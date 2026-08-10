@@ -1,0 +1,2632 @@
+{
+  "category": "intune",
+  "version": "baseline-v1.0",
+  "reviewedAt": "2026-08-10",
+  "rules": [
+    {
+      "checkId": "INTUNE-ITCE-Baseline-001-DeviceEncryptionRequired",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "device-compliance",
+        "encryption"
+      ],
+      "type": "device-encryption-required",
+      "what": "Vereist de Windows-compliance-policy dat BitLocker/apparaatversleuteling actief is?",
+      "why": "Zonder verplichte versleuteling is bedrijfsdata op een verloren of gestolen apparaat direct leesbaar.",
+      "source": "Microsoft Intune Security Baselines / MCSB DP-4 / buildplan sectie 7.1",
+      "learnMoreLinks": [
+        {
+          "label": "Windows 10/11 compliance settings — Device Health (BitLocker)",
+          "url": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows"
+        },
+        {
+          "label": "Update-MgDeviceManagementDeviceCompliancePolicy (Microsoft Graph PowerShell)",
+          "url": "https://learn.microsoft.com/powershell/module/microsoft.graph.devicemanagement/update-mgdevicemanagementdevicecompliancepolicy"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-002-CompliancePolicyAssigned",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "device-compliance"
+      ],
+      "type": "compliance-policy-assigned",
+      "what": "Is er minstens één compliance-policy die daadwerkelijk aan een groep is toegewezen (geen weeskindje)?",
+      "why": "Een compliance-policy zonder assignment test niets — devices worden dan nergens tegen getoetst, ook al lijkt de policy zelf in orde.",
+      "source": "buildplan sectie 7.1",
+      "remediationScript": "Import-Module Microsoft.Graph.DeviceManagement\n\n# Vervang door de policy-id (uit de finding/observedValue) en de doelgroep.\n$compliancePolicyId = '<device-compliance-policy-id>'\n$targetGroupId = '<object-id-van-doelgroep>'\n\n$params = @{\n    Assignments = @(\n        @{\n            Target = @{\n                '@odata.type' = '#microsoft.graph.groupAssignmentTarget'\n                GroupId = $targetGroupId\n            }\n        }\n    )\n}\nNew-MgDeviceManagementDeviceCompliancePolicyAssignment -DeviceCompliancePolicyId $compliancePolicyId -BodyParameter $params",
+      "learnMoreLinks": [
+        {
+          "label": "Assign device compliance policies in Intune",
+          "url": "https://learn.microsoft.com/mem/intune/protect/device-compliance-get-started"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-003-CompliancePolicyMinOsVersion",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "device-compliance",
+        "patching"
+      ],
+      "type": "compliance-policy-min-os",
+      "what": "Is er een minimale OS-versie ingesteld in de Windows-compliance-policy?",
+      "why": "Voorkomt dat verouderde, niet meer gepatchte Windows-builds als 'compliant' worden bestempeld.",
+      "source": "CIS Microsoft 365 Foundations Benchmark / buildplan sectie 7.1",
+      "optional": true,
+      "learnMoreLinks": [
+        {
+          "label": "Windows 10/11 compliance settings — minimum OS version",
+          "url": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-004-AppProtectionPolicyExists",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "app-protection"
+      ],
+      "type": "app-protection-policy-exists",
+      "what": "Is er minstens één app protection-policy (MAM) geconfigureerd voor mobiele apps?",
+      "why": "Beschermt bedrijfsdata binnen apps op onbeheerde/BYOD-apparaten (encryptie, PIN, kopieer-restricties), ook zonder volledig device-beheer.",
+      "source": "MCSB IM-6 / buildplan sectie 7.1",
+      "optional": true,
+      "learnMoreLinks": [
+        {
+          "label": "Create and assign app protection policies",
+          "url": "https://learn.microsoft.com/mem/intune/apps/app-protection-policies"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-005-PasscodeRequired",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "device-compliance",
+        "authentication"
+      ],
+      "type": "passcode-required",
+      "what": "Vereist de Windows-compliance-policy een wachtwoord/PIN om het apparaat te ontgrendelen?",
+      "why": "Een onbeveiligd apparaat geeft directe toegang tot bedrijfsdata en actieve sessies bij verlies of diefstal — dit is het meest basale endpointvereiste, vóór encryptie of OS-versie relevant wordt.",
+      "source": "Microsoft Intune Security Baselines / SkipToTheEndpoint OpenIntuneBaseline / buildplan sectie 7.1",
+      "learnMoreLinks": [
+        {
+          "label": "Windows 10/11 compliance settings — System Security (password)",
+          "url": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-006-DefenderEnabled",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "device-compliance",
+        "endpoint-protection"
+      ],
+      "type": "defender-enabled",
+      "what": "Vereist de Windows-compliance-policy dat Microsoft Defender Antivirus actief is?",
+      "why": "Zonder een afgedwongen antivirusvereiste kan een apparaat als 'compliant' gelden terwijl endpointbeveiliging uitstaat.",
+      "source": "Microsoft Intune Security Baselines / CIS Microsoft 365 Foundations Benchmark / buildplan sectie 7.1",
+      "optional": true,
+      "learnMoreLinks": [
+        {
+          "label": "Windows 10/11 compliance settings — Device Health (Microsoft Defender Antimalware)",
+          "url": "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-007-ASRDefaultRules",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "asr-default-rules"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] ASR Default rules\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_ASR_Default_rules.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablecontrolledfolderaccess",
+            "expectedValue": "device_vendor_msft_policy_config_defender_enablecontrolledfolderaccess_2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-008-AdministrativeTemplates",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "administrative-templates"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Administrative Templates\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Administrative_Templates.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera",
+            "expectedValue": "device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow",
+            "expectedValue": "device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_applyuacrestrictionstolocalaccountsonnetworklogon",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_applyuacrestrictionstolocalaccountsonnetworklogon_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver_pol_secguide_smb1clientdriver",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver_pol_secguide_smb1clientdriver_4"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1server",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_configuresmbv1server_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_enablestructuredexceptionhandlingoverwriteprotection",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_enablestructuredexceptionhandlingoverwriteprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_wdigestauthentication",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_wdigestauthentication_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_ipv6sourceroutingprotectionlevel",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_ipv6sourceroutingprotectionlevel_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_ipv6sourceroutingprotectionlevel_disableipsourceroutingipv6",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_ipv6sourceroutingprotectionlevel_disableipsourceroutingipv6_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_ipsourceroutingprotectionlevel",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_ipsourceroutingprotectionlevel_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_ipsourceroutingprotectionlevel_disableipsourcerouting",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_ipsourceroutingprotectionlevel_disableipsourcerouting_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_allowicmpredirectstooverrideospfgeneratedroutes",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_allowicmpredirectstooverrideospfgeneratedroutes_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_msslegacy_allowthecomputertoignorenetbiosnamereleaserequestsexceptfromwinsservers",
+            "expectedValue": "device_vendor_msft_policy_config_msslegacy_allowthecomputertoignorenetbiosnamereleaserequestsexceptfromwinsservers_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_dnsclient_turn_off_multicast",
+            "expectedValue": "device_vendor_msft_policy_config_admx_dnsclient_turn_off_multicast_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_prohibitinstallationandconfigurationofnetworkbridge",
+            "expectedValue": "device_vendor_msft_policy_config_connectivity_prohibitinstallationandconfigurationofnetworkbridge_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_networkconnections_nc_showsharedaccessui",
+            "expectedValue": "device_vendor_msft_policy_config_admx_networkconnections_nc_showsharedaccessui_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_networkconnections_nc_stddomainusersetlocation",
+            "expectedValue": "device_vendor_msft_policy_config_admx_networkconnections_nc_stddomainusersetlocation_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths",
+            "expectedValue": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths_pol_hardenedpaths_key",
+            "expectedValue": "\\\\*\\SYSVOL"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths_pol_hardenedpaths_value",
+            "expectedValue": "RequireMutualAuthentication=1,RequireIntegrity=1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths_pol_hardenedpaths_key",
+            "expectedValue": "\\\\*\\NETLOGON"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_hardeneduncpaths_pol_hardenedpaths_value",
+            "expectedValue": "RequireMutualAuthentication=1,RequireIntegrity=1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsconnectionmanager_prohitconnectiontonondomainnetworkswhenconnectedtodomainauthenticatednetwork",
+            "expectedValue": "device_vendor_msft_policy_config_windowsconnectionmanager_prohitconnectiontonondomainnetworkswhenconnectedtodomainauthenticatednetwork_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configureredirectionguardpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configureredirectionguardpolicy_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configureredirectionguardpolicy_redirectionguardpolicy_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configureredirectionguardpolicy_redirectionguardpolicy_enum_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy_rpcconnectionprotocol_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy_rpcconnectionprotocol_enum_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy_rpcconnectionauthentication_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpcconnectionpolicy_rpcconnectionauthentication_enum_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy_rpcauthenticationprotocol_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy_rpcauthenticationprotocol_enum_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy_rpclistenerprotocols_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpclistenerpolicy_rpclistenerprotocols_enum_5"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpctcpport",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurerpctcpport_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurerpctcpport_rpctcpport",
+            "expectedValue": 0
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_restrictdriverinstallationtoadministrators",
+            "expectedValue": "device_vendor_msft_policy_config_printers_restrictdriverinstallationtoadministrators_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy_copyfilespolicy_enum",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy_copyfilespolicy_enum_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification",
+            "expectedValue": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle",
+            "expectedValue": "device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle_allowencryptionoracledrop",
+            "expectedValue": "device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle_allowencryptionoracledrop_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_credentialsdelegation_remotehostallowsdelegationofnonexportablecredentials",
+            "expectedValue": "device_vendor_msft_policy_config_credentialsdelegation_remotehostallowsdelegationofnonexportablecredentials_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventinstallationofmatchingdevicesetupclasses",
+            "expectedValue": "device_vendor_msft_policy_config_deviceinstallation_preventinstallationofmatchingdevicesetupclasses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventinstallationofmatchingdevicesetupclasses_deviceinstall_classes_deny_retroactive",
+            "expectedValue": "device_vendor_msft_policy_config_deviceinstallation_preventinstallationofmatchingdevicesetupclasses_deviceinstall_classes_deny_retroactive_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventinstallationofmatchingdevicesetupclasses_deviceinstall_classes_deny_list",
+            "expectedValue": [
+              " {d48179be-ec20-11d1-b6b8-00c04fa372a7}"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_bootstartdriverinitialization",
+            "expectedValue": "device_vendor_msft_policy_config_system_bootstartdriverinitialization_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_bootstartdriverinitialization_selectdriverloadpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_system_bootstartdriverinitialization_selectdriverloadpolicy_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry",
+            "expectedValue": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nobackground10",
+            "expectedValue": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nobackground10_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nochanges10",
+            "expectedValue": "device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nochanges10_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_disabledownloadingofprintdriversoverhttp",
+            "expectedValue": "device_vendor_msft_policy_config_connectivity_disabledownloadingofprintdriversoverhttp_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_disableinternetdownloadforwebpublishingandonlineorderingwizards",
+            "expectedValue": "device_vendor_msft_policy_config_connectivity_disableinternetdownloadforwebpublishingandonlineorderingwizards_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps",
+            "expectedValue": "device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery",
+            "expectedValue": "device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin",
+            "expectedValue": "device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_requirepasswordwhencomputerwakesonbattery",
+            "expectedValue": "device_vendor_msft_policy_config_power_requirepasswordwhencomputerwakesonbattery_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_requirepasswordwhencomputerwakespluggedin",
+            "expectedValue": "device_vendor_msft_policy_config_power_requirepasswordwhencomputerwakespluggedin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remoteassistance_solicitedremoteassistance",
+            "expectedValue": "device_vendor_msft_policy_config_remoteassistance_solicitedremoteassistance_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remoteprocedurecall_restrictunauthenticatedrpcclients",
+            "expectedValue": "device_vendor_msft_policy_config_remoteprocedurecall_restrictunauthenticatedrpcclients_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remoteprocedurecall_restrictunauthenticatedrpcclients_rpcrestrictremoteclientslist",
+            "expectedValue": "device_vendor_msft_policy_config_remoteprocedurecall_restrictunauthenticatedrpcclients_rpcrestrictremoteclientslist_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional",
+            "expectedValue": "device_vendor_msft_policy_config_appruntime_allowmicrosoftaccountstobeoptional_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices",
+            "expectedValue": "device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior",
+            "expectedValue": "device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior_noautorun_dropdown",
+            "expectedValue": "device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior_noautorun_dropdown_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_autoplay_turnoffautoplay",
+            "expectedValue": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box",
+            "expectedValue": "device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box_255"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_credentialsui_enumerateadministrators",
+            "expectedValue": "device_vendor_msft_policy_config_credentialsui_enumerateadministrators_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizeapplicationlog",
+            "expectedValue": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizeapplicationlog_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizeapplicationlog_channel_logmaxsize",
+            "expectedValue": 32768
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizesecuritylog",
+            "expectedValue": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizesecuritylog_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_eventlogservice_specifymaximumfilesizesecuritylog_channel_logmaxsize",
+            "expectedValue": 196608
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen_enablesmartscreendropdown",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen_enablesmartscreendropdown_block"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_fileexplorer_turnoffdataexecutionpreventionforexplorer",
+            "expectedValue": "device_vendor_msft_policy_config_fileexplorer_turnoffdataexecutionpreventionforexplorer_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_fileexplorer_turnoffheapterminationoncorruption",
+            "expectedValue": "device_vendor_msft_policy_config_fileexplorer_turnoffheapterminationoncorruption_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_allowsoftwarewhensignatureisinvalid",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_allowsoftwarewhensignatureisinvalid_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_checkservercertificaterevocation",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_checkservercertificaterevocation_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_checksignaturesondownloadedprograms",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_checksignaturesondownloadedprograms_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_donotallowactivexcontrolsinprotectedmode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_donotallowactivexcontrolsinprotectedmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions_2560"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableprocessesinenhancedprotectedmode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableprocessesinenhancedprotectedmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_allowenhancedprotectedmode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_allowenhancedprotectedmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableignoringcertificateerrors",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableignoringcertificateerrors_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowaccesstodatasources",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowaccesstodatasources_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowaccesstodatasources_iz_partname1406",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowaccesstodatasources_iz_partname1406_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowcopypasteviascript",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowcopypasteviascript_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowcopypasteviascript_iz_partname1407",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowcopypasteviascript_iz_partname1407_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowdraganddropcopyandpastefiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowdraganddropcopyandpastefiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowdraganddropcopyandpastefiles_iz_partname1802",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowdraganddropcopyandpastefiles_iz_partname1802_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowloadingofxamlfiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowloadingofxamlfiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowloadingofxamlfiles_iz_partname2402",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowloadingofxamlfiles_iz_partname2402_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstouseactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstouseactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstouseactivexcontrols_iz_partname120b",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstouseactivexcontrols_iz_partname120b_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstousetdcactivexcontrol",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstousetdcactivexcontrol_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstousetdcactivexcontrol_iz_partname120c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowonlyapproveddomainstousetdcactivexcontrol_iz_partname120c_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptinitiatedwindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptinitiatedwindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptinitiatedwindows_iz_partname2102",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptinitiatedwindows_iz_partname2102_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptingofinternetexplorerwebbrowsercontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptingofinternetexplorerwebbrowsercontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptingofinternetexplorerwebbrowsercontrols_iz_partname1206",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptingofinternetexplorerwebbrowsercontrols_iz_partname1206_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptlets",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptlets_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptlets_iz_partname1209",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowscriptlets_iz_partname1209_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowupdatestostatusbarviascript",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowupdatestostatusbarviascript_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowupdatestostatusbarviascript_iz_partname2103",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowupdatestostatusbarviascript_iz_partname2103_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowvbscripttorunininternetexplorer",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowvbscripttorunininternetexplorer_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowvbscripttorunininternetexplorer_iz_partname140c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowvbscripttorunininternetexplorer_iz_partname140c_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols_iz_partname2201",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols_iz_partname2201_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforfiledownloads",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforfiledownloads_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforfiledownloads_iz_partname2200",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforfiledownloads_iz_partname2200_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedonotrunantimalwareagainstactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedonotrunantimalwareagainstactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedonotrunantimalwareagainstactivexcontrols_iz_partname270c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedonotrunantimalwareagainstactivexcontrols_iz_partname270c_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadsignedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadsignedactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadsignedactivexcontrols_iz_partname1001",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadsignedactivexcontrols_iz_partname1001_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadunsignedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadunsignedactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadunsignedactivexcontrols_iz_partname1004",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonedownloadunsignedactivexcontrols_iz_partname1004_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainsacrosswindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainsacrosswindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainsacrosswindows_iz_partname2709",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainsacrosswindows_iz_partname2709_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainswithinwindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainswithinwindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainswithinwindows_iz_partname2708",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenabledraggingofcontentfromdifferentdomainswithinwindows_iz_partname2708_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneincludelocalpathwhenuploadingfilestoserver",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneincludelocalpathwhenuploadingfilestoserver_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneincludelocalpathwhenuploadingfilestoserver_iz_partname160a",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneincludelocalpathwhenuploadingfilestoserver_iz_partname160a_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneinitializeandscriptactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneinitializeandscriptactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneinitializeandscriptactivexcontrols_iz_partname1201",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneinitializeandscriptactivexcontrols_iz_partname1201_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonelaunchingapplicationsandfilesiniframe",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonelaunchingapplicationsandfilesiniframe_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonelaunchingapplicationsandfilesiniframe_iz_partname1804",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonelaunchingapplicationsandfilesiniframe_iz_partname1804_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonelogonoptions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonelogonoptions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonelogonoptions_iz_partname1a00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonelogonoptions_iz_partname1a00_65536"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonenavigatewindowsandframes",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonenavigatewindowsandframes_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonenavigatewindowsandframes_iz_partname1607",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonenavigatewindowsandframes_iz_partname1607_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallownetframeworkreliantcomponents",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallownetframeworkreliantcomponents_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallownetframeworkreliantcomponents_iz_partname2004",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallownetframeworkreliantcomponents_iz_partname2004_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonerunnetframeworkreliantcomponentssignedwithauthenticode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonerunnetframeworkreliantcomponentssignedwithauthenticode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzonerunnetframeworkreliantcomponentssignedwithauthenticode_iz_partname2001",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzonerunnetframeworkreliantcomponentssignedwithauthenticode_iz_partname2001_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneshowsecuritywarningforpotentiallyunsafefiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneshowsecuritywarningforpotentiallyunsafefiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneshowsecuritywarningforpotentiallyunsafefiles_iz_partname1806",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneshowsecuritywarningforpotentiallyunsafefiles_iz_partname1806_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenablecrosssitescriptingfilter",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenablecrosssitescriptingfilter_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenablecrosssitescriptingfilter_iz_partname1409",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenablecrosssitescriptingfilter_iz_partname1409_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenableprotectedmode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenableprotectedmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneenableprotectedmode_iz_partname2500",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneenableprotectedmode_iz_partname2500_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowsmartscreenie",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowsmartscreenie_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowsmartscreenie_iz_partname2301",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowsmartscreenie_iz_partname2301_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneusepopupblocker",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneusepopupblocker_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneusepopupblocker_iz_partname1809",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneusepopupblocker_iz_partname1809_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowuserdatapersistence",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowuserdatapersistence_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowuserdatapersistence_iz_partname1606",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowuserdatapersistence_iz_partname1606_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowlessprivilegedsites",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowlessprivilegedsites_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowlessprivilegedsites_iz_partname2101",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowlessprivilegedsites_iz_partname2101_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_includeallnetworkpaths",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_includeallnetworkpaths_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzonedonotrunantimalwareagainstactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzonedonotrunantimalwareagainstactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzonedonotrunantimalwareagainstactivexcontrols_iz_partname270c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzonedonotrunantimalwareagainstactivexcontrols_iz_partname270c_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzoneinitializeandscriptactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzoneinitializeandscriptactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzoneinitializeandscriptactivexcontrols_iz_partname1201",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzoneinitializeandscriptactivexcontrols_iz_partname1201_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_intranetzonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_intranetzonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_localmachinezonedonotrunantimalwareagainstactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_localmachinezonedonotrunantimalwareagainstactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_localmachinezonedonotrunantimalwareagainstactivexcontrols_iz_partname270c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_localmachinezonedonotrunantimalwareagainstactivexcontrols_iz_partname270c_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_localmachinezonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_localmachinezonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_localmachinezonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_localmachinezonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddowninternetzoneallowsmartscreenie",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddowninternetzoneallowsmartscreenie_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddowninternetzoneallowsmartscreenie_iz_partname2301",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddowninternetzoneallowsmartscreenie_iz_partname2301_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownintranetjavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownintranetjavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownintranetjavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownintranetjavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownlocalmachinezonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownlocalmachinezonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownlocalmachinezonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownlocalmachinezonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszoneallowsmartscreenie",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszoneallowsmartscreenie_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszoneallowsmartscreenie_iz_partname2301",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddownrestrictedsiteszoneallowsmartscreenie_iz_partname2301_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddowntrustedsiteszonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddowntrustedsiteszonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_lockeddowntrustedsiteszonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_lockeddowntrustedsiteszonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowaccesstodatasources",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowaccesstodatasources_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowaccesstodatasources_iz_partname1406",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowaccesstodatasources_iz_partname1406_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowactivescripting",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowactivescripting_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowactivescripting_iz_partname1400",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowactivescripting_iz_partname1400_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowbinaryandscriptbehaviors",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowbinaryandscriptbehaviors_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowbinaryandscriptbehaviors_iz_partname2000",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowbinaryandscriptbehaviors_iz_partname2000_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowcopypasteviascript",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowcopypasteviascript_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowcopypasteviascript_iz_partname1407",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowcopypasteviascript_iz_partname1407_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowdraganddropcopyandpastefiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowdraganddropcopyandpastefiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowdraganddropcopyandpastefiles_iz_partname1802",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowdraganddropcopyandpastefiles_iz_partname1802_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowfiledownloads",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowfiledownloads_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowfiledownloads_iz_partname1803",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowfiledownloads_iz_partname1803_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowloadingofxamlfiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowloadingofxamlfiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowloadingofxamlfiles_iz_partname2402",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowloadingofxamlfiles_iz_partname2402_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowmetarefresh",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowmetarefresh_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowmetarefresh_iz_partname1608",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowmetarefresh_iz_partname1608_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstouseactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstouseactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstouseactivexcontrols_iz_partname120b",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstouseactivexcontrols_iz_partname120b_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstousetdcactivexcontrol",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstousetdcactivexcontrol_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstousetdcactivexcontrol_iz_partname120c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowonlyapproveddomainstousetdcactivexcontrol_iz_partname120c_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptinitiatedwindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptinitiatedwindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptinitiatedwindows_iz_partname2102",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptinitiatedwindows_iz_partname2102_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptingofinternetexplorerwebbrowsercontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptingofinternetexplorerwebbrowsercontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptingofinternetexplorerwebbrowsercontrols_iz_partname1206",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptingofinternetexplorerwebbrowsercontrols_iz_partname1206_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptlets",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptlets_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptlets_iz_partname1209",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowscriptlets_iz_partname1209_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowupdatestostatusbarviascript",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowupdatestostatusbarviascript_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowupdatestostatusbarviascript_iz_partname2103",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowupdatestostatusbarviascript_iz_partname2103_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowvbscripttorunininternetexplorer",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowvbscripttorunininternetexplorer_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowvbscripttorunininternetexplorer_iz_partname140c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowvbscripttorunininternetexplorer_iz_partname140c_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowautomaticpromptingforfiledownloads",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowautomaticpromptingforfiledownloads_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowautomaticpromptingforfiledownloads_iz_partname2200",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowautomaticpromptingforfiledownloads_iz_partname2200_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedonotrunantimalwareagainstactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedonotrunantimalwareagainstactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedonotrunantimalwareagainstactivexcontrols_iz_partname270c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedonotrunantimalwareagainstactivexcontrols_iz_partname270c_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadsignedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadsignedactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadsignedactivexcontrols_iz_partname1001",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadsignedactivexcontrols_iz_partname1001_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadunsignedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadunsignedactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadunsignedactivexcontrols_iz_partname1004",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonedownloadunsignedactivexcontrols_iz_partname1004_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainsacrosswindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainsacrosswindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainsacrosswindows_iz_partname2709",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainsacrosswindows_iz_partname2709_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainswithinwindows",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainswithinwindows_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainswithinwindows_iz_partname2708",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenabledraggingofcontentfromdifferentdomainswithinwindows_iz_partname2708_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneincludelocalpathwhenuploadingfilestoserver",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneincludelocalpathwhenuploadingfilestoserver_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneincludelocalpathwhenuploadingfilestoserver_iz_partname160a",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneincludelocalpathwhenuploadingfilestoserver_iz_partname160a_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneinitializeandscriptactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneinitializeandscriptactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneinitializeandscriptactivexcontrols_iz_partname1201",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneinitializeandscriptactivexcontrols_iz_partname1201_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonejavapermissions_iz_partname1c00_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelaunchingapplicationsandfilesiniframe",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelaunchingapplicationsandfilesiniframe_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelaunchingapplicationsandfilesiniframe_iz_partname1804",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelaunchingapplicationsandfilesiniframe_iz_partname1804_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelogonoptions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelogonoptions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelogonoptions_iz_partname1a00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonelogonoptions_iz_partname1a00_196608"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonenavigatewindowsandframes",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonenavigatewindowsandframes_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonenavigatewindowsandframes_iz_partname1607",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonenavigatewindowsandframes_iz_partname1607_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallownetframeworkreliantcomponents",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallownetframeworkreliantcomponents_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallownetframeworkreliantcomponents_iz_partname2004",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallownetframeworkreliantcomponents_iz_partname2004_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunnetframeworkreliantcomponentssignedwithauthenticode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunnetframeworkreliantcomponentssignedwithauthenticode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunnetframeworkreliantcomponentssignedwithauthenticode_iz_partname2001",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunnetframeworkreliantcomponentssignedwithauthenticode_iz_partname2001_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunactivexcontrolsandplugins",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunactivexcontrolsandplugins_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunactivexcontrolsandplugins_iz_partname1200",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonerunactivexcontrolsandplugins_iz_partname1200_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptactivexcontrolsmarkedsafeforscripting",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptactivexcontrolsmarkedsafeforscripting_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptactivexcontrolsmarkedsafeforscripting_iz_partname1405",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptactivexcontrolsmarkedsafeforscripting_iz_partname1405_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptingofjavaapplets",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptingofjavaapplets_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptingofjavaapplets_iz_partname1402",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszonescriptingofjavaapplets_iz_partname1402_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneshowsecuritywarningforpotentiallyunsafefiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneshowsecuritywarningforpotentiallyunsafefiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneshowsecuritywarningforpotentiallyunsafefiles_iz_partname1806",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneshowsecuritywarningforpotentiallyunsafefiles_iz_partname1806_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenablecrosssitescriptingfilter",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenablecrosssitescriptingfilter_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenablecrosssitescriptingfilter_iz_partname1409",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneenablecrosssitescriptingfilter_iz_partname1409_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneturnonprotectedmode",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneturnonprotectedmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneturnonprotectedmode_iz_partname2500",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneturnonprotectedmode_iz_partname2500_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowsmartscreenie",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowsmartscreenie_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowsmartscreenie_iz_partname2301",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowsmartscreenie_iz_partname2301_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneusepopupblocker",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneusepopupblocker_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneusepopupblocker_iz_partname1809",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneusepopupblocker_iz_partname1809_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowuserdatapersistence",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowuserdatapersistence_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowuserdatapersistence_iz_partname1606",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowuserdatapersistence_iz_partname1606_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowlessprivilegedsites",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowlessprivilegedsites_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowlessprivilegedsites_iz_partname2101",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictedsiteszoneallowlessprivilegedsites_iz_partname2101_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonedonotrunantimalwareagainstactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonedonotrunantimalwareagainstactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonedonotrunantimalwareagainstactivexcontrols_iz_partname270c",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonedonotrunantimalwareagainstactivexcontrols_iz_partname270c_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszoneinitializeandscriptactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszoneinitializeandscriptactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszoneinitializeandscriptactivexcontrols_iz_partname1201",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszoneinitializeandscriptactivexcontrols_iz_partname1201_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonejavapermissions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonejavapermissions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonejavapermissions_iz_partname1c00",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_trustedsiteszonejavapermissions_iz_partname1c00_65536"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_allowcertificateaddressmismatchwarning",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_allowcertificateaddressmismatchwarning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarnings",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarnings_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter_ie9safetyfilteroptions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter_ie9safetyfilteroptions_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_preventperuserinstallationofactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_preventperuserinstallationofactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_removerunthistimebuttonforoutdatedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_removerunthistimebuttonforoutdatedactivexcontrols_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_donotblockoutdatedactivexcontrols",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_donotblockoutdatedactivexcontrols_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_allowfallbacktossl3",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_allowfallbacktossl3_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_allowfallbacktossl3_advanced_enablessl3fallbackoptions",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_allowfallbacktossl3_advanced_enablessl3fallbackoptions_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_consistentmimehandlinginternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_consistentmimehandlinginternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_mimesniffingsafetyfeatureinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_mimesniffingsafetyfeatureinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_mkprotocolsecurityrestrictioninternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_mkprotocolsecurityrestrictioninternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_notificationbarinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_notificationbarinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_protectionfromzoneelevationinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_protectionfromzoneelevationinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictactivexinstallinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictactivexinstallinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_restrictfiledownloadinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_restrictfiledownloadinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_scriptedwindowsecurityrestrictionsinternetexplorerprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_scriptedwindowsecurityrestrictionsinternetexplorerprocesses_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_donotallowuserstoaddsites",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_donotallowuserstoaddsites_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_donotallowuserstochangepolicies",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_donotallowuserstochangepolicies_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_securityzonesuseonlymachinesettings",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_securityzonesuseonlymachinesettings_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_specifyuseofactivexinstallerservice",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_specifyuseofactivexinstallerservice_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablecrashdetection",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablecrashdetection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablesecuritysettingscheck",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablesecuritysettingscheck_0"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete",
+            "expectedValue": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableblockatfirstseen",
+            "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableblockatfirstseen_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_realtimeprotection_disablescanonrealtimeenable",
+            "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_realtimeprotection_disablescanonrealtimeenable_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_scan_disablepackedexescanning",
+            "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_scan_disablepackedexescanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableroutinelytakingaction",
+            "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableroutinelytakingaction_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_donotallowpasswordsaving",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_donotallowpasswordsaving_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_donotallowdriveredirection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_promptforpassworduponconnection",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_promptforpassworduponconnection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_requiresecurerpccommunication",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_requiresecurerpccommunication_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_terminalserver_ts_user_authentication_policy",
+            "expectedValue": "device_vendor_msft_policy_config_admx_terminalserver_ts_user_authentication_policy_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_clientconnectionencryptionlevel",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_clientconnectionencryptionlevel_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotedesktopservices_clientconnectionencryptionlevel_ts_encryption_level",
+            "expectedValue": "device_vendor_msft_policy_config_remotedesktopservices_clientconnectionencryptionlevel_ts_encryption_level_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading",
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_enablemprnotifications",
+            "expectedValue": "device_vendor_msft_policy_config_windowslogon_enablemprnotifications_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_allowautomaticrestartsignon",
+            "expectedValue": "device_vendor_msft_policy_config_windowslogon_allowautomaticrestartsignon_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging",
+            "expectedValue": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_enablescriptblockinvocationlogging",
+            "expectedValue": "device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_enablescriptblockinvocationlogging_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowbasicauthentication_client",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_allowbasicauthentication_client_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowunencryptedtraffic_client",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_allowunencryptedtraffic_client_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_disallowdigestauthentication",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_disallowdigestauthentication_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowbasicauthentication_service",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_allowbasicauthentication_service_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowunencryptedtraffic_service",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_allowunencryptedtraffic_service_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_disallowstoringofrunascredentials",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_disallowstoringofrunascredentials_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-009-Auditing",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "auditing"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Auditing\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Auditing.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogon_auditcredentialvalidation",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogon_auditcredentialvalidation_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditaccountlockout",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditaccountlockout_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditgroupmembership",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditgroupmembership_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditlogon",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditlogon_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditauthenticationpolicychange",
+            "expectedValue": "device_vendor_msft_policy_config_audit_policychange_auditauthenticationpolicychange_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditpolicychange",
+            "expectedValue": "device_vendor_msft_policy_config_audit_policychange_auditpolicychange_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditfileshare",
+            "expectedValue": "device_vendor_msft_policy_config_audit_objectaccess_auditfileshare_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditotherlogonlogoffevents",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditotherlogonlogoffevents_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountmanagement_auditsecuritygroupmanagement",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountmanagement_auditsecuritygroupmanagement_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsecuritysystemextension",
+            "expectedValue": "device_vendor_msft_policy_config_audit_system_auditsecuritysystemextension_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditspeciallogon",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountlogonlogoff_auditspeciallogon_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_accountmanagement_audituseraccountmanagement",
+            "expectedValue": "device_vendor_msft_policy_config_audit_accountmanagement_audituseraccountmanagement_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_detailedtracking_auditpnpactivity",
+            "expectedValue": "device_vendor_msft_policy_config_audit_detailedtracking_auditpnpactivity_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_detailedtracking_auditprocesscreation",
+            "expectedValue": "device_vendor_msft_policy_config_audit_detailedtracking_auditprocesscreation_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditdetailedfileshare",
+            "expectedValue": "device_vendor_msft_policy_config_audit_objectaccess_auditdetailedfileshare_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditotherobjectaccessevents",
+            "expectedValue": "device_vendor_msft_policy_config_audit_objectaccess_auditotherobjectaccessevents_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_objectaccess_auditremovablestorage",
+            "expectedValue": "device_vendor_msft_policy_config_audit_objectaccess_auditremovablestorage_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditmpssvcrulelevelpolicychange",
+            "expectedValue": "device_vendor_msft_policy_config_audit_policychange_auditmpssvcrulelevelpolicychange_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_policychange_auditotherpolicychangeevents",
+            "expectedValue": "device_vendor_msft_policy_config_audit_policychange_auditotherpolicychangeevents_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse",
+            "expectedValue": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditothersystemevents",
+            "expectedValue": "device_vendor_msft_policy_config_audit_system_auditothersystemevents_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsecuritystatechange",
+            "expectedValue": "device_vendor_msft_policy_config_audit_system_auditsecuritystatechange_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditsystemintegrity",
+            "expectedValue": "device_vendor_msft_policy_config_audit_system_auditsystemintegrity_3"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-010-AutomaticConfigurationOfOutlook",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "automatic-configuration-of-outlook"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Automatic configuration of Outlook\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Automatic_configuration_of_Outlook.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_toolsaccounts~l_exchangesettings_l_automaticallyconfigureprofilebasedonactiveonce",
+            "expectedValue": "user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_toolsaccounts~l_exchangesettings_l_automaticallyconfigureprofilebasedonactiveonce_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-011-Bitlocker",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "bitlocker"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Bitlocker\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Bitlocker.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_requiredeviceencryption",
+            "expectedValue": "device_vendor_msft_bitlocker_requiredeviceencryption_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_allowwarningforotherdiskencryption",
+            "expectedValue": "device_vendor_msft_bitlocker_allowwarningforotherdiskencryption_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_allowstandarduserencryption",
+            "expectedValue": "device_vendor_msft_bitlocker_allowstandarduserencryption_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_configurerecoverypasswordrotation",
+            "expectedValue": "device_vendor_msft_bitlocker_configurerecoverypasswordrotation_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype",
+            "expectedValue": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsosdropdown_name",
+            "expectedValue": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsosdropdown_name_6"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsfdvdropdown_name",
+            "expectedValue": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsfdvdropdown_name_6"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsrdvdropdown_name",
+            "expectedValue": "device_vendor_msft_bitlocker_encryptionmethodbydrivetype_encryptionmethodwithxtsrdvdropdown_name_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_identificationfield",
+            "expectedValue": "device_vendor_msft_bitlocker_identificationfield_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesencryptiontype",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesencryptiontype_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesencryptiontype_osencryptiontypedropdown_name",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesencryptiontype_osencryptiontypedropdown_name_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrequirestartupauthentication",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesrequirestartupauthentication_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesminimumpinlength",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesminimumpinlength_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesenhancedpin",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesenhancedpin_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesdisallowstandarduserscanchangepin",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesdisallowstandarduserscanchangepin_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesenableprebootpinexceptionondecapabledevice",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesenableprebootpinexceptionondecapabledevice_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesenableprebootinputprotectorsonslates",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesenableprebootinputprotectorsonslates_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrecoveryoptions",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesrecoveryoptions_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrecoverymessage",
+            "expectedValue": "device_vendor_msft_bitlocker_systemdrivesrecoverymessage_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_fixeddrivesencryptiontype",
+            "expectedValue": "device_vendor_msft_bitlocker_fixeddrivesencryptiontype_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_fixeddrivesrecoveryoptions",
+            "expectedValue": "device_vendor_msft_bitlocker_fixeddrivesrecoveryoptions_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_fixeddrivesrequireencryption",
+            "expectedValue": "device_vendor_msft_bitlocker_fixeddrivesrequireencryption_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_removabledrivesconfigurebde",
+            "expectedValue": "device_vendor_msft_bitlocker_removabledrivesconfigurebde_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_bitlocker_removabledrivesrequireencryption",
+            "expectedValue": "device_vendor_msft_bitlocker_removabledrivesrequireencryption_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-012-DefaultAVPolicy",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "default-av-policy"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Default AV Policy\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Default_AV_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowarchivescanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowarchivescanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowcloudprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowcloudprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowemailscanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowemailscanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowintrusionpreventionsystem",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowintrusionpreventionsystem_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowioavprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowioavprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowuseruiaccess",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowuseruiaccess_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablenetworkprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_enablenetworkprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablelowcpupriority",
+            "expectedValue": "device_vendor_msft_policy_config_defender_enablelowcpupriority_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-013-DeviceLock",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "device-lock"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Device Lock\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Device_Lock.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_devicepasswordenabled",
+            "expectedValue": "device_vendor_msft_policy_config_devicelock_devicepasswordenabled_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_devicepasswordhistory",
+            "expectedValue": 24
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_mindevicepasswordlength",
+            "expectedValue": 14
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-014-EDRConfiguration",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "edr-configuration"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] EDR Configuration\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_EDR_Configuration.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype",
+            "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype_autofromconnector"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing",
+            "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configuration_telemetryreportingfrequency",
+            "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configuration_telemetryreportingfrequency_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-015-EdgeStandardSearchEngineGoogle",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "group-policy-definition",
+        "edge-standard-search-engine-google"
+      ],
+      "type": "group-policy-definition-match",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Edge Standard search engine - Google\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Edge_Standard_search_engine__Google.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "params": {
+        "definitions": [
+          {
+            "definitionId": "de2c6c02-ebe2-46ee-a4fc-0c61ad011153",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "02d91833-0eaa-4f90-8fdb-b360319152bf",
+                "value": "redirect"
+              }
+            ]
+          },
+          {
+            "definitionId": "f8324242-18c0-40bf-ae08-52db57201372",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "9dfb796a-ce07-4c9d-9f90-f78149189665",
+                "value": "{google:baseURL}complete/search?output=chrome&q={searchTerms}"
+              }
+            ]
+          },
+          {
+            "definitionId": "5eb1769d-4cea-4bce-87b9-bb549f8288d3",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "068b0640-d70e-40ae-8336-c9324376de1e",
+                "value": "Google"
+              }
+            ]
+          },
+          {
+            "definitionId": "97b941fd-4e08-4672-9aa0-db0606256a06",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "8d9348dc-84f7-4e3d-8fd5-e18ce444708c",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "6e02112b-cd96-448b-9c43-2a1b632ad039",
+                "value": "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}"
+              }
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Group Policy analytics and Administrative Templates in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/administrative-templates-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-016-Firewall",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "firewall"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Firewall\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Firewall.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_defaultinboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_defaultinboundaction_1"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_defaultoutboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_defaultoutboundaction_0"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_disableinboundnotifications",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_disableinboundnotifications_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_enablelogdroppedpackets",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_enablelogdroppedpackets_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_enablelogsuccessconnections",
+            "expectedValue": "vendor_msft_firewall_mdmstore_domainprofile_enablelogsuccessconnections_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_logmaxfilesize",
+            "expectedValue": 16384
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_defaultinboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_defaultinboundaction_1"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_defaultoutboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_defaultoutboundaction_0"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_disableinboundnotifications",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_disableinboundnotifications_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_enablelogdroppedpackets",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_enablelogdroppedpackets_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_enablelogsuccessconnections",
+            "expectedValue": "vendor_msft_firewall_mdmstore_privateprofile_enablelogsuccessconnections_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_logmaxfilesize",
+            "expectedValue": 16384
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_enablefirewall",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_enablefirewall_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_allowlocalipsecpolicymerge",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_allowlocalipsecpolicymerge_false"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_allowlocalpolicymerge",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_allowlocalpolicymerge_false"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_defaultinboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_defaultinboundaction_1"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_defaultoutboundaction",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_defaultoutboundaction_0"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_disableinboundnotifications",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_disableinboundnotifications_true"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_enablelogdroppedpackets",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_enablelogdroppedpackets_false"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_enablelogsuccessconnections",
+            "expectedValue": "vendor_msft_firewall_mdmstore_publicprofile_enablelogsuccessconnections_false"
+          },
+          {
+            "settingDefinitionId": "vendor_msft_firewall_mdmstore_publicprofile_logmaxfilesize",
+            "expectedValue": 16384
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-017-LanManWorkstation",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "lanmanworkstation"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] LanManWorkstation\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_LanManWorkstation.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_lanmanworkstation_enableinsecureguestlogons",
+            "expectedValue": "device_vendor_msft_policy_config_lanmanworkstation_enableinsecureguestlogons_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-018-LocalPoliciesSecurityOptions",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "local-policies-security-options"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Local Policies Security Options\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Local_Policies_Security_Options.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_limitlocalaccountuseofblankpasswordstoconsolelogononly",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_limitlocalaccountuseofblankpasswordstoconsolelogononly_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2",
+            "expectedValue": 900
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_smartcardremovalbehavior",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_smartcardremovalbehavior_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkclient_digitallysigncommunicationsalways",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkclient_digitallysigncommunicationsalways_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkclient_sendunencryptedpasswordtothirdpartysmbservers",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkclient_sendunencryptedpasswordtothirdpartysmbservers_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkserver_digitallysigncommunicationsalways",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkserver_digitallysigncommunicationsalways_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_donotallowanonymousenumerationofsamaccounts",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_donotallowanonymousenumerationofsamaccounts_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_donotallowanonymousenumerationofsamaccountsandshares",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_donotallowanonymousenumerationofsamaccountsandshares_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_restrictanonymousaccesstonamedpipesandshares",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_restrictanonymousaccesstonamedpipesandshares_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networkaccess_restrictclientsallowedtomakeremotecallstosam",
+            "expectedValue": "O:BAG:BAD:(A;;RC;;;BA)"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_donotstorelanmanagerhashvalueonnextpasswordchange",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_donotstorelanmanagerhashvalueonnextpasswordchange_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_lanmanagerauthenticationlevel",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_lanmanagerauthenticationlevel_5"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_minimumsessionsecurityforntlmsspbasedclients",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_minimumsessionsecurityforntlmsspbasedclients_537395200"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_minimumsessionsecurityforntlmsspbasedservers",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_minimumsessionsecurityforntlmsspbasedservers_537395200"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministrators_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforstandardusers_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_detectapplicationinstallationsandpromptforelevation",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_detectapplicationinstallationsandpromptforelevation_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_onlyelevateuiaccessapplicationsthatareinstalledinsecurelocations",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_onlyelevateuiaccessapplicationsthatareinstalledinsecurelocations_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_runalladministratorsinadminapprovalmode",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_runalladministratorsinadminapprovalmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_useadminapprovalmode",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_useadminapprovalmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_virtualizefileandregistrywritefailurestoperuserlocations",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_virtualizefileandregistrywritefailurestoperuserlocations_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-019-MicrosoftAppStore",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-app-store"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft App Store\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_App_Store.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_allowgamedvr",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_allowgamedvr_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_msiallowusercontroloverinstall",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_msiallowusercontroloverinstall_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_msialwaysinstallwithelevatedprivileges",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_msialwaysinstallwithelevatedprivileges_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-020-MicrosoftEdge",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-edge"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft Edge\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_Edge.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_smartscreenenabled",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_smartscreenenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverride",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverride_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-021-OfficeUpdates",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "group-policy-definition",
+        "office-updates"
+      ],
+      "type": "group-policy-definition-match",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Office Updates\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Office_Updates.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "params": {
+        "definitions": [
+          {
+            "definitionId": "b7165b6d-6642-4f75-88e9-9551e30b580b",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "dd15a0a6-bffa-4db6-8019-a7f5d317bfd3",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "9b104ccb-544f-4548-975d-c09275dfef8c",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "65e41c86-5386-41f0-a512-d86b360699d2",
+                "value": "7"
+              }
+            ]
+          },
+          {
+            "definitionId": "2e34d8a2-266b-4cb0-b0bc-e26381d849f4",
+            "enabled": true,
+            "presentationValues": []
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Group Policy analytics and Administrative Templates in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/administrative-templates-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-022-Privacy",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "privacy"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Privacy\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Privacy.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock_2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-023-Search",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "search"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Search\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Search.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems",
+            "expectedValue": "device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-024-Smartscreen",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "smartscreen"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Smartscreen\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Smartscreen.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_smartscreen_enablesmartscreeninshell",
+            "expectedValue": "device_vendor_msft_policy_config_smartscreen_enablesmartscreeninshell_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifymalicious",
+            "expectedValue": "device_vendor_msft_policy_config_webthreatdefense_notifymalicious_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse",
+            "expectedValue": "device_vendor_msft_policy_config_webthreatdefense_notifypasswordreuse_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_notifyunsafeapp",
+            "expectedValue": "device_vendor_msft_policy_config_webthreatdefense_notifyunsafeapp_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_webthreatdefense_serviceenabled",
+            "expectedValue": "device_vendor_msft_policy_config_webthreatdefense_serviceenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_smartscreen_preventoverrideforfilesinshell",
+            "expectedValue": "device_vendor_msft_policy_config_smartscreen_preventoverrideforfilesinshell_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-025-SystemServices",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "system-services"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] System Services\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_System_Services.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxaccessorymanagementservicestartupmode",
+            "expectedValue": "device_vendor_msft_policy_config_systemservices_configurexboxaccessorymanagementservicestartupmode_4"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxliveauthmanagerservicestartupmode",
+            "expectedValue": "device_vendor_msft_policy_config_systemservices_configurexboxliveauthmanagerservicestartupmode_4"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxlivegamesaveservicestartupmode",
+            "expectedValue": "device_vendor_msft_policy_config_systemservices_configurexboxlivegamesaveservicestartupmode_4"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_systemservices_configurexboxlivenetworkingservicestartupmode",
+            "expectedValue": "device_vendor_msft_policy_config_systemservices_configurexboxlivenetworkingservicestartupmode_4"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-026-UserRights",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "user-rights"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] User Rights\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_User_Rights.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_accessfromnetwork",
+            "expectedValue": [
+              "*S-1-5-32-544",
+              "*S-1-5-32-555"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_allowlocallogon",
+            "expectedValue": [
+              "*S-1-5-32-544",
+              "*S-1-5-32-545"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_backupfilesanddirectories",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_createglobalobjects",
+            "expectedValue": [
+              "*S-1-5-32-544",
+              "*S-1-5-19",
+              "*S-1-5-20",
+              "*S-1-5-6"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_createpagefile",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_debugprograms",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denyaccessfromnetwork",
+            "expectedValue": [
+              "*S-1-5-113"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_denyremotedesktopserviceslogon",
+            "expectedValue": [
+              "*S-1-5-113"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_impersonateclient",
+            "expectedValue": [
+              "*S-1-5-32-544",
+              "*S-1-5-6",
+              "*S-1-5-19",
+              "*S-1-5-20"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_loadunloaddevicedrivers",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_manageauditingandsecuritylog",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_managevolume",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_modifyfirmwareenvironment",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_profilesingleprocess",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_remoteshutdown",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_restorefilesanddirectories",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_takeownership",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-027-WindowsLAPSPolicy",
+      "severity": "high",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-laps-policy"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Windows LAPS Policy\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Windows_LAPS_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_backupdirectory",
+            "expectedValue": "device_vendor_msft_laps_policies_backupdirectory_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_passwordagedays_aad",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_passwordcomplexity",
+            "expectedValue": "device_vendor_msft_laps_policies_passwordcomplexity_4"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_passwordlength",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationactions",
+            "expectedValue": "device_vendor_msft_laps_policies_postauthenticationactions_3"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_postauthenticationresetdelay",
+            "expectedValue": 24
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_administratoraccountname",
+            "expectedValue": "localadmin"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementenabled",
+            "expectedValue": "device_vendor_msft_laps_policies_automaticaccountmanagementenabled_true"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename",
+            "expectedValue": "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename_false"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementtarget",
+            "expectedValue": "device_vendor_msft_laps_policies_automaticaccountmanagementtarget_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementenableaccount",
+            "expectedValue": "device_vendor_msft_laps_policies_automaticaccountmanagementenableaccount_true"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementnameorprefix",
+            "expectedValue": "localadmin"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    }
+  ]
+}
