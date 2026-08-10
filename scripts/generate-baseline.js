@@ -159,21 +159,80 @@ function flattenInstance(instance, out, warnings) {
   }
 }
 
+/** Haalt de GUID uit een `.../groupPolicyDefinitions('<guid>')`- of `.../presentations('<guid>')`-odata.bind-URL. */
+function extractGuidFromODataBind(bindUrl, resourceName) {
+  const m = bindUrl && bindUrl.match(new RegExp(`${resourceName}\\('([^']+)'\\)`));
+  return m ? m[1] : null;
+}
+
+/**
+ * "Admin"-formaat: klassieke ADMX-backed Group Policy Configuration
+ * (`added[].definition@odata.bind` naar `groupPolicyDefinitions`, met optionele
+ * `presentationValues[]`) — andere Graph-API dan Settings Catalog
+ * (`deviceManagement/groupPolicyConfigurations`, niet `configurationPolicies`).
+ * definitionId/presentationId zijn de GUID's uit de odata.bind-URL's — net als
+ * settingDefinitionId bij Settings Catalog zijn dit Microsoft's vaste, tenant-
+ * onafhankelijke ADMX-catalogus-GUID's, dus rechtstreeks vergelijkbaar tussen tenants.
+ *
+ * LET OP: deze Graph-endpoint is beta-only en nooit tegen een echte tenant getest
+ * (zie TODO.md in sjkanon/Platform) — hoger risico dan Settings Catalog.
+ */
+function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDisplayName) {
+  const definitions = [];
+  const warnings = [];
+  for (const item of rawJsonPolicy.added || []) {
+    const definitionId = extractGuidFromODataBind(item["definition@odata.bind"], "groupPolicyDefinitions");
+    if (!definitionId) {
+      warnings.push(`Kon geen definitionId uit definition@odata.bind halen: ${item["definition@odata.bind"]}`);
+      continue;
+    }
+    const presentationValues = [];
+    for (const pv of item.presentationValues || []) {
+      const presentationId = extractGuidFromODataBind(pv["presentation@odata.bind"], "presentations");
+      if (!presentationId) {
+        warnings.push(`Kon geen presentationId uit presentation@odata.bind halen: ${pv["presentation@odata.bind"]}`);
+        continue;
+      }
+      presentationValues.push({ presentationId, value: pv.value });
+    }
+    definitions.push({ definitionId, enabled: !!item.enabled, presentationValues });
+  }
+
+  const pascalName = slugToPascalCase(baseName);
+  const checkId = `INTUNE-ITCE-Baseline-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
+
+  return {
+    rule: {
+      checkId,
+      severity: "medium",
+      tags: ["intune", "group-policy-definition", baseName.replace(/^Baseline_/, "").toLowerCase().replace(/_+/g, "-")],
+      type: "group-policy-definition-match",
+      what: `Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy "${policyDisplayName || baseName}"?`,
+      why: "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      source: `IntuneBackup/IntuneTemplate/${baseName}.json (afgesproken baseline, Defender-gebaseerd, ADMX)`,
+      params: { definitions },
+      learnMoreLinks: [
+        { label: "Group Policy analytics and Administrative Templates in Microsoft Intune", url: "https://learn.microsoft.com/mem/intune/configuration/administrative-templates-windows" },
+      ],
+    },
+    warnings,
+    settingCount: definitions.length,
+  };
+}
+
 /**
  * Twee formaten komen voor in IntuneTemplate/, onderscheiden door `.Type`:
- * - "Catalog": Settings Catalog-policy (`settings[].settingInstance`-bomen) — dit script
- *   ondersteunt dit formaat.
- * - "Admin": klassieke ADMX-backed Group Policy Configuration (`added[].definition@odata.bind`
- *   naar `groupPolicyDefinitions`) — een andere Graph-API (`groupPolicyConfigurations`, niet
- *   `configurationPolicies`) die de baseline-engine vandaag niet leest. Bewust NIET
- *   omgezet — geen valse dekking voorwenden. Zie TODO.md voor het openstaande werk.
+ * - "Catalog": Settings Catalog-policy (`settings[].settingInstance`-bomen).
+ * - "Admin": klassieke ADMX-backed Group Policy Configuration — zie convertAdminTemplateFile.
  */
 function convertTemplateFile(filePath, checkNumber) {
   const raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   const inner = JSON.parse(raw.JSON);
+  const baseName = path.basename(filePath, ".json");
 
   if (inner.Type === "Admin") {
-    return { rule: null, warnings: [], settingCount: 0, unsupportedFormat: "Admin (ADMX Group Policy Configuration, niet Settings Catalog)" };
+    const rawJsonPolicy = JSON.parse(inner.RAWJson);
+    return convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, inner.Displayname);
   }
 
   const policy = JSON.parse(inner.RAWJson);
@@ -184,7 +243,6 @@ function convertTemplateFile(filePath, checkNumber) {
     flattenInstance(s.settingInstance, settings, warnings);
   }
 
-  const baseName = path.basename(filePath, ".json");
   const pascalName = slugToPascalCase(baseName);
   const checkId = `INTUNE-ITCE-Baseline-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
   const severity = HIGH_SEVERITY_FILES.has(baseName) ? "high" : "medium";
@@ -231,13 +289,7 @@ function main() {
 
   for (const file of files) {
     const filePath = path.join(TEMPLATE_DIR, file);
-    const { rule, warnings, settingCount, unsupportedFormat } = convertTemplateFile(filePath, checkNumber);
-    if (unsupportedFormat) {
-      console.warn(`OVERGESLAGEN: ${file} — formaat "${unsupportedFormat}" wordt nog niet omgezet.`);
-      skippedFiles.push({ file, reason: unsupportedFormat });
-      hadWarnings = true;
-      continue;
-    }
+    const { rule, warnings, settingCount } = convertTemplateFile(filePath, checkNumber);
     if (settingCount === 0) {
       console.error(`FOUT: ${file} leverde 0 instellingen op — wordt overgeslagen, controleer het bestand handmatig.`);
       skippedFiles.push({ file, reason: "0 instellingen na flatten" });

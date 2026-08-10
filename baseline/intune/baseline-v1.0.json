@@ -1854,7 +1854,75 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-015-Firewall",
+      "checkId": "INTUNE-ITCE-Baseline-015-EdgeStandardSearchEngineGoogle",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "group-policy-definition",
+        "edge-standard-search-engine-google"
+      ],
+      "type": "group-policy-definition-match",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Edge Standard search engine - Google\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Edge_Standard_search_engine__Google.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "params": {
+        "definitions": [
+          {
+            "definitionId": "de2c6c02-ebe2-46ee-a4fc-0c61ad011153",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "02d91833-0eaa-4f90-8fdb-b360319152bf",
+                "value": "redirect"
+              }
+            ]
+          },
+          {
+            "definitionId": "f8324242-18c0-40bf-ae08-52db57201372",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "9dfb796a-ce07-4c9d-9f90-f78149189665",
+                "value": "{google:baseURL}complete/search?output=chrome&q={searchTerms}"
+              }
+            ]
+          },
+          {
+            "definitionId": "5eb1769d-4cea-4bce-87b9-bb549f8288d3",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "068b0640-d70e-40ae-8336-c9324376de1e",
+                "value": "Google"
+              }
+            ]
+          },
+          {
+            "definitionId": "97b941fd-4e08-4672-9aa0-db0606256a06",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "8d9348dc-84f7-4e3d-8fd5-e18ce444708c",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "6e02112b-cd96-448b-9c43-2a1b632ad039",
+                "value": "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}ie={inputEncoding}"
+              }
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Group Policy analytics and Administrative Templates in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/administrative-templates-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-016-Firewall",
       "severity": "high",
       "tags": [
         "intune",
@@ -1969,7 +2037,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-016-LanManWorkstation",
+      "checkId": "INTUNE-ITCE-Baseline-017-LanManWorkstation",
       "severity": "medium",
       "tags": [
         "intune",
@@ -1996,7 +2064,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-017-LocalPoliciesSecurityOptions",
+      "checkId": "INTUNE-ITCE-Baseline-018-LocalPoliciesSecurityOptions",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2103,7 +2171,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-018-MicrosoftAppStore",
+      "checkId": "INTUNE-ITCE-Baseline-019-MicrosoftAppStore",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2138,7 +2206,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-019-MicrosoftEdge",
+      "checkId": "INTUNE-ITCE-Baseline-020-MicrosoftEdge",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2169,7 +2237,55 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-020-Privacy",
+      "checkId": "INTUNE-ITCE-Baseline-021-OfficeUpdates",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "group-policy-definition",
+        "office-updates"
+      ],
+      "type": "group-policy-definition-match",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Office Updates\"?",
+      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Office_Updates.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "params": {
+        "definitions": [
+          {
+            "definitionId": "b7165b6d-6642-4f75-88e9-9551e30b580b",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "dd15a0a6-bffa-4db6-8019-a7f5d317bfd3",
+            "enabled": true,
+            "presentationValues": []
+          },
+          {
+            "definitionId": "9b104ccb-544f-4548-975d-c09275dfef8c",
+            "enabled": true,
+            "presentationValues": [
+              {
+                "presentationId": "65e41c86-5386-41f0-a512-d86b360699d2",
+                "value": "7"
+              }
+            ]
+          },
+          {
+            "definitionId": "2e34d8a2-266b-4cb0-b0bc-e26381d849f4",
+            "enabled": true,
+            "presentationValues": []
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Group Policy analytics and Administrative Templates in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/administrative-templates-windows"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-ITCE-Baseline-022-Privacy",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2196,7 +2312,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-021-Search",
+      "checkId": "INTUNE-ITCE-Baseline-023-Search",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2223,7 +2339,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-022-Smartscreen",
+      "checkId": "INTUNE-ITCE-Baseline-024-Smartscreen",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2270,7 +2386,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-023-SystemServices",
+      "checkId": "INTUNE-ITCE-Baseline-025-SystemServices",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2309,7 +2425,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-024-UserRights",
+      "checkId": "INTUNE-ITCE-Baseline-026-UserRights",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2442,7 +2558,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-025-WindowsLAPSPolicy",
+      "checkId": "INTUNE-ITCE-Baseline-027-WindowsLAPSPolicy",
       "severity": "high",
       "tags": [
         "intune",
