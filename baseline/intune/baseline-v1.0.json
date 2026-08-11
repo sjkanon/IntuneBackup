@@ -4,7 +4,7 @@
   "reviewedAt": "2026-08-10",
   "rules": [
     {
-      "checkId": "INTUNE-ITCE-Baseline-001-DeviceEncryptionRequired",
+      "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
       "severity": "high",
       "tags": [
         "intune",
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-002-CompliancePolicyAssigned",
+      "checkId": "INTUNE-BASE-002-CompliancePolicyAssigned",
       "severity": "high",
       "tags": [
         "intune",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-003-CompliancePolicyMinOsVersion",
+      "checkId": "INTUNE-BASE-003-CompliancePolicyMinOsVersion",
       "severity": "medium",
       "tags": [
         "intune",
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-004-AppProtectionPolicyExists",
+      "checkId": "INTUNE-BASE-004-AppProtectionPolicyExists",
       "severity": "medium",
       "tags": [
         "intune",
@@ -85,7 +85,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-005-PasscodeRequired",
+      "checkId": "INTUNE-BASE-005-PasscodeRequired",
       "severity": "high",
       "tags": [
         "intune",
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-006-DefenderEnabled",
+      "checkId": "INTUNE-BASE-006-DefenderEnabled",
       "severity": "medium",
       "tags": [
         "intune",
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-007-ASRDefaultRules",
+      "checkId": "INTUNE-BASE-007-ASRDefaultRules",
       "severity": "high",
       "tags": [
         "intune",
@@ -133,7 +133,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] ASR Default rules\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_ASR_Default_rules.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -219,7 +219,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-008-AdministrativeTemplates",
+      "checkId": "INTUNE-BASE-008-AdministrativeTemplates",
       "severity": "medium",
       "tags": [
         "intune",
@@ -228,7 +228,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Administrative Templates\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Administrative_Templates.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1456,7 +1456,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-009-Auditing",
+      "checkId": "INTUNE-BASE-009-Auditing",
       "severity": "medium",
       "tags": [
         "intune",
@@ -1465,7 +1465,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Auditing\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Auditing.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1571,7 +1571,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-010-AutomaticConfigurationOfOutlook",
+      "checkId": "INTUNE-BASE-010-AutomaticConfigurationOfOutlook",
       "severity": "medium",
       "tags": [
         "intune",
@@ -1580,7 +1580,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Automatic configuration of Outlook\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Automatic_configuration_of_Outlook.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1598,7 +1598,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-011-Bitlocker",
+      "checkId": "INTUNE-BASE-011-Bitlocker",
       "severity": "high",
       "tags": [
         "intune",
@@ -1607,7 +1607,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Bitlocker\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Bitlocker.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1717,7 +1717,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-012-DefaultAVPolicy",
+      "checkId": "INTUNE-BASE-012-DefaultAVPolicy",
       "severity": "high",
       "tags": [
         "intune",
@@ -1726,7 +1726,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Default AV Policy\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Default_AV_Policy.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1784,7 +1784,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-013-DeviceLock",
+      "checkId": "INTUNE-BASE-013-DeviceLock",
       "severity": "high",
       "tags": [
         "intune",
@@ -1793,7 +1793,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Device Lock\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Device_Lock.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1819,7 +1819,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-014-EDRConfiguration",
+      "checkId": "INTUNE-BASE-014-EDRConfiguration",
       "severity": "high",
       "tags": [
         "intune",
@@ -1828,7 +1828,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] EDR Configuration\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_EDR_Configuration.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -1854,7 +1854,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-015-EdgeStandardSearchEngineGoogle",
+      "checkId": "INTUNE-BASE-015-EdgeStandardSearchEngineGoogle",
       "severity": "medium",
       "tags": [
         "intune",
@@ -1863,7 +1863,7 @@
       ],
       "type": "group-policy-definition-match",
       "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Edge Standard search engine - Google\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Edge_Standard_search_engine__Google.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
       "params": {
         "definitions": [
@@ -1922,7 +1922,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-016-Firewall",
+      "checkId": "INTUNE-BASE-016-Firewall",
       "severity": "high",
       "tags": [
         "intune",
@@ -1931,7 +1931,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Firewall\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Firewall.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2037,7 +2037,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-017-LanManWorkstation",
+      "checkId": "INTUNE-BASE-017-LanManWorkstation",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2046,7 +2046,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] LanManWorkstation\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_LanManWorkstation.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2064,7 +2064,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-018-LocalPoliciesSecurityOptions",
+      "checkId": "INTUNE-BASE-018-LocalPoliciesSecurityOptions",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2073,7 +2073,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Local Policies Security Options\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Local_Policies_Security_Options.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2171,7 +2171,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-019-MicrosoftAppStore",
+      "checkId": "INTUNE-BASE-019-MicrosoftAppStore",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2180,7 +2180,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft App Store\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_App_Store.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2206,7 +2206,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-020-MicrosoftEdge",
+      "checkId": "INTUNE-BASE-020-MicrosoftEdge",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2215,7 +2215,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft Edge\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_Edge.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2237,7 +2237,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-021-OfficeUpdates",
+      "checkId": "INTUNE-BASE-021-OfficeUpdates",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2246,7 +2246,7 @@
       ],
       "type": "group-policy-definition-match",
       "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Office Updates\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Office_Updates.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
       "params": {
         "definitions": [
@@ -2285,7 +2285,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-022-Privacy",
+      "checkId": "INTUNE-BASE-022-Privacy",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2294,7 +2294,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Privacy\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Privacy.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2312,7 +2312,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-023-Search",
+      "checkId": "INTUNE-BASE-023-Search",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2321,7 +2321,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Search\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Search.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2339,7 +2339,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-024-Smartscreen",
+      "checkId": "INTUNE-BASE-024-Smartscreen",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2348,7 +2348,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Smartscreen\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Smartscreen.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2386,7 +2386,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-025-SystemServices",
+      "checkId": "INTUNE-BASE-025-SystemServices",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2395,7 +2395,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] System Services\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_System_Services.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2425,7 +2425,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-026-UserRights",
+      "checkId": "INTUNE-BASE-026-UserRights",
       "severity": "medium",
       "tags": [
         "intune",
@@ -2434,7 +2434,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] User Rights\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_User_Rights.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
@@ -2558,7 +2558,7 @@
       ]
     },
     {
-      "checkId": "INTUNE-ITCE-Baseline-027-WindowsLAPSPolicy",
+      "checkId": "INTUNE-BASE-027-WindowsLAPSPolicy",
       "severity": "high",
       "tags": [
         "intune",
@@ -2567,7 +2567,7 @@
       ],
       "type": "settings-catalog-match",
       "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Windows LAPS Policy\"?",
-      "why": "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       "source": "IntuneBackup/IntuneTemplate/Baseline_Windows_LAPS_Policy.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
