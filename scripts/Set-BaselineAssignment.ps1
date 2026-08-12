@@ -34,6 +34,11 @@ Maakt er een uitsluiting van in plaats van een toewijzing. Alleen zinvol bij een
 .PARAMETER Name
 Expliciete policynamen in plaats van de lijst uit IntuneTemplate/.
 
+.PARAMETER Scope
+Beperkt de policylijst tot device-scoped ('D') of user-scoped ('U') policies, op basis van de
+"[Baseline] - D/U - Item"-naamconventie. Standaard 'Both': dan blijft de lijst ongefilterd,
+inclusief policies die die conventie (nog) niet volgen. Werkt ook op een lijst uit -Name.
+
 .PARAMETER Replace
 Vervangt bestaande assignments in plaats van ze aan te vullen.
 
@@ -53,6 +58,12 @@ Laat zien wat er zou gebeuren, zonder iets te wijzigen.
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -AllDevices -Replace
 Gooit bestaande assignments weg en zet alleen All Devices erop.
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -Scope D -AllDevices
+.\Set-BaselineAssignment.ps1 -Scope U -AllUsers
+De dagelijkse bediening na de D/U-hernoeming: device-policies naar apparaten, user-policies
+naar gebruikers.
 #>
 # ConfirmImpact bewust op Medium: met High vraagt PowerShell per policy om bevestiging en
 # klik je je bij 24 policies suf. Draai eerst -WhatIf; dat is hier de dry run.
@@ -75,6 +86,9 @@ param(
     [switch]$Exclude,
 
     [string[]]$Name,
+
+    [ValidateSet('D', 'U', 'Both')]
+    [string]$Scope = 'Both',
 
     [switch]$Replace,
 
@@ -173,7 +187,26 @@ if ($Name) {
 }
 if ($wanted.Count -eq 0) { throw 'Geen policynamen om toe te wijzen.' }
 
+# Scope-filter: device-policies horen naar apparaten, user-policies naar gebruikers. De scope
+# leest het script uit de naam ("[Baseline] - D - Item"), want dat is het enige wat zowel de
+# repo als de tenant kent — een policy-id zegt er niets over. Policies die de conventie nog
+# niet volgen vallen dus buiten elk scope-filter; dat is bewust zichtbaar in plaats van stil,
+# anders wijs je na een halve migratie de helft van de baseline niet meer toe.
+if ($Scope -ne 'Both') {
+    $before = $wanted
+    $wanted = @($before | Where-Object { $_ -match "^\[Baseline\] - $Scope - " })
+    $ignored = @($before | Where-Object { $_ -notmatch '^\[Baseline\] - [DU] - ' })
+    if ($ignored.Count -gt 0) {
+        Write-Warning "$($ignored.Count) policy/policies volgen de '[Baseline] - D/U - Item'-conventie niet en vallen buiten -Scope ${Scope}:"
+        $ignored | ForEach-Object { Write-Warning "  $_" }
+    }
+    if ($wanted.Count -eq 0) {
+        throw "Geen policies met scope '$Scope' gevonden. Is de hernoeming (PLAN.md fase 2) al gedaan? Draai zonder -Scope om alles toe te wijzen."
+    }
+}
+
 Write-Host "$($wanted.Count) policies uit de baseline, doel: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
+if ($Scope -ne 'Both') { Write-Host "Scope-filter: $Scope" -ForegroundColor Cyan }
 Write-Host ("Modus: {0}" -f $(if ($Replace) { 'bestaande assignments VERVANGEN' } else { 'aanvullen op bestaande assignments' })) -ForegroundColor Cyan
 
 # --- policies ophalen ----------------------------------------------------------------

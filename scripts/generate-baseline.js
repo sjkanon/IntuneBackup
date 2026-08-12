@@ -102,7 +102,11 @@ const EXISTING_RULES = [
   },
 ];
 
-/** Bestandsnamen die duidelijk kritieker zijn dan de rest — de eigenaar kan dit vrij bijstellen. */
+/**
+ * Bestandsnamen die duidelijk kritieker zijn dan de rest — de eigenaar kan dit vrij bijstellen.
+ * Zowel de oude als de nieuwe (D/U-)naam staan erin zolang de hernoeming loopt; zie
+ * CHECK_ID_SLUGS voor de reden dat beide naast elkaar bestaan.
+ */
 const HIGH_SEVERITY_FILES = new Set([
   "Baseline_Bitlocker",
   "Baseline_EDR_Configuration",
@@ -111,6 +115,14 @@ const HIGH_SEVERITY_FILES = new Set([
   "Baseline_ASR_Default_rules",
   "Baseline_Device_Lock",
   "Baseline_Windows_LAPS_Policy",
+  // D/U-naamgeving (PLAN.md fase 2)
+  "Baseline_D_BitLocker",
+  "Baseline_D_Defender_for_Endpoint_EDR",
+  "Baseline_D_Defender_Antivirus",
+  "Baseline_D_Windows_Firewall",
+  "Baseline_D_Attack_Surface_Reduction",
+  "Baseline_D_Device_Lock",
+  "Baseline_D_Windows_LAPS",
 ]);
 
 /**
@@ -147,6 +159,77 @@ const CHECK_NUMBERS = {
   // Type "Device": levert vandaag geen check op, maar het nummer is gereserveerd zodat het
   // niet aan een ander template wordt uitgedeeld als de engine dit type gaat ondersteunen.
   Baseline_Windows_11_Update: 30,
+
+  // --- D/U-naamgeving (PLAN.md fase 2) --------------------------------------------------
+  // Zelfde nummers als hierboven, onder de nieuwe bestandsnaam. Beide sleutels staan er
+  // bewust tegelijk in: fase 1 (scripts) gaat vooraf aan fase 2 (rename), dus tijdens de
+  // overgang moet een bestand onder beide namen zijn nummer terugvinden. Zonder de nieuwe
+  // sleutel deelt assignCheckNumbers een vers nummer uit — en dat merk je pas achteraf.
+  // Ruim de oude sleutels op zodra fase 2 gemerged is.
+  Baseline_D_Attack_Surface_Reduction: 7,
+  Baseline_D_Administrative_Templates: 8,
+  Baseline_D_Audit_and_Event_Logging: 9,
+  Baseline_U_Microsoft_Outlook: 10,
+  Baseline_D_BitLocker: 11,
+  Baseline_D_Defender_Antivirus: 12,
+  Baseline_D_Device_Lock: 13,
+  Baseline_D_Defender_for_Endpoint_EDR: 14,
+  Baseline_D_Microsoft_Edge_Search_Engine: 15,
+  Baseline_D_Windows_Firewall: 16,
+  Baseline_D_Network_Security: 17,
+  Baseline_D_Local_Security_Policies: 18,
+  Baseline_D_Microsoft_Store: 19,
+  Baseline_D_Microsoft_Edge_Security: 20,
+  Baseline_D_Microsoft_Office_Updates: 21,
+  Baseline_D_Location_and_Privacy: 22,
+  Baseline_D_Windows_Search: 23,
+  Baseline_D_SmartScreen: 24,
+  Baseline_D_System_Services: 25,
+  Baseline_D_User_Rights: 26,
+  Baseline_D_Windows_LAPS: 27,
+  Baseline_D_Microsoft_OneDrive_KFM: 28,
+  Baseline_D_Microsoft_OneDrive: 29,
+  Baseline_D_Windows_Update_Ring_3_Production: 30,
+
+  // Nieuw uit de D/U-splitsing (PLAN.md fase 2) — bestaan nog niet, nummer alvast vast.
+  Baseline_U_Windows_User_Experience: 31,
+  Baseline_U_Microsoft_OneDrive: 32,
+};
+
+/**
+ * Vaste checkId-suffix per bestandsnaam, voor bestanden die hernoemd zijn.
+ *
+ * De suffix komt normaal uit slugToPascalCase(bestandsnaam). Bij de D/U-hernoeming zou dat
+ * elke checkId meeveranderen — Baseline_Bitlocker -> Baseline_D_BitLocker maakt van
+ * INTUNE-BASE-011-Bitlocker een INTUNE-BASE-011-DBitLocker. Een checkId is een externe
+ * identifier: het platform, findings en uitzonderingen verwijzen ernaar, dus die moet de
+ * hernoeming overleven. Alleen hernoemde bestanden staan hier; nieuwe policies krijgen
+ * gewoon hun eigen slug uit de bestandsnaam.
+ */
+const CHECK_ID_SLUGS = {
+  Baseline_D_Attack_Surface_Reduction: "ASRDefaultRules",
+  Baseline_D_Administrative_Templates: "AdministrativeTemplates",
+  Baseline_D_Audit_and_Event_Logging: "Auditing",
+  Baseline_U_Microsoft_Outlook: "AutomaticConfigurationOfOutlook",
+  Baseline_D_BitLocker: "Bitlocker",
+  Baseline_D_Defender_Antivirus: "DefaultAVPolicy",
+  Baseline_D_Device_Lock: "DeviceLock",
+  Baseline_D_Defender_for_Endpoint_EDR: "EDRConfiguration",
+  Baseline_D_Microsoft_Edge_Search_Engine: "EdgeStandardSearchEngineGoogle",
+  Baseline_D_Windows_Firewall: "Firewall",
+  Baseline_D_Network_Security: "LanManWorkstation",
+  Baseline_D_Local_Security_Policies: "LocalPoliciesSecurityOptions",
+  Baseline_D_Microsoft_Store: "MicrosoftAppStore",
+  Baseline_D_Microsoft_Edge_Security: "MicrosoftEdge",
+  Baseline_D_Microsoft_Office_Updates: "OfficeUpdates",
+  Baseline_D_Location_and_Privacy: "Privacy",
+  Baseline_D_Windows_Search: "Search",
+  Baseline_D_SmartScreen: "Smartscreen",
+  Baseline_D_System_Services: "SystemServices",
+  Baseline_D_User_Rights: "UserRights",
+  Baseline_D_Windows_LAPS: "WindowsLAPSPolicy",
+  Baseline_D_Microsoft_OneDrive_KFM: "OnedriveKnownFolderMove",
+  Baseline_D_Microsoft_OneDrive: "OnedriveSilentLogin",
 };
 
 /** Deelt nummers uit: bekend uit CHECK_NUMBERS, anders oplopend na het hoogste bekende. */
@@ -177,6 +260,33 @@ function slugToPascalCase(filenameWithoutExt) {
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join("");
+}
+
+/** "Baseline_D_BitLocker" -> "D"; null voor bestanden die nog niet hernoemd zijn. */
+function scopeFromFileName(baseName) {
+  const m = baseName.match(/^Baseline_([DU])_/);
+  return m ? m[1] : null;
+}
+
+/** De checkId-suffix: vast voor hernoemde bestanden, anders afgeleid van de bestandsnaam. */
+function checkIdSuffix(baseName) {
+  return CHECK_ID_SLUGS[baseName] ?? slugToPascalCase(baseName);
+}
+
+/**
+ * Onderwerpstag, stabiel over de D/U-hernoeming heen: de D_/U_-prefix telt niet mee, want
+ * anders wordt "bitlocker" ineens "d-bitlocker" en breekt filteren op tag. De scope komt als
+ * losse tag terug, zodat je er wél op kunt filteren zonder de onderwerpstag te vervuilen.
+ */
+function tagsFor(baseName, extra) {
+  // (?:[DU]_) als geheel optioneel, niet [DU]?_? — anders slikt de D van "Baseline_Device_Lock"
+  // de scope-positie in en houd je "evice-lock" over.
+  const topic = baseName
+    .replace(/^Baseline_(?:[DU]_)?/, "")
+    .toLowerCase()
+    .replace(/_+/g, "-");
+  const scope = scopeFromFileName(baseName);
+  return ["intune", extra, topic, ...(scope === "D" ? ["device-scope"] : scope === "U" ? ["user-scope"] : [])];
 }
 
 /**
@@ -255,14 +365,13 @@ function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDi
     definitions.push({ definitionId, enabled: !!item.enabled, presentationValues });
   }
 
-  const pascalName = slugToPascalCase(baseName);
-  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
+  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${checkIdSuffix(baseName)}`;
 
   return {
     rule: {
       checkId,
       severity: "medium",
-      tags: ["intune", "group-policy-definition", baseName.replace(/^Baseline_/, "").toLowerCase().replace(/_+/g, "-")],
+      tags: tagsFor(baseName, "group-policy-definition"),
       type: "group-policy-definition-match",
       what: `Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy "${policyDisplayName || baseName}"?`,
       why: "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
@@ -309,15 +418,14 @@ function convertTemplateFile(filePath, checkNumber) {
     flattenInstance(s.settingInstance, settings, warnings);
   }
 
-  const pascalName = slugToPascalCase(baseName);
-  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
+  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${checkIdSuffix(baseName)}`;
   const severity = HIGH_SEVERITY_FILES.has(baseName) ? "high" : "medium";
 
   return {
     rule: {
       checkId,
       severity,
-      tags: ["intune", "settings-catalog", baseName.replace(/^Baseline_/, "").toLowerCase().replace(/_+/g, "-")],
+      tags: tagsFor(baseName, "settings-catalog"),
       type: "settings-catalog-match",
       what: `Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy "${policy.name || baseName}"?`,
       why: "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",

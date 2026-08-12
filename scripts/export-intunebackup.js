@@ -79,6 +79,29 @@ function main() {
   }
   const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? JSON.parse(fs.readFileSync(ASSIGNMENTS_PATH, "utf8")) : {};
 
+  const templateFiles = fs.readdirSync(TEMPLATE_DIR).sort().filter((f) => f.startsWith("Baseline_") && f.endsWith(".json"));
+  const templates = templateFiles.map((file) => ({
+    file,
+    inner: JSON.parse(JSON.parse(fs.readFileSync(path.join(TEMPLATE_DIR, file), "utf8")).JSON),
+  }));
+
+  // Een sleutel in _assignments.json die geen enkele Displayname meer raakt is een fout, geen
+  // detail: assignments worden op naam gematcht, dus na een hernoeming waarbij dit bestand
+  // niet meebeweegt verdwijnt de toewijzing stil uit de export en rolt de restore de policy
+  // ongetoewezen uit. Dat merk je pas als iemand zich afvraagt waarom de baseline nergens
+  // landt. Vóór de D/U-hernoeming (PLAN.md fase 2) is dit precies het vangnet dat mist.
+  //
+  // Vóór rmDirContents, niet erna: afbreken mag de bestaande export niet half gesloopt
+  // achterlaten.
+  const knownDisplayNames = new Set(templates.map((t) => t.inner.Displayname));
+  const orphaned = Object.keys(assignments).filter((n) => !knownDisplayNames.has(n));
+  if (orphaned.length > 0) {
+    console.error(`FOUT: ${orphaned.length} sleutel(s) in ${path.relative(REPO_ROOT, ASSIGNMENTS_PATH)} horen bij geen enkele policy in IntuneTemplate/:`);
+    for (const n of orphaned) console.error(`  - "${n}"`);
+    console.error("Hernoemd of verwijderd? Werk _assignments.json bij. De export is ongewijzigd gelaten.");
+    process.exit(1);
+  }
+
   // Volledig herschrijven: een template dat uit IntuneTemplate/ verdwijnt moet ook uit de
   // export verdwijnen, anders rolt een restore later een policy uit die niet meer bestaat.
   rmDirContents(outDir);
@@ -87,9 +110,7 @@ function main() {
   const skipped = [];
   let withoutAssignment = 0;
 
-  for (const file of fs.readdirSync(TEMPLATE_DIR).sort()) {
-    if (!file.startsWith("Baseline_") || !file.endsWith(".json")) continue;
-    const inner = JSON.parse(JSON.parse(fs.readFileSync(path.join(TEMPLATE_DIR, file), "utf8")).JSON);
+  for (const { file, inner } of templates) {
     const folder = TYPE_TO_FOLDER[inner.Type];
     if (!folder) {
       skipped.push(`${file}: onbekend Type "${inner.Type}"`);
