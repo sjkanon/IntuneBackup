@@ -1,0 +1,236 @@
+#Requires -Modules Microsoft.Graph.Authentication
+<#
+.SYNOPSIS
+Wijst de baseline-policies in een tenant toe aan All Devices, All Users of een groep.
+
+.DESCRIPTION
+Zoekt in de tenant de policies op die in IntuneTemplate/ staan — over alle drie de
+policytypes heen (Settings Catalog, Administrative Templates/ADMX en klassieke Device
+Configurations) — en zet daar in één keer een assignment op.
+
+De policylijst komt standaard uit IntuneTemplate/, niet uit een naamfilter op "[Baseline]".
+Dat is bewust: "Windows 11 Update" hoort wél bij de baseline maar heeft die prefix niet, en
+een prefixfilter zou 'm stilzwijgend overslaan. Met -Name kun je een eigen lijst opgeven.
+
+Assignments worden standaard AANGEVULD, niet vervangen. Graph's /assign-endpoint overschrijft
+namelijk altijd de volledige lijst, dus dit script leest eerst de bestaande assignments en
+POST't de samenvoeging. Met -Replace gooi je de bestaande juist weg.
+
+.PARAMETER AllDevices
+Wijst toe aan alle apparaten (#microsoft.graph.allDevicesAssignmentTarget).
+
+.PARAMETER AllUsers
+Wijst toe aan alle gelicentieerde gebruikers (#microsoft.graph.allLicensedUsersAssignmentTarget).
+
+.PARAMETER GroupId
+Object-id van de Entra-groep waaraan toegewezen wordt.
+
+.PARAMETER GroupName
+Weergavenaam van de Entra-groep; wordt opgezocht en moet exact één groep opleveren.
+
+.PARAMETER Exclude
+Maakt er een uitsluiting van in plaats van een toewijzing. Alleen zinvol bij een groep.
+
+.PARAMETER Name
+Expliciete policynamen in plaats van de lijst uit IntuneTemplate/.
+
+.PARAMETER Replace
+Vervangt bestaande assignments in plaats van ze aan te vullen.
+
+.PARAMETER FilterId
+Object-id van een assignmentfilter dat op de assignment gezet wordt.
+
+.PARAMETER FilterType
+'include' of 'exclude' — verplicht samen met -FilterId.
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -AllDevices -WhatIf
+Laat zien wat er zou gebeuren, zonder iets te wijzigen.
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -GroupName 'SEC-Baseline-Pilot'
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -AllDevices -Replace
+Gooit bestaande assignments weg en zet alleen All Devices erop.
+#>
+# ConfirmImpact bewust op Medium: met High vraagt PowerShell per policy om bevestiging en
+# klik je je bij 24 policies suf. Draai eerst -WhatIf; dat is hier de dry run.
+[CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'AllDevices')]
+param(
+    [Parameter(Mandatory, ParameterSetName = 'AllDevices')]
+    [switch]$AllDevices,
+
+    [Parameter(Mandatory, ParameterSetName = 'AllUsers')]
+    [switch]$AllUsers,
+
+    [Parameter(Mandatory, ParameterSetName = 'GroupId')]
+    [string]$GroupId,
+
+    [Parameter(Mandatory, ParameterSetName = 'GroupName')]
+    [string]$GroupName,
+
+    [Parameter(ParameterSetName = 'GroupId')]
+    [Parameter(ParameterSetName = 'GroupName')]
+    [switch]$Exclude,
+
+    [string[]]$Name,
+
+    [switch]$Replace,
+
+    [string]$FilterId,
+
+    [ValidateSet('include', 'exclude')]
+    [string]$FilterType,
+
+    [ValidateSet('beta', 'v1.0')]
+    [string]$ApiVersion = 'beta'
+)
+
+$ErrorActionPreference = 'Stop'
+
+# Settings Catalog gebruikt 'name', de andere twee 'displayName' — anders vindt de match niets.
+$PolicyTypes = @(
+    [pscustomobject]@{ Label = 'Settings Catalog';        Endpoint = 'deviceManagement/configurationPolicies';      NameField = 'name' }
+    [pscustomobject]@{ Label = 'Administrative Template'; Endpoint = 'deviceManagement/groupPolicyConfigurations';  NameField = 'displayName' }
+    [pscustomobject]@{ Label = 'Device Configuration';    Endpoint = 'deviceManagement/deviceConfigurations';       NameField = 'displayName' }
+)
+
+function Get-GraphCollection {
+    <# Volgt @odata.nextLink; zonder paginering mis je policies zodra een tenant er meer dan
+       één pagina van heeft — precies het soort stille omissie dat hier niet mag. #>
+    param([Parameter(Mandatory)][string]$Uri)
+
+    $items = @()
+    $next = $Uri
+    while ($next) {
+        $response = Invoke-MgGraphRequest -Method GET -Uri $next
+        if ($response.value) { $items += $response.value }
+        $next = $response.'@odata.nextLink'
+    }
+    return $items
+}
+
+function Get-TemplateDisplayName {
+    <# Leest de Displayname uit de CIPP-templates in IntuneTemplate/ (genestelde JSON-string). #>
+    param([Parameter(Mandatory)][string]$TemplateDir)
+
+    Get-ChildItem -Path $TemplateDir -Filter 'Baseline_*.json' -File | ForEach-Object {
+        ((Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json).JSON | ConvertFrom-Json).Displayname
+    }
+}
+
+function Get-TargetKey {
+    <# Twee targets zijn hetzelfde als type, groep én filter gelijk zijn. Zonder deze sleutel
+       zou aanvullen elke run een duplicaat toevoegen. #>
+    param($Target)
+
+    $type = $Target.'@odata.type'
+    $group = $Target.groupId
+    $filter = $Target.deviceAndAppManagementAssignmentFilterId
+    $filterType = $Target.deviceAndAppManagementAssignmentFilterType
+    return "$type|$group|$filter|$filterType"
+}
+
+# --- doelgroep bepalen ---------------------------------------------------------------
+if ($FilterId -and -not $FilterType) { throw "-FilterId vereist ook -FilterType ('include' of 'exclude')." }
+if ($FilterType -and -not $FilterId) { throw "-FilterType vereist ook -FilterId." }
+
+if ($null -eq (Get-MgContext)) {
+    Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All', 'Group.Read.All' | Out-Null
+}
+
+$resolvedGroupId = $GroupId
+if ($GroupName) {
+    $escaped = $GroupName.Replace("'", "''")
+    $groups = Get-GraphCollection -Uri "v1.0/groups?`$filter=displayName eq '$escaped'&`$select=id,displayName"
+    if ($groups.Count -eq 0) { throw "Geen groep gevonden met displayName '$GroupName'." }
+    if ($groups.Count -gt 1) { throw "$($groups.Count) groepen heten '$GroupName' — gebruik -GroupId om de juiste aan te wijzen." }
+    $resolvedGroupId = $groups[0].id
+    Write-Host "Groep '$GroupName' -> $resolvedGroupId" -ForegroundColor Cyan
+}
+
+$target = switch ($PSCmdlet.ParameterSetName) {
+    'AllDevices' { @{ '@odata.type' = '#microsoft.graph.allDevicesAssignmentTarget' } }
+    'AllUsers'   { @{ '@odata.type' = '#microsoft.graph.allLicensedUsersAssignmentTarget' } }
+    default {
+        @{
+            '@odata.type' = if ($Exclude) { '#microsoft.graph.exclusionGroupAssignmentTarget' } else { '#microsoft.graph.groupAssignmentTarget' }
+            groupId       = $resolvedGroupId
+        }
+    }
+}
+$target['deviceAndAppManagementAssignmentFilterId'] = if ($FilterId) { $FilterId } else { $null }
+$target['deviceAndAppManagementAssignmentFilterType'] = if ($FilterType) { $FilterType } else { 'none' }
+
+# --- policylijst bepalen -------------------------------------------------------------
+if ($Name) {
+    $wanted = $Name
+} else {
+    $templateDir = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate'
+    if (-not (Test-Path $templateDir)) { throw "IntuneTemplate/ niet gevonden op $templateDir — geef -Name mee om zonder de repo te draaien." }
+    $wanted = @(Get-TemplateDisplayName -TemplateDir $templateDir)
+}
+if ($wanted.Count -eq 0) { throw 'Geen policynamen om toe te wijzen.' }
+
+Write-Host "$($wanted.Count) policies uit de baseline, doel: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
+Write-Host ("Modus: {0}" -f $(if ($Replace) { 'bestaande assignments VERVANGEN' } else { 'aanvullen op bestaande assignments' })) -ForegroundColor Cyan
+
+# --- policies ophalen ----------------------------------------------------------------
+$found = @{}
+foreach ($type in $PolicyTypes) {
+    foreach ($policy in Get-GraphCollection -Uri "$ApiVersion/$($type.Endpoint)?`$select=id,$($type.NameField)") {
+        $policyName = $policy.($type.NameField)
+        if ($wanted -contains $policyName) {
+            if ($found.ContainsKey($policyName)) {
+                Write-Warning "'$policyName' bestaat meerdere keren in de tenant — alleen de eerste ($($found[$policyName].Label)) wordt toegewezen."
+                continue
+            }
+            $found[$policyName] = [pscustomobject]@{ Id = $policy.id; Label = $type.Label; Endpoint = $type.Endpoint; Name = $policyName }
+        }
+    }
+}
+
+# --- toewijzen -----------------------------------------------------------------------
+$results = foreach ($policyName in $wanted) {
+    if (-not $found.ContainsKey($policyName)) {
+        [pscustomobject]@{ Policy = $policyName; Type = '-'; Actie = 'NIET GEVONDEN'; Assignments = 0 }
+        continue
+    }
+    $policy = $found[$policyName]
+    $uri = "$ApiVersion/$($policy.Endpoint)/$($policy.Id)"
+
+    $existing = if ($Replace) { @() } else { @(Get-GraphCollection -Uri "$uri/assignments" | ForEach-Object { $_.target }) }
+    $targets = [System.Collections.ArrayList]::new()
+    $seen = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($t in $existing) { if ($seen.Add((Get-TargetKey $t))) { [void]$targets.Add($t) } }
+
+    $isNew = $seen.Add((Get-TargetKey $target))
+    if (-not $isNew) {
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'al toegewezen'; Assignments = $targets.Count }
+        continue
+    }
+    [void]$targets.Add($target)
+
+    $body = @{ assignments = @($targets | ForEach-Object { @{ target = $_ } }) } | ConvertTo-Json -Depth 10
+    if ($PSCmdlet.ShouldProcess($policyName, "assignment zetten ($($targets.Count) target(s))")) {
+        try {
+            Invoke-MgGraphRequest -Method POST -Uri "$uri/assign" -Body $body | Out-Null
+            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = $(if ($Replace) { 'vervangen' } else { 'toegevoegd' }); Assignments = $targets.Count }
+        } catch {
+            Write-Error "$policyName - assignment mislukt: $_" -ErrorAction Continue
+            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'MISLUKT'; Assignments = 0 }
+        }
+    } else {
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'overgeslagen (WhatIf)'; Assignments = $targets.Count }
+    }
+}
+
+$results | Format-Table -AutoSize
+
+$missing = @($results | Where-Object Actie -eq 'NIET GEVONDEN')
+$failed = @($results | Where-Object Actie -eq 'MISLUKT')
+if ($missing.Count -gt 0) {
+    Write-Warning "$($missing.Count) policy/policies staan niet in de tenant. Rol ze eerst uit (CIPP, of Start-IntuneRestoreConfig op export/IntuneBackupAndRestore/) en draai dit script opnieuw."
+}
+if ($failed.Count -gt 0) { throw "$($failed.Count) assignment(s) mislukt — zie de fouten hierboven." }

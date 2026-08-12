@@ -1,0 +1,218 @@
+{
+  "Windows 11 Update": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] ASR Default rules": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Administrative Templates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Auditing": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Automatic configuration of Outlook": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Bitlocker": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Default AV Policy": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Device Lock": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] EDR Configuration": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Edge Standard search engine - Google": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Firewall": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] LanManWorkstation": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Local Policies Security Options": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Microsoft App Store": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Microsoft Edge": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Office Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Onedrive - Known Folder Move": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Onedrive Silent Login": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Privacy": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Search": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Smartscreen": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] System Services": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] User Rights": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] Windows LAPS Policy": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ]
+}

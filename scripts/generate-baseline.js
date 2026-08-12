@@ -34,7 +34,7 @@ const OUTPUT_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.js
  */
 const EXISTING_RULES = [
   {
-    checkId: "INTUNE-ITCE-Baseline-001-DeviceEncryptionRequired",
+    checkId: "INTUNE-BASE-001-DeviceEncryptionRequired",
     severity: "high",
     tags: ["intune", "device-compliance", "encryption"],
     type: "device-encryption-required",
@@ -47,7 +47,7 @@ const EXISTING_RULES = [
     ],
   },
   {
-    checkId: "INTUNE-ITCE-Baseline-002-CompliancePolicyAssigned",
+    checkId: "INTUNE-BASE-002-CompliancePolicyAssigned",
     severity: "high",
     tags: ["intune", "device-compliance"],
     type: "compliance-policy-assigned",
@@ -58,7 +58,7 @@ const EXISTING_RULES = [
     learnMoreLinks: [{ label: "Assign device compliance policies in Intune", url: "https://learn.microsoft.com/mem/intune/protect/device-compliance-get-started" }],
   },
   {
-    checkId: "INTUNE-ITCE-Baseline-003-CompliancePolicyMinOsVersion",
+    checkId: "INTUNE-BASE-003-CompliancePolicyMinOsVersion",
     severity: "medium",
     tags: ["intune", "device-compliance", "patching"],
     type: "compliance-policy-min-os",
@@ -69,7 +69,7 @@ const EXISTING_RULES = [
     learnMoreLinks: [{ label: "Windows 10/11 compliance settings — minimum OS version", url: "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows" }],
   },
   {
-    checkId: "INTUNE-ITCE-Baseline-004-AppProtectionPolicyExists",
+    checkId: "INTUNE-BASE-004-AppProtectionPolicyExists",
     severity: "medium",
     tags: ["intune", "app-protection"],
     type: "app-protection-policy-exists",
@@ -80,7 +80,7 @@ const EXISTING_RULES = [
     learnMoreLinks: [{ label: "Create and assign app protection policies", url: "https://learn.microsoft.com/mem/intune/apps/app-protection-policies" }],
   },
   {
-    checkId: "INTUNE-ITCE-Baseline-005-PasscodeRequired",
+    checkId: "INTUNE-BASE-005-PasscodeRequired",
     severity: "high",
     tags: ["intune", "device-compliance", "authentication"],
     type: "passcode-required",
@@ -90,7 +90,7 @@ const EXISTING_RULES = [
     learnMoreLinks: [{ label: "Windows 10/11 compliance settings — System Security (password)", url: "https://learn.microsoft.com/mem/intune/protect/compliance-policy-create-windows" }],
   },
   {
-    checkId: "INTUNE-ITCE-Baseline-006-DefenderEnabled",
+    checkId: "INTUNE-BASE-006-DefenderEnabled",
     severity: "medium",
     tags: ["intune", "device-compliance", "endpoint-protection"],
     type: "defender-enabled",
@@ -112,6 +112,63 @@ const HIGH_SEVERITY_FILES = new Set([
   "Baseline_Device_Lock",
   "Baseline_Windows_LAPS_Policy",
 ]);
+
+/**
+ * Vaste bestandsnaam -> checkId-nummer. Het nummer wás de alfabetische positie, maar dan
+ * verschuift één nieuw template alle checkId's erna — en een checkId is een externe
+ * identifier: het platform, findings en uitzonderingen verwijzen ernaar. Nieuwe bestanden
+ * krijgen daarom een nummer ná het hoogste bekende (alfabetisch), en de run meldt welk
+ * nummer dat werd zodat je het hier kunt vastzetten.
+ */
+const CHECK_NUMBERS = {
+  Baseline_ASR_Default_rules: 7,
+  Baseline_Administrative_Templates: 8,
+  Baseline_Auditing: 9,
+  Baseline_Automatic_configuration_of_Outlook: 10,
+  Baseline_Bitlocker: 11,
+  Baseline_Default_AV_Policy: 12,
+  Baseline_Device_Lock: 13,
+  Baseline_EDR_Configuration: 14,
+  Baseline_Edge_Standard_search_engine__Google: 15,
+  Baseline_Firewall: 16,
+  Baseline_LanManWorkstation: 17,
+  Baseline_Local_Policies_Security_Options: 18,
+  Baseline_Microsoft_App_Store: 19,
+  Baseline_Microsoft_Edge: 20,
+  Baseline_Office_Updates: 21,
+  Baseline_Privacy: 22,
+  Baseline_Search: 23,
+  Baseline_Smartscreen: 24,
+  Baseline_System_Services: 25,
+  Baseline_User_Rights: 26,
+  Baseline_Windows_LAPS_Policy: 27,
+  Baseline_Onedrive__Known_Folder_Move: 28,
+  Baseline_Onedrive_Silent_Login: 29,
+  // Type "Device": levert vandaag geen check op, maar het nummer is gereserveerd zodat het
+  // niet aan een ander template wordt uitgedeeld als de engine dit type gaat ondersteunen.
+  Baseline_Windows_11_Update: 30,
+};
+
+/** Deelt nummers uit: bekend uit CHECK_NUMBERS, anders oplopend na het hoogste bekende. */
+function assignCheckNumbers(baseNames) {
+  let next = Math.max(0, ...Object.values(CHECK_NUMBERS)) + 1;
+  const assigned = new Map();
+  const fresh = [];
+  for (const name of baseNames) {
+    if (CHECK_NUMBERS[name] !== undefined) {
+      assigned.set(name, CHECK_NUMBERS[name]);
+    } else {
+      assigned.set(name, next);
+      fresh.push(`  ${name}: ${next},`);
+      next += 1;
+    }
+  }
+  if (fresh.length > 0) {
+    console.log("\nNieuwe templates kregen een nummer — zet ze vast in CHECK_NUMBERS in dit script:");
+    console.log(fresh.join("\n"));
+  }
+  return assigned;
+}
 
 function slugToPascalCase(filenameWithoutExt) {
   const withoutPrefix = filenameWithoutExt.replace(/^Baseline_/, "");
@@ -199,7 +256,7 @@ function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDi
   }
 
   const pascalName = slugToPascalCase(baseName);
-  const checkId = `INTUNE-ITCE-Baseline-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
+  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
 
   return {
     rule: {
@@ -208,7 +265,7 @@ function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDi
       tags: ["intune", "group-policy-definition", baseName.replace(/^Baseline_/, "").toLowerCase().replace(/_+/g, "-")],
       type: "group-policy-definition-match",
       what: `Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy "${policyDisplayName || baseName}"?`,
-      why: "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
+      why: "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
       source: `IntuneBackup/IntuneTemplate/${baseName}.json (afgesproken baseline, Defender-gebaseerd, ADMX)`,
       params: { definitions },
       learnMoreLinks: [
@@ -221,14 +278,23 @@ function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDi
 }
 
 /**
- * Twee formaten komen voor in IntuneTemplate/, onderscheiden door `.Type`:
+ * Drie formaten komen voor in IntuneTemplate/, onderscheiden door `.Type`:
  * - "Catalog": Settings Catalog-policy (`settings[].settingInstance`-bomen).
  * - "Admin": klassieke ADMX-backed Group Policy Configuration — zie convertAdminTemplateFile.
+ * - "Device": klassieke deviceConfiguration (bv. windowsUpdateForBusinessConfiguration).
+ *   CIPP en IntuneBackupAndRestore kunnen die uitrollen, maar de platform-engine heeft er
+ *   geen matcher voor — er is geen `device-configuration-match`-type. Een rule genereren
+ *   die de engine niet kent levert een check op die stilzwijgend niets test, dus slaan we
+ *   die over tot de engine het ondersteunt.
  */
 function convertTemplateFile(filePath, checkNumber) {
   const raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
   const inner = JSON.parse(raw.JSON);
   const baseName = path.basename(filePath, ".json");
+
+  if (inner.Type === "Device") {
+    return { unsupportedType: inner.Type, settingCount: 0 };
+  }
 
   if (inner.Type === "Admin") {
     const rawJsonPolicy = JSON.parse(inner.RAWJson);
@@ -244,7 +310,7 @@ function convertTemplateFile(filePath, checkNumber) {
   }
 
   const pascalName = slugToPascalCase(baseName);
-  const checkId = `INTUNE-ITCE-Baseline-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
+  const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${pascalName}`;
   const severity = HIGH_SEVERITY_FILES.has(baseName) ? "high" : "medium";
 
   return {
@@ -254,7 +320,7 @@ function convertTemplateFile(filePath, checkNumber) {
       tags: ["intune", "settings-catalog", baseName.replace(/^Baseline_/, "").toLowerCase().replace(/_+/g, "-")],
       type: "settings-catalog-match",
       what: `Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy "${policy.name || baseName}"?`,
-      why: "Onderdeel van de tussen ITCE en de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      why: "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
       source: `IntuneBackup/IntuneTemplate/${baseName}.json (afgesproken baseline, Defender-gebaseerd)`,
       params: { settings },
       learnMoreLinks: [
@@ -284,12 +350,18 @@ function main() {
 
   const generatedRules = [];
   const skippedFiles = [];
-  let checkNumber = EXISTING_RULES.length + 1;
+  const checkNumbers = assignCheckNumbers(files.map((f) => path.basename(f, ".json")));
   let hadWarnings = false;
 
   for (const file of files) {
     const filePath = path.join(TEMPLATE_DIR, file);
-    const { rule, warnings, settingCount } = convertTemplateFile(filePath, checkNumber);
+    const checkNumber = checkNumbers.get(path.basename(file, ".json"));
+    const { rule, warnings, settingCount, unsupportedType } = convertTemplateFile(filePath, checkNumber);
+    if (unsupportedType) {
+      console.log(`${file}: Type "${unsupportedType}" — geen baseline-check (engine heeft er geen matcher voor), wel uitrolbaar via CIPP/IntuneBackupAndRestore.`);
+      skippedFiles.push({ file, reason: `Type "${unsupportedType}" wordt niet door de platform-engine ondersteund` });
+      continue;
+    }
     if (settingCount === 0) {
       console.error(`FOUT: ${file} leverde 0 instellingen op — wordt overgeslagen, controleer het bestand handmatig.`);
       skippedFiles.push({ file, reason: "0 instellingen na flatten" });
@@ -302,8 +374,12 @@ function main() {
     }
     generatedRules.push(rule);
     console.log(`${rule.checkId} <- ${file} (${settingCount} instellingen)`);
-    checkNumber += 1;
   }
+
+  // Op checkId sorteren: de volgorde in het bestand volgt zo het nummer, niet de
+  // alfabetische bestandsvolgorde — anders springt een later toegevoegd template met een
+  // hoog nummer midden in de lijst en oogt de diff groter dan hij is.
+  generatedRules.sort((a, b) => a.checkId.localeCompare(b.checkId));
 
   const output = {
     category: "intune",

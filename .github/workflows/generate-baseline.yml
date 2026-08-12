@@ -15,6 +15,7 @@ on:
     paths:
       - "IntuneTemplate/**"
       - "scripts/generate-baseline.js"
+      - "scripts/export-intunebackup.js"
       - ".github/workflows/generate-baseline.yml"
   workflow_dispatch:
 
@@ -31,6 +32,8 @@ jobs:
           node-version: 24
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js
+      - name: Genereer export/IntuneBackupAndRestore/ (restore-formaat)
+        run: node scripts/export-intunebackup.js
       - name: Open PR met de gegenereerde baseline (als er iets veranderde)
         uses: peter-evans/create-pull-request@v7
         with:
@@ -39,9 +42,13 @@ jobs:
           body: >
             Automatisch gegenereerd door `.github/workflows/generate-baseline.yml` na een
             wijziging in `IntuneTemplate/`. Controleer de diff — met name nieuwe/verwijderde
-            checkId's en gewijzigde `params.settings` — vóór je merget. Dit bestand is de
-            bron voor de `intune`-categorie in de baseline-koppeling van TEST Policies
-            Platform (Instellingen → Baseline-koppelingen).
+            checkId's en gewijzigde `params.settings` — vóór je merget.
+            `baseline/intune/baseline-v1.0.json` is de bron voor de `intune`-categorie in de
+            baseline-koppeling van TEST Policies Platform (Instellingen →
+            Baseline-koppelingen); `export/IntuneBackupAndRestore/` is dezelfde baseline in
+            het restore-formaat van de IntuneBackupAndRestore-module.
           branch: auto/regenerate-baseline
           delete-branch: true
-          add-paths: baseline/intune/baseline-v1.0.json
+          add-paths: |
+            baseline/intune/baseline-v1.0.json
+            export/IntuneBackupAndRestore/**

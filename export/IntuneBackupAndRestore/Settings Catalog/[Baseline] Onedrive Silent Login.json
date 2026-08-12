@@ -1,0 +1,102 @@
+{
+    "name": "[Baseline] Onedrive Silent Login",
+    "description": "",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateDisplayName": null,
+        "templateDisplayVersion": null,
+        "templateId": "",
+        "templateFamily": "none"
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 6,
+    "settings": [
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "0"
+        },
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "1"
+        },
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "2"
+        },
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "device_vendor_msft_policy_config_onedrivengscv4~policy~onedrivengsc_disablefirstdeletedialog_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv4~policy~onedrivengsc_disablefirstdeletedialog",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "3"
+        },
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "4"
+        },
+        {
+            "settingInstance": {
+                "choiceSettingValue": {
+                    "value": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart_1",
+                    "children": [],
+                    "settingValueTemplateReference": null
+                },
+                "auditRuleInformation": null,
+                "settingInstanceTemplateReference": null,
+                "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance"
+            },
+            "id": "5"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-08-10",
+  "reviewedAt": "2026-08-12",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -2618,6 +2618,100 @@
           {
             "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementnameorprefix",
             "expectedValue": "localadmin"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-028-OnedriveKnownFolderMove",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "onedrive-known-folder-move"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Onedrive - Known Folder Move\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Onedrive__Known_Folder_Move.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_desktop_checkbox",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_desktop_checkbox_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_documents_checkbox",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_documents_checkbox_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_pictures_checkbox",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_pictures_checkbox_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_dropdown",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_dropdown_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_textbox",
+            "expectedValue": "2a1e05f6-1193-4ac0-9694-fd77e853f4c3"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-029-OnedriveSilentLogin",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "onedrive-silent-login"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Onedrive Silent Login\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_Onedrive_Silent_Login.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation",
+            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
+            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv4~policy~onedrivengsc_disablefirstdeletedialog",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv4~policy~onedrivengsc_disablefirstdeletedialog_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
+            "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",
+            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart_1"
           }
         ]
       },
