@@ -1,5 +1,5 @@
 {
-  "Windows 11 Update": [
+  "[Baseline] - D - Administrative Templates": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -8,7 +8,7 @@
       }
     }
   ],
-  "[Baseline] ASR Default rules": [
+  "[Baseline] - D - Attack Surface Reduction": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -17,7 +17,7 @@
       }
     }
   ],
-  "[Baseline] Administrative Templates": [
+  "[Baseline] - D - Audit and Event Logging": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -26,7 +26,7 @@
       }
     }
   ],
-  "[Baseline] Auditing": [
+  "[Baseline] - D - BitLocker": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -35,7 +35,7 @@
       }
     }
   ],
-  "[Baseline] Automatic configuration of Outlook": [
+  "[Baseline] - D - Defender Antivirus": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -44,7 +44,7 @@
       }
     }
   ],
-  "[Baseline] Bitlocker": [
+  "[Baseline] - D - Defender for Endpoint EDR": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -53,7 +53,7 @@
       }
     }
   ],
-  "[Baseline] Default AV Policy": [
+  "[Baseline] - D - Device Lock": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -62,7 +62,7 @@
       }
     }
   ],
-  "[Baseline] Device Lock": [
+  "[Baseline] - D - Local Security Policies": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -71,7 +71,7 @@
       }
     }
   ],
-  "[Baseline] EDR Configuration": [
+  "[Baseline] - D - Location and Privacy": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -80,7 +80,7 @@
       }
     }
   ],
-  "[Baseline] Edge Standard search engine - Google": [
+  "[Baseline] - D - Microsoft Edge Search Engine": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -89,7 +89,7 @@
       }
     }
   ],
-  "[Baseline] Firewall": [
+  "[Baseline] - D - Microsoft Edge Security": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -98,7 +98,7 @@
       }
     }
   ],
-  "[Baseline] LanManWorkstation": [
+  "[Baseline] - D - Microsoft Office Updates": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -107,7 +107,7 @@
       }
     }
   ],
-  "[Baseline] Local Policies Security Options": [
+  "[Baseline] - D - Microsoft OneDrive": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -116,7 +116,7 @@
       }
     }
   ],
-  "[Baseline] Microsoft App Store": [
+  "[Baseline] - D - Microsoft OneDrive KFM": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -125,7 +125,7 @@
       }
     }
   ],
-  "[Baseline] Microsoft Edge": [
+  "[Baseline] - D - Microsoft Store": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -134,7 +134,7 @@
       }
     }
   ],
-  "[Baseline] Office Updates": [
+  "[Baseline] - D - Network Security": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -143,7 +143,7 @@
       }
     }
   ],
-  "[Baseline] Onedrive - Known Folder Move": [
+  "[Baseline] - D - SmartScreen": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -152,7 +152,7 @@
       }
     }
   ],
-  "[Baseline] Onedrive Silent Login": [
+  "[Baseline] - D - System Services": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -161,7 +161,7 @@
       }
     }
   ],
-  "[Baseline] Privacy": [
+  "[Baseline] - D - User Rights": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -170,7 +170,7 @@
       }
     }
   ],
-  "[Baseline] Search": [
+  "[Baseline] - D - Windows Firewall": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -179,7 +179,7 @@
       }
     }
   ],
-  "[Baseline] Smartscreen": [
+  "[Baseline] - D - Windows LAPS": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -188,7 +188,7 @@
       }
     }
   ],
-  "[Baseline] System Services": [
+  "[Baseline] - D - Windows Search": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -197,7 +197,7 @@
       }
     }
   ],
-  "[Baseline] User Rights": [
+  "[Baseline] - D - Windows Update Ring 3 Production": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -206,12 +206,30 @@
       }
     }
   ],
-  "[Baseline] Windows LAPS Policy": [
+  "[Baseline] - U - Microsoft OneDrive": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
         "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - U - Microsoft Outlook": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - U - Windows User Experience": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
       }
     }
   ]

@@ -1,0 +1,46 @@
+{
+    "name": "[Baseline] - U - Windows User Experience",
+    "description": "",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

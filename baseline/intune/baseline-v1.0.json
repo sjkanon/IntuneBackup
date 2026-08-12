@@ -129,12 +129,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "asr-default-rules"
+        "attack-surface-reduction",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] ASR Default rules\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Attack Surface Reduction\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_ASR_Default_rules.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Attack_Surface_Reduction.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -224,12 +225,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "administrative-templates"
+        "administrative-templates",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Administrative Templates\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Administrative Templates\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Administrative_Templates.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Administrative_Templates.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -379,10 +381,6 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy_copyfilespolicy_enum",
             "expectedValue": "device_vendor_msft_policy_config_printers_configurecopyfilespolicy_copyfilespolicy_enum_1"
-          },
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification",
-            "expectedValue": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification_1"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle",
@@ -1355,10 +1353,6 @@
             "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablesecuritysettingscheck_0"
           },
           {
-            "settingDefinitionId": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete",
-            "expectedValue": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete_0"
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableblockatfirstseen",
             "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableblockatfirstseen_1"
           },
@@ -1461,12 +1455,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "auditing"
+        "audit-and-event-logging",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Auditing\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Audit and Event Logging\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Auditing.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Audit_and_Event_Logging.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1576,12 +1571,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "automatic-configuration-of-outlook"
+        "microsoft-outlook",
+        "user-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Automatic configuration of Outlook\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - U - Microsoft Outlook\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Automatic_configuration_of_Outlook.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_U_Microsoft_Outlook.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1603,12 +1599,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "bitlocker"
+        "bitlocker",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Bitlocker\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - BitLocker\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Bitlocker.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_BitLocker.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1722,12 +1719,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "default-av-policy"
+        "defender-antivirus",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Default AV Policy\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Defender Antivirus\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Default_AV_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Defender_Antivirus.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1789,12 +1787,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "device-lock"
+        "device-lock",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Device Lock\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Device Lock\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Device_Lock.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Device_Lock.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1824,12 +1823,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "edr-configuration"
+        "defender-for-endpoint-edr",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] EDR Configuration\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Defender for Endpoint EDR\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_EDR_Configuration.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Defender_for_Endpoint_EDR.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -1859,12 +1859,13 @@
       "tags": [
         "intune",
         "group-policy-definition",
-        "edge-standard-search-engine-google"
+        "microsoft-edge-search-engine",
+        "device-scope"
       ],
       "type": "group-policy-definition-match",
-      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Edge Standard search engine - Google\"?",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft Edge Search Engine\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Edge_Standard_search_engine__Google.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_Edge_Search_Engine.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
       "params": {
         "definitions": [
           {
@@ -1927,12 +1928,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "firewall"
+        "windows-firewall",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Firewall\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Windows Firewall\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Firewall.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Windows_Firewall.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2042,12 +2044,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "lanmanworkstation"
+        "network-security",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] LanManWorkstation\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Network Security\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_LanManWorkstation.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Network_Security.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2069,12 +2072,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "local-policies-security-options"
+        "local-security-policies",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Local Policies Security Options\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Local Security Policies\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Local_Policies_Security_Options.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Local_Security_Policies.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2176,12 +2180,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "microsoft-app-store"
+        "microsoft-store",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft App Store\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft Store\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_App_Store.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_Store.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2211,12 +2216,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "microsoft-edge"
+        "microsoft-edge-security",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Microsoft Edge\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft Edge Security\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Microsoft_Edge.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_Edge_Security.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2242,12 +2248,13 @@
       "tags": [
         "intune",
         "group-policy-definition",
-        "office-updates"
+        "microsoft-office-updates",
+        "device-scope"
       ],
       "type": "group-policy-definition-match",
-      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] Office Updates\"?",
+      "what": "Bevat de tenant een Group Policy-configuratieprofiel (ADMX) dat overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft Office Updates\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Klassiek ADMX-backed (Type: \"Admin\"), niet Settings Catalog — de engine leest dit via de beta-only groupPolicyConfigurations-API, nog niet tegen een echte tenant geverifieerd.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Office_Updates.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_Office_Updates.json (afgesproken baseline, Defender-gebaseerd, ADMX)",
       "params": {
         "definitions": [
           {
@@ -2290,12 +2297,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "privacy"
+        "location-and-privacy",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Privacy\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Location and Privacy\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Privacy.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Location_and_Privacy.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2317,12 +2325,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "search"
+        "windows-search",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Search\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Windows Search\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Search.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Windows_Search.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2344,12 +2353,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "smartscreen"
+        "smartscreen",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Smartscreen\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - SmartScreen\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Smartscreen.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_SmartScreen.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2391,12 +2401,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "system-services"
+        "system-services",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] System Services\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - System Services\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_System_Services.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_System_Services.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2430,12 +2441,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "user-rights"
+        "user-rights",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] User Rights\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - User Rights\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_User_Rights.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_User_Rights.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2563,12 +2575,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "windows-laps-policy"
+        "windows-laps",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Windows LAPS Policy\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Windows LAPS\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Windows_LAPS_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Windows_LAPS.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2634,12 +2647,13 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "onedrive-known-folder-move"
+        "microsoft-onedrive-kfm",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Onedrive - Known Folder Move\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft OneDrive KFM\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Onedrive__Known_Folder_Move.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_OneDrive_KFM.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -2681,22 +2695,15 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "onedrive-silent-login"
+        "microsoft-onedrive",
+        "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] Onedrive Silent Login\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - D - Microsoft OneDrive\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/Baseline_Onedrive_Silent_Login.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_D_Microsoft_OneDrive.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation",
-            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation_1"
-          },
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
-            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial_1"
-          },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement",
             "expectedValue": "device_vendor_msft_policy_config_onedrivengscv3~policy~onedrivengsc_enableautomaticuploadbandwidthmanagement_1"
@@ -2708,6 +2715,70 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
             "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-031-UWindowsUserExperience",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-user-experience",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - U - Windows User Experience\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_U_Windows_User_Experience.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification",
+            "expectedValue": "user_vendor_msft_policy_config_admx_wpn_nolockscreentoastnotification_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete",
+            "expectedValue": "user_vendor_msft_policy_config_internetexplorer_allowautocomplete_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-032-UMicrosoftOneDrive",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-onedrive",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - U - Microsoft OneDrive\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/Baseline_U_Microsoft_OneDrive.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation",
+            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_disablefreanimation_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
+            "expectedValue": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial_1"
           },
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",

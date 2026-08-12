@@ -31,11 +31,10 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      # Draait bewust nog met --report (meldt wel, faalt niet): de D/U-hernoeming uit PLAN.md
-      # fase 2 staat nog open, dus vandaag is elke policy "fout". Haal --report weg zodra die
-      # fase gemerged is — dan bewaakt deze stap dat er geen gemengde policy meer bij komt.
+      # Bewaakt dat er geen policy met gemengde device/user-scope bij komt, en dat bestands- en
+      # policynaam dezelfde scope dragen. Blokkerend sinds PLAN.md fase 2 (de hernoeming).
       - name: Controleer device/user-scope van IntuneTemplate/
-        run: node scripts/check-scope.js --report
+        run: node scripts/check-scope.js
 
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js

@@ -49,8 +49,13 @@ De naamconventie is `[Baseline] - D - Item` / `[Baseline] - U - Item`, met besta
 `generate-baseline.js`, `export-intunebackup.js` en `Set-BaselineAssignment.ps1` filteren er
 alle drie op.
 
-Die omzetting is nog niet gedaan — zie [PLAN.md](PLAN.md). `check-scope.js` meldt vandaag dus
-terecht 24 openstaande policies en 2 gemengde.
+`check-scope.js` draait als eerste stap in `.github/workflows/generate-baseline.yml` en is
+blokkerend — een nieuwe policy met gemengde scope komt er dus niet ongemerkt in.
+
+**De tenant loopt hier nog achter.** De policies staan daar nog onder hun oude naam; die
+migratie is fase 3 in [PLAN.md](PLAN.md) en gebeurt met een `PATCH` (hernoemen, id en
+assignments blijven), niet met `Start-IntuneRestoreConfig` — die maakt aan op naam en zou
+duplicaten opleveren.
 
 ## Toewijzen in een tenant
 

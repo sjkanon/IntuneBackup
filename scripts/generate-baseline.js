@@ -102,20 +102,8 @@ const EXISTING_RULES = [
   },
 ];
 
-/**
- * Bestandsnamen die duidelijk kritieker zijn dan de rest — de eigenaar kan dit vrij bijstellen.
- * Zowel de oude als de nieuwe (D/U-)naam staan erin zolang de hernoeming loopt; zie
- * CHECK_ID_SLUGS voor de reden dat beide naast elkaar bestaan.
- */
+/** Bestandsnamen die duidelijk kritieker zijn dan de rest — de eigenaar kan dit vrij bijstellen. */
 const HIGH_SEVERITY_FILES = new Set([
-  "Baseline_Bitlocker",
-  "Baseline_EDR_Configuration",
-  "Baseline_Default_AV_Policy",
-  "Baseline_Firewall",
-  "Baseline_ASR_Default_rules",
-  "Baseline_Device_Lock",
-  "Baseline_Windows_LAPS_Policy",
-  // D/U-naamgeving (PLAN.md fase 2)
   "Baseline_D_BitLocker",
   "Baseline_D_Defender_for_Endpoint_EDR",
   "Baseline_D_Defender_Antivirus",
@@ -133,39 +121,6 @@ const HIGH_SEVERITY_FILES = new Set([
  * nummer dat werd zodat je het hier kunt vastzetten.
  */
 const CHECK_NUMBERS = {
-  Baseline_ASR_Default_rules: 7,
-  Baseline_Administrative_Templates: 8,
-  Baseline_Auditing: 9,
-  Baseline_Automatic_configuration_of_Outlook: 10,
-  Baseline_Bitlocker: 11,
-  Baseline_Default_AV_Policy: 12,
-  Baseline_Device_Lock: 13,
-  Baseline_EDR_Configuration: 14,
-  Baseline_Edge_Standard_search_engine__Google: 15,
-  Baseline_Firewall: 16,
-  Baseline_LanManWorkstation: 17,
-  Baseline_Local_Policies_Security_Options: 18,
-  Baseline_Microsoft_App_Store: 19,
-  Baseline_Microsoft_Edge: 20,
-  Baseline_Office_Updates: 21,
-  Baseline_Privacy: 22,
-  Baseline_Search: 23,
-  Baseline_Smartscreen: 24,
-  Baseline_System_Services: 25,
-  Baseline_User_Rights: 26,
-  Baseline_Windows_LAPS_Policy: 27,
-  Baseline_Onedrive__Known_Folder_Move: 28,
-  Baseline_Onedrive_Silent_Login: 29,
-  // Type "Device": levert vandaag geen check op, maar het nummer is gereserveerd zodat het
-  // niet aan een ander template wordt uitgedeeld als de engine dit type gaat ondersteunen.
-  Baseline_Windows_11_Update: 30,
-
-  // --- D/U-naamgeving (PLAN.md fase 2) --------------------------------------------------
-  // Zelfde nummers als hierboven, onder de nieuwe bestandsnaam. Beide sleutels staan er
-  // bewust tegelijk in: fase 1 (scripts) gaat vooraf aan fase 2 (rename), dus tijdens de
-  // overgang moet een bestand onder beide namen zijn nummer terugvinden. Zonder de nieuwe
-  // sleutel deelt assignCheckNumbers een vers nummer uit — en dat merk je pas achteraf.
-  // Ruim de oude sleutels op zodra fase 2 gemerged is.
   Baseline_D_Attack_Surface_Reduction: 7,
   Baseline_D_Administrative_Templates: 8,
   Baseline_D_Audit_and_Event_Logging: 9,
@@ -189,9 +144,11 @@ const CHECK_NUMBERS = {
   Baseline_D_Windows_LAPS: 27,
   Baseline_D_Microsoft_OneDrive_KFM: 28,
   Baseline_D_Microsoft_OneDrive: 29,
+  // Type "Device": levert vandaag geen check op, maar het nummer is gereserveerd zodat het
+  // niet aan een ander template wordt uitgedeeld als de engine dit type gaat ondersteunen.
   Baseline_D_Windows_Update_Ring_3_Production: 30,
 
-  // Nieuw uit de D/U-splitsing (PLAN.md fase 2) — bestaan nog niet, nummer alvast vast.
+  // Uit de D/U-splitsing (PLAN.md fase 2).
   Baseline_U_Windows_User_Experience: 31,
   Baseline_U_Microsoft_OneDrive: 32,
 };

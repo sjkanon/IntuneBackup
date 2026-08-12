@@ -4,7 +4,8 @@ Doel: de 24 bestaande policies omzetten naar een expliciete device/user-scheidin
 grootste gaten t.o.v. OpenIntuneBaseline / CIS dichten, en een aparte tenant-laag
 (ScubaGear / Maester) opzetten — zonder de bestaande checkId's te breken.
 
-Status: **fase 1 is uitgevoerd**, fase 2 en verder staan nog open.
+Status: **fase 1 en 2 zijn uitgevoerd** (repo), fase 3 en verder staan nog open. De tenant is
+nog niet aangeraakt.
 
 De twee stukken hieronder — naamgeving en diagnose — zijn context, geen werk. Het werk begint
 bij fase 1.
@@ -53,10 +54,12 @@ node scripts/check-scope.js
 
 ---
 
-## Diagnose: wat er nu mis is
+## Diagnose: wat er mis was
 
-Alle 24 policies staan in `IntuneTemplate/_assignments.json` op
-`allDevicesAssignmentTarget`. Drie daarvan kloppen niet:
+*Opgelost in fase 2; hier bewaard omdat het uitlegt waaróm de structuur veranderd is.*
+
+Alle 24 policies stonden in `IntuneTemplate/_assignments.json` op
+`allDevicesAssignmentTarget`. Drie daarvan klopten niet:
 
 | Policy | Device-settings | User-settings | Probleem |
 |---|---|---|---|
@@ -71,7 +74,7 @@ De 3 user-settings in OneDrive Silent Login:
 `onedrivengscv6~...~disablefreanimation`, `onedrivengscv2~...~disablefretutorial`,
 `onedrivengscv7~...~enableautostart`.
 
-Reproduceerbaar met `node scripts/check-scope.js --report`.
+`node scripts/check-scope.js` meldt nu 26 policies met een eenduidige scope.
 
 ---
 
@@ -144,10 +147,13 @@ Levert het filter niets op, dan volgt een foutmelding die naar fase 2 verwijst.
 
 ---
 
-## Fase 2 — De rename
+## Fase 2 — De rename ✅ gedaan
 
-Splitsen doen we in deze fase **alleen waar de scope gemengd is** — thematisch opknippen
+Splitsen gebeurde in deze fase **alleen waar de scope gemengd was** — thematisch opknippen
 komt in fase 7, zodat de diff van deze fase te reviewen blijft.
+
+Resultaat: 24 → 26 policies, alle 29 bestaande checkId's ongewijzigd, 2 nieuwe (031, 032).
+Enige generator-waarschuwing is de bekende EDR-onboarding-token die bewust wordt overgeslagen.
 
 | # | Nu | Straks | Scope | checkId blijft |
 |---|---|---|---|---|
@@ -190,11 +196,15 @@ komt in fase 7, zodat de diff van deze fase te reviewen blijft.
 | alle `- D -` | `#microsoft.graph.allDevicesAssignmentTarget` |
 | alle `- U -` | `#microsoft.graph.allLicensedUsersAssignmentTarget` |
 
-### Afronding van fase 2
+### Afronding van fase 2 ✅
 
-- oude sleutels uit `CHECK_NUMBERS` en `HIGH_SEVERITY_FILES` verwijderen
-- `--report` weghalen uit de `check-scope`-stap in de workflow
-- `node scripts/generate-baseline.js` moet dezelfde checkId's opleveren als vóór de rename
+- oude sleutels uit `CHECK_NUMBERS` en `HIGH_SEVERITY_FILES` verwijderd
+- `--report` weggehaald uit de `check-scope`-stap; die is nu blokkerend
+- `generate-baseline.js` levert dezelfde checkId's op als vóór de rename — geverifieerd
+
+De nieuwe checks houden de scope wél in hun slug (`031-UWindowsUserExperience`), want vanaf
+fase 5 komen er D/U-paren van hetzelfde onderwerp — zonder die marker zouden die twee dezelfde
+naam krijgen. Alleen de hernoemde checks uit `CHECK_ID_SLUGS` dragen hun oude, scopeloze slug.
 
 ---
 
@@ -412,7 +422,7 @@ koppeling tussen beide lagen — begin daar.
 | Fase | Wat | Risico | Status |
 |---|---|---|---|
 | 1 | Scripts aanpassen (`CHECK_ID_SLUGS`, `check-scope.js`, `-Scope`, harde assignment-check) | laag, geen tenant-impact | ✅ gedaan |
-| 2 | Rename + 2 splitsingen in `IntuneTemplate/` | laag in de repo | open |
+| 2 | Rename + 2 splitsingen in `IntuneTemplate/` | laag in de repo | ✅ gedaan |
 | 3 | Tenant-migratie via `Rename-BaselinePolicy.ps1`, met `Get-BaselinePolicyState.ps1` ervoor en erna | **hoog** — eerst `-WhatIf`, eerst in pilot-tenant | open |
 | 4 | Compliance policies (pijplijnwerk + 4 policies) | midden | open |
 | 5 | Hardening-gaten, te beginnen bij #37 Credential Guard en #39 WHfB | midden | open |
