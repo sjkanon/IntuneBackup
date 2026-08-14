@@ -164,6 +164,100 @@ function policyTable(templates, { checkIds, assignments, manifestByTarget }) {
   return [header, ...rows].join("\n");
 }
 
+/**
+ * Eén markdown per policy, naast de JSON: wat de policy doet, waar hij landt, en élke
+ * instelling die hij zet. De JSON is voor de tooling, dit is voor de mens die wil weten wat
+ * er precies verandert vóór hij het uitrolt.
+ */
+function policyDocument(template, ctx) {
+  const { baseName, type, displayName, raw, inner } = template;
+  const parsed = parseBaseName(baseName);
+  const entry = ctx.manifestByTarget.get(baseName) || {};
+  const checkId = ctx.checkIds ? ctx.checkIds.get(baseName) : null;
+  const family = raw.templateReference && raw.templateReference.templateId ? raw.templateReference.templateFamily : null;
+
+  const lines = [
+    GENERATED_HEADER,
+    "",
+    `# ${displayName}`,
+    "",
+    entry.doel || "",
+    "",
+    "| | |",
+    "|---|---|",
+    `| Platform | ${PLATFORMS[parsed.platform].label} |`,
+    `| Scope | ${parsed.scope === "D" ? "Device (D) — toewijzen aan apparaatgroepen" : "User (U) — toewijzen aan gebruikersgroepen"} |`,
+    `| Type | ${TYPE_LABEL[type] || type}${family ? ` (${family})` : ""} |`,
+    `| Toewijzing | ${assignmentLabel(ctx.assignments, displayName)} |`,
+    `| checkId | ${checkId ? `\`${checkId}\`` : "geen — de platform-engine heeft geen matcher voor dit policytype"} |`,
+    `| Bron | ${entry.bron || "eigen baseline"} |`,
+    `| Bestand | [\`${baseName}.json\`](${baseName}.json) |`,
+    "",
+  ];
+
+  if (entry.note) lines.push(`> ${entry.note}`, "");
+
+  if (type === "Catalog") {
+    const rows = [];
+    for (const s of raw.settings || []) settingRows(s.settingInstance, 0, rows);
+    lines.push(
+      `## Instellingen — ${rows.filter((r) => r.id).length}`,
+      "",
+      "Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende",
+      "instelling op de getoonde waarde staat.",
+      "",
+      "| Instelling | Waarde |",
+      "|---|---|",
+      ...rows.map((r) => {
+        const indent = "&nbsp;".repeat(r.depth * 4);
+        if (r.separator) return `| ${indent}*${r.separator}* | |`;
+        return `| ${indent}\`${escapePipes(r.id)}\` | ${escapePipes(r.value)} |`;
+      }),
+      ""
+    );
+  } else if (type === "Admin") {
+    lines.push(
+      `## ADMX-definities — ${(raw.added || []).length}`,
+      "",
+      "Klassieke Group Policy-instellingen. De GUID's zijn Microsoft's vaste",
+      "ADMX-catalogus-id's en dus tenant-onafhankelijk.",
+      "",
+      "| Definitie | Ingeschakeld | Waarden |",
+      "|---|---|---|",
+      ...(raw.added || []).map((d) => {
+        const guid = (d["definition@odata.bind"] || "").match(/groupPolicyDefinitions\('([^']+)'\)/);
+        const values = (d.presentationValues || []).map((p) => escapePipes(String(p.value))).join(", ") || "—";
+        return `| \`${guid ? guid[1] : "?"}\` | ${d.enabled ? "ja" : "nee"} | ${values} |`;
+      }),
+      ""
+    );
+  } else {
+    const rows = bodyRows(raw);
+    lines.push(
+      `## Eigenschappen — ${rows.length}`,
+      "",
+      type === "deviceCompliancePolicies"
+        ? "Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet."
+        : type === "AppProtection"
+          ? "Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `—` betekent niet ingesteld."
+          : "Een klassieke device configuration heeft geen settingDefinitionId's maar vaste eigenschappen.",
+      "",
+      "| Eigenschap | Waarde |",
+      "|---|---|",
+      ...rows.map((r) => `| \`${escapePipes(r.id)}\` | ${escapePipes(r.value)} |`),
+      ""
+    );
+  }
+
+  lines.push(
+    "---",
+    "",
+    `Terug naar het [${PLATFORMS[parsed.platform].label}-overzicht](README.md) · [hoofd-README](${"../".repeat(2)}../README.md)`,
+    ""
+  );
+  return lines.join("\n");
+}
+
 function platformReadme(platform, templates, ctx) {
   const label = PLATFORMS[platform].label;
   const byScope = { D: templates.filter((t) => parseBaseName(t.baseName).scope === "D"), U: templates.filter((t) => parseBaseName(t.baseName).scope === "U") };
