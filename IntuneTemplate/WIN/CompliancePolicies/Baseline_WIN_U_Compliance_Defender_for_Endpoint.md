@@ -1,0 +1,70 @@
+<!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
+
+# [Baseline] - WIN - U - Compliance Defender for Endpoint
+
+Toetst het risiconiveau dat Defender for Endpoint aan het apparaat toekent. Vereist een werkende koppeling met Defender for Endpoint in Intune.
+
+| | |
+|---|---|
+| Platform | Windows |
+| Scope | User (U) — toewijzen aan gebruikersgroepen |
+| Type | Compliance |
+| Toewijzing | All Users |
+| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
+| Bron | OpenIntuneBaseline Windows v3.8 — Compliance - U - Defender for Endpoint |
+| Bestand | [`Baseline_WIN_U_Compliance_Defender_for_Endpoint.json`](Baseline_WIN_U_Compliance_Defender_for_Endpoint.json) |
+
+> Vereist een werkende Defender for Endpoint-koppeling in Intune; zonder die connector blijven apparaten hangen op 'niet geëvalueerd'.
+
+## Eigenschappen — 42
+
+Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.
+
+| Eigenschap | Waarde |
+|---|---|
+| `passwordRequired` | false |
+| `passwordBlockSimple` | false |
+| `passwordRequiredToUnlockFromIdle` | false |
+| `passwordMinutesOfInactivityBeforeLock` | — |
+| `passwordExpirationDays` | — |
+| `passwordMinimumLength` | — |
+| `passwordMinimumCharacterSetCount` | — |
+| `passwordRequiredType` | deviceDefault |
+| `passwordPreviousPasswordBlockCount` | — |
+| `requireHealthyDeviceReport` | false |
+| `osMinimumVersion` | — |
+| `osMaximumVersion` | — |
+| `mobileOsMinimumVersion` | — |
+| `mobileOsMaximumVersion` | — |
+| `earlyLaunchAntiMalwareDriverEnabled` | false |
+| `bitLockerEnabled` | false |
+| `secureBootEnabled` | false |
+| `codeIntegrityEnabled` | false |
+| `memoryIntegrityEnabled` | false |
+| `kernelDmaProtectionEnabled` | false |
+| `virtualizationBasedSecurityEnabled` | false |
+| `firmwareProtectionEnabled` | false |
+| `storageRequireEncryption` | false |
+| `activeFirewallRequired` | false |
+| `defenderEnabled` | true |
+| `defenderVersion` | — |
+| `signatureOutOfDate` | true |
+| `rtpEnabled` | true |
+| `antivirusRequired` | false |
+| `antiSpywareRequired` | false |
+| `deviceThreatProtectionEnabled` | false |
+| `deviceThreatProtectionRequiredSecurityLevel` | unavailable |
+| `configurationManagerComplianceRequired` | false |
+| `tpmRequired` | false |
+| `deviceCompliancePolicyScript` | — |
+| `validOperatingSystemBuildRanges` | — |
+| `scheduledActionsForRule[0].ruleName` | PasswordRequired |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].@odata.type` | #microsoft.graph.deviceComplianceActionItem |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].gracePeriodHours` | 6 |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].actionType` | block |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].notificationTemplateId` | 00000000-0000-0000-0000-000000000000 |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].notificationMessageCCList` | — |
+
+---
+
+Terug naar het [Windows-overzicht](../README.md) · [hoofd-README](../../../README.md)

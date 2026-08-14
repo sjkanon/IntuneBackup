@@ -41,6 +41,10 @@ Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/R
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).
 
+Naast elk template staat een markdown met **élke instelling die die policy zet** — bijvoorbeeld
+[Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
+Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.
+
 ## Indeling
 
 ```

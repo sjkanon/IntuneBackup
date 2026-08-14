@@ -66,5 +66,5 @@ jobs:
             baseline/intune/baseline-v1.0.json
             export/NativeImport/IntuneBackupAndRestore/**
             OVERZICHT.md
-            IntuneTemplate/**/README.md
-            IntuneTemplate/README.md
+            IntuneTemplate/*.md
+            IntuneTemplate/**/*.md

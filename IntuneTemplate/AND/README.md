@@ -14,7 +14,7 @@ Toewijzen aan gebruikersgroepen.
 
 | Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
 |---|---|---|---:|---|---|
-| **App Protection** | Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-telefoon: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens. | App Protection | — | All Users | — |
+| [**App Protection**](AppProtection/Baseline_AND_U_App_Protection.md) | Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-telefoon: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens. | App Protection | — | All Users | — |
 
 ---
 

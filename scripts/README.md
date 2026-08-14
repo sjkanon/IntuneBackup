@@ -30,7 +30,7 @@ flowchart TD
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen en de migratietabel. Blokkerend in CI. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht. |
-| [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert de README's in `IntuneTemplate/`. `--check` faalt als ze achterlopen. |
+| [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
 
 Alle vijf de leesscripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
 hoe je 'm uitleest en waar een nieuw template hoort. Vier scripts lazen die map eerder elk op

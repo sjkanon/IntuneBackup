@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 /**
- * Genereert de README's die de inhoud van IntuneTemplate/ opsommen: één overzicht in
- * IntuneTemplate/ en één per platform, met per policy het type, het aantal instellingen, de
- * checkId, het toewijzingsdoel en de OIB-herkomst.
+ * Genereert de documentatie die uit IntuneTemplate/ af te leiden is:
  *
- * Gegenereerd en niet met de hand geschreven, om dezelfde reden als baseline-v1.0.json: 95
- * policies met de hand bijhouden gaat mis, en een tabel die niet meer klopt is erger dan geen
- * tabel — die leest namelijk nog steeds alsof hij klopt.
+ *   OVERZICHT.md                          de samenvatting om te delen
+ *   IntuneTemplate/README.md              de matrix en de mapindeling
+ *   IntuneTemplate/<PLAT>/README.md       elke policy met wat hij doet en waar hij landt
+ *   IntuneTemplate/<PLAT>/<CAT>/*.md      per policy élke instelling die hij zet
+ *
+ * Gegenereerd en niet met de hand geschreven, om dezelfde reden als baseline-v1.0.json: bijna
+ * honderd policies met duizenden instellingen bijhouden gaat mis, en een tabel die niet meer
+ * klopt is erger dan geen tabel — die leest namelijk nog steeds alsof hij klopt.
  *
  * Leest baseline/intune/baseline-v1.0.json mee voor de checkId's, dus draai
  * generate-baseline.js eerst. Ontbreekt dat bestand, dan blijft de checkId-kolom leeg met een
@@ -518,6 +521,11 @@ function main() {
     const list = templates.filter((t) => parseBaseName(t.baseName).platform === platform);
     if (list.length === 0) continue;
     files.push({ file: path.join(TEMPLATE_DIR, platform, "README.md"), content: platformReadme(platform, list, ctx) });
+  }
+
+  // Eén document per policy, naast de JSON.
+  for (const template of templates) {
+    files.push({ file: template.filePath.replace(/\.json$/, ".md"), content: policyDocument(template, ctx) });
   }
 
   const stale = [];
