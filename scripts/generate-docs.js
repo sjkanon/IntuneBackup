@@ -151,8 +151,9 @@ function policyTable(templates, { checkIds, assignments, manifestByTarget }) {
   const rows = templates.map((t) => {
     const item = parseBaseName(t.baseName).item.replace(/_/g, " ");
     const entry = manifestByTarget.get(t.baseName);
+    const doc = `${TYPE_TO_CATEGORY[t.type]}/${t.baseName}.md`;
     const cells = [
-      `**${escapePipes(item)}**`,
+      `[**${escapePipes(item)}**](${doc})`,
       escapePipes(entry && entry.doel ? entry.doel : "—"),
       TYPE_LABEL[t.type] || t.type,
       settingCount(t),
@@ -252,7 +253,7 @@ function policyDocument(template, ctx) {
   lines.push(
     "---",
     "",
-    `Terug naar het [${PLATFORMS[parsed.platform].label}-overzicht](README.md) · [hoofd-README](${"../".repeat(2)}../README.md)`,
+    `Terug naar het [${PLATFORMS[parsed.platform].label}-overzicht](../README.md) · [hoofd-README](../../../README.md)`,
     ""
   );
   return lines.join("\n");
