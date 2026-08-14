@@ -1,0 +1,170 @@
+{
+  "_comment": [
+    "Hoe de policies in de tenant heten of geheten hebben, en wat er nu bij hoort.",
+    "Gebruikt door scripts/Rename-BaselinePolicy.ps1. Zonder deze tabel weet over een half",
+    "jaar niemand meer waar '[Baseline] Bitlocker' gebleven is.",
+    "",
+    "action:",
+    "  rename  - PATCH op de bestaande policy: naam wijzigt, id en assignments blijven.",
+    "            De inhoud wordt daarna door CIPP of Start-IntuneRestoreConfig bijgewerkt.",
+    "  replace - het policytype zelf verandert (ander Graph-endpoint of andere",
+    "            templateReference). Dat kan niet met een PATCH; de oude policy moet weg en",
+    "            de nieuwe erbij, anders staan er twee die elkaar tegenspreken.",
+    "  retire  - gaat helemaal weg; de instellingen zitten voortaan in 'replacedBy'.",
+    "",
+    "previousNames staat in volgorde: eerst de oorspronkelijke naam, daarna de tussenstap uit",
+    "PLAN.md fase 2. Een policy kan onder beide namen in een tenant staan."
+  ],
+  "policies": [
+    {
+      "previousNames": ["[Baseline] ASR Default rules", "[Baseline] - D - Attack Surface Reduction"],
+      "target": "[Baseline] - WIN - D - Attack Surface Reduction",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Administrative Templates", "[Baseline] - D - Administrative Templates"],
+      "target": "[Baseline] - WIN - D - Legacy Hardening",
+      "action": "rename",
+      "reason": "Van 300 instellingen naar 15. De rest is thematisch ondergebracht in de OIB-policies hieronder; wat overblijft heeft geen OIB-tegenhanger.",
+      "replacedBy": [
+        "[Baseline] - WIN - D - Internet Explorer Legacy",
+        "[Baseline] - WIN - D - Security Hardening",
+        "[Baseline] - WIN - D - Printing",
+        "[Baseline] - WIN - D - Remote Desktop and RPC",
+        "[Baseline] - WIN - D - Audit and Event Logging"
+      ]
+    },
+    {
+      "previousNames": ["[Baseline] Auditing", "[Baseline] - D - Audit and Event Logging"],
+      "target": "[Baseline] - WIN - D - Audit and Event Logging",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Automatic configuration of Outlook", "[Baseline] - U - Microsoft Outlook"],
+      "target": "[Baseline] - WIN - U - Microsoft Outlook",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Bitlocker", "[Baseline] - D - BitLocker"],
+      "target": "[Baseline] - WIN - D - BitLocker",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Default AV Policy", "[Baseline] - D - Defender Antivirus"],
+      "target": "[Baseline] - WIN - D - Defender Antivirus",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Device Lock", "[Baseline] - D - Device Lock"],
+      "target": "[Baseline] - WIN - D - Device Lock",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] EDR Configuration", "[Baseline] - D - Defender for Endpoint EDR"],
+      "target": "[Baseline] - WIN - D - Defender for Endpoint EDR",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Edge Standard search engine - Google", "[Baseline] - D - Microsoft Edge Search Engine"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge Search Engine",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Firewall", "[Baseline] - D - Windows Firewall"],
+      "target": "[Baseline] - WIN - D - Windows Firewall",
+      "action": "replace",
+      "reason": "Was een gewone Settings Catalog-policy, is nu een Endpoint Security-template (endpointSecurityFirewall). De templateReference van een bestaande policy is niet te wijzigen."
+    },
+    {
+      "previousNames": ["[Baseline] LanManWorkstation", "[Baseline] - D - Network Security"],
+      "target": null,
+      "action": "retire",
+      "reason": "De enige instelling zit in Security Hardening.",
+      "replacedBy": ["[Baseline] - WIN - D - Security Hardening"]
+    },
+    {
+      "previousNames": ["[Baseline] Local Policies Security Options", "[Baseline] - D - Local Security Policies"],
+      "target": "[Baseline] - WIN - D - Local Security Policies",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Microsoft App Store", "[Baseline] - D - Microsoft Store"],
+      "target": "[Baseline] - WIN - D - Microsoft Store",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Microsoft Edge", "[Baseline] - D - Microsoft Edge Security"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge Security",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Office Updates", "[Baseline] - D - Microsoft Office Updates"],
+      "target": "[Baseline] - WIN - D - Microsoft Office Updates",
+      "action": "replace",
+      "reason": "Was ADMX (groupPolicyConfigurations, beta-only endpoint), is nu Settings Catalog. Ander Graph-endpoint, dus de oude policy moet weg — anders zetten twee policies dezelfde registerwaarden."
+    },
+    {
+      "previousNames": ["[Baseline] Privacy", "[Baseline] - D - Location and Privacy"],
+      "target": "[Baseline] - WIN - D - Location and Privacy",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Search", "[Baseline] - D - Windows Search"],
+      "target": null,
+      "action": "retire",
+      "reason": "De enige instelling zit in Windows Feature Configuration.",
+      "replacedBy": ["[Baseline] - WIN - D - Windows Feature Configuration"]
+    },
+    {
+      "previousNames": ["[Baseline] Smartscreen", "[Baseline] - D - SmartScreen"],
+      "target": "[Baseline] - WIN - D - Enhanced Phishing Protection",
+      "action": "rename",
+      "reason": "Vier van de zes instellingen staan in Enhanced Phishing Protection, de twee shell-SmartScreen-instellingen in Security Hardening.",
+      "replacedBy": ["[Baseline] - WIN - D - Security Hardening"]
+    },
+    {
+      "previousNames": ["[Baseline] System Services", "[Baseline] - D - System Services"],
+      "target": null,
+      "action": "retire",
+      "reason": "Alle vier instellingen zitten in Security Hardening.",
+      "replacedBy": ["[Baseline] - WIN - D - Security Hardening"]
+    },
+    {
+      "previousNames": ["[Baseline] User Rights", "[Baseline] - D - User Rights"],
+      "target": "[Baseline] - WIN - D - User Rights",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Windows LAPS Policy", "[Baseline] - D - Windows LAPS"],
+      "target": "[Baseline] - WIN - D - Windows LAPS",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] Onedrive - Known Folder Move", "[Baseline] - D - Microsoft OneDrive KFM"],
+      "target": null,
+      "action": "retire",
+      "reason": "Alle zes instellingen zitten in de OneDrive-policy.",
+      "replacedBy": ["[Baseline] - WIN - D - Microsoft OneDrive"]
+    },
+    {
+      "previousNames": ["[Baseline] Onedrive Silent Login", "[Baseline] - D - Microsoft OneDrive"],
+      "target": "[Baseline] - WIN - D - Microsoft OneDrive",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["Windows 11 Update", "[Baseline] - D - Windows Update Ring 3 Production"],
+      "target": "[Baseline] - WIN - D - Windows Update Ring 3 Production",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] - U - Windows User Experience"],
+      "target": "[Baseline] - WIN - U - Windows User Experience",
+      "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] - U - Microsoft OneDrive"],
+      "target": "[Baseline] - WIN - U - Microsoft OneDrive",
+      "action": "rename"
+    }
+  ]
+}

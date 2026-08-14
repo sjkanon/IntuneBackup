@@ -1,0 +1,11 @@
+{
+    "@odata.type": "#microsoft.graph.windowsHealthMonitoringConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "OpenIntuneBaseline Windows v3.8 — TP - Health Monitoring - D - Endpoint Analytics",
+    "displayName": "[Baseline] - WIN - D - Endpoint Analytics",
+    "allowDeviceHealthMonitoring": "enabled",
+    "configDeviceHealthMonitoringScope": "bootPerformance",
+    "configDeviceHealthMonitoringCustomScope": null
+}

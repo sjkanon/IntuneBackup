@@ -1,0 +1,74 @@
+{
+    "name": "[Baseline] - MAC - U - Microsoft Edge Profiles and Sync",
+    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Profiles, Sign-In and Sync",
+    "platforms": "macOS",
+    "technologies": "mdm,appleRemoteManagement",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 4,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.managedclient.preferences_browsersignin",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "com.apple.managedclient.preferences_browsersignin_2",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.managedclient.preferences_browseraddprofileenabled",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "com.apple.managedclient.preferences_browseraddprofileenabled_false",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.managedclient.preferences_forceephemeralprofiles",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "com.apple.managedclient.preferences_forceephemeralprofiles_false",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "com.apple.managedclient.preferences_forcesync",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "com.apple.managedclient.preferences_forcesync_true",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

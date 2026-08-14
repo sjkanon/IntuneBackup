@@ -1,0 +1,4 @@
+# Lokale checkout van OpenIntuneBaseline, bron voor scripts/import-oib.js.
+# Bewust niet meegecommit: de gegenereerde templates in IntuneTemplate/ zijn het resultaat,
+# en een tweede kopie van een externe repo zou hier alleen maar verouderen.
+.oib-source/

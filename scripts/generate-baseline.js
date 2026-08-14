@@ -20,6 +20,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { readTemplates, parseBaseName, flattenSettings } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -104,13 +105,21 @@ const EXISTING_RULES = [
 
 /** Bestandsnamen die duidelijk kritieker zijn dan de rest — de eigenaar kan dit vrij bijstellen. */
 const HIGH_SEVERITY_FILES = new Set([
-  "Baseline_D_BitLocker",
-  "Baseline_D_Defender_for_Endpoint_EDR",
-  "Baseline_D_Defender_Antivirus",
-  "Baseline_D_Windows_Firewall",
-  "Baseline_D_Attack_Surface_Reduction",
-  "Baseline_D_Device_Lock",
-  "Baseline_D_Windows_LAPS",
+  "Baseline_WIN_D_BitLocker",
+  "Baseline_WIN_D_Defender_for_Endpoint_EDR",
+  "Baseline_WIN_D_Defender_Antivirus",
+  "Baseline_WIN_D_Windows_Firewall",
+  "Baseline_WIN_D_Attack_Surface_Reduction",
+  "Baseline_WIN_D_Device_Lock",
+  "Baseline_WIN_D_Windows_LAPS",
+  "Baseline_WIN_D_Windows_Hello_for_Business",
+  "Baseline_WIN_D_Local_Administrators",
+  "Baseline_WIN_D_Device_Guard_and_Credential_Guard",
+  "Baseline_WIN_D_Microsoft_Office_Security",
+  "Baseline_WIN_U_Microsoft_Office_Security",
+  "Baseline_MAC_D_FileVault",
+  "Baseline_MAC_D_Defender_Antivirus",
+  "Baseline_MAC_D_Firewall_and_Gatekeeper",
 ]);
 
 /**
@@ -121,36 +130,128 @@ const HIGH_SEVERITY_FILES = new Set([
  * nummer dat werd zodat je het hier kunt vastzetten.
  */
 const CHECK_NUMBERS = {
-  Baseline_D_Attack_Surface_Reduction: 7,
-  Baseline_D_Administrative_Templates: 8,
-  Baseline_D_Audit_and_Event_Logging: 9,
-  Baseline_U_Microsoft_Outlook: 10,
-  Baseline_D_BitLocker: 11,
-  Baseline_D_Defender_Antivirus: 12,
-  Baseline_D_Device_Lock: 13,
-  Baseline_D_Defender_for_Endpoint_EDR: 14,
-  Baseline_D_Microsoft_Edge_Search_Engine: 15,
-  Baseline_D_Windows_Firewall: 16,
-  Baseline_D_Network_Security: 17,
-  Baseline_D_Local_Security_Policies: 18,
-  Baseline_D_Microsoft_Store: 19,
-  Baseline_D_Microsoft_Edge_Security: 20,
-  Baseline_D_Microsoft_Office_Updates: 21,
-  Baseline_D_Location_and_Privacy: 22,
-  Baseline_D_Windows_Search: 23,
-  Baseline_D_SmartScreen: 24,
-  Baseline_D_System_Services: 25,
-  Baseline_D_User_Rights: 26,
-  Baseline_D_Windows_LAPS: 27,
-  Baseline_D_Microsoft_OneDrive_KFM: 28,
-  Baseline_D_Microsoft_OneDrive: 29,
+  Baseline_WIN_D_Attack_Surface_Reduction: 7,
+  // 8 was Administrative Templates: die 300-instellingenpolicy is opgesplitst naar de
+  // OIB-policies (Internet Explorer Legacy, Security Hardening, Printing, Remote Desktop and
+  // RPC) plus Legacy Hardening voor de rest. Het nummer blijft gereserveerd — hergebruiken
+  // zou een oude finding aan een andere check koppelen.
+  Baseline_WIN_D_Audit_and_Event_Logging: 9,
+  Baseline_WIN_U_Microsoft_Outlook: 10,
+  Baseline_WIN_D_BitLocker: 11,
+  Baseline_WIN_D_Defender_Antivirus: 12,
+  Baseline_WIN_D_Device_Lock: 13,
+  Baseline_WIN_D_Defender_for_Endpoint_EDR: 14,
+  Baseline_WIN_D_Microsoft_Edge_Search_Engine: 15,
+  Baseline_WIN_D_Windows_Firewall: 16,
+  // 17 was Network Security (LanManWorkstation) — opgegaan in Security Hardening.
+  Baseline_WIN_D_Local_Security_Policies: 18,
+  Baseline_WIN_D_Microsoft_Store: 19,
+  Baseline_WIN_D_Microsoft_Edge_Security: 20,
+  Baseline_WIN_D_Microsoft_Office_Updates: 21,
+  Baseline_WIN_D_Location_and_Privacy: 22,
+  // 23 was Windows Search — opgegaan in Windows Feature Configuration.
+  Baseline_WIN_D_Enhanced_Phishing_Protection: 24,
+  // 25 was System Services — opgegaan in Security Hardening.
+  Baseline_WIN_D_User_Rights: 26,
+  Baseline_WIN_D_Windows_LAPS: 27,
+  // 28 was OneDrive Known Folder Move — opgegaan in de OneDrive-policy (29).
+  Baseline_WIN_D_Microsoft_OneDrive: 29,
   // Type "Device": levert vandaag geen check op, maar het nummer is gereserveerd zodat het
   // niet aan een ander template wordt uitgedeeld als de engine dit type gaat ondersteunen.
-  Baseline_D_Windows_Update_Ring_3_Production: 30,
+  Baseline_WIN_D_Windows_Update_Ring_3_Production: 30,
 
   // Uit de D/U-splitsing (PLAN.md fase 2).
-  Baseline_U_Windows_User_Experience: 31,
-  Baseline_U_Microsoft_OneDrive: 32,
+  Baseline_WIN_U_Windows_User_Experience: 31,
+  Baseline_WIN_U_Microsoft_OneDrive: 32,
+
+  // 33 en hoger: de OpenIntuneBaseline-import (zie IntuneTemplate/_oib-manifest.json).
+  Baseline_AND_U_App_Protection: 33,
+  Baseline_IOS_U_App_Protection: 34,
+  Baseline_MAC_D_Accounts_and_Login: 35,
+  Baseline_MAC_D_Defender_Antivirus: 36,
+  Baseline_MAC_D_Defender_for_Endpoint: 37,
+  Baseline_MAC_D_FileVault: 38,
+  Baseline_MAC_D_Firewall_and_Gatekeeper: 39,
+  Baseline_MAC_D_Microsoft_AutoUpdate: 40,
+  Baseline_MAC_D_Microsoft_Edge_Password_Management: 41,
+  Baseline_MAC_D_Microsoft_Edge_Security: 42,
+  Baseline_MAC_D_Microsoft_Office: 43,
+  Baseline_MAC_D_Microsoft_OneDrive: 44,
+  Baseline_MAC_D_Platform_SSO: 45,
+  Baseline_MAC_D_Restrictions: 46,
+  Baseline_MAC_D_Software_Updates: 47,
+  Baseline_MAC_U_Compliance_Device_Health: 48,
+  Baseline_MAC_U_Compliance_Device_Security: 49,
+  Baseline_MAC_U_Compliance_Password: 50,
+  Baseline_MAC_U_Microsoft_Edge_Extensions: 51,
+  Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync: 52,
+  Baseline_MAC_U_Microsoft_Edge_Updates: 53,
+  Baseline_MAC_U_Microsoft_OneDrive_KFM: 54,
+  Baseline_WIN_D_Administrator_Protection: 55,
+  Baseline_WIN_D_Automatic_Restart_Sign_On: 56,
+  Baseline_WIN_D_Cloud_Optimized_Content: 57,
+  Baseline_WIN_D_Config_Refresh: 58,
+  Baseline_WIN_D_Defender_Additional_Configuration: 59,
+  Baseline_WIN_D_Defender_Security_Experience: 60,
+  Baseline_WIN_D_Defender_Update_Ring_1_Pilot: 61,
+  Baseline_WIN_D_Defender_Update_Ring_2_UAT: 62,
+  Baseline_WIN_D_Defender_Update_Ring_3_Production: 63,
+  Baseline_WIN_D_Delivery_Optimisation: 64,
+  Baseline_WIN_D_Device_Guard_and_Credential_Guard: 65,
+  Baseline_WIN_D_Disable_NTLM: 66,
+  Baseline_WIN_D_Endpoint_Analytics: 67,
+  Baseline_WIN_D_In_Box_App_Removal: 68,
+  Baseline_WIN_D_Internet_Explorer_Legacy: 69,
+  Baseline_WIN_D_Legacy_Hardening: 70,
+  Baseline_WIN_D_Local_Administrators: 71,
+  Baseline_WIN_D_Login_and_Lock_Screen: 72,
+  Baseline_WIN_D_Microsoft_Accounts: 73,
+  Baseline_WIN_D_Microsoft_Edge_Updates: 74,
+  Baseline_WIN_D_Microsoft_Office_Security: 75,
+  Baseline_WIN_D_Passwordless: 76,
+  Baseline_WIN_D_Printing: 77,
+  Baseline_WIN_D_Remote_Desktop_and_RPC: 78,
+  Baseline_WIN_D_Script_File_Associations: 79,
+  Baseline_WIN_D_Security_Hardening: 80,
+  Baseline_WIN_D_Settings_Sync: 81,
+  Baseline_WIN_D_Timezone: 82,
+  Baseline_WIN_D_Update_Reports_and_Telemetry: 83,
+  Baseline_WIN_D_Windows_Feature_Configuration: 84,
+  Baseline_WIN_D_Windows_Firewall_Rules: 85,
+  Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust: 86,
+  Baseline_WIN_D_Windows_Hello_for_Business: 87,
+  Baseline_WIN_D_Windows_Package_Manager: 88,
+  Baseline_WIN_D_Windows_Sandbox: 89,
+  Baseline_WIN_D_Windows_Subsystem_for_Linux: 90,
+  Baseline_WIN_D_Windows_Update_Ring_1_Pilot: 91,
+  Baseline_WIN_D_Windows_Update_Ring_2_UAT: 92,
+  Baseline_WIN_U_Compliance_Defender_for_Endpoint: 93,
+  Baseline_WIN_U_Compliance_Device_Health: 94,
+  Baseline_WIN_U_Compliance_Device_Security: 95,
+  Baseline_WIN_U_Compliance_Password: 96,
+  Baseline_WIN_U_Copilot: 97,
+  Baseline_WIN_U_Microsoft_Edge_Extensions: 98,
+  Baseline_WIN_U_Microsoft_Edge_Password_Management: 99,
+  Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync: 100,
+  Baseline_WIN_U_Microsoft_Edge_User_Experience: 101,
+  Baseline_WIN_U_Microsoft_Office_Experience: 102,
+  Baseline_WIN_U_Microsoft_Office_Security: 103,
+  Baseline_WIN_U_Microsoft_Store: 104,
+  Baseline_WIN_U_Personal_Data_Encryption: 105,
+  Baseline_WIN_U_Windows_Spotlight: 106,
+};
+
+/**
+ * Nummers die bij een opgeheven policy hoorden. Ze worden niet opnieuw uitgedeeld: een
+ * checkId is een externe identifier, en 017 hergebruiken voor een nieuwe policy zou oude
+ * findings en uitzonderingen aan iets anders koppelen dan waar ze over gingen.
+ */
+const RETIRED_CHECK_NUMBERS = {
+  8: "Administrative Templates — vervangen door Internet Explorer Legacy, Security Hardening, Printing, Remote Desktop and RPC en Legacy Hardening",
+  17: "Network Security (LanManWorkstation) — opgegaan in Security Hardening",
+  23: "Windows Search — opgegaan in Windows Feature Configuration",
+  25: "System Services — opgegaan in Security Hardening",
+  28: "OneDrive Known Folder Move — opgegaan in Microsoft OneDrive (029)",
 };
 
 /**
@@ -164,34 +265,36 @@ const CHECK_NUMBERS = {
  * gewoon hun eigen slug uit de bestandsnaam.
  */
 const CHECK_ID_SLUGS = {
-  Baseline_D_Attack_Surface_Reduction: "ASRDefaultRules",
-  Baseline_D_Administrative_Templates: "AdministrativeTemplates",
-  Baseline_D_Audit_and_Event_Logging: "Auditing",
-  Baseline_U_Microsoft_Outlook: "AutomaticConfigurationOfOutlook",
-  Baseline_D_BitLocker: "Bitlocker",
-  Baseline_D_Defender_Antivirus: "DefaultAVPolicy",
-  Baseline_D_Device_Lock: "DeviceLock",
-  Baseline_D_Defender_for_Endpoint_EDR: "EDRConfiguration",
-  Baseline_D_Microsoft_Edge_Search_Engine: "EdgeStandardSearchEngineGoogle",
-  Baseline_D_Windows_Firewall: "Firewall",
-  Baseline_D_Network_Security: "LanManWorkstation",
-  Baseline_D_Local_Security_Policies: "LocalPoliciesSecurityOptions",
-  Baseline_D_Microsoft_Store: "MicrosoftAppStore",
-  Baseline_D_Microsoft_Edge_Security: "MicrosoftEdge",
-  Baseline_D_Microsoft_Office_Updates: "OfficeUpdates",
-  Baseline_D_Location_and_Privacy: "Privacy",
-  Baseline_D_Windows_Search: "Search",
-  Baseline_D_SmartScreen: "Smartscreen",
-  Baseline_D_System_Services: "SystemServices",
-  Baseline_D_User_Rights: "UserRights",
-  Baseline_D_Windows_LAPS: "WindowsLAPSPolicy",
-  Baseline_D_Microsoft_OneDrive_KFM: "OnedriveKnownFolderMove",
-  Baseline_D_Microsoft_OneDrive: "OnedriveSilentLogin",
+  Baseline_WIN_D_Attack_Surface_Reduction: "ASRDefaultRules",
+  Baseline_WIN_D_Audit_and_Event_Logging: "Auditing",
+  Baseline_WIN_U_Microsoft_Outlook: "AutomaticConfigurationOfOutlook",
+  Baseline_WIN_D_BitLocker: "Bitlocker",
+  Baseline_WIN_D_Defender_Antivirus: "DefaultAVPolicy",
+  Baseline_WIN_D_Device_Lock: "DeviceLock",
+  Baseline_WIN_D_Defender_for_Endpoint_EDR: "EDRConfiguration",
+  Baseline_WIN_D_Microsoft_Edge_Search_Engine: "EdgeStandardSearchEngineGoogle",
+  Baseline_WIN_D_Windows_Firewall: "Firewall",
+  Baseline_WIN_D_Local_Security_Policies: "LocalPoliciesSecurityOptions",
+  Baseline_WIN_D_Microsoft_Store: "MicrosoftAppStore",
+  Baseline_WIN_D_Microsoft_Edge_Security: "MicrosoftEdge",
+  Baseline_WIN_D_Microsoft_Office_Updates: "OfficeUpdates",
+  Baseline_WIN_D_Location_and_Privacy: "Privacy",
+  // De opvolger van de SmartScreen-policy houdt checkId 024 én zijn slug: het nummer is de
+  // identifier, de slug hoort daar vast bij te blijven staan.
+  Baseline_WIN_D_Enhanced_Phishing_Protection: "Smartscreen",
+  Baseline_WIN_D_User_Rights: "UserRights",
+  Baseline_WIN_D_Windows_LAPS: "WindowsLAPSPolicy",
+  Baseline_WIN_D_Microsoft_OneDrive: "OnedriveSilentLogin",
 };
 
-/** Deelt nummers uit: bekend uit CHECK_NUMBERS, anders oplopend na het hoogste bekende. */
+/**
+ * Deelt nummers uit: bekend uit CHECK_NUMBERS, anders oplopend na het hoogste bekende.
+ * Opgeheven nummers liggen per definitie onder dat maximum en komen dus nooit opnieuw aan
+ * bod — daarom staat RETIRED_CHECK_NUMBERS ook in de berekening, ook al is dat vandaag geen
+ * verschil: zodra iemand een nieuw nummer bovenaan opheft, klopt het nog steeds.
+ */
 function assignCheckNumbers(baseNames) {
-  let next = Math.max(0, ...Object.values(CHECK_NUMBERS)) + 1;
+  let next = Math.max(0, ...Object.values(CHECK_NUMBERS), ...Object.keys(RETIRED_CHECK_NUMBERS).map(Number)) + 1;
   const assigned = new Map();
   const fresh = [];
   for (const name of baseNames) {
@@ -210,77 +313,43 @@ function assignCheckNumbers(baseNames) {
   return assigned;
 }
 
-function slugToPascalCase(filenameWithoutExt) {
-  const withoutPrefix = filenameWithoutExt.replace(/^Baseline_/, "");
-  return withoutPrefix
+function pascalCase(text) {
+  return text
     .split(/[^A-Za-z0-9]+/)
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join("");
 }
 
-/** "Baseline_D_BitLocker" -> "D"; null voor bestanden die nog niet hernoemd zijn. */
-function scopeFromFileName(baseName) {
-  const m = baseName.match(/^Baseline_([DU])_/);
-  return m ? m[1] : null;
-}
-
-/** De checkId-suffix: vast voor hernoemde bestanden, anders afgeleid van de bestandsnaam. */
+/**
+ * De checkId-suffix. Vast voor bestanden die uit een hernoeming komen (CHECK_ID_SLUGS),
+ * anders afgeleid: scope + onderwerp, met het platform ervoor als het niet Windows is.
+ *
+ * De scope zit erin omdat er D/U-paren van hetzelfde onderwerp bestaan (Microsoft Store,
+ * Microsoft Office Security) — zonder die letter zouden die twee dezelfde checkId krijgen.
+ * Windows blijft zonder platformmarkering, zodat de checkId's die er al waren niet alsnog
+ * veranderen.
+ */
 function checkIdSuffix(baseName) {
-  return CHECK_ID_SLUGS[baseName] ?? slugToPascalCase(baseName);
+  if (CHECK_ID_SLUGS[baseName]) return CHECK_ID_SLUGS[baseName];
+  const parsed = parseBaseName(baseName);
+  if (!parsed) return pascalCase(baseName.replace(/^Baseline_/, ""));
+  const platformPart = parsed.platform === "WIN" ? "" : parsed.platform;
+  return `${platformPart}${parsed.scope}${pascalCase(parsed.item)}`;
 }
 
 /**
- * Onderwerpstag, stabiel over de D/U-hernoeming heen: de D_/U_-prefix telt niet mee, want
- * anders wordt "bitlocker" ineens "d-bitlocker" en breekt filteren op tag. De scope komt als
- * losse tag terug, zodat je er wél op kunt filteren zonder de onderwerpstag te vervuilen.
+ * Onderwerpstag, stabiel over de hernoemingen heen: platform- en scopeprefix tellen niet mee,
+ * want anders wordt "bitlocker" ineens "win-d-bitlocker" en breekt filteren op tag. Platform
+ * en scope komen als losse tags terug, zodat je er wél op kunt filteren zonder de
+ * onderwerpstag te vervuilen.
  */
 function tagsFor(baseName, extra) {
-  // (?:[DU]_) als geheel optioneel, niet [DU]?_? — anders slikt de D van "Baseline_Device_Lock"
-  // de scope-positie in en houd je "evice-lock" over.
-  const topic = baseName
-    .replace(/^Baseline_(?:[DU]_)?/, "")
-    .toLowerCase()
-    .replace(/_+/g, "-");
-  const scope = scopeFromFileName(baseName);
-  return ["intune", extra, topic, ...(scope === "D" ? ["device-scope"] : scope === "U" ? ["user-scope"] : [])];
-}
-
-/**
- * Klapt één settingInstance-boom recursief uit naar platte {settingDefinitionId,
- * expectedValue}-paren. Vier instance-vormen komen voor in de 20 templates (2026-08-10,
- * bevestigd tegen alle bestanden): Choice (met optionele children), Simple (scalaire
- * waarde), GroupSettingCollection (herhaalde child-groepen, bv. losse ASR-regels) en
- * SimpleSettingCollection (lijst van platte waarden, bv. User Rights Assignment-SID's).
- * Secret-waarden (bv. het EDR-onboarding-token) worden bewust overgeslagen: die zijn
- * per-tenant en horen niet als vaste verwachte waarde in een gedeelde baseline te staan.
- */
-function flattenInstance(instance, out, warnings) {
-  if (!instance || typeof instance !== "object") return;
-  const odataType = instance["@odata.type"] || "";
-  const settingDefinitionId = instance.settingDefinitionId;
-
-  if (odataType.endsWith("ChoiceSettingInstance")) {
-    const csv = instance.choiceSettingValue || {};
-    out.push({ settingDefinitionId, expectedValue: csv.value });
-    for (const child of csv.children || []) flattenInstance(child, out, warnings);
-  } else if (odataType.endsWith("SimpleSettingInstance")) {
-    const ssv = instance.simpleSettingValue || {};
-    if (ssv["@odata.type"] === "#microsoft.graph.deviceManagementConfigurationSecretSettingValue") {
-      warnings.push(`Secret-waarde overgeslagen voor ${settingDefinitionId} (per-tenant, hoort niet in een gedeelde baseline)`);
-      return;
-    }
-    out.push({ settingDefinitionId, expectedValue: ssv.value });
-  } else if (odataType.endsWith("SimpleSettingCollectionInstance")) {
-    const values = (instance.simpleSettingCollectionValue || []).map((v) => v.value);
-    out.push({ settingDefinitionId, expectedValue: values });
-  } else if (odataType.endsWith("GroupSettingCollectionInstance")) {
-    for (const group of instance.groupSettingCollectionValue || []) {
-      for (const child of group.children || []) flattenInstance(child, out, warnings);
-    }
-  } else {
-    warnings.push(`Onbekend settingInstance-type overgeslagen: "${odataType}" (${settingDefinitionId})`);
-  }
+  const parsed = parseBaseName(baseName);
+  const topic = (parsed ? parsed.item : baseName.replace(/^Baseline_/, "")).toLowerCase().replace(/_+/g, "-");
+  const platformTag = parsed ? { WIN: "windows", MAC: "macos", IOS: "ios", AND: "android" }[parsed.platform] : null;
+  const scopeTag = parsed ? (parsed.scope === "D" ? "device-scope" : "user-scope") : null;
+  return ["intune", extra, topic, platformTag, scopeTag].filter(Boolean);
 }
 
 /** Haalt de GUID uit een `.../groupPolicyDefinitions('<guid>')`- of `.../presentations('<guid>')`-odata.bind-URL. */
@@ -344,36 +413,33 @@ function convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, policyDi
 }
 
 /**
- * Drie formaten komen voor in IntuneTemplate/, onderscheiden door `.Type`:
- * - "Catalog": Settings Catalog-policy (`settings[].settingInstance`-bomen).
+ * Vijf formaten komen voor in IntuneTemplate/, onderscheiden door `.Type`:
+ * - "Catalog": Settings Catalog-policy (`settings[].settingInstance`-bomen), Windows én macOS.
  * - "Admin": klassieke ADMX-backed Group Policy Configuration — zie convertAdminTemplateFile.
  * - "Device": klassieke deviceConfiguration (bv. windowsUpdateForBusinessConfiguration).
- *   CIPP en IntuneBackupAndRestore kunnen die uitrollen, maar de platform-engine heeft er
- *   geen matcher voor — er is geen `device-configuration-match`-type. Een rule genereren
- *   die de engine niet kent levert een check op die stilzwijgend niets test, dus slaan we
- *   die over tot de engine het ondersteunt.
+ * - "deviceCompliancePolicies": compliance-policy.
+ * - "AppProtection": MAM-policy voor iOS/Android.
+ *
+ * De laatste drie leveren géén check op. CIPP en IntuneBackupAndRestore rollen ze prima uit,
+ * maar de platform-engine heeft er geen matcher voor — er is geen `device-configuration-
+ * match`. Een rule genereren die de engine niet kent levert een check op die stilzwijgend
+ * niets test. Voor compliance en app protection dekken de generieke checks 001–006 dit
+ * vandaag af (bestaat er een compliance-policy, is die toegewezen, vereist die encryptie).
  */
-function convertTemplateFile(filePath, checkNumber) {
-  const raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  const inner = JSON.parse(raw.JSON);
-  const baseName = path.basename(filePath, ".json");
+const TYPES_WITHOUT_MATCHER = ["Device", "deviceCompliancePolicies", "AppProtection"];
 
-  if (inner.Type === "Device") {
+function convertTemplate(template, checkNumber) {
+  const { baseName, inner, raw: policy } = template;
+
+  if (TYPES_WITHOUT_MATCHER.includes(inner.Type)) {
     return { unsupportedType: inner.Type, settingCount: 0 };
   }
 
   if (inner.Type === "Admin") {
-    const rawJsonPolicy = JSON.parse(inner.RAWJson);
-    return convertAdminTemplateFile(rawJsonPolicy, baseName, checkNumber, inner.Displayname);
+    return convertAdminTemplateFile(policy, baseName, checkNumber, inner.Displayname);
   }
 
-  const policy = JSON.parse(inner.RAWJson);
-
-  const settings = [];
-  const warnings = [];
-  for (const s of policy.settings || []) {
-    flattenInstance(s.settingInstance, settings, warnings);
-  }
+  const { settings, warnings } = flattenSettings(policy.settings);
 
   const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${checkIdSuffix(baseName)}`;
   const severity = HIGH_SEVERITY_FILES.has(baseName) ? "high" : "medium";
@@ -386,7 +452,7 @@ function convertTemplateFile(filePath, checkNumber) {
       type: "settings-catalog-match",
       what: `Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy "${policy.name || baseName}"?`,
       why: "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      source: `IntuneBackup/IntuneTemplate/${baseName}.json (afgesproken baseline, Defender-gebaseerd)`,
+      source: `IntuneBackup/IntuneTemplate/${path.relative(TEMPLATE_DIR, template.filePath).split(path.sep).join("/")} (afgesproken baseline, Defender-gebaseerd)`,
       params: { settings },
       learnMoreLinks: [
         { label: "Settings Catalog in Microsoft Intune", url: "https://learn.microsoft.com/mem/intune/configuration/settings-catalog" },
@@ -403,25 +469,21 @@ function main() {
     process.exit(1);
   }
 
-  const files = fs
-    .readdirSync(TEMPLATE_DIR)
-    .filter((f) => f.startsWith("Baseline_") && f.endsWith(".json"))
-    .sort();
-
-  if (files.length === 0) {
+  const templates = readTemplates(TEMPLATE_DIR);
+  if (templates.length === 0) {
     console.error("Geen Baseline_*.json-bestanden gevonden in IntuneTemplate/");
     process.exit(1);
   }
 
   const generatedRules = [];
   const skippedFiles = [];
-  const checkNumbers = assignCheckNumbers(files.map((f) => path.basename(f, ".json")));
+  const checkNumbers = assignCheckNumbers(templates.map((t) => t.baseName));
   let hadWarnings = false;
 
-  for (const file of files) {
-    const filePath = path.join(TEMPLATE_DIR, file);
-    const checkNumber = checkNumbers.get(path.basename(file, ".json"));
-    const { rule, warnings, settingCount, unsupportedType } = convertTemplateFile(filePath, checkNumber);
+  for (const template of templates) {
+    const file = template.baseName + ".json";
+    const checkNumber = checkNumbers.get(template.baseName);
+    const { rule, warnings, settingCount, unsupportedType } = convertTemplate(template, checkNumber);
     if (unsupportedType) {
       console.log(`${file}: Type "${unsupportedType}" — geen baseline-check (engine heeft er geen matcher voor), wel uitrolbaar via CIPP/IntuneBackupAndRestore.`);
       skippedFiles.push({ file, reason: `Type "${unsupportedType}" wordt niet door de platform-engine ondersteund` });

@@ -20,6 +20,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
+const { readTemplates, relativePathFor } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -30,41 +31,35 @@ const FOLDER_TO_TYPE = {
   "Settings Catalog": "Catalog",
   "Administrative Templates": "Admin",
   "Device Configurations": "Device",
+  "Device Compliance Policies": "deviceCompliancePolicies",
+  "App Protection Policies": "AppProtection",
 };
 
 /**
  * Tenant-specifieke velden: horen niet in een template dat naar een andere tenant gaat.
  * `id`/`createdDateTime`/`lastModifiedDateTime` verwijzen naar het bronobject, `version` en
- * `supportsScopeTags` worden serverside gezet.
+ * `supportsScopeTags` worden serverside gezet. `isAssigned`/`deployedAppCount` zijn
+ * afgeleide tellers uit de brontenant.
  */
-const TENANT_FIELDS = ["id", "createdDateTime", "lastModifiedDateTime", "version", "supportsScopeTags", "@odata.context"];
+const TENANT_FIELDS = ["id", "createdDateTime", "lastModifiedDateTime", "version", "supportsScopeTags", "@odata.context", "isAssigned", "deployedAppCount"];
 
 /**
- * Bestandsnaamconventie van IntuneTemplate/, afgeleid uit de bestaande 21 bestanden:
- * "[Baseline] "-prefix eraf, leestekens weg, spaties naar underscores. " - " levert
- * daardoor een dubbele underscore op (Baseline_Edge_Standard_search_engine__Google).
- * assertFilenameConvention() controleert bij elke run dat dit nog klopt.
+ * Bestandsnaam uit de policynaam: "[Baseline] - WIN - D - In-Box App Removal" wordt
+ * "Baseline_WIN_D_In_Box_App_Removal". Leestekens worden underscores (niet weggehaald),
+ * zodat "Sign-On" leesbaar "Sign_On" wordt in plaats van "SignOn".
+ *
+ * Dit is alleen een vangnet voor policies die hier nog niet bestaan. Bestaat de naam al,
+ * dan wint het pad van dát bestand — de namen in IntuneTemplate/ zijn met de hand gekozen
+ * (korter dan de policynaam, bv. "Microsoft Edge Profiles and Sync") en een mechanische
+ * afleiding zou daar een tweede bestand naast zetten.
  */
-function templateFileName(displayName) {
-  const stripped = displayName.replace(/^\[Baseline\]\s*/, "");
-  const slug = stripped.replace(/[^A-Za-z0-9 ]/g, "").replace(/ /g, "_");
-  return `Baseline_${slug}.json`;
-}
-
-function assertFilenameConvention() {
-  const mismatches = [];
-  for (const f of fs.readdirSync(TEMPLATE_DIR)) {
-    if (!f.startsWith("Baseline_") || !f.endsWith(".json")) continue;
-    const inner = JSON.parse(JSON.parse(fs.readFileSync(path.join(TEMPLATE_DIR, f), "utf8")).JSON);
-    const expected = templateFileName(inner.Displayname);
-    if (expected !== f) mismatches.push(`  ${f} -> conventie zegt ${expected} (Displayname: ${inner.Displayname})`);
-  }
-  if (mismatches.length > 0) {
-    console.error("De bestandsnaamconventie klopt niet meer voor bestaande templates:");
-    console.error(mismatches.join("\n"));
-    console.error("Pas templateFileName() aan voordat je importeert, anders ontstaan er duplicaten.");
-    process.exit(1);
-  }
+function deriveBaseName(displayName) {
+  const m = displayName.match(/^\[Baseline\] - (WIN|MAC|IOS|AND) - ([DU]) - (.+)$/);
+  if (!m) return null;
+  const item = m[3]
+    .replace(/[^A-Za-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+  return `Baseline_${m[1]}_${m[2]}_${item}`;
 }
 
 function stripTenantFields(obj) {
@@ -119,6 +114,60 @@ function convertDevice(policy) {
   return { rawJson: stripTenantFields(policy) };
 }
 
+/**
+ * Compliance-policies moeten hun scheduledActionsForRule houden: zonder actie gebeurt er bij
+ * non-compliance niets, en Graph weigert een POST zonder die property. De id's erin zijn
+ * tenant-specifiek en gaan er juist uit.
+ */
+function convertCompliance(policy) {
+  if (!policy["@odata.type"]) return { error: "geen @odata.type — zonder dat weet Graph niet welk soort compliance-policy dit is" };
+  const rules = (policy.scheduledActionsForRule || []).map((rule) => ({
+    ruleName: rule.ruleName ?? "PasswordRequired",
+    scheduledActionConfigurations: (rule.scheduledActionConfigurations || []).map((cfg) => stripTenantFields(cfg)),
+  }));
+  return {
+    rawJson: {
+      ...stripTenantFields(policy),
+      scheduledActionsForRule: rules.length > 0 ? rules : [{ ruleName: "PasswordRequired", scheduledActionConfigurations: [{ actionType: "block", gracePeriodHours: 0, notificationTemplateId: "" }] }],
+    },
+  };
+}
+
+/**
+ * App Protection: `apps` gaat eruit. Bij appGroupType "allMicrosoftApps" bepaalt Intune de
+ * lijst zelf en is de meegeëxporteerde lijst een momentopname van de brontenant; CIPP
+ * verwijdert 'm ook voor het POST't.
+ */
+function convertAppProtection(policy) {
+  if (!policy["@odata.type"]) return { error: "geen @odata.type — zonder dat kan de policy niet aan een platform gekoppeld worden" };
+  const { apps, assignments, deploymentSummary, ...rest } = policy;
+  return { rawJson: stripTenantFields(rest) };
+}
+
+/**
+ * Assignments staan in een parallelle Assignments/-submap. Twee vormen, allebei uit
+ * IntuneBackupAndRestore zelf: bij App Protection heet het bestand "<id> - <naam>.json" en
+ * zit de lijst in een `value`-property; bij de rest is de bestandsnaam de policynaam en is
+ * de inhoud een kale array.
+ */
+function readAssignment(folderPath, file, type) {
+  const dir = path.join(folderPath, "Assignments");
+  if (!fs.existsSync(dir)) return null;
+
+  let assignmentFile = path.join(dir, file);
+  if (type === "AppProtection") {
+    const suffix = ` - ${file}`;
+    const match = fs.readdirSync(dir).find((f) => f === file || f.endsWith(suffix));
+    if (!match) return null;
+    assignmentFile = path.join(dir, match);
+  }
+  if (!fs.existsSync(assignmentFile)) return null;
+
+  const raw = JSON.parse(fs.readFileSync(assignmentFile, "utf8"));
+  const list = Array.isArray(raw) ? raw : Array.isArray(raw.value) ? raw.value : [raw];
+  return list.map((a) => ({ target: a.target })).filter((a) => a.target);
+}
+
 function main() {
   const argv = process.argv.slice(2);
   const backupDir = argv.find((a) => !a.startsWith("--"));
@@ -133,9 +182,8 @@ function main() {
     console.error(`Backup-map niet gevonden: ${backupDir}`);
     process.exit(1);
   }
-  assertFilenameConvention();
-
   const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? JSON.parse(fs.readFileSync(ASSIGNMENTS_PATH, "utf8")) : {};
+  const existingByName = new Map(readTemplates(TEMPLATE_DIR).map((t) => [t.displayName, t]));
   const added = [], skipped = [], overwritten = [], failed = [];
 
   for (const folder of fs.readdirSync(backupDir)) {
@@ -155,32 +203,45 @@ function main() {
       const policy = JSON.parse(fs.readFileSync(filePath, "utf8"));
       // ADMX-exports zijn kale arrays zonder naam — de bestandsnaam ís de displayName.
       const displayName = policy.name || policy.displayName || path.basename(file, ".json");
-      const target = templateFileName(displayName);
-      const targetPath = path.join(TEMPLATE_DIR, target);
-      const exists = fs.existsSync(targetPath);
 
-      // Assignments staan in de backup in een parallelle Assignments/-submap. Die lezen we
-      // ook voor overgeslagen policies: de assignment is losse informatie die nergens
-      // anders in de repo staat, ook als het template zelf ongemoeid blijft.
-      const assignmentPath = path.join(folderPath, "Assignments", file);
-      if (fs.existsSync(assignmentPath)) {
-        const rawAssignment = JSON.parse(fs.readFileSync(assignmentPath, "utf8"));
-        assignments[displayName] = (Array.isArray(rawAssignment) ? rawAssignment : [rawAssignment]).map((a) => ({ target: a.target }));
+      // Bestaat de policy hier al, dan is zijn huidige pad leidend; anders leiden we naam en
+      // map af. Zoeken op naam en niet op pad, omdat een template in IntuneTemplate/ een
+      // kortere bestandsnaam mag hebben dan de policynaam.
+      const existing = existingByName.get(displayName);
+      const baseName = existing ? existing.baseName : deriveBaseName(displayName);
+      if (!baseName) {
+        failed.push(`${displayName} [${folder}]: naam volgt niet "[Baseline] - PLATFORM - D/U - Item", dus is niet in te delen`);
+        continue;
       }
+      const relPath = relativePathFor(baseName, type);
+      const targetPath = existing ? existing.filePath : path.join(TEMPLATE_DIR, relPath);
+      const target = path.relative(TEMPLATE_DIR, targetPath).split(path.sep).join("/");
+      const exists = Boolean(existing);
+
+      // Assignments lezen we ook voor overgeslagen policies: de assignment is losse
+      // informatie die nergens anders in de repo staat, ook als het template zelf
+      // ongemoeid blijft.
+      const assignment = readAssignment(folderPath, file, type);
+      if (assignment) assignments[displayName] = assignment;
 
       if (exists && !overwrite) {
         skipped.push(`${displayName} -> ${target} (bestaat al; --overwrite om te vervangen)`);
         continue;
       }
 
-      const conv = type === "Catalog" ? convertCatalog(policy, displayName) : type === "Admin" ? convertAdmin(policy) : convertDevice(policy);
+      const conv =
+        type === "Catalog" ? convertCatalog(policy, displayName)
+        : type === "Admin" ? convertAdmin(policy)
+        : type === "deviceCompliancePolicies" ? convertCompliance(policy)
+        : type === "AppProtection" ? convertAppProtection(policy)
+        : convertDevice(policy);
       if (conv.error) {
         failed.push(`${displayName} [${folder}]: ${conv.error}`);
         continue;
       }
 
       // GUID hergebruiken bij overschrijven, zodat CIPP het als dezelfde template ziet.
-      const guid = exists ? JSON.parse(fs.readFileSync(targetPath, "utf8")).GUID : crypto.randomUUID();
+      const guid = existing ? existing.inner.GUID : crypto.randomUUID();
       const inner = {
         Displayname: displayName,
         Description: (Array.isArray(policy) ? "" : policy.description) || "",
@@ -191,7 +252,10 @@ function main() {
       };
       const row = { PartitionKey: "IntuneTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(inner), Package: "Baseline" };
 
-      if (!dryRun) fs.writeFileSync(targetPath, JSON.stringify(row) + "\n");
+      if (!dryRun) {
+        fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+        fs.writeFileSync(targetPath, JSON.stringify(row) + "\n");
+      }
       (exists ? overwritten : added).push(`${displayName} -> ${target} [${type}]`);
     }
   }

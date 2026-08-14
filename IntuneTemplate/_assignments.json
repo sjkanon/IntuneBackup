@@ -1,212 +1,5 @@
 {
-  "[Baseline] - D - Administrative Templates": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Attack Surface Reduction": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Audit and Event Logging": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - BitLocker": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Defender Antivirus": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Defender for Endpoint EDR": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Device Lock": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Local Security Policies": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Location and Privacy": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft Edge Search Engine": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft Edge Security": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft Office Updates": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft OneDrive": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft OneDrive KFM": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Microsoft Store": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Network Security": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - SmartScreen": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - System Services": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - User Rights": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Windows Firewall": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Windows LAPS": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Windows Search": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - D - Windows Update Ring 3 Production": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - U - Microsoft OneDrive": [
+  "[Baseline] - AND - U - App Protection": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -215,7 +8,7 @@
       }
     }
   ],
-  "[Baseline] - U - Microsoft Outlook": [
+  "[Baseline] - IOS - U - App Protection": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -224,7 +17,799 @@
       }
     }
   ],
-  "[Baseline] - U - Windows User Experience": [
+  "[Baseline] - MAC - D - Accounts and Login": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Defender Antivirus": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Defender for Endpoint": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - FileVault": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Firewall and Gatekeeper": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Microsoft AutoUpdate": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Microsoft Edge Password Management": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Microsoft Edge Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Microsoft Office": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Microsoft OneDrive": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Platform SSO": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Restrictions": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - D - Software Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Compliance Device Health": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Compliance Device Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Compliance Password": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Microsoft Edge Extensions": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Microsoft Edge Profiles and Sync": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Microsoft Edge Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - MAC - U - Microsoft OneDrive KFM": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Administrator Protection": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Attack Surface Reduction": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Audit and Event Logging": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Automatic Restart Sign-On": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - BitLocker": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Cloud Optimized Content": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Config Refresh": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender Additional Configuration": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender Antivirus": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender for Endpoint EDR": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender Security Experience": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender Update Ring 3 Production": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Delivery Optimisation": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Device Guard and Credential Guard": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Device Lock": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Disable NTLM": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Endpoint Analytics": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Enhanced Phishing Protection": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - In-Box App Removal": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Internet Explorer Legacy": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Legacy Hardening": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Local Administrators": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Local Security Policies": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Location and Privacy": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Login and Lock Screen": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Accounts": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Edge Search Engine": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Edge Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Edge Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Office Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Office Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft OneDrive": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Microsoft Store": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Passwordless": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Printing": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Remote Desktop and RPC": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Script File Associations": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Security Hardening": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Settings Sync": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Timezone": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Update Reports and Telemetry": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - User Rights": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Feature Configuration": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Firewall": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Firewall Rules": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Hello for Business": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows LAPS": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Package Manager": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Sandbox": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Subsystem for Linux": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows Update Ring 3 Production": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Defender for Endpoint": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Device Health": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Device Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Password": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Copilot": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Edge Extensions": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Edge Password Management": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Edge Profiles and Sync": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Edge User Experience": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Office Experience": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Office Security": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft OneDrive": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Outlook": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Microsoft Store": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Personal Data Encryption": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Windows Spotlight": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Windows User Experience": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

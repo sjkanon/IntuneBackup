@@ -1,0 +1,11 @@
+{
+    "value": [
+        {
+            "target": {
+                "deviceAndAppManagementAssignmentFilterId": null,
+                "deviceAndAppManagementAssignmentFilterType": "none",
+                "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+            }
+        }
+    ]
+}

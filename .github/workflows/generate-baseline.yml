@@ -17,6 +17,7 @@ on:
       - "scripts/generate-baseline.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
+      - "scripts/lib/**"
       - ".github/workflows/generate-baseline.yml"
   workflow_dispatch:
 
@@ -31,15 +32,21 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      # Bewaakt dat er geen policy met gemengde device/user-scope bij komt, en dat bestands- en
-      # policynaam dezelfde scope dragen. Blokkerend sinds PLAN.md fase 2 (de hernoeming).
-      - name: Controleer device/user-scope van IntuneTemplate/
+      # Bewaakt dat er geen policy met gemengde device/user-scope bij komt, dat bestands- en
+      # policynaam hetzelfde platform en dezelfde scope dragen, dat elk bestand in de map van
+      # zijn policytype staat, en dat geen twee toegewezen policies dezelfde instelling op een
+      # andere waarde zetten. Blokkerend.
+      - name: Controleer scope, indeling en conflicten van IntuneTemplate/
         run: node scripts/check-scope.js
 
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js
-      - name: Genereer export/IntuneBackupAndRestore/ (restore-formaat)
+      - name: Genereer export/NativeImport/IntuneBackupAndRestore/ (restore-formaat)
         run: node scripts/export-intunebackup.js
+      # Na generate-baseline: de policytabellen tonen de checkId's, en die komen uit de
+      # zojuist geschreven baseline.
+      - name: Genereer de README's in IntuneTemplate/
+        run: node scripts/generate-docs.js
       - name: Open PR met de gegenereerde baseline (als er iets veranderde)
         uses: peter-evans/create-pull-request@v7
         with:
@@ -51,10 +58,12 @@ jobs:
             checkId's en gewijzigde `params.settings` — vóór je merget.
             `baseline/intune/baseline-v1.0.json` is de bron voor de `intune`-categorie in de
             baseline-koppeling van TEST Policies Platform (Instellingen →
-            Baseline-koppelingen); `export/IntuneBackupAndRestore/` is dezelfde baseline in
+            Baseline-koppelingen); `export/NativeImport/IntuneBackupAndRestore/` is dezelfde baseline in
             het restore-formaat van de IntuneBackupAndRestore-module.
           branch: auto/regenerate-baseline
           delete-branch: true
           add-paths: |
             baseline/intune/baseline-v1.0.json
-            export/IntuneBackupAndRestore/**
+            export/NativeImport/IntuneBackupAndRestore/**
+            IntuneTemplate/**/README.md
+            IntuneTemplate/README.md

@@ -1,16 +1,17 @@
-#Requires -Modules Microsoft.Graph.Authentication
+﻿#Requires -Modules Microsoft.Graph.Authentication
 <#
 .SYNOPSIS
 Wijst de baseline-policies in een tenant toe aan All Devices, All Users of een groep.
 
 .DESCRIPTION
-Zoekt in de tenant de policies op die in IntuneTemplate/ staan — over alle drie de
-policytypes heen (Settings Catalog, Administrative Templates/ADMX en klassieke Device
-Configurations) — en zet daar in één keer een assignment op.
+Zoekt in de tenant de policies op die in IntuneTemplate/ staan — over alle vijf de
+policytypes heen (Settings Catalog, Administrative Templates/ADMX, klassieke Device
+Configurations, compliance-policies en App Protection/MAM) — en zet daar in één keer een
+assignment op.
 
 De policylijst komt standaard uit IntuneTemplate/, niet uit een naamfilter op "[Baseline]".
-Dat is bewust: "Windows 11 Update" hoort wél bij de baseline maar heeft die prefix niet, en
-een prefixfilter zou 'm stilzwijgend overslaan. Met -Name kun je een eigen lijst opgeven.
+Dat is bewust: een policy die de prefix (nog) niet draagt zou stilzwijgend worden
+overgeslagen. Met -Name kun je een eigen lijst opgeven.
 
 Assignments worden standaard AANGEVULD, niet vervangen. Graph's /assign-endpoint overschrijft
 namelijk altijd de volledige lijst, dus dit script leest eerst de bestaande assignments en
@@ -36,8 +37,12 @@ Expliciete policynamen in plaats van de lijst uit IntuneTemplate/.
 
 .PARAMETER Scope
 Beperkt de policylijst tot device-scoped ('D') of user-scoped ('U') policies, op basis van de
-"[Baseline] - D/U - Item"-naamconventie. Standaard 'Both': dan blijft de lijst ongefilterd,
-inclusief policies die die conventie (nog) niet volgen. Werkt ook op een lijst uit -Name.
+"[Baseline] - PLATFORM - D/U - Item"-naamconventie. Standaard 'Both': dan blijft de lijst
+ongefilterd, inclusief policies die die conventie (nog) niet volgen. Werkt ook op -Name.
+
+.PARAMETER Platform
+Beperkt de policylijst tot één platform: 'WIN', 'MAC', 'IOS' of 'AND'. Standaard 'All'.
+Handig om een nieuw platform apart uit te rollen zonder de Windows-baseline aan te raken.
 
 .PARAMETER Replace
 Vervangt bestaande assignments in plaats van ze aan te vullen.
@@ -62,11 +67,14 @@ Gooit bestaande assignments weg en zet alleen All Devices erop.
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -Scope D -AllDevices
 .\Set-BaselineAssignment.ps1 -Scope U -AllUsers
-De dagelijkse bediening na de D/U-hernoeming: device-policies naar apparaten, user-policies
-naar gebruikers.
+De dagelijkse bediening: device-policies naar apparaten, user-policies naar gebruikers.
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -Platform MAC -Scope D -AllDevices -WhatIf
+Alleen de macOS-device-policies, eerst als dry run.
 #>
 # ConfirmImpact bewust op Medium: met High vraagt PowerShell per policy om bevestiging en
-# klik je je bij 24 policies suf. Draai eerst -WhatIf; dat is hier de dry run.
+# klik je je bij bijna honderd policies suf. Draai eerst -WhatIf; dat is hier de dry run.
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'AllDevices')]
 param(
     [Parameter(Mandatory, ParameterSetName = 'AllDevices')]
@@ -90,6 +98,9 @@ param(
     [ValidateSet('D', 'U', 'Both')]
     [string]$Scope = 'Both',
 
+    [ValidateSet('WIN', 'MAC', 'IOS', 'AND', 'All')]
+    [string]$Platform = 'All',
+
     [switch]$Replace,
 
     [string]$FilterId,
@@ -103,12 +114,27 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# Settings Catalog gebruikt 'name', de andere twee 'displayName' — anders vindt de match niets.
+# Settings Catalog gebruikt 'name', de rest 'displayName' — anders vindt de match niets.
+#
+# App Protection staat apart: je vindt de policies via managedAppPolicies, maar toewijzen kan
+# alleen via de platformspecifieke collectie (iosManagedAppProtections /
+# androidManagedAppProtections). Een POST naar managedAppPolicies/{id}/assign bestaat niet.
 $PolicyTypes = @(
     [pscustomobject]@{ Label = 'Settings Catalog';        Endpoint = 'deviceManagement/configurationPolicies';      NameField = 'name' }
     [pscustomobject]@{ Label = 'Administrative Template'; Endpoint = 'deviceManagement/groupPolicyConfigurations';  NameField = 'displayName' }
     [pscustomobject]@{ Label = 'Device Configuration';    Endpoint = 'deviceManagement/deviceConfigurations';       NameField = 'displayName' }
+    [pscustomobject]@{ Label = 'Compliance Policy';       Endpoint = 'deviceManagement/deviceCompliancePolicies';   NameField = 'displayName' }
+    [pscustomobject]@{ Label = 'App Protection';          Endpoint = 'deviceAppManagement/managedAppPolicies';      NameField = 'displayName' }
 )
+
+# @odata.type van een app protection-policy -> de collectie waar /assign wél op werkt.
+$AppProtectionEndpoints = @{
+    '#microsoft.graph.iosManagedAppProtection'              = 'deviceAppManagement/iosManagedAppProtections'
+    '#microsoft.graph.androidManagedAppProtection'          = 'deviceAppManagement/androidManagedAppProtections'
+    '#microsoft.graph.mdmWindowsInformationProtectionPolicy' = 'deviceAppManagement/mdmWindowsInformationProtectionPolicies'
+    '#microsoft.graph.windowsInformationProtectionPolicy'   = 'deviceAppManagement/windowsInformationProtectionPolicies'
+    '#microsoft.graph.targetedManagedAppConfiguration'      = 'deviceAppManagement/targetedManagedAppConfigurations'
+}
 
 function Get-GraphCollection {
     <# Volgt @odata.nextLink; zonder paginering mis je policies zodra een tenant er meer dan
@@ -126,10 +152,11 @@ function Get-GraphCollection {
 }
 
 function Get-TemplateDisplayName {
-    <# Leest de Displayname uit de CIPP-templates in IntuneTemplate/ (genestelde JSON-string). #>
+    <# Leest de Displayname uit de CIPP-templates in IntuneTemplate/ (genestelde JSON-string).
+       -Recurse omdat de templates per platform en policytype in submappen staan. #>
     param([Parameter(Mandatory)][string]$TemplateDir)
 
-    Get-ChildItem -Path $TemplateDir -Filter 'Baseline_*.json' -File | ForEach-Object {
+    Get-ChildItem -Path $TemplateDir -Filter 'Baseline_*.json' -File -Recurse | ForEach-Object {
         ((Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json).JSON | ConvertFrom-Json).Displayname
     }
 }
@@ -192,35 +219,57 @@ if ($wanted.Count -eq 0) { throw 'Geen policynamen om toe te wijzen.' }
 # repo als de tenant kent — een policy-id zegt er niets over. Policies die de conventie nog
 # niet volgen vallen dus buiten elk scope-filter; dat is bewust zichtbaar in plaats van stil,
 # anders wijs je na een halve migratie de helft van de baseline niet meer toe.
-if ($Scope -ne 'Both') {
+if ($Scope -ne 'Both' -or $Platform -ne 'All') {
     $before = $wanted
-    $wanted = @($before | Where-Object { $_ -match "^\[Baseline\] - $Scope - " })
-    $ignored = @($before | Where-Object { $_ -notmatch '^\[Baseline\] - [DU] - ' })
-    if ($ignored.Count -gt 0) {
-        Write-Warning "$($ignored.Count) policy/policies volgen de '[Baseline] - D/U - Item'-conventie niet en vallen buiten -Scope ${Scope}:"
-        $ignored | ForEach-Object { Write-Warning "  $_" }
+    $notConvention = @($before | Where-Object { $_ -notmatch '^\[Baseline\] - (WIN|MAC|IOS|AND) - [DU] - ' })
+    if ($notConvention.Count -gt 0) {
+        Write-Warning "$($notConvention.Count) policy/policies volgen de '[Baseline] - PLATFORM - D/U - Item'-conventie niet en vallen buiten élk filter:"
+        $notConvention | ForEach-Object { Write-Warning "  $_" }
     }
+
+    $platformPattern = if ($Platform -eq 'All') { '(WIN|MAC|IOS|AND)' } else { $Platform }
+    $scopePattern = if ($Scope -eq 'Both') { '[DU]' } else { $Scope }
+    $wanted = @($before | Where-Object { $_ -match "^\[Baseline\] - $platformPattern - $scopePattern - " })
+
     if ($wanted.Count -eq 0) {
-        throw "Geen policies met scope '$Scope' gevonden. Is de hernoeming (PLAN.md fase 2) al gedaan? Draai zonder -Scope om alles toe te wijzen."
+        throw "Geen policies gevonden voor platform '$Platform' en scope '$Scope'. Draai zonder filter om alles toe te wijzen."
     }
 }
 
 Write-Host "$($wanted.Count) policies uit de baseline, doel: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
 if ($Scope -ne 'Both') { Write-Host "Scope-filter: $Scope" -ForegroundColor Cyan }
+if ($Platform -ne 'All') { Write-Host "Platformfilter: $Platform" -ForegroundColor Cyan }
 Write-Host ("Modus: {0}" -f $(if ($Replace) { 'bestaande assignments VERVANGEN' } else { 'aanvullen op bestaande assignments' })) -ForegroundColor Cyan
 
 # --- policies ophalen ----------------------------------------------------------------
 $found = @{}
 foreach ($type in $PolicyTypes) {
-    foreach ($policy in Get-GraphCollection -Uri "$ApiVersion/$($type.Endpoint)?`$select=id,$($type.NameField)") {
+    # Bij App Protection geen $select: de @odata.type is nodig om te bepalen op welke
+    # collectie /assign werkt, en die kun je niet selecteren.
+    $uri = if ($type.Label -eq 'App Protection') {
+        "$ApiVersion/$($type.Endpoint)"
+    } else {
+        "$ApiVersion/$($type.Endpoint)?`$select=id,$($type.NameField)"
+    }
+
+    foreach ($policy in Get-GraphCollection -Uri $uri) {
         $policyName = $policy.($type.NameField)
-        if ($wanted -contains $policyName) {
-            if ($found.ContainsKey($policyName)) {
-                Write-Warning "'$policyName' bestaat meerdere keren in de tenant — alleen de eerste ($($found[$policyName].Label)) wordt toegewezen."
+        if ($wanted -notcontains $policyName) { continue }
+
+        $endpoint = $type.Endpoint
+        if ($type.Label -eq 'App Protection') {
+            $endpoint = $AppProtectionEndpoints[[string]$policy.'@odata.type']
+            if (-not $endpoint) {
+                Write-Warning "'$policyName' heeft een onbekend app protection-type ($($policy.'@odata.type')) — overgeslagen."
                 continue
             }
-            $found[$policyName] = [pscustomobject]@{ Id = $policy.id; Label = $type.Label; Endpoint = $type.Endpoint; Name = $policyName }
         }
+
+        if ($found.ContainsKey($policyName)) {
+            Write-Warning "'$policyName' bestaat meerdere keren in de tenant — alleen de eerste ($($found[$policyName].Label)) wordt toegewezen."
+            continue
+        }
+        $found[$policyName] = [pscustomobject]@{ Id = $policy.id; Label = $type.Label; Endpoint = $endpoint; Name = $policyName }
     }
 }
 
@@ -264,6 +313,6 @@ $results | Format-Table -AutoSize
 $missing = @($results | Where-Object Actie -eq 'NIET GEVONDEN')
 $failed = @($results | Where-Object Actie -eq 'MISLUKT')
 if ($missing.Count -gt 0) {
-    Write-Warning "$($missing.Count) policy/policies staan niet in de tenant. Rol ze eerst uit (CIPP, of Start-IntuneRestoreConfig op export/IntuneBackupAndRestore/) en draai dit script opnieuw."
+    Write-Warning "$($missing.Count) policy/policies staan niet in de tenant. Rol ze eerst uit (CIPP, of Start-IntuneRestoreConfig op export/NativeImport/IntuneBackupAndRestore/) en draai dit script opnieuw."
 }
 if ($failed.Count -gt 0) { throw "$($failed.Count) assignment(s) mislukt — zie de fouten hierboven." }

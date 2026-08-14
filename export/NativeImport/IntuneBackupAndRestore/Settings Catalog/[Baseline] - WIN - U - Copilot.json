@@ -1,0 +1,48 @@
+{
+    "name": "[Baseline] - WIN - U - Copilot",
+    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - U - Copilot",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot",
+                "settingInstanceTemplateReference": null,
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot_1",
+                    "children": []
+                }
+            }
+        }
+    ]
+}
