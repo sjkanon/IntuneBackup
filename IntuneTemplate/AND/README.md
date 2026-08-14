@@ -1,6 +1,6 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Android — 1 policies
+# Android — 1 policy
 
 Alle policies heten `[Baseline] - AND - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
@@ -12,14 +12,15 @@ Alle policies heten `[Baseline] - AND - <D|U> - <Item>`; de tabellen hieronder l
 
 Toewijzen aan gebruikersgroepen.
 
-| Policy | Type | Instellingen | checkId | Toewijzing | Bron |
-|---|---|---:|---|---|---|
-| `App Protection` | App Protection | — | — | All Users | OIB |
+| Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
+|---|---|---|---:|---|---|
+| **App Protection** | Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-telefoon: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens. | App Protection | — | All Users | — |
 
 ---
 
-Kolom **Bron**: `OIB` komt uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) via
-[`_oib-manifest.json`](../_oib-manifest.json); `eigen` staat alleen in deze baseline.
+**Wat het doet** komt uit `doel` in [`_oib-manifest.json`](../_oib-manifest.json). Diezelfde zin
+staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het
+template — en dus straks in de tenant naast de policy.
 
 Een lege **checkId** betekent dat de platform-engine geen matcher voor dat policytype heeft
 (Device config, compliance, app protection) — zie de [hoofd-README](../../README.md#welke-types-een-check-opleveren).

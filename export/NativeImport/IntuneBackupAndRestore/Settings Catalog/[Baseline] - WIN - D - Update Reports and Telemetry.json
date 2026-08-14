@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Update Reports and Telemetry",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows Update for Business - D - Reports and Telemetry",
+    "description": "Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows Update for Business - D - Reports and Telemetry.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

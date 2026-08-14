@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Script File Associations",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations",
+    "description": "Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

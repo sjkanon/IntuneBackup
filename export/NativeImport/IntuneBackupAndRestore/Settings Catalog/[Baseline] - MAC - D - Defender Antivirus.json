@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Defender Antivirus",
-    "description": "OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - Antivirus Configuration",
+    "description": "Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - Antivirus Configuration.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

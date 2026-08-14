@@ -38,6 +38,7 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const RENAMES_PATH = path.join(TEMPLATE_DIR, "_renames.json");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_oib-manifest.json");
 
 const DISPLAY_NAME_RE = /^\[Baseline\] - (WIN|MAC|IOS|AND) - ([DU]) - .+$/;
 
@@ -220,6 +221,29 @@ function checkRenames(templates) {
   return problems;
 }
 
+/**
+ * Elk template hoort een regel in _oib-manifest.json te hebben. Die regel levert de
+ * `doel`-zin die in de tenant naast de policy komt te staan; zonder regel staat de policy daar
+ * straks zonder uitleg, en valt hij bovendien buiten `import-oib.js`.
+ */
+function checkManifestCoverage(templates) {
+  if (!fs.existsSync(MANIFEST_PATH)) return [];
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+  const byTarget = new Map((manifest.policies || []).map((p) => [p.target, p]));
+  const known = new Set(templates.map((t) => t.baseName));
+  const problems = [];
+
+  for (const t of templates) {
+    const entry = byTarget.get(t.baseName);
+    if (!entry) problems.push(`_oib-manifest.json: geen regel voor ${t.baseName} — dus geen omschrijving in de tenant`);
+    else if (!entry.doel) problems.push(`_oib-manifest.json: ${t.baseName} heeft geen "doel"`);
+  }
+  for (const target of byTarget.keys()) {
+    if (!known.has(target)) problems.push(`_oib-manifest.json: regel voor ${target}, maar dat template bestaat niet`);
+  }
+  return problems;
+}
+
 function main() {
   const reportOnly = process.argv.includes("--report");
 
@@ -254,7 +278,7 @@ function main() {
 
   const { conflicts, duplicates, shared } = findOverlaps(results, assignments);
   const failing = results.filter((r) => r.problems.length > 0);
-  const renameProblems = checkRenames(templates);
+  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates)];
 
   if (failing.length > 0) {
     console.log(`\n${failing.length} van ${results.length} policies hebben werk openstaan:\n`);
@@ -295,7 +319,7 @@ function main() {
   }
 
   if (renameProblems.length > 0) {
-    console.log(`\n${renameProblems.length} probleem/problemen in de migratietabel:\n`);
+    console.log(`\n${renameProblems.length} probleem/problemen in de migratietabel of het manifest:\n`);
     for (const p of renameProblems) console.log(`  ${p}`);
   }
 

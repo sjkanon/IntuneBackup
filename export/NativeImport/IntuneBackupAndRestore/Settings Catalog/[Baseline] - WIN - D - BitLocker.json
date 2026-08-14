@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - BitLocker",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Encryption - D - BitLocker (OS Disk)",
+    "description": "Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Encryption - D - BitLocker (OS Disk).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

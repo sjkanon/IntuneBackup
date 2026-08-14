@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Security Hardening",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Security Hardening",
+    "description": "Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Security Hardening.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

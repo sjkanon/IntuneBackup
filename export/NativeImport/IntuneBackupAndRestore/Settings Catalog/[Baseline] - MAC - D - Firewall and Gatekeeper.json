@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Firewall and Gatekeeper",
-    "description": "OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper",
+    "description": "Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een herkende ontwikkelaar is ondertekend. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

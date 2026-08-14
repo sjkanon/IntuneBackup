@@ -53,8 +53,8 @@ naamloze rij van. Die doet niets — zie de [hoofd-README](../README.md#terugzet
 
 - [Windows](WIN/README.md) — 73 policies
 - [macOS](MAC/README.md) — 20 policies
-- [iOS/iPadOS](IOS/README.md) — 1 policies
-- [Android](AND/README.md) — 1 policies
+- [iOS/iPadOS](IOS/README.md) — 1 policy
+- [Android](AND/README.md) — 1 policy
 
 Zie de [hoofd-README](../README.md) voor de naamconventie, de controles en hoe je een
 nieuwe OpenIntuneBaseline-versie binnenhaalt.

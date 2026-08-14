@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Administrator Protection",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Administrator Protection",
+    "description": "Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Administrator Protection.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

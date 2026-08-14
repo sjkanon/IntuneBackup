@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - U - Microsoft OneDrive KFM",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move",
+    "description": "Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets alleen lokaal staat. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

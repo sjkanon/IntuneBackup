@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Firewall Rules",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Security Rules",
+    "description": "Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Security Rules.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

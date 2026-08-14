@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Printing",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Printing",
+    "description": "Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Printing.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

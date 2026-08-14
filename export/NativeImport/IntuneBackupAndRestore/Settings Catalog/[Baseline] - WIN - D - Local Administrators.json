@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Local Administrators",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Local Group Membership - D - Local Administrators",
+    "description": "Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerde groep beheert in plaats van wat er toevallig op het apparaat staat. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Local Group Membership - D - Local Administrators.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Config Refresh",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Config Refresh",
+    "description": "Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Config Refresh.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

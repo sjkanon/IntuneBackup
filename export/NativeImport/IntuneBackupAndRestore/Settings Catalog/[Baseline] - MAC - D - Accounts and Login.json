@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Accounts and Login",
-    "description": "OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login",
+    "description": "Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

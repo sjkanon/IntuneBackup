@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Remote Desktop and RPC",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Remote Desktop Services and RPC",
+    "description": "Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een inbraak vaak voor zijwaartse beweging worden gebruikt. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Remote Desktop Services and RPC.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

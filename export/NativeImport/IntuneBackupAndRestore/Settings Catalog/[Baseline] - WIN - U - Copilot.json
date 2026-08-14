@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Copilot",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - U - Copilot",
+    "description": "Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - U - Copilot.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

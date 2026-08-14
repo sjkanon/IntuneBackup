@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft OneDrive",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - D - Configuration",
+    "description": "Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - D - Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

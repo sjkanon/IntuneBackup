@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Office Security",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Security",
+    "description": "De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

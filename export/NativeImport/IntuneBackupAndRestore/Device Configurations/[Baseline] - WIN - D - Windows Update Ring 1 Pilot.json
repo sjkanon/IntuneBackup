@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — WUfB - Ring 1 - Pilot",
+    "description": "Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar worden op een kleine groep. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v3.8 — WUfB - Ring 1 - Pilot.",
     "displayName": "[Baseline] - WIN - D - Windows Update Ring 1 Pilot",
     "deliveryOptimizationMode": "userDefined",
     "prereleaseFeatures": "userDefined",

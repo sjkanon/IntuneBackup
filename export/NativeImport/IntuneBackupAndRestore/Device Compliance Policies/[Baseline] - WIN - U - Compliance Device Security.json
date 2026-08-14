@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Security",
+    "description": "Toetst de beveiligingsstand van het apparaat: firewall, antivirus en beveiligingsonderdelen die aan horen te staan. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Security.",
     "displayName": "[Baseline] - WIN - U - Compliance Device Security",
     "passwordRequired": false,
     "passwordBlockSimple": false,

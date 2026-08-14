@@ -1,7 +1,7 @@
 {
     "@odata.type": "#microsoft.graph.androidManagedAppProtection",
     "displayName": "[Baseline] - AND - U - App Protection",
-    "description": "OpenIntuneBaseline BYOD — Android App Protection",
+    "description": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-telefoon: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline BYOD — Android App Protection.",
     "roleScopeTagIds": [
         "0"
     ],

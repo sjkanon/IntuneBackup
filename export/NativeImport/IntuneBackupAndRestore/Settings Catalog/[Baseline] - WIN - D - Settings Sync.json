@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Settings Sync",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Settings Sync",
+    "description": "Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Settings Sync.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,7 +1,7 @@
 {
     "@odata.type": "#microsoft.graph.iosManagedAppProtection",
     "displayName": "[Baseline] - IOS - U - App Protection",
-    "description": "OpenIntuneBaseline BYOD — iOS App Protection",
+    "description": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline BYOD — iOS App Protection.",
     "roleScopeTagIds": [
         "0"
     ],

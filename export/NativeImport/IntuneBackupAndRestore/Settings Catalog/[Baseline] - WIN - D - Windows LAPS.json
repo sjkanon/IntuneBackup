@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows LAPS",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Windows LAPS - D - LAPS Configuration (24H2+)",
+    "description": "Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows LAPS - D - LAPS Configuration (24H2+).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

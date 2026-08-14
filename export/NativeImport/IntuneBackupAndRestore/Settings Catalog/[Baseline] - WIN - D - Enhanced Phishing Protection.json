@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Enhanced Phishing Protection",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Enhanced Phishing Protection",
+    "description": "Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Enhanced Phishing Protection.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Sandbox",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Sandbox",
+    "description": "Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot het netwerk en het klembord van de host. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Sandbox.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

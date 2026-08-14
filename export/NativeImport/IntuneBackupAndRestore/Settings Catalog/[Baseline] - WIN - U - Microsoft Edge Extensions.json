@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Edge Extensions",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Extensions",
+    "description": "Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zijn. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Extensions.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Restrictions",
-    "description": "OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions",
+    "description": "Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

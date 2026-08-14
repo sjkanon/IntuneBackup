@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Cloud Optimized Content",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (device-deel)",
+    "description": "Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (device-deel).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

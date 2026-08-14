@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - FileVault",
-    "description": "OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault",
+    "description": "Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macOS-tegenhanger van BitLocker. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

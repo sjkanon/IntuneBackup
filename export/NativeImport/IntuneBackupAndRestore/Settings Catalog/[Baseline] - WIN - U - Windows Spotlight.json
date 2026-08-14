@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Windows Spotlight",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel)",
+    "description": "Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

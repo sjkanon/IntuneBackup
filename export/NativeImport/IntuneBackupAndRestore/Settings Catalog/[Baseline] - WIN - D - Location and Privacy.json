@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Location and Privacy",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Location and Privacy",
+    "description": "Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en spraak. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Location and Privacy.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

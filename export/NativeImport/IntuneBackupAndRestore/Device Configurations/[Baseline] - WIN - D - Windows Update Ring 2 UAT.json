@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — WUfB - Ring 2 - UAT",
+    "description": "Tweede updatering: krijgt Windows-updates na de pilot en vóór productie. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v3.8 — WUfB - Ring 2 - UAT.",
     "displayName": "[Baseline] - WIN - D - Windows Update Ring 2 UAT",
     "deliveryOptimizationMode": "userDefined",
     "prereleaseFeatures": "userDefined",

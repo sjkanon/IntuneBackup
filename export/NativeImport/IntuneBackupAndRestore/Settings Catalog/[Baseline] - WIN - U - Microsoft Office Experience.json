@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Office Experience",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Config and Experience",
+    "description": "De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en welke functies zichtbaar zijn. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Config and Experience.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

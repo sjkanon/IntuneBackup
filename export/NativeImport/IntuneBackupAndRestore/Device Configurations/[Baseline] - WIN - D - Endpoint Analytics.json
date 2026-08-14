@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — TP - Health Monitoring - D - Endpoint Analytics",
+    "description": "Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — TP - Health Monitoring - D - Endpoint Analytics.",
     "displayName": "[Baseline] - WIN - D - Endpoint Analytics",
     "allowDeviceHealthMonitoring": "enabled",
     "configDeviceHealthMonitoringScope": "bootPerformance",

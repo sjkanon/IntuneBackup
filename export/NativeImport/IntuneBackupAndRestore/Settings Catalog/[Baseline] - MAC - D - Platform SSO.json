@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Platform SSO",
-    "description": "OpenIntuneBaseline macOS v1.0 — Authentication - D - Platform SSO",
+    "description": "Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Authentication - D - Platform SSO.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

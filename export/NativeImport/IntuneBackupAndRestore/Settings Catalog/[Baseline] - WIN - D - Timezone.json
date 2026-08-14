@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Timezone",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Timezone",
+    "description": "Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Timezone.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

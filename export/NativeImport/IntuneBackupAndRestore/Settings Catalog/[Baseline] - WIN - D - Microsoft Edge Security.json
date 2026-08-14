@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Edge Security",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Security",
+    "description": "De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaatgedrag en welke sites onbeveiligde inhoud mogen laden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

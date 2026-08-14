@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Automatic Restart Sign-On",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Automatic Restart Sign-On",
+    "description": "Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer aan, zodat opstartprogramma's draaien zonder dat het apparaat onbeheerd ontgrendeld staat. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Automatic Restart Sign-On.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

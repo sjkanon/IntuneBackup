@@ -44,6 +44,7 @@ const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds } = 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_oib-manifest.json");
+const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const DEFAULT_SOURCE = path.join(REPO_ROOT, ".oib-source");
 
 /** OIB levert een deel van zijn export als UTF-16LE aan; de rest is UTF-8, soms met BOM. */
@@ -93,6 +94,39 @@ function stableGuid(name) {
   const h = crypto.createHash("sha1").update(`oib:${name}`).digest("hex");
   const v = (parseInt(h[16], 16) & 0x3) | 0x8;
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-5${h.slice(13, 16)}-${v.toString(16)}${h.slice(17, 20)}-${h.slice(20, 32)}`;
+}
+
+/** Toewijzingsdoel in gewone taal, voor in de omschrijving. */
+function assignmentText(assignment) {
+  if (!assignment || assignment.length === 0) return "geen — deze policy hoort op een eigen groep, niet op iedereen";
+  return assignment
+    .map((a) => {
+      const type = a.target["@odata.type"] || "";
+      if (type.includes("allDevices")) return "alle apparaten";
+      if (type.includes("allLicensedUsers")) return "alle gebruikers";
+      if (type.includes("exclusionGroup")) return "uitgesloten groep";
+      if (type.includes("group")) return "een groep";
+      return type.replace("#microsoft.graph.", "");
+    })
+    .join(", ");
+}
+
+/**
+ * De omschrijving die in de tenant naast de policy komt te staan. CIPP zet 'm uit het
+ * Description-veld van het template, IntuneBackupAndRestore uit `description` in de body —
+ * beide komen hier vandaan.
+ *
+ * Drie delen, omdat iemand die de policy in Intune openslaat drie dingen wil weten: wat doet
+ * dit, hoort het hier te landen, en waar komt het vandaan. Het toewijzingsdoel komt uit
+ * _assignments.json en niet uit een los tekstveld, zodat de omschrijving niet uit de pas kan
+ * lopen met wat de export en Set-BaselineAssignment.ps1 werkelijk doen.
+ */
+function composeDescription(entry, assignments) {
+  const parts = [];
+  if (entry.doel) parts.push(entry.doel);
+  parts.push(`Toewijzing volgens baseline: ${assignmentText(assignments[entry.displayName])}.`);
+  if (entry.bron) parts.push(`Bron: ${entry.bron}.`);
+  return parts.join(" ");
 }
 
 /**
@@ -215,6 +249,15 @@ function main() {
     process.exit(1);
   }
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+  const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? JSON.parse(fs.readFileSync(ASSIGNMENTS_PATH, "utf8")) : {};
+
+  const withoutDoel = manifest.policies.filter((p) => !p.doel).map((p) => p.target);
+  if (withoutDoel.length > 0) {
+    console.error(`FOUT: ${withoutDoel.length} policy/policies in het manifest hebben geen "doel":`);
+    for (const t of withoutDoel) console.error(`  - ${t}`);
+    console.error("Zonder die zin staat de policy straks naamloos in de tenant. Vul 'm aan in _oib-manifest.json.");
+    process.exit(1);
+  }
 
   const needsSource = manifest.policies.some((p) => p.source);
   if (needsSource && !fs.existsSync(sourceRoot)) {
@@ -248,9 +291,9 @@ function main() {
   let unchanged = 0;
 
   for (const { entry, source } of loaded) {
-    const type = entry.type || "Catalog";
+    let type = entry.type || "Catalog";
     const displayName = entry.displayName;
-    const description = entry.description ?? "";
+    const description = composeDescription(entry, assignments);
 
     // Bestaand template: GUID hergebruiken en, als er niets anders gezegd is, de eigen
     // extra instellingen daaruit overnemen. Dat maakt de tweede run identiek aan de eerste.
@@ -259,7 +302,20 @@ function main() {
     const guid = (existing && existing.inner.GUID) || (carrySource && carrySource.inner.GUID) || stableGuid(entry.target);
 
     let body;
-    if (!source) {
+    if (entry.metadataOnly) {
+      // Templates die niet uit OIB komen. Alleen naam en omschrijving worden ververst; de
+      // instellingen blijven onaangeroerd. Zonder deze tak zouden ze buiten het manifest
+      // vallen en dus ook geen doel-zin in de tenant krijgen.
+      if (!existing) {
+        console.error(`FOUT: ${entry.target} staat als metadataOnly in het manifest, maar bestaat niet in IntuneTemplate/.`);
+        process.exit(1);
+      }
+      type = existing.type;
+      body = { ...existing.raw };
+      if ("description" in body || type === "Catalog") body.description = description;
+      if (typeof body.name === "string") body.name = displayName;
+      if (typeof body.displayName === "string") body.displayName = displayName;
+    } else if (!source) {
       // Geen OIB-bron: dit template bestaat puur uit overgenomen eigen instellingen.
       if (!carrySource) {
         console.error(`FOUT: ${entry.target} heeft geen source en geen bestaande carryFrom (${entry.carryFrom}).`);

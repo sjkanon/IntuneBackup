@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Firewall",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Firewall Configuration",
+    "description": "Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Firewall Configuration.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

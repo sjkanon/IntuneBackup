@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft OneDrive",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - U - Configuration",
+    "description": "De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - U - Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

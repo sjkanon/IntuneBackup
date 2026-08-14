@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - U - Microsoft Edge Updates",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Updates",
+    "description": "Hoe en wanneer Edge op de Mac zichzelf bijwerkt. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Updates.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

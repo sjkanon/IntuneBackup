@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Office Security",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - D - Security",
+    "description": "De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, beperkt ActiveX en oude bestandsformaten. Het zwaartepunt van deze baseline voor phishing via bijlagen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - D - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

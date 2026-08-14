@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Microsoft Edge Security",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security",
+    "description": "De beveiligingsinstellingen van Edge op macOS: SmartScreen, downloadcontrole en certificaatgedrag. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

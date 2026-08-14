@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Subsystem for Linux",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Subsystem for Linux",
+    "description": "Beperkt het Windows-subsysteem voor Linux, dat anders een volledige tweede omgeving naast Windows opent waar de meeste beveiligingscontroles niet gelden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Subsystem for Linux.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

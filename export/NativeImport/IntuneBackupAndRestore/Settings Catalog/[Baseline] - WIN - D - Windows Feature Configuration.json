@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Feature Configuration",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Feature Configuration",
+    "description": "Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Feature Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

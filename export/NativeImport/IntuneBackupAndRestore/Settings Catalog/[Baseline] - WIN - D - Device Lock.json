@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Device Lock",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Power and Device Lock",
+    "description": "Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden, plus het gedrag bij dichtklappen en stroom. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Power and Device Lock.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

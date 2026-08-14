@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Defender for Endpoint",
-    "description": "OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration",
+    "description": "Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

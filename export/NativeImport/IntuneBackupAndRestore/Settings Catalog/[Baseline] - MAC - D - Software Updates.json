@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Software Updates",
-    "description": "OpenIntuneBaseline macOS v1.0 — Updates - D - Update Configuration",
+    "description": "Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Updates - D - Update Configuration.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

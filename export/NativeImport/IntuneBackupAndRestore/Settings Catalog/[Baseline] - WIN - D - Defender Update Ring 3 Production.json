@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Update Ring 3 Production",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 3 - Production",
+    "description": "Productiering voor Defender-updates: krijgt definities en engineversies pas nadat ring 1 en 2 ze zonder problemen hebben gedraaid. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 3 - Production.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

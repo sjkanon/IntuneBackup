@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Microsoft AutoUpdate",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft AutoUpdate - D - MAU Configuration",
+    "description": "Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerken. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft AutoUpdate - D - MAU Configuration.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

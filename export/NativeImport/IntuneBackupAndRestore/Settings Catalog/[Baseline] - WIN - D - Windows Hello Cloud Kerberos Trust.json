@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows Hello for Business - D - Cloud Kerberos Trust",
+    "description": "Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows Hello for Business - D - Cloud Kerberos Trust.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

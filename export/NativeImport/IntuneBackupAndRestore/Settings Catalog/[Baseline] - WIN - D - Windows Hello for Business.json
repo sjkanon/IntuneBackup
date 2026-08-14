@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello for Business",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration",
+    "description": "Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

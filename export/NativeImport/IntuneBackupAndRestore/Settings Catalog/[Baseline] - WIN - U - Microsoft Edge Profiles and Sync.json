@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Edge Profiles and Sync",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync",
+    "description": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

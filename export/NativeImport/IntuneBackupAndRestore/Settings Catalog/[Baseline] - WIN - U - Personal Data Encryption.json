@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Personal Data Encryption",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Encryption - U - Personal Data Encryption",
+    "description": "Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — ES - Encryption - U - Personal Data Encryption.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

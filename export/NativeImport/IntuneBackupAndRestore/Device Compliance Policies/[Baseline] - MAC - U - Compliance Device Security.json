@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security",
+    "description": "Toetst de beveiligingsstand van de Mac: firewall en systeemintegriteit. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security.",
     "displayName": "[Baseline] - MAC - U - Compliance Device Security",
     "passwordRequired": false,
     "passwordBlockSimple": false,

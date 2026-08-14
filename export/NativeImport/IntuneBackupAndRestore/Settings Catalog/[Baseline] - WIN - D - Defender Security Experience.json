@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Security Experience",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - Security Experience",
+    "description": "Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - Security Experience.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

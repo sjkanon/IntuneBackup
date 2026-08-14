@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Login and Lock Screen",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen",
+    "description": "Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoals de laatst aangemelde gebruiker en camera-toegang. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

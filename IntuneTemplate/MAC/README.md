@@ -13,40 +13,41 @@ Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder l
 
 Toewijzen aan apparaatgroepen.
 
-| Policy | Type | Instellingen | checkId | Toewijzing | Bron |
-|---|---|---:|---|---|---|
-| `Accounts and Login` | Settings Catalog | 5 | `INTUNE-BASE-035-MACDAccountsAndLogin` | All Devices | OIB |
-| `Defender Antivirus` | Settings Catalog | 24 | `INTUNE-BASE-036-MACDDefenderAntivirus` | All Devices | OIB |
-| `Defender for Endpoint` | Settings Catalog | 55 | `INTUNE-BASE-037-MACDDefenderForEndpoint` | All Devices | OIB |
-| `FileVault` | Settings Catalog | 5 | `INTUNE-BASE-038-MACDFileVault` | All Devices | OIB |
-| `Firewall and Gatekeeper` | Settings Catalog | 7 | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` | All Devices | OIB |
-| `Microsoft AutoUpdate` | Settings Catalog | 14 | `INTUNE-BASE-040-MACDMicrosoftAutoUpdate` | All Devices | OIB |
-| `Microsoft Edge Password Management` | Settings Catalog | 3 | `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement` | All Devices | OIB |
-| `Microsoft Edge Security` | Settings Catalog | 29 | `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity` | All Devices | OIB |
-| `Microsoft Office` | Settings Catalog | 5 | `INTUNE-BASE-043-MACDMicrosoftOffice` | All Devices | OIB |
-| `Microsoft OneDrive` | Settings Catalog | 14 | `INTUNE-BASE-044-MACDMicrosoftOneDrive` | All Devices | OIB |
-| `Platform SSO` | Settings Catalog | 24 | `INTUNE-BASE-045-MACDPlatformSSO` | All Devices | OIB |
-| `Restrictions` | Settings Catalog | 37 | `INTUNE-BASE-046-MACDRestrictions` | All Devices | OIB |
-| `Software Updates` | Settings Catalog | 7 | `INTUNE-BASE-047-MACDSoftwareUpdates` | All Devices | OIB |
+| Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
+|---|---|---|---:|---|---|
+| **Accounts and Login** | Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-035-MACDAccountsAndLogin` |
+| **Defender Antivirus** | Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-036-MACDDefenderAntivirus` |
+| **Defender for Endpoint** | Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd. | Settings Catalog | 55 | All Devices | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
+| **FileVault** | Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macOS-tegenhanger van BitLocker. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-038-MACDFileVault` |
+| **Firewall and Gatekeeper** | Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een herkende ontwikkelaar is ondertekend. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` |
+| **Microsoft AutoUpdate** | Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerken. | Settings Catalog | 14 | All Devices | `INTUNE-BASE-040-MACDMicrosoftAutoUpdate` |
+| **Microsoft Edge Password Management** | Bepaalt of Edge op de Mac wachtwoorden mag opslaan en tonen. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement` |
+| **Microsoft Edge Security** | De beveiligingsinstellingen van Edge op macOS: SmartScreen, downloadcontrole en certificaatgedrag. | Settings Catalog | 29 | All Devices | `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity` |
+| **Microsoft Office** | Basisconfiguratie van Office op macOS. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-043-MACDMicrosoftOffice` |
+| **Microsoft OneDrive** | Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 'm de toegangsrechten die macOS eist. | Settings Catalog | 14 | All Devices | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
+| **Platform SSO** | Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-045-MACDPlatformSSO` |
+| **Restrictions** | Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. | Settings Catalog | 37 | All Devices | `INTUNE-BASE-046-MACDRestrictions` |
+| **Software Updates** | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 
 ## User-scoped (U) — 7
 
 Toewijzen aan gebruikersgroepen.
 
-| Policy | Type | Instellingen | checkId | Toewijzing | Bron |
-|---|---|---:|---|---|---|
-| `Compliance Device Health` | Compliance | — | — | All Users | OIB |
-| `Compliance Device Security` | Compliance | — | — | All Users | OIB |
-| `Compliance Password` | Compliance | — | — | All Users | OIB |
-| `Microsoft Edge Extensions` | Settings Catalog | 4 | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` | All Users | OIB |
-| `Microsoft Edge Profiles and Sync` | Settings Catalog | 4 | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` | All Users | OIB |
-| `Microsoft Edge Updates` | Settings Catalog | 5 | `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates` | All Users | OIB |
-| `Microsoft OneDrive KFM` | Settings Catalog | 15 | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` | All Users | OIB |
+| Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
+|---|---|---|---:|---|---|
+| **Compliance Device Health** | Toetst of de Mac versleuteld is en veilig opstart. | Compliance | — | All Users | — |
+| **Compliance Device Security** | Toetst de beveiligingsstand van de Mac: firewall en systeemintegriteit. | Compliance | — | All Users | — |
+| **Compliance Password** | Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn. | Compliance | — | All Users | — |
+| **Microsoft Edge Extensions** | Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren. | Settings Catalog | 4 | All Users | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` |
+| **Microsoft Edge Profiles and Sync** | Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt. | Settings Catalog | 4 | All Users | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |
+| **Microsoft Edge Updates** | Hoe en wanneer Edge op de Mac zichzelf bijwerkt. | Settings Catalog | 5 | All Users | `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates` |
+| **Microsoft OneDrive KFM** | Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets alleen lokaal staat. | Settings Catalog | 15 | All Users | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` |
 
 ---
 
-Kolom **Bron**: `OIB` komt uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) via
-[`_oib-manifest.json`](../_oib-manifest.json); `eigen` staat alleen in deze baseline.
+**Wat het doet** komt uit `doel` in [`_oib-manifest.json`](../_oib-manifest.json). Diezelfde zin
+staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het
+template — en dus straks in de tenant naast de policy.
 
 Een lege **checkId** betekent dat de platform-engine geen matcher voor dat policytype heeft
 (Device config, compliance, app protection) — zie de [hoofd-README](../../README.md#welke-types-een-check-opleveren).

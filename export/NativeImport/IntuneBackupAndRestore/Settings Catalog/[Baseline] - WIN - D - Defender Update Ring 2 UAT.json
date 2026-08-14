@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Update Ring 2 UAT",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 2 - UAT",
+    "description": "Tweede ring voor Defender-updates: loopt achter op de pilot en voor op productie. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 2 - UAT.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

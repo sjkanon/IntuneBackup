@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Disable NTLM",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Network Security - D - Disable NTLM",
+    "description": "Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Network Security - D - Disable NTLM.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

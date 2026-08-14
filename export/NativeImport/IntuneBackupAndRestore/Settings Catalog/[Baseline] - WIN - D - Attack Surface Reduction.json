@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Attack Surface Reduction",
-    "description": "OpenIntuneBaseline Windows v3.8 — ES - Attack Surface Reduction - D - ASR Rules (L2)",
+    "description": "Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: macro's die processen starten, uitvoerbare inhoud uit e-mail en USB, misbruik van Office- en scriptmotoren, en het uitlezen van inloggegevens uit LSASS. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Attack Surface Reduction - D - ASR Rules (L2).",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

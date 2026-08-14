@@ -34,6 +34,9 @@ flowchart LR
   style T stroke-width:3px
 ```
 
+**[OVERZICHT.md](OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
+en wat er in de tenant nog moet gebeuren.
+
 Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/README.md) (met
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).

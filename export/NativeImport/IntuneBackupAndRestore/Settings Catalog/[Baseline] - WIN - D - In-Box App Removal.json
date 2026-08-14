@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - In-Box App Removal",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Windows Apps - D - In-Box App Removal",
+    "description": "Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Windows Apps - D - In-Box App Removal.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

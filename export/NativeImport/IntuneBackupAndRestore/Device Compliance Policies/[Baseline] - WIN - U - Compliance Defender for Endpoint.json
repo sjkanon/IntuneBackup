@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Defender for Endpoint",
+    "description": "Toetst het risiconiveau dat Defender for Endpoint aan het apparaat toekent. Vereist een werkende koppeling met Defender for Endpoint in Intune. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — Compliance - U - Defender for Endpoint.",
     "displayName": "[Baseline] - WIN - U - Compliance Defender for Endpoint",
     "passwordRequired": false,
     "passwordBlockSimple": false,

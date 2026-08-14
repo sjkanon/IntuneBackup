@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Windows User Experience",
-    "description": "",
+    "description": "Zet meldingen op het vergrendelscherm en automatisch aanvullen in Internet Explorer uit. Toewijzing volgens baseline: alle gebruikers. Bron: eigen baseline — uit de splitsing van Administrative Templates.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

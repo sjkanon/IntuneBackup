@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - U - Microsoft Edge Profiles and Sync",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Profiles, Sign-In and Sync",
+    "description": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Profiles, Sign-In and Sync.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

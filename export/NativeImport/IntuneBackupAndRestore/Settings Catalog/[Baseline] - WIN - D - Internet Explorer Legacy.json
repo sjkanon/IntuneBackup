@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Internet Explorer Legacy",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Internet Explorer (Legacy) - D - Security",
+    "description": "Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Internet Explorer (Legacy) - D - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

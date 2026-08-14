@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Health",
+    "description": "Toetst of het apparaat versleuteld is en veilig opstart (BitLocker, Secure Boot, code-integriteit). Zonder deze toets is 'vereis een compliant apparaat' in Conditional Access betekenisloos. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Health.",
     "displayName": "[Baseline] - WIN - U - Compliance Device Health",
     "passwordRequired": false,
     "passwordBlockSimple": false,

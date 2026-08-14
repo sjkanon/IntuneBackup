@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Legacy Hardening",
-    "description": "Eigen hardening-instellingen zonder tegenhanger in OpenIntuneBaseline",
+    "description": "De hardeningsinstellingen uit de oude Administrative Templates-policy waar OpenIntuneBaseline geen tegenhanger voor heeft: hardened UNC-paden, WDigest, blokkade van apparaatklassen, multicast-DNS en het verwerken van registerbeleid. Toewijzing volgens baseline: alle apparaten. Bron: Eigen hardening-instellingen zonder tegenhanger in OpenIntuneBaseline.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender for Endpoint EDR",
-    "description": "",
+    "description": "Koppelt het apparaat aan Defender for Endpoint met het onboarding-pakket van deze tenant. Dat pakket is tenant-specifiek en moet na een restore in een andere tenant handmatig opnieuw gekoppeld worden. Toewijzing volgens baseline: alle apparaten. Bron: eigen baseline — OpenIntuneBaseline heeft geen EDR-onboardingpolicy.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

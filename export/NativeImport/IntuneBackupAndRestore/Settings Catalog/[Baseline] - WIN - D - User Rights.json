@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - User Rights",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights",
+    "description": "Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

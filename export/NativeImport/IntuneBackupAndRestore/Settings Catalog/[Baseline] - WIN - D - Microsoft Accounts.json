@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Accounts",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Accounts - D - Configuration",
+    "description": "Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toegevoegd mogen worden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Accounts - D - Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

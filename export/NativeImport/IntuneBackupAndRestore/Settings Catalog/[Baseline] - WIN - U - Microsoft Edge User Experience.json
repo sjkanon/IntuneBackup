@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Edge User Experience",
-    "description": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - User Experience",
+    "description": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - User Experience.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

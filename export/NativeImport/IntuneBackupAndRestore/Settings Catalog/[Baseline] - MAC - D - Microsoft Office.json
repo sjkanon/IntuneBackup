@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Microsoft Office",
-    "description": "OpenIntuneBaseline macOS v1.0 — Microsoft Office - D - Office Configuration",
+    "description": "Basisconfiguratie van Office op macOS. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft Office - D - Office Configuration.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {
