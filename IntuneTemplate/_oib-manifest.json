@@ -28,7 +28,7 @@
   "excluded": [
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Attack Surface Reduction - D - ASR Rules (Audit Mode) - v3.1.json",
-      "reason": "Alternatief voor de L2-variant, niet aanvullend: dezelfde 18 ASR-regels op audit in plaats van block. Beide uitrollen levert een conflict op elke regel op."
+      "reason": "Alternatief voor de L2-variant, niet aanvullend: dezelfde 18 ASR-regels op audit in plaats van block. De auditvariant zit sinds augustus 2026 wel in de baseline, maar dan als CIPP-template (Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode) — OIB's versie zou daar een tweede, afwijkende kopie naast zetten."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies (24H2+) - v3.6.json",
@@ -285,6 +285,30 @@
       "doel": "Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie.",
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - AV Configuration",
       "note": "11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd."
+    },
+    {
+      "target": "Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode",
+      "displayName": "[Baseline] - WIN - D - Defender ASR Policy Audit Mode",
+      "doel": "Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren.",
+      "bron": "CIPP-standaardtemplate",
+      "metadataOnly": true,
+      "note": "Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet; zolang beide op alle apparaten staan levert dat in Intune een Conflict op elke regel op."
+    },
+    {
+      "target": "Baseline_WIN_D_Defender_AV_Policy",
+      "displayName": "[Baseline] - WIN - D - Defender AV Policy",
+      "doel": "Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie.",
+      "bron": "CIPP-standaardtemplate",
+      "metadataOnly": true,
+      "note": "Komt uit CIPP, niet uit OIB. Overlapt met [Baseline] - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor)."
+    },
+    {
+      "target": "Baseline_WIN_D_Defender_EDR_Policy",
+      "displayName": "[Baseline] - WIN - D - Defender EDR Policy",
+      "doel": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat.",
+      "bron": "CIPP-standaardtemplate",
+      "metadataOnly": true,
+      "note": "Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder \"Microsoft ATP connector enabled\" in plaats van op een vaste tenant-GUID."
     },
     {
       "target": "Baseline_WIN_D_Defender_for_Endpoint_EDR",

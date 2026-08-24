@@ -8,7 +8,7 @@ leidt er iets uit af — niets schrijft rechtstreeks in `baseline/` of `export/`
 flowchart TD
   OIB["OpenIntuneBaseline<br/>(.oib-source/)"] -->|import-oib.js| T
   TEN["Tenant-backup<br/>(IntuneBackupAndRestore)"] -->|import-intunebackup.js| T
-  T["IntuneTemplate/<br/>95 policies"]
+  T["IntuneTemplate/<br/>98 policies"]
   T -->|check-scope.js| CHK{{"scope · indeling · conflicten"}}
   T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]

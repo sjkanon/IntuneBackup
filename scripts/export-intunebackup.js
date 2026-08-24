@@ -21,7 +21,7 @@
  * Die `NativeImport` in het pad is geen beschrijving maar een uitsluiting. CIPP scant een
  * template-repository met `git/trees?recursive=1` en negeert precies twee dingen: bestanden
  * die niet op `.json` eindigen, en paden waarin `NativeImport` voorkomt. Zonder dat woord in
- * het pad importeert CIPP deze map óók — dezelfde 95 policies, maar zonder RowKey, dus als
+ * het pad importeert CIPP deze map óók — dezelfde 98 policies, maar zonder RowKey, dus als
  * duplicaat met een eigen GUID naast het echte template. Zie export/README.md.
  */
 

@@ -5,11 +5,11 @@ Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds au
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
 
-95 policies over vier platformen:
+98 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 64 | 1 | 4 | 4 | – | **73** |
+| [Windows](IntuneTemplate/WIN/README.md) | 67 | 1 | 4 | 4 | – | **76** |
 | [macOS](IntuneTemplate/MAC/README.md) | 17 | – | – | 3 | – | **20** |
 | [iOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
@@ -17,7 +17,7 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>95 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>98 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -172,7 +172,7 @@ Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRes
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 186 bestanden óók importeren — dezelfde 95 policies plus hun assignments, maar zonder
+CIPP die 192 bestanden óók importeren — dezelfde 98 policies plus hun assignments, maar zonder
 `RowKey`, waar CIPP dan een **tweede** template van maakt met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
 

@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 73 policies
+# Windows — 76 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 64 |
+| `SettingsCatalog/` | 67 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 56
+## Device-scoped (D) — 59
 
 Toewijzen aan apparaatgroepen.
 
@@ -26,6 +26,9 @@ Toewijzen aan apparaatgroepen.
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) | Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-058-DConfigRefresh` |
 | [**Defender Additional Configuration**](SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.md) | Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen. | Settings Catalog | 9 | All Devices | `INTUNE-BASE-059-DDefenderAdditionalConfiguration` |
 | [**Defender Antivirus**](SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.md) | Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie. | Settings Catalog | 31 | All Devices | `INTUNE-BASE-012-DefaultAVPolicy` |
+| [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) | Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. | Settings Catalog | 19 | All Devices | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
+| [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.md) | Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. | Settings Catalog | 19 | All Devices | `INTUNE-BASE-108-DDefenderAVPolicy` |
+| [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-109-DDefenderEDRPolicy` |
 | [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.md) | Koppelt het apparaat aan Defender for Endpoint met het onboarding-pakket van deze tenant. Dat pakket is tenant-specifiek en moet na een restore in een andere tenant handmatig opnieuw gekoppeld worden. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-014-EDRConfiguration` |
 | [**Defender Security Experience**](SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.md) | Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-060-DDefenderSecurityExperience` |
 | [**Defender Update Ring 1 Pilot**](SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.md) | Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je een slechte update opmerkt vóór de rest van de organisatie 'm krijgt. | Settings Catalog | 3 | — | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |

@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-08-14",
+  "reviewedAt": "2026-08-21",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -9186,6 +9186,241 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_experience_enableorganizationalmessages",
             "expectedValue": "user_vendor_msft_policy_config_experience_enableorganizationalmessages_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-107-DDefenderASRPolicyAuditMode",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "defender-asr-policy-audit-mode",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Defender ASR Policy Audit Mode\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutionofpotentiallyobfuscatedscripts_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockadobereaderfromcreatingchildprocesses_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwin32apicallsfromofficemacros_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockcredentialstealingfromwindowslocalsecurityauthoritysubsystem_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockprocesscreationsfrompsexecandwmicommands_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockpersistencethroughwmieventsubscription_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfromcreatingexecutablecontent_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficeapplicationsfrominjectingcodeintootherprocesses_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablefilesrunningunlesstheymeetprevalenceagetrustedlistcriterion_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockjavascriptorvbscriptfromlaunchingdownloadedexecutablecontent_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwebshellcreationforservers",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockwebshellcreationforservers_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockofficecommunicationappfromcreatingchildprocesses_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuseofcopiedorimpersonatedsystemtools",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuseofcopiedorimpersonatedsystemtools_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockallofficeapplicationsfromcreatingchildprocesses_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockuntrustedunsignedprocessesthatrunfromusb_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_useadvancedprotectionagainstransomware_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockexecutablecontentfromemailclientandwebmail_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockabuseofexploitedvulnerablesigneddrivers_audit"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockrebootingmachineinsafemode",
+            "expectedValue": "device_vendor_msft_policy_config_defender_attacksurfacereductionrules_blockrebootingmachineinsafemode_audit"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-108-DDefenderAVPolicy",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "defender-av-policy",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Defender AV Policy\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowbehaviormonitoring_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowcloudprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowcloudprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowemailscanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowemailscanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowfullscanonmappednetworkdrives",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowfullscanonmappednetworkdrives_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowfullscanremovabledrivescanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowioavprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowioavprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowrealtimemonitoring_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowscanningnetworkfiles",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowscanningnetworkfiles_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowscriptscanning",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowscriptscanning_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowuseruiaccess",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowuseruiaccess_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_checkforsignaturesbeforerunningscan",
+            "expectedValue": "device_vendor_msft_policy_config_defender_checkforsignaturesbeforerunningscan_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablelowcpupriority",
+            "expectedValue": "device_vendor_msft_policy_config_defender_enablelowcpupriority_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_defender_configuration_meteredconnectionupdates",
+            "expectedValue": "device_vendor_msft_defender_configuration_meteredconnectionupdates_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_defender_configuration_disablelocaladminmerge",
+            "expectedValue": "device_vendor_msft_defender_configuration_disablelocaladminmerge_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_enablenetworkprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_enablenetworkprotection_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_cloudblocklevel",
+            "expectedValue": "device_vendor_msft_policy_config_defender_cloudblocklevel_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_allowonaccessprotection",
+            "expectedValue": "device_vendor_msft_policy_config_defender_allowonaccessprotection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_submitsamplesconsent",
+            "expectedValue": "device_vendor_msft_policy_config_defender_submitsamplesconsent_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_defender_avgcpuloadfactor",
+            "expectedValue": 20
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-109-DDefenderEDRPolicy",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "defender-edr-policy",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Defender EDR Policy\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing",
+            "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configuration_samplesharing_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype",
+            "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype_autofromconnector"
           }
         ]
       },

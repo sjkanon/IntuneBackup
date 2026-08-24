@@ -14,7 +14,7 @@ Omdat CIPP dat woord als enige uitsluiting kent. Een template-repository wordt g
 `.json` eindigen, en het pad mag `NativeImport` niet bevatten. Een instelling voor "kijk
 alleen in deze submap" bestaat niet.
 
-Zonder dat woord importeert CIPP deze 186 bestanden dus ook. Ze bevatten dezelfde 95 policies,
+Zonder dat woord importeert CIPP deze 192 bestanden dus ook. Ze bevatten dezelfde 98 policies,
 maar in Graph-vorm zonder `RowKey` — en dan valt CIPP terug op het raden van het policytype
 uit de inhoud en maakt er een **tweede** template van, met dezelfde naam en een eigen GUID.
 Twee templates met dezelfde naam is precies het geval waar CIPP zelf een foutmelding voor
