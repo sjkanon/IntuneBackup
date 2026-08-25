@@ -147,7 +147,7 @@ resultaat, en een tweede kopie van een externe repo zou hier alleen maar veroude
 
 `core.longpaths=true` is op Windows nodig — OIB heeft bestandsnamen die over MAX_PATH gaan.
 
-Vier dingen die de importer bewust doet:
+Vijf dingen die de importer bewust doet:
 
 1. **GUID's blijven behouden.** De RowKey/GUID identificeert de CIPP-templaterij; een
    herschreven template dat een nieuwe GUID zou krijgen levert bij de volgende sync een
@@ -183,7 +183,16 @@ Vier dingen die de importer bewust doet:
    nieuwe OIB-versie, dan **stopt de import met een fout** in plaats van de override stil te
    laten vervallen — dat laatste is het gevaarlijkst, want dan klopt het bestand nog steeds
    terwijl de reden weg is. De run somt elke toegepaste override op.
-4. **Idempotent.** Bij een tweede run is het doelbestand zelf de bron voor die overgenomen
+4. **De verouderde PPPC-sleutel `Allowed` gaat eruit.** Apple's TCC-payload kent twee
+   sleutels voor hetzelfde besluit: `Allowed` (macOS 10.14) en `Authorization` (macOS 11+).
+   Ze mogen niet samen in één regel staan. OIB levert ze allebei aan, en macOS wijst dan de
+   **hele** TCC-payload af: Intune meldt `10022` op elk veld van die regel en de app krijgt
+   geen enkel recht — ook niet het recht dat wél goed stond. Trof onze macOS-policies voor
+   OneDrive en Defender for Endpoint. Zie [OpenIntuneBaseline issue
+   #62](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline/issues/62); die staat nog
+   open, dus dit gebeurt bij elke import opnieuw in plaats van eenmalig in de templates. De
+   run meldt wat er is weggehaald.
+5. **Idempotent.** Bij een tweede run is het doelbestand zelf de bron voor die overgenomen
    instellingen, dus zelfde input → zelfde output.
 
 Zes OIB-policies zijn bewust niet overgenomen (audit-varianten, 24H2-alternatieven, driver

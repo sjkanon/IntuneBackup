@@ -39,7 +39,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds } = require("./lib/templates");
+const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, stripDeprecatedTccAllowed } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -164,6 +164,9 @@ function renumberSettings(settings) {
   return settings.map((s, i) => ({ id: String(i), settingInstance: s.settingInstance }));
 }
 
+/** Wat stripDeprecatedTccAllowed() tijdens deze run heeft weggehaald, voor het eindverslag. */
+const tccFixes = [];
+
 function bodyForCatalog(source, entry, displayName, description) {
   const cleaned = stripODataAnnotations(source);
   let settings = (cleaned.settings || []).map((s) => ({ settingInstance: s.settingInstance }));
@@ -175,10 +178,15 @@ function bodyForCatalog(source, entry, displayName, description) {
     settings = settings.filter((s) => scopeOfSettingId(s.settingInstance.settingDefinitionId) === entry.splitScope);
   }
 
+  // OIB levert in zijn PPPC-payloads zowel `Allowed` als `Authorization`; die combinatie
+  // laat macOS het profiel weigeren (Intune meldt dan 10022 op elk veld van die regel).
+  const tcc = stripDeprecatedTccAllowed(settings);
+  if (tcc.removed > 0) tccFixes.push(`${entry.target}: ${tcc.removed}x verouderde PPPC-sleutel "Allowed" verwijderd (anders 10022)`);
+
   return {
     name: displayName,
     description,
-    settings: renumberSettings(settings),
+    settings: renumberSettings(tcc.node),
     platforms: cleaned.platforms,
     technologies: cleaned.technologies,
     templateReference: cleaned.templateReference
@@ -495,6 +503,10 @@ function main() {
   if (carried.length > 0) {
     console.log("\nOvergenomen uit de eigen baseline (OIB kent deze instellingen niet):");
     for (const c of carried) console.log("  " + c);
+  }
+  if (tccFixes.length > 0) {
+    console.log("\nPPPC gerepareerd (OpenIntuneBaseline issue #62 — nog open):");
+    for (const f of tccFixes) console.log("  " + f);
   }
   if (overridden.length > 0) {
     console.log("\nBewust afgeweken van OIB (overrides uit het manifest):");

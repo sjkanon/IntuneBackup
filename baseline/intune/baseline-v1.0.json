@@ -2350,10 +2350,6 @@
             "expectedValue": "com.apple.managedclient.preferences_applicationssystem_applications_microsoft defender.app_manifestserver_0"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
           },
@@ -2372,10 +2368,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_authorization",
@@ -2398,10 +2390,6 @@
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_staticcode_false"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
           },
@@ -2422,10 +2410,6 @@
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
           },
@@ -2444,10 +2428,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
@@ -2994,10 +2974,6 @@
           {
             "settingDefinitionId": "com.apple.servicemanagement_rules_item_rulevalue",
             "expectedValue": "com.microsoft.OneDriveLauncher"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
@@ -9464,10 +9440,6 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
           },
@@ -9486,10 +9458,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
@@ -9512,10 +9480,6 @@
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
           },
@@ -9534,10 +9498,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
@@ -9560,10 +9520,6 @@
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
           },
@@ -9582,10 +9538,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
@@ -9608,10 +9560,6 @@
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
           },
           {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
-          },
-          {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
           },
@@ -9630,10 +9578,6 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
-          },
-          {
-            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
-            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
           },
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",

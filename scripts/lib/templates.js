@@ -142,6 +142,44 @@ function flattenInstance(instance, out, warnings) {
   }
 }
 
+/**
+ * Apple's PPPC-payload kent twee sleutels voor hetzelfde besluit: `Allowed` (macOS 10.14) en
+ * `Authorization` (macOS 11+, met Allow / Deny / AllowStandardUserToSetSystemService). Ze
+ * mogen niet samen in één regel staan. Doen ze dat wel, dan weigert macOS de hele
+ * TCC-payload en meldt Intune **10022** op élk veld van die regel: de app krijgt dan geen
+ * enkel recht, ook niet het recht dat wél goed stond.
+ *
+ * OpenIntuneBaseline levert ze allebei aan (issue #62, nog open), dus dit wordt bij elke
+ * import opnieuw weggehaald in plaats van eenmalig in de templates gerepareerd.
+ * `Allowed` is de verouderde van de twee en gaat eruit.
+ *
+ * Geeft het aantal verwijderde instellingen terug; muteert `node` niet.
+ */
+const TCC_ALLOWED_RE = /^com\.apple\.tcc\.configuration-profile-policy_services_[a-z]+_item_allowed$/;
+
+function stripDeprecatedTccAllowed(node) {
+  let removed = 0;
+  const walk = (n) => {
+    if (Array.isArray(n)) return n.map(walk);
+    if (!n || typeof n !== "object") return n;
+    const out = {};
+    for (const [key, value] of Object.entries(n)) {
+      if (key === "children" && Array.isArray(value)) {
+        const kept = value.filter((c) => {
+          const drop = c && TCC_ALLOWED_RE.test(c.settingDefinitionId || "");
+          if (drop) removed++;
+          return !drop;
+        });
+        out[key] = kept.map(walk);
+      } else {
+        out[key] = walk(value);
+      }
+    }
+    return out;
+  };
+  return { node: walk(node), removed };
+}
+
 /** flattenInstance over een hele settings-array. */
 function flattenSettings(settings) {
   const out = [];
@@ -150,4 +188,4 @@ function flattenSettings(settings) {
   return { settings: out, warnings };
 }
 
-module.exports = { PLATFORMS, TYPE_TO_CATEGORY, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings };
+module.exports = { PLATFORMS, TYPE_TO_CATEGORY, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed };
