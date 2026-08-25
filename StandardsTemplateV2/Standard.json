@@ -1,0 +1,6 @@
+{
+  "PartitionKey": "StandardsTemplateV2",
+  "RowKey": "685d8481-995f-4592-9b04-a1a75de241cc",
+  "GUID": "685d8481-995f-4592-9b04-a1a75de241cc",
+  "JSON": "{\"tenantFilter\":[{\"label\":\"Template Tenant\",\"value\":\"Template Tenant\"}],\"excludedTenants\":[],\"description\":\"description\",\"templateName\":\"Standard\",\"standards\":{\"NudgeMFA\":{\"action\":[{\"label\":\"Remediate\",\"value\":\"Remediate\"}],\"standards\":{\"NudgeMFA\":{\"state\":{\"label\":\"Disabled\",\"value\":\"disabled\"},\"snoozeDurationInDays\":\"0\"}}},\"PasskeyDynamicMigrationOptOut\":{\"action\":[{\"label\":\"Remediate\",\"value\":\"Remediate\"}],\"standards\":{\"PasskeyDynamicMigrationOptOut\":{\"Enabled\":true}}}},\"runManually\":false,\"isDriftTemplate\":\"isDriftTemplate\",\"GUID\":\"685d8481-995f-4592-9b04-a1a75de241cc\",\"createdAt\":\"2026-08-25T07:24:12.591569Z\",\"updatedBy\":\"SjoerdKanon@ADMINICTKanon.onmicrosoft.com\",\"updatedAt\":\"2026-08-25T07:24:12.5927697Z\"}"
+}
