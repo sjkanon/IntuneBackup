@@ -9582,6 +9582,78 @@
           {
             "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
             "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement",
+            "expectedValue": "identifier \"ninjarmm-macagent\" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EBNT3ZX97E"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier",
+            "expectedValue": "/Applications/NinjaRMMAgent/programfiles/ninjarmm-macagent"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement",
+            "expectedValue": "identifier \"com.ninjarmm.ncstreamer\" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EBNT3ZX97E"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier",
+            "expectedValue": "com.ninjarmm.ncstreamer"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement",
+            "expectedValue": "identifier lockhart and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EBNT3ZX97E"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier",
+            "expectedValue": "/Applications/NinjaRMMAgent/programfiles/lockhart/bin/lockhart"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode_false"
           }
         ]
       },
