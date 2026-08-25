@@ -41,6 +41,12 @@ Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/R
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).
 
+Twee soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
+`IntuneTemplate/`, elk met een eigen README: de macOS ADE-enrollmentprofielen in
+[`enrollment/macos/`](enrollment/macos/README.md) en de macOS-shellscripts in
+[`shellscripts/macos/`](shellscripts/macos/README.md). Die worden door géén van de pijplijnen
+opgepikt en hebben geen `checkId`.
+
 Naast elk template staat een markdown met **élke instelling die die policy zet** — bijvoorbeeld
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
 Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.

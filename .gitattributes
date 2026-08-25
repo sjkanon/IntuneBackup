@@ -1,0 +1,5 @@
+# Shell-scripts moeten LF houden. Deze repo wordt op Windows onderhouden met
+# core.autocrlf=true; zonder deze regel krijgt een .sh bij checkout CRLF-regeleindes en
+# faalt hij op de Mac met "bad interpreter: /bin/bash^M" — een fout die je pas ziet als het
+# script al is geüpload.
+*.sh text eol=lf
