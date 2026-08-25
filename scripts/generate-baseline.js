@@ -239,6 +239,16 @@ const CHECK_NUMBERS = {
   Baseline_WIN_U_Microsoft_Store: 104,
   Baseline_WIN_U_Personal_Data_Encryption: 105,
   Baseline_WIN_U_Windows_Spotlight: 106,
+
+  // De drie CIPP-standaardtemplates stonden nog niet in deze map en kregen hun nummer dus
+  // uit de bestandsvolgorde. Hier vastgezet op de nummers waarmee ze in baseline-v1.0.json
+  // staan: een nieuw template ervoor in het alfabet zou ze anders alle drie opschuiven.
+  Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode: 107,
+  Baseline_WIN_D_Defender_AV_Policy: 108,
+  Baseline_WIN_D_Defender_EDR_Policy: 109,
+
+  // Eigen aanvulling op de macOS-baseline, buiten OpenIntuneBaseline om.
+  Baseline_MAC_D_Privacy_Preferences: 110,
 };
 
 /**

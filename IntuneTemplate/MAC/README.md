@@ -1,15 +1,15 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 20 policies
+# macOS — 21 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 17 |
+| `SettingsCatalog/` | 18 |
 | `CompliancePolicies/` | 3 |
 
-## Device-scoped (D) — 13
+## Device-scoped (D) — 14
 
 Toewijzen aan apparaatgroepen.
 
@@ -26,6 +26,7 @@ Toewijzen aan apparaatgroepen.
 | [**Microsoft Office**](SettingsCatalog/Baseline_MAC_D_Microsoft_Office.md) | Basisconfiguratie van Office op macOS. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-043-MACDMicrosoftOffice` |
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.md) | Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 'm de toegangsrechten die macOS eist. | Settings Catalog | 14 | All Devices | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
 | [**Platform SSO**](SettingsCatalog/Baseline_MAC_D_Platform_SSO.md) | Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-045-MACDPlatformSSO` |
+| [**Privacy Preferences**](SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.md) | Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid, zodat toetsenbord- en muisbesturing tijdens een sessie werkt zonder dat de gebruiker het zelf hoeft goed te keuren — en zonder dat hij het kan intrekken. | Settings Catalog | 30 | All Devices | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | [**Restrictions**](SettingsCatalog/Baseline_MAC_D_Restrictions.md) | Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. | Settings Catalog | 37 | All Devices | `INTUNE-BASE-046-MACDRestrictions` |
 | [**Software Updates**](SettingsCatalog/Baseline_MAC_D_Software_Updates.md) | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 

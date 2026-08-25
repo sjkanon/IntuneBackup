@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-08-21",
+  "reviewedAt": "2026-08-25",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -9421,6 +9421,151 @@
           {
             "settingDefinitionId": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype",
             "expectedValue": "device_vendor_msft_windowsadvancedthreatprotection_configurationtype_autofromconnector"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-110-MACDPrivacyPreferences",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "privacy-preferences",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Privacy Preferences\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement",
+            "expectedValue": "identifier \"com.ninjarmm.ncstreamer\" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = EBNT3ZX97E"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier",
+            "expectedValue": "com.ninjarmm.ncstreamer"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement",
+            "expectedValue": "anchor apple generic and identifier \"com.teamviewer.TeamViewer\" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = H7UGFBUGV6)"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier",
+            "expectedValue": "com.teamviewer.TeamViewer"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement",
+            "expectedValue": "anchor apple generic and identifier \"com.teamviewer.TeamViewerHost\" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = H7UGFBUGV6)"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier",
+            "expectedValue": "com.teamviewer.TeamViewerHost"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement",
+            "expectedValue": "anchor apple generic and identifier \"com.teamviewer.Desktop\" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = H7UGFBUGV6)"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier",
+            "expectedValue": "com.teamviewer.Desktop"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_allowed_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement",
+            "expectedValue": "anchor apple generic and identifier \"com.teamviewer.TeamViewerQS\" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = H7UGFBUGV6)"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier",
+            "expectedValue": "com.teamviewer.TeamViewerQS"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode",
+            "expectedValue": "com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode_false"
           }
         ]
       },

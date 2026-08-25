@@ -149,6 +149,14 @@
       "note": "Vereist de Microsoft Enterprise SSO-plug-in (Company Portal) op het apparaat."
     },
     {
+      "target": "Baseline_MAC_D_Privacy_Preferences",
+      "displayName": "[Baseline] - MAC - D - Privacy Preferences",
+      "doel": "Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid, zodat toetsenbord- en muisbesturing tijdens een sessie werkt zonder dat de gebruiker het zelf hoeft goed te keuren — en zonder dat hij het kan intrekken.",
+      "bron": "eigen baseline — OpenIntuneBaseline heeft geen PPPC-policy",
+      "metadataOnly": true,
+      "note": "Alleen de Toegankelijkheid-service. Volledige schijftoegang en schermopname staan er bewust niet in: de eerste is een apart besluit, de tweede kan macOS sowieso niet via MDM toestaan — een profiel kan schermopname alleen weigeren, toestaan doet de gebruiker zelf."
+    },
+    {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Device Security - D - Restrictions - v1.0.json",
       "target": "Baseline_MAC_D_Restrictions",
       "displayName": "[Baseline] - MAC - D - Restrictions",

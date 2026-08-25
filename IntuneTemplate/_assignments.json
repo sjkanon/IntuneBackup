@@ -116,6 +116,15 @@
       }
     }
   ],
+  "[Baseline] - MAC - D - Privacy Preferences": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - MAC - D - Restrictions": [
     {
       "target": {
