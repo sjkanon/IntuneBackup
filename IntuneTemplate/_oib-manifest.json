@@ -292,7 +292,19 @@
       "displayName": "[Baseline] - WIN - D - Defender Antivirus",
       "doel": "Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie.",
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - AV Configuration",
-      "note": "11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd."
+      "note": "11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd.",
+      "overrides": [
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats",
+          "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats_quarantine",
+          "reason": "Quarantaine in plaats van block: een fout-positief op een eigen toepassing is dan terug te draaien. IntuneAdmin doet hetzelfde. Hoog en ernstig blijven remove."
+        },
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats",
+          "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats_quarantine",
+          "reason": "Quarantaine in plaats van remove: remove verwijdert het bestand definitief, en juist op deze twee niveaus zitten de fout-positieven."
+        }
+      ]
     },
     {
       "target": "Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode",
@@ -300,7 +312,7 @@
       "doel": "Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren.",
       "bron": "CIPP-standaardtemplate",
       "metadataOnly": true,
-      "note": "Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet; zolang beide op alle apparaten staan levert dat in Intune een Conflict op elke regel op."
+      "note": "Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet. Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: beide op alle apparaten leverde op elk van die 16 regels een Conflict op, waarna Intune de regel door géén van beide policies toepast. Hoort op een pilotgroep, en dan zonder de blokkerende ASR-policy."
     },
     {
       "target": "Baseline_WIN_D_Defender_AV_Policy",
@@ -308,7 +320,7 @@
       "doel": "Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie.",
       "bron": "CIPP-standaardtemplate",
       "metadataOnly": true,
-      "note": "Komt uit CIPP, niet uit OIB. Overlapt met [Baseline] - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor)."
+      "note": "Komt uit CIPP, niet uit OIB. Overlapt met [Baseline] - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor). Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: het is het CIPP-alternatief voor de OIB-policy, geen aanvulling erop. De OIB-versie is op alle drie de punten strenger (network protection op block in plaats van audit, cloud block level op high in plaats van niet-geconfigureerd)."
     },
     {
       "target": "Baseline_WIN_D_Defender_EDR_Policy",
@@ -316,7 +328,7 @@
       "doel": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat.",
       "bron": "CIPP-standaardtemplate",
       "metadataOnly": true,
-      "note": "Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder \"Microsoft ATP connector enabled\" in plaats van op een vaste tenant-GUID."
+      "note": "Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder \"Microsoft ATP connector enabled\" in plaats van op een vaste tenant-GUID. Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: twee onboarding-policies naast elkaar is geen extra dekking maar dubbel onderhoud. In een andere tenant is dit de policy die je toewijst, en de tenant-specifieke die je weglaat."
     },
     {
       "target": "Baseline_WIN_D_Defender_for_Endpoint_EDR",
@@ -457,7 +469,14 @@
       "target": "Baseline_WIN_D_Login_and_Lock_Screen",
       "displayName": "[Baseline] - WIN - D - Login and Lock Screen",
       "doel": "Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoals de laatst aangemelde gebruiker en camera-toegang.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen"
+      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen",
+      "overrides": [
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal",
+          "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_1",
+          "reason": "OIB laat het oogje bij het wachtwoordveld staan; CIS L1 en IntuneAdmin zetten het uit. Het onthulknopje maakt meekijken op kantoor of in de trein triviaal, en er staat geen functionaliteit tegenover die iemand mist."
+        }
+      ]
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Accounts - D - Configuration - v3.2.json",
@@ -542,6 +561,14 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Remote Desktop Services and RPC"
     },
     {
+      "target": "Baseline_WIN_D_Removable_Storage",
+      "displayName": "[Baseline] - WIN - D - Removable Storage",
+      "doel": "Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, en telefoons en camera's die zich als WPD-apparaat aanmelden. Lezen blijft mogelijk.",
+      "bron": "eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026",
+      "metadataOnly": true,
+      "note": "OIB dekt verwisselbare media niet. Alleen schrijven wordt geblokkeerd, niet lezen: gegevens mogen naar binnen, niet naar buiten. De BitLocker-policy laat removabledrivesrequireencryption bewust uit staan — met een schrijfblokkade voegt een versleutelingseis niets toe."
+    },
+    {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Script File Associations - v3.4.json",
       "target": "Baseline_WIN_D_Script_File_Associations",
       "displayName": "[Baseline] - WIN - D - Script File Associations",
@@ -586,6 +613,14 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights"
     },
     {
+      "target": "Baseline_WIN_D_Windows_AI",
+      "displayName": "[Baseline] - WIN - D - Windows AI",
+      "doel": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.",
+      "bron": "eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026",
+      "metadataOnly": true,
+      "note": "OIB v3.8 kent nog geen Windows AI-policy. Recall staat uit in plaats van beperkt: zolang de functie aanstaat blijven de snapshots op het apparaat staan, en dat is de kern van de DPIA-vraag. Wie Recall wél wil toestaan vervangt allowrecallenablement door de beperkende variant (bewaartermijn, opslagruimte, uitsluitingslijsten)."
+    },
+    {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v3.8.json",
       "target": "Baseline_WIN_D_Windows_Feature_Configuration",
       "displayName": "[Baseline] - WIN - D - Windows Feature Configuration",
@@ -599,7 +634,33 @@
       "displayName": "[Baseline] - WIN - D - Windows Firewall",
       "doel": "Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast.",
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Firewall Configuration",
-      "note": "Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging."
+      "note": "Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.",
+      "overrides": [
+        {
+          "parent": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
+          "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge",
+          "value": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge_false",
+          "reason": "OIB zet local policy merge alleen op het openbare profiel; op domein en privé bleef 'm ongeconfigureerd, en dan blijven lokaal aangemaakte firewallregels gewoon meedoen. Een lokale beheerder kan zo een gat maken dat de policy zelf niet laat zien."
+        },
+        {
+          "parent": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
+          "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalipsecpolicymerge",
+          "value": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalipsecpolicymerge_false",
+          "reason": "Zelfde reden als local policy merge, maar dan voor lokaal aangemaakte IPsec-regels."
+        },
+        {
+          "parent": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall",
+          "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalpolicymerge",
+          "value": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalpolicymerge_false",
+          "reason": "Zie het domeinprofiel. Het privéprofiel is op een thuiswerkplek juist het profiel dat actief is."
+        },
+        {
+          "parent": "vendor_msft_firewall_mdmstore_privateprofile_enablefirewall",
+          "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalipsecpolicymerge",
+          "value": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalipsecpolicymerge_false",
+          "reason": "Zelfde reden, voor lokaal aangemaakte IPsec-regels op het privéprofiel."
+        }
+      ]
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Firewall - D - Security Rules - v3.8.json",
@@ -621,7 +682,15 @@
       "displayName": "[Baseline] - WIN - D - Windows Hello for Business",
       "doel": "Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning.",
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration",
-      "note": "Ontbrak volledig. Vereist een TPM, PIN van minimaal 6 tekens en anti-spoofing voor gezichtsherkenning."
+      "note": "Ontbrak volledig. Vereist een TPM, PIN van minimaal 6 tekens en anti-spoofing voor gezichtsherkenning. Geldt voor élke gebruiker van het apparaat; voor gedeelde apparaten staat er een eigen variant naast (Baseline_WIN_D_Windows_Hello_for_Business_Multi_User)."
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_Hello_for_Business_Multi_User",
+      "displayName": "[Baseline] - WIN - D - Windows Hello for Business Multi User",
+      "doel": "Windows Hello for Business voor gedeelde apparaten waar meerdere gebruikers op inloggen. Zelfde eisen als de gewone apparaatpolicy, maar zonder inrichting direct na het aanmelden: op een gedeeld apparaat zou elke gebruiker anders bij de eerste aanmelding door de PIN-inrichting worden geleid.",
+      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, aangevuld met DisablePostLogonProvisioning",
+      "metadataOnly": true,
+      "note": "Bewust zonder toewijzing: hoort op een groep met gedeelde apparaten. Geen Endpoint Security-template maar een gewone Settings Catalog-policy, omdat DisablePostLogonProvisioning niet in het Account Protection-template zit. De vier overlappende instellingen staan op dezelfde waarde als in de apparaatpolicy, dus naast elkaar op hetzelfde apparaat levert dat geen conflict op — deze policy voegt alleen DisablePostLogonProvisioning toe."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows LAPS - D - LAPS Configuration (24H2+) - v3.6.json",
@@ -787,6 +856,14 @@
       "displayName": "[Baseline] - WIN - U - Personal Data Encryption",
       "doel": "Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft.",
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Encryption - U - Personal Data Encryption"
+    },
+    {
+      "target": "Baseline_WIN_U_Windows_Hello_for_Business",
+      "displayName": "[Baseline] - WIN - U - Windows Hello for Business",
+      "doel": "Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen.",
+      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, omgezet naar user-scope",
+      "metadataOnly": true,
+      "note": "De user-scope van de PassportForWork-CSP kent vier van de vijf instellingen uit de apparaatpolicy; UseCertificateForOnPremAuth en de biometrie-instellingen bestaan alleen device-scoped en blijven dus daar. Zet er een apparaatfilter op dat gedeelde apparaten uitsluit (Set-BaselineAssignment.ps1 -FilterId), anders geldt hij ook daar."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0.json",

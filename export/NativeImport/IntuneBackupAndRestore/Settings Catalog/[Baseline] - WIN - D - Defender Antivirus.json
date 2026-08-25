@@ -567,7 +567,7 @@
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats_remove",
+                                    "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats_quarantine",
                                     "children": []
                                 }
                             },
@@ -578,7 +578,7 @@
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats_block",
+                                    "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats_quarantine",
                                     "children": []
                                 }
                             },

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender AV Policy",
-    "description": "Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. Toewijzing volgens baseline: alle apparaten. Bron: CIPP-standaardtemplate.",
+    "description": "Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIPP-standaardtemplate.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

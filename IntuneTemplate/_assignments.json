@@ -287,33 +287,6 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Defender ASR Policy Audit Mode": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Defender AV Policy": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Defender EDR Policy": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - WIN - D - Defender for Endpoint EDR": [
     {
       "target": {
@@ -557,6 +530,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Removable Storage": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Script File Associations": [
     {
       "target": {
@@ -603,6 +585,15 @@
     }
   ],
   "[Baseline] - WIN - D - User Rights": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Windows AI": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -828,6 +819,15 @@
     }
   ],
   "[Baseline] - WIN - U - Personal Data Encryption": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Windows Hello for Business": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

@@ -192,6 +192,113 @@ function bodyForCatalog(source, entry, displayName, description) {
   };
 }
 
+/** Zoekt één settingInstance op settingDefinitionId, op elke diepte. */
+function findInstance(node, settingDefinitionId) {
+  if (!node || typeof node !== "object") return null;
+  if (Array.isArray(node)) {
+    for (const child of node) {
+      const hit = findInstance(child, settingDefinitionId);
+      if (hit) return hit;
+    }
+    return null;
+  }
+  if (node.settingDefinitionId === settingDefinitionId) return node;
+  for (const value of Object.values(node)) {
+    const hit = findInstance(value, settingDefinitionId);
+    if (hit) return hit;
+  }
+  return null;
+}
+
+/** De kinderlijst van een instelling, ongeacht of het een choice of een groep is. */
+function childrenOf(instance) {
+  if (instance.choiceSettingValue) return (instance.choiceSettingValue.children ??= []);
+  const groups = instance.groupSettingCollectionValue;
+  if (Array.isArray(groups) && groups.length > 0) return (groups[0].children ??= []);
+  return null;
+}
+
+function newChildInstance(settingDefinitionId, value) {
+  if (typeof value === "number") {
+    return {
+      "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+      settingDefinitionId,
+      settingInstanceTemplateReference: null,
+      simpleSettingValue: {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+        settingValueTemplateReference: null,
+        value,
+      },
+    };
+  }
+  return {
+    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+    settingDefinitionId,
+    settingInstanceTemplateReference: null,
+    choiceSettingValue: {
+      "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+      settingValueTemplateReference: null,
+      value,
+      children: [],
+    },
+  };
+}
+
+/**
+ * Bewuste afwijkingen van OpenIntuneBaseline, uit `overrides` in het manifest.
+ *
+ * Zonder deze stap draait de volgende import ze stilzwijgend terug: bodyForCatalog bouwt de
+ * settings elke keer opnieuw uit de OIB-bron, en de carry-regel hierboven redt alleen
+ * top-level instellingen die OIB niet kent — niet een ándere waarde op een instelling die
+ * OIB wél zet, en niet een kind dat wij eronder hangen. Precies de twee vormen die uit de
+ * vergelijking met IntuneAdmin/IntuneBaselines kwamen.
+ *
+ *   { settingDefinitionId, value }           andere waarde op een instelling die OIB al zet
+ *   { parent, settingDefinitionId, value }   extra kind onder een instelling die OIB al zet
+ *
+ * Allebei falen hard als hun ankerpunt weg is. Een override die stil niets doet is het
+ * gevaarlijkst van alles: het bestand blijft dan kloppen terwijl de reden verdwenen is.
+ * `reason` is verplicht — een afwijking zonder opgeschreven waarom is over een half jaar
+ * niet van een vergissing te onderscheiden.
+ */
+function applyOverrides(body, entry, applied) {
+  for (const ov of entry.overrides || []) {
+    const { settingDefinitionId, value, parent, reason } = ov;
+    if (!reason) {
+      console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target} heeft geen "reason".`);
+      process.exit(1);
+    }
+    let instance = findInstance(body.settings, settingDefinitionId);
+
+    if (!instance && parent) {
+      const parentInstance = findInstance(body.settings, parent);
+      if (!parentInstance) {
+        console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target}: parent ${parent} staat niet (meer) in de OIB-bron.`);
+        process.exit(1);
+      }
+      const children = childrenOf(parentInstance);
+      if (!children) {
+        console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target}: ${parent} heeft geen kinderlijst.`);
+        process.exit(1);
+      }
+      children.push(newChildInstance(settingDefinitionId, value));
+      applied.push(`${entry.target}: ${settingDefinitionId} toegevoegd onder ${parent} — ${reason}`);
+      continue;
+    }
+    if (!instance) {
+      console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target}: die instelling staat niet (meer) in de OIB-bron, en er is geen "parent" opgegeven om 'm onder te hangen.`);
+      process.exit(1);
+    }
+    if (instance.choiceSettingValue) instance.choiceSettingValue.value = value;
+    else if (instance.simpleSettingValue) instance.simpleSettingValue.value = value;
+    else {
+      console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target}: geen choice- of simple-waarde om te overschrijven.`);
+      process.exit(1);
+    }
+    applied.push(`${entry.target}: ${settingDefinitionId} -> ${value} — ${reason}`);
+  }
+}
+
 /**
  * Compliance: `scheduledActionsForRule` is verplicht bij een POST — een compliance-policy
  * zonder actie doet niets bij non-compliance. De id's erin zijn tenant-specifiek en moeten
@@ -288,6 +395,7 @@ function main() {
 
   const written = [];
   const carried = [];
+  const overridden = [];
   let unchanged = 0;
 
   for (const { entry, source } of loaded) {
@@ -343,6 +451,7 @@ function main() {
           carried.push(`${entry.target}: ${keep.length} eigen instelling(en) behouden — ${keep.map((s) => s.settingInstance.settingDefinitionId).join(", ")}`);
         }
       }
+      applyOverrides(body, entry, overridden);
     } else if (type === "deviceCompliancePolicies") {
       body = bodyForCompliance(source, displayName, description);
     } else if (type === "Device") {
@@ -386,6 +495,10 @@ function main() {
   if (carried.length > 0) {
     console.log("\nOvergenomen uit de eigen baseline (OIB kent deze instellingen niet):");
     for (const c of carried) console.log("  " + c);
+  }
+  if (overridden.length > 0) {
+    console.log("\nBewust afgeweken van OIB (overrides uit het manifest):");
+    for (const o of overridden) console.log("  " + o);
   }
   if (manifest.excluded && manifest.excluded.length > 0) {
     console.log(`\n${manifest.excluded.length} OIB-policy(s) bewust niet overgenomen — zie "excluded" in het manifest.`);

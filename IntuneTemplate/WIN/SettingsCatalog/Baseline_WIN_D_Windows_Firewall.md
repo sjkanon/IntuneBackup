@@ -16,7 +16,7 @@ Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en leg
 
 > Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.
 
-## Instellingen — 31
+## Instellingen — 35
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -35,6 +35,8 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_domainprofile_enablelogdroppedpackets` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_domainprofile_enablelogsuccessconnections` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_domainprofile_logfilepath` | %SystemRoot%\System32\logfiles\firewall\domainfw.log |
+| &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_domainprofile_allowlocalipsecpolicymerge` | false |
 | `vendor_msft_firewall_mdmstore_privateprofile_enablefirewall` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_disableinboundnotifications` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_defaultoutboundaction` | 0 |
@@ -43,6 +45,8 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_enablelogdroppedpackets` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_enablelogsuccessconnections` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_logfilepath` | %SystemRoot%\System32\logfiles\firewall\privatefw.log |
+| &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_allowlocalpolicymerge` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_privateprofile_allowlocalipsecpolicymerge` | false |
 | `vendor_msft_firewall_mdmstore_publicprofile_enablefirewall` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_publicprofile_logmaxfilesize` | 16384 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`vendor_msft_firewall_mdmstore_publicprofile_allowlocalpolicymerge` | false |

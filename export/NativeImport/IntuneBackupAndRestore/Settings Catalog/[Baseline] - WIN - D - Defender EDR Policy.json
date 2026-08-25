@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender EDR Policy",
-    "description": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. Toewijzing volgens baseline: alle apparaten. Bron: CIPP-standaardtemplate.",
+    "description": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIPP-standaardtemplate.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

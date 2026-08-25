@@ -26,7 +26,7 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_devicelock_preventenablinglockscreencamera` | 1 |
 | `device_vendor_msft_policy_config_devicelock_preventlockscreenslideshow` | 1 |
 | `device_vendor_msft_policy_config_windowslogon_disablelockscreenappnotifications` | 1 |
-| `device_vendor_msft_policy_config_credentialsui_disablepasswordreveal` | 0 |
+| `device_vendor_msft_policy_config_credentialsui_disablepasswordreveal` | 1 |
 | `device_vendor_msft_policy_config_authentication_allowaadpasswordreset` | 1 |
 | `device_vendor_msft_policy_config_privacy_letappsactivatewithvoiceabovelock` | 2 |
 

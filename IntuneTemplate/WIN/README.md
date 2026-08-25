@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 76 policies
+# Windows — 80 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 67 |
+| `SettingsCatalog/` | 71 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 59
+## Device-scoped (D) — 62
 
 Toewijzen aan apparaatgroepen.
 
@@ -26,9 +26,9 @@ Toewijzen aan apparaatgroepen.
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) | Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-058-DConfigRefresh` |
 | [**Defender Additional Configuration**](SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.md) | Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen. | Settings Catalog | 9 | All Devices | `INTUNE-BASE-059-DDefenderAdditionalConfiguration` |
 | [**Defender Antivirus**](SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.md) | Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie. | Settings Catalog | 31 | All Devices | `INTUNE-BASE-012-DefaultAVPolicy` |
-| [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) | Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. | Settings Catalog | 19 | All Devices | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
-| [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.md) | Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. | Settings Catalog | 19 | All Devices | `INTUNE-BASE-108-DDefenderAVPolicy` |
-| [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-109-DDefenderEDRPolicy` |
+| [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) | Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. | Settings Catalog | 19 | — | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
+| [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.md) | Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. | Settings Catalog | 19 | — | `INTUNE-BASE-108-DDefenderAVPolicy` |
+| [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. | Settings Catalog | 2 | — | `INTUNE-BASE-109-DDefenderEDRPolicy` |
 | [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.md) | Koppelt het apparaat aan Defender for Endpoint met het onboarding-pakket van deze tenant. Dat pakket is tenant-specifiek en moet na een restore in een andere tenant handmatig opnieuw gekoppeld worden. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-014-EDRConfiguration` |
 | [**Defender Security Experience**](SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.md) | Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-060-DDefenderSecurityExperience` |
 | [**Defender Update Ring 1 Pilot**](SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.md) | Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je een slechte update opmerkt vóór de rest van de organisatie 'm krijgt. | Settings Catalog | 3 | — | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |
@@ -58,16 +58,19 @@ Toewijzen aan apparaatgroepen.
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.md) | Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of een beveiligingssleutel gebruiken in plaats van hun wachtwoord in te typen. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-076-DPasswordless` |
 | [**Printing**](SettingsCatalog/Baseline_WIN_D_Printing.md) | Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers. | Settings Catalog | 20 | All Devices | `INTUNE-BASE-077-DPrinting` |
 | [**Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.md) | Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een inbraak vaak voor zijwaartse beweging worden gebruikt. | Settings Catalog | 12 | All Devices | `INTUNE-BASE-078-DRemoteDesktopAndRPC` |
+| [**Removable Storage**](SettingsCatalog/Baseline_WIN_D_Removable_Storage.md) | Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, en telefoons en camera's die zich als WPD-apparaat aanmelden. Lezen blijft mogelijk. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-111-DRemovableStorage` |
 | [**Script File Associations**](SettingsCatalog/Baseline_WIN_D_Script_File_Associations.md) | Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert. | Settings Catalog | 1 | All Devices | `INTUNE-BASE-079-DScriptFileAssociations` |
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.md) | Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen. | Settings Catalog | 96 | All Devices | `INTUNE-BASE-080-DSecurityHardening` |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) | Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-081-DSettingsSync` |
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.md) | Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-082-DTimezone` |
 | [**Update Reports and Telemetry**](SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.md) | Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
 | [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 25 | All Devices | `INTUNE-BASE-026-UserRights` |
+| [**Windows AI**](SettingsCatalog/Baseline_WIN_D_Windows_AI.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
 | [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 8 | All Devices | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices | `INTUNE-BASE-085-DWindowsFirewallRules` |
-| [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.md) | Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. | Settings Catalog | 31 | All Devices | `INTUNE-BASE-016-Firewall` |
+| [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.md) | Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. | Settings Catalog | 35 | All Devices | `INTUNE-BASE-016-Firewall` |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) | Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust` |
+| [**Windows Hello for Business Multi User**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) | Windows Hello for Business voor gedeelde apparaten waar meerdere gebruikers op inloggen. Zelfde eisen als de gewone apparaatpolicy, maar zonder inrichting direct na het aanmelden: op een gedeeld apparaat zou elke gebruiker anders bij de eerste aanmelding door de PIN-inrichting worden geleid. | Settings Catalog | 5 | — | `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser` |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) | Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning. | Settings Catalog | 6 | All Devices | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
 | [**Windows LAPS**](SettingsCatalog/Baseline_WIN_D_Windows_LAPS.md) | Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat. | Settings Catalog | 13 | All Devices | `INTUNE-BASE-027-WindowsLAPSPolicy` |
 | [**Windows Package Manager**](SettingsCatalog/Baseline_WIN_D_Windows_Package_Manager.md) | Beperkt winget, zodat gebruikers geen software van willekeurige bronnen kunnen installeren. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-088-DWindowsPackageManager` |
@@ -77,7 +80,7 @@ Toewijzen aan apparaatgroepen.
 | [**Windows Update Ring 2 UAT**](DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.md) | Tweede updatering: krijgt Windows-updates na de pilot en vóór productie. | Device config | — | — | — |
 | [**Windows Update Ring 3 Production**](DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_3_Production.md) | Productiering voor Windows-updates: installeert dagelijks om 13:00 met een uitsteltermijn van twee dagen. | Device config | — | All Devices | — |
 
-## User-scoped (U) — 17
+## User-scoped (U) — 18
 
 Toewijzen aan gebruikersgroepen.
 
@@ -98,6 +101,7 @@ Toewijzen aan gebruikersgroepen.
 | [**Microsoft Outlook**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook.md) | Configureert het Exchange Online-profiel van de gebruiker automatisch, zodat Outlook werkt zonder handmatig een account toe te voegen. | Settings Catalog | 1 | All Users | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_U_Microsoft_Store.md) | De gebruikerskant van de Store-beperkingen. | Settings Catalog | 3 | All Users | `INTUNE-BASE-104-UMicrosoftStore` |
 | [**Personal Data Encryption**](SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.md) | Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft. | Settings Catalog | 4 | All Users | `INTUNE-BASE-105-UPersonalDataEncryption` |
+| [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.md) | Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen. | Settings Catalog | 4 | All Users | `INTUNE-BASE-114-UWindowsHelloForBusiness` |
 | [**Windows Spotlight**](SettingsCatalog/Baseline_WIN_U_Windows_Spotlight.md) | Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen. | Settings Catalog | 11 | All Users | `INTUNE-BASE-106-UWindowsSpotlight` |
 | [**Windows User Experience**](SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.md) | Zet meldingen op het vergrendelscherm en automatisch aanvullen in Internet Explorer uit. | Settings Catalog | 2 | All Users | `INTUNE-BASE-031-UWindowsUserExperience` |
 

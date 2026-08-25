@@ -249,6 +249,13 @@ const CHECK_NUMBERS = {
 
   // Eigen aanvulling op de macOS-baseline, buiten OpenIntuneBaseline om.
   Baseline_MAC_D_Privacy_Preferences: 110,
+
+  // Uit de vergelijking met IntuneAdmin/IntuneBaselines (augustus 2026): drie gaten die
+  // OpenIntuneBaseline niet dekt, plus de WHfB-varianten voor eigen en gedeelde apparaten.
+  Baseline_WIN_D_Removable_Storage: 111,
+  Baseline_WIN_D_Windows_AI: 112,
+  Baseline_WIN_D_Windows_Hello_for_Business_Multi_User: 113,
+  Baseline_WIN_U_Windows_Hello_for_Business: 114,
 };
 
 /**

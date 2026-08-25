@@ -5,11 +5,11 @@ Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds au
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
 
-99 policies over vier platformen:
+103 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 67 | 1 | 4 | 4 | – | **76** |
+| [Windows](IntuneTemplate/WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
 | [macOS](IntuneTemplate/MAC/README.md) | 18 | – | – | 3 | – | **21** |
 | [iOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
@@ -17,7 +17,7 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>99 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>103 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -147,7 +147,7 @@ resultaat, en een tweede kopie van een externe repo zou hier alleen maar veroude
 
 `core.longpaths=true` is op Windows nodig — OIB heeft bestandsnamen die over MAX_PATH gaan.
 
-Drie dingen die de importer bewust doet:
+Vier dingen die de importer bewust doet:
 
 1. **GUID's blijven behouden.** De RowKey/GUID identificeert de CIPP-templaterij; een
    herschreven template dat een nieuwe GUID zou krijgen levert bij de volgende sync een
@@ -157,7 +157,33 @@ Drie dingen die de importer bewust doet:
    stilzwijgend uitzetten. De regel: een top-level instelling uit het oude template blijft,
    tenzij die settingDefinitionId érgens in de geïmporteerde OIB-set voorkomt. De run meldt
    precies wat er is overgenomen.
-3. **Idempotent.** Bij een tweede run is het doelbestand zelf de bron voor die overgenomen
+3. **Bewuste afwijkingen van OIB blijven staan.** Punt 2 redt alleen instellingen die OIB
+   *niet* kent. Een andere wáárde op een instelling die OIB wél zet — het wachtwoord-oogje,
+   de Defender-actie bij een lage dreiging — zou elke import stilzwijgend terugdraaien. Die
+   staan daarom als `overrides` in het manifest, met een verplichte `reason`:
+
+   ```json
+   "overrides": [
+     {
+       "settingDefinitionId": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal",
+       "value": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal_1",
+       "reason": "CIS L1; het onthulknopje maakt meekijken triviaal."
+     },
+     {
+       "parent": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
+       "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge",
+       "value": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge_false",
+       "reason": "OIB zet local policy merge alleen op het openbare profiel."
+     }
+   ]
+   ```
+
+   Zonder `parent` moet de instelling al in de OIB-bron staan en wordt alleen de waarde
+   vervangen; mét `parent` wordt hij als kind toegevoegd. Verdwijnt het ankerpunt uit een
+   nieuwe OIB-versie, dan **stopt de import met een fout** in plaats van de override stil te
+   laten vervallen — dat laatste is het gevaarlijkst, want dan klopt het bestand nog steeds
+   terwijl de reden weg is. De run somt elke toegepaste override op.
+4. **Idempotent.** Bij een tweede run is het doelbestand zelf de bron voor die overgenomen
    instellingen, dus zelfde input → zelfde output.
 
 Zes OIB-policies zijn bewust niet overgenomen (audit-varianten, 24H2-alternatieven, driver
@@ -172,7 +198,7 @@ Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRes
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 194 bestanden óók importeren — dezelfde 99 policies plus hun assignments, maar zonder
+CIPP die 198 bestanden óók importeren — dezelfde 103 policies plus hun assignments, maar zonder
 `RowKey`, waar CIPP dan een **tweede** template van maakt met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
 
@@ -233,16 +259,32 @@ de bestaande juist weg. Optioneel `-FilterId` + `-FilterType` voor een assignmen
 Policies die niet in de tenant staan worden gemeld, niet aangemaakt — rol ze eerst uit via
 CIPP of `Start-IntuneRestoreConfig`.
 
-### Vier policies staan bewust zonder assignment
+### Acht policies staan bewust zonder assignment
 
-`Windows Update Ring 1 Pilot`, `Windows Update Ring 2 UAT`, `Defender Update Ring 1 Pilot` en
-`Defender Update Ring 2 UAT` zetten dezelfde instellingen als hun ring 3 met andere waarden.
-Alle drie de ringen op All Devices zou een conflict opleveren; ring 1 en 2 horen op een
-pilot- respectievelijk UAT-groep:
+Ze zijn stuk voor stuk een *alternatief* voor een policy die wél is toegewezen, geen aanvulling
+erop. Twee toegewezen policies die dezelfde instelling op een andere waarde zetten leveren in
+Intune een Conflict op, waarna de instelling door géén van beide wordt toegepast — dat is
+slechter dan geen van beide policies hebben. `check-scope.js` bewaakt dat.
+
+| Policy | Alternatief voor | Hoort op |
+|---|---|---|
+| `WIN - D - Windows Update Ring 1 Pilot` | update-ring 3 | pilotgroep |
+| `WIN - D - Windows Update Ring 2 UAT` | update-ring 3 | UAT-groep |
+| `WIN - D - Defender Update Ring 1 Pilot` | Defender-ring 3 | pilotgroep |
+| `WIN - D - Defender Update Ring 2 UAT` | Defender-ring 3 | UAT-groep |
+| `WIN - D - Defender ASR Policy Audit Mode` | `Attack Surface Reduction` — 16 dezelfde regels op audit in plaats van block | pilotgroep, en dan zónder de blokkerende policy |
+| `WIN - D - Defender AV Policy` | `Defender Antivirus` — het CIPP-template naast de OIB-versie, op drie punten losser | niets; de OIB-versie is strenger |
+| `WIN - D - Defender EDR Policy` | `Defender for Endpoint EDR` — zelfde onboarding, maar via de connector in plaats van een tenant-token | een andere tenant, en daar dan juist niet de tenant-specifieke |
+| `WIN - D - Windows Hello for Business Multi User` | `Windows Hello for Business` — zelfde eisen, maar zonder inrichting direct na het aanmelden | groep met gedeelde apparaten |
 
 ```powershell
 .\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
 ```
+
+De WHfB-variant voor gedeelde apparaten is de enige die je náást zijn tegenhanger kunt
+toewijzen: de vier overlappende instellingen staan daar op dezelfde waarde, dus er valt niets
+te botsen — hij voegt alleen `DisablePostLogonProvisioning` toe.
 
 ### Wat je eerst in een pilot zet
 
@@ -258,6 +300,7 @@ startpunt, geen kant-en-klare productieconfiguratie.
 | `WIN - D - In-Box App Removal` | verwijdert ingebouwde apps; controleer of niemand ze gebruikt |
 | `WIN - D - Windows Hello for Business` | vereist een TPM en een PIN van minimaal 6 tekens |
 | `WIN - D - Script File Associations` | .js/.vbs/.hta openen voortaan in Kladblok |
+| `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |
 | `MAC - D - FileVault` | versleutelt de schijf; regel eerst de herstelsleutel-escrow |
 
 ## Een backup uit een tenant terugbrengen naar de bron

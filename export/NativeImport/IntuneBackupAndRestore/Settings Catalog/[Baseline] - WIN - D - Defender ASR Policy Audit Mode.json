@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender ASR Policy Audit Mode",
-    "description": "Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. Toewijzing volgens baseline: alle apparaten. Bron: CIPP-standaardtemplate.",
+    "description": "Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIPP-standaardtemplate.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

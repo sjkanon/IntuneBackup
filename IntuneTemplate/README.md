@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# IntuneTemplate — 99 policies
+# IntuneTemplate — 103 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 67 | 1 | 4 | 4 | – | **76** |
+| [Windows](WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
 | [macOS](MAC/README.md) | 18 | – | – | 3 | – | **21** |
 | [iOS/iPadOS](IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](AND/README.md) | – | – | – | – | 1 | **1** |
-| **Totaal** | **85** | **1** | **4** | **7** | **2** | **99** |
+| **Totaal** | **89** | **1** | **4** | **7** | **2** | **103** |
 
 ## Indeling
 
@@ -51,7 +51,7 @@ naamloze rij van. Die doet niets — zie de [hoofd-README](../README.md#terugzet
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 76 policies
+- [Windows](WIN/README.md) — 80 policies
 - [macOS](MAC/README.md) — 21 policies
 - [iOS/iPadOS](IOS/README.md) — 1 policy
 - [Android](AND/README.md) — 1 policy

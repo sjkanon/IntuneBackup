@@ -9,12 +9,12 @@ Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op au
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json`](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json) |
 
-> Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet; zolang beide op alle apparaten staan levert dat in Intune een Conflict op elke regel op.
+> Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet. Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: beide op alle apparaten leverde op elk van die 16 regels een Conflict op, waarna Intune de regel door géén van beide policies toepast. Hoort op een pilotgroep, en dan zonder de blokkerende ASR-policy.
 
 ## Instellingen — 20
 

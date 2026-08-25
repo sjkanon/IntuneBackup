@@ -2,28 +2,28 @@
 
 # Intune-baseline — overzicht
 
-99 policies over 4 platformen, met
+103 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 99 |
-| Baseline-checks | 92 |
-| Zonder toewijzing (bewust) | 4 |
+| Policies | 103 |
+| Baseline-checks | 96 |
+| Zonder toewijzing (bewust) | 8 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 67 | 1 | 4 | 4 | – | **76** |
+| [Windows](IntuneTemplate/WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
 | [macOS](IntuneTemplate/MAC/README.md) | 18 | – | – | 3 | – | **21** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 76 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 80 policies
 - [macOS](IntuneTemplate/MAC/README.md) — 21 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 1 policy
 - [Android](IntuneTemplate/AND/README.md) — 1 policy
@@ -62,6 +62,32 @@ uitgedeeld. Instellingen die alleen wij hadden — versleuteling van vaste en ve
 schijven bijvoorbeeld — zijn bij een herschrijving behouden in plaats van stilzwijgend
 weggevallen.
 
+## Wat de vergelijking met IntuneAdmin opleverde
+
+Eind augustus 2026 is de set naast [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines)
+gelegd — 874 profielen, vergeleken op settingDefinitionId en waarde. 654 instellingen komen in
+beide sets voor, waarvan 55 met een andere waarde. Dat leverde vier nieuwe policies en drie
+aanpassingen op:
+
+| | |
+|---|---|
+| `WIN - D - Windows AI` | Recall en Click To Do uit. OIB v3.8 kent nog geen Windows AI-policy en wij dus ook niet. |
+| `WIN - D - Removable Storage` | schrijven naar USB-opslag en WPD-apparaten geblokkeerd; verwisselbare media was nergens beperkt. |
+| `WIN - U - Windows Hello for Business` | WHfB per gebruiker naast de bestaande per-apparaatpolicy. |
+| `WIN - D - Windows Hello for Business Multi User` | WHfB voor gedeelde apparaten, zonder inrichting direct na het aanmelden. |
+| `WIN - D - Windows Firewall` | *local policy merge* stond alleen op het openbare profiel; nu ook op domein en privé. |
+| `WIN - D - Login and Lock Screen` | het wachtwoord-onthulknopje gaat uit — de enige harde CIS-L1-afwijking zonder functionele reden. |
+| `WIN - D - Defender Antivirus` | lage en gemiddelde dreigingen naar quarantaine in plaats van block en remove: een fout-positief is dan terug te draaien. |
+
+Daarnaast verloren de drie CIPP-standaardtemplates voor Defender hun toewijzing. Ze zetten
+dezelfde instellingen als hun OIB-tegenhanger op een andere waarde — 19 conflicten in totaal,
+waarvan 16 ASR-regels. Bij een conflict past Intune de instelling door géén van beide policies
+toe, dus die 16 regels stonden feitelijk uit.
+
+Wat bewust anders blijft dan CIS en IntuneAdmin: telemetrie op *Optioneel* (Endpoint Analytics
+en Windows Update-rapportage leunen erop) en locatie aan (Apparaat zoeken, tijdzone). Beide
+staan met reden in het `doel`-veld van hun policy.
+
 ## Wat er nog moet gebeuren
 
 De repo is klaar en de controles staan groen. De tenant is niet aangeraakt: de policies
@@ -92,8 +118,13 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | `WIN - D - In-Box App Removal` | verwijdert ingebouwde apps; controleer of niemand ze gebruikt |
 | `WIN - D - Windows Hello for Business` | vereist een TPM en een PIN van minimaal zes tekens |
 | `WIN - D - Script File Associations` | .js, .vbs en .hta openen voortaan in Kladblok |
+| `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |
 | `MAC - D - FileVault` | versleutelt de schijf; regel eerst de escrow van de herstelsleutel |
 
-Daarnaast staan 4 policies bewust zonder toewijzing: de update-ringen 1 en 2 voor Windows
-en Defender zetten dezelfde instellingen als ring 3 met andere waarden. Alle ringen op All
-Devices zou een conflict opleveren; die horen op een pilot- en een UAT-groep.
+Daarnaast staan 8 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
+voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen 1 en 2 voor
+Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de drie
+CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, en de WHfB-variant
+voor gedeelde apparaten hoort op een groep met gedeelde apparaten. Allemaal op All Devices zou
+een conflict opleveren, waarna Intune de betwiste instelling door géén van beide policies
+toepast; die horen op een eigen groep.

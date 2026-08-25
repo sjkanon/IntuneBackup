@@ -192,6 +192,28 @@
                                     "useTemplateDefault": false
                                 }
                             }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge",
+                            "settingInstanceTemplateReference": null,
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalpolicymerge_false",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalipsecpolicymerge",
+                            "settingInstanceTemplateReference": null,
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": "vendor_msft_firewall_mdmstore_domainprofile_allowlocalipsecpolicymerge_false",
+                                "children": []
+                            }
                         }
                     ]
                 }
@@ -304,6 +326,28 @@
                                     "settingValueTemplateId": "9d55dfae-d55f-4f2a-af03-9a9524f61e76",
                                     "useTemplateDefault": false
                                 }
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalpolicymerge",
+                            "settingInstanceTemplateReference": null,
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalpolicymerge_false",
+                                "children": []
+                            }
+                        },
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "settingDefinitionId": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalipsecpolicymerge",
+                            "settingInstanceTemplateReference": null,
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "settingValueTemplateReference": null,
+                                "value": "vendor_msft_firewall_mdmstore_privateprofile_allowlocalipsecpolicymerge_false",
+                                "children": []
                             }
                         }
                     ]
