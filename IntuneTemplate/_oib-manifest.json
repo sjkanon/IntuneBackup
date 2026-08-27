@@ -88,7 +88,30 @@
       "target": "Baseline_MAC_D_Defender_for_Endpoint",
       "displayName": "[Baseline] - MAC - D - Defender for Endpoint",
       "doel": "Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd.",
-      "bron": "OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration"
+      "bron": "OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration",
+      "overrides": [
+        {
+          "settingDefinitionId": "com.apple.webcontent-filter_organization",
+          "value": "ITCE",
+          "reason": "OpenIntuneBaseline levert dit veld met de waarde \"JAMF Software\" — een restant uit de Jamf-profielen waar de MDE-documentatie op leunt. Deze naam staat bij de gebruiker in Systeeminstellingen → Netwerk → Filters; op een Mac die door Intune wordt beheerd hoort daar geen andere MDM-leverancier te staan."
+        }
+      ]
+    },
+    {
+      "target": "Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity",
+      "displayName": "[Baseline] - MAC - D - Enrollment Profile Administrator User Affinity",
+      "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.",
+      "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
+      "metadataOnly": true,
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar het beheerdersaccount itceadmin gebruikt in plaats van itce-aci-adm — kies één van de twee routes."
+    },
+    {
+      "target": "Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity",
+      "displayName": "[Baseline] - MAC - D - Enrollment Profile Standard User Affinity",
+      "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als standaardgebruiker; beheer loopt via het verborgen servicedeskaccount.",
+      "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
+      "metadataOnly": true,
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar het beheerdersaccount itceadmin gebruikt in plaats van itce-aci-adm — kies één van de twee routes."
     },
     {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Disk Encryption - D - FileVault - v1.0.json",
@@ -164,17 +187,18 @@
       "bron": "OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions"
     },
     {
-      "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Updates - D - Update Configuration - v1.0.json",
       "target": "Baseline_MAC_D_Software_Updates",
       "displayName": "[Baseline] - MAC - D - Software Updates",
       "doel": "Hoe en wanneer macOS zijn eigen updates ophaalt en installeert.",
-      "bron": "OpenIntuneBaseline macOS v1.0 — Updates - D - Update Configuration"
+      "bron": "eigen baseline — declaratief softwarebeleid (DDM); OpenIntuneBaseline macOS v1.0 gebruikt nog het klassieke com.apple.softwareupdate-profiel",
+      "metadataOnly": true,
+      "note": "Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op de eerste keuze uit de catalogus — controleer in de portal of dat \"Standaard\" of \"Altijd aan\" is vóór je 'm uitrolt."
     },
     {
       "source": "MACOS/IntuneManagement/CompliancePolicies/MacOS - OIB - Compliance - U - Device Health - v1.0.json",
       "target": "Baseline_MAC_U_Compliance_Device_Health",
       "displayName": "[Baseline] - MAC - U - Compliance Device Health",
-      "doel": "Toetst of de Mac versleuteld is en veilig opstart.",
+      "doel": "Toetst of System Integrity Protection op de Mac aanstaat.",
       "bron": "OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Health",
       "type": "deviceCompliancePolicies"
     },
@@ -182,7 +206,7 @@
       "source": "MACOS/IntuneManagement/CompliancePolicies/MacOS - OIB - Compliance - U - Device Security - v1.0.json",
       "target": "Baseline_MAC_U_Compliance_Device_Security",
       "displayName": "[Baseline] - MAC - U - Compliance Device Security",
-      "doel": "Toetst de beveiligingsstand van de Mac: firewall en systeemintegriteit.",
+      "doel": "Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeeper alleen ondertekende software toelaat.",
       "bron": "OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security",
       "type": "deviceCompliancePolicies"
     },

@@ -2,7 +2,7 @@
 
 # [Baseline] - MAC - U - Compliance Device Health
 
-Toetst of de Mac versleuteld is en veilig opstart.
+Toetst of System Integrity Protection op de Mac aanstaat.
 
 | | |
 |---|---|

@@ -2,15 +2,15 @@
 
 # Intune-baseline — overzicht
 
-103 policies over 4 platformen, met
+105 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 103 |
-| Baseline-checks | 96 |
-| Zonder toewijzing (bewust) | 8 |
+| Policies | 105 |
+| Baseline-checks | 98 |
+| Zonder toewijzing (bewust) | 10 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
@@ -18,13 +18,13 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
 | [Windows](IntuneTemplate/WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
-| [macOS](IntuneTemplate/MAC/README.md) | 18 | – | – | 3 | – | **21** |
+| [macOS](IntuneTemplate/MAC/README.md) | 20 | – | – | 3 | – | **23** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
 - [Windows](IntuneTemplate/WIN/README.md) — 80 policies
-- [macOS](IntuneTemplate/MAC/README.md) — 21 policies
+- [macOS](IntuneTemplate/MAC/README.md) — 23 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 1 policy
 - [Android](IntuneTemplate/AND/README.md) — 1 policy
 
@@ -88,6 +88,23 @@ Wat bewust anders blijft dan CIS en IntuneAdmin: telemetrie op *Optioneel* (Endp
 en Windows Update-rapportage leunen erop) en locatie aan (Apparaat zoeken, tijdzone). Beide
 staan met reden in het `doel`-veld van hun policy.
 
+## Wat de macOS-herziening opleverde
+
+Eind augustus 2026 is de macOS-set als geheel nagelopen. Dat leverde twee nieuwe policies
+en drie correcties op:
+
+| | |
+|---|---|
+| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | twee ADE-inschrijfprofielen die in precies één instelling verschillen: wordt het aangemelde account beheerder of standaardgebruiker. Alternatieven van elkaar, dus geen van beide toegewezen. |
+| `MAC - D - Software Updates` | van de klassieke `com.apple.softwareupdate`-payload naar declaratief updatebeleid (DDM, macOS 14+): uitstel van 7 dagen voor kleine, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien. checkId 047 blijft. |
+| `MAC - D - Defender for Endpoint` | de organisatienaam van het inhoudsfilter stond op *JAMF Software* — een restant uit de Jamf-profielen waar de MDE-documentatie op leunt. Die naam ziet de gebruiker in Systeeminstellingen → Netwerk → Filters. |
+| `MAC - U - Compliance Device Health` en `Device Security` | droegen elkaars omschrijving. Device Health toetst System Integrity Protection; Device Security toetst de versleuteling, de firewall en Gatekeeper. |
+
+Één gat is bewust niet gedicht: `MAC - U - Compliance Password` eist een wachtwoord van
+minimaal acht tekens met vergrendeling na vijftien minuten, maar er is geen configuratiepolicy
+die dat op de Mac instelt. Een Mac zonder schermvergrendeling wordt dus wel als niet-compliant
+gemeld en krijgt de instelling niet opgelegd — dat vraagt een eigen passcode-policy.
+
 ## Wat er nog moet gebeuren
 
 De repo is klaar en de controles staan groen. De tenant is niet aangeraakt: de policies
@@ -120,11 +137,14 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | `WIN - D - Script File Associations` | .js, .vbs en .hta openen voortaan in Kladblok |
 | `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |
 | `MAC - D - FileVault` | versleutelt de schijf; regel eerst de escrow van de herstelsleutel |
+| `MAC - D - Software Updates` | declaratief updatebeleid vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet |
+| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | vergrendelde inschrijving is na de inschrijving alleen met een wipe terug te draaien |
 
-Daarnaast staan 8 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
+Daarnaast staan 10 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
 voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen 1 en 2 voor
 Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de drie
-CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, en de WHfB-variant
-voor gedeelde apparaten hoort op een groep met gedeelde apparaten. Allemaal op All Devices zou
+CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de WHfB-variant
+voor gedeelde apparaten hoort op een groep met gedeelde apparaten, en de twee macOS-inschrijf-
+profielen verschillen in precies één instelling. Allemaal op All Devices zou
 een conflict opleveren, waarna Intune de betwiste instelling door géén van beide policies
 toepast; die horen op een eigen groep.

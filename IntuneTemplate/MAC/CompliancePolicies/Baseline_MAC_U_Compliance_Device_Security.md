@@ -2,7 +2,7 @@
 
 # [Baseline] - MAC - U - Compliance Device Security
 
-Toetst de beveiligingsstand van de Mac: firewall en systeemintegriteit.
+Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeeper alleen ondertekende software toelaat.
 
 | | |
 |---|---|

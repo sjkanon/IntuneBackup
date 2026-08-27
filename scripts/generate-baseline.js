@@ -256,6 +256,11 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Windows_AI: 112,
   Baseline_WIN_D_Windows_Hello_for_Business_Multi_User: 113,
   Baseline_WIN_U_Windows_Hello_for_Business: 114,
+
+  // De twee macOS-inschrijfprofielen. Alternatieven van elkaar, dus allebei zonder
+  // toewijzing — zie de note bij hun regel in _oib-manifest.json.
+  Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity: 115,
+  Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity: 116,
 };
 
 /**

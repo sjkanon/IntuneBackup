@@ -739,7 +739,7 @@
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "JAMF Software"
+                                    "value": "ITCE"
                                 }
                             },
                             {

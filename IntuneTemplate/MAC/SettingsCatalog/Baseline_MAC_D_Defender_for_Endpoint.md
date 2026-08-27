@@ -87,7 +87,7 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filtergrade` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filterpackets` | false |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filtersockets` | true |
-| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_organization` | JAMF Software |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_organization` | ITCE |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_pluginbundleid` | com.microsoft.wdav |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_userdefinedname` | Microsoft Defender Content Filter |
 

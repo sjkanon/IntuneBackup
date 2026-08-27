@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-08-25",
+  "reviewedAt": "2026-08-27",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -2514,7 +2514,7 @@
           },
           {
             "settingDefinitionId": "com.apple.webcontent-filter_organization",
-            "expectedValue": "JAMF Software"
+            "expectedValue": "ITCE"
           },
           {
             "settingDefinitionId": "com.apple.webcontent-filter_pluginbundleid",
@@ -3338,32 +3338,44 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "com.apple.softwareupdate_automaticcheckenabled",
-            "expectedValue": "com.apple.softwareupdate_automaticcheckenabled_true"
+            "settingDefinitionId": "softwareupdate_allowstandarduserosupdates",
+            "expectedValue": "softwareupdate_allowstandarduserosupdates_true"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_automaticdownload",
-            "expectedValue": "com.apple.softwareupdate_automaticdownload_true"
+            "settingDefinitionId": "softwareupdate_automaticactions_download",
+            "expectedValue": "softwareupdate_automaticactions_download_0"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_automaticallyinstallappupdates",
-            "expectedValue": "com.apple.softwareupdate_automaticallyinstallappupdates_true"
+            "settingDefinitionId": "softwareupdate_automaticactions_installosupdates",
+            "expectedValue": "softwareupdate_automaticactions_installosupdates_0"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_automaticallyinstallmacosupdates",
-            "expectedValue": "com.apple.softwareupdate_automaticallyinstallmacosupdates_true"
+            "settingDefinitionId": "softwareupdate_automaticactions_installsecurityupdate",
+            "expectedValue": "softwareupdate_automaticactions_installsecurityupdate_0"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_configdatainstall",
-            "expectedValue": "com.apple.softwareupdate_configdatainstall_true"
+            "settingDefinitionId": "softwareupdate_rapidsecurityresponse_enable",
+            "expectedValue": "softwareupdate_rapidsecurityresponse_enable_true"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_criticalupdateinstall",
-            "expectedValue": "com.apple.softwareupdate_criticalupdateinstall_true"
+            "settingDefinitionId": "softwareupdate_rapidsecurityresponse_enablerollback",
+            "expectedValue": "softwareupdate_rapidsecurityresponse_enablerollback_true"
           },
           {
-            "settingDefinitionId": "com.apple.softwareupdate_restrict-software-update-require-admin-to-install",
-            "expectedValue": "com.apple.softwareupdate_restrict-software-update-require-admin-to-install_false"
+            "settingDefinitionId": "softwareupdate_deferrals_majorperiodindays",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "softwareupdate_deferrals_minorperiodindays",
+            "expectedValue": 7
+          },
+          {
+            "settingDefinitionId": "softwareupdate_deferrals_systemperiodindays",
+            "expectedValue": 21
+          },
+          {
+            "settingDefinitionId": "softwareupdate_notifications",
+            "expectedValue": "softwareupdate_notifications_true"
           }
         ]
       },
@@ -9754,6 +9766,376 @@
           {
             "settingDefinitionId": "user_vendor_msft_passportforwork_{tenantid}_policies_enablepinrecovery",
             "expectedValue": "user_vendor_msft_passportforwork_{tenantid}_policies_enablepinrecovery_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "enrollment-profile-administrator-user-affinity",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Enrollment Profile Administrator User Affinity\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "ade_macos_useraffinity",
+            "expectedValue": "ade_macos_useraffinity_1"
+          },
+          {
+            "settingDefinitionId": "ade_macos_authenticationmethod",
+            "expectedValue": "ade_macos_authenticationmethod_2"
+          },
+          {
+            "settingDefinitionId": "ade_macos_awaitconfiguration",
+            "expectedValue": "ade_macos_awaitconfiguration_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_createlocaladmin",
+            "expectedValue": "ade_accountsettings_createlocaladmin_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountname",
+            "expectedValue": "itce-aci-adm"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountfullname",
+            "expectedValue": "ITCE Servicedesk"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_hideusersgroups",
+            "expectedValue": "ade_accountsettings_hideusersgroups_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountpasswordrotation",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_createlocalprimary",
+            "expectedValue": "ade_accountsettings_createlocalprimary_2"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_prefillaccountinfo",
+            "expectedValue": "ade_accountsettings_prefillaccountinfo_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_restrictediting",
+            "expectedValue": "ade_accountsettings_restrictediting_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_primaryaccountfullname",
+            "expectedValue": "{{username}}"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_primaryaccountname",
+            "expectedValue": "{{username}}"
+          },
+          {
+            "settingDefinitionId": "ade_lockedenrollment",
+            "expectedValue": "ade_lockedenrollment_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_department",
+            "expectedValue": "ITCE Servicedesk"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_departmentphone",
+            "expectedValue": "+32 (0)3 808 32 20"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_locationservices",
+            "expectedValue": "ade_setupassistant_locationservices_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_restore",
+            "expectedValue": "ade_setupassistant_restore_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appleid",
+            "expectedValue": "ade_setupassistant_appleid_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_termsandconditions",
+            "expectedValue": "ade_setupassistant_termsandconditions_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_touchfaceid",
+            "expectedValue": "ade_setupassistant_touchfaceid_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_applepay",
+            "expectedValue": "ade_setupassistant_applepay_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_siri",
+            "expectedValue": "ade_setupassistant_siri_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_diagnosticsdata",
+            "expectedValue": "ade_setupassistant_diagnosticsdata_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_filevault",
+            "expectedValue": "ade_setupassistant_filevault_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_iclouddiagnostics",
+            "expectedValue": "ade_setupassistant_iclouddiagnostics_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_icloudstorage",
+            "expectedValue": "ade_setupassistant_icloudstorage_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appearance",
+            "expectedValue": "ade_setupassistant_appearance_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_screentime",
+            "expectedValue": "ade_setupassistant_screentime_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_privacy",
+            "expectedValue": "ade_setupassistant_privacy_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_accessibility",
+            "expectedValue": "ade_setupassistant_accessibility_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_unlockwithwatch",
+            "expectedValue": "ade_setupassistant_unlockwithwatch_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_enablelockdownmode",
+            "expectedValue": "ade_setupassistant_enablelockdownmode_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_softwareupdate",
+            "expectedValue": "ade_setupassistant_softwareupdate_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_softwareupdatecompleted",
+            "expectedValue": "ade_setupassistant_softwareupdatecompleted_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_termsofaddress",
+            "expectedValue": "ade_setupassistant_termsofaddress_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_intelligence",
+            "expectedValue": "ade_setupassistant_intelligence_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_osshowcase",
+            "expectedValue": "ade_setupassistant_osshowcase_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appstore",
+            "expectedValue": "ade_setupassistant_appstore_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_liquidglass",
+            "expectedValue": "ade_setupassistant_liquidglass_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "enrollment-profile-standard-user-affinity",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Enrollment Profile Standard User Affinity\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "ade_macos_useraffinity",
+            "expectedValue": "ade_macos_useraffinity_1"
+          },
+          {
+            "settingDefinitionId": "ade_macos_authenticationmethod",
+            "expectedValue": "ade_macos_authenticationmethod_2"
+          },
+          {
+            "settingDefinitionId": "ade_macos_awaitconfiguration",
+            "expectedValue": "ade_macos_awaitconfiguration_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_createlocaladmin",
+            "expectedValue": "ade_accountsettings_createlocaladmin_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountfullname",
+            "expectedValue": "ITCE Servicedesk"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_hideusersgroups",
+            "expectedValue": "ade_accountsettings_hideusersgroups_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountpasswordrotation",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_adminaccountname",
+            "expectedValue": "itce-aci-adm"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_createlocalprimary",
+            "expectedValue": "ade_accountsettings_createlocalprimary_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_prefillaccountinfo",
+            "expectedValue": "ade_accountsettings_prefillaccountinfo_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_restrictediting",
+            "expectedValue": "ade_accountsettings_restrictediting_1"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_primaryaccountfullname",
+            "expectedValue": "{{username}}"
+          },
+          {
+            "settingDefinitionId": "ade_accountsettings_primaryaccountname",
+            "expectedValue": "{{username}}"
+          },
+          {
+            "settingDefinitionId": "ade_lockedenrollment",
+            "expectedValue": "ade_lockedenrollment_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_department",
+            "expectedValue": "ITCE Servicedesk"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_departmentphone",
+            "expectedValue": "+32 (0)3 808 32 20"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_locationservices",
+            "expectedValue": "ade_setupassistant_locationservices_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_restore",
+            "expectedValue": "ade_setupassistant_restore_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appleid",
+            "expectedValue": "ade_setupassistant_appleid_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_termsandconditions",
+            "expectedValue": "ade_setupassistant_termsandconditions_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_touchfaceid",
+            "expectedValue": "ade_setupassistant_touchfaceid_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_applepay",
+            "expectedValue": "ade_setupassistant_applepay_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_siri",
+            "expectedValue": "ade_setupassistant_siri_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_diagnosticsdata",
+            "expectedValue": "ade_setupassistant_diagnosticsdata_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_filevault",
+            "expectedValue": "ade_setupassistant_filevault_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_iclouddiagnostics",
+            "expectedValue": "ade_setupassistant_iclouddiagnostics_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_icloudstorage",
+            "expectedValue": "ade_setupassistant_icloudstorage_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appearance",
+            "expectedValue": "ade_setupassistant_appearance_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_screentime",
+            "expectedValue": "ade_setupassistant_screentime_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_privacy",
+            "expectedValue": "ade_setupassistant_privacy_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_accessibility",
+            "expectedValue": "ade_setupassistant_accessibility_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_unlockwithwatch",
+            "expectedValue": "ade_setupassistant_unlockwithwatch_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_enablelockdownmode",
+            "expectedValue": "ade_setupassistant_enablelockdownmode_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_softwareupdate",
+            "expectedValue": "ade_setupassistant_softwareupdate_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_softwareupdatecompleted",
+            "expectedValue": "ade_setupassistant_softwareupdatecompleted_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_termsofaddress",
+            "expectedValue": "ade_setupassistant_termsofaddress_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_intelligence",
+            "expectedValue": "ade_setupassistant_intelligence_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_osshowcase",
+            "expectedValue": "ade_setupassistant_osshowcase_0"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_appstore",
+            "expectedValue": "ade_setupassistant_appstore_1"
+          },
+          {
+            "settingDefinitionId": "ade_setupassistant_liquidglass",
+            "expectedValue": "ade_setupassistant_liquidglass_0"
           }
         ]
       },

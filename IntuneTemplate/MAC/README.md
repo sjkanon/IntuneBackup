@@ -1,15 +1,15 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 21 policies
+# macOS — 23 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 18 |
+| `SettingsCatalog/` | 20 |
 | `CompliancePolicies/` | 3 |
 
-## Device-scoped (D) — 14
+## Device-scoped (D) — 16
 
 Toewijzen aan apparaatgroepen.
 
@@ -18,6 +18,8 @@ Toewijzen aan apparaatgroepen.
 | [**Accounts and Login**](SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.md) | Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-035-MACDAccountsAndLogin` |
 | [**Defender Antivirus**](SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md) | Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-036-MACDDefenderAntivirus` |
 | [**Defender for Endpoint**](SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md) | Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd. | Settings Catalog | 50 | All Devices | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
+| [**Enrollment Profile Administrator User Affinity**](SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.md) | Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder. | Settings Catalog | 40 | — | `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity` |
+| [**Enrollment Profile Standard User Affinity**](SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.md) | Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als standaardgebruiker; beheer loopt via het verborgen servicedeskaccount. | Settings Catalog | 40 | — | `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity` |
 | [**FileVault**](SettingsCatalog/Baseline_MAC_D_FileVault.md) | Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macOS-tegenhanger van BitLocker. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-038-MACDFileVault` |
 | [**Firewall and Gatekeeper**](SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.md) | Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een herkende ontwikkelaar is ondertekend. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` |
 | [**Microsoft AutoUpdate**](SettingsCatalog/Baseline_MAC_D_Microsoft_AutoUpdate.md) | Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerken. | Settings Catalog | 14 | All Devices | `INTUNE-BASE-040-MACDMicrosoftAutoUpdate` |
@@ -28,7 +30,7 @@ Toewijzen aan apparaatgroepen.
 | [**Platform SSO**](SettingsCatalog/Baseline_MAC_D_Platform_SSO.md) | Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-045-MACDPlatformSSO` |
 | [**Privacy Preferences**](SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.md) | Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken. | Settings Catalog | 40 | All Devices | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | [**Restrictions**](SettingsCatalog/Baseline_MAC_D_Restrictions.md) | Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. | Settings Catalog | 37 | All Devices | `INTUNE-BASE-046-MACDRestrictions` |
-| [**Software Updates**](SettingsCatalog/Baseline_MAC_D_Software_Updates.md) | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
+| [**Software Updates**](SettingsCatalog/Baseline_MAC_D_Software_Updates.md) | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 
 ## User-scoped (U) — 7
 
@@ -36,8 +38,8 @@ Toewijzen aan gebruikersgroepen.
 
 | Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
 |---|---|---|---:|---|---|
-| [**Compliance Device Health**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.md) | Toetst of de Mac versleuteld is en veilig opstart. | Compliance | — | All Users | — |
-| [**Compliance Device Security**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.md) | Toetst de beveiligingsstand van de Mac: firewall en systeemintegriteit. | Compliance | — | All Users | — |
+| [**Compliance Device Health**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.md) | Toetst of System Integrity Protection op de Mac aanstaat. | Compliance | — | All Users | — |
+| [**Compliance Device Security**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.md) | Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeeper alleen ondertekende software toelaat. | Compliance | — | All Users | — |
 | [**Compliance Password**](CompliancePolicies/Baseline_MAC_U_Compliance_Password.md) | Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn. | Compliance | — | All Users | — |
 | [**Microsoft Edge Extensions**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.md) | Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren. | Settings Catalog | 4 | All Users | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` |
 | [**Microsoft Edge Profiles and Sync**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.md) | Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt. | Settings Catalog | 4 | All Users | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |
