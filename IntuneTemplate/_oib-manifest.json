@@ -177,7 +177,7 @@
       "doel": "Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen PPPC-policy",
       "metadataOnly": true,
-      "note": "Schermopname staat er bewust niet in: macOS staat een MDM niet toe die te verlenen — een profiel kan schermopname alleen weigeren of, met AllowStandardUserToSetSystemService, de gebruiker 'm zelf laten aanzetten zonder beheerderswachtwoord. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al."
+      "note": "Schermopname staat hier niet in maar in [Baseline] - MAC - D - Screen Recording: macOS staat een MDM niet toe die te verlenen, dus dat is een custom profile met AllowStandardUserToSetSystemService in plaats van een settings catalog-entry. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al."
     },
     {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Device Security - D - Restrictions - v1.0.json",
@@ -185,6 +185,14 @@
       "displayName": "[Baseline] - MAC - D - Restrictions",
       "doel": "Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.",
       "bron": "OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions"
+    },
+    {
+      "target": "Baseline_MAC_D_Screen_Recording",
+      "displayName": "[Baseline] - MAC - D - Screen Recording",
+      "doel": "Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen.",
+      "bron": "eigen baseline — Apple staat schermopname niet toe in de settings catalog-vorm van PPPC",
+      "metadataOnly": true,
+      "note": "Apple laat schermopname niet met \"Allow\" verlenen — een MDM kan het alleen weigeren of, zoals hier, de gebruiker het zelf laten aanzetten zonder beheerderswachtwoord. De eerste klik blijft dus handmatig, net als de periodieke herbevestiging op recente macOS-versies. Custom profile en geen settings catalog, omdat de mobileconfig de letterlijke waarde uit Apple's schema draagt in plaats van een Intune-enum die per definitie-update kan verschuiven. Dezelfde vijf bundles en dezelfde code requirements als de Toegankelijkheid-entries in [Baseline] - MAC - D - Privacy Preferences; die twee profielen raken elkaar niet omdat ze verschillende TCC-services zetten."
     },
     {
       "target": "Baseline_MAC_D_Software_Updates",

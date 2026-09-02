@@ -134,6 +134,15 @@
       }
     }
   ],
+  "[Baseline] - MAC - D - Screen Recording": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - MAC - D - Software Updates": [
     {
       "target": {
@@ -287,15 +296,6 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Defender for Endpoint EDR": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - WIN - D - Defender Security Experience": [
     {
       "target": {
@@ -306,6 +306,15 @@
     }
   ],
   "[Baseline] - WIN - D - Defender Update Ring 3 Production": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Defender for Endpoint EDR": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

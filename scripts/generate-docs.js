@@ -142,9 +142,20 @@ function bodyRows(raw, prefix = "", rows = []) {
       if (value.length === 0) rows.push({ id: label, value: "—" });
       else if (value.every((v) => typeof v !== "object")) rows.push({ id: label, value: value.join(", ") });
       else value.forEach((v, i) => bodyRows(v, `${label}[${i}]`, rows));
-    } else rows.push({ id: label, value: value === null ? "—" : String(value) });
+    } else rows.push({ id: label, value: value === null ? "—" : truncateScalar(String(value)) });
   }
   return rows;
+}
+
+/**
+ * Losse waarden afkappen op dezelfde lengte als shortValue() bij de settings-tabellen. Een
+ * custom macOS-profiel draagt zijn hele mobileconfig als base64 in `payload`; onafgekapt is dat
+ * duizenden tekens in één tabelcel, en dan is de tabel eromheen niet meer te lezen. Alleen
+ * scalairen: lijstwaarden (managedUniversalLinks bij App Protection) blijven volledig, want
+ * daar is de inhoud van de lijst juist wat je wil zien.
+ */
+function truncateScalar(text) {
+  return text.length > 110 ? `${text.slice(0, 107)}…` : text;
 }
 
 function policyTable(templates, { checkIds, assignments, manifestByTarget }) {

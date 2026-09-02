@@ -14,7 +14,7 @@ Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamVie
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen PPPC-policy |
 | Bestand | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |
 
-> Schermopname staat er bewust niet in: macOS staat een MDM niet toe die te verlenen — een profiel kan schermopname alleen weigeren of, met AllowStandardUserToSetSystemService, de gebruiker 'm zelf laten aanzetten zonder beheerderswachtwoord. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al.
+> Schermopname staat hier niet in maar in [Baseline] - MAC - D - Screen Recording: macOS staat een MDM niet toe die te verlenen, dus dat is een custom profile met AllowStandardUserToSetSystemService in plaats van een settings catalog-entry. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al.
 
 ## Instellingen — 44
 
