@@ -13,7 +13,7 @@
     "NIS2-mappen). Elke instelling hieronder ontbrak in beide eigen sets en is daarna nagelopen",
     "tegen de Policy CSP-documentatie en tegen de settings catalog-definities zelf.",
     "",
-    "target      bestandsnaam zonder .json; check-baseline2.js koppelt daarop.",
+    "target      bestandsnaam zonder .json; check-sets.js koppelt daarop.",
     "doel        de zin die in de tenant naast de policy komt te staan.",
     "controls    het artikel of de norm die deze maatregel eist. ISO/IEC 27001:2022 Annex A,",
     "            NIS2 (richtlijn 2022/2555 art. 21), EASA Part-IS.I.OR en het interne",
@@ -25,7 +25,7 @@
     "universeel  waarom dit voor elk apparaat geldt, en waar de grens ligt.",
     "note        wat je moet weten voordat je hem toewijst — impact, valkuilen, overlap.",
     "replaces    een instelling die deze policy overneemt van een toegewezen baseline-policy.",
-    "            check-baseline2.js bewaakt dat elke botsing hier verantwoord staat."
+    "            check-sets.js bewaakt dat elke botsing hier verantwoord staat."
   ],
   "guidNamespace": "b2a5e1c4-7d33-4f18-9a60-3e5c1d8f7b02",
   "policies": [

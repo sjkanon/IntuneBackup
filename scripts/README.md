@@ -12,8 +12,8 @@ flowchart TD
   T -->|check-scope.js| CHK{{"scope · indeling · conflicten"}}
   T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
-  I["ISMSTemplate/<br/>10 policies"] -->|check-isms.js| CHK
-  B2["BASELINE2/<br/>6 policies"] -->|check-baseline2.js| CHK
+  I["ISMSTemplate/<br/>10 policies"] -->|check-sets.js| CHK
+  B2["BASELINE2/<br/>6 policies"] -->|check-sets.js| CHK
   I -->|export-intunebackup.js| EXI["export/NativeImport/<br/>IntuneBackupAndRestore-ISMS/"]
   I -.->|leest rechtstreeks| CIPP
   EXI -->|Start-IntuneRestoreConfig| TENANT
@@ -33,8 +33,7 @@ flowchart TD
 | [`import-oib.js`](import-oib.js) | **naar** de bron | Zet OpenIntuneBaseline-policies om naar CIPP-templates, gestuurd door `_oib-manifest.json`. Behoudt GUID's en eigen instellingen die OIB niet kent. Idempotent. |
 | [`import-intunebackup.js`](import-intunebackup.js) | **naar** de bron | Zet een tenant-backup terug om naar templates. Voegt standaard alleen toe; `--overwrite` om te vervangen. |
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen en de migratietabel. Blokkerend in CI. |
-| [`check-isms.js`](check-isms.js) | controle | Hetzelfde voor `ISMSTemplate/`, plus de controle die `check-scope.js` niet kán doen: botst een ISMS-policy met een tóégewezen baseline-policy? `--docs` genereert `ISMSTemplate/README.md`. |
-| [`check-baseline2.js`](check-baseline2.js) | controle | Hetzelfde voor `BASELINE2/`, plus één extra eis: elke policy moet naast een control ook een `bewijs` en een `universeel` in het manifest hebben — de twee vragen die die set definiëren. Botst óók tegen `ISMSTemplate/` (meldend). `--docs` genereert `BASELINE2/README.md`. |
+| [`check-sets.js`](check-sets.js) | controle | Hetzelfde voor elke set naast de baseline (`ISMSTemplate/`, `BASELINE2/`), plus de controle die `check-scope.js` niet kán doen: botst een policy daaruit met een tóégewezen baseline-policy — of met een andere set? BASELINE2 heeft er één eis bij: naast een control ook een `bewijs` en een `universeel` in het manifest. `--docs` genereert de README van elke set. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, `ISMSTemplate/` in een eigen map ernaast zonder. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |

@@ -1,0 +1,78 @@
+{
+  "@odata.type": "#microsoft.graph.depMacOSEnrollmentProfile",
+
+  "displayName": "ITCE - macOS Corporate ADE Baseline",
+  "description": "Standaard ADE-enrollmentprofiel voor door ITCE beheerde bedrijfs-Macs onder token ACI_APPLE_MDM. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
+
+  "isDefault": true,
+  "isMandatory": true,
+  "supervisedModeEnabled": true,
+
+  "requiresUserAuthentication": true,
+  "enableAuthenticationViaCompanyPortal": true,
+  "configurationWebUrl": true,
+  "requireCompanyPortalOnSetupAssistantEnrolledDevices": true,
+  "usePlatformSSODuringSetupAssistant": false,
+
+  "waitForDeviceConfiguredConfirmation": true,
+  "profileRemovalDisabled": true,
+  "autoAdvanceSetupEnabled": false,
+  "requestRequiresNetworkTether": false,
+
+  "adminAccountUserName": "itceadmin",
+  "adminAccountFullName": "ITCE Servicedesk",
+  "hideAdminAccount": true,
+  "depProfileAdminAccountPasswordRotationSetting": {
+    "@odata.type": "microsoft.graph.depProfileAdminAccountPasswordRotationSetting",
+    "autoRotationPeriodInDays": 14,
+    "depProfileDelayAutoRotationSetting": {
+      "@odata.type": "microsoft.graph.depProfileDelayAutoRotationSetting",
+      "onRetrievalAutoRotatePasswordEnabled": true,
+      "onRetrievalDelayAutoRotatePasswordInHours": 8
+    }
+  },
+
+  "skipPrimarySetupAccountCreation": false,
+  "setPrimarySetupAccountAsRegularUser": true,
+  "dontAutoPopulatePrimaryAccountInfo": false,
+  "primaryAccountUserName": "{{partialupn}}",
+  "primaryAccountFullName": "{{username}}",
+  "enableRestrictEditing": true,
+
+  "supportDepartment": "ITCE Servicedesk",
+  "supportPhoneNumber": "+32 (0)3 808 32 20",
+
+  "locationDisabled": false,
+  "touchIdDisabled": false,
+  "accessibilityScreenDisabled": false,
+  "chooseYourLockScreenDisabled": false,
+
+  "appleIdDisabled": true,
+  "restoreBlocked": true,
+  "termsAndConditionsDisabled": true,
+  "applePayDisabled": true,
+  "siriDisabled": true,
+  "diagnosticsDisabled": true,
+  "iCloudDiagnosticsDisabled": true,
+  "iCloudStorageDisabled": true,
+  "displayToneSetupDisabled": true,
+  "privacyPaneDisabled": true,
+  "screenTimeScreenDisabled": true,
+  "fileVaultDisabled": true,
+  "registrationDisabled": true,
+  "passCodeDisabled": true,
+  "zoomDisabled": true,
+  "autoUnlockWithWatchDisabled": true,
+
+  "enabledSkipKeys": [
+    "SoftwareUpdate",
+    "UpdateCompleted",
+    "EnableLockdownMode",
+    "Intelligence",
+    "TermsOfAddress",
+    "OSShowcase",
+    "Wallpaper"
+  ],
+
+  "enrollmentTimeAzureAdGroupIds": []
+}

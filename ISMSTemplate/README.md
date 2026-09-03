@@ -1,4 +1,4 @@
-<!-- Gegenereerd door scripts/check-isms.js --docs — niet met de hand bijwerken. -->
+<!-- Gegenereerd door scripts/check-sets.js --docs — niet met de hand bijwerken. -->
 
 # ISMSTemplate/
 
@@ -22,26 +22,6 @@ kent beide prefixen. Wat verschilt is de pijplijn: deze set komt bewust **niet**
 check tegen een tenant te worden gelegd — dat levert alleen rode vinkjes op voor iets wat
 niemand heeft uitgerold.
 
-Uitrolbaar is de set wél, langs allebei de routes die de baseline ook gebruikt: CIPP leest deze
-map rechtstreeks, en `scripts/export-intunebackup.js` schrijft 'm weg in het formaat van de
-module IntuneBackupAndRestore — naar een **eigen** map,
-`export/NativeImport/IntuneBackupAndRestore-ISMS/`. Apart, omdat `Start-IntuneRestoreConfig`
-alles terugzet wat onder het meegegeven pad staat: stond de set in dezelfde map, dan neemt wie
-de baseline terugzet deze pilotpolicies ongemerkt mee.
-
-## Controles
-
-```bash
-node scripts/check-isms.js          # naam, plek, verantwoording en botsingen met de baseline
-node scripts/check-isms.js --docs   # plus deze README opnieuw genereren
-```
-
-De belangrijkste controle is de laatste: `check-scope.js` kijkt alleen naar toegewezen policies
-binnen `IntuneTemplate/` en ziet deze set dus niet. Zet een ISMS-policy dezelfde instelling als
-een tóégewezen baseline-policy, dan levert dat bij uitrol een Conflict op — waarna Intune de
-instelling door géén van beide toepast en de baseline er dus op achteruit gaat. Botsingen die
-bedoeld zijn, staan als `replaces` in `_manifest.json`; de rest blokkeert.
-
 ## Uitrollen
 
 Drie routes, alle drie zonder toewijzing:
@@ -57,9 +37,22 @@ Drie routes, alle drie zonder toewijzing:
   Géén `Start-IntuneRestoreAssignments`: de export bevat met opzet geen `Assignments/`-map.
 - **Met de hand** aanmaken in Intune.
 
-Daarna toewijzen aan een pilotgroep — niet aan All Devices, want een deel van deze instellingen
-verandert gedrag dat gebruikers direct merken. Bevalt een policy, dan verhuist hij naar
-`IntuneTemplate/` onder de `Baseline_`-naam en krijgt hij daar een checkId en een toewijzing.
+Daarna toewijzen aan een pilotgroep — niet aan All Devices, want een deel van deze
+instellingen verandert gedrag dat gebruikers direct merken.
+
+## Controles
+
+```bash
+node scripts/check-sets.js          # naam, plek, verantwoording en botsingen, alle sets
+node scripts/check-sets.js ISMS       # alleen deze set
+node scripts/check-sets.js --docs   # plus deze README opnieuw genereren
+```
+
+De belangrijkste controle is de laatste: `check-scope.js` kijkt alleen naar toegewezen policies
+binnen `IntuneTemplate/` en ziet deze set dus niet. Zet een policy hier dezelfde instelling als
+een tóégewezen baseline-policy, dan levert dat bij uitrol een Conflict op — waarna Intune de
+instelling door géén van beide toepast en de baseline er dus op achteruit gaat. Botsingen die
+bedoeld zijn, staan als `replaces` in `_manifest.json`; de rest blokkeert.
 
 ## De set
 

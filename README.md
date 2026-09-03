@@ -5,19 +5,19 @@ Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds au
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
 
-103 policies over vier platformen:
+106 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
 | [Windows](IntuneTemplate/WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
-| [macOS](IntuneTemplate/MAC/README.md) | 18 | – | – | 3 | – | **21** |
+| [macOS](IntuneTemplate/MAC/README.md) | 20 | – | 1 | 3 | – | **24** |
 | [iOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>103 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>106 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -59,7 +59,7 @@ Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.
 Naast de baseline staat er een tweede set: **[`ISMSTemplate/`](ISMSTemplate/README.md)** — tien
 policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22), elk te herleiden
 tot een artikel uit ISO/IEC 27001:2022, NIS2 of EASA Part-IS. Eigen prefix, eigen map, geen
-toewijzing: het is een pilotvoorstel, geen tweede baseline. `node scripts/check-isms.js` bewaakt
+toewijzing: het is een pilotvoorstel, geen tweede baseline. `node scripts/check-sets.js` bewaakt
 dat die set niet botst met wat er werkelijk is uitgerold. Uitrolbaar is hij langs dezelfde twee
 routes als de baseline — CIPP leest de map rechtstreeks, en `export-intunebackup.js` schrijft 'm
 weg naar `export/NativeImport/IntuneBackupAndRestore-ISMS/`, apart van de baseline-export zodat
@@ -72,14 +72,14 @@ nodig om gebruikers veilig te stellen, en geldt het voor élk apparaat? Samenges
 twee sets op `settingDefinitionId` te vergelijken met
 [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) (874 profielen: CIS
 v4, de Microsoft Endpoint Security-baselines, ISO 27001 en NIS2) en elke overgebleven waarde na
-te lopen tegen de Policy CSP-documentatie. `node scripts/check-baseline2.js` bewaakt die set,
+te lopen tegen de Policy CSP-documentatie. `node scripts/check-sets.js` bewaakt die set,
 inclusief de botsingen met de baseline én met de ISMS-set.
 
 | | Wat het is | Prefix | Toewijzing | Controle |
 |---|---|---|---|---|
 | [`IntuneTemplate/`](IntuneTemplate/README.md) | de afgesproken baseline | `Baseline_` | uitgerold | `check-scope.js` |
-| [`ISMSTemplate/`](ISMSTemplate/README.md) | vertaling van de ISMS-documenten | `ISMS_` | geen — pilot | `check-isms.js` |
-| [`BASELINE2/`](BASELINE2/README.md) | bewezen, nodig, apparaatbreed | `BASELINE2_` | geen — voorstel | `check-baseline2.js` |
+| [`ISMSTemplate/`](ISMSTemplate/README.md) | vertaling van de ISMS-documenten | `ISMS_` | geen — pilot | `check-sets.js` |
+| [`BASELINE2/`](BASELINE2/README.md) | bewezen, nodig, apparaatbreed | `BASELINE2_` | geen — voorstel | `check-sets.js` |
 
 ## Indeling
 
@@ -167,7 +167,7 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 |---|---|---|
 | Baseline-checks voor TEST Policies Platform | `baseline/intune/baseline-v1.0.json` | `node scripts/generate-baseline.js` |
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
-| Idem voor de ISMS-pilotset | `export/NativeImport/IntuneBackupAndRestore-ISMS/` | hetzelfde script |
+| Idem voor elke set ernaast | `export/NativeImport/IntuneBackupAndRestore-<SET>/` | hetzelfde script |
 | CIPP | *geen conversie* — CIPP leest `IntuneTemplate/`, `ISMSTemplate/` en `BASELINE2/` rechtstreeks | |
 
 ## OpenIntuneBaseline bijwerken
@@ -238,24 +238,26 @@ update profiles, Windows 365) — met reden, in `"excluded"` in het manifest.
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Dat geldt voor allebei de
-sets: `IntuneTemplate/` komt binnen onder `Package: "Baseline"`, `ISMSTemplate/` onder
-`Package: "ISMS"`.
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Dat geldt voor alle drie
+de sets; in CIPP zijn ze uit elkaar te houden aan `Package`: `Baseline`, `ISMS` en `BASELINE2`.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 198 bestanden óók importeren — dezelfde 103 policies plus hun assignments, maar zonder
-`RowKey`, waar CIPP dan een **tweede** template van maakt met dezelfde naam en een eigen GUID.
+CIPP die 219 bestanden óók importeren — dezelfde 122 policies plus hun assignments en het
+meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** template van maakt
+met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
 
-Wat overblijft: `baseline/intune/baseline-v1.0.json` en de drie `_`-bestanden in
-`IntuneTemplate/` zijn wél `.json` maar geen policy. CIPP maakt daar één rij van zonder naam
-en zonder type (ze vallen op elkaar terug omdat de ontdubbeling op `Displayname` matcht, en
-die is bij alle vier leeg). Die rij doet niets; opruimen kan door 'm in CIPP te verwijderen.
-`baseline-v1.0.json` kan niet mee onder een `NativeImport`-pad — het TEST Policies Platform
-haalt dat bestand op zijn huidige pad op.
+Wat overblijft: zeven bestanden zijn wél `.json` maar geen policy — `baseline/intune/`
+`baseline-v1.0.json`, de drie `_`-bestanden in `IntuneTemplate/`, de twee `_manifest.json`'s
+van `ISMSTemplate/` en `BASELINE2/`, en het macOS-ADE-profiel in `enrollment/macos/`. CIPP
+maakt daar één rij van zonder naam en zonder type (ze vallen op elkaar terug omdat de
+ontdubbeling op `Displayname` matcht, en die is bij alle zeven leeg). Die rij doet niets;
+opruimen kan door 'm in CIPP te verwijderen. Onder een `NativeImport`-pad zetten kan niet:
+het TEST Policies Platform haalt `baseline-v1.0.json` op zijn huidige pad op, en de andere
+zes worden door de scripts naast hun eigen map gelezen.
 
 **Via IntuneBackupAndRestore** (getest tegen module 4.0.1):
 

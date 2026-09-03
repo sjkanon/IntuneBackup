@@ -12,23 +12,29 @@
  * Compliance Policies" idem, maar vult een ontbrekende scheduledActionsForRule zelf aan;
  * "App Protection Policies" POST't naar deviceAppManagement/managedAppPolicies.
  *
- * Tegenhanger van scripts/import-intunebackup.js. IntuneTemplate/ en ISMSTemplate/ blijven
- * de bron: de export is een afgeleide en wordt bij elke run volledig opnieuw geschreven.
+ * Tegenhanger van scripts/import-intunebackup.js. De sets zelf blijven de bron: de export is
+ * een afgeleide en wordt bij elke run volledig opnieuw geschreven.
  *
- * Twee sets, twee doelmappen — bewust niet één:
+ * Elke set uit SET_PREFIXES (lib/templates.js) krijgt een eigen doelmap — bewust niet één
+ * gedeelde:
  *
- *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/       de uitgerolde baseline, mét assignments
- *   ISMSTemplate/    ->  .../IntuneBackupAndRestore-ISMS/  de pilotset, zonder assignments
+ *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/            de uitgerolde baseline, mét assignments
+ *   ISMSTemplate/    ->  .../IntuneBackupAndRestore-ISMS/       voorstel, zonder assignments
+ *   BASELINE2/       ->  .../IntuneBackupAndRestore-BASELINE2/  voorstel, zonder assignments
  *
  * `Start-IntuneRestoreConfig` krijgt één pad mee en zet alles terug wat eronder staat. Stonden
- * beide sets in dezelfde map, dan rolt wie de baseline terugzet ongemerkt tien pilotpolicies
- * mee uit — en die veranderen gedrag dat gebruikers direct merken (zie ISMSTemplate/README.md).
- * Twee paden houden dat een bewuste keuze. De ISMS-export bevat om dezelfde reden géén
- * Assignments/-submap: die policies horen na de restore met de hand op een pilotgroep.
+ * de sets in dezelfde map, dan rolt wie de baseline terugzet ongemerkt de voorstellen mee uit
+ * — en die veranderen gedrag dat gebruikers direct merken. Aparte paden houden dat een bewuste
+ * keuze. De voorstelsets krijgen om dezelfde reden géén Assignments/-submap: die policies horen
+ * na de restore met de hand op een pilotgroep.
+ *
+ * Een nieuwe set toevoegen is één regel in SET_PREFIXES; deze exporter pikt hem daarna vanzelf
+ * op. Dat is de bedoeling: een set die niet exporteert is een set die alleen via CIPP uitrolt,
+ * en dat verschil hoort niet stilzwijgend te ontstaan.
  *
  * Gebruik: node scripts/export-intunebackup.js [doelmap]
  *   standaard doelmap: export/NativeImport/IntuneBackupAndRestore/
- *   de ISMS-set gaat naar diezelfde map met "-ISMS" erachter
+ *   elke set naast de baseline gaat naar diezelfde map met "-<SET>" erachter
  *
  * Die `NativeImport` in het pad is geen beschrijving maar een uitsluiting. CIPP scant een
  * template-repository met `git/trees?recursive=1` en negeert precies twee dingen: bestanden
@@ -39,11 +45,10 @@
 
 const fs = require("fs");
 const path = require("path");
-const { readTemplates } = require("./lib/templates");
+const { SET_PREFIXES, readTemplates } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
-const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
-const ISMS_DIR = path.join(REPO_ROOT, "ISMSTemplate");
+const TEMPLATE_DIR = path.join(REPO_ROOT, SET_PREFIXES.Baseline);
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const DEFAULT_OUT = path.join(REPO_ROOT, "export", "NativeImport", "IntuneBackupAndRestore");
 
@@ -171,11 +176,100 @@ function exportSet({ label, sourceDir, outDir, assignments }) {
   return { written, perFolder, withoutAssignment };
 }
 
+/**
+ * Doelmap van een set naast de baseline: zusje van de baselinemap, niet een submap ervan.
+ * Alles ónder het pad dat je aan Start-IntuneRestoreConfig meegeeft wordt teruggezet.
+ */
+const outDirFor = (baseOut, set) => `${baseOut}-${set}`;
+
+/**
+ * Twee soorten configuratie reizen mee in de baseline-export, in mappen die de module niet
+ * kent en dus overslaat: de macOS ADE-enrollmentprofielen en de macOS-shellscripts.
+ *
+ * Niet omdat IntuneBackupAndRestore ze kan terugzetten — dat kan hij niet: een
+ * depMacOSEnrollmentProfile hangt onder een ABM-token (depOnboardingSettings/{id}/
+ * enrollmentProfiles) en een shellscript onder deviceShellScripts; de module heeft daar geen
+ * Invoke-IntuneRestore* voor. CIPP kent ze evenmin; het is geen van de vijf TemplateTypes. De
+ * weg naar een tenant is scripts/New-MacOSEnrollmentPolicy.ps1 voor het profiel en de portal
+ * voor het script.
+ *
+ * Ze gaan tóch mee omdat de exportmap het pakket is waarmee je een tenant opnieuw inricht.
+ * Wat daar niet in zit wordt bij zo'n herinrichting simpelweg vergeten — en een Mac die zonder
+ * ADE-profiel uit Apple Business synct, faalt in de enrollment. De README die hier per map bij
+ * wordt geschreven zegt hoe ze er wél in gaan.
+ *
+ * enrollment/ en shellscripts/ blijven de bron; dit zijn kopieën die bij elke run opnieuw
+ * worden geschreven, net als de rest van de export.
+ */
+const SIDECARS = [
+  {
+    sourceDir: "enrollment",
+    folder: "Apple ADE Enrollment Profiles",
+    extensions: [".json"],
+    how: (files, folder) => [
+      "`Start-IntuneRestoreConfig` slaat deze map over: IntuneBackupAndRestore kent geen",
+      "restore-functie voor Apple ADE-enrollmentprofielen, en CIPP kent ze ook niet. Ze reizen",
+      "hier mee omdat een tenant die je uit deze export opnieuw inricht ze wél nodig heeft — een",
+      "Mac die zonder enrollmentprofiel uit Apple Business synct, faalt in de enrollment.",
+      "",
+      "Terugzetten gaat per profiel, met het ABM-token erbij:",
+      "",
+      "```powershell",
+      ...files.map((f) => `.\\scripts\\New-MacOSEnrollmentPolicy.ps1 -TokenName <TOKEN> -Path '.\\${folder}\\${f.split("/").join("\\")}' -WhatIf`),
+      "```",
+      "",
+      "Haal `-WhatIf` weg als het klopt. Toewijzen blijft handwerk in de portal (Enrollment",
+      "program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde",
+      "serienummers levert Macs op die zonder wipe niet terug te draaien zijn.",
+      "",
+      "Zie `enrollment/macos/README.md` in de repo voor wat er in het profiel staat en waarom.",
+    ],
+  },
+  {
+    sourceDir: "shellscripts",
+    folder: "macOS Shell Scripts",
+    extensions: [".sh"],
+    how: () => [
+      "`Start-IntuneRestoreConfig` slaat deze map over: `deviceShellScripts` heeft geen",
+      "restore-functie in de module en geen `TemplateType` in CIPP. Deze scripts reizen mee",
+      "omdat ze bij een herinrichting anders vergeten worden.",
+      "",
+      "Aanmaken gaat met de hand: **Devices → macOS → Shell scripts → Add**. De instellingen",
+      "per script (uitvoeren als aangemelde gebruiker, frequentie, toewijzing) staan in",
+      "`shellscripts/macos/README.md` in de repo — die waarden zijn geen detail: een dockscript",
+      "dat als root draait schrijft naar de verkeerde Dock en de gebruiker ziet niets.",
+    ],
+  },
+];
+
+/**
+ * Kopieert één sidecar-map naar de export. Geeft de gekopieerde bestanden terug (relatief aan
+ * de doelmap), of een lege lijst als de bronmap niet bestaat.
+ */
+function exportSidecar(outDir, { sourceDir, folder, extensions, how }) {
+  const from = path.join(REPO_ROOT, sourceDir);
+  if (!fs.existsSync(from)) return [];
+
+  const written = [];
+  for (const platform of fs.readdirSync(from, { withFileTypes: true })) {
+    if (!platform.isDirectory()) continue;
+    for (const file of fs.readdirSync(path.join(from, platform.name))) {
+      if (!extensions.some((e) => file.endsWith(e))) continue;
+      const target = path.join(outDir, folder, platform.name);
+      fs.mkdirSync(target, { recursive: true });
+      fs.copyFileSync(path.join(from, platform.name, file), path.join(target, file));
+      written.push(`${platform.name}/${file}`);
+    }
+  }
+  if (written.length === 0) return written;
+
+  const lines = [`# ${folder}`, "", `**Gegenereerd** uit \`${sourceDir}/\` — niet met de hand bijwerken.`, "", ...how(written, folder), ""];
+  fs.writeFileSync(path.join(outDir, folder, "README.md"), lines.join("\n"));
+  return written;
+}
+
 function main() {
   const outDir = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_OUT;
-  // Zusje van de baselinemap, niet een submap ervan: alles ónder het pad dat je aan
-  // Start-IntuneRestoreConfig meegeeft wordt teruggezet.
-  const ismsOutDir = outDir + "-ISMS";
 
   if (!fs.existsSync(TEMPLATE_DIR)) {
     console.error(`IntuneTemplate/ niet gevonden op ${TEMPLATE_DIR}`);
@@ -203,12 +297,22 @@ function main() {
 
   const baseline = exportSet({ label: "Baseline", sourceDir: TEMPLATE_DIR, outDir, assignments });
 
-  // ISMSTemplate/ is optioneel: de exporter moet ook werken in een checkout zonder die set.
-  // Assignments bewust leeg — de pilotset heeft er geen, en dat is de bedoeling.
-  let isms = null;
-  if (fs.existsSync(ISMS_DIR)) {
+  // Elke set naast de baseline, in de volgorde van SET_PREFIXES. Een set is optioneel: de
+  // exporter moet ook werken in een checkout zonder ISMSTemplate/ of BASELINE2/. Assignments
+  // bewust leeg — die sets hebben er geen, en dat is de bedoeling.
+  const extra = [];
+  for (const [set, dirName] of Object.entries(SET_PREFIXES)) {
+    if (set === "Baseline") continue;
+    const sourceDir = path.join(REPO_ROOT, dirName);
+    if (!fs.existsSync(sourceDir)) continue;
     console.log("");
-    isms = exportSet({ label: "ISMS (pilot)", sourceDir: ISMS_DIR, outDir: ismsOutDir, assignments: {} });
+    extra.push({ set, outDir: outDirFor(outDir, set), ...exportSet({ label: `${set} (voorstel)`, sourceDir, outDir: outDirFor(outDir, set), assignments: {} }) });
+  }
+
+  const sidecars = SIDECARS.map((s) => ({ ...s, files: exportSidecar(outDir, s) })).filter((s) => s.files.length > 0);
+  for (const s of sidecars) {
+    console.log(`\n${s.files.length} bestand(en) uit ${s.sourceDir}/ meegekopieerd naar "${s.folder}/":`);
+    for (const f of s.files) console.log(`  ${f}`);
   }
 
   if (baseline.withoutAssignment.length > 0) {
@@ -226,11 +330,16 @@ function main() {
   console.log("Let op: -RestoreById $false is vereist — de assignments in de export bevatten bewust geen tenant-id's,");
   console.log("de module matcht dan op policynaam. Dat is ook de enige modus die cross-tenant klopt.");
 
-  if (isms) {
-    console.log(`\nDe ISMS-pilotset staat apart en wordt door bovenstaande aanroep niet meegenomen:`);
-    console.log(`  Start-IntuneRestoreConfig -Path '${ismsOutDir}'`);
-    console.log("Geen Start-IntuneRestoreAssignments: deze policies horen ongetoewezen terug en daarna met de hand");
-    console.log("op een pilotgroep — niet op All Devices. Zie ISMSTemplate/README.md.");
+  if (extra.length > 0) {
+    console.log(`\n${extra.length === 1 ? "Eén set staat" : `${extra.length} sets staan`} apart en ${extra.length === 1 ? "wordt" : "worden"} door bovenstaande aanroep niet meegenomen:`);
+    for (const e of extra) console.log(`  Start-IntuneRestoreConfig -Path '${e.outDir}'`);
+    console.log("Geen Start-IntuneRestoreAssignments: die policies horen ongetoewezen terug en daarna met de hand");
+    console.log("op een pilotgroep — niet op All Devices. Zie de README van de set.");
+  }
+
+  if (sidecars.length > 0) {
+    console.log(`\nDeze kent de module niet en gaan apart — zie de README in elke map:`);
+    for (const s of sidecars) console.log(`  ${s.folder}/  (${s.files.length})`);
   }
 }
 

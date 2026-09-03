@@ -17,7 +17,7 @@
     "          Sommige instellingen bestaan maar een keer per apparaat — een URL-blokkeerlijst",
     "          bijvoorbeeld. Twee toegewezen policies die hem allebei zetten leveren een",
     "          Conflict op, waarna Intune er geen toepast. Wie deze policy toewijst, haalt de",
-    "          instelling dus weg bij de policy die hier genoemd staat. check-isms.js bewaakt",
+    "          instelling dus weg bij de policy die hier genoemd staat. check-sets.js bewaakt",
     "          dat elke botsing hier verantwoord staat; een niet-verantwoorde botsing blokkeert."
   ],
   "policies": [
