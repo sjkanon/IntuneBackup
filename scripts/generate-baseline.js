@@ -290,6 +290,15 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Wireless_Shared_Devices: 138,
   Baseline_WIN_U_AI_Usage_Control: 139,
   Baseline_WIN_U_Attachment_Scanning: 140,
+
+  // 141 en hoger: de baselines uit IntuneAdmin die nog ontbraken. Op profielniveau
+  // vergeleken en niet op instellingniveau — daarmee kwamen hele sets in beeld die de
+  // eerdere vergelijking miste omdat hun losse instellingen elders al gedekt leken.
+  Baseline_WIN_D_Enrollment_Hardening: 141,
+  Baseline_WIN_D_Power_Management: 142,
+  Baseline_WIN_D_Storage_Sense: 143,
+  Baseline_WIN_D_Windows_AI_Features: 144,
+  Baseline_WIN_U_Microsoft_Teams: 145,
 };
 
 /**

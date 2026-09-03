@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 25,
+    "settingCount": 28,
     "settings": [
         {
             "id": "0",
@@ -463,6 +463,61 @@
                     }
                 ]
             }
+        },
+        {
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_userrights_profilesystemperformance",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-32-544"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-80-0"
+                    }
+                ]
+            },
+            "id": "25"
+        },
+        {
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_userrights_replaceprocessleveltoken",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-19"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-20"
+                    }
+                ]
+            },
+            "id": "26"
+        },
+        {
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_userrights_logonasbatchjob",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "*S-1-5-32-544"
+                    }
+                ]
+            },
+            "id": "27"
         }
     ]
 }

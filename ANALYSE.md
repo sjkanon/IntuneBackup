@@ -4,7 +4,7 @@ Handgeschreven, in tegenstelling tot [`README.md`](README.md) ernaast. Dit legt 
 BASELINE2-set tot stand is gekomen en — belangrijker — wat er bewust **niet** in zit en waarom.
 Zonder dat laatste is een volgende ronde gedoemd dezelfde 500 instellingen opnieuw te wegen.
 
-Datum: 3 september 2026. De set telt 25 policies: 15 uit deze analyse en de 10 die tot deze
+Datum: 3 september 2026. De baseline telt 134 policies. Deze analyse beschrijft de 25 die in september 2026 zijn toegevoegd: 15 uit deze analyse en de 10 die tot deze
 datum in `ISMSTemplate/` stonden en hier zijn opgegaan. Het einddoel is één baseline — deze map
 is de wachtkamer, `IntuneTemplate/` de bestemming.
 
@@ -77,6 +77,48 @@ Android die er helemaal niet waren.
 | `IOS - U - App Protection` | Het iOS-deelmenu bood nog onbeheerde apps aan, ondanks de beperking op uitgaande overdracht. Schermafdrukken waren niet geblokkeerd, PIN-hergebruik wel toegestaan. | Zie *Mobiel* hieronder. Raakt élke iPhone met bedrijfsgegevens — ook, en juist, de privétoestellen. |
 | `AND - U - App Protection` | PIN-hergebruik toegestaan. | Een PIN-reset zonder historie is betekenisloos, en dat is precies het moment waarop het ertoe doet. |
 | `IOS/AND - U - Compliance Device Health` en `Compliance Password` | **Er was geen enkele compliance-policy voor iOS en Android.** | "Vereis een compliant apparaat" in Conditional Access is voor die twee platformen zonder policy een lege huls. Doet vandaag nog niets — zie het voorbehoud hieronder. |
+
+## Tweede ronde: vergelijken op profiel in plaats van op instelling
+
+De eerste vergelijking hierboven ging per `settingDefinitionId`. Dat vindt losse gaten, maar het
+mist een hele categorie: een IntuneAdmin-*profiel* waarvan elke instelling apart onbelangrijk
+lijkt, terwijl het profiel als geheel iets afdekt dat wij nergens doen. Daarom is de set daarna
+nog eens per profiel doorgerekend — 800 profielen met instellingen, waarvan er **322 voor 0%
+gedekt** waren.
+
+Van die 322 valt het meeste af om dezelfde redenen als eerder: 90 losse CIS-profielen van één
+instelling, 89 Edge-profielen (L2 of cosmetisch), 26 iOS- en 9 Android-restricties die
+inschrijving vragen, 19 profielen voor Windows 365 en AVD, 16 voor Chrome en Safari, en één voor
+Defender op Linux. Wat overbleef zijn **vijf baselines die er wél toe doen**:
+
+| Baseline | Wat wij misten | Fase |
+|---|---|---:|
+| `WIN - D - Power Management` | De baseline eist al een wachtwoord bij ontwaken, maar de klep dicht doen deed niets — dus bleef het scherm ontgrendeld. Dat is het moment waarop een laptop onbeheerd achterblijft. | 1 |
+| `WIN - D - Storage Sense` | Een volle schijf breekt Windows Update, BitLocker-versleuteling en Defender-definitie-updates. Dat is de toestand waarin een apparaat stilletjes achterloopt. | 1 |
+| `WIN - D - Enrollment Hardening` | Tijdens OOBE de netwerkstap overslaan is de bekendste manier om Autopilot te omzeilen. Eén instelling sluit hem af. | 2 |
+| `WIN - D - Windows AI Features` | Cocreator, Image Creator, Generative Fill en de Settings Agent sturen invoer naar een generatieve dienst. ISMP22 staat die niet toe. | 2 |
+| `WIN - U - Microsoft Teams` | Zonder tenantbeperking kan een gebruiker in de zakelijke Teams-client inloggen op een vreemde tenant en daar bestanden naartoe slepen — een uitgaande datastroom die nergens wordt gelogd. | 3 |
+
+Plus drie CIS L1-user rights die aan de bestaande `WIN - D - User Rights` zijn toegevoegd:
+`profilesystemperformance`, `replaceprocessleveltoken` en `logonasbatchjob`. De overige
+user rights uit die CIS-set staan in IntuneAdmin met een placeholder (`<YOURACT>`) omdat de
+CIS-eis "niemand" is; een lege waardecollectie is in de settings catalog niet betrouwbaar te
+coderen, dus die zijn bewust overgeslagen in plaats van gegokt.
+
+**Twee sets die de vergelijking juist afwees:**
+
+- *App and Browser Isolation* (Microsoft Defender Application Guard, 10 instellingen) staat er in
+  drie IntuneAdmin-mappen. Microsoft heeft MDAG voor Edge inmiddels afgeschaft; een baseline
+  bouwen op een functie die verdwijnt levert alleen onderhoud op.
+- *MDE Enable file hash computation* zet de oude ADMX-variant, en nog op *Disabled* ook, terwijl
+  wij de moderne Defender-CSP-variant al aan hebben staan in
+  `WIN - D - Defender Additional Configuration`. Overnemen zou de zaak verslechteren.
+
+**Derde fout in de bron.** Naast de kapotte `AccountLockoutPolicy` hierboven: de vier Windows
+AI-profielen van IntuneAdmin heten "Enable Paint Cocreator", "Paint Image Creator" enzovoort en
+zetten `Disable X` op *Disabled* — ze schakelen die AI-functies dus juist **in**. Voor ISMP22
+moet dat andersom, dus onze policy zet ze op 1. Wie die profielen ongezien importeert krijgt het
+tegenovergestelde van wat de mapnaam suggereert.
 
 ## Wat de ISO 27001- en NIS2-mappen van IntuneAdmin opleverden
 

@@ -14,7 +14,7 @@ Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-u
 | Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights |
 | Bestand | [`Baseline_WIN_D_User_Rights.json`](Baseline_WIN_D_User_Rights.json) |
 
-## Instellingen — 25
+## Instellingen — 28
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -46,6 +46,9 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_userrights_restorefilesanddirectories` | *S-1-5-32-544 |
 | `device_vendor_msft_policy_config_userrights_shutdownthesystem` | *S-1-5-32-544, *S-1-5-32-545 |
 | `device_vendor_msft_policy_config_userrights_takeownership` | *S-1-5-32-544 |
+| `device_vendor_msft_policy_config_userrights_profilesystemperformance` | *S-1-5-32-544, *S-1-5-80-0 |
+| `device_vendor_msft_policy_config_userrights_replaceprocessleveltoken` | *S-1-5-19, *S-1-5-20 |
+| `device_vendor_msft_policy_config_userrights_logonasbatchjob` | *S-1-5-32-544 |
 
 ---
 

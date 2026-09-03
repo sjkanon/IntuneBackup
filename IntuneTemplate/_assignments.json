@@ -566,6 +566,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Power Management": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Printing": [
     {
       "target": {
@@ -621,6 +630,15 @@
     }
   ],
   "[Baseline] - WIN - D - Settings Sync": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Storage Sense": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

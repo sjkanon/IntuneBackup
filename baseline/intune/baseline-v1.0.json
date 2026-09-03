@@ -1838,6 +1838,26 @@
             "expectedValue": [
               "*S-1-5-32-544"
             ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_profilesystemperformance",
+            "expectedValue": [
+              "*S-1-5-32-544",
+              "*S-1-5-80-0"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_replaceprocessleveltoken",
+            "expectedValue": [
+              "*S-1-5-19",
+              "*S-1-5-20"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_userrights_logonasbatchjob",
+            "expectedValue": [
+              "*S-1-5-32-544"
+            ]
           }
         ]
       },
@@ -10837,6 +10857,211 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms",
             "expectedValue": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-141-DEnrollmentHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "enrollment-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Enrollment Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "vendor_msft_tenantlockdown_requirenetworkinoobe",
+            "expectedValue": "vendor_msft_tenantlockdown_requirenetworkinoobe_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-142-DPowerManagement",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "power-management",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Power Management\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_selectlidcloseactiononbattery",
+            "expectedValue": "device_vendor_msft_policy_config_power_selectlidcloseactiononbattery_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_selectlidcloseactionpluggedin",
+            "expectedValue": "device_vendor_msft_policy_config_power_selectlidcloseactionpluggedin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_selectpowerbuttonactiononbattery",
+            "expectedValue": "device_vendor_msft_policy_config_power_selectpowerbuttonactiononbattery_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_selectpowerbuttonactionpluggedin",
+            "expectedValue": "device_vendor_msft_policy_config_power_selectpowerbuttonactionpluggedin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_allowhibernate",
+            "expectedValue": "device_vendor_msft_policy_config_power_allowhibernate_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_power_energysaverbatterythresholdonbattery",
+            "expectedValue": 30
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-143-DStorageSense",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "storage-sense",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Storage Sense\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_allowstoragesenseglobal",
+            "expectedValue": "device_vendor_msft_policy_config_storage_allowstoragesenseglobal_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup",
+            "expectedValue": "device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesenseglobalcadence",
+            "expectedValue": 0
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesenserecyclebincleanupthreshold",
+            "expectedValue": 30
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesensedownloadscleanupthreshold",
+            "expectedValue": 30
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesensecloudcontentdehydrationthreshold",
+            "expectedValue": 30
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-144-DWindowsAIFeatures",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-ai-features",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Features\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablecocreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablecocreator_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableimagecreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableimagecreator_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablegenerativefill",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablesettingsagent",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-145-UMicrosoftTeams",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-teams",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - Microsoft Teams\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_teamsv3~policy~l_teams_string_teams_signinrestriction_policy",
+            "expectedValue": "user_vendor_msft_policy_config_teamsv3~policy~l_teams_string_teams_signinrestriction_policy_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_teamsv3~policy~l_teams_string_teams_signinrestriction_policy_restrictteamssignintoaccountsfromtenantlist",
+            "expectedValue": "<VUL-HIER-HET-TENANT-ID-IN>"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_teamsv2~policy~l_teams_teams_preventfirstlaunchafterinstall_policy",
+            "expectedValue": "user_vendor_msft_policy_config_teamsv2~policy~l_teams_teams_preventfirstlaunchafterinstall_policy_1"
           }
         ]
       },

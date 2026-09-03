@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 98 policies
+# Windows — 103 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 89 |
+| `SettingsCatalog/` | 94 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 78
+## Device-scoped (D) — 82
 
 Toewijzen aan apparaatgroepen.
 
@@ -47,6 +47,7 @@ Toewijzen aan apparaatgroepen.
 | [**Disable NTLM**](SettingsCatalog/Baseline_WIN_D_Disable_NTLM.md) | Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-066-DDisableNTLM` |
 | [**Endpoint Analytics**](DeviceConfigurations/Baseline_WIN_D_Endpoint_Analytics.md) | Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen. | Device config | — | All Devices | — |
 | [**Enhanced Phishing Protection**](SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.md) | Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-024-Smartscreen` |
+| [**Enrollment Hardening**](SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.md) | Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat niet zonder beheer langs de inschrijving kan komen. | Settings Catalog | 1 | — | `INTUNE-BASE-141-DEnrollmentHardening` |
 | [**In Box App Removal**](SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.md) | Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben. | Settings Catalog | 26 | All Devices | `INTUNE-BASE-068-DInBoxAppRemoval` |
 | [**Internet Explorer Legacy**](SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.md) | Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen. | Settings Catalog | 206 | All Devices | `INTUNE-BASE-069-DInternetExplorerLegacy` |
 | [**Kernel DMA Protection**](SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.md) | Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DMA-remapping ondersteunen. | Settings Catalog | 1 | — | `INTUNE-BASE-130-DKernelDMAProtection` |
@@ -66,6 +67,7 @@ Toewijzen aan apparaatgroepen.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) | Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat. | Settings Catalog | 19 | All Devices | `INTUNE-BASE-029-OnedriveSilentLogin` |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.md) | Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-019-MicrosoftAppStore` |
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.md) | Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of een beveiligingssleutel gebruiken in plaats van hun wachtwoord in te typen. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-076-DPasswordless` |
+| [**Power Management**](SettingsCatalog/Baseline_WIN_D_Power_Management.md) | Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand zetten, zodat de bestaande eis om een wachtwoord te vragen bij ontwaken ook echt tot een vergrendeld scherm leidt. | Settings Catalog | 6 | All Devices | `INTUNE-BASE-142-DPowerManagement` |
 | [**Printing Hardening**](SettingsCatalog/Baseline_WIN_D_Printing_Hardening.md) | Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van printerdrivers bij een gedeelde printer, en sluit printen over HTTP af. | Settings Catalog | 3 | — | `INTUNE-BASE-133-DPrintingHardening` |
 | [**Printing**](SettingsCatalog/Baseline_WIN_D_Printing.md) | Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers. | Settings Catalog | 20 | All Devices | `INTUNE-BASE-077-DPrinting` |
 | [**Privacy and Telemetry**](SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.md) | Zet de advertentie-id uit, blokkeert het klembord tussen apparaten, stopt het uploaden van gebruikersactiviteiten en houdt wat de gebruiker typt en inspreekt op het apparaat. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-134-DPrivacyAndTelemetry` |
@@ -75,10 +77,12 @@ Toewijzen aan apparaatgroepen.
 | [**Script File Associations**](SettingsCatalog/Baseline_WIN_D_Script_File_Associations.md) | Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert. | Settings Catalog | 1 | All Devices | `INTUNE-BASE-079-DScriptFileAssociations` |
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.md) | Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen. | Settings Catalog | 96 | All Devices | `INTUNE-BASE-080-DSecurityHardening` |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) | Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. | Settings Catalog | 4 | All Devices | `INTUNE-BASE-081-DSettingsSync` |
+| [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra de schijf vol dreigt te raken, en maakt lokaal gecachte OneDrive-bestanden weer online-only. | Settings Catalog | 6 | All Devices | `INTUNE-BASE-143-DStorageSense` |
 | [**Threat Protection**](SettingsCatalog/Baseline_WIN_D_Threat_Protection.md) | Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-136-DThreatProtection` |
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.md) | Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-082-DTimezone` |
 | [**Update Reports and Telemetry**](SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.md) | Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
-| [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 25 | All Devices | `INTUNE-BASE-026-UserRights` |
+| [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 28 | All Devices | `INTUNE-BASE-026-UserRights` |
+| [**Windows AI Features**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-144-DWindowsAIFeatures` |
 | [**Windows AI**](SettingsCatalog/Baseline_WIN_D_Windows_AI.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
 | [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 8 | All Devices | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices | `INTUNE-BASE-085-DWindowsFirewallRules` |
@@ -96,7 +100,7 @@ Toewijzen aan apparaatgroepen.
 | [**Wireless and Peripherals**](SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.md) | Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | [**Wireless Shared Devices**](SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) | Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. | Settings Catalog | 1 | — | `INTUNE-BASE-138-DWirelessSharedDevices` |
 
-## User-scoped (U) — 20
+## User-scoped (U) — 21
 
 Toewijzen aan gebruikersgroepen.
 
@@ -118,6 +122,7 @@ Toewijzen aan gebruikersgroepen.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_U_Microsoft_OneDrive.md) | De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet. | Settings Catalog | 8 | All Users | `INTUNE-BASE-032-UMicrosoftOneDrive` |
 | [**Microsoft Outlook**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook.md) | Configureert het Exchange Online-profiel van de gebruiker automatisch, zodat Outlook werkt zonder handmatig een account toe te voegen. | Settings Catalog | 1 | All Users | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_U_Microsoft_Store.md) | De gebruikerskant van de Store-beperkingen. | Settings Catalog | 3 | All Users | `INTUNE-BASE-104-UMicrosoftStore` |
+| [**Microsoft Teams**](SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.md) | Beperkt aanmelden in Teams tot de eigen tenant en voorkomt dat Teams zichzelf na installatie meteen start. | Settings Catalog | 3 | — | `INTUNE-BASE-145-UMicrosoftTeams` |
 | [**Personal Data Encryption**](SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.md) | Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft. | Settings Catalog | 4 | All Users | `INTUNE-BASE-105-UPersonalDataEncryption` |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.md) | Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen. | Settings Catalog | 4 | All Users | `INTUNE-BASE-114-UWindowsHelloForBusiness` |
 | [**Windows Spotlight**](SettingsCatalog/Baseline_WIN_U_Windows_Spotlight.md) | Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen. | Settings Catalog | 11 | All Users | `INTUNE-BASE-106-UWindowsSpotlight` |
