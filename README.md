@@ -51,6 +51,12 @@ Naast elk template staat een markdown met **élke instelling die die policy zet*
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
 Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.
 
+Naast de baseline staat er een tweede set: **[`ISMSTemplate/`](ISMSTemplate/README.md)** — negen
+policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22), elk te herleiden
+tot een artikel uit ISO/IEC 27001:2022, NIS2 of EASA Part-IS. Eigen prefix, eigen map, geen
+toewijzing: het is een pilotvoorstel, geen tweede baseline. `node scripts/check-isms.js` bewaakt
+dat die set niet botst met wat er werkelijk is uitgerold.
+
 ## Indeling
 
 ```

@@ -31,11 +31,25 @@ const TYPE_TO_CATEGORY = {
   AppProtection: "AppProtection",
 };
 
-/** "Baseline_WIN_D_BitLocker" -> { platform: "WIN", scope: "D", item: "BitLocker" } */
+/**
+ * Twee sets, één indeling.
+ *
+ *   Baseline_  IntuneTemplate/   de afgesproken baseline die in de tenant staat
+ *   ISMS_      ISMSTemplate/     de set die rechtstreeks uit de ISMS-documenten volgt
+ *
+ * Aparte prefix én aparte map, omdat het twee verschillende dingen zijn: de baseline is
+ * uitgerold en wordt door de pijplijn bewaakt, de ISMS-set is een voorstel dat nog op een
+ * pilotgroep moet. Zonder dat onderscheid tellen ze op in dezelfde overzichten en weet
+ * niemand meer wat er werkelijk op de apparaten staat.
+ */
+const SET_PREFIXES = { Baseline: "IntuneTemplate", ISMS: "ISMSTemplate" };
+const BASE_NAME_RE = /^(Baseline|ISMS)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
+
+/** "Baseline_WIN_D_BitLocker" -> { set: "Baseline", platform: "WIN", scope: "D", item: "BitLocker" } */
 function parseBaseName(baseName) {
-  const m = baseName.match(/^Baseline_(WIN|MAC|IOS|AND)_([DU])_(.+)$/);
+  const m = baseName.match(BASE_NAME_RE);
   if (!m) return null;
-  return { platform: m[1], scope: m[2], item: m[3] };
+  return { set: m[1], platform: m[2], scope: m[3], item: m[4] };
 }
 
 /** Relatief pad binnen IntuneTemplate/ waar dit template hoort. */
@@ -53,7 +67,7 @@ function listTemplateFiles(templateDir) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
       const full = path.join(dir, entry.name);
       if (entry.isDirectory()) walk(full);
-      else if (entry.name.startsWith("Baseline_") && entry.name.endsWith(".json")) out.push(full);
+      else if (BASE_NAME_RE.test(path.basename(entry.name, ".json")) && entry.name.endsWith(".json")) out.push(full);
     }
   };
   walk(templateDir);
@@ -188,4 +202,4 @@ function flattenSettings(settings) {
   return { settings: out, warnings };
 }
 
-module.exports = { PLATFORMS, TYPE_TO_CATEGORY, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed };
+module.exports = { PLATFORMS, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed };
