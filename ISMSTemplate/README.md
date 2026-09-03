@@ -2,7 +2,7 @@
 
 # ISMSTemplate/
 
-9 Intune-policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22),
+10 Intune-policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22),
 voor de eisen die `IntuneTemplate/` nog niet afdwingt. Elke policy is te herleiden tot een
 artikel: ISO/IEC 27001:2022 Annex A, NIS2 (richtlijn 2022/2555 art. 21), EASA Part-IS.I.OR,
 en het interne ISMS-document dat het eist.
@@ -18,9 +18,16 @@ ISMSTemplate/     ISMS_<PLATFORM>_<D|U>_<Item>.json        [ISMS] - WIN - D - It
 
 De mapindeling binnen beide is hetzelfde (`<PLATFORM>/<CATEGORIE>/`), en `scripts/lib/templates.js`
 kent beide prefixen. Wat verschilt is de pijplijn: deze set komt bewust **niet** in
-`baseline/intune/baseline-v1.0.json` en niet in de IntuneBackupAndRestore-export. Een policy die
-nog nergens is toegewezen hoort niet als check tegen een tenant te worden gelegd — dat levert
-alleen rode vinkjes op voor iets wat niemand heeft uitgerold.
+`baseline/intune/baseline-v1.0.json`. Een policy die nog nergens is toegewezen hoort niet als
+check tegen een tenant te worden gelegd — dat levert alleen rode vinkjes op voor iets wat
+niemand heeft uitgerold.
+
+Uitrolbaar is de set wél, langs allebei de routes die de baseline ook gebruikt: CIPP leest deze
+map rechtstreeks, en `scripts/export-intunebackup.js` schrijft 'm weg in het formaat van de
+module IntuneBackupAndRestore — naar een **eigen** map,
+`export/NativeImport/IntuneBackupAndRestore-ISMS/`. Apart, omdat `Start-IntuneRestoreConfig`
+alles terugzet wat onder het meegegeven pad staat: stond de set in dezelfde map, dan neemt wie
+de baseline terugzet deze pilotpolicies ongemerkt mee.
 
 ## Controles
 
@@ -37,11 +44,22 @@ bedoeld zijn, staan als `replaces` in `_manifest.json`; de rest blokkeert.
 
 ## Uitrollen
 
-Via CIPP (die leest deze map net als `IntuneTemplate/` rechtstreeks) of door de policy met de
-hand aan te maken. Daarna toewijzen aan een pilotgroep — niet aan All Devices, want een deel van
-deze instellingen verandert gedrag dat gebruikers direct merken. Bevalt een policy, dan verhuist
-hij naar `IntuneTemplate/` onder de `Baseline_`-naam en krijgt hij daar een checkId en een
-toewijzing.
+Drie routes, alle drie zonder toewijzing:
+
+- **CIPP** — leest deze map net als `IntuneTemplate/` rechtstreeks; de policies staan er onder
+  `Package: "ISMS"`.
+- **IntuneBackupAndRestore** — `node scripts/export-intunebackup.js` ververst de export, daarna:
+
+  ```powershell
+  Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-ISMS'
+  ```
+
+  Géén `Start-IntuneRestoreAssignments`: de export bevat met opzet geen `Assignments/`-map.
+- **Met de hand** aanmaken in Intune.
+
+Daarna toewijzen aan een pilotgroep — niet aan All Devices, want een deel van deze instellingen
+verandert gedrag dat gebruikers direct merken. Bevalt een policy, dan verhuist hij naar
+`IntuneTemplate/` onder de `Baseline_`-naam en krijgt hij daar een checkId en een toewijzing.
 
 ## De set
 
@@ -55,6 +73,7 @@ toewijzing.
 | **WIN - D - Logging** | Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien is wat een beheerder werkelijk heeft uitgevoerd. | 3 | A.8.15 Logging · A.8.16 Monitoringactiviteiten · NIS2 art. 21(2)(b) incidentbehandeling · IS.I.OR.245 vastlegging · IS.I.OR.220 incidentrespons · ISMP13 |
 | **WIN - D - Threat Protection** | Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker. | 3 | A.8.7 Bescherming tegen malware · A.8.8 Beheer van technische kwetsbaarheden · NIS2 art. 21(2)(e) beveiliging van netwerk- en informatiesystemen · IS.I.OR.220 · ISMP11 |
 | **WIN - D - Wireless and Peripherals** | Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. | 7 | A.8.20 Netwerkbeveiliging · A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein · NIS2 art. 21(2)(e) beveiliging bij verwerving en onderhoud · ISMP19 · ISMP14 · ISMP08 |
+| **WIN - D - Wireless Shared Devices** | Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. | 1 | A.8.20 Netwerkbeveiliging · A.8.1 Eindpuntapparatuur van gebruikers · NIS2 art. 21(2)(e) beveiliging van netwerk- en informatiesystemen · ISMP19 · ISMP14 · ISMP08 |
 | **WIN - U - AI Usage Control** | Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar. | 2 | A.5.10 Aanvaardbaar gebruik · A.5.19 Informatiebeveiliging in leveranciersrelaties · A.8.1 Eindpuntapparatuur van gebruikers · NIS2 art. 21(2)(d) toeleveringsketen · ISMP22 · ISDP01 |
 
 ---
@@ -215,6 +234,23 @@ device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2 = 1
 ```
 
 > Windows Connect Now is de vergeten route: daarmee kan een gebruiker draadloze instellingen — inclusief het netwerkwachtwoord — via WPS of een USB-stick van het ene apparaat naar het andere overzetten, buiten elk beheer om. Beide instellingen sluiten dat af. Over de vraag wie elkaars wifi-profielen kan zien: profielen die via Intune of GPO worden uitgerold zijn apparaatbreed en dus voor elke gebruiker van dat apparaat zichtbaar, en wie zelf een netwerk toevoegt kan met netsh het bijbehorende wachtwoord in leesbare tekst opvragen. Zolang het bedrijfsnetwerk op een gedeeld wachtwoord (PSK) draait, kent iedere gebruiker die ooit verbonden heeft dat wachtwoord dus — daar helpt geen enkele policy tegen. De maatregel die dat wél oplost staat in ISMP19 zelf: 802.1X met certificaten, want dan is er geen gedeeld geheim om uit te lezen. Handmatige wifi-configuratie helemaal blokkeren (AllowManualWiFiConfiguration) is bewust weggelaten: dat maakt thuiswerken en hotels onmogelijk, en ISMP08 staat teleworking uitdrukkelijk toe. ISMP19 gaat verder en zegt dat alle Bluetooth-profielen behalve Serial Port Profile uit moeten. Letterlijk uitvoeren breekt koptelefoons, muizen en toetsenborden; dat vraagt eerst een besluit. Deze vier instellingen zijn de verdedigbare tussenstap: het apparaat is niet meer te ontdekken of te benaderen door een onbekende, bestaande koppelingen blijven werken. ServicesAllowedList is bewust weggelaten — die vraagt om GUID's per profiel en zet er zonder zorgvuldige lijst meer uit dan bedoeld.
+### [ISMS] - WIN - D - Wireless Shared Devices
+
+Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij.
+
+| | |
+|---|---|
+| Bestand | `WIN/SettingsCatalog/ISMS_WIN_D_Wireless_Shared_Devices.json` |
+| Instellingen | 1 |
+| Bron | ISO/IEC 27001:2022 A.8.20 en A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration |
+
+Instellingen:
+
+```
+device_vendor_msft_policy_config_wifi_allowmanualwificonfiguration = 0
+```
+
+> ALLEEN voor gedeelde apparaten. Windows maakt van een netwerk dat een gebruiker zelf toevoegt standaard een all-user-profiel: elke andere gebruiker van dat apparaat ziet die SSID in de lijst staan en kan er verbinding mee maken. Het wachtwoord uitlezen lukt alleen als lokale beheerder, en dat is bij ons beperkt tot WLapsAdmin — maar de SSID-lijst zelf verraadt al waar een collega is geweest. Per-gebruiker-profielen bestaan in Windows wel (netsh wlan add profile user=current), maar de interface maakt ze nooit zo aan en er is geen MDM- of Settings Catalog-instelling die dat afdwingt: de bijbehorende GPO zit in Wireless Network (IEEE 802.11) Policies en is domeingebonden. Wat wel kan is de andere kant op: alleen nog netwerken uit Intune toestaan. TWEE VOORWAARDEN. Rol eerst een wifi-profiel uit via Intune, anders staat het apparaat na toepassing offline. En zet deze policy nooit op laptops: thuis- en hotelnetwerken werken dan niet meer, en ISMP08 staat teleworking uitdrukkelijk toe. Microsoft waarschuwt bovendien dat bestaande, door gebruikers aangemaakte profielen bij toepassing worden verwijderd — dat is hier de bedoeling, maar meld het vooraf.
 ### [ISMS] - WIN - U - AI Usage Control
 
 Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar.

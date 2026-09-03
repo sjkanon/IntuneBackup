@@ -31,6 +31,11 @@ flowchart LR
   CIPP --> TENANT
   PLAT -.->|vergelijkt| TENANT
 
+  ISMS["<b>ISMSTemplate/</b><br/>10 policies<br/><i>pilot</i>"]
+  ISMS -->|export-intunebackup.js| EXI["export/NativeImport/<br/>IntuneBackupAndRestore-ISMS/"]
+  ISMS -.->|leest rechtstreeks| CIPP
+  EXI -->|Start-IntuneRestoreConfig| TENANT
+
   style T stroke-width:3px
 ```
 
@@ -51,11 +56,14 @@ Naast elk template staat een markdown met **élke instelling die die policy zet*
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
 Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.
 
-Naast de baseline staat er een tweede set: **[`ISMSTemplate/`](ISMSTemplate/README.md)** — negen
+Naast de baseline staat er een tweede set: **[`ISMSTemplate/`](ISMSTemplate/README.md)** — tien
 policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22), elk te herleiden
 tot een artikel uit ISO/IEC 27001:2022, NIS2 of EASA Part-IS. Eigen prefix, eigen map, geen
 toewijzing: het is een pilotvoorstel, geen tweede baseline. `node scripts/check-isms.js` bewaakt
-dat die set niet botst met wat er werkelijk is uitgerold.
+dat die set niet botst met wat er werkelijk is uitgerold. Uitrolbaar is hij langs dezelfde twee
+routes als de baseline — CIPP leest de map rechtstreeks, en `export-intunebackup.js` schrijft 'm
+weg naar `export/NativeImport/IntuneBackupAndRestore-ISMS/`, apart van de baseline-export zodat
+een restore van de baseline de pilotset niet meesleept.
 
 ## Indeling
 
@@ -143,7 +151,8 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 |---|---|---|
 | Baseline-checks voor TEST Policies Platform | `baseline/intune/baseline-v1.0.json` | `node scripts/generate-baseline.js` |
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
-| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` rechtstreeks | |
+| Idem voor de ISMS-pilotset | `export/NativeImport/IntuneBackupAndRestore-ISMS/` | hetzelfde script |
+| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` en `ISMSTemplate/` rechtstreeks | |
 
 ## OpenIntuneBaseline bijwerken
 
@@ -213,7 +222,9 @@ update profiles, Windows 365) — met reden, in `"excluded"` in het manifest.
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`.
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Dat geldt voor allebei de
+sets: `IntuneTemplate/` komt binnen onder `Package: "Baseline"`, `ISMSTemplate/` onder
+`Package: "ISMS"`.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
@@ -246,6 +257,18 @@ De derde regel is geen vergetelheid: `Start-IntuneRestoreAssignments` roept in 4
 assignments van Settings Catalog, ADMX, device configurations en compliance aan, maar **niet**
 die van App Protection. Zonder die losse aanroep staan de twee MAM-policies er wel, maar
 zonder toewijzing — en dan beschermen ze niets.
+
+De ISMS-pilotset staat in een eigen map en gaat dus apart terug:
+
+```powershell
+Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-ISMS'
+```
+
+Geen `Start-IntuneRestoreAssignments` erachteraan: die export bevat met opzet geen
+`Assignments/`-map. De policies horen na de restore met de hand op een pilotgroep, niet op All
+Devices — zie [`ISMSTemplate/`](ISMSTemplate/README.md). En twee mappen in plaats van één, omdat
+`Start-IntuneRestoreConfig` alles terugzet wat onder het meegegeven pad staat: samen in één map
+zou wie de baseline terugzet de pilotset ongemerkt mee uitrollen.
 
 De exporter schrijft de app protection-assignments in de vorm die de module verwacht:
 bestandsnaam `<guid> - <policynaam>.json` (de module leest de naam als alles ná het eerste

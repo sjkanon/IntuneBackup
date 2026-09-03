@@ -14,7 +14,9 @@ on:
     branches: [main]
     paths:
       - "IntuneTemplate/**"
+      - "ISMSTemplate/**"
       - "scripts/generate-baseline.js"
+      - "scripts/check-isms.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
       - "scripts/lib/**"
@@ -38,10 +40,14 @@ jobs:
       # andere waarde zetten. Blokkerend.
       - name: Controleer scope, indeling en conflicten van IntuneTemplate/
         run: node scripts/check-scope.js
+      # Zelfde voor de ISMS-pilotset, plus de controle die check-scope.js niet kan doen: botst
+      # een ISMS-policy met een toegewezen baseline-policy? Schrijft ISMSTemplate/README.md bij.
+      - name: Controleer ISMSTemplate/ en genereer de README
+        run: node scripts/check-isms.js --docs
 
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js
-      - name: Genereer export/NativeImport/IntuneBackupAndRestore/ (restore-formaat)
+      - name: Genereer de restore-formaten van beide sets
         run: node scripts/export-intunebackup.js
       # Na generate-baseline: de policytabellen tonen de checkId's, en die komen uit de
       # zojuist geschreven baseline.
@@ -59,12 +65,16 @@ jobs:
             `baseline/intune/baseline-v1.0.json` is de bron voor de `intune`-categorie in de
             baseline-koppeling van TEST Policies Platform (Instellingen →
             Baseline-koppelingen); `export/NativeImport/IntuneBackupAndRestore/` is dezelfde baseline in
-            het restore-formaat van de IntuneBackupAndRestore-module.
+            het restore-formaat van de IntuneBackupAndRestore-module. De ISMS-pilotset gaat naar
+            `export/NativeImport/IntuneBackupAndRestore-ISMS/` — apart, zodat een restore van de
+            baseline die set niet meesleept.
           branch: auto/regenerate-baseline
           delete-branch: true
           add-paths: |
             baseline/intune/baseline-v1.0.json
             export/NativeImport/IntuneBackupAndRestore/**
+            export/NativeImport/IntuneBackupAndRestore-ISMS/**
+            ISMSTemplate/README.md
             OVERZICHT.md
             IntuneTemplate/*.md
             IntuneTemplate/**/*.md

@@ -1,11 +1,24 @@
 # export/
 
-**Gegenereerd — niet met de hand bijwerken.** Dit is `IntuneTemplate/` in het formaat dat de
-PowerShell-module [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore)
-verwacht. Wijzig je hier iets, dan is het bij de volgende
-`node scripts/export-intunebackup.js` weer weg.
+**Gegenereerd — niet met de hand bijwerken.** Dit zijn `IntuneTemplate/` en `ISMSTemplate/` in
+het formaat dat de PowerShell-module
+[IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) verwacht. Wijzig je
+hier iets, dan is het bij de volgende `node scripts/export-intunebackup.js` weer weg.
 
-CIPP heeft deze map niet nodig; die leest `IntuneTemplate/` rechtstreeks.
+Twee bronmappen, twee doelmappen:
+
+| Bron | Export | Assignments | Wat het is |
+|---|---|---|---|
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | ja, uit `_assignments.json` | de uitgerolde baseline |
+| `ISMSTemplate/` | `NativeImport/IntuneBackupAndRestore-ISMS/` | nee, met opzet | de ISMS-pilotset |
+
+Twee mappen en niet één, omdat `Start-IntuneRestoreConfig` één pad meekrijgt en alles terugzet
+wat eronder staat. In dezelfde map zou wie de baseline terugzet de tien pilotpolicies ongemerkt
+mee uitrollen — en die veranderen gedrag dat gebruikers direct merken. De ISMS-export heeft om
+dezelfde reden geen `Assignments/`: die policies horen ná de restore met de hand op een
+pilotgroep, niet op All Devices. Zie [`ISMSTemplate/`](../ISMSTemplate/README.md).
+
+CIPP heeft deze map niet nodig; die leest `IntuneTemplate/` en `ISMSTemplate/` rechtstreeks.
 
 ## Waarom `NativeImport` in het pad staat
 
@@ -14,7 +27,7 @@ Omdat CIPP dat woord als enige uitsluiting kent. Een template-repository wordt g
 `.json` eindigen, en het pad mag `NativeImport` niet bevatten. Een instelling voor "kijk
 alleen in deze submap" bestaat niet.
 
-Zonder dat woord importeert CIPP deze 192 bestanden dus ook. Ze bevatten dezelfde 98 policies,
+Zonder dat woord importeert CIPP deze 212 bestanden dus ook. Ze bevatten dezelfde 116 policies,
 maar in Graph-vorm zonder `RowKey` — en dan valt CIPP terug op het raden van het policytype
 uit de inhoud en maakt er een **tweede** template van, met dezelfde naam en een eigen GUID.
 Twee templates met dezelfde naam is precies het geval waar CIPP zelf een foutmelding voor
@@ -27,6 +40,8 @@ dezelfde policies in twee formaten in één repository.
 ```mermaid
 flowchart LR
   T["IntuneTemplate/"] -->|export-intunebackup.js| E["export/NativeImport/IntuneBackupAndRestore/"]
+  I["ISMSTemplate/"] -->|export-intunebackup.js| EI["export/NativeImport/IntuneBackupAndRestore-ISMS/"]
+  EI -->|Start-IntuneRestoreConfig| PI["pilotpolicies, ongetoewezen"]
   E -->|Start-IntuneRestoreConfig| P["policies in de tenant"]
   E -->|Start-IntuneRestoreAssignments<br/>-RestoreById $false| A["assignments"]
   E -->|Invoke-IntuneRestoreApp&#8203;ProtectionPolicyAssignment| M["MAM-assignments"]
@@ -49,17 +64,26 @@ wél de assignments van Settings Catalog, ADMX, device configurations en complia
 **niet** die van App Protection. Zonder die losse aanroep staan de twee MAM-policies er wel,
 maar zonder toewijzing — en dan beschermen ze niets.
 
+De ISMS-pilotset staat hier niet bij en gaat apart, zonder assignments:
+
+```powershell
+Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-ISMS'
+```
+
 ## Mappen
 
 | Map | Policies | Restore-functie |
 |---|---:|---|
-| `Settings Catalog/` | 81 | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 91 | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 7 | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
-| `Device Configurations/` | 4 | `Invoke-IntuneRestoreDeviceConfiguration` |
+| `Device Configurations/` | 5 | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 | `Invoke-IntuneRestoreAppProtectionPolicy` |
 | `Administrative Templates/` | 1 | `Invoke-IntuneRestoreGroupPolicyConfiguration` |
 
-Elke map heeft een `Assignments/`-submap. Twee vormen, allebei zoals de module ze zelf
+De ISMS-export ernaast heeft één map — `Settings Catalog/` met tien policies — en geen
+`Assignments/`.
+
+Elke map van de baseline-export heeft een `Assignments/`-submap. Twee vormen, allebei zoals de module ze zelf
 wegschrijft:
 
 - **App Protection**: bestandsnaam `<guid> - <policynaam>.json`, en de lijst zit in een
@@ -67,12 +91,15 @@ wegschrijft:
   `$assignments.Value` — een kale array levert daar stilzwijgend nul assignments op.
 - **De rest**: bestandsnaam is de policynaam, inhoud is een kale array.
 
-## Vier policies staan er zonder assignment
+## Policies zonder assignment
 
-`Windows Update Ring 1 Pilot`, `Windows Update Ring 2 UAT`, `Defender Update Ring 1 Pilot` en
-`Defender Update Ring 2 UAT` zetten dezelfde instellingen als hun ring 3 met andere waarden.
-Alle ringen op All Devices zou een conflict opleveren; ring 1 en 2 horen op een pilot-
-respectievelijk UAT-groep. Wijs ze na de restore handmatig toe.
+De update- en Defender-ringen 1 en 2 (`Windows Update Ring 1 Pilot`, `Windows Update Ring 2
+UAT`, `Defender Update Ring 1 Pilot`, `Defender Update Ring 2 UAT`) zetten dezelfde
+instellingen als hun ring 3 met andere waarden. Alle ringen op All Devices zou een conflict
+opleveren; ring 1 en 2 horen op een pilot- respectievelijk UAT-groep. Wijs ze na de restore
+handmatig toe. `node scripts/export-intunebackup.js` noemt bij elke run de volledige lijst.
+
+De hele ISMS-export valt hieronder: die is met opzet ongetoewezen.
 
 Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en de
 lijst met policies die eerst in een pilot horen.

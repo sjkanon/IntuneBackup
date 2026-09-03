@@ -12,6 +12,10 @@ flowchart TD
   T -->|check-scope.js| CHK{{"scope · indeling · conflicten"}}
   T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
+  I["ISMSTemplate/<br/>10 policies"] -->|check-isms.js| CHK
+  I -->|export-intunebackup.js| EXI["export/NativeImport/<br/>IntuneBackupAndRestore-ISMS/"]
+  I -.->|leest rechtstreeks| CIPP
+  EXI -->|Start-IntuneRestoreConfig| TENANT
   T -->|generate-docs.js| DOC["README's per platform"]
   T -.->|leest rechtstreeks| CIPP["CIPP"]
   BL --> PLAT["TEST Policies Platform"]
@@ -30,7 +34,7 @@ flowchart TD
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen en de migratietabel. Blokkerend in CI. |
 | [`check-isms.js`](check-isms.js) | controle | Hetzelfde voor `ISMSTemplate/`, plus de controle die `check-scope.js` niet kán doen: botst een ISMS-policy met een tóégewezen baseline-policy? `--docs` genereert `ISMSTemplate/README.md`. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
-| [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht. |
+| [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, `ISMSTemplate/` in een eigen map ernaast zonder. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
 
 Alle vijf de leesscripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
