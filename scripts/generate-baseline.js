@@ -319,6 +319,8 @@ const CHECK_NUMBERS = {
   // baseline uitrolt, dus daar hangen de findings aan.
   Baseline_WIN_D_Windows_AI_Permitted: 148,
   Baseline_WIN_U_AI_Usage_Control_Permitted: 149,
+  // Hoort bij Windows AI Permitted: als Recall aan mag, dan in elk geval begrensd.
+  Baseline_WIN_D_Windows_AI_Recall_Boundaries: 150,
 };
 
 /**

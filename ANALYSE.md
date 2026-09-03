@@ -154,9 +154,27 @@ Twee dingen die daarbij bewust zijn gedaan:
 
 De Permitted-varianten zijn geen aanbeveling. Ze staan in fase 5 (niet uitrollen) omdat de
 baseline standaard de Restricted-kant kiest; wie de andere kant op wil, wisselt de toewijzing om.
-Weeg dan wel de gevolgen: Recall bewaart een doorzoekbare index van alles wat op het scherm is
-geweest, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de
-gegevens die erin staan.
+
+Voor wie dat doet is er een derde policy: **`WIN - D - Windows AI Recall Boundaries`** (150,
+fase 3). Recall toestaan is namelijk geen alles-of-niets. De schade van een index is niet
+uniform verdeeld — één momentopname van een geopende wachtwoordkluis of van het Entra-portaal
+weegt zwaarder dan duizend van een tekstverwerker. Die policy haalt precies die plekken eruit:
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| `SetDenyUriListForRecall` | negen M365-beheerportalen en aanmeldpagina's | daar staat per definitie iets op het scherm dat niet in een doorzoekbare index thuishoort |
+| `SetDenyAppListForRecall` | RDP en vier wachtwoordkluizen | een RDP-sessie toont het scherm van een *ander* systeem; een kluis toont wachtwoorden |
+| `SetMaximumStorageDurationForRecallSnapshots` | 30 dagen | de kortste waarde die de instelling aanbiedt; standaard verloopt er niets |
+| `SetMaximumStorageSpaceForRecallSnapshots` | 10 GB | begrensd in plaats van "wat de schijf toelaat" |
+| `AllowRecallExport` | uit | de exportknop is de weg waarlangs de hele index het apparaat verlaat |
+
+De URI-lijst klopt voor elke M365-tenant. **De app-lijst is bewust onvolledig** en moet per klant
+worden aangevuld met wat daar gevoelige gegevens toont: het HR-pakket, het dossiersysteem, de
+bankomgeving. Namen mogen een uitvoerbaar bestand zijn (`app.exe`) of een AUMID voor Store-apps.
+
+Eén ding blijft staan ongeacht deze begrenzing: de index valt onder dezelfde bewaartermijnen en
+verwijderingsplichten als de gegevens die erin staan. Een bewaartermijn van 30 dagen is een
+technische grens, geen juridisch antwoord.
 
 **Twee sets die de vergelijking juist afwees:**
 

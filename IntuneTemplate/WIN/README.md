@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 106 policies
+# Windows — 107 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 97 |
+| `SettingsCatalog/` | 98 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 84
+## Device-scoped (D) — 85
 
 Toewijzen aan apparaatgroepen.
 
@@ -85,6 +85,7 @@ Toewijzen aan apparaatgroepen.
 | [**Windows AI Features Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) | Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | [**Windows AI Features Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | [**Windows AI Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) | Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. | Settings Catalog | 3 | — | `INTUNE-BASE-148-DWindowsAIPermitted` |
+| [**Windows AI Recall Boundaries**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.md) | Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerportalen en de wachtwoordkluis, hoogstens 30 dagen bewaren, hoogstens 10 GB, en gebruikers kunnen hun Recall-gegevens niet exporteren. | Settings Catalog | 5 | — | `INTUNE-BASE-150-DWindowsAIRecallBoundaries` |
 | [**Windows AI Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
 | [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 8 | All Devices | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices | `INTUNE-BASE-085-DWindowsFirewallRules` |

@@ -11161,6 +11161,67 @@
           "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
         }
       ]
+    },
+    {
+      "checkId": "INTUNE-BASE-150-DWindowsAIRecallBoundaries",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-ai-recall-boundaries",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Recall Boundaries\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_setdenyapplistforrecall",
+            "expectedValue": [
+              "mstsc.exe",
+              "KeePass.exe",
+              "KeePassXC.exe",
+              "1Password.exe",
+              "Bitwarden.exe"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_setdenyurilistforrecall",
+            "expectedValue": [
+              "https://login.microsoftonline.com",
+              "https://entra.microsoft.com",
+              "https://portal.azure.com",
+              "https://admin.microsoft.com",
+              "https://intune.microsoft.com",
+              "https://security.microsoft.com",
+              "https://compliance.microsoft.com",
+              "https://myaccount.microsoft.com",
+              "https://mysignins.microsoft.com"
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_setmaximumstoragedurationforrecallsnapshots",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_setmaximumstoragedurationforrecallsnapshots_30"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_setmaximumstoragespaceforrecallsnapshots_v2",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_setmaximumstoragespaceforrecallsnapshots_10240"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_allowrecallexport",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_allowrecallexport_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
     }
   ]
 }

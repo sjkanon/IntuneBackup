@@ -1505,6 +1505,35 @@
       "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per klant verschillen."
     },
     {
+      "target": "Baseline_WIN_D_Windows_AI_Recall_Boundaries",
+      "displayName": "[Baseline] - WIN - D - Windows AI Recall Boundaries",
+      "doel": "Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerportalen en de wachtwoordkluis, hoogstens 30 dagen bewaren, hoogstens 10 GB, en gebruikers kunnen hun Recall-gegevens niet exporteren.",
+      "bron": "Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport); waarden geverifieerd tegen de settings catalog-definities",
+      "herkomst": "eigen",
+      "toewijzingTekst": "geen — fase 3",
+      "fase": 3,
+      "faseWaarom": "Hoort bij [Baseline] - WIN - D - Windows AI Permitted en doet niets zonder die policy: staat Recall uit, dan valt er ook niets te begrenzen. Wijs hem pas toe als de klant Recall toestaat, en vul dan eerst de app-lijst aan met de programma's die in die omgeving gevoelige gegevens tonen.",
+      "controls": {
+        "iso": [
+          "A.5.34 Privacy en bescherming van persoonsgegevens",
+          "A.8.11 Datamaskering",
+          "A.8.12 Voorkomen van datalekken",
+          "A.5.33 Bescherming van registraties"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISDP01",
+          "ISMP22"
+        ]
+      },
+      "bewijs": "Recall bewaart een doorzoekbare index van alles wat op het scherm is geweest. De schade daarvan is niet uniform verdeeld: één momentopname van een geopende wachtwoordkluis of van het Entra-beheerportaal weegt zwaarder dan duizend van een tekstverwerker. Deze policy haalt juist die plekken eruit, begrenst hoe lang en hoeveel er wordt bewaard, en sluit de exportknop af waarmee een gebruiker zijn hele index naar een app of website kan sturen. Dat laatste is de weg waarlangs de index het apparaat verlaat.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware waar Recall is toegestaan. De URI-lijst klopt voor elke M365-tenant; de app-lijst is een startpunt dat per klant moet worden aangevuld.",
+      "note": "**De app-lijst is bewust onvolledig.** Wat erin staat is wat overal verdedigbaar is — een RDP-sessie toont het scherm van een ander systeem, een wachtwoordkluis toont wachtwoorden. Vul aan met de programma's die in deze omgeving gevoelige gegevens tonen: het HR-pakket, het dossiersysteem, de bankomgeving. Namen mogen een uitvoerbaar bestand zijn (`app.exe`) of een AUMID voor Store-apps. Let op dat de bewaartermijn van 30 dagen niets zegt over verwijderingsplichten: staat er een persoonsgegeven in de index, dan valt die index onder dezelfde regels als de bron. Exporteren staat standaard al uit; het staat hier expliciet zodat het een besluit is en geen toevalligheid."
+    },
+    {
       "target": "Baseline_WIN_D_Windows_AI_Restricted",
       "displayName": "[Baseline] - WIN - D - Windows AI Restricted",
       "doel": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.",
