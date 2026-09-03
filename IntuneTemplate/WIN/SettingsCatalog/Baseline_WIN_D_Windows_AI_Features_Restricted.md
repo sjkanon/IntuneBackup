@@ -1,6 +1,6 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# [Baseline] - WIN - D - Windows AI Features
+# [Baseline] - WIN - D - Windows AI Features Restricted
 
 Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent.
 
@@ -10,11 +10,11 @@ Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocre
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-144-DWindowsAIFeatures` |
+| checkId | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan |
-| Bestand | [`Baseline_WIN_D_Windows_AI_Features.json`](Baseline_WIN_D_Windows_AI_Features.json) |
+| Bestand | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 
-> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI; deze policy vult die aan en botst er niet mee.
+> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
 
 ## Instellingen — 4
 

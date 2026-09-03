@@ -1966,12 +1966,6 @@
             "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_allowtenantlist_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_allowtenantlist_allowtenantlistbox",
-            "expectedValue": [
-              "%OrganizationId%"
-            ]
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_enablefeedbackandsupport",
             "expectedValue": "device_vendor_msft_policy_config_onedrivengscv6~policy~onedrivengsc_enablefeedbackandsupport_0"
           },
@@ -2040,10 +2034,6 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_dropdown",
             "expectedValue": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_dropdown_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2.updates~policy~onedrivengsc_kfmoptinnowizard_kfmoptinnowizard_textbox",
-            "expectedValue": "%OrganizationId%"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_silentaccountconfig",
@@ -2126,10 +2116,6 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot",
             "expectedValue": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_1"
-          },
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_disablecustomrootlist_key",
-            "expectedValue": "%OrganizationId%"
           },
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_disablecustomrootlist_value",
@@ -3557,10 +3543,6 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "com.apple.managedclient.preferences_kfmsilentoptin",
-            "expectedValue": "%OrganizationId%"
-          },
-          {
             "settingDefinitionId": "com.apple.managedclient.preferences_blockexternalsync",
             "expectedValue": "com.apple.managedclient.preferences_blockexternalsync_true"
           },
@@ -3616,10 +3598,6 @@
           {
             "settingDefinitionId": "com.apple.managedclient.preferences_openatlogin",
             "expectedValue": "com.apple.managedclient.preferences_openatlogin_true"
-          },
-          {
-            "settingDefinitionId": "com.apple.managedclient.preferences_kfmoptinwithwizard",
-            "expectedValue": "%OrganizationId%"
           }
         ]
       },
@@ -10995,47 +10973,6 @@
       ]
     },
     {
-      "checkId": "INTUNE-BASE-144-DWindowsAIFeatures",
-      "severity": "medium",
-      "tags": [
-        "intune",
-        "settings-catalog",
-        "windows-ai-features",
-        "windows",
-        "device-scope"
-      ],
-      "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Features\"?",
-      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features.json (afgesproken baseline, Defender-gebaseerd)",
-      "params": {
-        "settings": [
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablecocreator",
-            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablecocreator_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableimagecreator",
-            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableimagecreator_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablegenerativefill",
-            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablesettingsagent",
-            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_1"
-          }
-        ]
-      },
-      "learnMoreLinks": [
-        {
-          "label": "Settings Catalog in Microsoft Intune",
-          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
-        }
-      ]
-    },
-    {
       "checkId": "INTUNE-BASE-145-UMicrosoftTeams",
       "severity": "medium",
       "tags": [
@@ -11056,12 +10993,90 @@
             "expectedValue": "user_vendor_msft_policy_config_teamsv3~policy~l_teams_string_teams_signinrestriction_policy_1"
           },
           {
-            "settingDefinitionId": "user_vendor_msft_policy_config_teamsv3~policy~l_teams_string_teams_signinrestriction_policy_restrictteamssignintoaccountsfromtenantlist",
-            "expectedValue": "<VUL-HIER-HET-TENANT-ID-IN>"
-          },
-          {
             "settingDefinitionId": "user_vendor_msft_policy_config_teamsv2~policy~l_teams_teams_preventfirstlaunchafterinstall_policy",
             "expectedValue": "user_vendor_msft_policy_config_teamsv2~policy~l_teams_teams_preventfirstlaunchafterinstall_policy_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-146-DWindowsAIFeaturesPermitted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-ai-features-permitted",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Features Permitted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablecocreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablecocreator_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableimagecreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableimagecreator_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablegenerativefill",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablesettingsagent",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-147-DWindowsAIFeaturesRestricted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-ai-features-restricted",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Features Restricted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablecocreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablecocreator_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableimagecreator",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableimagecreator_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablegenerativefill",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablesettingsagent",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_1"
           }
         ]
       },

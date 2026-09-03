@@ -1,6 +1,6 @@
 {
-    "name": "[Baseline] - WIN - D - Windows AI Features",
-    "description": "Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. Toewijzing volgens baseline: geen — fase 2. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan.",
+    "name": "[Baseline] - WIN - D - Windows AI Features Permitted",
+    "description": "Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. Toewijzing volgens baseline: geen — fase 5. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -23,7 +23,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disablecocreator_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disablecocreator_0",
                     "children": []
                 }
             }
@@ -37,7 +37,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disableimagecreator_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disableimagecreator_0",
                     "children": []
                 }
             }
@@ -51,7 +51,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disablegenerativefill_0",
                     "children": []
                 }
             }
@@ -65,7 +65,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_0",
                     "children": []
                 }
             }

@@ -1446,14 +1446,14 @@
       "fase": 1
     },
     {
-      "target": "Baseline_WIN_D_Windows_AI_Features",
-      "displayName": "[Baseline] - WIN - D - Windows AI Features",
-      "doel": "Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent.",
-      "bron": "IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan",
+      "target": "Baseline_WIN_D_Windows_AI_Features_Permitted",
+      "displayName": "[Baseline] - WIN - D - Windows AI Features Permitted",
+      "doel": "Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent.",
+      "bron": "IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen",
       "herkomst": "intuneadmin",
-      "toewijzingTekst": "geen — fase 2",
-      "fase": 2,
-      "faseWaarom": "Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging.",
+      "toewijzingTekst": "geen — fase 5",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die generatieve AI op de werkplek toestaat. Wijs er één toe, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -1469,9 +1469,37 @@
           "ISDP01"
         ]
       },
-      "bewijs": "ISMP22 staat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toe. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled. Hier staan ze op 1, dus uit.",
-      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets.",
-      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI; deze policy vult die aan en botst er niet mee."
+      "bewijs": "Niet elke klant heeft een ISMP22. Waar generatieve AI wél is toegestaan is het beter om dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait. Dat is precies wat deze vier instellingen doen.",
+      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten — maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
+      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control. Wie AI breed wil toestaan, moet ook die twee wegen."
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_AI_Features_Restricted",
+      "displayName": "[Baseline] - WIN - D - Windows AI Features Restricted",
+      "doel": "Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent.",
+      "bron": "IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan",
+      "herkomst": "intuneadmin",
+      "toewijzingTekst": "geen — fase 2",
+      "fase": 2,
+      "faseWaarom": "Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen.",
+      "controls": {
+        "iso": [
+          "A.5.10 Aanvaardbaar gebruik",
+          "A.8.1 Eindpuntapparatuur van gebruikers",
+          "A.5.34 Privacy en bescherming van persoonsgegevens"
+        ],
+        "nis2": [
+          "art. 21(2)(d) toeleveringsketen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP22",
+          "ISDP01"
+        ]
+      },
+      "bewijs": "ISMP22 staat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toe. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled.",
+      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets. Of hij past is echter een klantbesluit, geen technisch feit: een organisatie die generatieve AI op de werkplek toestaat kiest de Permitted-variant.",
+      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v3.8.json",
@@ -1886,8 +1914,8 @@
       "bron": "IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams",
       "herkomst": "intuneadmin",
       "toewijzingTekst": "geen — fase 3",
-      "fase": 3,
-      "faseWaarom": "Het tenant-id staat nog als <VUL-HIER-HET-TENANT-ID-IN> in het template. Toewijzen met die waarde blokkeert alle aanmeldingen in Teams. Vul eerst het echte tenant-id in.",
+      "fase": 2,
+      "faseWaarom": "Blokkeert aanmelden met een account uit een andere tenant. Dat is de bedoeling, maar wie een tweede werkaccount in Teams gebruikt merkt het meteen — kijk in de pilot of dat voorkomt.",
       "controls": {
         "iso": [
           "A.5.14 Informatieoverdracht",
@@ -1905,7 +1933,7 @@
       },
       "bewijs": "Zonder tenantbeperking kan een gebruiker in de zakelijke Teams-client inloggen op een tenant van een andere organisatie en daar bedrijfsbestanden naartoe slepen. Dat is een uitgaande datastroom die nergens wordt gelogd, omdat het verkeer er voor elke monitoringtool uitziet als gewoon Teams-gebruik. De tenantlijst is de enige plek waar dat te stoppen is.",
       "universeel": "Elke gebruiker met Teams op een beheerd apparaat.",
-      "note": "Vul het tenant-id in vóór toewijzing — de placeholder is met opzet zo geschreven dat hij opvalt. Meerdere tenants scheid je met een komma. De tweede instelling is comfort en geen beveiliging: Teams start niet meteen na installatie."
+      "note": "Het tenant-id staat als `%OrganizationId%` in het template. CIPP vervangt dat bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement); `%tenantid%` doet hetzelfde. Dezelfde constructie gebruiken de OneDrive-policies al voor hun tenantlijst. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen. Meerdere tenants scheid je met een komma. De tweede instelling is comfort en geen beveiliging: Teams start niet meteen na installatie."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Encryption - U - Personal Data Encryption - v3.4.json",

@@ -22,6 +22,14 @@ const fs = require("fs");
 const path = require("path");
 const { readTemplates, parseBaseName, flattenSettings } = require("./lib/templates");
 
+/**
+ * De tokens die CIPP bij uitrol per tenant invult. De lijst komt uit `$ReservedVariables` en
+ * `$BuiltInVars` in Get-CIPPTextReplacement (CIPP-API) en is hoofdletterongevoelig, net als
+ * de `-replace` daar. Onze templates gebruiken vandaag `%OrganizationId%` in de
+ * OneDrive-tenantlijst, in de KFM-instellingen en in de Teams-aanmeldbeperking.
+ */
+const CIPP_TOKEN_RE = /%(?:tenantid|organizationid|tenantfilter|defaultdomain|initialdomain|tenantname|partnertenantid|samappid|cippurl|cippuserschema)%/i;
+
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const OUTPUT_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
@@ -297,8 +305,14 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Enrollment_Hardening: 141,
   Baseline_WIN_D_Power_Management: 142,
   Baseline_WIN_D_Storage_Sense: 143,
-  Baseline_WIN_D_Windows_AI_Features: 144,
   Baseline_WIN_U_Microsoft_Teams: 145,
+
+  // Windows AI is een klantbesluit en geen technisch feit, dus twee varianten die dezelfde
+  // vier instellingen op de tegenovergestelde waarde zetten. Wijs er één toe; allebei levert
+  // een Conflict op waarna Intune er géén toepast. 144 is opgeheven: dat was de policy vóór
+  // de splitsing, en een oud nummer aan een andere check koppelen is erger dan een gat.
+  Baseline_WIN_D_Windows_AI_Features_Permitted: 146,
+  Baseline_WIN_D_Windows_AI_Features_Restricted: 147,
 };
 
 /**
@@ -312,6 +326,7 @@ const RETIRED_CHECK_NUMBERS = {
   23: "Windows Search — opgegaan in Windows Feature Configuration",
   25: "System Services — opgegaan in Security Hardening",
   28: "OneDrive Known Folder Move — opgegaan in Microsoft OneDrive (029)",
+  144: "Windows AI Features — gesplitst in een Restricted- (147) en een Permitted-variant (146), omdat het toestaan van generatieve AI een klantbesluit is",
 };
 
 /**
@@ -499,7 +514,21 @@ function convertTemplate(template, checkNumber) {
     return convertAdminTemplateFile(policy, baseName, checkNumber, inner.Displayname);
   }
 
-  const { settings, warnings } = flattenSettings(policy.settings);
+  const { settings: alleSettings, warnings } = flattenSettings(policy.settings);
+
+  // CIPP vervangt %-tokens bij uitrol door een tenant-specifieke waarde: %OrganizationId% en
+  // %tenantid% worden de customerId, %tenantfilter% het standaarddomein (zie
+  // Get-CIPPTextReplacement in CIPP-API). In de tenant staat dus de GUID en niet het token,
+  // en een check die het token als verwachte waarde meeneemt is per definitie rood — niet
+  // omdat de tenant afwijkt, maar omdat de baseline iets vergelijkt wat er nooit zo staat.
+  // Zo'n check is erger dan geen check: hij vraagt elke ronde aandacht en leert iedereen om
+  // rood te negeren. Dezelfde reden waarom flattenSettings het EDR-onboardingtoken overslaat.
+  const settings = alleSettings.filter((s) => {
+    const token = CIPP_TOKEN_RE.exec(JSON.stringify(s.expectedValue ?? ""));
+    if (!token) return true;
+    warnings.push(`CIPP-token ${token[0]} overgeslagen voor ${s.settingDefinitionId} (wordt bij uitrol per tenant vervangen, dus niet als vaste waarde te toetsen)`);
+    return false;
+  });
 
   const checkId = `INTUNE-BASE-${String(checkNumber).padStart(3, "0")}-${checkIdSuffix(baseName)}`;
   const severity = HIGH_SEVERITY_FILES.has(baseName) ? "high" : "medium";

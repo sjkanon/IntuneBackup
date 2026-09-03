@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 103 policies
+# Windows — 104 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 94 |
+| `SettingsCatalog/` | 95 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 82
+## Device-scoped (D) — 83
 
 Toewijzen aan apparaatgroepen.
 
@@ -82,7 +82,8 @@ Toewijzen aan apparaatgroepen.
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.md) | Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-082-DTimezone` |
 | [**Update Reports and Telemetry**](SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.md) | Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
 | [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 28 | All Devices | `INTUNE-BASE-026-UserRights` |
-| [**Windows AI Features**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-144-DWindowsAIFeatures` |
+| [**Windows AI Features Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) | Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
+| [**Windows AI Features Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | [**Windows AI**](SettingsCatalog/Baseline_WIN_D_Windows_AI.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
 | [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 8 | All Devices | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices | `INTUNE-BASE-085-DWindowsFirewallRules` |

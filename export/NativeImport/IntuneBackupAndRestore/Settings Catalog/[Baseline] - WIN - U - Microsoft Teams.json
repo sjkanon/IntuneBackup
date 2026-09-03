@@ -32,7 +32,7 @@
                             "simpleSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                 "settingValueTemplateReference": null,
-                                "value": "<VUL-HIER-HET-TENANT-ID-IN>"
+                                "value": "%OrganizationId%"
                             }
                         }
                     ]

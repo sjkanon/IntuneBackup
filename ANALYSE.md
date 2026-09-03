@@ -96,7 +96,7 @@ Defender op Linux. Wat overbleef zijn **vijf baselines die er wél toe doen**:
 | `WIN - D - Power Management` | De baseline eist al een wachtwoord bij ontwaken, maar de klep dicht doen deed niets — dus bleef het scherm ontgrendeld. Dat is het moment waarop een laptop onbeheerd achterblijft. | 1 |
 | `WIN - D - Storage Sense` | Een volle schijf breekt Windows Update, BitLocker-versleuteling en Defender-definitie-updates. Dat is de toestand waarin een apparaat stilletjes achterloopt. | 1 |
 | `WIN - D - Enrollment Hardening` | Tijdens OOBE de netwerkstap overslaan is de bekendste manier om Autopilot te omzeilen. Eén instelling sluit hem af. | 2 |
-| `WIN - D - Windows AI Features` | Cocreator, Image Creator, Generative Fill en de Settings Agent sturen invoer naar een generatieve dienst. ISMP22 staat die niet toe. | 2 |
+| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill en de Settings Agent sturen invoer naar een generatieve dienst. Of dat mag is een klantbesluit, dus twee varianten die dezelfde vier instellingen tegenovergesteld zetten. Wijs er één toe. | 2 / 5 |
 | `WIN - U - Microsoft Teams` | Zonder tenantbeperking kan een gebruiker in de zakelijke Teams-client inloggen op een vreemde tenant en daar bestanden naartoe slepen — een uitgaande datastroom die nergens wordt gelogd. | 3 |
 
 Plus drie CIS L1-user rights die aan de bestaande `WIN - D - User Rights` zijn toegevoegd:
@@ -104,6 +104,27 @@ Plus drie CIS L1-user rights die aan de bestaande `WIN - D - User Rights` zijn t
 user rights uit die CIS-set staan in IntuneAdmin met een placeholder (`<YOURACT>`) omdat de
 CIS-eis "niemand" is; een lege waardecollectie is in de settings catalog niet betrouwbaar te
 coderen, dus die zijn bewust overgeslagen in plaats van gegokt.
+
+
+### Tenant-specifieke waarden: laat CIPP ze invullen
+
+De Teams-aanmeldbeperking vraagt een tenant-id. Dat hoeft geen handmatige stap te zijn: CIPP
+vervangt bij uitrol een aantal `%tokens%` door tenant-specifieke waarden — `%tenantid%` en
+`%OrganizationId%` worden de customerId, `%tenantfilter%` het standaarddomein, `%tenantname%` de
+weergavenaam (zie `Get-CIPPTextReplacement` in CIPP-API; de vervanging is hoofdletterongevoelig).
+De OneDrive-policies in deze baseline gebruiken die constructie al voor hun tenantlijst en voor
+Known Folder Move, dus de Teams-policy doet nu hetzelfde.
+
+Dat legde een bestaande fout bloot. De baseline-check nam die tokens tot nu toe mee als
+verwachte waarde, terwijl in de tenant de ingevulde GUID staat. Vijf checks stonden daardoor
+permanent rood — niet omdat de tenant afweek, maar omdat de baseline iets vergeleek wat er nooit
+zo staat. Zo'n check is erger dan geen check: hij vraagt elke ronde aandacht en leert iedereen om
+rood te negeren. `generate-baseline.js` slaat die instellingen nu over, met een melding per
+geval, net zoals het het EDR-onboardingtoken al oversloeg.
+
+**Let op bij de andere uitrolroute:** CIPP doet die vervanging, `Start-IntuneRestoreConfig` niet.
+Wie via IntuneBackupAndRestore uitrolt houdt `%OrganizationId%` letterlijk in de policy en moet
+het id met de hand invullen.
 
 **Twee sets die de vergelijking juist afwees:**
 
