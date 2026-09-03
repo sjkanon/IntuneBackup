@@ -27,7 +27,7 @@ plaats van twee keer achter elkaar hernoemd worden.
 
 ## Wat er in de repo gebeurd is
 
-24 → 95 policies. De bron is nu `IntuneTemplate/_oib-manifest.json` plus
+24 → 95 policies. De bron is nu `IntuneTemplate/_manifest.json` plus
 `scripts/import-oib.js`; zie [README.md](README.md) voor de indeling, de naamgeving en hoe je
 een nieuwe OIB-versie binnenhaalt.
 

@@ -215,6 +215,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - AI Tooling": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Administrator Protection": [
     {
       "target": {
@@ -225,6 +234,15 @@
     }
   ],
   "[Baseline] - WIN - D - Attack Surface Reduction": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Audit Policy Enforcement": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -260,6 +278,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Business Continuity": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Cloud Optimized Content": [
     {
       "target": {
@@ -270,6 +297,15 @@
     }
   ],
   "[Baseline] - WIN - D - Config Refresh": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Data Minimisation": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -431,6 +467,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Logging": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Login and Lock Screen": [
     {
       "target": {
@@ -530,6 +575,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Privacy and Telemetry": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Remote Desktop and RPC": [
     {
       "target": {
@@ -567,6 +621,15 @@
     }
   ],
   "[Baseline] - WIN - D - Settings Sync": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Threat Protection": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -698,6 +761,24 @@
         "deviceAndAppManagementAssignmentFilterId": null,
         "deviceAndAppManagementAssignmentFilterType": "none",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - D - Wireless and Peripherals": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Attachment Scanning": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
       }
     }
   ],

@@ -2,7 +2,7 @@
 /**
  * Zet policies uit OpenIntuneBaseline (SkipToTheEndpoint/OpenIntuneBaseline) om naar
  * IntuneTemplate/Baseline_*.json in CIPP-templateformaat, gestuurd door
- * IntuneTemplate/_oib-manifest.json.
+ * IntuneTemplate/_manifest.json.
  *
  * Waarom een importer en geen handwerk: OIB brengt een paar keer per jaar een nieuwe versie
  * uit. Handmatig overgetypte settingDefinitionId's zijn niet te reviewen en niet te
@@ -43,7 +43,7 @@ const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, str
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
-const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_oib-manifest.json");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const DEFAULT_SOURCE = path.join(REPO_ROOT, ".oib-source");
 
@@ -370,7 +370,7 @@ function main() {
   if (withoutDoel.length > 0) {
     console.error(`FOUT: ${withoutDoel.length} policy/policies in het manifest hebben geen "doel":`);
     for (const t of withoutDoel) console.error(`  - ${t}`);
-    console.error("Zonder die zin staat de policy straks naamloos in de tenant. Vul 'm aan in _oib-manifest.json.");
+    console.error("Zonder die zin staat de policy straks naamloos in de tenant. Vul 'm aan in _manifest.json.");
     process.exit(1);
   }
 

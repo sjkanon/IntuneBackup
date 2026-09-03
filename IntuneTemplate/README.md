@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# IntuneTemplate — 106 policies
+# IntuneTemplate — 129 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
-| [macOS](MAC/README.md) | 20 | – | 1 | 3 | – | **24** |
-| [iOS/iPadOS](IOS/README.md) | – | – | – | – | 1 | **1** |
-| [Android](AND/README.md) | – | – | – | – | 1 | **1** |
-| **Totaal** | **91** | **1** | **5** | **7** | **2** | **106** |
+| [Windows](WIN/README.md) | 89 | 1 | 4 | 4 | – | **98** |
+| [macOS](MAC/README.md) | 21 | – | 1 | 3 | – | **25** |
+| [iOS/iPadOS](IOS/README.md) | – | – | – | 2 | 1 | **3** |
+| [Android](AND/README.md) | – | – | – | 2 | 1 | **3** |
+| **Totaal** | **110** | **1** | **5** | **11** | **2** | **129** |
 
 ## Indeling
 
@@ -40,7 +40,7 @@ bestand op zijn plek staat.
 | Bestand | Wat het vastlegt | Gelezen door |
 |---|---|---|
 | [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |
-| [`_oib-manifest.json`](_oib-manifest.json) | welke OIB-policy waar landt, en waarom er afgeweken wordt | `import-oib.js` |
+| [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, en waarom er afgeweken wordt | `import-oib.js` |
 | [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
 
 Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar
@@ -51,10 +51,10 @@ naamloze rij van. Die doet niets — zie de [hoofd-README](../README.md#terugzet
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 80 policies
-- [macOS](MAC/README.md) — 24 policies
-- [iOS/iPadOS](IOS/README.md) — 1 policy
-- [Android](AND/README.md) — 1 policy
+- [Windows](WIN/README.md) — 98 policies
+- [macOS](MAC/README.md) — 25 policies
+- [iOS/iPadOS](IOS/README.md) — 3 policies
+- [Android](AND/README.md) — 3 policies
 
 Zie de [hoofd-README](../README.md) voor de naamconventie, de controles en hoe je een
 nieuwe OpenIntuneBaseline-versie binnenhaalt.

@@ -38,7 +38,7 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const RENAMES_PATH = path.join(TEMPLATE_DIR, "_renames.json");
-const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_oib-manifest.json");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 
 const DISPLAY_NAME_RE = /^\[Baseline\] - (WIN|MAC|IOS|AND) - ([DU]) - .+$/;
 
@@ -222,24 +222,43 @@ function checkRenames(templates) {
 }
 
 /**
- * Elk template hoort een regel in _oib-manifest.json te hebben. Die regel levert de
+ * Elk template hoort een regel in _manifest.json te hebben. Die regel levert de
  * `doel`-zin die in de tenant naast de policy komt te staan; zonder regel staat de policy daar
  * straks zonder uitleg, en valt hij bovendien buiten `import-oib.js`.
+ *
+ * Daarnaast wordt hier het uitrolplan bewaakt. `fase` en `_assignments.json` zeggen allebei
+ * iets over of een policy op alle apparaten hoort, en dat zijn twee bestanden die uit elkaar
+ * kunnen lopen. Lopen ze uit elkaar, dan is de fout altijd erg: een fase-1-policy zonder
+ * toewijzing wordt stilzwijgend niet uitgerold, en een fase-5-policy mét toewijzing levert een
+ * Conflict op waarna de betwiste instelling door géén van beide policies wordt toegepast.
  */
-function checkManifestCoverage(templates) {
+function checkManifestCoverage(templates, assignments) {
   if (!fs.existsSync(MANIFEST_PATH)) return [];
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
   const byTarget = new Map((manifest.policies || []).map((p) => [p.target, p]));
+  const fases = manifest.fases || {};
   const known = new Set(templates.map((t) => t.baseName));
   const problems = [];
 
   for (const t of templates) {
     const entry = byTarget.get(t.baseName);
-    if (!entry) problems.push(`_oib-manifest.json: geen regel voor ${t.baseName} — dus geen omschrijving in de tenant`);
-    else if (!entry.doel) problems.push(`_oib-manifest.json: ${t.baseName} heeft geen "doel"`);
+    if (!entry) { problems.push(`_manifest.json: geen regel voor ${t.baseName} — dus geen omschrijving in de tenant`); continue; }
+    if (!entry.doel) problems.push(`_manifest.json: ${t.baseName} heeft geen "doel"`);
+
+    const fase = entry.fase;
+    if (fase === undefined) { problems.push(`_manifest.json: ${t.baseName} heeft geen "fase" — dus is niet te zeggen wanneer hij uitgerold hoort te worden`); continue; }
+    if (!fases[String(fase)]) { problems.push(`_manifest.json: ${t.baseName} heeft fase ${fase}, maar die staat niet in "fases"`); continue; }
+    // Alleen fase 1 gaat vanzelf naar alle apparaten. Alles daarboven is een uitzondering, en
+    // een uitzondering zonder reden is over een half jaar niet meer te wegen.
+    if (fase !== 1 && !entry.faseWaarom) problems.push(`_manifest.json: ${t.baseName} staat in fase ${fase} zonder "faseWaarom"`);
+    if (fase === 4 && !entry.faseGroep) problems.push(`_manifest.json: ${t.baseName} staat in fase 4 zonder "faseGroep" — op welke groep hoort hij dan?`);
+
+    const assigned = (assignments[t.displayName] || []).length > 0;
+    if (fase === 1 && !assigned) problems.push(`${t.displayName}: fase 1, maar geen regel in _assignments.json — wordt dus niet uitgerold`);
+    if (fase !== 1 && assigned) problems.push(`${t.displayName}: fase ${fase} (${fases[String(fase)].naam}), maar staat wél in _assignments.json`);
   }
   for (const target of byTarget.keys()) {
-    if (!known.has(target)) problems.push(`_oib-manifest.json: regel voor ${target}, maar dat template bestaat niet`);
+    if (!known.has(target)) problems.push(`_manifest.json: regel voor ${target}, maar dat template bestaat niet`);
   }
   return problems;
 }
@@ -278,7 +297,7 @@ function main() {
 
   const { conflicts, duplicates, shared } = findOverlaps(results, assignments);
   const failing = results.filter((r) => r.problems.length > 0);
-  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates)];
+  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments)];
 
   if (failing.length > 0) {
     console.log(`\n${failing.length} van ${results.length} policies hebben werk openstaan:\n`);

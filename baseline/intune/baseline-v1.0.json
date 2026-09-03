@@ -7911,19 +7911,6 @@
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev99~policy~microsoft_edge_allowgamesmenu_0"
           },
           {
-            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
-            "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_1"
-          },
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
-            "expectedValue": [
-              "https://apps.microsoft.com",
-              "https://apps.microsoft.com/*",
-              "apps.microsoft.com",
-              "apps.microsoft.com/*"
-            ]
-          },
-          {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls",
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_1"
           },
@@ -10136,6 +10123,720 @@
           {
             "settingDefinitionId": "ade_setupassistant_liquidglass",
             "expectedValue": "ade_setupassistant_liquidglass_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-121-MACDPasscodeAndScreenLock",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "passcode-and-screen-lock",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Passcode and Screen Lock\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_forcepin",
+            "expectedValue": "com.apple.mobiledevice.passwordpolicy_forcepin_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_requirealphanumeric",
+            "expectedValue": "com.apple.mobiledevice.passwordpolicy_requirealphanumeric_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_allowsimple",
+            "expectedValue": "com.apple.mobiledevice.passwordpolicy_allowsimple_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_minlength",
+            "expectedValue": 8
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_mincomplexchars",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_pinhistory",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_maxinactivity",
+            "expectedValue": 15
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-123-DAccessControl",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "access-control",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Access Control\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_messagetitleforusersattemptingtologon",
+            "expectedValue": "Toegang uitsluitend voor geautoriseerde gebruikers"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_messagetextforusersattemptingtologon",
+            "expectedValue": [
+              "Dit systeem en de gegevens erop zijn eigendom van de organisatie en zijn uitsluitend bestemd voor geautoriseerd gebruik.",
+              "Gebruik wordt gelogd en gecontroleerd. Onbevoegd gebruik kan leiden tot disciplinaire maatregelen en strafrechtelijke vervolging.",
+              "Door verder te gaan verklaart u kennis te hebben genomen van het informatiebeveiligingsbeleid."
+            ]
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_donotdisplaylastsignedin",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_donotdisplaylastsignedin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_credentialproviders_blockpicturepassword",
+            "expectedValue": "device_vendor_msft_policy_config_credentialproviders_blockpicturepassword_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_credentialproviders_allowpinlogon",
+            "expectedValue": "device_vendor_msft_policy_config_credentialproviders_allowpinlogon_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_credui_nolocalpasswordresetquestions",
+            "expectedValue": "device_vendor_msft_policy_config_admx_credui_nolocalpasswordresetquestions_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-124-DAccountLockout",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "account-lockout",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Account Lockout\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_accountlockoutpolicy",
+            "expectedValue": "AccountLockoutDuration:15, AccountLockoutThreshold:10, ResetAccountLockoutCounterAfter:15"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_allowadministratorlockout",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineaccountlockoutthreshold",
+            "expectedValue": 10
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-125-DAITooling",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "ai-tooling",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - AI Tooling\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_visualstudiov4~policy~visualstudio~copilotsettings_disablecopilotforindividuals",
+            "expectedValue": "device_vendor_msft_policy_config_visualstudiov4~policy~visualstudio~copilotsettings_disablecopilotforindividuals_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-126-DAuditPolicyEnforcement",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "audit-policy-enforcement",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Audit Policy Enforcement\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_audit_forceauditpolicysubcategorysettingstooverrideauditpolicycategorysettings",
+            "expectedValue": 1
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-127-DBusinessContinuity",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "business-continuity",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Business Continuity\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_remoteremediation_cloudremediationsettings_enablecloudremediation",
+            "expectedValue": "device_vendor_msft_remoteremediation_cloudremediationsettings_enablecloudremediation_true"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_remoteremediation_cloudremediationsettings_autoremediationsettings_enableautoremediation",
+            "expectedValue": "device_vendor_msft_remoteremediation_cloudremediationsettings_autoremediationsettings_enableautoremediation_true"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_remoteremediation_cloudremediationsettings_autoremediationsettings_setretryinterval",
+            "expectedValue": 30
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_remoteremediation_cloudremediationsettings_autoremediationsettings_settimetoreboot",
+            "expectedValue": 180
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-128-DCryptography",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "cryptography",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Cryptography\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sslversionmin",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sslversionmin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sslversionmin_sslversionmin",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_sslversionmin_sslversionmin_tls1.2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-129-DDataMinimisation",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "data-minimisation",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Data Minimisation\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Data_Minimisation.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_limitdiagnosticlogcollection",
+            "expectedValue": "device_vendor_msft_policy_config_system_limitdiagnosticlogcollection_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_limitdumpcollection",
+            "expectedValue": "device_vendor_msft_policy_config_system_limitdumpcollection_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-130-DKernelDMAProtection",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "kernel-dma-protection",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Kernel DMA Protection\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_dmaguard_deviceenumerationpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_dmaguard_deviceenumerationpolicy_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-131-DLogging",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "logging",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Logging\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting",
+            "expectedValue": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_enableinvocationheader",
+            "expectedValue": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_enableinvocationheader_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enabletranscripting_outputdirectory",
+            "expectedValue": ""
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-132-DLogonHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "logon-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Logon Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_donotrequirectrlaltdel",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_donotrequirectrlaltdel_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_dontdisplaynetworkselectionui",
+            "expectedValue": "device_vendor_msft_policy_config_windowslogon_dontdisplaynetworkselectionui_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-133-DPrintingHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "printing-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Printing Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_printers_configurewindowsprotectedprint",
+            "expectedValue": "device_vendor_msft_policy_config_printers_configurewindowsprotectedprint_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_devices_preventusersfrominstallingprinterdriverswhenconnectingtosharedprinters",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_devices_preventusersfrominstallingprinterdriverswhenconnectingtosharedprinters_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_connectivity_diableprintingoverhttp",
+            "expectedValue": "device_vendor_msft_policy_config_connectivity_diableprintingoverhttp_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-134-DPrivacyAndTelemetry",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "privacy-and-telemetry",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Privacy and Telemetry\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_disableadvertisingid",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_disableadvertisingid_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_uploaduseractivities",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_uploaduseractivities_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_allowinputpersonalization",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_allowinputpersonalization_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-135-DRemoteAccessHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "remote-access-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Remote Access Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remoteshell_allowremoteshellaccess",
+            "expectedValue": "device_vendor_msft_policy_config_remoteshell_allowremoteshellaccess_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkserver_amountofidletimerequiredbeforesuspendingsession",
+            "expectedValue": 15
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-136-DThreatProtection",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "threat-protection",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Threat Protection\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride",
+            "expectedValue": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_spynet_localsettingoverridespynetreporting",
+            "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_spynet_localsettingoverridespynetreporting_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_safedllsearchmode",
+            "expectedValue": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_safedllsearchmode_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-137-DWirelessAndPeripherals",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "wireless-and-peripherals",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Wireless and Peripherals\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_bluetooth_allowadvertising",
+            "expectedValue": "device_vendor_msft_policy_config_bluetooth_allowadvertising_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_bluetooth_allowdiscoverablemode",
+            "expectedValue": "device_vendor_msft_policy_config_bluetooth_allowdiscoverablemode_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_bluetooth_allowprepairing",
+            "expectedValue": "device_vendor_msft_policy_config_bluetooth_allowprepairing_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_bluetooth_allowpromptedproximalconnections",
+            "expectedValue": "device_vendor_msft_policy_config_bluetooth_allowpromptedproximalconnections_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork",
+            "expectedValue": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-138-DWirelessSharedDevices",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "wireless-shared-devices",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Wireless Shared Devices\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_wifi_allowmanualwificonfiguration",
+            "expectedValue": "device_vendor_msft_policy_config_wifi_allowmanualwificonfiguration_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-139-UAIUsageControl",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "ai-usage-control",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - AI Usage Control\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
+            "expectedValue": [
+              "https://apps.microsoft.com",
+              "https://apps.microsoft.com/*",
+              "apps.microsoft.com",
+              "apps.microsoft.com/*",
+              "chatgpt.com",
+              "chat.openai.com",
+              "gemini.google.com",
+              "claude.ai",
+              "perplexity.ai",
+              "chat.deepseek.com",
+              "chat.mistral.ai",
+              "grok.com",
+              "poe.com",
+              "character.ai"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-140-UAttachmentScanning",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "attachment-scanning",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - Attachment Scanning\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms",
+            "expectedValue": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms_1"
           }
         ]
       },

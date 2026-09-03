@@ -2,3 +2,7 @@
 # Bewust niet meegecommit: de gegenereerde templates in IntuneTemplate/ zijn het resultaat,
 # en een tweede kopie van een externe repo zou hier alleen maar verouderen.
 .oib-source/
+
+# Lokale checkout van IntuneAdmin/IntuneBaselines, bron voor scripts/import-intuneadmin.js.
+# Zelfde reden als .oib-source/: de gegenereerde templates zijn het resultaat.
+.intuneadmin-source/

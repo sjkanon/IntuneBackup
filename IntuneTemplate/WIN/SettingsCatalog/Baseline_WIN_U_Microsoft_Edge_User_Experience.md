@@ -14,7 +14,7 @@ De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke fun
 | Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - User Experience |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_User_Experience.json`](Baseline_WIN_U_Microsoft_Edge_User_Experience.json) |
 
-## Instellingen — 20
+## Instellingen — 18
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -22,8 +22,6 @@ instelling op de getoonde waarde staat.
 | Instelling | Waarde |
 |---|---|
 | `user_vendor_msft_policy_config_microsoft_edgev99~policy~microsoft_edge_allowgamesmenu` | 0 |
-| `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc` | https://apps.microsoft.com, https://apps.microsoft.com/*, apps.microsoft.com, apps.microsoft.com/* |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_notificationsallowedforurlsdesc` | *.microsoft.com, *.cloud.microsoft |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_defaultnotificationssetting` | 1 |

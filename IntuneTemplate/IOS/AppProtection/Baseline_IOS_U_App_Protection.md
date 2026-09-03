@@ -16,7 +16,7 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iP
 
 > MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt.
 
-## Eigenschappen — 66
+## Eigenschappen — 67
 
 Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `—` betekent niet ingesteld.
 
@@ -58,7 +58,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `pinRequiredInsteadOfBiometricTimeout` | PT12H |
 | `allowedOutboundClipboardSharingExceptionLength` | 0 |
 | `notificationRestriction` | blockOrganizationalData |
-| `previousPinBlockCount` | 0 |
+| `previousPinBlockCount` | 5 |
 | `managedBrowser` | microsoftEdge |
 | `maximumAllowedDeviceThreatLevel` | notConfigured |
 | `mobileThreatDefenseRemediationAction` | block |
@@ -77,7 +77,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `allowedIosDeviceModels` | — |
 | `appActionIfIosDeviceModelNotAllowed` | block |
 | `thirdPartyKeyboardsBlocked` | false |
-| `filterOpenInToOnlyManagedApps` | false |
+| `filterOpenInToOnlyManagedApps` | true |
 | `disableProtectionOfManagedOutboundOpenInData` | false |
 | `protectInboundDataFromUnknownSources` | false |
 | `customBrowserProtocol` |  |
@@ -88,6 +88,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `exemptedAppProtocols[0].@odata.type` | #microsoft.graph.keyValuePair |
 | `exemptedAppProtocols[0].name` | Default |
 | `exemptedAppProtocols[0].value` | skype;app-settings;calshow;itms;itmss;itms-apps;itms-appss;itms-services; |
+| `screenCaptureConfigurationState` | blocked |
 
 ---
 

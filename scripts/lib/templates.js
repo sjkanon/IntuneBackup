@@ -32,26 +32,24 @@ const TYPE_TO_CATEGORY = {
 };
 
 /**
- * Twee sets, één indeling.
+ * Eén set, één indeling: IntuneTemplate/Baseline_<PLATFORM>_<SCOPE>_<Item>.json.
  *
- *   Baseline_   IntuneTemplate/   de afgesproken baseline die in de tenant staat
- *   BASELINE2_  BASELINE2/        alles wat daar nog bij moet, nog zonder toewijzing
+ * Er stonden tot september 2026 drie sets naast elkaar — de baseline, ISMSTemplate/ en
+ * BASELINE2/, elk met een eigen prefix en een eigen wachtkamer. Dat leverde vooral de vraag
+ * op in welke map iets hoorde, en drie overzichten die je bij elkaar moest optellen om te
+ * weten wat er in totaal in zit. Ze zijn samengevoegd tot deze ene set.
  *
- * Aparte prefix én aparte map, omdat het twee verschillende dingen zijn: de baseline is
- * uitgerold en wordt door de pijplijn bewaakt, BASELINE2 is de wachtkamer. Het einddoel is
- * één baseline — een policy die de pilot doorstaat verhuist naar IntuneTemplate/ onder de
- * Baseline_-naam en krijgt daar een checkId en een toewijzing. Tot dat moment is het
- * onderscheid nodig: zonder de scheiding tellen ze op in dezelfde overzichten en weet niemand
- * meer wat er werkelijk op de apparaten staat.
+ * Wat de wachtkamer deed, doet nu het veld `fase` in _manifest.json: fase 1 gaat op alle
+ * apparaten, fase 2 eerst op een pilotgroep, fase 3 wacht op een voorwaarde, fase 4 hoort op
+ * een eigen groep, fase 5 wordt niet uitgerold. _assignments.json volgt daaruit en
+ * check-scope.js bewaakt dat die twee niet uit elkaar lopen. Zo staat alles in één map zonder
+ * dat er iets wordt uitgerold dat er nog niet klaar voor is.
  *
- * De ISMS-set had hier tot september 2026 een eigen prefix. Die is opgegaan in BASELINE2 —
- * twee wachtkamers naast elkaar leverden alleen de vraag op in welke iets hoorde.
- *
- * BASELINE2 staat vóór Baseline in de alternatie: allebei beginnen met dezelfde letters in
- * een andere kapitalisatie, en een regex leest van links naar rechts.
+ * SET_PREFIXES blijft een map en geen constante: de exporter en de docs lopen erover heen, en
+ * een tweede set toevoegen moet één regel blijven in plaats van een refactor.
  */
-const SET_PREFIXES = { Baseline: "IntuneTemplate", BASELINE2: "BASELINE2" };
-const BASE_NAME_RE = /^(BASELINE2|Baseline)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
+const SET_PREFIXES = { Baseline: "IntuneTemplate" };
+const BASE_NAME_RE = /^(Baseline)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
 
 /** "Baseline_WIN_D_BitLocker" -> { set: "Baseline", platform: "WIN", scope: "D", item: "BitLocker" } */
 function parseBaseName(baseName) {

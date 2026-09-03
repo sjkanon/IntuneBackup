@@ -14,9 +14,7 @@ on:
     branches: [main]
     paths:
       - "IntuneTemplate/**"
-      - "BASELINE2/**"
       - "scripts/generate-baseline.js"
-      - "scripts/check-sets.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
       - "scripts/lib/**"
@@ -40,13 +38,6 @@ jobs:
       # andere waarde zetten. Blokkerend.
       - name: Controleer scope, indeling en conflicten van IntuneTemplate/
         run: node scripts/check-scope.js
-      # Zelfde voor de sets ernaast (vandaag BASELINE2/), plus de controle die
-      # check-scope.js niet kan doen: botst een policy daaruit met een toegewezen
-      # baseline-policy, of met een andere set? BASELINE2 heeft er een eis bij: elke policy
-      # moet naast een control ook een `bewijs` en een `universeel` in het manifest hebben.
-      # Schrijft de README van elke set bij.
-      - name: Controleer de sets naast de baseline en genereer hun README
-        run: node scripts/check-sets.js --docs
 
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js
@@ -76,7 +67,6 @@ jobs:
           add-paths: |
             baseline/intune/baseline-v1.0.json
             export/NativeImport/**
-            BASELINE2/README.md
             OVERZICHT.md
             IntuneTemplate/*.md
             IntuneTemplate/**/*.md

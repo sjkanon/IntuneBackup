@@ -31,11 +31,7 @@ flowchart LR
   CIPP --> TENANT
   PLAT -.->|vergelijkt| TENANT
 
-  B2["<b>BASELINE2/</b><br/>25 policies<br/><i>wachtkamer</i>"]
-  B2 -->|export-intunebackup.js| EXI["export/NativeImport/<br/>IntuneBackupAndRestore-BASELINE2/"]
-  B2 -.->|leest rechtstreeks| CIPP
-  B2 -.->|na de pilot| T
-  EXI -->|Start-IntuneRestoreConfig| TENANT
+  IA["IntuneAdmin/IntuneBaselines<br/>874 profielen"] -->|import-intuneadmin.js| T
 
   style T stroke-width:3px
 ```
@@ -57,45 +53,34 @@ Naast elk template staat een markdown met **élke instelling die die policy zet*
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
 Ook gegenereerd, dus die kan niet uit de pas lopen met de JSON ernaast.
 
-Naast de baseline staat er één set: **[`BASELINE2/`](BASELINE2/README.md)** — 25 policies die
-de baseline aanvullen op punten waar hij aantoonbaar iets mist. De lat is drie vragen die alle
-drie met ja beantwoord moeten worden: werkt het en is het bewezen, hebben we het nodig om
-gebruikers veilig te stellen, en geldt het voor élk apparaat? Waar het antwoord op de derde
-"nee, met dit voorbehoud" is, staat dat voorbehoud in het manifest — bijvoorbeeld bij *Wireless
-Shared Devices*, die op gedeelde apparaten hoort en niet op een laptop van één gebruiker.
+**Eén baseline.** Tot september 2026 stonden er drie sets naast elkaar — `IntuneTemplate/`,
+`ISMSTemplate/` en `BASELINE2/`. Die zijn samengevoegd: alles staat nu in `IntuneTemplate/`
+onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase` in
+[`_manifest.json`](IntuneTemplate/_manifest.json).
 
-Samengesteld door de baseline op `settingDefinitionId` te vergelijken met
-[IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) (874 profielen: CIS
-v4, de Microsoft Endpoint Security-baselines, ISO 27001 en NIS2) en met de iOS- en
-Android-baselines van UniFy-Endpoint, en elke overgebleven waarde na te lopen tegen de Policy
-CSP-documentatie en de settings catalog-definities zelf. **[`BASELINE2/ANALYSE.md`](BASELINE2/ANALYSE.md)**
-legt vast wat er is afgewogen en — belangrijker — wat er bewust *niet* in zit en waarom.
+| Fase | Wat het betekent | Aantal |
+|---:|---|---:|
+| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 105 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 9 |
+| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 4 |
+| 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 9 |
+| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 2 |
 
-De tien policies die tot september 2026 in `ISMSTemplate/` stonden zijn hierin opgegaan. Twee
-wachtkamers naast elkaar leverden alleen de vraag op in welke iets hoorde; de verantwoording naar
-ISO/IEC 27001:2022, NIS2 en EASA Part-IS staat gewoon per policy in `_manifest.json`.
+Alleen fase 1 staat in `_assignments.json`. `check-scope.js` bewaakt dat die twee niet uit
+elkaar lopen: een fase-1-policy zonder toewijzing wordt stilzwijgend niet uitgerold, en een
+fase-5-policy mét toewijzing levert een Conflict op waarna de betwiste instelling door géén van
+beide policies wordt toegepast. Elke policy boven fase 1 heeft een verplichte `faseWaarom`.
 
-**Het einddoel is één baseline.** BASELINE2 is de wachtkamer, niet de eindbestemming: een policy
-die de pilot doorstaat verhuist naar `IntuneTemplate/` onder de `Baseline_`-naam en krijgt daar
-een checkId en een toewijzing. Tot dat moment is de scheiding nodig — een policy die nergens is
-toegewezen hoort niet als check tegen een tenant te worden gelegd.
-
-| | Wat het is | Prefix | Toewijzing | In de baseline-check |
-|---|---|---|---|---|
-| [`IntuneTemplate/`](IntuneTemplate/README.md) | de afgesproken baseline | `Baseline_` | uitgerold | ja |
-| [`BASELINE2/`](BASELINE2/README.md) | alles wat er nog bij moet | `BASELINE2_` | geen — voorstel | nee |
-
-`node scripts/check-sets.js` bewaakt BASELINE2: naam, plek, verantwoording, en of een policy
-dezelfde instelling zet als een tóégewezen baseline-policy. Dat laatste is de belangrijkste —
-twee toegewezen policies met een andere waarde leveren in Intune een *Conflict* op, waarna de
-instelling door géén van beide wordt toegepast.
+**[`ANALYSE.md`](ANALYSE.md)** legt vast hoe de aanvulling van september 2026 tot stand kwam:
+welke bronnen zijn vergeleken, de 509 instellingen die IntuneAdmin meer zet dan wij, waarom er
+14 van overbleven, en — belangrijker — wat er bewust *niet* in zit en waarom.
 
 ## Indeling
 
 ```
 IntuneTemplate/
   _assignments.json     toewijzingsdoel per policy
-  _oib-manifest.json    welke OIB-policy waar landt (bron voor scripts/import-oib.js)
+  _manifest.json        waarom elke policy bestaat, waar hij vandaan komt en in welke fase
   _renames.json         hoe policies in de tenant heetten (bron voor Rename-BaselinePolicy.ps1)
   WIN/  SettingsCatalog/ AdministrativeTemplates/ DeviceConfigurations/ CompliancePolicies/
   MAC/  SettingsCatalog/ CompliancePolicies/
@@ -141,7 +126,7 @@ scope (`com.apple.*`) of staan er helemaal geen settings in het bestand. Daar is
 keuze over het toewijzingsdoel — zoals OpenIntuneBaseline de letters ook gebruikt — en
 controleert `check-scope.js` alleen de naamconventie.
 
-Twee gevolgen daarvan, allebei zichtbaar in `_oib-manifest.json`:
+Twee gevolgen daarvan, allebei zichtbaar in `_manifest.json`:
 
 - OIB's *Device Guard, Credential Guard and HVCI*, *Power and Device Lock* en *Windows
   Sandbox* heten daar `U` omdat OIB ze aan gebruikers toewijst (o.a. om een herstart midden
@@ -177,7 +162,7 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 | Baseline-checks voor TEST Policies Platform | `baseline/intune/baseline-v1.0.json` | `node scripts/generate-baseline.js` |
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | Idem voor elke set ernaast | `export/NativeImport/IntuneBackupAndRestore-<SET>/` | hetzelfde script |
-| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` en `BASELINE2/` rechtstreeks | |
+| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` rechtstreeks | |
 
 ## OpenIntuneBaseline bijwerken
 
@@ -187,7 +172,7 @@ node scripts/import-oib.js --dry-run
 node scripts/import-oib.js
 ```
 
-`IntuneTemplate/_oib-manifest.json` bepaalt welke OIB-policy waar landt, met per policy de
+`IntuneTemplate/_manifest.json` bepaalt welke OIB-policy waar landt, met per policy de
 reden als er iets afwijkt. `.oib-source/` is gitignored: de gegenereerde templates zijn het
 resultaat, en een tweede kopie van een externe repo zou hier alleen maar verouderen.
 
@@ -248,7 +233,7 @@ update profiles, Windows 365) — met reden, in `"excluded"` in het manifest.
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
 komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Dat geldt voor alle drie
-de sets; in CIPP zijn ze uit elkaar te houden aan `Package`: `Baseline` en `BASELINE2`.
+de baseline; in CIPP is dat te zien aan `Package`: `Baseline`.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
@@ -261,7 +246,7 @@ OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
 
 Wat overblijft: zeven bestanden zijn wél `.json` maar geen policy — `baseline/intune/`
 `baseline-v1.0.json`, de drie `_`-bestanden in `IntuneTemplate/`, de twee `_manifest.json`'s
-van `BASELINE2/`, en het macOS-ADE-profiel in `enrollment/macos/`. CIPP
+en het macOS-ADE-profiel in `enrollment/macos/`. CIPP
 maakt daar één rij van zonder naam en zonder type (ze vallen op elkaar terug omdat de
 ontdubbeling op `Displayname` matcht, en die is bij alle zeven leeg). Die rij doet niets;
 opruimen kan door 'm in CIPP te verwijderen. Onder een `NativeImport`-pad zetten kan niet:
@@ -285,15 +270,9 @@ assignments van Settings Catalog, ADMX, device configurations en compliance aan,
 die van App Protection. Zonder die losse aanroep staan de twee MAM-policies er wel, maar
 zonder toewijzing — en dan beschermen ze niets.
 
-BASELINE2 staat in een eigen map en gaat dus apart terug:
-
-```powershell
-Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-BASELINE2'
-```
-
 Geen `Start-IntuneRestoreAssignments` erachteraan: die export bevat met opzet geen
 `Assignments/`-map. De policies horen na de restore met de hand op een pilotgroep, niet op All
-Devices — zie [`BASELINE2/`](BASELINE2/README.md). En twee mappen in plaats van één, omdat
+Devices — zie de fases hierboven. En twee mappen in plaats van één, omdat
 `Start-IntuneRestoreConfig` alles terugzet wat onder het meegegeven pad staat: samen in één map
 zou wie de baseline terugzet de pilotset ongemerkt mee uitrollen.
 

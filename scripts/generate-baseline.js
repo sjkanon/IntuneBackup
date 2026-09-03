@@ -164,7 +164,7 @@ const CHECK_NUMBERS = {
   Baseline_WIN_U_Windows_User_Experience: 31,
   Baseline_WIN_U_Microsoft_OneDrive: 32,
 
-  // 33 en hoger: de OpenIntuneBaseline-import (zie IntuneTemplate/_oib-manifest.json).
+  // 33 en hoger: de OpenIntuneBaseline-import (zie IntuneTemplate/_manifest.json).
   Baseline_AND_U_App_Protection: 33,
   Baseline_IOS_U_App_Protection: 34,
   Baseline_MAC_D_Accounts_and_Login: 35,
@@ -258,9 +258,38 @@ const CHECK_NUMBERS = {
   Baseline_WIN_U_Windows_Hello_for_Business: 114,
 
   // De twee macOS-inschrijfprofielen. Alternatieven van elkaar, dus allebei zonder
-  // toewijzing — zie de note bij hun regel in _oib-manifest.json.
+  // toewijzing — zie de note bij hun regel in _manifest.json.
   Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity: 115,
   Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity: 116,
+
+  // 117 en hoger: de samenvoeging van september 2026. De ISMS-set en BASELINE2 zijn hierin
+  // opgegaan — één baseline, met `fase` in _manifest.json in plaats van drie mappen. De
+  // nummers zijn vastgezet op het moment van samenvoegen; ze volgen niet uit de
+  // bestandsvolgorde, want dan zou één nieuw template alles erna verschuiven.
+  Baseline_AND_U_Compliance_Device_Health: 117,
+  Baseline_AND_U_Compliance_Password: 118,
+  Baseline_IOS_U_Compliance_Device_Health: 119,
+  Baseline_IOS_U_Compliance_Password: 120,
+  Baseline_MAC_D_Passcode_and_Screen_Lock: 121,
+  Baseline_MAC_D_Screen_Recording: 122,
+  Baseline_WIN_D_Access_Control: 123,
+  Baseline_WIN_D_Account_Lockout: 124,
+  Baseline_WIN_D_AI_Tooling: 125,
+  Baseline_WIN_D_Audit_Policy_Enforcement: 126,
+  Baseline_WIN_D_Business_Continuity: 127,
+  Baseline_WIN_D_Cryptography: 128,
+  Baseline_WIN_D_Data_Minimisation: 129,
+  Baseline_WIN_D_Kernel_DMA_Protection: 130,
+  Baseline_WIN_D_Logging: 131,
+  Baseline_WIN_D_Logon_Hardening: 132,
+  Baseline_WIN_D_Printing_Hardening: 133,
+  Baseline_WIN_D_Privacy_and_Telemetry: 134,
+  Baseline_WIN_D_Remote_Access_Hardening: 135,
+  Baseline_WIN_D_Threat_Protection: 136,
+  Baseline_WIN_D_Wireless_and_Peripherals: 137,
+  Baseline_WIN_D_Wireless_Shared_Devices: 138,
+  Baseline_WIN_U_AI_Usage_Control: 139,
+  Baseline_WIN_U_Attachment_Scanning: 140,
 };
 
 /**

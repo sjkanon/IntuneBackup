@@ -56,7 +56,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `pinRequiredInsteadOfBiometricTimeout` | PT12H |
 | `allowedOutboundClipboardSharingExceptionLength` | 0 |
 | `notificationRestriction` | blockOrganizationalData |
-| `previousPinBlockCount` | 0 |
+| `previousPinBlockCount` | 5 |
 | `managedBrowser` | microsoftEdge |
 | `maximumAllowedDeviceThreatLevel` | notConfigured |
 | `mobileThreatDefenseRemediationAction` | block |

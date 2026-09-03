@@ -1,16 +1,16 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 24 policies
+# macOS — 25 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 20 |
+| `SettingsCatalog/` | 21 |
 | `DeviceConfigurations/` | 1 |
 | `CompliancePolicies/` | 3 |
 
-## Device-scoped (D) — 17
+## Device-scoped (D) — 18
 
 Toewijzen aan apparaatgroepen.
 
@@ -28,6 +28,7 @@ Toewijzen aan apparaatgroepen.
 | [**Microsoft Edge Security**](SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.md) | De beveiligingsinstellingen van Edge op macOS: SmartScreen, downloadcontrole en certificaatgedrag. | Settings Catalog | 29 | All Devices | `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity` |
 | [**Microsoft Office**](SettingsCatalog/Baseline_MAC_D_Microsoft_Office.md) | Basisconfiguratie van Office op macOS. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-043-MACDMicrosoftOffice` |
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.md) | Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 'm de toegangsrechten die macOS eist. | Settings Catalog | 13 | All Devices | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
+| [**Passcode and Screen Lock**](SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.md) | Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-policy al eist: minimaal acht tekens, geen eenvoudig wachtwoord, vergrendelen na vijftien minuten. | Settings Catalog | 7 | — | `INTUNE-BASE-121-MACDPasscodeAndScreenLock` |
 | [**Platform SSO**](SettingsCatalog/Baseline_MAC_D_Platform_SSO.md) | Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-045-MACDPlatformSSO` |
 | [**Privacy Preferences**](SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.md) | Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken. | Settings Catalog | 40 | All Devices | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | [**Restrictions**](SettingsCatalog/Baseline_MAC_D_Restrictions.md) | Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. | Settings Catalog | 37 | All Devices | `INTUNE-BASE-046-MACDRestrictions` |
@@ -50,7 +51,7 @@ Toewijzen aan gebruikersgroepen.
 
 ---
 
-**Wat het doet** komt uit `doel` in [`_oib-manifest.json`](../_oib-manifest.json). Diezelfde zin
+**Wat het doet** komt uit `doel` in [`_manifest.json`](../_manifest.json). Diezelfde zin
 staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het
 template — en dus straks in de tenant naast de policy.
 

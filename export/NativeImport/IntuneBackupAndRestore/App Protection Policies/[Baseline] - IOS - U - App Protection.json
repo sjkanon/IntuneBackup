@@ -44,7 +44,7 @@
     "pinRequiredInsteadOfBiometricTimeout": "PT12H",
     "allowedOutboundClipboardSharingExceptionLength": 0,
     "notificationRestriction": "blockOrganizationalData",
-    "previousPinBlockCount": 0,
+    "previousPinBlockCount": 5,
     "managedBrowser": "microsoftEdge",
     "maximumAllowedDeviceThreatLevel": "notConfigured",
     "mobileThreatDefenseRemediationAction": "block",
@@ -67,7 +67,7 @@
     "allowedIosDeviceModels": null,
     "appActionIfIosDeviceModelNotAllowed": "block",
     "thirdPartyKeyboardsBlocked": false,
-    "filterOpenInToOnlyManagedApps": false,
+    "filterOpenInToOnlyManagedApps": true,
     "disableProtectionOfManagedOutboundOpenInData": false,
     "protectInboundDataFromUnknownSources": false,
     "customBrowserProtocol": "",
@@ -137,5 +137,6 @@
             "name": "Default",
             "value": "skype;app-settings;calshow;itms;itmss;itms-apps;itms-appss;itms-services;"
         }
-    ]
+    ],
+    "screenCaptureConfigurationState": "blocked"
 }

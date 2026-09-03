@@ -12,8 +12,6 @@ flowchart TD
   T -->|check-scope.js| CHK{{"scope · indeling · conflicten"}}
   T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
-  I["BASELINE2/<br/>25 policies"] -->|check-sets.js| CHK
-  I -->|export-intunebackup.js| EXI["export/NativeImport/<br/>IntuneBackupAndRestore-BASELINE2/"]
   I -.->|leest rechtstreeks| CIPP
   EXI -->|Start-IntuneRestoreConfig| TENANT
   T -->|generate-docs.js| DOC["README's per platform"]
@@ -29,10 +27,10 @@ flowchart TD
 
 | Script | Richting | Wat het doet |
 |---|---|---|
-| [`import-oib.js`](import-oib.js) | **naar** de bron | Zet OpenIntuneBaseline-policies om naar CIPP-templates, gestuurd door `_oib-manifest.json`. Behoudt GUID's en eigen instellingen die OIB niet kent. Idempotent. |
+| [`import-intuneadmin.js`](import-intuneadmin.js) | **naar** de bron | Zet profielen uit IntuneAdmin/IntuneBaselines om naar CIPP-templates, gestuurd door het `intuneadmin`-blok in `_manifest.json`. Leest UTF-16LE, strippt template-referenties uit de brontenant, behoudt GUID's en eigen instellingen. |
+| [`import-oib.js`](import-oib.js) | **naar** de bron | Zet OpenIntuneBaseline-policies om naar CIPP-templates, gestuurd door `_manifest.json`. Behoudt GUID's en eigen instellingen die OIB niet kent. Idempotent. |
 | [`import-intunebackup.js`](import-intunebackup.js) | **naar** de bron | Zet een tenant-backup terug om naar templates. Voegt standaard alleen toe; `--overwrite` om te vervangen. |
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen en de migratietabel. Blokkerend in CI. |
-| [`check-sets.js`](check-sets.js) | controle | Hetzelfde voor elke set naast de baseline (vandaag `BASELINE2/`), plus de controle die `check-scope.js` niet kán doen: botst een policy daaruit met een tóégewezen baseline-policy — of met een andere set? BASELINE2 heeft er één eis bij: naast een control ook een `bewijs` en een `universeel` in het manifest. `--docs` genereert de README van elke set. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, elke set daarnaast in een eigen map zonder. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |

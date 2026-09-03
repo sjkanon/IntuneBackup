@@ -27,7 +27,7 @@ const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const BASELINE_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
-const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_oib-manifest.json");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 
 const TYPE_LABEL = {
   Catalog: "Settings Catalog",
@@ -305,7 +305,7 @@ function platformReadme(platform, templates, ctx) {
   lines.push(
     "---",
     "",
-    "**Wat het doet** komt uit `doel` in [`_oib-manifest.json`](../_oib-manifest.json). Diezelfde zin",
+    "**Wat het doet** komt uit `doel` in [`_manifest.json`](../_manifest.json). Diezelfde zin",
     "staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het",
     "template — en dus straks in de tenant naast de policy.",
     "",
@@ -369,7 +369,7 @@ function overviewReadme(templates, ctx) {
     "| Bestand | Wat het vastlegt | Gelezen door |",
     "|---|---|---|",
     "| [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |",
-    "| [`_oib-manifest.json`](_oib-manifest.json) | welke OIB-policy waar landt, en waarom er afgeweken wordt | `import-oib.js` |",
+    "| [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, en waarom er afgeweken wordt | `import-oib.js` |",
     "| [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
     "",
     "Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar",
