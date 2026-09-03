@@ -65,6 +65,22 @@ routes als de baseline — CIPP leest de map rechtstreeks, en `export-intuneback
 weg naar `export/NativeImport/IntuneBackupAndRestore-ISMS/`, apart van de baseline-export zodat
 een restore van de baseline de pilotset niet meesleept.
 
+En een derde: **[`BASELINE2/`](BASELINE2/README.md)** — zes policies die de baseline aanvullen op
+punten waar hij aantoonbaar iets mist. De lat is daar niet "het staat in een norm" maar drie
+vragen die alle drie met ja beantwoord moeten worden: werkt het en is het bewezen, hebben we het
+nodig om gebruikers veilig te stellen, en geldt het voor élk apparaat? Samengesteld door onze
+twee sets op `settingDefinitionId` te vergelijken met
+[IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) (874 profielen: CIS
+v4, de Microsoft Endpoint Security-baselines, ISO 27001 en NIS2) en elke overgebleven waarde na
+te lopen tegen de Policy CSP-documentatie. `node scripts/check-baseline2.js` bewaakt die set,
+inclusief de botsingen met de baseline én met de ISMS-set.
+
+| | Wat het is | Prefix | Toewijzing | Controle |
+|---|---|---|---|---|
+| [`IntuneTemplate/`](IntuneTemplate/README.md) | de afgesproken baseline | `Baseline_` | uitgerold | `check-scope.js` |
+| [`ISMSTemplate/`](ISMSTemplate/README.md) | vertaling van de ISMS-documenten | `ISMS_` | geen — pilot | `check-isms.js` |
+| [`BASELINE2/`](BASELINE2/README.md) | bewezen, nodig, apparaatbreed | `BASELINE2_` | geen — voorstel | `check-baseline2.js` |
+
 ## Indeling
 
 ```
@@ -152,7 +168,7 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 | Baseline-checks voor TEST Policies Platform | `baseline/intune/baseline-v1.0.json` | `node scripts/generate-baseline.js` |
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | Idem voor de ISMS-pilotset | `export/NativeImport/IntuneBackupAndRestore-ISMS/` | hetzelfde script |
-| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` en `ISMSTemplate/` rechtstreeks | |
+| CIPP | *geen conversie* — CIPP leest `IntuneTemplate/`, `ISMSTemplate/` en `BASELINE2/` rechtstreeks | |
 
 ## OpenIntuneBaseline bijwerken
 

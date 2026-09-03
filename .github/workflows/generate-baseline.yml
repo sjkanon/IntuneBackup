@@ -15,8 +15,10 @@ on:
     paths:
       - "IntuneTemplate/**"
       - "ISMSTemplate/**"
+      - "BASELINE2/**"
       - "scripts/generate-baseline.js"
       - "scripts/check-isms.js"
+      - "scripts/check-baseline2.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
       - "scripts/lib/**"
@@ -44,6 +46,11 @@ jobs:
       # een ISMS-policy met een toegewezen baseline-policy? Schrijft ISMSTemplate/README.md bij.
       - name: Controleer ISMSTemplate/ en genereer de README
         run: node scripts/check-isms.js --docs
+      # Zelfde voor BASELINE2/, met één extra eis: elke policy moet naast een control ook een
+      # `bewijs` en een `universeel` in het manifest hebben. Zonder die twee is een policy daar
+      # een mening. Schrijft BASELINE2/README.md bij.
+      - name: Controleer BASELINE2/ en genereer de README
+        run: node scripts/check-baseline2.js --docs
 
       - name: Genereer baseline/intune/baseline-v1.0.json
         run: node scripts/generate-baseline.js
@@ -75,6 +82,7 @@ jobs:
             export/NativeImport/IntuneBackupAndRestore/**
             export/NativeImport/IntuneBackupAndRestore-ISMS/**
             ISMSTemplate/README.md
+            BASELINE2/README.md
             OVERZICHT.md
             IntuneTemplate/*.md
             IntuneTemplate/**/*.md
