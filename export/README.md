@@ -10,7 +10,7 @@ Elke bronmap krijgt een eigen doelmap:
 | Bron | Export | Policies | Assignments |
 |---|---|---:|---|
 | `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 106 | ja, uit `_assignments.json` |
-| `ISMSTemplate/` | `NativeImport/IntuneBackupAndRestore-ISMS/` | 10 | nee, met opzet |
+| `BASELINE2/` | `NativeImport/IntuneBackupAndRestore-BASELINE2/` | 25 | nee, met opzet |
 | `BASELINE2/` | `NativeImport/IntuneBackupAndRestore-BASELINE2/` | 6 | nee, met opzet |
 
 Aparte mappen en niet één gedeelde, omdat `Start-IntuneRestoreConfig` één pad meekrijgt en
@@ -18,7 +18,7 @@ alles terugzet wat eronder staat. Samen in één map zou wie de baseline terugze
 voorstelpolicies ongemerkt mee uitrollen — en die veranderen gedrag dat gebruikers direct
 merken. Die exports hebben om dezelfde reden geen `Assignments/`: die policies horen ná de
 restore met de hand op een pilotgroep, niet op All Devices. Zie
-[`ISMSTemplate/`](../ISMSTemplate/README.md) en [`BASELINE2/`](../BASELINE2/README.md).
+[`BASELINE2/`](../BASELINE2/README.md).
 
 Een set toevoegen aan `SET_PREFIXES` in `scripts/lib/templates.js` is genoeg: de exporter
 schrijft hem daarna vanzelf naar `NativeImport/IntuneBackupAndRestore-<SET>/`.
@@ -46,7 +46,7 @@ dezelfde policies in twee formaten in één repository.
 ```mermaid
 flowchart LR
   T["IntuneTemplate/"] -->|export-intunebackup.js| E["export/NativeImport/IntuneBackupAndRestore/"]
-  I["ISMSTemplate/ · BASELINE2/"] -->|export-intunebackup.js| EI["export/NativeImport/IntuneBackupAndRestore-&lt;SET&gt;/"]
+  I["BASELINE2/"] -->|export-intunebackup.js| EI["export/NativeImport/IntuneBackupAndRestore-&lt;SET&gt;/"]
   EI -->|Start-IntuneRestoreConfig| PI["voorstelpolicies, ongetoewezen"]
   E -->|Start-IntuneRestoreConfig| P["policies in de tenant"]
   E -->|Start-IntuneRestoreAssignments<br/>-RestoreById $false| A["assignments"]
@@ -73,7 +73,7 @@ maar zonder toewijzing — en dan beschermen ze niets.
 De twee voorstelsets staan hier niet bij en gaan apart, zonder assignments:
 
 ```powershell
-Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-ISMS'
+Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-BASELINE2'
 Start-IntuneRestoreConfig -Path '<repo>\export\NativeImport\IntuneBackupAndRestore-BASELINE2'
 ```
 
@@ -109,7 +109,7 @@ instellingen als hun ring 3 met andere waarden. Alle ringen op All Devices zou e
 opleveren; ring 1 en 2 horen op een pilot- respectievelijk UAT-groep. Wijs ze na de restore
 handmatig toe. `node scripts/export-intunebackup.js` noemt bij elke run de volledige lijst.
 
-De ISMS- en BASELINE2-export vallen hier helemaal onder: die zijn met opzet ongetoewezen.
+De BASELINE2-export valt hier helemaal onder: die set is met opzet nog ongetoewezen.
 
 Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en de
 lijst met policies die eerst in een pilot horen.

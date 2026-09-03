@@ -32,23 +32,26 @@ const TYPE_TO_CATEGORY = {
 };
 
 /**
- * Drie sets, één indeling.
+ * Twee sets, één indeling.
  *
  *   Baseline_   IntuneTemplate/   de afgesproken baseline die in de tenant staat
- *   ISMS_       ISMSTemplate/     de set die rechtstreeks uit de ISMS-documenten volgt
- *   BASELINE2_  BASELINE2/        de aanvulling die bewezen, nodig en apparaatbreed is
+ *   BASELINE2_  BASELINE2/        alles wat daar nog bij moet, nog zonder toewijzing
  *
- * Aparte prefix én aparte map, omdat het drie verschillende dingen zijn: de baseline is
- * uitgerold en wordt door de pijplijn bewaakt, de ISMS-set is een voorstel dat vanuit een
- * norm te verantwoorden is, en BASELINE2 is de aanvulling die de drie vragen met ja
- * beantwoordt (bewezen, nodig, geldt voor elk apparaat). Zonder dat onderscheid tellen ze op
- * in dezelfde overzichten en weet niemand meer wat er werkelijk op de apparaten staat.
+ * Aparte prefix én aparte map, omdat het twee verschillende dingen zijn: de baseline is
+ * uitgerold en wordt door de pijplijn bewaakt, BASELINE2 is de wachtkamer. Het einddoel is
+ * één baseline — een policy die de pilot doorstaat verhuist naar IntuneTemplate/ onder de
+ * Baseline_-naam en krijgt daar een checkId en een toewijzing. Tot dat moment is het
+ * onderscheid nodig: zonder de scheiding tellen ze op in dezelfde overzichten en weet niemand
+ * meer wat er werkelijk op de apparaten staat.
+ *
+ * De ISMS-set had hier tot september 2026 een eigen prefix. Die is opgegaan in BASELINE2 —
+ * twee wachtkamers naast elkaar leverden alleen de vraag op in welke iets hoorde.
  *
  * BASELINE2 staat vóór Baseline in de alternatie: allebei beginnen met dezelfde letters in
  * een andere kapitalisatie, en een regex leest van links naar rechts.
  */
-const SET_PREFIXES = { Baseline: "IntuneTemplate", ISMS: "ISMSTemplate", BASELINE2: "BASELINE2" };
-const BASE_NAME_RE = /^(BASELINE2|Baseline|ISMS)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
+const SET_PREFIXES = { Baseline: "IntuneTemplate", BASELINE2: "BASELINE2" };
+const BASE_NAME_RE = /^(BASELINE2|Baseline)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
 
 /** "Baseline_WIN_D_BitLocker" -> { set: "Baseline", platform: "WIN", scope: "D", item: "BitLocker" } */
 function parseBaseName(baseName) {

@@ -4,7 +4,9 @@ Handgeschreven, in tegenstelling tot [`README.md`](README.md) ernaast. Dit legt 
 BASELINE2-set tot stand is gekomen en — belangrijker — wat er bewust **niet** in zit en waarom.
 Zonder dat laatste is een volgende ronde gedoemd dezelfde 500 instellingen opnieuw te wegen.
 
-Datum: 3 september 2026.
+Datum: 3 september 2026. De set telt 25 policies: 15 uit deze analyse en de 10 die tot deze
+datum in `ISMSTemplate/` stonden en hier zijn opgegaan. Het einddoel is één baseline — deze map
+is de wachtkamer, `IntuneTemplate/` de bestemming.
 
 ## De vraag
 
@@ -41,21 +43,23 @@ Drie dingen die daarbij misgaan als je ze niet weet:
 
 ## Uitkomst in cijfers
 
-Onze twee bestaande sets zetten samen 1.908 instellingen (`IntuneTemplate/` 106 policies /
-1.877 instellingen, `ISMSTemplate/` 10 / 31). Daartegen leverde IntuneAdmin **509
-`settingDefinitionId`'s op die wij nergens zetten**. Die vallen zo uiteen:
+Op het moment van de vergelijking zetten onze twee sets samen 1.908 instellingen
+(`IntuneTemplate/` 106 policies / 1.877 instellingen, `ISMSTemplate/` 10 / 31 — die tweede is
+sindsdien in deze map opgegaan). Daartegen leverde IntuneAdmin **509 `settingDefinitionId`'s op
+die wij nergens zetten**. Die vallen zo uiteen:
 
 | | Aantal | Wat ermee gebeurde |
 |---|---:|---|
 | Browser (Chrome, Safari, Edge) | 180 | Chrome en Safari gebruiken we niet. De Edge-instellingen zijn cosmetisch of al gedekt — zie hieronder. |
 | Apple-payloads (`com.apple.*`) | 21 | grotendeels iOS-restricties voor *supervised* apparaten; wij hebben geen enrolled iOS. Eén uitzondering: de passcode-payload. |
-| Visual Studio | 9 | ontwikkelaarsspecifiek, niet apparaatbreed. `ISMSTemplate/` dekt de Copilot-kant al. |
+| Visual Studio | 9 | ontwikkelaarsspecifiek, niet apparaatbreed. `WIN - D - AI Tooling` dekt de Copilot-kant al. |
 | Office | 5 | al gedekt door de vier Office-policies in de baseline. |
 | Overige Windows-CSP | 294 | het echte werk. Hiervan viel het overgrote deel af op *niet apparaatbreed* (kiosk, AVD, Windows 365, gedeelde apparaten), *CIS L2* (bewust: L2 breekt zaken) of *al gedekt via een andere instelling*. |
-| **Overgebleven en overgenomen** | **8** | verdeeld over 5 Windows-policies in `BASELINE2/` |
+| **Overgebleven en overgenomen** | **14** | verdeeld over 8 Windows-policies in `BASELINE2/` |
 
-Plus één gat dat niet uit IntuneAdmin kwam maar uit onze eigen documentatie: de macOS-passcode.
-Totaal 6 policies, 15 instellingen.
+Plus drie gaten die niet uit IntuneAdmin kwamen: de macOS-passcode (uit onze eigen `OVERZICHT.md`),
+de drie MAM-verscherpingen (uit de UniFy-vergelijking) en de vier compliance-policies voor iOS en
+Android die er helemaal niet waren.
 
 ## Wat we misten en nu hebben
 
@@ -66,7 +70,13 @@ Totaal 6 policies, 15 instellingen.
 | `WIN - D - Audit Policy Enforcement` | De 40 auditinstellingen van de baseline konden stilzwijgend overruled worden door de oude categorie-instellingen. | Eén instelling die van de bestaande auditpolicy de werkelijke waarheid maakt in plaats van een voornemen. Onzichtbaar, breekt niets. |
 | `WIN - D - Kernel DMA Protection` | Niets hield een DMA-capabel randapparaat tegen dat geen remapping ondersteunt. | De "evil maid": laptop even alleen, stekker erin, sleutel uit het geheugen. Microsoft zet hem in zijn eigen baseline op dezelfde waarde. |
 | `WIN - U - Attachment Scanning` | De virusscanner werd niet aangeroepen op het moment dat een gedownloade bijlage werd geopend. | Een bijlage die bij binnenkomst nog onbekend was, is een dag later wél herkend. CIS L1, geen merkbare impact. |
+| `WIN - D - Printing Hardening` | De printspooler stond open: gewone gebruikers mochten drivers installeren bij een gedeelde printer, en Protected Print stond uit. | Dat is precies het gat waar PrintNightmare doorheen liep. Elk Windows-apparaat heeft een spooler, ook zonder printer. |
+| `WIN - D - Remote Access Hardening` | De WinRM-remoteshell (`winrs`) stond open en een inactieve SMB-sessie bleef staan. | Standaardstap in lateral movement. Werkplekken hebben geen legitieme reden inkomende remoteshells te accepteren. |
+| `WIN - D - Privacy and Telemetry` | Klembord tussen apparaten, invoerpersonalisatie, activiteiten-upload en advertentie-id stonden alle vier aan. | Vier kanalen waarlangs gegevens het apparaat verlaten zonder dat iemand ze als datastroom herkent. Alle vier CIS L1. |
 | `MAC - D - Passcode and Screen Lock` | **De compliance-policy eist een wachtwoord van 8 tekens en vergrendeling na 15 minuten, maar geen enkele policy stelde dat in.** | Stond al als open gat in `OVERZICHT.md`. Een Mac zonder schermvergrendeling krijgt een rood vinkje en de gebruiker kan er niets aan doen. Waarden één op één uit de compliance-policy. |
+| `IOS - U - App Protection` | Het iOS-deelmenu bood nog onbeheerde apps aan, ondanks de beperking op uitgaande overdracht. Schermafdrukken waren niet geblokkeerd, PIN-hergebruik wel toegestaan. | Zie *Mobiel* hieronder. Raakt élke iPhone met bedrijfsgegevens — ook, en juist, de privétoestellen. |
+| `AND - U - App Protection` | PIN-hergebruik toegestaan. | Een PIN-reset zonder historie is betekenisloos, en dat is precies het moment waarop het ertoe doet. |
+| `IOS/AND - U - Compliance Device Health` en `Compliance Password` | **Er was geen enkele compliance-policy voor iOS en Android.** | "Vereis een compliant apparaat" in Conditional Access is voor die twee platformen zonder policy een lege huls. Doet vandaag nog niets — zie het voorbehoud hieronder. |
 
 ## Wat de ISO 27001- en NIS2-mappen van IntuneAdmin opleverden
 
@@ -95,11 +105,14 @@ iOS en Android hebben in `IntuneTemplate/` samen precies twee policies, allebei 
 (MAM). Beide staan op `targetedAppManagementLevels: "unmanaged"` — de telefoons zijn **niet
 enrolled**. Dat heeft twee gevolgen:
 
-**Compliance-policies voor iOS en Android zijn zinloos zolang dat zo is.** IntuneAdmin en de
-UniFy-sets hebben ze ruim (iOS Device Health/Properties/MDE, Android Enterprise en
-Personally-owned work profile), maar een compliance-policy raakt alleen een enrolled apparaat.
-Toevoegen zou een set rode vinkjes opleveren voor apparaten die er niet zijn. Dit wordt pas een
-gat op het moment dat er telefoons worden ingeschreven — zet het dan op de agenda, niet eerder.
+**Compliance-policies voor iOS en Android doen vandaag niets.** Een compliance-policy raakt
+alleen een ingeschreven apparaat, en die zijn er niet. Ze staan er toch — vier stuks, Device
+Health en Password per platform — omdat het alternatief is dat de dag waarop de eerste telefoon
+wordt ingeschreven een dag zonder toets is, en omdat "vereis een compliant apparaat" in
+Conditional Access voor iOS en Android zonder policy een lege huls is: er is dan geen enkele regel
+om aan te voldoen. Ze leveren geen rode vinkjes op zolang er niets is ingeschreven — een
+compliance-policy zonder apparaten rapporteert niets. Wijs ze pas toe wanneer er daadwerkelijk
+wordt ingeschreven; tot dan staan ze klaar. Dat voorbehoud staat ook per policy in het manifest.
 
 **De MAM-policies zijn wél het enige wat elke telefoon raakt, en daar zitten drie echte gaten.**
 Vergeleken met de L2-BYOD-varianten van UniFy-Endpoint is onze set op de meeste punten *strenger*
@@ -113,13 +126,12 @@ Wat ontbreekt:
 | `screenCaptureConfigurationState` (iOS) | niet gezet | `blocked` | Android blokkeert schermafdrukken al (`screenCaptureBlocked: true`); op iOS was daar tot iOS 26 geen instelling voor. Nu wel — en de asymmetrie is niet bedoeld. |
 | `previousPinBlockCount` (beide) | `0` | `5` | Geen PIN-historie: een gebruiker kan bij een reset dezelfde PIN opnieuw kiezen. Geen enkele frictie om te repareren. |
 
-Deze drie staan **niet** als BASELINE2-template in deze map, en dat is opzet. Een tweede
-MAM-policy naast de bestaande op dezelfde apps is niet hoe App Protection stapelt, en het zou een
-onduidelijke situatie opleveren. De juiste ingreep is een wijziging in
-`Baseline_IOS_U_App_Protection` en `Baseline_AND_U_App_Protection` zelf. Die twee zijn nog niet
-in de tenant uitgerold (`OVERZICHT.md`: uitgerold = 0), dus dat kan nu nog zonder migratie —
-maar het is een wijziging aan de mét de klant afgesproken baseline, en dat is een besluit, geen
-opruimactie.
+Deze drie staan als `BASELINE2 - IOS/AND - U - App Protection` in deze map: een volledige kopie
+van de baseline-policy met de verscherping erin. **Rol die uit in plaats van de baseline-variant,
+niet ernaast.** Twee App Protection-policies op dezelfde apps stapelen niet netjes — Intune kiest
+per instelling de strengste waarde, maar welke policy een instelling levert is dan niet meer af te
+lezen. Uiteindelijk hoort de wijziging terug in de baseline-policy zelf; dat is een besluit over de
+mét de klant afgesproken baseline, geen opruimactie, en daarom staat het hier eerst.
 
 Bewust niet overgenomen uit de UniFy-sets: `pinRequiredInsteadOfBiometricTimeout` op 30 minuten
 (wij: 12 uur — merkbare frictie, en de PIN is niet de enige beveiliging),
@@ -140,7 +152,9 @@ en vraagt onderhoud — `minimumWarningOsVersion` is het overwegen waard).
 | `applicationcontrol` / WDAC / AppLocker / Smart App Control | Ontbreekt volledig, en dat is de grootste inhoudelijke leemte van de hele baseline. Maar applicatiecontrole is geen instelling die je aanzet — het is een project met een inventarisatie, een audit-fase en een uitzonderingenproces. Hoort niet in een set die "dit werkt voor elk apparaat" belooft. **Wel de belangrijkste kandidaat voor de volgende ronde.** |
 | DNS over HTTPS | Kwam niet in IntuneAdmin voor en staat niet in onze set. De baseline zet wel `turn_off_multicast` (LLMNR). DoH afdwingen vraagt een besluit over welke resolver, en dat is tenantspecifiek. |
 | `privacy_disableadvertisingid`, `allowcrossdeviceclipboard`, `uploaduseractivities` | Privacy, geen beveiliging. Horen bij `ISMSTemplate/` onder ISDP01 als iemand ze wil. |
-| CIS L2 in het algemeen | L2 is expliciet "voor omgevingen waar beveiliging boven functionaliteit gaat". Dat is de tegenovergestelde lat van deze set. |
+| CIS L2 in het algemeen | L2 is expliciet "voor omgevingen waar beveiliging boven functionaliteit gaat". Dat is de tegenovergestelde lat van deze set. Eén uitzondering die wél is overgenomen: PowerShell-transcriptie (L2), omdat die uit ISMP13 volgt. |
+| macOS, verder dan de passcode | De vergelijking met IntuneAdmin én de UniFy-sets leverde voor macOS 12 instellingen op die wij niet zetten. Elf daarvan zijn Safari-instellingen die de bron juist op *toestaan* zet (`allowsafariprivatebrowsing_true`) — dat is geen hardening — en de rest zijn Kerberos-SSO-placeholders (`YOURKERBEROSREALM`). **Onze 21 macOS-policies lopen op deze bronnen vóór.** |
+| iOS/Android device restrictions | De UniFy-sets hebben ze uitgebreid (App Management, Connectivity Controls, Device Pairing, Lock Screen). Allemaal settings catalog, en die bereiken alleen ingeschreven apparaten. Zelfde agenda als de compliance-policies, maar met meer keuzes — dat is een eigen ronde, geen bijvangst. |
 
 ## Fouten die we in de bronnen tegenkwamen
 

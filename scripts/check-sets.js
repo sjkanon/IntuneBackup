@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Controleert de policysets naast de uitgerolde baseline — vandaag ISMSTemplate/ en
- * BASELINE2/, morgen wat er ook maar bij komt.
+ * Controleert de policysets naast de uitgerolde baseline — vandaag alleen BASELINE2/,
+ * morgen wat er ook maar bij komt.
  *
  * Eén script en geen check-isms.js + check-baseline2.js naast elkaar, omdat elke set
  * dezelfde vier controles nodig heeft en een tweede kopie er precies één zou missen. Wat
@@ -28,7 +28,7 @@
  * Gebruik: node scripts/check-sets.js [--docs] [SET]
  *   --docs schrijft daarnaast de README van elke set uit het manifest en de templates, zodat
  *   die tabel niet uit de pas kan lopen met wat de policies werkelijk zetten.
- *   SET beperkt de run tot één set (ISMS of BASELINE2).
+ *   SET beperkt de run tot één set.
  */
 
 const fs = require("fs");
@@ -47,32 +47,6 @@ const exportDirFor = (set) => `export/NativeImport/IntuneBackupAndRestore-${set}
  * welke manifestvelden onder elke policy in de detailtabel komen.
  */
 const SETS = {
-  ISMS: {
-    dir: "ISMSTemplate",
-    title: "ISMS-set",
-    detailFields: [["Bron", "bron"]],
-    head: (n) => [
-      `${n} Intune-policies die rechtstreeks uit de ISMS-documenten volgen (ISDP01–02, ISMP01–22),`,
-      "voor de eisen die `IntuneTemplate/` nog niet afdwingt. Elke policy is te herleiden tot een",
-      "artikel: ISO/IEC 27001:2022 Annex A, NIS2 (richtlijn 2022/2555 art. 21), EASA Part-IS.I.OR,",
-      "en het interne ISMS-document dat het eist.",
-      "",
-      "**Dit is geen tweede baseline.** De baseline staat in `IntuneTemplate/` en is uitgerold; deze",
-      "set is een voorstel dat nog op een pilotgroep moet. Daarom een eigen prefix, een eigen map en",
-      "geen enkele toewijzing:",
-      "",
-      "```",
-      "IntuneTemplate/   Baseline_<PLATFORM>_<D|U>_<Item>.json    [Baseline] - WIN - D - Item    uitgerold",
-      "ISMSTemplate/     ISMS_<PLATFORM>_<D|U>_<Item>.json        [ISMS] - WIN - D - Item        pilot",
-      "```",
-      "",
-      "De mapindeling binnen beide is hetzelfde (`<PLATFORM>/<CATEGORIE>/`), en `scripts/lib/templates.js`",
-      "kent beide prefixen. Wat verschilt is de pijplijn: deze set komt bewust **niet** in",
-      "`baseline/intune/baseline-v1.0.json`. Een policy die nog nergens is toegewezen hoort niet als",
-      "check tegen een tenant te worden gelegd — dat levert alleen rode vinkjes op voor iets wat",
-      "niemand heeft uitgerold.",
-    ],
-  },
   BASELINE2: {
     dir: "BASELINE2",
     title: "BASELINE2-set",
@@ -92,13 +66,13 @@ const SETS = {
       `${n} Intune-policies die de uitgerolde baseline aanvullen en op alle drie de vragen ja`,
       "antwoorden: **werkt het aantoonbaar**, **hebben we het nodig** om gebruikers veilig te",
       "stellen, en **geldt het voor élk apparaat**? Een maatregel die op één van de drie nee",
-      "scoort hoort hier niet — die hoort in `ISMSTemplate/` (verantwoording vanuit een norm) of",
-      "nergens.",
+      "scoort hoort hier niet, of hij staat er mét het voorbehoud erbij in het manifest.",
       "",
-      "De set is samengesteld door `IntuneTemplate/` en `ISMSTemplate/` op `settingDefinitionId`",
-      "te vergelijken met de 874 profielen van IntuneAdmin/IntuneBaselines (CIS v4 Windows 11",
-      "L1/L2, CIS Edge, de Microsoft Endpoint Security-baselines, Modern Workplace en de ISO",
-      "27001- en NIS2-mappen). Elke instelling hier ontbrak in beide eigen sets.",
+      "De set is samengesteld door `IntuneTemplate/` op `settingDefinitionId` te vergelijken met",
+      "de 874 profielen van IntuneAdmin/IntuneBaselines (CIS v4 Windows 11 L1/L2, CIS Edge, de",
+      "Microsoft Endpoint Security-baselines, Modern Workplace en de ISO 27001- en NIS2-mappen) en",
+      "met de iOS- en Android-baselines van UniFy-Endpoint. De tien policies die tot september",
+      "2026 in `ISMSTemplate/` stonden zijn hierin opgegaan — zie [ANALYSE.md](ANALYSE.md).",
       "",
       "**Nog geen tweede baseline.** Eigen prefix, eigen map, en nog geen enkele toewijzing:",
       "",

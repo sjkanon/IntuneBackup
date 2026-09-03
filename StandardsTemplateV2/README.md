@@ -1,7 +1,7 @@
 # StandardsTemplateV2/
 
 Eén CIPP **standards**-template. Dat is iets anders dan alles in `IntuneTemplate/`,
-`ISMSTemplate/` en `BASELINE2/`: die gaan over Intune-policies op apparaten, dit gaat over
+`BASELINE2/`: die gaan over Intune-policies op apparaten, dit gaat over
 tenantinstellingen die CIPP zelf bewaakt en herstelt.
 
 | | |

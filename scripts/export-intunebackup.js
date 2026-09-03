@@ -19,7 +19,7 @@
  * gedeelde:
  *
  *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/            de uitgerolde baseline, mét assignments
- *   ISMSTemplate/    ->  .../IntuneBackupAndRestore-ISMS/       voorstel, zonder assignments
+ *   BASELINE2/       ->  .../IntuneBackupAndRestore-BASELINE2/  voorstel, zonder assignments
  *   BASELINE2/       ->  .../IntuneBackupAndRestore-BASELINE2/  voorstel, zonder assignments
  *
  * `Start-IntuneRestoreConfig` krijgt één pad mee en zet alles terug wat eronder staat. Stonden
@@ -298,7 +298,7 @@ function main() {
   const baseline = exportSet({ label: "Baseline", sourceDir: TEMPLATE_DIR, outDir, assignments });
 
   // Elke set naast de baseline, in de volgorde van SET_PREFIXES. Een set is optioneel: de
-  // exporter moet ook werken in een checkout zonder ISMSTemplate/ of BASELINE2/. Assignments
+  // exporter moet ook werken in een checkout zonder BASELINE2/. Assignments
   // bewust leeg — die sets hebben er geen, en dat is de bedoeling.
   const extra = [];
   for (const [set, dirName] of Object.entries(SET_PREFIXES)) {
