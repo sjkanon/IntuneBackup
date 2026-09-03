@@ -1,6 +1,6 @@
 {
-    "name": "[Baseline] - WIN - D - Windows AI",
-    "description": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. Toewijzing volgens baseline: alle apparaten. Bron: eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026.",
+    "name": "[Baseline] - WIN - D - Windows AI Permitted",
+    "description": "Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. Toewijzing volgens baseline: geen — fase 5. Bron: Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -23,7 +23,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_allowrecallenablement_0",
+                    "value": "device_vendor_msft_policy_config_windowsai_allowrecallenablement_1",
                     "children": []
                 }
             }
@@ -37,7 +37,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis_0",
                     "children": []
                 }
             }
@@ -51,7 +51,7 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_windowsai_disableclicktodo_1",
+                    "value": "device_vendor_msft_policy_config_windowsai_disableclicktodo_0",
                     "children": []
                 }
             }

@@ -1,6 +1,6 @@
 {
-    "name": "[Baseline] - WIN - U - AI Usage Control",
-    "description": "Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy.",
+    "name": "[Baseline] - WIN - U - AI Usage Control Restricted",
+    "description": "Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar. Toewijzing volgens baseline: undefined. Bron: ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

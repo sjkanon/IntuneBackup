@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 104 policies
+# Windows — 106 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 95 |
+| `SettingsCatalog/` | 97 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 83
+## Device-scoped (D) — 84
 
 Toewijzen aan apparaatgroepen.
 
@@ -84,7 +84,8 @@ Toewijzen aan apparaatgroepen.
 | [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 28 | All Devices | `INTUNE-BASE-026-UserRights` |
 | [**Windows AI Features Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) | Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | [**Windows AI Features Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
-| [**Windows AI**](SettingsCatalog/Baseline_WIN_D_Windows_AI.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
+| [**Windows AI Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) | Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. | Settings Catalog | 3 | — | `INTUNE-BASE-148-DWindowsAIPermitted` |
+| [**Windows AI Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices | `INTUNE-BASE-112-DWindowsAI` |
 | [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 8 | All Devices | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices | `INTUNE-BASE-085-DWindowsFirewallRules` |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.md) | Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. | Settings Catalog | 35 | All Devices | `INTUNE-BASE-016-Firewall` |
@@ -101,13 +102,14 @@ Toewijzen aan apparaatgroepen.
 | [**Wireless and Peripherals**](SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.md) | Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | [**Wireless Shared Devices**](SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) | Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. | Settings Catalog | 1 | — | `INTUNE-BASE-138-DWirelessSharedDevices` |
 
-## User-scoped (U) — 21
+## User-scoped (U) — 22
 
 Toewijzen aan gebruikersgroepen.
 
 | Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
 |---|---|---|---:|---|---|
-| [**AI Usage Control**](SettingsCatalog/Baseline_WIN_U_AI_Usage_Control.md) | Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar. | Settings Catalog | 2 | — | `INTUNE-BASE-139-UAIUsageControl` |
+| [**AI Usage Control Permitted**](SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.md) | Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten. | Settings Catalog | 2 | — | `INTUNE-BASE-149-UAIUsageControlPermitted` |
+| [**AI Usage Control Restricted**](SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.md) | Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar. | Settings Catalog | 2 | — | `INTUNE-BASE-139-UAIUsageControl` |
 | [**Attachment Scanning**](SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.md) | Laat de virusscanner elke bijlage controleren op het moment dat de gebruiker hem opent, niet alleen bij het opslaan. | Settings Catalog | 1 | All Users | `INTUNE-BASE-140-UAttachmentScanning` |
 | [**Compliance Defender for Endpoint**](CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint.md) | Toetst het risiconiveau dat Defender for Endpoint aan het apparaat toekent. Vereist een werkende koppeling met Defender for Endpoint in Intune. | Compliance | — | All Users | — |
 | [**Compliance Device Health**](CompliancePolicies/Baseline_WIN_U_Compliance_Device_Health.md) | Toetst of het apparaat versleuteld is en veilig opstart (BitLocker, Secure Boot, code-integriteit). Zonder deze toets is 'vereis een compliant apparaat' in Conditional Access betekenisloos. | Compliance | — | All Users | — |

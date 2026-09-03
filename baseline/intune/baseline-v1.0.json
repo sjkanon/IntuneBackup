@@ -9644,14 +9644,14 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "windows-ai",
+        "windows-ai-restricted",
         "windows",
         "device-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Restricted\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -10774,14 +10774,14 @@
       "tags": [
         "intune",
         "settings-catalog",
-        "ai-usage-control",
+        "ai-usage-control-restricted",
         "windows",
         "user-scope"
       ],
       "type": "settings-catalog-match",
-      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - AI Usage Control\"?",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - AI Usage Control Restricted\"?",
       "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
-      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control.json (afgesproken baseline, Defender-gebaseerd)",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
       "params": {
         "settings": [
           {
@@ -11077,6 +11077,81 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disablesettingsagent",
             "expectedValue": "device_vendor_msft_policy_config_windowsai_disablesettingsagent_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-148-DWindowsAIPermitted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-ai-permitted",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows AI Permitted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_allowrecallenablement",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_allowrecallenablement_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableaidataanalysis_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_disableclicktodo",
+            "expectedValue": "device_vendor_msft_policy_config_windowsai_disableclicktodo_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-149-UAIUsageControlPermitted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "ai-usage-control-permitted",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - AI Usage Control Permitted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
+            "expectedValue": [
+              "https://apps.microsoft.com",
+              "https://apps.microsoft.com/*",
+              "apps.microsoft.com",
+              "apps.microsoft.com/*"
+            ]
           }
         ]
       },

@@ -1436,16 +1436,6 @@
       "fase": 1
     },
     {
-      "target": "Baseline_WIN_D_Windows_AI",
-      "displayName": "[Baseline] - WIN - D - Windows AI",
-      "doel": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.",
-      "bron": "eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026",
-      "metadataOnly": true,
-      "note": "OIB v3.8 kent nog geen Windows AI-policy. Recall staat uit in plaats van beperkt: zolang de functie aanstaat blijven de snapshots op het apparaat staan, en dat is de kern van de DPIA-vraag. Wie Recall wél wil toestaan vervangt allowrecallenablement door de beperkende variant (bewaartermijn, opslagruimte, uitsluitingslijsten).",
-      "herkomst": "intuneadmin",
-      "fase": 1
-    },
-    {
       "target": "Baseline_WIN_D_Windows_AI_Features_Permitted",
       "displayName": "[Baseline] - WIN - D - Windows AI Features Permitted",
       "doel": "Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent.",
@@ -1471,7 +1461,7 @@
       },
       "bewijs": "Niet elke klant heeft een ISMP22. Waar generatieve AI wél is toegestaan is het beter om dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait. Dat is precies wat deze vier instellingen doen.",
       "universeel": "Elk Windows 11-apparaat waar deze functies op zitten — maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
-      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control. Wie AI breed wil toestaan, moet ook die twee wegen."
+      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI Restricted, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control Restricted. Wie AI breed wil toestaan, moet ook die twee wegen."
     },
     {
       "target": "Baseline_WIN_D_Windows_AI_Features_Restricted",
@@ -1499,7 +1489,33 @@
       },
       "bewijs": "ISMP22 staat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toe. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled.",
       "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets. Of hij past is echter een klantbesluit, geen technisch feit: een organisatie die generatieve AI op de werkplek toestaat kiest de Permitted-variant.",
-      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
+      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_AI_Permitted",
+      "displayName": "[Baseline] - WIN - D - Windows AI Permitted",
+      "doel": "Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken.",
+      "bron": "Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd",
+      "herkomst": "eigen",
+      "toewijzingTekst": "geen — fase 5",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die Recall en Click To Do toestaat. Wijs er één toe, nooit allebei.",
+      "bewijs": "Waar Recall is toegestaan is het beter dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware, maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
+      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per klant verschillen."
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_AI_Restricted",
+      "displayName": "[Baseline] - WIN - D - Windows AI Restricted",
+      "doel": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.",
+      "bron": "eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026",
+      "metadataOnly": true,
+      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Permitted.** Die zet dezelfde drie instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Dit is de variant die de baseline standaard uitrolt.",
+      "herkomst": "intuneadmin",
+      "fase": 1,
+      "toewijzingTekst": "alle apparaten",
+      "bewijs": "Recall maakt elke paar seconden een schermafdruk en bewaart die doorzoekbaar op de schijf. Alles wat een gebruiker op het scherm heeft gehad staat daarmee in één index: wachtwoordkluizen, salarisbestanden, het patiëntdossier dat even openstond. Wie de schijf of het account overneemt, neemt die index mee. Click To Do stuurt bovendien schermdata naar een generatieve dienst. Voor een organisatie met ISMP22 is dat geen afweging maar een verbod, en ook zonder ISMP22 vergroot het de schade van elk incident.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware. Op andere apparaten bestaat Recall niet en doet de instelling niets — hij is dus overal veilig toe te wijzen. Óf hij past is wel een klantbesluit: zie de Permitted-variant."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v3.8.json",
@@ -1714,8 +1730,36 @@
       "faseGroep": "SEC-Shared-Devices"
     },
     {
-      "target": "Baseline_WIN_U_AI_Usage_Control",
-      "displayName": "[Baseline] - WIN - U - AI Usage Control",
+      "target": "Baseline_WIN_U_AI_Usage_Control_Permitted",
+      "displayName": "[Baseline] - WIN - U - AI Usage Control Permitted",
+      "doel": "Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten.",
+      "bron": "Tegenhanger van de Restricted-variant: dezelfde blokkeerlijst zonder de AI-domeinen",
+      "herkomst": "eigen",
+      "toewijzingTekst": "geen — fase 5",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die publieke AI-diensten toestaat. Wijs er één toe, nooit allebei.",
+      "controls": {
+        "iso": [
+          "A.5.10 Aanvaardbaar gebruik",
+          "A.5.19 Informatiebeveiliging in leveranciersrelaties",
+          "A.8.1 Eindpuntapparatuur van gebruikers"
+        ],
+        "nis2": [
+          "art. 21(2)(d) toeleveringsketen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP22",
+          "ISDP01"
+        ]
+      },
+      "bewijs": "Een klant die publieke AI-diensten toestaat heeft nog steeds de Store-blokkade nodig die hier vóór de AI-ronde al in zat. Die twee dingen in één lijst zetten betekent dat je ze niet los kunt kiezen — deze variant knipt ze uit elkaar zonder de Store-regels te verliezen.",
+      "universeel": "Elke gebruiker met Edge, maar alleen bij een klant die publieke AI-diensten heeft goedgekeurd.",
+      "note": "**Alternatief van [Baseline] - WIN - U - AI Usage Control Restricted.** Een URL-blokkeerlijst is sowieso frictie en geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. Wie AI-gebruik echt wil sturen doet dat met de categorie Generative AI in Defender Web Content Filtering — dat staat in het Defender-portaal, niet in deze repo."
+    },
+    {
+      "target": "Baseline_WIN_U_AI_Usage_Control_Restricted",
+      "displayName": "[Baseline] - WIN - U - AI Usage Control Restricted",
       "doel": "Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsoft Copilot blijft uitdrukkelijk bereikbaar.",
       "controls": {
         "iso": [
@@ -1733,7 +1777,7 @@
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy",
-      "note": "ISMP22 verbiedt alle AI-tools behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; op dit moment houdt niets een gebruiker tegen. LET OP bij uitrol: [Baseline] - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De vier bestaande regels voor de Store-website staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo.",
+      "note": "ISMP22 verbiedt alle AI-tools behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; op dit moment houdt niets een gebruiker tegen. LET OP bij uitrol: [Baseline] - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De vier bestaande regels voor de Store-website staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van [Baseline] - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.",
       "bewijs": "ISMP22 verbiedt alle AI-tools behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; op dit moment houdt niets een gebruiker tegen. Een URL-blokkeerlijst is daarbij frictie, geen grens — hij werkt niet op een telefoon en niet op een privéapparaat — maar hij maakt de regel zichtbaar en houdt het gemakzuchtige gebruik tegen.",
       "universeel": "Geldt voor elke gebruiker op elk apparaat met Edge. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; die staat in het Defender-portaal, niet in deze repo.",
       "herkomst": "eigen",
@@ -1750,7 +1794,7 @@
         }
       ],
       "fase": 2,
-      "faseWaarom": "Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt."
+      "faseWaarom": "Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen."
     },
     {
       "target": "Baseline_WIN_U_Attachment_Scanning",

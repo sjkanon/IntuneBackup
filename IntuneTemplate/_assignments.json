@@ -683,7 +683,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Windows AI": [
+  "[Baseline] - WIN - D - Windows AI Restricted": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

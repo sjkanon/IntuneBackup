@@ -14,7 +14,7 @@ Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocre
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 
-> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
+> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
 
 ## Instellingen — 4
 

@@ -96,7 +96,7 @@ Defender op Linux. Wat overbleef zijn **vijf baselines die er wél toe doen**:
 | `WIN - D - Power Management` | De baseline eist al een wachtwoord bij ontwaken, maar de klep dicht doen deed niets — dus bleef het scherm ontgrendeld. Dat is het moment waarop een laptop onbeheerd achterblijft. | 1 |
 | `WIN - D - Storage Sense` | Een volle schijf breekt Windows Update, BitLocker-versleuteling en Defender-definitie-updates. Dat is de toestand waarin een apparaat stilletjes achterloopt. | 1 |
 | `WIN - D - Enrollment Hardening` | Tijdens OOBE de netwerkstap overslaan is de bekendste manier om Autopilot te omzeilen. Eén instelling sluit hem af. | 2 |
-| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill en de Settings Agent sturen invoer naar een generatieve dienst. Of dat mag is een klantbesluit, dus twee varianten die dezelfde vier instellingen tegenovergesteld zetten. Wijs er één toe. | 2 / 5 |
+| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill en de Settings Agent sturen invoer naar een generatieve dienst. Zie *AI is een klantbesluit* hieronder. | 2 / 5 |
 | `WIN - U - Microsoft Teams` | Zonder tenantbeperking kan een gebruiker in de zakelijke Teams-client inloggen op een vreemde tenant en daar bestanden naartoe slepen — een uitgaande datastroom die nergens wordt gelogd. | 3 |
 
 Plus drie CIS L1-user rights die aan de bestaande `WIN - D - User Rights` zijn toegevoegd:
@@ -125,6 +125,38 @@ geval, net zoals het het EDR-onboardingtoken al oversloeg.
 **Let op bij de andere uitrolroute:** CIPP doet die vervanging, `Start-IntuneRestoreConfig` niet.
 Wie via IntuneBackupAndRestore uitrolt houdt `%OrganizationId%` letterlijk in de policy en moet
 het id met de hand invullen.
+
+
+### AI is een klantbesluit, dus elke AI-policy is een paar
+
+Of generatieve AI op de werkplek mag is geen technisch feit maar beleid, en dat verschilt per
+klant. Alle drie de AI-policies bestaan daarom in twee varianten die dezelfde instellingen op de
+tegenovergestelde waarde zetten. **Wijs er per paar één toe** — allebei levert in Intune een
+Conflict op, waarna de betwiste instelling door géén van beide policies wordt toegepast en er dus
+niets meer geregeld is. `check-scope.js` bewaakt dat.
+
+| Paar | Restricted | Permitted |
+|---|---|---|
+| `WIN - D - Windows AI` (112) | Recall niet beschikbaar, geen schermafdrukken, Click To Do uit | alle drie toegestaan, expliciet vastgelegd |
+| `WIN - D - Windows AI Features` (147 / 146) | Cocreator, Image Creator, Generative Fill en Settings Agent uit | dezelfde vier aan |
+| `WIN - U - AI Usage Control` (139 / 149) | Edge blokkeert tien publieke AI-diensten plus de Store-website | alleen de vier Store-regels; de AI-diensten blijven bereikbaar |
+
+Twee dingen die daarbij bewust zijn gedaan:
+
+- **De Restricted-variant houdt het oude checkId.** 112 en 139 waren er al; die variant is de
+  voortzetting van de policy zoals hij was, dus daar blijven bestaande findings aan hangen. De
+  Permitted-tegenhangers kregen 148 en 149. checkId 144 — de Windows AI Features-policy vóór
+  haar splitsing — is opgeheven en niet hergebruikt.
+- **De Permitted-variant van AI Usage Control laat de blokkeerlijst niet vallen.** Die lijst
+  bevatte vóór de AI-ronde al vier regels voor de Store-website. Ze zijn tot vier teruggebracht
+  in plaats van de hele instelling weg te laten — anders had het toestaan van AI stilzwijgend ook
+  de Store-blokkade opgeheven, en dat is een ander besluit.
+
+De Permitted-varianten zijn geen aanbeveling. Ze staan in fase 5 (niet uitrollen) omdat de
+baseline standaard de Restricted-kant kiest; wie de andere kant op wil, wisselt de toewijzing om.
+Weeg dan wel de gevolgen: Recall bewaart een doorzoekbare index van alles wat op het scherm is
+geweest, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de
+gegevens die erin staan.
 
 **Twee sets die de vergelijking juist afwees:**
 

@@ -14,7 +14,7 @@ Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukk
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Features_Permitted.json`](Baseline_WIN_D_Windows_AI_Features_Permitted.json) |
 
-> **Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control. Wie AI breed wil toestaan, moet ook die twee wegen.
+> **Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI Restricted, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control Restricted. Wie AI breed wil toestaan, moet ook die twee wegen.
 
 ## Instellingen — 4
 

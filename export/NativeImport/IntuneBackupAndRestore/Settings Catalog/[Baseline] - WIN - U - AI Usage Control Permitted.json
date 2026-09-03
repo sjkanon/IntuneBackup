@@ -1,0 +1,60 @@
+{
+    "name": "[Baseline] - WIN - U - AI Usage Control Permitted",
+    "description": "Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten. Toewijzing volgens baseline: geen — fase 5. Bron: Tegenhanger van de Restricted-variant: dezelfde blokkeerlijst zonder de AI-domeinen.",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_1",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
+                            "settingInstanceTemplateReference": null,
+                            "simpleSettingCollectionValue": [
+                                {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "https://apps.microsoft.com"
+                                },
+                                {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "https://apps.microsoft.com/*"
+                                },
+                                {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "apps.microsoft.com"
+                                },
+                                {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "apps.microsoft.com/*"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

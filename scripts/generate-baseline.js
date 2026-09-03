@@ -261,7 +261,7 @@ const CHECK_NUMBERS = {
   // Uit de vergelijking met IntuneAdmin/IntuneBaselines (augustus 2026): drie gaten die
   // OpenIntuneBaseline niet dekt, plus de WHfB-varianten voor eigen en gedeelde apparaten.
   Baseline_WIN_D_Removable_Storage: 111,
-  Baseline_WIN_D_Windows_AI: 112,
+  Baseline_WIN_D_Windows_AI_Restricted: 112,
   Baseline_WIN_D_Windows_Hello_for_Business_Multi_User: 113,
   Baseline_WIN_U_Windows_Hello_for_Business: 114,
 
@@ -296,7 +296,7 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Threat_Protection: 136,
   Baseline_WIN_D_Wireless_and_Peripherals: 137,
   Baseline_WIN_D_Wireless_Shared_Devices: 138,
-  Baseline_WIN_U_AI_Usage_Control: 139,
+  Baseline_WIN_U_AI_Usage_Control_Restricted: 139,
   Baseline_WIN_U_Attachment_Scanning: 140,
 
   // 141 en hoger: de baselines uit IntuneAdmin die nog ontbraken. Op profielniveau
@@ -313,6 +313,12 @@ const CHECK_NUMBERS = {
   // de splitsing, en een oud nummer aan een andere check koppelen is erger dan een gat.
   Baseline_WIN_D_Windows_AI_Features_Permitted: 146,
   Baseline_WIN_D_Windows_AI_Features_Restricted: 147,
+
+  // De Permitted-tegenhangers van de twee oudere AI-policies. De Restricted-variant houdt het
+  // nummer dat de policy vóór de splitsing had (112 en 139) — dat is de variant die de
+  // baseline uitrolt, dus daar hangen de findings aan.
+  Baseline_WIN_D_Windows_AI_Permitted: 148,
+  Baseline_WIN_U_AI_Usage_Control_Permitted: 149,
 };
 
 /**
@@ -340,6 +346,12 @@ const RETIRED_CHECK_NUMBERS = {
  * gewoon hun eigen slug uit de bestandsnaam.
  */
 const CHECK_ID_SLUGS = {
+  // De AI-splitsing van september 2026: het toestaan van generatieve AI is een klantbesluit,
+  // dus elke AI-policy heeft een Restricted- en een Permitted-variant. De Restricted-variant
+  // is de voortzetting van de policy die er al was en houdt daarom zijn suffix — anders zou
+  // een bestaande finding aan een andere checkId gaan hangen.
+  Baseline_WIN_D_Windows_AI_Restricted: "DWindowsAI",
+  Baseline_WIN_U_AI_Usage_Control_Restricted: "UAIUsageControl",
   Baseline_WIN_D_Attack_Surface_Reduction: "ASRDefaultRules",
   Baseline_WIN_D_Audit_and_Event_Logging: "Auditing",
   Baseline_WIN_U_Microsoft_Outlook: "AutomaticConfigurationOfOutlook",
