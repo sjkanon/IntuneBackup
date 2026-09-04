@@ -21,7 +21,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { PLATFORMS, TYPE_TO_CATEGORY, readTemplates, parseBaseName, flattenSettings } = require("./lib/templates");
+const { PLATFORMS, TYPE_TO_CATEGORY, readTemplates, parseBaseName, flattenSettings, packagePlan } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -369,7 +369,7 @@ function overviewReadme(templates, ctx) {
     "| Bestand | Wat het vastlegt | Gelezen door |",
     "|---|---|---|",
     "| [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |",
-    "| [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, en waarom er afgeweken wordt | `import-oib.js` |",
+    "| [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, waarom er afgeweken wordt en in welke fase hij uitrolt | `import-oib.js`, `set-packages.js` |",
     "| [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
     "",
     "Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar",
@@ -377,6 +377,27 @@ function overviewReadme(templates, ctx) {
     "",
     "Ze hebben geen `RowKey` en geen `Displayname`, dus CIPP maakt er bij een repo-sync één",
     "naamloze rij van. Die doet niets — zie de [hoofd-README](../README.md#terugzetten-in-een-tenant).",
+    "",
+    "## CIPP-pakketten",
+    "",
+    "Het veld `Package` in elk template. CIPP's baselines kennen de standard **Intune Template",
+    "Package**: die rolt in één keer élk template met dezelfde waarde uit en bepaalt dat",
+    "lidmaatschap bij iedere run opnieuw — een nieuwe policy schuift dus vanzelf mee, zonder dat",
+    "er in CIPP iets aangeklikt hoeft te worden.",
+    "",
+    "De deploy-opties van die ene standard worden letterlijk op elk lid gekopieerd, dus één",
+    "pakket is één toewijzingsdoel. Vandaar de verdeling hieronder in plaats van `Baseline` op",
+    "alles: die zou de gebruikerspolicies op apparaten zetten en de policies die nog niet klaar",
+    "zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het doel in",
+    "`_assignments.json`; `set-packages.js` schrijft hem, `check-scope.js` bewaakt hem.",
+    "",
+    "| `Package` | In CIPP toewijzen aan | Policies |",
+    "|---|---|---:|",
+    ...packagePlan(ctx.manifest, ctx.assignments).map((p) => `| ${p.pakket ? `\`${p.pakket}\`` : "*(leeg)*"} | ${p.toewijzing} | ${p.leden.length} |`),
+    "",
+    "Fase 5 krijgt bewust een lege waarde: CIPP toont alleen pakketten met een gevulde",
+    "`Package`, dus die policies staan in geen enkel pakket. Los kiezen kan nog steeds — ze",
+    "bestaan als alternatief voor een policy die wél uitrolt.",
     "",
     "## Per platform",
     "",
@@ -664,7 +685,7 @@ function main() {
     console.warn(`Let op: ${path.relative(REPO_ROOT, BASELINE_PATH)} bestaat niet — de checkId-kolom blijft leeg. Draai eerst generate-baseline.js.`);
   }
 
-  const ctx = { checkIds, assignments, manifestByTarget };
+  const ctx = { checkIds, assignments, manifestByTarget, manifest };
   const files = [
     { file: path.join(REPO_ROOT, "OVERZICHT.md"), content: overviewDocument(templates, ctx) },
     { file: path.join(TEMPLATE_DIR, "README.md"), content: overviewReadme(templates, ctx) },

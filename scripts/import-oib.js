@@ -39,7 +39,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, stripDeprecatedTccAllowed } = require("./lib/templates");
+const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, stripDeprecatedTccAllowed, packageFor } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -140,8 +140,15 @@ function findOurTemplate(baseName) {
   return hit ? readTemplate(hit) : null;
 }
 
-/** CIPP-template: Table Storage-rij met een genestelde JSON-string, zie README. */
-function buildTemplateFile({ guid, displayName, description, type, body }) {
+/**
+ * CIPP-template: Table Storage-rij met een genestelde JSON-string, zie README.
+ *
+ * `Package` bepaalt in welk CIPP-pakket de policy uitrolt en volgt daarom uit dezelfde twee
+ * bestanden als de omschrijving: de fase in _manifest.json en het doel in _assignments.json.
+ * Zie `packageFor` in lib/templates.js; set-packages.js doet hetzelfde voor de policies die
+ * hier niet langskomen.
+ */
+function buildTemplateFile({ guid, displayName, description, type, body, pkg }) {
   const inner = {
     Displayname: displayName,
     Description: description,
@@ -155,7 +162,7 @@ function buildTemplateFile({ guid, displayName, description, type, body }) {
     RowKey: guid,
     GUID: guid,
     JSON: JSON.stringify(inner),
-    Package: "Baseline",
+    Package: pkg,
   });
 }
 
@@ -344,6 +351,37 @@ function bodyForDevice(source, displayName, description) {
  * meegeleverde lijst is een momentopname van de brontenant. CIPP verwijdert `apps` ook
  * voor het POST't; door 'm hier al weg te laten doen beide restore-routes hetzelfde.
  */
+/**
+ * Bewuste afwijkingen op een plat veld, uit `veldOverrides` in het manifest.
+ *
+ * `applyOverrides` hierboven werkt op settingDefinitionId's en dus alleen op Settings
+ * Catalog. App Protection en compliance zijn geen catalogus maar een platte Graph-resource:
+ * daar heet een afwijking gewoon "dit veld krijgt een andere waarde dan de bron zegt".
+ * Zonder deze stap draait de volgende import zo'n waarde stilzwijgend terug, want de body
+ * wordt elke keer opnieuw uit de bron opgebouwd — hetzelfde gevaar, andere policyvorm.
+ *
+ *   { veld, waarde, reason }
+ *
+ * Faalt hard als het veld niet (meer) in de bron staat. Een override die stil niets doet is
+ * het gevaarlijkst van alles: het bestand blijft dan kloppen terwijl de reden verdwenen is.
+ * `reason` is verplicht, om dezelfde reden als bij `overrides`.
+ */
+function applyVeldOverrides(body, entry, applied) {
+  for (const ov of entry.veldOverrides || []) {
+    const { veld, waarde, reason } = ov;
+    if (!reason) {
+      console.error(`FOUT: veldOverride voor ${veld} in ${entry.target} heeft geen "reason".`);
+      process.exit(1);
+    }
+    if (!(veld in body)) {
+      console.error(`FOUT: veldOverride voor ${veld} in ${entry.target}: dat veld staat niet (meer) in de bron.`);
+      process.exit(1);
+    }
+    applied.push(`${entry.target}: ${veld} ${JSON.stringify(body[veld])} -> ${JSON.stringify(waarde)} — ${reason}`);
+    body[veld] = waarde;
+  }
+}
+
 function bodyForAppProtection(source, displayName, description) {
   const cleaned = stripODataAnnotations(source);
   return {
@@ -462,16 +500,18 @@ function main() {
       applyOverrides(body, entry, overridden);
     } else if (type === "deviceCompliancePolicies") {
       body = bodyForCompliance(source, displayName, description);
+      applyVeldOverrides(body, entry, overridden);
     } else if (type === "Device") {
       body = bodyForDevice(source, displayName, description);
     } else if (type === "AppProtection") {
       body = bodyForAppProtection(source, displayName, description);
+      applyVeldOverrides(body, entry, overridden);
     } else {
       console.error(`FOUT: onbekend Type "${type}" voor ${entry.target}`);
       process.exit(1);
     }
 
-    const contents = buildTemplateFile({ guid, displayName, description, type, body });
+    const contents = buildTemplateFile({ guid, displayName, description, type, body, pkg: packageFor(entry, assignments[displayName]) ?? "" });
     const relPath = relativePathFor(entry.target, type);
     if (!relPath) {
       console.error(`FOUT: ${entry.target} (Type ${type}) past niet in de mapindeling — controleer de naam en het Type.`);

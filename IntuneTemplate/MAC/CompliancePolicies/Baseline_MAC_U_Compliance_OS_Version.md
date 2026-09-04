@@ -14,7 +14,7 @@ Toetst of de Mac op macOS 14 of hoger draait — de versie die het declaratieve 
 | Bron | Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — MAC - D - Software Updates gebruikt declaratief updatebeleid (DDM) en dat vraagt macOS 14 |
 | Bestand | [`Baseline_MAC_U_Compliance_OS_Version.json`](Baseline_MAC_U_Compliance_OS_Version.json) |
 
-> **Deze waarde veroudert en moet worden nagelopen.** macOS 14 is de ondergrens omdat het updateprofiel die vraagt, niet omdat 14 nog de nieuwste is. Verhoog hem als de vloot verder is; zie de note bij de Windows-tegenhanger over het automatiseren daarvan.
+> **Deze waarde veroudert en moet worden nagelopen.** macOS 14 is de ondergrens omdat het updateprofiel die vraagt, niet omdat 14 nog de nieuwste is. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert niets en hoort dat ook niet te doen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 14 staat.
 
 ## Eigenschappen — 27
 

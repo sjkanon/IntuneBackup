@@ -12,6 +12,9 @@
  *  4. Het bestand staat in de map die bij zijn platform en Type hoort.
  *  5. Geen twee toegewezen policies zetten dezelfde settingDefinitionId — dat levert in
  *     Intune een *Conflict* op, waarna de instelling door géén van beide wordt toegepast.
+ *  6. Het veld `Package` klopt met de fase en de toewijzing. Dat veld bepaalt in welk
+ *     CIPP-pakket een policy uitrolt en met welk doel; loopt het achter, dan rolt de policy
+ *     naar het verkeerde publiek uit of helemaal niet.
  *
  * De scope volgt uit de settingDefinitionId, niet uit het onderwerp: alles wat begint met
  * `user_` is user-scoped, de rest is device-scoped. Let op de derde vorm die in deze repo
@@ -32,7 +35,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { PLATFORMS, readTemplates, relativePathFor, parseBaseName, collectSettingIds, flattenSettings } = require("./lib/templates");
+const { PLATFORMS, readTemplates, relativePathFor, parseBaseName, collectSettingIds, flattenSettings, packageFor, versionFloors } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -256,6 +259,17 @@ function checkManifestCoverage(templates, assignments) {
     const assigned = (assignments[t.displayName] || []).length > 0;
     if (fase === 1 && !assigned) problems.push(`${t.displayName}: fase 1, maar geen regel in _assignments.json — wordt dus niet uitgerold`);
     if (fase !== 1 && assigned) problems.push(`${t.displayName}: fase ${fase} (${fases[String(fase)].naam}), maar staat wél in _assignments.json`);
+
+    // Punt 6: het CIPP-pakket. Dit veld staat in het template zelf en wordt dus niet vanzelf
+    // bijgewerkt als de fase of de toewijzing verandert — vandaar deze controle in plaats van
+    // vertrouwen op wie het bestand aanraakt.
+    const expectedPackage = packageFor(entry, assignments[t.displayName]);
+    if (expectedPackage === null) {
+      problems.push(`${t.baseName}: fase ${fase} en de toewijzing leveren samen geen "Package" op`);
+    } else if (t.outer.Package !== expectedPackage) {
+      const now = t.outer.Package ?? "";
+      problems.push(`${t.baseName}: Package is "${now}", hoort "${expectedPackage}" te zijn — draai scripts/set-packages.js`);
+    }
   }
   for (const target of byTarget.keys()) {
     if (!known.has(target)) problems.push(`_manifest.json: regel voor ${target}, maar dat template bestaat niet`);

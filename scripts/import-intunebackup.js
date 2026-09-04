@@ -20,11 +20,12 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { readTemplates, relativePathFor } = require("./lib/templates");
+const { readTemplates, relativePathFor, packageFor } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 
 /** Mapnaam in de backup -> CIPP-`Type`. Andere mappen worden overgeslagen (met melding). */
 const FOLDER_TO_TYPE = {
@@ -183,6 +184,8 @@ function main() {
     process.exit(1);
   }
   const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? JSON.parse(fs.readFileSync(ASSIGNMENTS_PATH, "utf8")) : {};
+  const manifest = fs.existsSync(MANIFEST_PATH) ? JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8")) : { policies: [] };
+  const manifestByTarget = new Map((manifest.policies || []).map((p) => [p.target, p]));
   const existingByName = new Map(readTemplates(TEMPLATE_DIR).map((t) => [t.displayName, t]));
   const added = [], skipped = [], overwritten = [], failed = [];
 
@@ -250,7 +253,11 @@ function main() {
         GUID: guid,
         ReusableSettings: [],
       };
-      const row = { PartitionKey: "IntuneTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(inner), Package: "Baseline" };
+      // Een policy die hier voor het eerst uit een tenant binnenkomt heeft nog geen regel in
+      // _manifest.json, en dus geen fase — dan is niet te zeggen in welk CIPP-pakket hij
+      // hoort. Lege `Package` is daar het juiste antwoord: hij staat in de repo, maar rolt
+      // nergens uit tot iemand de fase heeft bepaald. Draai daarna set-packages.js.
+      const row = { PartitionKey: "IntuneTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(inner), Package: packageFor(manifestByTarget.get(baseName), assignments[displayName]) ?? "" };
 
       if (!dryRun) {
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });

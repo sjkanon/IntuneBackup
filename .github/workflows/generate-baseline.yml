@@ -17,6 +17,7 @@ on:
       - "scripts/generate-baseline.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
+      - "scripts/set-packages.js"
       - "scripts/lib/**"
       - ".github/workflows/generate-baseline.yml"
   workflow_dispatch:
@@ -34,8 +35,10 @@ jobs:
           node-version: 24
       # Bewaakt dat er geen policy met gemengde device/user-scope bij komt, dat bestands- en
       # policynaam hetzelfde platform en dezelfde scope dragen, dat elk bestand in de map van
-      # zijn policytype staat, en dat geen twee toegewezen policies dezelfde instelling op een
-      # andere waarde zetten. Blokkerend.
+      # zijn policytype staat, dat geen twee toegewezen policies dezelfde instelling op een
+      # andere waarde zetten, en dat het CIPP-pakket in elk template klopt met zijn fase en
+      # toewijzing. Blokkerend — het pakket wordt hier bewust niet stilzwijgend rechtgezet:
+      # het bepaalt naar wie een policy uitrolt, en dat hoort iemand te zien.
       - name: Controleer scope, indeling en conflicten van IntuneTemplate/
         run: node scripts/check-scope.js
 

@@ -14,7 +14,7 @@ Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan
 | Bron | Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — Account Lockout vraagt 22H2 met KB5053657 of 24H2, Administrator Protection en Windows Protected Print vragen 24H2 |
 | Bestand | [`Baseline_WIN_U_Compliance_OS_Version.json`](Baseline_WIN_U_Compliance_OS_Version.json) |
 
-> **Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2; verhoog hem zodra de vloot verder is. Dat handmatig bijhouden over alle platformen is precies wat te automatiseren valt — zie de aanpak van Sander Burgerhout, die osMinimumVersion via Graph op een n-1-basislijn zet uit endoflife.date. Zolang dat er niet is: zet het in de agenda bij elke grote OS-release.
+> **Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert bewust niets, want zodra een verouderde ondergrens de build rood maakt verhoogt iemand het getal om 'm groen te krijgen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 22H2 staat.
 
 ## Eigenschappen — 38
 

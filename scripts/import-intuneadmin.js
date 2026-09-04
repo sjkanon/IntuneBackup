@@ -37,7 +37,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { listTemplateFiles, readTemplate, relativePathFor, collectSettingIds } = require("./lib/templates");
+const { listTemplateFiles, readTemplate, relativePathFor, collectSettingIds, packageFor } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -99,9 +99,13 @@ function composeDescription(entry, assignments) {
   return parts.join(" ");
 }
 
-function buildTemplateFile({ guid, displayName, description, type, body }) {
+/**
+ * `Package` bepaalt in welk CIPP-pakket de policy uitrolt en volgt uit de fase in
+ * _manifest.json en het doel in _assignments.json — zie `packageFor` in lib/templates.js.
+ */
+function buildTemplateFile({ guid, displayName, description, type, body, pkg }) {
   const inner = { Displayname: displayName, Description: description, RAWJson: JSON.stringify(body), Type: type, GUID: guid, ReusableSettings: [] };
-  return JSON.stringify({ PartitionKey: "IntuneTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(inner), Package: "Baseline" });
+  return JSON.stringify({ PartitionKey: "IntuneTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(inner), Package: pkg });
 }
 
 /**
@@ -219,7 +223,7 @@ function main() {
       technologies: source.technologies || "mdm",
       templateReference: { templateId: "", templateFamily: "none", templateDisplayName: null, templateDisplayVersion: null },
     };
-    const content = buildTemplateFile({ guid, displayName: entry.displayName, description, type, body });
+    const content = buildTemplateFile({ guid, displayName: entry.displayName, description, type, body, pkg: packageFor(entry, assignments[entry.displayName]) ?? "" });
     const dest = existing || path.join(TEMPLATE_DIR, relativePathFor(entry.target, type));
 
     if (ours && JSON.stringify(JSON.parse(content)) === JSON.stringify(ours.outer)) {

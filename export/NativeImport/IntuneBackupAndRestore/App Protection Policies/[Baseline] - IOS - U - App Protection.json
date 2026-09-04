@@ -34,7 +34,7 @@
     "maximumWarningOsVersion": null,
     "maximumWipeOsVersion": null,
     "minimumRequiredOsVersion": null,
-    "minimumWarningOsVersion": null,
+    "minimumWarningOsVersion": "18.0",
     "minimumRequiredAppVersion": null,
     "minimumWarningAppVersion": null,
     "minimumWipeOsVersion": null,

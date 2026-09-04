@@ -30,12 +30,13 @@ flowchart TD
 | [`import-intuneadmin.js`](import-intuneadmin.js) | **naar** de bron | Zet profielen uit IntuneAdmin/IntuneBaselines om naar CIPP-templates, gestuurd door het `intuneadmin`-blok in `_manifest.json`. Leest UTF-16LE, strippt template-referenties uit de brontenant, behoudt GUID's en eigen instellingen. |
 | [`import-oib.js`](import-oib.js) | **naar** de bron | Zet OpenIntuneBaseline-policies om naar CIPP-templates, gestuurd door `_manifest.json`. Behoudt GUID's en eigen instellingen die OIB niet kent. Idempotent. |
 | [`import-intunebackup.js`](import-intunebackup.js) | **naar** de bron | Zet een tenant-backup terug om naar templates. Voegt standaard alleen toe; `--overwrite` om te vervangen. |
-| [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen en de migratietabel. Blokkerend in CI. |
+| [`set-packages.js`](set-packages.js) | **in** de bron | Zet `Package` in elk template — het CIPP-pakket waarin de policy uitrolt — afgeleid uit de fase in `_manifest.json` en het doel in `_assignments.json`. Draaien na elke wijziging in die twee. |
+| [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen, het CIPP-pakket en de migratietabel. Blokkerend in CI. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, elke set daarnaast in een eigen map zonder. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
 
-Alle vijf de leesscripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
+Alle zes de scripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
 hoe je 'm uitleest en waar een nieuw template hoort. Vier scripts lazen die map eerder elk op
 hun eigen manier uit; met submappen zou die aanname op vier plekken stilzwijgend het verkeerde
 antwoord geven.
@@ -56,7 +57,8 @@ Nog te bouwen: `Get-BaselinePolicyState.ps1`, de tenant-zijdige tegenhanger van
 ## Volgorde
 
 ```bash
-node scripts/check-scope.js        # eerst: faalt bij scope-, map- of conflictproblemen
+node scripts/set-packages.js       # eerst: het CIPP-pakket per template bijwerken
+node scripts/check-scope.js        # dan: faalt bij scope-, map-, pakket- of conflictproblemen
 node scripts/generate-baseline.js  # dan: checkId's toekennen en de baseline schrijven
 node scripts/export-intunebackup.js
 node scripts/generate-docs.js      # laatst: leest de checkId's uit de baseline

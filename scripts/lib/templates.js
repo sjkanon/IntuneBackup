@@ -103,6 +103,111 @@ function readTemplates(templateDir) {
   return listTemplateFiles(templateDir).map(readTemplate);
 }
 
+/**
+ * De CIPP-`Package` per policy: welke policies in CIPP als één pakket uitrollen.
+ *
+ * CIPP's baselines kennen sinds september 2026 de standard `IntuneTemplatePackage` ("Intune
+ * Template Package"): die rolt in één keer élk template uit dat dezelfde `Package`-waarde
+ * draagt, en bepaalt dat lidmaatschap bij iedere run opnieuw. Een nieuwe policy met die
+ * `Package` schuift dus vanzelf de baseline in, zonder dat er in CIPP iets aangeklikt hoeft
+ * te worden — precies het model van deze repo.
+ *
+ * De prijs ervan is dat de deploy-opties uit die ene standard letterlijk op élk lid worden
+ * gekopieerd: één package is één toewijzingsdoel. Met `Package: "Baseline"` op alle 141
+ * templates kun je dus alleen kiezen tussen "alles op alle apparaten" — waarmee de 28
+ * gebruikerspolicies het verkeerde doel krijgen en fase 2 t/m 5 ongetest live gaan — of
+ * "niets toewijzen". Vandaar één package per toewijzingsdoel, afgeleid uit `fase` en
+ * `faseGroep` in _manifest.json en het doel in _assignments.json, zodat er geen tweede
+ * waarheid ontstaat naast die twee bestanden.
+ *
+ * Fase 5 krijgt met opzet een lege `Package`: CIPP's pakkettenlijst filtert op een gevulde
+ * waarde (`Where-Object { $_.Package }`), dus die policies verschijnen in geen enkel pakket.
+ * Los kiezen kan nog steeds — dat is de bedoeling, ze bestaan als alternatief.
+ */
+const PACKAGE_PREFIX = "Baseline-";
+
+/** Toewijzingsdoel in _assignments.json -> package. Alleen fase 1 komt hier langs. */
+const PACKAGE_BY_TARGET = {
+  allDevicesAssignmentTarget: PACKAGE_PREFIX + "Devices",
+  allLicensedUsersAssignmentTarget: PACKAGE_PREFIX + "Users",
+};
+
+/** Fase -> package, voor de fases waar het doel niet uit _assignments.json volgt. */
+const PACKAGE_BY_FASE = {
+  2: PACKAGE_PREFIX + "Pilot",
+  3: PACKAGE_PREFIX + "Wacht",
+  5: "",
+};
+
+/**
+ * Een macOS-inschrijfprofiel wordt aan een ADE-token gekoppeld en niet aan een Entra-groep.
+ * De package bestaat wel — de profielen moeten in de tenant staan — maar krijgt in CIPP
+ * "Do not assign"; het koppelen gebeurt in Intune bij het token zelf.
+ */
+const PACKAGE_WITHOUT_GROUP = new Set([PACKAGE_PREFIX + "ADE-token"]);
+
+/** "SEC-Update-Ring1" uit een `faseGroep` die er nog een toelichting achter heeft staan. */
+function groupOfFaseGroep(faseGroep) {
+  return String(faseGroep || "").split(" (")[0].trim();
+}
+
+/** De @odata.type-suffixen waarop een policy in _assignments.json landt, ontdubbeld. */
+function assignmentTargets(assignment) {
+  return [...new Set((assignment || []).map((a) => ((a.target || {})["@odata.type"] || "").replace("#microsoft.graph.", "")))];
+}
+
+/**
+ * De `Package` die bij deze policy hoort, of `null` als die niet af te leiden is — dan klopt
+ * er iets niet aan het manifest of aan _assignments.json en hoort check-scope.js dat te
+ * melden in plaats van hier een gok te doen.
+ */
+function packageFor(entry, assignment) {
+  if (!entry || entry.fase === undefined) return null;
+  if (entry.fase === 1) {
+    const targets = assignmentTargets(assignment);
+    if (targets.length !== 1) return null;
+    return PACKAGE_BY_TARGET[targets[0]] ?? null;
+  }
+  if (entry.fase === 4) {
+    const group = groupOfFaseGroep(entry.faseGroep);
+    return group ? PACKAGE_PREFIX + group : null;
+  }
+  return PACKAGE_BY_FASE[entry.fase] ?? null;
+}
+
+/** Wat je in CIPP bij deze package invult onder "Who should this template be assigned to?". */
+function assignmentForPackage(pkg) {
+  if (!pkg) return "wordt niet uitgerold";
+  if (pkg === PACKAGE_PREFIX + "Devices") return "Assign to all devices";
+  if (pkg === PACKAGE_PREFIX + "Users") return "Assign to all users";
+  if (pkg === PACKAGE_PREFIX + "Wacht") return "Do not assign";
+  if (pkg === PACKAGE_PREFIX + "Pilot") return "Custom group: SEC-Baseline-Pilot";
+  if (PACKAGE_WITHOUT_GROUP.has(pkg)) return "Do not assign (koppelen aan een ADE-token in Intune)";
+  return `Custom group: ${pkg.slice(PACKAGE_PREFIX.length)}`;
+}
+
+/**
+ * De hele indeling in één keer: package -> { toewijzing, leden }. Voor de docs en voor wie in
+ * CIPP een baseline samenstelt; de volgorde ligt vast in `rank` hieronder, zodat een tabel niet bij
+ * elke run van volgorde wisselt.
+ */
+function packagePlan(manifest, assignments) {
+  const plan = new Map();
+  for (const entry of manifest.policies || []) {
+    const pkg = packageFor(entry, assignments[entry.displayName]);
+    if (pkg === null) continue;
+    if (!plan.has(pkg)) plan.set(pkg, { pakket: pkg, toewijzing: assignmentForPackage(pkg), leden: [] });
+    plan.get(pkg).leden.push(entry);
+  }
+  const rank = (pkg) => {
+    const order = [PACKAGE_PREFIX + "Devices", PACKAGE_PREFIX + "Users", PACKAGE_PREFIX + "Pilot", PACKAGE_PREFIX + "Wacht"];
+    const i = order.indexOf(pkg);
+    if (i >= 0) return i;
+    return pkg === "" ? order.length + 1 : order.length;
+  };
+  return [...plan.values()].sort((a, b) => rank(a.pakket) - rank(b.pakket) || a.pakket.localeCompare(b.pakket));
+}
+
 /** Verzamelt elke settingDefinitionId in een willekeurige boom. */
 function collectSettingIds(node, acc = new Set()) {
   if (!node || typeof node !== "object") return acc;
@@ -208,4 +313,41 @@ function flattenSettings(settings) {
   return { settings: out, warnings };
 }
 
-module.exports = { PLATFORMS, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed };
+/**
+ * De vijf velden waarmee een policy een OS-ondergrens zet, en hoe je ziet of er écht een
+ * waarde in staat. Hier en niet in de scripts, om dezelfde reden als de rest van dit bestand:
+ * `check-osversion.js` rapporteert erover en `check-scope.js` bewaakt dat er een reden bij
+ * staat, en die twee mogen niet elk een eigen idee hebben van wat "gezet" betekent.
+ *
+ * Twee vormen van "niet gezet" die naast `null` voorkomen: de lege string, en `"0000-00-00"` —
+ * de placeholder waarmee app protection een niet-ingevulde patchdatum aangeeft. Die laatste
+ * ziet er in een export uit als een waarde en is het niet.
+ *
+ * `minimumRequired*` blokkeert de app, `minimumWarning*` laat de gebruiker door met een
+ * melding. Dat onderscheid staat niet in dit bestand maar het is de reden dat beide erin
+ * staan: een baseline die alleen de required-velden nakijkt mist precies de zachte variant
+ * waarmee je zo'n ondergrens hoort te beginnen.
+ */
+const VERSION_FIELDS = [
+  "osMinimumVersion",
+  "minimumRequiredOsVersion",
+  "minimumWarningOsVersion",
+  "minimumRequiredPatchVersion",
+  "minimumWarningPatchVersion",
+];
+
+/** Android-beveiligingspatchdatums (yyyy-MM-dd), geen OS-versies — die tellen anders. */
+const PATCH_FIELDS = new Set(["minimumRequiredPatchVersion", "minimumWarningPatchVersion"]);
+
+const UNSET_VERSIONS = new Set([null, undefined, "", "0000-00-00"]);
+
+function isVersionSet(value) {
+  return !UNSET_VERSIONS.has(value);
+}
+
+/** De gezette ondergrenzen van één policy, in de volgorde van VERSION_FIELDS. */
+function versionFloors(raw) {
+  return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
+}
+
+module.exports = { PLATFORMS, PACKAGE_PREFIX, packageFor, assignmentForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

@@ -14,7 +14,7 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iP
 | Bron | OpenIntuneBaseline BYOD — iOS App Protection |
 | Bestand | [`Baseline_IOS_U_App_Protection.json`](Baseline_IOS_U_App_Protection.json) |
 
-> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt.
+> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug.
 
 ## Eigenschappen — 67
 
@@ -48,7 +48,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `maximumWarningOsVersion` | — |
 | `maximumWipeOsVersion` | — |
 | `minimumRequiredOsVersion` | — |
-| `minimumWarningOsVersion` | — |
+| `minimumWarningOsVersion` | 18.0 |
 | `minimumRequiredAppVersion` | — |
 | `minimumWarningAppVersion` | — |
 | `minimumWipeOsVersion` | — |

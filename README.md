@@ -81,16 +81,19 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
-| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 105 |
-| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 9 |
-| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 4 |
+| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 108 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 14 |
+| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 5 |
 | 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 9 |
-| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 2 |
+| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 5 |
 
 Alleen fase 1 staat in `_assignments.json`. `check-scope.js` bewaakt dat die twee niet uit
 elkaar lopen: een fase-1-policy zonder toewijzing wordt stilzwijgend niet uitgerold, en een
 fase-5-policy mét toewijzing levert een Conflict op waarna de betwiste instelling door géén van
 beide policies wordt toegepast. Elke policy boven fase 1 heeft een verplichte `faseWaarom`.
+
+De fase bepaalt ook het **CIPP-pakket** van een policy — het veld `Package` in het template,
+waarop CIPP zijn baselines groepeert. Zie [uitrollen via een CIPP-baseline](#uitrollen-via-een-cipp-baseline).
 
 **[`ANALYSE.md`](ANALYSE.md)** legt vast hoe de aanvulling van september 2026 tot stand kwam:
 welke bronnen zijn vergeleken, de 509 instellingen die IntuneAdmin meer zet dan wij, waarom er
@@ -167,8 +170,9 @@ node scripts/check-scope.js            # faalt bij scope-, naam-, map- of confli
 node scripts/check-scope.js --report   # alleen het overzicht
 ```
 
-Vijf controles: gemengde scope, naamconventie, bestandsnaam vs. policynaam, plaatsing in de
-juiste map, en — nieuw sinds de OIB-import — of twee tóégewezen policies dezelfde instelling
+Zes controles: gemengde scope, naamconventie, bestandsnaam vs. policynaam, plaatsing in de
+juiste map, of het veld `Package` klopt met de fase en de toewijzing, en — nieuw sinds de
+OIB-import — of twee tóégewezen policies dezelfde instelling
 op een **andere** waarde zetten. Dat laatste levert in Intune een *Conflict* op, waarna de
 instelling door géén van beide policies wordt toegepast. Dezelfde waarde uit twee policies is
 geen conflict maar dubbel onderhoud, en wordt apart gemeld. Bij macOS wordt alleen gemeld dat
@@ -253,8 +257,36 @@ update profiles, Windows 365) — met reden, in `"excluded"` in het manifest.
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Dat geldt voor alle drie
-de baseline; in CIPP is dat te zien aan `Package`: `Baseline`.
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 141
+templates in CIPP onder Tenant Administration → Templates.
+
+### Uitrollen via een CIPP-baseline
+
+Templates in CIPP staan er alleen; uitrollen doet een **baseline** (Tenant Administration →
+Baselines). Een baseline bestaat uit *standards*, en de standard die onze policies uitrolt heet
+**Intune Template Package**: die rolt in één keer élk template uit dat dezelfde `Package`-waarde
+draagt, en bepaalt dat lidmaatschap bij iedere run opnieuw. Een nieuwe policy in deze repo
+schuift dus vanzelf de baseline in — er hoeft in CIPP niets te worden aangeklikt.
+
+De deploy-opties van zo'n standard worden letterlijk op elk lid gekopieerd: **één pakket is één
+toewijzingsdoel**. Daarom draagt niet elk template dezelfde `Package`. De verdeling volgt uit de
+fase en het toewijzingsdoel en staat in de [`IntuneTemplate`-README](IntuneTemplate/README.md#cipp-pakketten);
+`set-packages.js` schrijft het veld, `check-scope.js` bewaakt het.
+
+Voeg per pakket één *Intune Template Package* toe en zet de toewijzing zoals die tabel zegt.
+Een voorstel voor de fasering, met de stages die CIPP kent:
+
+| Stage | Pakketten | Graduatie naar de volgende stage |
+|---|---|---|
+| 1 | `Baseline-Devices`, `Baseline-Users`, en de drie groepspakketten | — |
+| 2 | `Baseline-Pilot` | `success` (alles uit stage 1 is compliant) + `time` van twee weken |
+| 3 | `Baseline-Wacht` | `manual`, of een `variable`-conditie zodra de voorwaarde er is |
+
+Stage 1 geldt altijd; latere stages stapelen erbovenop, en een tenant schuift pas door als de
+condities van de vólgende stage kloppen (`time`, `variable`, `group`, `success` of `manual`).
+Zet een pakket in precies één stage: hetzelfde template twee keer met een ander
+toewijzingsdoel botst op CIPP's conflictdetectie. Laat de pilot daarom groeien via de **groep**
+`SEC-Baseline-Pilot` en niet via een extra stage.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met

@@ -14,6 +14,8 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-tele
 | Bron | OpenIntuneBaseline BYOD — Android App Protection |
 | Bestand | [`Baseline_AND_U_App_Protection.json`](Baseline_AND_U_App_Protection.json) |
 
+> Sinds september 2026 waarschuwt deze policy bij Android onder 16.0 en bij een beveiligingspatch ouder dan 2026-03-01. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Beide waarden verouderen — draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Ze staan in `veldOverrides` omdat OIB ze leeg laat; zonder die regels draait de eerstvolgende `import-oib.js` ze stilzwijgend terug.
+
 ## Eigenschappen — 86
 
 Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `—` betekent niet ingesteld.
@@ -46,7 +48,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `maximumWarningOsVersion` | — |
 | `maximumWipeOsVersion` | — |
 | `minimumRequiredOsVersion` | — |
-| `minimumWarningOsVersion` | — |
+| `minimumWarningOsVersion` | 16.0 |
 | `minimumRequiredAppVersion` | — |
 | `minimumWarningAppVersion` | — |
 | `minimumWipeOsVersion` | — |
@@ -72,7 +74,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `disableAppEncryptionIfDeviceEncryptionIsEnabled` | false |
 | `encryptAppData` | true |
 | `minimumRequiredPatchVersion` | 0000-00-00 |
-| `minimumWarningPatchVersion` | 0000-00-00 |
+| `minimumWarningPatchVersion` | 2026-03-01 |
 | `minimumWipePatchVersion` | 0000-00-00 |
 | `allowedAndroidDeviceManufacturers` | — |
 | `appActionIfAndroidDeviceManufacturerNotAllowed` | block |
