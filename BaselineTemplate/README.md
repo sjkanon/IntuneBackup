@@ -31,7 +31,7 @@ Stage 1 geldt altijd en latere stages stapelen erbovenop. De conditie hoort bij 
 je **binnengaat**, niet bij de stage die je verlaat. Fase 3 wacht op iets dat CIPP niet kan
 meten — een eerste telefoon-inschrijving — dus daar is `manual` het eerlijke antwoord.
 
-## Importeren
+## Importeren — met de knop, niet met de automatische sync
 
 Tools → Community Repos → deze repo → `BaselineTemplate/Baseline.json` → **Import**. CIPP
 maakt er een baseline van (geen templaterij) onder Tenant Administration → Baselines.
@@ -39,6 +39,28 @@ maakt er een baseline van (geen templaterij) onder Tenant Administration → Bas
 Hij komt binnen toegewezen aan de placeholder-tenant `Exported Template`; er rolt dus niets
 uit tot je zelf tenants kiest. Dat is met opzet — dezelfde placeholder die CIPP's eigen export
 gebruikt.
+
+**Die knop is de enige weg.** CIPP heeft twee codepaden die uit een gekoppelde repo lezen, en
+maar één ervan kent baselines:
+
+| Pad | Wat het doet met dit bestand |
+|---|---|
+| Tools → Community Repos → Import (`Invoke-ExecCommunityRepo`) | ziet `TemplateType: "BaselineTemplate"` en roept `Import-CIPPBaselineTemplate` aan — wordt een baseline |
+| De geplande template-sync (`New-CIPPTemplateRun`) | haalt élk `.json` op (behalve onder `NativeImport`) en duwt het door `Import-CommunityTemplate`, zónder naar `TemplateType` te kijken |
+
+In dat tweede pad heeft dit bestand geen `RowKey`, geen `@odata.type` en geen `settings`, dus
+het valt door alle herkenning heen en landt als een **naamloze rij** in de templates-tabel —
+dezelfde rij waarin de andere niet-policybestanden van deze repo terechtkomen (de ontdubbeling
+matcht op een lege `Displayname`, dus het blijft bij die ene rij). Die doet niets en kun je in
+CIPP verwijderen.
+
+Gevolg voor het dagelijks gebruik: de policies in `IntuneTemplate/` komen vanzelf mee met de
+koppeling, de baseline zelf haal je één keer met de knop op — en opnieuw als hij verandert,
+waar de catalogus een *UpdateAvailable* bij toont. Een her-import werkt de bestaande baseline
+bij op dezelfde GUID, dus de toegewezen tenants en de resultaten blijven staan.
+
+Onder een `NativeImport`-pad zetten om die naamloze rij te vermijden kan niet: de catalogus
+filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te vinden.
 
 ## Wat je erna zelf doet
 

@@ -273,11 +273,20 @@ toewijzingsdoel**. Daarom draagt niet elk template dezelfde `Package`. De verdel
 fase en het toewijzingsdoel en staat in de [`IntuneTemplate`-README](IntuneTemplate/README.md#cipp-pakketten);
 `set-packages.js` schrijft het veld, `check-scope.js` bewaakt het.
 
-Die hele indeling staat als bestand in de repo: [`BaselineTemplate/Baseline.json`](BaselineTemplate/Baseline.json),
-te importeren via Tools → Community Repos → dit bestand → Import. Hij komt binnen toegewezen
-aan de placeholder-tenant `Exported Template`, dus er rolt niets uit tot je zelf tenants kiest.
-Zie de [BaselineTemplate-README](BaselineTemplate/README.md). Wie hem liever met de hand
-opbouwt: voeg per pakket één *Intune Template Package* toe met de toewijzing uit die tabel.
+Die hele indeling staat als bestand in de repo: [`BaselineTemplate/Baseline.json`](BaselineTemplate/Baseline.json).
+Hij komt binnen toegewezen aan de placeholder-tenant `Exported Template`, dus er rolt niets uit
+tot je zelf tenants kiest. Zie de [BaselineTemplate-README](BaselineTemplate/README.md). Wie hem
+liever met de hand opbouwt: voeg per pakket één *Intune Template Package* toe met de toewijzing
+uit die tabel.
+
+**Let op — dit bestand komt niet mee met de automatische koppeling.** De geplande sync
+(`New-CIPPTemplateRun`) haalt elk `.json` op en duwt het door `Import-CommunityTemplate`, zonder
+naar `TemplateType` te kijken; alleen de Import-knop op **Tools → Community Repos** kent de
+afsplitsing naar de baseline-import. De policies in `IntuneTemplate/` komen dus vanzelf binnen,
+de baseline zelf haal je één keer met die knop op — en opnieuw wanneer hij verandert, waar de
+catalogus een *UpdateAvailable* bij toont. De automatische sync maakt er intussen dezelfde
+naamloze templaterij van als van de andere niet-policybestanden; die doet niets en kun je in
+CIPP verwijderen.
 
 De stages die erin zitten:
 
@@ -302,9 +311,10 @@ meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** temp
 met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
 
-`BaselineTemplate/Baseline.json` is de uitzondering die CIPP wél kent: die map is een van
-CIPP's eigen partitienamen en het bestand draagt `TemplateType: "BaselineTemplate"`, dus het
-wordt een baseline in plaats van een templaterij.
+`BaselineTemplate/Baseline.json` hoort ook in dat rijtje, maar alleen bij de *automatische*
+sync: die kijkt niet naar `TemplateType` en maakt er dus ook een naamloze rij van. Via Tools →
+Community Repos → Import wordt hij wél als baseline herkend. Zie
+[hieronder](#uitrollen-via-een-cipp-baseline).
 
 Wat overblijft: zeven bestanden zijn wél `.json` maar geen policy — `baseline/intune/`
 `baseline-v1.0.json`, de drie `_`-bestanden in `IntuneTemplate/`, de twee `_manifest.json`'s
