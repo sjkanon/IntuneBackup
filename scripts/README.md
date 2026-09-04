@@ -34,6 +34,7 @@ flowchart TD
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen, het CIPP-pakket en de migratietabel. Blokkerend in CI. |
 | [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, elke set daarnaast in een eigen map zonder. |
+| [`generate-baseline-template.js`](generate-baseline-template.js) | **uit** de bron | Schrijft `BaselineTemplate/Baseline.json`: de CIPP-baseline met zijn stages en pakketten. `--check` faalt als hij achterloopt. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
 
 Alle zes de scripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
@@ -61,6 +62,7 @@ node scripts/set-packages.js       # eerst: het CIPP-pakket per template bijwerk
 node scripts/check-scope.js        # dan: faalt bij scope-, map-, pakket- of conflictproblemen
 node scripts/generate-baseline.js  # dan: checkId's toekennen en de baseline schrijven
 node scripts/export-intunebackup.js
+node scripts/generate-baseline-template.js
 node scripts/generate-docs.js      # laatst: leest de checkId's uit de baseline
 ```
 

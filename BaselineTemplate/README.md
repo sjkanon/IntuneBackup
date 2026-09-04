@@ -1,0 +1,61 @@
+# BaselineTemplate/
+
+De CIPP-**baseline** als bestand: welke pakketten in welke stage uitrollen, naar wie, en
+wanneer een tenant doorschuift.
+
+| | |
+|---|---|
+| Bestand | [`Baseline.json`](Baseline.json) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Herkend aan | `TemplateType: "BaselineTemplate"` én de mapnaam `BaselineTemplate/` |
+| Naam in CIPP | `Baseline` |
+
+## Waarom dit hier staat
+
+`IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen: uitrollen doet
+een baseline. Dat scherm met de hand invullen is negen keer dezelfde standard toevoegen en
+negen keer het juiste toewijzingsdoel kiezen — één misklik zet 80 policies op het verkeerde
+publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
+
+## Wat erin staat
+
+| Stage | Pakketten | Doorschuiven naar deze stage |
+|---:|---|---|
+| 1 · Nu | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` en de drie groepspakketten | — stage 1 geldt altijd |
+| 2 · Pilot | `Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
+| 3 · Wacht op voorwaarde | `Baseline-Wacht` | `manual` — iemand zet 'm door |
+
+Welke policies in welk pakket zitten staat in de
+[`IntuneTemplate`-README](../IntuneTemplate/README.md#cipp-pakketten).
+
+Stage 1 geldt altijd en latere stages stapelen erbovenop. De conditie hoort bij de stage die
+je **binnengaat**, niet bij de stage die je verlaat. Fase 3 wacht op iets dat CIPP niet kan
+meten — een eerste telefoon-inschrijving — dus daar is `manual` het eerlijke antwoord.
+
+## Importeren
+
+Tools → Community Repos → deze repo → `BaselineTemplate/Baseline.json` → **Import**. CIPP
+maakt er een baseline van (geen templaterij) onder Tenant Administration → Baselines.
+
+Hij komt binnen toegewezen aan de placeholder-tenant `Exported Template`; er rolt dus niets
+uit tot je zelf tenants kiest. Dat is met opzet — dezelfde placeholder die CIPP's eigen export
+gebruikt.
+
+## Wat je erna zelf doet
+
+- **Tenants toewijzen.** Zonder dat draait de baseline nergens.
+- **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2` en
+  `SEC-Shared-Devices` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
+- **De ADE-profielen koppelen.** `Baseline-ADE-token` wordt bewust niet toegewezen: een
+  macOS-inschrijfprofiel hangt aan een ADE-token, niet aan een Entra-groep, en je kiest er per
+  token één van de twee.
+
+## Bijwerken
+
+Niet met de hand: draai `node scripts/generate-baseline-template.js`. De pakketten en hun
+toewijzing volgen uit `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json) en het
+doel in [`_assignments.json`](../IntuneTemplate/_assignments.json); `--check` faalt in CI als
+dit bestand achterloopt.
+
+Pas op met opnieuw exporteren vanuit CIPP: CIPP's eigen export klapt de pakketten plat naar
+141 losse templateverwijzingen — een momentopname, waarna een nieuwe policy niet meer vanzelf
+meekomt. Deze kant op genereren houdt de late binding intact.

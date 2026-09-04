@@ -175,15 +175,60 @@ function packageFor(entry, assignment) {
   return PACKAGE_BY_FASE[entry.fase] ?? null;
 }
 
-/** Wat je in CIPP bij deze package invult onder "Who should this template be assigned to?". */
+/**
+ * De deploy-opties van de CIPP-standard voor dit pakket: `assignTo` is de radioknop "Who
+ * should this template be assigned to?", `customGroup` het veld eronder. `"On"` is CIPP's
+ * waarde voor *Do not assign* — het template wordt dan wél aangemaakt, maar niet toegewezen.
+ *
+ * De pilotgroep staat hier als enige groepsnaam letterlijk: fase 2 kent geen `faseGroep`,
+ * want dat is per definitie de pilot. De rest van de groepen komt uit het manifest.
+ */
+const PILOT_GROUP = "SEC-Baseline-Pilot";
+
+function deployOptionsForPackage(pkg) {
+  if (!pkg) return null;
+  if (pkg === PACKAGE_PREFIX + "Devices") return { assignTo: "AllDevices", customGroup: "" };
+  if (pkg === PACKAGE_PREFIX + "Users") return { assignTo: "allLicensedUsers", customGroup: "" };
+  if (pkg === PACKAGE_PREFIX + "Wacht") return { assignTo: "On", customGroup: "" };
+  if (pkg === PACKAGE_PREFIX + "Pilot") return { assignTo: "customGroup", customGroup: PILOT_GROUP };
+  if (PACKAGE_WITHOUT_GROUP.has(pkg)) return { assignTo: "On", customGroup: "" };
+  return { assignTo: "customGroup", customGroup: pkg.slice(PACKAGE_PREFIX.length) };
+}
+
+/** Diezelfde keuze in mensentaal, voor de tabellen in de documentatie. */
 function assignmentForPackage(pkg) {
-  if (!pkg) return "wordt niet uitgerold";
-  if (pkg === PACKAGE_PREFIX + "Devices") return "Assign to all devices";
-  if (pkg === PACKAGE_PREFIX + "Users") return "Assign to all users";
-  if (pkg === PACKAGE_PREFIX + "Wacht") return "Do not assign";
-  if (pkg === PACKAGE_PREFIX + "Pilot") return "Custom group: SEC-Baseline-Pilot";
+  const opties = deployOptionsForPackage(pkg);
+  if (!opties) return "wordt niet uitgerold";
+  if (opties.assignTo === "AllDevices") return "Assign to all devices";
+  if (opties.assignTo === "allLicensedUsers") return "Assign to all users";
+  if (opties.assignTo === "customGroup") return `Custom group: ${opties.customGroup}`;
   if (PACKAGE_WITHOUT_GROUP.has(pkg)) return "Do not assign (koppelen aan een ADE-token in Intune)";
-  return `Custom group: ${pkg.slice(PACKAGE_PREFIX.length)}`;
+  return "Do not assign";
+}
+
+/**
+ * De stages van de CIPP-baseline, in volgorde. Stage 1 geldt altijd; een tenant schuift door
+ * naar de volgende zodra dié stage's `conditions` kloppen — de conditie hoort dus bij de stage
+ * die je binnengaat, niet bij de stage die je verlaat.
+ *
+ * Waarom deze drie: fase 1 en de groepspolicies kunnen meteen (stage 1). Fase 2 is bewust
+ * pilotwerk en gaat pas als stage 1 aantoonbaar staat — vandaar `success` (élke standard uit
+ * de bereikte stages is compliant) én twee weken wachttijd, zodat "compliant" ook echt een
+ * periode heeft geduurd. Fase 3 wacht op iets dat CIPP niet kan meten (een eerste
+ * telefoon-inschrijving), dus daar is `manual` het eerlijke antwoord: iemand zet 'm door.
+ */
+const BASELINE_STAGES = [
+  { name: "Nu", logic: "and", conditions: [] },
+  { name: "Pilot", logic: "and", conditions: [{ type: "success" }, { type: "time", days: 2, unit: "weeks" }] },
+  { name: "Wacht op voorwaarde", logic: "and", conditions: [{ type: "manual" }] },
+];
+
+/** In welke stage dit pakket hoort (1-based), of `null` als het niet uitrolt. */
+function stageForPackage(pkg) {
+  if (!pkg) return null;
+  if (pkg === PACKAGE_PREFIX + "Pilot") return 2;
+  if (pkg === PACKAGE_PREFIX + "Wacht") return 3;
+  return 1;
 }
 
 /**
@@ -196,7 +241,7 @@ function packagePlan(manifest, assignments) {
   for (const entry of manifest.policies || []) {
     const pkg = packageFor(entry, assignments[entry.displayName]);
     if (pkg === null) continue;
-    if (!plan.has(pkg)) plan.set(pkg, { pakket: pkg, toewijzing: assignmentForPackage(pkg), leden: [] });
+    if (!plan.has(pkg)) plan.set(pkg, { pakket: pkg, toewijzing: assignmentForPackage(pkg), opties: deployOptionsForPackage(pkg), stage: stageForPackage(pkg), leden: [] });
     plan.get(pkg).leden.push(entry);
   }
   const rank = (pkg) => {
@@ -350,4 +395,4 @@ function versionFloors(raw) {
   return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
 }
 
-module.exports = { PLATFORMS, PACKAGE_PREFIX, packageFor, assignmentForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };
+module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

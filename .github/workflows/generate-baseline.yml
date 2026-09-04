@@ -48,6 +48,8 @@ jobs:
         run: node scripts/export-intunebackup.js
       # Na generate-baseline: de policytabellen tonen de checkId's, en die komen uit de
       # zojuist geschreven baseline.
+      - name: Genereer de CIPP-baseline in BaselineTemplate/
+        run: node scripts/generate-baseline-template.js
       - name: Genereer de README's in IntuneTemplate/
         run: node scripts/generate-docs.js
       - name: Open PR met de gegenereerde baseline (als er iets veranderde)
@@ -69,6 +71,7 @@ jobs:
           delete-branch: true
           add-paths: |
             baseline/intune/baseline-v1.0.json
+            BaselineTemplate/Baseline.json
             baseline/README.md
             export/NativeImport/**
             OVERZICHT.md

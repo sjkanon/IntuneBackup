@@ -62,18 +62,21 @@ alles: die zou de gebruikerspolicies op apparaten zetten en de policies die nog 
 zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het doel in
 `_assignments.json`; `set-packages.js` schrijft hem, `check-scope.js` bewaakt hem.
 
-| `Package` | In CIPP toewijzen aan | Policies |
-|---|---|---:|
-| `Baseline-Devices` | Assign to all devices | 80 |
-| `Baseline-Users` | Assign to all users | 28 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 14 |
-| `Baseline-Wacht` | Do not assign | 5 |
-| `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 2 |
-| `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 |
-| `Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 2 |
-| `Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 2 |
-| `Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 2 |
-| *(leeg)* | wordt niet uitgerold | 5 |
+| `Package` | In CIPP toewijzen aan | Stage | Policies |
+|---|---|---:|---:|
+| `Baseline-Devices` | Assign to all devices | 1 | 80 |
+| `Baseline-Users` | Assign to all users | 1 | 28 |
+| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 14 |
+| `Baseline-Wacht` | Do not assign | 3 | 5 |
+| `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
+| `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
+| `Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
+| `Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
+| `Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
+| *(leeg)* | wordt niet uitgerold | – | 5 |
+
+De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
+de CIPP-baseline die deze pakketten uitrolt.
 
 Fase 5 krijgt bewust een lege waarde: CIPP toont alleen pakketten met een gevulde
 `Package`, dus die policies staan in geen enkel pakket. Los kiezen kan nog steeds — ze

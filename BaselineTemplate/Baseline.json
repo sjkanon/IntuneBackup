@@ -1,0 +1,205 @@
+{
+  "TemplateType": "BaselineTemplate",
+  "templateName": "Baseline",
+  "description": "De afgesproken Intune-baseline uit github.com/sjkanon/IntuneBackup. Elke stage rolt Intune-templatepakketten uit; het lidmaatschap van een pakket volgt de repo, dus een nieuwe policy komt er vanzelf bij. Wijs de tenants toe voor je hem laat draaien.",
+  "assignedTenants": [
+    {
+      "label": "Exported Template",
+      "value": "Exported Template",
+      "type": "Tenant"
+    }
+  ],
+  "excludedTenants": [],
+  "alertEmails": "",
+  "alertWebhookUrl": "",
+  "stages": [
+    {
+      "name": "Nu",
+      "logic": "and",
+      "conditions": [],
+      "standards": [
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#devices",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-Devices",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#users",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-Users",
+            "assignTo": "allLicensedUsers",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#ade-token",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-ADE-token",
+            "assignTo": "On",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": false,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-baseline-pilot",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Baseline-Pilot",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Baseline-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-shared-devices",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Shared-Devices",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Shared-Devices",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-update-ring1",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Update-Ring1",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Update-Ring1",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-update-ring2",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Update-Ring2",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Update-Ring2",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    },
+    {
+      "name": "Pilot",
+      "logic": "and",
+      "conditions": [
+        {
+          "type": "success"
+        },
+        {
+          "type": "time",
+          "days": 2,
+          "unit": "weeks"
+        }
+      ],
+      "standards": [
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#pilot",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-Pilot",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Baseline-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    },
+    {
+      "name": "Wacht op voorwaarde",
+      "logic": "and",
+      "conditions": [
+        {
+          "type": "manual"
+        }
+      ],
+      "standards": [
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#wacht",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-Wacht",
+            "assignTo": "On",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": false,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    }
+  ],
+  "referencedTemplates": []
+}

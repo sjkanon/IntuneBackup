@@ -273,20 +273,25 @@ toewijzingsdoel**. Daarom draagt niet elk template dezelfde `Package`. De verdel
 fase en het toewijzingsdoel en staat in de [`IntuneTemplate`-README](IntuneTemplate/README.md#cipp-pakketten);
 `set-packages.js` schrijft het veld, `check-scope.js` bewaakt het.
 
-Voeg per pakket één *Intune Template Package* toe en zet de toewijzing zoals die tabel zegt.
-Een voorstel voor de fasering, met de stages die CIPP kent:
+Die hele indeling staat als bestand in de repo: [`BaselineTemplate/Baseline.json`](BaselineTemplate/Baseline.json),
+te importeren via Tools → Community Repos → dit bestand → Import. Hij komt binnen toegewezen
+aan de placeholder-tenant `Exported Template`, dus er rolt niets uit tot je zelf tenants kiest.
+Zie de [BaselineTemplate-README](BaselineTemplate/README.md). Wie hem liever met de hand
+opbouwt: voeg per pakket één *Intune Template Package* toe met de toewijzing uit die tabel.
 
-| Stage | Pakketten | Graduatie naar de volgende stage |
-|---|---|---|
-| 1 | `Baseline-Devices`, `Baseline-Users`, en de drie groepspakketten | — |
-| 2 | `Baseline-Pilot` | `success` (alles uit stage 1 is compliant) + `time` van twee weken |
-| 3 | `Baseline-Wacht` | `manual`, of een `variable`-conditie zodra de voorwaarde er is |
+De stages die erin zitten:
 
-Stage 1 geldt altijd; latere stages stapelen erbovenop, en een tenant schuift pas door als de
-condities van de vólgende stage kloppen (`time`, `variable`, `group`, `success` of `manual`).
-Zet een pakket in precies één stage: hetzelfde template twee keer met een ander
-toewijzingsdoel botst op CIPP's conflictdetectie. Laat de pilot daarom groeien via de **groep**
-`SEC-Baseline-Pilot` en niet via een extra stage.
+| Stage | Pakketten | Doorschuiven naar déze stage |
+|---:|---|---|
+| 1 · Nu | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` en de drie groepspakketten | — stage 1 geldt altijd |
+| 2 · Pilot | `Baseline-Pilot` | `success` (alles uit stage 1 is compliant) **en** `time` van twee weken |
+| 3 · Wacht op voorwaarde | `Baseline-Wacht` | `manual` — iemand zet 'm door |
+
+Latere stages stapelen op stage 1, en de conditie hoort bij de stage die een tenant
+**binnengaat**, niet bij de stage die hij verlaat. CIPP kent er vijf: `time`, `variable`,
+`group`, `success` en `manual`. Zet een pakket in precies één stage: hetzelfde template twee
+keer met een ander toewijzingsdoel botst op CIPP's conflictdetectie. Laat de pilot daarom
+groeien via de **groep** `SEC-Baseline-Pilot` en niet via een extra stage.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
@@ -296,6 +301,10 @@ CIPP die 219 bestanden óók importeren — dezelfde 122 policies plus hun assig
 meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** template van maakt
 met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
+
+`BaselineTemplate/Baseline.json` is de uitzondering die CIPP wél kent: die map is een van
+CIPP's eigen partitienamen en het bestand draagt `TemplateType: "BaselineTemplate"`, dus het
+wordt een baseline in plaats van een templaterij.
 
 Wat overblijft: zeven bestanden zijn wél `.json` maar geen policy — `baseline/intune/`
 `baseline-v1.0.json`, de drie `_`-bestanden in `IntuneTemplate/`, de twee `_manifest.json`'s
