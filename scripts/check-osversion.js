@@ -131,6 +131,58 @@ function lineOf(entry) {
   return String(entry.cycle).split("-")[0];
 }
 
+/** "11-24h2-e", "11-24h2-w", "11-24h2-e-lts", "11-24h2-iot-lts" -> allemaal "11-24h2". */
+function featureUpdateOf(cycle) {
+  return String(cycle).replace(/-(e|w|iot)?-?lts$/, "").replace(/-(e|w)$/, "");
+}
+
+/**
+ * De twee aannames onder deze afleiding, bij elke run opnieuw getoetst in plaats van
+ * aangenomen. Ze zijn allebei afgeleid uit één momentopname van endoflife.date (2026-09-04)
+ * en kunnen dus verlopen zonder dat iemand het merkt — en dan geeft dit script niet een fout
+ * maar een verkeerd getal, wat erger is.
+ *
+ *  1. **Ontdubbelen op build klopt alleen als (E) en (W) dezelfde build dragen.** Zo staat het
+ *     er vandaag: dezelfde feature-update, twee cycli, één `latest`, andere einddatum. Gaan ze
+ *     ooit uiteenlopen, dan levert het ontdubbelen twee sporten voor één feature-update op en
+ *     is n-1 weer n — precies de fout die de ontdubbeling moest wegnemen.
+ *  2. **n-1 is sport 1, dus de lijst moet aflopend zijn.** De API levert nieuwste eerst; is
+ *     dat niet meer zo, dan is "positie 1" niet meer n-1 en klopt de hele tabel niet.
+ *
+ * Toetst bewust alleen de top van de ladder: daar hangt n-1 vanaf. Verder terug staan er
+ * cycli met een eigen ritme (LTSC, IoT) waar "aflopend" niets meer betekent.
+ */
+function ladderWarnings(platform, releases, ladder) {
+  const warnings = [];
+
+  if (platform === "WIN") {
+    const buildsPerUpdate = new Map();
+    for (const r of releases) {
+      const build = r.latest && r.latest.name;
+      if (!build) continue;
+      const key = featureUpdateOf(r.name);
+      if (!buildsPerUpdate.has(key)) buildsPerUpdate.set(key, new Set());
+      buildsPerUpdate.get(key).add(build);
+    }
+    for (const [update, builds] of buildsPerUpdate) {
+      if (builds.size > 1) {
+        warnings.push(`feature-update ${update} draagt meer dan één build (${[...builds].join(", ")}) — ontdubbelen op build klopt hier niet meer, n-1 kan een editie te hoog uitvallen`);
+      }
+    }
+  }
+
+  const [first, second] = ladder;
+  if (first && second) {
+    const rank = (entry) => (platform === "WIN" ? Number(String(entry.key).split(".").pop()) : parseFloat(entry.key));
+    const a = rank(first);
+    const b = rank(second);
+    if (Number.isFinite(a) && Number.isFinite(b) && a <= b) {
+      warnings.push(`de lijst staat niet nieuwste-eerst (${first.key} vóór ${second.key}) — n-1 is dan niet sport 1 en de afstanden kloppen niet`);
+    }
+  }
+  return warnings;
+}
+
 function rungFor(platform, ladder, value) {
   const exact = ladder.findIndex((e) => e.key === value);
   if (exact !== -1) return exact;
@@ -245,11 +297,15 @@ async function main() {
   const needed = [...new Set(rows.map((r) => r.product).filter(Boolean))];
   const ladders = new Map();
   const failures = [];
+  const aannames = [];
   await Promise.all(
     needed.map(async (product) => {
       const platform = PRODUCTS.find((p) => p.product === product).platform;
       try {
-        ladders.set(product, buildLadder(platform, await fetchReleases(product)));
+        const releases = await fetchReleases(product);
+        const ladder = buildLadder(platform, releases);
+        for (const w of ladderWarnings(platform, releases, ladder)) aannames.push({ product, message: w });
+        ladders.set(product, ladder);
       } catch (error) {
         failures.push({ product, message: error.message });
       }
@@ -291,6 +347,13 @@ async function main() {
     console.error("");
     for (const f of failures) console.error(`  FOUT  endoflife.date/${f.product}: ${f.message}`);
     console.error("  Voor die platforms staat er een ? in de kolommen N-1 en AFSTAND.");
+  }
+
+  if (aannames.length > 0) {
+    console.error("");
+    for (const a of aannames) console.error(`  LET OP  endoflife.date/${a.product}: ${a.message}`);
+    console.error("  De afleiding staat nog, maar de aanname eronder niet meer — controleer de n-1 met de hand");
+    console.error("  voordat je een waarde verhoogt, en pas buildLadder() aan.");
   }
 
   if (notes.length > 0) {
