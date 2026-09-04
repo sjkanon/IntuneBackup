@@ -561,6 +561,97 @@ function overviewDocument(templates, ctx) {
   ].join("\n");
 }
 
+/**
+ * baseline/README.md. Die stond er al met "Gegenereerd — niet met de hand bijwerken" boven,
+ * maar er genereerde niets hem: de tekst noemde 88 regels terwijl het bestand er 127 had. Dat
+ * is precies het soort stille afwijking waar de rest van deze repo zich tegen wapent, dus hij
+ * wordt nu wel gegenereerd — uit baseline-v1.0.json zelf en niet uit IntuneTemplate/, want het
+ * gaat om wat er in dat bestand is beland.
+ */
+function baselineReadme() {
+  if (!fs.existsSync(BASELINE_PATH)) return null;
+  const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"));
+  const rules = baseline.rules || [];
+  const uitPlatform = rules.filter((r) => !/IntuneTemplate/.test(r.source || ""));
+  const gegenereerd = rules.length - uitPlatform.length;
+  const hoog = rules.filter((r) => r.severity === "high").length;
+
+  const perType = {};
+  for (const r of rules) perType[r.type] = (perType[r.type] || 0) + 1;
+  const perPlatform = {};
+  for (const r of rules) {
+    const m = (r.source || "").match(/Baseline_(WIN|MAC|IOS|AND)_/);
+    if (m) perPlatform[m[1]] = (perPlatform[m[1]] || 0) + 1;
+  }
+
+  // De typen die het platform zelf meebrengt (checkId 001-006) staan op één regel: die komen
+  // niet uit IntuneTemplate/ en zijn los niet interessant.
+  const platformTypes = [...new Set(uitPlatform.map((r) => r.type))];
+  const bron = { "settings-catalog-match": "elke Settings Catalog-policy, Windows én macOS", "group-policy-definition-match": "de enige overgebleven ADMX-policy" };
+  const typeRijen = Object.entries(perType)
+    .filter(([t]) => !platformTypes.includes(t))
+    .sort((a, b) => b[1] - a[1])
+    .map(([t, n]) => "| `" + t + "` | " + n + " | " + (bron[t] || "—") + " |");
+  typeRijen.push("| " + platformTypes.map((t) => "`" + t + "`").join(", ") + " | " + uitPlatform.length + " | overgenomen uit het platform (001–006) |");
+
+  const platformRegel = Object.entries(perPlatform).sort((a, b) => b[1] - a[1]).map(([p, n]) => PLATFORMS[p].label + " " + n).join(", ");
+
+  return [
+    "<!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->",
+    "",
+    "# baseline/",
+    "",
+    "**Gegenereerd — niet met de hand bijwerken.** `intune/baseline-v1.0.json` is de bron voor de",
+    "`intune`-categorie in de baseline-koppeling van het TEST Policies Platform (Instellingen →",
+    "Baseline-koppelingen). Wijzig je hier iets, dan is het bij de volgende",
+    "`node scripts/generate-baseline.js` weer weg — pas `IntuneTemplate/` aan.",
+    "",
+    "```mermaid",
+    "flowchart LR",
+    '  T["IntuneTemplate/"] -->|generate-baseline.js| B["baseline/intune/baseline-v1.0.json<br/>' + rules.length + ' rules"]',
+    '  B --> P["TEST Policies Platform"]',
+    '  P -->|vergelijkt op inhoud| TEN["live tenant"]',
+    "```",
+    "",
+    "## Wat erin zit",
+    "",
+    rules.length + " regels: " + uitPlatform.length + " die uit het platform zelf komen (checkId 001–006, device-compliance- en",
+    "app-protection-checks) plus " + gegenereerd + " gegenereerd uit `IntuneTemplate/`. Daarvan " + hoog + " met severity",
+    "`high`, de rest `medium`.",
+    "",
+    "| `type` | Aantal | Uit |",
+    "|---|---:|---|",
+    ...typeRijen,
+    "",
+    "Per platform: " + platformRegel + ".",
+    "",
+    "Niet elk policytype levert een check op. `Device`, `deviceCompliancePolicies` en",
+    "`AppProtection` hebben geen matcher in de engine; een regel met een onbekend type is een check",
+    "die stilzwijgend niets test. Voor compliance en app protection dekken 001–006 het generiek af.",
+    "",
+    "Instellingen met een CIPP-token als waarde (`%OrganizationId%` en verwanten) blijven bewust",
+    "buiten de checks: CIPP vult die bij uitrol per tenant in, dus in de tenant staat de GUID en",
+    "niet het token. Een check die het token als verwachte waarde meeneemt is per definitie rood.",
+    "",
+    "## Twee dingen om te weten bij het lezen van een finding",
+    "",
+    "**De checks matchen op inhoud, niet op naam.** Een policy die de klant anders genoemd heeft",
+    "telt gewoon mee — dat is bewust. Keerzijde: een achtergebleven policy onder een óude naam",
+    "houdt zijn check groen, ook als de nieuwe nooit is aangemaakt. De baseline is daarom geen",
+    "vangnet voor een naamsmigratie; zie [PLAN.md](../PLAN.md#fase-3--tenant-migratie).",
+    "",
+    "**checkId's zijn externe identifiers.** Het platform, findings en uitzonderingen verwijzen",
+    "ernaar, dus ze veranderen niet als een bestand hernoemd wordt. Zes nummers zijn opgeheven",
+    "(008, 017, 023, 025, 028 en 144) en worden niet opnieuw uitgedeeld — zie",
+    "`RETIRED_CHECK_NUMBERS` in [`scripts/generate-baseline.js`](../scripts/generate-baseline.js).",
+    "",
+    "---",
+    "",
+    "Terug naar de [hoofd-README](../README.md).",
+    "",
+  ].join("\n");
+}
+
 function main() {
   const checkOnly = process.argv.includes("--check");
   const templates = readTemplates(TEMPLATE_DIR);
@@ -578,6 +669,9 @@ function main() {
     { file: path.join(REPO_ROOT, "OVERZICHT.md"), content: overviewDocument(templates, ctx) },
     { file: path.join(TEMPLATE_DIR, "README.md"), content: overviewReadme(templates, ctx) },
   ];
+
+  const baselineDoc = baselineReadme();
+  if (baselineDoc) files.push({ file: path.join(REPO_ROOT, "baseline", "README.md"), content: baselineDoc });
 
   for (const platform of Object.keys(PLATFORMS)) {
     const list = templates.filter((t) => parseBaseName(t.baseName).platform === platform);
@@ -608,7 +702,7 @@ function main() {
   }
 
   if (checkOnly && stale.length > 0) {
-    console.error(`\n${stale.length} README('s) lopen achter op IntuneTemplate/. Draai: node scripts/generate-docs.js`);
+    console.error(`\n${stale.length} README('s) lopen achter. Draai: node scripts/generate-docs.js`);
     process.exit(1);
   }
   console.log(`\n${files.length} README('s) gecontroleerd, ${stale.length} ${checkOnly ? "verouderd" : "geschreven"}.`);

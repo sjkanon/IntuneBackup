@@ -66,6 +66,7 @@ jobs:
           delete-branch: true
           add-paths: |
             baseline/intune/baseline-v1.0.json
+            baseline/README.md
             export/NativeImport/**
             OVERZICHT.md
             IntuneTemplate/*.md
