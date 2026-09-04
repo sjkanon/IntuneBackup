@@ -652,7 +652,7 @@
       "bron": "CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instelling overgenomen uit het NIS2-profiel van IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie.",
       "bewijs": "Windows kent twee auditsystemen naast elkaar: de negen oude categorieën en de ruim vijftig subcategorieën. Staat deze schakelaar niet aan, dan kan een oude categorie-instelling — uit een GPO, een image of een restant — de subcategorieën overrulen, en dan logt het apparaat iets anders dan de policy zegt. Dit is de instelling die van [Baseline] - WIN - D - Audit and Event Logging (40 instellingen) de werkelijke waarheid maakt in plaats van een voornemen.",
       "universeel": "Geldt voor elk Windows-apparaat, is onzichtbaar voor gebruikers en breekt niets. Zonder deze instelling is de bestaande auditpolicy op een deel van de vloot mogelijk niet effectief — en dát merk je pas als je na een incident de logs nodig hebt.",
-      "note": "Eén instelling, maar de goedkoopste van de hele set: hij voegt zelf niets toe en zorgt alleen dat wat er al staat ook echt geldt. Draai na uitrol op een testapparaat `auditpol /get /category:*` en vergelijk met de baseline-policy.",
+      "note": "Eén instelling, maar de goedkoopste van de hele set: hij voegt zelf niets toe en zorgt alleen dat wat er al staat ook echt geldt. Draai na uitrol op een testapparaat `auditpol /get /category:*` en vergelijk met de baseline-policy. Daarnaast wordt OneSettings-auditing aangezet: Windows legt vast wanneer het configuratie ophaalt bij de OneSettings-dienst. Zonder dat spoor is een wijziging die daarvandaan komt achteraf niet te zien.",
       "herkomst": "intuneadmin",
       "fase": 1
     },
@@ -845,6 +845,34 @@
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 1
+    },
+    {
+      "target": "Baseline_WIN_D_Defender_Ransomware_Protection",
+      "displayName": "[Baseline] - WIN - D - Defender Ransomware Protection",
+      "doel": "Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk versleutelt.",
+      "bron": "IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection; waarden geverifieerd tegen de settings catalog-definities. IntuneAdmin zet Audit; hier staat Block.",
+      "herkomst": "intuneadmin",
+      "toewijzingTekst": "alle apparaten",
+      "fase": 1,
+      "controls": {
+        "iso": [
+          "A.8.7 Bescherming tegen malware",
+          "A.5.29 Informatiebeveiliging tijdens verstoring",
+          "A.8.20 Netwerkbeveiliging"
+        ],
+        "nis2": [
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer",
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP11",
+          "ISMP09"
+        ]
+      },
+      "bewijs": "Moderne ransomware versleutelt niet het apparaat waarop hij landt, maar de bestandsshares eromheen — dat is sneller en raakt meer. De rest van de baseline kijkt naar wat er óp het apparaat gebeurt; deze instelling kijkt naar wat het apparaat bij ánderen doet, en dat was tot nu toe een blinde vlek. Defender herkent het patroon van een proces dat over SMB in hoog tempo bestanden herschrijft en zet dat stil.",
+      "universeel": "Elk Windows-apparaat met Defender Antivirus, en juist ook het apparaat dat zelf niets belangrijks bevat — dat is namelijk het apparaat waarop de aanvaller landt.",
+      "note": "De agressiviteit staat op Low: alleen blokkeren als Defender voor 100 procent zeker is. Dat is de waarde met de kleinste kans op een fout-positief, en een fout-positief is hier duur — je blokkeert dan een legitiem proces dat bestanden op een share bijwerkt, bijvoorbeeld een back-up of een sync-tool. Medium en High blokkeren vanaf 99 respectievelijk 90 procent zekerheid; overweeg die pas als de rapportage laat zien dat er niets legitiems geraakt wordt. IntuneAdmin levert deze instelling op Audit; hier staat Block, want detecteren zonder blokkeren stopt geen versleuteling."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - Security Experience - v3.3.json",
@@ -1126,7 +1154,7 @@
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie.",
       "bewijs": "CTRL+ALT+DEL is de enige toetscombinatie die Windows niet aan een gewone toepassing kan doorgeven: hij dwingt de Secure Attention Sequence af en daarmee het echte aanmeldscherm. Zonder die eis kan een programma een namaak-aanmeldscherm tonen en het wachtwoord meelezen — de klassieke credential-harvest, en de reden dat CIS hem al sinds Windows NT voorschrijft. De netwerkkeuze op het vergrendelscherm is de tweede: die laat iemand zonder aan te melden het apparaat op een ander netwerk zetten.",
       "universeel": "Beide gelden voor elk Windows-apparaat en raken geen enkele toepassing. De enige zichtbare verandering is dat de gebruiker één keer extra een toetscombinatie indrukt.",
-      "note": "Merkbaar voor gebruikers, dus meld het aan: na deze policy moet iedereen CTRL+ALT+DEL indrukken vóór het aanmeldscherm verschijnt. Op tablets en 2-in-1's zonder toetsenbord neemt Windows daar de Windows-knop plus aan/uit voor. De letters in de instellingsnaam zijn omgekeerd: \"Do not require CTRL+ALT+DEL\" op Disabled betekent dat het juist wél vereist is.",
+      "note": "Merkbaar voor gebruikers, dus meld het aan: na deze policy moet iedereen CTRL+ALT+DEL indrukken vóór het aanmeldscherm verschijnt. Op tablets en 2-in-1's zonder toetsenbord neemt Windows daar de Windows-knop plus aan/uit voor. De letters in de instellingsnaam zijn omgekeerd: \"Do not require CTRL+ALT+DEL\" op Disabled betekent dat het juist wél vereist is. Twee toevoegingen op het aanmeldscherm: het e-mailadres van de gebruiker wordt er niet meer getoond, en verbonden gebruikers worden niet opgesomd. Beide halen de helft van een aanmeldpoging — de gebruikersnaam — weg bij wie het scherm ziet.",
       "herkomst": "intuneadmin",
       "fase": 2,
       "faseWaarom": "Gebruikers moeten voortaan CTRL+ALT+DEL indrukken vóór het aanmeldscherm. Communiceer dat vóór de brede uitrol."
@@ -1301,7 +1329,7 @@
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
       "bewijs": "Dit zijn vier kanalen waarlangs bedrijfsgegevens het apparaat verlaten zonder dat iemand het als datastroom herkent. Het klembord tussen apparaten synchroniseert alles wat een gebruiker kopieert — wachtwoorden inbegrepen — naar de cloud en naar zijn andere apparaten, ook privéapparaten. Invoerpersonalisatie stuurt getypte en ingesproken tekst naar Microsoft om het woordenboek te verbeteren. Gebruikersactiviteiten uploaden doet hetzelfde met welke bestanden en apps iemand gebruikt. Alle vier staan in CIS L1 en alle vier zijn met één instelling dicht.",
       "universeel": "Geldt voor elk apparaat en elke gebruiker. Sluit aan op de keuze die de baseline al maakte om telemetrie op Optioneel te laten staan voor Endpoint Analytics: het niveau blijft, maar deze vier persoonsgebonden stromen gaan eruit.",
-      "note": "Merkbaar op één punt: het klembord werkt niet meer tussen apparaten (plakken binnen hetzelfde apparaat blijft gewoon werken) en de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `[ISMS] - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet vier aparte kanalen uit.",
+      "note": "Merkbaar op één punt: het klembord werkt niet meer tussen apparaten (plakken binnen hetzelfde apparaat blijft gewoon werken) en de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `[ISMS] - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet vier aparte kanalen uit. Zes kanalen erbij, alle zes CIS L1: zoeken gebruikt de locatie niet meer, sms-synchronisatie naar de cloud gaat uit, consumentencontent op het aanmeldscherm verdwijnt, online tips halen niets meer op bij Microsoft, lettertypen worden niet meer van fs.microsoft.com gedownload, en apps kunnen geen gegevens meer delen tussen gebruikers van hetzelfde apparaat. Die laatste is de enige met een merkbare kant: een app die bewust gegevens tussen gebruikers deelt werkt niet meer zo.",
       "herkomst": "intuneadmin",
       "fase": 1,
       "intuneadmin": {
@@ -1331,7 +1359,7 @@
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
       "bewijs": "`AllowRemoteShellAccess` op Disabled sluit `winrs` af: het opstarten van een interactieve opdrachtshell op afstand via WinRM. Dat is een standaardstap in lateral movement — het staat in vrijwel elk aanvalsdraaiboek, van PsExec-vervangers tot Cobalt Strike. De inactieve SMB-sessie is de tweede: een sessie die open blijft staan is een sessie die iemand anders kan overnemen zodra het apparaat onbeheerd is.",
       "universeel": "Beide gelden voor elk Windows-apparaat. Werkplekken hebben geen legitieme reden om inkomende remoteshells te accepteren; beheer op afstand loopt via Intune, NinjaOne en Defender, en geen daarvan gebruikt winrs.",
-      "note": "LET OP vóór je toewijst: controleer of er geen beheerscript of monitoringtool op WinRM leunt. `Enter-PSSession` en `Invoke-Command` blijven werken — die gebruiken de PowerShell-endpoint, niet de remoteshell — maar `winrs` en alles wat daarop bouwt niet meer. Op een vloot met on-prem beheertooling is dit de enige policy in deze set die iets kan breken dat je niet direct ziet.",
+      "note": "LET OP vóór je toewijst: controleer of er geen beheerscript of monitoringtool op WinRM leunt. `Enter-PSSession` en `Invoke-Command` blijven werken — die gebruiken de PowerShell-endpoint, niet de remoteshell — maar `winrs` en alles wat daarop bouwt niet meer. Op een vloot met on-prem beheertooling is dit de enige policy in deze set die iets kan breken dat je niet direct ziet. Naast de remoteshell gaat nu ook WinRM-serverbeheer als geheel dicht. Dat is de bredere variant: geen enkele inkomende WinRM-verbinding meer, niet alleen geen interactieve shell. Controleer dit samen met de remoteshell-instelling tegen wat er aan beheertooling op WinRM leunt.",
       "herkomst": "intuneadmin",
       "fase": 2,
       "faseWaarom": "Controleer of geen beheerscript of monitoringtool op winrs leunt. Enter-PSSession en Invoke-Command blijven werken, winrs niet."
@@ -1871,7 +1899,7 @@
       "bron": "CIS v4 Windows 11 L1 — instelling overgenomen uit IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie.",
       "bewijs": "Windows merkt gedownloade bestanden met de Mark of the Web. Deze instelling zorgt dat de Attachment Manager de virusscanner aanroept op het moment dat zo'n bestand wordt geopend. Dat is het moment waarop het ertoe doet: een bijlage die bij binnenkomst nog onbekend was, is een dag later wél herkend. De baseline heeft Defender volledig ingericht maar laat dit aanroeppunt vandaag ongemoeid.",
       "universeel": "Geldt voor elke gebruiker op elk apparaat. Kost een fractie van een seconde bij het openen van een gedownload bestand en verandert verder niets.",
-      "note": "User-scoped, dus toewijzen aan gebruikers en niet aan apparaten. Werkt met Defender en met elke andere scanner die zich als antivirusprovider registreert.",
+      "note": "User-scoped, dus toewijzen aan gebruikers en niet aan apparaten. Werkt met Defender en met elke andere scanner die zich als antivirusprovider registreert. Daarnaast blijft de zone-informatie op een gedownload bestand bewaard (Mark of the Web). Dat merkteken is waar Office Beveiligde weergave en SmartScreen op afgaan; gaat het verloren, dan opent een gedownload document alsof het van de eigen schijf komt en valt de belangrijkste rem weg. De instelling heet in de catalogus omgekeerd — *Do not preserve zone information* op Disabled betekent dat de informatie juist wél wordt bewaard.",
       "herkomst": "intuneadmin",
       "fase": 1
     },

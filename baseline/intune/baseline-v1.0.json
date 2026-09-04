@@ -10322,6 +10322,10 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_audit_forceauditpolicysubcategorysettingstooverrideauditpolicycategorysettings",
             "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_enableonesettingsauditing",
+            "expectedValue": "device_vendor_msft_policy_config_system_enableonesettingsauditing_1"
           }
         ]
       },
@@ -10528,6 +10532,14 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_dontdisplaynetworkselectionui",
             "expectedValue": "device_vendor_msft_policy_config_windowslogon_dontdisplaynetworkselectionui_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_logon_blockuserfromshowingaccountdetailsonsignin",
+            "expectedValue": "device_vendor_msft_policy_config_admx_logon_blockuserfromshowingaccountdetailsonsignin_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_logon_dontenumerateconnectedusers",
+            "expectedValue": "device_vendor_msft_policy_config_admx_logon_dontenumerateconnectedusers_1"
           }
         ]
       },
@@ -10606,6 +10618,30 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_privacy_allowinputpersonalization",
             "expectedValue": "device_vendor_msft_policy_config_privacy_allowinputpersonalization_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_search_allowsearchtouselocation",
+            "expectedValue": "device_vendor_msft_policy_config_search_allowsearchtouselocation_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_messaging_allowmessagesync",
+            "expectedValue": "device_vendor_msft_policy_config_messaging_allowmessagesync_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_experience_disableconsumeraccountstatecontent",
+            "expectedValue": "device_vendor_msft_policy_config_experience_disableconsumeraccountstatecontent_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_settings_allowonlinetips",
+            "expectedValue": "device_vendor_msft_policy_config_settings_allowonlinetips_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_system_allowfontproviders",
+            "expectedValue": "device_vendor_msft_policy_config_system_allowfontproviders_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_allowshareduserappdata",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_allowshareduserappdata_0"
           }
         ]
       },
@@ -10639,6 +10675,10 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkserver_amountofidletimerequiredbeforesuspendingsession",
             "expectedValue": 15
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_remotemanagement_allowremoteservermanagement",
+            "expectedValue": "device_vendor_msft_policy_config_remotemanagement_allowremoteservermanagement_0"
           }
         ]
       },
@@ -10835,6 +10875,10 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms",
             "expectedValue": "user_vendor_msft_policy_config_attachmentmanager_notifyantivirusprograms_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_attachmentmanager_donotpreservezoneinformation",
+            "expectedValue": "user_vendor_msft_policy_config_attachmentmanager_donotpreservezoneinformation_0"
           }
         ]
       },
@@ -11213,6 +11257,39 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_windowsai_allowrecallexport",
             "expectedValue": "device_vendor_msft_policy_config_windowsai_allowrecallexport_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-153-DDefenderRansomwareProtection",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "defender-ransomware-protection",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Defender Ransomware Protection\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_defender_configuration_behavioralnetworkblocks_remoteencryptionprotection_remoteencryptionprotectionconfiguredstate",
+            "expectedValue": "device_vendor_msft_defender_configuration_behavioralnetworkblocks_remoteencryptionprotection_remoteencryptionprotectionconfiguredstate_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_defender_configuration_behavioralnetworkblocks_remoteencryptionprotection_remoteencryptionprotectionaggressiveness",
+            "expectedValue": "device_vendor_msft_defender_configuration_behavioralnetworkblocks_remoteencryptionprotection_remoteencryptionprotectionaggressiveness_0"
           }
         ]
       },

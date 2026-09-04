@@ -332,6 +332,15 @@
       }
     }
   ],
+  "[Baseline] - WIN - D - Defender Ransomware Protection": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "[Baseline] - WIN - D - Defender Security Experience": [
     {
       "target": {

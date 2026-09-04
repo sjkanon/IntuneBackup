@@ -2,14 +2,14 @@
 
 # Intune-baseline — overzicht
 
-140 policies over 4 platformen, met
+141 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 140 |
-| Baseline-checks | 126 |
+| Policies | 141 |
+| Baseline-checks | 127 |
 | Zonder toewijzing (bewust) | 33 |
 | Uitgerold in de tenant | 0 |
 
@@ -17,13 +17,13 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 98 | 1 | 4 | 5 | – | **108** |
+| [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 4 | 5 | – | **109** |
 | [macOS](IntuneTemplate/MAC/README.md) | 21 | – | 1 | 4 | – | **26** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 108 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 109 policies
 - [macOS](IntuneTemplate/MAC/README.md) — 26 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 3 policies
 - [Android](IntuneTemplate/AND/README.md) — 3 policies

@@ -14,9 +14,9 @@ Sluit de WinRM-remoteshell af en verbreekt een inactieve SMB-sessie na vijftien 
 | Bron | CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities. |
 | Bestand | [`Baseline_WIN_D_Remote_Access_Hardening.json`](Baseline_WIN_D_Remote_Access_Hardening.json) |
 
-> LET OP vóór je toewijst: controleer of er geen beheerscript of monitoringtool op WinRM leunt. `Enter-PSSession` en `Invoke-Command` blijven werken — die gebruiken de PowerShell-endpoint, niet de remoteshell — maar `winrs` en alles wat daarop bouwt niet meer. Op een vloot met on-prem beheertooling is dit de enige policy in deze set die iets kan breken dat je niet direct ziet.
+> LET OP vóór je toewijst: controleer of er geen beheerscript of monitoringtool op WinRM leunt. `Enter-PSSession` en `Invoke-Command` blijven werken — die gebruiken de PowerShell-endpoint, niet de remoteshell — maar `winrs` en alles wat daarop bouwt niet meer. Op een vloot met on-prem beheertooling is dit de enige policy in deze set die iets kan breken dat je niet direct ziet. Naast de remoteshell gaat nu ook WinRM-serverbeheer als geheel dicht. Dat is de bredere variant: geen enkele inkomende WinRM-verbinding meer, niet alleen geen interactieve shell. Controleer dit samen met de remoteshell-instelling tegen wat er aan beheertooling op WinRM leunt.
 
-## Instellingen — 2
+## Instellingen — 3
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -25,6 +25,7 @@ instelling op de getoonde waarde staat.
 |---|---|
 | `device_vendor_msft_policy_config_remoteshell_allowremoteshellaccess` | 0 |
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_microsoftnetworkserver_amountofidletimerequiredbeforesuspendingsession` | 15 |
+| `device_vendor_msft_policy_config_remotemanagement_allowremoteservermanagement` | 0 |
 
 ---
 

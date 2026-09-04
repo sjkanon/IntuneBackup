@@ -281,6 +281,57 @@ Beide staan hier omdat ze bij een volgende vergelijking opnieuw zullen opduiken.
    waardoor macOS de héle TCC-payload afwijst. Al bekend en al opgelost in `import-oib.js`
    ([OIB issue #62](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline/issues/62)).
 
+
+## Slotsom: 874 profielen tegenover 141 policies
+
+Die twee getallen vergelijken niets. IntuneAdmin zet in zijn CIS-mappen vaak **één profiel per
+instelling** — 380 losse profielen voor Windows 11 alleen al — terwijl deze baseline instellingen
+bundelt tot een beheersbare policy. De eerlijke vergelijking is op `settingDefinitionId`:
+
+| | IntuneAdmin | Deze baseline |
+|---|---:|---:|
+| Bestanden / policies | 874 | 141 |
+| Profielen mét instellingen | 808 | — |
+| **Unieke settingDefinitionIds** | **1.193** | **1.747** |
+
+Van hun 1.193 instellingen zetten wij er **729 (61%)**. Omgekeerd zetten wij **1.018
+instellingen die IntuneAdmin helemaal niet heeft** — grotendeels de OpenIntuneBaseline-inhoud
+voor Windows en macOS, waar IntuneAdmin veel dunner is.
+
+De 464 die overblijven, na drie rondes vergelijken:
+
+| Categorie | Aantal | Wat ermee gebeurt |
+|---|---:|---|
+| Microsoft Edge | 133 | onze Edge Security-policy zet er al 54; de rest is CIS L2 of cosmetisch |
+| Windows, overig | 76 | hieruit kwam de laatste ronde; wat nog rest is per stuk gewogen en afgevallen |
+| Google Chrome | 34 | gebruiken we niet |
+| AVD / Windows 365 / RDS | 34 | geen Cloud PC's |
+| Apple- en Android-restricties | 40 | vragen inschrijving; staat op de agenda bij de eerste ingeschreven telefoon |
+| Legacy/ADMX-restanten | 30 | Windows Media Player, Help en Ondersteuning, MSS-timers |
+| Firewall-profielvarianten | 29 | onze firewallpolicy zet de drie profielen al; dit zijn Hyper-V/WSL-varianten |
+| Defender | 22 | grotendeels App Guard (afgeschaft) en scaninstellingen die wij al anders zetten |
+| Linux | 15 | geen Linux |
+| Overig | 51 | Defender-UI verbergen, Visual Studio, OneDrive, Office, WSL, Teams |
+
+Wat de laatste ronde nog opleverde, staat hieronder. Daarna is de bodem van deze bron bereikt:
+wat er nu nog ligt is niet van toepassing, dubbelop, of afgeschaft.
+
+| Toevoeging | Waarom |
+|---|---|
+| `WIN - D - Defender Ransomware Protection` (153) | Moderne ransomware versleutelt niet het apparaat waarop hij landt maar de shares eromheen. De hele baseline keek naar wat er *óp* het apparaat gebeurt; dit is de eerste die kijkt naar wat het apparaat bij ánderen doet. Block op Low: alleen bij 100% zekerheid, want een fout-positief raakt hier een back-up of sync-tool. |
+| `Attachment Scanning` + Mark of the Web | Zone-informatie op een gedownload bestand blijft bewaard. Dat merkteken is waar Office Beveiligde weergave en SmartScreen op afgaan; verdwijnt het, dan opent een download alsof hij van de eigen schijf komt. |
+| `Logon Hardening` + twee | Het e-mailadres van de gebruiker staat niet meer op het aanmeldscherm, en verbonden gebruikers worden niet opgesomd. |
+| `Privacy and Telemetry` + zes | Zoeklocatie, sms-synchronisatie, consumentencontent, online tips, lettertypeproviders en het delen van app-gegevens tussen gebruikers. Alle zes CIS L1. |
+| `Remote Access Hardening` + WinRM-serverbeheer | De bredere variant naast de remoteshell: geen enkele inkomende WinRM-verbinding meer. |
+| `Audit Policy Enforcement` + OneSettings-auditing | Windows legt vast wanneer het configuratie ophaalt bij de OneSettings-dienst. |
+
+Bewust níet overgenomen in deze ronde: de scaninstellingen van IntuneAdmin (onze
+Defender-policy zet al een dagelijkse quickscan op 11:00 — hun schema zou daar dwars doorheen
+lopen), het blokkeren van leestoegang tot verwisselbare media (wij blokkeren schrijven; lezen
+blokkeren breekt te veel), en de zeven CIS-user rights die op "niemand" moeten staan — een lege
+waardecollectie is in de settings catalog niet betrouwbaar te coderen en IntuneAdmin vult ze zelf
+met een placeholder.
+
 ## Wat er nu moet gebeuren
 
 | # | Stap | |

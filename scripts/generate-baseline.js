@@ -326,6 +326,9 @@ const CHECK_NUMBERS = {
   // zonder beveiligingsupdates was daarmee volledig compliant.
   Baseline_MAC_U_Compliance_OS_Version: 151,
   Baseline_WIN_U_Compliance_OS_Version: 152,
+  // Kijkt naar wat dit apparaat bij ándere machines doet — de rest van de baseline kijkt
+  // alleen naar wat er óp het apparaat gebeurt.
+  Baseline_WIN_D_Defender_Ransomware_Protection: 153,
 };
 
 /**

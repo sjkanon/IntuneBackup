@@ -43,12 +43,19 @@ Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/R
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).
 
-Drie soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
+Vier soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
 `IntuneTemplate/`, elk met een eigen README: de macOS ADE-enrollmentprofielen in
 [`enrollment/macos/`](enrollment/macos/README.md), de macOS-shellscripts in
-[`shellscripts/macos/`](shellscripts/macos/README.md) en de aangepaste compliance-check voor
-Defender op macOS in [`compliance/macos/`](compliance/macos/README.md). Die worden door géén van
-de pijplijnen opgepikt en hebben geen `checkId`.
+[`shellscripts/macos/`](shellscripts/macos/README.md), de aangepaste compliance-check voor
+Defender op macOS in [`compliance/macos/`](compliance/macos/README.md) en de Win32-app die de
+voorgeïnstalleerde McAfee verwijdert in
+[`apps/win32/remove-mcafee/`](apps/win32/remove-mcafee/README.md). Die worden door géén van de
+pijplijnen opgepikt en hebben geen `checkId`.
+
+Die laatste hoort er om één reden bij: McAfee zet **Microsoft Defender in passive mode**. De
+ASR-regels, Controlled Folder Access, Network Protection en Remote Encryption Protection uit deze
+baseline leunen allemaal op een actieve Defender-engine. Komen ze aan op een apparaat met McAfee,
+dan staat de baseline-check groen terwijl er niets wordt uitgevoerd.
 
 ## Twee tenantinstellingen die geen policy zijn
 
