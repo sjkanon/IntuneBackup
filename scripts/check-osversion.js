@@ -41,10 +41,14 @@
 
 const fs = require("fs");
 const path = require("path");
-const { readTemplates } = require("./lib/templates");
+const { readTemplates, PATCH_FIELDS, versionFloors } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
+const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
+
+/** Waar de Android-patchdatum vandaan komt: de eerste van de maand, zes maanden terug. */
+const PATCH_MONTHS_BACK = 6;
 
 /**
  * Platformwoord in `@odata.type` -> endoflife.date-product. Windows vóór de rest: de andere
@@ -57,12 +61,23 @@ const PRODUCTS = [
   { platform: "IOS", match: "ios", product: "ios" },
 ];
 
-/** De drie velden die een ondergrens dragen. `null` en "0000-00-00" betekenen "niet gezet". */
-const VERSION_FIELDS = ["osMinimumVersion", "minimumRequiredOsVersion", "minimumRequiredPatchVersion"];
-const UNSET = new Set([null, undefined, "", "0000-00-00"]);
+/**
+ * De Android-beveiligingspatchdatum heeft geen n-1 bij endoflife.date — daar is de basislijn
+ * de kalender: de eerste van de maand, zes maanden terug. De afstand is dan het aantal
+ * maanden dat de ingestelde datum ouder is dan die basislijn.
+ */
+function patchBaseline(now = new Date()) {
+  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - PATCH_MONTHS_BACK, 1));
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}-01`;
+}
 
-/** Android-patchdatum: een yyyy-MM-dd, geen OS-versie. endoflife.date kent er geen n-1 voor. */
-const PATCH_FIELD = "minimumRequiredPatchVersion";
+/** Hele maanden tussen twee yyyy-MM-dd-datums; null als er geen datum in staat. */
+function monthsBetween(from, to) {
+  const a = /^(\d{4})-(\d{2})/.exec(from);
+  const b = /^(\d{4})-(\d{2})/.exec(to);
+  if (!a || !b) return null;
+  return (Number(b[1]) - Number(a[1])) * 12 + (Number(b[2]) - Number(a[2]));
+}
 
 function platformOf(odataType) {
   const type = String(odataType || "").toLowerCase();
@@ -159,21 +174,37 @@ function formatDistance(distance, platform) {
   return distance < 0 ? `${n} ${unit} strenger` : `${n} ${unit} achter`;
 }
 
+/**
+ * De `soort` uit `ondergrens` in _manifest.json — het antwoord op de enige vraag die deze
+ * tabel eigenlijk stelt: mag dit getal mee omhoog? Een capaciteitsvloer mag dat niet, hoe ver
+ * hij ook achterloopt; die staat er omdat een andere policy in de baseline hem nodig heeft.
+ * `check-scope.js` bewaakt dat elke gezette ondergrens zo'n regel heeft, dus een "?" hier
+ * betekent dat het manifest en de templates uit elkaar lopen.
+ */
+function soortenByTarget() {
+  if (!fs.existsSync(MANIFEST_PATH)) return new Map();
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+  const map = new Map();
+  for (const p of manifest.policies || []) {
+    for (const rule of p.ondergrens || []) map.set(`${p.target} ${rule.veld}`, rule.soort);
+  }
+  return map;
+}
+
 function collectRows(templates) {
+  const soorten = soortenByTarget();
   const rows = [];
   for (const t of templates) {
     const platform = platformOf(t.raw["@odata.type"]);
-    for (const field of VERSION_FIELDS) {
-      if (!(field in t.raw)) continue;
-      const value = t.raw[field];
-      if (UNSET.has(value)) continue;
+    for (const { veld, waarde } of versionFloors(t.raw)) {
       rows.push({
         platform: platform ? platform.platform : "?",
         product: platform ? platform.product : null,
         file: path.relative(REPO_ROOT, t.filePath).split(path.sep).join("/"),
         baseName: t.baseName,
-        field,
-        value: String(value),
+        field: veld,
+        value: waarde,
+        soort: soorten.get(`${t.baseName} ${veld}`) || "?",
         odataType: t.raw["@odata.type"],
       });
     }
@@ -190,6 +221,7 @@ function printTable(rows) {
     { key: "value", head: "HUIDIG" },
     { key: "anchor", head: "N-1" },
     { key: "distance", head: "AFSTAND" },
+    { key: "soort", head: "SOORT" },
   ];
   const widths = cols.map((c) => Math.max(c.head.length, ...rows.map((r) => String(r[c.key]).length)));
   const line = (cells) => ("  " + cells.map((cell, i) => String(cell).padEnd(widths[i])).join("  ")).trimEnd();
@@ -226,10 +258,12 @@ async function main() {
 
   const notes = [];
   for (const row of rows) {
-    if (row.field === PATCH_FIELD) {
-      row.anchor = "—";
-      row.distance = "n.v.t.";
-      notes.push(`${row.baseName}: ${PATCH_FIELD} is een Android-beveiligingspatchdatum (yyyy-MM-dd), geen OS-versie — endoflife.date kent er geen n-1 voor.`);
+    if (PATCH_FIELDS.has(row.field)) {
+      const baseline = patchBaseline();
+      const months = monthsBetween(row.value, baseline);
+      row.anchor = baseline;
+      row.distance = months === null ? "?" : months === 0 ? "op de basislijn" : months > 0 ? `${months} maand${months === 1 ? "" : "en"} ouder` : `${-months} maand${-months === 1 ? "" : "en"} strenger`;
+      if (months === null) notes.push(`${row.baseName}: "${row.value}" is geen yyyy-MM-dd-datum — afstand niet te bepalen.`);
       continue;
     }
     if (!row.product) {
@@ -266,8 +300,11 @@ async function main() {
 
   console.log("\nAfstand is een positie op de ladder, geen som. Bij Windows wordt eerst ontdubbeld op build");
   console.log("(elke feature-update staat er als -e en -w in) en alleen binnen dezelfde productlijn geteld.");
-  console.log("\nDit rapport blokkeert niets: een ondergrens die uit een andere policy in de baseline volgt");
-  console.log("(een capaciteitsvloer) mag niet meebewegen met n-1. Verhogen is een besluit, dus een PR.");
+  console.log(`Een patchdatum heeft geen n-1 bij endoflife.date; daar is de basislijn de kalender — de eerste van`);
+  console.log(`de maand, ${PATCH_MONTHS_BACK} maanden terug (nu ${patchBaseline()}).`);
+  console.log("\nDit rapport blokkeert niets. SOORT zegt of een waarde mee omhoog mág: een capaciteitsvloer volgt");
+  console.log("uit een andere policy in de baseline en mag niet meebewegen met n-1, hoe ver hij ook achterloopt;");
+  console.log("een actualiteitsdoel mag dat wel. Verhogen blijft een besluit, dus een PR.");
 }
 
 // `process.exitCode` en niet `process.exit()`: dat laatste breekt de nog openstaande

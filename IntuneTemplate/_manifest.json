@@ -23,6 +23,21 @@
     "bewijs        waarom dit aantoonbaar werkt: wie schrijft het voor, wat houdt het tegen.",
     "universeel    waarom dit voor elk apparaat geldt — en waar de grens ligt.",
     "note          wat je moet weten voordat je hem toewijst: impact, valkuilen, overlap.",
+    "ondergrens    per gezet OS-ondergrensveld (osMinimumVersion, minimumRequired*,",
+    "              minimumWarning*) wélke van twee soorten het is. Zonder dat onderscheid kan",
+    "              geen enkel script weten of een waarde verhoogd mág worden:",
+    "                capaciteitsvloer   volgt uit een andere policy in deze baseline, die",
+    "                                   onder die versie niet werkt. Mag niet meebewegen met",
+    "                                   n-1; 'volgtUit' noemt de policies waar hij uit volgt.",
+    "                actualiteitsdoel   houdt oude toestellen buiten, maar maakt niets",
+    "                                   mogelijk. Mag meebewegen met n-1.",
+    "              'waarom' is verplicht. check-scope.js bewaakt dat elk gezet veld een regel",
+    "              heeft en andersom; check-osversion.js rapporteert de afstand tot n-1.",
+    "veldOverrides bewuste afwijking op een plat veld, voor policies die geen Settings Catalog",
+    "              zijn (app protection, compliance). 'overrides' hierboven werkt op",
+    "              settingDefinitionId's en dus niet op die vorm. Zonder deze regels bouwt de",
+    "              volgende import de body opnieuw uit de bron en is de waarde stil weg.",
+    "              { veld, waarde, reason }; faalt hard als het veld niet meer in de bron staat.",
     "overrides     bewuste afwijking van de bron. Verdwijnt het ankerpunt uit een nieuwe versie",
     "              van die bron, dan stopt de import met een fout in plaats van de afwijking",
     "              stil te laten vervallen.",
@@ -111,6 +126,31 @@
       "bron": "OpenIntuneBaseline BYOD — Android App Protection",
       "type": "AppProtection",
       "herkomst": "oib",
+      "ondergrens": [
+        {
+          "veld": "minimumWarningOsVersion",
+          "soort": "actualiteitsdoel",
+          "waarom": "App protection is de BYOD-kant: het toestel is niet van ons en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde Android-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
+        },
+        {
+          "veld": "minimumWarningPatchVersion",
+          "soort": "actualiteitsdoel",
+          "waarom": "De Android-beveiligingspatchdatum, standaard zes maanden terug. endoflife.date kent hier geen n-1 voor; de basislijn is de datum zelf, en die schuift per definitie mee met de kalender."
+        }
+      ],
+      "veldOverrides": [
+        {
+          "veld": "minimumWarningOsVersion",
+          "waarde": "16.0",
+          "reason": "OIB laat deze leeg. n-1 voor Android, als waarschuwing en niet als blokkade — zie ondergrens."
+        },
+        {
+          "veld": "minimumWarningPatchVersion",
+          "waarde": "2026-03-01",
+          "reason": "OIB laat deze op de placeholder 0000-00-00 staan. Zes maanden terug per september 2026; de goedkoopste beveiligingswinst in de hele baseline."
+        }
+      ],
+      "note": "Sinds september 2026 waarschuwt deze policy bij Android onder 16.0 en bij een beveiligingspatch ouder dan 2026-03-01. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Beide waarden verouderen — draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Ze staan in `veldOverrides` omdat OIB ze leeg laat; zonder die regels draait de eerstvolgende `import-oib.js` ze stilzwijgend terug.",
       "fase": 1
     },
     {
@@ -135,7 +175,14 @@
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD.",
       "bewijs": "Root, USB-foutopsporing en installatie uit onbekende bronnen zijn de drie voorwaarden waaronder de Android-sandbox niet meer houdt wat hij belooft. Play Integrity op `hardwareBacked` is daarbij het verschil dat telt: de basisvariant is in software te vervalsen, de hardware-variant leunt op de secure element van het toestel. IntuneAdmin en UniFy zetten die op `basic`; wij houden `hardwareBacked` aan, gelijk aan wat de App Protection-policy in de baseline al eist.",
       "universeel": "Geldt voor elk ingeschreven Android-toestel. **Zelfde voorbehoud als bij iOS:** er zijn vandaag geen Android-inschrijvingen, dus deze toets doet nog niets.",
-      "note": "Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een minimale OS-versie (12.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.",
+      "note": "Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een minimale OS-versie (12.0). Die waarde veroudert: draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date. Dat rapport blokkeert niets en hoort dat ook niet te doen — verhogen is een besluit en dus een PR. Deze ondergrens is een actualiteitsdoel (zie `ondergrens`) en mag dus meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten.",
+      "ondergrens": [
+        {
+          "veld": "osMinimumVersion",
+          "soort": "actualiteitsdoel",
+          "waarom": "OIB-conventie, geen eis die uit de baseline zelf volgt: geen enkele Android-policy hierin heeft versie 12 nodig om te werken. De waarde is er om oude toestellen buiten te houden, niet om een instelling mogelijk te maken — dus mag hij meebewegen met n-1."
+        }
+      ],
       "herkomst": "intuneadmin",
       "fase": 3,
       "faseWaarom": "Wacht op de eerste Android-inschrijving. Let op: geschreven als androidWorkProfileCompliancePolicy — fully managed vraagt een tweede policy van een ander type."
@@ -175,8 +222,22 @@
       "doel": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt.",
       "bron": "OpenIntuneBaseline BYOD — iOS App Protection",
       "type": "AppProtection",
-      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt.",
+      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug.",
       "herkomst": "oib",
+      "ondergrens": [
+        {
+          "veld": "minimumWarningOsVersion",
+          "soort": "actualiteitsdoel",
+          "waarom": "App protection is de BYOD-kant: het toestel is niet van ons en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde iOS-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
+        }
+      ],
+      "veldOverrides": [
+        {
+          "veld": "minimumWarningOsVersion",
+          "waarde": "18.0",
+          "reason": "OIB laat deze leeg. n-1 voor iOS, als waarschuwing en niet als blokkade — zie ondergrens."
+        }
+      ],
       "fase": 1
     },
     {
@@ -201,7 +262,14 @@
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Baseline - iOSiPadOS - Device Health) en UniFy-Endpoint iOS BYOD.",
       "bewijs": "Op een apparaat met jailbreak is de sandbox weg waar de hele iOS-beveiliging op rust: elke app kan dan bij de gegevens van elke andere app, inclusief die van Outlook en Teams. Dit is de enige toets die dat detecteert, en zonder compliance-policy is 'vereis een compliant apparaat' in Conditional Access voor iOS een lege huls — er is geen enkele regel om aan te voldoen.",
       "universeel": "Geldt voor elke ingeschreven iPhone en iPad. **Met één voorbehoud dat je moet kennen:** vandaag is er geen enkele iOS-inschrijving — de twee mobiele policies in de baseline zijn App Protection op `unmanaged`. Deze policy doet dus niets tot er telefoons worden ingeschreven, en meldt ook niets. Hij staat hier zodat de dag dat dat gebeurt geen dag zonder toets is.",
-      "note": "Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders. Sinds september 2026 eist deze policy ook een minimale OS-versie (16.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.",
+      "note": "Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders. Sinds september 2026 eist deze policy ook een minimale OS-versie (16.0). Die waarde veroudert: draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date. Dat rapport blokkeert niets en hoort dat ook niet te doen — verhogen is een besluit en dus een PR. Deze ondergrens is een actualiteitsdoel (zie `ondergrens`) en mag dus meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten.",
+      "ondergrens": [
+        {
+          "veld": "osMinimumVersion",
+          "soort": "actualiteitsdoel",
+          "waarom": "OIB-conventie, geen eis die uit de baseline zelf volgt: geen enkele iOS-policy hierin heeft versie 16 nodig om te werken. De waarde is er om oude toestellen buiten te houden, niet om een instelling mogelijk te maken — dus mag hij meebewegen met n-1."
+        }
+      ],
       "herkomst": "intuneadmin",
       "fase": 3,
       "faseWaarom": "Wacht op de eerste iOS-inschrijving. Een compliance-policy raakt alleen een ingeschreven apparaat; vandaag is iOS uitsluitend App Protection op unmanaged."
@@ -475,7 +543,17 @@
       },
       "bewijs": "Dezelfde leemte als bij Windows, met een extra scherpe kant: de baseline zet het macOS-updatebeleid declaratief, en dat werkt pas vanaf macOS 14. Een Mac op 13 krijgt dat profiel niet, wordt dus nooit bijgewerkt, en was tot nu toe volledig compliant. Het apparaat dat het meest achterloopt was daarmee het apparaat waar niemand iets van hoorde.",
       "universeel": "Elke Mac in beheer. De ondergrens is de versie waaronder het updatebeleid van de baseline niet aankomt.",
-      "note": "**Deze waarde veroudert en moet worden nagelopen.** macOS 14 is de ondergrens omdat het updateprofiel die vraagt, niet omdat 14 nog de nieuwste is. Verhoog hem als de vloot verder is; zie de note bij de Windows-tegenhanger over het automatiseren daarvan."
+      "ondergrens": [
+        {
+          "veld": "osMinimumVersion",
+          "soort": "capaciteitsvloer",
+          "waarom": "macOS 14 is de versie die het declaratieve updatebeleid (DDM) van MAC - D - Software Updates vereist. Onder 14 komt dat profiel niet aan en staat de policy groen terwijl de instelling nooit is toegepast. Deze waarde mag dus niet meebewegen met n-1: verhogen mag pas als de vloot verder is, verlagen nooit zolang die policy DDM gebruikt.",
+          "volgtUit": [
+            "Baseline_MAC_D_Software_Updates"
+          ]
+        }
+      ],
+      "note": "**Deze waarde veroudert en moet worden nagelopen.** macOS 14 is de ondergrens omdat het updateprofiel die vraagt, niet omdat 14 nog de nieuwste is. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert niets en hoort dat ook niet te doen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 14 staat."
     },
     {
       "source": "MACOS/IntuneManagement/CompliancePolicies/MacOS - OIB - Compliance - U - Password - v1.0.json",
@@ -1962,7 +2040,19 @@
       },
       "bewijs": "Geen van de elf compliance-policies in deze baseline zette een minimale OS-versie. Een apparaat op een Windows-versie die geen beveiligingsupdates meer krijgt was daarmee volledig compliant en kwam gewoon door Conditional Access — precies het apparaat waarvoor die toets bedoeld is. De ondergrens is bovendien geen willekeurige keuze: een deel van de baseline werkt domweg niet onder 22H2, en dan is de policy groen terwijl de instelling nooit is aangekomen.",
       "universeel": "Elk Windows-apparaat. De ondergrens is de versie waaronder de baseline zichzelf niet meer kan waarmaken.",
-      "note": "**Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2; verhoog hem zodra de vloot verder is. Dat handmatig bijhouden over alle platformen is precies wat te automatiseren valt — zie de aanpak van Sander Burgerhout, die osMinimumVersion via Graph op een n-1-basislijn zet uit endoflife.date. Zolang dat er niet is: zet het in de agenda bij elke grote OS-release."
+      "ondergrens": [
+        {
+          "veld": "osMinimumVersion",
+          "soort": "capaciteitsvloer",
+          "waarom": "10.0.22621 is Windows 11 22H2, de versie waaronder de baseline zichzelf niet meer kan waarmaken: Account Lockout vraagt 22H2 met KB5053657 of 24H2, en Administrator Protection en Windows Protected Print vragen 24H2. Onder die grens is de policy groen terwijl de instelling nooit is aangekomen. Deze waarde mag dus niet meebewegen met n-1 — verhogen mag als de vloot verder is, verlagen nooit zolang die policies in de baseline zitten.",
+          "volgtUit": [
+            "Baseline_WIN_D_Account_Lockout",
+            "Baseline_WIN_D_Administrator_Protection",
+            "Baseline_WIN_D_Printing_Hardening"
+          ]
+        }
+      ],
+      "note": "**Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert bewust niets, want zodra een verouderde ondergrens de build rood maakt verhoogt iemand het getal om 'm groen te krijgen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 22H2 staat."
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Password - v3.1.json",

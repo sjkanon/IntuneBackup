@@ -277,6 +277,83 @@ function checkManifestCoverage(templates, assignments) {
   return problems;
 }
 
+/**
+ * Elke gezette OS-ondergrens hoort een regel in `ondergrens` te hebben die zegt wélke van twee
+ * soorten het is: een **capaciteitsvloer** (volgt uit een andere policy in deze baseline, die
+ * onder die versie niet werkt) of een **actualiteitsdoel** (houdt oude toestellen buiten, maar
+ * maakt niets mogelijk).
+ *
+ * Zonder dat onderscheid kan geen enkel script weten of een waarde verhoogd mág worden, en dan
+ * is er maar één veilige uitkomst: niemand raakt hem meer aan. Dat is precies hoe een
+ * ondergrens jaren op 22H2 blijft staan. Het onderscheid staat daarom in het manifest en niet
+ * in een `.md`, want alleen zo kan `check-osversion.js` het naast de gemeten afstand zetten.
+ *
+ * Een capaciteitsvloer moet bovendien zeggen wáár hij uit volgt. "Deze policy vraagt macOS 14"
+ * is te controleren; "dit is nu eenmaal de vloer" is dat niet, en vervalt stilzwijgend zodra
+ * de policy die het vroeg uit de baseline verdwijnt.
+ *
+ * Tot slot moeten `veldOverrides` en het template het eens zijn. Lopen die uit elkaar, dan is
+ * óf het template met de hand aangepast zonder het manifest bij te werken, óf het manifest
+ * zonder opnieuw te importeren — en in beide gevallen wint de eerstvolgende import van een
+ * waarde die niemand meer verwacht.
+ */
+const ONDERGRENS_SOORTEN = new Set(["capaciteitsvloer", "actualiteitsdoel"]);
+
+function checkOndergrens(templates) {
+  if (!fs.existsSync(MANIFEST_PATH)) return [];
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+  const byTarget = new Map((manifest.policies || []).map((p) => [p.target, p]));
+  const known = new Set(templates.map((t) => t.baseName));
+  const problems = [];
+
+  for (const t of templates) {
+    const entry = byTarget.get(t.baseName);
+    if (!entry) continue; // checkManifestCoverage meldt een ontbrekende regel al.
+
+    const floors = versionFloors(t.raw);
+    const rules = entry.ondergrens || [];
+    const byVeld = new Map(rules.map((r) => [r.veld, r]));
+
+    for (const { veld, waarde } of floors) {
+      const rule = byVeld.get(veld);
+      if (!rule) {
+        problems.push(`_manifest.json: ${t.baseName} zet ${veld} op "${waarde}" zonder regel in "ondergrens" — dan kan geen script weten of die waarde verhoogd mag worden`);
+        continue;
+      }
+      if (!ONDERGRENS_SOORTEN.has(rule.soort)) {
+        problems.push(`_manifest.json: ${t.baseName}, ondergrens ${veld}: soort "${rule.soort}" is onbekend — verwacht ${[...ONDERGRENS_SOORTEN].join(" of ")}`);
+      }
+      if (!rule.waarom) problems.push(`_manifest.json: ${t.baseName}, ondergrens ${veld}: geen "waarom"`);
+      if (rule.soort === "capaciteitsvloer") {
+        const volgtUit = rule.volgtUit || [];
+        if (volgtUit.length === 0) {
+          problems.push(`_manifest.json: ${t.baseName}, ondergrens ${veld}: capaciteitsvloer zonder "volgtUit" — dan is niet na te gaan welke policy die vloer nodig heeft`);
+        }
+        for (const target of volgtUit) {
+          if (!known.has(target)) problems.push(`_manifest.json: ${t.baseName}, ondergrens ${veld}: "volgtUit" noemt ${target}, maar dat template bestaat niet`);
+        }
+      }
+    }
+
+    const gezet = new Set(floors.map((f) => f.veld));
+    for (const rule of rules) {
+      if (!gezet.has(rule.veld)) {
+        problems.push(`_manifest.json: ${t.baseName} heeft een "ondergrens"-regel voor ${rule.veld}, maar dat veld staat niet op een waarde — regel weghalen of het veld invullen`);
+      }
+    }
+
+    for (const ov of entry.veldOverrides || []) {
+      if (!ov.reason) problems.push(`_manifest.json: ${t.baseName}, veldOverride ${ov.veld}: geen "reason"`);
+      if (!(ov.veld in t.raw)) {
+        problems.push(`_manifest.json: ${t.baseName}, veldOverride ${ov.veld}: dat veld staat niet in het template`);
+      } else if (JSON.stringify(t.raw[ov.veld]) !== JSON.stringify(ov.waarde)) {
+        problems.push(`_manifest.json: ${t.baseName}, veldOverride ${ov.veld}: manifest zegt ${JSON.stringify(ov.waarde)}, template zegt ${JSON.stringify(t.raw[ov.veld])} — de eerstvolgende import zet het manifest door`);
+      }
+    }
+  }
+  return problems;
+}
+
 function main() {
   const reportOnly = process.argv.includes("--report");
 
@@ -311,7 +388,7 @@ function main() {
 
   const { conflicts, duplicates, shared } = findOverlaps(results, assignments);
   const failing = results.filter((r) => r.problems.length > 0);
-  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments)];
+  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments), ...checkOndergrens(templates)];
 
   if (failing.length > 0) {
     console.log(`\n${failing.length} van ${results.length} policies hebben werk openstaan:\n`);
