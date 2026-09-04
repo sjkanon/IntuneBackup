@@ -321,6 +321,11 @@ const CHECK_NUMBERS = {
   Baseline_WIN_U_AI_Usage_Control_Permitted: 149,
   // Hoort bij Windows AI Permitted: als Recall aan mag, dan in elk geval begrensd.
   Baseline_WIN_D_Windows_AI_Recall_Boundaries: 150,
+
+  // Geen enkele compliance-policy zette een minimale OS-versie: een apparaat op een versie
+  // zonder beveiligingsupdates was daarmee volledig compliant.
+  Baseline_MAC_U_Compliance_OS_Version: 151,
+  Baseline_WIN_U_Compliance_OS_Version: 152,
 };
 
 /**

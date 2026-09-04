@@ -135,7 +135,7 @@
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD.",
       "bewijs": "Root, USB-foutopsporing en installatie uit onbekende bronnen zijn de drie voorwaarden waaronder de Android-sandbox niet meer houdt wat hij belooft. Play Integrity op `hardwareBacked` is daarbij het verschil dat telt: de basisvariant is in software te vervalsen, de hardware-variant leunt op de secure element van het toestel. IntuneAdmin en UniFy zetten die op `basic`; wij houden `hardwareBacked` aan, gelijk aan wat de App Protection-policy in de baseline al eist.",
       "universeel": "Geldt voor elk ingeschreven Android-toestel. **Zelfde voorbehoud als bij iOS:** er zijn vandaag geen Android-inschrijvingen, dus deze toets doet nog niets.",
-      "note": "Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst.",
+      "note": "Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een minimale OS-versie (12.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.",
       "herkomst": "intuneadmin",
       "fase": 3,
       "faseWaarom": "Wacht op de eerste Android-inschrijving. Let op: geschreven als androidWorkProfileCompliancePolicy — fully managed vraagt een tweede policy van een ander type."
@@ -201,7 +201,7 @@
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Baseline - iOSiPadOS - Device Health) en UniFy-Endpoint iOS BYOD.",
       "bewijs": "Op een apparaat met jailbreak is de sandbox weg waar de hele iOS-beveiliging op rust: elke app kan dan bij de gegevens van elke andere app, inclusief die van Outlook en Teams. Dit is de enige toets die dat detecteert, en zonder compliance-policy is 'vereis een compliant apparaat' in Conditional Access voor iOS een lege huls — er is geen enkele regel om aan te voldoen.",
       "universeel": "Geldt voor elke ingeschreven iPhone en iPad. **Met één voorbehoud dat je moet kennen:** vandaag is er geen enkele iOS-inschrijving — de twee mobiele policies in de baseline zijn App Protection op `unmanaged`. Deze policy doet dus niets tot er telefoons worden ingeschreven, en meldt ook niets. Hij staat hier zodat de dag dat dat gebeurt geen dag zonder toets is.",
-      "note": "Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders.",
+      "note": "Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders. Sinds september 2026 eist deze policy ook een minimale OS-versie (16.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.",
       "herkomst": "intuneadmin",
       "fase": 3,
       "faseWaarom": "Wacht op de eerste iOS-inschrijving. Een compliance-policy raakt alleen een ingeschreven apparaat; vandaag is iOS uitsluitend App Protection op unmanaged."
@@ -449,6 +449,33 @@
       "type": "deviceCompliancePolicies",
       "herkomst": "oib",
       "fase": 1
+    },
+    {
+      "target": "Baseline_MAC_U_Compliance_OS_Version",
+      "displayName": "[Baseline] - MAC - U - Compliance OS Version",
+      "doel": "Toetst of de Mac op macOS 14 of hoger draait — de versie die het declaratieve updatebeleid van de baseline vereist.",
+      "bron": "Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — MAC - D - Software Updates gebruikt declaratief updatebeleid (DDM) en dat vraagt macOS 14",
+      "herkomst": "eigen",
+      "toewijzingTekst": "geen — fase 2",
+      "fase": 2,
+      "faseWaarom": "Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur.",
+      "controls": {
+        "iso": [
+          "A.8.8 Beheer van technische kwetsbaarheden",
+          "A.8.19 Installatie van software op operationele systemen"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving en onderhoud"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP11",
+          "ISMP14"
+        ]
+      },
+      "bewijs": "Dezelfde leemte als bij Windows, met een extra scherpe kant: de baseline zet het macOS-updatebeleid declaratief, en dat werkt pas vanaf macOS 14. Een Mac op 13 krijgt dat profiel niet, wordt dus nooit bijgewerkt, en was tot nu toe volledig compliant. Het apparaat dat het meest achterloopt was daarmee het apparaat waar niemand iets van hoorde.",
+      "universeel": "Elke Mac in beheer. De ondergrens is de versie waaronder het updatebeleid van de baseline niet aankomt.",
+      "note": "**Deze waarde veroudert en moet worden nagelopen.** macOS 14 is de ondergrens omdat het updateprofiel die vraagt, niet omdat 14 nog de nieuwste is. Verhoog hem als de vloot verder is; zie de note bij de Windows-tegenhanger over het automatiseren daarvan."
     },
     {
       "source": "MACOS/IntuneManagement/CompliancePolicies/MacOS - OIB - Compliance - U - Password - v1.0.json",
@@ -1879,6 +1906,35 @@
       "type": "deviceCompliancePolicies",
       "herkomst": "oib",
       "fase": 1
+    },
+    {
+      "target": "Baseline_WIN_U_Compliance_OS_Version",
+      "displayName": "[Baseline] - WIN - U - Compliance OS Version",
+      "doel": "Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan uitvoeren: minimaal Windows 11 22H2.",
+      "bron": "Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — Account Lockout vraagt 22H2 met KB5053657 of 24H2, Administrator Protection en Windows Protected Print vragen 24H2",
+      "herkomst": "eigen",
+      "toewijzingTekst": "geen — fase 2",
+      "fase": 2,
+      "faseWaarom": "Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur.",
+      "controls": {
+        "iso": [
+          "A.8.8 Beheer van technische kwetsbaarheden",
+          "A.8.19 Installatie van software op operationele systemen",
+          "A.8.32 Wijzigingsbeheer"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving en onderhoud",
+          "art. 21(2)(f) beoordeling van de doeltreffendheid"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP11",
+          "ISMP14"
+        ]
+      },
+      "bewijs": "Geen van de elf compliance-policies in deze baseline zette een minimale OS-versie. Een apparaat op een Windows-versie die geen beveiligingsupdates meer krijgt was daarmee volledig compliant en kwam gewoon door Conditional Access — precies het apparaat waarvoor die toets bedoeld is. De ondergrens is bovendien geen willekeurige keuze: een deel van de baseline werkt domweg niet onder 22H2, en dan is de policy groen terwijl de instelling nooit is aangekomen.",
+      "universeel": "Elk Windows-apparaat. De ondergrens is de versie waaronder de baseline zichzelf niet meer kan waarmaken.",
+      "note": "**Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2; verhoog hem zodra de vloot verder is. Dat handmatig bijhouden over alle platformen is precies wat te automatiseren valt — zie de aanpak van Sander Burgerhout, die osMinimumVersion via Graph op een n-1-basislijn zet uit endoflife.date. Zolang dat er niet is: zet het in de agenda bij elke grote OS-release."
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Password - v3.1.json",

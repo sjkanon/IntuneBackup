@@ -43,11 +43,25 @@ Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/R
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).
 
-Twee soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
+Drie soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
 `IntuneTemplate/`, elk met een eigen README: de macOS ADE-enrollmentprofielen in
-[`enrollment/macos/`](enrollment/macos/README.md) en de macOS-shellscripts in
-[`shellscripts/macos/`](shellscripts/macos/README.md). Die worden door géén van de pijplijnen
-opgepikt en hebben geen `checkId`.
+[`enrollment/macos/`](enrollment/macos/README.md), de macOS-shellscripts in
+[`shellscripts/macos/`](shellscripts/macos/README.md) en de aangepaste compliance-check voor
+Defender op macOS in [`compliance/macos/`](compliance/macos/README.md). Die worden door géén van
+de pijplijnen opgepikt en hebben geen `checkId`.
+
+## Twee tenantinstellingen die geen policy zijn
+
+De baseline kan ze niet zetten en `check-scope.js` ziet ze niet, maar zonder deze twee doet een
+deel van de rest niets. Zet ze vóór je gaat toewijzen.
+
+| Instelling | Waar | Waarom |
+|---|---|---|
+| **Apparaten zonder toegewezen compliancebeleid markeren als → Niet-compliant** | Intune → Apparaten → Compliancebeleid → Nalevingsbeleidsinstellingen | Staat standaard op *Compliant*. Een apparaat dat door een filter, een uitsluitingsgroep of een ontbrekende primaire gebruiker buiten élke toewijzing valt, telt dan als compliant en komt gewoon door Conditional Access. De compliance-policies in deze baseline zeggen daar niets over — die worden pas geëvalueerd als er één is toegewezen. Zie [Rozemuller](https://rozemuller.com/why-does-this-intune-device-have-no-compliance-policy-assigned/). |
+| **Defender for Endpoint-connector** | Intune → Endpoint Security → Microsoft Defender for Endpoint | `WIN - U - Compliance Defender for Endpoint` toetst de risicoscore uit Defender. Zonder werkende connector komt die score nooit binnen en is de toets stil zonder oordeel. |
+
+Op macOS is de Defender-kant een derde geval: die toets bestaat niet als instelling en vraagt een
+script — zie [`compliance/macos/`](compliance/macos/README.md).
 
 Naast elk template staat een markdown met **élke instelling die die policy zet** — bijvoorbeeld
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).

@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Drie Assen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Literata:opsz,wght@7..72,400;7..72,600&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F1F2EF; --surface:#FFFFFF; --sunk:#E6E8E3; --rise:#F8F9F6;
+  --ink:#14171A; --body:#2B3136; --muted:#5C666D; --faint:#8C959B;
+  --line:#D6D9D3; --hair:#E6E8E4;
+  --slate:#3E4C59;
+  --crit:#96262B; --crit-bg:#F3E3E3;
+  --warn:#82550F; --warn-bg:#F5EBD9;
+  --ok:#2C6647; --ok-bg:#E0EBE3;
+  --nil:#5C666D; --nil-bg:#E7E9E5;
+  --f-d:"Instrument Serif",Georgia,serif;
+  --f-b:"Literata",Georgia,serif;
+  --f-u:"Public Sans",-apple-system,"Segoe UI",sans-serif;
+  --f-m:ui-monospace,"SFMono-Regular",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#101315; --surface:#181C1F; --sunk:#13181A; --rise:#1E2327;
+    --ink:#EDEFEC; --body:#C6CDD1; --muted:#8E999F; --faint:#6D787E;
+    --line:#2B3237; --hair:#212830;
+    --slate:#9BB0C2;
+    --crit:#E08A8D; --crit-bg:#2C1919;
+    --warn:#D5A257; --warn-bg:#2A2214;
+    --ok:#78BE97; --ok-bg:#16281E;
+    --nil:#8E999F; --nil-bg:#1D2327;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101315; --surface:#181C1F; --sunk:#13181A; --rise:#1E2327;
+  --ink:#EDEFEC; --body:#C6CDD1; --muted:#8E999F; --faint:#6D787E;
+  --line:#2B3237; --hair:#212830;
+  --slate:#9BB0C2;
+  --crit:#E08A8D; --crit-bg:#2C1919;
+  --warn:#D5A257; --warn-bg:#2A2214;
+  --ok:#78BE97; --ok-bg:#16281E;
+  --nil:#8E999F; --nil-bg:#1D2327;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;padding:0 22px 90px;background:var(--paper);color:var(--body);
+  font-family:var(--f-b);font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.pg{max-width:1100px;margin:0 auto}
+.col{max-width:690px}
+h1,h2,h3,h4{margin:0;color:var(--ink);line-height:1.16;text-wrap:balance}
+p{margin:0}
+a{color:var(--slate)}
+code{font-family:var(--f-m);font-size:.82em}
+b,strong{font-weight:600;color:var(--ink)}
+em.i{font-style:italic}
+
+/* masthead */
+.mh{padding:58px 0 0}
+.kick{font-family:var(--f-u);font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.mh h1{font-family:var(--f-d);font-weight:400;font-size:clamp(46px,8.5vw,88px);
+  letter-spacing:-.015em;max-width:12ch}
+.mh .sub{font-size:19px;color:var(--muted);margin-top:22px;max-width:58ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:26px;padding-top:18px;
+  border-top:1px solid var(--line);font-family:var(--f-u);font-size:12.5px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600}
+.rule{height:2px;background:var(--ink);margin:40px 0 46px}
+
+/* axes diagram */
+.axes{background:var(--surface);border:1px solid var(--line);padding:28px 24px 22px;margin-bottom:14px}
+.axes svg{display:block;width:100%;height:auto;max-width:820px;margin:0 auto}
+.axcap{font-family:var(--f-u);font-size:13px;color:var(--muted);text-align:center;
+  margin-top:16px;max-width:64ch;margin-left:auto;margin-right:auto;line-height:1.55}
+
+/* axis cards */
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-bottom:54px}
+.ax{background:var(--surface);padding:20px}
+.ax .n{font-family:var(--f-u);font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint)}
+.ax h3{font-family:var(--f-u);font-size:16px;font-weight:600;margin:9px 0 10px}
+.ax .v{font-family:var(--f-d);font-size:40px;line-height:1;color:var(--ink);margin-bottom:9px}
+.ax .v small{font-family:var(--f-u);font-size:15px;color:var(--muted)}
+.ax p{font-family:var(--f-u);font-size:13.5px;color:var(--muted);line-height:1.5}
+.ax.good .v{color:var(--ok)} .ax.bad .v{color:var(--crit)} .ax.mid .v{color:var(--warn)}
+
+/* sections */
+section{margin-bottom:66px;scroll-margin-top:20px}
+.eye{font-family:var(--f-u);font-size:11px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--slate)}
+section>h2{font-family:var(--f-d);font-weight:400;font-size:clamp(28px,4vw,40px);
+  letter-spacing:-.01em;margin:10px 0 0;max-width:22ch}
+.dek{color:var(--muted);font-size:16.5px;margin-top:13px;max-width:64ch}
+.hr{height:1px;background:var(--line);margin:22px 0 30px}
+.stack{display:flex;flex-direction:column;gap:18px;max-width:690px}
+h3.sh{font-family:var(--f-u);font-size:18px;font-weight:600;margin:36px 0 4px}
+h3.sh+.hr{margin:14px 0 20px}
+
+/* sticky section nav */
+nav.toc{position:sticky;top:0;z-index:20;background:var(--paper);
+  border-bottom:1px solid var(--line);margin:0 -22px 44px;padding:0 22px}
+nav.toc ol{display:flex;flex-wrap:wrap;gap:0 4px;list-style:none;margin:0;padding:0;
+  max-width:1100px;margin-inline:auto}
+nav.toc a{display:inline-block;font-family:var(--f-u);font-size:12.5px;font-weight:500;
+  color:var(--muted);text-decoration:none;padding:12px 10px;border-bottom:2px solid transparent}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--slate)}
+nav.toc a b{font-family:var(--f-m);font-size:11px;color:var(--faint);margin-right:6px}
+nav.toc a:hover b{color:var(--slate)}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--f-u);font-size:13.5px}
+th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--faint);padding:11px 13px;border-bottom:1px solid var(--line);white-space:nowrap;
+  position:sticky;top:44px;background:var(--surface);z-index:2}
+td{padding:10px 13px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:0}
+tbody tr.grp td{background:var(--sunk);font-weight:600;color:var(--ink);
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:8px 13px}
+td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mono{font-family:var(--f-m);font-size:12.5px;color:var(--ink)}
+
+.st{display:inline-block;font-family:var(--f-u);font-size:10px;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap}
+.st.ok{background:var(--ok-bg);color:var(--ok)}
+.st.no{background:var(--crit-bg);color:var(--crit)}
+.st.pt{background:var(--warn-bg);color:var(--warn)}
+.st.nil{background:var(--nil-bg);color:var(--nil)}
+
+/* findings */
+.f{border:1px solid var(--line);background:var(--surface);border-left:3px solid var(--sv);
+  padding:19px 21px;--sv:var(--nil);margin-bottom:15px}
+.f.c{--sv:var(--crit)} .f.w{--sv:var(--warn)} .f.m{--sv:var(--slate)}
+.f header{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:10px}
+.f .k{font-family:var(--f-m);font-size:12px;color:var(--sv);font-weight:600}
+.f h3{font-family:var(--f-u);font-size:17.5px;font-weight:600;flex:1 1 260px}
+.f p{margin-bottom:10px;max-width:66ch}
+.f p:last-child{margin-bottom:0}
+.ev{font-family:var(--f-m);font-size:12px;line-height:1.7;background:var(--sunk);
+  padding:11px 13px;overflow-x:auto;white-space:pre;border-left:2px solid var(--line);margin:12px 0}
+
+/* plan */
+.plan{display:flex;flex-direction:column;gap:2px}
+.pi{display:grid;grid-template-columns:52px 1fr;gap:16px;background:var(--surface);
+  border:1px solid var(--line);padding:15px 18px;align-items:start;border-left-width:3px;
+  border-left-style:solid;border-left-color:var(--pc,var(--line))}
+.pi.now{--pc:var(--crit)} .pi.pre{--pc:var(--warn)} .pi.roll{--pc:var(--ok)} .pi.own{--pc:var(--slate)}
+.pi .k{font-family:var(--f-d);font-size:26px;color:var(--pc);line-height:1;padding-top:2px}
+.pi h4{font-family:var(--f-u);font-size:16px;font-weight:600;margin-bottom:5px}
+.pi p{font-family:var(--f-u);font-size:14px;color:var(--muted);line-height:1.5}
+.pi .who{font-family:var(--f-u);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--faint);margin-top:7px}
+.key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:16px;font-family:var(--f-u);
+  font-size:12.5px;color:var(--muted)}
+.key i{display:inline-block;width:3px;height:12px;margin-right:7px;vertical-align:-1px}
+
+.note{font-family:var(--f-u);font-size:14px;color:var(--muted);line-height:1.6;max-width:70ch}
+.note b{color:var(--ink)}
+ul{margin:0;padding-left:20px} li{margin-bottom:8px} li::marker{color:var(--slate)}
+footer{border-top:2px solid var(--ink);padding-top:22px;font-family:var(--f-u);
+  font-size:13px;color:var(--muted);max-width:76ch}
+
+@media (max-width:620px){
+  body{font-size:15.5px;padding:0 14px 60px}
+  .mh{padding-top:32px}
+  .pi{grid-template-columns:1fr;gap:6px}
+  nav.toc{margin-inline:-14px;padding-inline:14px}
+  nav.toc ol{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  th{position:static}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* print — dit rapport gaat naar een auditdossier */
+@media print{
+  :root{--paper:#fff;--surface:#fff;--sunk:#f4f4f2;--rise:#fafaf8;
+        --ink:#000;--body:#1a1a1a;--muted:#444;--faint:#666;--line:#999;--hair:#ccc}
+  body{font-size:10.5pt;padding:0;background:#fff;color:#000}
+  nav.toc{display:none}
+  th{position:static}
+  .mh{padding-top:0}
+  .mh h1{font-size:34pt}
+  section{margin-bottom:24pt;page-break-inside:auto}
+  section>h2{font-size:19pt;page-break-after:avoid}
+  h3.sh{page-break-after:avoid}
+  .f,.pi,.ax,.ct{page-break-inside:avoid}
+  .tw{overflow:visible;border:1px solid #999}
+  table{font-size:8.5pt}
+  thead{display:table-header-group}
+  tr{page-break-inside:avoid}
+  .trio,.counts{page-break-inside:avoid}
+  a{color:#000;text-decoration:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:7.5pt;color:#555}
+  footer{page-break-before:avoid}
+}
+</style>
+</head>
+<body>
+<div class="pg">
+
+<header class="mh">
+  <div class="kick">Volledig rapport · FlyingGroup · 3 september 2026</div>
+  <h1>Drie assen</h1>
+  <p class="sub">Een baseline kan op drie manieren tekortschieten: hij kan onvolledig zijn,
+  hij kan het verkeerde afdwingen, of hij kan gewoon niet uitgerold zijn. Dit rapport meet
+  alle drie — en laat zien dat alleen de derde het echte probleem is.</p>
+  <div class="meta">
+    <span>Tenant · <b>flyinggroup.aero</b>, CIPP-backup 2 september 2026</span>
+    <span>Baselines · <b>IntuneTemplate</b> 138 · <b>CATemplate</b> 33</span>
+    <span>Beleid · <b>24 ISMS-documenten</b>, rev. 1, 11 mei 2026</span>
+  </div>
+  <div class="rule"></div>
+</header>
+
+<nav class="toc" aria-label="Secties">
+  <ol>
+    <li><a href="#actief"><b>00</b>Nulmeting</a></li>
+    <li><a href="#as1"><b>01</b>Compleet?</a></li>
+    <li><a href="#as2"><b>02</b>Het juiste?</a></li>
+    <li><a href="#as3"><b>03</b>Uitgerold?</a></li>
+    <li><a href="#verbeteren"><b>04</b>Wat kan beter</a></li>
+    <li><a href="#niemand"><b>05</b>Buiten bereik</a></li>
+    <li><a href="#plan"><b>06</b>Plan</a></li>
+  </ol>
+</nav>
+
+<div class="axes">
+<svg viewBox="0 0 820 210" role="img" aria-label="Drie assen: standaarden naar baseline, ISMS-beleid naar baseline, en baseline naar tenant">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.3" color="#8C959B">
+    <path d="M196,52 H320" marker-end="url(#ar)"/>
+    <path d="M196,158 H320" marker-end="url(#ar)"/>
+    <path d="M500,105 H624" marker-end="url(#ar)"/>
+  </g>
+  <g font-family="Public Sans,sans-serif">
+    <!-- left boxes -->
+    <rect x="8" y="24" width="188" height="56" fill="none" stroke="#D6D9D3" stroke-width="1"/>
+    <text x="102" y="47" text-anchor="middle" font-size="13" font-weight="600" fill="#14171A">Externe standaarden</text>
+    <text x="102" y="66" text-anchor="middle" font-size="11" fill="#5C666D">MCSB · CIS · OIB · IntuneAdmin</text>
+
+    <rect x="8" y="130" width="188" height="56" fill="none" stroke="#D6D9D3" stroke-width="1"/>
+    <text x="102" y="153" text-anchor="middle" font-size="13" font-weight="600" fill="#14171A">ISMS-beleid</text>
+    <text x="102" y="172" text-anchor="middle" font-size="11" fill="#5C666D">24 documenten, ISMP/ISDP</text>
+
+    <!-- centre -->
+    <rect x="324" y="52" width="176" height="106" fill="none" stroke="#14171A" stroke-width="2"/>
+    <text x="412" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#14171A">De baseline</text>
+    <text x="412" y="112" text-anchor="middle" font-size="11" fill="#5C666D">IntuneTemplate 138</text>
+    <text x="412" y="128" text-anchor="middle" font-size="11" fill="#5C666D">CATemplate 33</text>
+
+    <!-- right -->
+    <rect x="628" y="52" width="184" height="106" fill="none" stroke="#D6D9D3" stroke-width="1"/>
+    <text x="720" y="90" text-anchor="middle" font-size="14" font-weight="600" fill="#14171A">De tenant</text>
+    <text x="720" y="112" text-anchor="middle" font-size="11" fill="#5C666D">38 Intune-policies</text>
+    <text x="720" y="128" text-anchor="middle" font-size="11" fill="#5C666D">16 CA-policies</text>
+
+    <!-- axis labels -->
+    <text x="258" y="44" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3E4C59" letter-spacing="1">AS 1</text>
+    <text x="258" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3E4C59" letter-spacing="1">AS 2</text>
+    <text x="562" y="97" text-anchor="middle" font-size="10.5" font-weight="700" fill="#3E4C59" letter-spacing="1">AS 3</text>
+    <text x="258" y="72" text-anchor="middle" font-size="10.5" fill="#8C959B">compleet?</text>
+    <text x="258" y="178" text-anchor="middle" font-size="10.5" fill="#8C959B">het juiste?</text>
+    <text x="562" y="125" text-anchor="middle" font-size="10.5" fill="#8C959B">uitgerold?</text>
+  </g>
+</svg>
+<p class="axcap">As 1 en 2 toetsen de baseline zelf; as 3 toetst de tenant. De eerste twee
+zijn in orde, de derde niet. Dat onderscheid bepaalt waar het werk zit — en waar níét.</p>
+</div>
+
+<div class="trio">
+  <div class="ax good">
+    <div class="n">As 1 — compleet?</div>
+    <h3>Baseline tegen externe standaarden</h3>
+    <div class="v">2<small> openstaand</small></div>
+    <p>Intune: 509 kandidaten uit IntuneAdmin teruggebracht tot 14, alle verwerkt.
+    CA: 14 van 15 kandidaten gebouwd. Wat rest zijn twee CA-templates.</p>
+  </div>
+  <div class="ax mid">
+    <div class="n">As 2 — het juiste?</div>
+    <h3>Baseline tegen het ISMS-beleid</h3>
+    <div class="v">4<small> gaten · 2 afwijkingen</small></div>
+    <p>Van de 41 technisch afdwingbare eisen dekt de baseline er 35. Eén afwijking is
+    strenger dan het beleid, één zwakker. Elf eisen kan geen endpointbaseline dekken.</p>
+  </div>
+  <div class="ax bad">
+    <div class="n">As 3 — uitgerold?</div>
+    <h3>Tenant tegen de baseline</h3>
+    <div class="v">4,2<small>%</small></div>
+    <p>82 van 1.967 Intune-instellingen; 3 van 33 CA-policies afgedwongen. Hier zit
+    het volledige probleem.</p>
+  </div>
+</div>
+
+<section id="actief">
+  <div class="eye">Nulmeting</div>
+  <h2>Wat beschermt de tenant vandaag?</h2>
+  <p class="dek">Vóór elke gapanalyse: wat staat er nú, en werkt het? Voor Conditional Access
+  is dat hard te zeggen — <code>state</code> zit in de backup. Voor Intune niet: de backup
+  bevat geen toewijzingen, behalve bij app protection.</p>
+  <div class="hr"></div>
+
+  <h3 class="sh">Conditional Access — 9 van 16 staan aan, 7 doen werk</h3>
+  <div class="hr"></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Policy</th><th>State</th><th>Wat het vandaag doet</th></tr></thead>
+      <tbody>
+        <tr><td><b>Default MFA Policy</b></td><td><span class="st ok">actief</span></td><td>MFA voor alle gebruikers — <b>behalve</b> vanaf de 7 vertrouwde locaties en behalve de groep <code>FYG-MFA-OFF</code>. Sessie 30 dagen.</td></tr>
+        <tr><td><b>MFA - Directory Roles</b></td><td><span class="st ok">actief</span></td><td>MFA op 10 beheerdersrollen, overal behalve de AVD-gateway.</td></tr>
+        <tr><td><b>Microsoft-managed: MFA admin portals</b></td><td><span class="st ok">actief</span></td><td>MFA op de beheerportalen voor 14 rollen.</td></tr>
+        <tr><td><b>Blocked countries</b></td><td><span class="st ok">actief</span></td><td>Blokkeert 20 landen. Onbekende landen <b>niet</b> meegerekend.</td></tr>
+        <tr><td><b>05-01 | MDM | Mobile Apps</b></td><td><span class="st ok">actief</span></td><td>Compliant apparaat vereist — maar alleen voor de groep <code>FYG-MFA-MOBILE-APP-MDM</code>.</td></tr>
+        <tr><td><b>06 -02 | Allow Personal Devices</b></td><td><span class="st ok">actief</span></td><td>Groep <code>FYG-D-BYOD</code> bij alle apps op alleen MFA, sessie 3 uur.</td></tr>
+        <tr><td><b>MFA op AVD verplicht</b></td><td><span class="st ok">actief</span></td><td>MFA + geen persistente browser voor <code>FYG-U-AVD-FIN</code> op de AVD-gateway.</td></tr>
+        <tr><td><b>Exchange ActiveSync-OFF</b></td><td><span class="st no">schijn</span></td><td>Staat aan, maar <code>includeApplications: ["None"]</code> — grijpt op geen enkele applicatie aan.</td></tr>
+        <tr><td><b>06 -01 | Block Personal Devices</b></td><td><span class="st no">schijn</span></td><td>Staat aan, maar <code>includeUsers: ["Itce OPS"]</code> — geldt voor één account van de 908.</td></tr>
+        <tr><td colspan="3" style="color:var(--muted)"><b>6 policies op report-only:</b> 00-01 landenblokkade · 00-02 legacy auth · 02-01 en 02-02 geografisch gelaagde MFA · 03-01 SMTP · 05-02 mobiel. Ze rapporteren, ze dwingen niets af.<br><b>1 policy uit:</b> Microsoft-managed per-user MFA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="f c" style="margin-top:22px">
+    <header><span class="k">!</span><h3>MFA geldt niet op zes klantlocaties en op AVD</h3></header>
+    <p>De zeven named locations van de tenant staan alle zeven op <code>isTrusted: true</code>,
+    en <b>Default MFA Policy</b> sluit <code>AllTrusted</code> uit. Vanaf ANR-HQ, BRU landside
+    en airside, KTK, LUX, Malta, AirBP en de AVD NAT-gateway is de tenantbrede MFA-eis dus niet
+    van kracht — bovenop de uitzondering voor de groep <code>FYG-MFA-OFF</code>.</p>
+    <p>Dat is een verdedigbare keuze voor een kantoornetwerk, maar het is er geen die ergens is
+    vastgelegd, en hij stapelt: wie op een klantlocatie zit én in <code>FYG-MFA-OFF</code>,
+    heeft geen enkele MFA-eis. <b>ISMP.02</b> eist MFA voor toegang tot aviation-critical en
+    remote systemen zonder locatie-uitzondering te noemen.</p>
+  </div>
+
+  <div class="f w" style="margin-top:15px">
+    <header><span class="k">!</span><h3>De landenblokkade laat onbekende herkomst door — en blokkeert Taiwan en Israël</h3></header>
+    <p><code>Countries-Blocked (Bad Countries)</code> telt 20 landen: <span class="mono">AF CN
+    CO ET HK IL IQ IR KH NE NP RU SD SY TW UG XK YE ZM ZW</span>. Twee dingen vallen op.</p>
+    <p><b>Onbekende landen worden niet meegerekend</b>
+    (<code>includeUnknownCountriesAndRegions: false</code>). Een aanmelding vanaf een IP dat
+    Entra niet aan een land kan koppelen — precies wat een anonimiserende proxy oplevert —
+    passeert deze blokkade.</p>
+    <p><b>TW en IL staan op de lijst.</b> Voor een zakelijke luchtvaartoperatie met
+    internationale klandizie is dat waarschijnlijk niet bedoeld; ze staan tussen landen die om
+    een heel andere reden geblokkeerd zijn. Controleren en onderbouwen, of eruit halen.</p>
+  </div>
+
+  <h3 class="sh">Intune — wat er staat, met de toewijzing als onbekende</h3>
+  <div class="hr"></div>
+  <p class="note" style="margin-bottom:20px">Voor de 28 configuratie- en 4 compliancepolicies
+  bevat de backup geen toewijzing. Ze bestaan; of ze op apparaten landen is hiermee niet vast
+  te stellen. <b>Dit is de eerste vraag om in de portal te beantwoorden</b> — een policy zonder
+  toewijzing doet niets, en de lijst hieronder ziet er dan heel anders uit.</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Wat er actief kán zijn</th><th>Waar het vandaan komt</th><th>Oordeel</th></tr></thead>
+      <tbody>
+        <tr><td><b>Attack Surface Reduction</b> — 16 regels op <em class="i">block</em></td><td>FYG-SecurityRestrictions</td><td><span class="st ok">strenger dan onze baseline</span></td></tr>
+        <tr><td><b>Tamper Protection</b></td><td>FYG-TamperProtection</td><td><span class="st ok">dekt ISMP.11</span></td></tr>
+        <tr><td><b>Defender Antivirus</b> — 21 instellingen</td><td>FYG - GEN - Microsoft Defender Antivirus</td><td><span class="st pt">dreigingen op <code>userdefined</code></span></td></tr>
+        <tr><td><b>BitLocker</b> — 3 instellingen</td><td>FYG-BitLocker_Policy</td><td><span class="st pt">geen escrow-eis, geen methodekeuze</span></td></tr>
+        <tr><td><b>Windows LAPS</b> — 12 tekens, rotatie 7 dagen</td><td>9. FYG - GEN - Windows LAPS</td><td><span class="st no">ondergraven door het OMA-URI-profiel</span></td></tr>
+        <tr><td><b>Defender for Endpoint</b> — onboarding</td><td>FYG - GEN - Default EDR policy</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td><b>Credential Guard</b> — aan, zonder UEFI-lock</td><td>FYG-SecurityRestrictions</td><td><span class="st pt">baseline eist lock</span></td></tr>
+        <tr><td><b>Windows Update</b> — deferral 5, deadline 7, grace 7</td><td>FYG Windows Update Policy</td><td><span class="st no">tot 19 dagen; ISMP.21 eist 7</span></td></tr>
+        <tr><td><b>Windows Hello</b> — PIN 6–8, geen TPM vereist</td><td>FYG-D Windows Hello **</td><td><span class="st pt">zwakker dan de baseline</span></td></tr>
+        <tr><td><b>Compliance Windows</b> — BitLocker, Defender, RTP</td><td>Windows 10 Default Policy</td><td><span class="st ok">het enige platform met versleutelingseis</span></td></tr>
+        <tr><td><b>Compliance iOS / Android / macOS</b></td><td>3 policies</td><td><span class="st no">geen versleuteling, geen toegangscode</span></td></tr>
+        <tr><td><b>App protection</b> — 5 van 6 toegewezen</td><td><code>isAssigned</code> staat wél in de backup</td><td><span class="st pt">defaults laten data naar privéapps</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:16px"><b>Eén app protection-policy is niet toegewezen:</b>
+  <em class="i">Outlook app Android policies</em> (<code>isAssigned: false</code>). Hij staat er
+  wel, doet niets, en overlapt inhoudelijk met de twee die wél zijn toegewezen. Opruimen of
+  toewijzen — nu is het onduidelijk welke van de drie Android-policies de bedoeling is.</p>
+</section>
+
+<section id="as1">
+  <div class="eye">As 1</div>
+  <h2>Is de baseline compleet?</h2>
+  <p class="dek">Twee vergelijkingen, allebei afgerond. De uitkomst is dat er weinig meer bij
+  hoeft — en dat is zelf de bevinding.</p>
+  <div class="hr"></div>
+  <div class="stack">
+    <p><b>Intune, augustus 2026.</b> De set is gelegd naast
+    <a href="https://github.com/IntuneAdmin/IntuneBaselines">IntuneAdmin/IntuneBaselines</a>
+    — 874 profielen met CIS v4, ISO 27001, NIS2 en de Microsoft Endpoint Security-baselines.
+    Dat leverde 509 instellingen op die zij zetten en wij niet. Daarvan haalden er
+    <b>14</b> de lat; de rest viel af op browser (180), Apple-payloads voor supervised
+    toestellen (21), CIS L2, of dekking langs een andere weg. Een tweede ronde per profiel
+    voegde er nog 5 toe. Alles verwerkt.</p>
+
+    <p><b>Conditional Access, vandaag.</b> Er lag al een vergelijking met drie frameworks
+    (Chronlund, van Surksum, Verlinden) van 13 augustus. Van de vijftien kandidaten die
+    die aandroeg zijn er <b>veertien gebouwd</b>. Deze ronde toetste daarom aan de normatieve
+    bronnen — MCSB, CIS Microsoft 365 Foundations en Microsofts eigen templates. Uitkomst:
+    MCSB IM-7 is 7 van 7 gedekt, CIS 5.2.2 mist er twee, Microsofts categorieën 5 van 6.</p>
+
+    <p class="note"><b>Wat er nog bij moet:</b> periodieke herauthenticatie voor alle
+    gebruikers (CIS 5.2.2.13 — nu alleen beheerders en BYOD), en insider risk als
+    <code>optional</code>. Agent-identiteiten heroverwegen zodra Entra Agent ID breed
+    beschikbaar is. De volledige onderbouwing staat in
+    <a href="../CA-Policies/ANALYSE.html">ANALYSE.html</a> in de CA-repo.</p>
+  </div>
+
+  <h3 class="sh">Maar de CA-set zelf mankeert iets</h3>
+  <div class="hr"></div>
+  <p class="dek" style="margin-top:-8px;margin-bottom:22px">Drie eigenschappen die met geen
+  policyvergelijking te vinden zijn, en die uitrol in de weg zitten. Ze verklaren mede waarom
+  as 3 er zo slecht voorstaat.</p>
+
+  <div class="f c">
+    <header><span class="k">A</span><h3>De randvoorwaarden worden niet meegeleverd</h3></header>
+    <p>De templates verwijzen naar zes groepen en vier named locations die de repo nergens
+    definieert. Bij deze tenant bestond <b>geen van de zes</b>. Het probleem is niet dat
+    uitrol faalt — het is dat hij slaagt: een uitzonderingsgroep die niet bestaat sluit
+    niemand uit, dus de policy wordt strenger dan bedoeld.</p>
+    <div class="ev">Excluded from Conditional Access          &lt;- de break-glass-uitsluiting
+Conditional Access Service Accounts      Allowed Countries
+Licensed Users                           High-Risk Countries
+Excluded from Legacy Authentication Block  Service Accounts Trusted IPs
+Excluded from Device Code Auth Flow Block  AllTrusted
+Excluded from Country Block List</div>
+    <p>33 policies uitrollen waarvan de break-glass-groep niet bestaat is de klassieke manier
+    om een tenant volledig buiten te sluiten.</p>
+  </div>
+
+  <div class="f w">
+    <header><span class="k">B</span><h3>Twaalf van de 33 templates kunnen nooit een <code>pass</code> opleveren</h3></header>
+    <p>Elf staan op <code>disabled</code>, één op report-only. Nergens staat welke of waarom.
+    Twee gevallen spreken zichzelf tegen: <b><code>2055</code> (phishing-resistant MFA voor
+    beheerders) staat uit terwijl <code>2120</code> (voor álle gebruikers) aan staat</b> — de
+    eerste stap uitgeleverd, het einddoel aan. En <code>1090</code> staat aan terwijl
+    <code>1100</code> uit staat, beide risicopolicies, zonder reden.</p>
+  </div>
+
+  <div class="f w">
+    <header><span class="k">C</span><h3>Vijf P2-afhankelijke templates zijn niet als <code>optional</code> gemarkeerd</h3></header>
+    <p><span class="mono">1090 · 1100 · 2010 · 2020 · 2110</span> vereisen Entra ID P2 maar
+    staan niet in <code>OPTIONAL_TEMPLATES</code>. Aantoonbaar onbedoeld: de checks die ze
+    vervingen (<code>CA-BASE-004</code>/<code>005</code>) dragen wél
+    <code>requiresEntraIdP2: true</code>. Bij een klant zonder P2 zijn dat vijf permanente
+    rode vinkjes — en een check die altijd rood staat leert iedereen om rood te negeren.</p>
+  </div>
+</section>
+
+<section id="as2">
+  <div class="eye">As 2 — nieuw</div>
+  <h2>Dwingt de baseline af wat het beleid eist?</h2>
+  <p class="dek">Deze vraag was nog nooit systematisch gesteld. Alle 24 documenten zijn
+  doorgelezen; daaruit zijn de eisen gelicht met een getal of een afdwingbaar mechanisme erin —
+  41 stuks. Beleidsuitspraken over processen, registers en training vallen erbuiten: die zijn
+  niet in een tenant te meten.</p>
+  <div class="hr"></div>
+
+  <div class="tw" style="margin-bottom:30px">
+    <table>
+      <thead><tr><th>De 24 documenten</th><th class="r">Eisen</th><th>Wat het opleverde</th></tr></thead>
+      <tbody>
+        <tr><td><b>ISMP.02</b> Access Control</td><td class="r">10</td><td>het zwaarste document: wachtwoorden, vergrendeling, inactiviteit, bevoorrechte accounts, MFA</td></tr>
+        <tr><td><b>ISMP.11</b> Malware and Antivirus</td><td class="r">7</td><td>AV-gedrag, hardening, filtering — plus FIM en IDS die buiten Intune vallen</td></tr>
+        <tr><td><b>ISMP.13</b> Logging and Monitoring</td><td class="r">6</td><td>auditgebeurtenissen, kloksynchronisatie, logbescherming en 12-maandsbewaring</td></tr>
+        <tr><td><b>ISMP.19</b> Cryptographic Control</td><td class="r">5</td><td>AES-256, TLS 1.2+, Wi-Fi-encryptie, versleuteling nooit uit</td></tr>
+        <tr><td><b>ISMP.08</b> Mobile and Teleworking</td><td class="r">5</td><td>BYOD-eisen, remote wipe, encryptie op mobiel, de AVD-route</td></tr>
+        <tr><td><b>ISMP.15</b> Information Transfer</td><td class="r">4</td><td>OneDrive en Teams als kanaal, virusscan bij overdracht, removable media</td></tr>
+        <tr><td><b>ISMP.06</b> Acceptable Use</td><td class="r">3</td><td>verwisselbare media, software-installatie, apparaatvergrendeling</td></tr>
+        <tr><td><b>ISMP.21</b> Patch Management</td><td class="r">2</td><td>de vier patchtermijnen en continue compliancemeting</td></tr>
+        <tr><td><b>ISMP.14</b> Network Security</td><td class="r">2</td><td>deny-by-default op het eindpunt; segmentatie valt buiten Intune</td></tr>
+        <tr><td><b>ISMP.22</b> AI Technology</td><td class="r">1</td><td>de AI Usage Table — alleen Copilot toegestaan</td></tr>
+        <tr><td><b>ISMP.10</b> Backup</td><td class="r">2</td><td>mobiele back-up, versleutelde back-ups (buiten Intune)</td></tr>
+        <tr><td><b>ISMP.07</b> Clear Desk and Clear Screen</td><td class="r">1</td><td>schermvergrendeling — verwijst door naar ISMP.02</td></tr>
+        <tr><td><b>ISMP.18</b> Cryptographic Key Management</td><td class="r">2</td><td>hardware-backed sleutelopslag; geen sleutels in platte tekst</td></tr>
+        <tr><td><b>ISMP.16</b> Physical and Environmental</td><td class="r">1</td><td>opnameapparatuur in secure areas — fysiek, niet technisch</td></tr>
+        <tr><td><b>ISMP.03</b> Asset Management</td><td class="r">1</td><td>geen ongeautoriseerde software of hardware</td></tr>
+        <tr class="grp"><td colspan="3">Negen documenten leverden geen technisch toetsbare eis op</td></tr>
+        <tr><td colspan="3" style="color:var(--muted)"><b>ISDP.01</b> Data Protection · <b>ISDP.02</b> Data Retention ·
+          <b>ISMP.01</b> Information Security · <b>ISMP.04</b> Classification and Handling ·
+          <b>ISMP.05</b> Awareness and Training · <b>ISMP.09</b> Business Continuity ·
+          <b>ISMP.12</b> Third Party Supplier · <b>ISMP.17</b> Cloud Services ·
+          <b>ISMP.20</b> Significant Incident and Evidence
+          <br><br>Deze negen stellen eisen aan processen, registers, contracten, classificatie en
+          meldtermijnen — bindend, maar niet af te dwingen met een Intune-instelling of een
+          CA-conditie. ISMP.04 raakt de baseline het dichtst: classificatie bepaalt hoe informatie
+          opgeslagen en verzonden mag worden, en dat is Purview-werk, geen endpointwerk.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Bron</th><th>Eis</th><th>Baselinecontrole</th><th>Oordeel</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">Identiteit en toegang</td></tr>
+        <tr><td>ISMP.02</td><td>MFA voor aviation-critical en remote systemen</td><td>CA <span class="mono">2050 · 2100 · 2120</span></td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.02</td><td>Vergrendeling na <b>6</b> mislukte pogingen</td><td><code>devicelock_accountlockoutpolicy</code> — drempel <b>10</b></td><td><span class="st pt">afwijking</span></td></tr>
+        <tr><td>ISMP.02 · 07</td><td>Herauthenticatie na 15 min inactiviteit</td><td><code>machineinactivitylimit_v2</code> = 900</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.02</td><td>Wachtwoord ≥ 10 tekens, historie 4</td><td>Device Lock — lengte 14, historie 24</td><td><span class="st ok">strenger</span></td></tr>
+        <tr><td>ISMP.02</td><td>Bevoorrecht wachtwoord ≥ 12, geen woordenboek, uniek per service</td><td>Windows LAPS — 21 tekens, complexiteit 8</td><td><span class="st ok">strenger</span></td></tr>
+        <tr><td>ISMP.02</td><td>Wachtwoord niet zichtbaar bij invoer</td><td><code>credentialsui_disablepasswordreveal</code></td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.02</td><td>Least privilege op lokale beheerdersgroep</td><td>Local Administrators — <code>add_restrict</code></td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.02</td><td>Bescherming tegen brute force op aanmelding</td><td>Account Lockout + CA risicopolicies</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.02</td><td>Inactieve sessies beëindigen, zeker op afstand</td><td>CA <span class="mono">3010</span> (beheerders) · <span class="mono">3020</span> (BYOD)</td><td><span class="st no">gat</span></td></tr>
+        <tr><td>ISMP.18</td><td>Hardware-backed sleutelopslag waar beschikbaar</td><td>TPM verplicht — Device Guard, WHfB</td><td><span class="st ok">gedekt</span></td></tr>
+
+        <tr class="grp"><td colspan="4">Apparaat en versleuteling</td></tr>
+        <tr><td>ISMP.08 · 19</td><td>Full disk encryption, AES-256</td><td>BitLocker XTS-AES 256 · FileVault, beide met sleutelescrow</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.19</td><td>Versleuteling nooit uit te schakelen</td><td><code>requiredeviceencryption</code> + Tamper Protection</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.06 · 15</td><td>Alleen bedrijfseigen versleutelde verwisselbare media</td><td>Removable Storage — schrijven geblokkeerd</td><td><span class="st ok">andere weg</span></td></tr>
+        <tr><td>ISMP.08</td><td>Password/PIN en auto-lock op mobiel</td><td>Compliance Password (4 platformen) + MAM</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.08</td><td>Remote wipe ingeschakeld vóór toegang</td><td>MAM selectieve wipe; volledige wipe vraagt inschrijving</td><td><span class="st pt">deels</span></td></tr>
+        <tr><td>ISMP.10</td><td>Mobiel niet centraal gebackupt, lokale back-up beveiligd</td><td>MAM <code>dataBackupBlocked</code> + OneDrive KFM</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.16</td><td>Camera's en opnameapparatuur beperkt in secure areas</td><td>—</td><td><span class="st nil">niet technisch</span></td></tr>
+
+        <tr class="grp"><td colspan="4">Malware en hardening</td></tr>
+        <tr><td>ISMP.11</td><td>Definities automatisch bijgewerkt</td><td>Defender — interval 1 uur</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>Niet uitschakelbaar door eindgebruiker</td><td>Tamper Protection</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>Scan bij openen, uitvoeren en wijzigen</td><td>Defender realtime + Attachment Scanning</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>Infectie automatisch in quarantaine of hersteld</td><td><code>threatseveritydefaultaction</code> = quarantine</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>Onnodige poorten, diensten en applicaties verwijderd</td><td>In-Box App Removal · System Services · Legacy Hardening</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>Internetverkeer gefilterd op reputatie, deny/allow-lijst</td><td>Network Protection · SmartScreen · Enhanced Phishing Protection</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.11</td><td>File Integrity Monitoring op kritieke bestanden</td><td>—</td><td><span class="st nil">buiten Intune</span></td></tr>
+        <tr><td>ISMP.11</td><td>HIDS/NIDS op systemen met vertrouwelijke data</td><td>—</td><td><span class="st nil">buiten Intune</span></td></tr>
+        <tr><td>ISMP.11</td><td>In- en uitgaande e-mail gescand</td><td>—</td><td><span class="st nil">Exchange Online</span></td></tr>
+
+        <tr class="grp"><td colspan="4">Logging</td></tr>
+        <tr><td>ISMP.13</td><td>Aanmelding, privilegegebruik, bestandstoegang, configuratiewijziging</td><td>Audit and Event Logging — 40 instellingen</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.13</td><td>Auditconfiguratie niet te overrulen</td><td>Audit Policy Enforcement</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.13</td><td>Logs beschermd tegen overschrijven</td><td>Logging — logbestandsgroottes</td><td><span class="st pt">deels</span></td></tr>
+        <tr><td>ISMP.13</td><td>Beheerders kunnen eigen logregels niet wissen</td><td>—</td><td><span class="st nil">vraagt doorvoer</span></td></tr>
+        <tr><td>ISMP.13</td><td>Klok gesynchroniseerd op één vertrouwde NTP-bron</td><td>Timezone — <code>w32time_policy_enable_ntpclient</code></td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.13</td><td>Logs 12 maanden bewaard</td><td>—</td><td><span class="st nil">vraagt SIEM</span></td></tr>
+
+        <tr class="grp"><td colspan="4">Netwerk en overdracht</td></tr>
+        <tr><td>ISMP.19</td><td>TLS 1.2 of hoger</td><td>Cryptography — <code>edge_sslversionmin</code></td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.19</td><td>Wi-Fi met WPA2/WPA3 en AES, 802.1X waar haalbaar</td><td>—</td><td><span class="st no">gat</span></td></tr>
+        <tr><td>ISMP.14</td><td>Deny-by-default op het eindpunt</td><td>Windows Firewall + Firewall Rules</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.14</td><td>Netwerksegmentatie, VLAN's, gateways</td><td>—</td><td><span class="st nil">buiten Intune</span></td></tr>
+        <tr><td>ISMP.15</td><td>Bestanden gescand vóór en na overdracht</td><td>Defender realtime</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.15</td><td>OneDrive als voorkeurskanaal</td><td>Microsoft OneDrive + Known Folder Move</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.15</td><td>Teams als voorkeursplatform, tenantbeperkt</td><td>Microsoft Teams — aanmeldbeperking op tenant-id</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.15 · 19</td><td>Vertrouwelijke informatie versleuteld per e-mail</td><td>—</td><td><span class="st nil">Purview</span></td></tr>
+
+        <tr class="grp"><td colspan="4">Beheer, patchen en AI</td></tr>
+        <tr><td>ISMP.21</td><td>Kritieke patch binnen 7 dagen</td><td>Update Ring 3 — deadline 2 dagen</td><td><span class="st ok">strenger</span></td></tr>
+        <tr><td>ISMP.21</td><td>Patchcompliance continu gemonitord</td><td>Compliancepolicies + Update Reports and Telemetry</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.06 · 03</td><td>Geen ongeautoriseerde software-installatie</td><td>Local Administrators · Microsoft Store · Package Manager</td><td><span class="st ok">gedekt</span></td></tr>
+        <tr><td>ISMP.22</td><td>Alleen Copilot toegestaan, alle andere AI verboden</td><td>8 AI-policies; blokkeerlijst in Edge</td><td><span class="st pt">deels</span></td></tr>
+        <tr><td>ISMP.08</td><td>Onbeheerde toegang alleen via AVD</td><td>CA <span class="mono">2090</span> blokkeert; routeert niet naar AVD</td><td><span class="st no">gat</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">Wat dit oplevert</h3>
+  <div class="hr"></div>
+  <div class="stack">
+    <p><b>De baseline doet het goed.</b> Van de 30 eisen die Intune of CA technisch kán
+    afdwingen, dekt de baseline er 26 volledig, waarvan vier <em class="i">strenger</em> dan
+    het beleid vraagt. Dat is geen toeval: elf baselinepolicies verwijzen in hun eigen
+    documentatie al expliciet naar een ISMP-nummer.</p>
+
+    <p><b>Vier echte gaten.</b> Wi-Fi (WPA2/WPA3, 802.1X) — de baseline heeft geen enkel
+    Wi-Fi-profiel. Sessieduur voor gewone gebruikers — alleen beheerders en BYOD zijn gedekt,
+    en dat is precies de CA-toevoeging die as 1 ook aandroeg. Onbeheerde toegang naar AVD
+    routeren — de baseline blokkeert wel, maar biedt het alternatief niet dat het beleid
+    voorschrijft. En de AI-blokkade is een URL-lijst in Edge: frictie, geen grens — hij werkt
+    niet op een telefoon en niet op een privéapparaat.</p>
+
+    <p><b>Eén afwijking die een besluit vraagt.</b> ISMP.02 eist vergrendeling na zes mislukte
+    pogingen; de baseline staat op tien, met als onderbouwing dat vijf gebruikers te makkelijk
+    buitensluit en tien de waarde van de Microsoft Security Baseline is. Verdedigbaar, maar
+    het is niet wat het beleidsdocument zegt. Kies: baseline naar 6, of de afwijking vastleggen
+    als goedgekeurde uitzondering bij de CISO.</p>
+
+    <p class="note"><b>De mapping wordt niet bijgehouden.</b> Elf van de 138 policies noemen
+    een ISMP-nummer — precies de elf die uit de oude <code>ISMSTemplate/</code>-set komen. De
+    andere 127 dekken aantoonbaar beleidseisen af zonder dat ergens vast te leggen. Bij de
+    volgende beleidsherziening is er dus geen manier om te zien wat er meebeweegt. Een veld
+    <code>isms</code> in <code>_manifest.json</code> lost dat op, en <code>check-scope.js</code>
+    kan het bewaken zoals het nu de fasen bewaakt.</p>
+  </div>
+</section>
+
+<section id="as3">
+  <div class="eye">As 3</div>
+  <h2>Staat het in de tenant?</h2>
+  <p class="dek">Hier zit het probleem, en het is geen randgeval. De baseline is bijna
+  compleet en dwingt bijna het juiste af — maar hij is er niet.</p>
+  <div class="hr"></div>
+
+  <p class="note" style="margin-bottom:26px"><b>4,2% is geen veiligheidscijfer.</b> Het meet
+  hoeveel van ónze baseline in de tenant staat, niet hoe veilig de tenant is. Die twee lopen
+  hier uiteen: de tenant zet zestien ASR-regels op <em class="i">block</em> waar de baseline er
+  vier op <em class="i">warn</em> zet, heeft Tamper Protection aan, en dwingt MFA af op alle
+  gebruikers en op tien beheerdersrollen. Er staat een fundament. Het percentage zegt dat het
+  fundament dun is en dat het meeste van wat de baseline toevoegt ontbreekt — niet dat er niets
+  is.</p>
+
+  <div class="tw" style="margin-bottom:30px">
+    <table>
+      <thead><tr><th>Domein</th><th class="r">Baseline</th><th class="r">Tenant</th><th class="r">Dekking</th><th>Opmerking</th></tr></thead>
+      <tbody>
+        <tr><td><b>Conditional Access</b></td><td class="r">33 templates</td><td class="r">16 policies</td><td class="r"><b>3 afgedwongen</b></td><td>3 andere staan report-only; 24 hebben geen tegenhanger</td></tr>
+        <tr><td><b>Intune-instellingen</b></td><td class="r">1.967</td><td class="r">74</td><td class="r"><b>4,2%</b></td><td>103 van 138 policies hebben nul overlap</td></tr>
+        <tr><td><b>Conflicten</b></td><td class="r">—</td><td class="r">17</td><td class="r">—</td><td>4 daarvan in het voordeel van de tenant</td></tr>
+        <tr><td><b>Compliancepolicies</b></td><td class="r">11</td><td class="r">4</td><td class="r">—</td><td>alleen Windows eist versleuteling</td></tr>
+        <tr><td><b>App protection</b></td><td class="r">2</td><td class="r">6</td><td class="r">—</td><td>defaults laten data naar privéapps</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sh">De vier kritieke bevindingen</h3>
+  <div class="hr"></div>
+
+  <div class="f c">
+    <header><span class="k">01</span><h3>Een vast lokaal-adminwachtwoord staat leesbaar in een OMA-URI-profiel</h3></header>
+    <p><b>9. FYG - GEN - Create local admin account for ITCE</b> zet via een custom OMA-URI een
+    lokaal beheerdersaccount met een vast wachtwoord, onversleuteld — dus ook onversleuteld in
+    elke backup. Eén woordcombinatie, op élk apparaat identiek: wie hem op één toestel afleest
+    is lokaal beheerder op alle.</p>
+    <div class="ev">./Device/Vendor/MSFT/Accounts/Users/itceadmin/Password        = "&lt;geredigeerd&gt;"
+./Device/Vendor/MSFT/Accounts/Users/itceadmin/LocalUserGroup  = 2</div>
+    <p><b>9. FYG - GEN - Windows LAPS</b> beheert hetzelfde account en roteert elke 7 dagen. Het
+    OMA-URI-profiel zet bij de volgende sync de vaste waarde terug; de rotatie is daarmee geen
+    bescherming maar een venster. <b>ISMP.02</b> eist ≥12 tekens, geen woordenboekwoorden, nooit
+    gedeeld, in een password manager, uniek per service — alle vijf niet gehaald.
+    <b>ISMP.18</b> voegt toe: sleutelmateriaal nooit in platte tekst.</p>
+  </div>
+
+  <div class="f c">
+    <header><span class="k">02</span><h3>De blokkade op privéapparaten geldt voor één gebruiker</h3></header>
+    <p><b>06 -01 | CA | Block Personal Devices</b> staat op enabled met een correct device-filter
+    op <code>deviceOwnership -eq "Personal"</code> — maar het bereik is
+    <code>includeUsers: ["Itce OPS"]</code>. Voor de 908 andere gebruikers blokkeert de policy
+    niets.</p>
+  </div>
+
+  <div class="f c">
+    <header><span class="k">03</span><h3>Toegang vanaf privéapparaten vraagt alleen MFA</h3></header>
+    <p><b>06 -02</b> laat <code>FYG-D-BYOD</code> bij alle applicaties met browser en
+    desktopclients, en eist daarvoor uitsluitend MFA. Geen compliant device, geen app
+    protection, geen downloadbeperking. <b>ISMP.08</b> is expliciet: niet-ingeschreven of
+    niet-compliant apparaten zijn <em class="i">strictly prohibited</em>, en onbeheerde toegang
+    mag alleen via een AVD-omgeving zonder lokale opslag.</p>
+  </div>
+
+  <div class="f c">
+    <header><span class="k">04</span><h3>Er is geen enkele risicogebaseerde CA-policy</h3></header>
+    <p>Geen enkele tenantpolicy zet <code>signInRiskLevels</code> of <code>userRiskLevels</code>.
+    De vier baselinepolicies daarvoor — <span class="mono">1090 · 1100 · 2010 · 2020</span> —
+    ontbreken alle vier. Een gestolen sessietoken levert wél een risicoscore op in Entra, maar
+    geen enkele reactie.</p>
+  </div>
+
+  <p class="note">Tien verdere bevindingen — legacy auth open, geen accountvergrendeling, geen
+  auditlogging, geen firewall, patchdeadline tot 19 dagen, Defender op
+  <code>userdefined</code>, compliance zonder versleuteling, app protection naar privéapps,
+  geen AI-controles, USB onbeperkt — staan met bewijs in
+  <a href="RAPPORT-FLYINGGROUP.html">RAPPORT-FLYINGGROUP.html</a>.</p>
+</section>
+
+<section id="verbeteren">
+  <div class="eye">Per policyset</div>
+  <h2>Wat CA en Intune kunnen verbeteren voor het ISMS</h2>
+  <p class="dek">As 2 keek per beleidseis. Dit kijkt de andere kant op: per policyset, welke
+  template of policy moet er bij of anders om de pdf's te halen. Elf punten, en het
+  opvallendste is dat er al een leeg template klaarstaat voor het lastigste hoofdstuk.</p>
+  <div class="hr"></div>
+
+  <h3 class="sh">Conditional Access — vijf verbeteringen</h3>
+  <div class="hr"></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">ISMS</th><th style="width:29%">Wat er nu is</th><th>Wat er moet gebeuren</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>ISMP.22</b><br><b>ISMP.17</b><br><span style="color:var(--faint)">alleen Copilot; niet-goedgekeurde clouddiensten verboden</span></td>
+          <td><code>1070 BLOCK Explicitly Blocked Cloud Apps</code> staat op <code>disabled</code> met <code>includeApplications: ["None"]</code> — leeg en uit</td>
+          <td><b>Het template bestaat al; het is nooit gevuld.</b> Vul het met de app-id's van de verboden AI- en clouddiensten en zet het aan. Dit is de enige maatregel die AI-gebruik werkelijk bij de voordeur blokkeert — de Edge-URL-lijst in de Intune-baseline is frictie, geen grens. <b>Grootste winst van deze lijst, en de goedkoopste.</b></td>
+        </tr>
+        <tr>
+          <td><b>ISMP.02</b><br><span style="color:var(--faint)">inactieve sessies beëindigen, zeker op risicovolle locaties</span></td>
+          <td>sessieduur alleen in <code>3010</code> (beheerders) en <code>3020</code> (BYOD)</td>
+          <td>Nieuw SESSION-template met sign-in frequency voor alle gebruikers. Dekt tegelijk <b>CIS 5.2.2.13</b> — twee bronnen wijzen naar hetzelfde gat.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.08</b><br><span style="color:var(--faint)">onbeheerde toegang alleen via een AVD-omgeving zonder lokale opslag</span></td>
+          <td><code>2090</code> blokkeert browsertoegang op onbeheerde apparaten; niets wijst de AVD-route aan</td>
+          <td>Nieuw GRANT-template: op een niet-compliant apparaat alleen de AVD- en Cloud PC-apps toestaan, de rest blokkeren. Nu is het beleid half uitgevoerd — wel de blokkade, niet het voorgeschreven alternatief.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.02</b><br><span style="color:var(--faint)">MFA voor aviation-critical en remote systemen</span></td>
+          <td><code>2050</code> sluit <code>AllTrusted</code> uit</td>
+          <td>Het ISMS noemt geen locatie-uitzondering. Óf een variant zonder de uitzondering, óf de uitzondering vastleggen als goedgekeurd besluit. Bij deze tenant is dat geen theorie: het zet MFA uit op zes klantlocaties en op AVD.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.12</b><br><span style="color:var(--faint)">derdepartij-toegang met sterke authenticatie en monitoring</span></td>
+          <td><code>1080</code> en <code>1120</code> blokkeren gasten; er is geen GRANT-template voor gasten</td>
+          <td>Gasten vallen nu onder <code>2050</code>. Dat werkt, maar maakt onzichtbaar dat het ISMS een aparte eis voor derden stelt. Een expliciet gasttemplate met authenticatiesterkte, óf vastleggen dat <code>2050</code> het dekt.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:14px"><b>Niet implementeerbaar.</b> ISMP.02 vraagt om
+  <em class="i">"restrict connection times to provide additional security for high-risk
+  applications"</em>. Conditional Access kent geen tijdsconditie; het veld
+  <code>times</code> staat in het schema maar is nooit geïmplementeerd. Vastleggen als bekende
+  beperking in plaats van als openstaand punt.</p>
+
+  <h3 class="sh">Intune — zes verbeteringen</h3>
+  <div class="hr"></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th style="width:14%">ISMS</th><th style="width:29%">Wat er nu is</th><th>Wat er moet gebeuren</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>ISMP.19</b><br><span style="color:var(--faint)">Wi-Fi met WPA2/WPA3 en AES, 802.1X waar haalbaar</span></td>
+          <td><b>niets</b> — de baseline heeft geen enkel Wi-Fi-profiel</td>
+          <td>Nieuw Wi-Fi-profiel per platform. <b>Dit is het enige ISMS-onderwerp waar de baseline nul dekking heeft</b>, en het is er een waar de tenant vandaag WPA2-Personal met een gedeelde sleutel gebruikt.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.11</b><br><b>ISMP.03</b><br><span style="color:var(--faint)">alleen goedgekeurde, gelicentieerde en ondersteunde software</span></td>
+          <td>Local Administrators, Microsoft Store en Package Manager vormen samen een drempel, geen lijst. Device Guard zet HVCI — kernelcode, geen gebruikersmodus-allowlist</td>
+          <td><b>App Control for Business (WDAC) ontbreekt.</b> Dat is de enige maatregel die "alleen goedgekeurde software" letterlijk afdwingt in plaats van moeilijk maakt. Beginnen in audit-modus; met FlyingSoft dat van een netwerkshare draait is dat geen kleine stap, maar wel de juiste.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.02</b><br><span style="color:var(--faint)">vergrendeling na 6 mislukte pogingen</span></td>
+          <td>drempel <b>10</b>, onderbouwd met de Microsoft Security Baseline</td>
+          <td>Waarde naar 6, óf de afwijking laten vaststellen door de CISO. Het gaat niet om welke waarde beter is — het gaat erom dat de baseline vandaag iets anders zegt dan het beleid, zonder dat iemand dat besloot.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.22</b><br><span style="color:var(--faint)">alle AI behalve Copilot verboden</span></td>
+          <td>URL-blokkeerlijst in Edge (<code>WIN - U - AI Usage Control Restricted</code>)</td>
+          <td>Werkt niet op een telefoon, niet op een privéapparaat en niet in een andere browser. Aanvullen met Defender Web Content Filtering, categorie Generative AI, én CA-template <code>1070</code>. <b>De baselinedocumentatie zegt dit zelf al</b> — het is alleen nooit bij iemand belegd.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.06</b><br><span style="color:var(--faint)">alleen bedrijfseigen versleutelde verwisselbare media</span></td>
+          <td>Removable Storage blokkeert <em class="i">álle</em> schrijfacties</td>
+          <td>Strenger dan het beleid — maar het maakt de werkwijze die het beleid uitdrukkelijk toestaat onmogelijk. Geeft FlyingGroup versleutelde USB-sticks uit, dan is een variant met een BitLocker To Go-eis nodig in plaats van een schrijfblokkade. Keuze maken en vastleggen.</td>
+        </tr>
+        <tr>
+          <td><b>ISMP.13</b><br><span style="color:var(--faint)">logs 12 maanden bewaard; beheerders wissen geen eigen regels</span></td>
+          <td>logbestandsgroottes in <code>WIN - D - Logging</code></td>
+          <td>Intune kán dit niet dekken, en dat hoort geen open eind te zijn. Leg de doorvoer naar Sentinel of gelijkwaardig vast als de eigenaar van deze eis — zie <a href="#niemand">Buiten bereik</a>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="f m" style="margin-top:24px">
+    <header><span class="k">→</span><h3>Het patroon achter deze elf punten</h3></header>
+    <p>Drie ervan vragen echt iets nieuws: een Wi-Fi-profiel, App Control, en de AVD-route.
+    De andere acht zijn <b>bestaande onderdelen die af moeten</b> — een leeg template vullen,
+    een waarde rechttrekken, een keuze vastleggen, een eigenaar aanwijzen.</p>
+    <p>Dat is dezelfde vorm als de conclusie van het hele rapport. De baseline is niet
+    onvolledig; hij is niet afgemaakt. En het onderdeel dat het meest oplevert —
+    CA-template <code>1070</code> voor het AI- en clouddienstenbeleid — staat er al, leeg en
+    uitgeschakeld, sinds de dag dat het is aangemaakt.</p>
+  </div>
+</section>
+
+<section id="niemand">
+  <div class="eye">Randgeval</div>
+  <h2>Elf eisen die geen endpointbaseline kan dekken</h2>
+  <p class="dek">De nuttigste uitkomst van as 2. Deze controles staan in het beleid, zijn
+  bindend, en vallen buiten Intune én Conditional Access. Vandaag is van geen ervan
+  vastgelegd wie hem uitvoert.</p>
+  <div class="hr"></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Eis</th><th>Bron</th><th>Waar hij thuishoort</th></tr></thead>
+      <tbody>
+        <tr><td>In- en uitgaande e-mail gescand op malware en phishing</td><td>ISMP.11</td><td>Exchange Online Protection / Defender for Office 365</td></tr>
+        <tr><td>Vertrouwelijke informatie versleuteld per e-mail</td><td>ISMP.15 · 19</td><td>Purview Message Encryption of S/MIME</td></tr>
+        <tr><td>File Integrity Monitoring op systeemkritieke bestanden</td><td>ISMP.11</td><td>Defender for Endpoint / server-tooling</td></tr>
+        <tr><td>HIDS/NIDS op systemen met vertrouwelijke data</td><td>ISMP.11</td><td>Defender for Endpoint / netwerkleverancier</td></tr>
+        <tr><td>Logs 12 maanden bewaard en tegen wissen beschermd</td><td>ISMP.13</td><td>Sentinel of gelijkwaardige logdoorvoer</td></tr>
+        <tr><td>Beheerders kunnen hun eigen logregels niet wissen</td><td>ISMP.13</td><td>logdoorvoer met scheiding van rollen</td></tr>
+        <tr><td>Dagelijkse review van beveiligingslogs</td><td>ISMP.13</td><td>ITCE als beheerpartij, onder CIO/CISO</td></tr>
+        <tr><td>Netwerksegmentatie, VLAN's, gateways, deny-by-default</td><td>ISMP.14</td><td>netwerkbeheer</td></tr>
+        <tr><td>Back-ups versleuteld, FIPS 140-2/3, hersteltest jaarlijks</td><td>ISMP.10 · 19</td><td>Azure Backup / M365-retentie</td></tr>
+        <tr><td>Remote access via VPN met MFA, auto-disconnect</td><td>ISMP.02 · 08</td><td>VPN-leverancier + CA voor de identiteitshelft</td></tr>
+        <tr><td>Camera's en opnameapparatuur beperkt in secure areas</td><td>ISMP.16</td><td>fysieke beveiliging, niet techniek</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:18px">Twee daarvan zijn deels te dekken met licenties die
+  FlyingGroup mogelijk al heeft: e-mailscanning en -versleuteling zitten in Microsoft 365 E3/E5
+  respectievelijk Purview. De andere negen vragen een expliciete eigenaar. <b>Dit is geen
+  bevinding over de baseline maar over het controleraamwerk eromheen</b> — en het is precies
+  het soort gat dat bij een Part-IS-audit naar boven komt, omdat het beleid de eis stelt en
+  niemand kan aanwijzen waar hij wordt uitgevoerd.</p>
+</section>
+
+<section id="plan">
+  <div class="eye">Uitvoering</div>
+  <h2>Eén plan</h2>
+  <p class="dek">Alle drie de assen samengevoegd, op volgorde van wat eerst moet. De kleur
+  zegt wie het oppakt.</p>
+  <div class="hr"></div>
+
+  <div class="plan">
+    <div class="pi now"><div class="k">1</div><div>
+      <h4>Het vaste adminwachtwoord weg</h4>
+      <p>OMA-URI-profiel verwijderen, LAPS het account laten beheren, één keer geforceerd
+      roteren op alle apparaten. Het huidige wachtwoord geldt als gecompromitteerd.</p>
+      <div class="who">Tenant · vandaag</div></div></div>
+
+    <div class="pi now"><div class="k">2</div><div>
+      <h4>Legacy authenticatie werkelijk dichtzetten</h4>
+      <p><b>Exchange ActiveSync-OFF</b> selecteert geen enkele applicatie en grijpt dus nergens
+      op aan; <b>00-02</b> staat report-only. Eén van beide repareren, de andere intrekken.</p>
+      <div class="who">Tenant · vandaag</div></div></div>
+
+    <div class="pi now"><div class="k">3</div><div>
+      <h4>Defender scherp zetten en lege profielen opruimen</h4>
+      <p>Lage en gemiddelde dreigingen op <em class="i">quarantine</em>, PUA op
+      <em class="i">block</em>, definitie-interval op 1 uur. De drie profielen die niets
+      configureren verwijderen.</p>
+      <div class="who">Tenant · vandaag</div></div></div>
+
+    <div class="pi pre"><div class="k">4</div><div>
+      <h4>De randvoorwaarden van de CA-baseline bouwen</h4>
+      <p>Zes uitzonderingsgroepen en vier named locations aanmaken, of de templates aanpassen
+      op de bestaande <code>FYG-</code>-namen. Zonder dit is uitrol een lock-outrisico.</p>
+      <div class="who">Baseline + tenant · vóór elke uitrol</div></div></div>
+
+    <div class="pi pre"><div class="k">5</div><div>
+      <h4>De 17 conflicten beslechten</h4>
+      <p>Voor dertien wint de baseline. Voor de vier ASR-regels en de locatietoegang wint de
+      tenant — neem die over in de baseline in plaats van andersom.</p>
+      <div class="who">Baseline</div></div></div>
+
+    <div class="pi pre"><div class="k">6</div><div>
+      <h4>De CA-baseline opschonen</h4>
+      <p><code>OPTIONAL_TEMPLATES</code> aanvullen met de vijf P2-templates; een verplichte
+      reden bij elke niet-<code>enabled</code> state; <code>2055</code> aanzetten en de
+      <code>1090</code>/<code>1100</code>-tegenstrijdigheid oplossen.</p>
+      <div class="who">Baseline</div></div></div>
+
+    <div class="pi pre"><div class="k">7</div><div>
+      <h4>De vier ISMS-gaten dichten</h4>
+      <p>Wi-Fi-profiel met WPA2/WPA3 en 802.1X; sessieduur voor alle gebruikers (dekt ook CIS
+      5.2.2.13); een AVD-route voor onbeheerde toegang; en de vergrendelingsdrempel 10-of-6
+      laten vaststellen.</p>
+      <div class="who">Baseline · besluit CISO</div></div></div>
+
+    <div class="pi roll"><div class="k">8</div><div>
+      <h4>Uitrollen wat niemand merkt</h4>
+      <p>Auditlogging, accountvergrendeling, schermvergrendeling, firewall, hardening, user
+      rights. Daarna de compliancepolicies — maar pas ná de configuratiepolicies die
+      versleuteling inschakelen.</p>
+      <div class="who">Tenant · één golf</div></div></div>
+
+    <div class="pi roll"><div class="k">9</div><div>
+      <h4>Uitrollen wat mensen merken</h4>
+      <p>BYOD dichtzetten, app protection verscherpen, USB-schrijven blokkeren, Windows AI
+      begrenzen, de vier risicopolicies. Eerst pilot, met aankondiging.</p>
+      <div class="who">Tenant · met pilot</div></div></div>
+
+    <div class="pi own"><div class="k">10</div><div>
+      <h4>De elf controles buiten de baseline beleggen</h4>
+      <p>Per eis een eigenaar aanwijzen — e-mailscanning, versleuteling, FIM, IDS,
+      logbewaring, segmentatie, back-up, VPN, fysiek. Twee ervan zitten al in bestaande
+      licenties.</p>
+      <div class="who">CIO / CISO</div></div></div>
+
+    <div class="pi own"><div class="k">11</div><div>
+      <h4>De mapping bijhouden</h4>
+      <p>Een veld <code>isms</code> in <code>_manifest.json</code>, bewaakt door
+      <code>check-scope.js</code>. En <code>npm run ca-baseline-gap</code> koppelen aan
+      wijzigingen in <code>CATemplate/</code>, zodat de analyse niet opnieuw drie weken
+      achterloopt.</p>
+      <div class="who">Baseline · proces</div></div></div>
+  </div>
+
+  <div class="key">
+    <span><i style="background:var(--crit)"></i>direct, zonder voorbereiding</span>
+    <span><i style="background:var(--warn)"></i>voorwaarde vóór uitrol</span>
+    <span><i style="background:var(--ok)"></i>uitrol</span>
+    <span><i style="background:var(--slate)"></i>eigenaarschap en proces</span>
+  </div>
+
+  <h3 class="sh">Elke wijziging in de tenant, van nu naar doel</h3>
+  <div class="hr"></div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Wat</th><th>Nu</th><th>Doel</th><th class="r">Stap</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">Identiteit</td></tr>
+        <tr><td>Lokaal beheerderswachtwoord</td><td>vast, leesbaar in OMA-URI, overal gelijk</td><td>alleen LAPS, 21 tekens, na geforceerde rotatie</td><td class="r">1</td></tr>
+        <tr><td>Exchange ActiveSync-OFF</td><td>enabled, <code>includeApplications: None</code></td><td>alle cloud-apps, óf intrekken en 00-02 aanzetten</td><td class="r">2</td></tr>
+        <tr><td>06-01 Block Personal Devices</td><td><code>includeUsers: ["Itce OPS"]</code></td><td><code>All</code>, met BYOD en break-glass uitgezonderd</td><td class="r">9</td></tr>
+        <tr><td>06-02 Allow Personal Devices</td><td>alleen <code>mfa</code></td><td>+ compliant device of app protection, óf AVD-route</td><td class="r">9</td></tr>
+        <tr><td>MFA op vertrouwde locaties</td><td>uitgezonderd via <code>AllTrusted</code></td><td>keuze vastleggen, of uitzondering intrekken</td><td class="r">7</td></tr>
+        <tr><td>Risicopolicies</td><td>geen enkele</td><td>1090, 1100, 2010, 2020 — na 2 weken report-only</td><td class="r">9</td></tr>
+        <tr><td>Landenblokkade</td><td>20 landen, onbekende herkomst toegestaan</td><td>onbekende landen meerekenen; TW en IL heroverwegen</td><td class="r">2</td></tr>
+        <tr><td>De 6 report-only policies</td><td>rapporteren, dwingen niets af</td><td>per stuk: aanzetten of intrekken</td><td class="r">4</td></tr>
+
+        <tr class="grp"><td colspan="4">Apparaat</td></tr>
+        <tr><td>Defender — lage en gemiddelde dreigingen</td><td><code>userdefined</code></td><td><code>quarantine</code></td><td class="r">3</td></tr>
+        <tr><td>Defender — PUA</td><td><code>audit</code></td><td><code>block</code></td><td class="r">3</td></tr>
+        <tr><td>Defender — definitie-interval</td><td>8 uur</td><td>1 uur</td><td class="r">3</td></tr>
+        <tr><td>Windows Update</td><td>tot 19 dagen tot herstart</td><td>3 ringen; productie deadline 2 dagen</td><td class="r">8</td></tr>
+        <tr><td>Accountvergrendeling</td><td>geen</td><td>drempel 6 of 10 — CISO beslist — duur 15 min</td><td class="r">8</td></tr>
+        <tr><td>Schermvergrendeling</td><td>geen</td><td>900 seconden inactiviteit</td><td class="r">8</td></tr>
+        <tr><td>Auditlogging</td><td>standaardwaarden</td><td>44 instellingen + Audit Policy Enforcement</td><td class="r">8</td></tr>
+        <tr><td>Windows Firewall</td><td>niet geconfigureerd</td><td>3 profielen; regelset op pilot</td><td class="r">8</td></tr>
+        <tr><td>Lokale beheerders</td><td><code>add_update</code></td><td><code>add_restrict</code>, ná opschonen van de groep</td><td class="r">8</td></tr>
+        <tr><td>Credential Guard</td><td><code>lsacfgflags = 2</code></td><td><code>1</code> — met UEFI-lock</td><td class="r">8</td></tr>
+        <tr><td>USB-opslag</td><td>onbeperkt</td><td>schrijven geblokkeerd, lezen toegestaan</td><td class="r">9</td></tr>
+        <tr><td>Windows AI en Recall</td><td>geen enkele controle</td><td>variant <em class="i">Permitted</em> — Copilot mag, Recall begrensd</td><td class="r">9</td></tr>
+
+        <tr class="grp"><td colspan="4">Compliance en mobiel</td></tr>
+        <tr><td>macOS-compliance</td><td>alleen SIP</td><td>+ FileVault, wachtwoord, firewall — ná de FileVault-policy</td><td class="r">8</td></tr>
+        <tr><td>iOS- en Android-compliance</td><td>geen versleuteling, geen toegangscode</td><td>de 4 baselinepolicies per platform</td><td class="r">8</td></tr>
+        <tr><td>App protection — PIN</td><td>4 cijfers, hergebruik toegestaan</td><td>6 cijfers, laatste 5 geblokkeerd</td><td class="r">9</td></tr>
+        <tr><td>App protection — datastroom</td><td><code>allApps</code></td><td><code>managedApps</code>; klembord beperkt; Edge verplicht</td><td class="r">9</td></tr>
+        <tr><td>Outlook app Android policies</td><td><code>isAssigned: false</code></td><td>toewijzen of verwijderen</td><td class="r">3</td></tr>
+
+        <tr class="grp"><td colspan="4">Opruimen en vaststellen</td></tr>
+        <tr><td>iOS/macOS Device restrictions</td><td>honderden velden, alle op <code>false</code></td><td>verwijderen</td><td class="r">3</td></tr>
+        <tr><td>Autopilot Reset-profiel</td><td>alleen standaardwaarden</td><td>verwijderen of herstellen</td><td class="r">3</td></tr>
+        <tr><td>Toewijzingen van 32 policies</td><td>onbekend</td><td>in de portal vaststellen vóór stap 8</td><td class="r">4</td></tr>
+        <tr><td>ASR-uitsluitingen FlyingSoft</td><td>10 brede paden met wildcards</td><td>behouden, met een herbeoordelingsdatum</td><td class="r">10</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note" style="margin-top:16px">Dertig wijzigingen. Zeven daarvan kunnen vandaag —
+  stap 1 tot en met 3 — en die vragen geen pilot, geen groep en geen besluit.</p>
+</section>
+
+<footer>
+  <p>Gebaseerd op de CIPP-backup <b>flyinggroup.aero_2026-09-02-0817</b>, de baselines
+  <b>IntuneBackup/IntuneTemplate</b> (138 policies, 1.967 instellingen) en
+  <b>CA-Policies/CATemplate</b> (33 templates), en de 24 ISMS-beleidsdocumenten van
+  FlyingGroup, revisie 1 met ingangsdatum 11 mei 2026. Instellingen zijn uitgeklapt met
+  <code>flattenSettings</code> uit <code>scripts/lib/templates.js</code>, zodat beide sets
+  op dezelfde manier zijn behandeld.</p>
+  <p style="margin-top:12px">De backup bevat geen toewijzingen. Een policy die in de tenant
+  staat maar aan niemand is toegewezen ziet er in deze vergelijking hetzelfde uit als een
+  policy die overal geldt; waar dat het oordeel raakt staat het bij de bevinding.
+  Detailrapporten: <a href="RAPPORT-FLYINGGROUP.html">de tenanttoetsing</a> en
+  <a href="../CA-Policies/ANALYSE.html">de CA-gapanalyse</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ Merkt een Android-toestel als niet-compliant wanneer het geroot is, USB-foutopsp
 | Bron | OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD. |
 | Bestand | [`Baseline_AND_U_Compliance_Device_Health.json`](Baseline_AND_U_Compliance_Device_Health.json) |
 
-> Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst.
+> Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij de BYOD-inrichting die er nu is. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een minimale OS-versie (12.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.
 
 ## Eigenschappen — 37
 
@@ -48,7 +48,7 @@ Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen.
 | `securityRequireUpToDateSecurityProviders` | true |
 | `securityRequireCompanyPortalAppIntegrity` | true |
 | `securityRequiredAndroidSafetyNetEvaluationType` | hardwareBacked |
-| `osMinimumVersion` | — |
+| `osMinimumVersion` | 12.0 |
 | `osMaximumVersion` | — |
 | `minAndroidSecurityPatchLevel` | — |
 | `storageRequireEncryption` | false |

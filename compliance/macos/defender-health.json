@@ -1,0 +1,99 @@
+{
+  "Rules": [
+    {
+      "SettingName": "DefenderInstalled",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/mac-install-with-intune",
+      "RemediationStrings": [
+        {
+          "Language": "nl_NL",
+          "Title": "Microsoft Defender ontbreekt op deze Mac",
+          "Description": "Defender for Endpoint is niet geinstalleerd. Open Bedrijfsportal en installeer Microsoft Defender, of neem contact op met de servicedesk."
+        },
+        {
+          "Language": "en_US",
+          "Title": "Microsoft Defender is missing on this Mac",
+          "Description": "Defender for Endpoint is not installed. Open Company Portal and install Microsoft Defender, or contact the service desk."
+        }
+      ]
+    },
+    {
+      "SettingName": "DefenderRunning",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/mac-support-install",
+      "RemediationStrings": [
+        {
+          "Language": "nl_NL",
+          "Title": "Microsoft Defender draait niet",
+          "Description": "Defender is geinstalleerd maar het achtergrondproces draait niet. Start de Mac opnieuw op. Blijft de melding staan, neem dan contact op met de servicedesk."
+        },
+        {
+          "Language": "en_US",
+          "Title": "Microsoft Defender is not running",
+          "Description": "Defender is installed but its background process is not running. Restart the Mac. If the message persists, contact the service desk."
+        }
+      ]
+    },
+    {
+      "SettingName": "DefenderHealthy",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/mac-support-install",
+      "RemediationStrings": [
+        {
+          "Language": "nl_NL",
+          "Title": "Microsoft Defender meldt een probleem",
+          "Description": "Defender draait maar meldt zichzelf als niet gezond. Vaak ontbreekt een toestemming in Systeeminstellingen bij Privacy en beveiliging, zoals Volledige schijftoegang. Neem contact op met de servicedesk."
+        },
+        {
+          "Language": "en_US",
+          "Title": "Microsoft Defender reports a problem",
+          "Description": "Defender is running but reports itself as unhealthy. This is often a missing permission under System Settings, Privacy and Security, such as Full Disk Access. Contact the service desk."
+        }
+      ]
+    },
+    {
+      "SettingName": "DefenderRealtimeProtection",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/mac-preferences",
+      "RemediationStrings": [
+        {
+          "Language": "nl_NL",
+          "Title": "Realtimebeveiliging staat uit",
+          "Description": "Defender draait, maar scant niet mee terwijl u werkt. Neem contact op met de servicedesk."
+        },
+        {
+          "Language": "en_US",
+          "Title": "Real-time protection is off",
+          "Description": "Defender is running but is not scanning as you work. Contact the service desk."
+        }
+      ]
+    },
+    {
+      "SettingName": "DefenderDefinitionsCurrent",
+      "Operator": "IsEquals",
+      "DataType": "Boolean",
+      "Operand": true,
+      "MoreInfoUrl": "https://learn.microsoft.com/defender-endpoint/mac-updates",
+      "RemediationStrings": [
+        {
+          "Language": "nl_NL",
+          "Title": "De virusdefinities zijn verouderd",
+          "Description": "Defender herkent de nieuwste dreigingen nog niet. Zorg dat de Mac verbinding heeft met internet en laat hem enkele minuten aan staan."
+        },
+        {
+          "Language": "en_US",
+          "Title": "Virus definitions are out of date",
+          "Description": "Defender does not yet recognise the newest threats. Make sure the Mac has an internet connection and leave it on for a few minutes."
+        }
+      ]
+    }
+  ]
+}

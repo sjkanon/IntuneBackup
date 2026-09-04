@@ -29,7 +29,7 @@
     "securityRequireUpToDateSecurityProviders": true,
     "securityRequireCompanyPortalAppIntegrity": true,
     "securityRequiredAndroidSafetyNetEvaluationType": "hardwareBacked",
-    "osMinimumVersion": null,
+    "osMinimumVersion": "12.0",
     "osMaximumVersion": null,
     "minAndroidSecurityPatchLevel": null,
     "storageRequireEncryption": false,

@@ -1,6 +1,6 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 25 policies
+# macOS — 26 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
@@ -8,7 +8,7 @@ Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder l
 |---|---:|
 | `SettingsCatalog/` | 21 |
 | `DeviceConfigurations/` | 1 |
-| `CompliancePolicies/` | 3 |
+| `CompliancePolicies/` | 4 |
 
 ## Device-scoped (D) — 18
 
@@ -35,7 +35,7 @@ Toewijzen aan apparaatgroepen.
 | [**Screen Recording**](DeviceConfigurations/Baseline_MAC_D_Screen_Recording.md) | Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen. | Device config | — | All Devices | — |
 | [**Software Updates**](SettingsCatalog/Baseline_MAC_D_Software_Updates.md) | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 
-## User-scoped (U) — 7
+## User-scoped (U) — 8
 
 Toewijzen aan gebruikersgroepen.
 
@@ -43,6 +43,7 @@ Toewijzen aan gebruikersgroepen.
 |---|---|---|---:|---|---|
 | [**Compliance Device Health**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.md) | Toetst of System Integrity Protection op de Mac aanstaat. | Compliance | — | All Users | — |
 | [**Compliance Device Security**](CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.md) | Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeeper alleen ondertekende software toelaat. | Compliance | — | All Users | — |
+| [**Compliance OS Version**](CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.md) | Toetst of de Mac op macOS 14 of hoger draait — de versie die het declaratieve updatebeleid van de baseline vereist. | Compliance | — | — | — |
 | [**Compliance Password**](CompliancePolicies/Baseline_MAC_U_Compliance_Password.md) | Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn. | Compliance | — | All Users | — |
 | [**Microsoft Edge Extensions**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.md) | Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren. | Settings Catalog | 4 | All Users | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` |
 | [**Microsoft Edge Profiles and Sync**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.md) | Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt. | Settings Catalog | 4 | All Users | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |

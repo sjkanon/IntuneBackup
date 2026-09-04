@@ -12,7 +12,7 @@
     "passcodePreviousPasscodeBlockCount": null,
     "passcodeMinimumCharacterSetCount": null,
     "passcodeRequiredType": "deviceDefault",
-    "osMinimumVersion": null,
+    "osMinimumVersion": "16.0",
     "osMaximumVersion": null,
     "osMinimumBuildVersion": null,
     "osMaximumBuildVersion": null,

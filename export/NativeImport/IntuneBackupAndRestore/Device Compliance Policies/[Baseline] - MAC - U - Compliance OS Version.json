@@ -1,0 +1,43 @@
+{
+    "@odata.type": "#microsoft.graph.macOSCompliancePolicy",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "passwordRequired": false,
+    "passwordBlockSimple": false,
+    "passwordExpirationDays": null,
+    "passwordMinimumLength": null,
+    "passwordMinutesOfInactivityBeforeLock": null,
+    "passwordPreviousPasswordBlockCount": null,
+    "passwordMinimumCharacterSetCount": null,
+    "passwordRequiredType": "deviceDefault",
+    "osMinimumVersion": "14.0",
+    "osMaximumVersion": null,
+    "osMinimumBuildVersion": null,
+    "osMaximumBuildVersion": null,
+    "systemIntegrityProtectionEnabled": false,
+    "deviceThreatProtectionEnabled": false,
+    "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+    "advancedThreatProtectionRequiredSecurityLevel": "unavailable",
+    "storageRequireEncryption": false,
+    "gatekeeperAllowedAppSource": "notConfigured",
+    "firewallEnabled": false,
+    "firewallBlockAllIncoming": false,
+    "firewallEnableStealthMode": false,
+    "scheduledActionsForRule": [
+        {
+            "ruleName": "PasswordRequired",
+            "scheduledActionConfigurations": [
+                {
+                    "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                    "gracePeriodHours": 72,
+                    "actionType": "block",
+                    "notificationTemplateId": "00000000-0000-0000-0000-000000000000",
+                    "notificationMessageCCList": []
+                }
+            ]
+        }
+    ],
+    "displayName": "[Baseline] - MAC - U - Compliance OS Version",
+    "description": "Toetst of de Mac op macOS 14 of hoger draait — de versie die het declaratieve updatebeleid van de baseline vereist. Toewijzing volgens baseline: geen — fase 2. Bron: Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — MAC - D - Software Updates gebruikt declaratief updatebeleid (DDM) en dat vraagt macOS 14."
+}

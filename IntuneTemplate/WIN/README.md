@@ -1,6 +1,6 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 107 policies
+# Windows — 108 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
@@ -9,7 +9,7 @@ Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder l
 | `SettingsCatalog/` | 98 |
 | `DeviceConfigurations/` | 4 |
 | `AdministrativeTemplates/` | 1 |
-| `CompliancePolicies/` | 4 |
+| `CompliancePolicies/` | 5 |
 
 ## Device-scoped (D) — 85
 
@@ -103,7 +103,7 @@ Toewijzen aan apparaatgroepen.
 | [**Wireless and Peripherals**](SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.md) | Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | [**Wireless Shared Devices**](SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) | Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. | Settings Catalog | 1 | — | `INTUNE-BASE-138-DWirelessSharedDevices` |
 
-## User-scoped (U) — 22
+## User-scoped (U) — 23
 
 Toewijzen aan gebruikersgroepen.
 
@@ -115,6 +115,7 @@ Toewijzen aan gebruikersgroepen.
 | [**Compliance Defender for Endpoint**](CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint.md) | Toetst het risiconiveau dat Defender for Endpoint aan het apparaat toekent. Vereist een werkende koppeling met Defender for Endpoint in Intune. | Compliance | — | All Users | — |
 | [**Compliance Device Health**](CompliancePolicies/Baseline_WIN_U_Compliance_Device_Health.md) | Toetst of het apparaat versleuteld is en veilig opstart (BitLocker, Secure Boot, code-integriteit). Zonder deze toets is 'vereis een compliant apparaat' in Conditional Access betekenisloos. | Compliance | — | All Users | — |
 | [**Compliance Device Security**](CompliancePolicies/Baseline_WIN_U_Compliance_Device_Security.md) | Toetst de beveiligingsstand van het apparaat: firewall, antivirus en beveiligingsonderdelen die aan horen te staan. | Compliance | — | All Users | — |
+| [**Compliance OS Version**](CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.md) | Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan uitvoeren: minimaal Windows 11 22H2. | Compliance | — | — | — |
 | [**Compliance Password**](CompliancePolicies/Baseline_WIN_U_Compliance_Password.md) | Toetst of het apparaat een wachtwoord of PIN vereist en hoe sterk die moet zijn. | Compliance | — | All Users | — |
 | [**Copilot**](SettingsCatalog/Baseline_WIN_U_Copilot.md) | Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker. | Settings Catalog | 2 | All Users | `INTUNE-BASE-097-UCopilot` |
 | [**Microsoft Edge Extensions**](SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Extensions.md) | Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zijn. | Settings Catalog | 6 | All Users | `INTUNE-BASE-098-UMicrosoftEdgeExtensions` |

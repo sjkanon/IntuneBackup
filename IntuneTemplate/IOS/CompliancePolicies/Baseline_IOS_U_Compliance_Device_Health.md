@@ -14,7 +14,7 @@ Merkt een iPhone of iPad die met een jailbreak is opengebroken als niet-complian
 | Bron | OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Baseline - iOSiPadOS - Device Health) en UniFy-Endpoint iOS BYOD. |
 | Bestand | [`Baseline_IOS_U_Compliance_Device_Health.json`](Baseline_IOS_U_Compliance_Device_Health.json) |
 
-> Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders.
+> Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders. Sinds september 2026 eist deze policy ook een minimale OS-versie (16.0); die waarde veroudert en hoort bij elke grote release te worden nagelopen.
 
 ## Eigenschappen — 25
 
@@ -31,7 +31,7 @@ Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen.
 | `passcodePreviousPasscodeBlockCount` | — |
 | `passcodeMinimumCharacterSetCount` | — |
 | `passcodeRequiredType` | deviceDefault |
-| `osMinimumVersion` | — |
+| `osMinimumVersion` | 16.0 |
 | `osMaximumVersion` | — |
 | `osMinimumBuildVersion` | — |
 | `osMaximumBuildVersion` | — |
