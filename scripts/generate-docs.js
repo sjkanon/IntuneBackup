@@ -210,7 +210,18 @@ function policyDocument(template, ctx) {
     "",
   ];
 
-  if (entry.note) lines.push(`> ${entry.note}`, "");
+  // Elke regel apart voorzien van "> ": een note van meer dan één alinea zou anders na de
+  // eerste lege regel uit de blockquote lopen en als losse tekst onder het kader eindigen —
+  // dan lijkt de helft van de note bij de policy te horen in plaats van bij de waarschuwing.
+  if (entry.note) {
+    lines.push(
+      entry.note
+        .split("\n")
+        .map((regel) => (regel ? `> ${regel}` : ">"))
+        .join("\n"),
+      ""
+    );
+  }
 
   if (type === "Catalog") {
     const rows = [];

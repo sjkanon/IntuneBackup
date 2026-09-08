@@ -1,22 +1,23 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 26 policies
+# macOS — 27 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
 | `SettingsCatalog/` | 21 |
-| `DeviceConfigurations/` | 1 |
+| `DeviceConfigurations/` | 2 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 18
+## Device-scoped (D) — 19
 
 Toewijzen aan apparaatgroepen.
 
 | Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |
 |---|---|---|---:|---|---|
 | [**Accounts and Login**](SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.md) | Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-035-MACDAccountsAndLogin` |
+| [**Azure Files Cloud Kerberos**](DeviceConfigurations/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) | Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt. | Device config | — | — | — |
 | [**Defender Antivirus**](SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md) | Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS. | Settings Catalog | 24 | All Devices | `INTUNE-BASE-036-MACDDefenderAntivirus` |
 | [**Defender for Endpoint**](SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md) | Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd. | Settings Catalog | 50 | All Devices | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
 | [**Enrollment Profile Administrator User Affinity**](SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.md) | Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder. | Settings Catalog | 40 | — | `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity` |
