@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 109 policies
+# Windows — 111 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
 | `SettingsCatalog/` | 99 |
-| `DeviceConfigurations/` | 4 |
+| `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 5 |
 
-## Device-scoped (D) — 86
+## Device-scoped (D) — 88
 
 Toewijzen aan apparaatgroepen.
 
@@ -83,6 +83,8 @@ Toewijzen aan apparaatgroepen.
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.md) | Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-082-DTimezone` |
 | [**Update Reports and Telemetry**](SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.md) | Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen. | Settings Catalog | 5 | All Devices | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
 | [**User Rights**](SettingsCatalog/Baseline_WIN_D_User_Rights.md) | Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. | Settings Catalog | 28 | All Devices | `INTUNE-BASE-026-UserRights` |
+| [**Wifi Corporate**](DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.md) | Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Windows-laptop, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen. | Device config | — | — | — |
+| [**Wifi Guest**](DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.md) | Rolt het gastnetwerk uit als tweede profiel op elke Windows-laptop, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is en vanzelf terugvalt naar het bedrijfsnetwerk zodra dat weer in de lucht is. | Device config | — | — | — |
 | [**Windows AI Features Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) | Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | [**Windows AI Features Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.md) | Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent. | Settings Catalog | 4 | — | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | [**Windows AI Permitted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) | Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. | Settings Catalog | 3 | — | `INTUNE-BASE-148-DWindowsAIPermitted` |

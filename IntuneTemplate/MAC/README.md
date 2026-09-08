@@ -1,16 +1,16 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# macOS — 27 policies
+# macOS — 29 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
 | `SettingsCatalog/` | 22 |
-| `DeviceConfigurations/` | 1 |
+| `DeviceConfigurations/` | 3 |
 | `CompliancePolicies/` | 4 |
 
-## Device-scoped (D) — 19
+## Device-scoped (D) — 21
 
 Toewijzen aan apparaatgroepen.
 
@@ -35,6 +35,8 @@ Toewijzen aan apparaatgroepen.
 | [**Restrictions**](SettingsCatalog/Baseline_MAC_D_Restrictions.md) | Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten. | Settings Catalog | 37 | All Devices | `INTUNE-BASE-046-MACDRestrictions` |
 | [**Screen Recording**](DeviceConfigurations/Baseline_MAC_D_Screen_Recording.md) | Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen. | Device config | — | All Devices | — |
 | [**Software Updates**](SettingsCatalog/Baseline_MAC_D_Software_Updates.md) | Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. | Settings Catalog | 10 | All Devices | `INTUNE-BASE-047-MACDSoftwareUpdates` |
+| [**Wifi Corporate**](DeviceConfigurations/Baseline_MAC_D_Wifi_Corporate.md) | Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Mac, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen. | Device config | — | — | — |
+| [**Wifi Guest**](DeviceConfigurations/Baseline_MAC_D_Wifi_Guest.md) | Rolt het gastnetwerk uit als tweede profiel op elke Mac, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is. | Device config | — | — | — |
 
 ## User-scoped (U) — 8
 

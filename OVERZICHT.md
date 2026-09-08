@@ -2,29 +2,29 @@
 
 # Intune-baseline — overzicht
 
-142 policies over 4 platformen, met
+146 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 142 |
+| Policies | 146 |
 | Baseline-checks | 128 |
-| Zonder toewijzing (bewust) | 34 |
+| Zonder toewijzing (bewust) | 38 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 4 | 5 | – | **109** |
-| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 1 | 4 | – | **27** |
+| [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 6 | 5 | – | **111** |
+| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 109 policies
-- [macOS](IntuneTemplate/MAC/README.md) — 27 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 111 policies
+- [macOS](IntuneTemplate/MAC/README.md) — 29 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 3 policies
 - [Android](IntuneTemplate/AND/README.md) — 3 policies
 
@@ -140,7 +140,7 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | `MAC - D - Software Updates` | declaratief updatebeleid vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet |
 | `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | vergrendelde inschrijving is na de inschrijving alleen met een wipe terug te draaien |
 
-Daarnaast staan 34 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
+Daarnaast staan 38 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
 voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen 1 en 2 voor
 Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de drie
 CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de WHfB-variant

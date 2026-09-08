@@ -509,6 +509,59 @@
       "fase": 1
     },
     {
+      "target": "Baseline_MAC_D_Wifi_Corporate",
+      "displayName": "[Baseline] - MAC - D - Wifi Corporate",
+      "doel": "Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Mac, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen.",
+      "controls": {
+        "iso": [
+          "A.8.20 Netwerkbeveiliging",
+          "A.8.21 Beveiliging van netwerkdiensten",
+          "A.8.1 Eindpuntapparatuur van gebruikers"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP19"
+        ]
+      },
+      "bron": "Eigen baseline — Intune wifi-profiel (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
+      "bewijs": "Een centraal uitgerold wifi-profiel is wat voorkomt dat het netwerkwachtwoord per mail, per briefje of per collega rondgaat: de gebruiker hoeft het niet te kennen om verbinding te maken. Het maakt roteren ook uitvoerbaar — één wijziging hier bereikt de hele vloot, terwijl een handmatig ingevoerd wachtwoord bij elke rotatie opnieuw langs iedereen moet. Dat is de kern van A.8.20: netwerktoegang beheerd in plaats van doorverteld.",
+      "universeel": "Ja. Elke Mac die op locatie komt heeft dit profiel nodig, en een Mac die dat nooit doet heeft er geen last van — een profiel voor een SSID die niet in de lucht is doet niets. De grens ligt bij een vestiging met een eigen SSID: die vraagt een tweede profiel, niet een aangepast profiel.",
+      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. Twee macOS-eigenaardigheden: Apple's wifi-payload kent maar één personal-variant, dus `wpaPersonal` dekt WPA, WPA2 én WPA3 waar Windows apart `wpa2Personal` heeft; en macOS kent in dit profieltype geen tegenhanger van `connectToPreferredNetwork` — de voorkeursvolgorde volgt daar uit de netwerkvolgorde van het apparaat zelf. Dit is een gewone device configuration en geen custom .mobileconfig, dus de PSK staat als leesbaar veld in het template en niet verstopt in een base64-payload.",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan."
+    },
+    {
+      "target": "Baseline_MAC_D_Wifi_Guest",
+      "displayName": "[Baseline] - MAC - D - Wifi Guest",
+      "doel": "Rolt het gastnetwerk uit als tweede profiel op elke Mac, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is.",
+      "controls": {
+        "iso": [
+          "A.8.20 Netwerkbeveiliging",
+          "A.8.21 Beveiliging van netwerkdiensten"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen",
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP19",
+          "ISMP08"
+        ]
+      },
+      "bron": "Eigen baseline — Intune wifi-profiel (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e).",
+      "bewijs": "Zonder tweede profiel is een storing op het bedrijfsnetwerk meteen een apparaat zonder verbinding — en dus zonder Intune, zonder Defender-signalen en zonder enige mogelijkheid om op afstand iets recht te zetten, precies op het moment dat je dat nodig hebt. Het gastnetwerk als terugval houdt het apparaat bereikbaar. Dat dat netwerk minder vertrouwd is verandert niets aan de rest van de baseline: firewall, schijfversleuteling en Defender gaan nergens uit van een vertrouwd netwerk.",
+      "universeel": "Ja, met dezelfde grens als bij Wifi Corporate: een vestiging met een ander gastnetwerk vraagt een eigen profiel. Let op dat het gastnetwerk hiermee een beheerd netwerk wordt — als het een open netwerk met captive portal is in plaats van PSK, klopt dit template niet en is `wiFiSecurityType: open` de juiste vorm.",
+      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. Dit profiel is de terugval, niet de eerste keuze: rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. macOS bepaalt de voorkeursvolgorde zelf op basis van de netwerkvolgorde van het apparaat; wil je die hard vastleggen, dan is dat handwerk of een script en niet dit profiel.",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan, en niet eerder dan Wifi Corporate."
+    },
+    {
       "source": "MACOS/IntuneManagement/CompliancePolicies/MacOS - OIB - Compliance - U - Device Health - v1.0.json",
       "target": "Baseline_MAC_U_Compliance_Device_Health",
       "displayName": "[Baseline] - MAC - U - Compliance Device Health",
@@ -1577,6 +1630,59 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights",
       "herkomst": "oib",
       "fase": 1
+    },
+    {
+      "target": "Baseline_WIN_D_Wifi_Corporate",
+      "displayName": "[Baseline] - WIN - D - Wifi Corporate",
+      "doel": "Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Windows-laptop, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen.",
+      "controls": {
+        "iso": [
+          "A.8.20 Netwerkbeveiliging",
+          "A.8.21 Beveiliging van netwerkdiensten",
+          "A.8.1 Eindpuntapparatuur van gebruikers"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP19"
+        ]
+      },
+      "bron": "Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
+      "bewijs": "Een centraal uitgerold wifi-profiel is wat voorkomt dat het netwerkwachtwoord per mail, per briefje of per collega rondgaat: de gebruiker hoeft het niet te kennen om verbinding te maken. Het maakt roteren ook uitvoerbaar — één wijziging hier bereikt de hele vloot, terwijl een handmatig ingevoerd wachtwoord bij elke rotatie opnieuw langs iedereen moet. Dat is de kern van A.8.20: netwerktoegang beheerd in plaats van doorverteld.",
+      "universeel": "Ja. Elke laptop die op locatie komt heeft dit profiel nodig, en een laptop die dat nooit doet heeft er geen last van — een profiel voor een SSID die niet in de lucht is doet niets. De grens ligt bij een vestiging met een eigen SSID: die vraagt een tweede profiel, niet een aangepast profiel.",
+      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. `connectToPreferredNetwork` staat hier bewust op false en bij Wifi Guest op true: dit ís het voorkeursnetwerk, dus Windows hoeft hier niet weg te zoeken. Let op de samenloop met [Baseline] - WIN - D - Wireless Shared Devices: die policy staat alleen nog door Intune uitgerolde netwerken toe en heeft dit profiel dus nodig om een gedeeld apparaat niet offline te zetten. Dit is de policy die daar als voorwaarde bij hoort.",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan."
+    },
+    {
+      "target": "Baseline_WIN_D_Wifi_Guest",
+      "displayName": "[Baseline] - WIN - D - Wifi Guest",
+      "doel": "Rolt het gastnetwerk uit als tweede profiel op elke Windows-laptop, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is en vanzelf terugvalt naar het bedrijfsnetwerk zodra dat weer in de lucht is.",
+      "controls": {
+        "iso": [
+          "A.8.20 Netwerkbeveiliging",
+          "A.8.21 Beveiliging van netwerkdiensten"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen",
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "partis": [],
+        "isms": [
+          "ISMP19",
+          "ISMP08"
+        ]
+      },
+      "bron": "Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e).",
+      "bewijs": "Zonder tweede profiel is een storing op het bedrijfsnetwerk meteen een apparaat zonder verbinding — en dus zonder Intune, zonder Defender-signalen en zonder enige mogelijkheid om op afstand iets recht te zetten, precies op het moment dat je dat nodig hebt. Het gastnetwerk als automatische terugval houdt het apparaat bereikbaar. Dat dat netwerk minder vertrouwd is verandert niets aan de rest van de baseline: firewall, schijfversleuteling en Defender gaan nergens uit van een vertrouwd netwerk.",
+      "universeel": "Ja, met dezelfde grens als bij Wifi Corporate: een vestiging met een ander gastnetwerk vraagt een eigen profiel. Let op dat het gastnetwerk hiermee een beheerd netwerk wordt — als het een open netwerk met captive portal is in plaats van PSK, klopt dit template niet en is `wifiSecurityType: open` de juiste vorm.",
+      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. `connectToPreferredNetwork` staat hier op true en bij Wifi Corporate op false: dit is de terugval, dus zodra het bedrijfsnetwerk weer in de lucht is hoort Windows daarheen terug te gaan. Rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. Staat er een verbruikslimiet op het gastnetwerk, zet `meteredConnectionLimit` dan op `fixed` — nu staat hij op `unrestricted`, waarmee Windows er ook updates over binnenhaalt.",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan, en niet eerder dan Wifi Corporate."
     },
     {
       "target": "Baseline_WIN_D_Windows_AI_Features_Permitted",

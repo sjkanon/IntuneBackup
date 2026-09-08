@@ -1,0 +1,17 @@
+{
+    "@odata.type": "#microsoft.graph.windowsWifiConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Windows-laptop, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen. Toewijzing: geen — SSID en wachtwoord staan nog op een placeholder; vul die in vóór je toewijst, anders krijgt geen enkel apparaat verbinding. Bron: Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
+    "displayName": "[Baseline] - WIN - D - Wifi Corporate",
+    "ssid": "<SSID-CORPORATE>",
+    "networkName": "<SSID-CORPORATE>",
+    "wifiSecurityType": "wpa2Personal",
+    "preSharedKey": "<PSK-CORPORATE>",
+    "connectAutomatically": true,
+    "connectToPreferredNetwork": false,
+    "connectWhenNetworkNameIsHidden": false,
+    "meteredConnectionLimit": "unrestricted",
+    "proxySetting": "none"
+}

@@ -1,0 +1,17 @@
+{
+    "@odata.type": "#microsoft.graph.windowsWifiConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "Rolt het gastnetwerk uit als tweede profiel op elke Windows-laptop, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is en vanzelf terugvalt naar het bedrijfsnetwerk zodra dat weer in de lucht is. Toewijzing: geen — SSID en wachtwoord staan nog op een placeholder; vul die in vóór je toewijst, anders krijgt geen enkel apparaat verbinding. Bron: Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
+    "displayName": "[Baseline] - WIN - D - Wifi Guest",
+    "ssid": "<SSID-GUEST>",
+    "networkName": "<SSID-GUEST>",
+    "wifiSecurityType": "wpa2Personal",
+    "preSharedKey": "<PSK-GUEST>",
+    "connectAutomatically": true,
+    "connectToPreferredNetwork": true,
+    "connectWhenNetworkNameIsHidden": false,
+    "meteredConnectionLimit": "unrestricted",
+    "proxySetting": "none"
+}

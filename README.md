@@ -5,19 +5,19 @@ Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds au
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
 
-106 policies over vier platformen:
+146 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 71 | 1 | 4 | 4 | – | **80** |
-| [macOS](IntuneTemplate/MAC/README.md) | 20 | – | 1 | 3 | – | **24** |
-| [iOS](IntuneTemplate/IOS/README.md) | – | – | – | – | 1 | **1** |
-| [Android](IntuneTemplate/AND/README.md) | – | – | – | – | 1 | **1** |
+| [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 6 | 5 | – | **111** |
+| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
+| [iOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
+| [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>106 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>146 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
