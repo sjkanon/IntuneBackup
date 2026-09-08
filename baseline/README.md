@@ -9,24 +9,24 @@ Baseline-koppelingen). Wijzig je hier iets, dan is het bij de volgende
 
 ```mermaid
 flowchart LR
-  T["IntuneTemplate/"] -->|generate-baseline.js| B["baseline/intune/baseline-v1.0.json<br/>127 rules"]
+  T["IntuneTemplate/"] -->|generate-baseline.js| B["baseline/intune/baseline-v1.0.json<br/>128 rules"]
   B --> P["TEST Policies Platform"]
   P -->|vergelijkt op inhoud| TEN["live tenant"]
 ```
 
 ## Wat erin zit
 
-127 regels: 6 die uit het platform zelf komen (checkId 001–006, device-compliance- en
-app-protection-checks) plus 121 gegenereerd uit `IntuneTemplate/`. Daarvan 18 met severity
+128 regels: 6 die uit het platform zelf komen (checkId 001–006, device-compliance- en
+app-protection-checks) plus 122 gegenereerd uit `IntuneTemplate/`. Daarvan 18 met severity
 `high`, de rest `medium`.
 
 | `type` | Aantal | Uit |
 |---|---:|---|
-| `settings-catalog-match` | 120 | elke Settings Catalog-policy, Windows én macOS |
+| `settings-catalog-match` | 121 | elke Settings Catalog-policy, Windows én macOS |
 | `group-policy-definition-match` | 1 | de enige overgebleven ADMX-policy |
 | `device-encryption-required`, `compliance-policy-assigned`, `compliance-policy-min-os`, `app-protection-policy-exists`, `passcode-required`, `defender-enabled` | 6 | overgenomen uit het platform (001–006) |
 
-Per platform: Windows 100, macOS 21.
+Per platform: Windows 100, macOS 22.
 
 Niet elk policytype levert een check op. `Device`, `deviceCompliancePolicies` en
 `AppProtection` hebben geen matcher in de engine; een regel met een onbekend type is een check

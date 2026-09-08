@@ -8,10 +8,10 @@ in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
 | [Windows](WIN/README.md) | 99 | 1 | 4 | 5 | – | **109** |
-| [macOS](MAC/README.md) | 21 | – | 2 | 4 | – | **27** |
+| [macOS](MAC/README.md) | 22 | – | 1 | 4 | – | **27** |
 | [iOS/iPadOS](IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](AND/README.md) | – | – | – | 2 | 1 | **3** |
-| **Totaal** | **120** | **1** | **6** | **13** | **2** | **142** |
+| **Totaal** | **121** | **1** | **5** | **13** | **2** | **142** |
 
 ## Indeling
 

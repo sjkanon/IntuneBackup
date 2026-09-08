@@ -11299,6 +11299,62 @@
           "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
         }
       ]
+    },
+    {
+      "checkId": "INTUNE-BASE-154-MACDAzureFilesCloudKerberos",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "azure-files-cloud-kerberos",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Azure Files Cloud Kerberos\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensionidentifier_kerberos",
+            "expectedValue": "com.apple.extensiblesso_extensionidentifier_kerberos_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_teamidentifier_kerberos",
+            "expectedValue": "com.apple.extensiblesso_teamidentifier_kerberos_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_type_kerberos",
+            "expectedValue": "com.apple.extensiblesso_type_kerberos_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_realm_kerberos",
+            "expectedValue": "KERBEROS.MICROSOFTONLINE.COM"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_useplatformssotgt_kerberos",
+            "expectedValue": "com.apple.extensiblesso_extensiondata_useplatformssotgt_kerberos_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_performkerberosonly_kerberos",
+            "expectedValue": "com.apple.extensiblesso_extensiondata_performkerberosonly_kerberos_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_hosts_kerberos",
+            "expectedValue": [
+              "windows.net",
+              ".windows.net"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
     }
   ]
 }

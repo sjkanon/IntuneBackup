@@ -329,6 +329,11 @@ const CHECK_NUMBERS = {
   // Kijkt naar wat dit apparaat bij ándere machines doet — de rest van de baseline kijkt
   // alleen naar wat er óp het apparaat gebeurt.
   Baseline_WIN_D_Defender_Ransomware_Protection: 153,
+
+  // Tweede SSO-extensieprofiel naast Platform SSO, voor het Entra Cloud Kerberos-realm. De
+  // KDC-URL draagt %OrganizationId% en valt daarmee buiten de check — de rest van de policy
+  // (realm, hosts, usePlatformSSOTGT, performKerberosOnly) is wel te toetsen.
+  Baseline_MAC_D_Azure_Files_Cloud_Kerberos: 154,
 };
 
 /**

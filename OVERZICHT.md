@@ -9,7 +9,7 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 | | Aantal |
 |---|---:|
 | Policies | 142 |
-| Baseline-checks | 127 |
+| Baseline-checks | 128 |
 | Zonder toewijzing (bewust) | 34 |
 | Uitgerold in de tenant | 0 |
 
@@ -18,7 +18,7 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
 | [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 4 | 5 | – | **109** |
-| [macOS](IntuneTemplate/MAC/README.md) | 21 | – | 2 | 4 | – | **27** |
+| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 1 | 4 | – | **27** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
