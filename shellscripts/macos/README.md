@@ -105,8 +105,12 @@ share op het bureaublad staat — en verder niets. Mounten is een handeling en g
 Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de share
 dus pas een uur ná het inloggen terugzetten, en dat is precies het moment waarop iemand hem
 nodig heeft. Dit script installeert daarom een LaunchAgent
-(`com.aci-europe.baseline.mount-azure-files`) die bij login draait en daarna elke vijf
-minuten, en doet zelf één eerste poging.
+(`com.aci-europe.baseline.mount-azure-files`) en doet zelf één eerste poging.
+
+Die agent draait **bij login en bij elke netwerkwijziging**, niet op een klok: `RunAtLoad` plus
+`WatchPaths` op `resolv.conf` en de netwerkconfiguratie, met een `ThrottleInterval` van tien
+seconden ertegen. Wifi-wissel, VPN erbij, uit de slaap komen — dat zijn de momenten waarop een
+mount weg is of juist weer kan, en pollen om de zoveel minuten raakt die net niet.
 
 Het script kopieert zichzelf naar `~/Library/Application Support/Baseline/` en laat de agent
 díe kopie aanroepen. Eén bestand met de instellingen erin, dus de agent kan niet uit de pas
@@ -140,6 +144,37 @@ De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesl
 Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
 bestaande shares) staat in de note bij dat profiel.
 
+### Het sleuteltje in de menubalk zegt "Network not available"
+
+Dat is **niet** normaal, en het is iets anders dan "Not signed in" — die laatste beschrijft
+Microsoft uitdrukkelijk als onschuldig bij een Platform SSO-opstelling. "Network not available"
+betekent dat de Kerberos-extensie de KDC voor zijn realm niet kan bereiken.
+
+Eerste verdachte is de KDC-URL zelf. In het template staat die als:
+
+```
+kkdcp://login.microsoftonline.com/%OrganizationId%/kerberos
+```
+
+CIPP vervangt dat token bij uitrol door het tenant-id. **Rol je uit met IntuneBackupAndRestore
+of door de JSON rechtstreeks te importeren, dan gebeurt die vervanging niet** en staat het
+token letterlijk in de URL. De extensie probeert dan een KDC te bereiken die niet bestaat, en
+meldt precies dit. Controleer wat er écht op het toestel staat:
+
+```bash
+sudo profiles show -output /tmp/profielen.plist
+grep -A3 preferredKDCs /tmp/profielen.plist
+```
+
+Staat daar een GUID, dan is de URL goed en ligt het elders — bijvoorbeeld een proxy of firewall
+die `login.microsoftonline.com` over de KDC-proxy blokkeert. Staat er `%OrganizationId%`, dan is
+dat de oorzaak en moet het id met de hand worden ingevuld in de kopie die je uitrolt.
+
+Het [Platform SSO-ticket zelf](https://learn.microsoft.com/en-us/entra/identity/devices/device-join-macos-platform-single-sign-on-kerberos-configuration)
+staat hier los van: `app-sso platform -s` kan een geldig `tgt_cloud` tonen terwijl de
+Kerberos-extensie zijn eigen KDC niet bereikt. Die twee doen niet hetzelfde en falen
+onafhankelijk van elkaar.
+
 ### Share en submap zijn niet hetzelfde
 
 `smb://acisafiles.file.core.windows.net/data/Public` staat in het script als drie velden:
@@ -160,15 +195,25 @@ zijn eigen mount niet herkennen en elke ronde opnieuw mounten.
 De share landt in `/Volumes` en verschijnt in de Finder-zijbalk onder **Locaties**, met een
 uitwerpknop — hetzelfde als wanneer je hem via *Ga → Verbind met server* had gekoppeld.
 
-Dat is de reden dat het script `osascript -e 'mount volume "smb://…"'` gebruikt en niet
-`mount_smbfs`. Die twee mounten allebei, maar niet hetzelfde:
+Wat daarvoor telt is **waar** de share landt, niet welk commando hem mountte. Alles wat in
+`/Volumes` staat zet Finder in de zijbalk; een mount in een map in de thuismap ziet Finder niet
+als server en verschijnt nergens.
 
-| | `mount_smbfs` | `mount volume` (NetFS) |
+Het script gebruikt `mount_smbfs -N`, en uitdrukkelijk **niet** `osascript -e 'mount volume'`:
+
+| | `mount_smbfs -N` | `mount volume` (NetFS) |
 |---|---|---|
-| Waar | een map die je zelf aanmaakt, bijvoorbeeld in de thuismap | `/Volumes/` |
-| In de Finder-zijbalk | nee — Finder ziet zo'n mount niet als server | ja, onder Locaties |
-| Uitwerpen | alleen met `umount` | met de knop in Finder |
-| Rechten op /Volumes | een gewone gebruiker mag daar niets aanmaken | NetFS regelt dat |
+| Mountpunt in `/Volumes` | maakt hij zelf aan, ook als gewone gebruiker | maakt NetFS aan |
+| Kerberos | gebruikt het TGT dat er is | idem |
+| Als het ticket niet wordt geaccepteerd | mount mislukt, met een foutmelding | **zet een aanmeldvenster op het scherm en wacht** |
+
+Die laatste regel is het hele verschil. Uit een LaunchAgent beantwoordt niemand die dialoog:
+het script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
+zonder één regel uitvoer. Dat is precies wat hier gebeurde. `-N` vraagt per definitie niets.
+
+Dezelfde afweging maakt [`42Loris/macOS_DriveMapping`](https://github.com/42Loris/macOS_DriveMapping),
+met in het script de opmerking dat `osascript` bij een URL zonder inloggegevens die
+"continue"-dialoog uitlokt.
 
 Een icoon op het **bureaublad** krijg je er niet automatisch bij: dat staat standaard uit en
 zit los van de zijbalk. Wil je dat wel, dan is dat één instelling in de settings catalog —

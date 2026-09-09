@@ -4,8 +4,8 @@
 # gebruiker geen wachtwoord hoeft in te vullen. Het macOS-equivalent van een drive mapping.
 #
 # De share komt in /Volumes en staat daarmee in de Finder-zijbalk onder Locaties, met een
-# uitwerpknop — zie de opmerking bij mount_share() waarom dat via NetFS moet en niet met
-# mount_smbfs.
+# uitwerpknop. Dat het in /Volumes staat is wat telt, niet welk commando hem mountte — zie de
+# opmerking bij mount_share() waarom het mount_smbfs is en uitdrukkelijk niet NetFS.
 #
 # Waarom een script en geen configuratieprofiel:
 #
@@ -18,9 +18,14 @@
 # Waarom een LaunchAgent en niet alleen dit script:
 #
 #   Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de
-#   share dus pas een uur na het inloggen terugzetten. De LaunchAgent doet het bij login en
-#   daarna elke vijf minuten — dit script installeert alleen die agent en doet één eerste
-#   poging.
+#   share dus pas een uur na het inloggen terugzetten. De LaunchAgent doet het bij login én
+#   bij elke netwerkwijziging (WatchPaths op resolv.conf en de netwerkconfiguratie) — dit
+#   script installeert alleen die agent en doet één eerste poging.
+#
+#   Op de wachtrij en niet op een klok: een share mount je als het netwerk verandert, niet om
+#   de zoveel minuten. Wifi-wissel, VPN erbij, uit de slaap komen — dat zijn de momenten
+#   waarop een mount weg is of juist weer kan. De vorm komt van 42Loris/macOS_DriveMapping,
+#   dat dezelfde constructie in productie draait.
 #
 # In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
 #
@@ -73,7 +78,11 @@ LABEL="com.aci-europe.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
-SMB_URL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+SMB_PAD="//${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+
+# De naam die in de Finder-zijbalk komt te staan, en dus ook de map in /Volumes.
+MOUNT_NAAM="${SHARE_SUBPATH:-$SHARE_NAME}"
+MOUNTPOINT="/Volumes/$MOUNT_NAAM"
 
 mkdir -p "$STATE_DIR" "$LOG_DIR"
 
@@ -91,31 +100,30 @@ fi
 
 # --- Mounten -------------------------------------------------------------------------------
 
-# Op server en share, en bewust niet op het mountpad en niet op de submap. Twee redenen: als
-# /Volumes/<naam> al bezet is hangt macOS er een cijfer achter, en NetFS bepaalt zelf of het
-# de mount op de submap of op de share zet. Een controle op iets specifiekers zou de share
-# elke ronde opnieuw mounten omdat hij zijn eigen mount niet herkent.
+# Op het mountpad, want dat kiezen we nu zelf: mount_smbfs zet de share precies op het pad dat
+# je meegeeft. Vergelijken op kolom 3 van `mount` en niet met grep op de hele regel — anders
+# zou /Volumes/Public ook matchen op /Volumes/Public-2, en dan denkt het script dat het al
+# goed staat terwijl het naar een andere mount kijkt.
 is_mounted() {
-  /sbin/mount -t smbfs 2>/dev/null | grep -qi "${SERVER}/${SHARE_NAME} on "
+  /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$MOUNTPOINT" '$3 == m { gevonden = 1 } END { exit !gevonden }'
 }
 
-# `klist -l` én een kale `klist`, want die twee kijken niet naar hetzelfde. Platform SSO zet
-# het cloud-TGT in een cache met een eigen naam — `app-sso platform -s` laat die zien als
-# "cacheName": "9205B6F4-…" — en een kale `klist` toont alleen de standaardcache. Zit het
-# ticket in zo'n benoemde cache, dan meldt dit script anders elke ronde dat er geen ticket is
-# terwijl het er wél was, en mount het nooit.
+# Drie manieren, want ze kijken geen van drieën naar hetzelfde. `klist -s` is de nette check
+# maar geldt alleen voor de standaardcache, en Platform SSO zet het cloud-TGT in een cache met
+# een eigen naam — `app-sso platform -s` toont die als "cacheName": "9205B6F4-…". `klist -l`
+# somt álle caches op. Eén van de drie is genoeg.
 has_ticket() {
+  /usr/bin/klist -s 2>/dev/null && return 0
   { /usr/bin/klist -l 2>/dev/null; /usr/bin/klist 2>/dev/null; } |
     grep -q "KERBEROS.MICROSOFTONLINE.COM"
 }
 
 # macOS heeft geen `timeout`; die zit in coreutils en dat staat er niet standaard op.
 #
-# Nodig omdat `mount volume` kán blijven staan: heeft de Mac wél een ticket maar accepteert
-# de share het niet, dan valt NetFS terug op een aanmeldvenster en wacht het tot iemand het
-# invult. Uit een LaunchAgent gebeurt dat nooit. Het script blijft dan hangen, en een
-# Intune-shellscript dat niet op tijd klaar is wordt door de agent afgebroken en als "Failed"
-# gerapporteerd — zonder uitvoer, want die komt er nooit uit.
+# `mount_smbfs -N` vraagt niets, maar hij kan wél lang blijven wachten op een server die niet
+# antwoordt — poort 445 dicht op een gastnetwerk is het gewone geval. Een Intune-shellscript
+# dat na 60 minuten nog draait wordt door de agent afgebroken en als "Failed" gerapporteerd,
+# zonder uitvoer. Liever zelf afbreken met een regel in de log erbij.
 with_timeout() {
   local secs="$1"
   shift
@@ -139,14 +147,14 @@ mount_share() {
     return 0
   fi
 
-  # Zonder ticket niet proberen. NetFS zet bij een mislukte Kerberos-mount een aanmeldvenster
-  # op het scherm, en dat elke vijf minuten uit een achtergrondagent is erger dan geen share.
-  # --force is er voor handmatig testen, wanneer je de dialoog juist wil zien.
+  # Zonder ticket niet proberen. Met -N mislukt de mount dan gewoon en komt er geen dialoog,
+  # maar een poging die per definitie faalt hoort niet elke netwerkwissel opnieuw in de log.
+  # --force slaat de controle over, voor handmatig testen.
   #
-  # QUIET staat aan als de LaunchAgent belt. Die draait elke vijf minuten, en zolang de
-  # preview niet aanstaat is er nooit een ticket — dat zou 288 identieke regels per dag in de
-  # log zetten en de ene regel die er wél toe doet onvindbaar maken. De uurlijkse Intune-run
-  # meldt het wel, en dat is vaak genoeg om te weten dat het script leeft.
+  # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
+  # geen ticket is zou dat de log vullen met dezelfde regel en de ene die er wél toe doet
+  # onvindbaar maken. De uurlijkse Intune-run meldt het wel, en dat is vaak genoeg om te weten
+  # dat het script leeft.
   if ! has_ticket && [ "${FORCE:-0}" -ne 1 ]; then
     if [ "${QUIET:-0}" -ne 1 ]; then
       log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches — niet gemount. Controleer met: app-sso platform -s (kerberosStatus moet ticketKeyPath tgt_cloud en importSuccessful true tonen)."
@@ -154,24 +162,30 @@ mount_share() {
     return 0
   fi
 
-  # Via NetFS (`mount volume`) en niet via mount_smbfs. Dat is het verschil tussen een share
-  # die in Finder staat en een die er niet staat: NetFS mount in /Volumes, precies zoals
-  # Finder → Verbind met server, en dan zet Finder hem in de zijbalk onder Locaties mét
-  # uitwerpknop. mount_smbfs mount naar een map die je zelf aanmaakt — dat werkt, maar zo'n
-  # mount is voor Finder geen server en verschijnt dus nergens in de zijbalk. Een gewone
-  # gebruiker mag zelf niets in /Volumes aanmaken; NetFS regelt dat wel.
-  with_timeout 30 /usr/bin/osascript -e "mount volume \"${SMB_URL}\"" >/dev/null 2>>"$LOG"
+  # mount_smbfs -N, en uitdrukkelijk niet `osascript -e 'mount volume'`.
+  #
+  # Die laatste gaat door NetFS, en NetFS zet bij een URL zonder inloggegevens een
+  # "verbinden"-dialoog op het scherm zodra Kerberos niet wordt geaccepteerd. Uit een
+  # LaunchAgent antwoordt daar niemand op: het script blijft staan tot de Intune-agent het na
+  # 60 minuten afbreekt en "Failed" meldt, zonder één regel uitvoer. Dat is precies wat er hier
+  # gebeurde. -N vraagt per definitie niets en gebruikt het TGT dat er is.
+  #
+  # En de reden dat ik eerder naar NetFS ben gegaan klopte niet: mount_smbfs maakt zijn eigen
+  # mountpunt in /Volumes aan. Daar is geen mkdir voor nodig en dus ook geen beheerder. De
+  # share komt daarmee gewoon in /Volumes te staan, en dát is wat Finder in de zijbalk onder
+  # Locaties zet — niet de vraag welk commando hem mountte.
+  with_timeout 60 /sbin/mount_smbfs -N -o soft "$SMB_PAD" "$MOUNTPOINT" 2>>"$LOG"
   case $? in
     0)
-      log "Gemount: ${SMB_URL}"
+      log "Gemount: ${SMB_PAD} op ${MOUNTPOINT}"
       return 0
       ;;
     124)
-      log "Mount liep vast op ${SMB_URL} en is na 30s afgebroken — vrijwel zeker een aanmeldvenster dat op antwoord wacht. Het ticket wordt door de share niet geaccepteerd."
+      log "Mount liep vast op ${SMB_PAD} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
       return 1
       ;;
     *)
-      log "Mount mislukt voor ${SMB_URL}"
+      log "Mount mislukt voor ${SMB_PAD} (zie de regel hierboven voor de melding van mount_smbfs)."
       return 1
       ;;
   esac
@@ -195,7 +209,7 @@ fi
 # Vanaf hier is dit een Intune-run. De eerste regel is er om te kunnen zien dát het script
 # heeft gedraaid: staat hij er niet, dan is het script nooit begonnen en zit de fout ervóór —
 # bij het uploaden of bij de interpreter, niet in de logica hieronder.
-log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion), doel ${SMB_URL}"
+log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion), doel ${SMB_PAD}"
 
 if ! cmp -s "$0" "$HELPER"; then
   cp "$0" "$HELPER" && chmod 755 "$HELPER"
@@ -220,8 +234,14 @@ read -r -d '' PLIST <<PLIST_EOF || true
     </array>
     <key>RunAtLoad</key>
     <true/>
-    <key>StartInterval</key>
-    <integer>300</integer>
+    <key>WatchPaths</key>
+    <array>
+        <string>/private/var/run/resolv.conf</string>
+        <string>/Library/Preferences/SystemConfiguration/com.apple.network.identification.plist</string>
+        <string>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</string>
+    </array>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
     <key>ProcessType</key>
     <string>Background</string>
 </dict>
