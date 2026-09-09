@@ -144,6 +144,50 @@ De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesl
 Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
 bestaande shares) staat in de note bij dat profiel.
 
+### `server rejected the connection: Authentication error`
+
+Poort 445 open, maar de mount wordt geweigerd. Dan is het netwerk in orde en ligt het bij
+Kerberos. Drie oorzaken, in de volgorde waarin je ze uitsluit.
+
+**1. Het ticket staat niet in de standaardcache.** `mount_smbfs` gebruikt via GSSAPI de
+*default* credential cache. Platform SSO zet het cloud-TGT in een cache met een eigen naam, en
+staat die niet als standaard ingesteld, dan vindt `mount_smbfs` hem niet, valt terug op iets
+anders, en weigert de server. Zo zie je het verschil:
+
+```bash
+klist        # de standaardcache — leeg?
+klist -l     # álle caches — staat het TGT hier wél?
+```
+
+Levert dat een leeg `klist` maar een gevulde `klist -l`, dan is dat de oorzaak. Testen met:
+
+```bash
+kswitch -p <principal uit klist -l>
+mount_smbfs -N '//<account>.file.core.windows.net/<share>' /Volumes/<naam>
+```
+
+**2. De identifier URI staat op `CIFS/` in hoofdletters.** Bij een share die al bestond vóór
+Entra Kerberos werd aangezet, registreert Azure de app met `CIFS/<account>.file.core.windows.net`.
+macOS mount uitsluitend op `cifs/` in kleine letters en krijgt anders geen servicetoegang. Te
+zien in Entra ID → App-registraties → Alle toepassingen → het storage account → Manifest.
+Corrigeren gaat met [`updateappmanifestazurefiles.ps1`](https://github.com/Azure-Samples/azure-files-samples/blob/master/update-app-manifest/updateappmanifestazurefiles.ps1)
+uit azure-files-samples.
+
+**3. De autorisatie erachter.** Admin consent op de service principal van het storage account,
+MFA uitgesloten voor die Entra-app, en een share-level permission voor deze gebruiker op deze
+share. Ontbreekt er één, dan komt er wél een ticket maar weigert de server het alsnog.
+
+Onderscheid tussen 2 en 3: kijk na een mislukte mount of er een servicecertificaat is
+uitgegeven.
+
+```bash
+klist | grep -i cifs
+```
+
+Staat er een regel `cifs/<account>.file.core.windows.net`, dan heeft de KDC het ticket wél
+gegeven en zit de fout in de autorisatie (3). Staat er niets, dan kwam het niet eens tot een
+ticket en zit het bij de SPN of de app-registratie (2).
+
 ### Het sleuteltje in de menubalk is geen diagnose
 
 Het menubalkicoon van de Kerberos-extensie kan "Not signed in" of "Network not available"
