@@ -144,36 +144,41 @@ De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesl
 Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
 bestaande shares) staat in de note bij dat profiel.
 
-### Het sleuteltje in de menubalk zegt "Network not available"
+### Het sleuteltje in de menubalk is geen diagnose
 
-Dat is **niet** normaal, en het is iets anders dan "Not signed in" — die laatste beschrijft
-Microsoft uitdrukkelijk als onschuldig bij een Platform SSO-opstelling. "Network not available"
-betekent dat de Kerberos-extensie de KDC voor zijn realm niet kan bereiken.
+Het menubalkicoon van de Kerberos-extensie kan "Not signed in" of "Network not available"
+melden terwijl alles werkt. Microsoft schrijft daarover:
 
-Eerste verdachte is de KDC-URL zelf. In het template staat die als:
+> Users don't need to interact with the menu bar extra for Kerberos SSO to work. SSO
+> functionality operates correctly even if the menu bar extra reports "Not signed in". You can
+> instruct users to ignore the menu bar extra.
 
+Dat is bij deze opstelling ook logisch. Met `usePlatformSSOTGT` op true haalt de extensie
+**geen eigen ticket** op — ze gebruikt het TGT dat Platform SSO al heeft geïmporteerd. De
+extensie legt dus zelf nooit een verbinding met een KDC, en wat het icoontje over die
+verbinding meldt zegt daarom niets over of het werkt.
+
+De enige bron die wél telt is:
+
+```bash
+app-sso platform -s
 ```
-kkdcp://login.microsoftonline.com/%OrganizationId%/kerberos
-```
 
-CIPP vervangt dat token bij uitrol door het tenant-id. **Rol je uit met IntuneBackupAndRestore
-of door de JSON rechtstreeks te importeren, dan gebeurt die vervanging niet** en staat het
-token letterlijk in de URL. De extensie probeert dan een KDC te bereiken die niet bestaat, en
-meldt precies dit. Controleer wat er écht op het toestel staat:
+Onder `kerberosStatus` hoort een regel met `"realm": "KERBEROS.MICROSOFTONLINE.COM"`,
+`"ticketKeyPath": "tgt_cloud"` en `"importSuccessful": true`. Staat die er, dan is de
+Platform SSO-kant klaar en ligt een mislukte mount aan de Azure-kant.
+
+**Voordat je in het profiel gaat zoeken**, controleer wel of het token is vervangen — dat is een
+echte valkuil, alleen niet degene die dit icoontje aanwijst. In het template staat de KDC-URL
+als `kkdcp://login.microsoftonline.com/%OrganizationId%/kerberos`, en CIPP vult dat bij uitrol
+in. Rol je uit met IntuneBackupAndRestore of via een directe JSON-import, dan gebeurt dat niet:
 
 ```bash
 sudo profiles show -output /tmp/profielen.plist
 grep -A3 preferredKDCs /tmp/profielen.plist
 ```
 
-Staat daar een GUID, dan is de URL goed en ligt het elders — bijvoorbeeld een proxy of firewall
-die `login.microsoftonline.com` over de KDC-proxy blokkeert. Staat er `%OrganizationId%`, dan is
-dat de oorzaak en moet het id met de hand worden ingevuld in de kopie die je uitrolt.
-
-Het [Platform SSO-ticket zelf](https://learn.microsoft.com/en-us/entra/identity/devices/device-join-macos-platform-single-sign-on-kerberos-configuration)
-staat hier los van: `app-sso platform -s` kan een geldig `tgt_cloud` tonen terwijl de
-Kerberos-extensie zijn eigen KDC niet bereikt. Die twee doen niet hetzelfde en falen
-onafhankelijk van elkaar.
+Daar hoort een GUID te staan, niet `%OrganizationId%`.
 
 ### Share en submap zijn niet hetzelfde
 
