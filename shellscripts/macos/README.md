@@ -12,6 +12,7 @@ opgepikt door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js`
 |---|---|---|
 | `configure-dock.sh` | Richt de Dock één keer per gebruiker in en laat 'm daarna met rust | Gebruiker |
 | `mount-azure-files.sh` | Mount een Azure Files-share met het Kerberos-ticket uit Platform SSO | Gebruiker |
+| `nudge-screen-recording.sh` | Vraagt de gebruiker schermopname aan te zetten voor NinjaOne en TeamViewer, en opent het paneel | Gebruiker |
 
 ## configure-dock.sh
 
@@ -241,3 +242,87 @@ rm -f ~/Library/LaunchAgents/com.aci-europe.baseline.mount-azure-files.plist
 
 De eerstvolgende run van het Intune-script zet beide terug. De log staat in
 `~/Library/Application Support/Baseline/mount-azure-files.log`.
+
+## nudge-screen-recording.sh
+
+Vraagt de gebruiker om schermopname aan te zetten voor de apps waarmee de helpdesk meekijkt,
+en opent daarbij meteen het juiste paneel. Stopt zodra het geregeld is.
+
+### Waarom dit niet met een policy kan
+
+Schermopname is de enige maatregel in deze baseline die een MDM niet kan afdwingen, en dat is
+geen tekortkoming van de baseline maar een besluit van Apple. Uit Apple's eigen schema voor de
+PPPC-payload ([`apple/device-management`](https://github.com/apple/device-management/blob/main/mdm/profiles/com.apple.TCC.configuration-profile-policy.yaml),
+bij de key `ScreenCapture`):
+
+> Access to the contents can't be given in a profile; it can only be denied.
+
+Dezelfde formulering staat bij `Camera`, `Microphone` en `ListenEvent`. De waarde
+`AllowStandardUserToSetSystemService` bestaat volgens datzelfde schema **alleen** voor
+`ListenEvent` en `ScreenCapture` — Apple heeft die gemaakt omdát deze twee niet te verlenen
+zijn.
+
+Dat de Intune-settings catalog bij `Authorization` ook `Allow` aanbiedt, betekent niets: die
+lijst is generiek over alle 24 TCC-diensten. Zet je hem hier op `Allow`, dan accepteert Intune
+het profiel en negeert macOS de waarde.
+
+[`Baseline_MAC_D_Screen_Recording`](../../IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Screen_Recording.md)
+haalt dus het maximum: een **standaardgebruiker** mag de schakelaar zelf omzetten, zonder
+beheerderswachtwoord. Zonder dat profiel kan een niet-admin het sinds Big Sur helemaal niet.
+De klik blijft van de gebruiker; dit script zorgt dat hij hem ook doet.
+
+### Vijf schakelaars, niet één
+
+Het profiel dekt vijf bundles:
+
+```
+com.ninjarmm.ncstreamer
+com.teamviewer.TeamViewer
+com.teamviewer.TeamViewerHost
+com.teamviewer.Desktop
+com.teamviewer.TeamViewerQS
+```
+
+Alleen geïnstalleerde apps verschijnen in het paneel, en elke app is een eigen vinkje. Het
+script vraagt daarom alleen naar wat er op dít toestel staat — anders zou het blijven vragen om
+een schakelaar die er niet is.
+
+### Hoe het weet of het al goed staat
+
+Het probeert de TCC-database van de gebruiker te lezen
+(`~/Library/Application Support/com.apple.TCC/TCC.db`, kolom `auth_value`, of `allowed` op
+oudere versies). Lukt dat, dan weet het script het zeker en vraagt het niets.
+
+Die database is beschermd: zonder Volledige Schijftoegang mag niemand hem lezen. Lukt het niet,
+dan is dat geen fout — dan wordt het aan de gebruiker gevraagd, met een knop **Staat al aan**
+die het script laat stoppen. Beter één keer te veel vragen dan een rechtenstatus verzinnen.
+
+### Het houdt een keer op
+
+Na 96 pogingen — bij een run per uur is dat vier dagen — vraagt het niets meer en noteert het
+in de log wat er nog ontbreekt. Langer doorvragen verandert een herinnering in een ergernis, en
+dan klikt iemand hem weg zonder te lezen. Wat er dan nog mist hoort in een gesprek, niet in een
+dialoog.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **Yes** | het gaat om de rechten van déze gebruiker, en een dialoog uit root ziet niemand |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 hour** | |
+| Max number of retries | 3 | |
+
+Toewijzen aan een **gebruikersgroep**. Geen apparaatgroep: op een gedeelde Mac heeft elke
+gebruiker zijn eigen TCC-database en dus zijn eigen klik.
+
+### Opnieuw laten vragen
+
+```bash
+rm -f ~/Library/Application\ Support/Baseline/screen-recording-ok \
+      ~/Library/Application\ Support/Baseline/screen-recording-pogingen
+```
+
+De log staat in `~/Library/Application Support/Baseline/screen-recording.log`.
