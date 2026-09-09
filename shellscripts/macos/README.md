@@ -151,20 +151,16 @@ Kerberos. Drie oorzaken, in de volgorde waarin je ze uitsluit.
 
 **1. Het ticket staat niet in de standaardcache.** `mount_smbfs` gebruikt via GSSAPI de
 *default* credential cache. Platform SSO zet het cloud-TGT in een cache met een eigen naam, en
-staat die niet als standaard ingesteld, dan vindt `mount_smbfs` hem niet, valt terug op iets
-anders, en weigert de server. Zo zie je het verschil:
+staat die niet als standaard, dan vindt `mount_smbfs` hem niet en weigert de server.
 
 ```bash
-klist        # de standaardcache — leeg?
-klist -l     # álle caches — staat het TGT hier wél?
+klist -l
 ```
 
-Levert dat een leeg `klist` maar een gevulde `klist -l`, dan is dat de oorzaak. Testen met:
-
-```bash
-kswitch -p <principal uit klist -l>
-mount_smbfs -N '//<account>.file.core.windows.net/<share>' /Volumes/<naam>
-```
+De **`*`** vooraan een regel markeert de standaardcache. Staat die bij het
+`@KERBEROS.MICROSOFTONLINE.COM`-ticket en is het niet verlopen, dan is dit niet de oorzaak —
+ga door naar 2. Staat hij ergens anders, dan is het te testen met
+`kswitch -p <principal>` gevolgd door de mount.
 
 **2. De identifier URI staat op `CIFS/` in hoofdletters.** Bij een share die al bestond vóór
 Entra Kerberos werd aangezet, registreert Azure de app met `CIFS/<account>.file.core.windows.net`.
@@ -177,16 +173,25 @@ uit azure-files-samples.
 MFA uitgesloten voor die Entra-app, en een share-level permission voor deze gebruiker op deze
 share. Ontbreekt er één, dan komt er wél een ticket maar weigert de server het alsnog.
 
-Onderscheid tussen 2 en 3: kijk na een mislukte mount of er een servicecertificaat is
-uitgegeven.
+**Het onderscheid tussen 2 en 3 in één test.** Vraag de KDC rechtstreeks om het
+servicecertificaat, twee keer, en let op het verschil in hoofdletters:
 
 ```bash
-klist | grep -i cifs
+kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM ; echo "klein: $?"
+kgetcred CIFS/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM ; echo "groot: $?"
 ```
 
-Staat er een regel `cifs/<account>.file.core.windows.net`, dan heeft de KDC het ticket wél
-gegeven en zit de fout in de autorisatie (3). Staat er niets, dan kwam het niet eens tot een
-ticket en zit het bij de SPN of de app-registratie (2).
+Kerberos-principals zijn hoofdlettergevoelig, en dat is precies waar dit misgaat.
+
+| Uitkomst | Wat het betekent |
+|---|---|
+| klein mislukt, groot lukt | **Bewezen oorzaak 2.** De SPN staat als `CIFS/` geregistreerd en macOS vraagt om `cifs/`. Corrigeer de identifier URI. |
+| allebei mislukt met *Server not found in Kerberos database* | Er is helemaal geen SPN — Entra Kerberos staat niet aan op dit storage account, of de app-registratie ontbreekt. |
+| klein lukt, mount mislukt alsnog | **Oorzaak 3.** Het ticket komt er wel; de server weigert de autorisatie. Kijk naar consent, de MFA-uitzondering en de share-level permission. |
+
+Kent de Mac `kgetcred` niet, dan kun je hetzelfde na een mislukte mount aflezen met
+`klist | grep -i cifs`: staat er een `cifs/`-regel, dan gaf de KDC het ticket (3); staat er
+niets, dan kwam het daar niet eens toe (2).
 
 ### Het sleuteltje in de menubalk is geen diagnose
 
