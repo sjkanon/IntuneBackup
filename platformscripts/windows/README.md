@@ -82,7 +82,7 @@ NTFS-rechten in de map te krijgen, niet door hier een andere waarde in te vullen
 | `Kerberos/CloudKerberosTicketRetrievalEnabled` = 1 | **staat al in de baseline** — [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust`](../../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md), alle apparaten |
 | Apparaat is Entra joined of Entra hybrid joined | inschrijving |
 | `WinHttpAutoProxySvc` en `iphlpsvc` draaien | **niet uitgezet door de baseline** — de enige diensten die `Security Hardening` uitschakelt zijn de vier Xbox-diensten |
-| Entra Kerberos aan op het storage account, admin consent, MFA uitgesloten voor de Entra-app, share-level permissions | Azure-portal, zie [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) — dezelfde tenantkant geldt voor Windows |
+| Entra Kerberos aan op het storage account, admin consent, cloud-only groepsondersteuning, MFA uitgesloten voor de Entra-app, share-level permissions | Azure-portal — de stappen staan één keer uitgeschreven bij de macOS-tegenhanger, onder [De Azure-kant](../../shellscripts/macos/README.md#de-azure-kant-een-tweede-storage-account-met-entra-kerberos). Ze gelden onverkort voor Windows. |
 
 Cloud-only identiteiten vragen bovendien Windows 11 24H2 of hoger met de cumulatieve update
 van maart 2026 (KB5079391 / KB5079489); hybride identiteiten werken vanaf Windows 10 2004.

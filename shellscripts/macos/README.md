@@ -100,6 +100,51 @@ zijn nagezocht op iets dat een netwerkschijf koppelt; dat bestaat niet, op geen 
 platformen. Apple heeft `com.apple.finder_showmountedserversondesktop` — of een al gemounte
 share op het bureaublad staat — en verder niets. Mounten is een handeling en geen instelling.
 
+### De Azure-kant: een tweede storage account met Entra Kerberos
+
+Geldt voor **beide** platformen — `Mount-AzureFilesDrive.ps1` op Windows heeft precies dezelfde
+voorwaarden. De beperking van één identity source geldt per storage account en niet per tenant,
+dus een tweede account naast het bestaande lost het op zonder aan AVD te komen.
+
+Een **nieuw** account is bovendien makkelijker dan een bestaand: de `CIFS/` → `cifs/`-correctie
+op de identifier URI is alleen nodig bij shares die er al waren.
+
+1. **Maak het storage account** in dezelfde regio als de gebruikers, met een file share erin.
+2. **Zet Entra Kerberos aan.** In de portal via *Data storage* → *File shares* →
+   *Identity-based access* → *Microsoft Entra Kerberos* → *Set up*, of:
+
+   ```powershell
+   Set-AzStorageAccount -ResourceGroupName "<rg>" -Name "<account>" `
+       -EnableAzureActiveDirectoryKerberosForFile $true
+   ```
+
+   Hiermee registreert Azure vanzelf een app `[Storage Account] <account>.file.core.windows.net`.
+3. **Geef admin consent** op die app: Entra ID → App-registraties → Alle toepassingen → de app
+   met de naam van het storage account → *API-machtigingen* → *Verleen beheerderstoestemming*.
+   Zonder deze stap staat de app er wel en gebeurt er niets.
+4. **Zet cloud-only groepsondersteuning aan.** Verplicht zodra je cloud-only identiteiten
+   gebruikt, en makkelijk te missen: een Kerberos-ticket draagt hoogstens 1.010 groeps-SID's, en
+   zonder de juiste `Tags` in het app-manifest mislukt de authenticatie. Zie
+   [Group SID limit in Entra Kerberos](https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos#group-sid-limit-in-entra-kerberos-preview).
+5. **Sluit de app uit van MFA.** Entra Kerberos kan niet met MFA overweg. Staat er een
+   Conditional Access-beleid op alle apps, dan hoort deze in de uitsluitingslijst — zoek op
+   `[Storage Account] <account>.file.core.windows.net`. Vergeet je dit, dan is het symptoom
+   `System error 1327` bij `net use`.
+6. **Ken share-level permissions toe** aan dezelfde gebruikersgroep waaraan je het script
+   toewijst. Daarna bepalen de NTFS-rechten in de share de rest.
+7. **Vul de accountnaam in** in `shellscripts/macos/mount-azure-files.sh` en
+   `platformscripts/windows/Mount-AzureFilesDrive.ps1`, en zet deze policy van fase 3 naar
+   fase 1.
+
+Aan de clientkant: het apparaat moet Entra joined of Entra hybrid joined zijn. Windows werkt
+daarna meteen — Entra Kerberos is daar algemeen beschikbaar. Voor **macOS** blijft de toegang
+tot Azure Files via het Platform SSO-ticket een limited preview waarvoor Microsoft de tenant
+moet aanzetten (azurefiles@microsoft.com); die mail kun je los van dit alles alvast versturen,
+want dat is de traagste schakel.
+
+Dit profiel hoeft voor een ander storage account **niet** te wijzigen: `Hosts` staat op
+`.windows.net` en dekt daarmee elk account in Azure.
+
 ### Wat anderen doen, en wat ze daarvoor opgeven
 
 Er is geen mooie oplossing voor dit probleem; er zijn drie oplossingen die elk iets anders
