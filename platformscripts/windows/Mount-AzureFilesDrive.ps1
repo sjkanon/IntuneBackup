@@ -46,15 +46,18 @@ In Intune: Devices → Scripts and remediations → Platform scripts → Add →
 Toewijzen aan een gebruikersgroep, niet aan apparaten.
 #>
 
-# --- Invullen vóór uitrol ------------------------------------------------------------------
+# --- De share ------------------------------------------------------------------------------
+#
+# Storage account en sharenaam apart, want de UNC-vorm ziet er anders uit dan de HTTPS-URL uit
+# de portal: https://acisafiles.file.core.windows.net/Public wordt
+# \\acisafiles.file.core.windows.net\Public.
 #
 # Deze drie staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
 # platformscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de
-# templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait, dus een
-# niet-ingevulde waarde is meteen zichtbaar in de diff en in het script zelf.
+# templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
-$StorageAccount = 'STORAGE-ACCOUNT-INVULLEN'
-$ShareName      = 'SHARE-NAAM-INVULLEN'
+$StorageAccount = 'acisafiles'
+$ShareName      = 'Public'
 $DriveLetter    = 'Z'
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------

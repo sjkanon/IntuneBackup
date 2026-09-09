@@ -15,7 +15,7 @@ zo terug.
 
 | Bestand | Wat het doet | Scope |
 |---|---|---|
-| `Mount-AzureFilesDrive.ps1` | Koppelt een Azure Files-share als netwerkschijf met het Entra Kerberos-ticket | Gebruiker |
+| `Mount-AzureFilesDrive.ps1` | Koppelt `\\acisafiles.file.core.windows.net\Public` als `Z:` met het Entra Kerberos-ticket | Gebruiker |
 
 ## Mount-AzureFilesDrive.ps1
 

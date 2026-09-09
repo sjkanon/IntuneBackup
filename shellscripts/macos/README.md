@@ -104,7 +104,7 @@ share op het bureaublad staat — en verder niets. Mounten is een handeling en g
 Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de share
 dus pas een uur ná het inloggen terugzetten, en dat is precies het moment waarop iemand hem
 nodig heeft. Dit script installeert daarom een LaunchAgent
-(`com.flyinggroup.baseline.mount-azure-files`) die bij login draait en daarna elke vijf
+(`com.aci-europe.baseline.mount-azure-files`) die bij login draait en daarna elke vijf
 minuten, en doet zelf één eerste poging.
 
 Het script kopieert zichzelf naar `~/Library/Application Support/Baseline/` en laat de agent
@@ -178,8 +178,8 @@ Handmatig testen, mét dialoog, kan met `--force`:
 ### Opnieuw laten draaien
 
 ```bash
-launchctl bootout gui/$(id -u)/com.flyinggroup.baseline.mount-azure-files
-rm -f ~/Library/LaunchAgents/com.flyinggroup.baseline.mount-azure-files.plist
+launchctl bootout gui/$(id -u)/com.aci-europe.baseline.mount-azure-files
+rm -f ~/Library/LaunchAgents/com.aci-europe.baseline.mount-azure-files.plist
 ```
 
 De eerstvolgende run van het Intune-script zet beide terug. De log staat in

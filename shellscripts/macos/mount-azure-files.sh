@@ -47,15 +47,15 @@ set -u
 # in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait, dus een niet-ingevulde
 # waarde is meteen zichtbaar in de diff en in het script zelf.
 
-STORAGE_ACCOUNT="STORAGE-ACCOUNT-INVULLEN"
-SHARE_NAME="SHARE-NAAM-INVULLEN"
+STORAGE_ACCOUNT="acisafiles"
+SHARE_NAME="Public"
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
 LOG="$STATE_DIR/mount-azure-files.log"
 HELPER="$STATE_DIR/mount-azure-files.sh"
-LABEL="com.flyinggroup.baseline.mount-azure-files"
+LABEL="com.aci-europe.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
