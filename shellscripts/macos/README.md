@@ -230,6 +230,28 @@ realm en `Hosts` van het beheerde domein, netwerkzicht op de domeincontrollers i
 VPN of ExpressRoute) en een gebruiker die zijn wachtwoord intypt. Dat werkt, maar het is een
 andere oplossing dan deze — de aanmeldloze mount is er dan niet bij.
 
+**Entra ID en Entra Domain Services zijn niet hetzelfde**, en die naamsverwarring is hier de
+kern. Entra ID is de clouddirectory waar Intune, Platform SSO en Conditional Access op draaien;
+die spreekt OAuth2 en OIDC en heeft geen klassieke Kerberos. Entra DS is een **beheerd
+AD-domein op VM's in je eigen VNet**, met LDAP, NTLM en gewone Kerberos, dat in één richting
+uit Entra ID synchroniseert. Dezelfde gebruikers, een andere directory, een ander realm, eigen
+domeincontrollers op privé-adressen. Dat je gebruikers en apparaten "in Azure AD" zitten zegt
+dus niets over of ze bij Entra DS kunnen.
+
+Dat geldt niet alleen voor Macs. Microsoft stelt bij Entra DS als voorwaarde:
+
+> To access an Azure file share by using Microsoft Entra credentials from a VM, your VM must be
+> domain-joined to Microsoft Entra Domain Services. […] Non-domain-joined VMs can access Azure
+> file shares using Microsoft Entra Domain Services authentication only if the VM has
+> unimpeded network connectivity to the domain controllers […] Usually this connectivity
+> requires either site-to-site or point-to-site VPN.
+
+Een Entra-joined laptop die door Intune wordt beheerd is niet domain-joined en heeft vanaf
+internet geen zicht op die domeincontrollers. Met Entra DS als identity source bedient een
+storage account dus in de praktijk alleen VM's in of aan die VNet — geen enkele laptop uit de
+vloot, Windows noch macOS. macOS staat in de ondersteunde clients van die pagina trouwens
+helemaal niet genoemd.
+
 Staat er wél Entra Kerberos aan en komt deze fout tóch, dan zijn er nog twee mogelijkheden. De
 **admin consent** op de nieuwe service principal kan ontbreken — Entra ID → App-registraties →
 Alle toepassingen → de app met de naam van het storage account → *API-machtigingen* →
