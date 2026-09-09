@@ -40,15 +40,18 @@
 
 set -u
 
-# --- Invullen vóór uitrol ------------------------------------------------------------------
+# --- De share ------------------------------------------------------------------------------
+#
+# Storage account en sharenaam apart, want de SMB-URL ziet er anders uit dan de HTTPS-URL uit
+# de portal: https://acisafiles.file.core.windows.net/data wordt
+# smb://acisafiles.file.core.windows.net/data.
 #
 # Deze twee staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
 # shellscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de templates
-# in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait, dus een niet-ingevulde
-# waarde is meteen zichtbaar in de diff en in het script zelf.
+# in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
 STORAGE_ACCOUNT="acisafiles"
-SHARE_NAME="Public"
+SHARE_NAME="data"
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 

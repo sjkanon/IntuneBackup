@@ -49,15 +49,15 @@ Toewijzen aan een gebruikersgroep, niet aan apparaten.
 # --- De share ------------------------------------------------------------------------------
 #
 # Storage account en sharenaam apart, want de UNC-vorm ziet er anders uit dan de HTTPS-URL uit
-# de portal: https://acisafiles.file.core.windows.net/Public wordt
-# \\acisafiles.file.core.windows.net\Public.
+# de portal: https://acisafiles.file.core.windows.net/data wordt
+# \\acisafiles.file.core.windows.net\data.
 #
 # Deze drie staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
 # platformscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de
 # templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
 $StorageAccount = 'acisafiles'
-$ShareName      = 'Public'
+$ShareName      = 'data'
 $DriveLetter    = 'Z'
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
