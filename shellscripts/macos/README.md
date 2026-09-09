@@ -100,6 +100,22 @@ zijn nagezocht op iets dat een netwerkschijf koppelt; dat bestaat niet, op geen 
 platformen. Apple heeft `com.apple.finder_showmountedserversondesktop` — of een al gemounte
 share op het bureaublad staat — en verder niets. Mounten is een handeling en geen instelling.
 
+### Wat anderen doen, en wat ze daarvoor opgeven
+
+Er is geen mooie oplossing voor dit probleem; er zijn drie oplossingen die elk iets anders
+inleveren. Dat is nuttig om te weten vóór je aan deze constructie gaat sleutelen.
+
+| Aanpak | Wie | Wat het kost |
+|---|---|---|
+| **Snelkoppeling in de Dock**, geen mount | [Oktay Sari](https://allthingscloud.blog/revamping-network-drive-mappings-on-macos-with-intune/) (MVP) — `defaults write com.apple.dock persistent-others` met een `smb://`-URL | Lost de authenticatie niet op. Klikken levert een aanmeldvenster tenzij Kerberos er los onder ligt. |
+| **Storage account key in het script** | [Llewellyn Hughes](https://www.llewellynhughes.co.uk/post/azure-map-drive-mac/) — `mount_smbfs -d 777 -f 777 //account:KEY@…` | De sleutel staat in platte tekst in het script en geeft toegang tot het hele storage account. Geen identiteit per gebruiker, geen rechten per persoon. |
+| **Kerberos, met wachtwoord als terugval** | [42Loris/macOS_DriveMapping](https://github.com/42Loris/macOS_DriveMapping) — `mount_smbfs -N`, en anders een sleutelhanger-helper | Niets aan de beveiligingskant, maar het vraagt een werkende Kerberos-bron. Vraagt bovendien een Developer ID-certificaat voor de helper. |
+
+Deze baseline doet de derde, zonder terugval. Dat is een bewuste keuze: een gedeelde sleutel in
+een script haalt de identiteit uit een baseline die verder helemaal op identiteit is gebouwd,
+en een aanmeldvenster per keer is geen drive mapping. De prijs is dat het staat of valt met de
+identity source van het storage account — en dat is precies waar het hier op vastliep.
+
 ### Waarom er een LaunchAgent bij zit
 
 Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de share
