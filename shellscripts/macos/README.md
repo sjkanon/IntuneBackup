@@ -190,6 +190,36 @@ Handmatig testen, mét dialoog, kan met `--force`:
 ~/Library/Application\ Support/Baseline/mount-azure-files.sh --force
 ```
 
+### Als Intune "Failed" meldt
+
+Het script eindigt in een Intune-run **altijd** met exit 0, ook als er niets te mounten viel.
+Dat is bewust: zolang de Azure Files-preview niet aanstaat heeft geen enkele Mac een ticket,
+en dan zou elk toestel permanent rood staan voor iets dat volgens plan verloopt. Wat er wél
+gebeurde schrijft het script naar stdout, en die uitvoer bewaart Intune bij het apparaat.
+
+"Failed" betekent dus dat het script niet zélf tot het einde is gekomen. Drie oorzaken, in
+volgorde van waarschijnlijkheid:
+
+1. **De mount liep vast op een aanmeldvenster.** Heeft de Mac wel een Kerberos-ticket maar
+   accepteert de share het niet, dan valt NetFS terug op een dialoog en wacht tot iemand het
+   invult. Uit een LaunchAgent gebeurt dat nooit; het script blijft hangen en de Intune-agent
+   breekt het af. Sinds de timeout van 30 seconden gebeurt dat niet meer — het script noteert
+   dan `Mount liep vast … afgebroken` en gaat verder.
+2. **Er staat een oudere versie in Intune.** De placeholdercontrole is het enige andere pad
+   dat exit 1 geeft. In de log staat dan letterlijk `staat nog op de placeholder`.
+3. **Het script is nooit begonnen.** Regeleindes of een BOM uit een Windows-editor maken van
+   de eerste regel `#!/bin/bash^M` en dan start er niets. Zie *Regeleindes* hierboven.
+
+Het onderscheid tussen 2 en 3 zie je aan de log: staat er een `Gestart als …`-regel, dan heeft
+het script gedraaid en zit de fout in de logica; is er geen logbestand, dan is het nooit
+begonnen.
+
+```bash
+cat ~/Library/Application\ Support/Baseline/mount-azure-files.log
+```
+
+De agent van Intune zelf logt in `/Library/Logs/Microsoft/Intune/`.
+
 ### Opnieuw laten draaien
 
 ```bash

@@ -70,8 +70,11 @@ SMB_URL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
 mkdir -p "$STATE_DIR"
 
+# Naar het logbestand én naar stdout. Intune bewaart de uitvoer van een shellscript en toont
+# die in de portal bij het apparaat; zonder dat tweede spoor staat er alleen "Failed" of
+# "Success" en moet je voor elke diagnose op de Mac zelf zijn.
 log() {
-  printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >>"$LOG"
+  printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG"
 }
 
 if [ "$STORAGE_ACCOUNT" = "STORAGE-ACCOUNT-INVULLEN" ] || [ "$SHARE_NAME" = "SHARE-NAAM-INVULLEN" ]; then
@@ -93,6 +96,31 @@ has_ticket() {
   /usr/bin/klist 2>/dev/null | grep -q "KERBEROS.MICROSOFTONLINE.COM"
 }
 
+# macOS heeft geen `timeout`; die zit in coreutils en dat staat er niet standaard op.
+#
+# Nodig omdat `mount volume` kán blijven staan: heeft de Mac wél een ticket maar accepteert
+# de share het niet, dan valt NetFS terug op een aanmeldvenster en wacht het tot iemand het
+# invult. Uit een LaunchAgent gebeurt dat nooit. Het script blijft dan hangen, en een
+# Intune-shellscript dat niet op tijd klaar is wordt door de agent afgebroken en als "Failed"
+# gerapporteerd — zonder uitvoer, want die komt er nooit uit.
+with_timeout() {
+  local secs="$1"
+  shift
+  "$@" &
+  local pid=$!
+  local waited=0
+  while kill -0 "$pid" 2>/dev/null; do
+    if [ "$waited" -ge "$secs" ]; then
+      kill -9 "$pid" 2>/dev/null
+      wait "$pid" 2>/dev/null
+      return 124
+    fi
+    sleep 1
+    waited=$((waited + 1))
+  done
+  wait "$pid"
+}
+
 mount_share() {
   if is_mounted; then
     return 0
@@ -101,8 +129,15 @@ mount_share() {
   # Zonder ticket niet proberen. NetFS zet bij een mislukte Kerberos-mount een aanmeldvenster
   # op het scherm, en dat elke vijf minuten uit een achtergrondagent is erger dan geen share.
   # --force is er voor handmatig testen, wanneer je de dialoog juist wil zien.
+  #
+  # QUIET staat aan als de LaunchAgent belt. Die draait elke vijf minuten, en zolang de
+  # preview niet aanstaat is er nooit een ticket — dat zou 288 identieke regels per dag in de
+  # log zetten en de ene regel die er wél toe doet onvindbaar maken. De uurlijkse Intune-run
+  # meldt het wel, en dat is vaak genoeg om te weten dat het script leeft.
   if ! has_ticket && [ "${FORCE:-0}" -ne 1 ]; then
-    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in de cache — niet gemount."
+    if [ "${QUIET:-0}" -ne 1 ]; then
+      log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in de cache — niet gemount."
+    fi
     return 0
   fi
 
@@ -112,17 +147,25 @@ mount_share() {
   # uitwerpknop. mount_smbfs mount naar een map die je zelf aanmaakt — dat werkt, maar zo'n
   # mount is voor Finder geen server en verschijnt dus nergens in de zijbalk. Een gewone
   # gebruiker mag zelf niets in /Volumes aanmaken; NetFS regelt dat wel.
-  if /usr/bin/osascript -e "mount volume \"${SMB_URL}\"" >/dev/null 2>>"$LOG"; then
-    log "Gemount: ${SMB_URL}"
-    return 0
-  fi
-
-  log "Mount mislukt voor ${SMB_URL}"
-  return 1
+  with_timeout 30 /usr/bin/osascript -e "mount volume \"${SMB_URL}\"" >/dev/null 2>>"$LOG"
+  case $? in
+    0)
+      log "Gemount: ${SMB_URL}"
+      return 0
+      ;;
+    124)
+      log "Mount liep vast op ${SMB_URL} en is na 30s afgebroken — vrijwel zeker een aanmeldvenster dat op antwoord wacht. Het ticket wordt door de share niet geaccepteerd."
+      return 1
+      ;;
+    *)
+      log "Mount mislukt voor ${SMB_URL}"
+      return 1
+      ;;
+  esac
 }
 
 if [ "${1:-}" = "--mount" ]; then
-  mount_share
+  QUIET=1 mount_share
   exit $?
 fi
 
@@ -135,6 +178,11 @@ fi
 #
 # Het script kopieert zichzelf en laat de LaunchAgent die kopie aanroepen. Eén bestand met de
 # instellingen erin, dus de agent kan niet uit de pas lopen met wat Intune uitrolt.
+
+# Vanaf hier is dit een Intune-run. De eerste regel is er om te kunnen zien dát het script
+# heeft gedraaid: staat hij er niet, dan is het script nooit begonnen en zit de fout ervóór —
+# bij het uploaden of bij de interpreter, niet in de logica hieronder.
+log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion), doel ${SMB_URL}"
 
 if ! cmp -s "$0" "$HELPER"; then
   cp "$0" "$HELPER" && chmod 755 "$HELPER"
@@ -185,4 +233,11 @@ if [ "$NEEDS_RELOAD" -eq 1 ]; then
 fi
 
 mount_share
+
+# Bewust altijd 0. Een Intune-shellscript dat niet-nul teruggeeft komt in de portal als
+# "Failed" te staan, en zolang de Azure Files-preview niet aanstaat is er op geen enkele Mac
+# een ticket — dan zou élk toestel permanent rood staan voor iets dat volgens plan verloopt.
+# Wat er wél gebeurde staat hierboven in de uitvoer, en die bewaart Intune bij het apparaat.
+# Zie je in de portal tóch "Failed", dan is het script niet zelf tot hier gekomen.
+log "Klaar."
 exit 0
