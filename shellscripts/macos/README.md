@@ -185,9 +185,39 @@ Kerberos-principals zijn hoofdlettergevoelig, en dat is precies waar dit misgaat
 
 | Uitkomst | Wat het betekent |
 |---|---|
-| klein mislukt, groot lukt | **Bewezen oorzaak 2.** De SPN staat als `CIFS/` geregistreerd en macOS vraagt om `cifs/`. Corrigeer de identifier URI. |
-| allebei mislukt met *Server not found in Kerberos database* | Er is helemaal geen SPN — Entra Kerberos staat niet aan op dit storage account, of de app-registratie ontbreekt. |
+| klein mislukt, groot lukt | **Oorzaak 2.** De SPN staat als `CIFS/` geregistreerd en macOS vraagt om `cifs/`. Corrigeer de identifier URI. |
+| allebei mislukt met **AADSTS700016** | Er is in deze tenant geen app voor dit storage account. Zie hieronder — dit hebben we in de praktijk geraakt. |
 | klein lukt, mount mislukt alsnog | **Oorzaak 3.** Het ticket komt er wel; de server weigert de autorisatie. Kijk naar consent, de MFA-uitzondering en de share-level permission. |
+
+#### AADSTS700016 — de app bestaat niet
+
+```
+kgetcred: krb5_get_creds: Error from KDC: AADSTS700016: Application with identifier 'cifs'
+was not found in the directory '<tenant-id>'. This can happen if the application has not been
+installed by the administrator of the tenant or consented to by any user in the tenant.
+```
+
+Komt deze bij **beide** schrijfwijzen, dan is er niets om hoofdletters van te corrigeren: de
+KDC kent überhaupt geen toepassing voor deze fileservice. Twee mogelijkheden.
+
+**Entra Kerberos staat niet aan op het storage account.** Dat is de gewone oorzaak. Aanzetten
+maakt Azure automatisch een app-registratie `[Storage Account] <account>.file.core.windows.net`
+aan; zolang die er niet is, kan de KDC niets uitgeven. Azure-portal → het storage account →
+*Data storage* → *File shares* → *Identity-based access* → **Microsoft Entra Kerberos** → *Set up*.
+
+Daarna is er nog een tweede stap die makkelijk blijft liggen: **admin consent** geven op die
+nieuwe service principal, in Entra ID → App-registraties → Alle toepassingen → de app met de
+naam van het storage account → *API-machtigingen* → *Verleen beheerderstoestemming*. Zonder dat
+staat de app er wel maar doet hij niets.
+
+**Of het storage account hoort bij een andere tenant.** De foutmelding noemt het tenant-id
+waarin gezocht is; dat is de tenant waarop de Mac is aangemeld. Staat `acisafiles` in een ander
+abonnement onder een andere directory, dan zal dit nooit werken — Entra Kerberos ondersteunt
+geen toegang over tenants heen.
+
+Zolang deze fout er staat heeft het geen zin om aan het profiel, de `Hosts`-lijst of het script
+te sleutelen. Die kant is aantoonbaar in orde: er is een geldig TGT in de standaardcache, poort
+445 is open, en de KDC antwoordt keurig — met de mededeling dat er niets te geven valt.
 
 Kent de Mac `kgetcred` niet, dan kun je hetzelfde na een mislukte mount aflezen met
 `klist | grep -i cifs`: staat er een `cifs/`-regel, dan gaf de KDC het ticket (3); staat er
