@@ -92,8 +92,14 @@ is_mounted() {
   /sbin/mount -t smbfs 2>/dev/null | grep -qi "${SERVER}/${SHARE_NAME} on "
 }
 
+# `klist -l` én een kale `klist`, want die twee kijken niet naar hetzelfde. Platform SSO zet
+# het cloud-TGT in een cache met een eigen naam — `app-sso platform -s` laat die zien als
+# "cacheName": "9205B6F4-…" — en een kale `klist` toont alleen de standaardcache. Zit het
+# ticket in zo'n benoemde cache, dan meldt dit script anders elke ronde dat er geen ticket is
+# terwijl het er wél was, en mount het nooit.
 has_ticket() {
-  /usr/bin/klist 2>/dev/null | grep -q "KERBEROS.MICROSOFTONLINE.COM"
+  { /usr/bin/klist -l 2>/dev/null; /usr/bin/klist 2>/dev/null; } |
+    grep -q "KERBEROS.MICROSOFTONLINE.COM"
 }
 
 # macOS heeft geen `timeout`; die zit in coreutils en dat staat er niet standaard op.
@@ -136,7 +142,7 @@ mount_share() {
   # meldt het wel, en dat is vaak genoeg om te weten dat het script leeft.
   if ! has_ticket && [ "${FORCE:-0}" -ne 1 ]; then
     if [ "${QUIET:-0}" -ne 1 ]; then
-      log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in de cache — niet gemount."
+      log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches — niet gemount. Controleer met: app-sso platform -s (kerberosStatus moet ticketKeyPath tgt_cloud en importSuccessful true tonen)."
     fi
     return 0
   fi

@@ -184,6 +184,18 @@ Kerberos-mount een aanmeldvenster op het scherm, en dat elke vijf minuten uit ee
 achtergrondagent is erger dan een ontbrekende share. Het script controleert `klist` op een
 ticket voor `KERBEROS.MICROSOFTONLINE.COM` en noteert in de log waarom het niets deed.
 
+De controle kijkt met `klist -l` **en** met een kale `klist`, want die twee zien niet
+hetzelfde. Platform SSO zet het cloud-TGT in een cache met een eigen naam en een kale `klist`
+toont alleen de standaardcache. Wat er echt is, zie je het betrouwbaarst bij Microsoft zelf:
+
+```bash
+app-sso platform -s
+```
+
+Onder `kerberosStatus` hoort een regel te staan met `"realm": "KERBEROS.MICROSOFTONLINE.COM"`,
+`"ticketKeyPath": "tgt_cloud"` en `"importSuccessful": true`. Staat die er, dan is de
+Platform SSO-kant in orde en ligt een mislukte mount aan de Azure-kant.
+
 Handmatig testen, mét dialoog, kan met `--force`:
 
 ```bash
