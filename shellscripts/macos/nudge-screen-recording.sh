@@ -60,13 +60,14 @@ MAX_POGINGEN=96
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
-LOG="$STATE_DIR/screen-recording.log"
+LOG_DIR="$HOME/Library/Logs/Baseline"
+LOG="$LOG_DIR/screen-recording.log"
 MARKER="$STATE_DIR/screen-recording-ok"
 POGINGEN="$STATE_DIR/screen-recording-pogingen"
 TCC_DB="$HOME/Library/Application Support/com.apple.TCC/TCC.db"
 PANEEL="x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
 
-mkdir -p "$STATE_DIR"
+mkdir -p "$STATE_DIR" "$LOG_DIR"
 
 log() {
   printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG"

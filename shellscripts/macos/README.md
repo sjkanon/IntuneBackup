@@ -227,11 +227,42 @@ Het onderscheid tussen 2 en 3 zie je aan de log: staat er een `Gestart als …`-
 het script gedraaid en zit de fout in de logica; is er geen logbestand, dan is het nooit
 begonnen.
 
+### "Failed" blijft staan, ook als het al lang goed gaat
+
+Drie dingen uit
+[Microsoft's documentatie over shellscripts](https://learn.microsoft.com/en-us/intune/intune-service/apps/macos-shell-scripts)
+die verklaren waarom de portal een verkeerd beeld kan geven, en die je moet kennen vóór je een
+nieuwe versie uploadt:
+
+- **De agent haalt scripts elke 8 uur op**, en dat staat los van de MDM-sync. Een nieuwe versie
+  is dus niet meteen op het toestel. Forceren kan de gebruiker zelf: Bedrijfsportal openen, het
+  apparaat kiezen, **Check settings**.
+- **De status wordt alleen gemeld als hij verandert.** Blijft hij hetzelfde, dan werkt Intune
+  alleen de tijdstempel bij — elke 7 dagen. Een oude "Failed" kan er dus nog staan terwijl er
+  intussen niets meer misgaat.
+- **Een gefaald script wordt niet opnieuw gedraaid** tenzij *Max number of times to retry* is
+  ingesteld. Staat dat op *Not configured*, dan is één mislukking definitief tot je het script
+  wijzigt of het toestel herstart.
+
+Nuttig om te weten bij oorzaak 1 hierboven: de agent breekt een script pas na **60 minuten**
+af. Een mount die op een aanmeldvenster wacht haalt die grens dus makkelijk.
+
 ```bash
-cat ~/Library/Application\ Support/Baseline/mount-azure-files.log
+cat ~/Library/Logs/Baseline/mount-azure-files.log
 ```
 
-De agent van Intune zelf logt in `/Library/Logs/Microsoft/Intune/`.
+En zonder de Mac aan te raken: **Devices → Scripts and remediations → Platform scripts →**
+het script **→ Device status →** kies het toestel **→ Collect logs**, met paden gescheiden door
+een puntkomma en zónder spaties ertussen:
+
+```
+/Users/<gebruiker>/Library/Logs/Baseline/mount-azure-files.log;/Users/<gebruiker>/Library/Logs/Baseline/screen-recording.log
+```
+
+Dáárom staan deze logs in `~/Library/Logs/Baseline/` en niet naast de markeringen in
+`Application Support`: die mapnaam heeft een spatie en is daarmee niet op te halen. De agent
+van Intune levert zijn eigen logs altijd mee, uit `/Library/Logs/Microsoft/Intune/` en
+`~/Library/Logs/Microsoft/Intune/`.
 
 ### Opnieuw laten draaien
 
@@ -241,7 +272,7 @@ rm -f ~/Library/LaunchAgents/com.aci-europe.baseline.mount-azure-files.plist
 ```
 
 De eerstvolgende run van het Intune-script zet beide terug. De log staat in
-`~/Library/Application Support/Baseline/mount-azure-files.log`.
+`~/Library/Logs/Baseline/mount-azure-files.log`.
 
 ## nudge-screen-recording.sh
 
@@ -325,4 +356,4 @@ rm -f ~/Library/Application\ Support/Baseline/screen-recording-ok \
       ~/Library/Application\ Support/Baseline/screen-recording-pogingen
 ```
 
-De log staat in `~/Library/Application Support/Baseline/screen-recording.log`.
+De log staat in `~/Library/Logs/Baseline/screen-recording.log`.

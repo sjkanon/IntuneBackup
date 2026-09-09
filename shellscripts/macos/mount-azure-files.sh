@@ -60,7 +60,14 @@ SHARE_SUBPATH="Public"
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
-LOG="$STATE_DIR/mount-azure-files.log"
+
+# De log staat in ~/Library/Logs en niet naast de markeringen in Application Support. Dat is
+# de plek waar macOS logs verwacht, maar de reden is praktischer: Intune kan met "Collect
+# logs" bestanden van het toestel ophalen, en die paden worden met een puntkomma gescheiden
+# zónder spaties. "Application Support" heeft een spatie in de naam en is daarmee niet op te
+# halen — precies op het moment dat je de log het hardst nodig hebt.
+LOG_DIR="$HOME/Library/Logs/Baseline"
+LOG="$LOG_DIR/mount-azure-files.log"
 HELPER="$STATE_DIR/mount-azure-files.sh"
 LABEL="com.aci-europe.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
@@ -68,7 +75,7 @@ AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
 SMB_URL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
-mkdir -p "$STATE_DIR"
+mkdir -p "$STATE_DIR" "$LOG_DIR"
 
 # Naar het logbestand én naar stdout. Intune bewaart de uitvoer van een shellscript en toont
 # die in de portal bij het apparaat; zonder dat tweede spoor staat er alleen "Failed" of
