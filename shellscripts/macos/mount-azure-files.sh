@@ -62,6 +62,27 @@ STORAGE_ACCOUNT="acisafiles"
 SHARE_NAME="data"
 SHARE_SUBPATH="Public"
 
+# --- Terugval op de storage account key ----------------------------------------------------
+#
+# Leeg laten = alleen Kerberos. Staat er een sleutel, dan probeert het script eerst Kerberos en
+# valt daarna terug op deze sleutel.
+#
+# LET OP, en dit is geen formaliteit:
+#
+#   * Deze sleutel geeft toegang tot het HÉLE storage account, niet tot deze ene share. Bij
+#     acisafiles is dat hetzelfde account waar de AVD-omgeving op draait.
+#   * Er is geen identiteit per gebruiker. Iedereen die mount is dezelfde "gebruiker", dus
+#     rechten per persoon en herleidbaarheid in de logs bestaan niet.
+#   * Iedereen die het script kan lezen heeft de sleutel — in Intune, en op het toestel.
+#
+# VUL HEM HIER NOOIT IN IN DE REPO. Deze waarde blijft in git op de placeholder staan; de kopie
+# die je in Intune uploadt draagt de echte sleutel. Een sleutel in git staat er voorgoed in, ook
+# na een commit die hem weghaalt, en roulering breekt dan alles wat hem gebruikt.
+#
+# Plak de sleutel zoals Azure hem geeft; het script codeert hem zelf voor de URL.
+
+STORAGE_KEY=""
+
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
@@ -142,50 +163,86 @@ with_timeout() {
   wait "$pid"
 }
 
+# Een storage account key bevat +, / en = en die moeten percent-gecodeerd de URL in, anders
+# breekt hij op het eerste schuine streepje. Zo kan de sleutel erin zoals Azure hem geeft.
+urlencode() {
+  local s="$1" out="" c i
+  for ((i = 0; i < ${#s}; i++)); do
+    c="${s:i:1}"
+    case "$c" in
+      [a-zA-Z0-9.~_-]) out="$out$c" ;;
+      *) out="$out$(printf '%%%02X' "'$c")" ;;
+    esac
+  done
+  printf '%s' "$out"
+}
+
+# Mounten met de sleutel in plaats van met een ticket. De gebruikersnaam voor Azure Files met
+# gedeelde sleutel is de accountnaam zelf.
+#
+# De sleutel staat hier in de aanroep en dus kortstondig in de procestabel. Dat is niet mooi,
+# maar het is niet de zwakste schakel: dezelfde sleutel staat sowieso in het script op elk
+# toestel. Het alternatief is de sleutelhanger, en die vraagt op macOS een toestemmingsdialoog
+# tenzij hetzelfde ondertekende programma hem schrijft én leest — dat is precies waarom
+# 42Loris/macOS_DriveMapping daar een eigen Swift-helper met Developer ID voor bouwt.
+mount_met_sleutel() {
+  with_timeout 60 /sbin/mount_smbfs -N -o soft \
+    "//${STORAGE_ACCOUNT}:$(urlencode "$STORAGE_KEY")@${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}" \
+    "$MOUNTPOINT" 2>>"$LOG"
+}
+
 mount_share() {
   if is_mounted; then
     return 0
   fi
 
-  # Zonder ticket niet proberen. Met -N mislukt de mount dan gewoon en komt er geen dialoog,
-  # maar een poging die per definitie faalt hoort niet elke netwerkwissel opnieuw in de log.
-  # --force slaat de controle over, voor handmatig testen.
+  # --- Eerst Kerberos ---------------------------------------------------------------------
   #
-  # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
-  # geen ticket is zou dat de log vullen met dezelfde regel en de ene die er wél toe doet
-  # onvindbaar maken. De uurlijkse Intune-run meldt het wel, en dat is vaak genoeg om te weten
-  # dat het script leeft.
-  if ! has_ticket && [ "${FORCE:-0}" -ne 1 ]; then
-    if [ "${QUIET:-0}" -ne 1 ]; then
-      log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches — niet gemount. Controleer met: app-sso platform -s (kerberosStatus moet ticketKeyPath tgt_cloud en importSuccessful true tonen)."
-    fi
-    return 0
+  # mount_smbfs -N, en uitdrukkelijk niet `osascript -e 'mount volume'`. Die laatste gaat door
+  # NetFS, en NetFS zet bij een URL zonder inloggegevens een "verbinden"-dialoog op het scherm
+  # zodra Kerberos niet wordt geaccepteerd. Uit een LaunchAgent antwoordt daar niemand op: het
+  # script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
+  # zonder één regel uitvoer. -N vraagt per definitie niets en gebruikt het TGT dat er is.
+  #
+  # mount_smbfs maakt bovendien zijn eigen mountpunt in /Volumes aan, ook als gewone gebruiker.
+  # Dát het in /Volumes staat is wat Finder in de zijbalk onder Locaties zet.
+  if has_ticket || [ "${FORCE:-0}" -eq 1 ]; then
+    with_timeout 60 /sbin/mount_smbfs -N -o soft "$SMB_PAD" "$MOUNTPOINT" 2>>"$LOG"
+    case $? in
+      0)
+        log "Gemount met Kerberos: ${SMB_PAD} op ${MOUNTPOINT}"
+        return 0
+        ;;
+      124)
+        log "Kerberos-mount liep vast en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
+        ;;
+      *)
+        log "Kerberos-mount geweigerd voor ${SMB_PAD}."
+        ;;
+    esac
+  elif [ "${QUIET:-0}" -ne 1 ]; then
+    # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
+    # geen ticket is zou dat de log vullen met dezelfde regel.
+    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches. Controleer met: app-sso platform -s"
   fi
 
-  # mount_smbfs -N, en uitdrukkelijk niet `osascript -e 'mount volume'`.
-  #
-  # Die laatste gaat door NetFS, en NetFS zet bij een URL zonder inloggegevens een
-  # "verbinden"-dialoog op het scherm zodra Kerberos niet wordt geaccepteerd. Uit een
-  # LaunchAgent antwoordt daar niemand op: het script blijft staan tot de Intune-agent het na
-  # 60 minuten afbreekt en "Failed" meldt, zonder één regel uitvoer. Dat is precies wat er hier
-  # gebeurde. -N vraagt per definitie niets en gebruikt het TGT dat er is.
-  #
-  # En de reden dat ik eerder naar NetFS ben gegaan klopte niet: mount_smbfs maakt zijn eigen
-  # mountpunt in /Volumes aan. Daar is geen mkdir voor nodig en dus ook geen beheerder. De
-  # share komt daarmee gewoon in /Volumes te staan, en dát is wat Finder in de zijbalk onder
-  # Locaties zet — niet de vraag welk commando hem mountte.
-  with_timeout 60 /sbin/mount_smbfs -N -o soft "$SMB_PAD" "$MOUNTPOINT" 2>>"$LOG"
+  # --- Dan de sleutel ---------------------------------------------------------------------
+  if [ -z "$STORAGE_KEY" ]; then
+    return 1
+  fi
+
+  mount_met_sleutel
   case $? in
     0)
-      log "Gemount: ${SMB_PAD} op ${MOUNTPOINT}"
+      log "Gemount met de storage account key op ${MOUNTPOINT}. Let op: dit is toegang zonder identiteit per gebruiker."
       return 0
       ;;
     124)
-      log "Mount liep vast op ${SMB_PAD} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
+      log "Mount met de sleutel liep vast en is na 60s afgebroken."
       return 1
       ;;
     *)
-      log "Mount mislukt voor ${SMB_PAD} (zie de regel hierboven voor de melding van mount_smbfs)."
+      log "Mount met de sleutel mislukt (zie de regel hierboven voor de melding van mount_smbfs)."
       return 1
       ;;
   esac

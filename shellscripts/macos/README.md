@@ -156,10 +156,40 @@ inleveren. Dat is nuttig om te weten vóór je aan deze constructie gaat sleutel
 | **Storage account key in het script** | [Llewellyn Hughes](https://www.llewellynhughes.co.uk/post/azure-map-drive-mac/) — `mount_smbfs -d 777 -f 777 //account:KEY@…` | De sleutel staat in platte tekst in het script en geeft toegang tot het hele storage account. Geen identiteit per gebruiker, geen rechten per persoon. |
 | **Kerberos, met wachtwoord als terugval** | [42Loris/macOS_DriveMapping](https://github.com/42Loris/macOS_DriveMapping) — `mount_smbfs -N`, en anders een sleutelhanger-helper | Niets aan de beveiligingskant, maar het vraagt een werkende Kerberos-bron. Vraagt bovendien een Developer ID-certificaat voor de helper. |
 
-Deze baseline doet de derde, zonder terugval. Dat is een bewuste keuze: een gedeelde sleutel in
-een script haalt de identiteit uit een baseline die verder helemaal op identiteit is gebouwd,
-en een aanmeldvenster per keer is geen drive mapping. De prijs is dat het staat of valt met de
-identity source van het storage account — en dat is precies waar het hier op vastliep.
+Deze baseline doet de derde. Omdat de Kerberos-kant op de identity source van `acisafiles`
+vastloopt en dat account niet verandert zolang AVD eraan hangt, is de tweede er als **terugval**
+bij gezet — zie hieronder.
+
+### De storage account key als terugval
+
+`STORAGE_KEY` bovenin het script. Leeg laten betekent alleen Kerberos; staat er een sleutel,
+dan probeert het script eerst een ticket en valt daarna terug op de sleutel. De sleutel gaat
+percent-gecodeerd de URL in, dus je plakt hem zoals Azure hem geeft.
+
+Wat je hiermee inlevert, en dat is meer dan het lijkt:
+
+- **De sleutel opent het hele storage account**, niet deze ene share. Bij `acisafiles` is dat
+  hetzelfde account waar de AVD-omgeving op draait — die data valt er dus ook onder.
+- **Geen identiteit per gebruiker.** Iedereen die mount is dezelfde "gebruiker". Rechten per
+  persoon en herleidbaarheid in de logs bestaan niet, en de share-level permissions in Azure
+  doen niets meer.
+- **Iedereen die het script kan lezen heeft de sleutel** — in Intune, en op het toestel.
+
+Daarom staat er in dit bestand een lege placeholder en niet de sleutel zelf. **Vul hem nooit in
+in de repo.** De kopie die je naar Intune uploadt draagt de echte waarde; wat in git staat blijft
+leeg. Een sleutel die één keer in git heeft gestaan staat er voorgoed in, ook na een commit die
+hem weghaalt, en dan is roulering de enige uitweg — met alles eraan vast.
+
+Rouleer de sleutel sowieso zodra de Kerberos-route werkt, en ook eerder als hij ergens is
+langsgekomen waar hij niet hoort: Azure-portal → het storage account → *Toegangssleutels* →
+*Sleutel roteren*. Gebruik key2 voor de uitrol en houd key1 achter de hand, dan kun je rouleren
+zonder alles tegelijk te breken.
+
+De sleutel staat kortstondig in de procestabel omdat `mount_smbfs` hem als argument krijgt. Dat
+is niet mooi, maar niet de zwakste schakel: dezelfde sleutel staat sowieso in het script op elk
+toestel. Het alternatief is de sleutelhanger, en die vraagt op macOS een toestemmingsdialoog
+tenzij hetzelfde ondertekende programma hem schrijft én leest — precies de reden dat 42Loris
+daar een eigen Swift-helper met Developer ID-certificaat voor bouwt.
 
 ### Waarom er een LaunchAgent bij zit
 
