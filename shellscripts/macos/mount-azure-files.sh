@@ -3,6 +3,10 @@
 # Mount een Azure Files-share op de Mac met het Kerberos-ticket uit Platform SSO, zodat de
 # gebruiker geen wachtwoord hoeft in te vullen. Het macOS-equivalent van een drive mapping.
 #
+# De share komt in /Volumes en staat daarmee in de Finder-zijbalk onder Locaties, met een
+# uitwerpknop — zie de opmerking bij mount_share() waarom dat via NetFS moet en niet met
+# mount_smbfs.
+#
 # Waarom een script en geen configuratieprofiel:
 #
 #   Er is er geen. Alle 18.329 settingDefinitionId's van de settings catalog zijn nagezocht
@@ -46,11 +50,6 @@ set -u
 STORAGE_ACCOUNT="STORAGE-ACCOUNT-INVULLEN"
 SHARE_NAME="SHARE-NAAM-INVULLEN"
 
-# Waar de share landt. Niet in /Volumes: daar mag een gewone gebruiker geen map aanmaken, en
-# een mount zonder eigen map komt op een naam met een cijfer erachter terecht zodra macOS er
-# al één kent.
-MOUNT_PARENT="Azure Files"
-
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
@@ -60,7 +59,7 @@ LABEL="com.flyinggroup.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
-MOUNTPOINT="$HOME/$MOUNT_PARENT/$SHARE_NAME"
+SMB_URL="smb://${SERVER}/${SHARE_NAME}"
 
 mkdir -p "$STATE_DIR"
 
@@ -75,40 +74,51 @@ fi
 
 # --- Mounten -------------------------------------------------------------------------------
 
+# Op server en share en niet op het mountpad: als /Volumes/<share> al bezet is hangt macOS er
+# een cijfer achter, en dan zou een controle op de padnaam de share elke ronde opnieuw mounten.
+is_mounted() {
+  /sbin/mount -t smbfs 2>/dev/null | grep -qi "${SERVER}/${SHARE_NAME} on "
+}
+
+has_ticket() {
+  /usr/bin/klist 2>/dev/null | grep -q "KERBEROS.MICROSOFTONLINE.COM"
+}
+
 mount_share() {
-  if /sbin/mount | grep -q " on ${MOUNTPOINT} "; then
+  if is_mounted; then
     return 0
   fi
 
-  # De ticketstatus wordt gelogd maar blokkeert niets. Een mislukte mount met de reden erbij
-  # is bruikbaarder dan een script dat stilvalt omdat het de cache verkeerd uitleest.
-  if /usr/bin/klist 2>/dev/null | grep -q "KERBEROS.MICROSOFTONLINE.COM"; then
-    log "Cloud Kerberos-ticket aanwezig."
-  else
-    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in de cache — mount wordt toch geprobeerd."
-  fi
-
-  mkdir -p "$MOUNTPOINT" || {
-    log "Kon $MOUNTPOINT niet aanmaken."
-    return 1
-  }
-
-  # -N  niet om een wachtwoord vragen: het ticket doet het werk, en een prompt uit een
-  #     LaunchAgent is een dialoog die niemand verwacht.
-  # -o soft  laat Finder een fout geven in plaats van te blijven hangen als de share weg is.
-  if /sbin/mount_smbfs -N -o soft "//${SERVER}/${SHARE_NAME}" "$MOUNTPOINT" 2>>"$LOG"; then
-    log "Gemount: //${SERVER}/${SHARE_NAME} op $MOUNTPOINT"
+  # Zonder ticket niet proberen. NetFS zet bij een mislukte Kerberos-mount een aanmeldvenster
+  # op het scherm, en dat elke vijf minuten uit een achtergrondagent is erger dan geen share.
+  # --force is er voor handmatig testen, wanneer je de dialoog juist wil zien.
+  if ! has_ticket && [ "${FORCE:-0}" -ne 1 ]; then
+    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in de cache — niet gemount."
     return 0
   fi
 
-  log "Mount mislukt voor //${SERVER}/${SHARE_NAME}"
-  # Een lege map blijft anders staan en lijkt op een share zonder inhoud.
-  rmdir "$MOUNTPOINT" 2>/dev/null
+  # Via NetFS (`mount volume`) en niet via mount_smbfs. Dat is het verschil tussen een share
+  # die in Finder staat en een die er niet staat: NetFS mount in /Volumes, precies zoals
+  # Finder → Verbind met server, en dan zet Finder hem in de zijbalk onder Locaties mét
+  # uitwerpknop. mount_smbfs mount naar een map die je zelf aanmaakt — dat werkt, maar zo'n
+  # mount is voor Finder geen server en verschijnt dus nergens in de zijbalk. Een gewone
+  # gebruiker mag zelf niets in /Volumes aanmaken; NetFS regelt dat wel.
+  if /usr/bin/osascript -e "mount volume \"${SMB_URL}\"" >/dev/null 2>>"$LOG"; then
+    log "Gemount: ${SMB_URL}"
+    return 0
+  fi
+
+  log "Mount mislukt voor ${SMB_URL}"
   return 1
 }
 
 if [ "${1:-}" = "--mount" ]; then
   mount_share
+  exit $?
+fi
+
+if [ "${1:-}" = "--force" ]; then
+  FORCE=1 mount_share
   exit $?
 fi
 

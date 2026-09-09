@@ -87,9 +87,9 @@ Intune slikt het script gewoon en de fout blijkt pas op het apparaat.
 
 ## mount-azure-files.sh
 
-Mount een Azure Files-share in `~/Azure Files/<share>` met het Kerberos-ticket dat Platform
-SSO uitgeeft, zodat de gebruiker geen wachtwoord hoeft in te vullen. Het macOS-equivalent van
-een drive mapping, en de tegenhanger van
+Mount een Azure Files-share in `/Volumes/<share>` met het Kerberos-ticket dat Platform SSO
+uitgeeft, zodat de gebruiker geen wachtwoord hoeft in te vullen en de share in de
+Finder-zijbalk staat. Het macOS-equivalent van een drive mapping, en de tegenhanger van
 [`Mount-AzureFilesDrive.ps1`](../../platformscripts/windows/README.md) op Windows.
 
 ### Waarom een script en geen configuratieprofiel
@@ -139,15 +139,41 @@ De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesl
 Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
 bestaande shares) staat in de note bij dat profiel.
 
-### Niet in /Volumes
+### Zichtbaar in Finder
 
-De share landt in `~/Azure Files/<share>` en niet in `/Volumes`. Daar mag een gewone gebruiker
-geen map aanmaken, en een mount zonder eigen map krijgt van macOS een naam met een cijfer
-erachter zodra het er al één kent — `share-1`, `share-2`, en dan wijst niemands snelkoppeling
-meer waar hij naar wees.
+De share landt in `/Volumes/<share>` en verschijnt in de Finder-zijbalk onder **Locaties**,
+met een uitwerpknop — hetzelfde als wanneer je hem via *Ga → Verbind met server* had gekoppeld.
 
-`-o soft` staat aan: valt de share weg, dan geeft Finder een fout in plaats van te blijven
-hangen.
+Dat is de reden dat het script `osascript -e 'mount volume "smb://…"'` gebruikt en niet
+`mount_smbfs`. Die twee mounten allebei, maar niet hetzelfde:
+
+| | `mount_smbfs` | `mount volume` (NetFS) |
+|---|---|---|
+| Waar | een map die je zelf aanmaakt, bijvoorbeeld in de thuismap | `/Volumes/<share>` |
+| In de Finder-zijbalk | nee — Finder ziet zo'n mount niet als server | ja, onder Locaties |
+| Uitwerpen | alleen met `umount` | met de knop in Finder |
+| Rechten op /Volumes | een gewone gebruiker mag daar niets aanmaken | NetFS regelt dat |
+
+Een icoon op het **bureaublad** krijg je er niet automatisch bij: dat staat standaard uit en
+zit los van de zijbalk. Wil je dat wel, dan is dat één instelling in de settings catalog —
+`com.apple.finder_showmountedserversondesktop` — en dus een policy, geen scriptwijziging.
+
+De **Favorieten** bovenin de zijbalk zijn iets anders dan Locaties. Daar kan een script niets
+zinnigs mee: die lijst is een bookmarkblob in `com.apple.sidebarlists.plist` en Apple heeft de
+API ervoor afgeschaft. De gebruiker kan de share er zelf naartoe slepen.
+
+### Geen ticket, geen poging
+
+Zonder Kerberos-ticket mount het script niet. Dat is bewust: NetFS zet bij een mislukte
+Kerberos-mount een aanmeldvenster op het scherm, en dat elke vijf minuten uit een
+achtergrondagent is erger dan een ontbrekende share. Het script controleert `klist` op een
+ticket voor `KERBEROS.MICROSOFTONLINE.COM` en noteert in de log waarom het niets deed.
+
+Handmatig testen, mét dialoog, kan met `--force`:
+
+```bash
+~/Library/Application\ Support/Baseline/mount-azure-files.sh --force
+```
 
 ### Opnieuw laten draaien
 
