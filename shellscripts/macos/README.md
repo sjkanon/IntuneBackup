@@ -198,22 +198,44 @@ installed by the administrator of the tenant or consented to by any user in the 
 ```
 
 Komt deze bij **beide** schrijfwijzen, dan is er niets om hoofdletters van te corrigeren: de
-KDC kent überhaupt geen toepassing voor deze fileservice. Twee mogelijkheden.
+KDC kent überhaupt geen toepassing voor deze fileservice. Aanzetten van Entra Kerberos maakt
+die app-registratie (`[Storage Account] <account>.file.core.windows.net`) automatisch aan;
+zolang die er niet is, valt er niets uit te geven.
 
-**Entra Kerberos staat niet aan op het storage account.** Dat is de gewone oorzaak. Aanzetten
-maakt Azure automatisch een app-registratie `[Storage Account] <account>.file.core.windows.net`
-aan; zolang die er niet is, kan de KDC niets uitgeven. Azure-portal → het storage account →
-*Data storage* → *File shares* → *Identity-based access* → **Microsoft Entra Kerberos** → *Set up*.
+**Kijk eerst naar de identity source van het storage account**, want dat is wat wij hier
+tegenkwamen. Azure-portal → het storage account → *Data storage* → *File shares* →
+*Identity-based access*. Staan **Microsoft Entra Kerberos** en **AD DS** daar grijs met
+*"Another access method is already configured"*, dan is er al een andere bron gekozen — bij ons
+Microsoft Entra Domain Services. Microsoft is daar stellig over:
 
-Daarna is er nog een tweede stap die makkelijk blijft liggen: **admin consent** geven op die
-nieuwe service principal, in Entra ID → App-registraties → Alle toepassingen → de app met de
-naam van het storage account → *API-machtigingen* → *Verleen beheerderstoestemming*. Zonder dat
-staat de app er wel maar doet hij niets.
+> Your Azure storage account can't authenticate with both Microsoft Entra ID and a second
+> method like AD DS or Microsoft Entra Domain Services. If you already chose another identity
+> source for your storage account, you must disable it before enabling Microsoft Entra
+> Kerberos.
 
-**Of het storage account hoort bij een andere tenant.** De foutmelding noemt het tenant-id
-waarin gezocht is; dat is de tenant waarop de Mac is aangemeld. Staat `acisafiles` in een ander
-abonnement onder een andere directory, dan zal dit nooit werken — Entra Kerberos ondersteunt
-geen toegang over tenants heen.
+Eén identity source per storage account, en dat is een keuze die verder reikt dan de Macs: al
+het bestaande verkeer naar die shares hangt eraan. Omzetten gaat volgens
+[Change the identity source for Azure file shares](https://learn.microsoft.com/en-us/azure/storage/files/change-identity-source)
+en is geen instelling die je even omklapt.
+
+**Waarom Entra DS niet alsnog werkt met dit profiel.** Kerberos tegen een Entra DS-share loopt
+via de domeincontrollers van dat beheerde domein, met het domein zelf als realm — niet via de
+cloud-KDC op `KERBEROS.MICROSOFTONLINE.COM`. Platform SSO geeft maar twee tickets uit:
+`tgt_cloud` voor Entra Kerberos, en `tgt_ad` voor een on-premises AD via Cloud Kerberos Trust.
+Entra DS is geen van beide — het is een beheerd domein dat *uit* Entra ID synchroniseert en
+niet meedoet aan Cloud Kerberos Trust. Er komt dus nooit een TGT voor dat realm.
+
+Wie tóch bij Entra DS wil blijven, heeft op de Mac een klassieke Kerberos SSO-opstelling nodig:
+realm en `Hosts` van het beheerde domein, netwerkzicht op de domeincontrollers in de VNet (dus
+VPN of ExpressRoute) en een gebruiker die zijn wachtwoord intypt. Dat werkt, maar het is een
+andere oplossing dan deze — de aanmeldloze mount is er dan niet bij.
+
+Staat er wél Entra Kerberos aan en komt deze fout tóch, dan zijn er nog twee mogelijkheden. De
+**admin consent** op de nieuwe service principal kan ontbreken — Entra ID → App-registraties →
+Alle toepassingen → de app met de naam van het storage account → *API-machtigingen* →
+*Verleen beheerderstoestemming*. Of het storage account hoort bij een **andere directory** dan
+die waarop de Mac is aangemeld; de foutmelding noemt het tenant-id waarin gezocht is, en Entra
+Kerberos werkt niet over tenants heen.
 
 Zolang deze fout er staat heeft het geen zin om aan het profiel, de `Hosts`-lijst of het script
 te sleutelen. Die kant is aantoonbaar in orde: er is een geldig TGT in de standaardcache, poort
