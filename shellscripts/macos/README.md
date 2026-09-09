@@ -87,7 +87,7 @@ Intune slikt het script gewoon en de fout blijkt pas op het apparaat.
 
 ## mount-azure-files.sh
 
-Mount een Azure Files-share in `/Volumes/<share>` met het Kerberos-ticket dat Platform SSO
+Mount een Azure Files-share in `/Volumes` met het Kerberos-ticket dat Platform SSO
 uitgeeft, zodat de gebruiker geen wachtwoord hoeft in te vullen en de share in de
 Finder-zijbalk staat. Het macOS-equivalent van een drive mapping, en de tegenhanger van
 [`Mount-AzureFilesDrive.ps1`](../../platformscripts/windows/README.md) op Windows.
@@ -139,17 +139,32 @@ De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesl
 Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
 bestaande shares) staat in de note bij dat profiel.
 
+### Share en submap zijn niet hetzelfde
+
+`smb://acisafiles.file.core.windows.net/data/Public` staat in het script als drie velden:
+`data` is de **share**, `Public` een **map daarin**. SMB kent maar één sharelaag, en dat
+onderscheid is niet cosmetisch — de mount en de share-level permissions in Azure hangen aan
+`data`, de submap is alleen het punt waar je binnenkomt. Wie alleen bij `Public` mag hoort dat
+via de rechten op die map te krijgen, niet door hier een andere waarde in te vullen.
+
+`SHARE_SUBPATH` leeg laten mount de hele share.
+
+De controle op "staat hij al?" kijkt daarom naar de **share** en niet naar de submap of het
+mountpad: NetFS bepaalt zelf of het de mount op `/Volumes/Public` of op `/Volumes/data` zet,
+en als /Volumes die naam al kent hangt macOS er een cijfer achter. Een strengere controle zou
+zijn eigen mount niet herkennen en elke ronde opnieuw mounten.
+
 ### Zichtbaar in Finder
 
-De share landt in `/Volumes/<share>` en verschijnt in de Finder-zijbalk onder **Locaties**,
-met een uitwerpknop — hetzelfde als wanneer je hem via *Ga → Verbind met server* had gekoppeld.
+De share landt in `/Volumes` en verschijnt in de Finder-zijbalk onder **Locaties**, met een
+uitwerpknop — hetzelfde als wanneer je hem via *Ga → Verbind met server* had gekoppeld.
 
 Dat is de reden dat het script `osascript -e 'mount volume "smb://…"'` gebruikt en niet
 `mount_smbfs`. Die twee mounten allebei, maar niet hetzelfde:
 
 | | `mount_smbfs` | `mount volume` (NetFS) |
 |---|---|---|
-| Waar | een map die je zelf aanmaakt, bijvoorbeeld in de thuismap | `/Volumes/<share>` |
+| Waar | een map die je zelf aanmaakt, bijvoorbeeld in de thuismap | `/Volumes/` |
 | In de Finder-zijbalk | nee — Finder ziet zo'n mount niet als server | ja, onder Locaties |
 | Uitwerpen | alleen met `umount` | met de knop in Finder |
 | Rechten op /Volumes | een gewone gebruiker mag daar niets aanmaken | NetFS regelt dat |

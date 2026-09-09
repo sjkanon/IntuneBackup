@@ -15,7 +15,7 @@ zo terug.
 
 | Bestand | Wat het doet | Scope |
 |---|---|---|
-| `Mount-AzureFilesDrive.ps1` | Koppelt `\\acisafiles.file.core.windows.net\data` als `Z:` met het Entra Kerberos-ticket | Gebruiker |
+| `Mount-AzureFilesDrive.ps1` | Koppelt `\\acisafiles.file.core.windows.net\data\Public` als `Z:` met het Entra Kerberos-ticket | Gebruiker |
 
 ## Mount-AzureFilesDrive.ps1
 
@@ -64,6 +64,16 @@ met een eigen schema). Die vragen Windows Enterprise E3/E5 of Intune Plan 2.
 Is de gekozen letter al bezet door iets anders, dan laat het script hem staan en stopt met
 exit 1. Een bestaande schijf onder de gebruiker vandaan trekken is erger dan deze niet
 koppelen.
+
+### Share en submap zijn niet hetzelfde
+
+`\\acisafiles.file.core.windows.net\data\Public` staat in het script als drie velden: `data`
+is de **share**, `Public` een **map daarin**. SMB kent maar één sharelaag, en dat onderscheid
+is niet cosmetisch — de verbinding en de share-level permissions in Azure hangen aan `data`,
+de submap is alleen het punt waar de schijf begint. Wie alleen bij `Public` mag hoort dat via
+NTFS-rechten in de map te krijgen, niet door hier een andere waarde in te vullen.
+
+`$ShareSubPath` leeg laten koppelt de hele share.
 
 ### Wat er buiten dit script moet staan
 

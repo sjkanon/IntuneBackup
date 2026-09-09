@@ -42,16 +42,20 @@ set -u
 
 # --- De share ------------------------------------------------------------------------------
 #
-# Storage account en sharenaam apart, want de SMB-URL ziet er anders uit dan de HTTPS-URL uit
-# de portal: https://acisafiles.file.core.windows.net/data wordt
-# smb://acisafiles.file.core.windows.net/data.
+# \\acisafiles.file.core.windows.net\data\Public wordt smb://acisafiles.file.core.windows.net
+# /data/Public. In drie velden, want SMB kent maar één sharelaag: `data` is de share, `Public`
+# is een map dáárin. Dat onderscheid is niet cosmetisch — de mount en de rechten hangen aan de
+# share, de submap is alleen het punt waar je binnenkomt.
 #
-# Deze twee staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
+# SHARE_SUBPATH leeg laten mount de hele share.
+#
+# Deze drie staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
 # shellscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de templates
 # in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
 STORAGE_ACCOUNT="acisafiles"
 SHARE_NAME="data"
+SHARE_SUBPATH="Public"
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
@@ -62,7 +66,7 @@ LABEL="com.aci-europe.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
-SMB_URL="smb://${SERVER}/${SHARE_NAME}"
+SMB_URL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
 mkdir -p "$STATE_DIR"
 
@@ -77,8 +81,10 @@ fi
 
 # --- Mounten -------------------------------------------------------------------------------
 
-# Op server en share en niet op het mountpad: als /Volumes/<share> al bezet is hangt macOS er
-# een cijfer achter, en dan zou een controle op de padnaam de share elke ronde opnieuw mounten.
+# Op server en share, en bewust niet op het mountpad en niet op de submap. Twee redenen: als
+# /Volumes/<naam> al bezet is hangt macOS er een cijfer achter, en NetFS bepaalt zelf of het
+# de mount op de submap of op de share zet. Een controle op iets specifiekers zou de share
+# elke ronde opnieuw mounten omdat hij zijn eigen mount niet herkent.
 is_mounted() {
   /sbin/mount -t smbfs 2>/dev/null | grep -qi "${SERVER}/${SHARE_NAME} on "
 }

@@ -48,16 +48,20 @@ Toewijzen aan een gebruikersgroep, niet aan apparaten.
 
 # --- De share ------------------------------------------------------------------------------
 #
-# Storage account en sharenaam apart, want de UNC-vorm ziet er anders uit dan de HTTPS-URL uit
-# de portal: https://acisafiles.file.core.windows.net/data wordt
-# \\acisafiles.file.core.windows.net\data.
+# \\acisafiles.file.core.windows.net\data\Public, in losse velden. SMB kent maar één
+# sharelaag: `data` is de share, `Public` is een map dáárin. Dat onderscheid is niet
+# cosmetisch — de verbinding en de share-level permissions hangen aan de share, de submap is
+# alleen het punt waar de schijf begint.
 #
-# Deze drie staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
+# $ShareSubPath leeg laten koppelt de hele share.
+#
+# Deze vier staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
 # platformscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de
 # templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
 $StorageAccount = 'acisafiles'
 $ShareName      = 'data'
+$ShareSubPath   = 'Public'
 $DriveLetter    = 'Z'
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
@@ -68,6 +72,7 @@ $stateDir = Join-Path $env:LOCALAPPDATA 'Baseline'
 $log      = Join-Path $stateDir 'mount-azurefiles.log'
 $server   = "$StorageAccount.file.core.windows.net"
 $root     = "\\$server\$ShareName"
+if ($ShareSubPath) { $root = Join-Path $root $ShareSubPath }
 
 if (-not (Test-Path $stateDir)) { New-Item -ItemType Directory -Path $stateDir -Force | Out-Null }
 
