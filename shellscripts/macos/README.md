@@ -434,6 +434,39 @@ Dezelfde afweging maakt [`42Loris/macOS_DriveMapping`](https://github.com/42Lori
 met in het script de opmerking dat `osascript` bij een URL zonder inloggegevens die
 "continue"-dialoog uitlokt.
 
+#### Als /Volumes niet lukt
+
+`mount_smbfs` maakt zijn eigen mountpunt in `/Volumes` aan, maar niet altijd: ligt daar nog een
+map van een eerdere poging die van `root` is, dan geeft élke volgende mount
+**`Operation not permitted`**. Dat is iets anders dan `Authentication error` — het gaat dan niet
+over de sleutel of het ticket maar over het mountpunt, en wie dat verwart zoekt dagen in de
+verkeerde hoek.
+
+Het script ruimt zo'n leeg restant zelf op en wijkt anders uit naar `~/<share>`. Die terugval
+werkt altijd, maar levert geen regel onder *Locaties* op; de log zegt het wanneer het gebeurt.
+Handmatig opruimen kan met `sudo rmdir /Volumes/<naam>`.
+
+#### En in de Favorieten
+
+Na een geslaagde mount zet het script het pad ook in de **Favorieten** bovenin de zijbalk, met
+Apple's eigen `sfltool`:
+
+```bash
+/usr/bin/sfltool add-item com.apple.LSSharedFileList.FavoriteItems "file:///Volumes/<naam>"
+```
+
+Geen tool van derden nodig — `mysides` was daar jarenlang voor, maar `sfltool` zit in macOS
+zelf. Het moet wel als de ingelogde gebruiker draaien, want de favorietenlijst is per gebruiker;
+dat is hier het geval.
+
+Eén keer, met een markering in `~/Library/Application Support/Baseline/favoriet` ernaast. Zonder
+die markering zou elke netwerkwijziging er een regel bij zetten en staat de zijbalk na een dag
+vol met dezelfde snelkoppeling.
+
+Let op het verschil tussen de twee plekken in de zijbalk: een gemounte server verschijnt vanzelf
+onder **Locaties** en verdwijnt daar bij het uitwerpen. Een **favoriet** is een vaste verwijzing
+naar een pad en blijft staan, ook als er niets gemount is — dan wijst hij naar een lege map.
+
 Een icoon op het **bureaublad** krijg je er niet automatisch bij: dat staat standaard uit en
 zit los van de zijbalk. Wil je dat wel, dan is dat één instelling in de settings catalog —
 `com.apple.finder_showmountedserversondesktop` — en dus een policy, geen scriptwijziging.

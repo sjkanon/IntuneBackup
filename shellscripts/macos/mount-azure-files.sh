@@ -95,15 +95,25 @@ STATE_DIR="$HOME/Library/Application Support/Baseline"
 LOG_DIR="$HOME/Library/Logs/Baseline"
 LOG="$LOG_DIR/mount-azure-files.log"
 HELPER="$STATE_DIR/mount-azure-files.sh"
+FAVORIET_MARKER="$STATE_DIR/favoriet"
 LABEL="com.aci-europe.baseline.mount-azure-files"
 AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
 SMB_PAD="//${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
-# De naam die in de Finder-zijbalk komt te staan, en dus ook de map in /Volumes.
+# Mountpunten in volgorde van voorkeur.
+#
+# /Volumes eerst, want alleen wat dáár staat zet Finder in de zijbalk onder Locaties. Normaal
+# maakt mount_smbfs die map zelf aan, maar dat lukt niet altijd: is /Volumes op dit toestel niet
+# schrijfbaar voor een gewone gebruiker, of ligt er een restant van een eerdere poging dat van
+# root is, dan geeft de mount "Operation not permitted" — en dat is iets anders dan een
+# afgewezen aanmelding.
+#
+# De thuismap is de terugval. Die werkt altijd, maar levert geen regel in de zijbalk op; het
+# script zegt in de log wanneer het daarop is uitgeweken.
 MOUNT_NAAM="${SHARE_SUBPATH:-$SHARE_NAME}"
-MOUNTPOINT="/Volumes/$MOUNT_NAAM"
+MOUNTPUNTEN=("/Volumes/$MOUNT_NAAM" "$HOME/$MOUNT_NAAM")
 
 mkdir -p "$STATE_DIR" "$LOG_DIR"
 
@@ -121,12 +131,18 @@ fi
 
 # --- Mounten -------------------------------------------------------------------------------
 
-# Op het mountpad, want dat kiezen we nu zelf: mount_smbfs zet de share precies op het pad dat
-# je meegeeft. Vergelijken op kolom 3 van `mount` en niet met grep op de hele regel — anders
-# zou /Volumes/Public ook matchen op /Volumes/Public-2, en dan denkt het script dat het al
-# goed staat terwijl het naar een andere mount kijkt.
+# Kijkt of de share op één van de kandidaat-mountpunten al staat. Vergelijken op kolom 3 van
+# `mount` en niet met grep op de hele regel — anders zou /Volumes/Public ook matchen op
+# /Volumes/Public-2, en dan denkt het script dat het goed staat terwijl het naar een andere
+# mount kijkt.
 is_mounted() {
-  /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$MOUNTPOINT" '$3 == m { gevonden = 1 } END { exit !gevonden }'
+  local m
+  for m in "${MOUNTPUNTEN[@]}"; do
+    if /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$m" '$3 == m { g = 1 } END { exit !g }'; then
+      return 0
+    fi
+  done
+  return 1
 }
 
 # Drie manieren, want ze kijken geen van drieën naar hetzelfde. `klist -s` is de nette check
@@ -177,18 +193,69 @@ urlencode() {
   printf '%s' "$out"
 }
 
-# Mounten met de sleutel in plaats van met een ticket. De gebruikersnaam voor Azure Files met
-# gedeelde sleutel is de accountnaam zelf.
+# Het SMB-pad mét de sleutel erin. De gebruikersnaam voor Azure Files met gedeelde sleutel is de
+# accountnaam zelf.
 #
-# De sleutel staat hier in de aanroep en dus kortstondig in de procestabel. Dat is niet mooi,
+# De sleutel komt hiermee in de aanroep en dus kortstondig in de procestabel. Dat is niet mooi,
 # maar het is niet de zwakste schakel: dezelfde sleutel staat sowieso in het script op elk
 # toestel. Het alternatief is de sleutelhanger, en die vraagt op macOS een toestemmingsdialoog
 # tenzij hetzelfde ondertekende programma hem schrijft én leest — dat is precies waarom
 # 42Loris/macOS_DriveMapping daar een eigen Swift-helper met Developer ID voor bouwt.
-mount_met_sleutel() {
-  with_timeout 60 /sbin/mount_smbfs -N -o soft \
-    "//${STORAGE_ACCOUNT}:$(urlencode "$STORAGE_KEY")@${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}" \
-    "$MOUNTPOINT" 2>>"$LOG"
+pad_met_sleutel() {
+  printf '//%s:%s@%s/%s%s' \
+    "$STORAGE_ACCOUNT" "$(urlencode "$STORAGE_KEY")" "$SERVER" \
+    "$SHARE_NAME" "${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+}
+
+# Ruimt een leeg restant in /Volumes op. Blijft daar na een mislukte poging een map staan die van
+# root is, dan geeft élke volgende mount "Operation not permitted" en lijkt het alsof de sleutel
+# niet deugt. rmdir faalt stil als de map niet van ons is; dan doet de terugval zijn werk.
+ruim_restant_op() {
+  local mp="$1"
+  [ -d "$mp" ] || return 0
+  /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$mp" '$3 == m { g = 1 } END { exit !g }' && return 0
+  rmdir "$mp" 2>/dev/null
+  return 0
+}
+
+# Eén poging: $1 is het volledige SMB-pad, $2 het mountpunt.
+probeer_mount() {
+  local pad="$1" mp="$2"
+  case "$mp" in
+    /Volumes/*) ruim_restant_op "$mp" ;;
+    *) mkdir -p "$mp" 2>>"$LOG" || return 1 ;;
+  esac
+  with_timeout 60 /sbin/mount_smbfs -N -o soft "$pad" "$mp" 2>>"$LOG"
+}
+
+# Zet het mountpunt in de Favorieten bovenin de Finder-zijbalk.
+#
+# Met `sfltool`, Apple's eigen commando; er is geen tool van derden voor nodig. Het moet wel als
+# de ingelogde gebruiker draaien, want de favorietenlijst is per gebruiker — dat is hier het
+# geval, zowel vanuit Intune ("Run script as signed-in user") als vanuit de LaunchAgent.
+#
+# Eén keer, met een markering ernaast. Zonder die markering zou elke netwerkwijziging er een
+# regel bij zetten en staat de zijbalk na een dag vol met dezelfde snelkoppeling.
+#
+# Let op wat een favoriet wél en niet is: een gemounte server verschijnt vanzelf onder
+# *Locaties* en verdwijnt daar weer bij het uitwerpen. Een favoriet is een vaste verwijzing naar
+# een pad en blijft staan — ook als er op dat moment niets gemount is.
+zet_in_favorieten() {
+  local mp="$1" url
+  [ -x /usr/bin/sfltool ] || return 0
+  if [ -f "$FAVORIET_MARKER" ] && [ "$(cat "$FAVORIET_MARKER" 2>/dev/null)" = "$mp" ]; then
+    return 0
+  fi
+
+  # Alleen spaties hoeven gecodeerd; de schuine strepen van het pad moeten juist blijven staan.
+  url="file://${mp// /%20}"
+
+  if /usr/bin/sfltool add-item com.apple.LSSharedFileList.FavoriteItems "$url" >>"$LOG" 2>&1; then
+    printf '%s' "$mp" >"$FAVORIET_MARKER"
+    log "In de Finder-favorieten gezet: ${mp}"
+  else
+    log "Kon ${mp} niet aan de Finder-favorieten toevoegen."
+  fi
 }
 
 mount_share() {
@@ -196,56 +263,65 @@ mount_share() {
     return 0
   fi
 
-  # --- Eerst Kerberos ---------------------------------------------------------------------
+  # Wat we kunnen proberen, in volgorde. Kerberos eerst: dat is de vorm met identiteit per
+  # gebruiker, en de sleutel is de terugval — niet andersom.
   #
   # mount_smbfs -N, en uitdrukkelijk niet `osascript -e 'mount volume'`. Die laatste gaat door
   # NetFS, en NetFS zet bij een URL zonder inloggegevens een "verbinden"-dialoog op het scherm
-  # zodra Kerberos niet wordt geaccepteerd. Uit een LaunchAgent antwoordt daar niemand op: het
-  # script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
-  # zonder één regel uitvoer. -N vraagt per definitie niets en gebruikt het TGT dat er is.
-  #
-  # mount_smbfs maakt bovendien zijn eigen mountpunt in /Volumes aan, ook als gewone gebruiker.
-  # Dát het in /Volumes staat is wat Finder in de zijbalk onder Locaties zet.
+  # zodra de aanmelding niet wordt geaccepteerd. Uit een LaunchAgent antwoordt daar niemand op:
+  # het script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
+  # zonder één regel uitvoer. -N vraagt per definitie niets.
+  local methoden=()
   if has_ticket || [ "${FORCE:-0}" -eq 1 ]; then
-    with_timeout 60 /sbin/mount_smbfs -N -o soft "$SMB_PAD" "$MOUNTPOINT" 2>>"$LOG"
-    case $? in
-      0)
-        log "Gemount met Kerberos: ${SMB_PAD} op ${MOUNTPOINT}"
-        return 0
-        ;;
-      124)
-        log "Kerberos-mount liep vast en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
-        ;;
-      *)
-        log "Kerberos-mount geweigerd voor ${SMB_PAD}."
-        ;;
-    esac
+    methoden+=("kerberos")
   elif [ "${QUIET:-0}" -ne 1 ]; then
     # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
     # geen ticket is zou dat de log vullen met dezelfde regel.
     log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches. Controleer met: app-sso platform -s"
   fi
-
-  # --- Dan de sleutel ---------------------------------------------------------------------
-  if [ -z "$STORAGE_KEY" ]; then
+  if [ -n "$STORAGE_KEY" ]; then
+    methoden+=("sleutel")
+  fi
+  if [ "${#methoden[@]}" -eq 0 ]; then
     return 1
   fi
 
-  mount_met_sleutel
-  case $? in
-    0)
-      log "Gemount met de storage account key op ${MOUNTPOINT}. Let op: dit is toegang zonder identiteit per gebruiker."
-      return 0
-      ;;
-    124)
-      log "Mount met de sleutel liep vast en is na 60s afgebroken."
-      return 1
-      ;;
-    *)
-      log "Mount met de sleutel mislukt (zie de regel hierboven voor de melding van mount_smbfs)."
-      return 1
-      ;;
-  esac
+  local methode mp pad
+  for methode in "${methoden[@]}"; do
+    if [ "$methode" = "kerberos" ]; then
+      pad="$SMB_PAD"
+    else
+      pad="$(pad_met_sleutel)"
+    fi
+
+    for mp in "${MOUNTPUNTEN[@]}"; do
+      probeer_mount "$pad" "$mp"
+      case $? in
+        0)
+          if [ "$methode" = "sleutel" ]; then
+            log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
+          else
+            log "Gemount met Kerberos op ${mp}."
+          fi
+          case "$mp" in
+            /Volumes/*) ;;
+            *) log "Uitgeweken naar de thuismap omdat /Volumes niet lukte. De share staat hierdoor niet in de Finder-zijbalk onder Locaties." ;;
+          esac
+          zet_in_favorieten "$mp"
+          return 0
+          ;;
+        124)
+          # Een vastloper is netwerk en geen mountpunt; een tweede pad proberen heeft geen zin.
+          log "Mount (${methode}) liep vast op ${mp} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
+          return 1
+          ;;
+      esac
+    done
+
+    log "Mount met ${methode} lukte op geen van de mountpunten."
+  done
+
+  return 1
 }
 
 if [ "${1:-}" = "--mount" ]; then
