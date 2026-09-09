@@ -11,6 +11,7 @@ opgepikt door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js`
 | Bestand | Wat het doet | Scope |
 |---|---|---|
 | `configure-dock.sh` | Richt de Dock één keer per gebruiker in en laat 'm daarna met rust | Gebruiker |
+| `mount-azure-files.sh` | Mount een Azure Files-share met het Kerberos-ticket uit Platform SSO | Gebruiker |
 
 ## configure-dock.sh
 
@@ -83,3 +84,77 @@ krijgt makkelijk de indruk dat het goed zit.
 `core.autocrlf=true`; zonder die regel krijgt dit script bij checkout CRLF en faalt het op de
 Mac met `bad interpreter: /bin/bash^M`. Controleer dat na een upload met `file` of `cat -A` —
 Intune slikt het script gewoon en de fout blijkt pas op het apparaat.
+
+## mount-azure-files.sh
+
+Mount een Azure Files-share in `~/Azure Files/<share>` met het Kerberos-ticket dat Platform
+SSO uitgeeft, zodat de gebruiker geen wachtwoord hoeft in te vullen. Het macOS-equivalent van
+een drive mapping, en de tegenhanger van
+[`Mount-AzureFilesDrive.ps1`](../../platformscripts/windows/README.md) op Windows.
+
+### Waarom een script en geen configuratieprofiel
+
+Er is geen drive-mapping-payload. Alle 18.329 `settingDefinitionId`'s van de settings catalog
+zijn nagezocht op iets dat een netwerkschijf koppelt; dat bestaat niet, op geen van beide
+platformen. Apple heeft `com.apple.finder_showmountedserversondesktop` — of een al gemounte
+share op het bureaublad staat — en verder niets. Mounten is een handeling en geen instelling.
+
+### Waarom er een LaunchAgent bij zit
+
+Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de share
+dus pas een uur ná het inloggen terugzetten, en dat is precies het moment waarop iemand hem
+nodig heeft. Dit script installeert daarom een LaunchAgent
+(`com.flyinggroup.baseline.mount-azure-files`) die bij login draait en daarna elke vijf
+minuten, en doet zelf één eerste poging.
+
+Het script kopieert zichzelf naar `~/Library/Application Support/Baseline/` en laat de agent
+díe kopie aanroepen. Eén bestand met de instellingen erin, dus de agent kan niet uit de pas
+lopen met wat Intune uitrolt: verandert het script in Intune, dan wordt de kopie bij de
+volgende run vervangen en de agent opnieuw geladen.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **Yes** | een mount hoort bij een sessie; als root landt hij in een sessie die niemand ziet |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 hour** | houdt de LaunchAgent en de kopie bij |
+| Max number of retries | 3 | |
+
+Toewijzen aan een **gebruikersgroep**, niet aan apparaten: wie bij de share mag is een
+eigenschap van de gebruiker, en de share-level permissions in Azure staan op dezelfde groep.
+
+### Wat er buiten dit script moet staan
+
+[`Baseline_MAC_D_Azure_Files_Cloud_Kerberos`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md)
+moet zijn uitgerold — zonder dat profiel is er geen ticket voor het
+`KERBEROS.MICROSOFTONLINE.COM`-realm en vraagt de mount alsnog om een wachtwoord. Dat profiel
+staat vandaag in **fase 3**: toegang tot Azure Files via het Platform SSO-ticket is een
+limited preview waarvoor Microsoft je moet aanzetten, en het vraagt macOS Tahoe 26.5. Zolang
+die voorwaarden er niet zijn, mount dit script niets en zegt de log waarom.
+
+De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesloten voor de
+Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
+bestaande shares) staat in de note bij dat profiel.
+
+### Niet in /Volumes
+
+De share landt in `~/Azure Files/<share>` en niet in `/Volumes`. Daar mag een gewone gebruiker
+geen map aanmaken, en een mount zonder eigen map krijgt van macOS een naam met een cijfer
+erachter zodra het er al één kent — `share-1`, `share-2`, en dan wijst niemands snelkoppeling
+meer waar hij naar wees.
+
+`-o soft` staat aan: valt de share weg, dan geeft Finder een fout in plaats van te blijven
+hangen.
+
+### Opnieuw laten draaien
+
+```bash
+launchctl bootout gui/$(id -u)/com.flyinggroup.baseline.mount-azure-files
+rm -f ~/Library/LaunchAgents/com.flyinggroup.baseline.mount-azure-files.plist
+```
+
+De eerstvolgende run van het Intune-script zet beide terug. De log staat in
+`~/Library/Application Support/Baseline/mount-azure-files.log`.

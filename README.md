@@ -43,14 +43,21 @@ Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/R
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
 [`baseline/`](baseline/README.md).
 
-Vier soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
+Vijf soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
 `IntuneTemplate/`, elk met een eigen README: de macOS ADE-enrollmentprofielen in
 [`enrollment/macos/`](enrollment/macos/README.md), de macOS-shellscripts in
-[`shellscripts/macos/`](shellscripts/macos/README.md), de aangepaste compliance-check voor
-Defender op macOS in [`compliance/macos/`](compliance/macos/README.md) en de Win32-app die de
-voorgeïnstalleerde McAfee verwijdert in
+[`shellscripts/macos/`](shellscripts/macos/README.md), de Windows-platformscripts in
+[`platformscripts/windows/`](platformscripts/windows/README.md), de aangepaste compliance-check
+voor Defender op macOS in [`compliance/macos/`](compliance/macos/README.md) en de Win32-app die
+de voorgeïnstalleerde McAfee verwijdert in
 [`apps/win32/remove-mcafee/`](apps/win32/remove-mcafee/README.md). Die worden door géén van de
 pijplijnen opgepikt en hebben geen `checkId`.
+
+De twee scriptmappen doen hetzelfde in twee vormen: een **drive mapping is geen policy**. Geen
+van de 18.329 settingDefinitionId's in de settings catalog koppelt een netwerkschijf, en Group
+Policy Preferences → Drive Maps is geen ADMX en dus niet te ingesten. Wie een share bij een
+groep gebruikers wil krijgen, doet dat met een script in gebruikerscontext dat aan een
+gebruikersgroep is toegewezen.
 
 Die laatste hoort er om één reden bij: McAfee zet **Microsoft Defender in passive mode**. De
 ASR-regels, Controlled Folder Access, Network Protection en Remote Encryption Protection uit deze
