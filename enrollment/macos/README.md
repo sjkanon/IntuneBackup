@@ -192,3 +192,35 @@ Moet Apple Intelligence echt uit, dan is dat een aparte settings catalog-policy.
 - [depMacOSEnrollmentProfile — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-enrollment-depmacosenrollmentprofile?view=graph-rest-beta)
 - [Apple SkipKeys — apple/device-management](https://github.com/apple/device-management/blob/release/other/skipkeys.yaml)
 - [Add Platform SSO policy to ADE Profile on macOS devices](https://learn.microsoft.com/en-us/intune/device-configuration/settings-catalog/configure-platform-sso-during-enrollment)
+
+## De Bedrijfsportal vraagt na de inschrijving om een setup — dat hoort zo
+
+`requiresUserAuthentication`, `enableAuthenticationViaCompanyPortal` en `configurationWebUrl`
+staan alle drie op `true`. Dat is *Setup Assistant with modern authentication*: de Mac schrijft
+zichzelf in tijdens Setup Assistant, en de **koppeling aan de gebruiker wordt daarna in de
+Bedrijfsportal afgemaakt**. Dat de portal daarom om een setup vraagt is dus geen storing.
+
+Het is ook geen stap die je kunt overslaan. Zolang die registratie niet is voltooid:
+
+- installeert de **Microsoft Intune management agent** niet, en die is nodig voor élk
+  shellscript — geen agent betekent dat geen enkel script ooit draait;
+- blijft alles wat aan een **gebruikersgroep** is toegewezen liggen, omdat de gebruiker nog niet
+  aan het toestel hangt.
+
+Dat laatste is verwarrend in de portal: het script staat er dan met `Result: NotRun`, wat
+klinkt als "wacht nog even" terwijl er structureel niets gaat gebeuren.
+
+Controleren op het toestel:
+
+```bash
+ls -ld "/Library/Intune/Microsoft Intune Agent.app"   # is de agent er?
+profiles status -type enrollment                      # is de Mac ingeschreven, en via DEP?
+```
+
+Staat de agent er niet, dan is de registratie in de Bedrijfsportal het eerste dat af moet — niet
+het script. Daarna haalt de agent zijn opdrachten op; dat gaat vanzelf elke 8 uur, of meteen via
+Bedrijfsportal → het apparaat → **Check settings**.
+
+Net als de klik voor schermopname (zie [`shellscripts/macos/`](../../shellscripts/macos/README.md))
+is dit een handeling per Mac die geen enkele policy kan overnemen. Beide horen daarom in de
+overdracht van een nieuw toestel.
