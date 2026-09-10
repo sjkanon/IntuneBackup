@@ -217,10 +217,16 @@ Die agent draait **bij login en bij elke netwerkwijziging**, niet op een klok: `
 seconden ertegen. Wifi-wissel, VPN erbij, uit de slaap komen — dat zijn de momenten waarop een
 mount weg is of juist weer kan, en pollen om de zoveel minuten raakt die net niet.
 
-Het script kopieert zichzelf naar `~/Library/Application Support/Baseline/` en laat de agent
-díe kopie aanroepen. Eén bestand met de instellingen erin, dus de agent kan niet uit de pas
-lopen met wat Intune uitrolt: verandert het script in Intune, dan wordt de kopie bij de
-volgende run vervangen en de agent opnieuw geladen.
+Het Intune-script **genereert** de helper in `/Library/Scripts/Baseline/`: het schrijft de
+instellingen van bovenin het bestand erin (met `printf %q`, zodat een sleutel met spaties of
+quotes heel blijft) en plakt de mountlogica er letterlijk achteraan. Eén plek voor de
+instellingen, en de agent kan niet uit de pas lopen met wat Intune uitrolt.
+
+Eerst kopieerde het script zichzélf met `cp "$0"`. Dat ging mis: bij de Intune-agent wijst
+`$0` niet naar de scripttekst, dus belandde er een **binair bestand** in `/Library/Scripts` en
+stierf de LaunchAgent met `exit 126 — cannot execute binary file`. Genereren maakt geen enkele
+aanname over hoe het bestand wordt aangeroepen, en er zit nu een `bash -n` overheen vóór de
+helper in gebruik gaat.
 
 ### Instellingen in Intune
 

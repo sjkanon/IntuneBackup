@@ -1,53 +1,46 @@
 #!/bin/bash
 #
-# Mount een Azure Files-share op de Mac met het Kerberos-ticket uit Platform SSO, zodat de
-# gebruiker geen wachtwoord hoeft in te vullen. Het macOS-equivalent van een drive mapping.
+# Zet op een Mac een LaunchAgent klaar die een Azure Files-share mount — het macOS-equivalent
+# van een drive mapping. Dit script mount zélf niets.
 #
-# De share komt in /Volumes en staat daarmee in de Finder-zijbalk onder Locaties, met een
-# uitwerpknop. Dat het in /Volumes staat is wat telt, niet welk commando hem mountte — zie de
-# opmerking bij mount_share() waarom beide wegen via NetFS lopen, en waarom het script vooraf
-# controleert of de aanmelding gaat lukken.
+# Waarom die taakverdeling:
+#
+#   Een mount hoort in de grafische sessie van de gebruiker, en het proces dat de Intune-agent
+#   start zit daar niet in. Vandaar dat mounten met de hand wél lukt en vanuit Intune niet, hoe
+#   goed de mountlogica ook is. Dus:
+#
+#     dit script, als root   schrijft de helper en de LaunchAgent naar /Library
+#     de LaunchAgent         mount, in de sessie van de gebruiker, bij login en netwerkwijziging
+#
+#   Een LaunchAgent in /Library/LaunchAgents laadt macOS automatisch voor élke gebruiker bij
+#   élke login. Geen launchctl bootstrap vanuit een domein waar we niet in zitten, en meteen
+#   goed voor de volgende persoon op dat toestel.
+#
+# Waarom de helper wordt geschreven en niet gekopieerd:
+#
+#   Dat was eerst een cp van $0 naar de helper. Bij de Intune-agent wijst $0 niet naar de
+#   scripttekst, dus belandde er iets anders in /Library/Scripts — een binair bestand, en de
+#   LaunchAgent stierf met exit 126, "cannot execute binary file". Nu genereert dit script de
+#   helper: de instellingen hieronder worden erin geschreven en de rest komt uit een letterlijk
+#   heredoc. Eén plek voor de instellingen, en geen enkele aanname over hoe dit bestand wordt
+#   aangeroepen.
 #
 # Waarom een script en geen configuratieprofiel:
 #
-#   Er is er geen. Alle 18.329 settingDefinitionId's van de settings catalog zijn nagezocht
-#   op een payload die een netwerkschijf koppelt: die bestaat niet, op geen van beide
-#   platformen. Apple heeft `com.apple.finder_showmountedserversondesktop` (of een al
-#   gemounte share op het bureaublad staat) en verder niets. Mounten is een handeling, geen
-#   instelling, en dus een script.
-#
-# Waarom een LaunchAgent en niet alleen dit script:
-#
-#   Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de
-#   share dus pas een uur na het inloggen terugzetten. De LaunchAgent doet het bij login én
-#   bij elke netwerkwijziging (WatchPaths op resolv.conf en de netwerkconfiguratie) — dit
-#   script installeert alleen die agent en doet één eerste poging.
-#
-#   Op de wachtrij en niet op een klok: een share mount je als het netwerk verandert, niet om
-#   de zoveel minuten. Wifi-wissel, VPN erbij, uit de slaap komen — dat zijn de momenten
-#   waarop een mount weg is of juist weer kan. De vorm komt van 42Loris/macOS_DriveMapping,
-#   dat dezelfde constructie in productie draait.
+#   Er is er geen. Alle 18.329 settingDefinitionId's van de settings catalog zijn nagezocht op
+#   een payload die een netwerkschijf koppelt: die bestaat niet, op geen van beide platformen.
+#   Mounten is een handeling, geen instelling.
 #
 # In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
 #
-#   Run script as signed-in user   No     dit script installeert alleen; het schrijft naar
-#                                         /Library en dat mag alleen root. Mounten doet de
-#                                         LaunchAgent, in de sessie van de gebruiker.
+#   Run script as signed-in user   No     dit script schrijft naar /Library en dat mag alleen
+#                                         root; mounten doet de LaunchAgent
 #   Hide script notifications      Yes
 #   Script frequency               Every 1 hour
 #   Max number of retries          3
 #
-# Toewijzen aan een APPARAATgroep. Dat is nieuw ten opzichte van de eerste opzet: het script
-# draait nu als root en zet een systeembrede LaunchAgent klaar, die vervolgens voor iedere
-# gebruiker van dit toestel werkt. Een gebruikersgroep zou alleen de eerste persoon bedienen.
-#
-# Wie er bij de share mág blijft een eigenschap van de gebruiker — dat regelen de share-level
-# permissions in Azure, niet de toewijzing van dit script. Behalve bij de sleutel-terugval: die
-# kent geen identiteit per gebruiker, dus dan bepaalt de toewijzing wél wie erbij kan.
-#
-# Vereist dat [Baseline] - MAC - D - Azure Files Cloud Kerberos is uitgerold; zonder dat
-# profiel is er geen ticket voor het KERBEROS.MICROSOFTONLINE.COM-realm en vraagt de mount
-# alsnog om een wachtwoord.
+# Toewijzen aan een APPARAATgroep. De LaunchAgent werkt daarna voor iedere gebruiker van dat
+# toestel; een gebruikersgroep zou alleen de eerste persoon bedienen.
 
 set -u
 
@@ -55,14 +48,8 @@ set -u
 #
 # \\acisafiles.file.core.windows.net\data\Public wordt smb://acisafiles.file.core.windows.net
 # /data/Public. In drie velden, want SMB kent maar één sharelaag: `data` is de share, `Public`
-# is een map dáárin. Dat onderscheid is niet cosmetisch — de mount en de rechten hangen aan de
-# share, de submap is alleen het punt waar je binnenkomt.
-#
-# SHARE_SUBPATH leeg laten mount de hele share.
-#
-# Deze drie staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
-# shellscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de templates
-# in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
+# is een map dáárin. De mount en de rechten hangen aan de share; de submap is alleen het punt
+# waar je binnenkomt. SHARE_SUBPATH leeg laten mount de hele share.
 
 STORAGE_ACCOUNT="acisafiles"
 SHARE_NAME="data"
@@ -70,7 +57,7 @@ SHARE_SUBPATH="Public"
 
 # --- Terugval op de storage account key ----------------------------------------------------
 #
-# Leeg laten = alleen Kerberos. Staat er een sleutel, dan probeert het script eerst Kerberos en
+# Leeg laten = alleen Kerberos. Staat er een sleutel, dan probeert de helper eerst een ticket en
 # valt daarna terug op deze sleutel.
 #
 # LET OP, en dit is geen formaliteit:
@@ -79,11 +66,10 @@ SHARE_SUBPATH="Public"
 #     acisafiles is dat hetzelfde account waar de AVD-omgeving op draait.
 #   * Er is geen identiteit per gebruiker. Iedereen die mount is dezelfde "gebruiker", dus
 #     rechten per persoon en herleidbaarheid in de logs bestaan niet.
-#   * Iedereen die het script kan lezen heeft de sleutel — in Intune, en op het toestel.
+#   * Iedereen die de helper kan lezen heeft de sleutel — in Intune, en op het toestel.
 #
-# VUL HEM HIER NOOIT IN IN DE REPO. Deze waarde blijft in git op de placeholder staan; de kopie
-# die je in Intune uploadt draagt de echte sleutel. Een sleutel in git staat er voorgoed in, ook
-# na een commit die hem weghaalt, en roulering breekt dan alles wat hem gebruikt.
+# VUL HEM HIER NOOIT IN IN DE REPO; die staat publiek op GitHub. Deze waarde blijft in git op de
+# lege placeholder staan. De kopie in local/ draagt de echte sleutel en gaat niet mee in git.
 #
 # Plak de sleutel zoals Azure hem geeft, zonder iets te vervangen.
 
@@ -91,91 +77,73 @@ STORAGE_KEY=""
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
-# Als root (de Intune-run) schrijft alles naar /Library, zodat het voor élke gebruiker geldt.
-# Als gebruiker (de LaunchAgent) landen de markeringen en de log in de thuismap, want die zijn
-# per persoon. Beide logpaden zijn spatievrij, zodat Intune ze met "Collect logs" kan ophalen.
-if [ "$(id -u)" -eq 0 ]; then
-  STATE_DIR="/Library/Application Support/Baseline"
-  LOG_DIR="/Library/Logs/Baseline"
-else
-  STATE_DIR="$HOME/Library/Application Support/Baseline"
-  LOG_DIR="$HOME/Library/Logs/Baseline"
-fi
-
-# De log staat in Library/Logs en niet naast de markeringen in Application Support. Dat is de
-# plek waar macOS logs verwacht, maar de reden is praktischer: Intune kan met "Collect logs"
-# bestanden ophalen, en die paden worden met een puntkomma gescheiden zónder spaties.
-# "Application Support" heeft een spatie in de naam en is daarmee niet op te halen — precies op
-# het moment dat je de log het hardst nodig hebt.
-LOG="$LOG_DIR/mount-azure-files.log"
-FAVORIET_MARKER="$STATE_DIR/favoriet"
 LABEL="com.aci-europe.baseline.mount-azure-files"
-
-# Systeembreed, niet in de thuismap. Een LaunchAgent in /Library/LaunchAgents laadt macOS
-# automatisch voor élke gebruiker bij élke login — dat is precies wat we willen, en het scheelt
-# het gedoe met `launchctl bootstrap` vanuit een sessie waar we niet in zitten.
 HELPER="/Library/Scripts/Baseline/mount-azure-files.sh"
 AGENT="/Library/LaunchAgents/$LABEL.plist"
 
-SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
-SMB_PAD="//${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+# Spatievrij, zodat Intune deze log met "Collect logs" kan ophalen. "Application Support" heeft
+# een spatie in de naam en is daarmee niet op te halen — precies op het moment dat je hem nodig
+# hebt. De helper logt in de thuismap van de gebruiker, want die draait per persoon.
+LOG_DIR="/Library/Logs/Baseline"
+LOG="$LOG_DIR/mount-azure-files-install.log"
 
-mkdir -p "$STATE_DIR" "$LOG_DIR"
+mkdir -p "$LOG_DIR"
 
-# Naar het logbestand én naar stdout. Intune bewaart de uitvoer van een shellscript en toont
-# die in de portal bij het apparaat; zonder dat tweede spoor staat er alleen "Failed" of
-# "Success" en moet je voor elke diagnose op de Mac zelf zijn.
+# Naar het logbestand én naar stdout: Intune bewaart de uitvoer en toont die in de portal bij
+# het apparaat. Zonder dat tweede spoor staat er alleen "Failed" of "Success".
 log() {
   printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG"
 }
+
+log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion)."
 
 if [ "$STORAGE_ACCOUNT" = "STORAGE-ACCOUNT-INVULLEN" ] || [ "$SHARE_NAME" = "SHARE-NAAM-INVULLEN" ]; then
   log "Storage account of share staat nog op de placeholder — niets gedaan."
   exit 1
 fi
 
-# --- Mounten -------------------------------------------------------------------------------
+if [ "$(id -u)" -ne 0 ]; then
+  log "Dit script hoort als root te draaien: zet in Intune 'Run script as signed-in user' op No."
+  exit 1
+fi
 
-# Op server en share, niet op een pad: NetFS kiest de naam in /Volumes zelf, dus wat wij bedacht
-# hadden hoeft er niet te staan.
-is_mounted() {
-  [ -n "$(huidig_mountpunt)" ]
+# --- De helper schrijven -------------------------------------------------------------------
+#
+# Eerst de instellingen, met %q zodat elk vreemd teken in de sleutel veilig wordt geciteerd.
+# Daarna de logica uit een letterlijk heredoc: daarin wordt niets geëxpandeerd, dus die tekst
+# komt er precies zo uit als hij hier staat.
+
+NIEUW="$(mktemp)"
+{
+  printf '#!/bin/bash\n'
+  printf '#\n'
+  printf '# GEGENEREERD door mount-azure-files.sh via Intune. Niet met de hand bijwerken:\n'
+  printf '# de eerstvolgende run overschrijft dit bestand.\n'
+  printf '#\n'
+  printf 'set -u\n'
+  printf 'STORAGE_ACCOUNT=%q\n' "$STORAGE_ACCOUNT"
+  printf 'SHARE_NAME=%q\n' "$SHARE_NAME"
+  printf 'SHARE_SUBPATH=%q\n' "$SHARE_SUBPATH"
+  printf 'STORAGE_KEY=%q\n' "$STORAGE_KEY"
+  cat <<'HELPER_EINDE'
+
+STATE_DIR="$HOME/Library/Application Support/Baseline"
+LOG_DIR="$HOME/Library/Logs/Baseline"
+LOG="$LOG_DIR/mount-azure-files.log"
+FAVORIET_MARKER="$STATE_DIR/favoriet"
+
+SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
+DOEL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+
+mkdir -p "$STATE_DIR" "$LOG_DIR"
+
+log() {
+  printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG"
 }
 
-# Drie manieren, want ze kijken geen van drieën naar hetzelfde. `klist -s` is de nette check
-# maar geldt alleen voor de standaardcache, en Platform SSO zet het cloud-TGT in een cache met
-# een eigen naam — `app-sso platform -s` toont die als "cacheName": "9205B6F4-…". `klist -l`
-# somt álle caches op. Eén van de drie is genoeg.
-has_ticket() {
-  /usr/bin/klist -s 2>/dev/null && return 0
-  { /usr/bin/klist -l 2>/dev/null; /usr/bin/klist 2>/dev/null; } |
-    grep -q "KERBEROS.MICROSOFTONLINE.COM"
-}
-
-# Kan de KDC een servicebewijs voor déze fileservice geven? Dat is de vraag die telt, en hij is
-# rechtstreeks te stellen.
-#
-# Een TGT is namelijk nog geen toegang. Kerberos gaat in twee stappen: het TGT bewijst wie je
-# bent tegenover het realm, en daarna vraag je een bewijs voor één specifieke dienst —
-# `cifs/<server>`. Die tweede stap kan mislukken terwijl de eerste prima is. Op acisafiles gaf
-# hij AADSTS700016: er is in de directory geen toepassing voor die fileservice, omdat Entra
-# Kerberos niet aanstaat op dat account.
-#
-# Waarom dit vooraf vragen en niet gewoon de mount proberen: alleen als dit lukt, weten we dat
-# NetFS geen aanmeldvenster gaat opzetten. En dát is de voorwaarde om Kerberos via NetFS te
-# mogen mounten — de enige weg die op deze toestellen /Volumes openkrijgt.
-has_service_ticket() {
-  [ -x /usr/bin/kgetcred ] || return 1
-  with_timeout 20 /usr/bin/kgetcred \
-    "cifs/${SERVER}@KERBEROS.MICROSOFTONLINE.COM" >/dev/null 2>&1
-}
-
-# macOS heeft geen `timeout`; die zit in coreutils en dat staat er niet standaard op.
-#
-# `mount_smbfs -N` vraagt niets, maar hij kan wél lang blijven wachten op een server die niet
-# antwoordt — poort 445 dicht op een gastnetwerk is het gewone geval. Een Intune-shellscript
-# dat na 60 minuten nog draait wordt door de agent afgebroken en als "Failed" gerapporteerd,
-# zonder uitvoer. Liever zelf afbreken met een regel in de log erbij.
+# macOS heeft geen timeout-commando; dat zit in coreutils en staat er niet standaard op. Nodig
+# omdat een mount lang kan blijven wachten op een server die niet antwoordt, en omdat NetFS bij
+# een afgewezen aanmelding een dialoog opzet waar uit een achtergrondagent niemand op reageert.
 with_timeout() {
   local secs="$1"
   shift
@@ -194,39 +162,7 @@ with_timeout() {
   wait "$pid"
 }
 
-# Mounten via NetFS, met de sleutel. Dit is de weg die /Volumes wél openkrijgt.
-#
-# `mount_smbfs` moet zijn mountpunt zelf aanmaken en mag dat op deze toestellen niet: /Volumes
-# is er niet schrijfbaar voor een gewone gebruiker, en dan is "Operation not permitted" het
-# antwoord. NetFS draait met de rechten die dat wél mogen — dat is hoe Finder → Verbind met
-# server het ook doet. Gevolg: de share landt in /Volumes en staat dus in de zijbalk onder
-# Locaties.
-#
-# Waarom dit hier wel mag en bij Kerberos niet: NetFS zet een aanmeldvenster op het scherm
-# zodra de aanmelding wordt afgewezen, en uit een LaunchAgent antwoordt daar niemand op. Met een
-# geldige sleutel wordt er niets afgewezen. Zonder sleutel — alleen een ticket — blijft dat
-# risico bestaan, en daar houden we `mount_smbfs -N` aan. De timeout eromheen vangt af dat de
-# sleutel ooit toch geweigerd wordt, bijvoorbeeld na roulering.
-#
-# De sleutel gaat via stdin naar osascript en niet als argument: zo staat hij niet in de
-# procestabel. Percent-coderen hoeft hier ook niet — `as user name … with password …` neemt de
-# waarde zoals hij is.
-mount_via_netfs() {
-  local doel="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
-
-  # Zonder inloggegevens: NetFS gebruikt dan het Kerberos-servicebewijs dat er is. Dat mag alleen
-  # als has_service_ticket() net heeft bevestigd dát het er is — anders komt er een dialoog.
-  if [ "${1:-}" != "sleutel" ]; then
-    with_timeout 60 /usr/bin/osascript -e "mount volume \"${doel}\"" >/dev/null 2>>"$LOG"
-    return $?
-  fi
-
-  with_timeout 60 /usr/bin/osascript >/dev/null 2>>"$LOG" <<OSA
-mount volume "${doel}" as user name "${STORAGE_ACCOUNT}" with password "${STORAGE_KEY}"
-OSA
-}
-
-# Waar staat deze share nu gemount? NetFS bepaalt de naam zelf, dus na afloop opzoeken in plaats
+# Waar staat deze share nu gemount? NetFS kiest de naam in /Volumes zelf, dus opzoeken in plaats
 # van aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten.
 huidig_mountpunt() {
   /sbin/mount 2>/dev/null |
@@ -235,33 +171,65 @@ huidig_mountpunt() {
     /usr/bin/head -1
 }
 
-# Zet het mountpunt in de Favorieten bovenin de Finder-zijbalk.
+is_mounted() {
+  [ -n "$(huidig_mountpunt)" ]
+}
+
+# Drie manieren, want ze kijken geen van drieën naar hetzelfde. klist -s is de nette check maar
+# geldt alleen voor de standaardcache, en Platform SSO zet het cloud-TGT in een cache met een
+# eigen naam. klist -l somt alle caches op. Eén van de drie is genoeg.
+has_ticket() {
+  /usr/bin/klist -s 2>/dev/null && return 0
+  { /usr/bin/klist -l 2>/dev/null; /usr/bin/klist 2>/dev/null; } |
+    grep -q "KERBEROS.MICROSOFTONLINE.COM"
+}
+
+# Een TGT is nog geen toegang. Kerberos gaat in twee stappen: het TGT bewijst wie je bent, en
+# daarna vraag je een bewijs voor één dienst — cifs/<server>. Die tweede stap kan mislukken
+# terwijl de eerste prima is; op acisafiles geeft hij AADSTS700016, want Entra Kerberos staat
+# daar niet aan.
 #
-# Met `sfltool`, Apple's eigen commando; er is geen tool van derden voor nodig. Het moet wel als
-# de ingelogde gebruiker draaien, want de favorietenlijst is per gebruiker — dat is hier het
-# geval, zowel vanuit Intune ("Run script as signed-in user") als vanuit de LaunchAgent.
+# Vooraf vragen en niet gewoon proberen: alleen als dit lukt weten we dat NetFS geen
+# aanmeldvenster gaat opzetten, en dat is de voorwaarde om Kerberos via NetFS te mogen mounten.
+has_service_ticket() {
+  [ -x /usr/bin/kgetcred ] || return 1
+  with_timeout 20 /usr/bin/kgetcred \
+    "cifs/${SERVER}@KERBEROS.MICROSOFTONLINE.COM" >/dev/null 2>&1
+}
+
+# Mounten via NetFS. Dit is de weg die /Volumes openkrijgt voor een gewone gebruiker —
+# mount_smbfs moet zijn mountpunt zelf aanmaken en mag dat daar niet, wat "Operation not
+# permitted" oplevert. NetFS draait met de rechten die het wel mogen, net als Finder → Verbind
+# met server. En alleen wat in /Volumes staat, zet Finder in de zijbalk onder Locaties.
 #
-# Eén keer, met een markering ernaast. Zonder die markering zou elke netwerkwijziging er een
-# regel bij zetten en staat de zijbalk na een dag vol met dezelfde snelkoppeling.
+# De sleutel gaat via stdin naar osascript en niet als argument, dus hij staat niet in de
+# procestabel. Coderen hoeft niet: as user name / with password neemt de waarde zoals hij is.
+mount_via_netfs() {
+  if [ "${1:-}" != "sleutel" ]; then
+    with_timeout 60 /usr/bin/osascript -e "mount volume \"${DOEL}\"" >/dev/null 2>>"$LOG"
+    return $?
+  fi
+  with_timeout 60 /usr/bin/osascript >/dev/null 2>>"$LOG" <<OSA
+mount volume "${DOEL}" as user name "${STORAGE_ACCOUNT}" with password "${STORAGE_KEY}"
+OSA
+}
+
+# Zet het mountpunt in de Favorieten bovenin de Finder-zijbalk, met sfltool van Apple zelf; geen
+# tool van derden nodig. Eén keer, met een markering ernaast — anders zet elke netwerkwijziging
+# er een regel bij en staat de zijbalk na een dag vol met dezelfde snelkoppeling.
 #
-# Let op wat een favoriet wél en niet is: een gemounte server verschijnt vanzelf onder
-# *Locaties* en verdwijnt daar weer bij het uitwerpen. Een favoriet is een vaste verwijzing naar
-# een pad en blijft staan — ook als er op dat moment niets gemount is.
+# Locaties en Favorieten zijn niet hetzelfde: een gemounte server verschijnt vanzelf onder
+# Locaties en verdwijnt bij uitwerpen; een favoriet is een vaste verwijzing die blijft staan.
 zet_in_favorieten() {
   local mp="$1" url
   [ -x /usr/bin/sfltool ] || return 0
   if [ -f "$FAVORIET_MARKER" ] && [ "$(cat "$FAVORIET_MARKER" 2>/dev/null)" = "$mp" ]; then
     return 0
   fi
-
-  # Alleen spaties hoeven gecodeerd; de schuine strepen van het pad moeten juist blijven staan.
   url="file://${mp// /%20}"
-
   if /usr/bin/sfltool add-item com.apple.LSSharedFileList.FavoriteItems "$url" >>"$LOG" 2>&1; then
     printf '%s' "$mp" >"$FAVORIET_MARKER"
     log "In de Finder-favorieten gezet: ${mp}"
-  else
-    log "Kon ${mp} niet aan de Finder-favorieten toevoegen."
   fi
 }
 
@@ -270,26 +238,17 @@ mount_share() {
     return 0
   fi
 
-  # Kerberos eerst: dat is de vorm mét identiteit per gebruiker, de sleutel is de terugval — niet
-  # andersom. Zodra Entra Kerberos ergens wél aanstaat, neemt Kerberos dus vanzelf over en hoeft
-  # er aan dit script niets te veranderen.
-  #
-  # Beide wegen lopen via NetFS, want alleen die krijgt /Volumes open als gewone gebruiker, en
-  # alleen wat in /Volumes staat zet Finder in de zijbalk. De prijs van NetFS is dat het een
-  # aanmeldvenster opzet zodra de aanmelding wordt afgewezen, en uit een LaunchAgent antwoordt
-  # daar niemand op. Daarom vraagt het script vooraf of de aanmelding gáát lukken: een
-  # servicebewijs voor Kerberos, een ingevulde sleutel voor de terugval.
+  # Kerberos eerst: dat is de vorm met identiteit per gebruiker, de sleutel is de terugval.
+  # Zodra Entra Kerberos ergens wel aanstaat, neemt Kerberos vanzelf over.
   local methoden=()
-  if has_ticket || [ "${FORCE:-0}" -eq 1 ]; then
-    if has_service_ticket || [ "${FORCE:-0}" -eq 1 ]; then
+  if has_ticket; then
+    if has_service_ticket; then
       methoden+=("kerberos")
     elif [ "${QUIET:-0}" -ne 1 ]; then
-      log "Wel een TGT, maar de KDC geeft geen servicebewijs voor cifs/${SERVER}. Entra Kerberos staat niet aan op dit storage account (AADSTS700016), of de app-registratie ontbreekt."
+      log "Wel een TGT, maar geen servicebewijs voor cifs/${SERVER} — Entra Kerberos staat niet aan op dit storage account (AADSTS700016)."
     fi
   elif [ "${QUIET:-0}" -ne 1 ]; then
-    # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
-    # geen ticket is zou dat de log vullen met dezelfde regel.
-    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM in een van de caches. Controleer met: app-sso platform -s"
+    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM. Controleer met: app-sso platform -s"
   fi
   if [ -n "$STORAGE_KEY" ]; then
     methoden+=("sleutel")
@@ -327,51 +286,47 @@ mount_share() {
   return 1
 }
 
-if [ "${1:-}" = "--mount" ]; then
+# QUIET onderdrukt de regels over een ontbrekend ticket. De agent vuurt bij elke
+# netwerkwijziging, en zonder dit zou de log volstromen met dezelfde melding.
+if [ "${1:-}" = "--stil" ]; then
   QUIET=1 mount_share
-  exit $?
+else
+  log "Handmatig gestart."
+  mount_share
 fi
+exit $?
+HELPER_EINDE
+} >"$NIEUW"
 
-if [ "${1:-}" = "--force" ]; then
-  FORCE=1 mount_share
-  exit $?
-fi
-
-# --- Installeren ---------------------------------------------------------------------------
+# --- Controleren wat er geschreven is, vóór het in gebruik gaat -----------------------------
 #
-# Dit deel draait als root, vanuit Intune, en mount zélf niets.
-#
-# Dat is de hele les van deze uitrol. Een mount hoort in de grafische sessie van de gebruiker,
-# en het proces dat de Intune-agent start zit daar niet in — vandaar dat het met de hand wél
-# lukte en via Intune niet. De taakverdeling is nu:
-#
-#   Intune, als root   zet de helper en de LaunchAgent klaar in /Library
-#   LaunchAgent        mount, in de sessie van de gebruiker, bij login en bij netwerkwijziging
-#
-# Een LaunchAgent in /Library/LaunchAgents laadt macOS automatisch voor élke gebruiker bij élke
-# login. Daarmee werkt het ook voor de volgende persoon op dit toestel, zonder dat iemand iets
-# hoeft te doen.
-
-log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion), doel ${SMB_PAD}"
-
-if [ "$(id -u)" -ne 0 ]; then
-  log "Dit script hoort als root te draaien: zet in Intune 'Run script as signed-in user' op No. Het mount niet zelf; de LaunchAgent doet dat in de sessie van de gebruiker."
+# Precies de fout die dit script eerder maakte: er belandde een binair bestand in /Library en de
+# LaunchAgent stierf met exit 126. Een syntaxcontrole kost niets en vangt dat af.
+if ! /bin/bash -n "$NIEUW" 2>>"$LOG"; then
+  log "De gegenereerde helper is geen geldig script — niets vervangen."
+  rm -f "$NIEUW"
   exit 1
 fi
 
-mkdir -p "$(dirname "$HELPER")" /Library/LaunchAgents
-
-# De helper is een kopie van dit bestand: één bestand met de instellingen erin, dus de agent kan
-# niet uit de pas lopen met wat Intune uitrolt.
-if ! cmp -s "$0" "$HELPER"; then
-  cp "$0" "$HELPER" && chown root:wheel "$HELPER" && chmod 755 "$HELPER"
-  log "Helper bijgewerkt: ${HELPER}"
+HERLADEN=0
+mkdir -p "$(dirname "$HELPER")"
+if ! cmp -s "$NIEUW" "$HELPER"; then
+  mv "$NIEUW" "$HELPER"
+  chown root:wheel "$HELPER"
+  chmod 755 "$HELPER"
+  log "Helper geschreven: ${HELPER}"
   HERLADEN=1
 else
-  HERLADEN=0
+  rm -f "$NIEUW"
 fi
 
-read -r -d '' PLIST <<PLIST_EOF || true
+# --- De LaunchAgent --------------------------------------------------------------------------
+#
+# RunAtLoad plus WatchPaths op resolv.conf en de netwerkconfiguratie: een share mount je als het
+# netwerk verandert, niet om de zoveel minuten. Wifi-wissel, VPN erbij, uit de slaap komen — dat
+# zijn de momenten waarop een mount weg is of juist weer kan.
+
+read -r -d '' PLIST <<PLIST_EINDE || true
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -382,7 +337,7 @@ read -r -d '' PLIST <<PLIST_EOF || true
     <array>
         <string>/bin/bash</string>
         <string>${HELPER}</string>
-        <string>--mount</string>
+        <string>--stil</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -394,42 +349,44 @@ read -r -d '' PLIST <<PLIST_EOF || true
     </array>
     <key>ThrottleInterval</key>
     <integer>10</integer>
-    <key>ProcessType</key>
-    <string>Background</string>
 </dict>
 </plist>
-PLIST_EOF
+PLIST_EINDE
 
 if [ ! -f "$AGENT" ] || [ "$(cat "$AGENT")" != "$PLIST" ]; then
-  printf '%s
-' "$PLIST" >"$AGENT"
+  printf '%s\n' "$PLIST" >"$AGENT"
   chown root:wheel "$AGENT"
   chmod 644 "$AGENT"
   log "LaunchAgent geschreven: ${AGENT}"
   HERLADEN=1
 fi
 
+# --- Meteen laden voor wie er nu achter zit --------------------------------------------------
+#
 # Bij de volgende login laadt macOS de agent vanzelf. Maar er zit nu iemand achter dit toestel,
-# en die wil zijn schijf niet pas morgen. Root mag in de grafische sessie van de console-
-# gebruiker laden, dus dat doen we er meteen bij.
+# en die wil zijn schijf niet pas morgen. Root mag laden in de grafische sessie van de
+# console-gebruiker.
+
+if [ "$HERLADEN" -eq 0 ]; then
+  log "Helper en LaunchAgent stonden al goed."
+  log "Klaar."
+  exit 0
+fi
+
 CONSOLE_GEBRUIKER="$(/usr/bin/stat -f%Su /dev/console 2>/dev/null)"
-if [ "$HERLADEN" -eq 1 ] && [ -n "$CONSOLE_GEBRUIKER" ] && [ "$CONSOLE_GEBRUIKER" != "root" ]; then
+if [ -n "$CONSOLE_GEBRUIKER" ] && [ "$CONSOLE_GEBRUIKER" != "root" ]; then
   CONSOLE_UID="$(/usr/bin/id -u "$CONSOLE_GEBRUIKER" 2>/dev/null)"
   if [ -n "$CONSOLE_UID" ]; then
-    # bootout mag falen: de eerste keer draait er nog niets.
     /bin/launchctl bootout "gui/${CONSOLE_UID}/${LABEL}" 2>/dev/null
     if /bin/launchctl bootstrap "gui/${CONSOLE_UID}" "$AGENT" 2>>"$LOG"; then
-      log "LaunchAgent geladen voor ${CONSOLE_GEBRUIKER} — de mount volgt binnen enkele seconden."
+      log "LaunchAgent geladen voor ${CONSOLE_GEBRUIKER}. Het resultaat van de mount staat in ~/Library/Logs/Baseline/mount-azure-files.log van die gebruiker."
     else
       log "LaunchAgent laden voor ${CONSOLE_GEBRUIKER} mislukt; hij gaat vanzelf bij de volgende login."
     fi
   fi
-elif [ "$HERLADEN" -eq 0 ]; then
-  log "Helper en LaunchAgent stonden al goed."
 fi
 
-# Bewust altijd 0. Een Intune-shellscript dat niet-nul teruggeeft komt in de portal als "Failed"
-# te staan. Of de mount lukt is hier niet te zien — dat gebeurt straks in de sessie van de
-# gebruiker, en staat in diens eigen log. Wat dit script wél kon doen staat hierboven.
+# Bewust altijd 0. Of de mount lukt is hier niet te zien — dat gebeurt in de sessie van de
+# gebruiker. Wat dit script kon doen staat hierboven.
 log "Klaar."
 exit 0
