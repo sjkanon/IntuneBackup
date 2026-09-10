@@ -193,34 +193,40 @@ Moet Apple Intelligence echt uit, dan is dat een aparte settings catalog-policy.
 - [Apple SkipKeys — apple/device-management](https://github.com/apple/device-management/blob/release/other/skipkeys.yaml)
 - [Add Platform SSO policy to ADE Profile on macOS devices](https://learn.microsoft.com/en-us/intune/device-configuration/settings-catalog/configure-platform-sso-during-enrollment)
 
-## De Bedrijfsportal vraagt na de inschrijving om een setup — dat hoort zo
+## De Bedrijfsportal vraagt om een setup terwijl de Mac al is ingeschreven
 
 `requiresUserAuthentication`, `enableAuthenticationViaCompanyPortal` en `configurationWebUrl`
-staan alle drie op `true`. Dat is *Setup Assistant with modern authentication*: de Mac schrijft
-zichzelf in tijdens Setup Assistant, en de **koppeling aan de gebruiker wordt daarna in de
-Bedrijfsportal afgemaakt**. Dat de portal daarom om een setup vraagt is dus geen storing.
+staan alle drie op `true` — *Setup Assistant with modern authentication*. De Mac schrijft zich in
+tijdens Setup Assistant, en de Bedrijfsportal maakt daarna de gebruikerskoppeling af. Dat de
+portal daarom om een setup vraagt is op zich normaal.
 
-Het is ook geen stap die je kunt overslaan. Zolang die registratie niet is voltooid:
-
-- installeert de **Microsoft Intune management agent** niet, en die is nodig voor élk
-  shellscript — geen agent betekent dat geen enkel script ooit draait;
-- blijft alles wat aan een **gebruikersgroep** is toegewezen liggen, omdat de gebruiker nog niet
-  aan het toestel hangt.
-
-Dat laatste is verwarrend in de portal: het script staat er dan met `Result: NotRun`, wat
-klinkt als "wacht nog even" terwijl er structureel niets gaat gebeuren.
-
-Controleren op het toestel:
+**Maar hij blijft het soms vragen als de inschrijving allang compleet is.** Op ITCE's MacBook Air
+stond alles goed en toonde de portal tóch *Install management profile*. Controleer daarom eerst
+wat er echt is, vóór je die knop aanraakt:
 
 ```bash
-ls -ld "/Library/Intune/Microsoft Intune Agent.app"   # is de agent er?
-profiles status -type enrollment                      # is de Mac ingeschreven, en via DEP?
+profiles status -type enrollment
+ls -ld "/Library/Intune/Microsoft Intune Agent.app"
 ```
 
-Staat de agent er niet, dan is de registratie in de Bedrijfsportal het eerste dat af moet — niet
-het script. Daarna haalt de agent zijn opdrachten op; dat gaat vanzelf elke 8 uur, of meteen via
-Bedrijfsportal → het apparaat → **Check settings**.
+Staat er `Enrolled via DEP: Yes` met `MDM enrollment: Yes (User Approved)` en is de agent er,
+dan is de inschrijving af en is de prompt betekenisloos. **Klik dan niet op *Download profile*.**
+Dat start de handmatige inschrijfstroom op een Mac die al beheerd wordt, en dat levert een tweede
+apparaatrecord op met twee MDM-kanalen die elkaar tegenwerken.
+
+Ontbreekt er wél iets, dan is dát het eerste dat af moet en niet het script:
+
+- Zonder voltooide inschrijving installeert de **Microsoft Intune management agent** niet, en die
+  is nodig voor élk shellscript.
+- Zonder gebruikerskoppeling blijft alles wat aan een **gebruikersgroep** hangt liggen.
+
+In de portal ziet dat er in beide gevallen uit als `Result: NotRun`, wat klinkt als "wacht nog
+even" terwijl er structureel niets gaat gebeuren. Vandaar dat die twee commando's vóór elke
+scriptdiagnose komen.
+
+Is alles in orde en staat er toch `NotRun`, dan wacht je gewoon op de agent: die haalt scripts
+**elke 8 uur** op, los van de MDM-sync.
 
 Net als de klik voor schermopname (zie [`shellscripts/macos/`](../../shellscripts/macos/README.md))
-is dit een handeling per Mac die geen enkele policy kan overnemen. Beide horen daarom in de
+is de gebruikerskoppeling een handeling per Mac die geen policy kan overnemen. Beide horen in de
 overdracht van een nieuw toestel.
