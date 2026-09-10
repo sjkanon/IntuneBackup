@@ -5,7 +5,8 @@
 #
 # De share komt in /Volumes en staat daarmee in de Finder-zijbalk onder Locaties, met een
 # uitwerpknop. Dat het in /Volumes staat is wat telt, niet welk commando hem mountte — zie de
-# opmerking bij mount_share() waarom het mount_smbfs is en uitdrukkelijk niet NetFS.
+# opmerking bij mount_via_netfs() waarom dat met een sleutel via NetFS gaat en met een ticket
+# via mount_smbfs.
 #
 # Waarom een script en geen configuratieprofiel:
 #
@@ -79,7 +80,7 @@ SHARE_SUBPATH="Public"
 # die je in Intune uploadt draagt de echte sleutel. Een sleutel in git staat er voorgoed in, ook
 # na een commit die hem weghaalt, en roulering breekt dan alles wat hem gebruikt.
 #
-# Plak de sleutel zoals Azure hem geeft; het script codeert hem zelf voor de URL.
+# Plak de sleutel zoals Azure hem geeft, zonder iets te vervangen.
 
 STORAGE_KEY=""
 
@@ -131,18 +132,10 @@ fi
 
 # --- Mounten -------------------------------------------------------------------------------
 
-# Kijkt of de share op één van de kandidaat-mountpunten al staat. Vergelijken op kolom 3 van
-# `mount` en niet met grep op de hele regel — anders zou /Volumes/Public ook matchen op
-# /Volumes/Public-2, en dan denkt het script dat het goed staat terwijl het naar een andere
-# mount kijkt.
+# Op server en share, niet op een pad: NetFS kiest de naam in /Volumes zelf, dus wat wij bedacht
+# hadden hoeft er niet te staan.
 is_mounted() {
-  local m
-  for m in "${MOUNTPUNTEN[@]}"; do
-    if /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$m" '$3 == m { g = 1 } END { exit !g }'; then
-      return 0
-    fi
-  done
-  return 1
+  [ -n "$(huidig_mountpunt)" ]
 }
 
 # Drie manieren, want ze kijken geen van drieën naar hetzelfde. `klist -s` is de nette check
@@ -179,34 +172,6 @@ with_timeout() {
   wait "$pid"
 }
 
-# Een storage account key bevat +, / en = en die moeten percent-gecodeerd de URL in, anders
-# breekt hij op het eerste schuine streepje. Zo kan de sleutel erin zoals Azure hem geeft.
-urlencode() {
-  local s="$1" out="" c i
-  for ((i = 0; i < ${#s}; i++)); do
-    c="${s:i:1}"
-    case "$c" in
-      [a-zA-Z0-9.~_-]) out="$out$c" ;;
-      *) out="$out$(printf '%%%02X' "'$c")" ;;
-    esac
-  done
-  printf '%s' "$out"
-}
-
-# Het SMB-pad mét de sleutel erin. De gebruikersnaam voor Azure Files met gedeelde sleutel is de
-# accountnaam zelf.
-#
-# De sleutel komt hiermee in de aanroep en dus kortstondig in de procestabel. Dat is niet mooi,
-# maar het is niet de zwakste schakel: dezelfde sleutel staat sowieso in het script op elk
-# toestel. Het alternatief is de sleutelhanger, en die vraagt op macOS een toestemmingsdialoog
-# tenzij hetzelfde ondertekende programma hem schrijft én leest — dat is precies waarom
-# 42Loris/macOS_DriveMapping daar een eigen Swift-helper met Developer ID voor bouwt.
-pad_met_sleutel() {
-  printf '//%s:%s@%s/%s%s' \
-    "$STORAGE_ACCOUNT" "$(urlencode "$STORAGE_KEY")" "$SERVER" \
-    "$SHARE_NAME" "${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
-}
-
 # Ruimt een leeg restant in /Volumes op. Blijft daar na een mislukte poging een map staan die van
 # root is, dan geeft élke volgende mount "Operation not permitted" en lijkt het alsof de sleutel
 # niet deugt. rmdir faalt stil als de map niet van ons is; dan doet de terugval zijn werk.
@@ -226,6 +191,39 @@ probeer_mount() {
     *) mkdir -p "$mp" 2>>"$LOG" || return 1 ;;
   esac
   with_timeout 60 /sbin/mount_smbfs -N -o soft "$pad" "$mp" 2>>"$LOG"
+}
+
+# Mounten via NetFS, met de sleutel. Dit is de weg die /Volumes wél openkrijgt.
+#
+# `mount_smbfs` moet zijn mountpunt zelf aanmaken en mag dat op deze toestellen niet: /Volumes
+# is er niet schrijfbaar voor een gewone gebruiker, en dan is "Operation not permitted" het
+# antwoord. NetFS draait met de rechten die dat wél mogen — dat is hoe Finder → Verbind met
+# server het ook doet. Gevolg: de share landt in /Volumes en staat dus in de zijbalk onder
+# Locaties.
+#
+# Waarom dit hier wel mag en bij Kerberos niet: NetFS zet een aanmeldvenster op het scherm
+# zodra de aanmelding wordt afgewezen, en uit een LaunchAgent antwoordt daar niemand op. Met een
+# geldige sleutel wordt er niets afgewezen. Zonder sleutel — alleen een ticket — blijft dat
+# risico bestaan, en daar houden we `mount_smbfs -N` aan. De timeout eromheen vangt af dat de
+# sleutel ooit toch geweigerd wordt, bijvoorbeeld na roulering.
+#
+# De sleutel gaat via stdin naar osascript en niet als argument: zo staat hij niet in de
+# procestabel. Percent-coderen hoeft hier ook niet — `as user name … with password …` neemt de
+# waarde zoals hij is.
+mount_via_netfs() {
+  local doel="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+  with_timeout 60 /usr/bin/osascript >/dev/null 2>>"$LOG" <<OSA
+mount volume "${doel}" as user name "${STORAGE_ACCOUNT}" with password "${STORAGE_KEY}"
+OSA
+}
+
+# Waar staat deze share nu gemount? NetFS bepaalt de naam zelf, dus na afloop opzoeken in plaats
+# van aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten.
+huidig_mountpunt() {
+  /sbin/mount 2>/dev/null |
+    /usr/bin/grep -i "${SERVER}/${SHARE_NAME}" |
+    /usr/bin/sed -n 's/.* on \(.*\) (.*/\1/p' |
+    /usr/bin/head -1
 }
 
 # Zet het mountpunt in de Favorieten bovenin de Finder-zijbalk.
@@ -286,39 +284,54 @@ mount_share() {
     return 1
   fi
 
-  local methode mp pad
+  local methode mp gelukt=0
   for methode in "${methoden[@]}"; do
-    if [ "$methode" = "kerberos" ]; then
-      pad="$SMB_PAD"
-    else
-      pad="$(pad_met_sleutel)"
-    fi
-
-    for mp in "${MOUNTPUNTEN[@]}"; do
-      probeer_mount "$pad" "$mp"
+    if [ "$methode" = "sleutel" ]; then
+      # NetFS: krijgt /Volumes wél open, want de sleutel maakt een aanmeldvenster onmogelijk.
+      mount_via_netfs
       case $? in
-        0)
-          if [ "$methode" = "sleutel" ]; then
-            log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
-          else
-            log "Gemount met Kerberos op ${mp}."
-          fi
-          case "$mp" in
-            /Volumes/*) ;;
-            *) log "Uitgeweken naar de thuismap omdat /Volumes niet lukte. De share staat hierdoor niet in de Finder-zijbalk onder Locaties." ;;
-          esac
-          zet_in_favorieten "$mp"
-          return 0
-          ;;
+        0) gelukt=1 ;;
         124)
-          # Een vastloper is netwerk en geen mountpunt; een tweede pad proberen heeft geen zin.
-          log "Mount (${methode}) liep vast op ${mp} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
+          log "Mount met de sleutel liep vast en is na 60s afgebroken — server onbereikbaar, of de sleutel wordt geweigerd en er wacht een dialoog."
           return 1
           ;;
+        *) log "Mount met de sleutel mislukt." ;;
       esac
-    done
+    else
+      # Kerberos: mount_smbfs, want zonder geldige aanmelding zou NetFS een dialoog opzetten.
+      # Die kan zijn eigen mountpunt in /Volumes niet altijd aanmaken; vandaar de terugval.
+      for mp in "${MOUNTPUNTEN[@]}"; do
+        probeer_mount "$SMB_PAD" "$mp"
+        case $? in
+          0)
+            gelukt=1
+            break
+            ;;
+          124)
+            # Een vastloper is netwerk en geen mountpunt; een tweede pad proberen heeft geen zin.
+            log "Kerberos-mount liep vast op ${mp} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
+            return 1
+            ;;
+        esac
+      done
+      [ "$gelukt" -eq 1 ] || log "Kerberos-mount lukte op geen van de mountpunten."
+    fi
 
-    log "Mount met ${methode} lukte op geen van de mountpunten."
+    if [ "$gelukt" -eq 1 ]; then
+      mp="$(huidig_mountpunt)"
+      [ -n "$mp" ] || mp="onbekend pad"
+      if [ "$methode" = "sleutel" ]; then
+        log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
+      else
+        log "Gemount met Kerberos op ${mp}."
+      fi
+      case "$mp" in
+        /Volumes/*) ;;
+        *) log "Niet in /Volumes maar op ${mp}. De share staat hierdoor niet in de Finder-zijbalk onder Locaties." ;;
+      esac
+      zet_in_favorieten "$mp"
+      return 0
+    fi
   done
 
   return 1
