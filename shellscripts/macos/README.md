@@ -11,7 +11,7 @@ opgepikt door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js`
 | Bestand | Wat het doet | Scope |
 |---|---|---|
 | `configure-dock.sh` | Richt de Dock één keer per gebruiker in en laat 'm daarna met rust | Gebruiker |
-| `mount-azure-files.sh` | Mount een Azure Files-share met het Kerberos-ticket uit Platform SSO | Gebruiker |
+| `mount-azure-files.sh` | Zet een LaunchAgent klaar die de Azure Files-share mount in de sessie van de gebruiker | Apparaat |
 | `nudge-screen-recording.sh` | Vraagt de gebruiker schermopname aan te zetten voor NinjaOne en TeamViewer, en opent het paneel | Gebruiker |
 
 ## configure-dock.sh
@@ -193,10 +193,24 @@ daar een eigen Swift-helper met Developer ID-certificaat voor bouwt.
 
 ### Waarom er een LaunchAgent bij zit
 
-Een mount overleeft geen uitloggen. Een Intune-shellscript dat elk uur draait zou de share
-dus pas een uur ná het inloggen terugzetten, en dat is precies het moment waarop iemand hem
-nodig heeft. Dit script installeert daarom een LaunchAgent
-(`com.aci-europe.baseline.mount-azure-files`) en doet zelf één eerste poging.
+Een mount hoort in de **grafische sessie van de gebruiker**, en het proces dat de Intune-agent
+start zit daar niet in. Dat is de verklaring voor het beeld waar we lang op vastliepen: met de
+hand mounten lukte wél, en via Intune gebeurde er niets.
+
+Daarom mount het Intune-script zelf niets meer. De taakverdeling:
+
+| | doet wat | draait als |
+|---|---|---|
+| Intune-script | zet de helper en de LaunchAgent klaar in `/Library` | **root** |
+| LaunchAgent | mount, bij login en bij netwerkwijziging | de ingelogde gebruiker |
+
+Een LaunchAgent in `/Library/LaunchAgents/` laadt macOS **automatisch voor elke gebruiker bij
+elke login**. Dat scheelt het gedoe met `launchctl bootstrap` vanuit een sessie waar je niet in
+zit, en het werkt meteen voor de volgende persoon op dat toestel. Voor wie er nú achter zit
+laadt het installatiescript de agent er alsnog bij, zodat je niet hoeft uit te loggen.
+
+Ook een mount overleeft geen uitloggen, en een Intune-script dat elk uur draait zou de share
+pas een uur ná het inloggen terugzetten — precies het moment waarop iemand hem nodig heeft.
 
 Die agent draait **bij login en bij elke netwerkwijziging**, niet op een klok: `RunAtLoad` plus
 `WatchPaths` op `resolv.conf` en de netwerkconfiguratie, met een `ThrottleInterval` van tien
@@ -214,13 +228,17 @@ Devices → macOS → Shell scripts → Add.
 
 | Instelling | Waarde | Waarom |
 |---|---|---|
-| Run script as signed-in user | **Yes** | een mount hoort bij een sessie; als root landt hij in een sessie die niemand ziet |
+| Run script as signed-in user | **No** | het script installeert alleen, en schrijft naar `/Library` — dat mag alleen root |
 | Hide script notifications | Yes | |
-| Script frequency | **Every 1 hour** | houdt de LaunchAgent en de kopie bij |
+| Script frequency | **Every 1 hour** | houdt de helper en de LaunchAgent bij |
 | Max number of retries | 3 | |
 
-Toewijzen aan een **gebruikersgroep**, niet aan apparaten: wie bij de share mag is een
-eigenschap van de gebruiker, en de share-level permissions in Azure staan op dezelfde groep.
+Toewijzen aan een **apparaatgroep**. De LaunchAgent die het script neerzet werkt daarna voor
+iedere gebruiker van dat toestel; een gebruikersgroep zou alleen de eerste persoon bedienen.
+
+Wie er bij de share mág blijft een eigenschap van de gebruiker — dat regelen de share-level
+permissions in Azure. Behalve bij de sleutel-terugval: die kent geen identiteit per gebruiker,
+dus dan bepaalt de toewijzing wél wie erbij kan.
 
 ### Wat er buiten dit script moet staan
 

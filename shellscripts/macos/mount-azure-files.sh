@@ -30,15 +30,20 @@
 #
 # In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
 #
-#   Run script as signed-in user   Yes    een mount hoort bij een sessie; als root landt hij
-#                                         in een sessie die niemand ziet
+#   Run script as signed-in user   No     dit script installeert alleen; het schrijft naar
+#                                         /Library en dat mag alleen root. Mounten doet de
+#                                         LaunchAgent, in de sessie van de gebruiker.
 #   Hide script notifications      Yes
 #   Script frequency               Every 1 hour
 #   Max number of retries          3
 #
-# Toewijzen aan een gebruikersgroep, niet aan apparaten — wie bij de share mag is een
-# eigenschap van de gebruiker, en de share-level permissions in Azure staan op dezelfde
-# groep.
+# Toewijzen aan een APPARAATgroep. Dat is nieuw ten opzichte van de eerste opzet: het script
+# draait nu als root en zet een systeembrede LaunchAgent klaar, die vervolgens voor iedere
+# gebruiker van dit toestel werkt. Een gebruikersgroep zou alleen de eerste persoon bedienen.
+#
+# Wie er bij de share mág blijft een eigenschap van de gebruiker — dat regelen de share-level
+# permissions in Azure, niet de toewijzing van dit script. Behalve bij de sleutel-terugval: die
+# kent geen identiteit per gebruiker, dus dan bepaalt de toewijzing wél wie erbij kan.
 #
 # Vereist dat [Baseline] - MAC - D - Azure Files Cloud Kerberos is uitgerold; zonder dat
 # profiel is er geen ticket voor het KERBEROS.MICROSOFTONLINE.COM-realm en vraagt de mount
@@ -86,19 +91,31 @@ STORAGE_KEY=""
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
-STATE_DIR="$HOME/Library/Application Support/Baseline"
+# Als root (de Intune-run) schrijft alles naar /Library, zodat het voor élke gebruiker geldt.
+# Als gebruiker (de LaunchAgent) landen de markeringen en de log in de thuismap, want die zijn
+# per persoon. Beide logpaden zijn spatievrij, zodat Intune ze met "Collect logs" kan ophalen.
+if [ "$(id -u)" -eq 0 ]; then
+  STATE_DIR="/Library/Application Support/Baseline"
+  LOG_DIR="/Library/Logs/Baseline"
+else
+  STATE_DIR="$HOME/Library/Application Support/Baseline"
+  LOG_DIR="$HOME/Library/Logs/Baseline"
+fi
 
-# De log staat in ~/Library/Logs en niet naast de markeringen in Application Support. Dat is
-# de plek waar macOS logs verwacht, maar de reden is praktischer: Intune kan met "Collect
-# logs" bestanden van het toestel ophalen, en die paden worden met een puntkomma gescheiden
-# zónder spaties. "Application Support" heeft een spatie in de naam en is daarmee niet op te
-# halen — precies op het moment dat je de log het hardst nodig hebt.
-LOG_DIR="$HOME/Library/Logs/Baseline"
+# De log staat in Library/Logs en niet naast de markeringen in Application Support. Dat is de
+# plek waar macOS logs verwacht, maar de reden is praktischer: Intune kan met "Collect logs"
+# bestanden ophalen, en die paden worden met een puntkomma gescheiden zónder spaties.
+# "Application Support" heeft een spatie in de naam en is daarmee niet op te halen — precies op
+# het moment dat je de log het hardst nodig hebt.
 LOG="$LOG_DIR/mount-azure-files.log"
-HELPER="$STATE_DIR/mount-azure-files.sh"
 FAVORIET_MARKER="$STATE_DIR/favoriet"
 LABEL="com.aci-europe.baseline.mount-azure-files"
-AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
+
+# Systeembreed, niet in de thuismap. Een LaunchAgent in /Library/LaunchAgents laadt macOS
+# automatisch voor élke gebruiker bij élke login — dat is precies wat we willen, en het scheelt
+# het gedoe met `launchctl bootstrap` vanuit een sessie waar we niet in zitten.
+HELPER="/Library/Scripts/Baseline/mount-azure-files.sh"
+AGENT="/Library/LaunchAgents/$LABEL.plist"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
 SMB_PAD="//${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
@@ -322,20 +339,36 @@ fi
 
 # --- Installeren ---------------------------------------------------------------------------
 #
-# Het script kopieert zichzelf en laat de LaunchAgent die kopie aanroepen. Eén bestand met de
-# instellingen erin, dus de agent kan niet uit de pas lopen met wat Intune uitrolt.
+# Dit deel draait als root, vanuit Intune, en mount zélf niets.
+#
+# Dat is de hele les van deze uitrol. Een mount hoort in de grafische sessie van de gebruiker,
+# en het proces dat de Intune-agent start zit daar niet in — vandaar dat het met de hand wél
+# lukte en via Intune niet. De taakverdeling is nu:
+#
+#   Intune, als root   zet de helper en de LaunchAgent klaar in /Library
+#   LaunchAgent        mount, in de sessie van de gebruiker, bij login en bij netwerkwijziging
+#
+# Een LaunchAgent in /Library/LaunchAgents laadt macOS automatisch voor élke gebruiker bij élke
+# login. Daarmee werkt het ook voor de volgende persoon op dit toestel, zonder dat iemand iets
+# hoeft te doen.
 
-# Vanaf hier is dit een Intune-run. De eerste regel is er om te kunnen zien dát het script
-# heeft gedraaid: staat hij er niet, dan is het script nooit begonnen en zit de fout ervóór —
-# bij het uploaden of bij de interpreter, niet in de logica hieronder.
 log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion), doel ${SMB_PAD}"
 
+if [ "$(id -u)" -ne 0 ]; then
+  log "Dit script hoort als root te draaien: zet in Intune 'Run script as signed-in user' op No. Het mount niet zelf; de LaunchAgent doet dat in de sessie van de gebruiker."
+  exit 1
+fi
+
+mkdir -p "$(dirname "$HELPER")" /Library/LaunchAgents
+
+# De helper is een kopie van dit bestand: één bestand met de instellingen erin, dus de agent kan
+# niet uit de pas lopen met wat Intune uitrolt.
 if ! cmp -s "$0" "$HELPER"; then
-  cp "$0" "$HELPER" && chmod 755 "$HELPER"
-  log "Helper bijgewerkt."
-  NEEDS_RELOAD=1
+  cp "$0" "$HELPER" && chown root:wheel "$HELPER" && chmod 755 "$HELPER"
+  log "Helper bijgewerkt: ${HELPER}"
+  HERLADEN=1
 else
-  NEEDS_RELOAD=0
+  HERLADEN=0
 fi
 
 read -r -d '' PLIST <<PLIST_EOF || true
@@ -367,29 +400,36 @@ read -r -d '' PLIST <<PLIST_EOF || true
 </plist>
 PLIST_EOF
 
-mkdir -p "$HOME/Library/LaunchAgents"
 if [ ! -f "$AGENT" ] || [ "$(cat "$AGENT")" != "$PLIST" ]; then
-  printf '%s\n' "$PLIST" >"$AGENT"
-  log "LaunchAgent geschreven."
-  NEEDS_RELOAD=1
+  printf '%s
+' "$PLIST" >"$AGENT"
+  chown root:wheel "$AGENT"
+  chmod 644 "$AGENT"
+  log "LaunchAgent geschreven: ${AGENT}"
+  HERLADEN=1
 fi
 
-if [ "$NEEDS_RELOAD" -eq 1 ]; then
-  # bootout mag falen: de eerste keer draait er nog niets.
-  /bin/launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
-  if /bin/launchctl bootstrap "gui/$(id -u)" "$AGENT" 2>>"$LOG"; then
-    log "LaunchAgent geladen."
-  else
-    log "LaunchAgent laden mislukt."
+# Bij de volgende login laadt macOS de agent vanzelf. Maar er zit nu iemand achter dit toestel,
+# en die wil zijn schijf niet pas morgen. Root mag in de grafische sessie van de console-
+# gebruiker laden, dus dat doen we er meteen bij.
+CONSOLE_GEBRUIKER="$(/usr/bin/stat -f%Su /dev/console 2>/dev/null)"
+if [ "$HERLADEN" -eq 1 ] && [ -n "$CONSOLE_GEBRUIKER" ] && [ "$CONSOLE_GEBRUIKER" != "root" ]; then
+  CONSOLE_UID="$(/usr/bin/id -u "$CONSOLE_GEBRUIKER" 2>/dev/null)"
+  if [ -n "$CONSOLE_UID" ]; then
+    # bootout mag falen: de eerste keer draait er nog niets.
+    /bin/launchctl bootout "gui/${CONSOLE_UID}/${LABEL}" 2>/dev/null
+    if /bin/launchctl bootstrap "gui/${CONSOLE_UID}" "$AGENT" 2>>"$LOG"; then
+      log "LaunchAgent geladen voor ${CONSOLE_GEBRUIKER} — de mount volgt binnen enkele seconden."
+    else
+      log "LaunchAgent laden voor ${CONSOLE_GEBRUIKER} mislukt; hij gaat vanzelf bij de volgende login."
+    fi
   fi
+elif [ "$HERLADEN" -eq 0 ]; then
+  log "Helper en LaunchAgent stonden al goed."
 fi
 
-mount_share
-
-# Bewust altijd 0. Een Intune-shellscript dat niet-nul teruggeeft komt in de portal als
-# "Failed" te staan, en zolang de Azure Files-preview niet aanstaat is er op geen enkele Mac
-# een ticket — dan zou élk toestel permanent rood staan voor iets dat volgens plan verloopt.
-# Wat er wél gebeurde staat hierboven in de uitvoer, en die bewaart Intune bij het apparaat.
-# Zie je in de portal tóch "Failed", dan is het script niet zelf tot hier gekomen.
+# Bewust altijd 0. Een Intune-shellscript dat niet-nul teruggeeft komt in de portal als "Failed"
+# te staan. Of de mount lukt is hier niet te zien — dat gebeurt straks in de sessie van de
+# gebruiker, en staat in diens eigen log. Wat dit script wél kon doen staat hierboven.
 log "Klaar."
 exit 0
