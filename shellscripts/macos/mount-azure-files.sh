@@ -5,8 +5,8 @@
 #
 # De share komt in /Volumes en staat daarmee in de Finder-zijbalk onder Locaties, met een
 # uitwerpknop. Dat het in /Volumes staat is wat telt, niet welk commando hem mountte — zie de
-# opmerking bij mount_via_netfs() waarom dat met een sleutel via NetFS gaat en met een ticket
-# via mount_smbfs.
+# opmerking bij mount_share() waarom beide wegen via NetFS lopen, en waarom het script vooraf
+# controleert of de aanmelding gaat lukken.
 #
 # Waarom een script en geen configuratieprofiel:
 #
@@ -103,19 +103,6 @@ AGENT="$HOME/Library/LaunchAgents/$LABEL.plist"
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
 SMB_PAD="//${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
-# Mountpunten in volgorde van voorkeur.
-#
-# /Volumes eerst, want alleen wat dáár staat zet Finder in de zijbalk onder Locaties. Normaal
-# maakt mount_smbfs die map zelf aan, maar dat lukt niet altijd: is /Volumes op dit toestel niet
-# schrijfbaar voor een gewone gebruiker, of ligt er een restant van een eerdere poging dat van
-# root is, dan geeft de mount "Operation not permitted" — en dat is iets anders dan een
-# afgewezen aanmelding.
-#
-# De thuismap is de terugval. Die werkt altijd, maar levert geen regel in de zijbalk op; het
-# script zegt in de log wanneer het daarop is uitgeweken.
-MOUNT_NAAM="${SHARE_SUBPATH:-$SHARE_NAME}"
-MOUNTPUNTEN=("/Volumes/$MOUNT_NAAM" "$HOME/$MOUNT_NAAM")
-
 mkdir -p "$STATE_DIR" "$LOG_DIR"
 
 # Naar het logbestand én naar stdout. Intune bewaart de uitvoer van een shellscript en toont
@@ -148,6 +135,24 @@ has_ticket() {
     grep -q "KERBEROS.MICROSOFTONLINE.COM"
 }
 
+# Kan de KDC een servicebewijs voor déze fileservice geven? Dat is de vraag die telt, en hij is
+# rechtstreeks te stellen.
+#
+# Een TGT is namelijk nog geen toegang. Kerberos gaat in twee stappen: het TGT bewijst wie je
+# bent tegenover het realm, en daarna vraag je een bewijs voor één specifieke dienst —
+# `cifs/<server>`. Die tweede stap kan mislukken terwijl de eerste prima is. Op acisafiles gaf
+# hij AADSTS700016: er is in de directory geen toepassing voor die fileservice, omdat Entra
+# Kerberos niet aanstaat op dat account.
+#
+# Waarom dit vooraf vragen en niet gewoon de mount proberen: alleen als dit lukt, weten we dat
+# NetFS geen aanmeldvenster gaat opzetten. En dát is de voorwaarde om Kerberos via NetFS te
+# mogen mounten — de enige weg die op deze toestellen /Volumes openkrijgt.
+has_service_ticket() {
+  [ -x /usr/bin/kgetcred ] || return 1
+  with_timeout 20 /usr/bin/kgetcred \
+    "cifs/${SERVER}@KERBEROS.MICROSOFTONLINE.COM" >/dev/null 2>&1
+}
+
 # macOS heeft geen `timeout`; die zit in coreutils en dat staat er niet standaard op.
 #
 # `mount_smbfs -N` vraagt niets, maar hij kan wél lang blijven wachten op een server die niet
@@ -172,27 +177,6 @@ with_timeout() {
   wait "$pid"
 }
 
-# Ruimt een leeg restant in /Volumes op. Blijft daar na een mislukte poging een map staan die van
-# root is, dan geeft élke volgende mount "Operation not permitted" en lijkt het alsof de sleutel
-# niet deugt. rmdir faalt stil als de map niet van ons is; dan doet de terugval zijn werk.
-ruim_restant_op() {
-  local mp="$1"
-  [ -d "$mp" ] || return 0
-  /sbin/mount 2>/dev/null | /usr/bin/awk -v m="$mp" '$3 == m { g = 1 } END { exit !g }' && return 0
-  rmdir "$mp" 2>/dev/null
-  return 0
-}
-
-# Eén poging: $1 is het volledige SMB-pad, $2 het mountpunt.
-probeer_mount() {
-  local pad="$1" mp="$2"
-  case "$mp" in
-    /Volumes/*) ruim_restant_op "$mp" ;;
-    *) mkdir -p "$mp" 2>>"$LOG" || return 1 ;;
-  esac
-  with_timeout 60 /sbin/mount_smbfs -N -o soft "$pad" "$mp" 2>>"$LOG"
-}
-
 # Mounten via NetFS, met de sleutel. Dit is de weg die /Volumes wél openkrijgt.
 #
 # `mount_smbfs` moet zijn mountpunt zelf aanmaken en mag dat op deze toestellen niet: /Volumes
@@ -212,6 +196,14 @@ probeer_mount() {
 # waarde zoals hij is.
 mount_via_netfs() {
   local doel="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
+
+  # Zonder inloggegevens: NetFS gebruikt dan het Kerberos-servicebewijs dat er is. Dat mag alleen
+  # als has_service_ticket() net heeft bevestigd dát het er is — anders komt er een dialoog.
+  if [ "${1:-}" != "sleutel" ]; then
+    with_timeout 60 /usr/bin/osascript -e "mount volume \"${doel}\"" >/dev/null 2>>"$LOG"
+    return $?
+  fi
+
   with_timeout 60 /usr/bin/osascript >/dev/null 2>>"$LOG" <<OSA
 mount volume "${doel}" as user name "${STORAGE_ACCOUNT}" with password "${STORAGE_KEY}"
 OSA
@@ -261,17 +253,22 @@ mount_share() {
     return 0
   fi
 
-  # Wat we kunnen proberen, in volgorde. Kerberos eerst: dat is de vorm met identiteit per
-  # gebruiker, en de sleutel is de terugval — niet andersom.
+  # Kerberos eerst: dat is de vorm mét identiteit per gebruiker, de sleutel is de terugval — niet
+  # andersom. Zodra Entra Kerberos ergens wél aanstaat, neemt Kerberos dus vanzelf over en hoeft
+  # er aan dit script niets te veranderen.
   #
-  # mount_smbfs -N, en uitdrukkelijk niet `osascript -e 'mount volume'`. Die laatste gaat door
-  # NetFS, en NetFS zet bij een URL zonder inloggegevens een "verbinden"-dialoog op het scherm
-  # zodra de aanmelding niet wordt geaccepteerd. Uit een LaunchAgent antwoordt daar niemand op:
-  # het script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
-  # zonder één regel uitvoer. -N vraagt per definitie niets.
+  # Beide wegen lopen via NetFS, want alleen die krijgt /Volumes open als gewone gebruiker, en
+  # alleen wat in /Volumes staat zet Finder in de zijbalk. De prijs van NetFS is dat het een
+  # aanmeldvenster opzet zodra de aanmelding wordt afgewezen, en uit een LaunchAgent antwoordt
+  # daar niemand op. Daarom vraagt het script vooraf of de aanmelding gáát lukken: een
+  # servicebewijs voor Kerberos, een ingevulde sleutel voor de terugval.
   local methoden=()
   if has_ticket || [ "${FORCE:-0}" -eq 1 ]; then
-    methoden+=("kerberos")
+    if has_service_ticket || [ "${FORCE:-0}" -eq 1 ]; then
+      methoden+=("kerberos")
+    elif [ "${QUIET:-0}" -ne 1 ]; then
+      log "Wel een TGT, maar de KDC geeft geen servicebewijs voor cifs/${SERVER}. Entra Kerberos staat niet aan op dit storage account (AADSTS700016), of de app-registratie ontbreekt."
+    fi
   elif [ "${QUIET:-0}" -ne 1 ]; then
     # QUIET staat aan als de LaunchAgent belt. Die vuurt bij elke netwerkwijziging, en zolang er
     # geen ticket is zou dat de log vullen met dezelfde regel.
@@ -284,54 +281,30 @@ mount_share() {
     return 1
   fi
 
-  local methode mp gelukt=0
+  local methode mp
   for methode in "${methoden[@]}"; do
-    if [ "$methode" = "sleutel" ]; then
-      # NetFS: krijgt /Volumes wél open, want de sleutel maakt een aanmeldvenster onmogelijk.
-      mount_via_netfs
-      case $? in
-        0) gelukt=1 ;;
-        124)
-          log "Mount met de sleutel liep vast en is na 60s afgebroken — server onbereikbaar, of de sleutel wordt geweigerd en er wacht een dialoog."
-          return 1
-          ;;
-        *) log "Mount met de sleutel mislukt." ;;
-      esac
-    else
-      # Kerberos: mount_smbfs, want zonder geldige aanmelding zou NetFS een dialoog opzetten.
-      # Die kan zijn eigen mountpunt in /Volumes niet altijd aanmaken; vandaar de terugval.
-      for mp in "${MOUNTPUNTEN[@]}"; do
-        probeer_mount "$SMB_PAD" "$mp"
-        case $? in
-          0)
-            gelukt=1
-            break
-            ;;
-          124)
-            # Een vastloper is netwerk en geen mountpunt; een tweede pad proberen heeft geen zin.
-            log "Kerberos-mount liep vast op ${mp} en is na 60s afgebroken — server niet bereikbaar of poort 445 dicht."
-            return 1
-            ;;
-        esac
-      done
-      [ "$gelukt" -eq 1 ] || log "Kerberos-mount lukte op geen van de mountpunten."
-    fi
+    mount_via_netfs "$methode"
+    case $? in
+      0) ;;
+      124)
+        log "Mount (${methode}) liep vast en is na 60s afgebroken — server onbereikbaar, of er wacht een aanmeldvenster."
+        return 1
+        ;;
+      *)
+        log "Mount met ${methode} mislukt."
+        continue
+        ;;
+    esac
 
-    if [ "$gelukt" -eq 1 ]; then
-      mp="$(huidig_mountpunt)"
-      [ -n "$mp" ] || mp="onbekend pad"
-      if [ "$methode" = "sleutel" ]; then
-        log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
-      else
-        log "Gemount met Kerberos op ${mp}."
-      fi
-      case "$mp" in
-        /Volumes/*) ;;
-        *) log "Niet in /Volumes maar op ${mp}. De share staat hierdoor niet in de Finder-zijbalk onder Locaties." ;;
-      esac
-      zet_in_favorieten "$mp"
-      return 0
+    mp="$(huidig_mountpunt)"
+    [ -n "$mp" ] || mp="onbekend pad"
+    if [ "$methode" = "sleutel" ]; then
+      log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
+    else
+      log "Gemount met Kerberos op ${mp}."
     fi
+    zet_in_favorieten "$mp"
+    return 0
   done
 
   return 1
