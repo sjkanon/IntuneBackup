@@ -3,3 +3,6 @@
 # faalt hij op de Mac met "bad interpreter: /bin/bash^M" — een fout die je pas ziet als het
 # script al is geüpload.
 *.sh text eol=lf
+
+# De ingevulde uitrolkopieën in local/ zijn shellscripts en moeten dus ook LF houden.
+local/*.sh text eol=lf

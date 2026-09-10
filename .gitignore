@@ -6,3 +6,8 @@
 # Lokale checkout van IntuneAdmin/IntuneBaselines, bron voor scripts/import-intuneadmin.js.
 # Zelfde reden als .oib-source/: de gegenereerde templates zijn het resultaat.
 .intuneadmin-source/
+
+# Uitrolkopieën met ingevulde geheimen. Deze repo is publiek: een storage account key die hier
+# één keer in belandt staat er voorgoed in, ook na een commit die hem weghaalt, en wordt op
+# GitHub binnen minuten door scanners gevonden. Wat in local/ staat gaat nooit mee.
+/local/
