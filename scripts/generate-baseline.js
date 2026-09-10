@@ -334,6 +334,21 @@ const CHECK_NUMBERS = {
   // KDC-URL draagt %OrganizationId% en valt daarmee buiten de check — de rest van de policy
   // (realm, hosts, usePlatformSSOTGT, performKerberosOnly) is wel te toetsen.
   Baseline_MAC_D_Azure_Files_Cloud_Kerberos: 154,
+
+  // Wifi-profielen. Type "Device": die leveren vandaag geen check op, maar het nummer wordt
+  // wel uitgedeeld — zonder het hier vast te zetten schuift het zodra er een policy bijkomt
+  // die er alfabetisch voor staat.
+  Baseline_MAC_D_Wifi_Corporate: 155,
+  Baseline_MAC_D_Wifi_Guest: 156,
+  Baseline_WIN_D_Wifi_Corporate: 157,
+  Baseline_WIN_D_Wifi_Guest: 158,
+
+  // Outlook-caching is een klantbesluit en geen technisch feit: drie varianten op dezelfde as,
+  // die dezelfde instelling anders zetten. Managed is de variant die uitrolt; Default en Off
+  // staan in fase 5. Wijs er één toe — twee leveren een Conflict op waarna Intune er géén toepast.
+  Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default: 159,
+  Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed: 160,
+  Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off: 161,
 };
 
 /**

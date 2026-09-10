@@ -1,12 +1,12 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 111 policies
+# Windows — 114 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 99 |
+| `SettingsCatalog/` | 102 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 5 |
@@ -106,7 +106,7 @@ Toewijzen aan apparaatgroepen.
 | [**Wireless and Peripherals**](SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.md) | Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. | Settings Catalog | 7 | All Devices | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | [**Wireless Shared Devices**](SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) | Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. | Settings Catalog | 1 | — | `INTUNE-BASE-138-DWirelessSharedDevices` |
 
-## User-scoped (U) — 23
+## User-scoped (U) — 26
 
 Toewijzen aan gebruikersgroepen.
 
@@ -128,6 +128,9 @@ Toewijzen aan gebruikersgroepen.
 | [**Microsoft Office Experience**](SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Experience.md) | De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en welke functies zichtbaar zijn. | Settings Catalog | 29 | All Users | `INTUNE-BASE-102-UMicrosoftOfficeExperience` |
 | [**Microsoft Office Security**](SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.md) | De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave. | Settings Catalog | 221 | All Users | `INTUNE-BASE-103-UMicrosoftOfficeSecurity` |
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_U_Microsoft_OneDrive.md) | De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet. | Settings Catalog | 8 | All Users | `INTUNE-BASE-032-UMicrosoftOneDrive` |
+| [**Microsoft Outlook Cached Mode Default**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.md) | Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook staan — gedeelde mappen worden dus wél meegecachet. | Settings Catalog | 1 | — | `INTUNE-BASE-159-UMicrosoftOutlookCachedModeDefault` |
+| [**Microsoft Outlook Cached Mode Managed**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.md) | Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is erbuiten: gedeelde mailmappen, gedeelde agenda's en Public Folder Favorites worden niet naar het OST-bestand gekopieerd. | Settings Catalog | 6 | — | `INTUNE-BASE-160-UMicrosoftOutlookCachedModeManaged` |
+| [**Microsoft Outlook Cached Mode Off**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.md) | Zet Outlook in Online mode en verbiedt het aanmaken van een OST-bestand, zodat er geen mailbox-inhoud op de schijf van het apparaat landt. | Settings Catalog | 2 | — | `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff` |
 | [**Microsoft Outlook**](SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook.md) | Configureert het Exchange Online-profiel van de gebruiker automatisch, zodat Outlook werkt zonder handmatig een account toe te voegen. | Settings Catalog | 1 | All Users | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_U_Microsoft_Store.md) | De gebruikerskant van de Store-beperkingen. | Settings Catalog | 3 | All Users | `INTUNE-BASE-104-UMicrosoftStore` |
 | [**Microsoft Teams**](SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.md) | Beperkt aanmelden in Teams tot de eigen tenant en voorkomt dat Teams zichzelf na installatie meteen start. | Settings Catalog | 3 | — | `INTUNE-BASE-145-UMicrosoftTeams` |

@@ -2262,6 +2262,39 @@
       "fase": 1
     },
     {
+      "target": "Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed",
+      "displayName": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed",
+      "doel": "Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is erbuiten: gedeelde mailmappen, gedeelde agenda's en Public Folder Favorites worden niet naar het OST-bestand gekopieerd.",
+      "bron": "eigen baseline",
+      "note": "Eén van drie varianten op dezelfde as — wijs er één toe, nooit twee: deze, Cached Mode Default (alleen cached mode aan) of Cached Mode Off (Online mode). De eigen mailbox wordt gecachet, zodat Outlook offline werkt en zoeken lokaal gaat. Wat eraan gedeeld hangt niet: een gedeelde mailbox die aan het profiel wordt toegevoegd is de belangrijkste oorzaak van OST-bestanden van tientallen gigabytes, en online lezen is daar geen praktisch verlies. Let op de polariteit van de twee gedeelde-map-instellingen, die tegen elkaar in loopt: *Disable shared mail folder caching* op **Enabled** schrijft `cacheothersmail=0`, en *Download shared non-mail folders* op **Disabled** schrijft `downloadsharedfolders=0`. Beide nullen betekenen niet cachen. Geldt alleen voor klassieke Outlook (de Win32-app uit Microsoft 365 Apps); het nieuwe Outlook voor Windows leest deze ADMX-instellingen niet en heeft geen OST. De bekende schuif **hoeveelheid e-mail offline bewaren** (3 maanden / 12 maanden / alles, registerwaarde `SyncWindowSetting`) zit *niet* in de settings catalog: de ingeste `outlk16v2`-ADMX kent onder *Cached Exchange Mode* achttien instellingen en die schuif is er geen van. Wie die wil zetten, kan dat alleen via een eigen ADMX-import of de Office Cloud Policy Service — buiten deze baseline dus.",
+      "metadataOnly": true,
+      "herkomst": "eigen",
+      "fase": 2,
+      "faseWaarom": "Raakt elk bestaand profiel: Outlook bouwt het OST opnieuw op en een gedeelde mailbox in het profiel gaat van gecachet naar online. Dat is zichtbaar — de eerste synchronisatie kost tijd en bandbreedte, en wie gewend is offline in een gedeelde mailbox te werken merkt het meteen. Eerst op de pilotgroep, en kijk daar hoeveel profielen een gedeelde mailbox hebben."
+    },
+    {
+      "target": "Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default",
+      "displayName": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Default",
+      "doel": "Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook staan — gedeelde mappen worden dus wél meegecachet.",
+      "bron": "eigen baseline",
+      "note": "De lichtste van de drie varianten: één instelling, geen uitspraak over gedeelde mappen. Past waar gebruikers offline in een gedeelde mailbox moeten kunnen werken en de schijfruimte geen probleem is. Geldt alleen voor klassieke Outlook (de Win32-app uit Microsoft 365 Apps); het nieuwe Outlook voor Windows leest deze ADMX-instellingen niet en heeft geen OST. De bekende schuif **hoeveelheid e-mail offline bewaren** (3 maanden / 12 maanden / alles, registerwaarde `SyncWindowSetting`) zit *niet* in de settings catalog: de ingeste `outlk16v2`-ADMX kent onder *Cached Exchange Mode* achttien instellingen en die schuif is er geen van. Wie die wil zetten, kan dat alleen via een eigen ADMX-import of de Office Cloud Policy Service — buiten deze baseline dus.",
+      "metadataOnly": true,
+      "herkomst": "eigen",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Managed-variant, voor een klant die gedeelde mailboxen wél gecachet wil hebben. Wijs er één toe, nooit twee — ze zetten dezelfde instelling en leveren samen een Conflict op."
+    },
+    {
+      "target": "Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off",
+      "displayName": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Off",
+      "doel": "Zet Outlook in Online mode en verbiedt het aanmaken van een OST-bestand, zodat er geen mailbox-inhoud op de schijf van het apparaat landt.",
+      "bron": "eigen baseline",
+      "note": "Voor een gedeeld of kiosk-apparaat waar het profiel niet bewaard wordt, en voor wie geen mailinhoud op de schijf wil hebben. De prijs is hoog: zonder OST werkt Outlook niet offline, is zoeken een serverzoekopdracht, en merkt de gebruiker elke hapering in de verbinding. Op een laptop hoort deze variant niet. Geldt alleen voor klassieke Outlook (de Win32-app uit Microsoft 365 Apps); het nieuwe Outlook voor Windows leest deze ADMX-instellingen niet en heeft geen OST. De bekende schuif **hoeveelheid e-mail offline bewaren** (3 maanden / 12 maanden / alles, registerwaarde `SyncWindowSetting`) zit *niet* in de settings catalog: de ingeste `outlk16v2`-ADMX kent onder *Cached Exchange Mode* achttien instellingen en die schuif is er geen van. Wie die wil zetten, kan dat alleen via een eigen ADMX-import of de Office Cloud Policy Service — buiten deze baseline dus.",
+      "metadataOnly": true,
+      "herkomst": "eigen",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Managed-variant, voor gedeelde apparaten zonder bewaard profiel. Wijs er één toe, nooit twee — ze zetten dezelfde instelling met een andere waarde en leveren samen een Conflict op, waarna géén van beide wordt toegepast."
+    },
+    {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Store - U - Configuration - v3.3.json",
       "target": "Baseline_WIN_U_Microsoft_Store",
       "displayName": "[Baseline] - WIN - U - Microsoft Store",

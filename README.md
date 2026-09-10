@@ -5,11 +5,11 @@ Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds au
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
 
-146 policies over vier platformen:
+149 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 99 | 1 | 6 | 5 | – | **111** |
+| [Windows](IntuneTemplate/WIN/README.md) | 102 | 1 | 6 | 5 | – | **114** |
 | [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
 | [iOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
@@ -17,7 +17,7 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>146 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>149 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -89,10 +89,10 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
 | 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 108 |
-| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 14 |
-| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 5 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 15 |
+| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 10 |
 | 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 9 |
-| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 5 |
+| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 7 |
 
 Alleen fase 1 staat in `_assignments.json`. `check-scope.js` bewaakt dat die twee niet uit
 elkaar lopen: een fase-1-policy zonder toewijzing wordt stilzwijgend niet uitgerold, en een
