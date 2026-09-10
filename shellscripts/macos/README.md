@@ -212,10 +212,23 @@ laadt het installatiescript de agent er alsnog bij, zodat je niet hoeft uit te l
 Ook een mount overleeft geen uitloggen, en een Intune-script dat elk uur draait zou de share
 pas een uur ná het inloggen terugzetten — precies het moment waarop iemand hem nodig heeft.
 
-Die agent draait **bij login en bij elke netwerkwijziging**, niet op een klok: `RunAtLoad` plus
-`WatchPaths` op `resolv.conf` en de netwerkconfiguratie, met een `ThrottleInterval` van tien
-seconden ertegen. Wifi-wissel, VPN erbij, uit de slaap komen — dat zijn de momenten waarop een
-mount weg is of juist weer kan, en pollen om de zoveel minuten raakt die net niet.
+Die agent heeft **drie** aanleidingen, en alle drie zijn nodig:
+
+| | wanneer |
+|---|---|
+| `RunAtLoad` | bij het inloggen, en bij het laden vanuit het installatiescript |
+| `WatchPaths` | zodra het netwerk wijzigt — wifi-wissel, VPN erbij, uit de slaap komen |
+| `StartInterval` | elke vijf minuten, als vangnet |
+
+Dat laatste liet ik eerst weg omdat pollen lelijk is naast `WatchPaths`. Dat was fout: een
+SMB-mount raakt ook los **zonder** dat er iets aan het netwerk verandert — na slaapstand, of als
+de server de verbinding laat vallen. Dan vuurt `WatchPaths` niet en blijft de share weg tot de
+volgende login. Precies wat er bij het testen gebeurde: gemount om 08:41, acht minuten later weg,
+en niets dat hem terugzette.
+
+Vijf minuten kost niets. Staat de share er nog, dan stopt het script meteen, en met `QUIET`
+schrijft het daar niets over in de log. `ThrottleInterval` van tien seconden houdt de agent
+rustig als er kort achter elkaar meerdere aanleidingen zijn.
 
 Het Intune-script **genereert** de helper in `/Library/Scripts/Baseline/`: het schrijft de
 instellingen van bovenin het bestand erin (met `printf %q`, zodat een sleutel met spaties of

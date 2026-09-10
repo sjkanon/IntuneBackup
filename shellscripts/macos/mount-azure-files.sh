@@ -377,9 +377,17 @@ fi
 
 # --- De LaunchAgent --------------------------------------------------------------------------
 #
-# RunAtLoad plus WatchPaths op resolv.conf en de netwerkconfiguratie: een share mount je als het
-# netwerk verandert, niet om de zoveel minuten. Wifi-wissel, VPN erbij, uit de slaap komen — dat
-# zijn de momenten waarop een mount weg is of juist weer kan.
+# Drie aanleidingen, en alle drie zijn nodig:
+#
+#   RunAtLoad       bij het inloggen, en bij het laden vanuit het installatiescript
+#   WatchPaths      zodra het netwerk wijzigt — wifi-wissel, VPN erbij, uit de slaap komen
+#   StartInterval   elke vijf minuten als vangnet
+#
+# Dat laatste had ik eerst weggelaten omdat pollen lelijk is naast WatchPaths. Dat was fout: een
+# SMB-mount raakt ook los zonder dat er iets aan het netwerk verandert — na slaapstand, of als de
+# server de verbinding laat vallen. Dan vuurt WatchPaths niet en blijft de share weg tot de
+# volgende login. Vijf minuten kost niets: staat de share er nog, dan stopt het script meteen, en
+# met QUIET schrijft het daar niets over in de log.
 
 read -r -d '' PLIST <<PLIST_EINDE || true
 <?xml version="1.0" encoding="UTF-8"?>
@@ -402,6 +410,8 @@ read -r -d '' PLIST <<PLIST_EINDE || true
         <string>/Library/Preferences/SystemConfiguration/com.apple.network.identification.plist</string>
         <string>/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist</string>
     </array>
+    <key>StartInterval</key>
+    <integer>300</integer>
     <key>ThrottleInterval</key>
     <integer>10</integer>
 </dict>
