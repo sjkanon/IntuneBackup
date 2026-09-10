@@ -163,12 +163,30 @@ with_timeout() {
 }
 
 # Waar staat deze share nu gemount? NetFS kiest de naam in /Volumes zelf, dus opzoeken in plaats
-# van aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten.
+# van aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten. Zoeken op de
+# servernaam alleen: de bronregel van een NetFS-mount ziet er anders uit dan het pad dat wij
+# meegaven, en de FQDN van het storage account is specifiek genoeg.
 huidig_mountpunt() {
   /sbin/mount 2>/dev/null |
-    /usr/bin/grep -i "${SERVER}/${SHARE_NAME}" |
+    /usr/bin/grep -i "$SERVER" |
     /usr/bin/sed -n 's/.* on \(.*\) (.*/\1/p' |
     /usr/bin/head -1
+}
+
+# Na een geslaagde mount staat hij niet meteen in `mount`. Zonder even wachten meldt het script
+# "onbekend pad", zet het de favoriet niet, en denkt het bij de volgende netwerkwijziging dat er
+# niets gemount is — waarna macOS er een tweede naast hangt als /Volumes/<naam>-1.
+wacht_op_mountpunt() {
+  local poging mp
+  for poging in 1 2 3 4 5; do
+    mp="$(huidig_mountpunt)"
+    if [ -n "$mp" ]; then
+      printf '%s' "$mp"
+      return 0
+    fi
+    sleep 1
+  done
+  return 1
 }
 
 is_mounted() {
@@ -214,15 +232,28 @@ mount volume "${DOEL}" as user name "${STORAGE_ACCOUNT}" with password "${STORAG
 OSA
 }
 
-# Zet het mountpunt in de Favorieten bovenin de Finder-zijbalk, met sfltool van Apple zelf; geen
-# tool van derden nodig. Eén keer, met een markering ernaast — anders zet elke netwerkwijziging
-# er een regel bij en staat de zijbalk na een dag vol met dezelfde snelkoppeling.
+# Het mountpunt in de Favorieten bovenin de Finder-zijbalk zetten — als dat kan.
 #
-# Locaties en Favorieten zijn niet hetzelfde: een gemounte server verschijnt vanzelf onder
-# Locaties en verdwijnt bij uitwerpen; een favoriet is een vaste verwijzing die blijft staan.
+# Op macOS 26 kan het niet. `sfltool` kent alleen csinfo, dumpbtm, archive, clear, resetbtm,
+# resetlist, list en list-info; er is geen `add-item`. Oudere bronnen noemen dat commando wel,
+# maar deze macOS accepteert het niet en schrijft alleen zijn usage naar de log.
+#
+# Daarom eerst kijken of het subcommando bestaat, en anders stil overslaan. Zonder die controle
+# meldde dit script "In de Finder-favorieten gezet" terwijl er niets gebeurde — een regel in de
+# log die iets bevestigt wat niet waar is, is erger dan geen regel.
+#
+# Wat wél werkt is de mount zelf: die staat in /Volumes en verschijnt daarmee in de zijbalk
+# onder **Locaties**. Het verschil met Favorieten is dat Locaties verdwijnt bij uitwerpen. Wil je
+# echt een vaste favoriet, dan is `mysides` het enige werkende gereedschap — en dat is een binary
+# van derden die je zelf moet uitrollen en ondertekenen.
 zet_in_favorieten() {
   local mp="$1" url
+  case "$mp" in
+    /*) ;;
+    *) return 0 ;;
+  esac
   [ -x /usr/bin/sfltool ] || return 0
+  /usr/bin/sfltool 2>&1 | grep -q "add-item" || return 0
   if [ -f "$FAVORIET_MARKER" ] && [ "$(cat "$FAVORIET_MARKER" 2>/dev/null)" = "$mp" ]; then
     return 0
   fi
@@ -272,8 +303,13 @@ mount_share() {
         ;;
     esac
 
-    mp="$(huidig_mountpunt)"
-    [ -n "$mp" ] || mp="onbekend pad"
+    mp="$(wacht_op_mountpunt)"
+    if [ -z "$mp" ]; then
+      # De mount gaf geen fout maar staat na vijf seconden nergens in `mount`. Dat is geen
+      # geslaagde mount, dus ook niet zo melden.
+      log "Mount met ${methode} meldde geen fout, maar de share staat nergens gemount."
+      return 1
+    fi
     if [ "$methode" = "sleutel" ]; then
       log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
     else

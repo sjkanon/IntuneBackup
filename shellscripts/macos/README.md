@@ -500,34 +500,26 @@ Het script ruimt zo'n leeg restant zelf op en wijkt anders uit naar `~/<share>`.
 werkt altijd, maar levert geen regel onder *Locaties* op; de log zegt het wanneer het gebeurt.
 Handmatig opruimen kan met `sudo rmdir /Volumes/<naam>`.
 
-#### En in de Favorieten
+#### Favorieten kan niet, Locaties wel
 
-Na een geslaagde mount zet het script het pad ook in de **Favorieten** bovenin de zijbalk, met
-Apple's eigen `sfltool`:
+De share landt in `/Volumes` en verschijnt daarmee vanzelf in de Finder-zijbalk onder
+**Locaties**, met een uitwerpknop. Dat is de zijbalk.
 
-```bash
-/usr/bin/sfltool add-item com.apple.LSSharedFileList.FavoriteItems "file:///Volumes/<naam>"
+De **Favorieten** bovenin die zijbalk zijn iets anders, en die kan een script op macOS 26 niet
+vullen. `sfltool` — Apple's eigen gereedschap — kent alleen:
+
+```
+csinfo | dumpbtm | archive | clear | resetbtm | resetlist | list | list-info
 ```
 
-Geen tool van derden nodig — `mysides` was daar jarenlang voor, maar `sfltool` zit in macOS
-zelf. Het moet wel als de ingelogde gebruiker draaien, want de favorietenlijst is per gebruiker;
-dat is hier het geval.
+Er is geen `add-item`. Oudere bronnen noemen dat commando wel; deze macOS accepteert het niet en
+schrijft alleen zijn usage naar de log. Het script controleert nu eerst of het subcommando
+bestaat en slaat het anders stil over — want een logregel die "In de Finder-favorieten gezet"
+meldt terwijl er niets gebeurde is erger dan geen regel.
 
-Eén keer, met een markering in `~/Library/Application Support/Baseline/favoriet` ernaast. Zonder
-die markering zou elke netwerkwijziging er een regel bij zetten en staat de zijbalk na een dag
-vol met dezelfde snelkoppeling.
-
-Let op het verschil tussen de twee plekken in de zijbalk: een gemounte server verschijnt vanzelf
-onder **Locaties** en verdwijnt daar bij het uitwerpen. Een **favoriet** is een vaste verwijzing
-naar een pad en blijft staan, ook als er niets gemount is — dan wijst hij naar een lege map.
-
-Een icoon op het **bureaublad** krijg je er niet automatisch bij: dat staat standaard uit en
-zit los van de zijbalk. Wil je dat wel, dan is dat één instelling in de settings catalog —
-`com.apple.finder_showmountedserversondesktop` — en dus een policy, geen scriptwijziging.
-
-De **Favorieten** bovenin de zijbalk zijn iets anders dan Locaties. Daar kan een script niets
-zinnigs mee: die lijst is een bookmarkblob in `com.apple.sidebarlists.plist` en Apple heeft de
-API ervoor afgeschaft. De gebruiker kan de share er zelf naartoe slepen.
+Wil je tóch een vaste favoriet, dan is [`mysides`](https://github.com/mosen/mysides) het enige
+werkende gereedschap: een binary van derden die je zelf moet uitrollen en ondertekenen. Het
+verschil dat je ervoor koopt: Locaties verdwijnt bij uitwerpen, een favoriet blijft staan.
 
 ### Geen ticket, geen poging
 
