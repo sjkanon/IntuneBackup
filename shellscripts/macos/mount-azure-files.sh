@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Zet op een Mac een LaunchAgent klaar die een Azure Files-share mount — het macOS-equivalent
-# van een drive mapping. Dit script mount zélf niets.
+# Zet op een Mac een LaunchAgent klaar die een of meer Azure Files-shares mount — het
+# macOS-equivalent van drive mappings. Dit script mount zélf niets.
 #
 # Waarom die taakverdeling:
 #
@@ -16,20 +16,20 @@
 #   élke login. Geen launchctl bootstrap vanuit een domein waar we niet in zitten, en meteen
 #   goed voor de volgende persoon op dat toestel.
 #
+# Waarom één bestand voor alle sets:
+#
+#   Krijgen groepen verschillende shares, dan rol je dit bestand meerdere keren uit met een
+#   andere SET_NAAM — niet met een tweede kopie van de code. Eén plek waar een fix landt. Twee
+#   losse kopieën lopen gegarandeerd uit de pas zodra er iets aan verandert, en dat merk je pas
+#   als het misgaat.
+#
 # Waarom de helper wordt geschreven en niet gekopieerd:
 #
 #   Dat was eerst een cp van $0 naar de helper. Bij de Intune-agent wijst $0 niet naar de
 #   scripttekst, dus belandde er iets anders in /Library/Scripts — een binair bestand, en de
 #   LaunchAgent stierf met exit 126, "cannot execute binary file". Nu genereert dit script de
 #   helper: de instellingen hieronder worden erin geschreven en de rest komt uit een letterlijk
-#   heredoc. Eén plek voor de instellingen, en geen enkele aanname over hoe dit bestand wordt
-#   aangeroepen.
-#
-# Waarom een script en geen configuratieprofiel:
-#
-#   Er is er geen. Alle 18.329 settingDefinitionId's van de settings catalog zijn nagezocht op
-#   een payload die een netwerkschijf koppelt: die bestaat niet, op geen van beide platformen.
-#   Mounten is een handeling, geen instelling.
+#   heredoc. Geen enkele aanname meer over hoe dit bestand wordt aangeroepen.
 #
 # In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
 #
@@ -39,21 +39,47 @@
 #   Script frequency               Every 1 hour
 #   Max number of retries          3
 #
-# Toewijzen aan een APPARAATgroep. De LaunchAgent werkt daarna voor iedere gebruiker van dat
-# toestel; een gebruikersgroep zou alleen de eerste persoon bedienen.
+# Toewijzen: aan de groep die deze shares hoort te krijgen. Gaat het om iedereen, neem dan een
+# apparaatgroep — de LaunchAgent werkt dan voor elke gebruiker van dat toestel. Krijgt maar een
+# deel van de mensen deze set, dan een gebruikersgroep; het script draait nog steeds als root,
+# maar landt alleen op toestellen van die mensen.
+#
+# LET OP bij de sleutel-terugval: die kent geen identiteit per gebruiker. De toewijzing bepaalt
+# dan wie de share gemount kríjgt, niet wie erbij kán — met de sleutel op het toestel is elke
+# share in dat storage account te benaderen. Echte scheiding per groep krijg je pas met Kerberos
+# en share-level permissions.
 
 set -u
 
-# --- De share ------------------------------------------------------------------------------
+# --- Welke set is dit ------------------------------------------------------------------------
 #
-# \\acisafiles.file.core.windows.net\data\Public wordt smb://acisafiles.file.core.windows.net
-# /data/Public. In drie velden, want SMB kent maar één sharelaag: `data` is de share, `Public`
-# is een map dáárin. De mount en de rechten hangen aan de share; de submap is alleen het punt
-# waar je binnenkomt. SHARE_SUBPATH leeg laten mount de hele share.
+# Krijgen verschillende groepen verschillende shares, dan rol je dit bestand meerdere keren uit
+# met een andere SET_NAAM en een andere SHARES-lijst, en wijs je elke uitrol aan zijn eigen
+# groep toe.
+#
+# SET_NAAM maakt de helper, het LaunchAgent-label en de log uniek. Zonder dat zouden twee
+# uitrollen elkaars helper overschrijven en om hetzelfde label vechten — de laatste die draait
+# wint, en de andere groep raakt zijn schijf kwijt zonder dat iemand ziet waarom.
+#
+# Alleen letters, cijfers en koppeltekens.
+
+SET_NAAM="public"
+
+# --- De shares -----------------------------------------------------------------------------
+#
+# Eén regel per share, en meerdere mag: alles in deze lijst hoort bij dezelfde groep.
+#
+# Een kale sharenaam is het beste — die wordt de naam van het volume en dus de naam in de
+# Finder-zijbalk. Een submap mag ook ("data/Public"), maar dan kan Finder de mount niet aan een
+# share koppelen en toont hij de servernaam in plaats van de mapnaam.
+#
+# Elke share landt in /Volumes/<naam>.
 
 STORAGE_ACCOUNT="acisafiles"
-SHARE_NAME="data"
-SHARE_SUBPATH="Public"
+
+SHARES=(
+  "data/Public"
+)
 
 # --- Terugval op de storage account key ----------------------------------------------------
 #
@@ -62,10 +88,11 @@ SHARE_SUBPATH="Public"
 #
 # LET OP, en dit is geen formaliteit:
 #
-#   * Deze sleutel geeft toegang tot het HÉLE storage account, niet tot deze ene share. Bij
+#   * Deze sleutel geeft toegang tot het HÉLE storage account, niet tot één share. Bij
 #     acisafiles is dat hetzelfde account waar de AVD-omgeving op draait.
 #   * Er is geen identiteit per gebruiker. Iedereen die mount is dezelfde "gebruiker", dus
-#     rechten per persoon en herleidbaarheid in de logs bestaan niet.
+#     rechten per persoon en herleidbaarheid in de logs bestaan niet, en de share-level
+#     permissions in Azure doen niets.
 #   * Iedereen die de helper kan lezen heeft de sleutel — in Intune, en op het toestel.
 #
 # VUL HEM HIER NOOIT IN IN DE REPO; die staat publiek op GitHub. Deze waarde blijft in git op de
@@ -77,15 +104,16 @@ STORAGE_KEY=""
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
-LABEL="com.aci-europe.baseline.mount-azure-files"
-HELPER="/Library/Scripts/Baseline/mount-azure-files.sh"
+BASIS="mount-azure-files-${SET_NAAM}"
+LABEL="com.aci-europe.baseline.${BASIS}"
+HELPER="/Library/Scripts/Baseline/${BASIS}.sh"
 AGENT="/Library/LaunchAgents/$LABEL.plist"
 
 # Spatievrij, zodat Intune deze log met "Collect logs" kan ophalen. "Application Support" heeft
 # een spatie in de naam en is daarmee niet op te halen — precies op het moment dat je hem nodig
 # hebt. De helper logt in de thuismap van de gebruiker, want die draait per persoon.
 LOG_DIR="/Library/Logs/Baseline"
-LOG="$LOG_DIR/mount-azure-files-install.log"
+LOG="$LOG_DIR/${BASIS}-install.log"
 
 mkdir -p "$LOG_DIR"
 
@@ -97,8 +125,20 @@ log() {
 
 log "Gestart als $(id -un) (uid $(id -u)), macOS $(/usr/bin/sw_vers -productVersion)."
 
-if [ "$STORAGE_ACCOUNT" = "STORAGE-ACCOUNT-INVULLEN" ] || [ "$SHARE_NAME" = "SHARE-NAAM-INVULLEN" ]; then
-  log "Storage account of share staat nog op de placeholder — niets gedaan."
+case "$SET_NAAM" in
+  "" | *[!a-zA-Z0-9-]*)
+    log "SET_NAAM mag alleen letters, cijfers en koppeltekens bevatten en niet leeg zijn."
+    exit 1
+    ;;
+esac
+
+if [ "$STORAGE_ACCOUNT" = "STORAGE-ACCOUNT-INVULLEN" ]; then
+  log "Storage account staat nog op de placeholder — niets gedaan."
+  exit 1
+fi
+
+if [ "${#SHARES[@]}" -eq 0 ]; then
+  log "Geen shares opgegeven — niets te doen."
   exit 1
 fi
 
@@ -109,9 +149,9 @@ fi
 
 # --- De helper schrijven -------------------------------------------------------------------
 #
-# Eerst de instellingen, met %q zodat elk vreemd teken in de sleutel veilig wordt geciteerd.
-# Daarna de logica uit een letterlijk heredoc: daarin wordt niets geëxpandeerd, dus die tekst
-# komt er precies zo uit als hij hier staat.
+# Eerst de instellingen, met %q zodat elk vreemd teken in de sleutel of een sharenaam veilig
+# wordt geciteerd. Daarna de logica uit een letterlijk heredoc: daarin wordt niets geëxpandeerd,
+# dus die tekst komt er precies zo uit als hij hier staat.
 
 NIEUW="$(mktemp)"
 {
@@ -121,19 +161,19 @@ NIEUW="$(mktemp)"
   printf '# de eerstvolgende run overschrijft dit bestand.\n'
   printf '#\n'
   printf 'set -u\n'
+  printf 'BASIS=%q\n' "$BASIS"
   printf 'STORAGE_ACCOUNT=%q\n' "$STORAGE_ACCOUNT"
-  printf 'SHARE_NAME=%q\n' "$SHARE_NAME"
-  printf 'SHARE_SUBPATH=%q\n' "$SHARE_SUBPATH"
   printf 'STORAGE_KEY=%q\n' "$STORAGE_KEY"
+  printf 'SHARES=('
+  printf '%q ' "${SHARES[@]}"
+  printf ')\n'
   cat <<'HELPER_EINDE'
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
 LOG_DIR="$HOME/Library/Logs/Baseline"
-LOG="$LOG_DIR/mount-azure-files.log"
-FAVORIET_MARKER="$STATE_DIR/favoriet"
+LOG="$LOG_DIR/${BASIS}.log"
 
 SERVER="$STORAGE_ACCOUNT.file.core.windows.net"
-DOEL="smb://${SERVER}/${SHARE_NAME}${SHARE_SUBPATH:+/${SHARE_SUBPATH}}"
 
 mkdir -p "$STATE_DIR" "$LOG_DIR"
 
@@ -148,7 +188,7 @@ log() {
 # LET OP bij gebruik: wat hier draait komt op de achtergrond, en een achtergrondproces krijgt in
 # een niet-interactieve shell zijn stdin van /dev/null. Geef een commando dus nooit invoer via
 # een pipe of heredoc mee — dat komt niet aan, en het commando lijkt dan geslaagd terwijl het
-# niets heeft gedaan.
+# niets heeft gedaan. Dat kostte hier een dag zoeken.
 with_timeout() {
   local secs="$1"
   shift
@@ -167,24 +207,23 @@ with_timeout() {
   wait "$pid"
 }
 
-# Waar staat deze share nu gemount? NetFS kiest de naam in /Volumes zelf, dus opzoeken in plaats
-# van aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten. Zoeken op de
-# servernaam alleen: de bronregel van een NetFS-mount ziet er anders uit dan het pad dat wij
-# meegaven, en de FQDN van het storage account is specifiek genoeg.
+# Waar staat deze share gemount? NetFS kiest de naam in /Volumes zelf, dus opzoeken in plaats van
+# aannemen. Met sed en niet met awk, want een mountpad kan spaties bevatten. Met grep -F, want de
+# punten in een servernaam zijn anders jokertekens.
 huidig_mountpunt() {
   /sbin/mount 2>/dev/null |
-    /usr/bin/grep -i "$SERVER" |
+    /usr/bin/grep -iF "${SERVER}/$1" |
     /usr/bin/sed -n 's/.* on \(.*\) (.*/\1/p' |
     /usr/bin/head -1
 }
 
 # Na een geslaagde mount staat hij niet meteen in `mount`. Zonder even wachten meldt het script
-# "onbekend pad", zet het de favoriet niet, en denkt het bij de volgende netwerkwijziging dat er
-# niets gemount is — waarna macOS er een tweede naast hangt als /Volumes/<naam>-1.
+# "onbekend pad", en denkt het bij de volgende ronde dat er niets gemount is — waarna macOS er
+# een tweede naast hangt als /Volumes/<naam>-1.
 wacht_op_mountpunt() {
   local poging mp
   for poging in 1 2 3 4 5; do
-    mp="$(huidig_mountpunt)"
+    mp="$(huidig_mountpunt "$1")"
     if [ -n "$mp" ]; then
       printf '%s' "$mp"
       return 0
@@ -192,10 +231,6 @@ wacht_op_mountpunt() {
     sleep 1
   done
   return 1
-}
-
-is_mounted() {
-  [ -n "$(huidig_mountpunt)" ]
 }
 
 # Drie manieren, want ze kijken geen van drieën naar hetzelfde. klist -s is de nette check maar
@@ -214,6 +249,7 @@ has_ticket() {
 #
 # Vooraf vragen en niet gewoon proberen: alleen als dit lukt weten we dat NetFS geen
 # aanmeldvenster gaat opzetten, en dat is de voorwaarde om Kerberos via NetFS te mogen mounten.
+# Het bewijs geldt voor de hele server, dus dit hoeft maar één keer per ronde.
 has_service_ticket() {
   [ -x /usr/bin/kgetcred ] || return 1
   with_timeout 20 /usr/bin/kgetcred \
@@ -224,130 +260,115 @@ has_service_ticket() {
 # mount_smbfs moet zijn mountpunt zelf aanmaken en mag dat daar niet, wat "Operation not
 # permitted" oplevert. NetFS draait met de rechten die het wel mogen, net als Finder → Verbind
 # met server. En alleen wat in /Volumes staat, zet Finder in de zijbalk onder Locaties.
-#
-# De sleutel gaat via stdin naar osascript en niet als argument, dus hij staat niet in de
-# procestabel. Coderen hoeft niet: as user name / with password neemt de waarde zoals hij is.
 mount_via_netfs() {
-  if [ "${1:-}" != "sleutel" ]; then
-    with_timeout 60 /usr/bin/osascript -e "mount volume \"${DOEL}\"" >/dev/null 2>>"$LOG"
+  local share="$1" methode="$2"
+  local doel="smb://${SERVER}/${share}"
+
+  if [ "$methode" != "sleutel" ]; then
+    with_timeout 60 /usr/bin/osascript -e "mount volume \"${doel}\"" >/dev/null 2>>"$LOG"
     return $?
   fi
 
-  # Het script gaat via een tijdelijk bestand en niet via stdin. Dat is geen stijlkeuze: een
-  # achtergrondproces krijgt in een niet-interactieve shell zijn stdin van /dev/null, en
-  # with_timeout draait alles op de achtergrond. Met een heredoc kreeg osascript dus een leeg
-  # script, deed niets, en gaf 0 terug — een mount die slaagt zonder te mounten.
-  #
-  # Ook niet via -e: dan staat de sleutel in de procestabel. Het bestand is 600 en wordt meteen
-  # weer weggegooid; de helper zelf draagt die sleutel toch al.
+  # Het script gaat via een tijdelijk bestand en niet via stdin: with_timeout draait alles op de
+  # achtergrond en daar valt stdin weg. Ook niet via -e, want dan staat de sleutel in de
+  # procestabel. Het bestand is 600 en meteen weer weg; de helper draagt die sleutel toch al.
   local scpt rc
   scpt="$(mktemp)" || return 1
   chmod 600 "$scpt"
   printf 'mount volume "%s" as user name "%s" with password "%s"\n' \
-    "$DOEL" "$STORAGE_ACCOUNT" "$STORAGE_KEY" >"$scpt"
+    "$doel" "$STORAGE_ACCOUNT" "$STORAGE_KEY" >"$scpt"
   with_timeout 60 /usr/bin/osascript "$scpt" >/dev/null 2>>"$LOG"
   rc=$?
   rm -f "$scpt"
   return $rc
 }
 
-# Het mountpunt in de Favorieten bovenin de Finder-zijbalk zetten — als dat kan.
-#
-# Op macOS 26 kan het niet. `sfltool` kent alleen csinfo, dumpbtm, archive, clear, resetbtm,
-# resetlist, list en list-info; er is geen `add-item`. Oudere bronnen noemen dat commando wel,
-# maar deze macOS accepteert het niet en schrijft alleen zijn usage naar de log.
-#
-# Daarom eerst kijken of het subcommando bestaat, en anders stil overslaan. Zonder die controle
-# meldde dit script "In de Finder-favorieten gezet" terwijl er niets gebeurde — een regel in de
-# log die iets bevestigt wat niet waar is, is erger dan geen regel.
-#
-# Wat wél werkt is de mount zelf: die staat in /Volumes en verschijnt daarmee in de zijbalk
-# onder **Locaties**. Het verschil met Favorieten is dat Locaties verdwijnt bij uitwerpen. Wil je
-# echt een vaste favoriet, dan is `mysides` het enige werkende gereedschap — en dat is een binary
-# van derden die je zelf moet uitrollen en ondertekenen.
-zet_in_favorieten() {
-  local mp="$1" url
-  case "$mp" in
-    /*) ;;
-    *) return 0 ;;
-  esac
-  [ -x /usr/bin/sfltool ] || return 0
-  /usr/bin/sfltool 2>&1 | grep -q "add-item" || return 0
-  if [ -f "$FAVORIET_MARKER" ] && [ "$(cat "$FAVORIET_MARKER" 2>/dev/null)" = "$mp" ]; then
-    return 0
-  fi
-  url="file://${mp// /%20}"
-  if /usr/bin/sfltool add-item com.apple.LSSharedFileList.FavoriteItems "$url" >>"$LOG" 2>&1; then
-    printf '%s' "$mp" >"$FAVORIET_MARKER"
-    log "In de Finder-favorieten gezet: ${mp}"
-  fi
-}
-
-mount_share() {
-  if is_mounted; then
-    return 0
-  fi
-
-  # Kerberos eerst: dat is de vorm met identiteit per gebruiker, de sleutel is de terugval.
-  # Zodra Entra Kerberos ergens wel aanstaat, neemt Kerberos vanzelf over.
-  local methoden=()
-  if has_ticket; then
-    if has_service_ticket; then
-      methoden+=("kerberos")
-    elif [ "${QUIET:-0}" -ne 1 ]; then
-      log "Wel een TGT, maar geen servicebewijs voor cifs/${SERVER} — Entra Kerberos staat niet aan op dit storage account (AADSTS700016)."
-    fi
-  elif [ "${QUIET:-0}" -ne 1 ]; then
-    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM. Controleer met: app-sso platform -s"
-  fi
-  if [ -n "$STORAGE_KEY" ]; then
-    methoden+=("sleutel")
-  fi
-  if [ "${#methoden[@]}" -eq 0 ]; then
-    return 1
-  fi
-
+# Eén share mounten. $1 is de share, $2 de lijst methoden die deze ronde mogen.
+mount_een() {
+  local share="$1"
+  shift
   local methode mp
-  for methode in "${methoden[@]}"; do
-    mount_via_netfs "$methode"
+
+  if [ -n "$(huidig_mountpunt "$share")" ]; then
+    return 0
+  fi
+
+  for methode in "$@"; do
+    mount_via_netfs "$share" "$methode"
     case $? in
       0) ;;
       124)
-        log "Mount (${methode}) liep vast en is na 60s afgebroken — server onbereikbaar, of er wacht een aanmeldvenster."
+        log "${share}: mount (${methode}) liep vast en is na 60s afgebroken — server onbereikbaar, of er wacht een aanmeldvenster."
         return 1
         ;;
       *)
-        log "Mount met ${methode} mislukt."
+        log "${share}: mount met ${methode} mislukt."
         continue
         ;;
     esac
 
-    mp="$(wacht_op_mountpunt)"
+    mp="$(wacht_op_mountpunt "$share")"
     if [ -z "$mp" ]; then
-      # De mount gaf geen fout maar staat na vijf seconden nergens in `mount`. Dat is geen
-      # geslaagde mount, dus ook niet zo melden.
-      log "Mount met ${methode} meldde geen fout, maar de share staat nergens gemount."
+      log "${share}: mount met ${methode} meldde geen fout, maar de share staat nergens gemount."
       return 1
     fi
     if [ "$methode" = "sleutel" ]; then
-      log "Gemount met de storage account key op ${mp} — let op: toegang zonder identiteit per gebruiker."
+      log "${share}: gemount met de storage account key op ${mp} — toegang zonder identiteit per gebruiker."
     else
-      log "Gemount met Kerberos op ${mp}."
+      log "${share}: gemount met Kerberos op ${mp}."
     fi
-    zet_in_favorieten "$mp"
     return 0
   done
 
   return 1
 }
 
-# QUIET onderdrukt de regels over een ontbrekend ticket. De agent vuurt bij elke
-# netwerkwijziging, en zonder dit zou de log volstromen met dezelfde melding.
+# Welke methoden mogen we deze ronde proberen? Dat hangt aan de server en niet aan de share, dus
+# één keer bepalen en daarna voor elke share hergebruiken. Kerberos eerst: dat is de vorm mét
+# identiteit per gebruiker, de sleutel is de terugval. Zodra Entra Kerberos ergens wél aanstaat,
+# neemt Kerberos vanzelf over.
+bepaal_methoden() {
+  METHODEN=()
+  if has_ticket; then
+    if has_service_ticket; then
+      METHODEN+=("kerberos")
+    elif [ "${QUIET:-0}" -ne 1 ]; then
+      log "Wel een TGT, maar geen servicebewijs voor cifs/${SERVER} — Entra Kerberos staat niet aan op dit storage account (AADSTS700016)."
+    fi
+  elif [ "${QUIET:-0}" -ne 1 ]; then
+    log "Geen ticket voor KERBEROS.MICROSOFTONLINE.COM. Controleer met: app-sso platform -s"
+  fi
+  [ -n "$STORAGE_KEY" ] && METHODEN+=("sleutel")
+}
+
+mount_alles() {
+  local share fout=0 tedoen=0
+
+  # Staat alles er al? Dan niets doen en niets loggen. De agent vuurt bij elke netwerkwijziging
+  # en elke vijf minuten; zonder deze afslag zou de log volstromen.
+  for share in "${SHARES[@]}"; do
+    [ -n "$(huidig_mountpunt "$share")" ] || tedoen=1
+  done
+  [ "$tedoen" -eq 0 ] && return 0
+
+  bepaal_methoden
+  if [ "${#METHODEN[@]}" -eq 0 ]; then
+    return 1
+  fi
+
+  for share in "${SHARES[@]}"; do
+    mount_een "$share" "${METHODEN[@]}" || fout=1
+  done
+  return $fout
+}
+
+# QUIET onderdrukt de regels over een ontbrekend ticket. De agent vuurt vaak, en zonder dit zou
+# de log volstromen met dezelfde melding.
 if [ "${1:-}" = "--stil" ]; then
-  QUIET=1 mount_share
+  QUIET=1 mount_alles
 else
-  log "Handmatig gestart."
-  mount_share
+  log "Handmatig gestart voor: ${SHARES[*]}"
+  mount_alles
 fi
 exit $?
 HELPER_EINDE
@@ -369,7 +390,7 @@ if ! cmp -s "$NIEUW" "$HELPER"; then
   mv "$NIEUW" "$HELPER"
   chown root:wheel "$HELPER"
   chmod 755 "$HELPER"
-  log "Helper geschreven: ${HELPER}"
+  log "Helper geschreven voor ${#SHARES[@]} share(s): ${SHARES[*]}"
   HERLADEN=1
 else
   rm -f "$NIEUW"
@@ -386,8 +407,7 @@ fi
 # Dat laatste had ik eerst weggelaten omdat pollen lelijk is naast WatchPaths. Dat was fout: een
 # SMB-mount raakt ook los zonder dat er iets aan het netwerk verandert — na slaapstand, of als de
 # server de verbinding laat vallen. Dan vuurt WatchPaths niet en blijft de share weg tot de
-# volgende login. Vijf minuten kost niets: staat de share er nog, dan stopt het script meteen, en
-# met QUIET schrijft het daar niets over in de log.
+# volgende login. Vijf minuten kost niets: staat alles er nog, dan stopt de helper meteen.
 
 read -r -d '' PLIST <<PLIST_EINDE || true
 <?xml version="1.0" encoding="UTF-8"?>
@@ -429,7 +449,7 @@ fi
 # --- Meteen laden voor wie er nu achter zit --------------------------------------------------
 #
 # Bij de volgende login laadt macOS de agent vanzelf. Maar er zit nu iemand achter dit toestel,
-# en die wil zijn schijf niet pas morgen. Root mag laden in de grafische sessie van de
+# en die wil zijn schijven niet pas morgen. Root mag laden in de grafische sessie van de
 # console-gebruiker.
 
 if [ "$HERLADEN" -eq 0 ]; then
@@ -444,14 +464,14 @@ if [ -n "$CONSOLE_GEBRUIKER" ] && [ "$CONSOLE_GEBRUIKER" != "root" ]; then
   if [ -n "$CONSOLE_UID" ]; then
     /bin/launchctl bootout "gui/${CONSOLE_UID}/${LABEL}" 2>/dev/null
     if /bin/launchctl bootstrap "gui/${CONSOLE_UID}" "$AGENT" 2>>"$LOG"; then
-      log "LaunchAgent geladen voor ${CONSOLE_GEBRUIKER}. Het resultaat van de mount staat in ~/Library/Logs/Baseline/mount-azure-files.log van die gebruiker."
+      log "LaunchAgent geladen voor ${CONSOLE_GEBRUIKER}. Het resultaat staat in ~/Library/Logs/Baseline/mount-azure-files.log van die gebruiker."
     else
       log "LaunchAgent laden voor ${CONSOLE_GEBRUIKER} mislukt; hij gaat vanzelf bij de volgende login."
     fi
   fi
 fi
 
-# Bewust altijd 0. Of de mount lukt is hier niet te zien — dat gebeurt in de sessie van de
+# Bewust altijd 0. Of de mounts lukken is hier niet te zien — dat gebeurt in de sessie van de
 # gebruiker. Wat dit script kon doen staat hierboven.
 log "Klaar."
 exit 0

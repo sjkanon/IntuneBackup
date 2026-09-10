@@ -241,6 +241,46 @@ stierf de LaunchAgent met `exit 126 — cannot execute binary file`. Genereren m
 aanname over hoe het bestand wordt aangeroepen, en er zit nu een `bash -n` overheen vóór de
 helper in gebruik gaat.
 
+### Meer dan één share, of meer dan één groep
+
+Bovenin het script staan twee velden die samen bepalen wat deze uitrol doet:
+
+```bash
+SET_NAAM="public"
+SHARES=(
+  "data/Public"
+)
+```
+
+**Meerdere shares voor dezelfde groep?** Zet ze onder elkaar in `SHARES`. Eén helper, één
+LaunchAgent, één log.
+
+**Verschillende groepen, verschillende shares?** Rol dit bestand dan **twee keer uit** met een
+andere `SET_NAAM`, en wijs elke uitrol aan zijn eigen groep toe. `SET_NAAM` maakt de helper,
+het LaunchAgent-label en de log uniek:
+
+| `SET_NAAM` | helper | label |
+|---|---|---|
+| `public` | `/Library/Scripts/Baseline/mount-azure-files-public.sh` | `…baseline.mount-azure-files-public` |
+| `media` | `/Library/Scripts/Baseline/mount-azure-files-media.sh` | `…baseline.mount-azure-files-media` |
+
+Zonder dat onderscheid overschrijven twee uitrollen elkaars helper en vechten ze om hetzelfde
+label — de laatste die draait wint, en de andere groep raakt zijn schijf kwijt zonder dat iemand
+ziet waarom.
+
+Wat je **niet** moet doen is het script kopiëren en de kopie aanpassen. Dan moet elke fix twee
+keer, en dat gaat een keer mis.
+
+#### Wat een groepstoewijzing wél en niet regelt
+
+Met de **sleutel-terugval** bepaalt de toewijzing alleen wie de share gemount *krijgt* — niet wie
+erbij *kan*. Die sleutel opent het hele storage account, dus iemand met een Mac uit de ene groep
+kan met de hand net zo goed de share van de andere groep mounten.
+
+Echte scheiding per groep krijg je pas met **Kerberos**: dan geldt de share-level permission in
+Azure, en levert de KDC domweg geen ticket voor een share waar je niet bij mag. Zolang de sleutel
+in het spel is, is de groepsindeling een gemak en geen grens.
+
 ### Instellingen in Intune
 
 Devices → macOS → Shell scripts → Add.
