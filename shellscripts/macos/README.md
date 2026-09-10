@@ -337,6 +337,36 @@ Dat geldt niet alleen voor Macs. Microsoft stelt bij Entra DS als voorwaarde:
 > unimpeded network connectivity to the domain controllers […] Usually this connectivity
 > requires either site-to-site or point-to-site VPN.
 
+#### Waarom het met een domain-joined toestel wél werkt
+
+Er zijn drie Kerberos-werelden in het spel, en het misverstand zit in de aanname dat ze op
+elkaar aansluiten.
+
+| | Wie is de KDC | Wat is het storage account daar |
+|---|---|---|
+| **Klassiek AD** (on-prem AD DS of Entra DS) | echte domeincontrollers | een account in dát domein, met de SPN `cifs/<naam>.file.core.windows.net` |
+| **Entra Kerberos** | Entra ID zelf, via een KDC-proxy over HTTPS, realm `KERBEROS.MICROSOFTONLINE.COM` | een app-registratie met identifier `cifs/<naam>.file.core.windows.net` |
+
+Een **domain-joined** toestel werkt in de eerste wereld: het is lid van dat domein, vindt de
+domeincontrollers, haalt daar zijn TGT en vraagt bij diezelfde controller het `cifs/`-bewijs.
+Die kent het, want gebruiker en storage account staan in dezelfde directory. Dát het toestel
+óók Entra-joined is, doet daar niets aan mee — het is de domeinlidmaatschap die het werk doet.
+
+Een **Entra-joined toestel onder Intune** heeft een ticket uit de tweede wereld, en het storage
+account vertrouwt de eerste. Ander realm, andere KDC, en geen vertrouwensrelatie ertussen.
+Vandaar `AADSTS700016`: je vraagt de cloud-KDC naar een dienst waar hij nooit van gehoord heeft.
+
+En de voor de hand liggende tegenwerping — Entra ID kán toch on-premises tickets uitgeven, dat
+is `tgt_ad` — klopt, maar alleen voor een échte on-premises AD DS, waar je met
+`Set-AzureADKerberosServer` een vertrouwensobject in dat domein zet. Op een beheerd domein kan
+dat niet; Microsoft daarover, op de vraag of Cloud Kerberos Trust met Entra DS kan:
+
+> No, that wouldnt work, the trust is with Azure AD, not the Azure AD DS managed domain.
+
+En zelfs áls het kon: Cloud Kerberos Trust haalt de domeincontroller weg bij het **aanmelden**,
+niet bij het benaderen van een bron. Voor het `cifs/`-bewijs moet je alsnog bij een
+domeincontroller zijn. De VPN-eis blijft dus hoe dan ook staan.
+
 Een Entra-joined laptop die door Intune wordt beheerd is niet domain-joined en heeft vanaf
 internet geen zicht op die domeincontrollers. Met Entra DS als identity source bedient een
 storage account dus in de praktijk alleen VM's in of aan die VNet — geen enkele laptop uit de
