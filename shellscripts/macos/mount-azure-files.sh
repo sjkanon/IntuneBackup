@@ -144,6 +144,11 @@ log() {
 # macOS heeft geen timeout-commando; dat zit in coreutils en staat er niet standaard op. Nodig
 # omdat een mount lang kan blijven wachten op een server die niet antwoordt, en omdat NetFS bij
 # een afgewezen aanmelding een dialoog opzet waar uit een achtergrondagent niemand op reageert.
+#
+# LET OP bij gebruik: wat hier draait komt op de achtergrond, en een achtergrondproces krijgt in
+# een niet-interactieve shell zijn stdin van /dev/null. Geef een commando dus nooit invoer via
+# een pipe of heredoc mee — dat komt niet aan, en het commando lijkt dan geslaagd terwijl het
+# niets heeft gedaan.
 with_timeout() {
   local secs="$1"
   shift
@@ -227,9 +232,23 @@ mount_via_netfs() {
     with_timeout 60 /usr/bin/osascript -e "mount volume \"${DOEL}\"" >/dev/null 2>>"$LOG"
     return $?
   fi
-  with_timeout 60 /usr/bin/osascript >/dev/null 2>>"$LOG" <<OSA
-mount volume "${DOEL}" as user name "${STORAGE_ACCOUNT}" with password "${STORAGE_KEY}"
-OSA
+
+  # Het script gaat via een tijdelijk bestand en niet via stdin. Dat is geen stijlkeuze: een
+  # achtergrondproces krijgt in een niet-interactieve shell zijn stdin van /dev/null, en
+  # with_timeout draait alles op de achtergrond. Met een heredoc kreeg osascript dus een leeg
+  # script, deed niets, en gaf 0 terug — een mount die slaagt zonder te mounten.
+  #
+  # Ook niet via -e: dan staat de sleutel in de procestabel. Het bestand is 600 en wordt meteen
+  # weer weggegooid; de helper zelf draagt die sleutel toch al.
+  local scpt rc
+  scpt="$(mktemp)" || return 1
+  chmod 600 "$scpt"
+  printf 'mount volume "%s" as user name "%s" with password "%s"\n' \
+    "$DOEL" "$STORAGE_ACCOUNT" "$STORAGE_KEY" >"$scpt"
+  with_timeout 60 /usr/bin/osascript "$scpt" >/dev/null 2>>"$LOG"
+  rc=$?
+  rm -f "$scpt"
+  return $rc
 }
 
 # Het mountpunt in de Favorieten bovenin de Finder-zijbalk zetten — als dat kan.
