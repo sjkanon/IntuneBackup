@@ -9,7 +9,7 @@ Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macO
 | Platform | macOS |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-038-MACDFileVault` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault |
 | Bestand | [`Baseline_MAC_D_FileVault.json`](Baseline_MAC_D_FileVault.json) |

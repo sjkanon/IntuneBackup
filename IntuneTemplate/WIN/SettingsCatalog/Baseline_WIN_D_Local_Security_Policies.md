@@ -14,9 +14,9 @@ De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthentic
 | Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Local Security Policies |
 | Bestand | [`Baseline_WIN_D_Local_Security_Policies.json`](Baseline_WIN_D_Local_Security_Policies.json) |
 
-> De eigen machineinactivitylimit_v2 blijft staan; OIB regelt de schermvergrendeling via Power and Device Lock.
+> De eigen machineinactivitylimit_v2 blijft staan; OIB regelt de schermvergrendeling via Power and Device Lock. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat [Baseline] - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).
 
-## Instellingen — 24
+## Instellingen — 25
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -47,6 +47,7 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_useadminapprovalmode` | 1 |
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_virtualizefileandregistrywritefailurestoperuserlocations` | 1 |
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2` | 900 |
+| `device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_restrictntlm_auditincomingntlmtraffic` | 2 |
 
 ---
 

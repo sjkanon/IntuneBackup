@@ -88,8 +88,8 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
-| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 108 |
-| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 15 |
+| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 98 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 25 |
 | 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 10 |
 | 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 9 |
 | 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 7 |
@@ -371,10 +371,17 @@ policytypes is de bestandsnaam de policynaam en is de inhoud wél een kale array
 .\scripts\Set-BaselineAssignment.ps1 -GroupId '<object-id>' -Exclude
 ```
 
-Zet in één keer een assignment op alle baseline-policies, over de vijf policytypes heen (elk
-met een eigen Graph-endpoint). `-Scope D|U` filtert op de scope in de naam, `-Platform` op het
-platform. Policies die de naamconventie niet volgen vallen buiten élk filter; het script
-waarschuwt daar expliciet over in plaats van ze stil over te slaan.
+Zet in één keer een assignment op de baseline-policies die bij dat doel horen, over de vijf
+policytypes heen (elk met een eigen Graph-endpoint). Welke dat zijn volgt uit de fase, net als
+bij de CIPP-pakketten: `-AllDevices` en `-AllUsers` nemen fase 1 met dat doel uit
+`_assignments.json`, `-GroupName 'SEC-Baseline-Pilot'` neemt de pilot, en een groep uit
+`faseGroep` neemt de fase 4-policies van die groep. Fase 3 en 5 wijst het script nooit vanzelf
+toe — tot september 2026 deed `-AllDevices` dat wel, alternatieven en pilot incluis.
+`-IgnoreFase` neemt toch alles, voor een testtenant; `-Exclude` gaat altijd op alle policies.
+
+`-Scope D|U` filtert daarna op de scope in de naam, `-Platform` op het platform. Policies die
+de naamconventie niet volgen vallen buiten élk filter; het script waarschuwt daar expliciet
+over in plaats van ze stil over te slaan.
 
 App Protection is een geval apart: je vindt de policies via `managedAppPolicies`, maar
 toewijzen kan alleen via de platformspecifieke collectie (`iosManagedAppProtections` /
@@ -421,16 +428,12 @@ De rest van de baseline is inhoudelijk conservatief, maar deze policies verander
 gebruikers of oude systemen direct raken. OpenIntuneBaseline zegt hetzelfde: het is een
 startpunt, geen kant-en-klare productieconfiguratie.
 
-| Policy | Waarom |
-|---|---|
-| `WIN - D - Disable NTLM` | breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken |
-| `WIN - D - Administrator Protection` | Windows 11 24H2+; verandert het UAC-gedrag van beheerders |
-| `WIN - D - Device Guard and Credential Guard` | vraagt een herstart en kan oude drivers blokkeren |
-| `WIN - D - In-Box App Removal` | verwijdert ingebouwde apps; controleer of niemand ze gebruikt |
-| `WIN - D - Windows Hello for Business` | vereist een TPM en een PIN van minimaal 6 tekens |
-| `WIN - D - Script File Associations` | .js/.vbs/.hta openen voortaan in Kladblok |
-| `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |
-| `MAC - D - FileVault` | versleutelt de schijf; regel eerst de herstelsleutel-escrow |
+Dat is fase 2, en de lijst staat — met per policy het waarom — in
+[OVERZICHT.md](OVERZICHT.md#eerst-in-een-pilot). Hij wordt gegenereerd uit `faseWaarom` in het
+manifest. Tot september 2026 stond hier een eigen lijst, en die liep uit de pas: negen van de
+policies erop stonden in fase 1 en rolden via `Baseline-Devices` gewoon naar alle apparaten.
+Windows Hello for Business gaat daarbij als paar de pilot in, device én user — de een in de
+pilot en de ander op iedereen maakt de pilot zinloos.
 
 ## Een backup uit een tenant terugbrengen naar de bron
 

@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 24,
+    "settingCount": 25,
     "settings": [
         {
             "id": "0",
@@ -346,6 +346,20 @@
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
                     "settingValueTemplateReference": null,
                     "value": 900
+                }
+            }
+        },
+        {
+            "id": "24",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_restrictntlm_auditincomingntlmtraffic",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_restrictntlm_auditincomingntlmtraffic_2",
+                    "children": []
                 }
             }
         }

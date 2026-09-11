@@ -9,7 +9,7 @@ Zet virtualisatie-gebaseerde beveiliging, Credential Guard en geheugenintegritei
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard` |
 | Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Device Guard, Credential Guard and HVCI |
 | Bestand | [`Baseline_WIN_D_Device_Guard_and_Credential_Guard.json`](Baseline_WIN_D_Device_Guard_and_Credential_Guard.json) |

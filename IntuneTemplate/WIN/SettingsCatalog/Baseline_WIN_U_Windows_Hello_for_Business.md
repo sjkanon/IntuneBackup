@@ -9,7 +9,7 @@ Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde ei
 | Platform | Windows |
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Users |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-114-UWindowsHelloForBusiness` |
 | Bron | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, omgezet naar user-scope |
 | Bestand | [`Baseline_WIN_U_Windows_Hello_for_Business.json`](Baseline_WIN_U_Windows_Hello_for_Business.json) |

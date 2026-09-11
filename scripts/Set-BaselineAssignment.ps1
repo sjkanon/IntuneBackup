@@ -13,6 +13,12 @@ De policylijst komt standaard uit IntuneTemplate/, niet uit een naamfilter op "[
 Dat is bewust: een policy die de prefix (nog) niet draagt zou stilzwijgend worden
 overgeslagen. Met -Name kun je een eigen lijst opgeven.
 
+Welke policies bij het doel horen volgt uit de fase in _manifest.json, dezelfde afleiding als
+de CIPP-pakketten: -AllDevices en -AllUsers nemen fase 1 met dat doel uit _assignments.json,
+-GroupName 'SEC-Baseline-Pilot' neemt fase 2, en -GroupName met een `faseGroep` neemt de
+fase 4-policies van die groep. Fase 3 en 5 wijst dit script nooit vanzelf toe. Een
+uitsluiting (-Exclude) gaat wél op alle policies: die haalt alleen iets weg.
+
 Assignments worden standaard AANGEVULD, niet vervangen. Graph's /assign-endpoint overschrijft
 namelijk altijd de volledige lijst, dus dit script leest eerst de bestaande assignments en
 POST't de samenvoeging. Met -Replace gooi je de bestaande juist weg.
@@ -46,6 +52,11 @@ Handig om een nieuw platform apart uit te rollen zonder de Windows-baseline aan 
 
 .PARAMETER Replace
 Vervangt bestaande assignments in plaats van ze aan te vullen.
+
+.PARAMETER IgnoreFase
+Neemt alle templates uit IntuneTemplate/, ongeacht hun fase. Alleen voor een testtenant: een
+fase 5-policy naast zijn tegenhanger levert een Conflict op, waarna Intune de betwiste
+instelling door géén van beide toepast.
 
 .PARAMETER FilterId
 Object-id van een assignmentfilter dat op de assignment gezet wordt.
@@ -102,6 +113,8 @@ param(
     [string]$Platform = 'All',
 
     [switch]$Replace,
+
+    [switch]$IgnoreFase,
 
     [string]$FilterId,
 
@@ -205,12 +218,56 @@ $target['deviceAndAppManagementAssignmentFilterId'] = if ($FilterId) { $FilterId
 $target['deviceAndAppManagementAssignmentFilterType'] = if ($FilterType) { $FilterType } else { 'none' }
 
 # --- policylijst bepalen -------------------------------------------------------------
+# Standaard volgt de lijst de fase in _manifest.json, niet "alles wat in IntuneTemplate/ staat".
+# Zonder dat onderscheid zet -AllDevices ook de pilot, de wachtkamer en de alternatieven op alle
+# apparaten — en een fase 5-policy naast zijn tegenhanger levert een Conflict op, waarna Intune
+# de betwiste instelling door géén van beide toepast. Dezelfde afleiding als packageFor() in
+# scripts/lib/templates.js, zodat CIPP en dit script hetzelfde naar hetzelfde doel uitrollen:
+# fase 1 staat met zijn doel in _assignments.json, fase 2 hoort op de pilotgroep, fase 4 op zijn
+# `faseGroep`, en fase 3 en 5 worden door niets toegewezen.
+$PilotGroup = 'SEC-Baseline-Pilot'
+
 if ($Name) {
     $wanted = $Name
 } else {
     $templateDir = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate'
     if (-not (Test-Path $templateDir)) { throw "IntuneTemplate/ niet gevonden op $templateDir — geef -Name mee om zonder de repo te draaien." }
-    $wanted = @(Get-TemplateDisplayName -TemplateDir $templateDir)
+
+    if ($IgnoreFase -or $Exclude) {
+        # Een uitsluiting op elke baseline-policy kan geen kwaad: die haalt alleen iets weg.
+        $wanted = @(Get-TemplateDisplayName -TemplateDir $templateDir)
+    } else {
+        $manifest = Get-Content -LiteralPath (Join-Path $templateDir '_manifest.json') -Raw | ConvertFrom-Json
+        $assigned = Get-Content -LiteralPath (Join-Path $templateDir '_assignments.json') -Raw | ConvertFrom-Json
+        $assignedTo = {
+            param([string]$TargetType)
+            $assigned.PSObject.Properties |
+                Where-Object { @($_.Value.target.'@odata.type') -contains "#microsoft.graph.$TargetType" } |
+                ForEach-Object Name
+        }
+
+        $wanted = @(switch ($PSCmdlet.ParameterSetName) {
+            'AllDevices' { & $assignedTo 'allDevicesAssignmentTarget' }
+            'AllUsers'   { & $assignedTo 'allLicensedUsersAssignmentTarget' }
+            'GroupName'  {
+                $manifest.policies |
+                    Where-Object {
+                        ($_.fase -eq 2 -and $GroupName -eq $PilotGroup) -or
+                        ($_.fase -eq 4 -and (($_.faseGroep -split ' \(')[0].Trim()) -eq $GroupName)
+                    } |
+                    ForEach-Object displayName
+            }
+            'GroupId' {
+                throw "Met alleen -GroupId is niet te zeggen welke fase bij die groep hoort. Gebruik -GroupName, geef de policies op met -Name, of neem met -IgnoreFase alles."
+            }
+        })
+
+        if ($wanted.Count -eq 0) {
+            $known = @($PilotGroup) + @($manifest.policies | Where-Object { $_.fase -eq 4 } | ForEach-Object { ($_.faseGroep -split ' \(')[0].Trim() }) | Sort-Object -Unique
+            throw "Geen policy hoort volgens de fase bij dit doel. Groepen die de fase kent: $($known -join ', '). Voor een andere groep: -Name of -IgnoreFase."
+        }
+        Write-Host "Policylijst volgens de fase in _manifest.json ($($wanted.Count) policies)" -ForegroundColor Cyan
+    }
 }
 if ($wanted.Count -eq 0) { throw 'Geen policynamen om toe te wijzen.' }
 

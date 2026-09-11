@@ -10,7 +10,7 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 |---|---:|
 | Policies | 149 |
 | Baseline-checks | 131 |
-| Zonder toewijzing (bewust) | 41 |
+| Zonder toewijzing (bewust) | 51 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
@@ -118,7 +118,7 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | 3 | Vervangen | Windows Firewall en Office Updates wisselen van policytype — handwerk |
 | 4 | Opheffen | Network Security, Windows Search, System Services, OneDrive KFM verwijderen |
 | 5 | Uitrollen | de nieuwe policies via CIPP of `Start-IntuneRestoreConfig` |
-| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` |
+| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |
 | 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |
 
 > **De baseline-check is hier geen vangnet.** De checks vergelijken op inhoud, niet op naam.
@@ -127,24 +127,44 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 
 ## Eerst in een pilot
 
+Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `Baseline-Pilot` uit naar
+`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
+verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.
+
 | Policy | Waarom |
 |---|---|
-| `WIN - D - Disable NTLM` | breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken |
-| `WIN - D - Device Guard and Credential Guard` | vraagt een herstart en kan oude stuurprogramma's blokkeren |
-| `WIN - D - Administrator Protection` | Windows 11 24H2+; verandert het UAC-gedrag van beheerders |
-| `WIN - D - In-Box App Removal` | verwijdert ingebouwde apps; controleer of niemand ze gebruikt |
-| `WIN - D - Windows Hello for Business` | vereist een TPM en een PIN van minimaal zes tekens |
-| `WIN - D - Script File Associations` | .js, .vbs en .hta openen voortaan in Kladblok |
-| `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |
-| `MAC - D - FileVault` | versleutelt de schijf; regel eerst de escrow van de herstelsleutel |
-| `MAC - D - Software Updates` | declaratief updatebeleid vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet |
-| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | vergrendelde inschrijving is na de inschrijving alleen met een wipe terug te draaien |
+| `WIN - D - Access Control` | Gebruikers moeten hun volledige naam typen in plaats van te klikken, en zien een banner. Pas de bannertekst eerst aan op de eigen organisatienaam. |
+| `WIN - D - Account Lockout` | De machine-drempel zet een apparaat na tien mislukte pogingen in BitLocker-herstel. Dat is recoverable (de sleutel staat in Entra ID) maar levert een helpdeskvraag op; kijk in de pilot hoe vaak het gebeurt. |
+| `WIN - D - Administrator Protection` | Verandert hoe een beheerder werkt: geen permanent verhoogde rechten meer, maar per handeling een bevestiging. Scripts en tools die stil op beheerdersrechten leunen merken dat. Windows 11 24H2 en hoger; op oudere builds doet hij niets. |
+| `WIN - D - Cryptography` | Een intern systeem dat alleen TLS 1.0/1.1 spreekt wordt onbereikbaar. Dat is de bedoeling, maar het moet bekend zijn. |
+| `WIN - D - Device Guard and Credential Guard` | Vraagt een herstart, en geheugenintegriteit (HVCI) laadt geen stuurprogramma's die er niet op gebouwd zijn — denk aan oude VPN-, printer- en dockdrivers. Kijk in de pilot of alles nog start. |
+| `WIN - D - Disable NTLM` | Weigert alle NTLM, inkomend en uitgaand. Wat niet via Kerberos kan breekt: toepassingen die op IP-adres verbinden, apparaten buiten het domein, en shares waarvoor het apparaat geen Kerberos-ticket krijgt — een Entra-joined apparaat dat een share op Entra Domain Services opent valt terug op NTLM. Lees vóór de pilot op een paar Windows 11 24H2-apparaten Microsoft-Windows-NTLM/Operational (4020/4021 uitgaand, 4022/4023 inkomend): die logging staat daar standaard aan en laat zien wat er zou breken. |
+| `WIN - D - Enrollment Hardening` | Raakt de eerste installatie van een apparaat, niet een draaiend apparaat. Test op één Autopilot-toestel: zonder netwerk komt de gebruiker niet verder, en dat is de bedoeling — maar het moet wel kloppen met hoe apparaten bij jullie worden uitgerold. |
+| `WIN - D - In-Box App Removal` | Verwijdert ingebouwde apps, ook van apparaten die al in gebruik zijn. Kijk in de pilot of iemand er een mist. |
+| `WIN - D - Kernel DMA Protection` | Een dock of eGPU zonder DMA-remapping werkt niet meer. Test met de docks die in de vloot zitten. |
+| `WIN - D - Logon Hardening` | Gebruikers moeten voortaan CTRL+ALT+DEL indrukken vóór het aanmeldscherm. Communiceer dat vóór de brede uitrol. |
+| `WIN - D - Printing Hardening` | Windows Protected Print laat printers vallen die geen Mopria-driver hebben. Inventariseer de printervloot eerst. |
+| `WIN - D - Remote Access Hardening` | Controleer of geen beheerscript of monitoringtool op winrs leunt. Enter-PSSession en Invoke-Command blijven werken, winrs niet. |
+| `WIN - D - Removable Storage` | Schrijven naar USB-sticks, externe schijven en telefoons wordt geblokkeerd, en dat merkt een gebruiker meteen. Let op: tot deze policy breed uitrolt is verwisselbare opslag nergens beperkt — BitLocker laat removabledrivesrequireencryption bewust uit, omdat deze blokkade dat afdekt. |
+| `WIN - D - Script File Associations` | Dubbelklikken op een .js-, .vbs- of .hta-bestand opent voortaan Kladblok. Een inlog- of installatiescript dat zo gestart wordt doet dan niets meer; kijk in de pilot of er zulke scripts in omloop zijn. |
+| `WIN - D - Windows AI Features Restricted` | Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen. |
+| `WIN - D - Windows Hello for Business` | Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos. |
+| `WIN - U - AI Usage Control Restricted` | Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen. |
+| `WIN - U - Compliance OS Version` | Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur. |
+| `WIN - U - Microsoft Outlook Cached Mode Managed` | Raakt elk bestaand profiel: Outlook bouwt het OST opnieuw op en een gedeelde mailbox in het profiel gaat van gecachet naar online. Dat is zichtbaar — de eerste synchronisatie kost tijd en bandbreedte, en wie gewend is offline in een gedeelde mailbox te werken merkt het meteen. Eerst op de pilotgroep, en kijk daar hoeveel profielen een gedeelde mailbox hebben. |
+| `WIN - U - Microsoft Teams` | Blokkeert aanmelden met een account uit een andere tenant. Dat is de bedoeling, maar wie een tweede werkaccount in Teams gebruikt merkt het meteen — kijk in de pilot of dat voorkomt. |
+| `WIN - U - Windows Hello for Business` | Hoort bij WIN - D - Windows Hello for Business en gaat samen met die de pilot in — op alle gebruikers zou hij WHfB alsnog op elk apparaat inrichten, en dan test de pilot niets. |
+| `MAC - D - FileVault` | Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt. |
+| `MAC - D - Passcode and Screen Lock` | Gebruikers met een korter of eenvoudiger wachtwoord moeten het bij de eerstvolgende aanmelding wijzigen. |
+| `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat "Standaard" of "Altijd aan" is. |
+| `MAC - U - Compliance OS Version` | Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur. |
 
-Daarnaast staan 41 policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*
-voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen 1 en 2 voor
-Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de drie
-CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de WHfB-variant
-voor gedeelde apparaten hoort op een groep met gedeelde apparaten, en de twee macOS-inschrijf-
-profielen verschillen in precies één instelling. Allemaal op All Devices zou
+Zonder toewijzing staan er 51: de 25 hierboven, 10 die op een voorwaarde
+wachten, 9 voor een eigen groep en 7 die niet uitrollen. Die laatste twee zijn een
+*alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
+1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
+drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de
+WHfB-variant voor gedeelde apparaten hoort op een groep met gedeelde apparaten, en de twee
+macOS-inschrijfprofielen verschillen in precies één instelling. Allemaal op All Devices zou
 een conflict opleveren, waarna Intune de betwiste instelling door géén van beide policies
 toepast; die horen op een eigen groep.

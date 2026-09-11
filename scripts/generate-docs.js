@@ -437,6 +437,16 @@ function overviewDocument(templates, ctx) {
   const perPlatform = (p) => templates.filter((t) => parseBaseName(t.baseName).platform === p);
   const checks = ctx.checkIds ? new Set([...ctx.checkIds.values()]).size : 0;
   const unassigned = templates.filter((t) => !ctx.assignments[t.displayName]);
+  // De pilottabel komt uit `fase` en `faseWaarom`. Tot september 2026 stond hij hier als vaste
+  // tekst, en die liep uit de pas: negen van de tien policies erin stonden in fase 1 en rolden
+  // via Baseline-Devices gewoon naar alle apparaten.
+  const faseOf = (t) => (ctx.manifestByTarget.get(t.baseName) || {}).fase;
+  const byFase = (n) => templates.filter((t) => faseOf(t) === n).length;
+  const platformRank = (t) => platforms.indexOf(parseBaseName(t.baseName).platform);
+  const pilot = templates
+    .filter((t) => faseOf(t) === 2)
+    .sort((a, b) => platformRank(a) - platformRank(b) || a.displayName.localeCompare(b.displayName))
+    .map((t) => ctx.manifestByTarget.get(t.baseName));
 
   const matrix = platforms
     .map((p) => {
@@ -562,7 +572,7 @@ function overviewDocument(templates, ctx) {
     "| 3 | Vervangen | Windows Firewall en Office Updates wisselen van policytype — handwerk |",
     "| 4 | Opheffen | Network Security, Windows Search, System Services, OneDrive KFM verwijderen |",
     "| 5 | Uitrollen | de nieuwe policies via CIPP of `Start-IntuneRestoreConfig` |",
-    "| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` |",
+    "| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |",
     "| 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |",
     "",
     "> **De baseline-check is hier geen vangnet.** De checks vergelijken op inhoud, niet op naam.",
@@ -571,25 +581,21 @@ function overviewDocument(templates, ctx) {
     "",
     "## Eerst in een pilot",
     "",
+    "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `Baseline-Pilot` uit naar",
+    "`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat",
+    "verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.",
+    "",
     "| Policy | Waarom |",
     "|---|---|",
-    "| `WIN - D - Disable NTLM` | breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken |",
-    "| `WIN - D - Device Guard and Credential Guard` | vraagt een herstart en kan oude stuurprogramma's blokkeren |",
-    "| `WIN - D - Administrator Protection` | Windows 11 24H2+; verandert het UAC-gedrag van beheerders |",
-    "| `WIN - D - In-Box App Removal` | verwijdert ingebouwde apps; controleer of niemand ze gebruikt |",
-    "| `WIN - D - Windows Hello for Business` | vereist een TPM en een PIN van minimaal zes tekens |",
-    "| `WIN - D - Script File Associations` | .js, .vbs en .hta openen voortaan in Kladblok |",
-    "| `WIN - D - Removable Storage` | schrijven naar USB-opslag en naar telefoons en camera's wordt geblokkeerd |",
-    "| `MAC - D - FileVault` | versleutelt de schijf; regel eerst de escrow van de herstelsleutel |",
-    "| `MAC - D - Software Updates` | declaratief updatebeleid vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet |",
-    "| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | vergrendelde inschrijving is na de inschrijving alleen met een wipe terug te draaien |",
+    ...pilot.map((p) => `| \`${p.displayName.replace(/^\[Baseline\] - /, "")}\` | ${escapePipes(p.faseWaarom)} |`),
     "",
-    `Daarnaast staan ${unassigned.length} policies bewust zonder toewijzing. Stuk voor stuk een *alternatief*`,
-    "voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen 1 en 2 voor",
-    "Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de drie",
-    "CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de WHfB-variant",
-    "voor gedeelde apparaten hoort op een groep met gedeelde apparaten, en de twee macOS-inschrijf-",
-    "profielen verschillen in precies één instelling. Allemaal op All Devices zou",
+    `Zonder toewijzing staan er ${unassigned.length}: de ${pilot.length} hierboven, ${byFase(3)} die op een voorwaarde`,
+    `wachten, ${byFase(4)} voor een eigen groep en ${byFase(5)} die niet uitrollen. Die laatste twee zijn een`,
+    "*alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen",
+    "1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de",
+    "drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de",
+    "WHfB-variant voor gedeelde apparaten hoort op een groep met gedeelde apparaten, en de twee",
+    "macOS-inschrijfprofielen verschillen in precies één instelling. Allemaal op All Devices zou",
     "een conflict opleveren, waarna Intune de betwiste instelling door géén van beide policies",
     "toepast; die horen op een eigen groep.",
     "",

@@ -9,7 +9,7 @@ Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord.
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
 | Bron | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_for_Business.json`](Baseline_WIN_D_Windows_Hello_for_Business.json) |

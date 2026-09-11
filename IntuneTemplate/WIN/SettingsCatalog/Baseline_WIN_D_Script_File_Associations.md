@@ -9,7 +9,7 @@ Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de script
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-079-DScriptFileAssociations` |
 | Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations |
 | Bestand | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |

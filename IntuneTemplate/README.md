@@ -64,9 +64,9 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 
 | `Package` | In CIPP toewijzen aan | Stage | Policies |
 |---|---|---:|---:|
-| `Baseline-Devices` | Assign to all devices | 1 | 80 |
-| `Baseline-Users` | Assign to all users | 1 | 28 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 15 |
+| `Baseline-Devices` | Assign to all devices | 1 | 71 |
+| `Baseline-Users` | Assign to all users | 1 | 27 |
+| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 25 |
 | `Baseline-Wacht` | Do not assign | 3 | 10 |
 | `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
 | `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |

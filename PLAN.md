@@ -97,8 +97,9 @@ Volgorde:
 8. `Invoke-IntuneRestoreAppProtectionPolicyAssignment` apart aanroepen (zie README).
 9. **Opnieuw inventariseren** — de lijst met wees-policies moet leeg zijn.
 
-Zet de policies uit "Wat je eerst in een pilot zet" (README) niet in dezelfde ronde op All
-Devices.
+De pilot (fase 2) gaat niet mee in stap 7: `-AllDevices` en `-AllUsers` nemen alleen wat in
+fase 1 staat. Die volgt apart met `-GroupName 'SEC-Baseline-Pilot'` — de lijst staat in
+[OVERZICHT.md](OVERZICHT.md#eerst-in-een-pilot).
 
 ### Wat als er nog policies met de oude naam in de tenant staan
 

@@ -367,7 +367,8 @@
       "bron": "OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault",
       "note": "De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt."
     },
     {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Firewall - D - Gatekeeper - v1.0.json",
@@ -506,7 +507,8 @@
       "metadataOnly": true,
       "note": "Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op de eerste keuze uit de catalogus — controleer in de portal of dat \"Standaard\" of \"Altijd aan\" is vóór je 'm uitrolt.",
       "herkomst": "eigen",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat \"Standaard\" of \"Altijd aan\" is."
     },
     {
       "target": "Baseline_MAC_D_Wifi_Corporate",
@@ -727,7 +729,8 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Administrator Protection",
       "note": "Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Verandert hoe een beheerder werkt: geen permanent verhoogde rechten meer, maar per handeling een bevestiging. Scripts en tools die stil op beheerdersrechten leunen merken dat. Windows 11 24H2 en hoger; op oudere builds doet hij niets."
     },
     {
       "target": "Baseline_WIN_D_AI_Tooling",
@@ -1073,7 +1076,8 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Device Guard, Credential Guard and HVCI",
       "note": "OIB wijst deze aan gebruikers toe om een herstart midden in Autopilot te vermijden; alle 8 instellingen zijn device-scoped, dus hier D. Houd er rekening mee dat de eerste toepassing een herstart vraagt.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Vraagt een herstart, en geheugenintegriteit (HVCI) laadt geen stuurprogramma's die er niet op gebouwd zijn — denk aan oude VPN-, printer- en dockdrivers. Kijk in de pilot of alles nog start."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Power and Device Lock - v3.6.json",
@@ -1091,9 +1095,10 @@
       "displayName": "[Baseline] - WIN - D - Disable NTLM",
       "doel": "Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen.",
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Network Security - D - Disable NTLM",
-      "note": "Test dit eerst: NTLM uitzetten breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken.",
+      "note": "NTLMv1 en LM zijn al weg op elk apparaat: lanmanagerauthenticationlevel 5 staat ook in [Baseline] - WIN - D - Local Security Policies, in fase 1. Deze policy doet de rest — NTLM helemaal weigeren. Microsoft zet NTLM pas in de volgende grote Windows-release standaard uit en bestaande versies blijven het ondersteunen, dus haast is er niet; audit eerst. Local Security Policies logt inkomend NTLM dat deze policy zou weigeren (auditincomingntlmtraffic), uitgaand is op 24H2 zonder policy te zien.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Weigert alle NTLM, inkomend en uitgaand. Wat niet via Kerberos kan breekt: toepassingen die op IP-adres verbinden, apparaten buiten het domein, en shares waarvoor het apparaat geen Kerberos-ticket krijgt — een Entra-joined apparaat dat een share op Entra Domain Services opent valt terug op NTLM. Lees vóór de pilot op een paar Windows 11 24H2-apparaten Microsoft-Windows-NTLM/Operational (4020/4021 uitgaand, 4022/4023 inkomend): die logging staat daar standaard aan en laat zien wat er zou breken."
     },
     {
       "source": "WINDOWS/IntuneManagement/DeviceConfiguration/Win - OIB - TP - Health Monitoring - D - Endpoint Analytics - v3.4.json",
@@ -1151,7 +1156,8 @@
       "doel": "Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben.",
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows Apps - D - In-Box App Removal",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Verwijdert ingebouwde apps, ook van apparaten die al in gebruik zijn. Kijk in de pilot of iemand er een mist."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Internet Explorer (Legacy) - D - Security - v3.1.1.json",
@@ -1217,7 +1223,7 @@
       "displayName": "[Baseline] - WIN - D - Local Security Policies",
       "doel": "De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit.",
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Local Security Policies",
-      "note": "De eigen machineinactivitylimit_v2 blijft staan; OIB regelt de schermvergrendeling via Power and Device Lock.",
+      "note": "De eigen machineinactivitylimit_v2 blijft staan; OIB regelt de schermvergrendeling via Power and Device Lock. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat [Baseline] - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1522,7 +1528,8 @@
       "metadataOnly": true,
       "note": "OIB dekt verwisselbare media niet. Alleen schrijven wordt geblokkeerd, niet lezen: gegevens mogen naar binnen, niet naar buiten. De BitLocker-policy laat removabledrivesrequireencryption bewust uit staan — met een schrijfblokkade voegt een versleutelingseis niets toe.",
       "herkomst": "intuneadmin",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Schrijven naar USB-sticks, externe schijven en telefoons wordt geblokkeerd, en dat merkt een gebruiker meteen. Let op: tot deze policy breed uitrolt is verwisselbare opslag nergens beperkt — BitLocker laat removabledrivesrequireencryption bewust uit, omdat deze blokkade dat afdekt."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Script File Associations - v3.4.json",
@@ -1532,7 +1539,8 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations",
       "note": "Opent .js/.vbs/.hta met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Dubbelklikken op een .js-, .vbs- of .hta-bestand opent voortaan Kladblok. Een inlog- of installatiescript dat zo gestart wordt doet dan niets meer; kijk in de pilot of er zulke scripts in omloop zijn."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Security Hardening - v3.7.json",
@@ -1867,7 +1875,8 @@
       "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration",
       "note": "Ontbrak volledig. Vereist een TPM, PIN van minimaal 6 tekens en anti-spoofing voor gezichtsherkenning. Geldt voor élke gebruiker van het apparaat; voor gedeelde apparaten staat er een eigen variant naast (Baseline_WIN_D_Windows_Hello_for_Business_Multi_User).",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos."
     },
     {
       "target": "Baseline_WIN_D_Windows_Hello_for_Business_Multi_User",
@@ -2348,7 +2357,8 @@
       "metadataOnly": true,
       "note": "De user-scope van de PassportForWork-CSP kent vier van de vijf instellingen uit de apparaatpolicy; UseCertificateForOnPremAuth en de biometrie-instellingen bestaan alleen device-scoped en blijven dus daar. Zet er een apparaatfilter op dat gedeelde apparaten uitsluit (Set-BaselineAssignment.ps1 -FilterId), anders geldt hij ook daar.",
       "herkomst": "eigen",
-      "fase": 1
+      "fase": 2,
+      "faseWaarom": "Hoort bij WIN - D - Windows Hello for Business en gaat samen met die de pilot in — op alle gebruikers zou hij WHfB alsnog op elk apparaat inrichten, en dan test de pilot niets."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0.json",

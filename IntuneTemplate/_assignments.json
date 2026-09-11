@@ -44,15 +44,6 @@
       }
     }
   ],
-  "[Baseline] - MAC - D - FileVault": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - MAC - D - Firewall and Gatekeeper": [
     {
       "target": {
@@ -143,15 +134,6 @@
       }
     }
   ],
-  "[Baseline] - MAC - D - Software Updates": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - MAC - U - Compliance Device Health": [
     {
       "target": {
@@ -216,15 +198,6 @@
     }
   ],
   "[Baseline] - WIN - D - AI Tooling": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Administrator Protection": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -377,25 +350,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Device Guard and Credential Guard": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - WIN - D - Device Lock": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Disable NTLM": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -414,15 +369,6 @@
     }
   ],
   "[Baseline] - WIN - D - Enhanced Phishing Protection": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - In-Box App Removal": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -611,24 +557,6 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Removable Storage": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Script File Associations": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - WIN - D - Security Hardening": [
     {
       "target": {
@@ -729,15 +657,6 @@
     }
   ],
   "[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Windows Hello for Business": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -936,15 +855,6 @@
     }
   ],
   "[Baseline] - WIN - U - Personal Data Encryption": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - U - Windows Hello for Business": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

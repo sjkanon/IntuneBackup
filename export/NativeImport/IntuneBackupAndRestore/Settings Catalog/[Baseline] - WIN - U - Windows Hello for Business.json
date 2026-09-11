@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Windows Hello for Business",
-    "description": "Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, omgezet naar user-scope.",
+    "description": "Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, omgezet naar user-scope.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

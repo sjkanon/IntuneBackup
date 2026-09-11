@@ -9,7 +9,7 @@ Hoe en wanneer macOS zijn eigen updates ophaalt en installeert.
 | Platform | macOS |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 | Bron | eigen baseline — declaratief softwarebeleid (DDM); OpenIntuneBaseline macOS v1.0 gebruikt nog het klassieke com.apple.softwareupdate-profiel |
 | Bestand | [`Baseline_MAC_D_Software_Updates.json`](Baseline_MAC_D_Software_Updates.json) |
