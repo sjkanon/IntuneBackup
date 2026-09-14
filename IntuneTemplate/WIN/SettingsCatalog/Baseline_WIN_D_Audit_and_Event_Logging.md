@@ -11,7 +11,7 @@ Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zij
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-009-Auditing` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Audit and Event Logging |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging |
 | Bestand | [`Baseline_WIN_D_Audit_and_Event_Logging.json`](Baseline_WIN_D_Audit_and_Event_Logging.json) |
 
 > 23 -> 40 instellingen; alle bestaande zaten er al in.
@@ -58,7 +58,7 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_audit_objectaccess_auditremovablestorage` | 3 |
 | `device_vendor_msft_policy_config_audit_policychange_auditmpssvcrulelevelpolicychange` | 3 |
 | `device_vendor_msft_policy_config_audit_policychange_auditotherpolicychangeevents` | 2 |
-| `device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse` | 3 |
+| `device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse` | 1 |
 | `device_vendor_msft_policy_config_audit_system_auditipsecdriver` | 3 |
 | `device_vendor_msft_policy_config_audit_system_auditothersystemevents` | 3 |
 | `device_vendor_msft_policy_config_audit_system_auditsecuritystatechange` | 1 |

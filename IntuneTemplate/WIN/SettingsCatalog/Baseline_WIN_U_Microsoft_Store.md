@@ -11,7 +11,7 @@ De gebruikerskant van de Store-beperkingen.
 | Type | Settings Catalog |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-104-UMicrosoftStore` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Store - U - Configuration |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration |
 | Bestand | [`Baseline_WIN_U_Microsoft_Store.json`](Baseline_WIN_U_Microsoft_Store.json) |
 
 ## Instellingen — 3

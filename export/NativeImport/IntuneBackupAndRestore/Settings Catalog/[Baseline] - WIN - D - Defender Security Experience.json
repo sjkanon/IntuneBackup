@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Security Experience",
-    "description": "Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - Security Experience.",
+    "description": "Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {
@@ -60,20 +60,20 @@
             "id": "2",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications",
-                "settingInstanceTemplateReference": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstanceTemplateReference",
-                    "settingInstanceTemplateId": "90d71ec1-eace-4cf1-a2da-023962fac6c5"
-                },
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "value": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications_0",
+                    "children": [],
                     "settingValueTemplateReference": {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingValueTemplateReference",
                         "settingValueTemplateId": "aeb811f1-7980-4c19-a6b9-959aa84582c8",
                         "useTemplateDefault": false
                     },
-                    "children": []
+                    "value": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications",
+                "settingInstanceTemplateReference": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstanceTemplateReference",
+                    "settingInstanceTemplateId": "90d71ec1-eace-4cf1-a2da-023962fac6c5"
                 }
             }
         },

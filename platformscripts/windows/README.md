@@ -15,7 +15,7 @@ zo terug.
 
 | Bestand | Wat het doet | Scope |
 |---|---|---|
-| `Mount-AzureFilesDrive.ps1` | Koppelt `\\acisafiles.file.core.windows.net\data\Public` als `Z:` met het Entra Kerberos-ticket | Gebruiker |
+| `Mount-AzureFilesDrive.ps1` | Koppelt `\\<account>.file.core.windows.net\<share>\<submap>` als `Z:` met het Entra Kerberos-ticket | Gebruiker |
 
 ## Mount-AzureFilesDrive.ps1
 
@@ -67,10 +67,10 @@ koppelen.
 
 ### Share en submap zijn niet hetzelfde
 
-`\\acisafiles.file.core.windows.net\data\Public` staat in het script als drie velden: `data`
-is de **share**, `Public` een **map daarin**. SMB kent maar één sharelaag, en dat onderscheid
-is niet cosmetisch — de verbinding en de share-level permissions in Azure hangen aan `data`,
-de submap is alleen het punt waar de schijf begint. Wie alleen bij `Public` mag hoort dat via
+`\\<account>.file.core.windows.net\<share>\<submap>` staat in het script als drie velden:
+`$ShareName` is de **share**, `$ShareSubPath` een **map daarin**. SMB kent maar één
+sharelaag, en dat onderscheid is niet cosmetisch — de verbinding en de share-level permissions
+in Azure hangen aan de share, de submap is alleen het punt waar de schijf begint. Wie alleen bij één submap mag hoort dat via
 NTFS-rechten in de map te krijgen, niet door hier een andere waarde in te vullen.
 
 `$ShareSubPath` leeg laten koppelt de hele share.

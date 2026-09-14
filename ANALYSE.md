@@ -187,8 +187,8 @@ technische grens, geen juridisch antwoord.
 
 **Derde fout in de bron.** Naast de kapotte `AccountLockoutPolicy` hierboven: de vier Windows
 AI-profielen van IntuneAdmin heten "Enable Paint Cocreator", "Paint Image Creator" enzovoort en
-zetten `Disable X` op *Disabled* — ze schakelen die AI-functies dus juist **in**. Voor ISMP22
-moet dat andersom, dus onze policy zet ze op 1. Wie die profielen ongezien importeert krijgt het
+zetten `Disable X` op *Disabled* — ze schakelen die AI-functies dus juist **in**. Voor een
+AI-beleid dat die functies beperkt moet dat andersom, dus onze Restricted-variant zet ze op 1. Wie die profielen ongezien importeert krijgt het
 tegenovergestelde van wat de mapnaam suggereert.
 
 ## Wat de ISO 27001- en NIS2-mappen van IntuneAdmin opleverden
@@ -264,8 +264,8 @@ en vraagt onderhoud — `minimumWarningOsVersion` is het overwegen waard).
 | `cryptography_tlsciphersuites` | Een expliciete cipher suite-volgorde veroudert en breekt stil verbindingen. Hoort bij een cryptobeleid met een eigenaar, niet in een baseline. |
 | `applicationcontrol` / WDAC / AppLocker / Smart App Control | Ontbreekt volledig, en dat is de grootste inhoudelijke leemte van de hele baseline. Maar applicatiecontrole is geen instelling die je aanzet — het is een project met een inventarisatie, een audit-fase en een uitzonderingenproces. Hoort niet in een set die "dit werkt voor elk apparaat" belooft. **Wel de belangrijkste kandidaat voor de volgende ronde.** |
 | DNS over HTTPS | Kwam niet in IntuneAdmin voor en staat niet in onze set. De baseline zet wel `turn_off_multicast` (LLMNR). DoH afdwingen vraagt een besluit over welke resolver, en dat is tenantspecifiek. |
-| `privacy_disableadvertisingid`, `allowcrossdeviceclipboard`, `uploaduseractivities` | Privacy, geen beveiliging. Horen bij `ISMSTemplate/` onder ISDP01 als iemand ze wil. |
-| CIS L2 in het algemeen | L2 is expliciet "voor omgevingen waar beveiliging boven functionaliteit gaat". Dat is de tegenovergestelde lat van deze set. Eén uitzondering die wél is overgenomen: PowerShell-transcriptie (L2), omdat die uit ISMP13 volgt. |
+| `privacy_disableadvertisingid`, `allowcrossdeviceclipboard`, `uploaduseractivities` | Privacy, geen beveiliging. Horen bij een privacybesluit van de organisatie, niet in een beveiligingsbaseline. (Sinds OIB v4.0 zet OpenIntuneBaseline `allowcrossdeviceclipboard` zelf uit, in Windows Feature Configuration.) |
+| CIS L2 in het algemeen | L2 is expliciet "voor omgevingen waar beveiliging boven functionaliteit gaat". Dat is de tegenovergestelde lat van deze set. Eén uitzondering die wél is overgenomen: PowerShell-transcriptie (L2), omdat logbeleid die sessieregistratie doorgaans vraagt. |
 | macOS, verder dan de passcode | De vergelijking met IntuneAdmin én de UniFy-sets leverde voor macOS 12 instellingen op die wij niet zetten. Elf daarvan zijn Safari-instellingen die de bron juist op *toestaan* zet (`allowsafariprivatebrowsing_true`) — dat is geen hardening — en de rest zijn Kerberos-SSO-placeholders (`YOURKERBEROSREALM`). **Onze 21 macOS-policies lopen op deze bronnen vóór.** |
 | iOS/Android device restrictions | De UniFy-sets hebben ze uitgebreid (App Management, Connectivity Controls, Device Pairing, Lock Screen). Allemaal settings catalog, en die bereiken alleen ingeschreven apparaten. Zelfde agenda als de compliance-policies, maar met meer keuzes — dat is een eigen ronde, geen bijvangst. |
 
@@ -338,6 +338,63 @@ met een placeholder.
 |---:|---|---|
 | 1 | BASELINE2 op een pilotgroep | vooral `Kernel DMA Protection` (test met de docks uit de vloot) en `Logon Hardening` (meld CTRL+ALT+DEL vooraf aan gebruikers) |
 | 2 | Besluit over de drie MAM-instellingen | wijziging aan de afgesproken baseline; kan nu nog zonder migratie |
-| 3 | Controleer de ISMP-koppeling in `_manifest.json` | afgeleid uit `ISMSTemplate/_manifest.json`, niet tegen de brondocumenten gelegd |
+| 3 | ~~Controleer de ISMP-koppeling in `_manifest.json`~~ | vervallen: de koppeling aan de ISMS-documenten van één organisatie is in september 2026 uit het manifest gehaald, zodat de baseline generiek is. ISO 27001, NIS2 en Part-IS staan er nog |
 | 4 | Bevalt een policy? | verhuizen naar `IntuneTemplate/` onder de `Baseline_`-naam, met checkId en toewijzing |
 | 5 | Volgende ronde | applicatiecontrole (WDAC/Smart App Control), en iOS/Android-compliance zodra er telefoons worden ingeschreven |
+
+# Ronde OIB Windows v4.0 (14 september 2026)
+
+OpenIntuneBaseline Windows v4.0 ("26H2 Edition") is overgenomen van branch `windows-v4.0` op
+commit `f247604` (9 september 2026). **Die versie was nog niet uitgebracht** — de CHANGELOG
+noemt als datum nog `2026-09-xx`. Zodra de tag er is: `.oib-source` op die tag zetten en de
+diff opnieuw nalopen. macOS (v1.0) en BYOD zijn niet veranderd.
+
+## Hoe, en waarom niet met `import-oib.js`
+
+Een volledige run van `import-oib.js` draait op dit moment handwerk terug dat na eerdere imports
+in de templates is gezet: de URL-blokkeerlijst die van Edge User Experience naar AI Usage Control
+is verhuisd, drie App Protection-waarden (`previousPinBlockCount`, `screenCaptureConfigurationState`,
+`filterOpenInToOnlyManagedApps`) die niet als `veldOverrides` in het manifest staan, en de policies
+zonder `source` én zonder `type` (wifi, OS Version, iOS/Android-compliance), die de importer als
+Settings Catalog behandelt en naar de verkeerde map verplaatst. Daarom zijn de verschillen tussen
+v3.x en v4.0 per instelling op de bestaande templates gezet: wat OIB schrapte eruit, wat OIB
+toevoegde erbij, en een gewijzigde waarde alleen als ons template nog de oude OIB-waarde (plus
+onze overrides) had. Die drie punten horen in het manifest vastgelegd te worden vóór de importer
+weer veilig te draaien is.
+
+## Wat er veranderde
+
+| | |
+|---|---|
+| **Compliance** | Vier gebundelde policies (Device Health, Device Security, Defender for Endpoint, Password) worden negen losse: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence en Defender Real Time Protection. Password vervalt: die eisen lopen via de EAS-engine, worden afgedwongen in plaats van getoetst en raken alleen lokale accounts. Vergrendelen na 15 minuten staat nu in Device Lock. checkId 093–096 zijn opgeheven; `_renames.json` zegt per oude policy waar hij is gebleven. |
+| **Local Security Policies / LAPS** | De 24H2+-varianten zijn de enige. Voor LAPS verandert er inhoudelijk niets; Local Security Policies zet voortaan het ingebouwde Administrator-account uit. LAPS beheert een eigen account, dus dat raakt het herstel niet. |
+| **Defender** | Matig en hoog op quarantaine (was remove); exploit-protection-overrides door gebruikers geblokkeerd; enhanced notifications weer aan. |
+| **Edge** | Vijf beveiligingsinstellingen uit de Edge v151-baseline (process isolation, renderer app container, network service sandbox, code integrity guard); geen aanmelding met niet-Microsoft-accounts; geen automatische download van lokale AI-modellen; nieuwe policy **Microsoft Edge Management** (fase 2). |
+| **Office** | Zes instellingen uit de M365 Apps-baseline 2512. |
+| **Overig** | In-Box App Removal naar de lijst-variant; klembord tussen apparaten uit; sensitive privilege use alleen nog op Success; IE-modus TLS 1.2 én 1.3; slaapstand aan het net 30 minuten. |
+
+## Waar we bewust afwijken
+
+| Instelling | OIB v4.0 | Wij | Waarom |
+|---|---|---|---|
+| `submitsamplesconsent` | alle voorbeelden automatisch | veilige voorbeelden automatisch | alle voorbeelden stuurt ook documenten met persoonsgegevens zonder vraag naar Microsoft |
+| Respijt Defender Security Intelligence | direct (in de export) | 6 uur | de CHANGELOG noemt zelf 0,25 dag; direct maakt elke laptop die uit de slaapstand komt even niet-compliant |
+| Microsoft Edge Management | — | fase 2 | draait de voorrang om: beleid uit de Edge Management Service wint van het Edge-beleid uit deze baseline |
+
+## Dubbelingen opgeruimd
+
+Vier eigen instellingen zet OIB nu zelf, met dezelfde waarde. Ze zijn uit onze policy gehaald
+zodat ze niet uit twee policies komen: `machineinactivitylimit_v2` (Local Security Policies → Device
+Lock), `disallowexploitprotectionoverride` (Threat Protection → Defender Additional Configuration),
+`preventdevicemetadatafromnetwork` (Wireless and Peripherals → Windows Feature Configuration) en
+`allowcrossdeviceclipboard` (Privacy and Telemetry → Windows Feature Configuration). De twee kale
+`apps.microsoft.com`-regels die OIB uit de URL-blokkeerlijst haalde, zijn ook uit beide AI Usage
+Control-varianten gehaald.
+
+## Generiek
+
+De baseline droeg sporen van één organisatie: de nummering van haar ISMS-documenten
+(`controls.isms` en ISMP-verwijzingen in de toelichtingen), een storage account en LaunchAgent-label
+in de mountscripts, het beheerdersaccount in de macOS-inschrijfprofielen, en twee klantrapporten.
+Die zijn weg of vervangen door placeholders; de rapporten staan in het gitignorede `local/`.
+Let op: ze staan nog wel in de git-geschiedenis.

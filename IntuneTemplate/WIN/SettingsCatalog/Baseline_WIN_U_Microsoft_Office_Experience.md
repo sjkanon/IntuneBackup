@@ -11,7 +11,7 @@ De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en 
 | Type | Settings Catalog |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-102-UMicrosoftOfficeExperience` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Config and Experience |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience |
 | Bestand | [`Baseline_WIN_U_Microsoft_Office_Experience.json`](Baseline_WIN_U_Microsoft_Office_Experience.json) |
 
 ## Instellingen — 29

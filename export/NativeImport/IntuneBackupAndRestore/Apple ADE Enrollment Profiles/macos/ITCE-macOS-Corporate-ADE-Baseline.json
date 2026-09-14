@@ -2,7 +2,7 @@
   "@odata.type": "#microsoft.graph.depMacOSEnrollmentProfile",
 
   "displayName": "ITCE - macOS Corporate ADE Baseline",
-  "description": "Standaard ADE-enrollmentprofiel voor door ITCE beheerde bedrijfs-Macs onder token ACI_APPLE_MDM. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
+  "description": "Standaard ADE-enrollmentprofiel voor door ITCE beheerde bedrijfs-Macs. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
 
   "isDefault": true,
   "isMandatory": true,

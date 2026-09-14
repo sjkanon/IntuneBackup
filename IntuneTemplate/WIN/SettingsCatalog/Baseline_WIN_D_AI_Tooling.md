@@ -14,7 +14,7 @@ Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke
 | Bron | ISO/IEC 27001:2022 A.5.10 en A.8.1 — instelling uit de Visual Studio-benchmark van IntuneAdmin |
 | Bestand | [`Baseline_WIN_D_AI_Tooling.json`](Baseline_WIN_D_AI_Tooling.json) |
 
-> ISMP22 staat GitHub Copilot toe, maar uitsluitend voor softwareontwikkeling en uitsluitend via de goedgekeurde licentie. Zonder deze instelling kan een ontwikkelaar zijn privéaccount koppelen, en dan verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet.
+> Bedoeld voor een AI-beleid dat GitHub Copilot alleen toestaat voor softwareontwikkeling en alleen via de licentie van de organisatie. Zonder deze instelling kan een ontwikkelaar zijn privéaccount koppelen, en dan verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet.
 
 ## Instellingen — 1
 

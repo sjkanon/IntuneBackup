@@ -11,7 +11,7 @@ Productiering voor Defender-updates: krijgt definities en engineversies pas nada
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-063-DDefenderUpdateRing3Production` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 3 - Production |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production |
 | Bestand | [`Baseline_WIN_D_Defender_Update_Ring_3_Production.json`](Baseline_WIN_D_Defender_Update_Ring_3_Production.json) |
 
 ## Instellingen — 3

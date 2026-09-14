@@ -11,7 +11,7 @@ Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden.
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-081-DSettingsSync` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Settings Sync |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Settings Sync |
 | Bestand | [`Baseline_WIN_D_Settings_Sync.json`](Baseline_WIN_D_Settings_Sync.json) |
 
 ## Instellingen — 4

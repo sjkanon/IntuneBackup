@@ -11,7 +11,7 @@ Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd.
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-021-OfficeUpdates` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - D - Updates |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates |
 | Bestand | [`Baseline_WIN_D_Microsoft_Office_Updates.json`](Baseline_WIN_D_Microsoft_Office_Updates.json) |
 
 > Vervangt de klassieke ADMX-variant (Type Admin). Dat endpoint is beta-only en nooit tegen een echte tenant getest; Settings Catalog is stabieler. In de tenant is dit geen hernoeming maar een vervanging — verwijder de oude ADMX-policy, anders zetten beide dezelfde registerwaarden.

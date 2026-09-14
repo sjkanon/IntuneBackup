@@ -2,28 +2,28 @@
 
 # Intune-baseline — overzicht
 
-149 policies over 4 platformen, met
+155 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 149 |
-| Baseline-checks | 131 |
-| Zonder toewijzing (bewust) | 51 |
+| Policies | 155 |
+| Baseline-checks | 132 |
+| Zonder toewijzing (bewust) | 52 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 102 | 1 | 6 | 5 | – | **114** |
+| [Windows](IntuneTemplate/WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
 | [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 114 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 120 policies
 - [macOS](IntuneTemplate/MAC/README.md) — 29 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 3 policies
 - [Android](IntuneTemplate/AND/README.md) — 3 policies
@@ -71,7 +71,7 @@ aanpassingen op:
 
 | | |
 |---|---|
-| `WIN - D - Windows AI` | Recall en Click To Do uit. OIB v3.8 kent nog geen Windows AI-policy en wij dus ook niet. |
+| `WIN - D - Windows AI` | Recall en Click To Do uit. OIB v4.0 kent nog geen Windows AI-policy en wij dus ook niet. |
 | `WIN - D - Removable Storage` | schrijven naar USB-opslag en WPD-apparaten geblokkeerd; verwisselbare media was nergens beperkt. |
 | `WIN - U - Windows Hello for Business` | WHfB per gebruiker naast de bestaande per-apparaatpolicy. |
 | `WIN - D - Windows Hello for Business Multi User` | WHfB voor gedeelde apparaten, zonder inrichting direct na het aanmelden. |
@@ -151,6 +151,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `WIN - D - Windows Hello for Business` | Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos. |
 | `WIN - U - AI Usage Control Restricted` | Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen. |
 | `WIN - U - Compliance OS Version` | Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur. |
+| `WIN - U - Microsoft Edge Management` | Draait de voorrang om: beleid uit de Edge Management Service wint daarna van het Edge-beleid uit deze baseline. Wie de rol Edge Administrator heeft kan dan dus instellingen uit Microsoft Edge Security en User Experience overschrijven. Leg eerst vast wie die rol heeft voordat dit breed uitrolt. |
 | `WIN - U - Microsoft Outlook Cached Mode Managed` | Raakt elk bestaand profiel: Outlook bouwt het OST opnieuw op en een gedeelde mailbox in het profiel gaat van gecachet naar online. Dat is zichtbaar — de eerste synchronisatie kost tijd en bandbreedte, en wie gewend is offline in een gedeelde mailbox te werken merkt het meteen. Eerst op de pilotgroep, en kijk daar hoeveel profielen een gedeelde mailbox hebben. |
 | `WIN - U - Microsoft Teams` | Blokkeert aanmelden met een account uit een andere tenant. Dat is de bedoeling, maar wie een tweede werkaccount in Teams gebruikt merkt het meteen — kijk in de pilot of dat voorkomt. |
 | `WIN - U - Windows Hello for Business` | Hoort bij WIN - D - Windows Hello for Business en gaat samen met die de pilot in — op alle gebruikers zou hij WHfB alsnog op elk apparaat inrichten, en dan test de pilot niets. |
@@ -159,7 +160,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat "Standaard" of "Altijd aan" is. |
 | `MAC - U - Compliance OS Version` | Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur. |
 
-Zonder toewijzing staan er 51: de 25 hierboven, 10 die op een voorwaarde
+Zonder toewijzing staan er 52: de 26 hierboven, 10 die op een voorwaarde
 wachten, 9 voor een eigen groep en 7 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de

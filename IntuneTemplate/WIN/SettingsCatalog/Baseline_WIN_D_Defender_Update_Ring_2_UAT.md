@@ -11,7 +11,7 @@ Tweede ring voor Defender-updates: loopt achter op de pilot en voor op productie
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | — |
 | checkId | `INTUNE-BASE-062-DDefenderUpdateRing2UAT` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 2 - UAT |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT |
 | Bestand | [`Baseline_WIN_D_Defender_Update_Ring_2_UAT.json`](Baseline_WIN_D_Defender_Update_Ring_2_UAT.json) |
 
 ## Instellingen — 3

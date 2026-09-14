@@ -20,8 +20,9 @@ De baseline rolt Defender for Endpoint uit op macOS
 ([`MAC - D - Defender for Endpoint`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md)
 en [`MAC - D - Defender Antivirus`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md)),
 maar controleerde nergens of dat ook is gelukt. Windows heeft die controle wél —
-`WIN - U - Compliance Defender for Endpoint` toetst de risicoscore. Op macOS ontbrak de
-tegenhanger.
+`WIN - U - Compliance Defender Real Time Protection` en `Defender Security Intelligence` toetsen
+of Defender aanstaat, de realtimebeveiliging actief is en de definities actueel zijn. Op macOS
+ontbrak de tegenhanger.
 
 `macOSCompliancePolicy` kent wel `deviceThreatProtectionEnabled`, maar dat toetst iets anders:
 de **risicoscore** die Defender aan het apparaat toekent. Een Mac waarop de agent nooit is

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Additional Configuration",
-    "description": "Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Defender Antivirus - D - Additional Configuration.",
+    "description": "Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -78,21 +78,6 @@
             "id": "4",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_defender_configuration_hideexclusionsfromlocalusers",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_defender_configuration_hideexclusionsfromlocalusers_1",
-                    "children": []
-                }
-            }
-        },
-        {
-            "id": "5",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_defender_configuration_oobeenablertpandsigupdate",
                 "settingInstanceTemplateReference": null,
                 "auditRuleInformation": null,
@@ -105,7 +90,7 @@
             }
         },
         {
-            "id": "6",
+            "id": "5",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                 "settingDefinitionId": "device_vendor_msft_defender_configuration_passiveremediation",
@@ -122,7 +107,7 @@
             }
         },
         {
-            "id": "7",
+            "id": "6",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_defender_configuration_quickscanincludeexclusions",
@@ -137,7 +122,7 @@
             }
         },
         {
-            "id": "8",
+            "id": "7",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_defender_configuration_supportloglocation",
@@ -148,6 +133,20 @@
                     "settingValueTemplateReference": null,
                     "value": "%ProgramData%\\Microsoft\\IntuneManagementExtension\\Logs"
                 }
+            }
+        },
+        {
+            "id": "8",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride",
+                "settingInstanceTemplateReference": null
             }
         }
     ]

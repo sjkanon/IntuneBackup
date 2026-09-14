@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Internet Explorer Legacy",
-    "description": "Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Internet Explorer (Legacy) - D - Security.",
+    "description": "Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -74,26 +74,26 @@
             "id": "4",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions_2048",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions_10240"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport",
+                "settingInstanceTemplateReference": null
             }
         },
         {
@@ -2420,14 +2420,14 @@
             "id": "97",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles_0",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles",
+                "settingInstanceTemplateReference": null
             }
         },
         {

@@ -11,7 +11,7 @@ Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord.
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Toewijzing | — |
 | checkId | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows Hello for Business - D - WHfB Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_for_Business.json`](Baseline_WIN_D_Windows_Hello_for_Business.json) |
 
 > Ontbrak volledig. Vereist een TPM, PIN van minimaal 6 tekens en anti-spoofing voor gezichtsherkenning. Geldt voor élke gebruiker van het apparaat; voor gedeelde apparaten staat er een eigen variant naast (Baseline_WIN_D_Windows_Hello_for_Business_Multi_User).

@@ -11,7 +11,7 @@ Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en ve
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-011-Bitlocker` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Encryption - D - BitLocker (OS Disk) |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | Bestand | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 
 > OIB dekt alleen de OS-schijf. De 11 eigen instellingen voor vaste en verwisselbare schijven en de preboot-PIN blijven staan — anders zou versleuteling van datadrives stilzwijgend uitgaan.

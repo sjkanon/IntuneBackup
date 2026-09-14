@@ -11,7 +11,7 @@ Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, aut
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-080-DSecurityHardening` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Security Hardening |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening |
 | Bestand | [`Baseline_WIN_D_Security_Hardening.json`](Baseline_WIN_D_Security_Hardening.json) |
 
 > Neemt de oude policies Network Security (017), System Services (025) en het grootste deel van Administrative Templates (008) over.

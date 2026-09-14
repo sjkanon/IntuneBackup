@@ -75,10 +75,10 @@ SET_NAAM="public"
 #
 # Elke share landt in /Volumes/<naam>.
 
-STORAGE_ACCOUNT="acisafiles"
+STORAGE_ACCOUNT="STORAGE-ACCOUNT-INVULLEN"
 
 SHARES=(
-  "data/Public"
+  "SHARE-NAAM-INVULLEN"
 )
 
 # --- Terugval op de storage account key ----------------------------------------------------
@@ -88,8 +88,9 @@ SHARES=(
 #
 # LET OP, en dit is geen formaliteit:
 #
-#   * Deze sleutel geeft toegang tot het HÉLE storage account, niet tot één share. Bij
-#     acisafiles is dat hetzelfde account waar de AVD-omgeving op draait.
+#   * Deze sleutel geeft toegang tot het HÉLE storage account, niet tot één share. Draait er
+#     op hetzelfde account ook iets anders, zoals een AVD-omgeving, dan valt die data er ook
+#     onder.
 #   * Er is geen identiteit per gebruiker. Iedereen die mount is dezelfde "gebruiker", dus
 #     rechten per persoon en herleidbaarheid in de logs bestaan niet, en de share-level
 #     permissions in Azure doen niets.
@@ -105,7 +106,7 @@ STORAGE_KEY=""
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------
 
 BASIS="mount-azure-files-${SET_NAAM}"
-LABEL="com.aci-europe.baseline.${BASIS}"
+LABEL="com.baseline.${BASIS}"
 HELPER="/Library/Scripts/Baseline/${BASIS}.sh"
 AGENT="/Library/LaunchAgents/$LABEL.plist"
 
@@ -141,6 +142,13 @@ if [ "${#SHARES[@]}" -eq 0 ]; then
   log "Geen shares opgegeven — niets te doen."
   exit 1
 fi
+
+for share in "${SHARES[@]}"; do
+  if [ "$share" = "SHARE-NAAM-INVULLEN" ]; then
+    log "Share staat nog op de placeholder — niets gedaan."
+    exit 1
+  fi
+done
 
 if [ "$(id -u)" -ne 0 ]; then
   log "Dit script hoort als root te draaien: zet in Intune 'Run script as signed-in user' op No."
@@ -244,8 +252,8 @@ has_ticket() {
 
 # Een TGT is nog geen toegang. Kerberos gaat in twee stappen: het TGT bewijst wie je bent, en
 # daarna vraag je een bewijs voor één dienst — cifs/<server>. Die tweede stap kan mislukken
-# terwijl de eerste prima is; op acisafiles geeft hij AADSTS700016, want Entra Kerberos staat
-# daar niet aan.
+# terwijl de eerste prima is; op een account zonder Entra Kerberos geeft hij AADSTS700016, want
+# de KDC kent dan geen toepassing voor die fileservice.
 #
 # Vooraf vragen en niet gewoon proberen: alleen als dit lukt weten we dat NetFS geen
 # aanmeldvenster gaat opzetten, en dat is de voorwaarde om Kerberos via NetFS te mogen mounten.

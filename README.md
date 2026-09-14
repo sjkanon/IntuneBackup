@@ -3,21 +3,22 @@
 `IntuneTemplate/` is de bron: de afgesproken Intune-policies in CIPP-templateformaat (Table
 Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds augustus 2026
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
-(Windows v3.8, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt.
+(Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
+overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-149 policies over vier platformen:
+155 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 102 | 1 | 6 | 5 | – | **114** |
+| [Windows](IntuneTemplate/WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
 | [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
 | [iOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
 
 ```mermaid
 flowchart LR
-  OIB["OpenIntuneBaseline<br/>Win v3.8 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>149 policies<br/><i>de bron</i>"]
+  OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
+  T["<b>IntuneTemplate/</b><br/>155 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -72,7 +73,7 @@ deel van de rest niets. Zet ze vóór je gaat toewijzen.
 | Instelling | Waar | Waarom |
 |---|---|---|
 | **Apparaten zonder toegewezen compliancebeleid markeren als → Niet-compliant** | Intune → Apparaten → Compliancebeleid → Nalevingsbeleidsinstellingen | Staat standaard op *Compliant*. Een apparaat dat door een filter, een uitsluitingsgroep of een ontbrekende primaire gebruiker buiten élke toewijzing valt, telt dan als compliant en komt gewoon door Conditional Access. De compliance-policies in deze baseline zeggen daar niets over — die worden pas geëvalueerd als er één is toegewezen. Zie [Rozemuller](https://rozemuller.com/why-does-this-intune-device-have-no-compliance-policy-assigned/). |
-| **Defender for Endpoint-connector** | Intune → Endpoint Security → Microsoft Defender for Endpoint | `WIN - U - Compliance Defender for Endpoint` toetst de risicoscore uit Defender. Zonder werkende connector komt die score nooit binnen en is de toets stil zonder oordeel. |
+| **Defender for Endpoint-connector** | Intune → Endpoint Security → Microsoft Defender for Endpoint | Nodig voor de onboarding via `WIN - D - Defender EDR Policy` en voor een toets op de risicoscore uit Defender. Die toets zit bewust niet in de baseline — ook OpenIntuneBaseline v4.0 heeft hem niet; `WIN - U - Compliance Defender Real Time Protection` en `Defender Security Intelligence` toetsen wat er óp het apparaat staat en werken zonder connector. Wil je de risicoscore toch meewegen, zet dan eerst de connector aan: zonder komt de score nooit binnen en is de toets stil zonder oordeel. |
 
 Op macOS is de Defender-kant een derde geval: die toets bestaat niet als instelling en vraagt een
 script — zie [`compliance/macos/`](compliance/macos/README.md).
@@ -203,6 +204,11 @@ git -c core.longpaths=true clone --depth 1 https://github.com/SkipToTheEndpoint/
 node scripts/import-oib.js --dry-run
 node scripts/import-oib.js
 ```
+
+> **Let op (september 2026):** draai de importer niet blind op de hele set. Een volledige run draait
+> op dit moment handwerk terug dat niet in het manifest staat — zie
+> [`ANALYSE.md`](ANALYSE.md#hoe-en-waarom-niet-met-import-oibjs). Kijk de `--dry-run` na en neem
+> alleen de bestanden over die je bedoelt.
 
 `IntuneTemplate/_manifest.json` bepaalt welke OIB-policy waar landt, met per policy de
 reden als er iets afwijkt. `.oib-source/` is gitignored: de gegenereerde templates zijn het

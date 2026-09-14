@@ -11,7 +11,7 @@ Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-078-DRemoteDesktopAndRPC` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Remote Desktop Services and RPC |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC |
 | Bestand | [`Baseline_WIN_D_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_Remote_Desktop_and_RPC.json) |
 
 ## Instellingen — 12

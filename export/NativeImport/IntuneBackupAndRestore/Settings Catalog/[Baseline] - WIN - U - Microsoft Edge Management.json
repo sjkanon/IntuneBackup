@@ -1,0 +1,93 @@
+{
+    "name": "[Baseline] - WIN - U - Microsoft Edge Management",
+    "description": "Staat de Edge Management Service toe op beheerde apparaten en laat het beleid dat daar wordt ingesteld vóór lokaal en MDM-beleid gaan, zodat Intune en die dienst elkaar niet tegenwerken. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management.",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 5,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementuserpolicyoverridescloudmachinepolicy_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementuserpolicyoverridescloudmachinepolicy",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementenabled_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementenabled",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "2",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementextensionsfeedbackenabled_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementextensionsfeedbackenabled",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementpolicyoverridesplatformpolicy_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementpolicyoverridesplatformpolicy",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "4",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "auditRuleInformation": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled",
+                "settingInstanceTemplateReference": null
+            }
+        }
+    ]
+}

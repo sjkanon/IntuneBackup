@@ -11,7 +11,7 @@ Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Burea
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-029-OnedriveSilentLogin` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - D - Configuration |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration |
 | Bestand | [`Baseline_WIN_D_Microsoft_OneDrive.json`](Baseline_WIN_D_Microsoft_OneDrive.json) |
 
 > Neemt ook de Known Folder Move-policy (028) over: alle 6 instellingen daarvan zitten hierin.

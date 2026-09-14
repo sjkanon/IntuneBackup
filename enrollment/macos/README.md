@@ -10,7 +10,7 @@ Uitrollen gaat via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | Bestand | Token | Standaardprofiel |
 |---|---|---|
-| `ITCE-macOS-Corporate-ADE-Baseline.json` | `ACI_APPLE_MDM` | ja (`isDefault: true`) |
+| `ITCE-macOS-Corporate-ADE-Baseline.json` | `ADE-TOKEN-NAAM` | ja (`isDefault: true`) |
 
 `isDefault: true` betekent dat élk apparaat dat onder dit token uit Apple Business synct dit
 profiel krijgt. Dat is bewust — Microsoft raadt aan zo snel mogelijk een standaardprofiel te
@@ -154,13 +154,13 @@ exporteer het resultaat hierheen. Het script blokkeert de foute combinatie voor 
 
 ```powershell
 # Wat zou er gebeuren
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ACI_APPLE_MDM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json -WhatIf
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json -WhatIf
 
 # Aanmaken
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ACI_APPLE_MDM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json
 
 # Bestaand profiel ophalen als JSON (om handwerk in de portal vast te leggen)
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ACI_APPLE_MDM -Export -OutDir .\enrollment\macos
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Export -OutDir .\enrollment\macos
 ```
 
 Een dynamische Entra-groep op de profielnaam scheelt handwerk bij het toewijzen van apps en

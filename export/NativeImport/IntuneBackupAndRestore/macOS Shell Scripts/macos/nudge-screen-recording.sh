@@ -49,7 +49,7 @@ BUNDLES=(
   "com.teamviewer.TeamViewerQS"
 )
 
-ORG_NAAM="ACI Europe"
+ORG_NAAM="de IT-afdeling"
 
 # Na dit aantal pogingen houdt het script op met vragen. Bij een run per uur is dat vier
 # dagen. Langer blijven vragen verandert een herinnering in een ergernis, en dan klikt iemand

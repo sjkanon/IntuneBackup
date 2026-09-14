@@ -16,7 +16,7 @@ levert Macs op die niet meer zijn terug te draaien zonder wipe; dat hoort met de
 voor je neus in de portal.
 
 .PARAMETER TokenName
-Naam van het enrollment program token in Intune, bijvoorbeeld ACI_APPLE_MDM.
+Naam van het enrollment program token in Intune, bijvoorbeeld ADE-TOKEN-NAAM.
 
 .PARAMETER Path
 Pad naar het JSON-bestand met de profieldefinitie.
@@ -28,10 +28,10 @@ Haalt alle profielen onder het token op en schrijft ze als JSON naar -OutDir.
 Doelmap voor -Export. Standaard enrollment/macos.
 
 .EXAMPLE
-.\New-MacOSEnrollmentPolicy.ps1 -TokenName ACI_APPLE_MDM -Path .\enrollment\macos\ACI-EP-MacOS-UF-Supervised-Corporate-01.json -WhatIf
+.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json -WhatIf
 
 .EXAMPLE
-.\New-MacOSEnrollmentPolicy.ps1 -TokenName ACI_APPLE_MDM -Export
+.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Export
 #>
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'Create')]
 param(

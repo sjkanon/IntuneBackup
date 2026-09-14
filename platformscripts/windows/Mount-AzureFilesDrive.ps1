@@ -48,8 +48,8 @@ Toewijzen aan een gebruikersgroep, niet aan apparaten.
 
 # --- De share ------------------------------------------------------------------------------
 #
-# \\acisafiles.file.core.windows.net\data\Public, in losse velden. SMB kent maar één
-# sharelaag: `data` is de share, `Public` is een map dáárin. Dat onderscheid is niet
+# \\<account>.file.core.windows.net\<share>\<submap>, in losse velden. SMB kent maar één
+# sharelaag: `<share>` is de share, `<submap>` is een map dáárin. Dat onderscheid is niet
 # cosmetisch — de verbinding en de share-level permissions hangen aan de share, de submap is
 # alleen het punt waar de schijf begint.
 #
@@ -59,9 +59,9 @@ Toewijzen aan een gebruikersgroep, niet aan apparaten.
 # platformscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de
 # templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
 
-$StorageAccount = 'acisafiles'
-$ShareName      = 'data'
-$ShareSubPath   = 'Public'
+$StorageAccount = 'STORAGE-ACCOUNT-INVULLEN'
+$ShareName      = 'SHARE-NAAM-INVULLEN'
+$ShareSubPath   = ''
 $DriveLetter    = 'Z'
 
 # --- Vanaf hier niets meer aanpassen -------------------------------------------------------

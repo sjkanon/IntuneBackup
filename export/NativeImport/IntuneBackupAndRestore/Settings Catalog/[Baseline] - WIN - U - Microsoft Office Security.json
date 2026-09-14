@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Office Security",
-    "description": "De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Security.",
+    "description": "De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 108,
+    "settingCount": 114,
     "settings": [
         {
             "id": "0",
@@ -2837,6 +2837,102 @@
                     "value": "user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security_l_turnofffilevalidation_0",
                     "children": []
                 }
+            }
+        },
+        {
+            "id": "108",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "109",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "110",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "111",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "112",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "113",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty_0"
+                            },
+                            "settingDefinitionId": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty",
+                            "settingInstanceTemplateReference": null
+                        }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions",
+                "settingInstanceTemplateReference": null
             }
         }
     ]

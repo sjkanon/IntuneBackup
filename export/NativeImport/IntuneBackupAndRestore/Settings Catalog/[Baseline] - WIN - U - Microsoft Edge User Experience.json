@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Edge User Experience",
-    "description": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - User Experience.",
+    "description": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 15,
+    "settingCount": 18,
     "settings": [
         {
             "id": "0",
@@ -33,34 +33,32 @@
             "id": "1",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
-                            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_notificationsallowedforurlsdesc",
-                            "settingInstanceTemplateReference": null,
-                            "auditRuleInformation": null,
                             "simpleSettingCollectionValue": [
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "*.microsoft.com"
+                                    "value": "[*.]microsoft.com"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "*.cloud.microsoft"
+                                    "value": "[*.]cloud.microsoft"
                                 }
-                            ]
+                            ],
+                            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_notificationsallowedforurlsdesc",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls",
+                "settingInstanceTemplateReference": null
             }
         },
         {
@@ -125,21 +123,6 @@
             "id": "5",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev117~policy~microsoft_edge~edgegames_gamermodeenabled",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "user_vendor_msft_policy_config_microsoft_edgev117~policy~microsoft_edge~edgegames_gamermodeenabled_0",
-                    "children": []
-                }
-            }
-        },
-        {
-            "id": "6",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_newpdfreaderenabled",
                 "settingInstanceTemplateReference": null,
                 "auditRuleInformation": null,
@@ -152,7 +135,7 @@
             }
         },
         {
-            "id": "7",
+            "id": "6",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled",
@@ -167,7 +150,7 @@
             }
         },
         {
-            "id": "8",
+            "id": "7",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_showmicrosoftrewards",
@@ -182,7 +165,7 @@
             }
         },
         {
-            "id": "9",
+            "id": "8",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_showacrobatsubscriptionbutton",
@@ -197,7 +180,7 @@
             }
         },
         {
-            "id": "10",
+            "id": "9",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~performance_recommended_startupboostenabled_recommended",
@@ -212,7 +195,7 @@
             }
         },
         {
-            "id": "11",
+            "id": "10",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~sleepingtabs_recommended_sleepingtabsenabled_recommended",
@@ -227,7 +210,7 @@
             }
         },
         {
-            "id": "12",
+            "id": "11",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_restoreonstartup_recommended",
@@ -255,7 +238,7 @@
             }
         },
         {
-            "id": "13",
+            "id": "12",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev79diff~policy~microsoft_edge_recommended~startup_recommended_newtabpagemanagedquicklinks_recommended",
@@ -270,7 +253,7 @@
             }
         },
         {
-            "id": "14",
+            "id": "13",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended",
@@ -282,6 +265,86 @@
                     "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended_1",
                     "children": []
                 }
+            }
+        },
+        {
+            "id": "14",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled_0"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "15",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "16",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings_1"
+                            },
+                            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings",
+                            "settingInstanceTemplateReference": null
+                        }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "17",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
+                                "settingValueTemplateReference": null,
+                                "value": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility_1"
+                            },
+                            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility",
+                            "settingInstanceTemplateReference": null
+                        }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility",
+                "settingInstanceTemplateReference": null
             }
         }
     ]

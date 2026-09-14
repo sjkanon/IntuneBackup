@@ -11,7 +11,7 @@ Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoa
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-072-DLoginAndLockScreen` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Login and Lock Screen |
 | Bestand | [`Baseline_WIN_D_Login_and_Lock_Screen.json`](Baseline_WIN_D_Login_and_Lock_Screen.json) |
 
 ## Instellingen — 8

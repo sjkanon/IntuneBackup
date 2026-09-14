@@ -14,7 +14,7 @@ Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als
 | Bron | ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — instelling uit CIS v3 Microsoft Edge L1 |
 | Bestand | [`Baseline_WIN_D_Cryptography.json`](Baseline_WIN_D_Cryptography.json) |
 
-> ISMP19 eist TLS 1.2 of hoger voor web- en clouddiensten. De WinINet-stack staat al goed (Internet Explorer Legacy), maar Edge zelf accepteerde tot nu toe wat de server aanbood. Let op: interne systemen die alleen TLS 1.0/1.1 spreken worden hierdoor onbereikbaar — dat is precies waarom dit een pilotpolicy is.
+> Gangbaar beleid eist TLS 1.2 of hoger voor web- en clouddiensten. De WinINet-stack staat al goed (Internet Explorer Legacy), maar Edge zelf accepteerde tot nu toe wat de server aanbood. Let op: interne systemen die alleen TLS 1.0/1.1 spreken worden hierdoor onbereikbaar — dat is precies waarom dit een pilotpolicy is.
 
 ## Instellingen — 2
 

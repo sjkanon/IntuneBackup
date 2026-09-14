@@ -77,11 +77,12 @@
   "upstreams": {
     "oib": {
       "repo": "https://github.com/SkipToTheEndpoint/OpenIntuneBaseline",
-      "windows": "v3.8",
+      "windows": "v4.0",
       "macos": "v1.0",
       "byod": "ongenummerd",
-      "retrievedAt": "2026-08-14",
-      "checkout": "git -c core.longpaths=true clone --depth 1 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source"
+      "retrievedAt": "2026-09-14",
+      "checkout": "git -c core.longpaths=true clone --branch windows-v4.0 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source && git -C .oib-source checkout f247604",
+      "let_op": "Windows v4.0 was bij deze import nog niet uitgebracht: overgenomen van branch windows-v4.0 op commit f247604 (9 september 2026), de CHANGELOG noemt als datum nog 2026-09-xx. Haal de import opnieuw door zodra de tag windows-v4.0 er is en kijk de diff na."
     },
     "intuneadmin": {
       "repo": "https://github.com/IntuneAdmin/IntuneBaselines",
@@ -95,14 +96,6 @@
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Attack Surface Reduction - D - ASR Rules (Audit Mode) - v3.1.json",
       "reason": "Alternatief voor de L2-variant, niet aanvullend: dezelfde 18 ASR-regels op audit in plaats van block. De auditvariant zit sinds augustus 2026 wel in de baseline, maar dan als CIPP-template (Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode) — OIB's versie zou daar een tweede, afwijkende kopie naast zetten."
-    },
-    {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies (24H2+) - v3.6.json",
-      "reason": "Alternatief voor de basisvariant (20 van de 23 instellingen overlappen). De 24H2+-variant vereist dat élk apparaat op 24H2 of hoger zit; kies 'm bewust en vervang dan de basisvariant."
-    },
-    {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows LAPS - D - LAPS Configuration - v3.1.json",
-      "reason": "De 24H2+-variant is hier wél overgenomen: onze bestaande LAPS-policy had het automatische accountbeheer al, dus de basisvariant zou een stap terug zijn."
     },
     {
       "source": "WINDOWS/IntuneManagement/DriverUpdateProfiles/",
@@ -166,11 +159,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP08",
-          "ISMP11"
-        ]
+        "partis": []
       },
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD.",
       "bewijs": "Root, USB-foutopsporing en installatie uit onbekende bronnen zijn de drie voorwaarden waaronder de Android-sandbox niet meer houdt wat hij belooft. Play Integrity op `hardwareBacked` is daarbij het verschil dat telt: de basisvariant is in software te vervalsen, de hardware-variant leunt op de secure element van het toestel. IntuneAdmin en UniFy zetten die op `basic`; wij houden `hardwareBacked` aan, gelijk aan wat de App Protection-policy in de baseline al eist.",
@@ -201,11 +190,7 @@
           "art. 21(2)(i) toegangsbeleid en authenticatie",
           "art. 21(2)(h) cryptografie en versleuteling"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02",
-          "ISMP19"
-        ]
+        "partis": []
       },
       "bron": "OpenIntuneBaseline-conventie voor compliance; waarden gelijkgetrokken met de PIN-eis van zes tekens in de bestaande App Protection-policy en met de Android-eis in IntuneAdmin.",
       "bewijs": "Op een werkprofiel staat de bedrijfsdata; de toegangscode van dat profiel is wat die data scheidt van de privékant van hetzelfde toestel. Zonder eis is dat profiel met een veeggebaar te openen. Versleuteling van de opslag is de tweede helft: een niet-versleuteld toestel geeft zijn data prijs zodra iemand de opslag uitleest, hoe sterk de code ook is. Android versleutelt sinds versie 10 standaard, dus deze toets meldt vooral toestellen die dat om welke reden dan ook niet doen.",
@@ -253,11 +238,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP08",
-          "ISMP11"
-        ]
+        "partis": []
       },
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Baseline - iOSiPadOS - Device Health) en UniFy-Endpoint iOS BYOD.",
       "bewijs": "Op een apparaat met jailbreak is de sandbox weg waar de hele iOS-beveiliging op rust: elke app kan dan bij de gegevens van elke andere app, inclusief die van Outlook en Teams. Dit is de enige toets die dat detecteert, en zonder compliance-policy is 'vereis een compliant apparaat' in Conditional Access voor iOS een lege huls — er is geen enkele regel om aan te voldoen.",
@@ -287,11 +268,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bron": "OpenIntuneBaseline-conventie voor compliance; waarden gelijkgetrokken met de PIN-eis van zes tekens in de bestaande App Protection-policy.",
       "bewijs": "Een toestel zonder schermvergrendeling is een toestel waarvan iedereen die het oppakt de mail kan lezen. Zes tekens en geen eenvoudige code (geen 123456, geen 111111) is de waarde die Apple zelf aanhoudt en die de App Protection-policy in de baseline al voor de app-PIN eist — deze policy trekt die eis door naar het toestel zelf.",
@@ -341,7 +318,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar het beheerdersaccount itceadmin gebruikt in plaats van itce-aci-adm — kies één van de twee routes.",
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (itceadmin) gebruikt — kies één van de twee routes.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het standaard-inschrijfprofiel; ze verschillen in precies één instelling. Vergrendelde inschrijving is achteraf alleen met een wipe terug te draaien.",
@@ -353,7 +330,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als standaardgebruiker; beheer loopt via het verborgen servicedeskaccount.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar het beheerdersaccount itceadmin gebruikt in plaats van itce-aci-adm — kies één van de twee routes.",
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (itceadmin) gebruikt — kies één van de twee routes.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het beheerders-inschrijfprofiel; ze verschillen in precies één instelling.",
@@ -437,10 +414,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02"
-        ]
+        "partis": []
       },
       "bron": "Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de macOS settings catalog — waarden één op één overgenomen uit [Baseline] - MAC - U - Compliance Password en geverifieerd tegen de settings catalog-definities (minLength max 16, maxInactivity max 15).",
       "bewijs": "Dit is geen nieuwe eis maar het sluitstuk van een eis die er al staat. OVERZICHT.md benoemt het gat zelf: MAC - U - Compliance Password toetst op een wachtwoord van acht tekens met vergrendeling na vijftien minuten, maar er is geen enkele policy die dat op de Mac instelt. Een Mac zonder schermvergrendeling wordt daardoor wel als niet-compliant gemeld en krijgt de instelling niet opgelegd — de gebruiker ziet een rood vinkje en kan er zelf niets aan doen.",
@@ -465,10 +439,10 @@
       "displayName": "[Baseline] - MAC - D - Azure Files Cloud Kerberos",
       "doel": "Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt.",
       "bron": "Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities",
-      "note": "Hoort bij [Baseline] - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen. `generate-baseline.js` laat die ene instelling bewust buiten de check — in de tenant staat de GUID en niet het token, dus een check die het token als verwachte waarde meeneemt is per definitie rood.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Op 9 september 2026 vastgesteld dat dit vandaag niet kan.** `acisafiles` gebruikt Microsoft Entra Domain Services als identity source; in het portaal staan Entra Kerberos en AD DS daardoor grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/acisafiles.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in shellscripts/macos/README.md.\n\n**Wat er nodig is om dit uit te rollen.** `acisafiles` blijft op Entra Domain Services staan zolang AVD eraan hangt; dat account valt dus af. Wie deze policy wil gebruiken heeft een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `shellscripts/macos/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — er is geen on-premises AD in beeld. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
+      "note": "Hoort bij [Baseline] - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen. `generate-baseline.js` laat die ene instelling bewust buiten de check — in de tenant staat de GUID en niet het token, dus een check die het token als verwachte waarde meeneemt is per definitie rood.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Een storage account dat al een andere identity source heeft valt af.** Gebruikt het account Microsoft Entra Domain Services — bijvoorbeeld omdat een AVD-omgeving eraan hangt — dan staan Entra Kerberos en AD DS in het portaal grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in shellscripts/macos/README.md.\n\n**Wat er nodig is om dit uit te rollen.** Een storage account met Entra Kerberos als identity source. Staat het bestaande account op iets anders en kan dat niet om, dan is er een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `shellscripts/macos/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — deze baseline gaat uit van cloud-only apparaten. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
       "herkomst": "eigen",
       "fase": 3,
-      "faseWaarom": "Wacht op een storage account met Entra Kerberos, en dat is op 9 september 2026 niet acisafiles. Dat account staat op Microsoft Entra Domain Services omdat de AVD-omgeving eraan hangt, en een storage account kan maar één identity source hebben. Omzetten is daarmee geen optie: dat raakt AVD. Op een Mac met een geldig cloud-TGT levert dit AADSTS700016 op — de KDC kent geen toepassing voor die fileservice. Het profiel zelf is af en account-onafhankelijk: `Hosts` staat op `.windows.net` en dekt dus elk storage account. Zodra er één is met Entra Kerberos kan dit naar fase 1, met als tweede voorwaarde dat Microsoft de tenant voor de macOS-preview aanzet (azurefiles@microsoft.com)."
+      "faseWaarom": "Wacht op een storage account met Entra Kerberos als identity source. Een account dat al op Microsoft Entra Domain Services of AD DS staat — bijvoorbeeld omdat een AVD-omgeving eraan hangt — kan dat niet tegelijk hebben, en omzetten raakt alles wat al op dat account draait. Op een Mac met een geldig cloud-TGT levert zo'n account AADSTS700016 op — de KDC kent geen toepassing voor die fileservice. Het profiel zelf is af en account-onafhankelijk: `Hosts` staat op `.windows.net` en dekt dus elk storage account. Zodra er één is met Entra Kerberos kan dit naar fase 1, met als tweede voorwaarde dat Microsoft de tenant voor de macOS-preview aanzet (azurefiles@microsoft.com)."
     },
     {
       "target": "Baseline_MAC_D_Privacy_Preferences",
@@ -523,15 +497,12 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19"
-        ]
+        "partis": []
       },
       "bron": "Eigen baseline — Intune wifi-profiel (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
       "bewijs": "Een centraal uitgerold wifi-profiel is wat voorkomt dat het netwerkwachtwoord per mail, per briefje of per collega rondgaat: de gebruiker hoeft het niet te kennen om verbinding te maken. Het maakt roteren ook uitvoerbaar — één wijziging hier bereikt de hele vloot, terwijl een handmatig ingevoerd wachtwoord bij elke rotatie opnieuw langs iedereen moet. Dat is de kern van A.8.20: netwerktoegang beheerd in plaats van doorverteld.",
       "universeel": "Ja. Elke Mac die op locatie komt heeft dit profiel nodig, en een Mac die dat nooit doet heeft er geen last van — een profiel voor een SSID die niet in de lucht is doet niets. De grens ligt bij een vestiging met een eigen SSID: die vraagt een tweede profiel, niet een aangepast profiel.",
-      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. Twee macOS-eigenaardigheden: Apple's wifi-payload kent maar één personal-variant, dus `wpaPersonal` dekt WPA, WPA2 én WPA3 waar Windows apart `wpa2Personal` heeft; en macOS kent in dit profieltype geen tegenhanger van `connectToPreferredNetwork` — de voorkeursvolgorde volgt daar uit de netwerkvolgorde van het apparaat zelf. Dit is een gewone device configuration en geen custom .mobileconfig, dus de PSK staat als leesbaar veld in het template en niet verstopt in een base64-payload.",
+      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten. Twee macOS-eigenaardigheden: Apple's wifi-payload kent maar één personal-variant, dus `wpaPersonal` dekt WPA, WPA2 én WPA3 waar Windows apart `wpa2Personal` heeft; en macOS kent in dit profieltype geen tegenhanger van `connectToPreferredNetwork` — de voorkeursvolgorde volgt daar uit de netwerkvolgorde van het apparaat zelf. Dit is een gewone device configuration en geen custom .mobileconfig, dus de PSK staat als leesbaar veld in het template en niet verstopt in een base64-payload.",
       "herkomst": "eigen",
       "fase": 3,
       "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan."
@@ -549,16 +520,12 @@
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen",
           "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bron": "Eigen baseline — Intune wifi-profiel (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e).",
       "bewijs": "Zonder tweede profiel is een storing op het bedrijfsnetwerk meteen een apparaat zonder verbinding — en dus zonder Intune, zonder Defender-signalen en zonder enige mogelijkheid om op afstand iets recht te zetten, precies op het moment dat je dat nodig hebt. Het gastnetwerk als terugval houdt het apparaat bereikbaar. Dat dat netwerk minder vertrouwd is verandert niets aan de rest van de baseline: firewall, schijfversleuteling en Defender gaan nergens uit van een vertrouwd netwerk.",
       "universeel": "Ja, met dezelfde grens als bij Wifi Corporate: een vestiging met een ander gastnetwerk vraagt een eigen profiel. Let op dat het gastnetwerk hiermee een beheerd netwerk wordt — als het een open netwerk met captive portal is in plaats van PSK, klopt dit template niet en is `wiFiSecurityType: open` de juiste vorm.",
-      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. Dit profiel is de terugval, niet de eerste keuze: rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. macOS bepaalt de voorkeursvolgorde zelf op basis van de netwerkvolgorde van het apparaat; wil je die hard vastleggen, dan is dat handwerk of een script en niet dit profiel.",
+      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten. Dit profiel is de terugval, niet de eerste keuze: rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. macOS bepaalt de voorkeursvolgorde zelf op basis van de netwerkvolgorde van het apparaat; wil je die hard vastleggen, dan is dat handwerk of een script en niet dit profiel.",
       "herkomst": "eigen",
       "fase": 3,
       "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan, en niet eerder dan Wifi Corporate."
@@ -600,11 +567,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging bij verwerving en onderhoud"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP11",
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bewijs": "Dezelfde leemte als bij Windows, met een extra scherpe kant: de baseline zet het macOS-updatebeleid declaratief, en dat werkt pas vanaf macOS 14. Een Mac op 13 krijgt dat profiel niet, wordt dus nooit bijgewerkt, en was tot nu toe volledig compliant. Het apparaat dat het meest achterloopt was daarmee het apparaat waar niemand iets van hoorde.",
       "universeel": "Elke Mac in beheer. De ondergrens is de versie waaronder het updatebeleid van de baseline niet aankomt.",
@@ -682,13 +645,10 @@
         ],
         "partis": [
           "IS.I.OR.245 registratie en traceerbaarheid"
-        ],
-        "isms": [
-          "ISMP02"
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.5.15 en A.8.5, NIS2 art. 21(2)(i), EASA Part-IS IS.I.OR.245 — instellingen uit CIS v4 Windows 11 L1",
-      "note": "ISMP02 eist de eerste twee letterlijk: een algemene waarschuwing bij het aanmelden, en geen systeem- of gebruikersidentificatie vóór een geslaagde aanmelding. De banner is juridisch relevant bij misbruik; pas de tekst aan op de eigen organisatienaam vóór uitrol. Het verbergen van de laatste gebruikersnaam is merkbaar voor gebruikers — die moeten voortaan hun volledige naam typen — dus communiceer die vóór je 'm toewijst. De drie andere instellingen sluiten de aanmeldroutes af die het beleid niet noemt als goedgekeurde methode: het beeldwachtwoord, de oude convenience-PIN (níet de Windows Hello-PIN, die blijft werken) en de beveiligingsvragen voor lokale accounts — dat laatste omdat ISMP02 identiteitsverificatie bij een reset eist, en beveiligingsvragen dat juist omzeilen.",
+      "note": "Informatiebeveiligingsbeleid eist de eerste twee vaak letterlijk: een algemene waarschuwing bij het aanmelden, en geen systeem- of gebruikersidentificatie vóór een geslaagde aanmelding. De banner is juridisch relevant bij misbruik; pas de tekst aan op de eigen organisatienaam vóór uitrol. Het verbergen van de laatste gebruikersnaam is merkbaar voor gebruikers — die moeten voortaan hun volledige naam typen — dus communiceer die vóór je 'm toewijst. De drie andere instellingen sluiten de aanmeldroutes af die het beleid niet noemt als goedgekeurde methode: het beeldwachtwoord, de oude convenience-PIN (níet de Windows Hello-PIN, die blijft werken) en de beveiligingsvragen voor lokale accounts — dat laatste omdat een wachtwoordreset om identiteitsverificatie hoort te vragen, en beveiligingsvragen dat juist omzeilen.",
       "bewijs": "De aanmeldbanner is geen technische maatregel maar een juridische: zonder expliciete waarschuwing vooraf is 'onbevoegd gebruik' bij een incident aantoonbaar moeilijker hard te maken. De andere vijf zijn dat wel — het verbergen van de laatst aangemelde gebruikersnaam haalt de helft van een aanmeldpoging (de gebruikersnaam) weg bij wie het scherm ziet, en het beeldwachtwoord, de convenience-PIN en de beveiligingsvragen zijn drie aanmeldroutes die het beleid niet als goedgekeurd noemt. Alle vijf staan in CIS v4 Windows 11 L1.",
       "universeel": "Geldt voor elk Windows-apparaat. Pas wel eerst de bannertekst aan op de eigen organisatienaam — die staat er nu generiek in.",
       "herkomst": "eigen",
@@ -708,10 +668,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 en de Microsoft Security Baseline — waarden geverifieerd tegen Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) en LocalPoliciesSecurityOptions.",
       "bewijs": "Dit is de oudste en best onderbouwde maatregel tegen wachtwoord-raden die er is: zonder drempel kan iemand met fysieke toegang of met een gestolen laptop onbeperkt PIN's en wachtwoorden proberen. CIS, de Microsoft Security Baseline en NIST SP 800-63B schrijven hem alle drie voor. De baseline dwingt vandaag wél wachtwoordlengte (14) en -historie (24) af, maar telt mislukte pogingen nergens — die twee samen zijn precies het gat.",
@@ -726,7 +683,7 @@
       "target": "Baseline_WIN_D_Administrator_Protection",
       "displayName": "[Baseline] - WIN - D - Administrator Protection",
       "doel": "Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Administrator Protection",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection",
       "note": "Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.",
       "herkomst": "oib",
       "fase": 2,
@@ -742,13 +699,10 @@
           "A.8.1 Eindpuntapparatuur van gebruikers"
         ],
         "nis2": [],
-        "partis": [],
-        "isms": [
-          "ISMP22"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.5.10 en A.8.1 — instelling uit de Visual Studio-benchmark van IntuneAdmin",
-      "note": "ISMP22 staat GitHub Copilot toe, maar uitsluitend voor softwareontwikkeling en uitsluitend via de goedgekeurde licentie. Zonder deze instelling kan een ontwikkelaar zijn privéaccount koppelen, en dan verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet.",
+      "note": "Bedoeld voor een AI-beleid dat GitHub Copilot alleen toestaat voor softwareontwikkeling en alleen via de licentie van de organisatie. Zonder deze instelling kan een ontwikkelaar zijn privéaccount koppelen, en dan verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet.",
       "bewijs": "Zonder deze instelling koppelt een ontwikkelaar zijn privé-GitHub-account aan Visual Studio en verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet. De zakelijke Copilot-licentie blijft gewoon werken; alleen de persoonlijke variant wordt geblokkeerd.",
       "universeel": "Geldt níet voor elk apparaat in de zin dat het overal effect heeft: alleen apparaten met Visual Studio merken er iets van. Maar hij is wél overal veilig toe te wijzen — op een apparaat zonder Visual Studio doet de instelling niets en veroorzaakt ze niets.",
       "herkomst": "intuneadmin",
@@ -759,17 +713,17 @@
       "target": "Baseline_WIN_D_Attack_Surface_Reduction",
       "displayName": "[Baseline] - WIN - D - Attack Surface Reduction",
       "doel": "Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: macro's die processen starten, uitvoerbare inhoud uit e-mail en USB, misbruik van Office- en scriptmotoren, en het uitlezen van inloggegevens uit LSASS.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Attack Surface Reduction - D - ASR Rules (L2)",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2)",
       "note": "Vervangt de vorige ASR-policy: dezelfde 18 regels plus 2 nieuwe, allemaal op block.",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Audit and Event Logging - v3.7.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Audit and Event Logging - v4.0.json",
       "target": "Baseline_WIN_D_Audit_and_Event_Logging",
       "displayName": "[Baseline] - WIN - D - Audit and Event Logging",
       "doel": "Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Audit and Event Logging",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging",
       "note": "23 -> 40 instellingen; alle bestaande zaten er al in.",
       "herkomst": "oib",
       "fase": 1
@@ -788,9 +742,6 @@
         ],
         "partis": [
           "IS.I.OR.245 registratie en traceerbaarheid"
-        ],
-        "isms": [
-          "ISMP13"
         ]
       },
       "bron": "CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instelling overgenomen uit het NIS2-profiel van IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie.",
@@ -805,7 +756,7 @@
       "target": "Baseline_WIN_D_Automatic_Restart_Sign_On",
       "displayName": "[Baseline] - WIN - D - Automatic Restart Sign-On",
       "doel": "Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer aan, zodat opstartprogramma's draaien zonder dat het apparaat onbeheerd ontgrendeld staat.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Automatic Restart Sign-On",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Automatic Restart Sign-On",
       "herkomst": "oib",
       "fase": 1
     },
@@ -814,7 +765,7 @@
       "target": "Baseline_WIN_D_BitLocker",
       "displayName": "[Baseline] - WIN - D - BitLocker",
       "doel": "Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Encryption - D - BitLocker (OS Disk)",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk)",
       "note": "OIB dekt alleen de OS-schijf. De 11 eigen instellingen voor vaste en verwisselbare schijven en de preboot-PIN blijven staan — anders zou versleuteling van datadrives stilzwijgend uitgaan.",
       "herkomst": "oib",
       "fase": 1
@@ -834,14 +785,10 @@
         ],
         "partis": [
           "IS.I.OR.250 continuiteit"
-        ],
-        "isms": [
-          "ISMP09",
-          "ISMP10"
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.5.29, A.5.30 en A.8.14, NIS2 art. 21(2)(c) — instellingen uit de Modern Workplace-set van IntuneAdmin",
-      "note": "ISMP09 en ISMP10 gaan over continuïteit maar hebben op de werkplek zelf geen enkele technische maatregel. Dit is de goedkoopste die er is. De Wi-Fi-gegevens uit het bronprofiel zijn bewust weggelaten: die zijn tenant-specifiek en horen niet in een gedeelde baseline. Zonder die gegevens werkt het herstel over een bekabelde verbinding; heb je een vloot zonder ethernet, vul ze dan aan vóór uitrol.",
+      "note": "Continuïteitsbeleid heeft op de werkplek zelf zelden een technische maatregel. Dit is de goedkoopste die er is. De Wi-Fi-gegevens uit het bronprofiel zijn bewust weggelaten: die zijn tenant-specifiek en horen niet in een gedeelde baseline. Zonder die gegevens werkt het herstel over een bekabelde verbinding; heb je een vloot zonder ethernet, vul ze dan aan vóór uitrol.",
       "bewijs": "Quick Machine Recovery haalt een apparaat dat niet meer opstart zelf uit de brand: het start in WinRE, haalt een herstelpakket op uit de cloud en repareert zichzelf. De aanleiding is bekend — bij de CrowdStrike-storing van juli 2024 moest elk getroffen apparaat fysiek worden aangeraakt. Microsoft heeft de functie daar expliciet op gebouwd.",
       "universeel": "Geldt voor elk Windows-apparaat en is onzichtbaar tot het moment dat het misgaat.",
       "herkomst": "intuneadmin",
@@ -852,7 +799,7 @@
       "target": "Baseline_WIN_D_Cloud_Optimized_Content",
       "displayName": "[Baseline] - WIN - D - Cloud Optimized Content",
       "doel": "Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (device-deel)",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (device-deel)",
       "splitScope": "D",
       "note": "Het device-deel van dezelfde OIB-policy.",
       "herkomst": "oib",
@@ -863,7 +810,7 @@
       "target": "Baseline_WIN_D_Config_Refresh",
       "displayName": "[Baseline] - WIN - D - Config Refresh",
       "doel": "Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Config Refresh",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Config Refresh",
       "note": "Zet lokaal gewijzigde MDM-instellingen periodiek terug — het tegengif tegen handmatig geknoei op een device.",
       "herkomst": "oib",
       "fase": 1
@@ -879,13 +826,10 @@
         "nis2": [
           "art. 21(2)(h) cryptografie en versleuteling"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — instelling uit CIS v3 Microsoft Edge L1",
-      "note": "ISMP19 eist TLS 1.2 of hoger voor web- en clouddiensten. De WinINet-stack staat al goed (Internet Explorer Legacy), maar Edge zelf accepteerde tot nu toe wat de server aanbood. Let op: interne systemen die alleen TLS 1.0/1.1 spreken worden hierdoor onbereikbaar — dat is precies waarom dit een pilotpolicy is.",
+      "note": "Gangbaar beleid eist TLS 1.2 of hoger voor web- en clouddiensten. De WinINet-stack staat al goed (Internet Explorer Legacy), maar Edge zelf accepteerde tot nu toe wat de server aanbood. Let op: interne systemen die alleen TLS 1.0/1.1 spreken worden hierdoor onbereikbaar — dat is precies waarom dit een pilotpolicy is.",
       "bewijs": "Edge accepteerde tot nu toe wat de server aanbood, TLS 1.0 en 1.1 inbegrepen. Die twee zijn sinds 2021 door alle browserleveranciers afgeschaft en zijn met bekende aanvallen (BEAST, POODLE) te breken. De WinINet-stack stond al goed via Internet Explorer Legacy; Edge zelf niet.",
       "universeel": "Geldt voor elk apparaat met Edge — dat zijn ze allemaal. **Voorbehoud:** een intern systeem dat alleen TLS 1.0/1.1 spreekt wordt hierdoor onbereikbaar. Dat is precies de bedoeling, maar het moet wel bekend zijn vóór uitrol.",
       "herkomst": "eigen",
@@ -902,46 +846,42 @@
           "A.8.11 Datamaskering"
         ],
         "nis2": [],
-        "partis": [],
-        "isms": [
-          "ISDP01",
-          "ISMP13"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.5.34 en A.8.11, AVG art. 5(1)(c) dataminimalisatie — instellingen uit CIS v4 Windows 11 L1",
-      "note": "De baseline zet telemetrie bewust op Optioneel omdat Endpoint Analytics en Windows Update-rapportage erop leunen. Dat is een verdedigbare keuze, maar hij staat op gespannen voet met ISDP01. Deze twee instellingen halen de scherpe kant eraf zonder de rapportage te breken: het niveau blijft staan, maar aanvullende diagnostische logbestanden en geheugendumps — waar gebruikersgegevens in kunnen zitten — gaan niet mee. Dat is het antwoord op de vraag die een FG of auditor hier stelt.",
+      "note": "De baseline zet telemetrie bewust op Optioneel omdat Endpoint Analytics en Windows Update-rapportage erop leunen. Dat is een verdedigbare keuze, maar hij staat op gespannen voet met dataminimalisatie onder de AVG. Deze twee instellingen halen de scherpe kant eraf zonder de rapportage te breken: het niveau blijft staan, maar aanvullende diagnostische logbestanden en geheugendumps — waar gebruikersgegevens in kunnen zitten — gaan niet mee. Dat is het antwoord op de vraag die een FG of auditor hier stelt.",
       "bewijs": "De baseline zet telemetrie bewust op Optioneel omdat Endpoint Analytics en Windows Update-rapportage erop leunen. Deze twee instellingen halen daar de scherpe kant af zonder die rapportage te breken: aanvullende diagnostische logbestanden en geheugendumps — waar gebruikersgegevens in kunnen zitten — gaan niet mee. Dat is het antwoord op de vraag die een FG of auditor hier stelt.",
       "universeel": "Geldt voor elk Windows-apparaat en is voor gebruikers onmerkbaar.",
       "herkomst": "eigen",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Defender Antivirus - D - Additional Configuration - v3.8.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Defender Antivirus - D - Additional Configuration - v4.0.json",
       "target": "Baseline_WIN_D_Defender_Additional_Configuration",
       "displayName": "[Baseline] - WIN - D - Defender Additional Configuration",
       "doel": "Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Defender Antivirus - D - Additional Configuration",
-      "note": "Instellingen die niet in het Endpoint Security-antivirustemplate passen en dus een losse Settings Catalog-policy vereisen.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration",
+      "note": "Instellingen die niet in het Endpoint Security-antivirustemplate passen en dus een losse Settings Catalog-policy vereisen. Sinds OIB v4.0: 'Disallow Exploit Protection Override' aan (gebruikers konden wel exploit-protectioninstellingen maken maar ze zonder beheerrechten niet meer weghalen), en 'Hide Exclusions From Local Users' eruit omdat 'Hide Exclusions From Local Admins' die al impliceert.",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - AV Configuration - v3.3.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - AV Configuration - v4.0.json",
       "target": "Baseline_WIN_D_Defender_Antivirus",
       "displayName": "[Baseline] - WIN - D - Defender Antivirus",
       "doel": "Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - AV Configuration",
-      "note": "11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration",
+      "note": "11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd. Sinds OIB v4.0 zet OIB matig en hoog zelf op quarantaine; de eigen override voor matig is daarmee overbodig geworden en weggehaald. Laag blijft een override.",
       "overrides": [
         {
           "settingDefinitionId": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats",
           "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats_quarantine",
-          "reason": "Quarantaine in plaats van block: een fout-positief op een eigen toepassing is dan terug te draaien. IntuneAdmin doet hetzelfde. Hoog en ernstig blijven remove."
+          "reason": "Quarantaine in plaats van block: een fout-positief op een eigen toepassing is dan terug te draaien. IntuneAdmin doet hetzelfde. Matig en hoog zet OIB sinds v4.0 zelf op quarantaine; ernstig blijft remove."
         },
         {
-          "settingDefinitionId": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats",
-          "value": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats_quarantine",
-          "reason": "Quarantaine in plaats van remove: remove verwijdert het bestand definitief, en juist op deze twee niveaus zitten de fout-positieven."
+          "settingDefinitionId": "device_vendor_msft_policy_config_defender_submitsamplesconsent",
+          "value": "device_vendor_msft_policy_config_defender_submitsamplesconsent_1",
+          "reason": "OIB v4.0 zet dit op 'alle voorbeelden automatisch versturen'. Dat stuurt ook documenten en andere bestanden met persoonsgegevens zonder vraag naar Microsoft. 'Veilige voorbeelden automatisch' is de Microsoft-standaard en houdt die bestanden binnen; cloudbescherming werkt daar gewoon mee."
         }
       ],
       "herkomst": "oib",
@@ -1008,22 +948,18 @@
           "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer",
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP11",
-          "ISMP09"
-        ]
+        "partis": []
       },
       "bewijs": "Moderne ransomware versleutelt niet het apparaat waarop hij landt, maar de bestandsshares eromheen — dat is sneller en raakt meer. De rest van de baseline kijkt naar wat er óp het apparaat gebeurt; deze instelling kijkt naar wat het apparaat bij ánderen doet, en dat was tot nu toe een blinde vlek. Defender herkent het patroon van een proces dat over SMB in hoog tempo bestanden herschrijft en zet dat stil.",
       "universeel": "Elk Windows-apparaat met Defender Antivirus, en juist ook het apparaat dat zelf niets belangrijks bevat — dat is namelijk het apparaat waarop de aanvaller landt.",
       "note": "De agressiviteit staat op Low: alleen blokkeren als Defender voor 100 procent zeker is. Dat is de waarde met de kleinste kans op een fout-positief, en een fout-positief is hier duur — je blokkeert dan een legitiem proces dat bestanden op een share bijwerkt, bijvoorbeeld een back-up of een sync-tool. Medium en High blokkeren vanaf 99 respectievelijk 90 procent zekerheid; overweeg die pas als de rapportage laat zien dat er niets legitiems geraakt wordt. IntuneAdmin levert deze instelling op Audit; hier staat Block, want detecteren zonder blokkeren stopt geen versleuteling."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - Security Experience - v3.3.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - Security Experience - v4.0.json",
       "target": "Baseline_WIN_D_Defender_Security_Experience",
       "displayName": "[Baseline] - WIN - D - Defender Security Experience",
       "doel": "Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - Security Experience",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1032,7 +968,7 @@
       "target": "Baseline_WIN_D_Defender_Update_Ring_1_Pilot",
       "displayName": "[Baseline] - WIN - D - Defender Update Ring 1 Pilot",
       "doel": "Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je een slechte update opmerkt vóór de rest van de organisatie 'm krijgt.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 1 - Pilot",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot",
       "note": "Ringen zetten dezelfde drie instellingen met andere waarden. Alleen ring 3 staat op All Devices; ring 1 en 2 horen op een pilot-/UAT-groep en hebben daarom geen assignment.",
       "herkomst": "oib",
       "fase": 4,
@@ -1044,7 +980,7 @@
       "target": "Baseline_WIN_D_Defender_Update_Ring_2_UAT",
       "displayName": "[Baseline] - WIN - D - Defender Update Ring 2 UAT",
       "doel": "Tweede ring voor Defender-updates: loopt achter op de pilot en voor op productie.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 2 - UAT",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT",
       "herkomst": "oib",
       "fase": 4,
       "faseWaarom": "UAT-groep voor Defender-updates.",
@@ -1055,7 +991,7 @@
       "target": "Baseline_WIN_D_Defender_Update_Ring_3_Production",
       "displayName": "[Baseline] - WIN - D - Defender Update Ring 3 Production",
       "doel": "Productiering voor Defender-updates: krijgt definities en engineversies pas nadat ring 1 en 2 ze zonder problemen hebben gedraaid.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 3 - Production",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1064,7 +1000,7 @@
       "target": "Baseline_WIN_D_Delivery_Optimisation",
       "displayName": "[Baseline] - WIN - D - Delivery Optimisation",
       "doel": "Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van internet te halen, en begrenst hoeveel bandbreedte dat mag kosten.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows Update for Business - D - Delivery Optimisation",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1073,19 +1009,19 @@
       "target": "Baseline_WIN_D_Device_Guard_and_Credential_Guard",
       "displayName": "[Baseline] - WIN - D - Device Guard and Credential Guard",
       "doel": "Zet virtualisatie-gebaseerde beveiliging, Credential Guard en geheugenintegriteit aan, zodat inloggegevens in een afgeschermd deel van het geheugen staan. Vraagt een herstart en kan oude stuurprogramma's blokkeren.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Device Guard, Credential Guard and HVCI",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Device Guard, Credential Guard and HVCI",
       "note": "OIB wijst deze aan gebruikers toe om een herstart midden in Autopilot te vermijden; alle 8 instellingen zijn device-scoped, dus hier D. Houd er rekening mee dat de eerste toepassing een herstart vraagt.",
       "herkomst": "oib",
       "fase": 2,
       "faseWaarom": "Vraagt een herstart, en geheugenintegriteit (HVCI) laadt geen stuurprogramma's die er niet op gebouwd zijn — denk aan oude VPN-, printer- en dockdrivers. Kijk in de pilot of alles nog start."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Power and Device Lock - v3.6.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Power and Device Lock - v4.0.json",
       "target": "Baseline_WIN_D_Device_Lock",
       "displayName": "[Baseline] - WIN - D - Device Lock",
       "doel": "Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden, plus het gedrag bij dichtklappen en stroom.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Power and Device Lock",
-      "note": "OIB noemt deze policy U omdat zij 'm aan gebruikers toewijst; alle 12 instellingen zijn device-scoped, dus hier is het D (zie check-scope.js). De drie eigen wachtwoordinstellingen blijven staan.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock",
+      "note": "OIB noemt deze policy U omdat zij 'm aan gebruikers toewijst; alle 12 instellingen zijn device-scoped, dus hier is het D (zie check-scope.js). De drie eigen wachtwoordinstellingen blijven staan. Sinds OIB v4.0 staat hier ook de vergrendeling na 15 minuten inactiviteit (interactivelogon_machineinactivitylimit_v2 = 900): de vervanger van de vervallen Password-compliancepolicy, en een instelling die de baseline eerder in Local Security Policies zette. De slaapstand aan het net gaat daarbij naar 30 minuten, zodat vergrendelen en slapen niet op hetzelfde moment vallen.",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1094,7 +1030,7 @@
       "target": "Baseline_WIN_D_Disable_NTLM",
       "displayName": "[Baseline] - WIN - D - Disable NTLM",
       "doel": "Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Network Security - D - Disable NTLM",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM",
       "note": "NTLMv1 en LM zijn al weg op elk apparaat: lanmanagerauthenticationlevel 5 staat ook in [Baseline] - WIN - D - Local Security Policies, in fase 1. Deze policy doet de rest — NTLM helemaal weigeren. Microsoft zet NTLM pas in de volgende grote Windows-release standaard uit en bestaande versies blijven het ondersteunen, dus haast is er niet; audit eerst. Local Security Policies logt inkomend NTLM dat deze policy zou weigeren (auditincomingntlmtraffic), uitgaand is op 24H2 zonder policy te zien.",
       "herkomst": "oib",
       "fase": 2,
@@ -1105,7 +1041,7 @@
       "target": "Baseline_WIN_D_Endpoint_Analytics",
       "displayName": "[Baseline] - WIN - D - Endpoint Analytics",
       "doel": "Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — TP - Health Monitoring - D - Endpoint Analytics",
+      "bron": "OpenIntuneBaseline Windows v4.0 — TP - Health Monitoring - D - Endpoint Analytics",
       "type": "Device",
       "herkomst": "oib",
       "fase": 1
@@ -1115,7 +1051,7 @@
       "target": "Baseline_WIN_D_Enhanced_Phishing_Protection",
       "displayName": "[Baseline] - WIN - D - Enhanced Phishing Protection",
       "doel": "Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Enhanced Phishing Protection",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection",
       "carryFrom": "Baseline_WIN_D_SmartScreen",
       "note": "Opvolger van de SmartScreen-policy (checkId 024 blijft). Vier van de zes oude instellingen staan hier, de twee shell-SmartScreen-instellingen in Security Hardening.",
       "herkomst": "oib",
@@ -1139,32 +1075,28 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP08",
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bewijs": "Zonder deze instelling kan iemand tijdens OOBE de netwerkstap overslaan en een lokaal account aanmaken. Het apparaat komt dan nooit bij Intune, krijgt geen enkele policy, en staat als onbeheerd toestel met bedrijfsgegevens in de wereld. Het is de bekendste manier om Autopilot te omzeilen, en één instelling sluit hem af.",
       "universeel": "Elk Windows-apparaat dat nog moet worden ingericht. Op een al ingeschreven apparaat verandert er niets.",
       "note": "Werkt via de TenantLockdown-CSP en geldt vanaf de volgende schone installatie. Zorg dat bekabeld of wifi tijdens OOBE beschikbaar is — bij een vloot zonder ethernet en zonder vooraf ingericht wifi-profiel loopt de gebruiker vast."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Apps - D - In-Box App Removal - v3.7.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Apps - D - In-Box App Removal - v4.0.json",
       "target": "Baseline_WIN_D_In_Box_App_Removal",
       "displayName": "[Baseline] - WIN - D - In-Box App Removal",
       "doel": "Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows Apps - D - In-Box App Removal",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows Apps - D - In-Box App Removal",
       "herkomst": "oib",
       "fase": 2,
       "faseWaarom": "Verwijdert ingebouwde apps, ook van apparaten die al in gebruik zijn. Kijk in de pilot of iemand er een mist."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Internet Explorer (Legacy) - D - Security - v3.1.1.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Internet Explorer (Legacy) - D - Security - v4.0.json",
       "target": "Baseline_WIN_D_Internet_Explorer_Legacy",
       "displayName": "[Baseline] - WIN - D - Internet Explorer Legacy",
       "doel": "Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Internet Explorer (Legacy) - D - Security",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security",
       "dropSettings": [
         "user_vendor_msft_policy_config_internetexplorer_allowautocomplete"
       ],
@@ -1184,10 +1116,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bron": "Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — waarde geverifieerd tegen Policy CSP DmaGuard/DeviceEnumerationPolicy.",
       "bewijs": "Een Thunderbolt- of PCIe-apparaat kan buiten het besturingssysteem om in het werkgeheugen lezen en schrijven. Dat is de bekende \"evil maid\"-aanval: laptop even alleen laten, stekker erin, BitLocker-sleutel uit het geheugen. Kernel DMA Protection isoleert zulke apparaten via de IOMMU; deze instelling zet de enumeratie op Block all voor apparaten die díe isolatie niet ondersteunen. Microsoft zet hem in zijn eigen security baseline op dezelfde waarde.",
@@ -1212,18 +1141,18 @@
       "target": "Baseline_WIN_D_Local_Administrators",
       "displayName": "[Baseline] - WIN - D - Local Administrators",
       "doel": "Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerde groep beheert in plaats van wat er toevallig op het apparaat staat.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Local Group Membership - D - Local Administrators",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators",
       "note": "LAPS zonder beheerde administrators-groep is half werk: LAPS roteert het wachtwoord van een account dat verder niemand beheert.",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies - v3.0.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies - v4.0.json",
       "target": "Baseline_WIN_D_Local_Security_Policies",
       "displayName": "[Baseline] - WIN - D - Local Security Policies",
       "doel": "De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Local Security Policies",
-      "note": "De eigen machineinactivitylimit_v2 blijft staan; OIB regelt de schermvergrendeling via Power and Device Lock. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat [Baseline] - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies",
+      "note": "Sinds OIB v4.0 is dit de voormalige 24H2+-variant: de basisvariant is vervallen omdat Windows 11 23H2 op 10 november 2026 geen updates meer krijgt. Inhoudelijk verschilt die variant op één punt: het ingebouwde Administrator-account gaat uit (enableadministratoraccountstatus). Dat raakt LAPS niet — [Baseline] - WIN - D - Windows LAPS beheert een eigen account (automaticaccountmanagementtarget = nieuw account), niet het ingebouwde. machineinactivitylimit_v2 stond hier als eigen aanvulling, maar OIB zet hem sinds v4.0 in Power and Device Lock — hij staat nu dus in [Baseline] - WIN - D - Device Lock en niet meer hier, anders zou dezelfde instelling uit twee policies komen. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat [Baseline] - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1232,7 +1161,7 @@
       "target": "Baseline_WIN_D_Location_and_Privacy",
       "displayName": "[Baseline] - WIN - D - Location and Privacy",
       "doel": "Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en spraak.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Location and Privacy",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy",
       "note": "De enige eigen instelling (letappsactivatewithvoiceabovelock) staat bij OIB in Login and Lock Screen en gaat dus niet verloren.",
       "herkomst": "oib",
       "fase": 1
@@ -1252,13 +1181,10 @@
         "partis": [
           "IS.I.OR.245 vastlegging",
           "IS.I.OR.220 incidentrespons"
-        ],
-        "isms": [
-          "ISMP13"
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.8.15 en A.8.16, NIS2 art. 21(2)(b), EASA Part-IS IS.I.OR.245 — instellingen uit CIS v4 Windows 11 L2",
-      "note": "Scriptblok-logging stond al aan in [Baseline] - WIN - D - Security Hardening; die is hier bewust weggelaten om geen conflict te maken. Wat ontbrak is de transcriptie: scriptblok-logging laat zien wélke code is geladen, het transcript laat de sessie zelf zien met invoer, uitvoer en tijdstempels. ISMP13 vraagt dat laatste. Eén kanttekening: transcripties komen standaard in het profiel van de gebruiker terecht, waar diezelfde gebruiker ze kan verwijderen. ISMP13 vraagt om logs die een beheerder niet zelf kan wissen — vul outputdirectory dus met een centrale share zodra die er is.",
+      "note": "Scriptblok-logging stond al aan in [Baseline] - WIN - D - Security Hardening; die is hier bewust weggelaten om geen conflict te maken. Wat ontbrak is de transcriptie: scriptblok-logging laat zien wélke code is geladen, het transcript laat de sessie zelf zien met invoer, uitvoer en tijdstempels. Logbeleid vraagt meestal dat laatste. Eén kanttekening: transcripties komen standaard in het profiel van de gebruiker terecht, waar diezelfde gebruiker ze kan verwijderen. Moeten logs buiten bereik van de gebruiker blijven, vul outputdirectory dan met een centrale share zodra die er is.",
       "bewijs": "Scriptblok-logging stond al aan en laat zien wélke code is geladen; het transcript laat de sessie zelf zien met invoer, uitvoer en tijdstempels. Bij het onderzoeken van een incident is dat het verschil tussen weten dat er iets is uitgevoerd en weten wat er is gebeurd. CIS v4 Windows 11 L2.",
       "universeel": "Geldt voor elk Windows-apparaat. **Voorbehoud:** transcripties komen standaard in het profiel van de gebruiker terecht, waar diezelfde gebruiker ze kan verwijderen. Vul `outputdirectory` met een centrale share zodra die er is — anders is de maatregel tegen een kwaadwillende beheerder niet effectief.",
       "herkomst": "eigen",
@@ -1269,7 +1195,7 @@
       "target": "Baseline_WIN_D_Login_and_Lock_Screen",
       "displayName": "[Baseline] - WIN - D - Login and Lock Screen",
       "doel": "Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoals de laatst aangemelde gebruiker en camera-toegang.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Login and Lock Screen",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Login and Lock Screen",
       "overrides": [
         {
           "settingDefinitionId": "device_vendor_msft_policy_config_credentialsui_disablepasswordreveal",
@@ -1293,10 +1219,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie.",
       "bewijs": "CTRL+ALT+DEL is de enige toetscombinatie die Windows niet aan een gewone toepassing kan doorgeven: hij dwingt de Secure Attention Sequence af en daarmee het echte aanmeldscherm. Zonder die eis kan een programma een namaak-aanmeldscherm tonen en het wachtwoord meelezen — de klassieke credential-harvest, en de reden dat CIS hem al sinds Windows NT voorschrijft. De netwerkkeuze op het vergrendelscherm is de tweede: die laat iemand zonder aan te melden het apparaat op een ander netwerk zetten.",
@@ -1311,7 +1234,7 @@
       "target": "Baseline_WIN_D_Microsoft_Accounts",
       "displayName": "[Baseline] - WIN - D - Microsoft Accounts",
       "doel": "Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toegevoegd mogen worden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Accounts - D - Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1325,11 +1248,11 @@
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Security - v3.8.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Security - v4.0.json",
       "target": "Baseline_WIN_D_Microsoft_Edge_Security",
       "displayName": "[Baseline] - WIN - D - Microsoft Edge Security",
       "doel": "De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaatgedrag en welke sites onbeveiligde inhoud mogen laden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Security",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security",
       "note": "2 -> 54 instellingen.",
       "herkomst": "oib",
       "fase": 1
@@ -1339,7 +1262,7 @@
       "target": "Baseline_WIN_D_Microsoft_Edge_Updates",
       "displayName": "[Baseline] - WIN - D - Microsoft Edge Updates",
       "doel": "Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Updates",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1348,7 +1271,7 @@
       "target": "Baseline_WIN_D_Microsoft_Office_Security",
       "displayName": "[Baseline] - WIN - D - Microsoft Office Security",
       "doel": "De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, beperkt ActiveX en oude bestandsformaten. Het zwaartepunt van deze baseline voor phishing via bijlagen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - D - Security",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security",
       "note": "209 instellingen, kern is de macroblokkade voor bestanden uit internet.",
       "herkomst": "oib",
       "fase": 1
@@ -1358,7 +1281,7 @@
       "target": "Baseline_WIN_D_Microsoft_Office_Updates",
       "displayName": "[Baseline] - WIN - D - Microsoft Office Updates",
       "doel": "Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - D - Updates",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates",
       "note": "Vervangt de klassieke ADMX-variant (Type Admin). Dat endpoint is beta-only en nooit tegen een echte tenant getest; Settings Catalog is stabieler. In de tenant is dit geen hernoeming maar een vervanging — verwijder de oude ADMX-policy, anders zetten beide dezelfde registerwaarden.",
       "herkomst": "oib",
       "fase": 1
@@ -1368,7 +1291,7 @@
       "target": "Baseline_WIN_D_Microsoft_OneDrive",
       "displayName": "[Baseline] - WIN - D - Microsoft OneDrive",
       "doel": "Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - D - Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration",
       "note": "Neemt ook de Known Folder Move-policy (028) over: alle 6 instellingen daarvan zitten hierin.",
       "herkomst": "oib",
       "fase": 1
@@ -1378,7 +1301,7 @@
       "target": "Baseline_WIN_D_Microsoft_Store",
       "displayName": "[Baseline] - WIN - D - Microsoft Store",
       "doel": "Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Store - D - Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1387,7 +1310,7 @@
       "target": "Baseline_WIN_D_Passwordless",
       "displayName": "[Baseline] - WIN - D - Passwordless",
       "doel": "Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of een beveiligingssleutel gebruiken in plaats van hun wachtwoord in te typen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Credential Management - D - Passwordless",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Credential Management - D - Passwordless",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1407,11 +1330,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP02",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bewijs": "De baseline eist al een wachtwoord bij ontwaken (power_requirepasswordwhencomputerwakes), maar als het dichtklappen van de klep géén slaapstand veroorzaakt gebeurt er niets en blijft het scherm ontgrendeld. Dit is de helft die ontbrak: pas met een lid-close-actie leidt de klep dicht tot een vergrendeld apparaat. Dat is het meest voorkomende moment waarop een laptop onbeheerd achterblijft — de vergaderzaal, de trein, het koffietentje.",
       "universeel": "Elke laptop heeft een klep en elk apparaat een aan/uit-knop. Op een desktop doet de lid-instelling niets en de knop-instelling wel.",
@@ -1422,7 +1341,7 @@
       "target": "Baseline_WIN_D_Printing",
       "displayName": "[Baseline] - WIN - D - Printing",
       "doel": "Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Printing",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Printing",
       "note": "PrintNightmare-hardening; zat eerder als 13 instellingen in de Administrative Templates-blok.",
       "herkomst": "oib",
       "fase": 1
@@ -1440,11 +1359,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP11",
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
       "bewijs": "De printspooler is al jaren de meest misbruikte weg naar SYSTEM-rechten op Windows: PrintNightmare (CVE-2021-34527) werkte precies doordat een gewone gebruiker een printerdriver mocht installeren bij het verbinden met een gedeelde printer. Windows Protected Print draait de spooler in een beperkte modus die alleen nog Mopria-drivers gebruikt en de hele klasse aanvallen wegneemt; Microsoft noemt het zelf de opvolger van de losse mitigaties. Onze baseline heeft wel een Printing-policy, maar die zet deze drie niet.",
@@ -1467,16 +1382,12 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISDP01",
-          "ISMP13"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
       "bewijs": "Dit zijn vier kanalen waarlangs bedrijfsgegevens het apparaat verlaten zonder dat iemand het als datastroom herkent. Het klembord tussen apparaten synchroniseert alles wat een gebruiker kopieert — wachtwoorden inbegrepen — naar de cloud en naar zijn andere apparaten, ook privéapparaten. Invoerpersonalisatie stuurt getypte en ingesproken tekst naar Microsoft om het woordenboek te verbeteren. Gebruikersactiviteiten uploaden doet hetzelfde met welke bestanden en apps iemand gebruikt. Alle vier staan in CIS L1 en alle vier zijn met één instelling dicht.",
       "universeel": "Geldt voor elk apparaat en elke gebruiker. Sluit aan op de keuze die de baseline al maakte om telemetrie op Optioneel te laten staan voor Endpoint Analytics: het niveau blijft, maar deze vier persoonsgebonden stromen gaan eruit.",
-      "note": "Merkbaar op één punt: het klembord werkt niet meer tussen apparaten (plakken binnen hetzelfde apparaat blijft gewoon werken) en de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `[ISMS] - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet vier aparte kanalen uit. Zes kanalen erbij, alle zes CIS L1: zoeken gebruikt de locatie niet meer, sms-synchronisatie naar de cloud gaat uit, consumentencontent op het aanmeldscherm verdwijnt, online tips halen niets meer op bij Microsoft, lettertypen worden niet meer van fs.microsoft.com gedownload, en apps kunnen geen gegevens meer delen tussen gebruikers van hetzelfde apparaat. Die laatste is de enige met een merkbare kant: een app die bewust gegevens tussen gebruikers deelt werkt niet meer zo.",
+      "note": "Merkbaar op één punt: de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `[Baseline] - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet drie aparte kanalen uit. Het klembord tussen apparaten stond hier ook, maar dat zet OpenIntuneBaseline sinds v4.0 zelf in [Baseline] - WIN - D - Windows Feature Configuration. Zes kanalen erbij, alle zes CIS L1: zoeken gebruikt de locatie niet meer, sms-synchronisatie naar de cloud gaat uit, consumentencontent op het aanmeldscherm verdwijnt, online tips halen niets meer op bij Microsoft, lettertypen worden niet meer van fs.microsoft.com gedownload, en apps kunnen geen gegevens meer delen tussen gebruikers van hetzelfde apparaat. Die laatste is de enige met een merkbare kant: een app die bewust gegevens tussen gebruikers deelt werkt niet meer zo.",
       "herkomst": "intuneadmin",
       "fase": 1,
       "intuneadmin": {
@@ -1497,11 +1408,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP14",
-          "ISMP19"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
       "bewijs": "`AllowRemoteShellAccess` op Disabled sluit `winrs` af: het opstarten van een interactieve opdrachtshell op afstand via WinRM. Dat is een standaardstap in lateral movement — het staat in vrijwel elk aanvalsdraaiboek, van PsExec-vervangers tot Cobalt Strike. De inactieve SMB-sessie is de tweede: een sessie die open blijft staan is een sessie die iemand anders kan overnemen zodra het apparaat onbeheerd is.",
@@ -1516,7 +1423,7 @@
       "target": "Baseline_WIN_D_Remote_Desktop_and_RPC",
       "displayName": "[Baseline] - WIN - D - Remote Desktop and RPC",
       "doel": "Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een inbraak vaak voor zijwaartse beweging worden gebruikt.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Remote Desktop Services and RPC",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1532,11 +1439,11 @@
       "faseWaarom": "Schrijven naar USB-sticks, externe schijven en telefoons wordt geblokkeerd, en dat merkt een gebruiker meteen. Let op: tot deze policy breed uitrolt is verwisselbare opslag nergens beperkt — BitLocker laat removabledrivesrequireencryption bewust uit, omdat deze blokkade dat afdekt."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Script File Associations - v3.4.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Script File Associations - v4.0.json",
       "target": "Baseline_WIN_D_Script_File_Associations",
       "displayName": "[Baseline] - WIN - D - Script File Associations",
       "doel": "Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations",
       "note": "Opent .js/.vbs/.hta met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit.",
       "herkomst": "oib",
       "fase": 2,
@@ -1547,7 +1454,7 @@
       "target": "Baseline_WIN_D_Security_Hardening",
       "displayName": "[Baseline] - WIN - D - Security Hardening",
       "doel": "Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Security Hardening",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening",
       "note": "Neemt de oude policies Network Security (017), System Services (025) en het grootste deel van Administrative Templates (008) over.",
       "herkomst": "oib",
       "fase": 1
@@ -1557,7 +1464,7 @@
       "target": "Baseline_WIN_D_Settings_Sync",
       "displayName": "[Baseline] - WIN - D - Settings Sync",
       "doel": "Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Settings Sync",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Settings Sync",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1577,10 +1484,7 @@
         "nis2": [
           "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP09"
-        ]
+        "partis": []
       },
       "bewijs": "Een volle schijf is geen ongemak maar een beveiligingsprobleem: Windows Update kan niet meer installeren, BitLocker kan een schijf niet afronden en Defender-definitie-updates falen. Dat is precies de toestand waarin een apparaat stilletjes achterloopt zonder dat iemand het merkt. Storage Sense voorkomt dat zonder dat er iemand langs hoeft.",
       "universeel": "Elk Windows-apparaat. Ruimt alleen op wat Windows zelf als wegwerpbaar aanmerkt — geen documenten van gebruikers.",
@@ -1600,13 +1504,10 @@
         ],
         "partis": [
           "IS.I.OR.220"
-        ],
-        "isms": [
-          "ISMP11"
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.8.7 en A.8.8, NIS2 art. 21(2)(e) — instellingen uit CIS v4 Windows 11 L1",
-      "note": "LSA-bescherming stond al in [Baseline] - WIN - D - Device Guard and Credential Guard; wat ontbrak zijn de lokale overrides. ISMP11 eist dat de malwarebescherming niet door de eindgebruiker te wijzigen is, en dit zijn precies de drie plekken waar dat tot nu toe wél kon. SafeDllSearchMode is de oudste van de drie en nog steeds de goedkoopste verdediging tegen DLL-kaping.",
+      "note": "LSA-bescherming stond al in [Baseline] - WIN - D - Device Guard and Credential Guard; wat ontbrak zijn de lokale overrides. Malwarebescherming hoort niet door de eindgebruiker te wijzigen te zijn, en dit waren de plekken waar dat wél kon; het blokkeren van eigen exploit-protectioninstellingen staat sinds OpenIntuneBaseline v4.0 in [Baseline] - WIN - D - Defender Additional Configuration. SafeDllSearchMode is de oudste en nog steeds de goedkoopste verdediging tegen DLL-kaping.",
       "bewijs": "Drie plekken waar een eindgebruiker de malwarebescherming lokaal kon overrulen: Exploit Protection overschrijven, de cloudrapportage lokaal uitzetten, en de DLL-zoekvolgorde. SafeDllSearchMode is de oudste van de drie en nog steeds de goedkoopste verdediging tegen DLL-kaping — een techniek die nog wekelijks in actieve campagnes voorkomt. CIS v4 Windows 11 L1.",
       "universeel": "Geldt voor elk Windows-apparaat en is voor gebruikers onmerkbaar, tenzij iemand gewend was Defender-instellingen lokaal aan te passen.",
       "herkomst": "eigen",
@@ -1617,7 +1518,7 @@
       "target": "Baseline_WIN_D_Timezone",
       "displayName": "[Baseline] - WIN - D - Timezone",
       "doel": "Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Timezone",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1626,7 +1527,7 @@
       "target": "Baseline_WIN_D_Update_Reports_and_Telemetry",
       "displayName": "[Baseline] - WIN - D - Update Reports and Telemetry",
       "doel": "Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows Update for Business - D - Reports and Telemetry",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Reports and Telemetry",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1635,7 +1536,7 @@
       "target": "Baseline_WIN_D_User_Rights",
       "displayName": "[Baseline] - WIN - D - User Rights",
       "doel": "Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1652,15 +1553,12 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19"
-        ]
+        "partis": []
       },
       "bron": "Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e).",
       "bewijs": "Een centraal uitgerold wifi-profiel is wat voorkomt dat het netwerkwachtwoord per mail, per briefje of per collega rondgaat: de gebruiker hoeft het niet te kennen om verbinding te maken. Het maakt roteren ook uitvoerbaar — één wijziging hier bereikt de hele vloot, terwijl een handmatig ingevoerd wachtwoord bij elke rotatie opnieuw langs iedereen moet. Dat is de kern van A.8.20: netwerktoegang beheerd in plaats van doorverteld.",
       "universeel": "Ja. Elke laptop die op locatie komt heeft dit profiel nodig, en een laptop die dat nooit doet heeft er geen last van — een profiel voor een SSID die niet in de lucht is doet niets. De grens ligt bij een vestiging met een eigen SSID: die vraagt een tweede profiel, niet een aangepast profiel.",
-      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. `connectToPreferredNetwork` staat hier bewust op false en bij Wifi Guest op true: dit ís het voorkeursnetwerk, dus Windows hoeft hier niet weg te zoeken. Let op de samenloop met [Baseline] - WIN - D - Wireless Shared Devices: die policy staat alleen nog door Intune uitgerolde netwerken toe en heeft dit profiel dus nodig om een gedeeld apparaat niet offline te zetten. Dit is de policy die daar als voorwaarde bij hoort.",
+      "note": "SSID en PSK staan op `<SSID-CORPORATE>` en `<PSK-CORPORATE>`. Vul ze in vóór je toewijst; met de placeholder erin maakt het profiel op geen enkel apparaat verbinding. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten. `connectToPreferredNetwork` staat hier bewust op false en bij Wifi Guest op true: dit ís het voorkeursnetwerk, dus Windows hoeft hier niet weg te zoeken. Let op de samenloop met [Baseline] - WIN - D - Wireless Shared Devices: die policy staat alleen nog door Intune uitgerolde netwerken toe en heeft dit profiel dus nodig om een gedeeld apparaat niet offline te zetten. Dit is de policy die daar als voorwaarde bij hoort.",
       "herkomst": "eigen",
       "fase": 3,
       "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan."
@@ -1678,16 +1576,12 @@
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen",
           "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bron": "Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e).",
       "bewijs": "Zonder tweede profiel is een storing op het bedrijfsnetwerk meteen een apparaat zonder verbinding — en dus zonder Intune, zonder Defender-signalen en zonder enige mogelijkheid om op afstand iets recht te zetten, precies op het moment dat je dat nodig hebt. Het gastnetwerk als automatische terugval houdt het apparaat bereikbaar. Dat dat netwerk minder vertrouwd is verandert niets aan de rest van de baseline: firewall, schijfversleuteling en Defender gaan nergens uit van een vertrouwd netwerk.",
       "universeel": "Ja, met dezelfde grens als bij Wifi Corporate: een vestiging met een ander gastnetwerk vraagt een eigen profiel. Let op dat het gastnetwerk hiermee een beheerd netwerk wordt — als het een open netwerk met captive portal is in plaats van PSK, klopt dit template niet en is `wifiSecurityType: open` de juiste vorm.",
-      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten — wat ISMP19 ook voorschrijft. `connectToPreferredNetwork` staat hier op true en bij Wifi Corporate op false: dit is de terugval, dus zodra het bedrijfsnetwerk weer in de lucht is hoort Windows daarheen terug te gaan. Rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. Staat er een verbruikslimiet op het gastnetwerk, zet `meteredConnectionLimit` dan op `fixed` — nu staat hij op `unrestricted`, waarmee Windows er ook updates over binnenhaalt.",
+      "note": "SSID en PSK staan op `<SSID-GUEST>` en `<PSK-GUEST>`. Vul ze in vóór je toewijst. Het wachtwoord komt in dit template te staan en daarmee in deze repo. Er bestaat geen CIPP-token voor een PSK zoals %OrganizationId% dat voor de tenant-id is, en een placeholder laten staan werkt hier niet: Graph geeft een PSK nooit terug — bij een tenant-backup komt alleen `preSharedKeyIsSet: true` mee. Vul je hem dus in de tenant in in plaats van hier, dan zet de eerstvolgende CIPP-sync de placeholder er weer overheen en is elk apparaat zijn wifi kwijt. Vul hem hier in, en alleen zolang deze repo privé is; wordt hij ooit gedeeld, roteer dan de PSK. Dat de PSK sowieso een gedeeld geheim blijft staat al in de toelichting bij [Baseline] - WIN - D - Wireless and Peripherals: een lokale beheerder leest hem met `netsh wlan show profile key=clear` gewoon uit, en de maatregel die dat wél oplost is 802.1X met certificaten. `connectToPreferredNetwork` staat hier op true en bij Wifi Corporate op false: dit is de terugval, dus zodra het bedrijfsnetwerk weer in de lucht is hoort Windows daarheen terug te gaan. Rol hem alleen uit náást Wifi Corporate, anders hangt de hele vloot standaard op het gastnetwerk. Staat er een verbruikslimiet op het gastnetwerk, zet `meteredConnectionLimit` dan op `fixed` — nu staat hij op `unrestricted`, waarmee Windows er ook updates over binnenhaalt.",
       "herkomst": "eigen",
       "fase": 3,
       "faseWaarom": "SSID en PSK staan op een placeholder. Toewijzen voordat die zijn ingevuld levert een profiel op dat nergens verbinding maakt. Zet de fase op 1 zodra de echte waarden erin staan, en niet eerder dan Wifi Corporate."
@@ -1710,13 +1604,9 @@
         "nis2": [
           "art. 21(2)(d) toeleveringsketen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP22",
-          "ISDP01"
-        ]
+        "partis": []
       },
-      "bewijs": "Niet elke klant heeft een ISMP22. Waar generatieve AI wél is toegestaan is het beter om dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait. Dat is precies wat deze vier instellingen doen.",
+      "bewijs": "Niet elke organisatie beperkt generatieve AI. Waar generatieve AI wél is toegestaan is het beter om dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait. Dat is precies wat deze vier instellingen doen.",
       "universeel": "Elk Windows 11-apparaat waar deze functies op zitten — maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
       "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI Restricted, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control Restricted. Wie AI breed wil toestaan, moet ook die twee wegen."
     },
@@ -1738,15 +1628,11 @@
         "nis2": [
           "art. 21(2)(d) toeleveringsketen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP22",
-          "ISDP01"
-        ]
+        "partis": []
       },
-      "bewijs": "ISMP22 staat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toe. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled.",
+      "bewijs": "Voor een AI-beleid dat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toestaat. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat dan op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled.",
       "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets. Of hij past is echter een klantbesluit, geen technisch feit: een organisatie die generatieve AI op de werkplek toestaat kiest de Permitted-variant.",
-      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar, zoals ISMP22 het toestaat. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
+      "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
     },
     {
       "target": "Baseline_WIN_D_Windows_AI_Permitted",
@@ -1780,11 +1666,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISDP01",
-          "ISMP22"
-        ]
+        "partis": []
       },
       "bewijs": "Recall bewaart een doorzoekbare index van alles wat op het scherm is geweest. De schade daarvan is niet uniform verdeeld: één momentopname van een geopende wachtwoordkluis of van het Entra-beheerportaal weegt zwaarder dan duizend van een tekstverwerker. Deze policy haalt juist die plekken eruit, begrenst hoe lang en hoeveel er wordt bewaard, en sluit de exportknop af waarmee een gebruiker zijn hele index naar een app of website kan sturen. Dat laatste is de weg waarlangs de index het apparaat verlaat.",
       "universeel": "Elk Windows 11-apparaat met Copilot+-hardware waar Recall is toegestaan. De URI-lijst klopt voor elke M365-tenant; de app-lijst is een startpunt dat per klant moet worden aangevuld.",
@@ -1800,15 +1682,15 @@
       "herkomst": "intuneadmin",
       "fase": 1,
       "toewijzingTekst": "alle apparaten",
-      "bewijs": "Recall maakt elke paar seconden een schermafdruk en bewaart die doorzoekbaar op de schijf. Alles wat een gebruiker op het scherm heeft gehad staat daarmee in één index: wachtwoordkluizen, salarisbestanden, het patiëntdossier dat even openstond. Wie de schijf of het account overneemt, neemt die index mee. Click To Do stuurt bovendien schermdata naar een generatieve dienst. Voor een organisatie met ISMP22 is dat geen afweging maar een verbod, en ook zonder ISMP22 vergroot het de schade van elk incident.",
+      "bewijs": "Recall maakt elke paar seconden een schermafdruk en bewaart die doorzoekbaar op de schijf. Alles wat een gebruiker op het scherm heeft gehad staat daarmee in één index: wachtwoordkluizen, salarisbestanden, het patiëntdossier dat even openstond. Wie de schijf of het account overneemt, neemt die index mee. Click To Do stuurt bovendien schermdata naar een generatieve dienst. Voor een organisatie die generatieve AI beperkt is dat geen afweging maar een verbod, en ook zonder zo'n beleid vergroot het de schade van elk incident.",
       "universeel": "Elk Windows 11-apparaat met Copilot+-hardware. Op andere apparaten bestaat Recall niet en doet de instelling niets — hij is dus overal veilig toe te wijzen. Óf hij past is wel een klantbesluit: zie de Permitted-variant."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v3.8.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v4.0.json",
       "target": "Baseline_WIN_D_Windows_Feature_Configuration",
       "displayName": "[Baseline] - WIN - D - Windows Feature Configuration",
       "doel": "Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Feature Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration",
       "note": "Neemt de oude Windows Search-policy (023) over.",
       "herkomst": "oib",
       "fase": 1
@@ -1818,7 +1700,7 @@
       "target": "Baseline_WIN_D_Windows_Firewall",
       "displayName": "[Baseline] - WIN - D - Windows Firewall",
       "doel": "Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Firewall Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration",
       "note": "Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.",
       "overrides": [
         {
@@ -1854,7 +1736,7 @@
       "target": "Baseline_WIN_D_Windows_Firewall_Rules",
       "displayName": "[Baseline] - WIN - D - Windows Firewall Rules",
       "doel": "Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe).",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Firewall - D - Security Rules",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1863,7 +1745,7 @@
       "target": "Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust",
       "displayName": "[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust",
       "doel": "Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows Hello for Business - D - Cloud Kerberos Trust",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows Hello for Business - D - Cloud Kerberos Trust",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1872,7 +1754,7 @@
       "target": "Baseline_WIN_D_Windows_Hello_for_Business",
       "displayName": "[Baseline] - WIN - D - Windows Hello for Business",
       "doel": "Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows Hello for Business - D - WHfB Configuration",
       "note": "Ontbrak volledig. Vereist een TPM, PIN van minimaal 6 tekens en anti-spoofing voor gezichtsherkenning. Geldt voor élke gebruiker van het apparaat; voor gedeelde apparaten staat er een eigen variant naast (Baseline_WIN_D_Windows_Hello_for_Business_Multi_User).",
       "herkomst": "oib",
       "fase": 2,
@@ -1891,21 +1773,21 @@
       "faseGroep": "SEC-Shared-Devices"
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows LAPS - D - LAPS Configuration (24H2+) - v3.6.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows LAPS - D - LAPS Configuration - v4.0.json",
       "target": "Baseline_WIN_D_Windows_LAPS",
       "displayName": "[Baseline] - WIN - D - Windows LAPS",
       "doel": "Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Windows LAPS - D - LAPS Configuration (24H2+)",
-      "note": "De 24H2+-variant, niet de basisvariant: onze policy had het automatische accountbeheer al. De eigen administratoraccountname blijft staan.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration",
+      "note": "Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant hadden we al niet overgenomen omdat onze policy het automatische accountbeheer al had. De eigen administratoraccountname blijft staan.",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Windows Package Manager  - v3.5.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Windows Package Manager - v3.5.json",
       "target": "Baseline_WIN_D_Windows_Package_Manager",
       "displayName": "[Baseline] - WIN - D - Windows Package Manager",
       "doel": "Beperkt winget, zodat gebruikers geen software van willekeurige bronnen kunnen installeren.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Package Manager",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Package Manager",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1914,7 +1796,7 @@
       "target": "Baseline_WIN_D_Windows_Sandbox",
       "displayName": "[Baseline] - WIN - D - Windows Sandbox",
       "doel": "Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot het netwerk en het klembord van de host.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Sandbox",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox",
       "note": "Device-scoped instellingen, dus D — zie de opmerking bij Device Guard.",
       "herkomst": "oib",
       "fase": 1
@@ -1924,7 +1806,7 @@
       "target": "Baseline_WIN_D_Windows_Subsystem_for_Linux",
       "displayName": "[Baseline] - WIN - D - Windows Subsystem for Linux",
       "doel": "Beperkt het Windows-subsysteem voor Linux, dat anders een volledige tweede omgeving naast Windows opent waar de meeste beveiligingscontroles niet gelden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Subsystem for Linux",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux",
       "herkomst": "oib",
       "fase": 1
     },
@@ -1933,7 +1815,7 @@
       "target": "Baseline_WIN_D_Windows_Update_Ring_1_Pilot",
       "displayName": "[Baseline] - WIN - D - Windows Update Ring 1 Pilot",
       "doel": "Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar worden op een kleine groep.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — WUfB - Ring 1 - Pilot",
+      "bron": "OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot",
       "type": "Device",
       "note": "Zonder assignment: ringen horen op een pilot-groep, niet op All Devices — dat zou ring 3 tegenspreken.",
       "herkomst": "oib",
@@ -1946,7 +1828,7 @@
       "target": "Baseline_WIN_D_Windows_Update_Ring_2_UAT",
       "displayName": "[Baseline] - WIN - D - Windows Update Ring 2 UAT",
       "doel": "Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — WUfB - Ring 2 - UAT",
+      "bron": "OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT",
       "type": "Device",
       "herkomst": "oib",
       "fase": 4,
@@ -1974,15 +1856,10 @@
         "nis2": [
           "art. 21(2)(e) beveiliging bij verwerving en onderhoud"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19",
-          "ISMP14",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.8.20 en A.7.9, NIS2 art. 21(2)(e) — instellingen uit de Endpoint Security-set van IntuneAdmin",
-      "note": "Windows Connect Now is de vergeten route: daarmee kan een gebruiker draadloze instellingen — inclusief het netwerkwachtwoord — via WPS of een USB-stick van het ene apparaat naar het andere overzetten, buiten elk beheer om. Beide instellingen sluiten dat af. Over de vraag wie elkaars wifi-profielen kan zien: profielen die via Intune of GPO worden uitgerold zijn apparaatbreed en dus voor elke gebruiker van dat apparaat zichtbaar, en wie zelf een netwerk toevoegt kan met netsh het bijbehorende wachtwoord in leesbare tekst opvragen. Zolang het bedrijfsnetwerk op een gedeeld wachtwoord (PSK) draait, kent iedere gebruiker die ooit verbonden heeft dat wachtwoord dus — daar helpt geen enkele policy tegen. De maatregel die dat wél oplost staat in ISMP19 zelf: 802.1X met certificaten, want dan is er geen gedeeld geheim om uit te lezen. Handmatige wifi-configuratie helemaal blokkeren (AllowManualWiFiConfiguration) is bewust weggelaten: dat maakt thuiswerken en hotels onmogelijk, en ISMP08 staat teleworking uitdrukkelijk toe. ISMP19 gaat verder en zegt dat alle Bluetooth-profielen behalve Serial Port Profile uit moeten. Letterlijk uitvoeren breekt koptelefoons, muizen en toetsenborden; dat vraagt eerst een besluit. Deze vier instellingen zijn de verdedigbare tussenstap: het apparaat is niet meer te ontdekken of te benaderen door een onbekende, bestaande koppelingen blijven werken. ServicesAllowedList is bewust weggelaten — die vraagt om GUID's per profiel en zet er zonder zorgvuldige lijst meer uit dan bedoeld.",
+      "note": "Windows Connect Now is de vergeten route: daarmee kan een gebruiker draadloze instellingen — inclusief het netwerkwachtwoord — via WPS of een USB-stick van het ene apparaat naar het andere overzetten, buiten elk beheer om. Beide instellingen sluiten dat af. Over de vraag wie elkaars wifi-profielen kan zien: profielen die via Intune of GPO worden uitgerold zijn apparaatbreed en dus voor elke gebruiker van dat apparaat zichtbaar, en wie zelf een netwerk toevoegt kan met netsh het bijbehorende wachtwoord in leesbare tekst opvragen. Zolang het bedrijfsnetwerk op een gedeeld wachtwoord (PSK) draait, kent iedere gebruiker die ooit verbonden heeft dat wachtwoord dus — daar helpt geen enkele policy tegen. De maatregel die dat wél oplost is 802.1X met certificaten, want dan is er geen gedeeld geheim om uit te lezen. Handmatige wifi-configuratie helemaal blokkeren (AllowManualWiFiConfiguration) is bewust weggelaten: dat maakt thuiswerken en hotels onmogelijk, en telewerken hoort gewoon te kunnen. Strenger beleid eist soms dat alle Bluetooth-profielen behalve Serial Port Profile uit moeten. Letterlijk uitvoeren breekt koptelefoons, muizen en toetsenborden; dat vraagt eerst een besluit. Deze vier instellingen zijn de verdedigbare tussenstap: het apparaat is niet meer te ontdekken of te benaderen door een onbekende, bestaande koppelingen blijven werken. ServicesAllowedList is bewust weggelaten — die vraagt om GUID's per profiel en zet er zonder zorgvuldige lijst meer uit dan bedoeld.",
       "bewijs": "Windows Connect Now is de vergeten route: daarmee kan een gebruiker draadloze instellingen — inclusief het netwerkwachtwoord — via WPS of een USB-stick van het ene apparaat naar het andere overzetten, buiten elk beheer om. De vier Bluetooth-instellingen maken het apparaat onvindbaar en onbenaderbaar voor een onbekende; bestaande koppelingen blijven werken.",
       "universeel": "Geldt voor elk apparaat met Bluetooth of wifi. Koptelefoons, muizen en toetsenborden die al gekoppeld zijn blijven werken — nieuw koppelen vanaf de andere kant lukt niet meer, wat bij een muis in een vergaderzaal kan opvallen.",
       "herkomst": "intuneadmin",
@@ -2000,17 +1877,12 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP19",
-          "ISMP14",
-          "ISMP08"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.8.20 en A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration",
-      "note": "ALLEEN voor gedeelde apparaten. Windows maakt van een netwerk dat een gebruiker zelf toevoegt standaard een all-user-profiel: elke andere gebruiker van dat apparaat ziet die SSID in de lijst staan en kan er verbinding mee maken. Het wachtwoord uitlezen lukt alleen als lokale beheerder, en dat is bij ons beperkt tot WLapsAdmin — maar de SSID-lijst zelf verraadt al waar een collega is geweest. Per-gebruiker-profielen bestaan in Windows wel (netsh wlan add profile user=current), maar de interface maakt ze nooit zo aan en er is geen MDM- of Settings Catalog-instelling die dat afdwingt: de bijbehorende GPO zit in Wireless Network (IEEE 802.11) Policies en is domeingebonden. Wat wel kan is de andere kant op: alleen nog netwerken uit Intune toestaan. TWEE VOORWAARDEN. Rol eerst een wifi-profiel uit via Intune, anders staat het apparaat na toepassing offline. En zet deze policy nooit op laptops: thuis- en hotelnetwerken werken dan niet meer, en ISMP08 staat teleworking uitdrukkelijk toe. Microsoft waarschuwt bovendien dat bestaande, door gebruikers aangemaakte profielen bij toepassing worden verwijderd — dat is hier de bedoeling, maar meld het vooraf.",
+      "note": "ALLEEN voor gedeelde apparaten. Windows maakt van een netwerk dat een gebruiker zelf toevoegt standaard een all-user-profiel: elke andere gebruiker van dat apparaat ziet die SSID in de lijst staan en kan er verbinding mee maken. Het wachtwoord uitlezen lukt alleen als lokale beheerder, en dat is bij ons beperkt tot WLapsAdmin — maar de SSID-lijst zelf verraadt al waar een collega is geweest. Per-gebruiker-profielen bestaan in Windows wel (netsh wlan add profile user=current), maar de interface maakt ze nooit zo aan en er is geen MDM- of Settings Catalog-instelling die dat afdwingt: de bijbehorende GPO zit in Wireless Network (IEEE 802.11) Policies en is domeingebonden. Wat wel kan is de andere kant op: alleen nog netwerken uit Intune toestaan. TWEE VOORWAARDEN. Rol eerst een wifi-profiel uit via Intune, anders staat het apparaat na toepassing offline. En zet deze policy nooit op laptops: thuis- en hotelnetwerken werken dan niet meer, en telewerken hoort gewoon te kunnen. Microsoft waarschuwt bovendien dat bestaande, door gebruikers aangemaakte profielen bij toepassing worden verwijderd — dat is hier de bedoeling, maar meld het vooraf.",
       "bewijs": "Alleen door Intune uitgerolde netwerken toestaan sluit de route af waarbij een gebruiker een gedeeld apparaat aan een eigen hotspot of een onbekend netwerk hangt. Op een gedeeld apparaat is dat een reëel risico, omdat wifi-profielen daar apparaatbreed zijn en dus voor de volgende gebruiker blijven staan.",
-      "universeel": "**Nee — dit is de enige policy in de set die niet voor elk apparaat geldt.** Hij hoort op gedeelde apparaten. Op een laptop van één gebruiker maakt hij thuiswerken en hotels onmogelijk, en ISMP08 staat teleworking uitdrukkelijk toe. Wijs hem toe aan een groep met gedeelde apparaten, niet aan All Devices.",
+      "universeel": "**Nee — dit is de enige policy in de set die niet voor elk apparaat geldt.** Hij hoort op gedeelde apparaten. Op een laptop van één gebruiker maakt hij thuiswerken en hotels onmogelijk, en telewerken hoort gewoon te kunnen. Wijs hem toe aan een groep met gedeelde apparaten, niet aan All Devices.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker maakt dit thuiswerken en hotels onmogelijk.",
@@ -2034,11 +1906,7 @@
         "nis2": [
           "art. 21(2)(d) toeleveringsketen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP22",
-          "ISDP01"
-        ]
+        "partis": []
       },
       "bewijs": "Een klant die publieke AI-diensten toestaat heeft nog steeds de Store-blokkade nodig die hier vóór de AI-ronde al in zat. Die twee dingen in één lijst zetten betekent dat je ze niet los kunt kiezen — deze variant knipt ze uit elkaar zonder de Store-regels te verliezen.",
       "universeel": "Elke gebruiker met Edge, maar alleen bij een klant die publieke AI-diensten heeft goedgekeurd.",
@@ -2057,22 +1925,18 @@
         "nis2": [
           "art. 21(2)(d) toeleveringsketen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP22",
-          "ISDP01"
-        ]
+        "partis": []
       },
       "bron": "ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy",
-      "note": "ISMP22 verbiedt alle AI-tools behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; op dit moment houdt niets een gebruiker tegen. LET OP bij uitrol: [Baseline] - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De vier bestaande regels voor de Store-website staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van [Baseline] - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.",
-      "bewijs": "ISMP22 verbiedt alle AI-tools behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; op dit moment houdt niets een gebruiker tegen. Een URL-blokkeerlijst is daarbij frictie, geen grens — hij werkt niet op een telefoon en niet op een privéapparaat — maar hij maakt de regel zichtbaar en houdt het gemakzuchtige gebruik tegen.",
+      "note": "Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. LET OP bij uitrol: [Baseline] - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De twee regels voor de Store-website uit OpenIntuneBaseline staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van [Baseline] - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.",
+      "bewijs": "Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. Een URL-blokkeerlijst is daarbij frictie, geen grens — hij werkt niet op een telefoon en niet op een privéapparaat — maar hij maakt de regel zichtbaar en houdt het gemakzuchtige gebruik tegen.",
       "universeel": "Geldt voor elke gebruiker op elk apparaat met Edge. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; die staat in het Defender-portaal, niet in deze repo.",
       "herkomst": "eigen",
       "overgenomenVan": [
         {
           "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
           "policy": "[Baseline] - WIN - U - Microsoft Edge User Experience",
-          "reason": "Een apparaat kent een URL-blokkeerlijst en de lijst hier is de complete opvolger: de vier bestaande regels voor de Store-website staan erin, plus de AI-diensten die ISMP22 niet heeft goedgekeurd."
+          "reason": "Een apparaat kent een URL-blokkeerlijst en de lijst hier is de complete opvolger: de twee regels voor de Store-website uit OpenIntuneBaseline staan erin, plus de AI-diensten die het AI-beleid niet toestaat."
         },
         {
           "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
@@ -2094,10 +1958,7 @@
         "nis2": [
           "art. 21(2)(e) beveiliging van netwerk- en informatiesystemen"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP11"
-        ]
+        "partis": []
       },
       "bron": "CIS v4 Windows 11 L1 — instelling overgenomen uit IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie.",
       "bewijs": "Windows merkt gedownloade bestanden met de Mark of the Web. Deze instelling zorgt dat de Attachment Manager de virusscanner aanroept op het moment dat zo'n bestand wordt geopend. Dat is het moment waarop het ertoe doet: een bijlage die bij binnenkomst nog onbekend was, is een dag later wél herkend. De baseline heeft Defender volledig ingericht maar laat dit aanroeppunt vandaag ongemoeid.",
@@ -2107,36 +1968,140 @@
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Defender for Endpoint - v3.1.json",
-      "target": "Baseline_WIN_U_Compliance_Defender_for_Endpoint",
-      "displayName": "[Baseline] - WIN - U - Compliance Defender for Endpoint",
-      "doel": "Toetst het risiconiveau dat Defender for Endpoint aan het apparaat toekent. Vereist een werkende koppeling met Defender for Endpoint in Intune.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Defender for Endpoint",
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Antispyware - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Antispyware",
+      "displayName": "[Baseline] - WIN - U - Compliance Antispyware",
+      "doel": "Toetst of er een actieve antispywareoplossing in Windows-beveiliging geregistreerd staat.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antispyware",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
       "type": "deviceCompliancePolicies",
-      "note": "Vereist een werkende Defender for Endpoint-koppeling in Intune; zonder die connector blijven apparaten hangen op 'niet geëvalueerd'.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
     },
     {
-      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Device Health - v3.1.json",
-      "target": "Baseline_WIN_U_Compliance_Device_Health",
-      "displayName": "[Baseline] - WIN - U - Compliance Device Health",
-      "doel": "Toetst of het apparaat versleuteld is en veilig opstart (BitLocker, Secure Boot, code-integriteit). Zonder deze toets is 'vereis een compliant apparaat' in Conditional Access betekenisloos.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Health",
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Antivirus - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Antivirus",
+      "displayName": "[Baseline] - WIN - U - Compliance Antivirus",
+      "doel": "Toetst of er een actieve antivirusoplossing in Windows-beveiliging geregistreerd staat.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antivirus",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
       "type": "deviceCompliancePolicies",
-      "note": "Eerste compliance-policy in deze baseline. Zonder compliance-policy is 'vereis een compliant apparaat' in Conditional Access betekenisloos.",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
     },
     {
-      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Device Security - v3.1.json",
-      "target": "Baseline_WIN_U_Compliance_Device_Security",
-      "displayName": "[Baseline] - WIN - U - Compliance Device Security",
-      "doel": "Toetst de beveiligingsstand van het apparaat: firewall, antivirus en beveiligingsonderdelen die aan horen te staan.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Device Security",
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - BitLocker - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_BitLocker",
+      "displayName": "[Baseline] - WIN - U - Compliance BitLocker",
+      "doel": "Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omdat het versleutelen na de inschrijving even duurt.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - BitLocker",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
       "type": "deviceCompliancePolicies",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - Code Integrity - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Code_Integrity",
+      "displayName": "[Baseline] - WIN - U - Compliance Code Integrity",
+      "doel": "Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprogramma's en systeembestanden laadt.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Defender - U - Real-Time Protection - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Defender_Real_Time_Protection",
+      "displayName": "[Baseline] - WIN - U - Compliance Defender Real Time Protection",
+      "doel": "Toetst of Microsoft Defender aanstaat en de realtimebeveiliging actief is.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Real-Time Protection",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Defender - U - Security Intelligence - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Defender_Security_Intelligence",
+      "displayName": "[Baseline] - WIN - U - Compliance Defender Security Intelligence",
+      "doel": "Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": [
+        {
+          "veld": "scheduledActionsForRule",
+          "waarde": [
+            {
+              "ruleName": "PasswordRequired",
+              "scheduledActionConfigurations": [
+                {
+                  "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                  "actionType": "block",
+                  "notificationMessageCCList": [],
+                  "gracePeriodHours": 6,
+                  "notificationTemplateId": "00000000-0000-0000-0000-000000000000"
+                }
+              ]
+            }
+          ],
+          "reason": "De OIB-export blokkeert direct, terwijl de CHANGELOG van v4.0 zelf 0,25 dag (6 uur) respijt noemt. Een laptop die uit de slaapstand of van vakantie terugkomt haalt eerst nieuwe definities op; zonder respijt verliest hij in die minuten toegang via Conditional Access. Zes uur is ook wat de vervallen Compliance Defender for Endpoint gaf."
+        }
+      ]
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Firewall - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Firewall",
+      "displayName": "[Baseline] - WIN - U - Compliance Firewall",
+      "doel": "Toetst of Windows Firewall actief is.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Firewall",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - SecureBoot - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_Secure_Boot",
+      "displayName": "[Baseline] - WIN - U - Compliance Secure Boot",
+      "doel": "Toetst of het apparaat met Secure Boot opstart, zodat een bootkit niet vóór Windows kan laden.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - TPM - v4.0.json",
+      "target": "Baseline_WIN_U_Compliance_TPM",
+      "displayName": "[Baseline] - WIN - U - Compliance TPM",
+      "doel": "Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebescherming, geen Windows Hello for Business en geen Credential Guard.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM",
+      "note": "Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).",
+      "type": "deviceCompliancePolicies",
+      "herkomst": "oib",
+      "fase": 1,
+      "overrides": [],
+      "veldOverrides": []
     },
     {
       "target": "Baseline_WIN_U_Compliance_OS_Version",
@@ -2157,11 +2122,7 @@
           "art. 21(2)(e) beveiliging bij verwerving en onderhoud",
           "art. 21(2)(f) beoordeling van de doeltreffendheid"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP11",
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bewijs": "Geen van de elf compliance-policies in deze baseline zette een minimale OS-versie. Een apparaat op een Windows-versie die geen beveiligingsupdates meer krijgt was daarmee volledig compliant en kwam gewoon door Conditional Access — precies het apparaat waarvoor die toets bedoeld is. De ondergrens is bovendien geen willekeurige keuze: een deel van de baseline werkt domweg niet onder 22H2, en dan is de policy groen terwijl de instelling nooit is aangekomen.",
       "universeel": "Elk Windows-apparaat. De ondergrens is de versie waaronder de baseline zichzelf niet meer kan waarmaken.",
@@ -2180,21 +2141,11 @@
       "note": "**Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert bewust niets, want zodra een verouderde ondergrens de build rood maakt verhoogt iemand het getal om 'm groen te krijgen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 22H2 staat."
     },
     {
-      "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - Compliance - U - Password - v3.1.json",
-      "target": "Baseline_WIN_U_Compliance_Password",
-      "displayName": "[Baseline] - WIN - U - Compliance Password",
-      "doel": "Toetst of het apparaat een wachtwoord of PIN vereist en hoe sterk die moet zijn.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — Compliance - U - Password",
-      "type": "deviceCompliancePolicies",
-      "herkomst": "oib",
-      "fase": 1
-    },
-    {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - U - Copilot - v3.8.json",
       "target": "Baseline_WIN_U_Copilot",
       "displayName": "[Baseline] - WIN - U - Copilot",
       "doel": "Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - U - Copilot",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - U - Copilot",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2203,7 +2154,7 @@
       "target": "Baseline_WIN_U_Microsoft_Edge_Extensions",
       "displayName": "[Baseline] - WIN - U - Microsoft Edge Extensions",
       "doel": "Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zijn.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Extensions",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2212,43 +2163,56 @@
       "target": "Baseline_WIN_U_Microsoft_Edge_Password_Management",
       "displayName": "[Baseline] - WIN - U - Microsoft Edge Password Management",
       "doel": "Bepaalt of Edge wachtwoorden mag opslaan en tonen, zodat werkwachtwoorden niet in een browserprofiel belanden.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Password Management",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Password Management",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v3.0.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v4.0.json",
       "target": "Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync",
       "displayName": "[Baseline] - WIN - U - Microsoft Edge Profiles and Sync",
       "doel": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - User Experience - v3.8.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - User Experience - v4.0.json",
       "target": "Baseline_WIN_U_Microsoft_Edge_User_Experience",
       "displayName": "[Baseline] - WIN - U - Microsoft Edge User Experience",
       "doel": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - User Experience",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience",
       "herkomst": "oib",
       "fase": 1
+    },
+    {
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Management - v4.0.json",
+      "target": "Baseline_WIN_U_Microsoft_Edge_Management",
+      "displayName": "[Baseline] - WIN - U - Microsoft Edge Management",
+      "doel": "Staat de Edge Management Service toe op beheerde apparaten en laat het beleid dat daar wordt ingesteld vóór lokaal en MDM-beleid gaan, zodat Intune en die dienst elkaar niet tegenwerken.",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management",
+      "note": "Nieuw in OIB v4.0. Verplicht niemand om de Edge Management Service (admin.cloud.microsoft → Edge) te gebruiken; zolang daar niets is ingesteld verandert er niets. De versie- en extensiemonitoring in die dienst is gratis rapportage en werkt ook zonder verder beleid. Beheer in die portal vraagt de Entra-rol Edge Administrator.",
+      "herkomst": "oib",
+      "fase": 2,
+      "faseWaarom": "Draait de voorrang om: beleid uit de Edge Management Service wint daarna van het Edge-beleid uit deze baseline. Wie de rol Edge Administrator heeft kan dan dus instellingen uit Microsoft Edge Security en User Experience overschrijven. Leg eerst vast wie die rol heeft voordat dit breed uitrolt.",
+      "overrides": [],
+      "veldOverrides": []
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - U - Config and Experience - v3.6.json",
       "target": "Baseline_WIN_U_Microsoft_Office_Experience",
       "displayName": "[Baseline] - WIN - U - Microsoft Office Experience",
       "doel": "De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en welke functies zichtbaar zijn.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Config and Experience",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience",
       "herkomst": "oib",
       "fase": 1
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - U - Security - v3.6.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - U - Security - v4.0.json",
       "target": "Baseline_WIN_U_Microsoft_Office_Security",
       "displayName": "[Baseline] - WIN - U - Microsoft Office Security",
       "doel": "De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Security",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2257,7 +2221,7 @@
       "target": "Baseline_WIN_U_Microsoft_OneDrive",
       "displayName": "[Baseline] - WIN - U - Microsoft OneDrive",
       "doel": "De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft OneDrive - U - Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2308,7 +2272,7 @@
       "target": "Baseline_WIN_U_Microsoft_Store",
       "displayName": "[Baseline] - WIN - U - Microsoft Store",
       "doel": "De gebruikerskant van de Store-beperkingen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Microsoft Store - U - Configuration",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2330,11 +2294,7 @@
         "nis2": [
           "art. 21(2)(i) toegangsbeleid en authenticatie"
         ],
-        "partis": [],
-        "isms": [
-          "ISMP08",
-          "ISMP14"
-        ]
+        "partis": []
       },
       "bewijs": "Zonder tenantbeperking kan een gebruiker in de zakelijke Teams-client inloggen op een tenant van een andere organisatie en daar bedrijfsbestanden naartoe slepen. Dat is een uitgaande datastroom die nergens wordt gelogd, omdat het verkeer er voor elke monitoringtool uitziet als gewoon Teams-gebruik. De tenantlijst is de enige plek waar dat te stoppen is.",
       "universeel": "Elke gebruiker met Teams op een beheerd apparaat.",
@@ -2345,7 +2305,7 @@
       "target": "Baseline_WIN_U_Personal_Data_Encryption",
       "displayName": "[Baseline] - WIN - U - Personal Data Encryption",
       "doel": "Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — ES - Encryption - U - Personal Data Encryption",
+      "bron": "OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption",
       "herkomst": "oib",
       "fase": 1
     },
@@ -2365,7 +2325,7 @@
       "target": "Baseline_WIN_U_Windows_Spotlight",
       "displayName": "[Baseline] - WIN - U - Windows Spotlight",
       "doel": "Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen.",
-      "bron": "OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel)",
+      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel)",
       "splitScope": "U",
       "note": "OIB's policy is gemengd (4 user- en 1 device-instelling op topniveau). Gesplitst omdat een gemengde policy niet eenduidig toe te wijzen is.",
       "herkomst": "oib",

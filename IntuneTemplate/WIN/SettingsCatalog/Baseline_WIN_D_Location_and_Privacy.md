@@ -11,7 +11,7 @@ Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en sp
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-022-Privacy` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Location and Privacy |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy |
 | Bestand | [`Baseline_WIN_D_Location_and_Privacy.json`](Baseline_WIN_D_Location_and_Privacy.json) |
 
 > De enige eigen instelling (letappsactivatewithvoiceabovelock) staat bij OIB in Login and Lock Screen en gaat dus niet verloren.

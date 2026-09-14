@@ -11,7 +11,7 @@ Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar word
 | Type | Device config |
 | Toewijzing | — |
 | checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
-| Bron | OpenIntuneBaseline Windows v3.8 — WUfB - Ring 1 - Pilot |
+| Bron | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot |
 | Bestand | [`Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json) |
 
 > Zonder assignment: ringen horen op een pilot-groep, niet op All Devices — dat zou ring 3 tegenspreken.

@@ -165,6 +165,34 @@
       "previousNames": ["[Baseline] - U - Microsoft OneDrive"],
       "target": "[Baseline] - WIN - U - Microsoft OneDrive",
       "action": "rename"
+    },
+    {
+      "previousNames": ["[Baseline] - WIN - U - Compliance Device Health"],
+      "target": null,
+      "action": "retire",
+      "reason": "OpenIntuneBaseline v4.0 splitst compliance in één toets per policy, zodat respijt en uitzonderingen per toets te regelen zijn.",
+      "replacedBy": ["[Baseline] - WIN - U - Compliance BitLocker", "[Baseline] - WIN - U - Compliance Secure Boot", "[Baseline] - WIN - U - Compliance Code Integrity"]
+    },
+    {
+      "previousNames": ["[Baseline] - WIN - U - Compliance Device Security"],
+      "target": null,
+      "action": "retire",
+      "reason": "Zelfde splitsing als Device Health (OpenIntuneBaseline v4.0).",
+      "replacedBy": ["[Baseline] - WIN - U - Compliance TPM", "[Baseline] - WIN - U - Compliance Firewall", "[Baseline] - WIN - U - Compliance Antivirus", "[Baseline] - WIN - U - Compliance Antispyware"]
+    },
+    {
+      "previousNames": ["[Baseline] - WIN - U - Compliance Defender for Endpoint"],
+      "target": null,
+      "action": "retire",
+      "reason": "Zelfde splitsing (OpenIntuneBaseline v4.0). Toetste ondanks de naam geen risicoscore uit Defender for Endpoint, maar of Defender aanstaat, realtimebeveiliging actief is en de definities actueel zijn — precies wat de twee opvolgers doen.",
+      "replacedBy": ["[Baseline] - WIN - U - Compliance Defender Security Intelligence", "[Baseline] - WIN - U - Compliance Defender Real Time Protection"]
+    },
+    {
+      "previousNames": ["[Baseline] - WIN - U - Compliance Password"],
+      "target": null,
+      "action": "retire",
+      "reason": "Vervallen in OpenIntuneBaseline v4.0. De wachtwoordeisen in een Windows-compliancepolicy lopen via de DeviceLock-CSP en de EAS-engine: ze worden afgedwongen in plaats van alleen getoetst, raken alleen lokale accounts, en wachtwoordbeleid komt voor Entra-accounts uit Entra zelf. De enige nuttige instelling — vergrendelen na inactiviteit — staat nu in Device Lock.",
+      "replacedBy": ["[Baseline] - WIN - D - Device Lock"]
     }
   ]
 }

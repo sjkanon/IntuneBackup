@@ -11,7 +11,7 @@ Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun 
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-105-UPersonalDataEncryption` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Encryption - U - Personal Data Encryption |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption |
 | Bestand | [`Baseline_WIN_U_Personal_Data_Encryption.json`](Baseline_WIN_U_Personal_Data_Encryption.json) |
 
 ## Instellingen — 4

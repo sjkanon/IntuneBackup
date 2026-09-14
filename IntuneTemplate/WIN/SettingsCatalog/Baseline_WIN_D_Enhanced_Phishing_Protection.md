@@ -11,7 +11,7 @@ Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, h
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-024-Smartscreen` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Enhanced Phishing Protection |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection |
 | Bestand | [`Baseline_WIN_D_Enhanced_Phishing_Protection.json`](Baseline_WIN_D_Enhanced_Phishing_Protection.json) |
 
 > Opvolger van de SmartScreen-policy (checkId 024 blijft). Vier van de zes oude instellingen staan hier, de twee shell-SmartScreen-instellingen in Security Hardening.

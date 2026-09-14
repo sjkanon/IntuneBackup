@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# IntuneTemplate — 149 policies
+# IntuneTemplate — 155 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 102 | 1 | 6 | 5 | – | **114** |
+| [Windows](WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
 | [macOS](MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
 | [iOS/iPadOS](IOS/README.md) | – | – | – | 2 | 1 | **3** |
 | [Android](AND/README.md) | – | – | – | 2 | 1 | **3** |
-| **Totaal** | **124** | **1** | **9** | **13** | **2** | **149** |
+| **Totaal** | **125** | **1** | **9** | **18** | **2** | **155** |
 
 ## Indeling
 
@@ -65,8 +65,8 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `Package` | In CIPP toewijzen aan | Stage | Policies |
 |---|---|---:|---:|
 | `Baseline-Devices` | Assign to all devices | 1 | 71 |
-| `Baseline-Users` | Assign to all users | 1 | 27 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 25 |
+| `Baseline-Users` | Assign to all users | 1 | 32 |
+| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 26 |
 | `Baseline-Wacht` | Do not assign | 3 | 10 |
 | `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
 | `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
@@ -84,7 +84,7 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 114 policies
+- [Windows](WIN/README.md) — 120 policies
 - [macOS](MAC/README.md) — 29 policies
 - [iOS/iPadOS](IOS/README.md) — 3 policies
 - [Android](AND/README.md) — 3 policies

@@ -11,7 +11,7 @@ Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van p
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-077-DPrinting` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Printing |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Printing |
 | Bestand | [`Baseline_WIN_D_Printing.json`](Baseline_WIN_D_Printing.json) |
 
 > PrintNightmare-hardening; zat eerder als 13 instellingen in de Administrative Templates-blok.

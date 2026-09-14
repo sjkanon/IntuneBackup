@@ -14,7 +14,7 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel |
 | Bestand | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 
-> Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar het beheerdersaccount itceadmin gebruikt in plaats van itce-aci-adm — kies één van de twee routes.
+> Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (itceadmin) gebruikt — kies één van de twee routes.
 
 ## Instellingen — 40
 
@@ -30,7 +30,7 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountfullname` | ITCE Servicedesk |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_hideusersgroups` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountpasswordrotation` | 14 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | itce-aci-adm |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | itceadmin |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_createlocalprimary` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_prefillaccountinfo` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_restrictediting` | 1 |

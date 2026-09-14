@@ -11,7 +11,7 @@ Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen a
 | Type | Settings Catalog |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-106-UWindowsSpotlight` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel) |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel) |
 | Bestand | [`Baseline_WIN_U_Windows_Spotlight.json`](Baseline_WIN_U_Windows_Spotlight.json) |
 
 > OIB's policy is gemengd (4 user- en 1 device-instelling op topniveau). Gesplitst omdat een gemengde policy niet eenduidig toe te wijzen is.

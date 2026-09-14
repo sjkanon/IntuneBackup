@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-09-11",
+  "reviewedAt": "2026-09-14",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -382,7 +382,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse",
-            "expectedValue": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse_3"
+            "expectedValue": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse_1"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_audit_system_auditipsecdriver",
@@ -737,7 +737,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats",
-            "expectedValue": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats_remove"
+            "expectedValue": "device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats_quarantine"
           },
           {
             "settingDefinitionId": "device_vendor_msft_defender_configuration_meteredconnectionupdates",
@@ -794,7 +794,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_power_standbytimeoutpluggedin_enteracstandbytimeout",
-            "expectedValue": 900
+            "expectedValue": 1800
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_power_displayofftimeoutonbattery",
@@ -818,7 +818,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_power_unattendedsleeptimeoutpluggedin",
-            "expectedValue": 900
+            "expectedValue": 1800
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_devicepasswordenabled",
@@ -831,6 +831,10 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_devicelock_mindevicepasswordlength",
             "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2",
+            "expectedValue": 900
           }
         ]
       },
@@ -1131,7 +1135,7 @@
         "settings": [
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_enableadministratoraccountstatus",
-            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_enableadministratoraccountstatus_1"
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_enableadministratoraccountstatus_0"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_accounts_enableguestaccountstatus",
@@ -1220,10 +1224,6 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_virtualizefileandregistrywritefailurestoperuserlocations",
             "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_virtualizefileandregistrywritefailurestoperuserlocations_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2",
-            "expectedValue": 900
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_restrictntlm_auditincomingntlmtraffic",
@@ -1448,14 +1448,6 @@
             "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_siteperprocess_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode",
-            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode_1"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode",
-            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode_1"
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol",
             "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol_1"
           },
@@ -1522,6 +1514,34 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge~typosquattingchecker_typosquattingcheckerenabled",
             "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge~typosquattingchecker_typosquattingcheckerenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_browsercodeintegritysetting",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_browsercodeintegritysetting_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_processisolationenabled",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_processisolationenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge_rendererappcontainerenabled",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge_rendererappcontainerenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev102~policy~microsoft_edge_networkservicesandboxenabled",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev102~policy~microsoft_edge_networkservicesandboxenabled_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode_1"
           }
         ]
       },
@@ -3777,10 +3797,6 @@
             "expectedValue": "device_vendor_msft_defender_configuration_hideexclusionsfromlocaladmins_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_defender_configuration_hideexclusionsfromlocalusers",
-            "expectedValue": "device_vendor_msft_defender_configuration_hideexclusionsfromlocalusers_1"
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_defender_configuration_oobeenablertpandsigupdate",
             "expectedValue": "device_vendor_msft_defender_configuration_oobeenablertpandsigupdate_1"
           },
@@ -3797,6 +3813,10 @@
           {
             "settingDefinitionId": "device_vendor_msft_defender_configuration_supportloglocation",
             "expectedValue": "%ProgramData%\\Microsoft\\IntuneManagementExtension\\Logs"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride",
+            "expectedValue": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride_1"
           }
         ]
       },
@@ -3833,7 +3853,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications",
-            "expectedValue": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications_0"
+            "expectedValue": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disableenhancednotifications_1"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_hidewindowssecuritynotificationareacontrol",
@@ -4143,108 +4163,115 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsfeedbackhub_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsfeedbackhub",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsfeedbackhub_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftofficehub_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftofficehub",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftofficehub_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_clipchamp_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_clipchamp",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_clipchamp_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_copilot_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_copilot",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_copilot_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingnews_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_bingnews",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_bingnews_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_photos_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_photos",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_photos_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftsolitairecollection_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftsolitairecollection",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftsolitairecollection_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_microsoftstickynotes_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftstickynotes",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_microsoftstickynotes_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_msteams_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_msteams",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_msteams_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_todo_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_todo",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_todo_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_bingweather_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_bingweather",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_bingweather_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_outlookforwindows_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_outlookforwindows",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_outlookforwindows_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_paint_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_paint",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_paint_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_quickassist_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_quickassist",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_quickassist_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_screensketch_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_screensketch",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_screensketch_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscalculator_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_dynamicremovallist",
+            "expectedValue": [
+              "Microsoft.PowerAutomateDesktop_8wekyb3d8bbwe",
+              "Microsoft.Getstarted_8wekyb3d8bbwe"
+            ]
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowscamera_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowscalculator",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowscalculator_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_mediaplayer_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowscamera",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowscamera_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsnotepad_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_mediaplayer",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_mediaplayer_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowssoundrecorder_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsnotepad",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsnotepad_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_windowsterminal_0"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowssoundrecorder",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowssoundrecorder_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_gamingapp_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsterminal",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_windowsterminal_0"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxidentityprovider_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_gamingapp",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_gamingapp_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxspeechtotextoverlay_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxidentityprovider",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxidentityprovider_1"
           },
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui",
-            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_xboxtcui_1"
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxspeechtotextoverlay",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxspeechtotextoverlay_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxtcui",
+            "expectedValue": "device_vendor_msft_policy_config_applicationmanagement_removedefaultmicrosoftstorepackages_2_xboxtcui_1"
           }
         ]
       },
@@ -4293,7 +4320,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions",
-            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions_2048"
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions_10240"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disableprocessesinenhancedprotectedmode",
@@ -5009,7 +5036,7 @@
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles",
-            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles_0"
+            "expectedValue": "device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles_1"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter",
@@ -6585,7 +6612,7 @@
         "settings": [
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_applicationdefaults_defaultassociationsconfiguration",
-            "expectedValue": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxEZWZhdWx0QXNzb2NpYXRpb25zPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmFwcHgiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuYmF0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmNhYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5jb20iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuY21kIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmh0YSIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qcyIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qc2UiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIucHMxIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnBzMW0iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuc2N0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnNoYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5zaHMiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIud3NmIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLndzaCIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii52YmUiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIudmJzIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KPC9EZWZhdWx0QXNzb2NpYXRpb25zPg=="
+            "expectedValue": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxEZWZhdWx0QXNzb2NpYXRpb25zPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmFwcHgiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuYmF0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmNhYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5jb20iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuY21kIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmh0YSIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qcyIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qc2UiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIucHMxIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnBzbTEiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuc2N0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnNoYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5zaHMiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIud3NmIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLndzaCIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii52YmUiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIudmJzIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KPC9EZWZhdWx0QXNzb2NpYXRpb25zPg=="
           }
         ]
       },
@@ -7207,6 +7234,14 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_newsandinterests_allownewsandinterests",
             "expectedValue": "device_vendor_msft_policy_config_newsandinterests_allownewsandinterests_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork",
+            "expectedValue": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard",
+            "expectedValue": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard_0"
           }
         ]
       },
@@ -7882,6 +7917,14 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled",
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled_0"
           }
         ]
       },
@@ -7919,8 +7962,8 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_notificationsallowedforurls_notificationsallowedforurlsdesc",
             "expectedValue": [
-              "*.microsoft.com",
-              "*.cloud.microsoft"
+              "[*.]microsoft.com",
+              "[*.]cloud.microsoft"
             ]
           },
           {
@@ -7938,10 +7981,6 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev107~policy~microsoft_edge~edgeworkspaces_edgeworkspacesenabled",
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev107~policy~microsoft_edge~edgeworkspaces_edgeworkspacesenabled_1"
-          },
-          {
-            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev117~policy~microsoft_edge~edgegames_gamermodeenabled",
-            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev117~policy~microsoft_edge~edgegames_gamermodeenabled_0"
           },
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_newpdfreaderenabled",
@@ -7982,6 +8021,30 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended",
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled_0"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility_1"
           }
         ]
       },
@@ -9032,6 +9095,34 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security_l_turnofffilevalidation",
             "expectedValue": "user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security_l_turnofffilevalidation_0"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks",
+            "expectedValue": "user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols",
+            "expectedValue": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph",
+            "expectedValue": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart",
+            "expectedValue": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback",
+            "expectedValue": "user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions",
+            "expectedValue": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty",
+            "expectedValue": "user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty_0"
           }
         ]
       },
@@ -9799,7 +9890,7 @@
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountname",
-            "expectedValue": "itce-aci-adm"
+            "expectedValue": "itceadmin"
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountfullname",
@@ -9996,7 +10087,7 @@
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountname",
-            "expectedValue": "itce-aci-adm"
+            "expectedValue": "itceadmin"
           },
           {
             "settingDefinitionId": "ade_accountsettings_createlocalprimary",
@@ -10608,10 +10699,6 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard",
-            "expectedValue": "device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard_0"
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_policy_config_privacy_disableadvertisingid",
             "expectedValue": "device_vendor_msft_policy_config_privacy_disableadvertisingid_1"
           },
@@ -10710,10 +10797,6 @@
       "params": {
         "settings": [
           {
-            "settingDefinitionId": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride",
-            "expectedValue": "device_vendor_msft_policy_config_windowsdefendersecuritycenter_disallowexploitprotectionoverride_1"
-          },
-          {
             "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_spynet_localsettingoverridespynetreporting",
             "expectedValue": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_spynet_localsettingoverridespynetreporting_0"
           },
@@ -10761,10 +10844,6 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_bluetooth_allowpromptedproximalconnections",
             "expectedValue": "device_vendor_msft_policy_config_bluetooth_allowpromptedproximalconnections_0"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork",
-            "expectedValue": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork_1"
           },
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar",
@@ -10837,8 +10916,6 @@
             "expectedValue": [
               "https://apps.microsoft.com",
               "https://apps.microsoft.com/*",
-              "apps.microsoft.com",
-              "apps.microsoft.com/*",
               "chatgpt.com",
               "chat.openai.com",
               "gemini.google.com",
@@ -11196,9 +11273,7 @@
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",
             "expectedValue": [
               "https://apps.microsoft.com",
-              "https://apps.microsoft.com/*",
-              "apps.microsoft.com",
-              "apps.microsoft.com/*"
+              "https://apps.microsoft.com/*"
             ]
           }
         ]
@@ -11461,6 +11536,51 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_toolsaccounts~l_exchangesettings_l_ostcreation",
             "expectedValue": "user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_toolsaccounts~l_exchangesettings_l_ostcreation_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-171-UMicrosoftEdgeManagement",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-edge-management",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - Microsoft Edge Management\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Management.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementuserpolicyoverridescloudmachinepolicy",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementuserpolicyoverridescloudmachinepolicy_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementenabled_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementextensionsfeedbackenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev115~policy~microsoft_edge~manageability_edgemanagementextensionsfeedbackenabled_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementpolicyoverridesplatformpolicy",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev119~policy~microsoft_edge~manageability_edgemanagementpolicyoverridesplatformpolicy_1"
+          },
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled",
+            "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled_1"
           }
         ]
       },

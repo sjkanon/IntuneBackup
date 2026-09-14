@@ -233,10 +233,6 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Windows_Subsystem_for_Linux: 90,
   Baseline_WIN_D_Windows_Update_Ring_1_Pilot: 91,
   Baseline_WIN_D_Windows_Update_Ring_2_UAT: 92,
-  Baseline_WIN_U_Compliance_Defender_for_Endpoint: 93,
-  Baseline_WIN_U_Compliance_Device_Health: 94,
-  Baseline_WIN_U_Compliance_Device_Security: 95,
-  Baseline_WIN_U_Compliance_Password: 96,
   Baseline_WIN_U_Copilot: 97,
   Baseline_WIN_U_Microsoft_Edge_Extensions: 98,
   Baseline_WIN_U_Microsoft_Edge_Password_Management: 99,
@@ -349,6 +345,20 @@ const CHECK_NUMBERS = {
   Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default: 159,
   Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed: 160,
   Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off: 161,
+
+  // OpenIntuneBaseline v4.0: compliance gesplitst in één toets per policy (vervangt 093–096),
+  // plus de nieuwe Edge Management-policy. Compliance levert vandaag geen check op, maar het
+  // nummer wordt wel uitgedeeld — zelfde reden als bij de wifi-profielen hierboven.
+  Baseline_WIN_U_Compliance_Antispyware: 162,
+  Baseline_WIN_U_Compliance_Antivirus: 163,
+  Baseline_WIN_U_Compliance_BitLocker: 164,
+  Baseline_WIN_U_Compliance_Code_Integrity: 165,
+  Baseline_WIN_U_Compliance_Defender_Real_Time_Protection: 166,
+  Baseline_WIN_U_Compliance_Defender_Security_Intelligence: 167,
+  Baseline_WIN_U_Compliance_Firewall: 168,
+  Baseline_WIN_U_Compliance_Secure_Boot: 169,
+  Baseline_WIN_U_Compliance_TPM: 170,
+  Baseline_WIN_U_Microsoft_Edge_Management: 171,
 };
 
 /**
@@ -363,6 +373,10 @@ const RETIRED_CHECK_NUMBERS = {
   25: "System Services — opgegaan in Security Hardening",
   28: "OneDrive Known Folder Move — opgegaan in Microsoft OneDrive (029)",
   144: "Windows AI Features — gesplitst in een Restricted- (147) en een Permitted-variant (146), omdat het toestaan van generatieve AI een klantbesluit is",
+  93: "Compliance Defender for Endpoint — in OpenIntuneBaseline v4.0 gesplitst in Compliance Defender Security Intelligence en Defender Real Time Protection",
+  94: "Compliance Device Health — in OpenIntuneBaseline v4.0 gesplitst in Compliance BitLocker, Secure Boot en Code Integrity",
+  95: "Compliance Device Security — in OpenIntuneBaseline v4.0 gesplitst in Compliance TPM, Firewall, Antivirus en Antispyware",
+  96: "Compliance Password — vervallen in OpenIntuneBaseline v4.0; vergrendelen na inactiviteit staat nu in Device Lock",
 };
 
 /**

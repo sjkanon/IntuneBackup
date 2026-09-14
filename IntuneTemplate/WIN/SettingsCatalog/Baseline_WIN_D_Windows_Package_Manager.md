@@ -11,7 +11,7 @@ Beperkt winget, zodat gebruikers geen software van willekeurige bronnen kunnen i
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-088-DWindowsPackageManager` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Package Manager |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Package Manager |
 | Bestand | [`Baseline_WIN_D_Windows_Package_Manager.json`](Baseline_WIN_D_Windows_Package_Manager.json) |
 
 ## Instellingen — 5

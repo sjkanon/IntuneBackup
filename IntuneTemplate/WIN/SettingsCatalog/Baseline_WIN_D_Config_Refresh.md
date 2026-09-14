@@ -11,7 +11,7 @@ Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft,
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-058-DConfigRefresh` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Config Refresh |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Config Refresh |
 | Bestand | [`Baseline_WIN_D_Config_Refresh.json`](Baseline_WIN_D_Config_Refresh.json) |
 
 > Zet lokaal gewijzigde MDM-instellingen periodiek terug — het tegengif tegen handmatig geknoei op een device.

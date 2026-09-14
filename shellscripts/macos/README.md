@@ -104,7 +104,8 @@ share op het bureaublad staat — en verder niets. Mounten is een handeling en g
 
 Geldt voor **beide** platformen — `Mount-AzureFilesDrive.ps1` op Windows heeft precies dezelfde
 voorwaarden. De beperking van één identity source geldt per storage account en niet per tenant,
-dus een tweede account naast het bestaande lost het op zonder aan AVD te komen.
+dus een tweede account naast het bestaande lost het op zonder te raken wat al op het eerste
+account draait (bijvoorbeeld een AVD-omgeving op Entra Domain Services).
 
 Een **nieuw** account is bovendien makkelijker dan een bestaand: de `CIFS/` → `cifs/`-correctie
 op de identifier URI is alleen nodig bij shares die er al waren.
@@ -156,9 +157,9 @@ inleveren. Dat is nuttig om te weten vóór je aan deze constructie gaat sleutel
 | **Storage account key in het script** | [Llewellyn Hughes](https://www.llewellynhughes.co.uk/post/azure-map-drive-mac/) — `mount_smbfs -d 777 -f 777 //account:KEY@…` | De sleutel staat in platte tekst in het script en geeft toegang tot het hele storage account. Geen identiteit per gebruiker, geen rechten per persoon. |
 | **Kerberos, met wachtwoord als terugval** | [42Loris/macOS_DriveMapping](https://github.com/42Loris/macOS_DriveMapping) — `mount_smbfs -N`, en anders een sleutelhanger-helper | Niets aan de beveiligingskant, maar het vraagt een werkende Kerberos-bron. Vraagt bovendien een Developer ID-certificaat voor de helper. |
 
-Deze baseline doet de derde. Omdat de Kerberos-kant op de identity source van `acisafiles`
-vastloopt en dat account niet verandert zolang AVD eraan hangt, is de tweede er als **terugval**
-bij gezet — zie hieronder.
+Deze baseline doet de derde. Omdat de Kerberos-kant vastloopt zodra het storage account al een
+andere identity source heeft (AD DS of Entra Domain Services) en je die niet zomaar omzet, is de
+tweede er als **terugval** bij gezet — zie hieronder.
 
 ### De storage account key als terugval
 
@@ -168,8 +169,8 @@ percent-gecodeerd de URL in, dus je plakt hem zoals Azure hem geeft.
 
 Wat je hiermee inlevert, en dat is meer dan het lijkt:
 
-- **De sleutel opent het hele storage account**, niet deze ene share. Bij `acisafiles` is dat
-  hetzelfde account waar de AVD-omgeving op draait — die data valt er dus ook onder.
+- **De sleutel opent het hele storage account**, niet deze ene share. Draait er op hetzelfde
+  account ook iets anders, zoals een AVD-omgeving, dan valt die data er dus ook onder.
 - **Geen identiteit per gebruiker.** Iedereen die mount is dezelfde "gebruiker". Rechten per
   persoon en herleidbaarheid in de logs bestaan niet, en de share-level permissions in Azure
   doen niets meer.
@@ -248,7 +249,7 @@ Bovenin het script staan twee velden die samen bepalen wat deze uitrol doet:
 ```bash
 SET_NAAM="public"
 SHARES=(
-  "data/Public"
+  "algemeen"
 )
 ```
 
@@ -503,16 +504,17 @@ Daar hoort een GUID te staan, niet `%OrganizationId%`.
 
 ### Share en submap zijn niet hetzelfde
 
-`smb://acisafiles.file.core.windows.net/data/Public` staat in het script als drie velden:
-`data` is de **share**, `Public` een **map daarin**. SMB kent maar één sharelaag, en dat
-onderscheid is niet cosmetisch — de mount en de share-level permissions in Azure hangen aan
-`data`, de submap is alleen het punt waar je binnenkomt. Wie alleen bij `Public` mag hoort dat
-via de rechten op die map te krijgen, niet door hier een andere waarde in te vullen.
+`smb://<account>.file.core.windows.net/<share>/<submap>` staat in het script als
+`STORAGE_ACCOUNT` plus een regel in `SHARES`: `<share>` is de **share**, `<submap>` een **map
+daarin**. SMB kent maar één sharelaag, en dat onderscheid is niet cosmetisch — de mount en de
+share-level permissions in Azure hangen aan `<share>`, de submap is alleen het punt waar je
+binnenkomt. Wie alleen bij één submap mag hoort dat via de rechten op die map te krijgen, niet
+door hier een andere waarde in te vullen.
 
 `SHARE_SUBPATH` leeg laten mount de hele share.
 
 De controle op "staat hij al?" kijkt daarom naar de **share** en niet naar de submap of het
-mountpad: NetFS bepaalt zelf of het de mount op `/Volumes/Public` of op `/Volumes/data` zet,
+mountpad: NetFS bepaalt zelf of het de mount op `/Volumes/<submap>` of op `/Volumes/<share>` zet,
 en als /Volumes die naam al kent hangt macOS er een cijfer achter. Een strengere controle zou
 zijn eigen mount niet herkennen en elke ronde opnieuw mounten.
 
@@ -663,8 +665,8 @@ van Intune levert zijn eigen logs altijd mee, uit `/Library/Logs/Microsoft/Intun
 ### Opnieuw laten draaien
 
 ```bash
-launchctl bootout gui/$(id -u)/com.aci-europe.baseline.mount-azure-files
-rm -f ~/Library/LaunchAgents/com.aci-europe.baseline.mount-azure-files.plist
+launchctl bootout gui/$(id -u)/com.baseline.mount-azure-files-<SET_NAAM>
+sudo rm -f /Library/LaunchAgents/com.baseline.mount-azure-files-<SET_NAAM>.plist
 ```
 
 De eerstvolgende run van het Intune-script zet beide terug. De log staat in

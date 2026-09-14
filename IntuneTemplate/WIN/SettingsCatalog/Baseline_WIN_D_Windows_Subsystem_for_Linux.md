@@ -11,7 +11,7 @@ Beperkt het Windows-subsysteem voor Linux, dat anders een volledige tweede omgev
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-090-DWindowsSubsystemForLinux` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Windows Subsystem for Linux |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux |
 | Bestand | [`Baseline_WIN_D_Windows_Subsystem_for_Linux.json`](Baseline_WIN_D_Windows_Subsystem_for_Linux.json) |
 
 ## Instellingen — 10

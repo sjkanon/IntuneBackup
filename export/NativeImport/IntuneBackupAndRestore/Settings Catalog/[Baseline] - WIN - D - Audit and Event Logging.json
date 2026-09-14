@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Audit and Event Logging",
-    "description": "Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Audit and Event Logging.",
+    "description": "Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -496,14 +496,14 @@
             "id": "31",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse_3",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_audit_privilegeuse_auditsensitiveprivilegeuse",
+                "settingInstanceTemplateReference": null
             }
         },
         {

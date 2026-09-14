@@ -11,7 +11,7 @@ Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-u
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-026-UserRights` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights |
 | Bestand | [`Baseline_WIN_D_User_Rights.json`](Baseline_WIN_D_User_Rights.json) |
 
 ## Instellingen — 28

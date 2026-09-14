@@ -11,7 +11,7 @@ Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerd
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-071-DLocalAdministrators` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Local Group Membership - D - Local Administrators |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators |
 | Bestand | [`Baseline_WIN_D_Local_Administrators.json`](Baseline_WIN_D_Local_Administrators.json) |
 
 > LAPS zonder beheerde administrators-groep is half werk: LAPS roteert het wachtwoord van een account dat verder niemand beheert.

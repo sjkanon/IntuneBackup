@@ -11,10 +11,10 @@ Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, 
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-012-DefaultAVPolicy` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus - D - AV Configuration |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration |
 | Bestand | [`Baseline_WIN_D_Defender_Antivirus.json`](Baseline_WIN_D_Defender_Antivirus.json) |
 
-> 11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd.
+> 11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd. Sinds OIB v4.0 zet OIB matig en hoog zelf op quarantaine; de eigen override voor matig is daarmee overbodig geworden en weggehaald. Laag blijft een override.
 
 ## Instellingen — 32
 
@@ -52,7 +52,7 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_severethreats` | remove |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats` | quarantine |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats` | quarantine |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats` | remove |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats` | quarantine |
 | `device_vendor_msft_defender_configuration_meteredconnectionupdates` | 1 |
 | `device_vendor_msft_policy_config_defender_allowintrusionpreventionsystem` | 1 |
 

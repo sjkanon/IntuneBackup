@@ -11,7 +11,7 @@ Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-064-DDeliveryOptimisation` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Windows Update for Business - D - Delivery Optimisation |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation |
 | Bestand | [`Baseline_WIN_D_Delivery_Optimisation.json`](Baseline_WIN_D_Delivery_Optimisation.json) |
 
 ## Instellingen — 12

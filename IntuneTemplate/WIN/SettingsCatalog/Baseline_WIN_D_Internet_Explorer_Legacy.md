@@ -11,7 +11,7 @@ Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-mod
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-069-DInternetExplorerLegacy` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Internet Explorer (Legacy) - D - Security |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security |
 | Bestand | [`Baseline_WIN_D_Internet_Explorer_Legacy.json`](Baseline_WIN_D_Internet_Explorer_Legacy.json) |
 
 > De enige user-instelling is eruit gelaten: die staat al in [Baseline] - WIN - U - Windows User Experience, en twee policies die dezelfde instelling zetten leveren een conflict op. Neemt 204 instellingen over uit het oude Administrative Templates-blok.
@@ -28,7 +28,7 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_internetexplorer_checksignaturesondownloadedprograms` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_donotallowactivexcontrolsinprotectedmode` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions` | 2048 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_disableencryptionsupport_advanced_wininetprotocoloptions` | 10240 |
 | `device_vendor_msft_policy_config_internetexplorer_disableprocessesinenhancedprotectedmode` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_allowenhancedprotectedmode` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_disableignoringcertificateerrors` | 1 |
@@ -207,7 +207,7 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_trustedsiteszonejavapermissions_iz_partname1c00` | 65536 |
 | `device_vendor_msft_policy_config_internetexplorer_allowcertificateaddressmismatchwarning` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarnings` | 1 |
-| `device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles` | 0 |
+| `device_vendor_msft_policy_config_internetexplorer_disablebypassofsmartscreenwarningsaboutuncommonfiles` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_preventmanagingsmartscreenfilter_ie9safetyfilteroptions` | 1 |
 | `device_vendor_msft_policy_config_internetexplorer_preventperuserinstallationofactivexcontrols` | 1 |

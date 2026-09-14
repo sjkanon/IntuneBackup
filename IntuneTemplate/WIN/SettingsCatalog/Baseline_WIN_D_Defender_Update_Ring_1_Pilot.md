@@ -11,7 +11,7 @@ Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je ee
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | — |
 | checkId | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |
-| Bron | OpenIntuneBaseline Windows v3.8 — ES - Defender Antivirus Updates - Ring 1 - Pilot |
+| Bron | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot |
 | Bestand | [`Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json) |
 
 > Ringen zetten dezelfde drie instellingen met andere waarden. Alleen ring 3 staat op All Devices; ring 1 en 2 horen op een pilot-/UAT-groep en hebben daarom geen assignment.

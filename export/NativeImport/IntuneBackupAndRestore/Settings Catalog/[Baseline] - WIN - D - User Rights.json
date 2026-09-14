@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - User Rights",
-    "description": "Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - User Rights.",
+    "description": "Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -465,6 +465,7 @@
             }
         },
         {
+            "id": "25",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_userrights_profilesystemperformance",
@@ -481,10 +482,10 @@
                         "value": "*S-1-5-80-0"
                     }
                 ]
-            },
-            "id": "25"
+            }
         },
         {
+            "id": "26",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_userrights_replaceprocessleveltoken",
@@ -501,10 +502,10 @@
                         "value": "*S-1-5-20"
                     }
                 ]
-            },
-            "id": "26"
+            }
         },
         {
+            "id": "27",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_userrights_logonasbatchjob",
@@ -516,8 +517,7 @@
                         "value": "*S-1-5-32-544"
                     }
                 ]
-            },
-            "id": "27"
+            }
         }
     ]
 }

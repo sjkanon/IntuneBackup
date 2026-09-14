@@ -11,12 +11,12 @@ De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaat
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-020-MicrosoftEdge` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Security |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Security.json`](Baseline_WIN_D_Microsoft_Edge_Security.json) |
 
 > 2 -> 54 instellingen.
 
-## Instellingen — 54
+## Instellingen — 59
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -58,8 +58,6 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_networkpredictionoptions` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_networkpredictionoptions_networkpredictionoptions` | 2 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_siteperprocess` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev98~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol_featureflagoverridescontrol` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_hidefirstrunexperience` | 1 |
@@ -77,6 +75,13 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverride` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverrideforfiles` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge~typosquattingchecker_typosquattingcheckerenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_browsercodeintegritysetting` | 2 |
+| `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_processisolationenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge_rendererappcontainerenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev102~policy~microsoft_edge_networkservicesandboxenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode` | 1 |
 
 ---
 

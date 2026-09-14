@@ -11,7 +11,7 @@ Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstel
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-074-DMicrosoftEdgeUpdates` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - D - Updates |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Updates.json`](Baseline_WIN_D_Microsoft_Edge_Updates.json) |
 
 ## Instellingen — 22

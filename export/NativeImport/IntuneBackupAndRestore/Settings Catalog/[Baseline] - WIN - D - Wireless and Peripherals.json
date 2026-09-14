@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 7,
+    "settingCount": 6,
     "settings": [
         {
             "id": "0",
@@ -74,20 +74,6 @@
             "id": "4",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork",
-                "settingInstanceTemplateReference": null,
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork_1",
-                    "children": []
-                }
-            }
-        },
-        {
-            "id": "5",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_enableregistrar",
                 "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
@@ -99,7 +85,7 @@
             }
         },
         {
-            "id": "6",
+            "id": "5",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsconnectnow_wcn_disablewcnui_2",

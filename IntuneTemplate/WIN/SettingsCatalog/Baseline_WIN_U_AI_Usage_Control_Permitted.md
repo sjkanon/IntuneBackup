@@ -24,7 +24,7 @@ instelling op de getoonde waarde staat.
 | Instelling | Waarde |
 |---|---|
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc` | https://apps.microsoft.com, https://apps.microsoft.com/*, apps.microsoft.com, apps.microsoft.com/* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc` | https://apps.microsoft.com, https://apps.microsoft.com/* |
 
 ---
 

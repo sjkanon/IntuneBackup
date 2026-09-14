@@ -11,7 +11,7 @@ Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen insta
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-019-MicrosoftAppStore` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Store - D - Configuration |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration |
 | Bestand | [`Baseline_WIN_D_Microsoft_Store.json`](Baseline_WIN_D_Microsoft_Store.json) |
 
 ## Instellingen — 7

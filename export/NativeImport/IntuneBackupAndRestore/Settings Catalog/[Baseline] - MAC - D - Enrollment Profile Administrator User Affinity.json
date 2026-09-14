@@ -80,7 +80,7 @@
                                         "auditRuleInformation": null,
                                         "simpleSettingValue": {
                                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
-                                            "value": "itce-aci-adm",
+                                            "value": "itceadmin",
                                             "settingValueTemplateReference": {
                                                 "settingValueTemplateId": "3a7c9d2e-8f4b-4e1a-9c5d-6b8a3f7e2d4c",
                                                 "useTemplateDefault": false

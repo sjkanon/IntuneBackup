@@ -11,7 +11,7 @@ Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de script
 | Type | Settings Catalog |
 | Toewijzing | — |
 | checkId | `INTUNE-BASE-079-DScriptFileAssociations` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - D - Script File Associations |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
 | Bestand | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 
 > Opent .js/.vbs/.hta met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit.

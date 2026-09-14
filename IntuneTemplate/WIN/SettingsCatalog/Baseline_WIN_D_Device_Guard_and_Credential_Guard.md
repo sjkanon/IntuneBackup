@@ -11,7 +11,7 @@ Zet virtualisatie-gebaseerde beveiliging, Credential Guard en geheugenintegritei
 | Type | Settings Catalog |
 | Toewijzing | — |
 | checkId | `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Device Security - U - Device Guard, Credential Guard and HVCI |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Device Guard, Credential Guard and HVCI |
 | Bestand | [`Baseline_WIN_D_Device_Guard_and_Credential_Guard.json`](Baseline_WIN_D_Device_Guard_and_Credential_Guard.json) |
 
 > OIB wijst deze aan gebruikers toe om een herstart midden in Autopilot te vermijden; alle 8 instellingen zijn device-scoped, dus hier D. Houd er rekening mee dat de eerste toepassing een herstart vraagt.

@@ -11,7 +11,7 @@ Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer 
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-056-DAutomaticRestartSignOn` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Windows User Experience - D - Automatic Restart Sign-On |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Automatic Restart Sign-On |
 | Bestand | [`Baseline_WIN_D_Automatic_Restart_Sign_On.json`](Baseline_WIN_D_Automatic_Restart_Sign_On.json) |
 
 ## Instellingen — 3

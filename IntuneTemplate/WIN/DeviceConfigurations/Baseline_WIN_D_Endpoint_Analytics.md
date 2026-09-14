@@ -11,7 +11,7 @@ Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage appara
 | Type | Device config |
 | Toewijzing | All Devices |
 | checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
-| Bron | OpenIntuneBaseline Windows v3.8 — TP - Health Monitoring - D - Endpoint Analytics |
+| Bron | OpenIntuneBaseline Windows v4.0 — TP - Health Monitoring - D - Endpoint Analytics |
 | Bestand | [`Baseline_WIN_D_Endpoint_Analytics.json`](Baseline_WIN_D_Endpoint_Analytics.json) |
 
 ## Eigenschappen — 3

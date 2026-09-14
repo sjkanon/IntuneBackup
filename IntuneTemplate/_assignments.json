@@ -728,7 +728,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - U - Compliance Defender for Endpoint": [
+  "[Baseline] - WIN - U - Compliance Antispyware": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -737,7 +737,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - U - Compliance Device Health": [
+  "[Baseline] - WIN - U - Compliance Antivirus": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -746,7 +746,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - U - Compliance Device Security": [
+  "[Baseline] - WIN - U - Compliance BitLocker": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -755,7 +755,52 @@
       }
     }
   ],
-  "[Baseline] - WIN - U - Compliance Password": [
+  "[Baseline] - WIN - U - Compliance Code Integrity": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Defender Real Time Protection": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Defender Security Intelligence": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Firewall": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance Secure Boot": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
+      }
+    }
+  ],
+  "[Baseline] - WIN - U - Compliance TPM": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

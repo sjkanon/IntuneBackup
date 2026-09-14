@@ -11,7 +11,7 @@ Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.
 | Type | Device config |
 | Toewijzing | — |
 | checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
-| Bron | OpenIntuneBaseline Windows v3.8 — WUfB - Ring 2 - UAT |
+| Bron | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT |
 | Bestand | [`Baseline_WIN_D_Windows_Update_Ring_2_UAT.json`](Baseline_WIN_D_Windows_Update_Ring_2_UAT.json) |
 
 ## Eigenschappen — 36

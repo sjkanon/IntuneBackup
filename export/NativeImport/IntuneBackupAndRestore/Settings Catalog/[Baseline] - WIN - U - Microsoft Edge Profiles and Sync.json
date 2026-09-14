@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Edge Profiles and Sync",
-    "description": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync.",
+    "description": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 8,
+    "settingCount": 10,
     "settings": [
         {
             "id": "0",
@@ -136,6 +136,34 @@
                     "value": "user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled_1",
                     "children": []
                 }
+            }
+        },
+        {
+            "id": "8",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled_1"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled",
+                "settingInstanceTemplateReference": null
+            }
+        },
+        {
+            "id": "9",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
+                    "settingValueTemplateReference": null,
+                    "value": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled_0"
+                },
+                "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled",
+                "settingInstanceTemplateReference": null
             }
         }
     ]

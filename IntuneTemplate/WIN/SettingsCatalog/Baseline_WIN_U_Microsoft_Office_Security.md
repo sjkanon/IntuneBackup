@@ -11,10 +11,10 @@ De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en
 | Type | Settings Catalog |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-103-UMicrosoftOfficeSecurity` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Office - U - Security |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security |
 | Bestand | [`Baseline_WIN_U_Microsoft_Office_Security.json`](Baseline_WIN_U_Microsoft_Office_Security.json) |
 
-## Instellingen — 221
+## Instellingen — 228
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -242,6 +242,13 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security~l_trustcenter_l_vbawarningspolicy` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security~l_trustcenter_l_vbawarningspolicy_l_empty19` | 3 |
 | `user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security_l_turnofffilevalidation` | 0 |
+| `user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback` | 1 |
+| `user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty` | 0 |
 
 ---
 

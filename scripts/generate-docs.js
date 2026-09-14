@@ -525,7 +525,7 @@ function overviewDocument(templates, ctx) {
     "",
     "| | |",
     "|---|---|",
-    "| `WIN - D - Windows AI` | Recall en Click To Do uit. OIB v3.8 kent nog geen Windows AI-policy en wij dus ook niet. |",
+    "| `WIN - D - Windows AI` | Recall en Click To Do uit. OIB v4.0 kent nog geen Windows AI-policy en wij dus ook niet. |",
     "| `WIN - D - Removable Storage` | schrijven naar USB-opslag en WPD-apparaten geblokkeerd; verwisselbare media was nergens beperkt. |",
     "| `WIN - U - Windows Hello for Business` | WHfB per gebruiker naast de bestaande per-apparaatpolicy. |",
     "| `WIN - D - Windows Hello for Business Multi User` | WHfB voor gedeelde apparaten, zonder inrichting direct na het aanmelden. |",

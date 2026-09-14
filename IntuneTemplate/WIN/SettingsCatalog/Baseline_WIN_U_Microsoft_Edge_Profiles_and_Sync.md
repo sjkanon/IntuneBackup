@@ -11,10 +11,10 @@ Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroni
 | Type | Settings Catalog |
 | Toewijzing | All Users |
 | checkId | `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync` |
-| Bron | OpenIntuneBaseline Windows v3.8 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync |
+| Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json) |
 
-## Instellingen — 9
+## Instellingen — 11
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -30,6 +30,8 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge_forcesync` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~identity_implicitsigninenabled` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled` | 1 |
+| `user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled` | 1 |
+| `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled` | 0 |
 
 ---
 
