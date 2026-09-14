@@ -58,7 +58,7 @@
     "appActionIfUnableToAuthenticateUser": "block",
     "dialerRestrictionLevel": "allApps",
     "gracePeriodToBlockAppsDuringOffClockHours": null,
-    "targetedAppManagementLevels": "unmanaged",
+    "targetedAppManagementLevels": "unspecified",
     "appGroupType": "allMicrosoftApps",
     "appDataEncryptionType": "whenDeviceLocked",
     "minimumRequiredSdkVersion": null,

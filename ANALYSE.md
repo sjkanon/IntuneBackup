@@ -409,3 +409,18 @@ macOS v2.0 beta, UniFy en intune-my-macs:
 | `MAC - U - Compliance Device Security` | eiste *alle inkomende verbindingen blokkeren*, terwijl `MAC - D - Firewall and Gatekeeper` die instelling op false zet — een Mac die exact de baseline volgde was niet-compliant | eis op false, als `veldOverride`; firewall en stealth mode blijven vereist |
 | `MAC - D - Software Updates` | de drie automatische acties stonden op `_0`, en dat is *Allowed*: de gebruiker kiest, er werd niets afgedwongen | AlwaysOn (`_1`) |
 | `MAC - D - FileVault` | de persoonlijke herstelsleutel werd niet expliciet aangemaakt en het tonen ervan niet uitgezet | `userecoverykey` true en `showrecoverykey` false, als overrides met `parent` |
+
+# Ingeschreven telefoons houden toegang (14 september 2026)
+
+De App Protection-policies voor iOS en Android stonden op `targetedAppManagementLevels:
+unmanaged`. Een telefoon die zich inschreef viel daardoor buiten App Protection, en Conditional
+Access 2070 — dat voor iOS en Android een compliant app eist — liet Outlook en Teams op dat
+toestel dan niet meer toe. Beide policies staan nu op `unspecified`: ze gelden voor elk toestel,
+ingeschreven of niet. 2070 accepteert voortaan een compliant apparaat óf een compliant app, en
+sluit de Intune Enrollment-app uit zodat de inschrijving zelf niet vastloopt (zie ronde 4 in
+CA-Policies/ANALYSE.md).
+
+Tegelijk staan drie waarden die na de OIB-import met de hand waren aangescherpt nu als
+`veldOverrides` in het manifest: `previousPinBlockCount` (iOS en Android),
+`screenCaptureConfigurationState` en `filterOpenInToOnlyManagedApps` (iOS). Een volgende
+`import-oib.js` draait die daarmee niet meer terug.

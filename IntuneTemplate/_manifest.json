@@ -141,6 +141,16 @@
           "veld": "minimumWarningPatchVersion",
           "waarde": "2026-03-01",
           "reason": "OIB laat deze op de placeholder 0000-00-00 staan. Zes maanden terug per september 2026; de goedkoopste beveiligingswinst in de hele baseline."
+        },
+        {
+          "veld": "targetedAppManagementLevels",
+          "waarde": "unspecified",
+          "reason": "Tot september 2026 stond dit op unmanaged: alleen telefoons zónder inschrijving kregen App Protection. Een ingeschreven telefoon viel daarbuiten en kwam dan niet door Conditional Access 2070, dat een compliant app eist — Outlook en Teams werkten er niet. Met unspecified geldt de policy voor elk toestel, ingeschreven of niet. Zelfde keuze als UniFy."
+        },
+        {
+          "veld": "previousPinBlockCount",
+          "waarde": 5,
+          "reason": "De laatste vijf app-PIN's mogen niet opnieuw gebruikt worden. OpenIntuneBaseline laat dit op 0; zonder deze override zet een import het stilzwijgend terug."
         }
       ],
       "note": "Sinds september 2026 waarschuwt deze policy bij Android onder 16.0 en bij een beveiligingspatch ouder dan 2026-03-01. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Beide waarden verouderen — draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Ze staan in `veldOverrides` omdat OIB ze leeg laat; zonder die regels draait de eerstvolgende `import-oib.js` ze stilzwijgend terug.",
@@ -219,6 +229,26 @@
           "veld": "minimumWarningOsVersion",
           "waarde": "18.0",
           "reason": "OIB laat deze leeg. n-1 voor iOS, als waarschuwing en niet als blokkade — zie ondergrens."
+        },
+        {
+          "veld": "targetedAppManagementLevels",
+          "waarde": "unspecified",
+          "reason": "Tot september 2026 stond dit op unmanaged: alleen telefoons zónder inschrijving kregen App Protection. Een ingeschreven telefoon viel daarbuiten en kwam dan niet door Conditional Access 2070, dat een compliant app eist — Outlook en Teams werkten er niet. Met unspecified geldt de policy voor elk toestel, ingeschreven of niet. Zelfde keuze als UniFy."
+        },
+        {
+          "veld": "previousPinBlockCount",
+          "waarde": 5,
+          "reason": "De laatste vijf app-PIN's mogen niet opnieuw gebruikt worden. OpenIntuneBaseline laat dit op 0; zonder deze override zet een import het stilzwijgend terug."
+        },
+        {
+          "veld": "screenCaptureConfigurationState",
+          "waarde": "blocked",
+          "reason": "Geen schermafdrukken van organisatiegegevens in beheerde apps, gelijk aan de Android-policy. OpenIntuneBaseline laat dit ongeconfigureerd."
+        },
+        {
+          "veld": "filterOpenInToOnlyManagedApps",
+          "waarde": true,
+          "reason": "'Openen in' toont alleen beheerde apps, zodat een bijlage niet per ongeluk in een privé-app belandt. OpenIntuneBaseline zet dit uit."
         }
       ],
       "fase": 1

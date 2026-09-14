@@ -68,7 +68,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `appActionIfUnableToAuthenticateUser` | block |
 | `dialerRestrictionLevel` | allApps |
 | `gracePeriodToBlockAppsDuringOffClockHours` | — |
-| `targetedAppManagementLevels` | unmanaged |
+| `targetedAppManagementLevels` | unspecified |
 | `appGroupType` | allMicrosoftApps |
 | `screenCaptureBlocked` | true |
 | `disableAppEncryptionIfDeviceEncryptionIsEnabled` | false |
