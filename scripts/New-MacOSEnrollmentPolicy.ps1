@@ -28,7 +28,7 @@ Haalt alle profielen onder het token op en schrijft ze als JSON naar -OutDir.
 Doelmap voor -Export. Standaard enrollment/macos.
 
 .EXAMPLE
-.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json -WhatIf
+.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\macOS-Corporate-ADE-Baseline.json -WhatIf
 
 .EXAMPLE
 .\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Export

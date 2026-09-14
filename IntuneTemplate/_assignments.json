@@ -107,25 +107,7 @@
       }
     }
   ],
-  "[Baseline] - MAC - D - Privacy Preferences": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
   "[Baseline] - MAC - D - Restrictions": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - MAC - D - Screen Recording": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -332,7 +314,7 @@
       }
     }
   ],
-  "[Baseline] - WIN - D - Defender for Endpoint EDR": [
+  "[Baseline] - WIN - D - Defender EDR Policy": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,
@@ -441,15 +423,6 @@
     }
   ],
   "[Baseline] - WIN - D - Microsoft Accounts": [
-    {
-      "target": {
-        "deviceAndAppManagementAssignmentFilterId": null,
-        "deviceAndAppManagementAssignmentFilterType": "none",
-        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
-      }
-    }
-  ],
-  "[Baseline] - WIN - D - Microsoft Edge Search Engine": [
     {
       "target": {
         "deviceAndAppManagementAssignmentFilterId": null,

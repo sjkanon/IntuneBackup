@@ -10,7 +10,7 @@ Uitrollen gaat via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | Bestand | Token | Standaardprofiel |
 |---|---|---|
-| `ITCE-macOS-Corporate-ADE-Baseline.json` | `ADE-TOKEN-NAAM` | ja (`isDefault: true`) |
+| `macOS-Corporate-ADE-Baseline.json` | `ADE-TOKEN-NAAM` | ja (`isDefault: true`) |
 
 `isDefault: true` betekent dat élk apparaat dat onder dit token uit Apple Business synct dit
 profiel krijgt. Dat is bewust — Microsoft raadt aan zo snel mogelijk een standaardprofiel te
@@ -40,7 +40,7 @@ configureert, ook als je hem uit zou zetten.
 
 ### Accounts
 
-`itceadmin` is LAPS-beheerd: Intune genereert een willekeurig wachtwoord van 15 tekens en
+`mdmadmin` is LAPS-beheerd: Intune genereert een willekeurig wachtwoord van 15 tekens en
 bewaart het versleuteld. Daarom staat `adminAccountPassword` hier niet in. Rotatie op 14 dagen
 is een keuze; de Intune-standaard is zes maanden.
 
@@ -48,13 +48,15 @@ Openstaand, niet opgelost door dit bestand:
 
 - **Rotatie beperkt lezen niet.** Wie het geëscroweerde wachtwoord mag opvragen regel je met
   RBAC/PIM, niet hier. Controleer wie die rol heeft.
-- **`itceadmin` is tenantbreed voorspelbaar.** Voor een MSP met meerdere klanten is
-  `itce-<klantcode>-adm` beter; binnen deze ene tenant maakt het niets uit.
+- **`mdmadmin` is tenantbreed voorspelbaar.** Voor een beheerder met meerdere klanten is een
+  naam per klant (`<prefix>-<klantcode>-adm`) beter.
+- **`supportPhoneNumber` staat op `SERVICEDESK-TELEFOON-INVULLEN`.** De gebruiker ziet dat
+  nummer tijdens de inrichting; vul het per organisatie in vóór je het profiel aanmaakt.
 - **Controleer dat escrow aanstaat** onder Devices → macOS → Local admin password, anders
   roteert het wachtwoord wel maar is het niet op te halen.
 
 Het primaire account is `setPrimarySetupAccountAsRegularUser: true` — een **standaard** account,
-niet admin. Dat mag omdat `itceadmin` de adminrol vult; macOS eist minstens één adminaccount.
+niet admin. Dat mag omdat `mdmadmin` de adminrol vult; macOS eist minstens één adminaccount.
 
 De twee prefill-velden accepteren verschillende variabelen:
 
@@ -154,10 +156,10 @@ exporteer het resultaat hierheen. Het script blokkeert de foute combinatie voor 
 
 ```powershell
 # Wat zou er gebeuren
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json -WhatIf
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\macOS-Corporate-ADE-Baseline.json -WhatIf
 
 # Aanmaken
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\ITCE-macOS-Corporate-ADE-Baseline.json
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\enrollment\macos\macOS-Corporate-ADE-Baseline.json
 
 # Bestaand profiel ophalen als JSON (om handwerk in de portal vast te leggen)
 .\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Export -OutDir .\enrollment\macos
@@ -168,7 +170,7 @@ policies (niet van het enrollmentprofiel zelf — dat gaat per serienummer onder
 
 ```
 (device.deviceOSType -eq "MacMMP") and
-(device.enrollmentProfileName -eq "ITCE - macOS Corporate ADE Baseline")
+(device.enrollmentProfileName -eq "macOS Corporate ADE Baseline")
 ```
 
 Toewijzen blijft handwerk in de portal: **Enrollment program tokens → token → Devices →
@@ -200,7 +202,7 @@ staan alle drie op `true` — *Setup Assistant with modern authentication*. De M
 tijdens Setup Assistant, en de Bedrijfsportal maakt daarna de gebruikerskoppeling af. Dat de
 portal daarom om een setup vraagt is op zich normaal.
 
-**Maar hij blijft het soms vragen als de inschrijving allang compleet is.** Op ITCE's MacBook Air
+**Maar hij blijft het soms vragen als de inschrijving allang compleet is.** Op een testmac
 stond alles goed en toonde de portal tóch *Install management profile*. Controleer daarom eerst
 wat er echt is, vóór je die knop aanraakt:
 

@@ -92,7 +92,7 @@ function build(manifest, assignments) {
     TemplateType: "BaselineTemplate",
     templateName: TEMPLATE_NAME,
     description:
-      "De afgesproken Intune-baseline uit github.com/sjkanon/IntuneBackup. Elke stage rolt " +
+      "De afgesproken Intune-baseline uit de baseline-repository. Elke stage rolt " +
       "Intune-templatepakketten uit; het lidmaatschap van een pakket volgt de repo, dus een " +
       "nieuwe policy komt er vanzelf bij. Wijs de tenants toe voor je hem laat draaien.",
     // CIPP's eigen export zet hier dezelfde placeholder: een geïmporteerde baseline hoort
