@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Access Control",
-    "description": "Toont vóór het aanmelden een waarschuwing dat het systeem alleen voor geautoriseerde gebruikers is, en verbergt de laatst aangemelde gebruikersnaam. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.15 en A.8.5, NIS2 art. 21(2)(i), EASA Part-IS IS.I.OR.245 — instellingen uit CIS v4 Windows 11 L1.",
+    "description": "Toont vóór het aanmelden een waarschuwing dat het systeem alleen voor geautoriseerde gebruikers is, en verbergt de laatst aangemelde gebruikersnaam. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.15 en A.8.5, NIS2 art. 21(2)(i) — instellingen uit CIS v4 Windows 11 L1.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

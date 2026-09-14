@@ -14,9 +14,9 @@ Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart h
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 
-> Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant hadden we al niet overgenomen omdat onze policy het automatische accountbeheer al had. De eigen administratoraccountname blijft staan.
+> Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant hadden we al niet overgenomen omdat onze policy het automatische accountbeheer al had. De eigen administratoraccountname is in september 2026 weggehaald: met automatisch accountbeheer aan negeert Windows die instelling, en de waarde was de accountnaam van één organisatie.
 
-## Instellingen — 13
+## Instellingen — 12
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -35,7 +35,6 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_laps_policies_automaticaccountmanagementtarget` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_laps_policies_automaticaccountmanagementenableaccount` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename` | false |
-| `device_vendor_msft_laps_policies_administratoraccountname` | localadmin |
 
 ---
 

@@ -10,7 +10,7 @@ Mac die zonder enrollmentprofiel uit Apple Business synct, faalt in de enrollmen
 Terugzetten gaat per profiel, met het ABM-token erbij:
 
 ```powershell
-.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName <TOKEN> -Path '.\Apple ADE Enrollment Profiles\macos\ITCE-macOS-Corporate-ADE-Baseline.json' -WhatIf
+.\scripts\New-MacOSEnrollmentPolicy.ps1 -TokenName <TOKEN> -Path '.\Apple ADE Enrollment Profiles\macos\macOS-Corporate-ADE-Baseline.json' -WhatIf
 ```
 
 Haal `-WhatIf` weg als het klopt. Toewijzen blijft handwerk in de portal (Enrollment

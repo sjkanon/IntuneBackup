@@ -1,7 +1,7 @@
 {
   "TemplateType": "BaselineTemplate",
   "templateName": "Baseline",
-  "description": "De afgesproken Intune-baseline uit github.com/sjkanon/IntuneBackup. Elke stage rolt Intune-templatepakketten uit; het lidmaatschap van een pakket volgt de repo, dus een nieuwe policy komt er vanzelf bij. Wijs de tenants toe voor je hem laat draaien.",
+  "description": "De afgesproken Intune-baseline uit de baseline-repository. Elke stage rolt Intune-templatepakketten uit; het lidmaatschap van een pakket volgt de repo, dus een nieuwe policy komt er vanzelf bij. Wijs de tenants toe voor je hem laat draaien.",
   "assignedTenants": [
     {
       "label": "Exported Template",
@@ -76,6 +76,23 @@
             "intuneTemplatePackage": "Baseline-SEC-Baseline-Pilot",
             "assignTo": "customGroup",
             "customGroup": "SEC-Baseline-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-remote-support-macos",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Remote-Support-macOS",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Remote-Support-macOS",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",

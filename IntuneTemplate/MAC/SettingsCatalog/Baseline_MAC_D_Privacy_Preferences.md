@@ -2,14 +2,14 @@
 
 # [Baseline] - MAC - D - Privacy Preferences
 
-Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken.
+Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken.
 
 | | |
 |---|---|
 | Platform | macOS |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen PPPC-policy |
 | Bestand | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |

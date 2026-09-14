@@ -1,8 +1,8 @@
 {
   "@odata.type": "#microsoft.graph.depMacOSEnrollmentProfile",
 
-  "displayName": "ITCE - macOS Corporate ADE Baseline",
-  "description": "Standaard ADE-enrollmentprofiel voor door ITCE beheerde bedrijfs-Macs. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
+  "displayName": "macOS Corporate ADE Baseline",
+  "description": "Standaard ADE-enrollmentprofiel voor beheerde bedrijfs-Macs. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
 
   "isDefault": true,
   "isMandatory": true,
@@ -19,8 +19,8 @@
   "autoAdvanceSetupEnabled": false,
   "requestRequiresNetworkTether": false,
 
-  "adminAccountUserName": "itceadmin",
-  "adminAccountFullName": "ITCE Servicedesk",
+  "adminAccountUserName": "mdmadmin",
+  "adminAccountFullName": "IT Servicedesk",
   "hideAdminAccount": true,
   "depProfileAdminAccountPasswordRotationSetting": {
     "@odata.type": "microsoft.graph.depProfileAdminAccountPasswordRotationSetting",
@@ -39,8 +39,8 @@
   "primaryAccountFullName": "{{username}}",
   "enableRestrictEditing": true,
 
-  "supportDepartment": "ITCE Servicedesk",
-  "supportPhoneNumber": "+32 (0)3 808 32 20",
+  "supportDepartment": "IT Servicedesk",
+  "supportPhoneNumber": "SERVICEDESK-TELEFOON-INVULLEN",
 
   "locationDisabled": false,
   "touchIdDisabled": false,

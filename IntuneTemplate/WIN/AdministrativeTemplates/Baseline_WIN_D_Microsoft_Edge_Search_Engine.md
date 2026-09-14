@@ -9,7 +9,7 @@ Zet Google als standaardzoekmachine in Edge. Een klantkeuze, geen beveiligingsin
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | ADMX |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-015-EdgeStandardSearchEngineGoogle` |
 | Bron | eigen baseline (ADMX) |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Search_Engine.json`](Baseline_WIN_D_Microsoft_Edge_Search_Engine.json) |

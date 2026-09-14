@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Logging",
-    "description": "Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien is wat een beheerder werkelijk heeft uitgevoerd. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.8.15 en A.8.16, NIS2 art. 21(2)(b), EASA Part-IS IS.I.OR.245 — instellingen uit CIS v4 Windows 11 L2.",
+    "description": "Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien is wat een beheerder werkelijk heeft uitgevoerd. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.8.15 en A.8.16, NIS2 art. 21(2)(b) — instellingen uit CIS v4 Windows 11 L2.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

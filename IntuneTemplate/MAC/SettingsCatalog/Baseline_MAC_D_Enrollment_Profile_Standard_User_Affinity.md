@@ -14,7 +14,7 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel |
 | Bestand | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 
-> Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/ITCE-macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (itceadmin) gebruikt — kies één van de twee routes.
+> Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mdmadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mdmadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.
 
 ## Instellingen — 40
 
@@ -27,18 +27,18 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`ade_macos_authenticationmethod` | 2 |
 | `ade_macos_awaitconfiguration` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_createlocaladmin` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountfullname` | ITCE Servicedesk |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountfullname` | IT Servicedesk |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_hideusersgroups` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountpasswordrotation` | 14 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | itceadmin |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | mdmadmin |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_createlocalprimary` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_prefillaccountinfo` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_restrictediting` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_primaryaccountfullname` | {{username}} |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_primaryaccountname` | {{username}} |
 | `ade_lockedenrollment` | 1 |
-| `ade_setupassistant_department` | ITCE Servicedesk |
-| `ade_setupassistant_departmentphone` | +32 (0)3 808 32 20 |
+| `ade_setupassistant_department` | IT Servicedesk |
+| `ade_setupassistant_departmentphone` | SERVICEDESK-TELEFOON-INVULLEN |
 | `ade_setupassistant_locationservices` | 1 |
 | `ade_setupassistant_restore` | 0 |
 | `ade_setupassistant_appleid` | 0 |

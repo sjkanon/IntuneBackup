@@ -1955,10 +1955,6 @@
           {
             "settingDefinitionId": "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename",
             "expectedValue": "device_vendor_msft_laps_policies_automaticaccountmanagementrandomizename_false"
-          },
-          {
-            "settingDefinitionId": "device_vendor_msft_laps_policies_administratoraccountname",
-            "expectedValue": "localadmin"
           }
         ]
       },
@@ -2544,7 +2540,7 @@
           },
           {
             "settingDefinitionId": "com.apple.webcontent-filter_organization",
-            "expectedValue": "ITCE"
+            "expectedValue": "Microsoft Defender"
           },
           {
             "settingDefinitionId": "com.apple.webcontent-filter_pluginbundleid",
@@ -9890,11 +9886,11 @@
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountname",
-            "expectedValue": "itceadmin"
+            "expectedValue": "mdmadmin"
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountfullname",
-            "expectedValue": "ITCE Servicedesk"
+            "expectedValue": "IT Servicedesk"
           },
           {
             "settingDefinitionId": "ade_accountsettings_hideusersgroups",
@@ -9930,11 +9926,11 @@
           },
           {
             "settingDefinitionId": "ade_setupassistant_department",
-            "expectedValue": "ITCE Servicedesk"
+            "expectedValue": "IT Servicedesk"
           },
           {
             "settingDefinitionId": "ade_setupassistant_departmentphone",
-            "expectedValue": "+32 (0)3 808 32 20"
+            "expectedValue": "SERVICEDESK-TELEFOON-INVULLEN"
           },
           {
             "settingDefinitionId": "ade_setupassistant_locationservices",
@@ -10075,7 +10071,7 @@
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountfullname",
-            "expectedValue": "ITCE Servicedesk"
+            "expectedValue": "IT Servicedesk"
           },
           {
             "settingDefinitionId": "ade_accountsettings_hideusersgroups",
@@ -10087,7 +10083,7 @@
           },
           {
             "settingDefinitionId": "ade_accountsettings_adminaccountname",
-            "expectedValue": "itceadmin"
+            "expectedValue": "mdmadmin"
           },
           {
             "settingDefinitionId": "ade_accountsettings_createlocalprimary",
@@ -10115,11 +10111,11 @@
           },
           {
             "settingDefinitionId": "ade_setupassistant_department",
-            "expectedValue": "ITCE Servicedesk"
+            "expectedValue": "IT Servicedesk"
           },
           {
             "settingDefinitionId": "ade_setupassistant_departmentphone",
-            "expectedValue": "+32 (0)3 808 32 20"
+            "expectedValue": "SERVICEDESK-TELEFOON-INVULLEN"
           },
           {
             "settingDefinitionId": "ade_setupassistant_locationservices",

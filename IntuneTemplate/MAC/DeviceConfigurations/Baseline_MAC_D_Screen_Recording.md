@@ -2,14 +2,14 @@
 
 # [Baseline] - MAC - D - Screen Recording
 
-Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen.
+Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen.
 
 | | |
 |---|---|
 | Platform | macOS |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Device config |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | eigen baseline — Apple staat schermopname niet toe in de settings catalog-vorm van PPPC |
 | Bestand | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |

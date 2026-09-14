@@ -12,7 +12,7 @@ opgepikt door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js`
 |---|---|---|
 | `configure-dock.sh` | Richt de Dock één keer per gebruiker in en laat 'm daarna met rust | Gebruiker |
 | `mount-azure-files.sh` | Zet een LaunchAgent klaar die de Azure Files-share mount in de sessie van de gebruiker | Apparaat |
-| `nudge-screen-recording.sh` | Vraagt de gebruiker schermopname aan te zetten voor NinjaOne en TeamViewer, en opent het paneel | Gebruiker |
+| `nudge-screen-recording.sh` | Vraagt de gebruiker schermopname aan te zetten voor de remote-supporttools (standaard NinjaOne en TeamViewer), en opent het paneel | Gebruiker |
 
 ## configure-dock.sh
 
@@ -355,7 +355,7 @@ Kerberos-principals zijn hoofdlettergevoelig, en dat is precies waar dit misgaat
 | Uitkomst | Wat het betekent |
 |---|---|
 | klein mislukt, groot lukt | **Oorzaak 2.** De SPN staat als `CIFS/` geregistreerd en macOS vraagt om `cifs/`. Corrigeer de identifier URI. |
-| allebei mislukt met **AADSTS700016** | Er is in deze tenant geen app voor dit storage account. Zie hieronder — dit hebben we in de praktijk geraakt. |
+| allebei mislukt met **AADSTS700016** | Er is in deze tenant geen app voor dit storage account. Zie hieronder — dit is de meest voorkomende oorzaak. |
 | klein lukt, mount mislukt alsnog | **Oorzaak 3.** Het ticket komt er wel; de server weigert de autorisatie. Kijk naar consent, de MFA-uitzondering en de share-level permission. |
 
 #### AADSTS700016 — de app bestaat niet
@@ -371,10 +371,10 @@ KDC kent überhaupt geen toepassing voor deze fileservice. Aanzetten van Entra K
 die app-registratie (`[Storage Account] <account>.file.core.windows.net`) automatisch aan;
 zolang die er niet is, valt er niets uit te geven.
 
-**Kijk eerst naar de identity source van het storage account**, want dat is wat wij hier
-tegenkwamen. Azure-portal → het storage account → *Data storage* → *File shares* →
+**Kijk eerst naar de identity source van het storage account**, want dat is de meest
+voorkomende oorzaak. Azure-portal → het storage account → *Data storage* → *File shares* →
 *Identity-based access*. Staan **Microsoft Entra Kerberos** en **AD DS** daar grijs met
-*"Another access method is already configured"*, dan is er al een andere bron gekozen — bij ons
+*"Another access method is already configured"*, dan is er al een andere bron gekozen — bijvoorbeeld
 Microsoft Entra Domain Services. Microsoft is daar stellig over:
 
 > Your Azure storage account can't authenticate with both Microsoft Entra ID and a second
@@ -702,7 +702,8 @@ De klik blijft van de gebruiker; dit script zorgt dat hij hem ook doet.
 
 ### Vijf schakelaars, niet één
 
-Het profiel dekt vijf bundles:
+Het profiel dekt standaard vijf bundles, van NinjaOne en TeamViewer. Gebruikt de organisatie
+andere tools, vervang ze dan in het profiel én in `BUNDLES` in het script:
 
 ```
 com.ninjarmm.ncstreamer

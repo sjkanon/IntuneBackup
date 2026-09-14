@@ -10,7 +10,7 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 |---|---:|
 | Policies | 155 |
 | Baseline-checks | 132 |
-| Zonder toewijzing (bewust) | 52 |
+| Zonder toewijzing (bewust) | 55 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
@@ -160,8 +160,8 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat "Standaard" of "Altijd aan" is. |
 | `MAC - U - Compliance OS Version` | Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur. |
 
-Zonder toewijzing staan er 52: de 26 hierboven, 10 die op een voorwaarde
-wachten, 9 voor een eigen groep en 7 die niet uitrollen. Die laatste twee zijn een
+Zonder toewijzing staan er 55: de 26 hierboven, 10 die op een voorwaarde
+wachten, 11 voor een eigen groep en 8 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

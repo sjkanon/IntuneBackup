@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Vraagt de gebruiker om schermopname aan te zetten voor de apps waarmee wij op afstand
-# meekijken, en opent daarbij meteen het juiste paneel. Stopt zodra het geregeld is.
+# Vraagt de gebruiker om schermopname aan te zetten voor de remote-supporttools van de
+# organisatie, en opent daarbij meteen het juiste paneel. Stopt zodra het geregeld is.
 #
 # Waarom dit script bestaat:
 #
@@ -41,6 +41,8 @@ set -u
 # geïnstalleerd is verschijnt niet in het paneel en telt hier dus ook niet mee — anders zou dit
 # script blijven vragen om een vinkje dat nergens staat.
 
+# Standaard NinjaOne en TeamViewer, gelijk aan [Baseline] - MAC - D - Screen Recording. Gebruikt de
+# organisatie andere tools, vervang ze dan hier én in dat profiel.
 BUNDLES=(
   "com.ninjarmm.ncstreamer"
   "com.teamviewer.TeamViewer"

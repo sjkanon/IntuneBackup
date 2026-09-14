@@ -50,8 +50,8 @@ die wij nergens zetten**. Die vallen zo uiteen:
 
 | | Aantal | Wat ermee gebeurde |
 |---|---:|---|
-| Browser (Chrome, Safari, Edge) | 180 | Chrome en Safari gebruiken we niet. De Edge-instellingen zijn cosmetisch of al gedekt — zie hieronder. |
-| Apple-payloads (`com.apple.*`) | 21 | grotendeels iOS-restricties voor *supervised* apparaten; wij hebben geen enrolled iOS. Eén uitzondering: de passcode-payload. |
+| Browser (Chrome, Safari, Edge) | 180 | Chrome en Safari horen bij een eigen browserbesluit. De Edge-instellingen zijn cosmetisch of al gedekt — zie hieronder. |
+| Apple-payloads (`com.apple.*`) | 21 | grotendeels iOS-restricties voor *supervised* apparaten; die vragen ingeschreven iOS-apparaten. Eén uitzondering: de passcode-payload. |
 | Visual Studio | 9 | ontwikkelaarsspecifiek, niet apparaatbreed. `WIN - D - AI Tooling` dekt de Copilot-kant al. |
 | Office | 5 | al gedekt door de vier Office-policies in de baseline. |
 | Overige Windows-CSP | 294 | het echte werk. Hiervan viel het overgrote deel af op *niet apparaatbreed* (kiosk, AVD, Windows 365, gedeelde apparaten), *CIS L2* (bewust: L2 breekt zaken) of *al gedekt via een andere instelling*. |
@@ -304,8 +304,8 @@ De 464 die overblijven, na drie rondes vergelijken:
 |---|---:|---|
 | Microsoft Edge | 133 | onze Edge Security-policy zet er al 54; de rest is CIS L2 of cosmetisch |
 | Windows, overig | 76 | hieruit kwam de laatste ronde; wat nog rest is per stuk gewogen en afgevallen |
-| Google Chrome | 34 | gebruiken we niet |
-| AVD / Windows 365 / RDS | 34 | geen Cloud PC's |
+| Google Chrome | 34 | alleen relevant waar Chrome een beheerde browser is; geen onderdeel van deze set |
+| AVD / Windows 365 / RDS | 34 | hoort in een eigen set voor Cloud PC's en sessiehosts |
 | Apple- en Android-restricties | 40 | vragen inschrijving; staat op de agenda bij de eerste ingeschreven telefoon |
 | Legacy/ADMX-restanten | 30 | Windows Media Player, Help en Ondersteuning, MSS-timers |
 | Firewall-profielvarianten | 29 | onze firewallpolicy zet de drie profielen al; dit zijn Hyper-V/WSL-varianten |

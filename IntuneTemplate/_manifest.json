@@ -107,7 +107,7 @@
     },
     {
       "source": "WINDOWS365/",
-      "reason": "Windows 365 Cloud PC's zijn hier niet in scope. De policies zijn los te importeren zodra dat wel zo is."
+      "reason": "Windows 365 Cloud PC's horen in een eigen set; de policies zijn los te importeren voor een organisatie die ze gebruikt."
     }
   ],
   "policies": [

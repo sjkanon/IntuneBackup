@@ -88,7 +88,7 @@ Cloud-only identiteiten vragen bovendien Windows 11 24H2 of hoger met de cumulat
 van maart 2026 (KB5079391 / KB5079489); hybride identiteiten werken vanaf Windows 10 2004.
 
 `HostToRealm` is hier **niet** nodig. Die mapping is er alleen voor het geval een apparaat
-óók bij storage accounts moet die op on-premises AD DS zijn aangesloten; die zijn er niet.
+óók bij storage accounts moet die op on-premises AD DS zijn aangesloten; is dat niet zo, dan blijft hij weg.
 
 ### Als er tóch een aanmeldvenster komt
 

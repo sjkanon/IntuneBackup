@@ -177,7 +177,7 @@ tussen beide lagen — begin daar.
   uitzondering vastgelegd, niet als openstaande bevinding.
 - **Driver update profiles** — IntuneBackupAndRestore 4.0.1 ondersteunt ze niet. Via CIPP zou
   het kunnen, maar dan lopen de twee restore-routes uiteen.
-- **Windows 365** — OIB heeft er policies voor; Cloud PC's zijn hier nog niet in scope.
+- **Windows 365** — OIB heeft er policies voor; Cloud PC's horen in een eigen set.
 - Afwijkingen van CIS die OIB gemotiveerd maakt (built-in Administrator aan t.b.v. LAPS,
   UAC-promptgedrag t.b.v. helpdesk) — overgenomen inclusief motivatie, zie
   `OIBvsCIS-Rationale.csv` in OIB.

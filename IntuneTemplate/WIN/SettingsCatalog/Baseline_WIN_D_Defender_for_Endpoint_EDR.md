@@ -2,14 +2,14 @@
 
 # [Baseline] - WIN - D - Defender for Endpoint EDR
 
-Koppelt het apparaat aan Defender for Endpoint met het onboarding-pakket van deze tenant. Dat pakket is tenant-specifiek en moet na een restore in een andere tenant handmatig opnieuw gekoppeld worden.
+Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. Dat pakket is tenant-specifiek; in een andere tenant moet het opnieuw gekoppeld worden.
 
 | | |
 |---|---|
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityEndpointDetectionAndResponse) |
-| Toewijzing | All Devices |
+| Toewijzing | — |
 | checkId | `INTUNE-BASE-014-EDRConfiguration` |
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen EDR-onboardingpolicy |
 | Bestand | [`Baseline_WIN_D_Defender_for_Endpoint_EDR.json`](Baseline_WIN_D_Defender_for_Endpoint_EDR.json) |

@@ -9,12 +9,12 @@ Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaa
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityEndpointDetectionAndResponse) |
-| Toewijzing | — |
+| Toewijzing | All Devices |
 | checkId | `INTUNE-BASE-109-DDefenderEDRPolicy` |
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 
-> Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder "Microsoft ATP connector enabled" in plaats van op een vaste tenant-GUID. Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: twee onboarding-policies naast elkaar is geen extra dekking maar dubbel onderhoud. In een andere tenant is dit de policy die je toewijst, en de tenant-specifieke die je weglaat.
+> Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder "Microsoft ATP connector enabled" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; de token-variant staat in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.
 
 ## Instellingen — 3
 
