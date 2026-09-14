@@ -433,3 +433,86 @@ Tegelijk staan drie waarden die na de OIB-import met de hand waren aangescherpt 
 `veldOverrides` in het manifest: `previousPinBlockCount` (iOS en Android),
 `screenCaptureConfigurationState` en `filterOpenInToOnlyManagedApps` (iOS). Een volgende
 `import-oib.js` draait die daarmee niet meer terug.
+
+
+# Ronde normenkader: ISO 27001, NIS2, CIS en NIST CSF (14 september 2026)
+
+De vraag: de baseline zo uitgebreid en onderbouwd maken dat een CISO er ISO/IEC 27001:2022, NIS2,
+CIS Controls v8.1 en NIST CSF 2.0 mee kan verantwoorden — voor alle vier platformen en voor
+Conditional Access. Uitgevoerd als zes werkpakketten tegen één specificatie; elke instelling is
+tegen de Intune-definities (pl4nty/intune-change-tracking, Graph) geverifieerd voordat hij erin
+kwam, en alles is samengevoegd met `check-scope.js` groen.
+
+## Wat erbij kwam
+
+38 nieuwe policies; de baseline telt er nu 193 (was 155). Nieuwe policies staan bijna allemaal
+in fase 2 tot 5: ze bestaan, maar rollen pas uit na een pilot, een voorwaarde (een ingeschreven
+toestel, een licentie, een connector) of een klantbesluit.
+
+| Platform | Nieuw | Policies |
+|---|---:|---|
+| Android | 11 | `AND - U - Work Profile Restrictions` (fase 3), `AND - U - Compliance Corporate Device Health` (fase 3), `AND - U - Compliance Corporate Password` (fase 3), `AND - D - System Updates` (fase 3), `AND - U - Corporate Device Security` (fase 3), `AND - U - Corporate Data Protection` (fase 2), `AND - U - Corporate AI Restricted` (fase 2), `AND - U - Compliance Block Device Administrator` (fase 3), `AND - U - Compliance Defender for Endpoint` (fase 3), `AND - U - Compliance Corporate Defender for Endpoint` (fase 3), `AND - D - Compliance Dedicated Device Health` (fase 4) |
+| iOS/iPadOS | 11 | `IOS - D - Enterprise SSO` (fase 3), `IOS - D - Passcode` (fase 3), `IOS - D - Software Updates` (fase 3), `IOS - D - Restrictions Corporate` (fase 4), `IOS - D - Data Protection` (fase 3), `IOS - D - Apple Intelligence Restricted` (fase 3), `IOS - D - Apple Intelligence Permitted` (fase 5), `IOS - D - Lock Screen` (fase 4), `IOS - U - Compliance Defender for Endpoint` (fase 3), `IOS - D - Defender for Endpoint Onboarding Supervised` (fase 4), `IOS - D - Defender for Endpoint Onboarding Unsupervised` (fase 4) |
+| macOS | 8 | `MAC - D - Screensaver` (fase 2), `MAC - D - Apple Intelligence Restricted` (fase 2), `MAC - D - Apple Intelligence Permitted` (fase 5), `MAC - D - Restrictions Hardening` (fase 2), `MAC - D - Recovery Lock` (fase 2), `MAC - D - Login Window` (fase 2), `MAC - D - Time Server` (fase 1), `MAC - D - External Storage Read Only` (fase 5) |
+| Windows | 8 | `WIN - D - Network Authentication Hardening` (fase 2), `WIN - D - Windows Component Hardening` (fase 2), `WIN - U - File Sharing Restrictions` (fase 2), `WIN - D - Security Log Monitoring` (fase 2), `WIN - D - Windows Event Forwarding` (fase 3), `WIN - D - Microsoft Edge DNS over HTTPS Automatic` (fase 2), `WIN - D - Microsoft Edge DNS over HTTPS Secure` (fase 5), `WIN - U - Compliance Defender for Endpoint Risk` (fase 3) |
+
+
+Daarnaast:
+
+- **Correcties op bestaande policies**: Android Compliance Password (tekst sprak de JSON tegen),
+  Android Device Health (minimaal patchniveau), iOS App Protection (widget-sync uit), macOS Software
+  Updates (Enforce Latest na 30 dagen, beta uit), Firewall and Gatekeeper (XProtect-upload na vraag),
+  Edge Security op macOS (geen SSL-foutoverride).
+- **[`extras/`](extras/README.md)**: wat geen CIPP-type is — inschrijvingsrestricties, app-configuratie,
+  toewijzingsfilters, App Control for Business, DNS over HTTPS voor Windows, remediations voor
+  BitLocker-/LAPS-escrow, Escrow Buddy, Apple Business-checklists.
+- **Normenkader**: elke policy heeft `controls` (iso, nis2, cis, nistcsf) uit de vocabulaire in
+  `IntuneTemplate/_controls.json`. `check-scope.js` weigert een policy zonder of met een onbekend
+  label; `scripts/generate-compliance.js` maakt er [`COMPLIANCE.md`](COMPLIANCE.md) van: Annex A-matrix,
+  NIS2 per maatregel met bewijsroute, CIS- en CSF-dekking, klantkeuzes en een startpunt voor de
+  verklaring van toepasselijkheid. Van de 38 bestaande koppelingen zijn er 34 genormaliseerd of
+  gecorrigeerd.
+- **Conditional Access** (ronde 5 in CA-Policies/ANALYSE.md): `2060` sluit iOS/Android uit, P2- en
+  token protection-templates zijn optional, `1100` aan naast `1090`, `2055`/`2120` report-only,
+  `2180` sluit gasten uit, nieuw `1190` insider risk, en `controls/ca-controls.json` met een test.
+- **`import-oib.js`** is weer idempotent (zie de sectie over OIB v4.0 hierboven).
+
+## Dekking van de benchmarks
+
+| Benchmark | Stand |
+|---|---|
+| CIS Microsoft Windows 11 Enterprise L1 | 329 van 378 unieke instellingen (87%); de rest is gedekt via update-ringen, standaardwaarde, of bewust niet (NIST-wachtwoordregels, user rights "niemand", SMB-signing "if agrees", ESS) |
+| CIS Apple macOS 26 L1 | 38 van 97 regels (was 21); van de regels met een MDM-sleutel 30 van 50. 47 regels kunnen alleen per script of handmatig |
+| CIS Microsoft 365 Foundations 5.2.2 (CA) | 11 van 17 gedekt, 5 deels, 1 bewust niet (5.2.2.10 breekt WHfB- en Autopilot-registratie) |
+| CIS iOS/iPadOS en Android | corporate- en BYOD-restricties, passcode, updates en compliance aanwezig; staan in fase 3/4 tot er ingeschreven toestellen zijn |
+
+## Wat bewust niet is gedaan
+
+- **App Control for Business als template**: de `settingInstanceTemplateId` is niet generiek te verifiëren;
+  staat in `extras/windows/app-control/` met een script dat de id's uit de eigen tenant haalt.
+- **Defender for Endpoint-onboarding op macOS**: vraagt het tenant-specifieke onboarding-XML; route in
+  `extras/macos/defender-onboarding/`.
+- **SMB-encryptie vereisen en Kerberos-armoring afdwingen**: breken zonder inventarisatie.
+- **Externe opslag alleen-lezen op macOS** staat in fase 5: macOS mount een gewone USB-schijf dan
+  helemaal niet, dus ook lezen is weg.
+- **iOS Enterprise-inschrijfprofiel als Catalog-template**: template-id's niet te verifiëren; als
+  Graph-body in `extras/ios/enrollment/`.
+
+## Open punten
+
+1. **Template-id's in de macOS-inschrijfprofielen** (`Baseline_MAC_D_Enrollment_Profile_*`, sinds
+   27 augustus 2026) hebben een verdacht regelmatig patroon en zijn nergens te verifiëren. Leg ze één
+   keer naast een export uit een tenant.
+2. **ISO-labels**: 16 labels volgen de ingeburgerde vorm in dit manifest en niet letterlijk de NEN-titel
+   (die toont COMPLIANCE.md wel). Omzetten is één bewerking in `_controls.json` plus het manifest.
+   De NEN-titels komen uit een openbare VvT, niet uit de norm zelf; de CSF-titels en de paragrafen van
+   uitvoeringsverordening (EU) 2024/2690 zijn niet letterlijk nagekeken.
+3. **COMPLIANCE.md zonder CA**: de workflow draait `--no-ca` omdat CI de CA-repo niet ziet. Een versie
+   mét CA kan lokaal met `--ca ../CA-policies/controls/ca-controls.json`; kies één lijn voor wat er in
+   git staat.
+4. **OIB macOS v2.0**: bij die import zet OIB's Restrictions zelf Apple Intelligence- en hardening-ids;
+   het Restricted/Permitted-paar en Restrictions Hardening moeten dan opnieuw naast de bron gelegd worden.
+5. **CA**: controleren of CIPP `insiderRiskLevels` meestuurt (anders blokkeert `1190` iedereen); besluit
+   over `3010` naar 4 uur (CIS); de platform-engine vergelijkt insider- en agent-condities nog niet.
+6. **Niet op echte toestellen getest**: de nieuwe macOS-, iOS- en Android-policies en de scripts in
+   `extras/`. Eerst een pilottoestel per platform.
