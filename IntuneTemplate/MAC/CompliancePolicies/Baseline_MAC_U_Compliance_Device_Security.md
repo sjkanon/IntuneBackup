@@ -39,7 +39,7 @@ Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen.
 | `storageRequireEncryption` | true |
 | `gatekeeperAllowedAppSource` | macAppStoreAndIdentifiedDevelopers |
 | `firewallEnabled` | true |
-| `firewallBlockAllIncoming` | true |
+| `firewallBlockAllIncoming` | false |
 | `firewallEnableStealthMode` | false |
 | `scheduledActionsForRule[0].ruleName` | PasswordRequired |
 | `scheduledActionsForRule[0].scheduledActionConfigurations[0].@odata.type` | #microsoft.graph.deviceComplianceActionItem |

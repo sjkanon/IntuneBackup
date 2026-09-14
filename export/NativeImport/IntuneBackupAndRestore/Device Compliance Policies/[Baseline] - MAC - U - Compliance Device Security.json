@@ -24,7 +24,7 @@
     "storageRequireEncryption": true,
     "gatekeeperAllowedAppSource": "macAppStoreAndIdentifiedDevelopers",
     "firewallEnabled": true,
-    "firewallBlockAllIncoming": true,
+    "firewallBlockAllIncoming": false,
     "firewallEnableStealthMode": false,
     "scheduledActionsForRule": [
         {

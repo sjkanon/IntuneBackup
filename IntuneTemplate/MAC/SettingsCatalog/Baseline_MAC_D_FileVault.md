@@ -14,9 +14,9 @@ Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macO
 | Bron | OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault |
 | Bestand | [`Baseline_MAC_D_FileVault.json`](Baseline_MAC_D_FileVault.json) |
 
-> De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard.
+> De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard. Sinds september 2026 wordt de persoonlijke herstelsleutel expliciet aangemaakt (userecoverykey) en niet aan de gebruiker getoond (showrecoverykey), zodat hij alleen via Intune op te vragen is.
 
-## Instellingen — 8
+## Instellingen — 10
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -27,6 +27,8 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx.filevault2_enable` | 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx.filevault2_forceenableinsetupassistant` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx.filevault2_recoverykeyrotationinmonths` | 6 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx.filevault2_userecoverykey` | true |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx.filevault2_showrecoverykey` | false |
 | `com.apple.mcx_com.apple.mcx-fdefilevaultoptions` | *(groep)* |
 | &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.mcx_dontallowfdedisable` | true |
 | `com.apple.security.fderecoverykeyescrow_com.apple.security.fderecoverykeyescrow` | *(groep)* |

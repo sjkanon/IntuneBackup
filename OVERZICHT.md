@@ -157,7 +157,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `WIN - U - Windows Hello for Business` | Hoort bij WIN - D - Windows Hello for Business en gaat samen met die de pilot in — op alle gebruikers zou hij WHfB alsnog op elk apparaat inrichten, en dan test de pilot niets. |
 | `MAC - D - FileVault` | Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt. |
 | `MAC - D - Passcode and Screen Lock` | Gebruikers met een korter of eenvoudiger wachtwoord moeten het bij de eerstvolgende aanmelding wijzigen. |
-| `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat "Standaard" of "Altijd aan" is. |
+| `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. Downloaden en installeren van OS- en beveiligingsupdates gebeurt nu automatisch en is niet meer uit te zetten door de gebruiker: kijk in de pilot hoe het herstartmoment valt voordat je breed uitrolt. |
 | `MAC - U - Compliance OS Version` | Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur. |
 
 Zonder toewijzing staan er 55: de 26 hierboven, 10 die op een voorwaarde

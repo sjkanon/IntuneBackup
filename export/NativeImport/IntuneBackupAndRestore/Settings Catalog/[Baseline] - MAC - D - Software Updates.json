@@ -52,7 +52,7 @@
                                                 "auditRuleInformation": null,
                                                 "choiceSettingValue": {
                                                     "settingValueTemplateReference": null,
-                                                    "value": "softwareupdate_automaticactions_download_0",
+                                                    "value": "softwareupdate_automaticactions_download_1",
                                                     "children": []
                                                 }
                                             },
@@ -63,7 +63,7 @@
                                                 "auditRuleInformation": null,
                                                 "choiceSettingValue": {
                                                     "settingValueTemplateReference": null,
-                                                    "value": "softwareupdate_automaticactions_installosupdates_0",
+                                                    "value": "softwareupdate_automaticactions_installosupdates_1",
                                                     "children": []
                                                 }
                                             },
@@ -74,7 +74,7 @@
                                                 "auditRuleInformation": null,
                                                 "choiceSettingValue": {
                                                     "settingValueTemplateReference": null,
-                                                    "value": "softwareupdate_automaticactions_installsecurityupdate_0",
+                                                    "value": "softwareupdate_automaticactions_installsecurityupdate_1",
                                                     "children": []
                                                 }
                                             }

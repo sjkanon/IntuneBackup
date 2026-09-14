@@ -2588,6 +2588,14 @@
             "expectedValue": "com.apple.mcx.filevault2_recoverykeyrotationinmonths_6"
           },
           {
+            "settingDefinitionId": "com.apple.mcx.filevault2_userecoverykey",
+            "expectedValue": "com.apple.mcx.filevault2_userecoverykey_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.mcx.filevault2_showrecoverykey",
+            "expectedValue": "com.apple.mcx.filevault2_showrecoverykey_false"
+          },
+          {
             "settingDefinitionId": "com.apple.mcx_dontallowfdedisable",
             "expectedValue": "com.apple.mcx_dontallowfdedisable_true"
           },
@@ -3369,15 +3377,15 @@
           },
           {
             "settingDefinitionId": "softwareupdate_automaticactions_download",
-            "expectedValue": "softwareupdate_automaticactions_download_0"
+            "expectedValue": "softwareupdate_automaticactions_download_1"
           },
           {
             "settingDefinitionId": "softwareupdate_automaticactions_installosupdates",
-            "expectedValue": "softwareupdate_automaticactions_installosupdates_0"
+            "expectedValue": "softwareupdate_automaticactions_installosupdates_1"
           },
           {
             "settingDefinitionId": "softwareupdate_automaticactions_installsecurityupdate",
-            "expectedValue": "softwareupdate_automaticactions_installsecurityupdate_0"
+            "expectedValue": "softwareupdate_automaticactions_installsecurityupdate_1"
           },
           {
             "settingDefinitionId": "softwareupdate_rapidsecurityresponse_enable",

@@ -14,7 +14,7 @@ Hoe en wanneer macOS zijn eigen updates ophaalt en installeert.
 | Bron | eigen baseline — declaratief softwarebeleid (DDM); OpenIntuneBaseline macOS v1.0 gebruikt nog het klassieke com.apple.softwareupdate-profiel |
 | Bestand | [`Baseline_MAC_D_Software_Updates.json`](Baseline_MAC_D_Software_Updates.json) |
 
-> Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op de eerste keuze uit de catalogus — controleer in de portal of dat "Standaard" of "Altijd aan" is vóór je 'm uitrolt.
+> Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op AlwaysOn (`_1`). Tot september 2026 stonden ze op `_0`, en dat is Allowed: de gebruiker kiest zelf, dus er werd niets afgedwongen. OpenIntuneBaseline v2.0 beta, UniFy en intune-my-macs zetten alle drie AlwaysOn.
 
 ## Instellingen — 14
 
@@ -26,9 +26,9 @@ instelling op de getoonde waarde staat.
 | `softwareupdate_softwareupdate` | *(groep)* |
 | &nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_allowstandarduserosupdates` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions` | *(groep)* |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_download` | 0 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_installosupdates` | 0 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_installsecurityupdate` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_download` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_installosupdates` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_automaticactions_installsecurityupdate` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_rapidsecurityresponse` | *(groep)* |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_rapidsecurityresponse_enable` | true |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`softwareupdate_rapidsecurityresponse_enablerollback` | true |

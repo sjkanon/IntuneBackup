@@ -57,6 +57,28 @@
                                     "value": "com.apple.mcx.filevault2_recoverykeyrotationinmonths_6",
                                     "children": []
                                 }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "com.apple.mcx.filevault2_userecoverykey",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "com.apple.mcx.filevault2_userecoverykey_true",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "com.apple.mcx.filevault2_showrecoverykey",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "com.apple.mcx.filevault2_showrecoverykey_false",
+                                    "children": []
+                                }
                             }
                         ]
                     }

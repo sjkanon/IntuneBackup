@@ -368,7 +368,7 @@ weer veilig te draaien is.
 |---|---|
 | **Compliance** | Vier gebundelde policies (Device Health, Device Security, Defender for Endpoint, Password) worden negen losse: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence en Defender Real Time Protection. Password vervalt: die eisen lopen via de EAS-engine, worden afgedwongen in plaats van getoetst en raken alleen lokale accounts. Vergrendelen na 15 minuten staat nu in Device Lock. checkId 093–096 zijn opgeheven; `_renames.json` zegt per oude policy waar hij is gebleven. |
 | **Local Security Policies / LAPS** | De 24H2+-varianten zijn de enige. Voor LAPS verandert er inhoudelijk niets; Local Security Policies zet voortaan het ingebouwde Administrator-account uit. LAPS beheert een eigen account, dus dat raakt het herstel niet. |
-| **Defender** | Matig en hoog op quarantaine (was remove); exploit-protection-overrides door gebruikers geblokkeerd; enhanced notifications weer aan. |
+| **Defender** | Matig en hoog op quarantaine (was remove); exploit-protection-overrides door gebruikers geblokkeerd; de uitgebreide meldingen van Windows-beveiliging uit (minder overbodige meldingen). |
 | **Edge** | Vijf beveiligingsinstellingen uit de Edge v151-baseline (process isolation, renderer app container, network service sandbox, code integrity guard); geen aanmelding met niet-Microsoft-accounts; geen automatische download van lokale AI-modellen; nieuwe policy **Microsoft Edge Management** (fase 2). |
 | **Office** | Zes instellingen uit de M365 Apps-baseline 2512. |
 | **Overig** | In-Box App Removal naar de lijst-variant; klembord tussen apparaten uit; sensitive privilege use alleen nog op Success; IE-modus TLS 1.2 én 1.3; slaapstand aan het net 30 minuten. |
@@ -398,3 +398,14 @@ De baseline droeg sporen van één organisatie: de nummering van haar ISMS-docum
 in de mountscripts, het beheerdersaccount in de macOS-inschrijfprofielen, en twee klantrapporten.
 Die zijn weg of vervangen door placeholders; de rapporten staan in het gitignorede `local/`.
 Let op: ze staan nog wel in de git-geschiedenis.
+
+# macOS-reparaties (14 september 2026)
+
+Drie fouten in policies die er al stonden, gevonden bij de vergelijking met OpenIntuneBaseline
+macOS v2.0 beta, UniFy en intune-my-macs:
+
+| Policy | Wat er mis was | Nu |
+|---|---|---|
+| `MAC - U - Compliance Device Security` | eiste *alle inkomende verbindingen blokkeren*, terwijl `MAC - D - Firewall and Gatekeeper` die instelling op false zet — een Mac die exact de baseline volgde was niet-compliant | eis op false, als `veldOverride`; firewall en stealth mode blijven vereist |
+| `MAC - D - Software Updates` | de drie automatische acties stonden op `_0`, en dat is *Allowed*: de gebruiker kiest, er werd niets afgedwongen | AlwaysOn (`_1`) |
+| `MAC - D - FileVault` | de persoonlijke herstelsleutel werd niet expliciet aangemaakt en het tonen ervan niet uitgezet | `userecoverykey` true en `showrecoverykey` false, als overrides met `parent` |

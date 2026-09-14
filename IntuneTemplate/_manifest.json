@@ -338,10 +338,24 @@
       "displayName": "[Baseline] - MAC - D - FileVault",
       "doel": "Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macOS-tegenhanger van BitLocker.",
       "bron": "OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault",
-      "note": "De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard.",
+      "note": "De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard. Sinds september 2026 wordt de persoonlijke herstelsleutel expliciet aangemaakt (userecoverykey) en niet aan de gebruiker getoond (showrecoverykey), zodat hij alleen via Intune op te vragen is.",
       "herkomst": "oib",
       "fase": 2,
-      "faseWaarom": "Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt."
+      "faseWaarom": "Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt.",
+      "overrides": [
+        {
+          "parent": "com.apple.mcx.filevault2_com.apple.mcx.filevault2",
+          "settingDefinitionId": "com.apple.mcx.filevault2_userecoverykey",
+          "value": "com.apple.mcx.filevault2_userecoverykey_true",
+          "reason": "OpenIntuneBaseline macOS v1.0 zet de persoonlijke herstelsleutel niet expliciet aan; zonder deze instelling is niet gegarandeerd dat er een sleutel ontstaat die Intune kan escrowen. OIB v2.0 beta en intune-my-macs zetten hem wel."
+        },
+        {
+          "parent": "com.apple.mcx.filevault2_com.apple.mcx.filevault2",
+          "settingDefinitionId": "com.apple.mcx.filevault2_showrecoverykey",
+          "value": "com.apple.mcx.filevault2_showrecoverykey_false",
+          "reason": "De herstelsleutel hoort in Intune en niet op een briefje bij de gebruiker; een getoonde sleutel wordt gefotografeerd of opgeschreven. Zelfde waarde als OIB v2.0 beta."
+        }
+      ]
     },
     {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Firewall - D - Gatekeeper - v1.0.json",
@@ -478,10 +492,10 @@
       "doel": "Hoe en wanneer macOS zijn eigen updates ophaalt en installeert.",
       "bron": "eigen baseline — declaratief softwarebeleid (DDM); OpenIntuneBaseline macOS v1.0 gebruikt nog het klassieke com.apple.softwareupdate-profiel",
       "metadataOnly": true,
-      "note": "Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op de eerste keuze uit de catalogus — controleer in de portal of dat \"Standaard\" of \"Altijd aan\" is vóór je 'm uitrolt.",
+      "note": "Declaratieve variant (DDM, macOS 14+) in plaats van de com.apple.softwareupdate-payload die OpenIntuneBaseline levert: uitstel van 7 dagen voor kleine updates, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien, meldingen aan, en standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties (downloaden, OS-updates, beveiligingsupdates) staan op AlwaysOn (`_1`). Tot september 2026 stonden ze op `_0`, en dat is Allowed: de gebruiker kiest zelf, dus er werd niets afgedwongen. OpenIntuneBaseline v2.0 beta, UniFy en intune-my-macs zetten alle drie AlwaysOn.",
       "herkomst": "eigen",
       "fase": 2,
-      "faseWaarom": "Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. De drie automatische acties staan op de eerste keuze uit de catalogus — controleer in de pilot of dat \"Standaard\" of \"Altijd aan\" is."
+      "faseWaarom": "Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. Downloaden en installeren van OS- en beveiligingsupdates gebeurt nu automatisch en is niet meer uit te zetten door de gebruiker: kijk in de pilot hoe het herstartmoment valt voordat je breed uitrolt."
     },
     {
       "target": "Baseline_MAC_D_Wifi_Corporate",
@@ -545,7 +559,14 @@
       "bron": "OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security",
       "type": "deviceCompliancePolicies",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 1,
+      "veldOverrides": [
+        {
+          "veld": "firewallBlockAllIncoming",
+          "waarde": false,
+          "reason": "OpenIntuneBaseline macOS v1.0 eist 'alle inkomende verbindingen blokkeren' in compliance, maar zet diezelfde instelling in de configuratie ([Baseline] - MAC - D - Firewall and Gatekeeper) op false. Een Mac die precies de baseline volgt werd daardoor niet-compliant en verloor toegang via Conditional Access. Blokkeren van alle inkomende verbindingen breekt AirDrop, AirPlay-ontvangst en schermdeling; de firewall en stealth mode blijven wél vereist."
+        }
+      ]
     },
     {
       "target": "Baseline_MAC_U_Compliance_OS_Version",
