@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebescherming, geen Windows Hello for Business en geen Credential Guard. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM.",
+    "description": "Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebescherming, geen Windows Hello for Business en geen Credential Guard. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "[Baseline] - WIN - U - Compliance TPM",

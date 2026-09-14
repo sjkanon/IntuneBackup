@@ -50,5 +50,5 @@
         }
     ],
     "displayName": "[Baseline] - WIN - U - Compliance OS Version",
-    "description": "Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan uitvoeren: minimaal Windows 11 22H2. Toewijzing volgens baseline: geen — fase 2. Bron: Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — Account Lockout vraagt 22H2 met KB5053657 of 24H2, Administrator Protection en Windows Protected Print vragen 24H2."
+    "description": "Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan uitvoeren: minimaal Windows 11 22H2. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — Account Lockout vraagt 22H2 met KB5053657 of 24H2, Administrator Protection en Windows Protected Print vragen 24H2."
 }

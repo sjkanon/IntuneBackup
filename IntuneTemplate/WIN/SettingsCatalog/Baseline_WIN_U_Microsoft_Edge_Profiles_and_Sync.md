@@ -28,10 +28,10 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_browseraddprofileenabled` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_forceephemeralprofiles` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edgev86~policy~microsoft_edge_forcesync` | 1 |
-| `user_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~identity_implicitsigninenabled` | 1 |
-| `user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~identity_m365authpopupsinworkenabled` | 1 |
+| `user_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~identity_implicitsigninenabled` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~identity_nonmicrosoftaccountsigninenabled` | 0 |
+| `user_vendor_msft_policy_config_microsoft_edgev92~policy~microsoft_edge_aadwebsitessousingthisprofileenabled` | 1 |
 
 ---
 

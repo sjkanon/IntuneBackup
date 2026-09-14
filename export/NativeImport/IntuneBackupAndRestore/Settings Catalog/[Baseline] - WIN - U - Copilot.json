@@ -20,7 +20,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_removemicrosoftcopilotapp",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
@@ -35,7 +34,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_windowsai_turnoffwindowscopilot",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,

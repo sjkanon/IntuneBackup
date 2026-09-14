@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AI Tooling",
-    "description": "Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke licentie blijft werken. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.10 en A.8.1 — instelling uit de Visual Studio-benchmark van IntuneAdmin.",
+    "description": "Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke licentie blijft werken. Toewijzing volgens baseline: alle apparaten. Bron: ISO/IEC 27001:2022 A.5.10 en A.8.1 — instelling uit de Visual Studio-benchmark van IntuneAdmin.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

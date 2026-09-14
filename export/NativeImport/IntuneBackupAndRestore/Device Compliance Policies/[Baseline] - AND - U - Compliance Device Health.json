@@ -49,5 +49,5 @@
         }
     ],
     "displayName": "[Baseline] - AND - U - Compliance Device Health",
-    "description": "Merkt een Android-toestel als niet-compliant wanneer het geroot is, USB-foutopsporing aanstaat, apps van buiten de Play Store zijn toegestaan of Play Integrity niet hardwarematig bevestigd kan worden. Toewijzing: geen — voorstel, hoort eerst op een pilotgroep en pas daarna op alle apparaten. Bron: OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD."
+    "description": "Merkt een Android-toestel als niet-compliant wanneer het geroot is, USB-foutopsporing aanstaat, apps van buiten de Play Store zijn toegestaan of Play Integrity niet hardwarematig bevestigd kan worden. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD.."
 }

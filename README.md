@@ -205,10 +205,11 @@ node scripts/import-oib.js --dry-run
 node scripts/import-oib.js
 ```
 
-> **Let op (september 2026):** draai de importer niet blind op de hele set. Een volledige run draait
-> op dit moment handwerk terug dat niet in het manifest staat — zie
-> [`ANALYSE.md`](ANALYSE.md#hoe-en-waarom-niet-met-import-oibjs). Kijk de `--dry-run` na en neem
-> alleen de bestanden over die je bedoelt.
+> **Sinds 14 september 2026 is de importer weer idempotent:** een tweede run schrijft niets. Het
+> handwerk dat een volledige run eerder terugdraaide staat nu in het manifest (`dropSettings`,
+> `veldOverrides`, ook met `toevoegen` voor velden die de bron niet levert), policies zonder bron
+> en zonder `type` houden hun eigen Type, en `auditRuleInformation` uit nieuwere exports gaat eruit.
+> Kijk de `--dry-run` desondanks na bij elke nieuwe OIB-versie.
 
 `IntuneTemplate/_manifest.json` bepaalt welke OIB-policy waar landt, met per policy de
 reden als er iets afwijkt. `.oib-source/` is gitignored: de gegenereerde templates zijn het

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Business Continuity",
-    "description": "Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.29, A.5.30 en A.8.14, NIS2 art. 21(2)(c) — instellingen uit de Modern Workplace-set van IntuneAdmin.",
+    "description": "Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten. Toewijzing volgens baseline: alle apparaten. Bron: ISO/IEC 27001:2022 A.5.29, A.5.30 en A.8.14, NIS2 art. 21(2)(c) — instellingen uit de Modern Workplace-set van IntuneAdmin.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

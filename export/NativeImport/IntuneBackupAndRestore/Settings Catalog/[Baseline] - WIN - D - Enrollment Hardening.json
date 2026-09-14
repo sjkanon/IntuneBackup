@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Enrollment Hardening",
-    "description": "Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat niet zonder beheer langs de inschrijving kan komen. Toewijzing volgens baseline: geen — fase 2. Bron: IntuneAdmin/IntuneBaselines — Modern Workplace Expert, Baseline - Require Network In OOBE (TenantLockdown-CSP).",
+    "description": "Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat niet zonder beheer langs de inschrijving kan komen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: IntuneAdmin/IntuneBaselines — Modern Workplace Expert, Baseline - Require Network In OOBE (TenantLockdown-CSP).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

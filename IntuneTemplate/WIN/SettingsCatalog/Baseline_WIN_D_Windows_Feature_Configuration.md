@@ -24,15 +24,15 @@ instelling op de getoonde waarde staat.
 | Instelling | Waarde |
 |---|---|
 | `device_vendor_msft_policy_config_filesystem_enabledevdrive` | 0 |
+| `device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork` | 1 |
 | `device_vendor_msft_policy_config_experience_configurechaticon` | 3 |
 | `device_vendor_msft_policy_config_experience_disableshareapppromotions` | 1 |
+| `device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard` | 0 |
 | `device_vendor_msft_policy_config_search_allowcloudsearch` | 1 |
 | `device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems` | 0 |
 | `device_vendor_msft_policy_config_search_disableremovabledriveindexing` | 1 |
 | `device_vendor_msft_policy_config_search_donotusewebresults` | 0 |
 | `device_vendor_msft_policy_config_newsandinterests_allownewsandinterests` | 0 |
-| `device_vendor_msft_policy_config_deviceinstallation_preventdevicemetadatafromnetwork` | 1 |
-| `device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard` | 0 |
 
 ---
 

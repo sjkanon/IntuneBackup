@@ -19,7 +19,6 @@
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}",
-                "auditRuleInformation": null,
                 "settingInstanceTemplateReference": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstanceTemplateReference",
                     "settingInstanceTemplateId": "76c7a8be-67d2-44bf-81a5-38c94926b1a1"
@@ -33,7 +32,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -44,7 +42,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -56,7 +53,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -68,7 +64,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -80,7 +75,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -94,7 +88,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -105,7 +98,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -119,7 +111,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -136,7 +127,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -147,7 +137,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -159,7 +148,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -171,7 +159,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -183,7 +170,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -197,7 +183,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -208,7 +193,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -222,7 +206,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -239,7 +222,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -250,7 +232,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -262,7 +243,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -274,7 +254,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -286,7 +265,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -300,7 +278,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -311,7 +288,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -325,7 +301,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -342,7 +317,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -353,7 +327,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -365,7 +338,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -377,7 +349,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -389,7 +360,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -403,7 +373,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -414,7 +383,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -428,7 +396,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -445,7 +412,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -456,7 +422,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -468,7 +433,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -480,7 +444,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -492,7 +455,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -506,7 +468,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -517,7 +478,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -531,7 +491,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -548,7 +507,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_name",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -559,7 +517,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_action_type",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -571,7 +528,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_direction",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -583,7 +539,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_enabled",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
@@ -595,7 +550,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_interfacetypes",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -609,7 +563,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_app_filepath",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
@@ -620,7 +573,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingCollectionInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_profiles",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "choiceSettingCollectionValue": [
                                     {
                                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
@@ -634,7 +586,6 @@
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                 "settingDefinitionId": "vendor_msft_firewall_mdmstore_firewallrules_{firewallrulename}_description",
                                 "settingInstanceTemplateReference": null,
-                                "auditRuleInformation": null,
                                 "simpleSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,

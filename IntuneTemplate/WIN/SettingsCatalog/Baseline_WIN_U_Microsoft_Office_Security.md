@@ -66,6 +66,7 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excel9597workbooksandtemplates_l_excel9597workbooksandtemplatesdropid` | 2 |
 | `user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excel972003workbooksandtemplates` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excel972003workbooksandtemplates_l_excel972003workbooksandtemplatesdropid` | 2 |
+| `user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks` | 1 |
 | `user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_setdefaultfileblockbehavior` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_setdefaultfileblockbehavior_l_setdefaultfileblockbehaviordropid` | 0 |
 | `user_vendor_msft_policy_config_excel16v2~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_webpagesandexcel2003xmlspreadsheets` | 0 |
@@ -101,6 +102,9 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_office16v6~policy~l_microsoftofficesystem~l_securitysettings_l_allowvbaintranetrefs` | 0 |
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings_l_automationsecurity` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings_l_automationsecurity_l_settheautomationsecuritylevel` | 2 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart` | 1 |
 | `user_vendor_msft_policy_config_office16v5~policy~l_microsoftofficesystem~l_securitysettings_l_authenticationfbabehavior` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_office16v5~policy~l_microsoftofficesystem~l_securitysettings_l_authenticationfbabehavior_l_authenticationfbabehaviorenum` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_office16v5~policy~l_microsoftofficesystem~l_securitysettings_l_authenticationfbabehavior_l_authenticationfbaenabledhostsid` | *(leeg)* |
@@ -117,6 +121,7 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings_l_macroruntimescanscope` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings_l_macroruntimescanscope_l_macroruntimescanscopeenum` | 2 |
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings_l_protectdocumentmetadataforrightsmanaged` | 1 |
+| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback` | 1 |
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_securitysettings~l_trustcenter241_l_allowmixofpolicyanduserlocations` | 0 |
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_serversettings_l_disabletheofficeclientfrompolling` | 1 |
 | `user_vendor_msft_policy_config_office16v2~policy~l_microsoftofficesystem~l_smartdocumentswordexcel_l_disablesmartdocumentsuseofmanifests` | 1 |
@@ -162,6 +167,8 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_security~l_cryptography_l_signaturewarning_v2` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_security~l_cryptography_l_signaturewarning_v2_l_signaturewarning30` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_outlk16v2~policy~l_microsoftofficeoutlook~l_outlookoptions~l_other~l_advanced_l_msgunicodeformatwhendraggingtofilesystem_v2` | 0 |
+| `user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty` | 0 |
 | `user_vendor_msft_policy_config_ppt16v2~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_runprograms` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_ppt16v2~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_runprograms_l_empty` | 0 |
 | `user_vendor_msft_policy_config_ppt16v2~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_determinewhethertoforceencryptedppt` | 1 |
@@ -242,13 +249,6 @@ instelling op de getoonde waarde staat.
 | `user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security~l_trustcenter_l_vbawarningspolicy` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security~l_trustcenter_l_vbawarningspolicy_l_empty19` | 3 |
 | `user_vendor_msft_policy_config_word16v2~policy~l_microsoftofficeword~l_wordoptions~l_security_l_turnofffilevalidation` | 0 |
-| `user_vendor_msft_policy_config_excel16v9~policy~l_microsoftofficeexcel~l_exceloptions~l_security~l_trustcenter~l_fileblocksettings_l_excelfileblockexternallinks` | 1 |
-| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockinsecureprotocols` | 1 |
-| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockolegraph` | 1 |
-| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockorgchart` | 1 |
-| `user_vendor_msft_policy_config_office16v23~policy~l_microsoftofficesystem~l_securitysettings_l_blockwecfallback` | 1 |
-| `user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_ppt16v5~policy~l_microsoftofficepowerpoint~l_powerpointoptions~l_security_l_oleactions_l_empty` | 0 |
 
 ---
 

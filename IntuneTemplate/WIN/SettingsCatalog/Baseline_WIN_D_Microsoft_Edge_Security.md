@@ -45,19 +45,27 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~googlecast_enablemediarouter` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev78diff~policy~microsoft_edge_clearbrowsingdataonexit` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_clearcachedimagesandfilesonexit` | 0 |
+| `device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_browsercodeintegritysetting` | 2 |
 | `device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_configureshare` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_experimentationandconfigurationservicecontrol` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_experimentationandconfigurationservicecontrol_experimentationandconfigurationservicecontrol` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_dnsinterceptionchecksenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edgev128~policy~microsoft_edge_dynamiccodesettings` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev128~policy~microsoft_edge_dynamiccodesettings_dynamiccodesettings` | 0 |
+| `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge~typosquattingchecker_typosquattingcheckerenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edgev128.1~policy~microsoft_edge_applicationboundencryptionenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_autofilladdressenabled` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_autofillcreditcardenabled` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev95~policy~microsoft_edge_browserlegacyextensionpointsblockingenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_networkpredictionoptions` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_networkpredictionoptions_networkpredictionoptions` | 2 |
+| `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_processisolationenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge_rendererappcontainerenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_siteperprocess` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev102~policy~microsoft_edge_networkservicesandboxenabled` | 1 |
+| `device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge~experimentation_featureflagoverridescontrol_featureflagoverridescontrol` | 0 |
 | `device_vendor_msft_policy_config_microsoft_edgev80diff~policy~microsoft_edge_hidefirstrunexperience` | 1 |
@@ -74,14 +82,6 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_microsoft_edgev78diff~policy~microsoft_edge~smartscreen_smartscreenfortrusteddownloadsenabled` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverride` | 1 |
 | `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~smartscreen_preventsmartscreenpromptoverrideforfiles` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge~typosquattingchecker_typosquattingcheckerenabled` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev104~policy~microsoft_edge_browsercodeintegritysetting_browsercodeintegritysetting` | 2 |
-| `device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_processisolationenabled` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev96~policy~microsoft_edge_rendererappcontainerenabled` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev102~policy~microsoft_edge_networkservicesandboxenabled` | 1 |
-| `device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev98.1~policy~microsoft_edge_enhancesecuritymode_enhancesecuritymode` | 1 |
 
 ---
 

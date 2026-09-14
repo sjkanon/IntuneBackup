@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": true,
     "defenderVersion": null,
-    "description": "Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence.",
+    "description": "Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "[Baseline] - WIN - U - Compliance Defender Security Intelligence",

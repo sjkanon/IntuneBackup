@@ -33,12 +33,12 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_power_displayofftimeoutonbattery_entervideodcpowerdowntimeout` | 300 |
 | `device_vendor_msft_policy_config_power_displayofftimeoutpluggedin` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_power_displayofftimeoutpluggedin_entervideoacpowerdowntimeout` | 600 |
+| `device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2` | 900 |
 | `device_vendor_msft_policy_config_power_unattendedsleeptimeoutonbattery` | 600 |
 | `device_vendor_msft_policy_config_power_unattendedsleeptimeoutpluggedin` | 1800 |
 | `device_vendor_msft_policy_config_devicelock_devicepasswordenabled` | 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_devicelock_devicepasswordhistory` | 24 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_devicelock_mindevicepasswordlength` | 14 |
-| `device_vendor_msft_policy_config_localpoliciessecurityoptions_interactivelogon_machineinactivitylimit_v2` | 900 |
 
 ---
 

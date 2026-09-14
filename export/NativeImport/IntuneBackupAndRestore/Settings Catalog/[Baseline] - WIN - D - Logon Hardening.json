@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Logon Hardening",
-    "description": "Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergrendelscherm weg. Toewijzing: geen — voorstel, hoort eerst op een pilotgroep en pas daarna op alle apparaten. Bron: CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie.",
+    "description": "Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergrendelscherm weg. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -43,6 +43,7 @@
             }
         },
         {
+            "id": "2",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_logon_blockuserfromshowingaccountdetailsonsignin",
@@ -53,10 +54,10 @@
                     "value": "device_vendor_msft_policy_config_admx_logon_blockuserfromshowingaccountdetailsonsignin_1",
                     "children": []
                 }
-            },
-            "id": "2"
+            }
         },
         {
+            "id": "3",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_logon_dontenumerateconnectedusers",
@@ -67,8 +68,7 @@
                     "value": "device_vendor_msft_policy_config_admx_logon_dontenumerateconnectedusers_1",
                     "children": []
                 }
-            },
-            "id": "3"
+            }
         }
     ]
 }

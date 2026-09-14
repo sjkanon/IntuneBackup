@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Kernel DMA Protection",
-    "description": "Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DMA-remapping ondersteunen. Toewijzing: geen — voorstel, hoort eerst op een pilotgroep en pas daarna op alle apparaten. Bron: Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — waarde geverifieerd tegen Policy CSP DmaGuard/DeviceEnumerationPolicy.",
+    "description": "Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DMA-remapping ondersteunen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — waarde geverifieerd tegen Policy CSP DmaGuard/DeviceEnumerationPolicy..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

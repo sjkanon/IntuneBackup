@@ -49,10 +49,10 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_defender_configuration_disablelocaladminmerge` | 1 |
 | `device_vendor_msft_policy_config_defender_allowonaccessprotection` | 1 |
 | `device_vendor_msft_policy_config_defender_threatseveritydefaultaction` | *(groep)* |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_severethreats` | remove |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats` | quarantine |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_lowseveritythreats` | quarantine |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_highseveritythreats` | quarantine |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_moderateseveritythreats` | quarantine |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_defender_threatseveritydefaultaction_severethreats` | remove |
 | `device_vendor_msft_defender_configuration_meteredconnectionupdates` | 1 |
 | `device_vendor_msft_policy_config_defender_allowintrusionpreventionsystem` | 1 |
 

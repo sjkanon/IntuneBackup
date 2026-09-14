@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omdat het versleutelen na de inschrijving even duurt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - BitLocker.",
+    "description": "Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omdat het versleutelen na de inschrijving even duurt. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - BitLocker.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "[Baseline] - WIN - U - Compliance BitLocker",

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Azure Files Cloud Kerberos",
-    "description": "Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt. Toewijzing volgens baseline: geen — fase 3. Bron: Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities.",
+    "description": "Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Passcode and Screen Lock",
-    "description": "Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-policy al eist: minimaal acht tekens, geen eenvoudig wachtwoord, vergrendelen na vijftien minuten. Toewijzing: geen — voorstel, hoort eerst op een pilotgroep en pas daarna op alle apparaten. Bron: Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de macOS settings catalog — waarden één op één overgenomen uit [Baseline] - MAC - U - Compliance Password en geverifieerd tegen de settings catalog-definities (minLength max 16, maxInactivity max 15).",
+    "description": "Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-policy al eist: minimaal acht tekens, geen eenvoudig wachtwoord, vergrendelen na vijftien minuten. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de macOS settings catalog — waarden één op één overgenomen uit [Baseline] - MAC - U - Compliance Password en geverifieerd tegen de settings catalog-definities (minLength max 16, maxInactivity max 15)..",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

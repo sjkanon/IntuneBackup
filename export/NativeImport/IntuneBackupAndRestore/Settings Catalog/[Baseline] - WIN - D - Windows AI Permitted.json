@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows AI Permitted",
-    "description": "Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. Toewijzing volgens baseline: geen — fase 5. Bron: Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd.",
+    "description": "Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

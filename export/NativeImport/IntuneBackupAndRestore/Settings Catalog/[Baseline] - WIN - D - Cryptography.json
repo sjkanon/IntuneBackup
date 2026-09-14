@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Cryptography",
-    "description": "Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als een server dat aanbiedt. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — instelling uit CIS v3 Microsoft Edge L1.",
+    "description": "Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als een server dat aanbiedt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — instelling uit CIS v3 Microsoft Edge L1.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

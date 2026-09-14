@@ -20,7 +20,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_enableholdthefile",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
@@ -35,7 +34,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablefretutorial",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
@@ -50,7 +48,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
@@ -60,7 +57,6 @@
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
                             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_disablecustomrootlist",
                             "settingInstanceTemplateReference": null,
-                            "auditRuleInformation": null,
                             "groupSettingCollectionValue": [
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
@@ -70,7 +66,6 @@
                                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_disablecustomrootlist_key",
                                             "settingInstanceTemplateReference": null,
-                                            "auditRuleInformation": null,
                                             "simpleSettingValue": {
                                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                                 "settingValueTemplateReference": null,
@@ -81,7 +76,6 @@
                                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
                                             "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablecustomroot_disablecustomrootlist_value",
                                             "settingInstanceTemplateReference": null,
-                                            "auditRuleInformation": null,
                                             "simpleSettingValue": {
                                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                                 "settingValueTemplateReference": null,
@@ -102,7 +96,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv2~policy~onedrivengsc_disablepersonalsync",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
@@ -117,7 +110,6 @@
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_onedrivengscv7~policy~onedrivengsc_enableautostart",
                 "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,

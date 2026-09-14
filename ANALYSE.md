@@ -362,6 +362,15 @@ toevoegde erbij, en een gewijzigde waarde alleen als ons template nog de oude OI
 onze overrides) had. Die drie punten horen in het manifest vastgelegd te worden vóór de importer
 weer veilig te draaien is.
 
+**Opgelost op 14 september 2026.** De URL-blokkeerlijst staat als `dropSettings` bij Edge User
+Experience (en telt niet meer mee als "OIB dekt het", zodat AI Usage Control hem houdt), de
+App Protection-waarden staan als `veldOverrides` (`screenCaptureConfigurationState` met
+`toevoegen`, omdat de bron dat veld niet levert), policies zonder `source` en `type` houden het
+Type van hun bestaande template, `dropSettings` geldt ook voor overgenomen eigen instellingen,
+`auditRuleInformation` wordt gestript en templates eindigen op een newline zoals
+`set-packages.js` ze schrijft. Eén volledige run zette daarna alleen omschrijvingen en de
+volgorde van instellingen recht; een tweede run schrijft niets.
+
 ## Wat er veranderde
 
 | | |

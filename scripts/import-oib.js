@@ -70,6 +70,9 @@ function stripODataAnnotations(node) {
   for (const [key, value] of Object.entries(node)) {
     if (key.startsWith("#")) continue;
     if (key.includes("@odata.") && key !== "@odata.type") continue;
+    // Alleen-lezen exportveld van nieuwere IntuneManagement-exports; hoort niet in een POST
+    // en zou elke import een diff geven op templates die het veld niet hebben.
+    if (key === "auditRuleInformation") continue;
     out[key] = stripODataAnnotations(value);
   }
   return out;
@@ -157,13 +160,17 @@ function buildTemplateFile({ guid, displayName, description, type, body, pkg }) 
     GUID: guid,
     ReusableSettings: [],
   };
-  return JSON.stringify({
-    PartitionKey: "IntuneTemplate",
-    RowKey: guid,
-    GUID: guid,
-    JSON: JSON.stringify(inner),
-    Package: pkg,
-  });
+  // Met afsluitende newline, zoals set-packages.js schrijft — anders verschilt elk bestand
+  // één byte en is geen enkele run idempotent.
+  return (
+    JSON.stringify({
+      PartitionKey: "IntuneTemplate",
+      RowKey: guid,
+      GUID: guid,
+      JSON: JSON.stringify(inner),
+      Package: pkg,
+    }) + "\n"
+  );
 }
 
 /** Settings-array normaliseren naar {id, settingInstance} met oplopende id's. */
@@ -360,20 +367,21 @@ function bodyForDevice(source, displayName, description) {
  * Zonder deze stap draait de volgende import zo'n waarde stilzwijgend terug, want de body
  * wordt elke keer opnieuw uit de bron opgebouwd — hetzelfde gevaar, andere policyvorm.
  *
- *   { veld, waarde, reason }
+ *   { veld, waarde, reason }            veld dat in de bron staat krijgt een andere waarde
+ *   { veld, waarde, reason, toevoegen }  veld dat de bron niet levert, bewust toegevoegd
  *
- * Faalt hard als het veld niet (meer) in de bron staat. Een override die stil niets doet is
+ * Zonder `toevoegen` faalt hij hard als het veld niet (meer) in de bron staat. Een override die stil niets doet is
  * het gevaarlijkst van alles: het bestand blijft dan kloppen terwijl de reden verdwenen is.
  * `reason` is verplicht, om dezelfde reden als bij `overrides`.
  */
 function applyVeldOverrides(body, entry, applied) {
   for (const ov of entry.veldOverrides || []) {
-    const { veld, waarde, reason } = ov;
+    const { veld, waarde, reason, toevoegen } = ov;
     if (!reason) {
       console.error(`FOUT: veldOverride voor ${veld} in ${entry.target} heeft geen "reason".`);
       process.exit(1);
     }
-    if (!(veld in body)) {
+    if (!(veld in body) && !toevoegen) {
       console.error(`FOUT: veldOverride voor ${veld} in ${entry.target}: dat veld staat niet (meer) in de bron.`);
       process.exit(1);
     }
@@ -434,7 +442,11 @@ function main() {
         process.exit(1);
       }
       source = readJsonFile(file);
-      for (const id of collectSettingIds(source.settings || [])) oibSettingIds.add(id);
+      // Wat deze policy bewust weglaat telt niet als "OIB dekt het": anders verdwijnt een
+      // instelling die naar een andere policy is verhuisd daar ook, bij de carry-regel.
+      const dropped = new Set(entry.dropSettings || []);
+      const kept = (source.settings || []).filter((s) => !dropped.has(s.settingInstance && s.settingInstance.settingDefinitionId));
+      for (const id of collectSettingIds(kept)) oibSettingIds.add(id);
     }
     loaded.push({ entry, source });
   }
@@ -445,18 +457,23 @@ function main() {
   let unchanged = 0;
 
   for (const { entry, source } of loaded) {
-    let type = entry.type || "Catalog";
     const displayName = entry.displayName;
     const description = composeDescription(entry, assignments);
 
     // Bestaand template: GUID hergebruiken en, als er niets anders gezegd is, de eigen
     // extra instellingen daaruit overnemen. Dat maakt de tweede run identiek aan de eerste.
     const existing = findOurTemplate(entry.target);
+    // Zonder `type` in het manifest volgt het Type uit het bestaande template. Een eigen
+    // wifi- of compliancepolicy is geen Settings Catalog; die als Catalog opbouwen verplaatste
+    // hem naar SettingsCatalog/ en gooide zijn inhoud weg.
+    let type = entry.type || (existing && existing.type) || "Catalog";
     const carrySource = existing || (entry.carryFrom ? findOurTemplate(entry.carryFrom) : null);
     const guid = (existing && existing.inner.GUID) || (carrySource && carrySource.inner.GUID) || stableGuid(entry.target);
 
     let body;
-    if (entry.metadataOnly) {
+    // Een eigen policy zonder bron die geen Settings Catalog is, kan niet uit overgenomen
+    // settings worden opgebouwd: alleen naam en omschrijving bijwerken, net als metadataOnly.
+    if (entry.metadataOnly || (!source && !entry.carryFrom && existing && existing.type !== "Catalog")) {
       // Templates die niet uit OIB komen. Alleen naam en omschrijving worden ververst; de
       // instellingen blijven onaangeroerd. Zonder deze tak zouden ze buiten het manifest
       // vallen en dus ook geen doel-zin in de tenant krijgen.
@@ -489,8 +506,13 @@ function main() {
       body = bodyForCatalog(source, entry, displayName, description);
       if (entry.carryFrom !== null && carrySource) {
         const oibIds = new Set(body.settings.map((s) => s.settingInstance.settingDefinitionId));
+        // dropSettings geldt ook hier: een instelling die bewust uit deze policy is gehaald of
+        // naar een andere policy is verhuisd, reist anders als "eigen" instelling mee.
         const keep = (carrySource.raw.settings || []).filter(
-          (s) => !oibIds.has(s.settingInstance.settingDefinitionId) && !oibSettingIds.has(s.settingInstance.settingDefinitionId)
+          (s) =>
+            !oibIds.has(s.settingInstance.settingDefinitionId) &&
+            !oibSettingIds.has(s.settingInstance.settingDefinitionId) &&
+            !(entry.dropSettings || []).includes(s.settingInstance.settingDefinitionId)
         );
         if (keep.length > 0) {
           body.settings = renumberSettings([...body.settings, ...keep]);

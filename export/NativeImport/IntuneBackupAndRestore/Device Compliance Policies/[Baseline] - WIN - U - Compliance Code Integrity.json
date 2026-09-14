@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprogramma's en systeembestanden laadt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity.",
+    "description": "Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprogramma's en systeembestanden laadt. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "[Baseline] - WIN - U - Compliance Code Integrity",

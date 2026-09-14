@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Attachment Scanning",
-    "description": "Laat de virusscanner elke bijlage controleren op het moment dat de gebruiker hem opent, niet alleen bij het opslaan. Toewijzing: geen — voorstel, hoort eerst op een pilotgroep en pas daarna op alle apparaten. Bron: CIS v4 Windows 11 L1 — instelling overgenomen uit IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie.",
+    "description": "Laat de virusscanner elke bijlage controleren op het moment dat de gebruiker hem opent, niet alleen bij het opslaan. Toewijzing volgens baseline: alle gebruikers. Bron: CIS v4 Windows 11 L1 — instelling overgenomen uit IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -29,6 +29,7 @@
             }
         },
         {
+            "id": "1",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "user_vendor_msft_policy_config_attachmentmanager_donotpreservezoneinformation",
@@ -39,8 +40,7 @@
                     "value": "user_vendor_msft_policy_config_attachmentmanager_donotpreservezoneinformation_0",
                     "children": []
                 }
-            },
-            "id": "1"
+            }
         }
     ]
 }

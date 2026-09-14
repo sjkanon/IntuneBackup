@@ -14,6 +14,8 @@ De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke fun
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_User_Experience.json`](Baseline_WIN_U_Microsoft_Edge_User_Experience.json) |
 
+> De URL-blokkeerlijst uit OpenIntuneBaseline staat bewust niet hier maar in [Baseline] - WIN - U - AI Usage Control Restricted/Permitted (zie overgenomenVan daar); dropSettings houdt hem bij een import weg, anders zetten twee policies dezelfde lijst verschillend.
+
 ## Instellingen — 23
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
@@ -28,22 +30,22 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge~contentsettings_defaultnotificationssetting_defaultnotificationssetting` | 2 |
 | `user_vendor_msft_policy_config_microsoft_edgev144~policy~microsoft_edge_whatsnewpageforentraprofilesenabled` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edgev107~policy~microsoft_edge~edgeworkspaces_edgeworkspacesenabled` | 1 |
+| `user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled` | 0 |
+| `user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled` | 1 |
+| `user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_newpdfreaderenabled` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev87~policy~microsoft_edge_edgeshoppingassistantenabled` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_showmicrosoftrewards` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edgev111~policy~microsoft_edge_showacrobatsubscriptionbutton` | 0 |
+| `user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~performance_recommended_startupboostenabled_recommended` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edgev88~policy~microsoft_edge_recommended~sleepingtabs_recommended_sleepingtabsenabled_recommended` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_restoreonstartup_recommended` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_restoreonstartup_recommended_restoreonstartup` | 1 |
 | `user_vendor_msft_policy_config_microsoft_edgev79diff~policy~microsoft_edge_recommended~startup_recommended_newtabpagemanagedquicklinks_recommended` | 0 |
 | `user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_recommended~startup_recommended_showhomebutton_recommended` | 1 |
-| `user_vendor_msft_policy_config_microsoft_edgev135~policy~microsoft_edge_addressbartrendingsuggestenabled` | 0 |
-| `user_vendor_msft_policy_config_microsoft_edgev134~policy~microsoft_edge_addressbarworksearchresultsenabled` | 1 |
-| `user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edgev132~policy~microsoft_edge~generativeai_genailocalfoundationalmodelsettings_genailocalfoundationalmodelsettings` | 1 |
-| `user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`user_vendor_msft_policy_config_microsoft_edgev148~policy~microsoft_edge~startup_configurentpfeedtabvisibility_configurentpfeedtabvisibility` | 1 |
 
 ---
 

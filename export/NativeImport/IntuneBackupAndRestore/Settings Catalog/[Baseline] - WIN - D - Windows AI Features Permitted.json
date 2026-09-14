@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows AI Features Permitted",
-    "description": "Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. Toewijzing volgens baseline: geen — fase 5. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen.",
+    "description": "Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukkelijk toe: Cocreator, Image Creator, Generative Fill en de Settings Agent. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

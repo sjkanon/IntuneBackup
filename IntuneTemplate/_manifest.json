@@ -243,7 +243,8 @@
         {
           "veld": "screenCaptureConfigurationState",
           "waarde": "blocked",
-          "reason": "Geen schermafdrukken van organisatiegegevens in beheerde apps, gelijk aan de Android-policy. OpenIntuneBaseline laat dit ongeconfigureerd."
+          "reason": "Geen schermafdrukken van organisatiegegevens in beheerde apps, gelijk aan de Android-policy. OpenIntuneBaseline laat dit ongeconfigureerd.",
+          "toevoegen": true
         },
         {
           "veld": "filterOpenInToOnlyManagedApps",
@@ -2191,7 +2192,11 @@
       "doel": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn.",
       "bron": "OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience",
       "herkomst": "oib",
-      "fase": 1
+      "fase": 1,
+      "dropSettings": [
+        "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist"
+      ],
+      "note": "De URL-blokkeerlijst uit OpenIntuneBaseline staat bewust niet hier maar in [Baseline] - WIN - U - AI Usage Control Restricted/Permitted (zie overgenomenVan daar); dropSettings houdt hem bij een import weg, anders zetten twee policies dezelfde lijst verschillend."
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Management - v4.0.json",

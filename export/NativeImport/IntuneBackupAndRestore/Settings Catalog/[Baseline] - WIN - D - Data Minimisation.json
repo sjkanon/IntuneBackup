@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Data Minimisation",
-    "description": "Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestanden en geen geheugendumps naar Microsoft. Toewijzing: geen — pilotset, hoort eerst op een pilotgroep en pas daarna breder. Bron: ISO/IEC 27001:2022 A.5.34 en A.8.11, AVG art. 5(1)(c) dataminimalisatie — instellingen uit CIS v4 Windows 11 L1.",
+    "description": "Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestanden en geen geheugendumps naar Microsoft. Toewijzing volgens baseline: alle apparaten. Bron: ISO/IEC 27001:2022 A.5.34 en A.8.11, AVG art. 5(1)(c) dataminimalisatie — instellingen uit CIS v4 Windows 11 L1.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
