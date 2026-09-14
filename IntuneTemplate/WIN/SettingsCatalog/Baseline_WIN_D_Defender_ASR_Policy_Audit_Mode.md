@@ -16,6 +16,17 @@ Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op au
 
 > Komt uit CIPP, niet uit OIB — import-oib.js raakt de instellingen dus niet aan. Zet 16 ASR-regels op audit die [Baseline] - WIN - D - Attack Surface Reduction op block of warn zet. Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: beide op alle apparaten leverde op elk van die 16 regels een Conflict op, waarna Intune de regel door géén van beide policies toepast. Hoort op een pilotgroep, en dan zonder de blokkerende ASR-policy.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.16 Monitoringactiviteiten |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 20
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

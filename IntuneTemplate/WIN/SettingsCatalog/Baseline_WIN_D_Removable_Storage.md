@@ -16,6 +16,16 @@ Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, e
 
 > OIB dekt verwisselbare media niet. Alleen schrijven wordt geblokkeerd, niet lezen: gegevens mogen naar binnen, niet naar buiten. De BitLocker-policy laat removabledrivesrequireencryption bewust uit staan — met een schrijfblokkade voegt een versleutelingseis niets toe.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.7.10 Opslagmedia<br>A.8.12 Voorkomen van datalekken |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| NIST CSF 2.0 | PR.DS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

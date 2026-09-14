@@ -14,6 +14,15 @@ Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation |
 | Bestand | [`Baseline_WIN_D_Delivery_Optimisation.json`](Baseline_WIN_D_Delivery_Optimisation.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.6 Capaciteitsbeheer |
+| NIST CSF 2.0 | PR.IR-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 12
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

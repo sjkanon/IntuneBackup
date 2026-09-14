@@ -14,6 +14,17 @@ Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zi
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Extensions.json`](Baseline_WIN_U_Microsoft_Edge_Extensions.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.19 Installatie van software op operationele systemen |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 9.4 Restrict Unnecessary or Unauthorized Browser and Email Client Extensions |
+| NIST CSF 2.0 | PR.PS-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 6
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,15 @@ Staat de Edge Management Service toe op beheerde apparaten en laat het beleid da
 
 > Nieuw in OIB v4.0. Verplicht niemand om de Edge Management Service (admin.cloud.microsoft → Edge) te gebruiken; zolang daar niets is ingesteld verandert er niets. De versie- en extensiemonitoring in die dienst is gratis rapportage en werkt ook zonder verder beleid. Beheer in die portal vraagt de Entra-rol Edge Administrator.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 5
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

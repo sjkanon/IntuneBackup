@@ -16,6 +16,17 @@ Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk
 
 > De agressiviteit staat op Low: alleen blokkeren als Defender voor 100 procent zeker is. Dat is de waarde met de kleinste kans op een fout-positief, en een fout-positief is hier duur — je blokkeert dan een legitiem proces dat bestanden op een share bijwerkt, bijvoorbeeld een back-up of een sync-tool. Medium en High blokkeren vanaf 99 respectievelijk 90 procent zekerheid; overweeg die pas als de rapportage laat zien dat er niets legitiems geraakt wordt. IntuneAdmin levert deze instelling op Audit; hier staat Block, want detecteren zonder blokkeren stopt geen versleuteling.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.29 Informatiebeveiliging tijdens verstoring<br>A.8.7 Bescherming tegen malware<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer<br>art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.7 Use Behavior-Based Anti-Malware Software |
+| NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

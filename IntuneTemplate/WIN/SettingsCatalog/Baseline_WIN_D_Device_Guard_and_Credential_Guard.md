@@ -16,6 +16,17 @@ Zet virtualisatie-gebaseerde beveiliging, Credential Guard en geheugenintegritei
 
 > OIB wijst deze aan gebruikers toe om een herstart midden in Autopilot te vermijden; alle 8 instellingen zijn device-scoped, dus hier D. Houd er rekening mee dat de eerste toepassing een herstart vraagt.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden<br>art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | PR.AA-01<br>PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 8
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

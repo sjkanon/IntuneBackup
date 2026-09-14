@@ -14,6 +14,17 @@ Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten ni
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | Bestand | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.17 Kloksynchronisatie |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling |
+| CIS Controls v8.1 | 8.4 Standardize Time Synchronization |
+| NIST CSF 2.0 | PR.PS-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 10
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

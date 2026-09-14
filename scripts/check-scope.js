@@ -15,6 +15,10 @@
  *  6. Het veld `Package` klopt met de fase en de toewijzing. Dat veld bepaalt in welk
  *     CIPP-pakket een policy uitrolt en met welk doel; loopt het achter, dan rolt de policy
  *     naar het verkeerde publiek uit of helemaal niet.
+ *  7. Elke policy heeft `controls`, en elk label daarin staat letterlijk in
+ *     IntuneTemplate/_controls.json. COMPLIANCE.md telt per control welke policies hem invullen:
+ *     een policy zonder controls valt daar stil buiten, en een label met een eigen schrijfwijze
+ *     telt als een andere control.
  *
  * De scope volgt uit de settingDefinitionId, niet uit het onderwerp: alles wat begint met
  * `user_` is user-scoped, de rest is device-scoped. Let op de derde vorm die in deze repo
@@ -42,6 +46,7 @@ const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const RENAMES_PATH = path.join(TEMPLATE_DIR, "_renames.json");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
+const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
 
 const DISPLAY_NAME_RE = /^\[Baseline\] - (WIN|MAC|IOS|AND) - ([DU]) - .+$/;
 
@@ -354,6 +359,67 @@ function checkOndergrens(templates) {
   return problems;
 }
 
+/**
+ * Punt 7: de normverwijzing. Streng op de letterlijke tekst en niet alleen op het nummer:
+ * "A.8.5 Beveiligde authenticatie" en "A.8.5 Veilige authenticatie" zijn voor een mens dezelfde
+ * control, maar in elk overzicht dat op tekst groepeert twee regels — en dan klopt de telling
+ * niet meer die een auditor als eerste narekent. De foutmelding noemt de juiste vorm, zodat
+ * herstellen overnemen is in plaats van opzoeken.
+ *
+ * `iso` mag niet leeg zijn: elke policy in deze baseline hoort een Annex A-control in te vullen,
+ * al is het A.8.9 Configuratiebeheer. De andere drie mogen leeg zijn — niet elke instelling raakt
+ * NIS2 of een CIS-safeguard, en een verwijzing die er alleen staat om het veld te vullen is erger
+ * dan geen.
+ */
+const CONTROL_KEYS = ["iso", "nis2", "cis", "nistcsf"];
+
+function checkControls(templates) {
+  if (!fs.existsSync(MANIFEST_PATH)) return [];
+  if (!fs.existsSync(CONTROLS_PATH)) return ["IntuneTemplate/_controls.json ontbreekt — zonder vocabulaire is geen enkele normverwijzing te controleren"];
+  const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
+  const vocab = JSON.parse(fs.readFileSync(CONTROLS_PATH, "utf8"));
+  const iso = new Map(vocab.iso27001.controls.map((c) => [c.id, c.label]));
+  const nis2 = new Set(vocab.nis2.punten.map((p) => p.label));
+  const cis = new Map(vocab.cis.safeguards.map((sg) => [sg.id, sg.label]));
+  const csf = new Set(vocab.nistcsf.subcategorieen.map((sc) => sc.id));
+  const known = new Set(templates.map((t) => t.baseName));
+  const problems = [];
+
+  for (const entry of manifest.policies || []) {
+    if (!known.has(entry.target)) continue; // checkManifestCoverage meldt een regel zonder template al.
+    const where = `_manifest.json: ${entry.target}`;
+    const controls = entry.controls;
+    if (!controls || typeof controls !== "object" || Array.isArray(controls)) {
+      problems.push(`${where} heeft geen "controls" — de policy telt dan nergens mee in COMPLIANCE.md`);
+      continue;
+    }
+    for (const key of CONTROL_KEYS) if (!Array.isArray(controls[key])) problems.push(`${where}: controls.${key} ontbreekt of is geen lijst`);
+    for (const key of Object.keys(controls)) if (!CONTROL_KEYS.includes(key)) problems.push(`${where}: onbekend veld controls.${key} (verwacht ${CONTROL_KEYS.join(", ")})`);
+    if (Array.isArray(controls.iso) && controls.iso.length === 0) problems.push(`${where}: controls.iso is leeg — elke policy hoort minstens één Annex A-control in te vullen`);
+
+    for (const label of controls.iso || []) {
+      const m = String(label).match(/^A\.\d+\.\d+(?=\s|$)/);
+      const canon = m && iso.get(m[0]);
+      if (!canon) problems.push(`${where}: ISO "${label}" staat niet in _controls.json`);
+      else if (canon !== label) problems.push(`${where}: ISO "${label}" hoort "${canon}" te zijn`);
+    }
+    for (const label of controls.nis2 || []) {
+      if (nis2.has(label)) continue;
+      const m = String(label).match(/\(2\)\(([a-j])\)/);
+      const canon = m && vocab.nis2.punten.find((p) => p.letter === m[1]);
+      problems.push(`${where}: NIS2 "${label}" is geen canoniek label${canon ? ` — hoort "${canon.label}" te zijn` : ""}`);
+    }
+    for (const label of controls.cis || []) {
+      const m = String(label).match(/^CIS Controls v8\.1 (\d+\.\d+)(?=\s|$)/);
+      const canon = m && cis.get(m[1]);
+      if (!canon) problems.push(`${where}: CIS "${label}" staat niet in _controls.json`);
+      else if (canon !== label) problems.push(`${where}: CIS "${label}" hoort "${canon}" te zijn`);
+    }
+    for (const id of controls.nistcsf || []) if (!csf.has(id)) problems.push(`${where}: NIST CSF "${id}" staat niet in _controls.json`);
+  }
+  return problems;
+}
+
 function main() {
   const reportOnly = process.argv.includes("--report");
 
@@ -388,7 +454,7 @@ function main() {
 
   const { conflicts, duplicates, shared } = findOverlaps(results, assignments);
   const failing = results.filter((r) => r.problems.length > 0);
-  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments), ...checkOndergrens(templates)];
+  const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments), ...checkOndergrens(templates), ...checkControls(templates)];
 
   if (failing.length > 0) {
     console.log(`\n${failing.length} van ${results.length} policies hebben werk openstaan:\n`);

@@ -16,6 +16,15 @@ Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel 
 
 > Het device-deel van dezelfde OIB-policy.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 1
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

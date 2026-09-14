@@ -16,6 +16,16 @@ Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke
 
 > Bedoeld voor een AI-beleid dat GitHub Copilot alleen toestaat voor softwareontwikkeling en alleen via de licentie van de organisatie. Zonder deze instelling kan een ontwikkelaar zijn privéaccount koppelen, en dan verlaat bedrijfscode de goedgekeurde route zonder dat iemand het ziet.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.12 Voorkomen van datalekken |
+| NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 1
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

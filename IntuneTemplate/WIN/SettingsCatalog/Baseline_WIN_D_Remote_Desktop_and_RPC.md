@@ -14,6 +14,17 @@ Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC |
 | Bestand | [`Baseline_WIN_D_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_Remote_Desktop_and_RPC.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.5 Veilige authenticatie<br>A.8.20 Netwerkbeveiliging<br>A.8.21 Beveiliging van netwerkdiensten<br>A.8.24 Gebruik van cryptografie |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden<br>art. 21(2)(h) cryptografie en versleuteling |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>12.6 Use of Secure Network Management and Communication Protocols |
+| NIST CSF 2.0 | PR.IR-01<br>PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 12
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

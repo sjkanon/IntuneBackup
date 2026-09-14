@@ -16,6 +16,16 @@ Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf e
 
 > Continuïteitsbeleid heeft op de werkplek zelf zelden een technische maatregel. Dit is de goedkoopste die er is. De Wi-Fi-gegevens uit het bronprofiel zijn bewust weggelaten: die zijn tenant-specifiek en horen niet in een gedeelde baseline. Zonder die gegevens werkt het herstel over een bekabelde verbinding; heb je een vloot zonder ethernet, vul ze dan aan vóór uitrol.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.29 Informatiebeveiliging tijdens verstoring<br>A.5.30 ICT-gereedheid voor bedrijfscontinuiteit |
+| NIS2 art. 21(2) | art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer |
+| NIST CSF 2.0 | PR.IR-03<br>RC.RP-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

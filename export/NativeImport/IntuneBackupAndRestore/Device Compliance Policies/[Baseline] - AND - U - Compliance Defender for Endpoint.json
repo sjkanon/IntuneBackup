@@ -1,0 +1,25 @@
+{
+    "@odata.type": "#microsoft.graph.androidWorkProfileCompliancePolicy",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "deviceThreatProtectionEnabled": true,
+    "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+    "advancedThreatProtectionRequiredSecurityLevel": "low",
+    "scheduledActionsForRule": [
+        {
+            "ruleName": "PasswordRequired",
+            "scheduledActionConfigurations": [
+                {
+                    "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                    "gracePeriodHours": 24,
+                    "actionType": "block",
+                    "notificationTemplateId": "00000000-0000-0000-0000-000000000000",
+                    "notificationMessageCCList": []
+                }
+            ]
+        }
+    ],
+    "displayName": "[Baseline] - AND - U - Compliance Defender for Endpoint",
+    "description": "Merkt een Android-toestel met persoonlijk werkprofiel als niet-compliant wanneer Defender for Endpoint er een risicoscore hoger dan laag aan geeft. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Personal-Devices - v1.5; vergeleken met IntuneAdmin Baseline - Personally-owned work profile - Microsoft Defender for Endpoint (niveau medium)."
+}

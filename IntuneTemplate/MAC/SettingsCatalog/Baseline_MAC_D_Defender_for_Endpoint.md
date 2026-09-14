@@ -14,6 +14,17 @@ Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeeme
 | Bron | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration |
 | Bestand | [`Baseline_MAC_D_Defender_for_Endpoint.json`](Baseline_MAC_D_Defender_for_Endpoint.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.16 Monitoringactiviteiten |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling<br>art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 64
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

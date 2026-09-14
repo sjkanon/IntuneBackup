@@ -16,6 +16,17 @@ Sluit de WinRM-remoteshell af en verbreekt een inactieve SMB-sessie na vijftien 
 
 > LET OP vóór je toewijst: controleer of er geen beheerscript of monitoringtool op WinRM leunt. `Enter-PSSession` en `Invoke-Command` blijven werken — die gebruiken de PowerShell-endpoint, niet de remoteshell — maar `winrs` en alles wat daarop bouwt niet meer. Op een vloot met on-prem beheertooling is dit de enige policy in deze set die iets kan breken dat je niet direct ziet. Naast de remoteshell gaat nu ook WinRM-serverbeheer als geheel dicht. Dat is de bredere variant: geen enkele inkomende WinRM-verbinding meer, niet alleen geen interactieve shell. Controleer dit samen met de remoteshell-instelling tegen wat er aan beheertooling op WinRM leunt.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.15 Toegangsbeveiliging<br>A.8.20 Netwerkbeveiliging<br>A.8.21 Beveiliging van netwerkdiensten |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.IR-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 3
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

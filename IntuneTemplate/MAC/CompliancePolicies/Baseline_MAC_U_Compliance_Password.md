@@ -14,6 +14,17 @@ Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn.
 | Bron | OpenIntuneBaseline macOS v1.0 — Compliance - U - Password |
 | Bestand | [`Baseline_MAC_U_Compliance_Password.json`](Baseline_MAC_U_Compliance_Password.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.7.7 Clear desk en clear screen<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(f) beoordeling van de doeltreffendheid<br>art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
+| NIST CSF 2.0 | PR.AA-03<br>DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 27
 
 Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.

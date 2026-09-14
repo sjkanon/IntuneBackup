@@ -16,6 +16,17 @@ Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot he
 
 > Device-scoped instellingen, dus D — zie de opmerking bij Device Guard.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 6
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

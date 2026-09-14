@@ -16,6 +16,15 @@ Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen a
 
 > OIB's policy is gemengd (4 user- en 1 device-instelling op topniveau). Gesplitst omdat een gemengde policy niet eenduidig toe te wijzen is.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 11
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

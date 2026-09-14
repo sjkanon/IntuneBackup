@@ -1,0 +1,20 @@
+{
+  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
+  "displayName": "[Baseline] - AND - Allow Android Enterprise Enrollment",
+  "description": "Staat inschrijving met Android Enterprise toe, ook het persoonlijke werkprofiel. Device administrator staat in een eigen restrictie op Block (zie README).",
+  "priority": 1,
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "deviceEnrollmentConfigurationType": "singlePlatformRestriction",
+  "platformType": "androidForWork",
+  "platformRestriction": {
+    "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestriction",
+    "platformBlocked": false,
+    "personalDeviceEnrollmentBlocked": false,
+    "osMinimumVersion": null,
+    "osMaximumVersion": null,
+    "blockedManufacturers": [],
+    "blockedSkus": []
+  }
+}

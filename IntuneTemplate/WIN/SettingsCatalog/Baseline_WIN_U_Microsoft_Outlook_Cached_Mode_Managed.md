@@ -16,6 +16,15 @@ Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is
 
 > Eén van drie varianten op dezelfde as — wijs er één toe, nooit twee: deze, Cached Mode Default (alleen cached mode aan) of Cached Mode Off (Online mode). De eigen mailbox wordt gecachet, zodat Outlook offline werkt en zoeken lokaal gaat. Wat eraan gedeeld hangt niet: een gedeelde mailbox die aan het profiel wordt toegevoegd is de belangrijkste oorzaak van OST-bestanden van tientallen gigabytes, en online lezen is daar geen praktisch verlies. Let op de polariteit van de twee gedeelde-map-instellingen, die tegen elkaar in loopt: *Disable shared mail folder caching* op **Enabled** schrijft `cacheothersmail=0`, en *Download shared non-mail folders* op **Disabled** schrijft `downloadsharedfolders=0`. Beide nullen betekenen niet cachen. Geldt alleen voor klassieke Outlook (de Win32-app uit Microsoft 365 Apps); het nieuwe Outlook voor Windows leest deze ADMX-instellingen niet en heeft geen OST. De bekende schuif **hoeveelheid e-mail offline bewaren** (3 maanden / 12 maanden / alles, registerwaarde `SyncWindowSetting`) zit *niet* in de settings catalog: de ingeste `outlk16v2`-ADMX kent onder *Cached Exchange Mode* achttien instellingen en die schuif is er geen van. Wie die wil zetten, kan dat alleen via een eigen ADMX-import of de Office Cloud Policy Service — buiten deze baseline dus.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 6
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

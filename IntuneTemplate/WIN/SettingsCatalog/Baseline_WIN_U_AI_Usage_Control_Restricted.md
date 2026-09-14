@@ -16,6 +16,16 @@ Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsof
 
 > Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. LET OP bij uitrol: [Baseline] - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De twee regels voor de Store-website uit OpenIntuneBaseline staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van [Baseline] - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.5.19 Informatiebeveiliging in leveranciersrelaties<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.23 Webfiltering |
+| NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -2654,7 +2654,7 @@
           },
           {
             "settingDefinitionId": "com.apple.systempolicy.control_enablexprotectmalwareupload",
-            "expectedValue": "com.apple.systempolicy.control_enablexprotectmalwareupload_false"
+            "expectedValue": "com.apple.systempolicy.control_enablexprotectmalwareupload_true"
           }
         ]
       },
@@ -2914,6 +2914,14 @@
           {
             "settingDefinitionId": "com.apple.managedclient.preferences_authschemes",
             "expectedValue": "ntlm,negotiate"
+          },
+          {
+            "settingDefinitionId": "com.apple.managedclient.preferences_sslerroroverrideallowed",
+            "expectedValue": "com.apple.managedclient.preferences_sslerroroverrideallowed_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.managedclient.preferences_microsoftedgeinsiderpromotionenabled",
+            "expectedValue": "com.apple.managedclient.preferences_microsoftedgeinsiderpromotionenabled_false"
           }
         ]
       },
@@ -3410,6 +3418,30 @@
           {
             "settingDefinitionId": "softwareupdate_notifications",
             "expectedValue": "softwareupdate_notifications_true"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_beta_programenrollment",
+            "expectedValue": "softwareupdate_beta_programenrollment_2"
+          },
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion",
+            "expectedValue": "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion_0"
+          },
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_delayindays",
+            "expectedValue": 30
+          },
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_installtime",
+            "expectedValue": "12:30"
+          },
+          {
+            "settingDefinitionId": "com.apple.softwareupdate_automaticallyinstallappupdates",
+            "expectedValue": "com.apple.softwareupdate_automaticallyinstallappupdates_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.softwareupdate_configdatainstall",
+            "expectedValue": "com.apple.softwareupdate_configdatainstall_true"
           }
         ]
       },
@@ -11585,6 +11617,1348 @@
           {
             "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled",
             "expectedValue": "user_vendor_msft_policy_config_microsoft_edgev89~policy~microsoft_edge~manageability_mamenabled_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-179-ANDUCorporateAIRestricted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "corporate-ai-restricted",
+        "android",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - AND - U - Corporate AI Restricted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.assistcontentpolicy",
+            "expectedValue": "com.android.devicerestrictionpolicy.assistcontentpolicy_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.appfunctions",
+            "expectedValue": "com.android.devicerestrictionpolicy.appfunctions_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-180-ANDUCorporateDataProtection",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "corporate-data-protection",
+        "android",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - AND - U - Corporate Data Protection\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.screencaptureblocked",
+            "expectedValue": "com.android.devicerestrictionpolicy.screencaptureblocked_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.bluetoothblocksharing",
+            "expectedValue": "com.android.devicerestrictionpolicy.bluetoothblocksharing_disallowed"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.factoryresetblocked",
+            "expectedValue": "com.android.devicerestrictionpolicy.factoryresetblocked_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-181-ANDUCorporateDeviceSecurity",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "corporate-device-security",
+        "android",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - AND - U - Corporate Device Security\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.passwordrequiredtype",
+            "expectedValue": "com.android.devicerestrictionpolicy.passwordrequiredtype_numericcomplex"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.passwordminimumlength",
+            "expectedValue": 6
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.passwordsigninfailurecountbeforefactoryreset",
+            "expectedValue": 10
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.passwordpreviouspasswordcounttoblock",
+            "expectedValue": 5
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.passwordrequireunlock",
+            "expectedValue": "com.android.devicerestrictionpolicy.passwordrequireunlock_requiredpasswordunlockdailyoption"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.screentimeout",
+            "expectedValue": 900
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.securityrequireverifyapps",
+            "expectedValue": "com.android.devicerestrictionpolicy.securityrequireverifyapps_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.appsautoupdatepolicy",
+            "expectedValue": "com.android.devicerestrictionpolicy.appsautoupdatepolicy_always"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.usbdataaccess",
+            "expectedValue": "com.android.devicerestrictionpolicy.usbdataaccess_disallowusbfiletransfer"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.storageblockexternalmedia",
+            "expectedValue": "com.android.devicerestrictionpolicy.storageblockexternalmedia_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.cellulartwogblocked",
+            "expectedValue": "com.android.devicerestrictionpolicy.cellulartwogblocked_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.datetimeconfigurationblocked",
+            "expectedValue": "com.android.devicerestrictionpolicy.datetimeconfigurationblocked_true"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.privatespacepolicy",
+            "expectedValue": "com.android.devicerestrictionpolicy.privatespacepolicy_disallowed"
+          },
+          {
+            "settingDefinitionId": "com.android.devicerestrictionpolicy.crossprofilepoliciesallowdatasharing",
+            "expectedValue": "com.android.devicerestrictionpolicy.crossprofilepoliciesallowdatasharing_datasharingfromworktopersonalblocked"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-183-IOSDAppleIntelligencePermitted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "apple-intelligence-permitted",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Apple Intelligence Permitted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "intelligencesettings_allowwritingtools",
+            "expectedValue": "intelligencesettings_allowwritingtools_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowgenmoji",
+            "expectedValue": "intelligencesettings_allowgenmoji_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowimageplayground",
+            "expectedValue": "intelligencesettings_allowimageplayground_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowimagewand",
+            "expectedValue": "intelligencesettings_allowimagewand_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowpersonalizedhandwritingresults",
+            "expectedValue": "intelligencesettings_allowpersonalizedhandwritingresults_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowvisualintelligencesummary",
+            "expectedValue": "intelligencesettings_allowvisualintelligencesummary_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_mail_allowsummary",
+            "expectedValue": "intelligencesettings_apps_mail_allowsummary_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_mail_allowsmartreplies",
+            "expectedValue": "intelligencesettings_apps_mail_allowsmartreplies_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscription",
+            "expectedValue": "intelligencesettings_apps_notes_allowtranscription_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscriptionsummary",
+            "expectedValue": "intelligencesettings_apps_notes_allowtranscriptionsummary_true"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_safari_allowsummary",
+            "expectedValue": "intelligencesettings_apps_safari_allowsummary_true"
+          },
+          {
+            "settingDefinitionId": "externalintelligencesettings_enabled",
+            "expectedValue": "externalintelligencesettings_enabled_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-184-IOSDAppleIntelligenceRestricted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "apple-intelligence-restricted",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Apple Intelligence Restricted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "intelligencesettings_allowwritingtools",
+            "expectedValue": "intelligencesettings_allowwritingtools_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowgenmoji",
+            "expectedValue": "intelligencesettings_allowgenmoji_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowimageplayground",
+            "expectedValue": "intelligencesettings_allowimageplayground_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowimagewand",
+            "expectedValue": "intelligencesettings_allowimagewand_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowpersonalizedhandwritingresults",
+            "expectedValue": "intelligencesettings_allowpersonalizedhandwritingresults_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_allowvisualintelligencesummary",
+            "expectedValue": "intelligencesettings_allowvisualintelligencesummary_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_mail_allowsummary",
+            "expectedValue": "intelligencesettings_apps_mail_allowsummary_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_mail_allowsmartreplies",
+            "expectedValue": "intelligencesettings_apps_mail_allowsmartreplies_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscription",
+            "expectedValue": "intelligencesettings_apps_notes_allowtranscription_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscriptionsummary",
+            "expectedValue": "intelligencesettings_apps_notes_allowtranscriptionsummary_false"
+          },
+          {
+            "settingDefinitionId": "intelligencesettings_apps_safari_allowsummary",
+            "expectedValue": "intelligencesettings_apps_safari_allowsummary_false"
+          },
+          {
+            "settingDefinitionId": "externalintelligencesettings_enabled",
+            "expectedValue": "externalintelligencesettings_enabled_false"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-185-IOSDDataProtection",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "data-protection",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Data Protection\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowopenfrommanagedtounmanaged",
+            "expectedValue": "com.apple.applicationaccess_allowopenfrommanagedtounmanaged_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowunmanagedtoreadmanagedcontacts",
+            "expectedValue": "com.apple.applicationaccess_allowunmanagedtoreadmanagedcontacts_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmanagedtowriteunmanagedcontacts",
+            "expectedValue": "com.apple.applicationaccess_allowmanagedtowriteunmanagedcontacts_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceairdropunmanaged",
+            "expectedValue": "com.apple.applicationaccess_forceairdropunmanaged_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmanagedappscloudsync",
+            "expectedValue": "com.apple.applicationaccess_allowmanagedappscloudsync_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceencryptedbackup",
+            "expectedValue": "com.apple.applicationaccess_forceencryptedbackup_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-188-IOSDEnterpriseSSO",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "enterprise-sso",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Enterprise SSO\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+            "expectedValue": "Enable_SSO_On_All_ManagedApps"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+            "expectedValue": "com.apple.extensiblesso_ignored_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+            "expectedValue": "AppPrefixAllowList"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+            "expectedValue": "com.apple.extensiblesso_ignored_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_string",
+            "expectedValue": "com.microsoft.,com.apple."
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+            "expectedValue": "browser_sso_interaction_enabled"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+            "expectedValue": "com.apple.extensiblesso_ignored_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+            "expectedValue": "disable_explicit_app_prompt"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+            "expectedValue": "com.apple.extensiblesso_ignored_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+            "expectedValue": "device_registration"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+            "expectedValue": "com.apple.extensiblesso_ignored_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_string",
+            "expectedValue": "{{DEVICEREGISTRATION}}"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_extensionidentifier",
+            "expectedValue": "com.microsoft.azureauthenticator.ssoextension"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_screenlockedbehavior",
+            "expectedValue": "com.apple.extensiblesso_screenlockedbehavior_0"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_type",
+            "expectedValue": "com.apple.extensiblesso_type_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.extensiblesso_urls",
+            "expectedValue": [
+              "https://login.microsoftonline.com",
+              "https://login.microsoft.com",
+              "https://sts.windows.net",
+              "https://login.partner.microsoftonline.cn",
+              "https://login.chinacloudapi.cn",
+              "https://login.microsoftonline.us",
+              "https://login-us.microsoftonline.com"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-189-IOSDLockScreen",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "lock-screen",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Lock Screen\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.shareddeviceconfiguration_lockscreenfootnote",
+            "expectedValue": "VERLOREN-TOESTEL-TEKST-INVULLEN"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-190-IOSDPasscode",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "passcode",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Passcode\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_forcepin",
+            "expectedValue": "com.apple.mobiledevice.passwordpolicy_forcepin_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_allowsimple",
+            "expectedValue": "com.apple.mobiledevice.passwordpolicy_allowsimple_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_minlength",
+            "expectedValue": 6
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_maxgraceperiod",
+            "expectedValue": 0
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_maxinactivity",
+            "expectedValue": 5
+          },
+          {
+            "settingDefinitionId": "com.apple.mobiledevice.passwordpolicy_maxfailedattempts",
+            "expectedValue": 10
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-191-IOSDRestrictionsCorporate",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "restrictions-corporate",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Restrictions Corporate\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowuiconfigurationprofileinstallation",
+            "expectedValue": "com.apple.applicationaccess_allowuiconfigurationprofileinstallation_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowerasecontentandsettings",
+            "expectedValue": "com.apple.applicationaccess_allowerasecontentandsettings_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowenterpriseapptrust",
+            "expectedValue": "com.apple.applicationaccess_allowenterpriseapptrust_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowuntrustedtlsprompt",
+            "expectedValue": "com.apple.applicationaccess_allowuntrustedtlsprompt_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceautomaticdateandtime",
+            "expectedValue": "com.apple.applicationaccess_forceautomaticdateandtime_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowlockscreencontrolcenter",
+            "expectedValue": "com.apple.applicationaccess_allowlockscreencontrolcenter_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowlockscreennotificationsview",
+            "expectedValue": "com.apple.applicationaccess_allowlockscreennotificationsview_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowlockscreentodayview",
+            "expectedValue": "com.apple.applicationaccess_allowlockscreentodayview_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowusbrestrictedmode",
+            "expectedValue": "com.apple.applicationaccess_allowusbrestrictedmode_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowpasswordsharing",
+            "expectedValue": "com.apple.applicationaccess_allowpasswordsharing_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowpasswordproximityrequests",
+            "expectedValue": "com.apple.applicationaccess_allowpasswordproximityrequests_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowproximitysetuptonewdevice",
+            "expectedValue": "com.apple.applicationaccess_allowproximitysetuptonewdevice_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceauthenticationbeforeautofill",
+            "expectedValue": "com.apple.applicationaccess_forceauthenticationbeforeautofill_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_safariforcefraudwarning",
+            "expectedValue": "com.apple.applicationaccess_safariforcefraudwarning_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowwebdistributionappinstallation",
+            "expectedValue": "com.apple.applicationaccess_allowwebdistributionappinstallation_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmarketplaceappinstallation",
+            "expectedValue": "com.apple.applicationaccess_allowmarketplaceappinstallation_false"
+          },
+          {
+            "settingDefinitionId": "settings_item_mdmoptions_mdmoptions_activationlockallowedwhilesupervised",
+            "expectedValue": "settings_item_mdmoptions_mdmoptions_activationlockallowedwhilesupervised_true"
+          },
+          {
+            "settingDefinitionId": "sirisettings_allowwhilelocked",
+            "expectedValue": "sirisettings_allowwhilelocked_false"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-192-IOSDSoftwareUpdates",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "software-updates",
+        "ios",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - IOS - D - Software Updates\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion",
+            "expectedValue": "ddm-latestsoftwareupdate_enforcelatestsoftwareupdateversion_0"
+          },
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_delayindays",
+            "expectedValue": 14
+          },
+          {
+            "settingDefinitionId": "ddm-latestsoftwareupdate_installtime",
+            "expectedValue": "02:00"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_automaticactions_download",
+            "expectedValue": "softwareupdate_automaticactions_download_1"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_automaticactions_installosupdates",
+            "expectedValue": "softwareupdate_automaticactions_installosupdates_1"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_automaticactions_installsecurityupdate",
+            "expectedValue": "softwareupdate_automaticactions_installsecurityupdate_1"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_rapidsecurityresponse_enable",
+            "expectedValue": "softwareupdate_rapidsecurityresponse_enable_true"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_rapidsecurityresponse_enablerollback",
+            "expectedValue": "softwareupdate_rapidsecurityresponse_enablerollback_false"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_notifications",
+            "expectedValue": "softwareupdate_notifications_true"
+          },
+          {
+            "settingDefinitionId": "softwareupdate_recommendedcadence",
+            "expectedValue": "softwareupdate_recommendedcadence_2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-194-MACDAppleIntelligencePermitted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "apple-intelligence-permitted",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Apple Intelligence Permitted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowappleintelligencereport",
+            "expectedValue": "com.apple.applicationaccess_allowappleintelligencereport_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowexternalintelligenceintegrations",
+            "expectedValue": "com.apple.applicationaccess_allowexternalintelligenceintegrations_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowexternalintelligenceintegrationssignin",
+            "expectedValue": "com.apple.applicationaccess_allowexternalintelligenceintegrationssignin_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowgenmoji",
+            "expectedValue": "com.apple.applicationaccess_allowgenmoji_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowimageplayground",
+            "expectedValue": "com.apple.applicationaccess_allowimageplayground_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmailsmartreplies",
+            "expectedValue": "com.apple.applicationaccess_allowmailsmartreplies_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmailsummary",
+            "expectedValue": "com.apple.applicationaccess_allowmailsummary_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allownotestranscription",
+            "expectedValue": "com.apple.applicationaccess_allownotestranscription_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allownotestranscriptionsummary",
+            "expectedValue": "com.apple.applicationaccess_allownotestranscriptionsummary_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowsafarisummary",
+            "expectedValue": "com.apple.applicationaccess_allowsafarisummary_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowwritingtools",
+            "expectedValue": "com.apple.applicationaccess_allowwritingtools_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceondeviceonlydictation",
+            "expectedValue": "com.apple.applicationaccess_forceondeviceonlydictation_false"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-195-MACDAppleIntelligenceRestricted",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "apple-intelligence-restricted",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Apple Intelligence Restricted\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowappleintelligencereport",
+            "expectedValue": "com.apple.applicationaccess_allowappleintelligencereport_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowexternalintelligenceintegrations",
+            "expectedValue": "com.apple.applicationaccess_allowexternalintelligenceintegrations_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowexternalintelligenceintegrationssignin",
+            "expectedValue": "com.apple.applicationaccess_allowexternalintelligenceintegrationssignin_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowgenmoji",
+            "expectedValue": "com.apple.applicationaccess_allowgenmoji_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowimageplayground",
+            "expectedValue": "com.apple.applicationaccess_allowimageplayground_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmailsmartreplies",
+            "expectedValue": "com.apple.applicationaccess_allowmailsmartreplies_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowmailsummary",
+            "expectedValue": "com.apple.applicationaccess_allowmailsummary_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allownotestranscription",
+            "expectedValue": "com.apple.applicationaccess_allownotestranscription_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allownotestranscriptionsummary",
+            "expectedValue": "com.apple.applicationaccess_allownotestranscriptionsummary_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowsafarisummary",
+            "expectedValue": "com.apple.applicationaccess_allowsafarisummary_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowwritingtools",
+            "expectedValue": "com.apple.applicationaccess_allowwritingtools_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_forceondeviceonlydictation",
+            "expectedValue": "com.apple.applicationaccess_forceondeviceonlydictation_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-196-MACDExternalStorageReadOnly",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "external-storage-read-only",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - External Storage Read Only\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "diskmanagement_restrictions_externalstorage",
+            "expectedValue": "diskmanagement_restrictions_externalstorage_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-197-MACDLoginWindow",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "login-window",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Login Window\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.loginwindow_showfullname",
+            "expectedValue": "com.apple.loginwindow_showfullname_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.loginwindow_loginwindowtext",
+            "expectedValue": "Alleen voor geautoriseerd gebruik. Activiteit op dit apparaat kan worden vastgelegd. / Authorized use only. Activity on this device may be logged."
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-198-MACDRecoveryLock",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "recovery-lock",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Recovery Lock\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "setrecoverylock_enablerecoverylockpassword",
+            "expectedValue": "setrecoverylock_enablerecoverylockpassword_true"
+          },
+          {
+            "settingDefinitionId": "setrecoverylock_recoverylockpasswordrotationschedule",
+            "expectedValue": "setrecoverylock_recoverylockpasswordrotationschedule_5"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-199-MACDRestrictionsHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "restrictions-hardening",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Restrictions Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowcontentcaching",
+            "expectedValue": "com.apple.applicationaccess_allowcontentcaching_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowdiagnosticsubmission",
+            "expectedValue": "com.apple.applicationaccess_allowdiagnosticsubmission_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowspotlightinternetresults",
+            "expectedValue": "com.apple.applicationaccess_allowspotlightinternetresults_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.applicationaccess_allowuiconfigurationprofileinstallation",
+            "expectedValue": "com.apple.applicationaccess_allowuiconfigurationprofileinstallation_false"
+          },
+          {
+            "settingDefinitionId": "com.apple.systempolicy.managed_disableoverride",
+            "expectedValue": "com.apple.systempolicy.managed_disableoverride_true"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-200-MACDScreensaver",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "screensaver",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Screensaver\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.screensaver_askforpassword",
+            "expectedValue": "com.apple.screensaver_askforpassword_true"
+          },
+          {
+            "settingDefinitionId": "com.apple.screensaver_askforpassworddelay",
+            "expectedValue": 5
+          },
+          {
+            "settingDefinitionId": "com.apple.screensaver_loginwindowidletime",
+            "expectedValue": 900
+          },
+          {
+            "settingDefinitionId": "com.apple.screensaver.user_idletime",
+            "expectedValue": 900
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-201-MACDTimeServer",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "time-server",
+        "macos",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - MAC - D - Time Server\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "com.apple.mcx_timeserver",
+            "expectedValue": "time.apple.com"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-edge-dns-over-https-automatic",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_dnsoverhttpsmode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_dnsoverhttpsmode_automatic"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "microsoft-edge-dns-over-https-secure",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_dnsoverhttpsmode",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpsmode_dnsoverhttpsmode_secure"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpstemplates",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpstemplates_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev83diff~policy~microsoft_edge_dnsoverhttpstemplates_dnsoverhttpstemplates",
+            "expectedValue": "https://DOH-RESOLVER-INVULLEN/dns-query{?dns}"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-204-DNetworkAuthenticationHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "network-authentication-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Network Authentication Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_allowlocalsystemtousecomputeridentityforntlm",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_allowlocalsystemtousecomputeridentityforntlm_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_allowpku2uauthenticationrequests",
+            "expectedValue": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_allowpku2uauthenticationrequests_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_localpoliciessecurityoptions_networksecurity_ldapclientsigningrequirements",
+            "expectedValue": 1
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_kerberos_kerberosclientsupportsclaimscompoundarmor",
+            "expectedValue": "device_vendor_msft_policy_config_kerberos_kerberosclientsupportsclaimscompoundarmor_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_netbtnodetypeconfiguration",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_netbtnodetypeconfiguration_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_mssecurityguide_netbtnodetypeconfiguration_pol_secguide_secguide_netbtnodetypecfg",
+            "expectedValue": "device_vendor_msft_policy_config_mssecurityguide_netbtnodetypeconfiguration_pol_secguide_secguide_netbtnodetypecfg_2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-205-DSecurityLogMonitoring",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "security-log-monitoring",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Security Log Monitoring\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_warninglevel",
+            "expectedValue": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_warninglevel_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_warninglevel_warninglevel",
+            "expectedValue": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_warninglevel_warninglevel_90"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enablemodulelogging",
+            "expectedValue": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enablemodulelogging_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_powershellexecutionpolicy_enablemodulelogging_listbox_modulenames",
+            "expectedValue": [
+              "*"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-206-DWindowsComponentHardening",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-component-hardening",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows Component Hardening\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_autoadminlogon",
+            "expectedValue": "device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_autoadminlogon_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpserver",
+            "expectedValue": "device_vendor_msft_policy_config_admx_w32time_w32time_policy_enable_ntpserver_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_grouppolicy_enablecdp",
+            "expectedValue": "device_vendor_msft_policy_config_admx_grouppolicy_enablecdp_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_enumeratelocalusersondomainjoinedcomputers",
+            "expectedValue": "device_vendor_msft_policy_config_windowslogon_enumeratelocalusersondomainjoinedcomputers_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsexplorer_shellprotocolprotectedmodetitle_2",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsexplorer_shellprotocolprotectedmodetitle_2_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_appxruntime_appxruntimeblockhostedappaccesswinrt",
+            "expectedValue": "device_vendor_msft_policy_config_admx_appxruntime_appxruntimeblockhostedappaccesswinrt_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_windowsstore_disableosupgrade_2",
+            "expectedValue": "device_vendor_msft_policy_config_admx_windowsstore_disableosupgrade_2_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_grouppolicy_disablebackgroundpolicy",
+            "expectedValue": "device_vendor_msft_policy_config_admx_grouppolicy_disablebackgroundpolicy_0"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_terminalserver_ts_temp_delete",
+            "expectedValue": "device_vendor_msft_policy_config_admx_terminalserver_ts_temp_delete_0"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-207-DWindowsEventForwarding",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-event-forwarding",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows Event Forwarding\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventforwarding_subscriptionmanager",
+            "expectedValue": "device_vendor_msft_policy_config_admx_eventforwarding_subscriptionmanager_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_admx_eventforwarding_subscriptionmanager_subscriptionmanager_listbox",
+            "expectedValue": [
+              "Server=http://WEC-SERVER-FQDN-INVULLEN:5985/wsman/SubscriptionManager/WEC,Refresh=60"
+            ]
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-209-UFileSharingRestrictions",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "file-sharing-restrictions",
+        "windows",
+        "user-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - U - File Sharing Restrictions\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "user_vendor_msft_policy_config_admx_sharing_noinplacesharing",
+            "expectedValue": "user_vendor_msft_policy_config_admx_sharing_noinplacesharing_1"
           }
         ]
       },

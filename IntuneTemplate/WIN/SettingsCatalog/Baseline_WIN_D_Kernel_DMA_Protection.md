@@ -16,6 +16,17 @@ Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DM
 
 > De enige echte impact: een oud dock, een externe grafische kaart of een PCIe-kaart zonder DMA-remapping werkt niet meer. Het apparaat zelf blijft gewoon werken — het randapparaat wordt niet opgestart. Test daarom met de docks die in de vloot zitten vóór je breed toewijst. Vraagt een herstart om actief te worden, en geldt niet voor 1394-, PCMCIA- en ExpressCard-apparaten.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein<br>A.8.1 Eindpuntapparatuur van gebruikers |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 1
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

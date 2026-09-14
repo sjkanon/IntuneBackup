@@ -14,6 +14,17 @@ Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoa
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Login and Lock Screen |
 | Bestand | [`Baseline_WIN_D_Login_and_Lock_Screen.json`](Baseline_WIN_D_Login_and_Lock_Screen.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.7.7 Clear desk en clear screen |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 8
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

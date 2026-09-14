@@ -16,6 +16,17 @@ Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan
 
 > **Deze waarde veroudert en moet worden nagelopen.** 10.0.22621 is Windows 11 22H2. Draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date; dat rapport blokkeert bewust niets, want zodra een verouderde ondergrens de build rood maakt verhoogt iemand het getal om 'm groen te krijgen. Verhogen is een besluit en dus een PR — deze ondergrens is een capaciteitsvloer (zie `ondergrens`), dus hem automatisch met n-1 laten meebewegen zou juist de reden weghalen waarom hij op 22H2 staat.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.8 Beheer van technische kwetsbaarheden<br>A.8.19 Installatie van software op operationele systemen |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden<br>art. 21(2)(f) beoordeling van de doeltreffendheid |
+| CIS Controls v8.1 | 2.2 Ensure Authorized Software is Currently Supported |
+| NIST CSF 2.0 | DE.CM-09<br>PR.PS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 38
 
 Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.

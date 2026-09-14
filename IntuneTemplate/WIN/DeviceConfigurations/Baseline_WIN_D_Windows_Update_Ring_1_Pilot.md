@@ -16,6 +16,17 @@ Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar word
 
 > Zonder assignment: ringen horen op een pilot-groep, niet op All Devices — dat zou ring 3 tegenspreken.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.8 Beheer van technische kwetsbaarheden<br>A.8.32 Wijzigingsbeheer |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 7.3 Perform Automated Operating System Patch Management |
+| NIST CSF 2.0 | PR.PS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 36
 
 Een klassieke device configuration heeft geen settingDefinitionId's maar vaste eigenschappen.

@@ -14,6 +14,17 @@ Bepaalt of Edge wachtwoorden mag opslaan en tonen, zodat werkwachtwoorden niet i
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Password Management |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Password_Management.json`](Baseline_WIN_U_Microsoft_Edge_Password_Management.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 5.2 Use Unique Passwords |
+| NIST CSF 2.0 | PR.AA-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 5
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

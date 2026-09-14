@@ -138,5 +138,6 @@
             "value": "skype;app-settings;calshow;itms;itmss;itms-apps;itms-appss;itms-services;"
         }
     ],
-    "screenCaptureConfigurationState": "blocked"
+    "screenCaptureConfigurationState": "blocked",
+    "allowWidgetContentSync": false
 }

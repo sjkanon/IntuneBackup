@@ -1,0 +1,10 @@
+{
+  "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
+  "displayName": "[Baseline] - MAC - Enrollment Restriction Corporate Only",
+  "description": "Blokkeert inschrijving van persoonlijke Macs. Alleen Macs via Apple Automated Device Enrollment of met een geregistreerd serienummer (corporate identifier) kunnen zich inschrijven. Bron: eigen baseline — zie extras/macos/enrollment-restriction/README.md.",
+  "platformType": "mac",
+  "platformRestriction": {
+    "platformBlocked": false,
+    "personalDeviceEnrollmentBlocked": true
+  }
+}

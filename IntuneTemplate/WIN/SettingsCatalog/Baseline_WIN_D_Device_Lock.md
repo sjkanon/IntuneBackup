@@ -16,6 +16,17 @@ Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden
 
 > OIB noemt deze policy U omdat zij 'm aan gebruikers toewijst; alle 12 instellingen zijn device-scoped, dus hier is het D (zie check-scope.js). De drie eigen wachtwoordinstellingen blijven staan. Sinds OIB v4.0 staat hier ook de vergrendeling na 15 minuten inactiviteit (interactivelogon_machineinactivitylimit_v2 = 900): de vervanger van de vervallen Password-compliancepolicy, en een instelling die de baseline eerder in Local Security Policies zette. De slaapstand aan het net gaat daarbij naar 30 minuten, zodat vergrendelen en slapen niet op hetzelfde moment vallen.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.7.7 Clear desk en clear screen<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
+| NIST CSF 2.0 | PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 16
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

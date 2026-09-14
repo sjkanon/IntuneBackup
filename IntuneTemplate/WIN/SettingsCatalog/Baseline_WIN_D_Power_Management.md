@@ -16,6 +16,17 @@ Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand 
 
 > Slaapstand en niet afsluiten: afsluiten kost gebruikers werk en levert klachten op, en met wachtwoord-bij-ontwaken is slaapstand net zo goed vergrendeld. De energiebesparingsdrempel van 30 procent is uit de bron overgenomen en is geen beveiligingsinstelling.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.7.7 Clear desk en clear screen<br>A.8.1 Eindpuntapparatuur van gebruikers |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 6
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

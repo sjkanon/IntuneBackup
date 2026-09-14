@@ -16,6 +16,17 @@ Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macO
 
 > De macOS-tegenhanger van BitLocker; herstelsleutel wordt in Intune bewaard. Sinds september 2026 wordt de persoonlijke herstelsleutel expliciet aangemaakt (userecoverykey) en niet aan de gebruiker getoond (showrecoverykey), zodat hij alleen via Intune op te vragen is.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.24 Gebruik van cryptografie |
+| NIS2 art. 21(2) | art. 21(2)(h) cryptografie en versleuteling |
+| CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>3.11 Encrypt Sensitive Data at Rest |
+| NIST CSF 2.0 | PR.DS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 10
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

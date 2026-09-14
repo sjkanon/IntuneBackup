@@ -16,6 +16,15 @@ Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet de privacyrec
 
 > Schermopname staat hier niet in maar in [Baseline] - MAC - D - Screen Recording: macOS staat een MDM niet toe die te verlenen, dus dat is een custom profile met AllowStandardUserToSetSystemService in plaats van een settings catalog-entry. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.18 Gebruik van speciale systeemhulpmiddelen |
+| NIST CSF 2.0 | PR.AA-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 44
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

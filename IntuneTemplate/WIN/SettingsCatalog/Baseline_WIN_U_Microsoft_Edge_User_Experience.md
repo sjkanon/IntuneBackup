@@ -16,6 +16,15 @@ De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke fun
 
 > De URL-blokkeerlijst uit OpenIntuneBaseline staat bewust niet hier maar in [Baseline] - WIN - U - AI Usage Control Restricted/Permitted (zie overgenomenVan daar); dropSettings houdt hem bij een import weg, anders zetten twee policies dezelfde lijst verschillend.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 23
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,17 @@ Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en leg
 
 > Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.15 Logging<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>8.2 Collect Audit Logs |
+| NIST CSF 2.0 | PR.IR-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 35
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

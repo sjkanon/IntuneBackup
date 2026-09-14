@@ -16,6 +16,17 @@ Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van p
 
 > PrintNightmare-hardening; zat eerder als 13 instellingen in de Administrative Templates-blok.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.8 Beheer van technische kwetsbaarheden<br>A.8.19 Installatie van software op operationele systemen<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 20
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

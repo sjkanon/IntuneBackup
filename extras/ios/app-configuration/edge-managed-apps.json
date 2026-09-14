@@ -1,0 +1,20 @@
+{
+  "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
+  "displayName": "[Baseline] - IOS - Edge - Managed Apps",
+  "description": "Microsoft Edge op elk iOS-toestel (ook zonder inschrijving): Defender SmartScreen aan, certificaatfouten niet te negeren.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedAppManagementLevels": "unspecified",
+  "appGroupType": "selectedPublicApps",
+  "customSettings": [
+    {
+      "name": "com.microsoft.intune.mam.managedbrowser.SmartScreenEnabled",
+      "value": "true"
+    },
+    {
+      "name": "com.microsoft.intune.mam.managedbrowser.SSLErrorOverrideAllowed",
+      "value": "false"
+    }
+  ]
+}

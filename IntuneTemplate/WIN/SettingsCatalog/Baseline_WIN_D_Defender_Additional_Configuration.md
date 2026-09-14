@@ -16,6 +16,17 @@ Defender-instellingen die niet in het Endpoint Security-template passen en daaro
 
 > Instellingen die niet in het Endpoint Security-antivirustemplate passen en dus een losse Settings Catalog-policy vereisen. Sinds OIB v4.0: 'Disallow Exploit Protection Override' aan (gebruikers konden wel exploit-protectioninstellingen maken maar ze zonder beheerrechten niet meer weghalen), en 'Hide Exclusions From Local Users' eruit omdat 'Hide Exclusions From Local Admins' die al impliceert.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.5 Enable Anti-Exploitation Features<br>10.6 Centrally Manage Anti-Malware Software |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 9
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

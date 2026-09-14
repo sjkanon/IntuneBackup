@@ -16,6 +16,17 @@ Merkt een iPhone of iPad die met een jailbreak is opengebroken als niet-complian
 
 > Blokkeeractie na 24 uur respijt, zodat een gebruiker eerst een melding krijgt. Wijs 'm pas toe wanneer er daadwerkelijk iOS-apparaten worden ingeschreven; op een tenant zonder inschrijvingen levert hij een lege rapportage op en niets anders. Sinds september 2026 eist deze policy ook een minimale OS-versie (16.0). Die waarde veroudert: draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date. Dat rapport blokkeert niets en hoort dat ook niet te doen — verhogen is een besluit en dus een PR. Deze ondergrens is een actualiteitsdoel (zie `ondergrens`) en mag dus meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.7 Bescherming tegen malware<br>A.5.15 Toegangsbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen<br>art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
+| NIST CSF 2.0 | PR.PS-01<br>DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 25
 
 Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.

@@ -14,6 +14,16 @@ Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Hello for Business - D - Cloud Kerberos Trust |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.json`](Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen<br>art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie |
+| NIST CSF 2.0 | PR.AA-03<br>PR.AA-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 3
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

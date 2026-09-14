@@ -15,6 +15,7 @@ on:
     paths:
       - "IntuneTemplate/**"
       - "scripts/generate-baseline.js"
+      - "scripts/generate-compliance.js"
       - "scripts/export-intunebackup.js"
       - "scripts/check-scope.js"
       - "scripts/set-packages.js"
@@ -36,10 +37,11 @@ jobs:
       # Bewaakt dat er geen policy met gemengde device/user-scope bij komt, dat bestands- en
       # policynaam hetzelfde platform en dezelfde scope dragen, dat elk bestand in de map van
       # zijn policytype staat, dat geen twee toegewezen policies dezelfde instelling op een
-      # andere waarde zetten, en dat het CIPP-pakket in elk template klopt met zijn fase en
-      # toewijzing. Blokkerend — het pakket wordt hier bewust niet stilzwijgend rechtgezet:
-      # het bepaalt naar wie een policy uitrolt, en dat hoort iemand te zien.
-      - name: Controleer scope, indeling en conflicten van IntuneTemplate/
+      # andere waarde zetten, dat het CIPP-pakket in elk template klopt met zijn fase en
+      # toewijzing, en dat elke policy controls heeft in de vorm van IntuneTemplate/_controls.json.
+      # Blokkerend — het pakket wordt hier bewust niet stilzwijgend rechtgezet: het bepaalt naar
+      # wie een policy uitrolt, en dat hoort iemand te zien.
+      - name: Controleer scope, indeling, conflicten en normverwijzingen van IntuneTemplate/
         run: node scripts/check-scope.js
 
       - name: Genereer baseline/intune/baseline-v1.0.json
@@ -52,6 +54,25 @@ jobs:
         run: node scripts/generate-baseline-template.js
       - name: Genereer de README's in IntuneTemplate/
         run: node scripts/generate-docs.js
+
+      # Conditional Access telt in COMPLIANCE.md alleen mee als ca-controls.json er is. Zonder
+      # deze checkout staat er in het document expliciet dat CA ontbreekt. Zet hem aan zodra de
+      # CA-repo in CI bereikbaar is — en draai lokaal dan ook mét CA, anders wisselt
+      # COMPLIANCE.md bij elke run tussen de twee versies.
+      # - name: Haal CA-policies op voor de CA-kant van COMPLIANCE.md
+      #   uses: actions/checkout@v5
+      #   with:
+      #     repository: EIGENAAR-INVULLEN/CA-policies
+      #     path: .ca-policies
+      #     token: ${{ secrets.CA_POLICIES_TOKEN }}
+
+      # Na generate-baseline: de verantwoording noemt per control en per NIS2-punt de checkId's
+      # uit de zojuist geschreven baseline. --strict is een tweede vangnet naast check-scope.js
+      # voor wie alleen dit script draait. Met de CA-checkout hierboven: vervang --no-ca door
+      # --ca .ca-policies/controls/ca-controls.json.
+      - name: Genereer COMPLIANCE.md (ISO 27001, NIS2, CIS, NIST CSF)
+        run: node scripts/generate-compliance.js --strict --no-ca
+
       - name: Open PR met de gegenereerde baseline (als er iets veranderde)
         uses: peter-evans/create-pull-request@v7
         with:
@@ -66,7 +87,9 @@ jobs:
             Baseline-koppelingen); `export/NativeImport/IntuneBackupAndRestore/` is dezelfde baseline in
             het restore-formaat van de IntuneBackupAndRestore-module. Elke set ernaast gaat naar
             `export/NativeImport/IntuneBackupAndRestore-<SET>/` — apart, zodat een restore van de
-            baseline die sets niet meesleept.
+            baseline die sets niet meesleept. `COMPLIANCE.md` is de verantwoording naar ISO 27001,
+            NIS2, CIS en NIST CSF: kijk bij een gewijzigde fase of mapping of een control van
+            status verandert.
           branch: auto/regenerate-baseline
           delete-branch: true
           add-paths: |
@@ -75,5 +98,6 @@ jobs:
             baseline/README.md
             export/NativeImport/**
             OVERZICHT.md
+            COMPLIANCE.md
             IntuneTemplate/*.md
             IntuneTemplate/**/*.md

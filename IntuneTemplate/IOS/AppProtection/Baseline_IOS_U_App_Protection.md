@@ -14,9 +14,20 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iP
 | Bron | OpenIntuneBaseline BYOD — iOS App Protection |
 | Bestand | [`Baseline_IOS_U_App_Protection.json`](Baseline_IOS_U_App_Protection.json) |
 
-> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug.
+> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een klantbesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.
 
-## Eigenschappen — 67
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken<br>A.8.5 Veilige authenticatie<br>A.8.24 Gebruik van cryptografie<br>A.8.1 Eindpuntapparatuur van gebruikers |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen<br>art. 21(2)(h) cryptografie en versleuteling |
+| CIS Controls v8.1 | 3.3 Configure Data Access Control Lists<br>3.11 Encrypt Sensitive Data at Rest<br>4.11 Enforce Remote Wipe Capability on Portable End-User Devices |
+| NIST CSF 2.0 | PR.DS-01<br>PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
+## Eigenschappen — 68
 
 Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `—` betekent niet ingesteld.
 
@@ -89,6 +100,7 @@ Een app protection-policy heeft geen settingDefinitionId's maar vaste eigenschap
 | `exemptedAppProtocols[0].name` | Default |
 | `exemptedAppProtocols[0].value` | skype;app-settings;calshow;itms;itmss;itms-apps;itms-appss;itms-services; |
 | `screenCaptureConfigurationState` | blocked |
+| `allowWidgetContentSync` | false |
 
 ---
 

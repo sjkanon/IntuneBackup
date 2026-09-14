@@ -16,6 +16,17 @@ Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellin
 
 > Eén instelling, maar de goedkoopste van de hele set: hij voegt zelf niets toe en zorgt alleen dat wat er al staat ook echt geldt. Draai na uitrol op een testapparaat `auditpol /get /category:*` en vergelijk met de baseline-policy. Daarnaast wordt OneSettings-auditing aangezet: Windows legt vast wanneer het configuratie ophaalt bij de OneSettings-dienst. Zonder dat spoor is een wijziging die daarvandaan komt achteraf niet te zien.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.15 Logging<br>A.8.16 Monitoringactiviteiten |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling |
+| CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.5 Collect Detailed Audit Logs |
+| NIST CSF 2.0 | PR.PS-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

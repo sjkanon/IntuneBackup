@@ -16,6 +16,17 @@ Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als
 
 > Gangbaar beleid eist TLS 1.2 of hoger voor web- en clouddiensten. De WinINet-stack staat al goed (Internet Explorer Legacy), maar Edge zelf accepteerde tot nu toe wat de server aanbood. Let op: interne systemen die alleen TLS 1.0/1.1 spreken worden hierdoor onbereikbaar — dat is precies waarom dit een pilotpolicy is.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.24 Gebruik van cryptografie |
+| NIS2 art. 21(2) | art. 21(2)(h) cryptografie en versleuteling |
+| CIS Controls v8.1 | 3.10 Encrypt Sensitive Data in Transit |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

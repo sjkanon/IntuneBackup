@@ -14,6 +14,15 @@ Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access |
 | Bestand | [`Baseline_MAC_D_Microsoft_OneDrive.json`](Baseline_MAC_D_Microsoft_OneDrive.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 20
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

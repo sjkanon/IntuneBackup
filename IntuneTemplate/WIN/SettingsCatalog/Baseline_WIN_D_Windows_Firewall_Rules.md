@@ -14,6 +14,17 @@ Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebrui
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules |
 | Bestand | [`Baseline_WIN_D_Windows_Firewall_Rules.json`](Baseline_WIN_D_Windows_Firewall_Rules.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices |
+| NIST CSF 2.0 | PR.IR-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 49
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

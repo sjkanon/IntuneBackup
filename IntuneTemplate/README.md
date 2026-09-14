@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# IntuneTemplate — 155 policies
+# IntuneTemplate — 193 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
-| [macOS](MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
-| [iOS/iPadOS](IOS/README.md) | – | – | – | 2 | 1 | **3** |
-| [Android](AND/README.md) | – | – | – | 2 | 1 | **3** |
-| **Totaal** | **125** | **1** | **9** | **18** | **2** | **155** |
+| [Windows](WIN/README.md) | 110 | 1 | 6 | 11 | – | **128** |
+| [macOS](MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
+| [iOS/iPadOS](IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
+| [Android](AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
+| **Totaal** | **151** | **1** | **13** | **26** | **2** | **193** |
 
 ## Indeling
 
@@ -35,13 +35,14 @@ De map volgt uit de bestandsnaam (platform) en het CIPP-`Type` (policytype) en d
 geen informatie die niet ook in het bestand staat. `check-scope.js` controleert dat elk
 bestand op zijn plek staat.
 
-## De drie `_`-bestanden
+## De `_`-bestanden
 
 | Bestand | Wat het vastlegt | Gelezen door |
 |---|---|---|
 | [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |
 | [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, waarom er afgeweken wordt en in welke fase hij uitrolt | `import-oib.js`, `set-packages.js` |
 | [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
+| [`_controls.json`](_controls.json) | de normenvocabulaire: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |
 
 Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar
 IntuneBackupAndRestore heeft ze wél nodig om compleet terug te kunnen zetten.
@@ -64,17 +65,20 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 
 | `Package` | In CIPP toewijzen aan | Stage | Policies |
 |---|---|---:|---:|
-| `Baseline-Devices` | Assign to all devices | 1 | 68 |
+| `Baseline-Devices` | Assign to all devices | 1 | 69 |
 | `Baseline-Users` | Assign to all users | 1 | 32 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 26 |
-| `Baseline-Wacht` | Do not assign | 3 | 10 |
+| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 38 |
+| `Baseline-Wacht` | Do not assign | 3 | 26 |
 | `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
+| `Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
 | `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
+| `Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
+| `Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
 | `Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
 | `Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
 | `Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
 | `Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
-| *(leeg)* | wordt niet uitgerold | – | 8 |
+| *(leeg)* | wordt niet uitgerold | – | 12 |
 
 De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 de CIPP-baseline die deze pakketten uitrolt.
@@ -85,10 +89,10 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 120 policies
-- [macOS](MAC/README.md) — 29 policies
-- [iOS/iPadOS](IOS/README.md) — 3 policies
-- [Android](AND/README.md) — 3 policies
+- [Windows](WIN/README.md) — 128 policies
+- [macOS](MAC/README.md) — 37 policies
+- [iOS/iPadOS](IOS/README.md) — 14 policies
+- [Android](AND/README.md) — 14 policies
 
 Zie de [hoofd-README](../README.md) voor de naamconventie, de controles en hoe je een
 nieuwe OpenIntuneBaseline-versie binnenhaalt.

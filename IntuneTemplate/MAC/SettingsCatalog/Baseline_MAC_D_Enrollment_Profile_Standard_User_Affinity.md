@@ -16,6 +16,17 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 
 > Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mdmadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mdmadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.9 Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.2 Speciale toegangsrechten |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory<br>4.7 Manage Default Accounts on Enterprise Assets and Software<br>5.4 Restrict Administrator Privileges to Dedicated Administrator Accounts |
+| NIST CSF 2.0 | ID.AM-01<br>PR.AA-05<br>PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 40
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

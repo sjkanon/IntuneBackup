@@ -1,0 +1,12 @@
+{
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "displayName": "AND - Personal Work Profile",
+  "description": "Android Enterprise-toestellen in persoonlijk eigendom (werkprofiel, BYOD).",
+  "platform": "androidForWork",
+  "rule": "(device.deviceOwnership -eq \"Personal\")",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType": "devices",
+  "payloads": []
+}

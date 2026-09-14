@@ -2,31 +2,38 @@
 
 # Intune-baseline — overzicht
 
-155 policies over 4 platformen, met
+193 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 155 |
-| Baseline-checks | 132 |
-| Zonder toewijzing (bewust) | 55 |
+| Policies | 193 |
+| Baseline-checks | 158 |
+| Zonder toewijzing (bewust) | 92 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
-| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
-| [iOS/iPadOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
-| [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
+| [Windows](IntuneTemplate/WIN/README.md) | 110 | 1 | 6 | 11 | – | **128** |
+| [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
+| [iOS/iPadOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
+| [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 120 policies
-- [macOS](IntuneTemplate/MAC/README.md) — 29 policies
-- [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 3 policies
-- [Android](IntuneTemplate/AND/README.md) — 3 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 128 policies
+- [macOS](IntuneTemplate/MAC/README.md) — 37 policies
+- [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 14 policies
+- [Android](IntuneTemplate/AND/README.md) — 14 policies
+
+## Normenkader
+
+193 van de 193 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 31 van de 93 Annex A-controls.
+Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
+zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
 
 ## Eén bron, drie afgeleiden
 
@@ -143,25 +150,37 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `WIN - D - In-Box App Removal` | Verwijdert ingebouwde apps, ook van apparaten die al in gebruik zijn. Kijk in de pilot of iemand er een mist. |
 | `WIN - D - Kernel DMA Protection` | Een dock of eGPU zonder DMA-remapping werkt niet meer. Test met de docks die in de vloot zitten. |
 | `WIN - D - Logon Hardening` | Gebruikers moeten voortaan CTRL+ALT+DEL indrukken vóór het aanmeldscherm. Communiceer dat vóór de brede uitrol. |
+| `WIN - D - Microsoft Edge DNS over HTTPS Automatic` | Automatisch is de standaard van Edge, maar vastgelegd kan de gebruiker het niet meer uitzetten of een eigen resolver kiezen. Test op de pilotgroep of interne namen en een eventuele webproxy/DNS-filter blijven werken. |
+| `WIN - D - Network Authentication Hardening` | PKU2U dichtzetten breekt Remote Desktop naar een ander Entra-joined apparaat met Entra-referenties via de oude aanmeldmethode, en P-node breekt NetBIOS-naamresolutie via broadcast in een netwerk zonder DNS of WINS. Eerst op de pilotgroep. |
 | `WIN - D - Printing Hardening` | Windows Protected Print laat printers vallen die geen Mopria-driver hebben. Inventariseer de printervloot eerst. |
 | `WIN - D - Remote Access Hardening` | Controleer of geen beheerscript of monitoringtool op winrs leunt. Enter-PSSession en Invoke-Command blijven werken, winrs niet. |
 | `WIN - D - Removable Storage` | Schrijven naar USB-sticks, externe schijven en telefoons wordt geblokkeerd, en dat merkt een gebruiker meteen. Let op: tot deze policy breed uitrolt is verwisselbare opslag nergens beperkt — BitLocker laat removabledrivesrequireencryption bewust uit, omdat deze blokkade dat afdekt. |
 | `WIN - D - Script File Associations` | Dubbelklikken op een .js-, .vbs- of .hta-bestand opent voortaan Kladblok. Een inlog- of installatiescript dat zo gestart wordt doet dan niets meer; kijk in de pilot of er zulke scripts in omloop zijn. |
+| `WIN - D - Security Log Monitoring` | Module-logging voor alle modules (*) levert veel gebeurtenis 4103 op in Microsoft-Windows-PowerShell/Operational. Eerst op de pilotgroep kijken wat dat met de logomvang en een eventuele SIEM-ingest doet; zie extras/windows/event-log-sizes voor de logboekgrootte. |
 | `WIN - D - Windows AI Features Restricted` | Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen. |
+| `WIN - D - Windows Component Hardening` | Merkbaar op twee punten: 'Doorgaan op dit apparaat' (Continue experiences) verdwijnt, en een kioskapparaat dat met AutoAdminLogon werkt meldt niet meer vanzelf aan. Eerst op de pilotgroep; kiosken buiten deze policy houden. |
 | `WIN - D - Windows Hello for Business` | Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos. |
 | `WIN - U - AI Usage Control Restricted` | Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen. |
 | `WIN - U - Compliance OS Version` | Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur. |
+| `WIN - U - File Sharing Restrictions` | Een gebruiker die gewend is een map uit zijn profiel via Verkenner te delen, ziet die optie verdwijnen. Delen via OneDrive en Teams blijft werken. |
 | `WIN - U - Microsoft Edge Management` | Draait de voorrang om: beleid uit de Edge Management Service wint daarna van het Edge-beleid uit deze baseline. Wie de rol Edge Administrator heeft kan dan dus instellingen uit Microsoft Edge Security en User Experience overschrijven. Leg eerst vast wie die rol heeft voordat dit breed uitrolt. |
 | `WIN - U - Microsoft Outlook Cached Mode Managed` | Raakt elk bestaand profiel: Outlook bouwt het OST opnieuw op en een gedeelde mailbox in het profiel gaat van gecachet naar online. Dat is zichtbaar — de eerste synchronisatie kost tijd en bandbreedte, en wie gewend is offline in een gedeelde mailbox te werken merkt het meteen. Eerst op de pilotgroep, en kijk daar hoeveel profielen een gedeelde mailbox hebben. |
 | `WIN - U - Microsoft Teams` | Blokkeert aanmelden met een account uit een andere tenant. Dat is de bedoeling, maar wie een tweede werkaccount in Teams gebruikt merkt het meteen — kijk in de pilot of dat voorkomt. |
 | `WIN - U - Windows Hello for Business` | Hoort bij WIN - D - Windows Hello for Business en gaat samen met die de pilot in — op alle gebruikers zou hij WHfB alsnog op elk apparaat inrichten, en dan test de pilot niets. |
+| `MAC - D - Apple Intelligence Restricted` | Gebruikers zien Writing Tools, samenvattingen, Genmoji, Image Playground en de ChatGPT-integratie verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen. |
 | `MAC - D - FileVault` | Versleutelt de schijf en vraagt de gebruiker daarbij om mee te werken. Controleer in de pilot dat de herstelsleutel ook echt in Intune verschijnt voordat je breed uitrolt. |
+| `MAC - D - Login Window` | Gebruikers moeten bij het inlogvenster hun accountnaam typen in plaats van hun naam aan te klikken. Aankondigen. Na een herstart ziet de gebruiker nog steeds de accountlijst van het FileVault-ontgrendelscherm; deze instelling geldt voor het inlogvenster daarna (afmelden, gebruikers wisselen). |
 | `MAC - D - Passcode and Screen Lock` | Gebruikers met een korter of eenvoudiger wachtwoord moeten het bij de eerstvolgende aanmelding wijzigen. |
-| `MAC - D - Software Updates` | Declaratief updatebeleid (DDM) vraagt macOS 14 of hoger; oudere Macs krijgen het profiel niet. Downloaden en installeren van OS- en beveiligingsupdates gebeurt nu automatisch en is niet meer uit te zetten door de gebruiker: kijk in de pilot hoe het herstartmoment valt voordat je breed uitrolt. |
+| `MAC - D - Recovery Lock` | Wie recoveryOS nodig heeft — macOS opnieuw installeren, Schijfhulpprogramma vanuit herstel, een andere opstartschijf — moet voortaan het wachtwoord bij de servicedesk opvragen. Controleer in de pilot dat het wachtwoord in Intune zichtbaar is voordat je breed uitrolt. |
+| `MAC - D - Restrictions Hardening` | Een niet-ondertekende app via rechtsklik → Open starten kan niet meer, en een gebruiker kan geen profiel of certificaat meer met de hand installeren (bijvoorbeeld van een VPN-leverancier, een testomgeving of een wifi-portaal). Inventariseer in de pilot wie dat nu doet; die installaties horen voortaan via Intune. |
+| `MAC - D - Screensaver` | Wie gewend is het scherm binnen een minuut na de schermbeveiliging zonder wachtwoord terug te krijgen, moet nu direct wachtwoord of Touch ID gebruiken. Merkbaar, niet breekbaar; eerst pilot en aankondigen. |
+| `MAC - D - Software Updates` | Updates worden automatisch geïnstalleerd en uiterlijk 30 dagen na uitgave afgedwongen met een herstart om 12:30 — ook voor een nieuwe hoofdversie van macOS. Kijk in de pilot hoe het herstartmoment valt en of bedrijfsapps de nieuwe hoofdversie aankunnen. Beta-inschrijving is niet meer mogelijk. |
 | `MAC - U - Compliance OS Version` | Een Mac onder macOS 14 wordt niet-compliant en verliest toegang via Conditional Access. OVERZICHT.md noemt al dat oudere Macs het updateprofiel niet krijgen; deze policy maakt dat zichtbaar in plaats van stil. Kijk eerst hoeveel Macs het raakt. Respijt staat op 72 uur. |
+| `AND - U - Corporate AI Restricted` | Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een klantbesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een klant die deze assistenten toestaat. |
+| `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
-Zonder toewijzing staan er 55: de 26 hierboven, 10 die op een voorwaarde
-wachten, 11 voor een eigen groep en 8 die niet uitrollen. Die laatste twee zijn een
+Zonder toewijzing staan er 92: de 38 hierboven, 26 die op een voorwaarde
+wachten, 16 voor een eigen groep en 12 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

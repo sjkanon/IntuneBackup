@@ -16,6 +16,16 @@ Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukk
 
 > **Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI Restricted, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control Restricted. Wie AI breed wil toestaan, moet ook die twee wegen.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.5.34 Privacy en bescherming van persoonsgegevens<br>A.8.1 Eindpuntapparatuur van gebruikers |
+| NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

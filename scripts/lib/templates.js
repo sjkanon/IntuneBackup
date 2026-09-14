@@ -19,7 +19,7 @@ const PLATFORMS = {
   WIN: { label: "Windows", expectedPlatforms: ["windows10", "windows10X"] },
   MAC: { label: "macOS", expectedPlatforms: ["macOS"] },
   IOS: { label: "iOS/iPadOS", expectedPlatforms: ["iOS"] },
-  AND: { label: "Android", expectedPlatforms: ["android"] },
+  AND: { label: "Android", expectedPlatforms: ["androidEnterprise", "android"] },
 };
 
 /** CIPP-`Type` -> submap. Zelfde volgorde als de Graph-endpoints die erbij horen. */
@@ -359,7 +359,7 @@ function flattenSettings(settings) {
 }
 
 /**
- * De vijf velden waarmee een policy een OS-ondergrens zet, en hoe je ziet of er écht een
+ * De zes velden waarmee een policy een OS-ondergrens zet, en hoe je ziet of er écht een
  * waarde in staat. Hier en niet in de scripts, om dezelfde reden als de rest van dit bestand:
  * `check-osversion.js` rapporteert erover en `check-scope.js` bewaakt dat er een reden bij
  * staat, en die twee mogen niet elk een eigen idee hebben van wat "gezet" betekent.
@@ -379,10 +379,11 @@ const VERSION_FIELDS = [
   "minimumWarningOsVersion",
   "minimumRequiredPatchVersion",
   "minimumWarningPatchVersion",
+  "minAndroidSecurityPatchLevel",
 ];
 
 /** Android-beveiligingspatchdatums (yyyy-MM-dd), geen OS-versies — die tellen anders. */
-const PATCH_FIELDS = new Set(["minimumRequiredPatchVersion", "minimumWarningPatchVersion"]);
+const PATCH_FIELDS = new Set(["minimumRequiredPatchVersion", "minimumWarningPatchVersion", "minAndroidSecurityPatchLevel"]);
 
 const UNSET_VERSIONS = new Set([null, undefined, "", "0000-00-00"]);
 

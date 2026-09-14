@@ -32,6 +32,17 @@ Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een 
 >
 > Controleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie "Not signed in" meldt is normaal en betekent niet dat het niet werkt.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 6.7 Centralize Access Control |
+| NIST CSF 2.0 | PR.AA-03<br>PR.AA-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 10
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

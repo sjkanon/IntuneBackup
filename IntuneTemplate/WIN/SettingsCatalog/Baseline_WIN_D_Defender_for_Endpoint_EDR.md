@@ -14,6 +14,17 @@ Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. D
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen EDR-onboardingpolicy |
 | Bestand | [`Baseline_WIN_D_Defender_for_Endpoint_EDR.json`](Baseline_WIN_D_Defender_for_Endpoint_EDR.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.16 Monitoringactiviteiten |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling |
+| CIS Controls v8.1 | 13.1 Centralize Security Event Alerting<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
+| NIST CSF 2.0 | DE.CM-09<br>DE.AE-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

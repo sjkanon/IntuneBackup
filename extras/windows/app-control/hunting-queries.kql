@@ -1,0 +1,41 @@
+// App Control for Business — Advanced Hunting (Microsoft Defender XDR)
+// ActionTypes volgens Microsoft Learn: "Query App Control events with advanced hunting" (augustus 2026).
+// Draai 1–3 tijdens de auditfase, 1 en 4 na afdwingen.
+
+// 1. Overzicht: welke App Control-gebeurtenissen, op hoeveel apparaten (laatste 7 dagen)
+DeviceEvents
+| where Timestamp > ago(7d)
+| where ActionType startswith "AppControl"
+| summarize Apparaten = dcount(DeviceName), Gebeurtenissen = count() by ActionType
+| order by Apparaten desc
+
+// 2. Auditfase: wat zou worden geblokkeerd (3076 + script/MSI 8028), gegroepeerd per bestand
+DeviceEvents
+| where Timestamp > ago(30d)
+| where ActionType in ("AppControlCodeIntegrityPolicyAudited", "AppControlCIScriptAudited")
+| extend Fields = parse_json(AdditionalFields)
+| summarize Apparaten = dcount(DeviceId), Laatst = max(Timestamp), VoorbeeldPad = any(FolderPath),
+            Uitgever = any(tostring(Fields.PublisherName)), SHA256 = any(SHA256)
+          by FileName, ActionType
+| order by Apparaten desc
+
+// 3. Herkomst: toegestaan, geaudit of geblokkeerd op basis van ISG-reputatie of managed installer
+DeviceEvents
+| where Timestamp > ago(7d)
+| where ActionType in ("AppControlCodeIntegrityOriginAllowed", "AppControlCodeIntegrityOriginAudited", "AppControlCodeIntegrityOriginBlocked")
+| summarize Aantal = count() by ActionType, FileName
+| order by Aantal desc
+
+// 4. Na afdwingen: elke blokkade (3077 + script/MSI 8029) met gebruiker en bovenliggend proces
+DeviceEvents
+| where Timestamp > ago(1d)
+| where ActionType in ("AppControlCodeIntegrityPolicyBlocked", "AppControlCIScriptBlocked")
+| project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, SHA256,
+          InitiatingProcessFileName, AdditionalFields
+| order by Timestamp desc
+
+// 5. Controle: welke apparaten hebben de policy geladen (3099) — apparaten die ontbreken hebben hem niet
+DeviceEvents
+| where Timestamp > ago(7d)
+| where ActionType == "AppControlCodeIntegrityPolicyLoaded"
+| summarize Laatst = max(Timestamp) by DeviceName

@@ -16,6 +16,16 @@ Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-dien
 
 > **Alternatief van [Baseline] - WIN - U - AI Usage Control Restricted.** Een URL-blokkeerlijst is sowieso frictie en geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. Wie AI-gebruik echt wil sturen doet dat met de categorie Generative AI in Defender Web Content Filtering — dat staat in het Defender-portaal, niet in deze repo.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.5.19 Informatiebeveiliging in leveranciersrelaties<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.23 Webfiltering |
+| NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

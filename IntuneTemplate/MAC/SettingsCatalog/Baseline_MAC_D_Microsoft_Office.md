@@ -14,6 +14,15 @@ Basisconfiguratie van Office op macOS.
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Office - D - Office Configuration |
 | Bestand | [`Baseline_MAC_D_Microsoft_Office.json`](Baseline_MAC_D_Microsoft_Office.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 7
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

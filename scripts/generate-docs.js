@@ -5,7 +5,10 @@
  *   OVERZICHT.md                          de samenvatting om te delen
  *   IntuneTemplate/README.md              de matrix en de mapindeling
  *   IntuneTemplate/<PLAT>/README.md       elke policy met wat hij doet en waar hij landt
- *   IntuneTemplate/<PLAT>/<CAT>/*.md      per policy élke instelling die hij zet
+ *   IntuneTemplate/<PLAT>/<CAT>/*.md      per policy élke instelling die hij zet, en de normen die hij invult
+ *
+ * COMPLIANCE.md — de verantwoording naar ISO 27001, NIS2, CIS en NIST CSF — komt uit
+ * generate-compliance.js; hier staat per policy alleen de verwijzing ernaar.
  *
  * Gegenereerd en niet met de hand geschreven, om dezelfde reden als baseline-v1.0.json: bijna
  * honderd policies met duizenden instellingen bijhouden gaat mis, en een tabel die niet meer
@@ -158,6 +161,40 @@ function truncateScalar(text) {
   return text.length > 110 ? `${text.slice(0, 107)}…` : text;
 }
 
+/**
+ * De normen uit `controls` in het manifest, als tabel onder de policy. Alleen de labels: wat een
+ * control betekent en wat er organisatorisch naast nodig is staat in COMPLIANCE.md, en dat hier
+ * herhalen zou honderdvijftig kopieën opleveren die elk apart verouderen.
+ */
+const CONTROL_FRAMEWORKS = [
+  ["iso", "ISO/IEC 27001:2022"],
+  ["nis2", "NIS2 art. 21(2)"],
+  ["cis", "CIS Controls v8.1"],
+  ["nistcsf", "NIST CSF 2.0"],
+];
+
+function controlsSection(controls) {
+  const rows = CONTROL_FRAMEWORKS.filter(([key]) => (controls[key] || []).length > 0).map(
+    ([key, label]) => `| ${label} | ${controls[key].map((c) => escapePipes(key === "cis" ? String(c).replace(/^CIS Controls v8\.1 /, "") : c)).join("<br>")} |`
+  );
+  if (rows.length === 0) return [];
+  return ["## Normen", "", "| Kader | Controls |", "|---|---|", ...rows, "", "Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).", ""];
+}
+
+/** Hoeveel verschillende Annex A-controls de policies in fase 1 samen raken — voor OVERZICHT.md. */
+function isoControlsInFase1(templates, manifestByTarget) {
+  const ids = new Set();
+  for (const t of templates) {
+    const entry = manifestByTarget.get(t.baseName) || {};
+    if (entry.fase !== 1 || !entry.controls) continue;
+    for (const label of entry.controls.iso || []) {
+      const m = String(label).match(/^A\.\d+\.\d+/);
+      if (m) ids.add(m[0]);
+    }
+  }
+  return ids.size;
+}
+
 function policyTable(templates, { checkIds, assignments, manifestByTarget }) {
   const header =
     "| Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |\n|---|---|---|---:|---|---|";
@@ -222,6 +259,8 @@ function policyDocument(template, ctx) {
       ""
     );
   }
+
+  if (entry.controls) lines.push(...controlsSection(entry.controls));
 
   if (type === "Catalog") {
     const rows = [];
@@ -375,13 +414,14 @@ function overviewReadme(templates, ctx) {
     "geen informatie die niet ook in het bestand staat. `check-scope.js` controleert dat elk",
     "bestand op zijn plek staat.",
     "",
-    "## De drie `_`-bestanden",
+    "## De `_`-bestanden",
     "",
     "| Bestand | Wat het vastlegt | Gelezen door |",
     "|---|---|---|",
     "| [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |",
     "| [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, waarom er afgeweken wordt en in welke fase hij uitrolt | `import-oib.js`, `set-packages.js` |",
     "| [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
+    "| [`_controls.json`](_controls.json) | de normenvocabulaire: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |",
     "",
     "Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar",
     "IntuneBackupAndRestore heeft ze wél nodig om compleet terug te kunnen zetten.",
@@ -481,6 +521,13 @@ function overviewDocument(templates, ctx) {
     "",
     "Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:",
     ...platforms.filter((p) => perPlatform(p).length > 0).map((p) => `- [${PLATFORMS[p].label}](IntuneTemplate/${p}/README.md) — ${plural(perPlatform(p).length, "policy", "policies")}`),
+    "",
+    "## Normenkader",
+    "",
+    `${templates.filter((t) => (ctx.manifestByTarget.get(t.baseName) || {}).controls).length} van de ${templates.length} policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),`,
+    `CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen ${isoControlsInFase1(templates, ctx.manifestByTarget)} van de 93 Annex A-controls.`,
+    "Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie",
+    "zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).",
     "",
     "## Eén bron, drie afgeleiden",
     "",

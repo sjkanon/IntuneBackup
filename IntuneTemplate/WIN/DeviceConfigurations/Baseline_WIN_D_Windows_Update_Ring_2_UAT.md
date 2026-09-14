@@ -14,6 +14,17 @@ Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.
 | Bron | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT |
 | Bestand | [`Baseline_WIN_D_Windows_Update_Ring_2_UAT.json`](Baseline_WIN_D_Windows_Update_Ring_2_UAT.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.8 Beheer van technische kwetsbaarheden<br>A.8.32 Wijzigingsbeheer |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 7.3 Perform Automated Operating System Patch Management |
+| NIST CSF 2.0 | PR.PS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 36
 
 Een klassieke device configuration heeft geen settingDefinitionId's maar vaste eigenschappen.

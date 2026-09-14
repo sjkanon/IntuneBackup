@@ -898,5 +898,14 @@
         "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
       }
     }
+  ],
+  "[Baseline] - MAC - D - Time Server": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
   ]
 }

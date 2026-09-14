@@ -16,6 +16,17 @@ Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaa
 
 > Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder "Microsoft ATP connector enabled" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; de token-variant staat in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.16 Monitoringactiviteiten |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling |
+| CIS Controls v8.1 | 13.1 Centralize Security Event Alerting<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
+| NIST CSF 2.0 | DE.CM-09<br>DE.AE-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 3
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

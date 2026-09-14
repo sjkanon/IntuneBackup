@@ -16,6 +16,17 @@ Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zij
 
 > 23 -> 40 instellingen; alle bestaande zaten er al in.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.15 Logging |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling |
+| CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.3 Ensure Adequate Audit Log Storage<br>8.5 Collect Detailed Audit Logs<br>8.8 Collect Command-Line Audit Logs |
+| NIST CSF 2.0 | PR.PS-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 40
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

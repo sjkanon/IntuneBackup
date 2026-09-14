@@ -14,6 +14,17 @@ Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets all
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move |
 | Bestand | [`Baseline_MAC_U_Microsoft_OneDrive_KFM.json`](Baseline_MAC_U_Microsoft_OneDrive_KFM.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken<br>A.8.13 Back-up van informatie |
+| NIS2 art. 21(2) | art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer |
+| CIS Controls v8.1 | 11.2 Perform Automated Backups |
+| NIST CSF 2.0 | PR.DS-11 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 15
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

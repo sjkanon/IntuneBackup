@@ -14,6 +14,17 @@ Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerke
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft AutoUpdate - D - MAU Configuration |
 | Bestand | [`Baseline_MAC_D_Microsoft_AutoUpdate.json`](Baseline_MAC_D_Microsoft_AutoUpdate.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.8 Beheer van technische kwetsbaarheden |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 7.4 Perform Automated Application Patch Management |
+| NIST CSF 2.0 | PR.PS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 16
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

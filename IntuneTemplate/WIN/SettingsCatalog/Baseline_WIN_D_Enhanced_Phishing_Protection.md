@@ -16,6 +16,16 @@ Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, h
 
 > Opvolger van de SmartScreen-policy (checkId 024 blijft). Vier van de zes oude instellingen staan hier, de twee shell-SmartScreen-instellingen in Security Hardening.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.23 Webfiltering |
+| NIS2 art. 21(2) | art. 21(2)(g) basispraktijken cyberhygiene en training<br>art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| NIST CSF 2.0 | PR.AA-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

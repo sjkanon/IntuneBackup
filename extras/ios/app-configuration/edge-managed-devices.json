@@ -1,0 +1,37 @@
+{
+  "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
+  "displayName": "[Baseline] - IOS - Edge - Managed Devices",
+  "description": "Microsoft Edge op ingeschreven toestellen: alleen het werkaccount, Defender SmartScreen aan, certificaatfouten niet te negeren.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedMobileApps": [
+    "APP-ID-EDGE-INVULLEN"
+  ],
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMAllowedAccountsOnly",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "Enabled"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMUPN",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{userprincipalname}}"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.intune.mam.managedbrowser.SmartScreenEnabled",
+      "appConfigKeyType": "booleanType",
+      "appConfigKeyValue": "true"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.intune.mam.managedbrowser.SSLErrorOverrideAllowed",
+      "appConfigKeyType": "booleanType",
+      "appConfigKeyValue": "false"
+    }
+  ]
+}

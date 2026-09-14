@@ -16,6 +16,16 @@ Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocre
 
 > Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.5.34 Privacy en bescherming van persoonsgegevens<br>A.8.1 Eindpuntapparatuur van gebruikers |
+| NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

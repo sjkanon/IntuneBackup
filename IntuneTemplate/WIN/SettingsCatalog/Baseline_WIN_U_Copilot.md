@@ -14,6 +14,16 @@ Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - U - Copilot |
 | Bestand | [`Baseline_WIN_U_Copilot.json`](Baseline_WIN_U_Copilot.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.10 Aanvaardbaar gebruik<br>A.8.19 Installatie van software op operationele systemen |
+| CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.PS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 2
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

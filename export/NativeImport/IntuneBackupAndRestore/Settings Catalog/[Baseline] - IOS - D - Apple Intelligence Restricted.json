@@ -1,0 +1,216 @@
+{
+    "name": "[Baseline] - IOS - D - Apple Intelligence Restricted",
+    "description": "Zet op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies uit — Writing Tools, Genmoji, Image Playground, Image Wand, gepersonaliseerd handschrift, samenvattingen in Mail, Notities, Safari en Visual Intelligence — en de koppeling met externe AI-diensten zoals ChatGPT. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Declaratieve configuraties com.apple.configuration.intelligence.settings en external-intelligence.settings in de iOS settings catalog; selectie uit UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate en IntuneAdmin — Disable Apple Intelligence, met Writing Tools uit waar UniFy het toestaat. De com.apple.applicationaccess-varianten die IntuneAdmin gebruikt zijn in de catalogus als Deprecated gemarkeerd.",
+    "platforms": "iOS",
+    "technologies": "mdm,appleRemoteManagement",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                "settingDefinitionId": "intelligencesettings_intelligencesettings",
+                "settingInstanceTemplateReference": null,
+                "groupSettingCollectionValue": [
+                    {
+                        "settingValueTemplateReference": null,
+                        "children": [
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowwritingtools",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowwritingtools_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowgenmoji",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowgenmoji_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowimageplayground",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowimageplayground_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowimagewand",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowimagewand_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowpersonalizedhandwritingresults",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowpersonalizedhandwritingresults_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "intelligencesettings_allowvisualintelligencesummary",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "intelligencesettings_allowvisualintelligencesummary_false",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                                "settingDefinitionId": "intelligencesettings_apps",
+                                "settingInstanceTemplateReference": null,
+                                "groupSettingCollectionValue": [
+                                    {
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                                                "settingDefinitionId": "intelligencesettings_apps_mail",
+                                                "settingInstanceTemplateReference": null,
+                                                "groupSettingCollectionValue": [
+                                                    {
+                                                        "settingValueTemplateReference": null,
+                                                        "children": [
+                                                            {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                                "settingDefinitionId": "intelligencesettings_apps_mail_allowsummary",
+                                                                "settingInstanceTemplateReference": null,
+                                                                "choiceSettingValue": {
+                                                                    "settingValueTemplateReference": null,
+                                                                    "value": "intelligencesettings_apps_mail_allowsummary_false",
+                                                                    "children": []
+                                                                }
+                                                            },
+                                                            {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                                "settingDefinitionId": "intelligencesettings_apps_mail_allowsmartreplies",
+                                                                "settingInstanceTemplateReference": null,
+                                                                "choiceSettingValue": {
+                                                                    "settingValueTemplateReference": null,
+                                                                    "value": "intelligencesettings_apps_mail_allowsmartreplies_false",
+                                                                    "children": []
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                                                "settingDefinitionId": "intelligencesettings_apps_notes",
+                                                "settingInstanceTemplateReference": null,
+                                                "groupSettingCollectionValue": [
+                                                    {
+                                                        "settingValueTemplateReference": null,
+                                                        "children": [
+                                                            {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                                "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscription",
+                                                                "settingInstanceTemplateReference": null,
+                                                                "choiceSettingValue": {
+                                                                    "settingValueTemplateReference": null,
+                                                                    "value": "intelligencesettings_apps_notes_allowtranscription_false",
+                                                                    "children": []
+                                                                }
+                                                            },
+                                                            {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                                "settingDefinitionId": "intelligencesettings_apps_notes_allowtranscriptionsummary",
+                                                                "settingInstanceTemplateReference": null,
+                                                                "choiceSettingValue": {
+                                                                    "settingValueTemplateReference": null,
+                                                                    "value": "intelligencesettings_apps_notes_allowtranscriptionsummary_false",
+                                                                    "children": []
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                                                "settingDefinitionId": "intelligencesettings_apps_safari",
+                                                "settingInstanceTemplateReference": null,
+                                                "groupSettingCollectionValue": [
+                                                    {
+                                                        "settingValueTemplateReference": null,
+                                                        "children": [
+                                                            {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                                "settingDefinitionId": "intelligencesettings_apps_safari_allowsummary",
+                                                                "settingInstanceTemplateReference": null,
+                                                                "choiceSettingValue": {
+                                                                    "settingValueTemplateReference": null,
+                                                                    "value": "intelligencesettings_apps_safari_allowsummary_false",
+                                                                    "children": []
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                "settingDefinitionId": "externalintelligencesettings_externalintelligencesettings",
+                "settingInstanceTemplateReference": null,
+                "groupSettingCollectionValue": [
+                    {
+                        "settingValueTemplateReference": null,
+                        "children": [
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "externalintelligencesettings_enabled",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "settingValueTemplateReference": null,
+                                    "value": "externalintelligencesettings_enabled_false",
+                                    "children": []
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

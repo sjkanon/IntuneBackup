@@ -14,6 +14,17 @@ Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS.
 | Bron | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - Antivirus Configuration |
 | Bestand | [`Baseline_MAC_D_Defender_Antivirus.json`](Baseline_MAC_D_Defender_Antivirus.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.2 Configure Automatic Anti-Malware Signature Updates<br>10.6 Centrally Manage Anti-Malware Software |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 26
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

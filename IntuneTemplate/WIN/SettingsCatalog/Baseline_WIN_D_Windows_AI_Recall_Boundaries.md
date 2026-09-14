@@ -16,6 +16,16 @@ Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerporta
 
 > **De app-lijst is bewust onvolledig.** Wat erin staat is wat overal verdedigbaar is — een RDP-sessie toont het scherm van een ander systeem, een wachtwoordkluis toont wachtwoorden. Vul aan met de programma's die in deze omgeving gevoelige gegevens tonen: het HR-pakket, het dossiersysteem, de bankomgeving. Namen mogen een uitvoerbaar bestand zijn (`app.exe`) of een AUMID voor Store-apps. Let op dat de bewaartermijn van 30 dagen niets zegt over verwijderingsplichten: staat er een persoonsgegeven in de index, dan valt die index onder dezelfde regels als de bron. Exporteren staat standaard al uit; het staat hier expliciet zodat het een besluit is en geen toevalligheid.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.33 Bescherming van registraties<br>A.5.34 Privacy en bescherming van persoonsgegevens<br>A.8.11 Datamaskering<br>A.8.12 Voorkomen van datalekken |
+| CIS Controls v8.1 | 3.4 Enforce Data Retention |
+| NIST CSF 2.0 | PR.DS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 5
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,17 @@ Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, 
 
 > 11 -> 28 instellingen. allowintrusionpreventionsystem blijft behouden; OIB laat 'm weg omdat Microsoft de instelling heeft uitgefaseerd. Sinds OIB v4.0 zet OIB matig en hoog zelf op quarantaine; de eigen override voor matig is daarmee overbodig geworden en weggehaald. Laag blijft een override.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.2 Configure Automatic Anti-Malware Signature Updates<br>10.4 Configure Automatic Anti-Malware Scanning of Removable Media<br>10.6 Centrally Manage Anti-Malware Software<br>10.7 Use Behavior-Based Anti-Malware Software |
+| NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 32
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,17 @@ De hardeningsinstellingen uit de oude Administrative Templates-policy waar OpenI
 
 > Wat er van de oude Administrative Templates-policy (008) overblijft nadat OIB de rest heeft overgenomen: hardened UNC paths, WDigest, blokkade van apparaatklassen, multicast-DNS, LSA custom SSP/AP, MPR-notificaties, standby-gedrag en Group Policy-registerverwerking. Los gehouden zodat een OIB-upgrade deze instellingen niet stilzwijgend meesleept of weggooit.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.9 Configuratiebeheer<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 25
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

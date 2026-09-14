@@ -16,6 +16,15 @@ Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook 
 
 > De lichtste van de drie varianten: één instelling, geen uitspraak over gedeelde mappen. Past waar gebruikers offline in een gedeelde mailbox moeten kunnen werken en de schijfruimte geen probleem is. Geldt alleen voor klassieke Outlook (de Win32-app uit Microsoft 365 Apps); het nieuwe Outlook voor Windows leest deze ADMX-instellingen niet en heeft geen OST. De bekende schuif **hoeveelheid e-mail offline bewaren** (3 maanden / 12 maanden / alles, registerwaarde `SyncWindowSetting`) zit *niet* in de settings catalog: de ingeste `outlk16v2`-ADMX kent onder *Cached Exchange Mode* achttien instellingen en die schuif is er geen van. Wie die wil zetten, kan dat alleen via een eigen ADMX-import of de Office Cloud Policy Service — buiten deze baseline dus.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 1
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

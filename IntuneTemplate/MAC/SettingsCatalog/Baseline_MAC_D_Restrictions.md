@@ -14,6 +14,17 @@ Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.
 | Bron | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | Bestand | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.14 Informatieoverdracht<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.12 Voorkomen van datalekken |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.DS-02<br>PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 39
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

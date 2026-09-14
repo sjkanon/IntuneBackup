@@ -1,0 +1,65 @@
+{
+  "name": "[Baseline] - WIN - D - App Control Enforced",
+  "description": "Laat alleen Windows-onderdelen, Store-apps, apps met een goede reputatie (Intelligent Security Graph) en apps van de Intune managed installer draaien; al het andere blokkeert App Control for Business. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Learn — Manage App Control for Business (ingebouwde controls), template d3849ba8-bf95-467c-9640-aa2334eae9e3_1; setting-ids geverifieerd tegen pl4nty DCv2/Settings.",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "roleScopeTagIds": ["0"],
+  "templateReference": {
+    "templateId": "d3849ba8-bf95-467c-9640-aa2334eae9e3_1",
+    "templateFamily": "endpointSecurityApplicationControl",
+    "templateDisplayName": "App Control for Business",
+    "templateDisplayVersion": "Version 1"
+  },
+  "settings": [
+    {
+      "id": "0",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_applicationcontrolv2_buildoptions",
+        "settingInstanceTemplateReference": {
+          "settingInstanceTemplateId": "SETTINGINSTANCETEMPLATEID-INVULLEN"
+        },
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "settingValueTemplateReference": null,
+          "value": "device_vendor_msft_policy_config_applicationcontrolv2_buildoptions_built_in_controls_selected",
+          "children": [
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_policy_config_applicationcontrolv2_auditmode",
+              "settingInstanceTemplateReference": null,
+              "choiceSettingValue": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                "settingValueTemplateReference": null,
+                "value": "device_vendor_msft_policy_config_applicationcontrolv2_auditmode_disabled",
+                "children": []
+              }
+            },
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_policy_config_applicationcontrolv2_trustappsfrommanagedinstaller",
+              "settingInstanceTemplateReference": null,
+              "choiceSettingValue": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                "settingValueTemplateReference": null,
+                "value": "device_vendor_msft_policy_config_applicationcontrolv2_trustappsfrommanagedinstaller_enabled",
+                "children": []
+              }
+            },
+            {
+              "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+              "settingDefinitionId": "device_vendor_msft_policy_config_applicationcontrolv2_trustappswithgoodreputation",
+              "settingInstanceTemplateReference": null,
+              "choiceSettingValue": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                "settingValueTemplateReference": null,
+                "value": "device_vendor_msft_policy_config_applicationcontrolv2_trustappswithgoodreputation_enabled",
+                "children": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

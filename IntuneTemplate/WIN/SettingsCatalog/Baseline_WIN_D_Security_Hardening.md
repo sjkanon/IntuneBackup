@@ -16,6 +16,17 @@ Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, aut
 
 > Neemt de oude policies Network Security (017), System Services (025) en het grootste deel van Administrative Templates (008) over.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.9 Configuratiebeheer<br>A.8.15 Logging<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(b) incidentbehandeling<br>art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software<br>8.8 Collect Command-Line Audit Logs<br>10.3 Disable Autorun and Autoplay for Removable Media |
+| NIST CSF 2.0 | PR.PS-01<br>PR.PS-04 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 96
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

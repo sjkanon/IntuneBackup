@@ -1,0 +1,41 @@
+{
+    "@odata.type": "#microsoft.graph.iosCompliancePolicy",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "passcodeRequired": false,
+    "passcodeBlockSimple": false,
+    "passcodeMinimumLength": null,
+    "passcodeMinutesOfInactivityBeforeLock": null,
+    "passcodeMinutesOfInactivityBeforeScreenTimeout": null,
+    "passcodeExpirationDays": null,
+    "passcodePreviousPasscodeBlockCount": null,
+    "passcodeMinimumCharacterSetCount": null,
+    "passcodeRequiredType": "deviceDefault",
+    "osMinimumVersion": null,
+    "osMaximumVersion": null,
+    "osMinimumBuildVersion": null,
+    "osMaximumBuildVersion": null,
+    "securityBlockJailbrokenDevices": false,
+    "deviceThreatProtectionEnabled": true,
+    "deviceThreatProtectionRequiredSecurityLevel": "unavailable",
+    "advancedThreatProtectionRequiredSecurityLevel": "medium",
+    "managedEmailProfileRequired": false,
+    "restrictedApps": [],
+    "scheduledActionsForRule": [
+        {
+            "ruleName": "PasswordRequired",
+            "scheduledActionConfigurations": [
+                {
+                    "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                    "gracePeriodHours": 24,
+                    "actionType": "block",
+                    "notificationTemplateId": "00000000-0000-0000-0000-000000000000",
+                    "notificationMessageCCList": []
+                }
+            ]
+        }
+    ],
+    "displayName": "[Baseline] - IOS - U - Compliance Defender for Endpoint",
+    "description": "Merkt een iPhone of iPad als niet-compliant zodra Microsoft Defender for Endpoint het machinerisico hoger dan Medium inschat. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint en UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (beide Medium); UniFy Corporate eist Low."
+}

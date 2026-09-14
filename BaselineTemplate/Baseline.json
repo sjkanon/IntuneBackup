@@ -71,11 +71,62 @@
         },
         {
           "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-android-dedicated",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-Android-Dedicated",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Android-Dedicated",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-baseline-pilot",
           "variables": {
             "intuneTemplatePackage": "Baseline-SEC-Baseline-Pilot",
             "assignTo": "customGroup",
             "customGroup": "SEC-Baseline-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-ios-byod",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-iOS-BYOD",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-iOS-BYOD",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-ios-corporate",
+          "variables": {
+            "intuneTemplatePackage": "Baseline-SEC-iOS-Corporate",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-iOS-Corporate",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",

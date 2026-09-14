@@ -14,6 +14,17 @@ De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security |
 | Bestand | [`Baseline_WIN_U_Microsoft_Office_Security.json`](Baseline_WIN_U_Microsoft_Office_Security.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.9 Configuratiebeheer |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>9.6 Block Unnecessary File Types |
+| NIST CSF 2.0 | PR.PS-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 228
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

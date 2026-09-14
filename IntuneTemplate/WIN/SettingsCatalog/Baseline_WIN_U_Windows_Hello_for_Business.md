@@ -16,6 +16,16 @@ Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde ei
 
 > De user-scope van de PassportForWork-CSP kent vier van de vijf instellingen uit de apparaatpolicy; UseCertificateForOnPremAuth en de biometrie-instellingen bestaan alleen device-scoped en blijven dus daar. Zet er een apparaatfilter op dat gedeelde apparaten uitsluit (Set-BaselineAssignment.ps1 -FilterId), anders geldt hij ook daar.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen<br>art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie |
+| NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 5
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

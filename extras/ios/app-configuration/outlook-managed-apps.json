@@ -1,0 +1,16 @@
+{
+  "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
+  "displayName": "[Baseline] - IOS - Outlook - Managed Apps",
+  "description": "Outlook op elk iOS-toestel (ook zonder inschrijving): waarschuwing bij externe ontvangers.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedAppManagementLevels": "unspecified",
+  "appGroupType": "selectedPublicApps",
+  "customSettings": [
+    {
+      "name": "com.microsoft.outlook.Mail.ExternalRecipientsToolTipEnabled",
+      "value": "true"
+    }
+  ]
+}

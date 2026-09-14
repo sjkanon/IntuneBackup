@@ -14,6 +14,16 @@ Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroni
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 11
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

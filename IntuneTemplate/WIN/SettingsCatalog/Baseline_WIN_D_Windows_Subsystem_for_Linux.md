@@ -14,6 +14,17 @@ Beperkt het Windows-subsysteem voor Linux, dat anders een volledige tweede omgev
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux |
 | Bestand | [`Baseline_WIN_D_Windows_Subsystem_for_Linux.json`](Baseline_WIN_D_Windows_Subsystem_for_Linux.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer<br>A.8.19 Installatie van software op operationele systemen |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 10
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

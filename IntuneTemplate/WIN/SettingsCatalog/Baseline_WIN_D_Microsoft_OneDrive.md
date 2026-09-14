@@ -16,6 +16,17 @@ Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Burea
 
 > Neemt ook de Known Folder Move-policy (028) over: alle 6 instellingen daarvan zitten hierin.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken<br>A.8.13 Back-up van informatie |
+| NIS2 art. 21(2) | art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer |
+| CIS Controls v8.1 | 11.2 Perform Automated Backups |
+| NIST CSF 2.0 | PR.DS-11 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 19
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

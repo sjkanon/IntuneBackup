@@ -16,6 +16,17 @@ De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, bep
 
 > 209 instellingen, kern is de macroblokkade voor bestanden uit internet.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.9 Configuratiebeheer |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 209
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

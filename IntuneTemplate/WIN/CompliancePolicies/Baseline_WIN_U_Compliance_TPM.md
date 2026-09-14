@@ -16,6 +16,16 @@ Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebesc
 
 > Sinds OIB v4.0 één toets per policy in plaats van vier gebundelde policies, zodat respijt en uitzonderingen per toets te regelen zijn. Samen met de acht andere WIN - U - Compliance-policies uit v4.0 de vervanger van Compliance Device Health, Device Security en Defender for Endpoint; Compliance Password is vervallen (zie _renames.json).
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.24 Gebruik van cryptografie |
+| NIS2 art. 21(2) | art. 21(2)(f) beoordeling van de doeltreffendheid<br>art. 21(2)(h) cryptografie en versleuteling |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 43
 
 Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.

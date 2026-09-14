@@ -2,7 +2,7 @@
 
 # [Baseline] - AND - U - Compliance Device Health
 
-Merkt een Android-toestel als niet-compliant wanneer het geroot is, USB-foutopsporing aanstaat, apps van buiten de Play Store zijn toegestaan of Play Integrity niet hardwarematig bevestigd kan worden.
+Merkt een Android-toestel met persoonlijk werkprofiel als niet-compliant wanneer het geroot is, USB-foutopsporing aanstaat, apps van buiten de Play Store zijn toegestaan, Play Integrity niet hardwarematig bevestigd kan worden, of de laatste beveiligingspatch ouder is dan de ondergrens.
 
 | | |
 |---|---|
@@ -14,7 +14,18 @@ Merkt een Android-toestel als niet-compliant wanneer het geroot is, USB-foutopsp
 | Bron | OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD. |
 | Bestand | [`Baseline_AND_U_Compliance_Device_Health.json`](Baseline_AND_U_Compliance_Device_Health.json) |
 
-> Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel, dat past bij een BYOD-inrichting. Wordt er ooit fully managed of dedicated ingeschreven, dan is er een tweede policy nodig van het type `androidDeviceOwnerCompliancePolicy`; de instellingen heten daar anders. `hardwareBacked` sluit oudere toestellen zonder ondersteunde secure element uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een minimale OS-versie (12.0). Die waarde veroudert: draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt op de n-1-versie uit endoflife.date. Dat rapport blokkeert niets en hoort dat ook niet te doen — verhogen is een besluit en dus een PR. Deze ondergrens is een actualiteitsdoel (zie `ondergrens`) en mag dus meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten.
+> Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel. `hardwareBacked` sluit oudere toestellen zonder ondersteunde hardware-attestatie uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een beveiligingspatch van 2026-03-01 of later (zes maanden terug, gelijk aan de waarschuwing in App Protection); toestellen van fabrikanten die per kwartaal patchen blijven daarmee ruim binnen. De OS-ondergrens (12.0) en de patchdatum verouderen: draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Beide zijn actualiteitsdoelen (zie `ondergrens`) en mogen meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten. Defender for Endpoint staat bewust in een aparte policy (Compliance Defender for Endpoint), omdat die een licentie en connector vraagt.
+
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.7 Bescherming tegen malware<br>A.8.8 Beheer van technische kwetsbaarheden<br>A.8.19 Installatie van software op operationele systemen |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden<br>art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 2.3 Address Unauthorized Software<br>4.1 Establish and Maintain a Secure Configuration Process<br>7.3 Perform Automated Operating System Patch Management<br>10.1 Deploy and Maintain Anti-Malware Software |
+| NIST CSF 2.0 | PR.PS-01<br>PR.PS-02<br>PR.PS-05<br>DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
 
 ## Eigenschappen — 37
 
@@ -50,7 +61,7 @@ Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen.
 | `securityRequiredAndroidSafetyNetEvaluationType` | hardwareBacked |
 | `osMinimumVersion` | 12.0 |
 | `osMaximumVersion` | — |
-| `minAndroidSecurityPatchLevel` | — |
+| `minAndroidSecurityPatchLevel` | 2026-03-01 |
 | `storageRequireEncryption` | false |
 | `restrictedApps` | — |
 | `scheduledActionsForRule[0].ruleName` | PasswordRequired |

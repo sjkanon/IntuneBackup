@@ -1,0 +1,55 @@
+{
+  "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
+  "displayName": "[Baseline] - IOS - Outlook - Managed Devices",
+  "description": "Outlook op ingeschreven toestellen: account vooraf ingevuld met moderne authenticatie, alleen het werkaccount, waarschuwing bij externe ontvangers, contacten naar de Contacten-app voor naamweergave bij gesprekken.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedMobileApps": [
+    "APP-ID-OUTLOOK-INVULLEN"
+  ],
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.outlook.EmailProfile.AccountType",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "ModernAuth"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.outlook.EmailProfile.EmailAddress",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{mail}}"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.outlook.EmailProfile.EmailUPN",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{userprincipalname}}"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMAllowedAccountsOnly",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "Enabled"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "IntuneMAMUPN",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{userprincipalname}}"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.outlook.Mail.ExternalRecipientsToolTipEnabled",
+      "appConfigKeyType": "booleanType",
+      "appConfigKeyValue": "true"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "com.microsoft.outlook.Contacts.LocalSyncEnabled",
+      "appConfigKeyType": "booleanType",
+      "appConfigKeyValue": "true"
+    }
+  ]
+}

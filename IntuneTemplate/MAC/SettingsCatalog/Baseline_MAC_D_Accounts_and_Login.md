@@ -14,6 +14,17 @@ Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebb
 | Bron | OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login |
 | Bestand | [`Baseline_MAC_D_Accounts_and_Login.json`](Baseline_MAC_D_Accounts_and_Login.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.15 Toegangsbeveiliging<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software |
+| NIST CSF 2.0 | PR.AA-03<br>PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 8
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

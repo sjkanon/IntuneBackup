@@ -16,6 +16,17 @@ Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: m
 
 > Vervangt de vorige ASR-policy: dezelfde 18 regels plus 2 nieuwe, allemaal op block.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware<br>A.8.8 Beheer van technische kwetsbaarheden |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | PR.PS-05<br>DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 20
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

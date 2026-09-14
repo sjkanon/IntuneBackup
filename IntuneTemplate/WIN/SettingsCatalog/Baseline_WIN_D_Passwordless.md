@@ -14,6 +14,16 @@ Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Credential Management - D - Passwordless |
 | Bestand | [`Baseline_WIN_D_Passwordless.json`](Baseline_WIN_D_Passwordless.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen<br>art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie |
+| NIST CSF 2.0 | PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

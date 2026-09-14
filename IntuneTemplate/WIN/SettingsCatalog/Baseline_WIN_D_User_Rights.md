@@ -14,6 +14,17 @@ Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-u
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights |
 | Bestand | [`Baseline_WIN_D_User_Rights.json`](Baseline_WIN_D_User_Rights.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.15 Toegangsbeveiliging<br>A.8.2 Speciale toegangsrechten<br>A.8.18 Gebruik van speciale systeemhulpmiddelen |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
+| NIST CSF 2.0 | PR.AA-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 28
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

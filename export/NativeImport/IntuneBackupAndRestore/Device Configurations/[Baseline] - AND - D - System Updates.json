@@ -1,0 +1,11 @@
+{
+    "@odata.type": "#microsoft.graph.androidDeviceOwnerGeneralDeviceConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "systemUpdateInstallType": "windowed",
+    "systemUpdateWindowStartMinutesAfterMidnight": 0,
+    "systemUpdateWindowEndMinutesAfterMidnight": 360,
+    "displayName": "[Baseline] - AND - D - System Updates",
+    "description": "Installeert Android-systeemupdates op toestellen van de organisatie automatisch in een onderhoudsvenster tussen 00:00 en 06:00. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - DEV - Additional-Settings - Fully-Managed - v1.5, alleen de drie systemUpdate-velden."
+}

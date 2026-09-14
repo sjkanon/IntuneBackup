@@ -1,0 +1,3508 @@
+{
+  "_comment": [
+    "Canonieke normenvocabulaire voor _manifest.json (veld controls) en scripts/generate-compliance.js.",
+    "check-scope.js bewaakt dat elke policy controls heeft en alleen labels uit dit bestand gebruikt.",
+    "",
+    "iso27001   ISO/IEC 27001:2022 Annex A, Nederlandse titels volgens NEN-EN-ISO/IEC 27001:2023.",
+    "           label       de exacte vorm in controls.iso.",
+    "           titel       het titeldeel van label. Waar SPEC of het bestaande manifest een vorm voorschreef is",
+    "                       die aangehouden (titelBron spec/manifest), ook als die afwijkt van de NEN-tekst.",
+    "           titelNen    de titel zoals in de Nederlandse norm; COMPLIANCE.md en de VvT tonen deze.",
+    "           dekking     technisch | deels | organisatorisch — of de control met endpoint-/identitybeleid",
+    "                       (Intune, Conditional Access) af te dekken is. Organisatorisch betekent: niet met dat",
+    "                       beleid, dus proces, mensen, fysiek, of een ander technisch domein (netwerk, ontwikkeling).",
+    "           soa         voorstel voor de verklaring van toepasselijkheid; 'afhankelijk' met reden.",
+    "nis2       Richtlijn (EU) 2022/2555 art. 21 lid 2 a–j; label exact zoals in SPEC.",
+    "cis        CIS Controls v8.1, safeguards van controls 1–14, 16 en 17; ig = laagste Implementation Group.",
+    "nistcsf    NIST Cybersecurity Framework 2.0, alleen de voor dit domein relevante subcategorieën."
+  ],
+  "iso27001": {
+    "norm": "ISO/IEC 27001:2022 Annex A — NEN-EN-ISO/IEC 27001:2023 (+A1:2024 wijzigt Annex A niet)",
+    "themas": {
+      "organisatorisch": "5 Organisatorische beheersmaatregelen",
+      "mensgericht": "6 Mensgerichte beheersmaatregelen",
+      "fysiek": "7 Fysieke beheersmaatregelen",
+      "technologisch": "8 Technologische beheersmaatregelen"
+    },
+    "controls": [
+      {
+        "id": "A.5.1",
+        "label": "A.5.1 Beleidsregels voor informatiebeveiliging",
+        "titel": "Beleidsregels voor informatiebeveiliging",
+        "titelNen": "Beleidsregels voor informatiebeveiliging",
+        "titelEn": "Policies for information security",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Informatiebeveiligingsbeleid en onderwerpspecifiek beleid (o.a. endpoint-, toegangs- en AI-beleid) vaststellen, laten goedkeuren door het management en periodiek herzien.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.2",
+        "label": "A.5.2 Rollen en verantwoordelijkheden bij informatiebeveiliging",
+        "titel": "Rollen en verantwoordelijkheden bij informatiebeveiliging",
+        "titelNen": "Rollen en verantwoordelijkheden bij informatiebeveiliging",
+        "titelEn": "Information security roles and responsibilities",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Eigenaar van de baseline, CISO en beheerrollen (Intune-, Entra-, Defender-beheer) benoemen en vastleggen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.3",
+        "label": "A.5.3 Functiescheiding",
+        "titel": "Functiescheiding",
+        "titelNen": "Functiescheiding",
+        "titelEn": "Segregation of duties",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Scheiding tussen wie policies wijzigt, wie ze goedkeurt (PR-review) en wie uitzonderingen verleent; Entra/Intune-RBAC en PIM inrichten — valt buiten deze baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.4",
+        "label": "A.5.4 Managementverantwoordelijkheden",
+        "titel": "Managementverantwoordelijkheden",
+        "titelNen": "Managementverantwoordelijkheden",
+        "titelEn": "Management responsibilities",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Management stuurt aantoonbaar op naleving (NIS2 art. 20: bestuurders keuren maatregelen goed en volgen training).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.5",
+        "label": "A.5.5 Contact met overheidsinstanties",
+        "titel": "Contact met overheidsinstanties",
+        "titelNen": "Contact met overheidsinstanties",
+        "titelEn": "Contact with authorities",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Contactpunten met CSIRT/NCSC, toezichthouder en AP vastleggen, inclusief meldtermijnen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.6",
+        "label": "A.5.6 Contact met speciale belangengroepen",
+        "titel": "Contact met speciale belangengroepen",
+        "titelNen": "Contact met speciale belangengroepen",
+        "titelEn": "Contact with special interest groups",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Deelname aan ISAC's, sectorale overleggen en leveranciersadviezen organiseren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.7",
+        "label": "A.5.7 Informatie en analyses over dreigingen",
+        "titel": "Informatie en analyses over dreigingen",
+        "titelNen": "Informatie en analyses over dreigingen",
+        "titelEn": "Threat intelligence",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Dreigingsinformatie (Defender, Entra ID Protection, NCSC) laten beoordelen en vertalen naar aanpassingen van de baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.8",
+        "label": "A.5.8 Informatiebeveiliging in projectmanagement",
+        "titel": "Informatiebeveiliging in projectmanagement",
+        "titelNen": "Informatiebeveiliging in projectmanagement",
+        "titelEn": "Information security in project management",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Beveiligingseisen opnemen in projecten, bijvoorbeeld bij de uitrol van nieuwe apparaten of platformen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.9",
+        "label": "A.5.9 Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen",
+        "titel": "Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen",
+        "titelNen": "Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen",
+        "titelEn": "Inventory of information and other associated assets",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Intune levert de apparaatinventaris; eigenaarschap, informatie-inventaris en periodieke controle op volledigheid zijn organisatorisch.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.10",
+        "label": "A.5.10 Aanvaardbaar gebruik",
+        "titel": "Aanvaardbaar gebruik",
+        "titelNen": "Aanvaardbaar gebruik van informatie en andere gerelateerde bedrijfsmiddelen",
+        "titelEn": "Acceptable use of information and other associated assets",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Gebruiksregels (incl. AI en privégebruik) vaststellen en communiceren; techniek dwingt alleen een deel af.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.11",
+        "label": "A.5.11 Retourneren van bedrijfsmiddelen",
+        "titel": "Retourneren van bedrijfsmiddelen",
+        "titelNen": "Retourneren van bedrijfsmiddelen",
+        "titelEn": "Return of assets",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Uitdienstproces: inleveren van apparaten, retire/wipe in Intune, account blokkeren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.12",
+        "label": "A.5.12 Classificeren van informatie",
+        "titel": "Classificeren van informatie",
+        "titelNen": "Classificeren van informatie",
+        "titelEn": "Classification of information",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Classificatieschema vaststellen; technische labels (Purview) vallen buiten deze baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.13",
+        "label": "A.5.13 Labelen van informatie",
+        "titel": "Labelen van informatie",
+        "titelNen": "Labelen van informatie",
+        "titelEn": "Labelling of information",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Labelprocedure en -hulpmiddelen (Purview-gevoeligheidslabels) — buiten deze baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.14",
+        "label": "A.5.14 Informatieoverdracht",
+        "titel": "Informatieoverdracht",
+        "titelNen": "Overdragen van informatie",
+        "titelEn": "Information transfer",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.15",
+        "label": "A.5.15 Toegangsbeveiliging",
+        "titel": "Toegangsbeveiliging",
+        "titelNen": "Toegangsbeveiliging",
+        "titelEn": "Access control",
+        "titelBron": "spec",
+        "thema": "organisatorisch",
+        "dekking": "technisch",
+        "organisatorisch": "Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.16",
+        "label": "A.5.16 Identiteitsbeheer",
+        "titel": "Identiteitsbeheer",
+        "titelNen": "Identiteitsbeheer",
+        "titelEn": "Identity management",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.17",
+        "label": "A.5.17 Authenticatie-informatie",
+        "titel": "Authenticatie-informatie",
+        "titelNen": "Authenticatie-informatie",
+        "titelEn": "Authentication information",
+        "titelBron": "spec",
+        "thema": "organisatorisch",
+        "dekking": "technisch",
+        "organisatorisch": "Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.18",
+        "label": "A.5.18 Toegangsrechten",
+        "titel": "Toegangsrechten",
+        "titelNen": "Toegangsrechten",
+        "titelEn": "Access rights",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.19",
+        "label": "A.5.19 Informatiebeveiliging in leveranciersrelaties",
+        "titel": "Informatiebeveiliging in leveranciersrelaties",
+        "titelNen": "Informatiebeveiliging in leveranciersrelaties",
+        "titelEn": "Information security in supplier relationships",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Leveranciersbeleid en risicobeoordeling (incl. Microsoft, AI-diensten, remote-supporttools); techniek kan alleen niet-goedgekeurde diensten blokkeren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.20",
+        "label": "A.5.20 Adresseren van informatiebeveiliging in leveranciersovereenkomsten",
+        "titel": "Adresseren van informatiebeveiliging in leveranciersovereenkomsten",
+        "titelNen": "Adresseren van informatiebeveiliging in leveranciersovereenkomsten",
+        "titelEn": "Addressing information security within supplier agreements",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Beveiligingseisen, verwerkersovereenkomsten en auditrechten in contracten opnemen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.21",
+        "label": "A.5.21 Beheren van informatiebeveiliging in de ICT-toeleveringsketen",
+        "titel": "Beheren van informatiebeveiliging in de ICT-toeleveringsketen",
+        "titelNen": "Beheren van informatiebeveiliging in de ICT-toeleveringsketen",
+        "titelEn": "Managing information security in the ICT supply chain",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Eisen aan ICT-producten en -diensten in de keten; herkomst van software en updates beoordelen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.22",
+        "label": "A.5.22 Monitoren, beoordelen en het beheren van wijzigingen van leveranciersdiensten",
+        "titel": "Monitoren, beoordelen en het beheren van wijzigingen van leveranciersdiensten",
+        "titelNen": "Monitoren, beoordelen en het beheren van wijzigingen van leveranciersdiensten",
+        "titelEn": "Monitoring, review and change management of supplier services",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Wijzigingen bij Microsoft/leveranciers volgen (Message Center, roadmaps) en periodiek beoordelen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.23",
+        "label": "A.5.23 Informatiebeveiliging voor het gebruik van clouddiensten",
+        "titel": "Informatiebeveiliging voor het gebruik van clouddiensten",
+        "titelNen": "Informatiebeveiliging voor het gebruik van clouddiensten",
+        "titelEn": "Information security for use of cloud services",
+        "titelBron": "spec",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Proces voor aanschaf, gebruik en beëindiging van clouddiensten; CA en tenantbeperkingen dwingen een deel af.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.24",
+        "label": "A.5.24 Plannen en voorbereiden van het beheer van informatiebeveiligingsincidenten",
+        "titel": "Plannen en voorbereiden van het beheer van informatiebeveiligingsincidenten",
+        "titelNen": "Plannen en voorbereiden van het beheer van informatiebeveiligingsincidenten",
+        "titelEn": "Information security incident management planning and preparation",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Incidentresponsplan met rollen, draaiboeken (o.a. apparaat isoleren, account intrekken) en meldplicht (NIS2 art. 23).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.25",
+        "label": "A.5.25 Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen",
+        "titel": "Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen",
+        "titelNen": "Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen",
+        "titelEn": "Assessment and decision on information security events",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Triageproces en criteria voor 'incident'; Defender levert de signalen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.26",
+        "label": "A.5.26 Reageren op informatiebeveiligingsincidenten",
+        "titel": "Reageren op informatiebeveiligingsincidenten",
+        "titelNen": "Reageren op informatiebeveiligingsincidenten",
+        "titelEn": "Response to information security incidents",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Uitvoeren van het responsplan; technische acties (isoleren, wissen, sessies intrekken) moeten geoefend zijn.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.27",
+        "label": "A.5.27 Leren van informatiebeveiligingsincidenten",
+        "titel": "Leren van informatiebeveiligingsincidenten",
+        "titelNen": "Leren van informatiebeveiligingsincidenten",
+        "titelEn": "Learning from information security incidents",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Evaluaties na incidenten en vertaling naar baseline-wijzigingen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.28",
+        "label": "A.5.28 Verzamelen van bewijsmateriaal",
+        "titel": "Verzamelen van bewijsmateriaal",
+        "titelNen": "Verzamelen van bewijsmateriaal",
+        "titelEn": "Collection of evidence",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Forensische procedure en bewaartermijnen; logging en EDR leveren het materiaal, borging van de keten is organisatorisch.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.29",
+        "label": "A.5.29 Informatiebeveiliging tijdens verstoring",
+        "titel": "Informatiebeveiliging tijdens verstoring",
+        "titelNen": "Informatiebeveiliging tijdens een verstoring",
+        "titelEn": "Information security during disruption",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Beveiligingsniveau tijdens calamiteiten plannen (noodprocedures, break-glass-accounts).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.30",
+        "label": "A.5.30 ICT-gereedheid voor bedrijfscontinuiteit",
+        "titel": "ICT-gereedheid voor bedrijfscontinuiteit",
+        "titelNen": "ICT-gereedheid voor bedrijfscontinuïteit",
+        "titelEn": "ICT readiness for business continuity",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "BIA, hersteldoelen (RTO/RPO) en periodieke continuïteitstests.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.31",
+        "label": "A.5.31 Wettelijke, statutaire, regelgevende en contractuele eisen",
+        "titel": "Wettelijke, statutaire, regelgevende en contractuele eisen",
+        "titelNen": "Wettelijke, statutaire, regelgevende en contractuele eisen",
+        "titelEn": "Legal, statutory, regulatory and contractual requirements",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Register van toepasselijke wet- en regelgeving (NIS2/Cyberbeveiligingswet, AVG) bijhouden.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.32",
+        "label": "A.5.32 Intellectuele-eigendomsrechten",
+        "titel": "Intellectuele-eigendomsrechten",
+        "titelNen": "Intellectuele-eigendomsrechten",
+        "titelEn": "Intellectual property rights",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Licentiebeheer en regels voor gebruik van software en content.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.33",
+        "label": "A.5.33 Bescherming van registraties",
+        "titel": "Bescherming van registraties",
+        "titelNen": "Beschermen van registraties",
+        "titelEn": "Protection of records",
+        "titelBron": "manifest",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Bewaartermijnen en bescherming van registraties vastleggen (retentiebeleid, logbewaring).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.34",
+        "label": "A.5.34 Privacy en bescherming van persoonsgegevens",
+        "titel": "Privacy en bescherming van persoonsgegevens",
+        "titelNen": "Privacy en bescherming van persoonsgegevens",
+        "titelEn": "Privacy and protection of PII",
+        "titelBron": "spec",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "AVG-verantwoording: verwerkingsregister, DPIA voor telemetrie, monitoring en AI-functies, afstemming met FG en OR.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.35",
+        "label": "A.5.35 Onafhankelijke beoordeling van informatiebeveiliging",
+        "titel": "Onafhankelijke beoordeling van informatiebeveiliging",
+        "titelNen": "Onafhankelijke beoordeling van informatiebeveiliging",
+        "titelEn": "Independent review of information security",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Interne audit of externe beoordeling op geplande tussenpozen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.36",
+        "label": "A.5.36 Naleving van beleid, regels en normen voor informatiebeveiliging",
+        "titel": "Naleving van beleid, regels en normen voor informatiebeveiliging",
+        "titelNen": "Naleving van beleid, regels en normen voor informatiebeveiliging",
+        "titelEn": "Compliance with policies, rules and standards for information security",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "deels",
+        "organisatorisch": "Naleving periodiek beoordelen; compliance-policies en baseline-checks leveren de meting, de beoordeling en opvolging zijn organisatorisch.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.5.37",
+        "label": "A.5.37 Gedocumenteerde bedieningsprocedures",
+        "titel": "Gedocumenteerde bedieningsprocedures",
+        "titelNen": "Gedocumenteerde bedieningsprocedures",
+        "titelEn": "Documented operating procedures",
+        "titelBron": "nen",
+        "thema": "organisatorisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Beheerprocedures documenteren (uitrol, uitzonderingen, herstel); de gegenereerde documentatie in deze repo is een deel daarvan.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.1",
+        "label": "A.6.1 Screening",
+        "titel": "Screening",
+        "titelNen": "Screening",
+        "titelEn": "Screening",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Antecedentenonderzoek (VOG) naar risico van de functie.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.2",
+        "label": "A.6.2 Arbeidsovereenkomst",
+        "titel": "Arbeidsovereenkomst",
+        "titelNen": "Arbeidsovereenkomst",
+        "titelEn": "Terms and conditions of employment",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Beveiligingsverplichtingen opnemen in arbeidsvoorwaarden.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.3",
+        "label": "A.6.3 Bewustwording van, opleiding en training in informatiebeveiliging",
+        "titel": "Bewustwording van, opleiding en training in informatiebeveiliging",
+        "titelNen": "Bewustwording van, opleiding en training in informatiebeveiliging",
+        "titelEn": "Information security awareness, education and training",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Bewustwordingsprogramma en training (phishing, wachtwoorden, AI-gebruik); ook voor bestuurders (NIS2 art. 20(2)).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.4",
+        "label": "A.6.4 Disciplinaire procedure",
+        "titel": "Disciplinaire procedure",
+        "titelNen": "Disciplinaire procedure",
+        "titelEn": "Disciplinary process",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Formele procedure bij schending van het beleid.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.5",
+        "label": "A.6.5 Verantwoordelijkheden na beëindiging of wijziging van het dienstverband",
+        "titel": "Verantwoordelijkheden na beëindiging of wijziging van het dienstverband",
+        "titelNen": "Verantwoordelijkheden na beëindiging of wijziging van het dienstverband",
+        "titelEn": "Responsibilities after termination or change of employment",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "deels",
+        "organisatorisch": "Uitdienstproces: toegang intrekken, apparaat terug of selectief wissen, geheimhouding na vertrek.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.6",
+        "label": "A.6.6 Vertrouwelijkheids- of geheimhoudingsovereenkomsten",
+        "titel": "Vertrouwelijkheids- of geheimhoudingsovereenkomsten",
+        "titelNen": "Vertrouwelijkheids- of geheimhoudingsovereenkomsten",
+        "titelEn": "Confidentiality or non-disclosure agreements",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Geheimhoudingsovereenkomsten opstellen en laten tekenen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.7",
+        "label": "A.6.7 Werken op afstand",
+        "titel": "Werken op afstand",
+        "titelNen": "Werken op afstand",
+        "titelEn": "Remote working",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "deels",
+        "organisatorisch": "Thuiswerkbeleid (locatie, schermen, netwerken); techniek beschermt het apparaat en de toegang.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.6.8",
+        "label": "A.6.8 Melden van informatiebeveiligingsgebeurtenissen",
+        "titel": "Melden van informatiebeveiligingsgebeurtenissen",
+        "titelNen": "Melden van informatiebeveiligingsgebeurtenissen",
+        "titelEn": "Information security event reporting",
+        "titelBron": "nen",
+        "thema": "mensgericht",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Meldkanaal voor medewerkers inrichten en bekendmaken.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.1",
+        "label": "A.7.1 Fysieke beveiligingszones",
+        "titel": "Fysieke beveiligingszones",
+        "titelNen": "Fysieke beveiligingszones",
+        "titelEn": "Physical security perimeters",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein: fysieke zones definiëren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.2",
+        "label": "A.7.2 Fysieke toegangsbeveiliging",
+        "titel": "Fysieke toegangsbeveiliging",
+        "titelNen": "Fysieke toegangsbeveiliging",
+        "titelEn": "Physical entry",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein: toegangscontrole tot gebouwen en ruimten.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.3",
+        "label": "A.7.3 Beveiligen van kantoren, ruimten en faciliteiten",
+        "titel": "Beveiligen van kantoren, ruimten en faciliteiten",
+        "titelNen": "Beveiligen van kantoren, ruimten en faciliteiten",
+        "titelEn": "Securing offices, rooms and facilities",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.4",
+        "label": "A.7.4 Monitoren van de fysieke beveiliging",
+        "titel": "Monitoren van de fysieke beveiliging",
+        "titelNen": "Monitoren van de fysieke beveiliging",
+        "titelEn": "Physical security monitoring",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein: camerabewaking, alarmopvolging.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.5",
+        "label": "A.7.5 Beschermen tegen fysieke en omgevingsdreigingen",
+        "titel": "Beschermen tegen fysieke en omgevingsdreigingen",
+        "titelNen": "Beschermen tegen fysieke en omgevingsdreigingen",
+        "titelEn": "Protecting against physical and environmental threats",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.6",
+        "label": "A.7.6 Werken in beveiligde zones",
+        "titel": "Werken in beveiligde zones",
+        "titelNen": "Werken in beveiligde zones",
+        "titelEn": "Working in secure areas",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.7",
+        "label": "A.7.7 Clear desk en clear screen",
+        "titel": "Clear desk en clear screen",
+        "titelNen": "'Clear desk' en 'clear screen'",
+        "titelEn": "Clear desk and clear screen",
+        "titelBron": "spec",
+        "thema": "fysiek",
+        "dekking": "technisch",
+        "organisatorisch": "Clear-desk-regels voor papier en media vaststellen; clear screen wordt technisch afgedwongen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.8",
+        "label": "A.7.8 Plaatsen en beschermen van apparatuur",
+        "titel": "Plaatsen en beschermen van apparatuur",
+        "titelNen": "Plaatsen en beschermen van apparatuur",
+        "titelEn": "Equipment siting and protection",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.9",
+        "label": "A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein",
+        "titel": "Beveiliging van bedrijfsmiddelen buiten het terrein",
+        "titelNen": "Beveiligen van bedrijfsmiddelen buiten het terrein",
+        "titelEn": "Security of assets off-premises",
+        "titelBron": "spec",
+        "thema": "fysiek",
+        "dekking": "deels",
+        "organisatorisch": "Regels voor meenemen, onbeheerd achterlaten en melden van verlies; versleuteling en wissen op afstand zijn technisch.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.10",
+        "label": "A.7.10 Opslagmedia",
+        "titel": "Opslagmedia",
+        "titelNen": "Opslagmedia",
+        "titelEn": "Storage media",
+        "titelBron": "spec",
+        "thema": "fysiek",
+        "dekking": "deels",
+        "organisatorisch": "Beleid voor verwisselbare media en veilige vernietiging.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.11",
+        "label": "A.7.11 Nutsvoorzieningen",
+        "titel": "Nutsvoorzieningen",
+        "titelNen": "Nutsvoorzieningen",
+        "titelEn": "Supporting utilities",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.12",
+        "label": "A.7.12 Beveiligen van bekabeling",
+        "titel": "Beveiligen van bekabeling",
+        "titelNen": "Beveiligen van bekabeling",
+        "titelEn": "Cabling security",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.13",
+        "label": "A.7.13 Onderhoud van apparatuur",
+        "titel": "Onderhoud van apparatuur",
+        "titelNen": "Onderhoud van apparatuur",
+        "titelEn": "Equipment maintenance",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Onderhoud en reparatie door bevoegden, met afspraken over gegevens op het apparaat.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.7.14",
+        "label": "A.7.14 Veilig verwijderen of hergebruiken van apparatuur",
+        "titel": "Veilig verwijderen of hergebruiken van apparatuur",
+        "titelNen": "Veilig verwijderen of hergebruiken van apparatuur",
+        "titelEn": "Secure disposal or re-use of equipment",
+        "titelBron": "nen",
+        "thema": "fysiek",
+        "dekking": "deels",
+        "organisatorisch": "Procedure voor afvoer en hergebruik (wipe/Autopilot Reset, certificaat van vernietiging).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.1",
+        "label": "A.8.1 Eindpuntapparatuur van gebruikers",
+        "titel": "Eindpuntapparatuur van gebruikers",
+        "titelNen": "'User endpoint devices'",
+        "titelEn": "User endpoint devices",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Beleid voor zakelijke en privéapparaten (BYOD), registratie en gebruiksregels.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.2",
+        "label": "A.8.2 Speciale toegangsrechten",
+        "titel": "Speciale toegangsrechten",
+        "titelNen": "Speciale toegangsrechten",
+        "titelEn": "Privileged access rights",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.3",
+        "label": "A.8.3 Beperking toegang tot informatie",
+        "titel": "Beperking toegang tot informatie",
+        "titelNen": "Beperking toegang tot informatie",
+        "titelEn": "Information access restriction",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.4",
+        "label": "A.8.4 Toegangsbeveiliging op broncode",
+        "titel": "Toegangsbeveiliging op broncode",
+        "titelNen": "Toegangsbeveiliging op broncode",
+        "titelEn": "Access to source code",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij eigen softwareontwikkeling: toegang tot repositories en ontwikkeltools beheren.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen software- of scriptontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.5",
+        "label": "A.8.5 Veilige authenticatie",
+        "titel": "Veilige authenticatie",
+        "titelNen": "Beveiligde authenticatie",
+        "titelEn": "Secure authentication",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.6",
+        "label": "A.8.6 Capaciteitsbeheer",
+        "titel": "Capaciteitsbeheer",
+        "titelNen": "Capaciteitsbeheer",
+        "titelEn": "Capacity management",
+        "titelBron": "manifest",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Capaciteitsplanning voor netwerk, licenties en opslag.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.7",
+        "label": "A.8.7 Bescherming tegen malware",
+        "titel": "Bescherming tegen malware",
+        "titelNen": "Bescherming tegen malware",
+        "titelEn": "Protection against malware",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.8",
+        "label": "A.8.8 Beheer van technische kwetsbaarheden",
+        "titel": "Beheer van technische kwetsbaarheden",
+        "titelNen": "Beheer van technische kwetsbaarheden",
+        "titelEn": "Management of technical vulnerabilities",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.9",
+        "label": "A.8.9 Configuratiebeheer",
+        "titel": "Configuratiebeheer",
+        "titelNen": "Configuratiebeheer",
+        "titelEn": "Configuration management",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.10",
+        "label": "A.8.10 Wissen van informatie",
+        "titel": "Wissen van informatie",
+        "titelNen": "Wissen van informatie",
+        "titelEn": "Information deletion",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Bewaar- en verwijderbeleid; selectief wissen en wipe zijn technische hulpmiddelen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.11",
+        "label": "A.8.11 Datamaskering",
+        "titel": "Datamaskering",
+        "titelNen": "Maskeren van gegevens",
+        "titelEn": "Data masking",
+        "titelBron": "manifest",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Beleid wanneer gegevens gemaskeerd of gepseudonimiseerd worden — grotendeels applicatieniveau.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.12",
+        "label": "A.8.12 Voorkomen van datalekken",
+        "titel": "Voorkomen van datalekken",
+        "titelNen": "Voorkomen van gegevenslekken (data leakage prevention)",
+        "titelEn": "Data leakage prevention",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.13",
+        "label": "A.8.13 Back-up van informatie",
+        "titel": "Back-up van informatie",
+        "titelNen": "Back-up van informatie",
+        "titelEn": "Information backup",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Back-upbeleid voor M365-data en periodieke hersteltests; OneDrive-synchronisatie is geen volledige back-up.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.14",
+        "label": "A.8.14 Redundantie",
+        "titel": "Redundantie",
+        "titelNen": "Redundantie van informatieverwerkende faciliteiten",
+        "titelEn": "Redundancy of information processing facilities",
+        "titelBron": "manifest",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Redundantie van diensten en infrastructuur — buiten het endpoint-/identitydomein.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.15",
+        "label": "A.8.15 Logging",
+        "titel": "Logging",
+        "titelNen": "Logging",
+        "titelEn": "Logging",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.16",
+        "label": "A.8.16 Monitoringactiviteiten",
+        "titel": "Monitoringactiviteiten",
+        "titelNen": "Monitoren van activiteiten",
+        "titelEn": "Monitoring activities",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "24/7- of kantoortijdenopvolging van alerts, met escalatiecriteria.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.17",
+        "label": "A.8.17 Kloksynchronisatie",
+        "titel": "Kloksynchronisatie",
+        "titelNen": "Kloksynchronisatie",
+        "titelEn": "Clock synchronization",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Goedgekeurde tijdbron vastleggen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.18",
+        "label": "A.8.18 Gebruik van speciale systeemhulpmiddelen",
+        "titel": "Gebruik van speciale systeemhulpmiddelen",
+        "titelNen": "Gebruik van speciale systeemhulpmiddelen",
+        "titelEn": "Use of privileged utility programs",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Register van toegestane beheer- en remote-supporttools en wie ze mag gebruiken.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.19",
+        "label": "A.8.19 Installatie van software op operationele systemen",
+        "titel": "Installatie van software op operationele systemen",
+        "titelNen": "Installeren van software op operationele systemen",
+        "titelEn": "Installation of software on operational systems",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Proces voor goedkeuren en aanbieden van software (Company Portal-catalogus).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.20",
+        "label": "A.8.20 Netwerkbeveiliging",
+        "titel": "Netwerkbeveiliging",
+        "titelNen": "Beveiliging netwerkcomponenten",
+        "titelEn": "Networks security",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Netwerkinfrastructuur (firewalls, wifi, VPN) valt grotendeels buiten deze baseline.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.21",
+        "label": "A.8.21 Beveiliging van netwerkdiensten",
+        "titel": "Beveiliging van netwerkdiensten",
+        "titelNen": "Beveiliging van netwerkdiensten",
+        "titelEn": "Security of network services",
+        "titelBron": "manifest",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Eisen aan netwerkdiensten en -leveranciers vastleggen en monitoren.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.22",
+        "label": "A.8.22 Netwerksegmentatie",
+        "titel": "Netwerksegmentatie",
+        "titelNen": "Netwerksegmentatie",
+        "titelEn": "Segregation of networks",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Netwerksegmentatie is infrastructuur, niet via endpoint-/identitybeleid in te richten.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.23",
+        "label": "A.8.23 Webfiltering",
+        "titel": "Webfiltering",
+        "titelNen": "Toepassen van webfilters",
+        "titelEn": "Web filtering",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "technisch",
+        "organisatorisch": "Categorieën en uitzonderingen vaststellen (Defender Web Content Filtering in het Defender-portaal).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.24",
+        "label": "A.8.24 Gebruik van cryptografie",
+        "titel": "Gebruik van cryptografie",
+        "titelNen": "Gebruik van cryptografie",
+        "titelEn": "Use of cryptography",
+        "titelBron": "spec",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Cryptografiebeleid en sleutelbeheer (wie heeft toegang tot herstelsleutels, rotatie).",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.25",
+        "label": "A.8.25 Beveiligen tijdens de ontwikkelcyclus",
+        "titel": "Beveiligen tijdens de ontwikkelcyclus",
+        "titelNen": "Beveiligen tijdens de ontwikkelcyclus",
+        "titelEn": "Secure development life cycle",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij eigen ontwikkeling.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen softwareontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.26",
+        "label": "A.8.26 Toepassingsbeveiligingseisen",
+        "titel": "Toepassingsbeveiligingseisen",
+        "titelNen": "Toepassingsbeveiligingseisen",
+        "titelEn": "Application security requirements",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Beveiligingseisen bij ontwikkelen of aanschaffen van toepassingen.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.27",
+        "label": "A.8.27 Veilige systeemarchitectuur en technische uitgangspunten",
+        "titel": "Veilige systeemarchitectuur en technische uitgangspunten",
+        "titelNen": "Veilige systeemarchitectuur en technische uitgangspunten",
+        "titelEn": "Secure system architecture and engineering principles",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Architectuurprincipes (zero trust) vastleggen.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen systeemontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.28",
+        "label": "A.8.28 Veilig coderen",
+        "titel": "Veilig coderen",
+        "titelNen": "Veilig coderen",
+        "titelEn": "Secure coding",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij eigen ontwikkeling.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen softwareontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.29",
+        "label": "A.8.29 Testen van de beveiliging tijdens ontwikkeling en acceptatie",
+        "titel": "Testen van de beveiliging tijdens ontwikkeling en acceptatie",
+        "titelNen": "Testen van de beveiliging tijdens ontwikkeling en acceptatie",
+        "titelEn": "Security testing in development and acceptance",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij eigen ontwikkeling; voor de baseline zelf: de pilotfase (fase 2).",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen softwareontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.30",
+        "label": "A.8.30 Uitbestede systeemontwikkeling",
+        "titel": "Uitbestede systeemontwikkeling",
+        "titelNen": "Uitbestede systeemontwikkeling",
+        "titelEn": "Outsourced development",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij uitbestede ontwikkeling.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij uitbestede ontwikkeling"
+        }
+      },
+      {
+        "id": "A.8.31",
+        "label": "A.8.31 Scheiding van ontwikkel-, test- en productieomgevingen",
+        "titel": "Scheiding van ontwikkel-, test- en productieomgevingen",
+        "titelNen": "Scheiding van ontwikkel-, test- en productieomgevingen",
+        "titelEn": "Separation of development, test and production environments",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Test-tenant of pilotgroep naast productie.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen ontwikkeling of een eigen testomgeving"
+        }
+      },
+      {
+        "id": "A.8.32",
+        "label": "A.8.32 Wijzigingsbeheer",
+        "titel": "Wijzigingsbeheer",
+        "titelNen": "Wijzigingsbeheer",
+        "titelEn": "Change management",
+        "titelBron": "manifest",
+        "thema": "technologisch",
+        "dekking": "deels",
+        "organisatorisch": "Wijzigingsprocedure (PR-review, pilotfase, communicatie) vastleggen en volgen; update-ringen zijn de technische kant.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      },
+      {
+        "id": "A.8.33",
+        "label": "A.8.33 Testgegevens",
+        "titel": "Testgegevens",
+        "titelNen": "Testgegevens",
+        "titelEn": "Test information",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Alleen bij eigen ontwikkeling of testen.",
+        "soa": {
+          "voorstel": "afhankelijk",
+          "reden": "alleen van toepassing bij eigen ontwikkeling of testen"
+        }
+      },
+      {
+        "id": "A.8.34",
+        "label": "A.8.34 Bescherming van informatiesystemen tijdens audits",
+        "titel": "Bescherming van informatiesystemen tijdens audits",
+        "titelNen": "Bescherming van informatiesystemen tijdens audits",
+        "titelEn": "Protection of information systems during audit testing",
+        "titelBron": "nen",
+        "thema": "technologisch",
+        "dekking": "organisatorisch",
+        "organisatorisch": "Audits en pentests plannen en afstemmen met het verantwoordelijke management.",
+        "soa": {
+          "voorstel": "ja"
+        }
+      }
+    ]
+  },
+  "nis2": {
+    "bron": "Richtlijn (EU) 2022/2555 (NIS2), art. 21 lid 2; uitgewerkt in Uitvoeringsverordening (EU) 2024/2690, bijlage",
+    "punten": [
+      {
+        "letter": "a",
+        "label": "art. 21(2)(a) risicoanalyse en beveiligingsbeleid voor informatiesystemen",
+        "titelWet": "Beleid inzake risicoanalyse en beveiliging van informatiesystemen",
+        "uitvoeringsverordening": "bijlage §1–2",
+        "technisch": "Deze baseline is een uitwerking van het beveiligingsbeleid voor apparaten en toegang, maar geen risicoanalyse.",
+        "organisatorisch": [
+          "Risicoanalyse (bijvoorbeeld een BIA en risicoregister) die de keuze van maatregelen onderbouwt",
+          "Beleid voor netwerk- en informatiebeveiliging, goedgekeurd door het bestuur (art. 20)",
+          "Periodieke herziening van beleid en risicoanalyse",
+          "Registratie van geaccepteerde restrisico's en klantkeuzes (zie Klantkeuzes in dit document)"
+        ]
+      },
+      {
+        "letter": "b",
+        "label": "art. 21(2)(b) incidentbehandeling",
+        "titelWet": "Incidentenbehandeling",
+        "uitvoeringsverordening": "bijlage §3",
+        "technisch": "EDR-onboarding, auditlogging, PowerShell-logging en de risicogebaseerde CA-policies leveren detectie en de middelen om in te grijpen.",
+        "organisatorisch": [
+          "Incidentresponsplan met rollen en draaiboeken",
+          "Meldprocedure richting CSIRT/toezichthouder binnen 24 uur (vroegtijdige waarschuwing), 72 uur en 1 maand (art. 23)",
+          "Opvolging van alerts (wie kijkt wanneer, escalatie)",
+          "Centrale logopslag en bewaartermijnen",
+          "Evaluatie na incidenten"
+        ]
+      },
+      {
+        "letter": "c",
+        "label": "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer",
+        "titelWet": "Bedrijfscontinuïteit, zoals back-upbeheer en noodvoorzieningen, en crisisbeheer",
+        "uitvoeringsverordening": "bijlage §4",
+        "technisch": "OneDrive Known Folder Move, Windows-back-up, Quick Machine Recovery en een terugvalnetwerk dragen bij; ze vervangen geen back-up van M365-data.",
+        "organisatorisch": [
+          "Bedrijfscontinuïteits- en herstelplan met RTO/RPO",
+          "Back-upbeleid voor M365- en applicatiedata, met periodieke hersteltests",
+          "Crisisorganisatie en communicatieplan",
+          "Break-glass-procedure voor de tenant"
+        ]
+      },
+      {
+        "letter": "d",
+        "label": "art. 21(2)(d) beveiliging van de toeleveringsketen",
+        "titelWet": "Beveiliging van de toeleveringsketen, met inbegrip van beveiligingsaspecten van de relaties met leveranciers",
+        "uitvoeringsverordening": "bijlage §5",
+        "technisch": "Technisch alleen het blokkeren van niet-goedgekeurde diensten en softwarebronnen (AI-diensten, extensies, softwarebronnen).",
+        "organisatorisch": [
+          "Leveranciersregister met risicoclassificatie",
+          "Beveiligingseisen in contracten en verwerkersovereenkomsten",
+          "Periodieke beoordeling van kritieke leveranciers (Microsoft, MSP, remote-supporttools)",
+          "Besluit welke AI- en clouddiensten zijn toegestaan"
+        ]
+      },
+      {
+        "letter": "e",
+        "label": "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden",
+        "titelWet": "Beveiliging bij het verwerven, ontwikkelen en onderhouden van netwerk- en informatiesystemen, met inbegrip van de behandeling en bekendmaking van kwetsbaarheden",
+        "uitvoeringsverordening": "bijlage §6",
+        "technisch": "Het zwaartepunt van de baseline: configuratiebeheer, patchbeheer (update-ringen), hardening, malwarebescherming, netwerkbeveiliging op het apparaat en OS-ondergrenzen.",
+        "organisatorisch": [
+          "Kwetsbaarhedenbeheerproces met hersteltermijnen en uitzonderingsregistratie",
+          "Wijzigingsbeheer voor de baseline (PR-review, pilot)",
+          "Beveiligingseisen bij aanschaf van ICT-producten en -diensten",
+          "Beleid voor gecoördineerde bekendmaking van kwetsbaarheden (CVD)"
+        ]
+      },
+      {
+        "letter": "f",
+        "label": "art. 21(2)(f) beoordeling van de doeltreffendheid",
+        "titelWet": "Beleid en procedures om de effectiviteit van cyberbeveiligingsrisicobeheersmaatregelen te beoordelen",
+        "uitvoeringsverordening": "bijlage §7",
+        "technisch": "Compliance-policies en de baseline-checks in TEST Policies Platform meten of de maatregelen daadwerkelijk staan; dat is bewijs, geen beoordeling.",
+        "organisatorisch": [
+          "Vastgesteld beoordelingsprogramma (interne audit, pentest, managementreview)",
+          "KPI's en rapportage aan het bestuur",
+          "Opvolging van afwijkingen uit de baseline-checks en compliance-rapportage",
+          "Periodieke herijking van deze baseline tegen nieuwe dreigingen"
+        ]
+      },
+      {
+        "letter": "g",
+        "label": "art. 21(2)(g) basispraktijken cyberhygiene en training",
+        "titelWet": "Basispraktijken op het gebied van cyberhygiëne en opleiding op het gebied van cyberbeveiliging",
+        "uitvoeringsverordening": "bijlage §8",
+        "technisch": "Technisch alleen waarschuwingen in de context (phishingbescherming, aanmeldbanner); de rest van de baseline is de hygiëne zelf.",
+        "organisatorisch": [
+          "Bewustwordingsprogramma voor alle medewerkers",
+          "Training voor bestuurders (art. 20(2))",
+          "Specifieke training voor beheerders",
+          "Periodieke phishing-simulaties en evaluatie"
+        ]
+      },
+      {
+        "letter": "h",
+        "label": "art. 21(2)(h) cryptografie en versleuteling",
+        "titelWet": "Beleid en procedures rond het gebruik van cryptografie en, in voorkomend geval, encryptie",
+        "uitvoeringsverordening": "bijlage §9",
+        "technisch": "BitLocker, FileVault, Personal Data Encryption, app-versleuteling (MAM), TLS-ondergrens en versleutelde beheerprotocollen.",
+        "organisatorisch": [
+          "Cryptografiebeleid (algoritmen, sleutellengtes)",
+          "Sleutelbeheer: wie mag herstelsleutels opvragen, logging daarvan",
+          "Periodieke controle op versleutelingsstatus en uitzonderingen"
+        ]
+      },
+      {
+        "letter": "i",
+        "label": "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen",
+        "titelWet": "Beveiligingsaspecten ten aanzien van personeel, toegangsbeleid en beheer van activa",
+        "uitvoeringsverordening": "bijlage §10–12",
+        "technisch": "Schermvergrendeling, wachtwoord- en PIN-eisen, beheerde lokale beheerders, LAPS, verwisselbare opslag, inschrijving en compliance als toegangsvoorwaarde.",
+        "organisatorisch": [
+          "HR-beveiliging: screening, geheimhouding, uitdienstproces",
+          "Toegangsbeleid en periodieke beoordeling van rechten",
+          "Inventaris van bedrijfsmiddelen met eigenaar",
+          "Beleid voor privéapparaten en verwisselbare media"
+        ]
+      },
+      {
+        "letter": "j",
+        "label": "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie",
+        "titelWet": "Het gebruik van multifactorauthenticatie of continue authenticatie, beveiligde spraak-, video- en tekstcommunicatie en beveiligde noodcommunicatiesystemen",
+        "uitvoeringsverordening": "bijlage §11.7",
+        "technisch": "Intune levert de sterke authenticatiemethoden (Windows Hello for Business, wachtwoordloos aanmelden); het afdwingen van MFA gebeurt in Conditional Access.",
+        "organisatorisch": [
+          "Besluit over toegestane MFA-methoden en uitzonderingen",
+          "Registratieproces voor authenticatiemethoden (TAP-uitgifte)",
+          "Beveiligde noodcommunicatie buiten de eigen tenant (bijvoorbeeld bij tenantuitval)"
+        ]
+      }
+    ]
+  },
+  "cis": {
+    "versie": "CIS Controls v8.1 (juni 2024)",
+    "controls": {
+      "1": "Inventory and Control of Enterprise Assets",
+      "2": "Inventory and Control of Software Assets",
+      "3": "Data Protection",
+      "4": "Secure Configuration of Enterprise Assets and Software",
+      "5": "Account Management",
+      "6": "Access Control Management",
+      "7": "Continuous Vulnerability Management",
+      "8": "Audit Log Management",
+      "9": "Email and Web Browser Protections",
+      "10": "Malware Defenses",
+      "11": "Data Recovery",
+      "12": "Network Infrastructure Management",
+      "13": "Network Monitoring and Defense",
+      "14": "Security Awareness and Skills Training",
+      "16": "Application Software Security",
+      "17": "Incident Response Management"
+    },
+    "safeguards": [
+      {
+        "id": "1.1",
+        "label": "CIS Controls v8.1 1.1 Establish and Maintain Detailed Enterprise Asset Inventory",
+        "titel": "Establish and Maintain Detailed Enterprise Asset Inventory",
+        "control": 1,
+        "controlTitel": "Inventory and Control of Enterprise Assets",
+        "ig": 1,
+        "functie": "Identify",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "1.2",
+        "label": "CIS Controls v8.1 1.2 Address Unauthorized Assets",
+        "titel": "Address Unauthorized Assets",
+        "control": 1,
+        "controlTitel": "Inventory and Control of Enterprise Assets",
+        "ig": 1,
+        "functie": "Respond",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "1.3",
+        "label": "CIS Controls v8.1 1.3 Utilize an Active Discovery Tool",
+        "titel": "Utilize an Active Discovery Tool",
+        "control": 1,
+        "controlTitel": "Inventory and Control of Enterprise Assets",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "1.4",
+        "label": "CIS Controls v8.1 1.4 Use Dynamic Host Configuration Protocol (DHCP) Logging to Update Enterprise Asset Inventory",
+        "titel": "Use Dynamic Host Configuration Protocol (DHCP) Logging to Update Enterprise Asset Inventory",
+        "control": 1,
+        "controlTitel": "Inventory and Control of Enterprise Assets",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "1.5",
+        "label": "CIS Controls v8.1 1.5 Use a Passive Asset Discovery Tool",
+        "titel": "Use a Passive Asset Discovery Tool",
+        "control": 1,
+        "controlTitel": "Inventory and Control of Enterprise Assets",
+        "ig": 3,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.1",
+        "label": "CIS Controls v8.1 2.1 Establish and Maintain a Software Inventory",
+        "titel": "Establish and Maintain a Software Inventory",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 1,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.2",
+        "label": "CIS Controls v8.1 2.2 Ensure Authorized Software is Currently Supported",
+        "titel": "Ensure Authorized Software is Currently Supported",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 1,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.3",
+        "label": "CIS Controls v8.1 2.3 Address Unauthorized Software",
+        "titel": "Address Unauthorized Software",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 1,
+        "functie": "Respond",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.4",
+        "label": "CIS Controls v8.1 2.4 Utilize Automated Software Inventory Tools",
+        "titel": "Utilize Automated Software Inventory Tools",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.5",
+        "label": "CIS Controls v8.1 2.5 Allowlist Authorized Software",
+        "titel": "Allowlist Authorized Software",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.6",
+        "label": "CIS Controls v8.1 2.6 Allowlist Authorized Libraries",
+        "titel": "Allowlist Authorized Libraries",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "2.7",
+        "label": "CIS Controls v8.1 2.7 Allowlist Authorized Scripts",
+        "titel": "Allowlist Authorized Scripts",
+        "control": 2,
+        "controlTitel": "Inventory and Control of Software Assets",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.1",
+        "label": "CIS Controls v8.1 3.1 Establish and Maintain a Data Management Process",
+        "titel": "Establish and Maintain a Data Management Process",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.2",
+        "label": "CIS Controls v8.1 3.2 Establish and Maintain a Data Inventory",
+        "titel": "Establish and Maintain a Data Inventory",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Identify",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.3",
+        "label": "CIS Controls v8.1 3.3 Configure Data Access Control Lists",
+        "titel": "Configure Data Access Control Lists",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.4",
+        "label": "CIS Controls v8.1 3.4 Enforce Data Retention",
+        "titel": "Enforce Data Retention",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.5",
+        "label": "CIS Controls v8.1 3.5 Securely Dispose of Data",
+        "titel": "Securely Dispose of Data",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.6",
+        "label": "CIS Controls v8.1 3.6 Encrypt Data on End-User Devices",
+        "titel": "Encrypt Data on End-User Devices",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.7",
+        "label": "CIS Controls v8.1 3.7 Establish and Maintain a Data Classification Scheme",
+        "titel": "Establish and Maintain a Data Classification Scheme",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.8",
+        "label": "CIS Controls v8.1 3.8 Document Data Flows",
+        "titel": "Document Data Flows",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.9",
+        "label": "CIS Controls v8.1 3.9 Encrypt Data on Removable Media",
+        "titel": "Encrypt Data on Removable Media",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.10",
+        "label": "CIS Controls v8.1 3.10 Encrypt Sensitive Data in Transit",
+        "titel": "Encrypt Sensitive Data in Transit",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.11",
+        "label": "CIS Controls v8.1 3.11 Encrypt Sensitive Data at Rest",
+        "titel": "Encrypt Sensitive Data at Rest",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.12",
+        "label": "CIS Controls v8.1 3.12 Segment Data Processing and Storage Based on Sensitivity",
+        "titel": "Segment Data Processing and Storage Based on Sensitivity",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.13",
+        "label": "CIS Controls v8.1 3.13 Deploy a Data Loss Prevention Solution",
+        "titel": "Deploy a Data Loss Prevention Solution",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "3.14",
+        "label": "CIS Controls v8.1 3.14 Log Sensitive Data Access",
+        "titel": "Log Sensitive Data Access",
+        "control": 3,
+        "controlTitel": "Data Protection",
+        "ig": 3,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.1",
+        "label": "CIS Controls v8.1 4.1 Establish and Maintain a Secure Configuration Process",
+        "titel": "Establish and Maintain a Secure Configuration Process",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.2",
+        "label": "CIS Controls v8.1 4.2 Establish and Maintain a Secure Configuration Process for Network Infrastructure",
+        "titel": "Establish and Maintain a Secure Configuration Process for Network Infrastructure",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.3",
+        "label": "CIS Controls v8.1 4.3 Configure Automatic Session Locking on Enterprise Assets",
+        "titel": "Configure Automatic Session Locking on Enterprise Assets",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.4",
+        "label": "CIS Controls v8.1 4.4 Implement and Manage a Firewall on Servers",
+        "titel": "Implement and Manage a Firewall on Servers",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "4.5",
+        "label": "CIS Controls v8.1 4.5 Implement and Manage a Firewall on End-User Devices",
+        "titel": "Implement and Manage a Firewall on End-User Devices",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.6",
+        "label": "CIS Controls v8.1 4.6 Securely Manage Enterprise Assets and Software",
+        "titel": "Securely Manage Enterprise Assets and Software",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.7",
+        "label": "CIS Controls v8.1 4.7 Manage Default Accounts on Enterprise Assets and Software",
+        "titel": "Manage Default Accounts on Enterprise Assets and Software",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.8",
+        "label": "CIS Controls v8.1 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software",
+        "titel": "Uninstall or Disable Unnecessary Services on Enterprise Assets and Software",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.9",
+        "label": "CIS Controls v8.1 4.9 Configure Trusted DNS Servers on Enterprise Assets",
+        "titel": "Configure Trusted DNS Servers on Enterprise Assets",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "4.10",
+        "label": "CIS Controls v8.1 4.10 Enforce Automatic Device Lockout on Portable End-User Devices",
+        "titel": "Enforce Automatic Device Lockout on Portable End-User Devices",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.11",
+        "label": "CIS Controls v8.1 4.11 Enforce Remote Wipe Capability on Portable End-User Devices",
+        "titel": "Enforce Remote Wipe Capability on Portable End-User Devices",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "4.12",
+        "label": "CIS Controls v8.1 4.12 Separate Enterprise Workspaces on Mobile End-User Devices",
+        "titel": "Separate Enterprise Workspaces on Mobile End-User Devices",
+        "control": 4,
+        "controlTitel": "Secure Configuration of Enterprise Assets and Software",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.1",
+        "label": "CIS Controls v8.1 5.1 Establish and Maintain an Inventory of Accounts",
+        "titel": "Establish and Maintain an Inventory of Accounts",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 1,
+        "functie": "Identify",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.2",
+        "label": "CIS Controls v8.1 5.2 Use Unique Passwords",
+        "titel": "Use Unique Passwords",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.3",
+        "label": "CIS Controls v8.1 5.3 Disable Dormant Accounts",
+        "titel": "Disable Dormant Accounts",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.4",
+        "label": "CIS Controls v8.1 5.4 Restrict Administrator Privileges to Dedicated Administrator Accounts",
+        "titel": "Restrict Administrator Privileges to Dedicated Administrator Accounts",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.5",
+        "label": "CIS Controls v8.1 5.5 Establish and Maintain an Inventory of Service Accounts",
+        "titel": "Establish and Maintain an Inventory of Service Accounts",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "5.6",
+        "label": "CIS Controls v8.1 5.6 Centralize Account Management",
+        "titel": "Centralize Account Management",
+        "control": 5,
+        "controlTitel": "Account Management",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.1",
+        "label": "CIS Controls v8.1 6.1 Establish an Access Granting Process",
+        "titel": "Establish an Access Granting Process",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.2",
+        "label": "CIS Controls v8.1 6.2 Establish an Access Revoking Process",
+        "titel": "Establish an Access Revoking Process",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.3",
+        "label": "CIS Controls v8.1 6.3 Require MFA for Externally-Exposed Applications",
+        "titel": "Require MFA for Externally-Exposed Applications",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.4",
+        "label": "CIS Controls v8.1 6.4 Require MFA for Remote Network Access",
+        "titel": "Require MFA for Remote Network Access",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.5",
+        "label": "CIS Controls v8.1 6.5 Require MFA for Administrative Access",
+        "titel": "Require MFA for Administrative Access",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.6",
+        "label": "CIS Controls v8.1 6.6 Establish and Maintain an Inventory of Authentication and Authorization Systems",
+        "titel": "Establish and Maintain an Inventory of Authentication and Authorization Systems",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.7",
+        "label": "CIS Controls v8.1 6.7 Centralize Access Control",
+        "titel": "Centralize Access Control",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "6.8",
+        "label": "CIS Controls v8.1 6.8 Define and Maintain Role-Based Access Control",
+        "titel": "Define and Maintain Role-Based Access Control",
+        "control": 6,
+        "controlTitel": "Access Control Management",
+        "ig": 3,
+        "functie": "Govern",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.1",
+        "label": "CIS Controls v8.1 7.1 Establish and Maintain a Vulnerability Management Process",
+        "titel": "Establish and Maintain a Vulnerability Management Process",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.2",
+        "label": "CIS Controls v8.1 7.2 Establish and Maintain a Remediation Process",
+        "titel": "Establish and Maintain a Remediation Process",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.3",
+        "label": "CIS Controls v8.1 7.3 Perform Automated Operating System Patch Management",
+        "titel": "Perform Automated Operating System Patch Management",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.4",
+        "label": "CIS Controls v8.1 7.4 Perform Automated Application Patch Management",
+        "titel": "Perform Automated Application Patch Management",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "7.5",
+        "label": "CIS Controls v8.1 7.5 Perform Automated Vulnerability Scans of Internal Enterprise Assets",
+        "titel": "Perform Automated Vulnerability Scans of Internal Enterprise Assets",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.6",
+        "label": "CIS Controls v8.1 7.6 Perform Automated Vulnerability Scans of Externally-Exposed Enterprise Assets",
+        "titel": "Perform Automated Vulnerability Scans of Externally-Exposed Enterprise Assets",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "7.7",
+        "label": "CIS Controls v8.1 7.7 Remediate Detected Vulnerabilities",
+        "titel": "Remediate Detected Vulnerabilities",
+        "control": 7,
+        "controlTitel": "Continuous Vulnerability Management",
+        "ig": 2,
+        "functie": "Respond",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.1",
+        "label": "CIS Controls v8.1 8.1 Establish and Maintain an Audit Log Management Process",
+        "titel": "Establish and Maintain an Audit Log Management Process",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.2",
+        "label": "CIS Controls v8.1 8.2 Collect Audit Logs",
+        "titel": "Collect Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 1,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.3",
+        "label": "CIS Controls v8.1 8.3 Ensure Adequate Audit Log Storage",
+        "titel": "Ensure Adequate Audit Log Storage",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.4",
+        "label": "CIS Controls v8.1 8.4 Standardize Time Synchronization",
+        "titel": "Standardize Time Synchronization",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.5",
+        "label": "CIS Controls v8.1 8.5 Collect Detailed Audit Logs",
+        "titel": "Collect Detailed Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "8.6",
+        "label": "CIS Controls v8.1 8.6 Collect DNS Query Audit Logs",
+        "titel": "Collect DNS Query Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.7",
+        "label": "CIS Controls v8.1 8.7 Collect URL Request Audit Logs",
+        "titel": "Collect URL Request Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.8",
+        "label": "CIS Controls v8.1 8.8 Collect Command-Line Audit Logs",
+        "titel": "Collect Command-Line Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.9",
+        "label": "CIS Controls v8.1 8.9 Centralize Audit Logs",
+        "titel": "Centralize Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.10",
+        "label": "CIS Controls v8.1 8.10 Retain Audit Logs",
+        "titel": "Retain Audit Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "8.11",
+        "label": "CIS Controls v8.1 8.11 Conduct Audit Log Reviews",
+        "titel": "Conduct Audit Log Reviews",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "8.12",
+        "label": "CIS Controls v8.1 8.12 Collect Service Provider Logs",
+        "titel": "Collect Service Provider Logs",
+        "control": 8,
+        "controlTitel": "Audit Log Management",
+        "ig": 3,
+        "functie": "Detect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.1",
+        "label": "CIS Controls v8.1 9.1 Ensure Use of Only Fully Supported Browsers and Email Clients",
+        "titel": "Ensure Use of Only Fully Supported Browsers and Email Clients",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.2",
+        "label": "CIS Controls v8.1 9.2 Use DNS Filtering Services",
+        "titel": "Use DNS Filtering Services",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.3",
+        "label": "CIS Controls v8.1 9.3 Maintain and Enforce Network-Based URL Filters",
+        "titel": "Maintain and Enforce Network-Based URL Filters",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.4",
+        "label": "CIS Controls v8.1 9.4 Restrict Unnecessary or Unauthorized Browser and Email Client Extensions",
+        "titel": "Restrict Unnecessary or Unauthorized Browser and Email Client Extensions",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.5",
+        "label": "CIS Controls v8.1 9.5 Implement DMARC",
+        "titel": "Implement DMARC",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.6",
+        "label": "CIS Controls v8.1 9.6 Block Unnecessary File Types",
+        "titel": "Block Unnecessary File Types",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "9.7",
+        "label": "CIS Controls v8.1 9.7 Deploy and Maintain Email Server Anti-Malware Protections",
+        "titel": "Deploy and Maintain Email Server Anti-Malware Protections",
+        "control": 9,
+        "controlTitel": "Email and Web Browser Protections",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.1",
+        "label": "CIS Controls v8.1 10.1 Deploy and Maintain Anti-Malware Software",
+        "titel": "Deploy and Maintain Anti-Malware Software",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 1,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.2",
+        "label": "CIS Controls v8.1 10.2 Configure Automatic Anti-Malware Signature Updates",
+        "titel": "Configure Automatic Anti-Malware Signature Updates",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.3",
+        "label": "CIS Controls v8.1 10.3 Disable Autorun and Autoplay for Removable Media",
+        "titel": "Disable Autorun and Autoplay for Removable Media",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.4",
+        "label": "CIS Controls v8.1 10.4 Configure Automatic Anti-Malware Scanning of Removable Media",
+        "titel": "Configure Automatic Anti-Malware Scanning of Removable Media",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.5",
+        "label": "CIS Controls v8.1 10.5 Enable Anti-Exploitation Features",
+        "titel": "Enable Anti-Exploitation Features",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.6",
+        "label": "CIS Controls v8.1 10.6 Centrally Manage Anti-Malware Software",
+        "titel": "Centrally Manage Anti-Malware Software",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "10.7",
+        "label": "CIS Controls v8.1 10.7 Use Behavior-Based Anti-Malware Software",
+        "titel": "Use Behavior-Based Anti-Malware Software",
+        "control": 10,
+        "controlTitel": "Malware Defenses",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "11.1",
+        "label": "CIS Controls v8.1 11.1 Establish and Maintain a Data Recovery Process",
+        "titel": "Establish and Maintain a Data Recovery Process",
+        "control": 11,
+        "controlTitel": "Data Recovery",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "11.2",
+        "label": "CIS Controls v8.1 11.2 Perform Automated Backups",
+        "titel": "Perform Automated Backups",
+        "control": 11,
+        "controlTitel": "Data Recovery",
+        "ig": 1,
+        "functie": "Recover",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "11.3",
+        "label": "CIS Controls v8.1 11.3 Protect Recovery Data",
+        "titel": "Protect Recovery Data",
+        "control": 11,
+        "controlTitel": "Data Recovery",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "11.4",
+        "label": "CIS Controls v8.1 11.4 Establish and Maintain an Isolated Instance of Recovery Data",
+        "titel": "Establish and Maintain an Isolated Instance of Recovery Data",
+        "control": 11,
+        "controlTitel": "Data Recovery",
+        "ig": 1,
+        "functie": "Recover",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "11.5",
+        "label": "CIS Controls v8.1 11.5 Test Data Recovery",
+        "titel": "Test Data Recovery",
+        "control": 11,
+        "controlTitel": "Data Recovery",
+        "ig": 2,
+        "functie": "Recover",
+        "assetType": "Data",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.1",
+        "label": "CIS Controls v8.1 12.1 Ensure Network Infrastructure is Up-to-Date",
+        "titel": "Ensure Network Infrastructure is Up-to-Date",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.2",
+        "label": "CIS Controls v8.1 12.2 Establish and Maintain a Secure Network Architecture",
+        "titel": "Establish and Maintain a Secure Network Architecture",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "12.3",
+        "label": "CIS Controls v8.1 12.3 Securely Manage Network Infrastructure",
+        "titel": "Securely Manage Network Infrastructure",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.4",
+        "label": "CIS Controls v8.1 12.4 Establish and Maintain Architecture Diagram(s)",
+        "titel": "Establish and Maintain Architecture Diagram(s)",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.5",
+        "label": "CIS Controls v8.1 12.5 Centralize Network Authentication, Authorization, and Auditing (AAA)",
+        "titel": "Centralize Network Authentication, Authorization, and Auditing (AAA)",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.6",
+        "label": "CIS Controls v8.1 12.6 Use of Secure Network Management and Communication Protocols",
+        "titel": "Use of Secure Network Management and Communication Protocols",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "12.7",
+        "label": "CIS Controls v8.1 12.7 Ensure Remote Devices Utilize a VPN and are Connecting to an Enterprise's AAA Infrastructure",
+        "titel": "Ensure Remote Devices Utilize a VPN and are Connecting to an Enterprise's AAA Infrastructure",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "12.8",
+        "label": "CIS Controls v8.1 12.8 Establish and Maintain Dedicated Computing Resources for All Administrative Work",
+        "titel": "Establish and Maintain Dedicated Computing Resources for All Administrative Work",
+        "control": 12,
+        "controlTitel": "Network Infrastructure Management",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.1",
+        "label": "CIS Controls v8.1 13.1 Centralize Security Event Alerting",
+        "titel": "Centralize Security Event Alerting",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.2",
+        "label": "CIS Controls v8.1 13.2 Deploy a Host-Based Intrusion Detection Solution",
+        "titel": "Deploy a Host-Based Intrusion Detection Solution",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.3",
+        "label": "CIS Controls v8.1 13.3 Deploy a Network Intrusion Detection Solution",
+        "titel": "Deploy a Network Intrusion Detection Solution",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.4",
+        "label": "CIS Controls v8.1 13.4 Perform Traffic Filtering Between Network Segments",
+        "titel": "Perform Traffic Filtering Between Network Segments",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.5",
+        "label": "CIS Controls v8.1 13.5 Manage Access Control for Remote Assets",
+        "titel": "Manage Access Control for Remote Assets",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.6",
+        "label": "CIS Controls v8.1 13.6 Collect Network Traffic Flow Logs",
+        "titel": "Collect Network Traffic Flow Logs",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 2,
+        "functie": "Detect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.7",
+        "label": "CIS Controls v8.1 13.7 Deploy a Host-Based Intrusion Prevention Solution",
+        "titel": "Deploy a Host-Based Intrusion Prevention Solution",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Devices",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.8",
+        "label": "CIS Controls v8.1 13.8 Deploy a Network Intrusion Prevention Solution",
+        "titel": "Deploy a Network Intrusion Prevention Solution",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.9",
+        "label": "CIS Controls v8.1 13.9 Deploy Port-Level Access Control",
+        "titel": "Deploy Port-Level Access Control",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.10",
+        "label": "CIS Controls v8.1 13.10 Perform Application Layer Filtering",
+        "titel": "Perform Application Layer Filtering",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "13.11",
+        "label": "CIS Controls v8.1 13.11 Tune Security Event Alerting Thresholds",
+        "titel": "Tune Security Event Alerting Thresholds",
+        "control": 13,
+        "controlTitel": "Network Monitoring and Defense",
+        "ig": 3,
+        "functie": "Detect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.1",
+        "label": "CIS Controls v8.1 14.1 Establish and Maintain a Security Awareness Program",
+        "titel": "Establish and Maintain a Security Awareness Program",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.2",
+        "label": "CIS Controls v8.1 14.2 Train Workforce Members to Recognize Social Engineering Attacks",
+        "titel": "Train Workforce Members to Recognize Social Engineering Attacks",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.3",
+        "label": "CIS Controls v8.1 14.3 Train Workforce Members on Authentication Best Practices",
+        "titel": "Train Workforce Members on Authentication Best Practices",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.4",
+        "label": "CIS Controls v8.1 14.4 Train Workforce on Data Handling Best Practices",
+        "titel": "Train Workforce on Data Handling Best Practices",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.5",
+        "label": "CIS Controls v8.1 14.5 Train Workforce Members on Causes of Unintentional Data Exposure",
+        "titel": "Train Workforce Members on Causes of Unintentional Data Exposure",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "14.6",
+        "label": "CIS Controls v8.1 14.6 Train Workforce Members on Recognizing and Reporting Security Incidents",
+        "titel": "Train Workforce Members on Recognizing and Reporting Security Incidents",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.7",
+        "label": "CIS Controls v8.1 14.7 Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates",
+        "titel": "Train Workforce on How to Identify and Report if Their Enterprise Assets are Missing Security Updates",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.8",
+        "label": "CIS Controls v8.1 14.8 Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks",
+        "titel": "Train Workforce on the Dangers of Connecting to and Transmitting Enterprise Data Over Insecure Networks",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 1,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "14.9",
+        "label": "CIS Controls v8.1 14.9 Conduct Role-Specific Security Awareness and Skills Training",
+        "titel": "Conduct Role-Specific Security Awareness and Skills Training",
+        "control": 14,
+        "controlTitel": "Security Awareness and Skills Training",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (titel handmatig overgenomen; regel was afgebroken)"
+      },
+      {
+        "id": "16.1",
+        "label": "CIS Controls v8.1 16.1 Establish and Maintain a Secure Application Development Process",
+        "titel": "Establish and Maintain a Secure Application Development Process",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.2",
+        "label": "CIS Controls v8.1 16.2 Establish and Maintain a Process to Accept and Address Software Vulnerabilities",
+        "titel": "Establish and Maintain a Process to Accept and Address Software Vulnerabilities",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.3",
+        "label": "CIS Controls v8.1 16.3 Perform Root Cause Analysis on Security Vulnerabilities",
+        "titel": "Perform Root Cause Analysis on Security Vulnerabilities",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.4",
+        "label": "CIS Controls v8.1 16.4 Establish and Manage an Inventory of Third-Party Software Components",
+        "titel": "Establish and Manage an Inventory of Third-Party Software Components",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.5",
+        "label": "CIS Controls v8.1 16.5 Use Up-to-Date and Trusted Third-Party Software Components",
+        "titel": "Use Up-to-Date and Trusted Third-Party Software Components",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.6",
+        "label": "CIS Controls v8.1 16.6 Establish and Maintain a Severity Rating System and Process for Application Vulnerabilities",
+        "titel": "Establish and Maintain a Severity Rating System and Process for Application Vulnerabilities",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.7",
+        "label": "CIS Controls v8.1 16.7 Use Standard Hardening Configuration Templates for Application Infrastructure",
+        "titel": "Use Standard Hardening Configuration Templates for Application Infrastructure",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.8",
+        "label": "CIS Controls v8.1 16.8 Separate Production and Non-Production Systems",
+        "titel": "Separate Production and Non-Production Systems",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Network",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.9",
+        "label": "CIS Controls v8.1 16.9 Train Developers in Application Security Concepts and Secure Coding",
+        "titel": "Train Developers in Application Security Concepts and Secure Coding",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Users",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.10",
+        "label": "CIS Controls v8.1 16.10 Apply Secure Design Principles in Application Architectures",
+        "titel": "Apply Secure Design Principles in Application Architectures",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.11",
+        "label": "CIS Controls v8.1 16.11 Leverage Vetted Modules or Services for Application Security Components",
+        "titel": "Leverage Vetted Modules or Services for Application Security Components",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 2,
+        "functie": "Identify",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.12",
+        "label": "CIS Controls v8.1 16.12 Implement Code-Level Security Checks",
+        "titel": "Implement Code-Level Security Checks",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.13",
+        "label": "CIS Controls v8.1 16.13 Conduct Application Penetration Testing",
+        "titel": "Conduct Application Penetration Testing",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 3,
+        "functie": "Detect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "16.14",
+        "label": "CIS Controls v8.1 16.14 Conduct Threat Modeling",
+        "titel": "Conduct Threat Modeling",
+        "control": 16,
+        "controlTitel": "Application Software Security",
+        "ig": 3,
+        "functie": "Protect",
+        "assetType": "Software",
+        "soort": "technisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.1",
+        "label": "CIS Controls v8.1 17.1 Designate Personnel to Manage Incident Handling",
+        "titel": "Designate Personnel to Manage Incident Handling",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 1,
+        "functie": "Respond",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.2",
+        "label": "CIS Controls v8.1 17.2 Establish and Maintain Contact Information for Reporting Security Incidents",
+        "titel": "Establish and Maintain Contact Information for Reporting Security Incidents",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.3",
+        "label": "CIS Controls v8.1 17.3 Establish and Maintain an Enterprise Process for Reporting Incidents",
+        "titel": "Establish and Maintain an Enterprise Process for Reporting Incidents",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 1,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.4",
+        "label": "CIS Controls v8.1 17.4 Establish and Maintain an Incident Response Process",
+        "titel": "Establish and Maintain an Incident Response Process",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 2,
+        "functie": "Govern",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.5",
+        "label": "CIS Controls v8.1 17.5 Assign Key Roles and Responsibilities",
+        "titel": "Assign Key Roles and Responsibilities",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 2,
+        "functie": "Respond",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.6",
+        "label": "CIS Controls v8.1 17.6 Define Mechanisms for Communicating During Incident Response",
+        "titel": "Define Mechanisms for Communicating During Incident Response",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 2,
+        "functie": "Respond",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.7",
+        "label": "CIS Controls v8.1 17.7 Conduct Routine Incident Response Exercises",
+        "titel": "Conduct Routine Incident Response Exercises",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 2,
+        "functie": "Recover",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.8",
+        "label": "CIS Controls v8.1 17.8 Conduct Post-Incident Reviews",
+        "titel": "Conduct Post-Incident Reviews",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 2,
+        "functie": "Recover",
+        "assetType": "Users",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      },
+      {
+        "id": "17.9",
+        "label": "CIS Controls v8.1 17.9 Establish and Maintain Security Incident Thresholds",
+        "titel": "Establish and Maintain Security Incident Thresholds",
+        "control": 17,
+        "controlTitel": "Incident Response Management",
+        "ig": 3,
+        "functie": "Recover",
+        "assetType": "Documentation",
+        "soort": "organisatorisch",
+        "bron": "CIS Controls v8.1 Guide (juni 2024), bijlage Controls and Safeguards Index"
+      }
+    ]
+  },
+  "nistcsf": {
+    "versie": "NIST Cybersecurity Framework 2.0 (februari 2024)",
+    "functies": {
+      "GV": "Govern (besturen)",
+      "ID": "Identify (identificeren)",
+      "PR": "Protect (beschermen)",
+      "DE": "Detect (detecteren)",
+      "RS": "Respond (reageren)",
+      "RC": "Recover (herstellen)"
+    },
+    "subcategorieen": [
+      {
+        "id": "GV.OC-03",
+        "functie": "GV",
+        "categorie": "GV.OC",
+        "titel": "Legal, regulatory, and contractual requirements regarding cybersecurity are understood and managed"
+      },
+      {
+        "id": "GV.RM-01",
+        "functie": "GV",
+        "categorie": "GV.RM",
+        "titel": "Risk management objectives are established and agreed to by organizational stakeholders"
+      },
+      {
+        "id": "GV.RR-02",
+        "functie": "GV",
+        "categorie": "GV.RR",
+        "titel": "Roles, responsibilities, and authorities related to cybersecurity risk management are established and communicated"
+      },
+      {
+        "id": "GV.PO-01",
+        "functie": "GV",
+        "categorie": "GV.PO",
+        "titel": "Policy for managing cybersecurity risks is established, communicated, and enforced"
+      },
+      {
+        "id": "GV.PO-02",
+        "functie": "GV",
+        "categorie": "GV.PO",
+        "titel": "Policy for managing cybersecurity risks is reviewed, updated, communicated, and enforced"
+      },
+      {
+        "id": "GV.OV-01",
+        "functie": "GV",
+        "categorie": "GV.OV",
+        "titel": "Cybersecurity risk management strategy outcomes are reviewed to inform and adjust strategy"
+      },
+      {
+        "id": "GV.SC-01",
+        "functie": "GV",
+        "categorie": "GV.SC",
+        "titel": "A cybersecurity supply chain risk management program is established and agreed to"
+      },
+      {
+        "id": "GV.SC-05",
+        "functie": "GV",
+        "categorie": "GV.SC",
+        "titel": "Requirements to address cybersecurity risks in supply chains are established and integrated into contracts"
+      },
+      {
+        "id": "ID.AM-01",
+        "functie": "ID",
+        "categorie": "ID.AM",
+        "titel": "Inventories of hardware managed by the organization are maintained"
+      },
+      {
+        "id": "ID.AM-02",
+        "functie": "ID",
+        "categorie": "ID.AM",
+        "titel": "Inventories of software, services, and systems managed by the organization are maintained"
+      },
+      {
+        "id": "ID.AM-08",
+        "functie": "ID",
+        "categorie": "ID.AM",
+        "titel": "Systems, hardware, software, services, and data are managed throughout their life cycles"
+      },
+      {
+        "id": "ID.RA-01",
+        "functie": "ID",
+        "categorie": "ID.RA",
+        "titel": "Vulnerabilities in assets are identified, validated, and recorded"
+      },
+      {
+        "id": "ID.RA-02",
+        "functie": "ID",
+        "categorie": "ID.RA",
+        "titel": "Cyber threat intelligence is received from information sharing forums and sources"
+      },
+      {
+        "id": "ID.RA-07",
+        "functie": "ID",
+        "categorie": "ID.RA",
+        "titel": "Changes and exceptions are managed, assessed for risk impact, recorded, and tracked"
+      },
+      {
+        "id": "ID.IM-01",
+        "functie": "ID",
+        "categorie": "ID.IM",
+        "titel": "Improvements are identified from evaluations"
+      },
+      {
+        "id": "PR.AA-01",
+        "functie": "PR",
+        "categorie": "PR.AA",
+        "titel": "Identities and credentials for authorized users, services, and hardware are managed"
+      },
+      {
+        "id": "PR.AA-02",
+        "functie": "PR",
+        "categorie": "PR.AA",
+        "titel": "Identities are proofed and bound to credentials based on the context of interactions"
+      },
+      {
+        "id": "PR.AA-03",
+        "functie": "PR",
+        "categorie": "PR.AA",
+        "titel": "Users, services, and hardware are authenticated"
+      },
+      {
+        "id": "PR.AA-04",
+        "functie": "PR",
+        "categorie": "PR.AA",
+        "titel": "Identity assertions are protected, conveyed, and verified"
+      },
+      {
+        "id": "PR.AA-05",
+        "functie": "PR",
+        "categorie": "PR.AA",
+        "titel": "Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties)"
+      },
+      {
+        "id": "PR.AT-01",
+        "functie": "PR",
+        "categorie": "PR.AT",
+        "titel": "Personnel are provided with awareness and training"
+      },
+      {
+        "id": "PR.DS-01",
+        "functie": "PR",
+        "categorie": "PR.DS",
+        "titel": "The confidentiality, integrity, and availability of data-at-rest are protected"
+      },
+      {
+        "id": "PR.DS-02",
+        "functie": "PR",
+        "categorie": "PR.DS",
+        "titel": "The confidentiality, integrity, and availability of data-in-transit are protected"
+      },
+      {
+        "id": "PR.DS-10",
+        "functie": "PR",
+        "categorie": "PR.DS",
+        "titel": "The confidentiality, integrity, and availability of data-in-use are protected"
+      },
+      {
+        "id": "PR.DS-11",
+        "functie": "PR",
+        "categorie": "PR.DS",
+        "titel": "Backups of data are created, protected, maintained, and tested"
+      },
+      {
+        "id": "PR.PS-01",
+        "functie": "PR",
+        "categorie": "PR.PS",
+        "titel": "Configuration management practices are established and applied"
+      },
+      {
+        "id": "PR.PS-02",
+        "functie": "PR",
+        "categorie": "PR.PS",
+        "titel": "Software is maintained, replaced, and removed commensurate with risk"
+      },
+      {
+        "id": "PR.PS-03",
+        "functie": "PR",
+        "categorie": "PR.PS",
+        "titel": "Hardware is maintained, replaced, and removed commensurate with risk"
+      },
+      {
+        "id": "PR.PS-04",
+        "functie": "PR",
+        "categorie": "PR.PS",
+        "titel": "Log records are generated and made available for continuous monitoring"
+      },
+      {
+        "id": "PR.PS-05",
+        "functie": "PR",
+        "categorie": "PR.PS",
+        "titel": "Installation and execution of unauthorized software are prevented"
+      },
+      {
+        "id": "PR.IR-01",
+        "functie": "PR",
+        "categorie": "PR.IR",
+        "titel": "Networks and environments are protected from unauthorized logical access and usage"
+      },
+      {
+        "id": "PR.IR-03",
+        "functie": "PR",
+        "categorie": "PR.IR",
+        "titel": "Mechanisms are implemented to achieve resilience requirements in normal and adverse situations"
+      },
+      {
+        "id": "PR.IR-04",
+        "functie": "PR",
+        "categorie": "PR.IR",
+        "titel": "Adequate resource capacity to ensure availability is maintained"
+      },
+      {
+        "id": "DE.CM-01",
+        "functie": "DE",
+        "categorie": "DE.CM",
+        "titel": "Networks and network services are monitored to find potentially adverse events"
+      },
+      {
+        "id": "DE.CM-03",
+        "functie": "DE",
+        "categorie": "DE.CM",
+        "titel": "Personnel activity and technology usage are monitored to find potentially adverse events"
+      },
+      {
+        "id": "DE.CM-09",
+        "functie": "DE",
+        "categorie": "DE.CM",
+        "titel": "Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events"
+      },
+      {
+        "id": "DE.AE-02",
+        "functie": "DE",
+        "categorie": "DE.AE",
+        "titel": "Potentially adverse events are analyzed to better understand associated activities"
+      },
+      {
+        "id": "DE.AE-03",
+        "functie": "DE",
+        "categorie": "DE.AE",
+        "titel": "Information is correlated from multiple sources"
+      },
+      {
+        "id": "DE.AE-06",
+        "functie": "DE",
+        "categorie": "DE.AE",
+        "titel": "Information on adverse events is provided to authorized staff and tools"
+      },
+      {
+        "id": "RS.MA-01",
+        "functie": "RS",
+        "categorie": "RS.MA",
+        "titel": "The incident response plan is executed in coordination with relevant third parties once an incident is declared"
+      },
+      {
+        "id": "RS.MA-02",
+        "functie": "RS",
+        "categorie": "RS.MA",
+        "titel": "Incident reports are triaged and validated"
+      },
+      {
+        "id": "RS.AN-03",
+        "functie": "RS",
+        "categorie": "RS.AN",
+        "titel": "Analysis is performed to establish what has taken place during an incident and the root cause"
+      },
+      {
+        "id": "RS.AN-07",
+        "functie": "RS",
+        "categorie": "RS.AN",
+        "titel": "Incident data and metadata are collected, and their integrity and provenance are preserved"
+      },
+      {
+        "id": "RS.CO-02",
+        "functie": "RS",
+        "categorie": "RS.CO",
+        "titel": "Internal and external stakeholders are notified of incidents"
+      },
+      {
+        "id": "RS.MI-01",
+        "functie": "RS",
+        "categorie": "RS.MI",
+        "titel": "Incidents are contained"
+      },
+      {
+        "id": "RS.MI-02",
+        "functie": "RS",
+        "categorie": "RS.MI",
+        "titel": "Incidents are eradicated"
+      },
+      {
+        "id": "RC.RP-01",
+        "functie": "RC",
+        "categorie": "RC.RP",
+        "titel": "The recovery portion of the incident response plan is executed once initiated from the incident response process"
+      },
+      {
+        "id": "RC.RP-02",
+        "functie": "RC",
+        "categorie": "RC.RP",
+        "titel": "Recovery actions are selected, scoped, prioritized, and performed"
+      },
+      {
+        "id": "RC.RP-03",
+        "functie": "RC",
+        "categorie": "RC.RP",
+        "titel": "The integrity of backups and other restoration assets is verified before using them for restoration"
+      },
+      {
+        "id": "RC.RP-05",
+        "functie": "RC",
+        "categorie": "RC.RP",
+        "titel": "The integrity of restored assets is verified, systems and services are restored, and normal operating status is confirmed"
+      },
+      {
+        "id": "RC.CO-03",
+        "functie": "RC",
+        "categorie": "RC.CO",
+        "titel": "Recovery activities and progress in restoring operational capabilities are communicated to designated stakeholders"
+      }
+    ]
+  }
+}

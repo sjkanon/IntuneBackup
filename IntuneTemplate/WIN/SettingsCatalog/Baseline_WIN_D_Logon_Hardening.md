@@ -16,6 +16,17 @@ Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergr
 
 > Merkbaar voor gebruikers, dus meld het aan: na deze policy moet iedereen CTRL+ALT+DEL indrukken vóór het aanmeldscherm verschijnt. Op tablets en 2-in-1's zonder toetsenbord neemt Windows daar de Windows-knop plus aan/uit voor. De letters in de instellingsnaam zijn omgekeerd: "Do not require CTRL+ALT+DEL" op Disabled betekent dat het juist wél vereist is. Twee toevoegingen op het aanmeldscherm: het e-mailadres van de gebruiker wordt er niet meer getoond, en verbonden gebruikers worden niet opgesomd. Beide halen de helft van een aanmeldpoging — de gebruikersnaam — weg bij wie het scherm ziet.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.15 Toegangsbeveiliging<br>A.8.5 Veilige authenticatie<br>A.8.20 Netwerkbeveiliging |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
+| NIST CSF 2.0 | PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 4
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

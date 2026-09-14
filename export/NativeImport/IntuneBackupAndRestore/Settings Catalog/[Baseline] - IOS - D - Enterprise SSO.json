@@ -1,0 +1,305 @@
+{
+    "name": "[Baseline] - IOS - D - Enterprise SSO",
+    "description": "Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat beheerde apps en Safari één Entra-aanmelding delen en het apparaat zich bij Conditional Access kan bewijzen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices; URL-lijst en sleutels gelijkgetrokken met Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices).",
+    "platforms": "iOS",
+    "technologies": "mdm,appleRemoteManagement",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                "settingDefinitionId": "com.apple.extensiblesso_com.apple.extensiblesso",
+                "settingInstanceTemplateReference": null,
+                "groupSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                        "settingValueTemplateReference": null,
+                        "children": [
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata",
+                                "settingInstanceTemplateReference": null,
+                                "groupSettingCollectionValue": [
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+                                                "settingInstanceTemplateReference": null,
+                                                "simpleSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "Enable_SSO_On_All_ManagedApps"
+                                                }
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+                                                "settingInstanceTemplateReference": null,
+                                                "choiceSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "com.apple.extensiblesso_ignored_1",
+                                                    "children": [
+                                                        {
+                                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+                                                            "settingInstanceTemplateReference": null,
+                                                            "simpleSettingValue": {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                                                "settingValueTemplateReference": null,
+                                                                "value": 1
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+                                                "settingInstanceTemplateReference": null,
+                                                "simpleSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "AppPrefixAllowList"
+                                                }
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+                                                "settingInstanceTemplateReference": null,
+                                                "choiceSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "com.apple.extensiblesso_ignored_0",
+                                                    "children": [
+                                                        {
+                                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_string",
+                                                            "settingInstanceTemplateReference": null,
+                                                            "simpleSettingValue": {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                                "settingValueTemplateReference": null,
+                                                                "value": "com.microsoft.,com.apple."
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+                                                "settingInstanceTemplateReference": null,
+                                                "simpleSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "browser_sso_interaction_enabled"
+                                                }
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+                                                "settingInstanceTemplateReference": null,
+                                                "choiceSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "com.apple.extensiblesso_ignored_1",
+                                                    "children": [
+                                                        {
+                                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+                                                            "settingInstanceTemplateReference": null,
+                                                            "simpleSettingValue": {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                                                "settingValueTemplateReference": null,
+                                                                "value": 1
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+                                                "settingInstanceTemplateReference": null,
+                                                "simpleSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "disable_explicit_app_prompt"
+                                                }
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+                                                "settingInstanceTemplateReference": null,
+                                                "choiceSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "com.apple.extensiblesso_ignored_1",
+                                                    "children": [
+                                                        {
+                                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_integer",
+                                                            "settingInstanceTemplateReference": null,
+                                                            "simpleSettingValue": {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                                                                "settingValueTemplateReference": null,
+                                                                "value": 1
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "children": [
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_keytobereplaced",
+                                                "settingInstanceTemplateReference": null,
+                                                "simpleSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "device_registration"
+                                                }
+                                            },
+                                            {
+                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                                "settingDefinitionId": "com.apple.extensiblesso_ignored_$typepicker",
+                                                "settingInstanceTemplateReference": null,
+                                                "choiceSettingValue": {
+                                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                                    "settingValueTemplateReference": null,
+                                                    "value": "com.apple.extensiblesso_ignored_0",
+                                                    "children": [
+                                                        {
+                                                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                                            "settingDefinitionId": "com.apple.extensiblesso_extensiondata_generickey_string",
+                                                            "settingInstanceTemplateReference": null,
+                                                            "simpleSettingValue": {
+                                                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                                                "settingValueTemplateReference": null,
+                                                                "value": "{{DEVICEREGISTRATION}}"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                                "settingDefinitionId": "com.apple.extensiblesso_extensionidentifier",
+                                "settingInstanceTemplateReference": null,
+                                "simpleSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "com.microsoft.azureauthenticator.ssoextension"
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "com.apple.extensiblesso_screenlockedbehavior",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "com.apple.extensiblesso_screenlockedbehavior_0",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "com.apple.extensiblesso_type",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "com.apple.extensiblesso_type_1",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                                "settingDefinitionId": "com.apple.extensiblesso_urls",
+                                "settingInstanceTemplateReference": null,
+                                "simpleSettingCollectionValue": [
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login.microsoftonline.com"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login.microsoft.com"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://sts.windows.net"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login.partner.microsoftonline.cn"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login.chinacloudapi.cn"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login.microsoftonline.us"
+                                    },
+                                    {
+                                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                        "settingValueTemplateReference": null,
+                                        "value": "https://login-us.microsoftonline.com"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -14,6 +14,15 @@ Zet Google als standaardzoekmachine in Edge. Een klantkeuze, geen beveiligingsin
 | Bron | eigen baseline (ADMX) |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Search_Engine.json`](Baseline_WIN_D_Microsoft_Edge_Search_Engine.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
+| NIST CSF 2.0 | PR.PS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## ADMX-definities — 5
 
 Klassieke Group Policy-instellingen. De GUID's zijn Microsoft's vaste

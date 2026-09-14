@@ -6,19 +6,19 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
 overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-155 policies over vier platformen:
+193 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 103 | 1 | 6 | 10 | – | **120** |
-| [macOS](IntuneTemplate/MAC/README.md) | 22 | – | 3 | 4 | – | **29** |
-| [iOS](IntuneTemplate/IOS/README.md) | – | – | – | 2 | 1 | **3** |
-| [Android](IntuneTemplate/AND/README.md) | – | – | – | 2 | 1 | **3** |
+| [Windows](IntuneTemplate/WIN/README.md) | 110 | 1 | 6 | 11 | – | **128** |
+| [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
+| [iOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
+| [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>155 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>193 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -39,6 +39,17 @@ flowchart LR
 
 **[OVERZICHT.md](OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
 en wat er in de tenant nog moet gebeuren.
+
+**[COMPLIANCE.md](COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
+Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
+2.0-subcategorie welke policies hem technisch invullen, in welke fase, met welke checkId — en wat
+organisatorisch nodig blijft. Gegenereerd door `scripts/generate-compliance.js` uit de `controls` in
+`_manifest.json` en de vocabulaire in `IntuneTemplate/_controls.json`; `check-scope.js` weigert een
+policy zonder of met een onbekend label.
+
+**[`extras/`](extras/README.md)** bevat wat bij een complete baseline hoort maar geen van de vijf
+CIPP-policytypes is: inschrijvingsrestricties, app-configuratie, toewijzingsfilters, App Control for
+Business, remediations en scripts — per platform, met uitrolinstructies.
 
 Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/README.md) (met
 een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en

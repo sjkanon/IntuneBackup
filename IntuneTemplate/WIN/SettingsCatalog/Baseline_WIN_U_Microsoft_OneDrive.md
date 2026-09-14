@@ -14,6 +14,15 @@ De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet.
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration |
 | Bestand | [`Baseline_WIN_U_Microsoft_OneDrive.json`](Baseline_WIN_U_Microsoft_OneDrive.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken |
+| NIST CSF 2.0 | PR.DS-02 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 9
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

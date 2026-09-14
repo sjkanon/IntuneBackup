@@ -14,6 +14,17 @@ Bepaalt of Edge op de Mac wachtwoorden mag opslaan en tonen.
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Password Management |
 | Bestand | [`Baseline_MAC_D_Microsoft_Edge_Password_Management.json`](Baseline_MAC_D_Microsoft_Edge_Password_Management.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 5.2 Use Unique Passwords |
+| NIST CSF 2.0 | PR.AA-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 3
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,17 @@ Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat
 
 > Vereist de Microsoft Enterprise SSO-plug-in (Company Portal) op het apparaat.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.16 Identiteitsbeheer<br>A.5.17 Authenticatie-informatie<br>A.8.5 Veilige authenticatie |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 5.6 Centralize Account Management<br>6.7 Centralize Access Control |
+| NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 28
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

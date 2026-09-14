@@ -114,7 +114,7 @@
                                 "choiceSettingValue": {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "com.apple.systempolicy.control_enablexprotectmalwareupload_false",
+                                    "value": "com.apple.systempolicy.control_enablexprotectmalwareupload_true",
                                     "children": []
                                 }
                             }

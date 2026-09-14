@@ -16,6 +16,17 @@ Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en ve
 
 > OIB dekt alleen de OS-schijf. De 11 eigen instellingen voor vaste en verwisselbare schijven en de preboot-PIN blijven staan — anders zou versleuteling van datadrives stilzwijgend uitgaan.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein<br>A.7.10 Opslagmedia<br>A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.24 Gebruik van cryptografie |
+| NIS2 art. 21(2) | art. 21(2)(h) cryptografie en versleuteling |
+| CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>3.11 Encrypt Sensitive Data at Rest |
+| NIST CSF 2.0 | PR.DS-01 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 36
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

@@ -16,6 +16,17 @@ Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveil
 
 > Komt uit CIPP, niet uit OIB. Overlapt met [Baseline] - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor). Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: het is het CIPP-alternatief voor de OIB-policy, geen aanvulling erop. De OIB-versie is op alle drie de punten strenger (network protection op block in plaats van audit, cloud block level op high in plaats van niet-geconfigureerd).
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.4 Configure Automatic Anti-Malware Scanning of Removable Media<br>10.6 Centrally Manage Anti-Malware Software<br>10.7 Use Behavior-Based Anti-Malware Software |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 19
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

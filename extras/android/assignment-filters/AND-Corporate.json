@@ -1,0 +1,12 @@
+{
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "displayName": "AND - Corporate",
+  "description": "Android Enterprise-toestellen van de organisatie: fully managed, corporate-owned work profile en dedicated.",
+  "platform": "androidForWork",
+  "rule": "(device.deviceOwnership -eq \"Corporate\")",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType": "devices",
+  "payloads": []
+}

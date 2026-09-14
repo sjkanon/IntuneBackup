@@ -16,6 +16,17 @@ Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart h
 
 > Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant hadden we al niet overgenomen omdat onze policy het automatische accountbeheer al had. De eigen administratoraccountname is in september 2026 weggehaald: met automatisch accountbeheer aan negeert Windows die instelling, en de waarde was de accountnaam van één organisatie.
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Authenticatie-informatie<br>A.8.2 Speciale toegangsrechten |
+| NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
+| CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software<br>5.2 Use Unique Passwords |
+| NIST CSF 2.0 | PR.AA-01<br>PR.AA-05 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Instellingen — 12
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

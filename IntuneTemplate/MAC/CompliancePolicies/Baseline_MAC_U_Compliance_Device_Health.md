@@ -14,6 +14,17 @@ Toetst of System Integrity Protection op de Mac aanstaat.
 | Bron | OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Health |
 | Bestand | [`Baseline_MAC_U_Compliance_Device_Health.json`](Baseline_MAC_U_Compliance_Device_Health.json) |
 
+## Normen
+
+| Kader | Controls |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.1 Eindpuntapparatuur van gebruikers<br>A.8.7 Bescherming tegen malware |
+| NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden<br>art. 21(2)(f) beoordeling van de doeltreffendheid |
+| CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+
 ## Eigenschappen — 27
 
 Een compliance-policy heeft geen settingDefinitionId's maar vaste eigenschappen. `scheduledActionsForRule` bepaalt wat er gebeurt als een apparaat niet voldoet.

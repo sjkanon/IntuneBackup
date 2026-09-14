@@ -1,0 +1,43 @@
+{
+  "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
+  "displayName": "[Baseline] - IOS - Microsoft Defender - Managed Devices",
+  "description": "Microsoft Defender for Endpoint op ingeschreven toestellen: supervisiestatus doorgeven, webbescherming en netwerkbescherming aan, onbeveiligde netwerken melden, afmelden in de app uitgeschakeld.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedMobileApps": [
+    "APP-ID-DEFENDER-INVULLEN"
+  ],
+  "settings": [
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "issupervised",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "{{issupervised}}"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "WebProtection",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "true"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "DefenderNetworkProtectionEnable",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "true"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "DefenderOpenNetworkDetection",
+      "appConfigKeyType": "integerType",
+      "appConfigKeyValue": "2"
+    },
+    {
+      "@odata.type": "#microsoft.graph.appConfigurationSettingItem",
+      "appConfigKey": "DisableSignOut",
+      "appConfigKeyType": "stringType",
+      "appConfigKeyValue": "true"
+    }
+  ]
+}
