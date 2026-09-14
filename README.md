@@ -401,7 +401,7 @@ de bestaande juist weg. Optioneel `-FilterId` + `-FilterType` voor een assignmen
 Policies die niet in de tenant staan worden gemeld, niet aangemaakt — rol ze eerst uit via
 CIPP of `Start-IntuneRestoreConfig`.
 
-### Acht policies staan bewust zonder assignment
+### Negen policies staan bewust zonder assignment
 
 Ze zijn stuk voor stuk een *alternatief* voor een policy die wél is toegewezen, geen aanvulling
 erop. Twee toegewezen policies die dezelfde instelling op een andere waarde zetten leveren in
@@ -416,7 +416,8 @@ slechter dan geen van beide policies hebben. `check-scope.js` bewaakt dat.
 | `WIN - D - Defender Update Ring 2 UAT` | Defender-ring 3 | UAT-groep |
 | `WIN - D - Defender ASR Policy Audit Mode` | `Attack Surface Reduction` — 16 dezelfde regels op audit in plaats van block | pilotgroep, en dan zónder de blokkerende policy |
 | `WIN - D - Defender AV Policy` | `Defender Antivirus` — het CIPP-template naast de OIB-versie, op drie punten losser | niets; de OIB-versie is strenger |
-| `WIN - D - Defender EDR Policy` | `Defender for Endpoint EDR` — zelfde onboarding, maar via de connector in plaats van een tenant-token | een andere tenant, en daar dan juist niet de tenant-specifieke |
+| `WIN - D - Defender for Endpoint EDR` | `Defender EDR Policy` — zelfde onboarding, maar met het vaste onboarding-token van één tenant in plaats van via de connector | alleen de tenant waaruit dat token komt |
+| `WIN - D - Microsoft Edge Search Engine` | geen — Google als standaardzoekmachine is een klantkeuze, geen beveiligingsinstelling | alleen een organisatie die dat zo besloten heeft |
 | `WIN - D - Windows Hello for Business Multi User` | `Windows Hello for Business` — zelfde eisen, maar zonder inrichting direct na het aanmelden | groep met gedeelde apparaten |
 
 ```powershell
@@ -536,7 +537,8 @@ Er is nog één ADMX-policy over (de Edge-zoekmachine); Office Updates is juist 
 Catalog verhuisd om deze reden.
 
 **Per-tenant waarden:** het EDR-onboarding-token in `Baseline_WIN_D_Defender_for_Endpoint_EDR`
-is een `encryptedValueToken` die alleen in de brontenant betekenis heeft. De baselinegenerator
+is een `encryptedValueToken` die alleen in de brontenant betekenis heeft. Daarom rolt sinds
+september 2026 de connector-variant `Baseline_WIN_D_Defender_EDR_Policy` uit en staat deze in fase 5. De baselinegenerator
 slaat 'm over; bij een restore in een andere tenant moet je die instelling handmatig opnieuw
 koppelen.
 
