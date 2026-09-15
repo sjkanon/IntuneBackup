@@ -62,7 +62,7 @@ jobs:
       # - name: Haal CA-policies op voor de CA-kant van COMPLIANCE.md
       #   uses: actions/checkout@v5
       #   with:
-      #     repository: EIGENAAR-INVULLEN/CA-policies
+      #     repository: sjkanon/CA-Policies
       #     path: .ca-policies
       #     token: ${{ secrets.CA_POLICIES_TOKEN }}
 

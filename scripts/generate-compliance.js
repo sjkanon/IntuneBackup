@@ -9,7 +9,7 @@
  *   IntuneTemplate/_controls.json     de canonieke vocabulaire: alle 93 Annex A-controls, de tien
  *                                     NIS2-punten, de CIS-safeguards en de CSF-subcategorieën
  *   baseline/intune/baseline-v1.0.json de checkId's die TEST Policies Platform toetst
- *   ../CA-policies/controls/ca-controls.json en ../CA-policies/baseline/conditional-access/
+ *   ../CA-Policies/controls/ca-controls.json en ../CA-Policies/baseline/conditional-access/
  *                                     baseline-v1.0.json — optioneel, pad met --ca
  *
  * Gegenereerd om dezelfde reden als de rest van de documentatie: een normenmatrix die met de
@@ -26,7 +26,7 @@
  * Gebruik: node scripts/generate-compliance.js [--check] [--strict] [--ca <pad naar ca-controls.json> | --no-ca]
  *   --check   schrijft niets en geeft exit 1 als COMPLIANCE.md niet meer klopt (voor CI)
  *   --strict  exit 1 als een policy geen controls heeft of een label buiten de vocabulaire gebruikt
- *   --ca      pad naar ca-controls.json; standaard ../CA-policies/controls/ca-controls.json naast deze repo
+ *   --ca      pad naar ca-controls.json; standaard ../CA-Policies/controls/ca-controls.json naast deze repo
  *   --no-ca   Conditional Access niet meenemen, ook als die repo er staat (zelfde uitkomst lokaal en in CI)
  */
 
@@ -41,7 +41,14 @@ const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
 const BASELINE_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
 const OUTPUT_PATH = path.join(REPO_ROOT, "COMPLIANCE.md");
-const DEFAULT_CA_CONTROLS = path.resolve(REPO_ROOT, "..", "CA-policies", "controls", "ca-controls.json");
+/**
+ * De repo heet op GitHub CA-Policies; dit script kende hem als CA-policies. Op Windows maakt dat
+ * niets uit en op Linux mislukt hij stil: geen bestand, dus geen CA, dus een COMPLIANCE.md die
+ * beweert dat er geen CA-verantwoording is. Daarom beide vormen proberen.
+ */
+const DEFAULT_CA_CONTROLS = ["CA-Policies", "CA-policies"]
+  .map((dir) => path.resolve(REPO_ROOT, "..", dir, "controls", "ca-controls.json"))
+  .find((p) => fs.existsSync(p)) || path.resolve(REPO_ROOT, "..", "CA-Policies", "controls", "ca-controls.json");
 
 const GENERATED_HEADER = "<!-- Gegenereerd door scripts/generate-compliance.js — niet met de hand bijwerken. -->";
 const PLATFORM_ORDER = ["WIN", "MAC", "IOS", "AND"];

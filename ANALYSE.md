@@ -507,9 +507,15 @@ Daarnaast:
    (die toont COMPLIANCE.md wel). Omzetten is één bewerking in `_controls.json` plus het manifest.
    De NEN-titels komen uit een openbare VvT, niet uit de norm zelf; de CSF-titels en de paragrafen van
    uitvoeringsverordening (EU) 2024/2690 zijn niet letterlijk nagekeken.
-3. **COMPLIANCE.md zonder CA**: de workflow draait `--no-ca` omdat CI de CA-repo niet ziet. Een versie
-   mét CA kan lokaal met `--ca ../CA-policies/controls/ca-controls.json`; kies één lijn voor wat er in
-   git staat.
+3. **COMPLIANCE.md zonder CA**: `CA-Policies/controls/ca-controls.json` bestaat sinds 15 september 2026
+   (41 CA-policies, dezelfde vocabulaire als `_controls.json`), dus een versie mét CA is er nu:
+   `node scripts/generate-compliance.js --strict --ca ../CA-Policies/controls/ca-controls.json`.
+   Wat er in git staat is bewust de `--no-ca`-versie, want dat is wat de workflow regenereert — de
+   andere lijn zou bij elke CI-run een PR openen die hem terugdraait. Het scheelt vooral bij NIS2 (j):
+   3 Intune-policies zonder CA, 13 met. Eén lijn kiezen kan alsnog, en dan die: vul
+   `secrets.CA_POLICIES_TOKEN` en haal het commentaar weg bij de CA-checkout in
+   `.github/workflows/generate-baseline.yml` (repo staat er al in: `sjkanon/CA-Policies`), en vervang
+   in dezelfde workflow `--no-ca` door `--ca .ca-policies/controls/ca-controls.json`.
 4. **OIB macOS v2.0**: bij die import zet OIB's Restrictions zelf Apple Intelligence- en hardening-ids;
    het Restricted/Permitted-paar en Restrictions Hardening moeten dan opnieuw naast de bron gelegd worden.
 5. **CA**: controleren of CIPP `insiderRiskLevels` meestuurt (anders blokkeert `1190` iedereen); besluit
