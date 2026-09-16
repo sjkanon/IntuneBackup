@@ -45,7 +45,10 @@ Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeg
 2.0-subcategorie welke policies hem technisch invullen, in welke fase, met welke checkId — en wat
 organisatorisch nodig blijft. Gegenereerd door `scripts/generate-compliance.js` uit de `controls` in
 `_manifest.json` en de vocabulaire in `IntuneTemplate/_controls.json`; `check-scope.js` weigert een
-policy zonder of met een onbekend label.
+policy zonder of met een onbekend label. Wat er in git staat gaat alleen over Intune; de 41
+Conditional Access-policies uit [CA-Policies](https://github.com/sjkanon/CA-Policies) komen erbij met
+`--ca ../CA-Policies/controls/ca-controls.json` — nodig voor een eerlijk beeld van NIS2 (j), want MFA
+hangt vrijwel helemaal aan die repo. Zie [`scripts/README.md`](scripts/README.md#de-ca-kant-van-compliancemd).
 
 **[`extras/`](extras/README.md)** bevat wat bij een complete baseline hoort maar geen van de vijf
 CIPP-policytypes is: inschrijvingsrestricties, app-configuratie, toewijzingsfilters, App Control for
