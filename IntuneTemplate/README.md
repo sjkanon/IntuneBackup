@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# IntuneTemplate — 193 policies
+# IntuneTemplate — 195 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 110 | 1 | 6 | 11 | – | **128** |
+| [Windows](WIN/README.md) | 112 | 1 | 6 | 11 | – | **130** |
 | [macOS](MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Totaal** | **151** | **1** | **13** | **26** | **2** | **193** |
+| **Totaal** | **153** | **1** | **13** | **26** | **2** | **195** |
 
 ## Indeling
 
@@ -67,7 +67,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 |---|---|---:|---:|
 | `Baseline-Devices` | Assign to all devices | 1 | 69 |
 | `Baseline-Users` | Assign to all users | 1 | 32 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 38 |
+| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 39 |
 | `Baseline-Wacht` | Do not assign | 3 | 26 |
 | `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
 | `Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
@@ -78,7 +78,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
 | `Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
 | `Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
-| *(leeg)* | wordt niet uitgerold | – | 12 |
+| *(leeg)* | wordt niet uitgerold | – | 13 |
 
 De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 de CIPP-baseline die deze pakketten uitrolt.
@@ -89,7 +89,7 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 128 policies
+- [Windows](WIN/README.md) — 130 policies
 - [macOS](MAC/README.md) — 37 policies
 - [iOS/iPadOS](IOS/README.md) — 14 policies
 - [Android](AND/README.md) — 14 policies

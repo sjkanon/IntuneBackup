@@ -36,7 +36,7 @@ Intune-rapportage en, waar vermeld, via een generieke check.
 
 ## Samenvatting
 
-### Policies per fase — 193 Intune-policies
+### Policies per fase — 195 Intune-policies
 
 Alleen fase 1 is op alle apparaten of gebruikers toegewezen en telt als afgedwongen. De rest is
 bewust nog niet uitgerold; waarom staat per policy in [Klantkeuzes en restrisico's](#klantkeuzes-en-restrisicos).
@@ -44,11 +44,11 @@ bewust nog niet uitgerold; waarom staat per policy in [Klantkeuzes en restrisico
 | Fase | Windows | macOS | iOS/iPadOS | Android | Totaal |
 |---|---:|---:|---:|---:|---:|
 | 1 — Nu | 80 | 19 | 1 | 1 | **101** |
-| 2 — Pilot | 27 | 9 | – | 2 | **38** |
+| 2 — Pilot | 28 | 9 | – | 2 | **39** |
 | 3 — Wacht op voorwaarde | 5 | 3 | 8 | 10 | **26** |
 | 4 — Eigen groep | 7 | 4 | 4 | 1 | **16** |
-| 5 — Niet uitrollen | 9 | 2 | 1 | – | **12** |
-| **Totaal** | **128** | **37** | **14** | **14** | **193** |
+| 5 — Niet uitrollen | 10 | 2 | 1 | – | **13** |
+| **Totaal** | **130** | **37** | **14** | **14** | **195** |
 
 Toegewezen volgens `_assignments.json`: 101 (hoort gelijk te zijn aan fase 1: 101).
 
@@ -79,7 +79,7 @@ Aantal policies dat het punt technisch invult. Geen enkel punt is met techniek a
 | [(g)](#art-212g-basispraktijken-cyberhygiene-en-training) basispraktijken cyberhygiene en training | 1 | n.v.t. | 2 |
 | [(h)](#art-212h-cryptografie-en-versleuteling) cryptografie en versleuteling | 8 | n.v.t. | 7 |
 | [(i)](#art-212i-personeelsbeveiliging-toegangsbeleid-en-beheer-van-bedrijfsmiddelen) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen | 22 | n.v.t. | 37 |
-| [(j)](#art-212j-multifactorauthenticatie-en-beveiligde-communicatie) multifactorauthenticatie en beveiligde communicatie | 3 | n.v.t. | 6 |
+| [(j)](#art-212j-multifactorauthenticatie-en-beveiligde-communicatie) multifactorauthenticatie en beveiligde communicatie | 3 | n.v.t. | 7 |
 
 ### CIS Controls v8.1 en NIST CSF 2.0
 
@@ -119,7 +119,7 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | [**A.5.14** Overdragen van informatie](#a514-overdragen-van-informatie) | deels | ● Afgedekt (fase 1) | 1 | 1 | Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat. |
 | [**A.5.15** Toegangsbeveiliging](#a515-toegangsbeveiliging) | technisch | ● Afgedekt (fase 1) | 3 | 9 | Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. |
 | [**A.5.16** Identiteitsbeheer](#a516-identiteitsbeheer) | deels | ● Afgedekt (fase 1) | 2 | – | Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. |
-| [**A.5.17** Authenticatie-informatie](#a517-authenticatie-informatie) | technisch | ● Afgedekt (fase 1) | 12 | 15 | Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. |
+| [**A.5.17** Authenticatie-informatie](#a517-authenticatie-informatie) | technisch | ● Afgedekt (fase 1) | 12 | 17 | Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. |
 | **A.5.18** Toegangsrechten | deels | ○ Geen technische maatregel in de baseline | – | – | Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. |
 | [**A.5.19** Informatiebeveiliging in leveranciersrelaties](#a519-informatiebeveiliging-in-leveranciersrelaties) | organisatorisch | ◐ Alleen pilot, wacht of eigen groep | – | 2 | Leveranciersbeleid en risicobeoordeling (incl. Microsoft, AI-diensten, remote-supporttools); techniek kan alleen niet-goedgekeurde diensten blokkeren. |
 | **A.5.20** Adresseren van informatiebeveiliging in leveranciersovereenkomsten | organisatorisch | ▢ Organisatorisch | – | – | Beveiligingseisen, verwerkersovereenkomsten en auditrechten in contracten opnemen. |
@@ -181,7 +181,7 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | [**A.8.2** Speciale toegangsrechten](#a82-speciale-toegangsrechten) | technisch | ● Afgedekt (fase 1) | 6 | 3 | Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). |
 | [**A.8.3** Beperking toegang tot informatie](#a83-beperking-toegang-tot-informatie) | deels | ● Afgedekt (fase 1) | 1 | 1 | Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. |
 | **A.8.4** Toegangsbeveiliging op broncode | organisatorisch | ▢ Organisatorisch | – | – | Alleen bij eigen softwareontwikkeling: toegang tot repositories en ontwikkeltools beheren. |
-| [**A.8.5** Beveiligde authenticatie](#a85-beveiligde-authenticatie) | technisch | ● Afgedekt (fase 1) | 10 | 19 | Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). |
+| [**A.8.5** Beveiligde authenticatie](#a85-beveiligde-authenticatie) | technisch | ● Afgedekt (fase 1) | 10 | 21 | Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). |
 | [**A.8.6** Capaciteitsbeheer](#a86-capaciteitsbeheer) | deels | ● Afgedekt (fase 1) | 3 | – | Capaciteitsplanning voor netwerk, licenties en opslag. |
 | [**A.8.7** Bescherming tegen malware](#a87-bescherming-tegen-malware) | technisch | ● Afgedekt (fase 1) | 26 | 18 | Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). |
 | [**A.8.8** Beheer van technische kwetsbaarheden](#a88-beheer-van-technische-kwetsbaarheden) | deels | ● Afgedekt (fase 1) | 11 | 13 | Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. |
@@ -284,6 +284,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.md) (fase 2) — `INTUNE-BASE-124-DAccountLockout`
 - [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.md) (fase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
 - [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
+- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) (fase 2) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
 - [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
 - [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -293,6 +294,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.md) (fase 3) — `INTUNE-BASE-190-IOSDPasscode`
 - [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
 
 #### A.5.19 Informatiebeveiliging in leveranciersrelaties
 
@@ -454,6 +456,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.md) (fase 2) — `INTUNE-BASE-132-DLogonHardening`
 - [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) (fase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
 - [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
+- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) (fase 2) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
 - [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
 - [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -464,6 +467,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) (fase 3) — `INTUNE-BASE-154-MACDAzureFilesCloudKerberos`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
 
 #### A.8.6 Capaciteitsbeheer
 
@@ -1172,16 +1176,17 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.md) (fase 1) — `INTUNE-BASE-076-DPasswordless`
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) (fase 1) — `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`
 
-**Voorbereid — pilot, wacht of eigen groep (6)**
+**Voorbereid — pilot, wacht of eigen groep (7)**
 
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.md) (fase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
 - [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) (fase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
 - [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
+- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) (fase 2) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
 - [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
 - [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.md) (fase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
 
-**Alternatief, niet uitgerold (1)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`
+**Alternatief, niet uitgerold (2)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello PIN Complexity Numeric`
 
 **Bewijsroute.** TEST Policies Platform toetst 3 checkId's: `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`.
 
@@ -1259,7 +1264,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
 | **5.1** Establish and Maintain an Inventory of Accounts | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **5.2** Use Unique Passwords | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management`, `MAC - D - Recovery Lock` |
+| **5.2** Use Unique Passwords | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management`, `MAC - D - Recovery Lock`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric` |
 | **5.3** Disable Dormant Accounts | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **5.4** Restrict Administrator Privileges to Dedicated Administrator Accounts | IG1 | technisch | ● Afgedekt (fase 1) | `WIN - D - Local Administrators`, `WIN - D - Administrator Protection`, `MAC - D - Enrollment Profile Standard User Affinity` |
 | **5.5** Establish and Maintain an Inventory of Service Accounts | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
@@ -1451,9 +1456,9 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 
 | Subcategorie | Omschrijving | Status | Policies |
 |---|---|---|---|
-| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` en 5 meer |
+| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` en 7 meer |
 | **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ Geen technische maatregel in de baseline | — |
-| **PR.AA-03** | Users, services, and hardware are authenticated | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - Device Lock` en 21 meer |
+| **PR.AA-03** | Users, services, and hardware are authenticated | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - Device Lock` en 23 meer |
 | **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Afgedekt (fase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Afgedekt (fase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` en 6 meer |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Geen technische maatregel in de baseline | — |
@@ -1509,7 +1514,7 @@ Wat een managementbesluit vraagt vóór de baseline volledig staat. Elke regel k
 in het manifest; een besluit hier is een wijziging van de fase in een PR, zodat het besluit en de
 uitrol op één plek terug te vinden zijn.
 
-### A. Kies een variant — fase 5, niet uitrollen (12)
+### A. Kies een variant — fase 5, niet uitrollen (13)
 
 Alternatieven voor een policy die wél uitrolt, of klantkeuzes zonder technisch juist antwoord. Twee
 varianten tegelijk toewijzen levert in Intune een Conflict op, waarna géén van beide wordt toegepast.
@@ -1525,6 +1530,7 @@ varianten tegelijk toewijzen levert in Intune een Conflict op, waarna géén van
 | [`WIN - D - Microsoft Edge Search Engine`](IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.md) | Een klantkeuze, geen beveiligingsinstelling: welke zoekmachine standaard is hoort niet in een generieke baseline. Wijs hem alleen toe als de organisatie dat zo besloten heeft. | A.8.9 |
 | [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) | Alternatief van de Restricted-variant, voor een klant die generatieve AI op de werkplek toestaat. Wijs er één toe, nooit allebei. Samenhang: `WIN - D - Windows AI Features Restricted`, `WIN - D - Windows AI Restricted`, `WIN - U - AI Usage Control Restricted`. | A.5.10, A.5.34, A.8.1 |
 | [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) | Alternatief van de Restricted-variant, voor een klant die Recall en Click To Do toestaat. Wijs er één toe, nooit allebei. Samenhang: `WIN - D - Windows AI Restricted`. | A.5.10, A.5.34, A.8.1 |
+| [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) | Alternatief van de Alphanumeric-variant, voor een organisatie die de helpdeskkosten van een complexe PIN niet wil dragen. Wijs er één toe, nooit allebei: ze zetten dezelfde vier instellingen op een andere waarde en leveren samen een Conflict op, waarna géén van beide wordt toegepast. Samenhang: `WIN - D - Windows Hello PIN Complexity Alphanumeric`. | A.5.17, A.8.5 |
 | [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.md) | Alternatief van de Restricted-variant, voor een klant die publieke AI-diensten toestaat. Wijs er één toe, nooit allebei. Samenhang: `WIN - U - AI Usage Control Restricted`. | A.5.10, A.5.19, A.8.1, A.8.23 |
 | [`WIN - U - Microsoft Outlook Cached Mode Default`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.md) | Alternatief van de Managed-variant, voor een klant die gedeelde mailboxen wél gecachet wil hebben. Wijs er één toe, nooit twee — ze zetten dezelfde instelling en leveren samen een Conflict op. | A.8.9 |
 | [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.md) | Alternatief van de Managed-variant, voor gedeelde apparaten zonder bewaard profiel. Wijs er één toe, nooit twee — ze zetten dezelfde instelling met een andere waarde en leveren samen een Conflict op, waarna géén van beide wordt toegepast. | A.8.1, A.8.9 |
@@ -1585,7 +1591,7 @@ Klaar, maar doet pas iets als aan de voorwaarde is voldaan. Besluit: wie zorgt d
 | [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.md) | Doet niets zonder een Windows Event Collector met bron-geïnitieerde abonnementen die vanaf de apparaten bereikbaar is (VPN, Always On VPN of intern netwerk). Wie logs via Defender for Endpoint, Microsoft Sentinel of de Azure Monitor Agent centraliseert, heeft deze policy niet nodig. | A.8.15, A.8.16 |
 | [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) | Wacht op de Microsoft Defender for Endpoint-connector in Intune (Endpoint security → Microsoft Defender for Endpoint → 'Connect Windows devices … to Defender for Endpoint' aan) en op een Defender for Endpoint P1/P2- of Business-licentie. Zonder connector rapporteert elk apparaat 'niet-compliant' of 'niet beschikbaar' op deze toets. | A.5.15, A.8.7, A.8.16 |
 
-### D. Pilot — fase 2 (38)
+### D. Pilot — fase 2 (39)
 
 Merkbaar voor gebruikers of kan iets breken. Besluit: gevolgen accepteren na de pilot en naar fase 1 brengen.
 Tot dat besluit is de control die de policy invult niet afgedekt.
@@ -1623,6 +1629,7 @@ Tot dat besluit is de control die de policy invult niet afgedekt.
 | [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.md) | Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen. | A.5.10, A.5.34, A.8.1 |
 | [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.md) | Merkbaar op twee punten: 'Doorgaan op dit apparaat' (Continue experiences) verdwijnt, en een kioskapparaat dat met AutoAdminLogon werkt meldt niet meer vanzelf aan. Eerst op de pilotgroep; kiosken buiten deze policy houden. | A.8.1, A.8.9 |
 | [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) | Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos. | A.5.17, A.8.5 |
+| [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) | Gaat samen met WIN - D - Windows Hello for Business en WIN - U - Windows Hello for Business de pilot in — die staan in dezelfde fase en wachten op ditzelfde besluit. Complexiteit toewijzen aan gebruikers zonder ingerichte WHfB doet niets; andersom valt een gebruiker mét WHfB zonder deze policy terug op zes cijfers. Kijk in de pilot naar het aantal PIN-resets: dat is de kostenpost van deze variant. | A.5.17, A.8.5 |
 | [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.md) | Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen. | A.5.10, A.5.19, A.8.1, A.8.23 |
 | [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.md) | Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur. | A.8.8, A.8.19 |
 | [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.md) | Een gebruiker die gewend is een map uit zijn profiel via Verkenner te delen, ziet die optie verdwijnen. Delen via OneDrive en Teams blijft werken. | A.8.3, A.8.12 |
@@ -1683,7 +1690,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.5.14** Overdragen van informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 1 voorbereid. Organisatorisch: Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat. | (i) |
 | **A.5.15** Toegangsbeveiliging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1, 9 voorbereid. Organisatorisch: Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. | (b) (e) (i) |
 | **A.5.16** Identiteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 2 policies in fase 1. Organisatorisch: Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. | (i) |
-| **A.5.17** Authenticatie-informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 12 policies in fase 1, 15 voorbereid. Organisatorisch: Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. | (c) (e) (f) (g) (h) (i) (j) |
+| **A.5.17** Authenticatie-informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 12 policies in fase 1, 16 voorbereid. Organisatorisch: Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. | (c) (e) (f) (g) (h) (i) (j) |
 | **A.5.18** Toegangsrechten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. | — |
 | **A.5.19** Informatiebeveiliging in leveranciersrelaties | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch voorbereid: 1 policy in pilot, wacht of eigen groep. Organisatorisch: Leveranciersbeleid en risicobeoordeling (incl. Microsoft, AI-diensten, remote-supporttools); techniek kan alleen niet-goedgekeurde diensten blokkeren. | (d) |
 | **A.5.20** Adresseren van informatiebeveiliging in leveranciersovereenkomsten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Beveiligingseisen, verwerkersovereenkomsten en auditrechten in contracten opnemen. | — |
@@ -1730,7 +1737,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.8.2** Speciale toegangsrechten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 6 policies in fase 1, 3 voorbereid. Organisatorisch: Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). | (e) (i) |
 | **A.8.3** Beperking toegang tot informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 1 voorbereid. Organisatorisch: Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. | (h) (i) |
 | **A.8.4** Toegangsbeveiliging op broncode | afhankelijk | alleen van toepassing bij eigen software- of scriptontwikkeling | Organisatorisch: Alleen bij eigen softwareontwikkeling: toegang tot repositories en ontwikkeltools beheren. | — |
-| **A.8.5** Beveiligde authenticatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 10 policies in fase 1, 19 voorbereid. Organisatorisch: Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). | (e) (f) (g) (h) (i) (j) |
+| **A.8.5** Beveiligde authenticatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 10 policies in fase 1, 20 voorbereid. Organisatorisch: Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). | (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Capaciteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1. Organisatorisch: Capaciteitsplanning voor netwerk, licenties en opslag. | (c) |
 | **A.8.7** Bescherming tegen malware | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 26 policies in fase 1, 16 voorbereid. Organisatorisch: Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Beheer van technische kwetsbaarheden | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 11 policies in fase 1, 13 voorbereid. Organisatorisch: Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. | (e) (f) (h) (i) |
@@ -1765,7 +1772,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 
 | | Aantal |
 |---|---:|
-| Intune-policies met controls | 193 van 193 |
+| Intune-policies met controls | 195 van 195 |
 | Labels buiten de vocabulaire | 0 |
 | Labels met een afwijkende schrijfwijze (wel meegeteld) | 0 |
 

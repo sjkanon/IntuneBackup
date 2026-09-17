@@ -4181,6 +4181,58 @@
       }
     },
     {
+      "target": "Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric",
+      "displayName": "[Baseline] - WIN - D - Windows Hello PIN Complexity Alphanumeric",
+      "doel": "Eist een alfanumerieke Windows Hello-PIN: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken.",
+      "bron": "Eigen keuze, PassportForWork CSP — Policies/PINComplexity",
+      "note": "Zet bewust geen minimumlengte: die staat al in WIN - D - Windows Hello for Business op 6. Twee toegewezen policies die dezelfde instelling op een andere waarde zetten leveren in Intune een Conflict op, waarna geen van beide wordt toegepast; check-scope.js bewaakt dat.",
+      "herkomst": "eigen",
+      "fase": 2,
+      "faseWaarom": "Gaat samen met WIN - D - Windows Hello for Business en WIN - U - Windows Hello for Business de pilot in — die staan in dezelfde fase en wachten op ditzelfde besluit. Complexiteit toewijzen aan gebruikers zonder ingerichte WHfB doet niets; andersom valt een gebruiker mét WHfB zonder deze policy terug op zes cijfers. Kijk in de pilot naar het aantal PIN-resets: dat is de kostenpost van deze variant.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [
+          "CIS Controls v8.1 5.2 Use Unique Passwords"
+        ],
+        "nistcsf": [
+          "PR.AA-01",
+          "PR.AA-03"
+        ]
+      }
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric",
+      "displayName": "[Baseline] - WIN - D - Windows Hello PIN Complexity Numeric",
+      "doel": "Legt de numerieke Windows Hello-PIN expliciet vast: cijfers vereist, letters en leestekens geblokkeerd.",
+      "bron": "Eigen keuze, PassportForWork CSP — Policies/PINComplexity",
+      "note": "Dit is ook het gedrag van Windows zonder beleid. Expliciet vastleggen maakt het toetsbaar — 'niet ingesteld' en 'ingesteld op de standaard' zien er in een tenantexport hetzelfde uit — en het overleeft een standaardwijziging van Microsoft.",
+      "herkomst": "eigen",
+      "fase": 5,
+      "faseWaarom": "Alternatief van de Alphanumeric-variant, voor een organisatie die de helpdeskkosten van een complexe PIN niet wil dragen. Wijs er één toe, nooit allebei: ze zetten dezelfde vier instellingen op een andere waarde en leveren samen een Conflict op, waarna géén van beide wordt toegepast. Samenhang: `WIN - D - Windows Hello PIN Complexity Alphanumeric`.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [
+          "CIS Controls v8.1 5.2 Use Unique Passwords"
+        ],
+        "nistcsf": [
+          "PR.AA-01",
+          "PR.AA-03"
+        ]
+      }
+    },
+    {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Hello for Business - D - WHfB Configuration - v3.2.json",
       "target": "Baseline_WIN_D_Windows_Hello_for_Business",
       "displayName": "[Baseline] - WIN - D - Windows Hello for Business",
