@@ -31,8 +31,9 @@ Intune-rapportage en, waar vermeld, via een generieke check.
 4. [CIS Controls v8.1](#cis-controls-v81)
 5. [NIST CSF 2.0](#nist-csf-20)
 6. [Klantkeuzes en restrisico's](#klantkeuzes-en-restrisicos)
-7. [Verklaring van toepasselijkheid — startpunt](#verklaring-van-toepasselijkheid--startpunt)
-8. [Controle van de mapping](#controle-van-de-mapping)
+7. [Wat een licentie zou toevoegen](#wat-een-licentie-zou-toevoegen)
+8. [Verklaring van toepasselijkheid — startpunt](#verklaring-van-toepasselijkheid--startpunt)
+9. [Controle van de mapping](#controle-van-de-mapping)
 
 ## Samenvatting
 
@@ -1671,6 +1672,106 @@ Accepteer het risico expliciet, vul het in buiten deze baseline, of breng de voo
 **NIS2-punten zonder enige technische maatregel in fase 1:** (a). Voor deze punten rust de naleving volledig op de organisatorische maatregelen.
 
 Alle policies hebben een normverwijzing.
+
+## Wat een licentie zou toevoegen
+
+Uitgangspunt is **Microsoft 365 Business Premium** (maximaal 300 gebruikers). Wat daarin zit:
+
+- Microsoft Entra ID P1
+- Microsoft Intune Plan 1
+- Microsoft Defender for Business (Windows, Mac, Android, iOS)
+- Microsoft Defender for Office 365 Plan 1
+- Windows 11 Business (Pro-niveau, géén Enterprise)
+- Purview Information Protection en DLP
+
+Hieronder staat per licentie welke policies uit deze baseline erdoor gaan werken, en welke
+normen dat raakt. Policies die op een pilot, een klantbesluit of een inschrijving wachten staan
+hier **niet** in — die hebben hun eigen reden in [Klantkeuzes](#klantkeuzes-en-restrisicos).
+
+### Microsoft Entra ID P2
+
+*los per gebruiker, of als onderdeel van de Defender Suite for Business Premium*
+
+Risk-based Conditional Access staat in Microsofts eigen licentietabel op 'P1: No'. Vier templates in de CA-repo gebruiken userRiskLevels of signInRiskLevels als conditie; op P1 worden die condities nooit waar, dus de policies doen niets — terwijl ze wél uitrollen en in de toetsing als aanwezig gelden.
+
+| Kant | Policies |
+|---|---|
+| Conditional Access (4) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 1100 - BLOCK - HighRisk Users`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users` |
+
+**Zonder nieuwe policy, wel dekking:** Privileged Identity Management: rollen just-in-time in plaats van permanent, met goedkeuring en een auditspoor. A.5.3 staat in COMPLIANCE.md nu expliciet als 'Entra/Intune-RBAC en PIM inrichten — valt buiten deze baseline'.
+
+ISO: `A.5.3 Functiescheiding`, `A.8.2 Speciale toegangsrechten` · NIS2: `(i)`
+
+### Microsoft Defender for Cloud Apps
+
+*los, of als onderdeel van de Defender Suite for Business Premium*
+
+GLOBAL__3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.
+
+| Kant | Policies |
+|---|---|
+| Conditional Access (1) | `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` |
+
+### Microsoft Defender Suite for Business Premium
+
+*add-on op Business Premium, commercieel én non-profit*
+
+Bundelt entra-id-p2 en defender-cloud-apps, dus dezelfde vijf policies. Wat er bovenop komt is geen policy maar onderzoekscapaciteit: threat hunting, live response, zes maanden retentie en automated investigation & response.
+
+**Zonder nieuwe policy, wel dekking:** Automated investigation & response doet het beoordelen en indammen; zes maanden apparaatretentie en advanced hunting leveren het bewijsmateriaal dat A.5.28 vraagt en dat een NIS2-meldplicht binnen 24 uur onderbouwt.
+
+ISO: `A.5.7 Informatie en analyses over dreigingen`, `A.5.25 Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen`, `A.5.26 Reageren op informatiebeveiligingsincidenten`, `A.5.28 Verzamelen van bewijsmateriaal` · NIS2: `(b)`
+
+> **Let op.** Defender for Business en Defender for Endpoint Plan 2 kunnen NIET naast elkaar bestaan in één tenant. Microsoft: een organisatie met allebei 'defaults to the Defender for Business experience'. Om P2 werkelijk te krijgen moet je élke gebruiker licentiëren én Microsoft Support vragen de tenant om te zetten. Halverwege kopen levert dus de prijs van P2 met de mogelijkheden van Defender for Business.
+
+### Windows 11 Enterprise E3 of E5
+
+*aparte licentie naast Business Premium; beschikbaarheid verschilt per kanaal — navragen bij de distributeur*
+
+Personal Data Encryption en Credential Guard staan in Microsofts editietabel op 'Windows Pro: No'. Business Premium levert Windows 11 Business, dat is Pro-niveau.
+
+| Kant | Policies |
+|---|---|
+| Intune (1) | `WIN - U - Personal Data Encryption` |
+
+**Gedeeltelijk: WIN - D - Device Guard and Credential Guard.** Eén van de acht instellingen (deviceguard_lsacfgflags, Credential Guard) is Enterprise-only. De andere zeven — VBS, HVCI, System Guard Secure Launch, LSA-bescherming, Secure Boot met DMA — werken op Pro. Deze policy is dus zinvol zonder deze licentie; er zit één inerte instelling in.
+
+**Afweging.** Op een vloot met BitLocker op alle apparaten en OneDrive Known Folder Move is de marginale winst van PDE klein: de schijf is al versleuteld en de mappen staan al in de cloud. PDE beschermt tegen een ander scenario — een aanstaand, ontgrendeld toestel waarop een andere gebruiker aanmeldt. Koop dit als een contract of verklaring van toepasselijkheid het eist, niet omdat het volledig klinkt.
+
+### Microsoft Entra Workload ID Premium
+
+*aparte licentie; zit NIET in Entra ID P2 en niet in de Defender Suite*
+
+Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij de Defender Suite: P2 dekt gebruikersrisico, niet workload-risico.
+
+| Kant | Policies |
+|---|---|
+| Conditional Access (1) | `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` |
+
+### Microsoft Entra Agent ID
+
+*nog niet in elke tenant beschikbaar*
+
+De vijf agent-templates vragen agent-identiteiten. Dit is geen aankoopbeslissing maar een beschikbaarheidskwestie; ze staan daarom op report-only tot de voorziening er is.
+
+| Kant | Policies |
+|---|---|
+| Conditional Access (5) | `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources`, `GLOBAL - 1170 - BLOCK - Risky Agent Users`, `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network`, `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` |
+
+### Waar je niet voor hoeft te betalen
+
+Dingen waarvan makkelijk gedacht wordt dat ze een licentie vragen, maar die Business Premium
+al dekt. Ze staan hier zodat niemand er per ongeluk voor betaalt.
+De zes Defender-compliancepolicies in fase 3 en 4 wachten op CONFIGURATIE, niet op geld:
+de Defender–Intune-connector, en de Defender-app uitgerold via Managed Google Play of VPP.
+Defender for Business dekt Windows, Mac, Android én iOS.
+
+| Wat | Waarom het al werkt |
+|---|---|
+| Attack Surface Reduction-regels | Microsoft: 'ASR rules are a Microsoft Defender Antivirus feature available on any edition of Windows.' Alleen de gecentraliseerde rapportage vraagt meer; de regels zelf handhaven op Pro. |
+| Defender op Android en iOS | Defender for Business ondersteunt Windows, Mac, Android en iOS/iPadOS. De bijbehorende compliancepolicies wachten op de connector en de app-uitrol, niet op een licentie. |
+| Conditional Access zelf | Entra ID P1 zit in Business Premium. Alleen de vier risicogebaseerde policies vragen P2. |
+| VBS, HVCI, LSA-bescherming | Werken op Windows Pro. Alleen Credential Guard binnen diezelfde policy vraagt Enterprise. |
 
 ## Verklaring van toepasselijkheid — startpunt
 

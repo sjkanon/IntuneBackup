@@ -1,0 +1,181 @@
+{
+  "_comment": [
+    "Welke licentie welke policy in deze baseline mogelijk maakt, en welke normen daaraan hangen.",
+    "Gelezen door scripts/generate-compliance.js; check-scope.js bewaakt dat elke genoemde target",
+    "bestaat.",
+    "",
+    "WAAROM DIT BESTAAT",
+    "",
+    "COMPLIANCE.md markeert een control als '○ geen technische maatregel in de baseline' zonder te",
+    "zeggen waaróm hij leeg is. Dat is voor een CISO het verschil tussen twee heel andere gesprekken:",
+    "'dit vraagt een proces dat wij moeten inrichten' of 'dit kost een SKU'. Zonder dat onderscheid",
+    "leest elke lege regel als een verwijt.",
+    "",
+    "WAT HIER NIET IN HOORT",
+    "",
+    "Policies die op een pilot, een klantbesluit of een inschrijving wachten. Die staan al in fase 2,",
+    "3 of 4 met hun eigen faseWaarom. Dit bestand gaat uitsluitend over wat met geld op te lossen is.",
+    "Vandaag zijn dat er vijf — vier CA-policies en één Intune-policy.",
+    "",
+    "Prijzen staan er bewust niet in: die verschillen per kanaal, per non-profittarief en per jaar.",
+    "Een prijs in een repo is binnen een kwartaal onjuist en wordt dan alsnog geciteerd."
+  ],
+
+  "basis": {
+    "id": "business-premium",
+    "displayName": "Microsoft 365 Business Premium",
+    "grens": "maximaal 300 gebruikers",
+    "bevat": [
+      "Microsoft Entra ID P1",
+      "Microsoft Intune Plan 1",
+      "Microsoft Defender for Business (Windows, Mac, Android, iOS)",
+      "Microsoft Defender for Office 365 Plan 1",
+      "Windows 11 Business (Pro-niveau, géén Enterprise)",
+      "Purview Information Protection en DLP"
+    ],
+    "bron": "https://learn.microsoft.com/en-us/microsoft-365/admin/security-and-compliance/add-defender-suite-business-premium"
+  },
+
+  "licenties": [
+    {
+      "id": "entra-id-p2",
+      "displayName": "Microsoft Entra ID P2",
+      "verkrijgbaar": "los per gebruiker, of als onderdeel van de Defender Suite for Business Premium",
+      "bron": "https://learn.microsoft.com/en-us/entra/id-protection/overview-identity-protection",
+      "waarom": "Risk-based Conditional Access staat in Microsofts eigen licentietabel op 'P1: No'. Vier templates in de CA-repo gebruiken userRiskLevels of signInRiskLevels als conditie; op P1 worden die condities nooit waar, dus de policies doen niets — terwijl ze wél uitrollen en in de toetsing als aanwezig gelden.",
+      "ontgrendelt": {
+        "intune": [],
+        "ca": [
+          "GLOBAL__1090__BLOCK__HighRisk_SignIns",
+          "GLOBAL__1100__BLOCK__HighRisk_Users",
+          "GLOBAL__2010__GRANT__MediumRisk_Signins",
+          "GLOBAL__2020__GRANT__MediumRisk_Users"
+        ]
+      },
+      "extraControls": {
+        "_comment": "Wat de licentie invult zónder dat er een policy in deze baseline bij komt. PIM is geen CA-policy en geen Intune-policy, maar wél het antwoord op A.5.3 en A.8.2.",
+        "iso": ["A.5.3 Functiescheiding", "A.8.2 Speciale toegangsrechten"],
+        "nis2": ["art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"],
+        "hoe": "Privileged Identity Management: rollen just-in-time in plaats van permanent, met goedkeuring en een auditspoor. A.5.3 staat in COMPLIANCE.md nu expliciet als 'Entra/Intune-RBAC en PIM inrichten — valt buiten deze baseline'."
+      }
+    },
+
+    {
+      "id": "defender-cloud-apps",
+      "displayName": "Microsoft Defender for Cloud Apps",
+      "verkrijgbaar": "los, of als onderdeel van de Defender Suite for Business Premium",
+      "waarom": "GLOBAL__3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.",
+      "ontgrendelt": {
+        "intune": [],
+        "ca": ["GLOBAL__3060__SESSION__Defender_for_Cloud_Apps"]
+      }
+    },
+
+    {
+      "id": "defender-suite-bp",
+      "displayName": "Microsoft Defender Suite for Business Premium",
+      "verkrijgbaar": "add-on op Business Premium, commercieel én non-profit",
+      "bron": "https://learn.microsoft.com/en-us/microsoft-365/admin/security-and-compliance/add-defender-suite-business-premium",
+      "bevat": [
+        "Microsoft Entra ID P2",
+        "Microsoft Defender for Endpoint Plan 2",
+        "Microsoft Defender for Office 365 Plan 2",
+        "Microsoft Defender for Identity",
+        "Microsoft Defender for Cloud Apps"
+      ],
+      "waarom": "Bundelt entra-id-p2 en defender-cloud-apps, dus dezelfde vijf policies. Wat er bovenop komt is geen policy maar onderzoekscapaciteit: threat hunting, live response, zes maanden retentie en automated investigation & response.",
+      "ontgrendelt": {
+        "intune": [],
+        "ca": []
+      },
+      "extraControls": {
+        "_comment": "Defender for Endpoint P2 voegt geen policy toe aan deze baseline, maar vult wel vier ISO-controls die nu als organisatorisch of leeg staan.",
+        "iso": [
+          "A.5.7 Informatie en analyses over dreigingen",
+          "A.5.25 Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen",
+          "A.5.26 Reageren op informatiebeveiligingsincidenten",
+          "A.5.28 Verzamelen van bewijsmateriaal"
+        ],
+        "nis2": ["art. 21(2)(b) incidentbehandeling"],
+        "hoe": "Automated investigation & response doet het beoordelen en indammen; zes maanden apparaatretentie en advanced hunting leveren het bewijsmateriaal dat A.5.28 vraagt en dat een NIS2-meldplicht binnen 24 uur onderbouwt."
+      },
+      "waarschuwing": "Defender for Business en Defender for Endpoint Plan 2 kunnen NIET naast elkaar bestaan in één tenant. Microsoft: een organisatie met allebei 'defaults to the Defender for Business experience'. Om P2 werkelijk te krijgen moet je élke gebruiker licentiëren én Microsoft Support vragen de tenant om te zetten. Halverwege kopen levert dus de prijs van P2 met de mogelijkheden van Defender for Business."
+    },
+
+    {
+      "id": "windows-enterprise-e3",
+      "displayName": "Windows 11 Enterprise E3 of E5",
+      "verkrijgbaar": "aparte licentie naast Business Premium; beschikbaarheid verschilt per kanaal — navragen bij de distributeur",
+      "bron": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/personal-data-encryption/",
+      "waarom": "Personal Data Encryption en Credential Guard staan in Microsofts editietabel op 'Windows Pro: No'. Business Premium levert Windows 11 Business, dat is Pro-niveau.",
+      "ontgrendelt": {
+        "intune": ["Baseline_WIN_U_Personal_Data_Encryption"],
+        "ca": []
+      },
+      "gedeeltelijk": [
+        {
+          "target": "Baseline_WIN_D_Device_Guard_and_Credential_Guard",
+          "wat": "Eén van de acht instellingen (deviceguard_lsacfgflags, Credential Guard) is Enterprise-only. De andere zeven — VBS, HVCI, System Guard Secure Launch, LSA-bescherming, Secure Boot met DMA — werken op Pro. Deze policy is dus zinvol zonder deze licentie; er zit één inerte instelling in."
+        }
+      ],
+      "afweging": "Op een vloot met BitLocker op alle apparaten en OneDrive Known Folder Move is de marginale winst van PDE klein: de schijf is al versleuteld en de mappen staan al in de cloud. PDE beschermt tegen een ander scenario — een aanstaand, ontgrendeld toestel waarop een andere gebruiker aanmeldt. Koop dit als een contract of verklaring van toepasselijkheid het eist, niet omdat het volledig klinkt."
+    },
+
+    {
+      "id": "workload-identities-premium",
+      "displayName": "Microsoft Entra Workload ID Premium",
+      "verkrijgbaar": "aparte licentie; zit NIET in Entra ID P2 en niet in de Defender Suite",
+      "waarom": "Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij de Defender Suite: P2 dekt gebruikersrisico, niet workload-risico.",
+      "ontgrendelt": {
+        "intune": [],
+        "ca": ["GLOBAL__1140__BLOCK__Managed_Identities_At_Risk"]
+      }
+    },
+
+    {
+      "id": "entra-agent-id",
+      "displayName": "Microsoft Entra Agent ID",
+      "verkrijgbaar": "nog niet in elke tenant beschikbaar",
+      "waarom": "De vijf agent-templates vragen agent-identiteiten. Dit is geen aankoopbeslissing maar een beschikbaarheidskwestie; ze staan daarom op report-only tot de voorziening er is.",
+      "ontgrendelt": {
+        "intune": [],
+        "ca": [
+          "GLOBAL__1150__BLOCK__Risky_Agent_Identities",
+          "GLOBAL__1160__BLOCK__Agent_Identities_To_Agent_Resources",
+          "GLOBAL__1170__BLOCK__Risky_Agent_Users",
+          "GLOBAL__1180__BLOCK__Agent_Users_Outside_Compliant_Network",
+          "GLOBAL__2160__GRANT__Agent_Users_Compliant_Device"
+        ]
+      }
+    }
+  ],
+
+  "geenLicentie": {
+    "_comment": [
+      "Dingen waarvan makkelijk gedacht wordt dat ze een licentie vragen, maar die Business Premium",
+      "al dekt. Ze staan hier zodat niemand er per ongeluk voor betaalt.",
+      "",
+      "De zes Defender-compliancepolicies in fase 3 en 4 wachten op CONFIGURATIE, niet op geld:",
+      "de Defender–Intune-connector, en de Defender-app uitgerold via Managed Google Play of VPP.",
+      "Defender for Business dekt Windows, Mac, Android én iOS."
+    ],
+    "items": [
+      {
+        "wat": "Attack Surface Reduction-regels",
+        "waarom": "Microsoft: 'ASR rules are a Microsoft Defender Antivirus feature available on any edition of Windows.' Alleen de gecentraliseerde rapportage vraagt meer; de regels zelf handhaven op Pro."
+      },
+      {
+        "wat": "Defender op Android en iOS",
+        "waarom": "Defender for Business ondersteunt Windows, Mac, Android en iOS/iPadOS. De bijbehorende compliancepolicies wachten op de connector en de app-uitrol, niet op een licentie."
+      },
+      {
+        "wat": "Conditional Access zelf",
+        "waarom": "Entra ID P1 zit in Business Premium. Alleen de vier risicogebaseerde policies vragen P2."
+      },
+      {
+        "wat": "VBS, HVCI, LSA-bescherming",
+        "waarom": "Werken op Windows Pro. Alleen Credential Guard binnen diezelfde policy vraagt Enterprise."
+      }
+    ]
+  }
+}

@@ -39,6 +39,7 @@ const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
+const LICENTIES_PATH = path.join(TEMPLATE_DIR, "_licenties.json");
 const BASELINE_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
 const OUTPUT_PATH = path.join(REPO_ROOT, "COMPLIANCE.md");
 /**
@@ -330,8 +331,9 @@ function sectionIntro(ctx) {
     "4. [CIS Controls v8.1](#cis-controls-v81)",
     "5. [NIST CSF 2.0](#nist-csf-20)",
     "6. [Klantkeuzes en restrisico's](#klantkeuzes-en-restrisicos)",
-    "7. [Verklaring van toepasselijkheid — startpunt](#verklaring-van-toepasselijkheid--startpunt)",
-    "8. [Controle van de mapping](#controle-van-de-mapping)",
+    "7. [Wat een licentie zou toevoegen](#wat-een-licentie-zou-toevoegen)",
+    "8. [Verklaring van toepasselijkheid — startpunt](#verklaring-van-toepasselijkheid--startpunt)",
+    "9. [Controle van de mapping](#controle-van-de-mapping)",
     "",
   ].join("\n");
 }
@@ -614,6 +616,78 @@ function sectionKeuzes(ctx, data) {
   ].join("\n");
 }
 
+/**
+ * Wat met geld op te lossen is, en wat niet.
+ *
+ * Een control die als "○ geen technische maatregel" in dit document staat, zegt niet waaróm hij
+ * leeg is. Voor een CISO is dat het verschil tussen twee heel andere gesprekken: een proces dat
+ * de organisatie moet inrichten, of een SKU die je koopt. Zonder dat onderscheid leest elke lege
+ * regel als een verwijt, en dat is precies het soort document dat niemand meer serieus neemt.
+ */
+function sectionLicenties(ctx) {
+  const { licenties, templateByTarget } = ctx;
+  if (!licenties) return "";
+
+  const regels = [
+    "## Wat een licentie zou toevoegen",
+    "",
+    `Uitgangspunt is **${licenties.basis.displayName}** (${licenties.basis.grens}). Wat daarin zit:`,
+    "",
+    ...licenties.basis.bevat.map((x) => `- ${x}`),
+    "",
+    "Hieronder staat per licentie welke policies uit deze baseline erdoor gaan werken, en welke",
+    "normen dat raakt. Policies die op een pilot, een klantbesluit of een inschrijving wachten staan",
+    "hier **niet** in — die hebben hun eigen reden in [Klantkeuzes](#klantkeuzes-en-restrisicos).",
+    "",
+  ];
+
+  const metPolicies = licenties.licenties.filter(
+    (l) => (l.ontgrendelt.intune || []).length + (l.ontgrendelt.ca || []).length > 0 || l.extraControls || (l.gedeeltelijk || []).length > 0
+  );
+
+  for (const lic of metPolicies) {
+    regels.push(`### ${lic.displayName}`, "");
+    regels.push(`*${lic.verkrijgbaar}*`, "");
+    regels.push(lic.waarom, "");
+
+    const intune = (lic.ontgrendelt.intune || []).map((t) => {
+      const template = templateByTarget.get(t);
+      return template ? `\`${shortName(template.displayName)}\`` : `\`${t}\` *(bestaat niet)*`;
+    });
+    const ca = (lic.ontgrendelt.ca || []).map((t) => `\`${t.replace(/__/g, " - ").replace(/_/g, " ")}\``);
+
+    if (intune.length || ca.length) {
+      regels.push("| Kant | Policies |", "|---|---|");
+      if (intune.length) regels.push(`| Intune (${intune.length}) | ${intune.join(", ")} |`);
+      if (ca.length) regels.push(`| Conditional Access (${ca.length}) | ${ca.join(", ")} |`);
+      regels.push("");
+    }
+
+    for (const deel of lic.gedeeltelijk || []) {
+      const template = templateByTarget.get(deel.target);
+      regels.push(`**Gedeeltelijk: ${template ? shortName(template.displayName) : deel.target}.** ${deel.wat}`, "");
+    }
+
+    if (lic.extraControls) {
+      const iso = (lic.extraControls.iso || []).map((x) => `\`${x}\``).join(", ");
+      const nis2 = (lic.extraControls.nis2 || []).map((x) => `\`${x.match(/\([a-j]\)/)[0]}\``).join(", ");
+      regels.push(`**Zonder nieuwe policy, wel dekking:** ${lic.extraControls.hoe}`, "");
+      if (iso) regels.push(`ISO: ${iso}${nis2 ? ` · NIS2: ${nis2}` : ""}`, "");
+    }
+
+    if (lic.waarschuwing) regels.push(`> **Let op.** ${lic.waarschuwing}`, "");
+    if (lic.afweging) regels.push(`**Afweging.** ${lic.afweging}`, "");
+  }
+
+  regels.push("### Waar je niet voor hoeft te betalen", "");
+  regels.push(...(licenties.geenLicentie._comment || []).filter(Boolean).map((r) => r), "");
+  regels.push("| Wat | Waarom het al werkt |", "|---|---|");
+  for (const item of licenties.geenLicentie.items) regels.push(`| ${escapePipes(item.wat)} | ${escapePipes(item.waarom)} |`);
+  regels.push("");
+
+  return regels.join("\n");
+}
+
 function sectionSoa(ctx, data) {
   const { voc } = ctx;
   const out = [
@@ -690,9 +764,24 @@ function main() {
   if (!baselinePresent) console.warn("Let op: baseline/intune/baseline-v1.0.json ontbreekt — geen checkId's. Draai eerst generate-baseline.js.");
   if (!ca.present && !ca.uitgezet) console.warn(`Conditional Access niet meegenomen: ${ca.path} bestaat niet.`);
 
-  const ctx = { voc, manifest, assignments, templates, checkIds, ca, baselinePresent };
+  const licenties = fs.existsSync(LICENTIES_PATH) ? readJson(LICENTIES_PATH) : null;
+  const templateByTarget = new Map(templates.map((t) => [t.baseName, t]));
+
+  // Een licentieregel die naar een verdwenen template wijst, belooft een dekking die er niet is.
+  if (licenties) {
+    for (const lic of licenties.licenties) {
+      for (const t of lic.ontgrendelt.intune || []) {
+        if (!templateByTarget.has(t)) console.warn(`  licentie "${lic.displayName}" noemt ${t}, maar dat template bestaat niet`);
+      }
+      for (const deel of lic.gedeeltelijk || []) {
+        if (!templateByTarget.has(deel.target)) console.warn(`  licentie "${lic.displayName}" noemt ${deel.target}, maar dat template bestaat niet`);
+      }
+    }
+  }
+
+  const ctx = { voc, manifest, assignments, templates, checkIds, ca, baselinePresent, licenties, templateByTarget };
   const data = buildIndex(ctx);
-  const content = [sectionIntro(ctx), sectionSummary(ctx, data), sectionIso(ctx, data), sectionNis2(ctx, data), sectionCis(ctx, data), sectionCsf(ctx, data), sectionKeuzes(ctx, data), sectionSoa(ctx, data), sectionControle(ctx, data)].join("\n");
+  const content = [sectionIntro(ctx), sectionSummary(ctx, data), sectionIso(ctx, data), sectionNis2(ctx, data), sectionCis(ctx, data), sectionCsf(ctx, data), sectionKeuzes(ctx, data), sectionLicenties(ctx), sectionSoa(ctx, data), sectionControle(ctx, data)].join("\n");
 
   const before = fs.existsSync(OUTPUT_PATH) ? fs.readFileSync(OUTPUT_PATH, "utf8") : null;
   if (opts.check) {
