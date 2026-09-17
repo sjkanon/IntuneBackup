@@ -13050,6 +13050,88 @@
           "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
         }
       ]
+    },
+    {
+      "checkId": "INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-hello-passkey-pin-complexity-alphanumeric",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters_1"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
+    },
+    {
+      "checkId": "INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric",
+      "severity": "medium",
+      "tags": [
+        "intune",
+        "settings-catalog",
+        "windows-hello-passkey-pin-complexity-numeric",
+        "windows",
+        "device-scope"
+      ],
+      "type": "settings-catalog-match",
+      "what": "Bevat de tenant een Settings Catalog-policy die overeenkomt met de afgesproken baseline-policy \"[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric\"?",
+      "why": "Onderdeel van de met de klant afgesproken, Defender-gebaseerde Intune-baseline (bron: IntuneBackup/IntuneTemplate). Een tenant die hiervan afwijkt voldoet niet (meer) aan de afgesproken beveiligingsstandaard, ook al kan de policy op naam anders heten.",
+      "source": "IntuneBackup/IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.json (afgesproken baseline, Defender-gebaseerd)",
+      "params": {
+        "settings": [
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters_2"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters",
+            "expectedValue": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters_2"
+          }
+        ]
+      },
+      "learnMoreLinks": [
+        {
+          "label": "Settings Catalog in Microsoft Intune",
+          "url": "https://learn.microsoft.com/mem/intune/configuration/settings-catalog"
+        }
+      ]
     }
   ]
 }

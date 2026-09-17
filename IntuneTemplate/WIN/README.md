@@ -1,17 +1,17 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
-# Windows — 130 policies
+# Windows — 132 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 112 |
+| `SettingsCatalog/` | 114 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 96
+## Device-scoped (D) — 98
 
 Toewijzen aan apparaatgroepen.
 
@@ -102,6 +102,8 @@ Toewijzen aan apparaatgroepen.
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) | Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID. | Settings Catalog | 2 | All Devices | `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust` |
 | [**Windows Hello for Business Multi User**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) | Windows Hello for Business voor gedeelde apparaten waar meerdere gebruikers op inloggen. Zelfde eisen als de gewone apparaatpolicy, maar zonder inrichting direct na het aanmelden: op een gedeeld apparaat zou elke gebruiker anders bij de eerste aanmelding door de PIN-inrichting worden geleid. | Settings Catalog | 5 | — | `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser` |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) | Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning. | Settings Catalog | 6 | — | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
+| [**Windows Hello Passkey PIN Complexity Alphanumeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.md) | Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken. | Settings Catalog | 4 | — | `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric` |
+| [**Windows Hello Passkey PIN Complexity Numeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.md) | Legt de numerieke PIN voor de Windows Hello for Business-passkey expliciet vast: cijfers vereist, letters en leestekens geblokkeerd. | Settings Catalog | 4 | — | `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric` |
 | [**Windows Hello PIN Complexity Alphanumeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) | Eist een alfanumerieke Windows Hello-PIN: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken. | Settings Catalog | 4 | — | `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric` |
 | [**Windows Hello PIN Complexity Numeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) | Legt de numerieke Windows Hello-PIN expliciet vast: cijfers vereist, letters en leestekens geblokkeerd. | Settings Catalog | 4 | — | `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric` |
 | [**Windows LAPS**](SettingsCatalog/Baseline_WIN_D_Windows_LAPS.md) | Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat. | Settings Catalog | 12 | All Devices | `INTUNE-BASE-027-WindowsLAPSPolicy` |

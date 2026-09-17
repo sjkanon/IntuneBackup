@@ -1,0 +1,78 @@
+{
+    "name": "[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric",
+    "description": "Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken. Geldt alleen voor de PIN van de Windows Hello for Business-passkey, niet voor de PIN van een FIDO2-beveiligingssleutel: die staat op de sleutel zelf en wordt daar ingesteld. De minimumlengte zit hier bewust niet in; die staat al op 6 in WIN - D - Windows Hello for Business. Wijs er altijd maar een van de vier PIN-complexiteitspolicies toe: twee toegewezen policies die dezelfde instelling op een andere waarde zetten leveren een Conflict op, waarna geen van beide wordt toegepast.",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}",
+                "settingInstanceTemplateReference": null,
+                "groupSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationGroupSettingValue",
+                        "settingValueTemplateReference": null,
+                        "children": [
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_digits_1",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_lowercaseletters_1",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_uppercaseletters_1",
+                                    "children": []
+                                }
+                            },
+                            {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                                "settingDefinitionId": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters",
+                                "settingInstanceTemplateReference": null,
+                                "choiceSettingValue": {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "device_vendor_msft_passportforwork_{tenantid}_policies_pincomplexity_specialcharacters_1",
+                                    "children": []
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -2,35 +2,35 @@
 
 # Intune-baseline — overzicht
 
-195 policies over 4 platformen, met
+197 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 195 |
-| Baseline-checks | 160 |
-| Zonder toewijzing (bewust) | 94 |
+| Policies | 197 |
+| Baseline-checks | 162 |
+| Zonder toewijzing (bewust) | 96 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.md) | 112 | 1 | 6 | 11 | – | **130** |
+| [Windows](IntuneTemplate/WIN/README.md) | 114 | 1 | 6 | 11 | – | **132** |
 | [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](IntuneTemplate/WIN/README.md) — 130 policies
+- [Windows](IntuneTemplate/WIN/README.md) — 132 policies
 - [macOS](IntuneTemplate/MAC/README.md) — 37 policies
 - [iOS/iPadOS](IntuneTemplate/IOS/README.md) — 14 policies
 - [Android](IntuneTemplate/AND/README.md) — 14 policies
 
 ## Normenkader
 
-195 van de 195 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+197 van de 197 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 31 van de 93 Annex A-controls.
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
@@ -160,7 +160,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `WIN - D - Windows AI Features Restricted` | Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen. |
 | `WIN - D - Windows Component Hardening` | Merkbaar op twee punten: 'Doorgaan op dit apparaat' (Continue experiences) verdwijnt, en een kioskapparaat dat met AutoAdminLogon werkt meldt niet meer vanzelf aan. Eerst op de pilotgroep; kiosken buiten deze policy houden. |
 | `WIN - D - Windows Hello for Business` | Elke gebruiker wordt bij de eerstvolgende aanmelding door de PIN-inrichting geleid, en een apparaat zonder TPM krijgt WHfB niet. Gaat samen met WIN - U - Windows Hello for Business de pilot in: de een in de pilot en de ander op iedereen maakt de pilot zinloos. |
-| `WIN - D - Windows Hello PIN Complexity Alphanumeric` | Gaat samen met WIN - D - Windows Hello for Business en WIN - U - Windows Hello for Business de pilot in — die staan in dezelfde fase en wachten op ditzelfde besluit. Complexiteit toewijzen aan gebruikers zonder ingerichte WHfB doet niets; andersom valt een gebruiker mét WHfB zonder deze policy terug op zes cijfers. Kijk in de pilot naar het aantal PIN-resets: dat is de kostenpost van deze variant. |
+| `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` | Gaat samen met WIN - D - Windows Hello for Business en WIN - U - Windows Hello for Business de pilot in — die staan in dezelfde fase en wachten op ditzelfde besluit. Complexiteit toewijzen aan gebruikers zonder ingerichte WHfB doet niets; andersom valt een gebruiker mét WHfB zonder deze policy terug op zes cijfers. Kijk in de pilot naar het aantal PIN-resets: dat is de kostenpost van deze variant. Er zijn vier PIN-complexiteitspolicies en er mag er altijd maar één toegewezen zijn: `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` / `Numeric` (de passkey-benoemde set) en `WIN - D - Windows Hello PIN Complexity Alphanumeric` / `Numeric` (de generieke, ouder). Twee toegewezen policies die dezelfde instelling op een andere waarde zetten leveren in Intune een Conflict op, waarna géén van beide wordt toegepast. |
 | `WIN - U - AI Usage Control Restricted` | Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen. |
 | `WIN - U - Compliance OS Version` | Een apparaat onder de ondergrens wordt niet-compliant en verliest daarmee toegang via Conditional Access. Kijk eerst in de rapportage hoeveel apparaten dat raakt — het antwoord hoort nul te zijn, maar dat moet je gezien hebben en niet aannemen. Respijt staat op 72 uur. |
 | `WIN - U - File Sharing Restrictions` | Een gebruiker die gewend is een map uit zijn profiel via Verkenner te delen, ziet die optie verdwijnen. Delen via OneDrive en Teams blijft werken. |
@@ -180,8 +180,8 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `AND - U - Corporate AI Restricted` | Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een klantbesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een klant die deze assistenten toestaat. |
 | `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
-Zonder toewijzing staan er 94: de 39 hierboven, 26 die op een voorwaarde
-wachten, 16 voor een eigen groep en 13 die niet uitrollen. Die laatste twee zijn een
+Zonder toewijzing staan er 96: de 39 hierboven, 26 die op een voorwaarde
+wachten, 16 voor een eigen groep en 15 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

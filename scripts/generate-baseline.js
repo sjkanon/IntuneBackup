@@ -400,6 +400,12 @@ const CHECK_NUMBERS = {
   Baseline_WIN_D_Windows_Event_Forwarding: 207,
   Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk: 208,
   Baseline_WIN_U_File_Sharing_Restrictions: 209,
+  // 210 en 211 zijn op 16 september uitgedeeld en meteen gepubliceerd; ze staan hier omdat de
+  // passkey-benoemde kopieën alfabetisch vóór hen vallen en anders alles zouden opschuiven.
+  Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric: 210,
+  Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric: 211,
+  Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric: 212,
+  Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric: 213,
 };
 
 /**
