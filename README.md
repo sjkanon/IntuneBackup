@@ -40,6 +40,9 @@ flowchart LR
 **[OVERZICHT.md](OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
 en wat er in de tenant nog moet gebeuren.
 
+**[STRUCTUUR.md](STRUCTUUR.md)** is de plattegrond: welke map wat bevat, welk script wat leest en
+schrijft, en aan welke systemen de repo vastzit.
+
 **[COMPLIANCE.md](COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
 Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
 2.0-subcategorie welke policies hem technisch invullen, in welke fase, met welke checkId — en wat
