@@ -6,11 +6,11 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
 overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-193 policies over vier platformen:
+197 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 110 | 1 | 6 | 11 | – | **128** |
+| [Windows](IntuneTemplate/WIN/README.md) | 114 | 1 | 6 | 11 | – | **132** |
 | [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -18,7 +18,7 @@ overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>193 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>197 policies<br/><i>de bron</i>"]
   BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
@@ -39,6 +39,9 @@ flowchart LR
 
 **[OVERZICHT.md](OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
 en wat er in de tenant nog moet gebeuren.
+
+**[STRUCTUUR.md](STRUCTUUR.md)** is de plattegrond: welke map wat bevat, welk script wat leest en
+schrijft, en aan welke systemen de repo vastzit.
 
 **[COMPLIANCE.md](COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
 Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
@@ -103,11 +106,11 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
-| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 98 |
-| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 25 |
-| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 10 |
-| 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 9 |
-| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 7 |
+| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 101 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 39 |
+| 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 26 |
+| 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 16 |
+| 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 15 |
 
 Alleen fase 1 staat in `_assignments.json`. `check-scope.js` bewaakt dat die twee niet uit
 elkaar lopen: een fase-1-policy zonder toewijzing wordt stilzwijgend niet uitgerold, en een
