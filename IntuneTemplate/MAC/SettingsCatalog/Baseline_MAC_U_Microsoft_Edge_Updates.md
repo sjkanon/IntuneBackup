@@ -14,6 +14,8 @@ Hoe en wanneer Edge op de Mac zichzelf bijwerkt.
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Updates |
 | Bestand | [`Baseline_MAC_U_Microsoft_Edge_Updates.json`](Baseline_MAC_U_Microsoft_Edge_Updates.json) |
 
+> Aangevuld tot hetzelfde gedrag als de Windows-tegenhanger. relaunchnotification stond al op Required (bij macOS is 1 = Required en 0 = Recommended, omgekeerd aan wat je zou verwachten), maar zonder periode eindigt die melding nergens. Nu relaunchnotificationperiod op 259200000 milliseconden, 3 dagen en daarmee gelijk aan Windows, en relaunchfastifoutdated op 7 dagen. Een herstartvenster kent de macOS-catalogus niet (com.apple.managedclient.preferences_relaunchwindow bestaat daar niet), dus dat ene verschil met Windows blijft staan.
+
 ## Normen
 
 | Kader | Controls |
@@ -25,7 +27,7 @@ Hoe en wanneer Edge op de Mac zichzelf bijwerkt.
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
 
-## Instellingen — 7
+## Instellingen — 9
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -39,6 +41,8 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules_item_rulevalue` | com.microsoft.EdgeUpdater |
 | `com.apple.managedclient.preferences_componentupdatesenabled` | true |
 | `com.apple.managedclient.preferences_relaunchnotification` | 1 |
+| `com.apple.managedclient.preferences_relaunchnotificationperiod` | 259200000 |
+| `com.apple.managedclient.preferences_relaunchfastifoutdated` | 7 |
 
 ---
 

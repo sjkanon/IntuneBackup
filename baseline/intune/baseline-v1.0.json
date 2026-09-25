@@ -1,7 +1,7 @@
 {
   "category": "intune",
   "version": "baseline-v1.0",
-  "reviewedAt": "2026-09-17",
+  "reviewedAt": "2026-09-25",
   "rules": [
     {
       "checkId": "INTUNE-BASE-001-DeviceEncryptionRequired",
@@ -3576,6 +3576,14 @@
           {
             "settingDefinitionId": "com.apple.managedclient.preferences_relaunchnotification",
             "expectedValue": "com.apple.managedclient.preferences_relaunchnotification_1"
+          },
+          {
+            "settingDefinitionId": "com.apple.managedclient.preferences_relaunchnotificationperiod",
+            "expectedValue": 259200000
+          },
+          {
+            "settingDefinitionId": "com.apple.managedclient.preferences_relaunchfastifoutdated",
+            "expectedValue": 7
           }
         ]
       },
@@ -5540,6 +5548,22 @@
           {
             "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod_part_autoupdatecheckperiod",
             "expectedValue": 240
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow_relaunchwindow",
+            "expectedValue": "{\"entries\":[{\"duration_mins\":780,\"start\":{\"hour\":17,\"minute\":0}}]}"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated",
+            "expectedValue": "device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated_1"
+          },
+          {
+            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated_relaunchfastifoutdated",
+            "expectedValue": 7
           }
         ]
       },

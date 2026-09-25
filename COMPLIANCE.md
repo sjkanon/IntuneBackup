@@ -16,12 +16,12 @@ Intune-rapportage en, waar vermeld, via een generieke check.
 
 | Status | Betekenis |
 |---|---|
-| ● Afgedekt (fase 1) | minstens één policy in fase 1 dwingt de maatregel af of toetst hem |
-| ◐ Alleen pilot, wacht of eigen groep | de policy bestaat, maar staat in fase 2, 3 of 4: nog niet op alle apparaten |
+| ● Afgedekt (fase 1) | minstens één policy in fase 1 of een actieve CA-policy dwingt de maatregel af of toetst hem |
+| ◐ Alleen pilot, wacht of eigen groep | de policy bestaat, maar staat in fase 2, 3 of 4 (of in report-only): nog niet op alle apparaten |
 | ▢ Organisatorisch | niet met endpoint- of identitybeleid in te vullen: proces, mensen, fysiek of een ander technisch domein |
 | ○ Geen technische maatregel in de baseline | wel technisch in te vullen, maar deze baseline doet het niet (of alleen met een alternatief in fase 5) |
 
-> **Conditional Access is bewust niet meegenomen** (`--no-ca`). MFA (NIS2 (j)) en toegangsvoorwaarden steunen grotendeels op CA; de verantwoording daarvan staat in de CA-repo.
+Conditional Access is meegenomen uit `../CA-Policies/controls/ca-controls.json` (41 policies).
 
 ## Inhoud
 
@@ -37,7 +37,7 @@ Intune-rapportage en, waar vermeld, via een generieke check.
 
 ## Samenvatting
 
-### Policies per fase — 197 Intune-policies
+### Policies per fase — 197 Intune-policies en 41 CA-policies
 
 Alleen fase 1 is op alle apparaten of gebruikers toegewezen en telt als afgedwongen. De rest is
 bewust nog niet uitgerold; waarom staat per policy in [Klantkeuzes en restrisico's](#klantkeuzes-en-restrisicos).
@@ -53,6 +53,7 @@ bewust nog niet uitgerold; waarom staat per policy in [Klantkeuzes en restrisico
 
 Toegewezen volgens `_assignments.json`: 101 (hoort gelijk te zijn aan fase 1: 101).
 
+Conditional Access: 24 actief, 6 report-only, 11 uit of onbekend.
 
 ### ISO/IEC 27001:2022 Annex A — 93 controls
 
@@ -60,10 +61,10 @@ Kolommen: of de control volgens de vocabulaire met endpoint-/identitybeleid in t
 
 | Status | Technisch (10) | Deels (37) | Organisatorisch (46) | Totaal |
 |---|---:|---:|---:|---:|
-| ● Afgedekt (fase 1) | 10 | 21 | 0 | **31** |
+| ● Afgedekt (fase 1) | 10 | 26 | 0 | **36** |
 | ◐ Alleen pilot, wacht of eigen groep | 0 | 3 | 1 | **4** |
 | ▢ Organisatorisch | 0 | 0 | 45 | **45** |
-| ○ Geen technische maatregel in de baseline | 0 | 13 | 0 | **13** |
+| ○ Geen technische maatregel in de baseline | 0 | 8 | 0 | **8** |
 
 ### NIS2 art. 21(2)
 
@@ -71,27 +72,27 @@ Aantal policies dat het punt technisch invult. Geen enkel punt is met techniek a
 
 | Punt | Intune fase 1 | CA actief | Pilot, wacht, eigen groep |
 |---|---:|---:|---:|
-| [(a)](#art-212a-risicoanalyse-en-beveiligingsbeleid-voor-informatiesystemen) risicoanalyse en beveiligingsbeleid voor informatiesystemen | 0 | n.v.t. | 0 |
-| [(b)](#art-212b-incidentbehandeling) incidentbehandeling | 8 | n.v.t. | 6 |
-| [(c)](#art-212c-bedrijfscontinuiteit-en-crisisbeheer) bedrijfscontinuiteit en crisisbeheer | 6 | n.v.t. | 2 |
-| [(d)](#art-212d-beveiliging-van-de-toeleveringsketen) beveiliging van de toeleveringsketen | 2 | n.v.t. | 5 |
-| [(e)](#art-212e-beveiliging-bij-verwerving-ontwikkeling-en-onderhoud-incl-kwetsbaarheden) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden | 48 | n.v.t. | 35 |
-| [(f)](#art-212f-beoordeling-van-de-doeltreffendheid) beoordeling van de doeltreffendheid | 13 | n.v.t. | 2 |
-| [(g)](#art-212g-basispraktijken-cyberhygiene-en-training) basispraktijken cyberhygiene en training | 1 | n.v.t. | 2 |
-| [(h)](#art-212h-cryptografie-en-versleuteling) cryptografie en versleuteling | 8 | n.v.t. | 7 |
-| [(i)](#art-212i-personeelsbeveiliging-toegangsbeleid-en-beheer-van-bedrijfsmiddelen) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen | 22 | n.v.t. | 37 |
-| [(j)](#art-212j-multifactorauthenticatie-en-beveiligde-communicatie) multifactorauthenticatie en beveiligde communicatie | 3 | n.v.t. | 7 |
+| [(a)](#art-212a-risicoanalyse-en-beveiligingsbeleid-voor-informatiesystemen) risicoanalyse en beveiligingsbeleid voor informatiesystemen | 0 | 0 | 0 |
+| [(b)](#art-212b-incidentbehandeling) incidentbehandeling | 8 | 7 | 7 |
+| [(c)](#art-212c-bedrijfscontinuiteit-en-crisisbeheer) bedrijfscontinuiteit en crisisbeheer | 6 | 0 | 2 |
+| [(d)](#art-212d-beveiliging-van-de-toeleveringsketen) beveiliging van de toeleveringsketen | 2 | 1 | 5 |
+| [(e)](#art-212e-beveiliging-bij-verwerving-ontwikkeling-en-onderhoud-incl-kwetsbaarheden) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden | 48 | 0 | 35 |
+| [(f)](#art-212f-beoordeling-van-de-doeltreffendheid) beoordeling van de doeltreffendheid | 13 | 0 | 2 |
+| [(g)](#art-212g-basispraktijken-cyberhygiene-en-training) basispraktijken cyberhygiene en training | 1 | 1 | 2 |
+| [(h)](#art-212h-cryptografie-en-versleuteling) cryptografie en versleuteling | 8 | 1 | 7 |
+| [(i)](#art-212i-personeelsbeveiliging-toegangsbeleid-en-beheer-van-bedrijfsmiddelen) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen | 22 | 17 | 43 |
+| [(j)](#art-212j-multifactorauthenticatie-en-beveiligde-communicatie) multifactorauthenticatie en beveiligde communicatie | 3 | 10 | 9 |
 
 ### CIS Controls v8.1 en NIST CSF 2.0
 
-CIS-safeguards die technisch in te vullen zijn (proces-, documentatie- en trainingssafeguards niet meegeteld): **IG1 16 van 36** afgedekt, **IG1+IG2 36 van 94**, **IG1–IG3 37 van 111**.
+CIS-safeguards die technisch in te vullen zijn (proces-, documentatie- en trainingssafeguards niet meegeteld): **IG1 22 van 36** afgedekt, **IG1+IG2 44 van 94**, **IG1–IG3 47 van 111**.
 
 | NIST CSF 2.0-functie | Afgedekt | Alleen voorbereid | Relevante subcategorieën |
 |---|---:|---:|---:|
 | GV Govern (besturen) | 0 | 0 | 8 |
-| ID Identify (identificeren) | 0 | 2 | 7 |
-| PR Protect (beschermen) | 15 | 0 | 18 |
-| DE Detect (detecteren) | 2 | 1 | 6 |
+| ID Identify (identificeren) | 1 | 1 | 7 |
+| PR Protect (beschermen) | 16 | 0 | 18 |
+| DE Detect (detecteren) | 3 | 1 | 6 |
 | RS Respond (reageren) | 1 | 0 | 7 |
 | RC Recover (herstellen) | 1 | 0 | 5 |
 
@@ -110,25 +111,25 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | **A.5.4** Managementverantwoordelijkheden | organisatorisch | ▢ Organisatorisch | – | – | Management stuurt aantoonbaar op naleving (NIS2 art. 20: bestuurders keuren maatregelen goed en volgen training). |
 | **A.5.5** Contact met overheidsinstanties | organisatorisch | ▢ Organisatorisch | – | – | Contactpunten met CSIRT/NCSC, toezichthouder en AP vastleggen, inclusief meldtermijnen. |
 | **A.5.6** Contact met speciale belangengroepen | organisatorisch | ▢ Organisatorisch | – | – | Deelname aan ISAC's, sectorale overleggen en leveranciersadviezen organiseren. |
-| **A.5.7** Informatie en analyses over dreigingen | deels | ○ Geen technische maatregel in de baseline | – | – | Dreigingsinformatie (Defender, Entra ID Protection, NCSC) laten beoordelen en vertalen naar aanpassingen van de baseline. |
+| [**A.5.7** Informatie en analyses over dreigingen](#a57-informatie-en-analyses-over-dreigingen) | deels | ● Afgedekt (fase 1) | 1 | – | Dreigingsinformatie (Defender, Entra ID Protection, NCSC) laten beoordelen en vertalen naar aanpassingen van de baseline. |
 | **A.5.8** Informatiebeveiliging in projectmanagement | organisatorisch | ▢ Organisatorisch | – | – | Beveiligingseisen opnemen in projecten, bijvoorbeeld bij de uitrol van nieuwe apparaten of platformen. |
 | [**A.5.9** Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen](#a59-inventarisatie-van-informatie-en-andere-gerelateerde-bedrijfsmiddelen) | deels | ◐ Alleen pilot, wacht of eigen groep | – | 3 | Intune levert de apparaatinventaris; eigenaarschap, informatie-inventaris en periodieke controle op volledigheid zijn organisatorisch. |
 | [**A.5.10** Aanvaardbaar gebruik van informatie en andere gerelateerde bedrijfsmiddelen](#a510-aanvaardbaar-gebruik-van-informatie-en-andere-gerelateerde-bedrijfsmiddelen) | deels | ● Afgedekt (fase 1) | 3 | 11 | Gebruiksregels (incl. AI en privégebruik) vaststellen en communiceren; techniek dwingt alleen een deel af. |
 | **A.5.11** Retourneren van bedrijfsmiddelen | deels | ○ Geen technische maatregel in de baseline | – | – | Uitdienstproces: inleveren van apparaten, retire/wipe in Intune, account blokkeren. |
 | **A.5.12** Classificeren van informatie | organisatorisch | ▢ Organisatorisch | – | – | Classificatieschema vaststellen; technische labels (Purview) vallen buiten deze baseline. |
 | **A.5.13** Labelen van informatie | organisatorisch | ▢ Organisatorisch | – | – | Labelprocedure en -hulpmiddelen (Purview-gevoeligheidslabels) — buiten deze baseline. |
-| [**A.5.14** Overdragen van informatie](#a514-overdragen-van-informatie) | deels | ● Afgedekt (fase 1) | 1 | 1 | Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat. |
-| [**A.5.15** Toegangsbeveiliging](#a515-toegangsbeveiliging) | technisch | ● Afgedekt (fase 1) | 3 | 9 | Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. |
-| [**A.5.16** Identiteitsbeheer](#a516-identiteitsbeheer) | deels | ● Afgedekt (fase 1) | 2 | – | Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. |
-| [**A.5.17** Authenticatie-informatie](#a517-authenticatie-informatie) | technisch | ● Afgedekt (fase 1) | 12 | 19 | Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. |
-| **A.5.18** Toegangsrechten | deels | ○ Geen technische maatregel in de baseline | – | – | Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. |
+| [**A.5.14** Overdragen van informatie](#a514-overdragen-van-informatie) | deels | ● Afgedekt (fase 1) | 1 | 2 | Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat. |
+| [**A.5.15** Toegangsbeveiliging](#a515-toegangsbeveiliging) | technisch | ● Afgedekt (fase 1) | 14 | 21 | Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. |
+| [**A.5.16** Identiteitsbeheer](#a516-identiteitsbeheer) | deels | ● Afgedekt (fase 1) | 8 | 2 | Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. |
+| [**A.5.17** Authenticatie-informatie](#a517-authenticatie-informatie) | technisch | ● Afgedekt (fase 1) | 19 | 21 | Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. |
+| [**A.5.18** Toegangsrechten](#a518-toegangsrechten) | deels | ● Afgedekt (fase 1) | 3 | 1 | Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. |
 | [**A.5.19** Informatiebeveiliging in leveranciersrelaties](#a519-informatiebeveiliging-in-leveranciersrelaties) | organisatorisch | ◐ Alleen pilot, wacht of eigen groep | – | 2 | Leveranciersbeleid en risicobeoordeling (incl. Microsoft, AI-diensten, remote-supporttools); techniek kan alleen niet-goedgekeurde diensten blokkeren. |
 | **A.5.20** Adresseren van informatiebeveiliging in leveranciersovereenkomsten | organisatorisch | ▢ Organisatorisch | – | – | Beveiligingseisen, verwerkersovereenkomsten en auditrechten in contracten opnemen. |
 | **A.5.21** Beheren van informatiebeveiliging in de ICT-toeleveringsketen | organisatorisch | ▢ Organisatorisch | – | – | Eisen aan ICT-producten en -diensten in de keten; herkomst van software en updates beoordelen. |
 | **A.5.22** Monitoren, beoordelen en het beheren van wijzigingen van leveranciersdiensten | organisatorisch | ▢ Organisatorisch | – | – | Wijzigingen bij Microsoft/leveranciers volgen (Message Center, roadmaps) en periodiek beoordelen. |
-| **A.5.23** Informatiebeveiliging voor het gebruik van clouddiensten | deels | ○ Geen technische maatregel in de baseline | – | – | Proces voor aanschaf, gebruik en beëindiging van clouddiensten; CA en tenantbeperkingen dwingen een deel af. |
+| [**A.5.23** Informatiebeveiliging voor het gebruik van clouddiensten](#a523-informatiebeveiliging-voor-het-gebruik-van-clouddiensten) | deels | ● Afgedekt (fase 1) | 2 | 1 | Proces voor aanschaf, gebruik en beëindiging van clouddiensten; CA en tenantbeperkingen dwingen een deel af. |
 | **A.5.24** Plannen en voorbereiden van het beheer van informatiebeveiligingsincidenten | organisatorisch | ▢ Organisatorisch | – | – | Incidentresponsplan met rollen, draaiboeken (o.a. apparaat isoleren, account intrekken) en meldplicht (NIS2 art. 23). |
-| **A.5.25** Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen | deels | ○ Geen technische maatregel in de baseline | – | – | Triageproces en criteria voor 'incident'; Defender levert de signalen. |
+| [**A.5.25** Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen](#a525-beoordelen-van-en-besluiten-over-informatiebeveiligingsgebeurtenissen) | deels | ● Afgedekt (fase 1) | 1 | 1 | Triageproces en criteria voor 'incident'; Defender levert de signalen. |
 | **A.5.26** Reageren op informatiebeveiligingsincidenten | deels | ○ Geen technische maatregel in de baseline | – | – | Uitvoeren van het responsplan; technische acties (isoleren, wissen, sessies intrekken) moeten geoefend zijn. |
 | **A.5.27** Leren van informatiebeveiligingsincidenten | organisatorisch | ▢ Organisatorisch | – | – | Evaluaties na incidenten en vertaling naar baseline-wijzigingen. |
 | **A.5.28** Verzamelen van bewijsmateriaal | deels | ○ Geen technische maatregel in de baseline | – | – | Forensische procedure en bewaartermijnen; logging en EDR leveren het materiaal, borging van de keten is organisatorisch. |
@@ -152,7 +153,7 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | **A.6.4** Disciplinaire procedure | organisatorisch | ▢ Organisatorisch | – | – | Formele procedure bij schending van het beleid. |
 | **A.6.5** Verantwoordelijkheden na beëindiging of wijziging van het dienstverband | deels | ○ Geen technische maatregel in de baseline | – | – | Uitdienstproces: toegang intrekken, apparaat terug of selectief wissen, geheimhouding na vertrek. |
 | **A.6.6** Vertrouwelijkheids- of geheimhoudingsovereenkomsten | organisatorisch | ▢ Organisatorisch | – | – | Geheimhoudingsovereenkomsten opstellen en laten tekenen. |
-| **A.6.7** Werken op afstand | deels | ○ Geen technische maatregel in de baseline | – | – | Thuiswerkbeleid (locatie, schermen, netwerken); techniek beschermt het apparaat en de toegang. |
+| [**A.6.7** Werken op afstand](#a67-werken-op-afstand) | deels | ● Afgedekt (fase 1) | 1 | 2 | Thuiswerkbeleid (locatie, schermen, netwerken); techniek beschermt het apparaat en de toegang. |
 | **A.6.8** Melden van informatiebeveiligingsgebeurtenissen | organisatorisch | ▢ Organisatorisch | – | – | Meldkanaal voor medewerkers inrichten en bekendmaken. |
 
 ### 7 Fysieke beheersmaatregelen
@@ -165,7 +166,7 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | **A.7.4** Monitoren van de fysieke beveiliging | organisatorisch | ▢ Organisatorisch | – | – | Buiten het endpoint-/identitydomein: camerabewaking, alarmopvolging. |
 | **A.7.5** Beschermen tegen fysieke en omgevingsdreigingen | organisatorisch | ▢ Organisatorisch | – | – | Buiten het endpoint-/identitydomein. |
 | **A.7.6** Werken in beveiligde zones | organisatorisch | ▢ Organisatorisch | – | – | Buiten het endpoint-/identitydomein. |
-| [**A.7.7** 'Clear desk' en 'clear screen'](#a77-clear-desk-en-clear-screen) | technisch | ● Afgedekt (fase 1) | 5 | 5 | Clear-desk-regels voor papier en media vaststellen; clear screen wordt technisch afgedwongen. |
+| [**A.7.7** 'Clear desk' en 'clear screen'](#a77-clear-desk-en-clear-screen) | technisch | ● Afgedekt (fase 1) | 7 | 6 | Clear-desk-regels voor papier en media vaststellen; clear screen wordt technisch afgedwongen. |
 | **A.7.8** Plaatsen en beschermen van apparatuur | organisatorisch | ▢ Organisatorisch | – | – | Buiten het endpoint-/identitydomein. |
 | [**A.7.9** Beveiligen van bedrijfsmiddelen buiten het terrein](#a79-beveiligen-van-bedrijfsmiddelen-buiten-het-terrein) | deels | ● Afgedekt (fase 1) | 2 | 5 | Regels voor meenemen, onbeheerd achterlaten en melden van verlies; versleuteling en wissen op afstand zijn technisch. |
 | [**A.7.10** Opslagmedia](#a710-opslagmedia) | deels | ● Afgedekt (fase 1) | 1 | 3 | Beleid voor verwisselbare media en veilige vernietiging. |
@@ -178,30 +179,30 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 
 | Control | Invulbaar | Status | Fase 1 | Overig | Wat organisatorisch nodig blijft |
 |---|---|---|---:|---:|---|
-| [**A.8.1** 'User endpoint devices'](#a81-user-endpoint-devices) | technisch | ● Afgedekt (fase 1) | 19 | 34 | Beleid voor zakelijke en privéapparaten (BYOD), registratie en gebruiksregels. |
-| [**A.8.2** Speciale toegangsrechten](#a82-speciale-toegangsrechten) | technisch | ● Afgedekt (fase 1) | 6 | 3 | Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). |
-| [**A.8.3** Beperking toegang tot informatie](#a83-beperking-toegang-tot-informatie) | deels | ● Afgedekt (fase 1) | 1 | 1 | Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. |
+| [**A.8.1** 'User endpoint devices'](#a81-user-endpoint-devices) | technisch | ● Afgedekt (fase 1) | 24 | 39 | Beleid voor zakelijke en privéapparaten (BYOD), registratie en gebruiksregels. |
+| [**A.8.2** Speciale toegangsrechten](#a82-speciale-toegangsrechten) | technisch | ● Afgedekt (fase 1) | 11 | 6 | Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). |
+| [**A.8.3** Beperking toegang tot informatie](#a83-beperking-toegang-tot-informatie) | deels | ● Afgedekt (fase 1) | 3 | 3 | Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. |
 | **A.8.4** Toegangsbeveiliging op broncode | organisatorisch | ▢ Organisatorisch | – | – | Alleen bij eigen softwareontwikkeling: toegang tot repositories en ontwikkeltools beheren. |
-| [**A.8.5** Beveiligde authenticatie](#a85-beveiligde-authenticatie) | technisch | ● Afgedekt (fase 1) | 10 | 23 | Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). |
+| [**A.8.5** Beveiligde authenticatie](#a85-beveiligde-authenticatie) | technisch | ● Afgedekt (fase 1) | 19 | 25 | Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). |
 | [**A.8.6** Capaciteitsbeheer](#a86-capaciteitsbeheer) | deels | ● Afgedekt (fase 1) | 3 | – | Capaciteitsplanning voor netwerk, licenties en opslag. |
 | [**A.8.7** Bescherming tegen malware](#a87-bescherming-tegen-malware) | technisch | ● Afgedekt (fase 1) | 26 | 18 | Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). |
 | [**A.8.8** Beheer van technische kwetsbaarheden](#a88-beheer-van-technische-kwetsbaarheden) | deels | ● Afgedekt (fase 1) | 11 | 13 | Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. |
-| [**A.8.9** Configuratiebeheer](#a89-configuratiebeheer) | deels | ● Afgedekt (fase 1) | 18 | 10 | Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. |
+| [**A.8.9** Configuratiebeheer](#a89-configuratiebeheer) | deels | ● Afgedekt (fase 1) | 18 | 11 | Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. |
 | **A.8.10** Wissen van informatie | deels | ○ Geen technische maatregel in de baseline | – | – | Bewaar- en verwijderbeleid; selectief wissen en wipe zijn technische hulpmiddelen. |
 | [**A.8.11** Maskeren van gegevens](#a811-maskeren-van-gegevens) | deels | ◐ Alleen pilot, wacht of eigen groep | – | 1 | Beleid wanneer gegevens gemaskeerd of gepseudonimiseerd worden — grotendeels applicatieniveau. |
-| [**A.8.12** Voorkomen van gegevenslekken (data leakage prevention)](#a812-voorkomen-van-gegevenslekken-data-leakage-prevention) | deels | ● Afgedekt (fase 1) | 13 | 13 | DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. |
+| [**A.8.12** Voorkomen van gegevenslekken (data leakage prevention)](#a812-voorkomen-van-gegevenslekken-data-leakage-prevention) | deels | ● Afgedekt (fase 1) | 13 | 15 | DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. |
 | [**A.8.13** Back-up van informatie](#a813-back-up-van-informatie) | deels | ● Afgedekt (fase 1) | 3 | – | Back-upbeleid voor M365-data en periodieke hersteltests; OneDrive-synchronisatie is geen volledige back-up. |
 | **A.8.14** Redundantie van informatieverwerkende faciliteiten | organisatorisch | ▢ Organisatorisch | – | – | Redundantie van diensten en infrastructuur — buiten het endpoint-/identitydomein. |
-| [**A.8.15** Logging](#a815-logging) | deels | ● Afgedekt (fase 1) | 6 | 2 | Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. |
-| [**A.8.16** Monitoren van activiteiten](#a816-monitoren-van-activiteiten) | deels | ● Afgedekt (fase 1) | 4 | 8 | 24/7- of kantoortijdenopvolging van alerts, met escalatiecriteria. |
+| [**A.8.15** Logging](#a815-logging) | deels | ● Afgedekt (fase 1) | 7 | 2 | Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. |
+| [**A.8.16** Monitoren van activiteiten](#a816-monitoren-van-activiteiten) | deels | ● Afgedekt (fase 1) | 11 | 10 | 24/7- of kantoortijdenopvolging van alerts, met escalatiecriteria. |
 | [**A.8.17** Kloksynchronisatie](#a817-kloksynchronisatie) | technisch | ● Afgedekt (fase 1) | 2 | 1 | Goedgekeurde tijdbron vastleggen. |
 | [**A.8.18** Gebruik van speciale systeemhulpmiddelen](#a818-gebruik-van-speciale-systeemhulpmiddelen) | deels | ● Afgedekt (fase 1) | 1 | 3 | Register van toegestane beheer- en remote-supporttools en wie ze mag gebruiken. |
 | [**A.8.19** Installeren van software op operationele systemen](#a819-installeren-van-software-op-operationele-systemen) | technisch | ● Afgedekt (fase 1) | 10 | 8 | Proces voor goedkeuren en aanbieden van software (Company Portal-catalogus). |
-| [**A.8.20** Beveiliging netwerkcomponenten](#a820-beveiliging-netwerkcomponenten) | deels | ● Afgedekt (fase 1) | 13 | 13 | Netwerkinfrastructuur (firewalls, wifi, VPN) valt grotendeels buiten deze baseline. |
+| [**A.8.20** Beveiliging netwerkcomponenten](#a820-beveiliging-netwerkcomponenten) | deels | ● Afgedekt (fase 1) | 14 | 15 | Netwerkinfrastructuur (firewalls, wifi, VPN) valt grotendeels buiten deze baseline. |
 | [**A.8.21** Beveiliging van netwerkdiensten](#a821-beveiliging-van-netwerkdiensten) | deels | ● Afgedekt (fase 1) | 1 | 5 | Eisen aan netwerkdiensten en -leveranciers vastleggen en monitoren. |
 | **A.8.22** Netwerksegmentatie | organisatorisch | ▢ Organisatorisch | – | – | Netwerksegmentatie is infrastructuur, niet via endpoint-/identitybeleid in te richten. |
 | [**A.8.23** Toepassen van webfilters](#a823-toepassen-van-webfilters) | technisch | ● Afgedekt (fase 1) | 3 | 4 | Categorieën en uitzonderingen vaststellen (Defender Web Content Filtering in het Defender-portaal). |
-| [**A.8.24** Gebruik van cryptografie](#a824-gebruik-van-cryptografie) | deels | ● Afgedekt (fase 1) | 9 | 8 | Cryptografiebeleid en sleutelbeheer (wie heeft toegang tot herstelsleutels, rotatie). |
+| [**A.8.24** Gebruik van cryptografie](#a824-gebruik-van-cryptografie) | deels | ● Afgedekt (fase 1) | 10 | 8 | Cryptografiebeleid en sleutelbeheer (wie heeft toegang tot herstelsleutels, rotatie). |
 | **A.8.25** Beveiligen tijdens de ontwikkelcyclus | organisatorisch | ▢ Organisatorisch | – | – | Alleen bij eigen ontwikkeling. |
 | **A.8.26** Toepassingsbeveiligingseisen | organisatorisch | ▢ Organisatorisch | – | – | Beveiligingseisen bij ontwikkelen of aanschaffen van toepassingen. |
 | **A.8.27** Veilige systeemarchitectuur en technische uitgangspunten | organisatorisch | ▢ Organisatorisch | – | – | Architectuurprincipes (zero trust) vastleggen. |
@@ -216,6 +217,10 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 ### Maatregelen per control
 
 Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat niet uitrolt en telt niet mee voor de status.
+
+#### A.5.7 Informatie en analyses over dreigingen
+
+- `GLOBAL - 1050 - BLOCK - HighRisk Countries` (CA, enabled) — `CA-BASE-013-HighRiskCountries`
 
 #### A.5.9 Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen
 
@@ -244,12 +249,28 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 - [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.md) (fase 1) — `INTUNE-BASE-046-MACDRestrictions`
 - [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.md) (fase 2) — `INTUNE-BASE-145-UMicrosoftTeams`
+- `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled) — `CA-BASE-028-BlockFileDownloadsOnUnmanagedDevices`
 
 #### A.5.15 Toegangsbeveiliging
 
+- `GLOBAL - 1010 - BLOCK - Legacy Authentication` (CA, enabled) — `CA-BASE-009-LegacyAuthentication`
+- `GLOBAL - 1050 - BLOCK - HighRisk Countries` (CA, enabled) — `CA-BASE-013-HighRiskCountries`
+- `GLOBAL - 1090 - BLOCK - HighRisk SignIns` (CA, enabled) — `CA-BASE-017-HighRiskSignIns`
+- `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled) — `CA-BASE-031-GuestAccessOutsideApprovedApps`
+- `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled) — `CA-BASE-032-AdminsFromUntrustedLocations`
+- `GLOBAL - 2050 - GRANT - MFA for All Users` (CA, enabled) — `CA-BASE-021-MFAForAllUsers`
+- `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled) — `CA-BASE-035-BrowserAccessOnUnmanagedDevices`
+- `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled) — `CA-BASE-038-PhishingResistantMFAForAllUsers`
+- `GLOBAL - 3010 - SESSION - Admin Persistence` (CA, enabled) — `CA-BASE-025-AdminPersistence`
+- `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled) — `CA-BASE-042-ContinuousAccessEvaluation`
+- `GLOBAL - 3070 - SESSION - Session Limits All Users` (CA, enabled) — `CA-BASE-044-SessionLimitsAllUsers`
 - [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.md) (fase 1) — `INTUNE-BASE-035-MACDAccountsAndLogin`
 - [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.md) (fase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
 - [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.md) (fase 1) — `INTUNE-BASE-026-UserRights`
+- `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced) — `CA-BASE-046-AgentIdentitiesToAgentResources`
+- `GLOBAL - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced) — `CA-BASE-048-RiskyAgentUsers`
+- `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced) — `CA-BASE-049-AgentUsersOutsideCompliantNetwork`
+- `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced) — `CA-BASE-047-AgentUsersCompliantDevice`
 - [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.md) (fase 2) — `INTUNE-BASE-123-DAccessControl`
 - [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.md) (fase 2) — `INTUNE-BASE-124-DAccountLockout`
 - [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.md) (fase 2) — `INTUNE-BASE-141-DEnrollmentHardening`
@@ -259,14 +280,37 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- `GLOBAL - 1020 - BLOCK - Device Code Auth Flow` (CA, disabled) — `CA-BASE-010-DeviceCodeAuthFlow`
+- `GLOBAL - 1030 - BLOCK - Unsupported Device Platforms` (CA, disabled) — `CA-BASE-011-UnsupportedDevicePlatforms`
+- `GLOBAL - 1040 - BLOCK - Countries not Allowed` (CA, disabled) — `CA-BASE-012-CountriesNotAllowed`
+- `GLOBAL - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` (CA, disabled) — `CA-BASE-014-ServiceAccountsTrustedLocationsExcluded`
+- `GLOBAL - 1070 - BLOCK - Explicitly Blocked Cloud Apps` (CA, disabled) — `CA-BASE-015-ExplicitlyBlockedCloudApps`
+- `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled) — `CA-BASE-016-GuestAccessToSensitiveApps`
+- `GLOBAL - 1100 - BLOCK - HighRisk Users` (CA, disabled) — `CA-BASE-018-HighRiskUsers`
+- `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled) — `CA-BASE-023-MobileAppsAndDesktopClients`
 
 #### A.5.16 Identiteitsbeheer
 
+- `GLOBAL - 1110 - BLOCK - Unlicensed Users` (CA, enabled) — `CA-BASE-030-UnlicensedUsers`
+- `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled) — `CA-BASE-033-ManagedIdentitiesAtRisk`
+- `GLOBAL - 1150 - BLOCK - Risky Agent Identities` (CA, enabled) — `CA-BASE-045-RiskyAgentIdentities`
+- `GLOBAL - 2080 - GRANT - MFA For Device Registration` (CA, enabled) — `CA-BASE-034-MFAForDeviceRegistration`
+- `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled) — `CA-BASE-050-MFAForIntuneEnrollment`
+- `GLOBAL - 3030 - SESSION - Register Security Info Requirements` (CA, enabled) — `CA-BASE-027-RegisterSecurityInfoRequirements`
 - [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.md) (fase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
 - [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.md) (fase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
+- `GLOBAL - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced) — `CA-BASE-048-RiskyAgentUsers`
+- `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced) — `CA-BASE-051-RegisterSecurityInfoTAPOnly`
 
 #### A.5.17 Authenticatie-informatie
 
+- `GLOBAL - 2010 - GRANT - MediumRisk Signins` (CA, enabled) — `CA-BASE-019-MediumRiskSignins`
+- `GLOBAL - 2020 - GRANT - MediumRisk Users` (CA, enabled) — `CA-BASE-020-MediumRiskUsers`
+- `GLOBAL - 2050 - GRANT - MFA for All Users` (CA, enabled) — `CA-BASE-021-MFAForAllUsers`
+- `GLOBAL - 2100 - GRANT - MFA For Admin Portals` (CA, enabled) — `CA-BASE-036-MFAForAdminPortals`
+- `GLOBAL - 2110 - GRANT - Token Protection` (CA, enabled) — `CA-BASE-037-TokenProtection`
+- `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled) — `CA-BASE-038-PhishingResistantMFAForAllUsers`
+- `GLOBAL - 3030 - SESSION - Register Security Info Requirements` (CA, enabled) — `CA-BASE-027-RegisterSecurityInfoRequirements`
 - [`MAC - D - Microsoft Edge Password Management`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.md) (fase 1) — `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`
 - [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.md) (fase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
 - [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -279,6 +323,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.md) (fase 1) — `INTUNE-BASE-027-WindowsLAPSPolicy`
 - [`WIN - U - Microsoft Edge Password Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.md) (fase 1) — `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`
 - [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.md) (fase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
+- `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced) — `CA-BASE-051-RegisterSecurityInfoTAPOnly`
 - [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.md) (fase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
 - [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.md) (fase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
 - [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.md) (fase 2) — `INTUNE-BASE-123-DAccessControl`
@@ -295,14 +340,33 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.md) (fase 3) — `INTUNE-BASE-190-IOSDPasscode`
 - [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- `GLOBAL - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled) — `CA-BASE-022-PhishingResistantMFAForAdmins`
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric`
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) (fase 5) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
 - [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
+
+#### A.5.18 Toegangsrechten
+
+- `GLOBAL - 1110 - BLOCK - Unlicensed Users` (CA, enabled) — `CA-BASE-030-UnlicensedUsers`
+- `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled) — `CA-BASE-031-GuestAccessOutsideApprovedApps`
+- `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled) — `CA-BASE-042-ContinuousAccessEvaluation`
+- `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled) — `CA-BASE-016-GuestAccessToSensitiveApps`
 
 #### A.5.19 Informatiebeveiliging in leveranciersrelaties
 
 - [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.md) (fase 2) — `INTUNE-BASE-139-UAIUsageControl`
 - [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.md) (fase 5) — `INTUNE-BASE-149-UAIUsageControlPermitted`
+
+#### A.5.23 Informatiebeveiliging voor het gebruik van clouddiensten
+
+- `GLOBAL - 1150 - BLOCK - Risky Agent Identities` (CA, enabled) — `CA-BASE-045-RiskyAgentIdentities`
+- `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled) — `CA-BASE-043-DefenderForCloudApps`
+- `GLOBAL - 1070 - BLOCK - Explicitly Blocked Cloud Apps` (CA, disabled) — `CA-BASE-015-ExplicitlyBlockedCloudApps`
+
+#### A.5.25 Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen
+
+- `GLOBAL - 1090 - BLOCK - HighRisk SignIns` (CA, enabled) — `CA-BASE-017-HighRiskSignIns`
+- `GLOBAL - 1100 - BLOCK - HighRisk Users` (CA, disabled) — `CA-BASE-018-HighRiskUsers`
 
 #### A.5.29 Informatiebeveiliging tijdens een verstoring
 
@@ -335,13 +399,22 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) (fase 5) — `INTUNE-BASE-146-DWindowsAIFeaturesPermitted`
 - [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) (fase 5) — `INTUNE-BASE-148-DWindowsAIPermitted`
 
+#### A.6.7 Werken op afstand
+
+- `GLOBAL - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled) — `CA-BASE-041-CloudPCMobileAccess`
+- `GLOBAL - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced) — `CA-BASE-026-BYODPersistence`
+- `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled) — `CA-BASE-024-MobileDeviceAccessRequirements`
+
 #### A.7.7 'Clear desk' en 'clear screen'
 
+- `GLOBAL - 3010 - SESSION - Admin Persistence` (CA, enabled) — `CA-BASE-025-AdminPersistence`
+- `GLOBAL - 3070 - SESSION - Session Limits All Users` (CA, enabled) — `CA-BASE-044-SessionLimitsAllUsers`
 - [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.md) (fase 1) — `INTUNE-BASE-013-DeviceLock`
 - [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.md) (fase 1) — `INTUNE-BASE-072-DLoginAndLockScreen`
 - [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.md) (fase 1) — `INTUNE-BASE-142-DPowerManagement`
 - [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.md) (fase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
+- `GLOBAL - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced) — `CA-BASE-026-BYODPersistence`
 - [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.md) (fase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
 - [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.md) (fase 2) — `INTUNE-BASE-200-MACDScreensaver`
 - [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.md) (fase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
@@ -367,6 +440,11 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.1 'User endpoint devices'
 
+- `GLOBAL - 2080 - GRANT - MFA For Device Registration` (CA, enabled) — `CA-BASE-034-MFAForDeviceRegistration`
+- `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled) — `CA-BASE-035-BrowserAccessOnUnmanagedDevices`
+- `GLOBAL - 2130 - GRANT - Admins Compliant Device` (CA, enabled) — `CA-BASE-039-AdminsCompliantDevice`
+- `GLOBAL - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled) — `CA-BASE-041-CloudPCMobileAccess`
+- `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled) — `CA-BASE-050-MFAForIntuneEnrollment`
 - [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.md) (fase 1) — `INTUNE-BASE-046-MACDRestrictions`
@@ -386,6 +464,8 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.md) (fase 1) — `INTUNE-BASE-105-UPersonalDataEncryption`
+- `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced) — `CA-BASE-047-AgentUsersCompliantDevice`
+- `GLOBAL - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced) — `CA-BASE-026-BYODPersistence`
 - [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.md) (fase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
 - [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.md) (fase 2) — `INTUNE-BASE-038-MACDFileVault`
 - [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.md) (fase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
@@ -415,6 +495,9 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.md) (fase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
 - [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.md) (fase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
 - [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) (fase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
+- `GLOBAL - 1030 - BLOCK - Unsupported Device Platforms` (CA, disabled) — `CA-BASE-011-UnsupportedDevicePlatforms`
+- `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled) — `CA-BASE-023-MobileAppsAndDesktopClients`
+- `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled) — `CA-BASE-024-MobileDeviceAccessRequirements`
 - [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.md) (fase 5) — `INTUNE-BASE-194-MACDAppleIntelligencePermitted`
 - [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.md) (fase 5) — `INTUNE-BASE-146-DWindowsAIFeaturesPermitted`
 - [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.md) (fase 5) — `INTUNE-BASE-148-DWindowsAIPermitted`
@@ -423,6 +506,11 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.2 Speciale toegangsrechten
 
+- `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled) — `CA-BASE-032-AdminsFromUntrustedLocations`
+- `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled) — `CA-BASE-033-ManagedIdentitiesAtRisk`
+- `GLOBAL - 2100 - GRANT - MFA For Admin Portals` (CA, enabled) — `CA-BASE-036-MFAForAdminPortals`
+- `GLOBAL - 2130 - GRANT - Admins Compliant Device` (CA, enabled) — `CA-BASE-039-AdminsCompliantDevice`
+- `GLOBAL - 3010 - SESSION - Admin Persistence` (CA, enabled) — `CA-BASE-025-AdminPersistence`
 - [`WIN - D - Local Administrators`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.md) (fase 1) — `INTUNE-BASE-071-DLocalAdministrators`
 - [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.md) (fase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
 - [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.md) (fase 1) — `INTUNE-BASE-019-MicrosoftAppStore`
@@ -432,14 +520,30 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Administrator Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.md) (fase 2) — `INTUNE-BASE-055-DAdministratorProtection`
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.md) (fase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
 - [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.md) (fase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
+- `GLOBAL - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` (CA, disabled) — `CA-BASE-014-ServiceAccountsTrustedLocationsExcluded`
+- `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled) — `CA-BASE-016-GuestAccessToSensitiveApps`
+- `GLOBAL - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled) — `CA-BASE-022-PhishingResistantMFAForAdmins`
 
 #### A.8.3 Beperking toegang tot informatie
 
+- `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled) — `CA-BASE-031-GuestAccessOutsideApprovedApps`
+- `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled) — `CA-BASE-035-BrowserAccessOnUnmanagedDevices`
 - [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
+- `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced) — `CA-BASE-046-AgentIdentitiesToAgentResources`
 - [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.md) (fase 2) — `INTUNE-BASE-209-UFileSharingRestrictions`
+- `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled) — `CA-BASE-028-BlockFileDownloadsOnUnmanagedDevices`
 
 #### A.8.5 Beveiligde authenticatie
 
+- `GLOBAL - 1010 - BLOCK - Legacy Authentication` (CA, enabled) — `CA-BASE-009-LegacyAuthentication`
+- `GLOBAL - 2010 - GRANT - MediumRisk Signins` (CA, enabled) — `CA-BASE-019-MediumRiskSignins`
+- `GLOBAL - 2020 - GRANT - MediumRisk Users` (CA, enabled) — `CA-BASE-020-MediumRiskUsers`
+- `GLOBAL - 2050 - GRANT - MFA for All Users` (CA, enabled) — `CA-BASE-021-MFAForAllUsers`
+- `GLOBAL - 2080 - GRANT - MFA For Device Registration` (CA, enabled) — `CA-BASE-034-MFAForDeviceRegistration`
+- `GLOBAL - 2100 - GRANT - MFA For Admin Portals` (CA, enabled) — `CA-BASE-036-MFAForAdminPortals`
+- `GLOBAL - 2110 - GRANT - Token Protection` (CA, enabled) — `CA-BASE-037-TokenProtection`
+- `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled) — `CA-BASE-038-PhishingResistantMFAForAllUsers`
+- `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled) — `CA-BASE-050-MFAForIntuneEnrollment`
 - [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.md) (fase 1) — `INTUNE-BASE-035-MACDAccountsAndLogin`
@@ -470,6 +574,8 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) (fase 3) — `INTUNE-BASE-154-MACDAzureFilesCloudKerberos`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- `GLOBAL - 1020 - BLOCK - Device Code Auth Flow` (CA, disabled) — `CA-BASE-010-DeviceCodeAuthFlow`
+- `GLOBAL - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled) — `CA-BASE-022-PhishingResistantMFAForAdmins`
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric`
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) (fase 5) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
 - [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) (fase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
@@ -581,6 +687,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.md) (fase 3) — `INTUNE-BASE-192-IOSDSoftwareUpdates`
 - [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.md) (fase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
+- `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled) — `CA-BASE-023-MobileAppsAndDesktopClients`
 - [`WIN - D - Microsoft Edge Search Engine`](IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.md) (fase 5) — `INTUNE-BASE-015-EdgeStandardSearchEngineGoogle`
 - [`WIN - U - Microsoft Outlook Cached Mode Default`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.md) (fase 5) — `INTUNE-BASE-159-UMicrosoftOutlookCachedModeDefault`
 - [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.md) (fase 5) — `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff`
@@ -615,6 +722,8 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.md) (fase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
 - [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.md) (fase 3) — `INTUNE-BASE-185-IOSDDataProtection`
 - [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.md) (fase 3) — `INTUNE-BASE-150-DWindowsAIRecallBoundaries`
+- `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled) — `CA-BASE-024-MobileDeviceAccessRequirements`
+- `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled) — `CA-BASE-028-BlockFileDownloadsOnUnmanagedDevices`
 - [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.md) (fase 5) — `INTUNE-BASE-183-IOSDAppleIntelligencePermitted`
 - [`MAC - D - External Storage Read Only`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.md) (fase 5) — `INTUNE-BASE-196-MACDExternalStorageReadOnly`
 
@@ -626,6 +735,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.15 Logging
 
+- `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled) — `CA-BASE-043-DefenderForCloudApps`
 - [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.md) (fase 1) — `INTUNE-BASE-201-MACDTimeServer`
 - [`WIN - D - Audit and Event Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.md) (fase 1) — `INTUNE-BASE-009-Auditing`
 - [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.md) (fase 1) — `INTUNE-BASE-126-DAuditPolicyEnforcement`
@@ -637,10 +747,18 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.16 Monitoren van activiteiten
 
+- `GLOBAL - 1090 - BLOCK - HighRisk SignIns` (CA, enabled) — `CA-BASE-017-HighRiskSignIns`
+- `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled) — `CA-BASE-033-ManagedIdentitiesAtRisk`
+- `GLOBAL - 1150 - BLOCK - Risky Agent Identities` (CA, enabled) — `CA-BASE-045-RiskyAgentIdentities`
+- `GLOBAL - 2010 - GRANT - MediumRisk Signins` (CA, enabled) — `CA-BASE-019-MediumRiskSignins`
+- `GLOBAL - 2020 - GRANT - MediumRisk Users` (CA, enabled) — `CA-BASE-020-MediumRiskUsers`
+- `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled) — `CA-BASE-042-ContinuousAccessEvaluation`
+- `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled) — `CA-BASE-043-DefenderForCloudApps`
 - [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md) (fase 1) — `INTUNE-BASE-037-MACDDefenderForEndpoint`
 - [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.md) (fase 1) — `INTUNE-BASE-126-DAuditPolicyEnforcement`
 - [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.md) (fase 1) — `INTUNE-BASE-109-DDefenderEDRPolicy`
 - [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.md) (fase 1) — `INTUNE-BASE-131-DLogging`
+- `GLOBAL - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced) — `CA-BASE-048-RiskyAgentUsers`
 - [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.md) (fase 2) — `INTUNE-BASE-205-DSecurityLogMonitoring`
 - [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -648,6 +766,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.md) (fase 3) — `INTUNE-BASE-207-DWindowsEventForwarding`
 - [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) (fase 4) — `INTUNE-BASE-107-DDefenderASRPolicyAuditMode`
+- `GLOBAL - 1100 - BLOCK - HighRisk Users` (CA, disabled) — `CA-BASE-018-HighRiskUsers`
 - [`WIN - D - Defender for Endpoint EDR`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.md) (fase 5) — `INTUNE-BASE-014-EDRConfiguration`
 
 #### A.8.17 Kloksynchronisatie
@@ -686,6 +805,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.20 Beveiliging netwerkcomponenten
 
+- `GLOBAL - 1050 - BLOCK - HighRisk Countries` (CA, enabled) — `CA-BASE-013-HighRiskCountries`
 - [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.md) (fase 1) — `INTUNE-BASE-039-MACDFirewallAndGatekeeper`
 - [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.md) (fase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
 - [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -699,6 +819,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) (fase 1) — `INTUNE-BASE-085-DWindowsFirewallRules`
 - [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.md) (fase 1) — `INTUNE-BASE-137-DWirelessAndPeripherals`
 - [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced) — `CA-BASE-049-AgentUsersOutsideCompliantNetwork`
 - [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.md) (fase 2) — `INTUNE-BASE-132-DLogonHardening`
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.md) (fase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
 - [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) (fase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
@@ -711,6 +832,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 - [`WIN - D - Wifi Guest`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.md) (fase 3)
 - [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.md) (fase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
 - [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) (fase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
+- `GLOBAL - 1040 - BLOCK - Countries not Allowed` (CA, disabled) — `CA-BASE-012-CountriesNotAllowed`
 - [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.md) (fase 5) — `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure`
 
 #### A.8.21 Beveiliging van netwerkdiensten
@@ -734,6 +856,7 @@ Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat ni
 
 #### A.8.24 Gebruik van cryptografie
 
+- `GLOBAL - 2110 - GRANT - Token Protection` (CA, enabled) — `CA-BASE-037-TokenProtection`
 - [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.md) (fase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
 - [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -778,6 +901,10 @@ van het technische deel, geen vervanging van die afweging.
 
 - geen
 
+**Conditional Access, actief (0)**
+
+- geen
+
 **Bewijsroute.** Geen technische maatregel in fase 1, dus ook geen technische bewijsroute.
 
 **Organisatorisch nodig**
@@ -804,8 +931,19 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.md) (fase 1) — `INTUNE-BASE-080-DSecurityHardening`
 - [`WIN - D - Timezone`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.md) (fase 1) — `INTUNE-BASE-082-DTimezone`
 
-**Voorbereid — pilot, wacht of eigen groep (6)**
+**Conditional Access, actief (7)**
 
+- `GLOBAL - 1090 - BLOCK - HighRisk SignIns` (CA, enabled) — `CA-BASE-017-HighRiskSignIns`
+- `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled) — `CA-BASE-033-ManagedIdentitiesAtRisk`
+- `GLOBAL - 1150 - BLOCK - Risky Agent Identities` (CA, enabled) — `CA-BASE-045-RiskyAgentIdentities`
+- `GLOBAL - 2010 - GRANT - MediumRisk Signins` (CA, enabled) — `CA-BASE-019-MediumRiskSignins`
+- `GLOBAL - 2020 - GRANT - MediumRisk Users` (CA, enabled) — `CA-BASE-020-MediumRiskUsers`
+- `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled) — `CA-BASE-042-ContinuousAccessEvaluation`
+- `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled) — `CA-BASE-043-DefenderForCloudApps`
+
+**Voorbereid — pilot, wacht of eigen groep (7)**
+
+- `GLOBAL - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced) — `CA-BASE-048-RiskyAgentUsers`
 - [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.md) (fase 2) — `INTUNE-BASE-205-DSecurityLogMonitoring`
 - [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -813,9 +951,9 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.md) (fase 3) — `INTUNE-BASE-207-DWindowsEventForwarding`
 - [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) (fase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 
-**Alternatief, niet uitgerold (1)**: `WIN - D - Defender for Endpoint EDR`
+**Alternatief, niet uitgerold (2)**: `GLOBAL - 1100 - BLOCK - HighRisk Users`, `WIN - D - Defender for Endpoint EDR`
 
-**Bewijsroute.** TEST Policies Platform toetst 8 checkId's: `INTUNE-BASE-009-Auditing`, `INTUNE-BASE-037-MACDDefenderForEndpoint`, `INTUNE-BASE-080-DSecurityHardening`, `INTUNE-BASE-082-DTimezone`, `INTUNE-BASE-109-DDefenderEDRPolicy`, `INTUNE-BASE-126-DAuditPolicyEnforcement`, `INTUNE-BASE-131-DLogging`, `INTUNE-BASE-201-MACDTimeServer`.
+**Bewijsroute.** TEST Policies Platform toetst 15 checkId's: `CA-BASE-017-HighRiskSignIns`, `CA-BASE-019-MediumRiskSignins`, `CA-BASE-020-MediumRiskUsers`, `CA-BASE-033-ManagedIdentitiesAtRisk`, `CA-BASE-042-ContinuousAccessEvaluation`, `CA-BASE-043-DefenderForCloudApps`, `CA-BASE-045-RiskyAgentIdentities`, `INTUNE-BASE-009-Auditing`, `INTUNE-BASE-037-MACDDefenderForEndpoint`, `INTUNE-BASE-080-DSecurityHardening`, `INTUNE-BASE-082-DTimezone`, `INTUNE-BASE-109-DDefenderEDRPolicy`, `INTUNE-BASE-126-DAuditPolicyEnforcement`, `INTUNE-BASE-131-DLogging`, `INTUNE-BASE-201-MACDTimeServer`.
 
 **Organisatorisch nodig**
 
@@ -839,6 +977,10 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) (fase 1) — `INTUNE-BASE-029-OnedriveSilentLogin`
 - [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) (fase 1) — `INTUNE-BASE-081-DSettingsSync`
 - [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) (fase 1) — `INTUNE-BASE-143-DStorageSense`
+
+**Conditional Access, actief (0)**
+
+- geen
 
 **Voorbereid — pilot, wacht of eigen groep (2)**
 
@@ -865,6 +1007,10 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.md) (fase 1) — `INTUNE-BASE-125-DAITooling`
 - [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.md) (fase 1) — `INTUNE-BASE-112-DWindowsAI`
 
+**Conditional Access, actief (1)**
+
+- `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled) — `CA-BASE-031-GuestAccessOutsideApprovedApps`
+
 **Voorbereid — pilot, wacht of eigen groep (5)**
 
 - [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.md) (fase 2) — `INTUNE-BASE-179-ANDUCorporateAIRestricted`
@@ -873,9 +1019,9 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.md) (fase 2) — `INTUNE-BASE-139-UAIUsageControl`
 - [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.md) (fase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
 
-**Alternatief, niet uitgerold (5)**: `IOS - D - Apple Intelligence Permitted`, `MAC - D - Apple Intelligence Permitted`, `WIN - D - Windows AI Features Permitted`, `WIN - D - Windows AI Permitted`, `WIN - U - AI Usage Control Permitted`
+**Alternatief, niet uitgerold (6)**: `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps`, `IOS - D - Apple Intelligence Permitted`, `MAC - D - Apple Intelligence Permitted`, `WIN - D - Windows AI Features Permitted`, `WIN - D - Windows AI Permitted`, `WIN - U - AI Usage Control Permitted`
 
-**Bewijsroute.** TEST Policies Platform toetst 2 checkId's: `INTUNE-BASE-112-DWindowsAI`, `INTUNE-BASE-125-DAITooling`.
+**Bewijsroute.** TEST Policies Platform toetst 3 checkId's: `CA-BASE-031-GuestAccessOutsideApprovedApps`, `INTUNE-BASE-112-DWindowsAI`, `INTUNE-BASE-125-DAITooling`.
 
 **Organisatorisch nodig**
 
@@ -941,6 +1087,10 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.md) (fase 1) — `INTUNE-BASE-103-UMicrosoftOfficeSecurity`
 - [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.md) (fase 1) — `INTUNE-BASE-104-UMicrosoftStore`
 
+**Conditional Access, actief (0)**
+
+- geen
+
 **Voorbereid — pilot, wacht of eigen groep (35)**
 
 - [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.md) (fase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
@@ -979,7 +1129,7 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Windows Update Ring 2 UAT`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.md) (fase 4)
 - [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.md) (fase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
 
-**Alternatief, niet uitgerold (1)**: `WIN - D - Defender AV Policy`
+**Alternatief, niet uitgerold (2)**: `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients`, `WIN - D - Defender AV Policy`
 
 **Bewijsroute.** TEST Policies Platform toetst 40 checkId's: `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-007-ASRDefaultRules`, `INTUNE-BASE-012-DefaultAVPolicy`, `INTUNE-BASE-016-Firewall`, `INTUNE-BASE-018-LocalPoliciesSecurityOptions`, `INTUNE-BASE-019-MicrosoftAppStore`, `INTUNE-BASE-020-MicrosoftEdge`, `INTUNE-BASE-021-OfficeUpdates`, `INTUNE-BASE-036-MACDDefenderAntivirus`, `INTUNE-BASE-037-MACDDefenderForEndpoint`, `INTUNE-BASE-039-MACDFirewallAndGatekeeper`, `INTUNE-BASE-040-MACDMicrosoftAutoUpdate`, `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions`, `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates`, `INTUNE-BASE-056-DAutomaticRestartSignOn`, `INTUNE-BASE-058-DConfigRefresh`, `INTUNE-BASE-059-DDefenderAdditionalConfiguration`, `INTUNE-BASE-060-DDefenderSecurityExperience`, `INTUNE-BASE-063-DDefenderUpdateRing3Production`, `INTUNE-BASE-069-DInternetExplorerLegacy`, `INTUNE-BASE-070-DLegacyHardening`, `INTUNE-BASE-074-DMicrosoftEdgeUpdates`, `INTUNE-BASE-075-DMicrosoftOfficeSecurity`, `INTUNE-BASE-077-DPrinting`, `INTUNE-BASE-078-DRemoteDesktopAndRPC`, `INTUNE-BASE-080-DSecurityHardening`, `INTUNE-BASE-083-DUpdateReportsAndTelemetry`, `INTUNE-BASE-085-DWindowsFirewallRules`, `INTUNE-BASE-088-DWindowsPackageManager`, `INTUNE-BASE-089-DWindowsSandbox`, `INTUNE-BASE-090-DWindowsSubsystemForLinux`, `INTUNE-BASE-098-UMicrosoftEdgeExtensions`, `INTUNE-BASE-103-UMicrosoftOfficeSecurity`, `INTUNE-BASE-104-UMicrosoftStore`, `INTUNE-BASE-136-DThreatProtection`, `INTUNE-BASE-137-DWirelessAndPeripherals`, `INTUNE-BASE-140-UAttachmentScanning`, `INTUNE-BASE-153-DDefenderRansomwareProtection`. Zonder eigen check (aantoonbaar via de Intune-rapportage): `WIN - D - Windows Update Ring 3 Production`.
 
@@ -1012,6 +1162,10 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 
+**Conditional Access, actief (0)**
+
+- geen
+
 **Voorbereid — pilot, wacht of eigen groep (2)**
 
 - [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.md) (fase 2) — `INTUNE-BASE-002-CompliancePolicyAssigned`
@@ -1036,12 +1190,18 @@ van het technische deel, geen vervanging van die afweging.
 
 - [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.md) (fase 1) — `INTUNE-BASE-024-Smartscreen`
 
+**Conditional Access, actief (1)**
+
+- `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled) — `CA-BASE-038-PhishingResistantMFAForAllUsers`
+
 **Voorbereid — pilot, wacht of eigen groep (2)**
 
 - [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.md) (fase 2) — `INTUNE-BASE-197-MACDLoginWindow`
 - [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.md) (fase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
 
-**Bewijsroute.** TEST Policies Platform toetst 1 checkId's: `INTUNE-BASE-024-Smartscreen`.
+**Alternatief, niet uitgerold (1)**: `GLOBAL - 1020 - BLOCK - Device Code Auth Flow`
+
+**Bewijsroute.** TEST Policies Platform toetst 2 checkId's: `CA-BASE-038-PhishingResistantMFAForAllUsers`, `INTUNE-BASE-024-Smartscreen`.
 
 **Organisatorisch nodig**
 
@@ -1067,6 +1227,10 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.md) (fase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 - [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.md) (fase 1) — `INTUNE-BASE-105-UPersonalDataEncryption`
 
+**Conditional Access, actief (1)**
+
+- `GLOBAL - 2110 - GRANT - Token Protection` (CA, enabled) — `CA-BASE-037-TokenProtection`
+
 **Voorbereid — pilot, wacht of eigen groep (7)**
 
 - [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.md) (fase 2) — `INTUNE-BASE-038-MACDFileVault`
@@ -1077,9 +1241,9 @@ van het technische deel, geen vervanging van die afweging.
 - [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.md) (fase 3) — `INTUNE-BASE-185-IOSDDataProtection`
 - [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.md) (fase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
 
-**Alternatief, niet uitgerold (1)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`
+**Alternatief, niet uitgerold (2)**: `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements`, `WIN - D - Microsoft Edge DNS over HTTPS Secure`
 
-**Bewijsroute.** TEST Policies Platform toetst 6 checkId's: `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-011-Bitlocker`, `INTUNE-BASE-078-DRemoteDesktopAndRPC`, `INTUNE-BASE-105-UPersonalDataEncryption`.
+**Bewijsroute.** TEST Policies Platform toetst 7 checkId's: `CA-BASE-037-TokenProtection`, `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-011-Bitlocker`, `INTUNE-BASE-078-DRemoteDesktopAndRPC`, `INTUNE-BASE-105-UPersonalDataEncryption`.
 
 **Organisatorisch nodig**
 
@@ -1118,8 +1282,34 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.md) (fase 1) — `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`
 - [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.md) (fase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
 
-**Voorbereid — pilot, wacht of eigen groep (37)**
+**Conditional Access, actief (17)**
 
+- `GLOBAL - 1010 - BLOCK - Legacy Authentication` (CA, enabled) — `CA-BASE-009-LegacyAuthentication`
+- `GLOBAL - 1050 - BLOCK - HighRisk Countries` (CA, enabled) — `CA-BASE-013-HighRiskCountries`
+- `GLOBAL - 1090 - BLOCK - HighRisk SignIns` (CA, enabled) — `CA-BASE-017-HighRiskSignIns`
+- `GLOBAL - 1110 - BLOCK - Unlicensed Users` (CA, enabled) — `CA-BASE-030-UnlicensedUsers`
+- `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled) — `CA-BASE-031-GuestAccessOutsideApprovedApps`
+- `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled) — `CA-BASE-032-AdminsFromUntrustedLocations`
+- `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled) — `CA-BASE-033-ManagedIdentitiesAtRisk`
+- `GLOBAL - 1150 - BLOCK - Risky Agent Identities` (CA, enabled) — `CA-BASE-045-RiskyAgentIdentities`
+- `GLOBAL - 2080 - GRANT - MFA For Device Registration` (CA, enabled) — `CA-BASE-034-MFAForDeviceRegistration`
+- `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled) — `CA-BASE-035-BrowserAccessOnUnmanagedDevices`
+- `GLOBAL - 2130 - GRANT - Admins Compliant Device` (CA, enabled) — `CA-BASE-039-AdminsCompliantDevice`
+- `GLOBAL - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled) — `CA-BASE-041-CloudPCMobileAccess`
+- `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled) — `CA-BASE-050-MFAForIntuneEnrollment`
+- `GLOBAL - 3010 - SESSION - Admin Persistence` (CA, enabled) — `CA-BASE-025-AdminPersistence`
+- `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled) — `CA-BASE-042-ContinuousAccessEvaluation`
+- `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled) — `CA-BASE-043-DefenderForCloudApps`
+- `GLOBAL - 3070 - SESSION - Session Limits All Users` (CA, enabled) — `CA-BASE-044-SessionLimitsAllUsers`
+
+**Voorbereid — pilot, wacht of eigen groep (43)**
+
+- `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced) — `CA-BASE-046-AgentIdentitiesToAgentResources`
+- `GLOBAL - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced) — `CA-BASE-048-RiskyAgentUsers`
+- `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced) — `CA-BASE-049-AgentUsersOutsideCompliantNetwork`
+- `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced) — `CA-BASE-047-AgentUsersCompliantDevice`
+- `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced) — `CA-BASE-051-RegisterSecurityInfoTAPOnly`
+- `GLOBAL - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced) — `CA-BASE-026-BYODPersistence`
 - [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.md) (fase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
 - [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.md) (fase 2) — `INTUNE-BASE-197-MACDLoginWindow`
 - [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.md) (fase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
@@ -1158,9 +1348,9 @@ van het technische deel, geen vervanging van die afweging.
 - [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.md) (fase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
 
-**Alternatief, niet uitgerold (1)**: `MAC - D - External Storage Read Only`
+**Alternatief, niet uitgerold (10)**: `GLOBAL - 1030 - BLOCK - Unsupported Device Platforms`, `GLOBAL - 1040 - BLOCK - Countries not Allowed`, `GLOBAL - 1060 - BLOCK - Service Accounts Trusted Locations Excluded`, `GLOBAL - 1070 - BLOCK - Explicitly Blocked Cloud Apps`, `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps`, `GLOBAL - 1100 - BLOCK - HighRisk Users`, `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients`, `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements`, `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices`, `MAC - D - External Storage Read Only`
 
-**Bewijsroute.** TEST Policies Platform toetst 21 checkId's: `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-013-DeviceLock`, `INTUNE-BASE-018-LocalPoliciesSecurityOptions`, `INTUNE-BASE-024-Smartscreen`, `INTUNE-BASE-026-UserRights`, `INTUNE-BASE-027-WindowsLAPSPolicy`, `INTUNE-BASE-031-UWindowsUserExperience`, `INTUNE-BASE-035-MACDAccountsAndLogin`, `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`, `INTUNE-BASE-045-MACDPlatformSSO`, `INTUNE-BASE-046-MACDRestrictions`, `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-071-DLocalAdministrators`, `INTUNE-BASE-072-DLoginAndLockScreen`, `INTUNE-BASE-073-DMicrosoftAccounts`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`, `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`, `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-142-DPowerManagement`.
+**Bewijsroute.** TEST Policies Platform toetst 38 checkId's: `CA-BASE-009-LegacyAuthentication`, `CA-BASE-013-HighRiskCountries`, `CA-BASE-017-HighRiskSignIns`, `CA-BASE-025-AdminPersistence`, `CA-BASE-030-UnlicensedUsers`, `CA-BASE-031-GuestAccessOutsideApprovedApps`, `CA-BASE-032-AdminsFromUntrustedLocations`, `CA-BASE-033-ManagedIdentitiesAtRisk`, `CA-BASE-034-MFAForDeviceRegistration`, `CA-BASE-035-BrowserAccessOnUnmanagedDevices`, `CA-BASE-039-AdminsCompliantDevice`, `CA-BASE-041-CloudPCMobileAccess`, `CA-BASE-042-ContinuousAccessEvaluation`, `CA-BASE-043-DefenderForCloudApps`, `CA-BASE-044-SessionLimitsAllUsers`, `CA-BASE-045-RiskyAgentIdentities`, `CA-BASE-050-MFAForIntuneEnrollment`, `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-013-DeviceLock`, `INTUNE-BASE-018-LocalPoliciesSecurityOptions`, `INTUNE-BASE-024-Smartscreen`, `INTUNE-BASE-026-UserRights`, `INTUNE-BASE-027-WindowsLAPSPolicy`, `INTUNE-BASE-031-UWindowsUserExperience`, `INTUNE-BASE-035-MACDAccountsAndLogin`, `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`, `INTUNE-BASE-045-MACDPlatformSSO`, `INTUNE-BASE-046-MACDRestrictions`, `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-071-DLocalAdministrators`, `INTUNE-BASE-072-DLoginAndLockScreen`, `INTUNE-BASE-073-DMicrosoftAccounts`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`, `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`, `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-142-DPowerManagement`.
 
 **Organisatorisch nodig**
 
@@ -1181,8 +1371,23 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.md) (fase 1) — `INTUNE-BASE-076-DPasswordless`
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) (fase 1) — `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`
 
-**Voorbereid — pilot, wacht of eigen groep (7)**
+**Conditional Access, actief (10)**
 
+- `GLOBAL - 1010 - BLOCK - Legacy Authentication` (CA, enabled) — `CA-BASE-009-LegacyAuthentication`
+- `GLOBAL - 2010 - GRANT - MediumRisk Signins` (CA, enabled) — `CA-BASE-019-MediumRiskSignins`
+- `GLOBAL - 2020 - GRANT - MediumRisk Users` (CA, enabled) — `CA-BASE-020-MediumRiskUsers`
+- `GLOBAL - 2050 - GRANT - MFA for All Users` (CA, enabled) — `CA-BASE-021-MFAForAllUsers`
+- `GLOBAL - 2080 - GRANT - MFA For Device Registration` (CA, enabled) — `CA-BASE-034-MFAForDeviceRegistration`
+- `GLOBAL - 2100 - GRANT - MFA For Admin Portals` (CA, enabled) — `CA-BASE-036-MFAForAdminPortals`
+- `GLOBAL - 2110 - GRANT - Token Protection` (CA, enabled) — `CA-BASE-037-TokenProtection`
+- `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled) — `CA-BASE-038-PhishingResistantMFAForAllUsers`
+- `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled) — `CA-BASE-050-MFAForIntuneEnrollment`
+- `GLOBAL - 3030 - SESSION - Register Security Info Requirements` (CA, enabled) — `CA-BASE-027-RegisterSecurityInfoRequirements`
+
+**Voorbereid — pilot, wacht of eigen groep (9)**
+
+- `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced) — `CA-BASE-049-AgentUsersOutsideCompliantNetwork`
+- `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced) — `CA-BASE-051-RegisterSecurityInfoTAPOnly`
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.md) (fase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
 - [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) (fase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
 - [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) (fase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
@@ -1191,9 +1396,9 @@ van het technische deel, geen vervanging van die afweging.
 - [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.md) (fase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
 - [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) (fase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
 
-**Alternatief, niet uitgerold (4)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
+**Alternatief, niet uitgerold (6)**: `GLOBAL - 1020 - BLOCK - Device Code Auth Flow`, `GLOBAL - 2055 - GRANT - Phishing Resistant MFA for Admins`, `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
 
-**Bewijsroute.** TEST Policies Platform toetst 3 checkId's: `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`.
+**Bewijsroute.** TEST Policies Platform toetst 13 checkId's: `CA-BASE-009-LegacyAuthentication`, `CA-BASE-019-MediumRiskSignins`, `CA-BASE-020-MediumRiskUsers`, `CA-BASE-021-MFAForAllUsers`, `CA-BASE-027-RegisterSecurityInfoRequirements`, `CA-BASE-034-MFAForDeviceRegistration`, `CA-BASE-036-MFAForAdminPortals`, `CA-BASE-037-TokenProtection`, `CA-BASE-038-PhishingResistantMFAForAllUsers`, `CA-BASE-050-MFAForIntuneEnrollment`, `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`.
 
 **Organisatorisch nodig**
 
@@ -1210,8 +1415,8 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
-| **1.1** Establish and Maintain Detailed Enterprise Asset Inventory | IG1 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **1.2** Address Unauthorized Assets | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **1.1** Establish and Maintain Detailed Enterprise Asset Inventory | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 2080 - GRANT - MFA For Device Registration`, `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment`, `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
+| **1.2** Address Unauthorized Assets | IG1 | technisch | ○ Geen technische maatregel in de baseline | `GLOBAL - 1030 - BLOCK - Unsupported Device Platforms`, `GLOBAL - 2060 - GRANT - Mobile Apps and Desktop Clients` |
 | **1.3** Utilize an Active Discovery Tool | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **1.4** Use Dynamic Host Configuration Protocol (DHCP) Logging to Update Enterprise Asset Inventory | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **1.5** Use a Passive Asset Discovery Tool | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
@@ -1222,7 +1427,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 |---|---|---|---|---|
 | **2.1** Establish and Maintain a Software Inventory | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **2.2** Ensure Authorized Software is Currently Supported | IG1 | technisch | ◐ Alleen pilot, wacht of eigen groep | `MAC - U - Compliance OS Version`, `WIN - U - Compliance OS Version` |
-| **2.3** Address Unauthorized Software | IG1 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Printing Hardening`, `AND - U - Compliance Device Health` |
+| **2.3** Address Unauthorized Software | IG1 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Printing Hardening`, `AND - U - Compliance Device Health`, `GLOBAL - 1070 - BLOCK - Explicitly Blocked Cloud Apps` |
 | **2.4** Utilize Automated Software Inventory Tools | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **2.5** Allowlist Authorized Software | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - D - Restrictions Hardening`, `IOS - D - Restrictions Corporate` |
 | **2.6** Allowlist Authorized Libraries | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
@@ -1234,7 +1439,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 |---|---|---|---|---|
 | **3.1** Establish and Maintain a Data Management Process | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **3.2** Establish and Maintain a Data Inventory | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **3.3** Configure Data Access Control Lists | IG1 | technisch | ● Afgedekt (fase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `MAC - D - External Storage Read Only` |
+| **3.3** Configure Data Access Control Lists | IG1 | technisch | ● Afgedekt (fase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices`, `MAC - D - External Storage Read Only` |
 | **3.4** Enforce Data Retention | IG1 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Windows AI Recall Boundaries` |
 | **3.5** Securely Dispose of Data | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **3.6** Encrypt Data on End-User Devices | IG1 | technisch | ● Afgedekt (fase 1) | `AND - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - U - Compliance BitLocker`, `WIN - U - Personal Data Encryption`, `MAC - D - FileVault` en 3 meer |
@@ -1244,7 +1449,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 | **3.10** Encrypt Sensitive Data in Transit | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Security`, `WIN - D - Cryptography`, `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **3.11** Encrypt Sensitive Data at Rest | IG2 | technisch | ● Afgedekt (fase 1) | `IOS - U - App Protection`, `WIN - D - BitLocker`, `WIN - U - Personal Data Encryption`, `MAC - D - FileVault`, `IOS - D - Data Protection` |
 | **3.12** Segment Data Processing and Storage Based on Sensitivity | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **3.13** Deploy a Data Loss Prevention Solution | IG3 | technisch | ◐ Alleen pilot, wacht of eigen groep | `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection` |
+| **3.13** Deploy a Data Loss Prevention Solution | IG3 | technisch | ◐ Alleen pilot, wacht of eigen groep | `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `GLOBAL - 3040 - SESSION - Block File Downloads On Unmanaged Devices` |
 | **3.14** Log Sensitive Data Access | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
 
 ### 4 Secure Configuration of Enterprise Assets and Software
@@ -1253,40 +1458,40 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 |---|---|---|---|---|
 | **4.1** Establish and Maintain a Secure Configuration Process | IG1 | organisatorisch | ● Afgedekt (fase 1) | `WIN - D - Config Refresh`, `WIN - D - Internet Explorer Legacy`, `WIN - D - Legacy Hardening`, `WIN - D - Local Security Policies`, `WIN - D - Login and Lock Screen`, `WIN - D - Microsoft Edge Security` en 24 meer |
 | **4.2** Establish and Maintain a Secure Configuration Process for Network Infrastructure | IG1 | organisatorisch | ▢ Organisatorisch | — |
-| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - U - Compliance Password`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `MAC - D - Passcode and Screen Lock`, `MAC - D - Screensaver`, `AND - U - Compliance Corporate Password` en 5 meer |
+| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 3010 - SESSION - Admin Persistence`, `GLOBAL - 3070 - SESSION - Session Limits All Users`, `MAC - U - Compliance Password`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `GLOBAL - 3020 - SESSION - BYOD Persistence` en 8 meer |
 | **4.4** Implement and Manage a Firewall on Servers | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **4.7** Manage Default Accounts on Enterprise Assets and Software | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Accounts and Login`, `WIN - D - Local Security Policies`, `WIN - D - Windows LAPS`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration`, `WIN - D - Windows Sandbox` en 12 meer |
+| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1010 - BLOCK - Legacy Authentication`, `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration` en 13 meer |
 | **4.9** Configure Trusted DNS Servers on Enterprise Assets | IG2 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **4.10** Enforce Automatic Device Lockout on Portable End-User Devices | IG2 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Account Lockout`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `IOS - D - Passcode` |
 | **4.11** Enforce Remote Wipe Capability on Portable End-User Devices | IG2 | technisch | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection` |
-| **4.12** Separate Enterprise Workspaces on Mobile End-User Devices | IG3 | technisch | ● Afgedekt (fase 1) | `AND - U - App Protection`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions` |
+| **4.12** Separate Enterprise Workspaces on Mobile End-User Devices | IG3 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 2150 - GRANT - Cloud PC Mobile Access`, `AND - U - App Protection`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `GLOBAL - 2070 - GRANT - Mobile Device Access Requirements` |
 
 ### 5 Account Management
 
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
-| **5.1** Establish and Maintain an Inventory of Accounts | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **5.1** Establish and Maintain an Inventory of Accounts | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1110 - BLOCK - Unlicensed Users` |
 | **5.2** Use Unique Passwords | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management`, `MAC - D - Recovery Lock`, `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric` en 2 meer |
-| **5.3** Disable Dormant Accounts | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **5.4** Restrict Administrator Privileges to Dedicated Administrator Accounts | IG1 | technisch | ● Afgedekt (fase 1) | `WIN - D - Local Administrators`, `WIN - D - Administrator Protection`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **5.5** Establish and Maintain an Inventory of Service Accounts | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **5.3** Disable Dormant Accounts | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1110 - BLOCK - Unlicensed Users` |
+| **5.4** Restrict Administrator Privileges to Dedicated Administrator Accounts | IG1 | technisch | ● Afgedekt (fase 1) | `WIN - D - Local Administrators`, `WIN - D - Administrator Protection`, `MAC - D - Enrollment Profile Standard User Affinity`, `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps` |
+| **5.5** Establish and Maintain an Inventory of Service Accounts | IG2 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1140 - BLOCK - Managed Identities At Risk`, `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` |
 | **5.6** Centralize Account Management | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Platform SSO`, `WIN - D - Microsoft Accounts` |
 
 ### 6 Access Control Management
 
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
-| **6.1** Establish an Access Granting Process | IG1 | organisatorisch | ▢ Organisatorisch | — |
-| **6.2** Establish an Access Revoking Process | IG1 | organisatorisch | ▢ Organisatorisch | — |
-| **6.3** Require MFA for Externally-Exposed Applications | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **6.4** Require MFA for Remote Network Access | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **6.5** Require MFA for Administrative Access | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **6.1** Establish an Access Granting Process | IG1 | organisatorisch | ● Afgedekt (fase 1) | `GLOBAL - 3030 - SESSION - Register Security Info Requirements`, `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` |
+| **6.2** Establish an Access Revoking Process | IG1 | organisatorisch | ● Afgedekt (fase 1) | `GLOBAL - 3050 - SESSION - Continuous Access Evaluation` |
+| **6.3** Require MFA for Externally-Exposed Applications | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1010 - BLOCK - Legacy Authentication`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users`, `GLOBAL - 2050 - GRANT - MFA for All Users`, `GLOBAL - 2080 - GRANT - MFA For Device Registration`, `GLOBAL - 2110 - GRANT - Token Protection` en 3 meer |
+| **6.4** Require MFA for Remote Network Access | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 2050 - GRANT - MFA for All Users`, `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` |
+| **6.5** Require MFA for Administrative Access | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 2100 - GRANT - MFA For Admin Portals`, `GLOBAL - 2055 - GRANT - Phishing Resistant MFA for Admins` |
 | **6.6** Establish and Maintain an Inventory of Authentication and Authorization Systems | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **6.7** Centralize Access Control | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Platform SSO`, `IOS - D - Enterprise SSO`, `MAC - D - Azure Files Cloud Kerberos` |
-| **6.8** Define and Maintain Role-Based Access Control | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **6.7** Centralize Access Control | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Platform SSO`, `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources`, `IOS - D - Enterprise SSO`, `MAC - D - Azure Files Cloud Kerberos` |
+| **6.8** Define and Maintain Role-Based Access Control | IG3 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps`, `GLOBAL - 1080 - BLOCK - Guest Access to Sensitive Apps` |
 
 ### 7 Continuous Vulnerability Management
 
@@ -1305,7 +1510,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
 | **8.1** Establish and Maintain an Audit Log Management Process | IG1 | organisatorisch | ▢ Organisatorisch | — |
-| **8.2** Collect Audit Logs | IG1 | technisch | ● Afgedekt (fase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Windows Firewall`, `WIN - D - Security Log Monitoring` |
+| **8.2** Collect Audit Logs | IG1 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 3060 - SESSION - Defender for Cloud Apps`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Windows Firewall`, `WIN - D - Security Log Monitoring` |
 | **8.3** Ensure Adequate Audit Log Storage | IG1 | technisch | ● Afgedekt (fase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Security Log Monitoring` |
 | **8.4** Standardize Time Synchronization | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Time Server`, `WIN - D - Timezone` |
 | **8.5** Collect Detailed Audit Logs | IG2 | technisch | ● Afgedekt (fase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging` |
@@ -1362,17 +1567,17 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 | **12.5** Centralize Network Authentication, Authorization, and Auditing (AAA) | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **12.6** Use of Secure Network Management and Communication Protocols | IG2 | technisch | ● Afgedekt (fase 1) | `WIN - D - Remote Desktop and RPC` |
 | **12.7** Ensure Remote Devices Utilize a VPN and are Connecting to an Enterprise's AAA Infrastructure | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **12.8** Establish and Maintain Dedicated Computing Resources for All Administrative Work | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **12.8** Establish and Maintain Dedicated Computing Resources for All Administrative Work | IG3 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations`, `GLOBAL - 2130 - GRANT - Admins Compliant Device` |
 
 ### 13 Network Monitoring and Defense
 
 | Safeguard | IG | Soort | Status | Policies |
 |---|---|---|---|---|
-| **13.1** Centralize Security Event Alerting | IG2 | technisch | ● Afgedekt (fase 1) | `WIN - D - Defender EDR Policy`, `WIN - U - Compliance Defender for Endpoint Risk`, `WIN - D - Defender for Endpoint EDR` |
+| **13.1** Centralize Security Event Alerting | IG2 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 3060 - SESSION - Defender for Cloud Apps`, `WIN - D - Defender EDR Policy`, `GLOBAL - 1170 - BLOCK - Risky Agent Users`, `WIN - U - Compliance Defender for Endpoint Risk`, `GLOBAL - 1100 - BLOCK - HighRisk Users` en 1 meer |
 | **13.2** Deploy a Host-Based Intrusion Detection Solution | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Defender for Endpoint`, `WIN - D - Defender EDR Policy`, `WIN - D - Defender for Endpoint EDR` |
 | **13.3** Deploy a Network Intrusion Detection Solution | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **13.4** Perform Traffic Filtering Between Network Segments | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
-| **13.5** Manage Access Control for Remote Assets | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
+| **13.5** Manage Access Control for Remote Assets | IG2 | technisch | ● Afgedekt (fase 1) | `GLOBAL - 1050 - BLOCK - HighRisk Countries`, `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations`, `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices`, `GLOBAL - 2130 - GRANT - Admins Compliant Device`, `GLOBAL - 2150 - GRANT - Cloud PC Mobile Access`, `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network` en 4 meer |
 | **13.6** Collect Network Traffic Flow Logs | IG2 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **13.7** Deploy a Host-Based Intrusion Prevention Solution | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **13.8** Deploy a Network Intrusion Prevention Solution | IG3 | technisch | ○ Geen technische maatregel in de baseline | — |
@@ -1449,8 +1654,8 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 
 | Subcategorie | Omschrijving | Status | Policies |
 |---|---|---|---|
-| **ID.AM-01** | Inventories of hardware managed by the organization are maintained | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **ID.AM-02** | Inventories of software, services, and systems managed by the organization are maintained | ○ Geen technische maatregel in de baseline | — |
+| **ID.AM-01** | Inventories of hardware managed by the organization are maintained | ● Afgedekt (fase 1) | `GLOBAL - 2080 - GRANT - MFA For Device Registration`, `GLOBAL - 2170 - GRANT - MFA For Intune Enrollment`, `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity`, `GLOBAL - 1030 - BLOCK - Unsupported Device Platforms` |
+| **ID.AM-02** | Inventories of software, services, and systems managed by the organization are maintained | ○ Geen technische maatregel in de baseline | `GLOBAL - 1070 - BLOCK - Explicitly Blocked Cloud Apps` |
 | **ID.AM-08** | Systems, hardware, software, services, and data are managed throughout their life cycles | ○ Geen technische maatregel in de baseline | — |
 | **ID.RA-01** | Vulnerabilities in assets are identified, validated, and recorded | ◐ Alleen pilot, wacht of eigen groep | `MAC - D - Software Updates`, `IOS - D - Software Updates` |
 | **ID.RA-02** | Cyber threat intelligence is received from information sharing forums and sources | ○ Geen technische maatregel in de baseline | — |
@@ -1461,22 +1666,22 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 
 | Subcategorie | Omschrijving | Status | Policies |
 |---|---|---|---|
-| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Afgedekt (fase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` en 9 meer |
-| **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ Geen technische maatregel in de baseline | — |
-| **PR.AA-03** | Users, services, and hardware are authenticated | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - Device Lock` en 25 meer |
-| **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Afgedekt (fase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
-| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Afgedekt (fase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` en 6 meer |
+| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Afgedekt (fase 1) | `GLOBAL - 1010 - BLOCK - Legacy Authentication`, `GLOBAL - 1110 - BLOCK - Unlicensed Users`, `GLOBAL - 1140 - BLOCK - Managed Identities At Risk`, `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 2050 - GRANT - MFA for All Users`, `GLOBAL - 2080 - GRANT - MFA For Device Registration` en 19 meer |
+| **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ● Afgedekt (fase 1) | `GLOBAL - 3030 - SESSION - Register Security Info Requirements`, `GLOBAL - 2180 - GRANT - Register Security Info TAP Only` |
+| **PR.AA-03** | Users, services, and hardware are authenticated | ● Afgedekt (fase 1) | `GLOBAL - 1010 - BLOCK - Legacy Authentication`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users`, `GLOBAL - 2050 - GRANT - MFA for All Users`, `GLOBAL - 2100 - GRANT - MFA For Admin Portals`, `GLOBAL - 2120 - GRANT - Phishing Resistant MFA for All Users` en 33 meer |
+| **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Afgedekt (fase 1) | `GLOBAL - 2110 - GRANT - Token Protection`, `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos`, `GLOBAL - 1020 - BLOCK - Device Code Auth Flow` |
+| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Afgedekt (fase 1) | `GLOBAL - 1050 - BLOCK - HighRisk Countries`, `GLOBAL - 1110 - BLOCK - Unlicensed Users`, `GLOBAL - 1120 - BLOCK - Guest Access Outside Approved Apps`, `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations`, `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices`, `GLOBAL - 2100 - GRANT - MFA For Admin Portals` en 30 meer |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Geen technische maatregel in de baseline | — |
-| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` en 12 meer |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` en 13 meer |
+| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` en 14 meer |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Afgedekt (fase 1) | `GLOBAL - 2110 - GRANT - Token Protection`, `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry` en 14 meer |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Afgedekt (fase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Afgedekt (fase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
-| **PR.PS-01** | Configuration management practices are established and applied | ● Afgedekt (fase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - Cloud Optimized Content` en 53 meer |
+| **PR.PS-01** | Configuration management practices are established and applied | ● Afgedekt (fase 1) | `GLOBAL - 2130 - GRANT - Admins Compliant Device`, `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions` en 55 meer |
 | **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Afgedekt (fase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Microsoft Edge Updates`, `WIN - D - Microsoft Office Updates` en 16 meer |
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ Geen technische maatregel in de baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Afgedekt (fase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` en 2 meer |
 | **PR.PS-05** | Installation and execution of unauthorized software are prevented | ● Afgedekt (fase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Microsoft Edge Extensions`, `WIN - D - Attack Surface Reduction`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Microsoft Store` en 9 meer |
-| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Afgedekt (fase 1) | `MAC - D - Firewall and Gatekeeper`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - D - Wireless and Peripherals`, `WIN - D - Network Authentication Hardening` en 4 meer |
+| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Afgedekt (fase 1) | `GLOBAL - 1050 - BLOCK - HighRisk Countries`, `GLOBAL - 1130 - BLOCK - Admins From Untrusted Locations`, `GLOBAL - 2090 - GRANT - Browser Access On Unmanaged Devices`, `MAC - D - Firewall and Gatekeeper`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall` en 10 meer |
 | **PR.IR-03** | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations | ● Afgedekt (fase 1) | `WIN - D - Business Continuity`, `MAC - D - Wifi Guest`, `WIN - D - Wifi Guest` |
 | **PR.IR-04** | Adequate resource capacity to ensure availability is maintained | ● Afgedekt (fase 1) | `WIN - D - Delivery Optimisation`, `WIN - D - Endpoint Analytics`, `WIN - D - Storage Sense` |
 
@@ -1485,8 +1690,8 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 | Subcategorie | Omschrijving | Status | Policies |
 |---|---|---|---|
 | **DE.CM-01** | Networks and network services are monitored to find potentially adverse events | ◐ Alleen pilot, wacht of eigen groep | `IOS - D - Defender for Endpoint Onboarding Supervised`, `IOS - D - Defender for Endpoint Onboarding Unsupervised` |
-| **DE.CM-03** | Personnel activity and technology usage are monitored to find potentially adverse events | ○ Geen technische maatregel in de baseline | — |
-| **DE.CM-09** | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events | ● Afgedekt (fase 1) | `MAC - D - Defender Antivirus`, `MAC - D - Defender for Endpoint`, `MAC - D - Microsoft Edge Security`, `MAC - U - Compliance Device Health`, `MAC - U - Compliance Device Security`, `MAC - U - Compliance Password` en 34 meer |
+| **DE.CM-03** | Personnel activity and technology usage are monitored to find potentially adverse events | ● Afgedekt (fase 1) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users`, `GLOBAL - 3060 - SESSION - Defender for Cloud Apps`, `GLOBAL - 1170 - BLOCK - Risky Agent Users`, `GLOBAL - 1100 - BLOCK - HighRisk Users` |
+| **DE.CM-09** | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events | ● Afgedekt (fase 1) | `GLOBAL - 3060 - SESSION - Defender for Cloud Apps`, `MAC - D - Defender Antivirus`, `MAC - D - Defender for Endpoint`, `MAC - D - Microsoft Edge Security`, `MAC - U - Compliance Device Health`, `MAC - U - Compliance Device Security` en 35 meer |
 | **DE.AE-02** | Potentially adverse events are analyzed to better understand associated activities | ● Afgedekt (fase 1) | `WIN - D - Defender EDR Policy`, `WIN - D - Defender for Endpoint EDR` |
 | **DE.AE-03** | Information is correlated from multiple sources | ○ Geen technische maatregel in de baseline | — |
 | **DE.AE-06** | Information on adverse events is provided to authorized staff and tools | ○ Geen technische maatregel in de baseline | — |
@@ -1500,7 +1705,7 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 | **RS.AN-03** | Analysis is performed to establish what has taken place during an incident and the root cause | ○ Geen technische maatregel in de baseline | — |
 | **RS.AN-07** | Incident data and metadata are collected, and their integrity and provenance are preserved | ○ Geen technische maatregel in de baseline | — |
 | **RS.CO-02** | Internal and external stakeholders are notified of incidents | ○ Geen technische maatregel in de baseline | — |
-| **RS.MI-01** | Incidents are contained | ● Afgedekt (fase 1) | `WIN - D - Defender Antivirus`, `WIN - D - Defender Ransomware Protection`, `AND - U - Compliance Corporate Defender for Endpoint`, `AND - U - Compliance Defender for Endpoint`, `WIN - U - Compliance Defender for Endpoint Risk` |
+| **RS.MI-01** | Incidents are contained | ● Afgedekt (fase 1) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 1140 - BLOCK - Managed Identities At Risk`, `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 3050 - SESSION - Continuous Access Evaluation`, `WIN - D - Defender Antivirus`, `WIN - D - Defender Ransomware Protection` en 5 meer |
 | **RS.MI-02** | Incidents are eradicated | ○ Geen technische maatregel in de baseline | — |
 
 ### RC — Recover (herstellen)
@@ -1647,24 +1852,19 @@ Tot dat besluit is de control die de policy invult niet afgedekt.
 
 ### Restrisico's
 
-**ISO-controls die technisch in te vullen zijn maar vandaag niet door fase 1 worden afgedekt (16).**
+**ISO-controls die technisch in te vullen zijn maar vandaag niet door fase 1 worden afgedekt (11).**
 Accepteer het risico expliciet, vul het in buiten deze baseline, of breng de voorbereide policy naar fase 1.
 
 | Control | Invulbaar | Voorbereid in de baseline |
 |---|---|---|
 | **A.5.3** Functiescheiding | deels | — |
-| **A.5.7** Informatie en analyses over dreigingen | deels | — |
 | **A.5.9** Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen | deels | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
 | **A.5.11** Retourneren van bedrijfsmiddelen | deels | — |
-| **A.5.18** Toegangsrechten | deels | — |
-| **A.5.23** Informatiebeveiliging voor het gebruik van clouddiensten | deels | — |
-| **A.5.25** Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen | deels | — |
 | **A.5.26** Reageren op informatiebeveiligingsincidenten | deels | — |
 | **A.5.28** Verzamelen van bewijsmateriaal | deels | — |
 | **A.5.33** Beschermen van registraties | deels | `WIN - D - Windows AI Recall Boundaries` |
 | **A.5.36** Naleving van beleid, regels en normen voor informatiebeveiliging | deels | — |
 | **A.6.5** Verantwoordelijkheden na beëindiging of wijziging van het dienstverband | deels | — |
-| **A.6.7** Werken op afstand | deels | — |
 | **A.7.14** Veilig verwijderen of hergebruiken van apparatuur | deels | — |
 | **A.8.10** Wissen van informatie | deels | — |
 | **A.8.11** Maskeren van gegevens | deels | `WIN - D - Windows AI Recall Boundaries` |
@@ -1787,7 +1987,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.5.4** Managementverantwoordelijkheden | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Management stuurt aantoonbaar op naleving (NIS2 art. 20: bestuurders keuren maatregelen goed en volgen training). | — |
 | **A.5.5** Contact met overheidsinstanties | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Contactpunten met CSIRT/NCSC, toezichthouder en AP vastleggen, inclusief meldtermijnen. | — |
 | **A.5.6** Contact met speciale belangengroepen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Deelname aan ISAC's, sectorale overleggen en leveranciersadviezen organiseren. | — |
-| **A.5.7** Informatie en analyses over dreigingen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Dreigingsinformatie (Defender, Entra ID Protection, NCSC) laten beoordelen en vertalen naar aanpassingen van de baseline. | — |
+| **A.5.7** Informatie en analyses over dreigingen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1. Organisatorisch: Dreigingsinformatie (Defender, Entra ID Protection, NCSC) laten beoordelen en vertalen naar aanpassingen van de baseline. | (i) |
 | **A.5.8** Informatiebeveiliging in projectmanagement | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Beveiligingseisen opnemen in projecten, bijvoorbeeld bij de uitrol van nieuwe apparaten of platformen. | — |
 | **A.5.9** Inventarisatie van informatie en andere gerelateerde bedrijfsmiddelen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch voorbereid: 3 policies in pilot, wacht of eigen groep. Organisatorisch: Intune levert de apparaatinventaris; eigenaarschap, informatie-inventaris en periodieke controle op volledigheid zijn organisatorisch. | (i) |
 | **A.5.10** Aanvaardbaar gebruik van informatie en andere gerelateerde bedrijfsmiddelen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1, 6 voorbereid. Organisatorisch: Gebruiksregels (incl. AI en privégebruik) vaststellen en communiceren; techniek dwingt alleen een deel af. | (d) (g) (i) |
@@ -1795,17 +1995,17 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.5.12** Classificeren van informatie | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Classificatieschema vaststellen; technische labels (Purview) vallen buiten deze baseline. | — |
 | **A.5.13** Labelen van informatie | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Labelprocedure en -hulpmiddelen (Purview-gevoeligheidslabels) — buiten deze baseline. | — |
 | **A.5.14** Overdragen van informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 1 voorbereid. Organisatorisch: Regels voor informatieoverdracht met externen (mail, deelkoppelingen, gastaccounts); techniek beperkt kanalen op het apparaat. | (i) |
-| **A.5.15** Toegangsbeveiliging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1, 9 voorbereid. Organisatorisch: Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. | (b) (e) (i) |
-| **A.5.16** Identiteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 2 policies in fase 1. Organisatorisch: Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. | (i) |
-| **A.5.17** Authenticatie-informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 12 policies in fase 1, 16 voorbereid. Organisatorisch: Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. | (c) (e) (f) (g) (h) (i) (j) |
-| **A.5.18** Toegangsrechten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. | — |
+| **A.5.15** Toegangsbeveiliging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 14 policies in fase 1, 13 voorbereid. Organisatorisch: Toegangsbeleid vaststellen (wie mag waarbij, onder welke voorwaarden); Conditional Access en apparaatbeleid dwingen het af. | (b) (d) (e) (g) (i) (j) |
+| **A.5.16** Identiteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 8 policies in fase 1, 2 voorbereid. Organisatorisch: Levenscyclus van identiteiten (in-, door-, uitstroom) koppelen aan HR; gedeelde en serviceaccounts registreren. | (b) (i) (j) |
+| **A.5.17** Authenticatie-informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 19 policies in fase 1, 17 voorbereid. Organisatorisch: Gebruikers instrueren over omgang met wachtwoorden, pincodes en herstelcodes; uitgifteproces voor tijdelijke toegangscodes. | (b) (c) (e) (f) (g) (h) (i) (j) |
+| **A.5.18** Toegangsrechten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1. Organisatorisch: Toekennen, periodiek beoordelen (access reviews) en intrekken van rechten; CA dwingt voorwaarden af maar beoordeelt geen rechten. | (b) (d) (i) |
 | **A.5.19** Informatiebeveiliging in leveranciersrelaties | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch voorbereid: 1 policy in pilot, wacht of eigen groep. Organisatorisch: Leveranciersbeleid en risicobeoordeling (incl. Microsoft, AI-diensten, remote-supporttools); techniek kan alleen niet-goedgekeurde diensten blokkeren. | (d) |
 | **A.5.20** Adresseren van informatiebeveiliging in leveranciersovereenkomsten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Beveiligingseisen, verwerkersovereenkomsten en auditrechten in contracten opnemen. | — |
 | **A.5.21** Beheren van informatiebeveiliging in de ICT-toeleveringsketen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Eisen aan ICT-producten en -diensten in de keten; herkomst van software en updates beoordelen. | — |
 | **A.5.22** Monitoren, beoordelen en het beheren van wijzigingen van leveranciersdiensten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Wijzigingen bij Microsoft/leveranciers volgen (Message Center, roadmaps) en periodiek beoordelen. | — |
-| **A.5.23** Informatiebeveiliging voor het gebruik van clouddiensten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Proces voor aanschaf, gebruik en beëindiging van clouddiensten; CA en tenantbeperkingen dwingen een deel af. | — |
+| **A.5.23** Informatiebeveiliging voor het gebruik van clouddiensten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 2 policies in fase 1. Organisatorisch: Proces voor aanschaf, gebruik en beëindiging van clouddiensten; CA en tenantbeperkingen dwingen een deel af. | (b) (i) |
 | **A.5.24** Plannen en voorbereiden van het beheer van informatiebeveiligingsincidenten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Incidentresponsplan met rollen, draaiboeken (o.a. apparaat isoleren, account intrekken) en meldplicht (NIS2 art. 23). | — |
-| **A.5.25** Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Triageproces en criteria voor 'incident'; Defender levert de signalen. | — |
+| **A.5.25** Beoordelen van en besluiten over informatiebeveiligingsgebeurtenissen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1. Organisatorisch: Triageproces en criteria voor 'incident'; Defender levert de signalen. | (b) (i) |
 | **A.5.26** Reageren op informatiebeveiligingsincidenten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Uitvoeren van het responsplan; technische acties (isoleren, wissen, sessies intrekken) moeten geoefend zijn. | — |
 | **A.5.27** Leren van informatiebeveiligingsincidenten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Evaluaties na incidenten en vertaling naar baseline-wijzigingen. | — |
 | **A.5.28** Verzamelen van bewijsmateriaal | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Forensische procedure en bewaartermijnen; logging en EDR leveren het materiaal, borging van de keten is organisatorisch. | — |
@@ -1824,7 +2024,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.6.4** Disciplinaire procedure | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Formele procedure bij schending van het beleid. | — |
 | **A.6.5** Verantwoordelijkheden na beëindiging of wijziging van het dienstverband | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Uitdienstproces: toegang intrekken, apparaat terug of selectief wissen, geheimhouding na vertrek. | — |
 | **A.6.6** Vertrouwelijkheids- of geheimhoudingsovereenkomsten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Geheimhoudingsovereenkomsten opstellen en laten tekenen. | — |
-| **A.6.7** Werken op afstand | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Thuiswerkbeleid (locatie, schermen, netwerken); techniek beschermt het apparaat en de toegang. | — |
+| **A.6.7** Werken op afstand | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 1 voorbereid. Organisatorisch: Thuiswerkbeleid (locatie, schermen, netwerken); techniek beschermt het apparaat en de toegang. | (h) (i) |
 | **A.6.8** Melden van informatiebeveiligingsgebeurtenissen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Meldkanaal voor medewerkers inrichten en bekendmaken. | — |
 | **A.7.1** Fysieke beveiligingszones | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein: fysieke zones definiëren. | — |
 | **A.7.2** Fysieke toegangsbeveiliging | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein: toegangscontrole tot gebouwen en ruimten. | — |
@@ -1832,7 +2032,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.7.4** Monitoren van de fysieke beveiliging | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein: camerabewaking, alarmopvolging. | — |
 | **A.7.5** Beschermen tegen fysieke en omgevingsdreigingen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein. | — |
 | **A.7.6** Werken in beveiligde zones | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein. | — |
-| **A.7.7** 'Clear desk' en 'clear screen' | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 5 policies in fase 1, 5 voorbereid. Organisatorisch: Clear-desk-regels voor papier en media vaststellen; clear screen wordt technisch afgedwongen. | (e) (f) (i) |
+| **A.7.7** 'Clear desk' en 'clear screen' | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 7 policies in fase 1, 6 voorbereid. Organisatorisch: Clear-desk-regels voor papier en media vaststellen; clear screen wordt technisch afgedwongen. | (e) (f) (i) |
 | **A.7.8** Plaatsen en beschermen van apparatuur | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein. | — |
 | **A.7.9** Beveiligen van bedrijfsmiddelen buiten het terrein | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 2 policies in fase 1, 5 voorbereid. Organisatorisch: Regels voor meenemen, onbeheerd achterlaten en melden van verlies; versleuteling en wissen op afstand zijn technisch. | (e) (h) (i) |
 | **A.7.10** Opslagmedia | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 2 voorbereid. Organisatorisch: Beleid voor verwisselbare media en veilige vernietiging. | (e) (h) (i) |
@@ -1840,11 +2040,11 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.7.12** Beveiligen van bekabeling | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Buiten het endpoint-/identitydomein. | — |
 | **A.7.13** Onderhoud van apparatuur | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Onderhoud en reparatie door bevoegden, met afspraken over gegevens op het apparaat. | — |
 | **A.7.14** Veilig verwijderen of hergebruiken van apparatuur | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Procedure voor afvoer en hergebruik (wipe/Autopilot Reset, certificaat van vernietiging). | — |
-| **A.8.1** 'User endpoint devices' | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 19 policies in fase 1, 29 voorbereid. Organisatorisch: Beleid voor zakelijke en privéapparaten (BYOD), registratie en gebruiksregels. | (d) (e) (f) (h) (i) |
-| **A.8.2** Speciale toegangsrechten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 6 policies in fase 1, 3 voorbereid. Organisatorisch: Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). | (e) (i) |
-| **A.8.3** Beperking toegang tot informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 1 voorbereid. Organisatorisch: Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. | (h) (i) |
+| **A.8.1** 'User endpoint devices' | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 24 policies in fase 1, 31 voorbereid. Organisatorisch: Beleid voor zakelijke en privéapparaten (BYOD), registratie en gebruiksregels. | (d) (e) (f) (h) (i) (j) |
+| **A.8.2** Speciale toegangsrechten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 11 policies in fase 1, 3 voorbereid. Organisatorisch: Proces voor toekennen en periodiek beoordelen van beheerrechten (PIM, access reviews). | (b) (d) (e) (i) (j) |
+| **A.8.3** Beperking toegang tot informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1, 2 voorbereid. Organisatorisch: Autorisatiematrix en rechten op data (SharePoint/Teams) — grotendeels buiten deze baseline. | (d) (h) (i) |
 | **A.8.4** Toegangsbeveiliging op broncode | afhankelijk | alleen van toepassing bij eigen software- of scriptontwikkeling | Organisatorisch: Alleen bij eigen softwareontwikkeling: toegang tot repositories en ontwikkeltools beheren. | — |
-| **A.8.5** Beveiligde authenticatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 10 policies in fase 1, 20 voorbereid. Organisatorisch: Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). | (e) (f) (g) (h) (i) (j) |
+| **A.8.5** Beveiligde authenticatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 19 policies in fase 1, 20 voorbereid. Organisatorisch: Authenticatiebeleid vaststellen (welke methoden, uitzonderingen, break-glass). | (b) (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Capaciteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1. Organisatorisch: Capaciteitsplanning voor netwerk, licenties en opslag. | (c) |
 | **A.8.7** Bescherming tegen malware | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 26 policies in fase 1, 16 voorbereid. Organisatorisch: Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Beheer van technische kwetsbaarheden | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 11 policies in fase 1, 13 voorbereid. Organisatorisch: Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. | (e) (f) (h) (i) |
@@ -1854,16 +2054,16 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.8.12** Voorkomen van gegevenslekken (data leakage prevention) | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 13 policies in fase 1, 11 voorbereid. Organisatorisch: DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. | (c) (d) (e) (h) (i) |
 | **A.8.13** Back-up van informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1. Organisatorisch: Back-upbeleid voor M365-data en periodieke hersteltests; OneDrive-synchronisatie is geen volledige back-up. | (c) |
 | **A.8.14** Redundantie van informatieverwerkende faciliteiten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Redundantie van diensten en infrastructuur — buiten het endpoint-/identitydomein. | — |
-| **A.8.15** Logging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 6 policies in fase 1, 2 voorbereid. Organisatorisch: Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. | (b) (e) |
-| **A.8.16** Monitoren van activiteiten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 4 policies in fase 1, 7 voorbereid. Organisatorisch: 24/7- of kantoortijdenopvolging van alerts, met escalatiecriteria. | (b) (e) (i) |
+| **A.8.15** Logging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 7 policies in fase 1, 2 voorbereid. Organisatorisch: Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. | (b) (e) (i) |
+| **A.8.16** Monitoren van activiteiten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 11 policies in fase 1, 8 voorbereid. Organisatorisch: 24/7- of kantoortijdenopvolging van alerts, met escalatiecriteria. | (b) (e) (i) (j) |
 | **A.8.17** Kloksynchronisatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 2 policies in fase 1, 1 voorbereid. Organisatorisch: Goedgekeurde tijdbron vastleggen. | (b) (e) (i) |
 | **A.8.18** Gebruik van speciale systeemhulpmiddelen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 3 voorbereid. Organisatorisch: Register van toegestane beheer- en remote-supporttools en wie ze mag gebruiken. | (i) |
 | **A.8.19** Installeren van software op operationele systemen | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 10 policies in fase 1, 8 voorbereid. Organisatorisch: Proces voor goedkeuren en aanbieden van software (Company Portal-catalogus). | (e) (f) (g) (h) (i) |
-| **A.8.20** Beveiliging netwerkcomponenten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 13 policies in fase 1, 12 voorbereid. Organisatorisch: Netwerkinfrastructuur (firewalls, wifi, VPN) valt grotendeels buiten deze baseline. | (b) (c) (e) (f) (h) (i) (j) |
+| **A.8.20** Beveiliging netwerkcomponenten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 14 policies in fase 1, 13 voorbereid. Organisatorisch: Netwerkinfrastructuur (firewalls, wifi, VPN) valt grotendeels buiten deze baseline. | (b) (c) (e) (f) (h) (i) (j) |
 | **A.8.21** Beveiliging van netwerkdiensten | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 1 policy in fase 1, 5 voorbereid. Organisatorisch: Eisen aan netwerkdiensten en -leveranciers vastleggen en monitoren. | (c) (e) (h) |
 | **A.8.22** Netwerksegmentatie | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Netwerksegmentatie is infrastructuur, niet via endpoint-/identitybeleid in te richten. | — |
 | **A.8.23** Toepassen van webfilters | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1, 3 voorbereid. Organisatorisch: Categorieën en uitzonderingen vaststellen (Defender Web Content Filtering in het Defender-portaal). | (d) (e) (g) (i) (j) |
-| **A.8.24** Gebruik van cryptografie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 9 policies in fase 1, 7 voorbereid. Organisatorisch: Cryptografiebeleid en sleutelbeheer (wie heeft toegang tot herstelsleutels, rotatie). | (e) (f) (h) (i) (j) |
+| **A.8.24** Gebruik van cryptografie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 10 policies in fase 1, 7 voorbereid. Organisatorisch: Cryptografiebeleid en sleutelbeheer (wie heeft toegang tot herstelsleutels, rotatie). | (e) (f) (h) (i) (j) |
 | **A.8.25** Beveiligen tijdens de ontwikkelcyclus | afhankelijk | alleen van toepassing bij eigen softwareontwikkeling | Organisatorisch: Alleen bij eigen ontwikkeling. | — |
 | **A.8.26** Toepassingsbeveiligingseisen | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Beveiligingseisen bij ontwikkelen of aanschaffen van toepassingen. | — |
 | **A.8.27** Veilige systeemarchitectuur en technische uitgangspunten | afhankelijk | alleen van toepassing bij eigen systeemontwikkeling | Organisatorisch: Architectuurprincipes (zero trust) vastleggen. | — |

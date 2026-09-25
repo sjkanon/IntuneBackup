@@ -58,7 +58,7 @@ Toewijzen aan gebruikersgroepen.
 | [**Compliance Password**](CompliancePolicies/Baseline_MAC_U_Compliance_Password.md) | Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn. | Compliance | — | All Users | — |
 | [**Microsoft Edge Extensions**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.md) | Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren. | Settings Catalog | 4 | All Users | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` |
 | [**Microsoft Edge Profiles and Sync**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.md) | Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt. | Settings Catalog | 4 | All Users | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |
-| [**Microsoft Edge Updates**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.md) | Hoe en wanneer Edge op de Mac zichzelf bijwerkt. | Settings Catalog | 5 | All Users | `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates` |
+| [**Microsoft Edge Updates**](SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.md) | Hoe en wanneer Edge op de Mac zichzelf bijwerkt. | Settings Catalog | 7 | All Users | `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates` |
 | [**Microsoft OneDrive KFM**](SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.md) | Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets alleen lokaal staat. | Settings Catalog | 15 | All Users | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` |
 
 ---

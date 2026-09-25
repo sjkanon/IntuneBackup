@@ -14,6 +14,8 @@ Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstel
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Updates.json`](Baseline_WIN_D_Microsoft_Edge_Updates.json) |
 
+> Twee instellingen erbij die OpenIntuneBaseline niet zet, want zonder die twee heeft een openstaande Edge-update geen harde einddatum: het herstartvenster (relaunchwindow, 17:00 plus 780 minuten, dus 17:00 tot 06:00) en versneld herstarten bij een ernstig verouderde versie (relaunchfastifoutdated, 7 dagen, de laagste waarde die de definitie toestaat). De melding stond al op Required met een periode van 3 dagen; het venster zorgt dat de gedwongen herstart buiten werktijd valt. Let op: een apparaat dat nachts uit staat, herstart pas in het eerstvolgende venster. Die twee staan in de catalogus in een eigen versienamespace (microsoft_edgev93 voor het venster, microsoft_edgev141 voor de verouderde versie), waar de rest van deze policy op microsoft_edge en updatev87/v94/v95 staat; ids geverifieerd tegen de definities in DCv2/Settings.
+
 ## Normen
 
 | Kader | Controls |
@@ -25,7 +27,7 @@ Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstel
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
 
-## Instellingen — 22
+## Instellingen — 26
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -54,6 +56,10 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_part_installpolicy` | 5 |
 | `device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod_part_autoupdatecheckperiod` | 240 |
+| `device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow_relaunchwindow` | {"entries":[{"duration_mins":780,"start":{"hour":17,"minute":0}}]} |
+| `device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated_relaunchfastifoutdated` | 7 |
 
 ---
 
