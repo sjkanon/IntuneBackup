@@ -130,7 +130,7 @@ zijn. Stage 3 zet iemand met de hand door.
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policynamen in de tenant |
 
 Stap 1 t/m 7 draait [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
-na elke wijziging in `IntuneTemplate/`. Alle Node-scripts delen `scripts/lib/templates.js`.
+na elke wijziging in `IntuneTemplate/`. Alle Node-scripts in de pijplijn delen `scripts/lib/templates.js`.
 Details: [scripts/README.md](scripts/README.md).
 
 ## Externe koppelingen
@@ -146,6 +146,7 @@ Details: [scripts/README.md](scripts/README.md).
 | Microsoft Graph | repo → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | eerst `-WhatIf` |
 | endoflife.date | bron → rapport | `check-osversion.js` | faalt nooit, alleen signaal |
 | GitHub Actions | repo → repo | `generate-baseline.yml` opent een PR | de enige workflow |
+| Spiegelclone | repo → spiegel | `sync-mirror.js <doelmap> --push` | Eigen geschiedenis aan die kant, geen force-push; draai het ná de pijplijn |
 
 ### Twee dingen die CIPP anders doet dan je verwacht
 

@@ -88,3 +88,26 @@ node scripts/generate-compliance.js --strict --no-ca   # laatst: idem, plus de f
 Die volgorde staat ook in [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml),
 die na elke wijziging in `IntuneTemplate/` een PR opent met de geregenereerde bestanden. Dat is
 de enige workflow: één bron, één pijplijn, één plek waar de volgorde staat.
+
+## Spiegelen naar een tweede clone
+
+`sync-mirror.js` hoort niet bij de pijplijn hierboven: hij leest `IntuneTemplate/` niet en deelt
+`lib/templates.js` dus ook niet. Hij zet de bestanden in een tweede clone gelijk aan wat hier in
+git staat en maakt daar één gewone commit van.
+
+```bash
+node scripts/sync-mirror.js <doelmap> --dry-run   # eerst kijken wat er zou verschuiven
+node scripts/sync-mirror.js <doelmap> --push
+```
+
+Wat meegaat is `git ls-files`, niet wat er op de schijf ligt — daarmee blijft `local/` buiten de
+spiegel, en dat is precies de reden om het niet met een kopieeropdracht te doen: één uitrolkopie
+mét geheimen die naar een tweede remote lekt krijg je daar nooit meer uit. Verwijderd is
+verwijderd, maar alleen voor bestanden die aan de andere kant in git staan; wat daar lokaal is
+aangemaakt blijft met rust.
+
+De doelclone houdt zijn eigen geschiedenis. Geen `push --force`, dus de commits, workflowruns en
+branches aan die kant blijven staan — en dat is ook waarom het een script is en geen remote: een
+tweede remote van deze repo zou die kant bij elke push overschrijven.
+
+Draai het ná de volgorde hierboven, anders spiegel je gegenereerde bestanden die nog achterlopen.
