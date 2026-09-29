@@ -12,7 +12,6 @@ Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-dien
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-149-UAIUsageControlPermitted` |
 | Bron | Tegenhanger van de Restricted-variant: dezelfde blokkeerlijst zonder de AI-domeinen |
 | Bestand | [`Baseline_WIN_U_AI_Usage_Control_Permitted.json`](Baseline_WIN_U_AI_Usage_Control_Permitted.json) |
 

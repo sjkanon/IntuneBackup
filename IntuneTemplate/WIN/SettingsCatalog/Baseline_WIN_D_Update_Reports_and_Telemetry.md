@@ -12,7 +12,6 @@ Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig h
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Reports and Telemetry |
 | Bestand | [`Baseline_WIN_D_Update_Reports_and_Telemetry.json`](Baseline_WIN_D_Update_Reports_and_Telemetry.json) |
 

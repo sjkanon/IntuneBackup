@@ -4,8 +4,7 @@
 
 Wat bij een complete baseline hoort maar geen van de vijf CIPP-policytypes is (`Catalog`,
 `Admin`, `Device`, `deviceCompliancePolicies`, `AppProtection`). Niets hier wordt opgepikt door
-`check-scope.js`, `generate-baseline.js`, `export-intunebackup.js` of `Set-BaselineAssignment.ps1`,
-en er hoort geen `checkId` bij. Elke map heeft een eigen README met uitrolroute, voorwaarden en de
+`check-scope.js`, `export-intunebackup.js` of `Set-BaselineAssignment.ps1`. Elke map heeft een eigen README met uitrolroute, voorwaarden en de
 normen die het onderdeel invult.
 
 Zelfde lijn als [`enrollment/macos/`](../enrollment/macos/README.md),

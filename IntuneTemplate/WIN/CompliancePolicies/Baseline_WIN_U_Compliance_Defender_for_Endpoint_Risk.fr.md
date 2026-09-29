@@ -12,7 +12,6 @@ Rend un appareil non conforme dès que Defender for Endpoint évalue le niveau d
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Compliance, 'Microsoft Defender for Endpoint Risk score' (deviceThreatProtectionEnabled, RequiredSecurityLevel medium) ; corps aligné sur les policies de conformité OIB v4.0, champs vérifiés par rapport à DCv1 |
 | Fichier | [`Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json`](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json) |
 

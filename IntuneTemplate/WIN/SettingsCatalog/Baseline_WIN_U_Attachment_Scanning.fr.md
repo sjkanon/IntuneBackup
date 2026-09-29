@@ -12,7 +12,6 @@ Fait vérifier chaque pièce jointe par l'antivirus au moment où l'utilisateur 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-140-UAttachmentScanning` |
 | Source | CIS v4 Windows 11 L1 — paramètre repris d'IntuneAdmin, valeur vérifiée par rapport à la définition du settings catalog. |
 | Fichier | [`Baseline_WIN_U_Attachment_Scanning.json`](Baseline_WIN_U_Attachment_Scanning.json) |
 

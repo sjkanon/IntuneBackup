@@ -12,7 +12,6 @@ Legt in Edge DNS over HTTPS vast op 'automatisch': Edge versleutelt DNS-verzoeke
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic` |
 | Bron | Microsoft Edge-beleid DnsOverHttpsMode (Edge 83+) — waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json) |
 

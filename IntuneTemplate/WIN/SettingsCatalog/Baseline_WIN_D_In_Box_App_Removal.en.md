@@ -12,7 +12,6 @@ Removes the consumer apps that ship with Windows by default and have no business
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-068-DInBoxAppRemoval` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows Apps - D - In-Box App Removal |
 | File | [`Baseline_WIN_D_In_Box_App_Removal.json`](Baseline_WIN_D_In_Box_App_Removal.json) |
 

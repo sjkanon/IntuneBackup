@@ -12,7 +12,6 @@ Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebb
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-035-MACDAccountsAndLogin` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login |
 | Bestand | [`Baseline_MAC_D_Accounts_and_Login.json`](Baseline_MAC_D_Accounts_and_Login.json) |
 

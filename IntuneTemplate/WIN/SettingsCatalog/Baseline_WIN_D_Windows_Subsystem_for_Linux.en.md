@@ -12,7 +12,6 @@ Restricts the Windows Subsystem for Linux, which otherwise opens a complete seco
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-090-DWindowsSubsystemForLinux` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux |
 | File | [`Baseline_WIN_D_Windows_Subsystem_for_Linux.json`](Baseline_WIN_D_Windows_Subsystem_for_Linux.json) |
 

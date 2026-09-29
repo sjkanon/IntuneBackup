@@ -12,7 +12,6 @@ Turns off the advertising ID, blocks the clipboard between devices, stops upload
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-134-DPrivacyAndTelemetry` |
 | Source | CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definitions. |
 | File | [`Baseline_WIN_D_Privacy_and_Telemetry.json`](Baseline_WIN_D_Privacy_and_Telemetry.json) |
 

@@ -12,7 +12,6 @@ Voorkomt dat een gebruiker bestanden uit zijn eigen profiel via 'Delen' in Verke
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-209-UFileSharingRestrictions` |
 | Bron | CIS v4 Windows 11 L1 — IntuneAdmin CISv4-profiel 'Prevent users from sharing files within their profile (User)', instance ongewijzigd overgenomen |
 | Bestand | [`Baseline_WIN_U_File_Sharing_Restrictions.json`](Baseline_WIN_U_File_Sharing_Restrictions.json) |
 

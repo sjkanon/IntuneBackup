@@ -12,7 +12,6 @@ Marque un appareil Android dédié (kiosque ou partagé) comme non conforme lors
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Corp-Dedicated - Kiosk et Shared - v1.5 ; sans exigences de mot de passe ni de version d'OS, niveau de correctif ajouté |
 | Fichier | [`Baseline_AND_D_Compliance_Dedicated_Device_Health.json`](Baseline_AND_D_Compliance_Dedicated_Device_Health.json) |
 

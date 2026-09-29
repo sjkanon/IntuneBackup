@@ -12,7 +12,6 @@ Verrouille un compte pendant 15 minutes après dix tentatives de connexion écho
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-124-DAccountLockout` |
 | Source | CIS v4 Windows 11 L1 et la Microsoft Security Baseline — valeurs vérifiées par rapport à Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) et LocalPoliciesSecurityOptions. |
 | Fichier | [`Baseline_WIN_D_Account_Lockout.json`](Baseline_WIN_D_Account_Lockout.json) |
 

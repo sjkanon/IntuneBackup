@@ -12,7 +12,6 @@ Turns off Windows Spotlight, tips and consumer-oriented suggestions, so that no 
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-106-UWindowsSpotlight` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user part) |
 | File | [`Baseline_WIN_U_Windows_Spotlight.json`](Baseline_WIN_U_Windows_Spotlight.json) |
 

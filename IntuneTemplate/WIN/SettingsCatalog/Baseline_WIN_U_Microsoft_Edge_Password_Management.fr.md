@@ -12,7 +12,6 @@ Détermine si Edge peut enregistrer et afficher des mots de passe, afin que les 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Password Management |
 | Fichier | [`Baseline_WIN_U_Microsoft_Edge_Password_Management.json`](Baseline_WIN_U_Microsoft_Edge_Password_Management.json) |
 

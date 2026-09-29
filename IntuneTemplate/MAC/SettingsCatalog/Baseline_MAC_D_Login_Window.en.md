@@ -12,7 +12,6 @@ Makes the login window ask for account name and password instead of showing a li
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-197-MACDLoginWindow` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.3 (login banner) and 2.11.4 (prompt for name and password), mSCP branch tahoe; settingDefinitionIds verified against the settings catalog definitions |
 | File | [`Baseline_MAC_D_Login_Window.json`](Baseline_MAC_D_Login_Window.json) |
 

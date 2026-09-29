@@ -12,7 +12,6 @@ Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellin
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-126-DAuditPolicyEnforcement` |
 | Bron | CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instelling overgenomen uit het NIS2-profiel van IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie. |
 | Bestand | [`Baseline_WIN_D_Audit_Policy_Enforcement.json`](Baseline_WIN_D_Audit_Policy_Enforcement.json) |
 

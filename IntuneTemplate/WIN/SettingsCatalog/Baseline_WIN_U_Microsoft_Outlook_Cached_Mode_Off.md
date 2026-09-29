@@ -12,7 +12,6 @@ Zet Outlook in Online mode en verbiedt het aanmaken van een OST-bestand, zodat e
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff` |
 | Bron | eigen baseline |
 | Bestand | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.json) |
 

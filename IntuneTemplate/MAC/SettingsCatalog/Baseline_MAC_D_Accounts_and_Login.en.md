@@ -12,7 +12,6 @@ Determines what is visible at sign-in and which accounts a Mac may have.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-035-MACDAccountsAndLogin` |
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login |
 | File | [`Baseline_MAC_D_Accounts_and_Login.json`](Baseline_MAC_D_Accounts_and_Login.json) |
 

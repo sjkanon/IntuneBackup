@@ -12,7 +12,6 @@ Toetst of een Android-toestel met persoonlijk werkprofiel een schermvergrendelin
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline-conventie voor compliance; waarden gelijkgetrokken met de PIN-eis van zes tekens in de bestaande App Protection-policy en met de Android-eis in IntuneAdmin. |
 | Bestand | [`Baseline_AND_U_Compliance_Password.json`](Baseline_AND_U_Compliance_Password.json) |
 

@@ -12,7 +12,6 @@ Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroni
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Profiles, Sign-In and Sync |
 | Bestand | [`Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.json) |
 

@@ -12,7 +12,6 @@ Active le pare-feu macOS et fait en sorte que Gatekeeper n'autorise que les logi
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` |
 | Source | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | Fichier | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 

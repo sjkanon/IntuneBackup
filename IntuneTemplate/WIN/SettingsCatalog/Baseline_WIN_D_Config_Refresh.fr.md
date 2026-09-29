@@ -12,7 +12,6 @@ Rétablit périodiquement les paramètres modifiés localement à ce qu'Intune p
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-058-DConfigRefresh` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Config Refresh |
 | Fichier | [`Baseline_WIN_D_Config_Refresh.json`](Baseline_WIN_D_Config_Refresh.json) |
 

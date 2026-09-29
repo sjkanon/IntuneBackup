@@ -12,7 +12,6 @@ Affiche sur l'écran verrouillé d'un iPhone ou iPad d'entreprise un texte desti
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-189-IOSDLockScreen` |
 | Source | Payload Apple Shared Device Configuration (com.apple.shareddeviceconfiguration) dans le settings catalog iOS ; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate et IntuneAdmin — Lock Screen Message. Les restrictions de l'écran verrouillé de la même policy UniFy figurent dans [Baseline] - IOS - D - Restrictions Corporate |
 | Fichier | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 

@@ -12,7 +12,6 @@ Hoe en wanneer Edge op de Mac zichzelf bijwerkt.
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Updates |
 | Bestand | [`Baseline_MAC_U_Microsoft_Edge_Updates.json`](Baseline_MAC_U_Microsoft_Edge_Updates.json) |
 

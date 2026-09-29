@@ -12,7 +12,6 @@ Détermine quand l'écran se verrouille et quelles exigences s'appliquent au cod
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-013-DeviceLock` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock |
 | Fichier | [`Baseline_WIN_D_Device_Lock.json`](Baseline_WIN_D_Device_Lock.json) |
 

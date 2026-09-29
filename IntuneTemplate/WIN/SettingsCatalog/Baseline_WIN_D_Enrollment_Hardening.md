@@ -12,7 +12,6 @@ Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat nie
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-141-DEnrollmentHardening` |
 | Bron | IntuneAdmin/IntuneBaselines — Modern Workplace Expert, Baseline - Require Network In OOBE (TenantLockdown-CSP) |
 | Bestand | [`Baseline_WIN_D_Enrollment_Hardening.json`](Baseline_WIN_D_Enrollment_Hardening.json) |
 

@@ -12,7 +12,6 @@ Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-143-DStorageSense` |
 | Bron | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Storage Sense |
 | Bestand | [`Baseline_WIN_D_Storage_Sense.json`](Baseline_WIN_D_Storage_Sense.json) |
 

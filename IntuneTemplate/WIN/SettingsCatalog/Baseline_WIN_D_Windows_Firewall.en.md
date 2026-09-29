@@ -12,7 +12,6 @@ Turns on Windows Firewall for the domain, private and public profiles and define
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-016-Firewall` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | File | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 

@@ -12,7 +12,6 @@ Onboards Microsoft Defender for Endpoint without user action on supervised corpo
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — DC - Zero-Touch-Control-Filter - MDE - Corporate Devices (iosCustomConfiguration with Microsoft's Control Filter mobileconfig: com.apple.webcontent-filter, plug-in com.microsoft.scmx, SilentOnboard); fields verified against pl4nty DCv1 iOSCustomConfiguration |
 | File | [`Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.json`](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.json) |
 

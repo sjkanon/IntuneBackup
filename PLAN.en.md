@@ -4,20 +4,19 @@
 
 Goal: extend the baseline and keep it current based on
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), with an
-explicit platform and device/user split, without needlessly breaking existing checkIds —
-and with a separate tenant layer (ScubaGear / Maester) as the final piece.
+explicit platform and device/user split — and with a separate tenant layer (ScubaGear / Maester) as the final piece.
 
 Status: **phases 1, 2, 4, 5, 6 and 7 are done** (repo). Phase 3 (the tenant) and phase 8 are
 still open. The tenant has not been touched yet.
 
 | Phase | What | Risk | Status |
 |---|---|---|---|
-| 1 | Script changes (`CHECK_ID_SLUGS`, `check-scope.js`, `-Scope`, hard assignment check) | low | ✅ |
+| 1 | Script changes (`check-scope.js`, `-Scope`, hard assignment check) | low | ✅ |
 | 2 | D/U renaming + 2 splits in `IntuneTemplate/` | low in the repo | ✅ |
 | 4 | Compliance policies (pipeline work + 7 policies) | medium | ✅ |
 | 5 | Closing hardening gaps from OIB | medium | ✅ |
 | 6 | Update rings | low | ✅ |
-| 7 | Splitting Administrative Templates by theme | medium — breaks checkId 008 | ✅ |
+| 7 | Splitting Administrative Templates by theme | medium | ✅ |
 | — | macOS, BYOD and the platform axis in the naming | medium | ✅ |
 | 3 | **Tenant migration** via `Rename-BaselinePolicy.ps1` | **high** — `-WhatIf` first, in a pilot tenant first | open |
 | 8 | Tenant layer ScubaGear/Maester | separate track | open |
@@ -34,13 +33,12 @@ up to date in one go, instead of being renamed twice in a row.
 pull in a new OIB version.
 
 **Phases 1 and 2** (earlier): device/user split, renaming to `[Baseline] - D/U - Item`,
-`check-scope.js` as a blocking CI step, `CHECK_ID_SLUGS` so checkIds survive a rename.
+`check-scope.js` as a blocking CI step.
 
 **Phase 4 — compliance.** There were none. Without a compliance policy, "require a compliant
 device" in Conditional Access is meaningless. There are now 7 (4 Windows, 3 macOS), with a
 new CIPP `Type` `deviceCompliancePolicies` and the folder `Device Compliance Policies` in the
-export. They do not produce a check of their own — the platform engine has no matcher for them
-and the generic checks 001–006 cover it.
+export.
 
 **Phase 5 — hardening.** The entire OIB Windows set has been adopted: Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D and U),
@@ -58,8 +56,6 @@ Driver update profiles stay out of scope: IntuneBackupAndRestore 4.0.1 does not 
 into Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) and some smaller ones. The 15 settings with no OIB counterpart are in
 `WIN - D - Legacy Hardening`, kept separate so an OIB upgrade neither drags them along nor throws them away.
-The cost, as expected: checkId `008-AdministrativeTemplates` has been retired. Four other
-checkIds have been too (017, 023, 025, 028) — see the README.
 
 **Platform axis.** All policies are now named `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` and
 live in `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 policies) and BYOD app protection
@@ -105,8 +101,8 @@ phase 1. It follows separately with `-GroupName 'SEC-Baseline-Pilot'` — the li
 ### What if policies with the old name are still in the tenant
 
 That scenario is not theoretical: a rename that stops halfway, a policy someone
-renamed by hand earlier, a second tenant where CIPP was still deploying under the old name. Three
-ways this goes wrong, from annoying to dangerous:
+renamed by hand earlier, a second tenant where CIPP was still deploying under the old name. Two
+ways this goes wrong:
 
 **1. Conflicting settings.** Two Settings Catalog policies that set the same
 `settingDefinitionId` to a different value produce a *Conflict* — the
@@ -117,17 +113,6 @@ in the tenant.
 **2. Silent assignment drift.** `Set-BaselineAssignment.ps1 -Scope D` filters on the name. A
 policy that does not follow the convention falls outside every filter and so simply keeps its old All
 Devices assignment. The script warns about this — do not ignore that warning.
-
-**3. A green check on the wrong policy.** This is the most dangerous one. The
-`settings-catalog-match` rules match **on content, not on name**. A leftover
-`[Baseline] Bitlocker` still contains the settings of `INTUNE-BASE-011-Bitlocker`, so that
-check stays green — even if `[Baseline] - WIN - D - BitLocker` was never created, or is empty,
-or is not assigned anywhere. The platform then reports nothing while the baseline in fact no
-longer lands.
-
-That name independence is deliberate and correct in itself (a customer may name their policies
-differently), but it means the baseline check is **not** a safety net for this migration. That
-safety net has to be built separately.
 
 ### Still to build: `scripts/Get-BaselinePolicyState.ps1`
 
@@ -154,16 +139,8 @@ Teams and Power Platform. Maester bundles EIDSCA, CISA SCuBA, CIS Microsoft 365 
 ORCA, and also has a handful of Intune checks (LAPS, ASR, App Control for Business,
 Managed Installer).
 
-Approach:
-
-- **Separate baseline, do not mix.** `baseline/tenant/baseline-v1.0.json` next to
-  `baseline/intune/baseline-v1.0.json`. The matchers differ fundamentally (Graph device
-  management vs. Entra/Exchange/Teams APIs); one file containing two worlds produces checks
-  that silently test nothing — the same pitfall as `Type: "Device"` today.
-- **Own checkId series**, e.g. `TENANT-BASE-001-...`, so the number space of
-  `INTUNE-BASE-*` is left alone.
-- Order: first run ScubaGear for a baseline measurement, then set up Maester as the
-  ongoing check, and only then turn the findings into baseline rules.
+Approach: first run ScubaGear for a baseline measurement, then set up Maester as the ongoing
+check.
 
 Maester's four Intune checks overlap with this repo. They are the natural link
 between the two layers — start there.

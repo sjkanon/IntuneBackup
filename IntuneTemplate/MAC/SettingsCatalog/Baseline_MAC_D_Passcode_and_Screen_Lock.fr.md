@@ -12,7 +12,6 @@ Configure sur le Mac le mot de passe et le verrouillage d'écran que la policy d
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-121-MACDPasscodeAndScreenLock` |
 | Source | Payload Apple Passcode (com.apple.mobiledevice.passwordpolicy) dans le settings catalog macOS — valeurs reprises à l'identique de [Baseline] - MAC - U - Compliance Password et vérifiées par rapport aux définitions du settings catalog (minLength max 16, maxInactivity max 15). |
 | Fichier | [`Baseline_MAC_D_Passcode_and_Screen_Lock.json`](Baseline_MAC_D_Passcode_and_Screen_Lock.json) |
 

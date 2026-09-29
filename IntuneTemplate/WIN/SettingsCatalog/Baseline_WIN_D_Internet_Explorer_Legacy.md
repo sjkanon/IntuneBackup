@@ -12,7 +12,6 @@ Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-mod
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-069-DInternetExplorerLegacy` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security |
 | Bestand | [`Baseline_WIN_D_Internet_Explorer_Legacy.json`](Baseline_WIN_D_Internet_Explorer_Legacy.json) |
 

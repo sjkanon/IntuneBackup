@@ -12,7 +12,6 @@ Permet aux appareils d'échanger les mises à jour entre eux au lieu de les tél
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-064-DDeliveryOptimisation` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation |
 | Fichier | [`Baseline_WIN_D_Delivery_Optimisation.json`](Baseline_WIN_D_Delivery_Optimisation.json) |
 

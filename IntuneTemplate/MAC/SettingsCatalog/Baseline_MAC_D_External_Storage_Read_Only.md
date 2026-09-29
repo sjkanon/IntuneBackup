@@ -12,7 +12,6 @@ Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-s
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-196-MACDExternalStorageReadOnly` |
 | Bron | Apple declaratief beheer, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, alleen supervised); settingDefinitionId's en opties geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 

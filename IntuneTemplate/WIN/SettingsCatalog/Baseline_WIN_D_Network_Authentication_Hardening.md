@@ -12,7 +12,6 @@ Maakt netwerkauthenticatie minder vatbaar voor misbruik: het systeemaccount gebr
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-204-DNetworkAuthenticationHardening` |
 | Bron | CIS v4 Windows 11 L1 (IntuneAdmin CISv4-profielen) en de Microsoft Security Baseline voor Windows 11 — waarden geverifieerd tegen de settings catalog-definities; PKU2U wijkt bewust af van de IntuneAdmin-waarde |
 | Bestand | [`Baseline_WIN_D_Network_Authentication_Hardening.json`](Baseline_WIN_D_Network_Authentication_Hardening.json) |
 

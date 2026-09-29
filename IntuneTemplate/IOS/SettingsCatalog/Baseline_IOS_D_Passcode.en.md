@@ -12,7 +12,6 @@ Sets the passcode on enrolled iPhones and iPads that the compliance policy check
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-190-IOSDPasscode` |
 | Source | Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the iOS settings catalog, the same payload as UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; values aligned with [Baseline] - IOS - U - Compliance Password, inactivity according to CIS Apple iOS/iPadOS 26 Benchmark |
 | File | [`Baseline_IOS_D_Passcode.json`](Baseline_IOS_D_Passcode.json) |
 

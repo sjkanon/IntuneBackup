@@ -12,7 +12,6 @@ Explicitly allows the generative Apple Intelligence features and the integration
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-183-IOSDAppleIntelligencePermitted` |
 | Source | Counterpart of [Baseline] - IOS - D - Apple Intelligence Restricted; the same declarative keys at the Apple default value, recorded explicitly |
 | File | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 

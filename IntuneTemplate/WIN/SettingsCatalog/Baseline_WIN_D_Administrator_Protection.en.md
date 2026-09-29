@@ -12,7 +12,6 @@ Makes administrators work without elevated rights by default and ask for consent
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-055-DAdministratorProtection` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection |
 | File | [`Baseline_WIN_D_Administrator_Protection.json`](Baseline_WIN_D_Administrator_Protection.json) |
 

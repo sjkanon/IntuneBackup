@@ -12,7 +12,6 @@ Masque le champ du mot de passe à la connexion, afin que les utilisateurs utili
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-076-DPasswordless` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Credential Management - D - Passwordless |
 | Fichier | [`Baseline_WIN_D_Passwordless.json`](Baseline_WIN_D_Passwordless.json) |
 

@@ -12,7 +12,6 @@ La sécurité des macros Office : bloque les macros dans les fichiers provenant 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-075-DMicrosoftOfficeSecurity` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security |
 | Fichier | [`Baseline_WIN_D_Microsoft_Office_Security.json`](Baseline_WIN_D_Microsoft_Office_Security.json) |
 

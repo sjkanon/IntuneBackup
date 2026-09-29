@@ -12,7 +12,6 @@ Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-076-DPasswordless` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Credential Management - D - Passwordless |
 | Bestand | [`Baseline_WIN_D_Passwordless.json`](Baseline_WIN_D_Passwordless.json) |
 

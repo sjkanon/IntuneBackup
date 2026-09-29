@@ -12,7 +12,6 @@ Toetst of een iPhone of iPad een toegangscode van minimaal zes tekens vereist, g
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline-conventie voor compliance; waarden gelijkgetrokken met de PIN-eis van zes tekens in de bestaande App Protection-policy. |
 | Bestand | [`Baseline_IOS_U_Compliance_Password.json`](Baseline_IOS_U_Compliance_Password.json) |
 

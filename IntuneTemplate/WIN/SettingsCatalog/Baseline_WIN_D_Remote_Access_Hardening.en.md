@@ -12,7 +12,6 @@ Shuts off the WinRM remote shell and disconnects an idle SMB session after fifte
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-135-DRemoteAccessHardening` |
 | Source | CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definitions. |
 | File | [`Baseline_WIN_D_Remote_Access_Hardening.json`](Baseline_WIN_D_Remote_Access_Hardening.json) |
 

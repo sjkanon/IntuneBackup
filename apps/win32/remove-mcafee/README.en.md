@@ -8,7 +8,7 @@ consumer laptop.
 Lives outside [`IntuneTemplate/`](../../../IntuneTemplate/README.en.md), just like
 [`shellscripts/macos/`](../../../shellscripts/macos/README.en.md) and
 [`compliance/macos/`](../../../compliance/macos/README.en.md): a Win32 app is not a policy and does
-not fit any of the five CIPP policy types. No `checkId`, and no pipeline picks this folder up.
+not fit any of the five CIPP policy types. No pipeline picks this folder up.
 
 ## Why this belongs to the baseline
 
@@ -18,8 +18,8 @@ Windows allows only one active antivirus: as soon as McAfee registers itself, De
 baseline falls away — the ASR rules, Controlled Folder Access, Network Protection and the new
 Remote Encryption Protection all rely on an active Defender engine.
 
-The nasty part is that none of this reports an error. The policies arrive fine, the baseline
-check is green, and the settings do nothing because the engine that would enforce them is on the
+The nasty part is that none of this reports an error. The policies arrive fine, Intune
+reports them as succeeded, and the settings do nothing because the engine that would enforce them is on the
 bench. That stays the case until the McAfee trial expires — and then the device runs for a while
 without working antivirus.
 

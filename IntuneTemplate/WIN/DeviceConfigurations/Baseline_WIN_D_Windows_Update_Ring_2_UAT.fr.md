@@ -12,7 +12,6 @@ Deuxième anneau de mise à jour : reçoit les mises à jour Windows après le p
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT |
 | Fichier | [`Baseline_WIN_D_Windows_Update_Ring_2_UAT.json`](Baseline_WIN_D_Windows_Update_Ring_2_UAT.json) |
 

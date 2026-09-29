@@ -12,7 +12,6 @@ Configures the user's Exchange Online profile automatically, so that Outlook wor
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | Source | own baseline |
 | File | [`Baseline_WIN_U_Microsoft_Outlook.json`](Baseline_WIN_U_Microsoft_Outlook.json) |
 

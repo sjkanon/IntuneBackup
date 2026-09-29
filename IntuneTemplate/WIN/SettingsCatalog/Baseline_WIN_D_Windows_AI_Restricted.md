@@ -12,7 +12,6 @@ Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er o
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-112-DWindowsAI` |
 | Bron | eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026 |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 

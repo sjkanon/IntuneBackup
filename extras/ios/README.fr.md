@@ -5,7 +5,7 @@
 Les pipelines CIPP transportent cinq types de stratégies (Catalog, Device, compliance, App Protection,
 Admin). Une baseline iOS complète demande davantage : des paramètres de tenant dans Apple Business,
 un profil d'inscription ADE, la configuration des applications et deux groupes dynamiques. Ils se trouvent ici. Rien
-dans ce dossier n'est pris en compte par `generate-baseline.js`, `export-intunebackup.js` ou
+dans ce dossier n'est pris en compte par `export-intunebackup.js` ou
 `Set-BaselineAssignment.ps1`.
 
 | Dossier | Quoi | Déploiement |

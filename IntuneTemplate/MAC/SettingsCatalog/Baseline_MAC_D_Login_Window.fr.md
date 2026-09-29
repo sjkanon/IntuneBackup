@@ -12,7 +12,6 @@ Fait demander le nom de compte et le mot de passe par la fenêtre de connexion a
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-197-MACDLoginWindow` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.3 (bannière de connexion) et 2.11.4 (demander le nom et le mot de passe), mSCP branch tahoe ; settingDefinitionId vérifiés par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_MAC_D_Login_Window.json`](Baseline_MAC_D_Login_Window.json) |
 

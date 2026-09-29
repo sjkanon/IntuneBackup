@@ -12,7 +12,6 @@ Enregistre une transcription de chaque session PowerShell, afin de pouvoir voir 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-131-DLogging` |
 | Source | ISO/IEC 27001:2022 A.8.15 et A.8.16, NIS2 art. 21(2)(b) — paramètres issus de CIS v4 Windows 11 L2 |
 | Fichier | [`Baseline_WIN_D_Logging.json`](Baseline_WIN_D_Logging.json) |
 

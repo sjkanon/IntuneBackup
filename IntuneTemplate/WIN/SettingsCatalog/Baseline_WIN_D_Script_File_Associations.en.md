@@ -12,7 +12,6 @@ Makes .js, .vbs and .hta files open in Notepad instead of the script host, so th
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-079-DScriptFileAssociations` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
 | File | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 

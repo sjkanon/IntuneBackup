@@ -12,7 +12,6 @@ Impose que Microsoft Edge n'établisse pas de connexions en dessous de TLS 1.2, 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-128-DCryptography` |
 | Source | ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — paramètre issu de CIS v3 Microsoft Edge L1 |
 | Fichier | [`Baseline_WIN_D_Cryptography.json`](Baseline_WIN_D_Cryptography.json) |
 

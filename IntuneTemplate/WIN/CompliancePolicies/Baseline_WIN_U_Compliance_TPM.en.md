@@ -12,7 +12,6 @@ Checks whether the device has a TPM. Without a TPM there is no BitLocker with ha
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM |
 | File | [`Baseline_WIN_U_Compliance_TPM.json`](Baseline_WIN_U_Compliance_TPM.json) |
 

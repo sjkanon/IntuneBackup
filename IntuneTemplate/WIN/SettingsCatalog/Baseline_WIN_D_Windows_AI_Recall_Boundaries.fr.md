@@ -12,7 +12,6 @@ Encadre Recall lorsqu'il est autorisé : pas d'instantanés des portails d'admin
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-150-DWindowsAIRecallBoundaries` |
 | Source | Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport) ; valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Recall_Boundaries.json`](Baseline_WIN_D_Windows_AI_Recall_Boundaries.json) |
 

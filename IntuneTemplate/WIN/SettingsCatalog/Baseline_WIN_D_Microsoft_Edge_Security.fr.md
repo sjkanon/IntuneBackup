@@ -12,7 +12,6 @@ Les paramètres de sécurité d'Edge : SmartScreen, contrôle des téléchargeme
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-020-MicrosoftEdge` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_Security.json`](Baseline_WIN_D_Microsoft_Edge_Security.json) |
 

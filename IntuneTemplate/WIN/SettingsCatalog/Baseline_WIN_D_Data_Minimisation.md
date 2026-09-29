@@ -12,7 +12,6 @@ Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestand
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-129-DDataMinimisation` |
 | Bron | ISO/IEC 27001:2022 A.5.34 en A.8.11, AVG art. 5(1)(c) dataminimalisatie — instellingen uit CIS v4 Windows 11 L1 |
 | Bestand | [`Baseline_WIN_D_Data_Minimisation.json`](Baseline_WIN_D_Data_Minimisation.json) |
 

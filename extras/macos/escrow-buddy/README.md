@@ -6,8 +6,7 @@ FileVault-herstelsleutel alsnog in Intune krijgen voor een Mac die al versleutel
 
 Staat buiten `IntuneTemplate/` om dezelfde reden als [`shellscripts/macos/`](../../../shellscripts/macos/README.md):
 een shellscript (`deviceShellScripts`) is geen van de vijf CIPP-policytypes. Wordt niet opgepikt
-door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js` of
-`Set-BaselineAssignment.ps1`, en krijgt geen `checkId`. Hoort bij de samenvoeging in
+door `export-intunebackup.js`, `check-scope.js` of `Set-BaselineAssignment.ps1`. Hoort bij de samenvoeging in
 `shellscripts/macos/` thuis.
 
 | Bestand | Wat het doet | Scope |

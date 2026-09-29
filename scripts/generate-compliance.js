@@ -8,9 +8,7 @@
  *   IntuneTemplate/_assignments.json  what is actually assigned (fase 1)
  *   IntuneTemplate/_controls.json     the canonical vocabulary: all 93 Annex A controls, the ten
  *                                     NIS2 items, the CIS safeguards and the CSF subcategories
- *   baseline/intune/baseline-v1.0.json the checkIds that TEST Policies Platform verifies
- *   ../CA-Policies/controls/ca-controls.json and ../CA-Policies/baseline/conditional-access/
- *                                     baseline-v1.0.json — optional, path via --ca
+ *   ../CA-Policies/controls/ca-controls.json — optional, path via --ca
  *
  * Generated for the same reason as the rest of the documentation: a standards matrix that is
  * maintained by hand falls behind the policies within a quarter, and then still reads as if
@@ -19,10 +17,8 @@
  *
  * What "covered" means here: there is a policy in fase 1 (or an active CA policy) that
  * technically enforces or verifies the control. That is a statement about the baseline, not
- * about a tenant — whether the policy is actually present there is shown by the baseline check
- * in TEST Policies Platform.
- *
- * Run generate-baseline.js first: the checkIds come from the generated file.
+ * about a tenant — whether the policy is actually present and applied there is shown by Intune
+ * reporting.
  *
  * In three languages: COMPLIANCE.md, COMPLIANCE.en.md and COMPLIANCE.fr.md. Fixed text is below
  * as { nl, en, fr }; the texts from _controls.json, _manifest.json and _licenties.json come from
@@ -48,7 +44,6 @@ const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
 const LICENTIES_PATH = path.join(TEMPLATE_DIR, "_licenties.json");
-const BASELINE_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
 const OUTPUT_PATH = path.join(REPO_ROOT, "COMPLIANCE.md");
 /**
  * De repo heet op GitHub CA-Policies; dit script kende hem als CA-policies. Op Windows maakt dat
@@ -69,23 +64,6 @@ const generatedHeader = () =>
     fr: "<!-- Généré par scripts/generate-compliance.js — ne pas modifier à la main. -->",
   });
 const PLATFORM_ORDER = ["WIN", "MAC", "IOS", "AND"];
-
-/**
- * Compliance-, device- en app protection-policies leveren geen eigen check op (de engine heeft er
- * geen matcher voor), maar vijf generieke checks uit het platform toetsen wel precies wat deze
- * policies eisen. Zonder deze koppeling zou de bewijsroute voor versleuteling en OS-ondergrens
- * leeg lijken terwijl hij bestaat. INTUNE-BASE-002 (er is een toegewezen compliance-policy) geldt
- * voor élke compliance-policy en wordt hieronder generiek toegevoegd.
- */
-const GENERIC_CHECKS = {
-  Baseline_WIN_U_Compliance_BitLocker: ["INTUNE-BASE-001-DeviceEncryptionRequired"],
-  Baseline_WIN_U_Compliance_OS_Version: ["INTUNE-BASE-003-CompliancePolicyMinOsVersion"],
-  Baseline_WIN_U_Compliance_Defender_Real_Time_Protection: ["INTUNE-BASE-006-DefenderEnabled"],
-  Baseline_WIN_U_Compliance_Defender_Security_Intelligence: ["INTUNE-BASE-006-DefenderEnabled"],
-  Baseline_IOS_U_App_Protection: ["INTUNE-BASE-004-AppProtectionPolicyExists"],
-  Baseline_AND_U_App_Protection: ["INTUNE-BASE-004-AppProtectionPolicyExists"],
-};
-const COMPLIANCE_ASSIGNED_CHECK = "INTUNE-BASE-002-CompliancePolicyAssigned";
 
 const STATUS = {
   AFGEDEKT: "Afgedekt (fase 1)",
@@ -184,37 +162,15 @@ function resolveLabel(framework, label, voc) {
   return null;
 }
 
-/** checkId's per templatebestand: de eigen check uit baseline-v1.0.json plus de generieke. */
-function checkIdsByTarget(templates) {
-  const map = new Map();
-  if (!fs.existsSync(BASELINE_PATH)) return { map, present: false };
-  const baseline = readJson(BASELINE_PATH);
-  const known = new Set(baseline.rules.map((r) => r.checkId));
-  for (const rule of baseline.rules) {
-    const m = (rule.source || "").match(/IntuneTemplate\/(.+?)\.json/);
-    if (m) map.set(path.basename(m[1]), [rule.checkId]);
-  }
-  for (const t of templates) {
-    const list = map.get(t.baseName) || [];
-    for (const id of GENERIC_CHECKS[t.baseName] || []) if (known.has(id) && !list.includes(id)) list.push(id);
-    if (t.type === "deviceCompliancePolicies" && known.has(COMPLIANCE_ASSIGNED_CHECK)) list.push(COMPLIANCE_ASSIGNED_CHECK);
-    if (list.length) map.set(t.baseName, list);
-  }
-  return { map, present: true };
-}
-
 /**
  * De Conditional Access-kant, als die er is. ca-controls.json is `{ "<CA-templatebestand>": {iso,
- * nis2, cis, nistcsf, cism365} }`; de checkId komt uit de CA-baseline (source verwijst naar het
- * templatebestand), de status uit `state` in het template. Een policy in report-only telt als
+ * nis2, cis, nistcsf, cism365} }`; de status komt uit `state` in het template. Een policy in report-only telt als
  * voorbereid, niet als afgedekt: hij doet niets.
  */
 function readConditionalAccess(caControlsPath) {
   if (!fs.existsSync(caControlsPath)) return { present: false, path: caControlsPath, policies: [] };
   const caRoot = path.resolve(path.dirname(caControlsPath), "..");
-  const baselinePath = path.join(caRoot, "baseline", "conditional-access", "baseline-v1.0.json");
   const templateDir = path.join(caRoot, "CATemplate");
-  const rules = fs.existsSync(baselinePath) ? readJson(baselinePath).rules : [];
   const controls = readJson(caControlsPath);
 
   const policies = Object.entries(controls)
@@ -222,10 +178,9 @@ function readConditionalAccess(caControlsPath) {
     .map(([key, value]) => {
       const file = key.endsWith(".json") ? key : `${key}.json`;
       const name = file.replace(/\.json$/, "");
-      const rule = rules.find((r) => (r.source || "").includes(`CATemplate/${file}`));
       const state = readCaState(path.join(templateDir, file));
       const fase = state === "enabled" ? 1 : state === "disabled" ? 5 : 2;
-      return { target: name, naam: name.replace(/__/g, " - ").replace(/_/g, " "), controls: value, state, fase, checkIds: rule ? [rule.checkId] : [] };
+      return { target: name, naam: name.replace(/__/g, " - ").replace(/_/g, " "), controls: value, state, fase };
     });
   return { present: true, path: caControlsPath, policies };
 }
@@ -246,7 +201,7 @@ function readCaState(file) {
 
 /** Alle policies (Intune en CA) als verwijzingen, plus per normitem de lijst van verwijzingen. */
 function buildIndex(ctx) {
-  const { voc, manifest, templates, checkIds, ca } = ctx;
+  const { voc, manifest, templates, ca } = ctx;
   const templateByTarget = new Map(templates.map((t) => [t.baseName, t]));
   const problems = { zonderControls: [], onbekend: [], afwijkend: [] };
   const index = { iso: new Map(), nis2: new Map(), cis: new Map(), nistcsf: new Map() };
@@ -281,7 +236,6 @@ function buildIndex(ctx) {
       platform: parsed.platform,
       fase: entry.fase,
       entry,
-      checkIds: checkIds.get(entry.target) || [],
       link: `IntuneTemplate/${parsed.platform}/${TYPE_TO_CATEGORY[template.type]}/${entry.target}.md`,
     };
     const hasControls = entry.controls && Object.values(entry.controls).some((list) => Array.isArray(list) && list.length > 0);
@@ -291,7 +245,7 @@ function buildIndex(ctx) {
   }
 
   for (const policy of ca.policies) {
-    const ref = { bron: "CA", target: policy.target, naam: policy.naam, platform: "CA", fase: policy.fase, state: policy.state, checkIds: policy.checkIds, link: null };
+    const ref = { bron: "CA", target: policy.target, naam: policy.naam, platform: "CA", fase: policy.fase, state: policy.state, link: null };
     add(ref, policy.controls);
     refs.push(ref);
   }
@@ -308,11 +262,10 @@ function statusOf(refs, organisatorisch) {
 
 const sortRefs = (list) => [...list].sort((a, b) => a.fase - b.fase || a.bron.localeCompare(b.bron) || a.naam.localeCompare(b.naam));
 
-function refText(ref, { withChecks = true } = {}) {
+function refText(ref) {
   const name = ref.link ? `[\`${ref.naam}\`](${V.link(ref.link)})` : `\`${ref.naam}\``;
   const fase = ref.bron === "CA" ? `CA, ${ref.state}` : `${faseWord()} ${ref.fase}`;
-  const checks = withChecks && ref.checkIds.length ? ` — ${ref.checkIds.map((c) => `\`${c}\``).join(", ")}` : "";
-  return `${name} (${fase})${checks}`;
+  return `${name} (${fase})`;
 }
 
 /** Korte opsomming voor een tabelcel: namen tot een maximum, de rest als aantal. */
@@ -348,7 +301,7 @@ const headingLink = (key) => `[${heading(key)}](#${anchor(heading(key))})`;
 const relPath = (p) => path.relative(REPO_ROOT, p).split(path.sep).join("/");
 
 function sectionIntro(ctx) {
-  const { ca, baselinePresent } = ctx;
+  const { ca } = ctx;
   const caPath = relPath(ca.path);
   return [
     generatedHeader(),
@@ -366,10 +319,8 @@ function sectionIntro(ctx) {
         "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
         "",
         "**Lees dit eerst.** Dit document zegt wat de *baseline* afdwingt, niet wat een *tenant* doet. Of de",
-        "policies in een tenant staan en kloppen, toetst TEST Policies Platform met de genoemde checkId's",
-        "(bron: [`baseline/intune/baseline-v1.0.json`](baseline/intune/baseline-v1.0.json)). Een policy",
-        "zonder eigen checkId (compliance, device configuration, app protection) is aantoonbaar via de",
-        "Intune-rapportage en, waar vermeld, via een generieke check.",
+        "policies in een tenant staan en worden toegepast, toon je aan met de Intune-rapportage: de",
+        "toewijzing en de status per apparaat van elke policy die hieronder genoemd wordt.",
         "",
         "| Status | Betekenis |",
       ],
@@ -381,10 +332,8 @@ function sectionIntro(ctx) {
         "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
         "",
         "**Read this first.** This document states what the *baseline* enforces, not what a *tenant* does. Whether",
-        "the policies are present and correct in a tenant is verified by TEST Policies Platform with the checkIds listed",
-        "(source: [`baseline/intune/baseline-v1.0.json`](baseline/intune/baseline-v1.0.json)). A policy",
-        "without its own checkId (compliance, device configuration, app protection) can be evidenced through",
-        "Intune reporting and, where stated, through a generic check.",
+        "the policies are present and applied in a tenant is evidenced through Intune reporting: the",
+        "assignment and the per-device status of every policy named below.",
         "",
         "| Status | Meaning |",
       ],
@@ -396,10 +345,8 @@ function sectionIntro(ctx) {
         "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
         "",
         "**À lire d'abord.** Ce document indique ce que la *baseline* impose, pas ce que fait un *tenant*. La présence",
-        "et la conformité des policies dans un tenant sont vérifiées par TEST Policies Platform à l'aide des checkId indiqués",
-        "(source : [`baseline/intune/baseline-v1.0.json`](baseline/intune/baseline-v1.0.json)). Une policy",
-        "sans checkId propre (conformité, configuration d'appareil, protection d'application) se prouve par les",
-        "rapports Intune et, lorsque c'est indiqué, par un contrôle générique.",
+        "et l'application des policies dans un tenant se démontrent par les rapports Intune : l'affectation",
+        "et le statut par appareil de chaque policy citée ci-dessous.",
         "",
         "| Statut | Signification |",
       ],
@@ -442,13 +389,6 @@ function sectionIntro(ctx) {
           nl: `> **Conditional Access is niet meegenomen**: \`ca-controls.json\` niet gevonden (gezocht: \`${caPath}\`). MFA (NIS2 (j)) en toegangsvoorwaarden steunen grotendeels op CA; draai met \`--ca <pad>\` voor het volledige beeld.`,
           en: `> **Conditional Access is not included**: \`ca-controls.json\` not found (looked in: \`${caPath}\`). MFA (NIS2 (j)) and access conditions rely largely on CA; run with \`--ca <path>\` for the full picture.`,
           fr: `> **Conditional Access n'est pas inclus** : \`ca-controls.json\` introuvable (recherché : \`${caPath}\`). La MFA (NIS2 (j)) et les conditions d'accès reposent en grande partie sur CA ; lancez avec \`--ca <chemin>\` pour une vue complète.`,
-        }),
-    baselinePresent
-      ? ""
-      : V.t({
-          nl: "\n> **Let op:** `baseline/intune/baseline-v1.0.json` ontbreekt, dus de checkId's ontbreken. Draai eerst `node scripts/generate-baseline.js`.\n",
-          en: "\n> **Note:** `baseline/intune/baseline-v1.0.json` is missing, so the checkIds are missing. Run `node scripts/generate-baseline.js` first.\n",
-          fr: "\n> **Attention :** `baseline/intune/baseline-v1.0.json` est absent, les checkId manquent donc. Lancez d'abord `node scripts/generate-baseline.js`.\n",
         }),
     V.t({ nl: "## Inhoud", en: "## Contents", fr: "## Sommaire" }),
     "",
@@ -633,9 +573,9 @@ function sectionIso(ctx, data) {
     V.t({ nl: "### Maatregelen per control", en: "### Measures per control", fr: "### Mesures par contrôle" }),
     "",
     V.t({
-      nl: "Alle policies per control, met checkId en fase. Fase 5 is een alternatief dat niet uitrolt en telt niet mee voor de status.",
-      en: "All policies per control, with checkId and phase. Phase 5 is an alternative that is not deployed and does not count towards the status.",
-      fr: "Toutes les policies par mesure, avec checkId et phase. La phase 5 est une alternative non déployée et ne compte pas pour le statut.",
+      nl: "Alle policies per control, met hun fase. Fase 5 is een alternatief dat niet uitrolt en telt niet mee voor de status.",
+      en: "All policies per control, with their phase. Phase 5 is an alternative that is not deployed and does not count towards the status.",
+      fr: "Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative non déployée et ne compte pas pour le statut.",
     }),
     ""
   );
@@ -683,8 +623,6 @@ function sectionNis2(ctx, data) {
     const actief = sortRefs(refs.filter((r) => r.fase === 1));
     const voorbereid = sortRefs(refs.filter((r) => r.fase >= 2 && r.fase <= 4));
     const alternatief = sortRefs(refs.filter((r) => r.fase === 5));
-    const checks = [...new Set(actief.flatMap((r) => r.checkIds))].sort(byNumber);
-    const zonderCheck = actief.filter((r) => r.checkIds.length === 0);
 
     out.push(
       `### ${nis2Label(p)}`,
@@ -719,30 +657,20 @@ function sectionNis2(ctx, data) {
         ""
       );
     }
-    const checkList = checks.map((c) => `\`${c}\``).join(", ");
-    const bewijs = checks.length
-      ? V.t({
-          nl: `TEST Policies Platform toetst ${checks.length} checkId's: ${checkList}.`,
-          en: `TEST Policies Platform verifies ${checks.length} checkIds: ${checkList}.`,
-          fr: `TEST Policies Platform vérifie ${checks.length} checkId : ${checkList}.`,
-        })
-      : actief.length
-        ? V.t({ nl: "Geen checkId: aantoonbaar via de Intune-rapportage.", en: "No checkId: evidenced through Intune reporting.", fr: "Aucun checkId : démontrable via les rapports Intune." })
-        : V.t({
-            nl: "Geen technische maatregel in fase 1, dus ook geen technische bewijsroute.",
-            en: "No technical measure in phase 1, so no technical evidence route either.",
-            fr: "Aucune mesure technique en phase 1, donc pas non plus de preuve technique.",
-          });
-    const zonderList = zonderCheck.map((r) => `\`${r.naam}\``).join(", ");
-    const zonder = zonderCheck.length
-      ? V.t({
-          nl: ` Zonder eigen check (aantoonbaar via de Intune-rapportage): ${zonderList}.`,
-          en: ` Without their own check (evidenced through Intune reporting): ${zonderList}.`,
-          fr: ` Sans contrôle propre (démontrable via les rapports Intune) : ${zonderList}.`,
-        })
-      : "";
     out.push(
-      `**${V.t({ nl: "Bewijsroute.", en: "Evidence route.", fr: "Preuve." })}** ${bewijs}${zonder}`,
+      `**${V.t({ nl: "Bewijsroute.", en: "Evidence route.", fr: "Preuve." })}** ${
+        actief.length
+          ? V.t({
+              nl: "De Intune-rapportage: de toewijzing en de status per apparaat van de policies hierboven.",
+              en: "Intune reporting: the assignment and the per-device status of the policies above.",
+              fr: "Les rapports Intune : l'affectation et le statut par appareil des policies ci-dessus.",
+            })
+          : V.t({
+              nl: "Geen technische maatregel in fase 1, dus ook geen technische bewijsroute.",
+              en: "No technical measure in phase 1, so no technical evidence route either.",
+              fr: "Aucune mesure technique en phase 1, donc pas non plus de preuve technique.",
+            })
+      }`,
       "",
       `**${V.t({ nl: "Organisatorisch nodig", en: "Needed organisationally", fr: "Nécessaire sur le plan organisationnel" })}**`,
       "",
@@ -1248,10 +1176,8 @@ function main() {
   const manifest = readJson(MANIFEST_PATH);
   const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? readJson(ASSIGNMENTS_PATH) : {};
   const voc = indexVocabulary(readJson(CONTROLS_PATH));
-  const { map: checkIds, present: baselinePresent } = checkIdsByTarget(templates);
   const ca = opts.noCa ? { present: false, uitgezet: true, path: opts.caControls, policies: [] } : readConditionalAccess(opts.caControls);
 
-  if (!baselinePresent) console.warn("Let op: baseline/intune/baseline-v1.0.json ontbreekt — geen checkId's. Draai eerst generate-baseline.js.");
   if (!ca.present && !ca.uitgezet) console.warn(`Conditional Access niet meegenomen: ${ca.path} bestaat niet.`);
 
   const licenties = fs.existsSync(LICENTIES_PATH) ? readJson(LICENTIES_PATH) : null;
@@ -1269,7 +1195,7 @@ function main() {
     }
   }
 
-  const ctx = { voc, manifest, assignments, templates, checkIds, ca, baselinePresent, licenties, templateByTarget };
+  const ctx = { voc, manifest, assignments, templates, ca, licenties, templateByTarget };
   const data = buildIndex(ctx);
 
   const translators = [];

@@ -12,7 +12,6 @@ On a device with a personal work profile, sets a separate work profile code (six
 | Scope | User (U) — assign to user groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - USR - Personal-Work-Profile - v1.5; without password expiry, contact and caller ID blocks, account block and blocking of unknown sources on the personal side; lock time 15 instead of 5 minutes, the same as Compliance Password |
 | File | [`Baseline_AND_U_Work_Profile_Restrictions.json`](Baseline_AND_U_Work_Profile_Restrictions.json) |
 

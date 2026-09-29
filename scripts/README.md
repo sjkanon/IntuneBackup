@@ -3,7 +3,7 @@
 # scripts/
 
 `IntuneTemplate/` is de enige bron. Alles wat hier staat vult die map, controleert 'm, of
-leidt er iets uit af — niets schrijft rechtstreeks in `baseline/` of `export/` zonder dat
+leidt er iets uit af — niets schrijft rechtstreeks in `export/` zonder dat
 `IntuneTemplate/` het al weet.
 
 ```mermaid
@@ -13,13 +13,11 @@ flowchart TD
   TEN["Tenant-backup<br/>(IntuneBackupAndRestore)"] -->|import-intunebackup.js| T
   T["IntuneTemplate/<br/>197 policies"]
   T -->|check-scope.js| CHK{{"scope · indeling · conflicten"}}
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-docs.js| DOC["README's per platform"]
   T -->|generate-compliance.js| CMP["COMPLIANCE.md"]
   CA["CA-Policies/<br/>controls/ca-controls.json"] -.->|--ca| CMP
   T -.->|leest rechtstreeks| CIPP["CIPP"]
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TENANT["Tenant"]
   CIPP --> TENANT
   T -->|Set-BaselineAssignment.ps1| TENANT
@@ -36,13 +34,12 @@ flowchart TD
 | [`set-packages.js`](set-packages.js) | **in** de bron | Zet `Package` in elk template — het CIPP-pakket waarin de policy uitrolt — afgeleid uit de fase in `_manifest.json` en het doel in `_assignments.json` — en de Engelse omschrijving die in de tenant naast de policy staat (`doel` + toewijzing + bron, vertaald via `_i18n/en.json`). Draaien na elke wijziging in die bestanden. |
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen, het CIPP-pakket en de migratietabel. Blokkerend in CI. |
 | [`check-osversion.js`](check-osversion.js) | controle | Rapporteert hoe ver de OS-ondergrenzen achterlopen op n-1 per platform, met endoflife.date als bron. **Exitcode altijd 0** — een verouderde ondergrens is een besluit dat wacht, geen fout; zou dit CI laten falen, dan verhoogt iemand het getal om de build groen te krijgen. |
-| [`generate-baseline.js`](generate-baseline.js) | **uit** de bron | Bouwt de baseline-regels voor het TEST Policies Platform. Beheert de checkId-nummering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, elke set daarnaast in een eigen map zonder. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **uit** de bron | Schrijft `BaselineTemplate/Baseline.json`: de CIPP-baseline met zijn stages en pakketten. `--check` faalt als hij achterloopt. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
 | [`generate-compliance.js`](generate-compliance.js) | **uit** de bron | Schrijft `COMPLIANCE.md`: per ISO 27001-, NIS2-, CIS- en NIST CSF-item welke policies hem invullen, uit `controls` in `_manifest.json` en de vocabulaire in `_controls.json`. `--strict` faalt op een onbekend of afwijkend label, `--check` als het document achterloopt. Met `--ca` telt ook de Conditional Access-kant mee — zie hieronder. |
 
-Alle elf de scripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
+Alle tien de scripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
 hoe je 'm uitleest en waar een nieuw template hoort. Vier scripts lazen die map eerder elk op
 hun eigen manier uit; met submappen zou die aanname op vier plekken stilzwijgend het verkeerde
 antwoord geven.
@@ -80,11 +77,10 @@ Nog te bouwen: `Get-BaselinePolicyState.ps1`, de tenant-zijdige tegenhanger van
 ```bash
 node scripts/set-packages.js       # eerst: het CIPP-pakket per template bijwerken
 node scripts/check-scope.js        # dan: faalt bij scope-, map-, pakket- of conflictproblemen
-node scripts/generate-baseline.js  # dan: checkId's toekennen en de baseline schrijven
 node scripts/export-intunebackup.js
 node scripts/generate-baseline-template.js
-node scripts/generate-docs.js      # dan: leest de checkId's uit de baseline
-node scripts/generate-compliance.js --strict --no-ca   # laatst: idem, plus de fases
+node scripts/generate-docs.js
+node scripts/generate-compliance.js --strict --no-ca   # laatst
 ```
 
 Die volgorde staat ook in [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml),

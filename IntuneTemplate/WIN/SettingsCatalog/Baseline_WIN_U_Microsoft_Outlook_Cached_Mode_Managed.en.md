@@ -12,7 +12,6 @@ Turns on Cached Exchange Mode for the user's own mailbox and keeps everything sh
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-160-UMicrosoftOutlookCachedModeManaged` |
 | Source | own baseline |
 | File | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json) |
 

@@ -12,7 +12,6 @@ Fetches new Defender definitions and engine versions first, so that you notice a
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot |
 | File | [`Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json) |
 

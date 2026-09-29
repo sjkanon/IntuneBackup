@@ -12,7 +12,6 @@ Makes the advanced audit settings take precedence over the old category settings
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-126-DAuditPolicyEnforcement` |
 | Source | CIS v4 Windows 11 L1 and the Microsoft Security Baseline — setting taken from IntuneAdmin's NIS2 profile, value verified against the settings catalog definition. |
 | File | [`Baseline_WIN_D_Audit_Policy_Enforcement.json`](Baseline_WIN_D_Audit_Policy_Enforcement.json) |
 

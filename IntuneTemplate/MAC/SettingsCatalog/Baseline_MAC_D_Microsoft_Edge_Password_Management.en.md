@@ -12,7 +12,6 @@ Determines whether Edge on the Mac may save and show passwords.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Password Management |
 | File | [`Baseline_MAC_D_Microsoft_Edge_Password_Management.json`](Baseline_MAC_D_Microsoft_Edge_Password_Management.json) |
 

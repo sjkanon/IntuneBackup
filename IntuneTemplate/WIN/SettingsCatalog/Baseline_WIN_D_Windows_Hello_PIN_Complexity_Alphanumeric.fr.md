@@ -12,7 +12,6 @@ Exige un PIN Windows Hello alphanumérique : au moins un chiffre, une minuscule,
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric` |
 | Source | Choix propre, PassportForWork CSP — Policies/PINComplexity |
 | Fichier | [`Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.json`](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.json) |
 

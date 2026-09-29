@@ -12,7 +12,6 @@ Only for organisations that use NinjaOne or TeamViewer. Fixes the privacy permis
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | Source | own baseline — OpenIntuneBaseline has no PPPC policy |
 | File | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |
 

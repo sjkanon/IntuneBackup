@@ -12,7 +12,6 @@ Fait en sorte que la fermeture du capot et le bouton d'alimentation mettent l'ap
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-142-DPowerManagement` |
 | Source | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings ; valeurs vérifiées par rapport aux définitions du settings catalog (1 = Sleep) |
 | Fichier | [`Baseline_WIN_D_Power_Management.json`](Baseline_WIN_D_Power_Management.json) |
 

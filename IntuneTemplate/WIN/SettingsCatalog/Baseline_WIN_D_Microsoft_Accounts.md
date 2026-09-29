@@ -12,7 +12,6 @@ Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toege
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-073-DMicrosoftAccounts` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration |
 | Bestand | [`Baseline_WIN_D_Microsoft_Accounts.json`](Baseline_WIN_D_Microsoft_Accounts.json) |
 

@@ -6,7 +6,7 @@ Conseil et modèle : ne pas laisser les Mac personnels s'inscrire dans Intune.
 
 Une restriction d'inscription (`deviceEnrollmentPlatformRestrictionConfiguration`) n'est aucun des
 cinq types de stratégies CIPP et se trouve sous `deviceManagement/deviceEnrollmentConfigurations`. Non
-prise en compte par les pipelines, pas de `checkId`.
+prise en compte par les pipelines.
 
 | Fichier | Ce que c'est |
 |---|---|

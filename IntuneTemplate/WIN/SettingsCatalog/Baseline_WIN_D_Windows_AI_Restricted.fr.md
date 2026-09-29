@@ -12,7 +12,6 @@ Désactive Recall et Click To Do : Windows ne fait alors aucune capture de ce qu
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-112-DWindowsAI` |
 | Source | baseline propre — comparaison avec IntuneAdmin/IntuneBaselines, août 2026 |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 

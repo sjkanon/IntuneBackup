@@ -12,7 +12,6 @@ De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, bep
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-075-DMicrosoftOfficeSecurity` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security |
 | Bestand | [`Baseline_WIN_D_Microsoft_Office_Security.json`](Baseline_WIN_D_Microsoft_Office_Security.json) |
 

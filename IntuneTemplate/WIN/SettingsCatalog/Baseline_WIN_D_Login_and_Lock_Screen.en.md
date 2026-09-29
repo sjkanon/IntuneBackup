@@ -12,7 +12,6 @@ Determines what is visible and possible on the sign-in and lock screen, such as 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-072-DLoginAndLockScreen` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Login and Lock Screen |
 | File | [`Baseline_WIN_D_Login_and_Lock_Screen.json`](Baseline_WIN_D_Login_and_Lock_Screen.json) |
 

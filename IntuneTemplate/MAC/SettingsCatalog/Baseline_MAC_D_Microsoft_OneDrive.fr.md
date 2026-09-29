@@ -12,7 +12,6 @@ Connecte automatiquement le client OneDrive sur le Mac avec le compte profession
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access |
 | Fichier | [`Baseline_MAC_D_Microsoft_OneDrive.json`](Baseline_MAC_D_Microsoft_OneDrive.json) |
 

@@ -7,8 +7,7 @@ reason as the [ADE enrollment profiles](../../enrollment/macos/README.en.md): th
 know five CIPP policy types, and a shell script is none of those five. It sits under
 `deviceManagement/deviceShellScripts`, `Set-CIPPIntunePolicy` has no `TemplateType` for it,
 and `Start-IntuneRestoreConfig` does not restore it. A file here is therefore **not**
-picked up by `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js` or
-`Set-BaselineAssignment.ps1`, and it has no `checkId`.
+picked up by `export-intunebackup.js`, `check-scope.js` or `Set-BaselineAssignment.ps1`.
 
 | File | What it does | Scope |
 |---|---|---|

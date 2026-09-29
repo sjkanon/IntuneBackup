@@ -12,7 +12,6 @@ Determines which account users sign in to Edge with and what is synchronised.
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Profiles, Sign-In and Sync |
 | File | [`Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.json) |
 

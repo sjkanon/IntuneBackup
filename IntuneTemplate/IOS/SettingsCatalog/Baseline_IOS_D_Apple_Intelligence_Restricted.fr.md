@@ -12,7 +12,6 @@ Désactive, sur les iPhone et iPad inscrits, les fonctionnalités génératives 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted` |
 | Source | Configurations déclaratives com.apple.configuration.intelligence.settings et external-intelligence.settings dans le settings catalog iOS ; sélection issue d'UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate et d'IntuneAdmin — Disable Apple Intelligence, avec Writing Tools désactivé là où UniFy l'autorise. Les variantes com.apple.applicationaccess qu'utilise IntuneAdmin sont marquées Deprecated dans le catalogue |
 | Fichier | [`Baseline_IOS_D_Apple_Intelligence_Restricted.json`](Baseline_IOS_D_Apple_Intelligence_Restricted.json) |
 

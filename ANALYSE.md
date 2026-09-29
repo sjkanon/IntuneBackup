@@ -117,13 +117,6 @@ weergavenaam (zie `Get-CIPPTextReplacement` in CIPP-API; de vervanging is hoofdl
 De OneDrive-policies in deze baseline gebruiken die constructie al voor hun tenantlijst en voor
 Known Folder Move, dus de Teams-policy doet nu hetzelfde.
 
-Dat legde een bestaande fout bloot. De baseline-check nam die tokens tot nu toe mee als
-verwachte waarde, terwijl in de tenant de ingevulde GUID staat. Vijf checks stonden daardoor
-permanent rood — niet omdat de tenant afweek, maar omdat de baseline iets vergeleek wat er nooit
-zo staat. Zo'n check is erger dan geen check: hij vraagt elke ronde aandacht en leert iedereen om
-rood te negeren. `generate-baseline.js` slaat die instellingen nu over, met een melding per
-geval, net zoals het het EDR-onboardingtoken al oversloeg.
-
 **Let op bij de andere uitrolroute:** CIPP doet die vervanging, `Start-IntuneRestoreConfig` niet.
 Wie via IntuneBackupAndRestore uitrolt houdt `%OrganizationId%` letterlijk in de policy en moet
 het id met de hand invullen.
@@ -139,26 +132,20 @@ niets meer geregeld is. `check-scope.js` bewaakt dat.
 
 | Paar | Restricted | Permitted |
 |---|---|---|
-| `WIN - D - Windows AI` (112) | Recall niet beschikbaar, geen schermafdrukken, Click To Do uit | alle drie toegestaan, expliciet vastgelegd |
-| `WIN - D - Windows AI Features` (147 / 146) | Cocreator, Image Creator, Generative Fill en Settings Agent uit | dezelfde vier aan |
-| `WIN - U - AI Usage Control` (139 / 149) | Edge blokkeert tien publieke AI-diensten plus de Store-website | alleen de vier Store-regels; de AI-diensten blijven bereikbaar |
+| `WIN - D - Windows AI` | Recall niet beschikbaar, geen schermafdrukken, Click To Do uit | alle drie toegestaan, expliciet vastgelegd |
+| `WIN - D - Windows AI Features` | Cocreator, Image Creator, Generative Fill en Settings Agent uit | dezelfde vier aan |
+| `WIN - U - AI Usage Control` | Edge blokkeert tien publieke AI-diensten plus de Store-website | alleen de vier Store-regels; de AI-diensten blijven bereikbaar |
 
-Twee dingen die daarbij bewust zijn gedaan:
-
-- **De Restricted-variant houdt het oude checkId.** 112 en 139 waren er al; die variant is de
-  voortzetting van de policy zoals hij was, dus daar blijven bestaande findings aan hangen. De
-  Permitted-tegenhangers kregen 148 en 149. checkId 144 — de Windows AI Features-policy vóór
-  haar splitsing — is opgeheven en niet hergebruikt.
-- **De Permitted-variant van AI Usage Control laat de blokkeerlijst niet vallen.** Die lijst
-  bevatte vóór de AI-ronde al vier regels voor de Store-website. Ze zijn tot vier teruggebracht
-  in plaats van de hele instelling weg te laten — anders had het toestaan van AI stilzwijgend ook
-  de Store-blokkade opgeheven, en dat is een ander besluit.
+**De Permitted-variant van AI Usage Control laat de blokkeerlijst bewust niet vallen.** Die lijst
+bevatte vóór de AI-ronde al vier regels voor de Store-website. Ze zijn tot vier teruggebracht
+in plaats van de hele instelling weg te laten — anders had het toestaan van AI stilzwijgend ook
+de Store-blokkade opgeheven, en dat is een ander besluit.
 
 De Permitted-varianten zijn geen aanbeveling. Ze staan in fase 5 (niet uitrollen) omdat de
 baseline standaard de Restricted-kant kiest; wie de andere kant op wil, wisselt de toewijzing om.
 
-Voor wie dat doet is er een derde policy: **`WIN - D - Windows AI Recall Boundaries`** (150,
-fase 3). Recall toestaan is namelijk geen alles-of-niets. De schade van een index is niet
+Voor wie dat doet is er een derde policy: **`WIN - D - Windows AI Recall Boundaries`** (fase
+3). Recall toestaan is namelijk geen alles-of-niets. De schade van een index is niet
 uniform verdeeld — één momentopname van een geopende wachtwoordkluis of van het Entra-portaal
 weegt zwaarder dan duizend van een tekstverwerker. Die policy haalt precies die plekken eruit:
 
@@ -320,7 +307,7 @@ wat er nu nog ligt is niet van toepassing, dubbelop, of afgeschaft.
 
 | Toevoeging | Waarom |
 |---|---|
-| `WIN - D - Defender Ransomware Protection` (153) | Moderne ransomware versleutelt niet het apparaat waarop hij landt maar de shares eromheen. De hele baseline keek naar wat er *óp* het apparaat gebeurt; dit is de eerste die kijkt naar wat het apparaat bij ánderen doet. Block op Low: alleen bij 100% zekerheid, want een fout-positief raakt hier een back-up of sync-tool. |
+| `WIN - D - Defender Ransomware Protection` | Moderne ransomware versleutelt niet het apparaat waarop hij landt maar de shares eromheen. De hele baseline keek naar wat er *óp* het apparaat gebeurt; dit is de eerste die kijkt naar wat het apparaat bij ánderen doet. Block op Low: alleen bij 100% zekerheid, want een fout-positief raakt hier een back-up of sync-tool. |
 | `Attachment Scanning` + Mark of the Web | Zone-informatie op een gedownload bestand blijft bewaard. Dat merkteken is waar Office Beveiligde weergave en SmartScreen op afgaan; verdwijnt het, dan opent een download alsof hij van de eigen schijf komt. |
 | `Logon Hardening` + twee | Het e-mailadres van de gebruiker staat niet meer op het aanmeldscherm, en verbonden gebruikers worden niet opgesomd. |
 | `Privacy and Telemetry` + zes | Zoeklocatie, sms-synchronisatie, consumentencontent, online tips, lettertypeproviders en het delen van app-gegevens tussen gebruikers. Alle zes CIS L1. |
@@ -341,7 +328,7 @@ met een placeholder.
 | 1 | BASELINE2 op een pilotgroep | vooral `Kernel DMA Protection` (test met de docks uit de vloot) en `Logon Hardening` (meld CTRL+ALT+DEL vooraf aan gebruikers) |
 | 2 | Besluit over de drie MAM-instellingen | wijziging aan de afgesproken baseline; kan nu nog zonder migratie |
 | 3 | ~~Controleer de ISMP-koppeling in `_manifest.json`~~ | vervallen: de koppeling aan de ISMS-documenten van één organisatie is in september 2026 uit het manifest gehaald, zodat de baseline generiek is. ISO 27001, NIS2 en Part-IS staan er nog |
-| 4 | Bevalt een policy? | verhuizen naar `IntuneTemplate/` onder de `Baseline_`-naam, met checkId en toewijzing |
+| 4 | Bevalt een policy? | verhuizen naar `IntuneTemplate/` onder de `Baseline_`-naam, met toewijzing |
 | 5 | Volgende ronde | applicatiecontrole (WDAC/Smart App Control), en iOS/Android-compliance zodra er telefoons worden ingeschreven |
 
 # Ronde OIB Windows v4.0 (14 september 2026)
@@ -377,7 +364,7 @@ volgorde van instellingen recht; een tweede run schrijft niets.
 
 | | |
 |---|---|
-| **Compliance** | Vier gebundelde policies (Device Health, Device Security, Defender for Endpoint, Password) worden negen losse: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence en Defender Real Time Protection. Password vervalt: die eisen lopen via de EAS-engine, worden afgedwongen in plaats van getoetst en raken alleen lokale accounts. Vergrendelen na 15 minuten staat nu in Device Lock. checkId 093–096 zijn opgeheven; `_renames.json` zegt per oude policy waar hij is gebleven. |
+| **Compliance** | Vier gebundelde policies (Device Health, Device Security, Defender for Endpoint, Password) worden negen losse: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence en Defender Real Time Protection. Password vervalt: die eisen lopen via de EAS-engine, worden afgedwongen in plaats van getoetst en raken alleen lokale accounts. Vergrendelen na 15 minuten staat nu in Device Lock. `_renames.json` zegt per oude policy waar hij is gebleven. |
 | **Local Security Policies / LAPS** | De 24H2+-varianten zijn de enige. Voor LAPS verandert er inhoudelijk niets; Local Security Policies zet voortaan het ingebouwde Administrator-account uit. LAPS beheert een eigen account, dus dat raakt het herstel niet. |
 | **Defender** | Matig en hoog op quarantaine (was remove); exploit-protection-overrides door gebruikers geblokkeerd; de uitgebreide meldingen van Windows-beveiliging uit (minder overbodige meldingen). |
 | **Edge** | Vijf beveiligingsinstellingen uit de Edge v151-baseline (process isolation, renderer app container, network service sandbox, code integrity guard); geen aanmelding met niet-Microsoft-accounts; geen automatische download van lokale AI-modellen; nieuwe policy **Microsoft Edge Management** (fase 2). |
@@ -521,6 +508,6 @@ Daarnaast:
 4. **OIB macOS v2.0**: bij die import zet OIB's Restrictions zelf Apple Intelligence- en hardening-ids;
    het Restricted/Permitted-paar en Restrictions Hardening moeten dan opnieuw naast de bron gelegd worden.
 5. **CA**: controleren of CIPP `insiderRiskLevels` meestuurt (anders blokkeert `1190` iedereen); besluit
-   over `3010` naar 4 uur (CIS); de platform-engine vergelijkt insider- en agent-condities nog niet.
+   over `3010` naar 4 uur (CIS).
 6. **Niet op echte toestellen getest**: de nieuwe macOS-, iOS- en Android-policies en de scripts in
    `extras/`. Eerst een pilottoestel per platform.

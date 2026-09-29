@@ -12,7 +12,6 @@ Marque comme non conforme tout appareil Android encore géré avec l'ancien devi
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Conformité Intune pour Android device administrator (`securityBlockDeviceAdministratorManagedDevices`) ; recommandation issue d'UniFy Android Enterprise Baseline v1.5.1, guide 9 (Enrollment Restrictions) |
 | Fichier | [`Baseline_AND_U_Compliance_Block_Device_Administrator.json`](Baseline_AND_U_Compliance_Block_Device_Administrator.json) |
 

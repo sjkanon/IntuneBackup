@@ -12,7 +12,6 @@ Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet de privacyrec
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen PPPC-policy |
 | Bestand | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |
 

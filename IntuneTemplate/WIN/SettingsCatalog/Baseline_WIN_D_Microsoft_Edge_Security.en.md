@@ -12,7 +12,6 @@ Edge's security settings: SmartScreen, download control, certificate behaviour a
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-020-MicrosoftEdge` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security |
 | File | [`Baseline_WIN_D_Microsoft_Edge_Security.json`](Baseline_WIN_D_Microsoft_Edge_Security.json) |
 

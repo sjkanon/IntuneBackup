@@ -12,7 +12,6 @@ Configureert het Exchange Online-profiel van de gebruiker automatisch, zodat Out
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | Bron | eigen baseline |
 | Bestand | [`Baseline_WIN_U_Microsoft_Outlook.json`](Baseline_WIN_U_Microsoft_Outlook.json) |
 

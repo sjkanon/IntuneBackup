@@ -12,7 +12,6 @@ Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, z
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | Bron | ISO/IEC 27001:2022 A.8.20 en A.7.9, NIS2 art. 21(2)(e) — instellingen uit de Endpoint Security-set van IntuneAdmin |
 | Bestand | [`Baseline_WIN_D_Wireless_and_Peripherals.json`](Baseline_WIN_D_Wireless_and_Peripherals.json) |
 

@@ -12,7 +12,6 @@ Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-142-DPowerManagement` |
 | Bron | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; waarden geverifieerd tegen de settings catalog-definities (1 = Sleep) |
 | Bestand | [`Baseline_WIN_D_Power_Management.json`](Baseline_WIN_D_Power_Management.json) |
 

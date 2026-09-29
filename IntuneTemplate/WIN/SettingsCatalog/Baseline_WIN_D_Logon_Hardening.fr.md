@@ -12,7 +12,6 @@ Exige CTRL+ALT+DEL avant la connexion et retire le choix du réseau de l'écran 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-132-DLogonHardening` |
 | Source | CIS v4 Windows 11 L1 — paramètres repris d'IntuneAdmin, valeurs vérifiées par rapport à la définition du settings catalog. |
 | Fichier | [`Baseline_WIN_D_Logon_Hardening.json`](Baseline_WIN_D_Logon_Hardening.json) |
 

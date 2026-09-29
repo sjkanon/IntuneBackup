@@ -12,7 +12,6 @@ Maintient la liste de blocage Edge pour le site web du Store, mais en exclut exp
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-149-UAIUsageControlPermitted` |
 | Source | Pendant de la variante Restricted : la même liste de blocage sans les domaines d'IA |
 | Fichier | [`Baseline_WIN_U_AI_Usage_Control_Permitted.json`](Baseline_WIN_U_AI_Usage_Control_Permitted.json) |
 

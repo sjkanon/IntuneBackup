@@ -12,7 +12,6 @@ Toetst of een fully managed of corporate-owned Android-toestel een numeriek comp
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed en Corp-Work-Profile - v1.5 (wachtwoorddeel); zonder verloop na 365 dagen, vergrendeltijd 15 in plaats van 5 minuten |
 | Bestand | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 

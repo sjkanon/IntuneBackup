@@ -12,7 +12,6 @@ Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DM
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-130-DKernelDMAProtection` |
 | Bron | Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — waarde geverifieerd tegen Policy CSP DmaGuard/DeviceEnumerationPolicy. |
 | Bestand | [`Baseline_WIN_D_Kernel_DMA_Protection.json`](Baseline_WIN_D_Kernel_DMA_Protection.json) |
 

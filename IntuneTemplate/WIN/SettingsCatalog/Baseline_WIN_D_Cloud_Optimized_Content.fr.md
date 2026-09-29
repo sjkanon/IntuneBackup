@@ -12,7 +12,6 @@ Désactive les recommandations de contenu pilotées par le cloud de Windows — 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-057-DCloudOptimizedContent` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (partie appareil) |
 | Fichier | [`Baseline_WIN_D_Cloud_Optimized_Content.json`](Baseline_WIN_D_Cloud_Optimized_Content.json) |
 

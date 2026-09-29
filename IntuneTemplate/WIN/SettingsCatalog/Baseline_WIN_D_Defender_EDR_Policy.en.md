@@ -12,7 +12,6 @@ Connects the device to Defender for Endpoint via the Defender connector instead 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityEndpointDetectionAndResponse) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-109-DDefenderEDRPolicy` |
 | Source | CIPP standard template |
 | File | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 

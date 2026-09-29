@@ -12,7 +12,6 @@ Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van scherma
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-148-DWindowsAIPermitted` |
 | Bron | Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 

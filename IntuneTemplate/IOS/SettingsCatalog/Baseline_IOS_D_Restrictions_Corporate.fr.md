@@ -12,7 +12,6 @@ Durcissement des iPhone et iPad d'entreprise supervisés : pas de profils ni d'a
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-191-IOSDRestrictionsCorporate` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0, L1) — fusion de SC - Device Restrictions, Device Security, Device Pairing, Lock Screen, Safari Browser, Web-App-Store (EU) et Apple Intelligence & Siri - Corporate ; IntuneAdmin — Disable Web Distribution App Installation EU. Valeurs corrigées là où UniFy utilise `_false` au sens de « ne pas imposer » |
 | Fichier | [`Baseline_IOS_D_Restrictions_Corporate.json`](Baseline_IOS_D_Restrictions_Corporate.json) |
 

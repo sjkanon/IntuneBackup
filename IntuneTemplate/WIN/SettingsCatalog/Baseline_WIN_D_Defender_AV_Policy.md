@@ -12,7 +12,6 @@ Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveil
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-108-DDefenderAVPolicy` |
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_AV_Policy.json`](Baseline_WIN_D_Defender_AV_Policy.json) |
 

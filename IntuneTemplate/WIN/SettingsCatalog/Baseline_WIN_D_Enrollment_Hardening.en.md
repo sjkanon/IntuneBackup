@@ -12,7 +12,6 @@ Requires a network connection during initial setup, so that a device cannot get 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-141-DEnrollmentHardening` |
 | Source | IntuneAdmin/IntuneBaselines — Modern Workplace Expert, Baseline - Require Network In OOBE (TenantLockdown CSP) |
 | File | [`Baseline_WIN_D_Enrollment_Hardening.json`](Baseline_WIN_D_Enrollment_Hardening.json) |
 

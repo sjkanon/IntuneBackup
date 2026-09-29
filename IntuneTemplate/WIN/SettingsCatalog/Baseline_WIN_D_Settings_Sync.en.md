@@ -12,7 +12,6 @@ Determines which Windows settings are synchronised between devices.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-081-DSettingsSync` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Settings Sync |
 | File | [`Baseline_WIN_D_Settings_Sync.json`](Baseline_WIN_D_Settings_Sync.json) |
 

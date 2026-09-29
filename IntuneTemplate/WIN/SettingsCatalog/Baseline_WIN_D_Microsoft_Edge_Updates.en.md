@@ -12,7 +12,6 @@ How and when Edge updates itself, and that a user cannot postpone it.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-074-DMicrosoftEdgeUpdates` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates |
 | File | [`Baseline_WIN_D_Microsoft_Edge_Updates.json`](Baseline_WIN_D_Microsoft_Edge_Updates.json) |
 

@@ -12,7 +12,6 @@ Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-013-DeviceLock` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock |
 | Bestand | [`Baseline_WIN_D_Device_Lock.json`](Baseline_WIN_D_Device_Lock.json) |
 

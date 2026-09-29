@@ -12,7 +12,6 @@ Checks whether Windows Firewall is active.
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Firewall |
 | File | [`Baseline_WIN_U_Compliance_Firewall.json`](Baseline_WIN_U_Compliance_Firewall.json) |
 

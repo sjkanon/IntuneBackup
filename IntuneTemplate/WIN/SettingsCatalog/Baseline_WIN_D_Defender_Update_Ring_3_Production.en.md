@@ -12,7 +12,6 @@ Production ring for Defender updates: only gets definitions and engine versions 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-063-DDefenderUpdateRing3Production` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production |
 | File | [`Baseline_WIN_D_Defender_Update_Ring_3_Production.json`](Baseline_WIN_D_Defender_Update_Ring_3_Production.json) |
 

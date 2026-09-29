@@ -12,7 +12,6 @@ Blocks an infected device from encrypting files on other machines over the netwo
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-153-DDefenderRansomwareProtection` |
 | Source | IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection; values verified against the settings catalog definitions. IntuneAdmin sets Audit; here it is Block. |
 | File | [`Baseline_WIN_D_Defender_Ransomware_Protection.json`](Baseline_WIN_D_Defender_Ransomware_Protection.json) |
 

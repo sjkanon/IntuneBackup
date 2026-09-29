@@ -12,7 +12,6 @@ Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets all
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move |
 | Bestand | [`Baseline_MAC_U_Microsoft_OneDrive_KFM.json`](Baseline_MAC_U_Microsoft_OneDrive_KFM.json) |
 

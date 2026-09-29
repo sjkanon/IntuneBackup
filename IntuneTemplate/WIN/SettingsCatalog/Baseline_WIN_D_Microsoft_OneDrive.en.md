@@ -12,7 +12,6 @@ Automatically signs the OneDrive client in with the work account and moves Deskt
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-029-OnedriveSilentLogin` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration |
 | File | [`Baseline_WIN_D_Microsoft_OneDrive.json`](Baseline_WIN_D_Microsoft_OneDrive.json) |
 

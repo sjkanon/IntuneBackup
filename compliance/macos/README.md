@@ -9,7 +9,7 @@ Deze twee bestanden staan bewust **buiten** [`IntuneTemplate/`](../../IntuneTemp
 om dezelfde reden als [`shellscripts/macos/`](../../shellscripts/macos/README.md) en
 [`enrollment/macos/`](../../enrollment/macos/README.md): een compliance-script is in Graph een
 eigen resource (`deviceManagement/deviceComplianceScripts`) en past niet in een van de vijf
-CIPP-policytypes. De pijplijnen pikken deze map niet op, en er hoort dus ook geen `checkId` bij.
+CIPP-policytypes. De pijplijnen pikken deze map niet op.
 
 | Bestand | Wat het is |
 |---|---|

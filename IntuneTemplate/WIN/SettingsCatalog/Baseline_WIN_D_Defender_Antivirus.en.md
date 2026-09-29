@@ -12,7 +12,6 @@ Core configuration of Defender Antivirus: real-time protection, cloud protection
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-012-DefaultAVPolicy` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration |
 | File | [`Baseline_WIN_D_Defender_Antivirus.json`](Baseline_WIN_D_Defender_Antivirus.json) |
 

@@ -12,7 +12,6 @@ Staat de Edge Management Service toe op beheerde apparaten en laat het beleid da
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-171-UMicrosoftEdgeManagement` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Management.json`](Baseline_WIN_U_Microsoft_Edge_Management.json) |
 

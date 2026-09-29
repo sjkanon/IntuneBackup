@@ -12,7 +12,6 @@ Automatically signs the OneDrive client on the Mac in with the work account and 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access |
 | File | [`Baseline_MAC_D_Microsoft_OneDrive.json`](Baseline_MAC_D_Microsoft_OneDrive.json) |
 

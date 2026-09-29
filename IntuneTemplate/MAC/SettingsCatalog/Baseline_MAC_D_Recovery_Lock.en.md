@@ -12,7 +12,6 @@ On Macs with Apple silicon, sets a random, Intune-managed password on recoveryOS
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-198-MACDRecoveryLock` |
 | Source | Microsoft Learn — Configure Recovery Lock using the settings catalog (June 2026); form from microsoft/intune-my-macs pol-sec-007-recovery-lock (monthly rotation there, six months here) |
 | File | [`Baseline_MAC_D_Recovery_Lock.json`](Baseline_MAC_D_Recovery_Lock.json) |
 

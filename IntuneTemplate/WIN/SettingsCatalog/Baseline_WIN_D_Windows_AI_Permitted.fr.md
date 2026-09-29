@@ -12,7 +12,6 @@ Autorise explicitement Recall et Click To Do, y compris la conservation des capt
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-148-DWindowsAIPermitted` |
 | Source | Pendant de la variante Restricted ; les valeurs sont les valeurs par défaut de Windows, fixées explicitement |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 

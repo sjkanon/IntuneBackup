@@ -12,7 +12,6 @@ Turns off notifications on the lock screen and AutoComplete in Internet Explorer
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-031-UWindowsUserExperience` |
 | Source | own baseline — from the split of Administrative Templates |
 | File | [`Baseline_WIN_U_Windows_User_Experience.json`](Baseline_WIN_U_Windows_User_Experience.json) |
 

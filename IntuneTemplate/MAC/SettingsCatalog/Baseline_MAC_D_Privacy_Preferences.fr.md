@@ -12,7 +12,6 @@ Uniquement pour les organisations qui utilisent NinjaOne ou TeamViewer. Fixe les
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-110-MACDPrivacyPreferences` |
 | Source | baseline propre — OpenIntuneBaseline n'a pas de policy PPPC |
 | Fichier | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |
 

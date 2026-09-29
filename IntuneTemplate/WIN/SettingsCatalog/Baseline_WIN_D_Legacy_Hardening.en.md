@@ -12,7 +12,6 @@ The hardening settings from the old Administrative Templates policy for which Op
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-070-DLegacyHardening` |
 | Source | Own hardening settings without a counterpart in OpenIntuneBaseline |
 | File | [`Baseline_WIN_D_Legacy_Hardening.json`](Baseline_WIN_D_Legacy_Hardening.json) |
 

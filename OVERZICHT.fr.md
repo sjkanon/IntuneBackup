@@ -11,7 +11,6 @@ Ceci est le résumé ; les détails se trouvent dans le [README principal](READM
 | | Nombre |
 |---|---:|
 | Policies | 197 |
-| Contrôles de baseline | 162 |
 | Sans affectation (volontairement) | 96 |
 | Déployées dans le tenant | 0 |
 
@@ -37,19 +36,16 @@ aux CIS Controls v8.1 et au NIST CSF 2.0 ; ensemble, les policies de la phase 1 
 Par mesure et par point NIS2 : ce que la baseline impose, comment c'est vérifié et ce que l'organisation
 doit régler elle-même : [COMPLIANCE.fr.md](COMPLIANCE.fr.md).
 
-## Une source, trois dérivés
+## Une source, deux dérivés
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline"] -->|import-oib.js| T
   T["<b>IntuneTemplate/</b><br/>la source"]
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -.->|lit directement| CIPP[CIPP]
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TENANT[("Tenant Intune")]
   CIPP --> TENANT
-  PLAT -.->|vérifie| TENANT
   style T stroke-width:3px
 ```
 
@@ -61,12 +57,11 @@ De 24 policies maison à l'ensemble actuel.
 
 | | Nombre | |
 |---|---:|---|
-| Réécrites sur le contenu OIB | 15 | checkId conservé ; Edge Security est passé de 2 à 54 paramètres, Defender Antivirus de 11 à 28, Audit de 23 à 40 |
+| Réécrites sur le contenu OIB | 15 | Edge Security est passé de 2 à 54 paramètres, Defender Antivirus de 11 à 28, Audit de 23 à 40 |
 | Nouvelles | 75 | notamment Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 policies de conformité, 20 policies macOS, 2 BYOD MAM |
 | Fusionnées dans une autre policy | 6 | Administrative Templates (300 paramètres) éclaté ; Network Security, System Services, Windows Search et OneDrive KFM absorbés |
 | Reprises sans changement | 5 | là où OIB n'a pas d'équivalent : onboarding EDR, configuration automatique d'Outlook, moteur de recherche Edge, anneau de mise à jour 3, expérience utilisateur |
 
-Cinq checkId ont ainsi été supprimés (008, 017, 023, 025, 028) et ne seront pas réattribués.
 Les paramètres que nous étions seuls à avoir — le chiffrement des disques fixes et amovibles,
 par exemple — ont été conservés lors d'une réécriture au lieu de disparaître
 silencieusement.
@@ -105,7 +100,7 @@ et trois corrections :
 | | |
 |---|---|
 | `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | deux profils d'inscription ADE qui diffèrent d'un seul paramètre : le compte connecté devient-il administrateur ou utilisateur standard. Alternatives l'un de l'autre, donc aucun n'est affecté. |
-| `MAC - D - Software Updates` | du payload classique `com.apple.softwareupdate` à la gestion déclarative des mises à jour (DDM, macOS 14+) : report de 7 jours pour les mises à jour mineures, 14 pour les majeures et 21 pour les mises à jour système, Rapid Security Responses activées avec retour arrière. Le checkId 047 est conservé. |
+| `MAC - D - Software Updates` | du payload classique `com.apple.softwareupdate` à la gestion déclarative des mises à jour (DDM, macOS 14+) : report de 7 jours pour les mises à jour mineures, 14 pour les majeures et 21 pour les mises à jour système, Rapid Security Responses activées avec retour arrière. |
 | `MAC - D - Defender for Endpoint` | le nom d'organisation du filtre de contenu était *JAMF Software* — un reste des profils Jamf sur lesquels s'appuie la documentation MDE. L'utilisateur voit ce nom dans Réglages Système → Réseau → Filtres. |
 | `MAC - U - Compliance Device Health` et `Device Security` | portaient la description l'une de l'autre. Device Health vérifie System Integrity Protection ; Device Security vérifie le chiffrement, le pare-feu et Gatekeeper. |
 
@@ -129,10 +124,6 @@ l'étape 4 avant l'étape 3 produit deux policies qui se contredisent.
 | 5 | Déployer | les nouvelles policies via CIPP ou `Start-IntuneRestoreConfig` |
 | 6 | Affecter | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` et `-Scope U -AllUsers` ne prennent que la phase 1 ; le pilote suit avec `-GroupName 'SEC-Baseline-Pilot'` |
 | 7 | Inventorier à nouveau | la liste des policies orphelines doit être vide |
-
-> **Le contrôle de baseline n'est pas un filet de sécurité ici.** Les contrôles comparent le contenu, pas le nom.
-> Une policy restée sous l'*ancien* nom garde donc son contrôle au vert, même si la nouvelle
-> n'a jamais été créée ou n'est affectée nulle part.
 
 ## D'abord en pilote
 

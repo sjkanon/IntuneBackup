@@ -12,7 +12,6 @@ Prevents screen content from being sent to an assistant app (such as Gemini or C
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-179-ANDUCorporateAIRestricted` |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) and Applications (appfunctions), Fully-Managed and Corp-Work-Profile - v1.5 |
 | File | [`Baseline_AND_U_Corporate_AI_Restricted.json`](Baseline_AND_U_Corporate_AI_Restricted.json) |
 

@@ -21,18 +21,14 @@ overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
   T["<b>IntuneTemplate/</b><br/>197 policies<br/><i>de bron</i>"]
-  BL["baseline/intune/<br/>baseline-v1.0.json"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
 
   OIB -->|import-oib.js| T
-  T -->|generate-baseline.js| BL
   T -->|export-intunebackup.js| EX
   T -.->|leest rechtstreeks| CIPP[CIPP]
-  BL --> PLAT["TEST Policies Platform<br/>toetst de tenant"]
   EX -->|Start-IntuneRestoreConfig| TENANT
   CIPP --> TENANT
-  PLAT -.->|vergelijkt| TENANT
 
   IA["IntuneAdmin/IntuneBaselines<br/>874 profielen"] -->|import-intuneadmin.js| T
 
@@ -47,7 +43,7 @@ schrijft, en aan welke systemen de repo vastzit.
 
 **[COMPLIANCE.md](COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
 Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
-2.0-subcategorie welke policies hem technisch invullen, in welke fase, met welke checkId — en wat
+2.0-subcategorie welke policies hem technisch invullen, in welke fase — en wat
 organisatorisch nodig blijft. Gegenereerd door `scripts/generate-compliance.js` uit de `controls` in
 `_manifest.json` en de vocabulaire in `IntuneTemplate/_controls.json`; `check-scope.js` weigert een
 policy zonder of met een onbekend label. Wat er in git staat gaat alleen over Intune; de 41
@@ -60,8 +56,7 @@ CIPP-policytypes is: inschrijvingsrestricties, app-configuratie, toewijzingsfilt
 Business, remediations en scripts — per platform, met uitrolinstructies.
 
 Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/README.md) (met
-een tabel per platform), [`scripts/`](scripts/README.md), [`export/`](export/README.md) en
-[`baseline/`](baseline/README.md).
+een tabel per platform), [`scripts/`](scripts/README.md) en [`export/`](export/README.md).
 
 Vijf soorten configuratie passen niet in de vijf CIPP-policytypes en staan daarom buiten
 `IntuneTemplate/`, elk met een eigen README: de macOS ADE-enrollmentprofielen in
@@ -71,7 +66,7 @@ Vijf soorten configuratie passen niet in de vijf CIPP-policytypes en staan daaro
 voor Defender op macOS in [`compliance/macos/`](compliance/macos/README.md) en de Win32-app die
 de voorgeïnstalleerde McAfee verwijdert in
 [`apps/win32/remove-mcafee/`](apps/win32/remove-mcafee/README.md). Die worden door géén van de
-pijplijnen opgepikt en hebben geen `checkId`.
+pijplijnen opgepikt.
 
 De twee scriptmappen doen hetzelfde in twee vormen: een **drive mapping is geen policy**. Geen
 van de 18.329 settingDefinitionId's in de settings catalog koppelt een netwerkschijf, en Group
@@ -82,7 +77,7 @@ gebruikersgroep is toegewezen.
 Die laatste hoort er om één reden bij: McAfee zet **Microsoft Defender in passive mode**. De
 ASR-regels, Controlled Folder Access, Network Protection en Remote Encryption Protection uit deze
 baseline leunen allemaal op een actieve Defender-engine. Komen ze aan op een apparaat met McAfee,
-dan staat de baseline-check groen terwijl er niets wordt uitgevoerd.
+dan staan ze in Intune als geslaagd terwijl er niets wordt uitgevoerd.
 
 ## Twee tenantinstellingen die geen policy zijn
 
@@ -161,7 +156,7 @@ Vijf policytypes, onderscheiden door `.Type` in het template:
 Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json         bestandsnaam
 ```
 
-De prefix `Baseline_` blijft verplicht: `generate-baseline.js`, `export-intunebackup.js` en
+De prefix `Baseline_` blijft verplicht: `export-intunebackup.js`, `generate-docs.js` en
 `Set-BaselineAssignment.ps1` filteren er alle drie op. Een bestand dat die prefix verliest
 verdwijnt stilzwijgend uit alle drie de pijplijnen.
 
@@ -211,10 +206,15 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 
 | Doel | Pad | Script |
 |---|---|---|
-| Baseline-checks voor TEST Policies Platform | `baseline/intune/baseline-v1.0.json` | `node scripts/generate-baseline.js` |
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | Idem voor elke set ernaast | `export/NativeImport/IntuneBackupAndRestore-<SET>/` | hetzelfde script |
+| CIPP-baseline (stages en pakketten) | `BaselineTemplate/Baseline.json` | `node scripts/generate-baseline-template.js` |
 | CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` rechtstreeks | |
+
+**Bij een wijziging in `IntuneTemplate/`:** `.github/workflows/generate-baseline.yml`
+regenereert `export/NativeImport/IntuneBackupAndRestore/`, `BaselineTemplate/Baseline.json` en de
+gegenereerde documentatie automatisch en opent daar een PR voor — controleer de diff (nieuwe of
+verwijderde policies, gewijzigde instellingen) vóór je merget.
 
 ## OpenIntuneBaseline bijwerken
 
@@ -349,14 +349,12 @@ sync: die kijkt niet naar `TemplateType` en maakt er dus ook een naamloze rij va
 Community Repos → Import wordt hij wél als baseline herkend. Zie
 [hieronder](#uitrollen-via-een-cipp-baseline).
 
-Wat overblijft: zeven bestanden zijn wél `.json` maar geen policy — `baseline/intune/`
-`baseline-v1.0.json`, de drie `_`-bestanden in `IntuneTemplate/`, de twee `_manifest.json`'s
-en het macOS-ADE-profiel in `enrollment/macos/`. CIPP
+Wat overblijft: zes bestanden zijn wél `.json` maar geen policy — de drie `_`-bestanden in
+`IntuneTemplate/`, de twee `_manifest.json`'s en het macOS-ADE-profiel in `enrollment/macos/`. CIPP
 maakt daar één rij van zonder naam en zonder type (ze vallen op elkaar terug omdat de
-ontdubbeling op `Displayname` matcht, en die is bij alle zeven leeg). Die rij doet niets;
+ontdubbeling op `Displayname` matcht, en die is bij alle zes leeg). Die rij doet niets;
 opruimen kan door 'm in CIPP te verwijderen. Onder een `NativeImport`-pad zetten kan niet:
-het TEST Policies Platform haalt `baseline-v1.0.json` op zijn huidige pad op, en de andere
-zes worden door de scripts naast hun eigen map gelezen.
+ze worden door de scripts naast hun eigen map gelezen.
 
 **Via IntuneBackupAndRestore** (getest tegen module 4.0.1):
 
@@ -385,6 +383,11 @@ De exporter schrijft de app protection-assignments in de vorm die de module verw
 bestandsnaam `<guid> - <policynaam>.json` (de module leest de naam als alles ná het eerste
 ` - `) en de lijst in een `value`-property in plaats van een kale array. Bij de andere
 policytypes is de bestandsnaam de policynaam en is de inhoud wél een kale array.
+
+**Per-tenant waarden:** het EDR-onboarding-token in `Baseline_WIN_D_Defender_for_Endpoint_EDR`
+is een `encryptedValueToken` die alleen in de brontenant betekenis heeft. Daarom rolt sinds
+september 2026 de connector-variant `Baseline_WIN_D_Defender_EDR_Policy` uit en staat deze in
+fase 5. Bij een restore in een andere tenant moet je die instelling handmatig opnieuw koppelen.
 
 ## Toewijzen in een tenant
 
@@ -504,65 +507,3 @@ Drie regels in `_renames.json` vragen om handwerk en worden door het script alle
 - **retire** — gaat helemaal weg; `replacedBy` zegt waar de instellingen nu staan.
 - **duplicaat / beide aanwezig** (`DUPLICATE` / `BOTH PRESENT` in de uitvoer) — oude en nieuwe naam bestaan allebei. Eerst uitzoeken welke
   de echte is.
-
-**Let op:** de `settings-catalog-match`-checks matchen op inhoud, niet op naam. Een
-achtergebleven oude policy houdt zijn check dus groen, ook als de nieuwe nooit is aangemaakt.
-De baseline-check is geen vangnet voor deze migratie.
-
-## checkId's
-
-`checkId`-nummers komen uit `CHECK_NUMBERS` in `scripts/generate-baseline.js`, niet uit de
-alfabetische bestandsvolgorde — anders verschuift één nieuw template alle ID's erna, terwijl
-het platform, findings en uitzonderingen ernaar verwijzen. Een nieuw bestand krijgt
-automatisch het eerstvolgende vrije nummer en de run meldt welk; zet dat vast in de map.
-
-Om dezelfde reden bestaat `CHECK_ID_SLUGS`: de suffix achter het nummer komt normaal uit de
-bestandsnaam, dus zonder die map zou hernoemen naar `Baseline_WIN_D_BitLocker` van
-`INTUNE-BASE-011-Bitlocker` een `INTUNE-BASE-011-WINDBitLocker` maken. Nieuwe policies krijgen
-hun slug wél uit de bestandsnaam: scope + onderwerp, met het platform ervoor als het niet
-Windows is (`INTUNE-BASE-038-MACDFileVault`, `INTUNE-BASE-104-UMicrosoftStore`). De scope zit
-erin omdat er D/U-paren van hetzelfde onderwerp bestaan.
-
-### Vijf checkId's zijn opgeheven
-
-Hun policy is opgegaan in een OIB-policy die meer dekt. De nummers worden niet opnieuw
-uitgedeeld — een oude finding aan een andere check koppelen is erger dan een gat in de reeks.
-
-| checkId | Ging op in |
-|---|---|
-| `008-AdministrativeTemplates` | Internet Explorer Legacy, Security Hardening, Printing, Remote Desktop and RPC, Legacy Hardening |
-| `017-LanManWorkstation` | Security Hardening |
-| `023-Search` | Windows Feature Configuration |
-| `025-SystemServices` | Security Hardening |
-| `028-OnedriveKnownFolderMove` | Microsoft OneDrive (029) |
-
-Twee checkId's zijn van onderwerp verschoven maar behouden: `024-Smartscreen` hangt nu aan
-*Enhanced Phishing Protection* en `021-OfficeUpdates` aan de Settings Catalog-variant van
-Office Updates.
-
-### Welke types een check opleveren
-
-`"Catalog"` wordt `type: "settings-catalog-match"`, `"Admin"` wordt
-`type: "group-policy-definition-match"`. `"Device"`, `"deviceCompliancePolicies"` en
-`"AppProtection"` leveren **geen** check op: de platform-engine heeft er geen matcher voor, en
-een rule met een onbekend type is een check die stilzwijgend niets test. Voor compliance en
-app protection dekken de generieke checks 001–006 dit vandaag af (bestaat er een
-compliance-policy, is die toegewezen, vereist die encryptie). Die policies zijn wel gewoon
-uitrolbaar via CIPP en IntuneBackupAndRestore.
-
-**Let op bij `"Admin"`/ADMX:** de Graph-endpoint hiervoor
-(`deviceManagement/groupPolicyConfigurations`) is beta-only en de fetch-/matchinglogica in de
-platform-engine is nog niet tegen een echte tenant getest — zie TODO.md in `sjkanon/Platform`.
-Er is nog één ADMX-policy over (de Edge-zoekmachine); Office Updates is juist naar Settings
-Catalog verhuisd om deze reden.
-
-**Per-tenant waarden:** het EDR-onboarding-token in `Baseline_WIN_D_Defender_for_Endpoint_EDR`
-is een `encryptedValueToken` die alleen in de brontenant betekenis heeft. Daarom rolt sinds
-september 2026 de connector-variant `Baseline_WIN_D_Defender_EDR_Policy` uit en staat deze in fase 5. De baselinegenerator
-slaat 'm over; bij een restore in een andere tenant moet je die instelling handmatig opnieuw
-koppelen.
-
-**Bij een wijziging in `IntuneTemplate/`:** `.github/workflows/generate-baseline.yml`
-regenereert `baseline/intune/baseline-v1.0.json` én `export/NativeImport/IntuneBackupAndRestore/`
-automatisch en opent daar een PR voor — controleer de diff (nieuwe/verwijderde checks,
-gewijzigde instellingen) vóór je merget.

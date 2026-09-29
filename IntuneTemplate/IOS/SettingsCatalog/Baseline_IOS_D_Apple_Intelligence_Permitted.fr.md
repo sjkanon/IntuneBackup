@@ -12,7 +12,6 @@ Autorise explicitement, sur les iPhone et iPad inscrits, les fonctionnalités g�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-183-IOSDAppleIntelligencePermitted` |
 | Source | Contrepartie de [Baseline] - IOS - D - Apple Intelligence Restricted ; les mêmes clés déclaratives sur la valeur par défaut d'Apple, définies explicitement |
 | Fichier | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 

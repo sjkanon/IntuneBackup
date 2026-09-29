@@ -6,7 +6,7 @@ Advies en template: persoonlijke Macs niet laten inschrijven in Intune.
 
 Een inschrijvingsrestrictie (`deviceEnrollmentPlatformRestrictionConfiguration`) is geen van de
 vijf CIPP-policytypes en hangt onder `deviceManagement/deviceEnrollmentConfigurations`. Niet
-opgepikt door de pijplijnen, geen `checkId`.
+opgepikt door de pijplijnen.
 
 | Bestand | Wat het is |
 |---|---|

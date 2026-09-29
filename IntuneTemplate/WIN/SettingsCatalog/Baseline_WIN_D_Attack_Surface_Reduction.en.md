@@ -12,7 +12,6 @@ Blocks the attack techniques from Defender's Attack Surface Reduction rules: mac
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-007-ASRDefaultRules` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2) |
 | File | [`Baseline_WIN_D_Attack_Surface_Reduction.json`](Baseline_WIN_D_Attack_Surface_Reduction.json) |
 

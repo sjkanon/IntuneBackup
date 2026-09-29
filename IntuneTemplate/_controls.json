@@ -524,7 +524,7 @@
         "titelBron": "nen",
         "thema": "organisatorisch",
         "dekking": "deels",
-        "organisatorisch": "Naleving periodiek beoordelen; compliance-policies en baseline-checks leveren de meting, de beoordeling en opvolging zijn organisatorisch.",
+        "organisatorisch": "Naleving periodiek beoordelen; compliance-policies en de compliance-rapportage in Intune leveren de meting, de beoordeling en opvolging zijn organisatorisch.",
         "soa": {
           "voorstel": "ja"
         }
@@ -1411,11 +1411,11 @@
         "label": "art. 21(2)(f) beoordeling van de doeltreffendheid",
         "titelWet": "Beleid en procedures om de effectiviteit van cyberbeveiligingsrisicobeheersmaatregelen te beoordelen",
         "uitvoeringsverordening": "bijlage §7",
-        "technisch": "Compliance-policies en de baseline-checks in TEST Policies Platform meten of de maatregelen daadwerkelijk staan; dat is bewijs, geen beoordeling.",
+        "technisch": "Compliance-policies en de compliance-rapportage in Intune meten of de maatregelen daadwerkelijk staan; dat is bewijs, geen beoordeling.",
         "organisatorisch": [
           "Vastgesteld beoordelingsprogramma (interne audit, pentest, managementreview)",
           "KPI's en rapportage aan het bestuur",
-          "Opvolging van afwijkingen uit de baseline-checks en compliance-rapportage",
+          "Opvolging van afwijkingen uit de compliance-rapportage",
           "Periodieke herijking van deze baseline tegen nieuwe dreigingen"
         ]
       },

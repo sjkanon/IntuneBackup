@@ -12,7 +12,6 @@ Complète les restrictions macOS par cinq mesures qu'OpenIntuneBaseline macOS v1
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-199-MACDRestrictionsHardening` |
 | Source | OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions et D - Gatekeeper (mêmes valeurs) ; CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.6.3.1 (données de diagnostic) |
 | Fichier | [`Baseline_MAC_D_Restrictions_Hardening.json`](Baseline_MAC_D_Restrictions_Hardening.json) |
 

@@ -12,7 +12,6 @@ Fixe DNS over HTTPS dans Edge sur « automatique » : Edge chiffre les requêtes
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic` |
 | Source | Policy Microsoft Edge DnsOverHttpsMode (Edge 83+) — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json) |
 

@@ -11,7 +11,6 @@ Dit is de samenvatting; de details staan in de [hoofd-README](README.md) en per 
 | | Aantal |
 |---|---:|
 | Policies | 197 |
-| Baseline-checks | 162 |
 | Zonder toewijzing (bewust) | 96 |
 | Uitgerold in de tenant | 0 |
 
@@ -37,19 +36,16 @@ CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 31 van de 9
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
 
-## Eén bron, drie afgeleiden
+## Eén bron, twee afgeleiden
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline"] -->|import-oib.js| T
   T["<b>IntuneTemplate/</b><br/>de bron"]
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -.->|leest rechtstreeks| CIPP[CIPP]
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TENANT[("Intune-tenant")]
   CIPP --> TENANT
-  PLAT -.->|toetst| TENANT
   style T stroke-width:3px
 ```
 
@@ -61,13 +57,12 @@ Van 24 eigen policies naar de huidige set.
 
 | | Aantal | |
 |---|---:|---|
-| Herschreven op OIB-inhoud | 15 | checkId behouden; Edge Security ging van 2 naar 54 instellingen, Defender Antivirus van 11 naar 28, Audit van 23 naar 40 |
+| Herschreven op OIB-inhoud | 15 | Edge Security ging van 2 naar 54 instellingen, Defender Antivirus van 11 naar 28, Audit van 23 naar 40 |
 | Nieuw | 75 | o.a. Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 compliance-policies, 20 macOS-policies, 2 BYOD-MAM |
 | Opgegaan in een andere policy | 6 | Administrative Templates (300 instellingen) uit elkaar getrokken; Network Security, System Services, Windows Search en OneDrive KFM opgeslokt |
 | Ongewijzigd meegegaan | 5 | waar OIB geen tegenhanger voor heeft: EDR-onboarding, Outlook-autoconfiguratie, Edge-zoekmachine, update-ring 3, user experience |
 
-Vijf checkId's zijn daarmee opgeheven (008, 017, 023, 025, 028) en worden niet opnieuw
-uitgedeeld. Instellingen die alleen wij hadden — versleuteling van vaste en verwisselbare
+Instellingen die alleen wij hadden — versleuteling van vaste en verwisselbare
 schijven bijvoorbeeld — zijn bij een herschrijving behouden in plaats van stilzwijgend
 weggevallen.
 
@@ -105,7 +100,7 @@ en drie correcties op:
 | | |
 |---|---|
 | `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | twee ADE-inschrijfprofielen die in precies één instelling verschillen: wordt het aangemelde account beheerder of standaardgebruiker. Alternatieven van elkaar, dus geen van beide toegewezen. |
-| `MAC - D - Software Updates` | van de klassieke `com.apple.softwareupdate`-payload naar declaratief updatebeleid (DDM, macOS 14+): uitstel van 7 dagen voor kleine, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien. checkId 047 blijft. |
+| `MAC - D - Software Updates` | van de klassieke `com.apple.softwareupdate`-payload naar declaratief updatebeleid (DDM, macOS 14+): uitstel van 7 dagen voor kleine, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien. |
 | `MAC - D - Defender for Endpoint` | de organisatienaam van het inhoudsfilter stond op *JAMF Software* — een restant uit de Jamf-profielen waar de MDE-documentatie op leunt. Die naam ziet de gebruiker in Systeeminstellingen → Netwerk → Filters. |
 | `MAC - U - Compliance Device Health` en `Device Security` | droegen elkaars omschrijving. Device Health toetst System Integrity Protection; Device Security toetst de versleuteling, de firewall en Gatekeeper. |
 
@@ -129,10 +124,6 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | 5 | Uitrollen | de nieuwe policies via CIPP of `Start-IntuneRestoreConfig` |
 | 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |
 | 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |
-
-> **De baseline-check is hier geen vangnet.** De checks vergelijken op inhoud, niet op naam.
-> Een achtergebleven policy onder de óude naam houdt zijn check dus groen, ook als de nieuwe
-> nooit is aangemaakt of nergens is toegewezen.
 
 ## Eerst in een pilot
 

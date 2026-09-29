@@ -12,7 +12,6 @@ Restreint les fonctionnalités macOS par lesquelles les données de l'entreprise
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-046-MACDRestrictions` |
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | Fichier | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 

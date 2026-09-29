@@ -3,7 +3,7 @@
 # scripts/
 
 `IntuneTemplate/` is the only source. Everything here fills that folder, checks it, or
-derives something from it — nothing writes directly into `baseline/` or `export/` without
+derives something from it — nothing writes directly into `export/` without
 `IntuneTemplate/` already knowing about it.
 
 ```mermaid
@@ -13,13 +13,11 @@ flowchart TD
   TEN["Tenant backup<br/>(IntuneBackupAndRestore)"] -->|import-intunebackup.js| T
   T["IntuneTemplate/<br/>197 policies"]
   T -->|check-scope.js| CHK{{"scope · layout · conflicts"}}
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-docs.js| DOC["READMEs per platform"]
   T -->|generate-compliance.js| CMP["COMPLIANCE.md"]
   CA["CA-Policies/<br/>controls/ca-controls.json"] -.->|--ca| CMP
   T -.->|reads directly| CIPP["CIPP"]
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TENANT["Tenant"]
   CIPP --> TENANT
   T -->|Set-BaselineAssignment.ps1| TENANT
@@ -36,13 +34,12 @@ flowchart TD
 | [`set-packages.js`](set-packages.js) | **within** the source | Sets `Package` in every template — the CIPP package the policy is deployed in — derived from the phase in `_manifest.json` and the target in `_assignments.json` — and the English description shown next to the policy in the tenant (`doel` + assignment + source, translated via `_i18n/en.json`). Run after every change to those files. |
 | [`check-scope.js`](check-scope.js) | check | Scope, naming convention, folder layout, conflicting settings, the CIPP package and the migration table. Blocking in CI. |
 | [`check-osversion.js`](check-osversion.js) | check | Reports how far the OS minimums lag behind n-1 per platform, using endoflife.date as the source. **Exit code always 0** — an outdated minimum is a decision waiting to be made, not an error; if this made CI fail, someone would bump the number just to get the build green. |
-| [`generate-baseline.js`](generate-baseline.js) | **out of** the source | Builds the baseline rules for the TEST Policies Platform. Manages the checkId numbering. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **out of** the source | Writes the folder structure IntuneBackupAndRestore expects — `IntuneTemplate/` with assignments, and each set additionally in its own folder without. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **out of** the source | Writes `BaselineTemplate/Baseline.json`: the CIPP baseline with its stages and packages. `--check` fails if it is out of date. |
 | [`generate-docs.js`](generate-docs.js) | **out of** the source | Generates `OVERZICHT.md`, the READMEs in `IntuneTemplate/` and, per policy, a markdown file with every setting it applies. `--check` fails if they are out of date. |
 | [`generate-compliance.js`](generate-compliance.js) | **out of** the source | Writes `COMPLIANCE.md`: for each ISO 27001, NIS2, CIS and NIST CSF item, which policies cover it, from `controls` in `_manifest.json` and the vocabulary in `_controls.json`. `--strict` fails on an unknown or deviating label, `--check` if the document is out of date. With `--ca` the Conditional Access side is counted too — see below. |
 
-All eleven scripts share [`lib/templates.js`](lib/templates.js): how the folder is laid out,
+All ten scripts share [`lib/templates.js`](lib/templates.js): how the folder is laid out,
 how to read it and where a new template belongs. Four scripts used to read that folder each in
 their own way; with subfolders that assumption would have silently given the wrong answer in
 four places.
@@ -80,11 +77,10 @@ Still to build: `Get-BaselinePolicyState.ps1`, the tenant-side counterpart of
 ```bash
 node scripts/set-packages.js       # first: update the CIPP package per template
 node scripts/check-scope.js        # then: fails on scope, folder, package or conflict problems
-node scripts/generate-baseline.js  # then: assign checkIds and write the baseline
 node scripts/export-intunebackup.js
 node scripts/generate-baseline-template.js
-node scripts/generate-docs.js      # then: reads the checkIds from the baseline
-node scripts/generate-compliance.js --strict --no-ca   # last: same, plus the phases
+node scripts/generate-docs.js
+node scripts/generate-compliance.js --strict --no-ca   # last
 ```
 
 That order is also in [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml),

@@ -12,7 +12,6 @@ Protège les données de l'entreprise dans les applications Microsoft sur un iPh
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | App Protection |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline BYOD — iOS App Protection |
 | Fichier | [`Baseline_IOS_U_App_Protection.json`](Baseline_IOS_U_App_Protection.json) |
 

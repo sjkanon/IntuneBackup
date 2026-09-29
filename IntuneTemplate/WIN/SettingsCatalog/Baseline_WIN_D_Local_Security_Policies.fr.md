@@ -12,7 +12,6 @@ Les options de sécurité locales de Windows : accès anonyme, niveau d'authenti
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-018-LocalPoliciesSecurityOptions` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies |
 | Fichier | [`Baseline_WIN_D_Local_Security_Policies.json`](Baseline_WIN_D_Local_Security_Policies.json) |
 

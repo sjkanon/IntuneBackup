@@ -12,7 +12,6 @@ Chiffre le disque du système d'exploitation et, via les paramètres personnalis
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-011-Bitlocker` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | Fichier | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 

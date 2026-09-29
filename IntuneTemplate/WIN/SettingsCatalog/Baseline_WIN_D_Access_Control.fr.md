@@ -12,7 +12,6 @@ Affiche avant la connexion un avertissement indiquant que le système est réser
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-123-DAccessControl` |
 | Source | ISO/IEC 27001:2022 A.5.15 et A.8.5, NIS2 art. 21(2)(i) — paramètres issus de CIS v4 Windows 11 L1 |
 | Fichier | [`Baseline_WIN_D_Access_Control.json`](Baseline_WIN_D_Access_Control.json) |
 

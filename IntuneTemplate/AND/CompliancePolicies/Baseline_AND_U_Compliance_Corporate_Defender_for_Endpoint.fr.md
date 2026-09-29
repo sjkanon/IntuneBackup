@@ -12,7 +12,6 @@ Marque un appareil Android fully managed ou corporate-owned comme non conforme l
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Corp-Devices - v1.5 ; comparé à IntuneAdmin Baseline - Android Enterprise - Microsoft Defender for Endpoint (niveau medium) |
 | Fichier | [`Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.json`](Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.json) |
 

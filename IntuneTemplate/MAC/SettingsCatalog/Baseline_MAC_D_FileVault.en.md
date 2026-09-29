@@ -12,7 +12,6 @@ Encrypts the Mac's disk and stores the recovery key in Intune. The macOS counter
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-038-MACDFileVault` |
 | Source | OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault |
 | File | [`Baseline_MAC_D_FileVault.json`](Baseline_MAC_D_FileVault.json) |
 

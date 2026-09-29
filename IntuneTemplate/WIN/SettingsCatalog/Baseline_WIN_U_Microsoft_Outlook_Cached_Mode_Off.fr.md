@@ -12,7 +12,6 @@ Met Outlook en mode Online et interdit la création d'un fichier OST, afin qu'au
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff` |
 | Source | baseline propre |
 | Fichier | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.json) |
 

@@ -12,7 +12,6 @@ Anneau de production pour les mises à jour Windows : installe quotidiennement �
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | All Devices |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | baseline propre — fenêtres d'installation propres au tenant |
 | Fichier | [`Baseline_WIN_D_Windows_Update_Ring_3_Production.json`](Baseline_WIN_D_Windows_Update_Ring_3_Production.json) |
 

@@ -14,13 +14,9 @@
  * COMPLIANCE.md — the justification against ISO 27001, NIS2, CIS and NIST CSF — comes from
  * generate-compliance.js; here each policy only carries the reference to it.
  *
- * Generated and not written by hand, for the same reason as baseline-v1.0.json: keeping nearly
+ * Generated and not written by hand: keeping nearly
  * a hundred policies with thousands of settings up to date goes wrong, and a table that is no
  * longer correct is worse than no table — because it still reads as if it were correct.
- *
- * Also reads baseline/intune/baseline-v1.0.json for the checkIds, so run generate-baseline.js
- * first. If that file is missing, the checkId column stays empty with a notice alongside
- * instead of silently.
  *
  * Usage: node scripts/generate-docs.js [--check] [--missend]
  *   --check    writes nothing and exits 1 if a README is out of date (for CI).
@@ -34,7 +30,6 @@ const { LANGS, variantPath, languageBar, Translator, reportMissing } = require("
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
-const BASELINE_PATH = path.join(REPO_ROOT, "baseline", "intune", "baseline-v1.0.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
@@ -69,22 +64,8 @@ const head = (fileName) => [generatedHeader(), "", languageBar(fileName, V.lang)
 
 /** Ankers in de handgeschreven documenten, per taal — die koppen zijn vertaald en dus hun ankers ook. */
 const ANCHOR = {
-  typesCheck: { nl: "welke-types-een-check-opleveren", en: "which-types-produce-a-check", fr: "quels-types-produisent-un-contrôle" },
   restore: { nl: "terugzetten-in-een-tenant", en: "restoring-into-a-tenant", fr: "restaurer-dans-un-tenant" },
-  planFase3: { nl: "fase-3--tenant-migratie", en: "phase-3--tenant-migration", fr: "phase-3--migration-du-tenant" },
 };
-
-/** checkId per templatebestand, uit het `source`-veld van de gegenereerde baseline. */
-function checkIdsByBaseName() {
-  if (!fs.existsSync(BASELINE_PATH)) return null;
-  const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"));
-  const map = new Map();
-  for (const rule of baseline.rules) {
-    const m = (rule.source || "").match(/IntuneTemplate\/(.+?)\.json/);
-    if (m) map.set(path.basename(m[1]), rule.checkId);
-  }
-  return map;
-}
 
 function assignmentLabel(assignments, displayName) {
   const list = assignments[displayName];
@@ -261,12 +242,12 @@ function isoControlsInFase1(templates, manifestByTarget) {
   return ids.size;
 }
 
-function policyTable(templates, { checkIds, assignments, manifestByTarget }) {
+function policyTable(templates, { assignments, manifestByTarget }) {
   const header = V.t({
-    nl: "| Policy | Wat het doet | Type | Instellingen | Toewijzing | checkId |",
-    en: "| Policy | What it does | Type | Settings | Assignment | checkId |",
-    fr: "| Policy | Ce qu'elle fait | Type | Paramètres | Affectation | checkId |",
-  }) + "\n|---|---|---|---:|---|---|";
+    nl: "| Policy | Wat het doet | Type | Instellingen | Toewijzing |",
+    en: "| Policy | What it does | Type | Settings | Assignment |",
+    fr: "| Policy | Ce qu'elle fait | Type | Paramètres | Affectation |",
+  }) + "\n|---|---|---|---:|---|";
 
   const rows = templates.map((t) => {
     const item = parseBaseName(t.baseName).item.replace(/_/g, " ");
@@ -278,7 +259,6 @@ function policyTable(templates, { checkIds, assignments, manifestByTarget }) {
       TYPE_LABEL[t.type] || t.type,
       settingCount(t),
       assignmentLabel(assignments, t.displayName),
-      checkIds ? (checkIds.get(t.baseName) ? `\`${checkIds.get(t.baseName)}\`` : "—") : "?",
     ];
     return `| ${cells.join(" | ")} |`;
   });
@@ -294,7 +274,6 @@ function policyDocument(template, ctx) {
   const { baseName, type, displayName, raw } = template;
   const parsed = parseBaseName(baseName);
   const entry = ctx.manifestByTarget.get(baseName) || {};
-  const checkId = ctx.checkIds ? ctx.checkIds.get(baseName) : null;
   const family = raw.templateReference && raw.templateReference.templateId ? raw.templateReference.templateFamily : null;
 
   const lines = [
@@ -313,15 +292,6 @@ function policyDocument(template, ctx) {
     } |`,
     `| Type | ${TYPE_LABEL[type] || type}${family ? ` (${family})` : ""} |`,
     `| ${V.t({ nl: "Toewijzing", en: "Assignment", fr: "Affectation" })} | ${assignmentLabel(ctx.assignments, displayName)} |`,
-    `| checkId | ${
-      checkId
-        ? `\`${checkId}\``
-        : V.t({
-            nl: "geen — de platform-engine heeft geen matcher voor dit policytype",
-            en: "none — the platform engine has no matcher for this policy type",
-            fr: "aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy",
-          })
-    } |`,
     `| ${V.t({ nl: "Bron", en: "Source", fr: "Source" })} | ${entry.bron ? V.d(entry.bron) : V.t({ nl: "eigen baseline", en: "own baseline", fr: "baseline propre" })} |`,
     `| ${V.t({ nl: "Bestand", en: "File", fr: "Fichier" })} | [\`${baseName}.json\`](${baseName}.json) |`,
     "",
@@ -471,25 +441,16 @@ function platformReadme(platform, templates, ctx) {
         "**Wat het doet** komt uit `doel` in [`_manifest.json`](../_manifest.json). Diezelfde zin",
         "staat in het Engels, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld",
         "van het template — en dus straks in de tenant naast de policy.",
-        "",
-        "Een lege **checkId** betekent dat de platform-engine geen matcher voor dat policytype heeft",
-        `(Device config, compliance, app protection) — zie de [hoofd-README](${V.link("../../README.md")}#${ANCHOR.typesCheck.nl}).`,
       ],
       en: [
         "**What it does** comes from `doel` in [`_manifest.json`](../_manifest.json) (translated). The same",
         "sentence sits, together with the assignment target and the origin, in the template's `Description`",
         "field — and so later in the tenant next to the policy.",
-        "",
-        "An empty **checkId** means the platform engine has no matcher for that policy type",
-        `(Device config, compliance, app protection) — see the [main README](${V.link("../../README.md")}#${ANCHOR.typesCheck.en}).`,
       ],
       fr: [
         "**Ce qu'elle fait** provient de `doel` dans [`_manifest.json`](../_manifest.json) (traduit). La même phrase,",
         "en anglais, figure avec la cible d'affectation et l'origine dans le champ `Description` du",
         "template — et donc plus tard dans le tenant, à côté de la policy.",
-        "",
-        "Un **checkId** vide signifie que le moteur de la plateforme n'a pas de correspondance pour ce type de policy",
-        `(Device config, conformité, protection d'application) — voir le [README principal](${V.link("../../README.md")}#${ANCHOR.typesCheck.fr}).`,
       ],
     }),
     ""
@@ -525,9 +486,9 @@ function overviewReadme(templates, ctx) {
     `# IntuneTemplate — ${policies(templates.length)}`,
     "",
     ...V.t({
-      nl: ["De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat", "in `baseline/` en `export/` staat is hieruit afgeleid en wordt gegenereerd."],
-      en: ["The source of this repo: the agreed Intune policies in CIPP template format. Everything", "in `baseline/` and `export/` is derived from it and generated."],
-      fr: ["La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui", "se trouve dans `baseline/` et `export/` en est dérivé et généré."],
+      nl: ["De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat", "in `export/` en `BaselineTemplate/` staat is hieruit afgeleid en wordt gegenereerd."],
+      en: ["The source of this repo: the agreed Intune policies in CIPP template format. Everything", "in `export/` and `BaselineTemplate/` is derived from it and generated."],
+      fr: ["La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui", "se trouve dans `export/` et `BaselineTemplate/` en est dérivé et généré."],
     }),
     "",
     `| Platform | ${types.map((t) => TYPE_LABEL[t]).join(" | ")} | ${total} |`,
@@ -728,7 +689,6 @@ function overviewDocument(templates, ctx) {
   const platforms = ["WIN", "MAC", "IOS", "AND"];
   const types = Object.keys(TYPE_LABEL);
   const perPlatform = (p) => templates.filter((t) => parseBaseName(t.baseName).platform === p);
-  const checks = ctx.checkIds ? new Set([...ctx.checkIds.values()]).size : 0;
   const unassigned = templates.filter((t) => !ctx.assignments[t.displayName]);
   // De pilottabel komt uit `fase` en `faseWaarom`. Tot september 2026 stond hij hier als vaste
   // tekst, en die liep uit de pas: negen van de tien policies erin stonden in fase 1 en rolden
@@ -780,7 +740,6 @@ function overviewDocument(templates, ctx) {
     `| | ${count} |`,
     "|---|---:|",
     `| Policies | ${templates.length} |`,
-    `| ${V.t({ nl: "Baseline-checks", en: "Baseline checks", fr: "Contrôles de baseline" })} | ${checks + 6} |`,
     `| ${V.t({ nl: "Zonder toewijzing (bewust)", en: "Without assignment (deliberately)", fr: "Sans affectation (volontairement)" })} | ${unassigned.length} |`,
     `| ${V.t({ nl: "Uitgerold in de tenant", en: "Deployed in the tenant", fr: "Déployées dans le tenant" })} | 0 |`,
     "",
@@ -820,23 +779,20 @@ function overviewDocument(templates, ctx) {
       ],
     }),
     "",
-    V.t({ nl: "## Eén bron, drie afgeleiden", en: "## One source, three derivatives", fr: "## Une source, trois dérivés" }),
+    V.t({ nl: "## Eén bron, twee afgeleiden", en: "## One source, two derivatives", fr: "## Une source, deux dérivés" }),
     "",
     "```mermaid",
     "flowchart LR",
     '  OIB["OpenIntuneBaseline"] -->|import-oib.js| T',
     V.t({ nl: '  T["<b>IntuneTemplate/</b><br/>de bron"]', en: '  T["<b>IntuneTemplate/</b><br/>the source"]', fr: '  T["<b>IntuneTemplate/</b><br/>la source"]' }),
-    '  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]',
     '  T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]',
     V.t({ nl: "  T -.->|leest rechtstreeks| CIPP[CIPP]", en: "  T -.->|reads directly| CIPP[CIPP]", fr: "  T -.->|lit directement| CIPP[CIPP]" }),
-    '  BL --> PLAT["TEST Policies Platform"]',
     V.t({
       nl: '  EX -->|Start-IntuneRestoreConfig| TENANT[("Intune-tenant")]',
       en: '  EX -->|Start-IntuneRestoreConfig| TENANT[("Intune tenant")]',
       fr: '  EX -->|Start-IntuneRestoreConfig| TENANT[("Tenant Intune")]',
     }),
     "  CIPP --> TENANT",
-    V.t({ nl: "  PLAT -.->|toetst| TENANT", en: "  PLAT -.->|verifies| TENANT", fr: "  PLAT -.->|vérifie| TENANT" }),
     "  style T stroke-width:3px",
     "```",
     "",
@@ -854,13 +810,12 @@ function overviewDocument(templates, ctx) {
         "",
         "| | Aantal | |",
         "|---|---:|---|",
-        "| Herschreven op OIB-inhoud | 15 | checkId behouden; Edge Security ging van 2 naar 54 instellingen, Defender Antivirus van 11 naar 28, Audit van 23 naar 40 |",
+        "| Herschreven op OIB-inhoud | 15 | Edge Security ging van 2 naar 54 instellingen, Defender Antivirus van 11 naar 28, Audit van 23 naar 40 |",
         "| Nieuw | 75 | o.a. Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 compliance-policies, 20 macOS-policies, 2 BYOD-MAM |",
         "| Opgegaan in een andere policy | 6 | Administrative Templates (300 instellingen) uit elkaar getrokken; Network Security, System Services, Windows Search en OneDrive KFM opgeslokt |",
         "| Ongewijzigd meegegaan | 5 | waar OIB geen tegenhanger voor heeft: EDR-onboarding, Outlook-autoconfiguratie, Edge-zoekmachine, update-ring 3, user experience |",
         "",
-        "Vijf checkId's zijn daarmee opgeheven (008, 017, 023, 025, 028) en worden niet opnieuw",
-        "uitgedeeld. Instellingen die alleen wij hadden — versleuteling van vaste en verwisselbare",
+        "Instellingen die alleen wij hadden — versleuteling van vaste en verwisselbare",
         "schijven bijvoorbeeld — zijn bij een herschrijving behouden in plaats van stilzwijgend",
         "weggevallen.",
         "",
@@ -898,7 +853,7 @@ function overviewDocument(templates, ctx) {
         "| | |",
         "|---|---|",
         "| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | twee ADE-inschrijfprofielen die in precies één instelling verschillen: wordt het aangemelde account beheerder of standaardgebruiker. Alternatieven van elkaar, dus geen van beide toegewezen. |",
-        "| `MAC - D - Software Updates` | van de klassieke `com.apple.softwareupdate`-payload naar declaratief updatebeleid (DDM, macOS 14+): uitstel van 7 dagen voor kleine, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien. checkId 047 blijft. |",
+        "| `MAC - D - Software Updates` | van de klassieke `com.apple.softwareupdate`-payload naar declaratief updatebeleid (DDM, macOS 14+): uitstel van 7 dagen voor kleine, 14 voor grote en 21 voor systeemupdates, Rapid Security Responses aan inclusief terugdraaien. |",
         "| `MAC - D - Defender for Endpoint` | de organisatienaam van het inhoudsfilter stond op *JAMF Software* — een restant uit de Jamf-profielen waar de MDE-documentatie op leunt. Die naam ziet de gebruiker in Systeeminstellingen → Netwerk → Filters. |",
         "| `MAC - U - Compliance Device Health` en `Device Security` | droegen elkaars omschrijving. Device Health toetst System Integrity Protection; Device Security toetst de versleuteling, de firewall en Gatekeeper. |",
         "",
@@ -923,10 +878,6 @@ function overviewDocument(templates, ctx) {
         "| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |",
         "| 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |",
         "",
-        "> **De baseline-check is hier geen vangnet.** De checks vergelijken op inhoud, niet op naam.",
-        "> Een achtergebleven policy onder de óude naam houdt zijn check dus groen, ook als de nieuwe",
-        "> nooit is aangemaakt of nergens is toegewezen.",
-        "",
         "## Eerst in een pilot",
         "",
         "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `Baseline-Pilot` uit naar",
@@ -942,13 +893,12 @@ function overviewDocument(templates, ctx) {
         "",
         "| | Count | |",
         "|---|---:|---|",
-        "| Rewritten on OIB content | 15 | checkId kept; Edge Security went from 2 to 54 settings, Defender Antivirus from 11 to 28, Audit from 23 to 40 |",
+        "| Rewritten on OIB content | 15 | Edge Security went from 2 to 54 settings, Defender Antivirus from 11 to 28, Audit from 23 to 40 |",
         "| New | 75 | including Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 compliance policies, 20 macOS policies, 2 BYOD MAM |",
         "| Merged into another policy | 6 | Administrative Templates (300 settings) split up; Network Security, System Services, Windows Search and OneDrive KFM absorbed |",
         "| Carried over unchanged | 5 | where OIB has no counterpart: EDR onboarding, Outlook autoconfiguration, Edge search engine, update ring 3, user experience |",
         "",
-        "Five checkIds were retired as a result (008, 017, 023, 025, 028) and will not be issued",
-        "again. Settings that only we had — encryption of fixed and removable drives,",
+        "Settings that only we had — encryption of fixed and removable drives,",
         "for example — were kept during a rewrite instead of silently",
         "disappearing.",
         "",
@@ -986,7 +936,7 @@ function overviewDocument(templates, ctx) {
         "| | |",
         "|---|---|",
         "| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | two ADE enrolment profiles that differ in exactly one setting: whether the signed-in account becomes administrator or standard user. Alternatives to each other, so neither is assigned. |",
-        "| `MAC - D - Software Updates` | from the classic `com.apple.softwareupdate` payload to declarative update management (DDM, macOS 14+): deferral of 7 days for minor, 14 for major and 21 for system updates, Rapid Security Responses on including rollback. checkId 047 stays. |",
+        "| `MAC - D - Software Updates` | from the classic `com.apple.softwareupdate` payload to declarative update management (DDM, macOS 14+): deferral of 7 days for minor, 14 for major and 21 for system updates, Rapid Security Responses on including rollback. |",
         "| `MAC - D - Defender for Endpoint` | the organisation name of the content filter was set to *JAMF Software* — a leftover from the Jamf profiles the MDE documentation relies on. The user sees that name in System Settings → Network → Filters. |",
         "| `MAC - U - Compliance Device Health` and `Device Security` | carried each other's description. Device Health checks System Integrity Protection; Device Security checks encryption, the firewall and Gatekeeper. |",
         "",
@@ -1011,10 +961,6 @@ function overviewDocument(templates, ctx) {
         "| 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SEC-Baseline-Pilot'` |",
         "| 7 | Inventory again | the list of orphaned policies must be empty |",
         "",
-        "> **The baseline check is not a safety net here.** The checks compare on content, not on name.",
-        "> A leftover policy under the *old* name therefore keeps its check green, even if the new one",
-        "> was never created or is not assigned anywhere.",
-        "",
         "## Pilot first",
         "",
         "Phase 2 in `_manifest.json`. These policies are deployed via the package `Baseline-Pilot` to",
@@ -1030,12 +976,11 @@ function overviewDocument(templates, ctx) {
         "",
         "| | Nombre | |",
         "|---|---:|---|",
-        "| Réécrites sur le contenu OIB | 15 | checkId conservé ; Edge Security est passé de 2 à 54 paramètres, Defender Antivirus de 11 à 28, Audit de 23 à 40 |",
+        "| Réécrites sur le contenu OIB | 15 | Edge Security est passé de 2 à 54 paramètres, Defender Antivirus de 11 à 28, Audit de 23 à 40 |",
         "| Nouvelles | 75 | notamment Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 policies de conformité, 20 policies macOS, 2 BYOD MAM |",
         "| Fusionnées dans une autre policy | 6 | Administrative Templates (300 paramètres) éclaté ; Network Security, System Services, Windows Search et OneDrive KFM absorbés |",
         "| Reprises sans changement | 5 | là où OIB n'a pas d'équivalent : onboarding EDR, configuration automatique d'Outlook, moteur de recherche Edge, anneau de mise à jour 3, expérience utilisateur |",
         "",
-        "Cinq checkId ont ainsi été supprimés (008, 017, 023, 025, 028) et ne seront pas réattribués.",
         "Les paramètres que nous étions seuls à avoir — le chiffrement des disques fixes et amovibles,",
         "par exemple — ont été conservés lors d'une réécriture au lieu de disparaître",
         "silencieusement.",
@@ -1074,7 +1019,7 @@ function overviewDocument(templates, ctx) {
         "| | |",
         "|---|---|",
         "| `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | deux profils d'inscription ADE qui diffèrent d'un seul paramètre : le compte connecté devient-il administrateur ou utilisateur standard. Alternatives l'un de l'autre, donc aucun n'est affecté. |",
-        "| `MAC - D - Software Updates` | du payload classique `com.apple.softwareupdate` à la gestion déclarative des mises à jour (DDM, macOS 14+) : report de 7 jours pour les mises à jour mineures, 14 pour les majeures et 21 pour les mises à jour système, Rapid Security Responses activées avec retour arrière. Le checkId 047 est conservé. |",
+        "| `MAC - D - Software Updates` | du payload classique `com.apple.softwareupdate` à la gestion déclarative des mises à jour (DDM, macOS 14+) : report de 7 jours pour les mises à jour mineures, 14 pour les majeures et 21 pour les mises à jour système, Rapid Security Responses activées avec retour arrière. |",
         "| `MAC - D - Defender for Endpoint` | le nom d'organisation du filtre de contenu était *JAMF Software* — un reste des profils Jamf sur lesquels s'appuie la documentation MDE. L'utilisateur voit ce nom dans Réglages Système → Réseau → Filtres. |",
         "| `MAC - U - Compliance Device Health` et `Device Security` | portaient la description l'une de l'autre. Device Health vérifie System Integrity Protection ; Device Security vérifie le chiffrement, le pare-feu et Gatekeeper. |",
         "",
@@ -1098,10 +1043,6 @@ function overviewDocument(templates, ctx) {
         "| 5 | Déployer | les nouvelles policies via CIPP ou `Start-IntuneRestoreConfig` |",
         "| 6 | Affecter | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` et `-Scope U -AllUsers` ne prennent que la phase 1 ; le pilote suit avec `-GroupName 'SEC-Baseline-Pilot'` |",
         "| 7 | Inventorier à nouveau | la liste des policies orphelines doit être vide |",
-        "",
-        "> **Le contrôle de baseline n'est pas un filet de sécurité ici.** Les contrôles comparent le contenu, pas le nom.",
-        "> Une policy restée sous l'*ancien* nom garde donc son contrôle au vert, même si la nouvelle",
-        "> n'a jamais été créée ou n'est affectée nulle part.",
         "",
         "## D'abord en pilote",
         "",
@@ -1154,208 +1095,19 @@ function overviewDocument(templates, ctx) {
   ].join("\n");
 }
 
-/**
- * baseline/README.md. Die stond er al met "Gegenereerd — niet met de hand bijwerken" boven,
- * maar er genereerde niets hem: de tekst noemde 88 regels terwijl het bestand er 127 had. Dat
- * is precies het soort stille afwijking waar de rest van deze repo zich tegen wapent, dus hij
- * wordt nu wel gegenereerd — uit baseline-v1.0.json zelf en niet uit IntuneTemplate/, want het
- * gaat om wat er in dat bestand is beland.
- */
-function baselineReadme() {
-  if (!fs.existsSync(BASELINE_PATH)) return null;
-  const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"));
-  const rules = baseline.rules || [];
-  const uitPlatform = rules.filter((r) => !/IntuneTemplate/.test(r.source || ""));
-  const gegenereerd = rules.length - uitPlatform.length;
-  const hoog = rules.filter((r) => r.severity === "high").length;
-
-  const perType = {};
-  for (const r of rules) perType[r.type] = (perType[r.type] || 0) + 1;
-  const perPlatform = {};
-  for (const r of rules) {
-    const m = (r.source || "").match(/Baseline_(WIN|MAC|IOS|AND)_/);
-    if (m) perPlatform[m[1]] = (perPlatform[m[1]] || 0) + 1;
-  }
-
-  // De typen die het platform zelf meebrengt (checkId 001-006) staan op één regel: die komen
-  // niet uit IntuneTemplate/ en zijn los niet interessant.
-  const platformTypes = [...new Set(uitPlatform.map((r) => r.type))];
-  const bron = {
-    "settings-catalog-match": V.t({ nl: "elke Settings Catalog-policy, Windows én macOS", en: "every Settings Catalog policy, Windows and macOS", fr: "chaque policy Settings Catalog, Windows et macOS" }),
-    "group-policy-definition-match": V.t({ nl: "de enige overgebleven ADMX-policy", en: "the only remaining ADMX policy", fr: "la seule policy ADMX restante" }),
-  };
-  const typeRijen = Object.entries(perType)
-    .filter(([t]) => !platformTypes.includes(t))
-    .sort((a, b) => b[1] - a[1])
-    .map(([t, n]) => "| `" + t + "` | " + n + " | " + (bron[t] || "—") + " |");
-  typeRijen.push(
-    "| " + platformTypes.map((t) => "`" + t + "`").join(", ") + " | " + uitPlatform.length + " | " +
-      V.t({ nl: "overgenomen uit het platform (001–006)", en: "taken over from the platform (001–006)", fr: "repris de la plateforme (001–006)" }) + " |"
-  );
-
-  const platformRegel = Object.entries(perPlatform).sort((a, b) => b[1] - a[1]).map(([p, n]) => PLATFORMS[p].label + " " + n).join(", ");
-
-  return [
-    ...head("README.md"),
-    "# baseline/",
-    "",
-    ...V.t({
-      nl: [
-        "**Gegenereerd — niet met de hand bijwerken.** `intune/baseline-v1.0.json` is de bron voor de",
-        "`intune`-categorie in de baseline-koppeling van het TEST Policies Platform (Instellingen →",
-        "Baseline-koppelingen). Wijzig je hier iets, dan is het bij de volgende",
-        "`node scripts/generate-baseline.js` weer weg — pas `IntuneTemplate/` aan.",
-      ],
-      en: [
-        "**Generated — do not edit by hand.** `intune/baseline-v1.0.json` is the source for the",
-        "`intune` category in the baseline link of the TEST Policies Platform (Settings →",
-        "Baseline links). Anything you change here is gone again at the next",
-        "`node scripts/generate-baseline.js` — change `IntuneTemplate/` instead.",
-      ],
-      fr: [
-        "**Généré — ne pas modifier à la main.** `intune/baseline-v1.0.json` est la source de la",
-        "catégorie `intune` dans le lien de baseline de la TEST Policies Platform (Paramètres →",
-        "Liens de baseline). Toute modification faite ici disparaît au prochain",
-        "`node scripts/generate-baseline.js` — modifiez plutôt `IntuneTemplate/`.",
-      ],
-    }),
-    "",
-    "```mermaid",
-    "flowchart LR",
-    '  T["IntuneTemplate/"] -->|generate-baseline.js| B["baseline/intune/baseline-v1.0.json<br/>' + rules.length + ' rules"]',
-    '  B --> P["TEST Policies Platform"]',
-    V.t({
-      nl: '  P -->|vergelijkt op inhoud| TEN["live tenant"]',
-      en: '  P -->|compares on content| TEN["live tenant"]',
-      fr: '  P -->|compare le contenu| TEN["tenant réel"]',
-    }),
-    "```",
-    "",
-    V.t({ nl: "## Wat erin zit", en: "## What is in it", fr: "## Contenu" }),
-    "",
-    ...V.t({
-      nl: [
-        rules.length + " regels: " + uitPlatform.length + " die uit het platform zelf komen (checkId 001–006, device-compliance- en",
-        "app-protection-checks) plus " + gegenereerd + " gegenereerd uit `IntuneTemplate/`. Daarvan " + hoog + " met severity",
-        "`high`, de rest `medium`.",
-      ],
-      en: [
-        rules.length + " rules: " + uitPlatform.length + " that come from the platform itself (checkId 001–006, device compliance and",
-        "app protection checks) plus " + gegenereerd + " generated from `IntuneTemplate/`. Of these, " + hoog + " have severity",
-        "`high`, the rest `medium`.",
-      ],
-      fr: [
-        rules.length + " règles : " + uitPlatform.length + " qui proviennent de la plateforme elle-même (checkId 001–006, contrôles de conformité des appareils et",
-        "de protection des applications) plus " + gegenereerd + " générées à partir de `IntuneTemplate/`. Parmi elles, " + hoog + " ont la sévérité",
-        "`high`, les autres `medium`.",
-      ],
-    }),
-    "",
-    V.t({ nl: "| `type` | Aantal | Uit |", en: "| `type` | Count | From |", fr: "| `type` | Nombre | Provenance |" }),
-    "|---|---:|---|",
-    ...typeRijen,
-    "",
-    V.t({ nl: "Per platform: ", en: "Per platform: ", fr: "Par plateforme : " }) + platformRegel + ".",
-    "",
-    ...V.t({
-      nl: [
-        "Niet elk policytype levert een check op. `Device`, `deviceCompliancePolicies` en",
-        "`AppProtection` hebben geen matcher in de engine; een regel met een onbekend type is een check",
-        "die stilzwijgend niets test. Voor compliance en app protection dekken 001–006 het generiek af.",
-        "",
-        "Instellingen met een CIPP-token als waarde (`%OrganizationId%` en verwanten) blijven bewust",
-        "buiten de checks: CIPP vult die bij uitrol per tenant in, dus in de tenant staat de GUID en",
-        "niet het token. Een check die het token als verwachte waarde meeneemt is per definitie rood.",
-        "",
-        "## Twee dingen om te weten bij het lezen van een finding",
-        "",
-        "**De checks matchen op inhoud, niet op naam.** Een policy die de klant anders genoemd heeft",
-        "telt gewoon mee — dat is bewust. Keerzijde: een achtergebleven policy onder een óude naam",
-        "houdt zijn check groen, ook als de nieuwe nooit is aangemaakt. De baseline is daarom geen",
-        `vangnet voor een naamsmigratie; zie [PLAN.md](${V.link("../PLAN.md")}#${ANCHOR.planFase3.nl}).`,
-        "",
-        "**checkId's zijn externe identifiers.** Het platform, findings en uitzonderingen verwijzen",
-        "ernaar, dus ze veranderen niet als een bestand hernoemd wordt. Zes nummers zijn opgeheven",
-        "(008, 017, 023, 025, 028 en 144) en worden niet opnieuw uitgedeeld — zie",
-        "`RETIRED_CHECK_NUMBERS` in [`scripts/generate-baseline.js`](../scripts/generate-baseline.js).",
-        "",
-        "---",
-        "",
-        `Terug naar de [hoofd-README](${V.link("../README.md")}).`,
-      ],
-      en: [
-        "Not every policy type produces a check. `Device`, `deviceCompliancePolicies` and",
-        "`AppProtection` have no matcher in the engine; a rule with an unknown type is a check",
-        "that silently tests nothing. For compliance and app protection, 001–006 cover it generically.",
-        "",
-        "Settings with a CIPP token as value (`%OrganizationId%` and relatives) deliberately stay",
-        "out of the checks: CIPP fills them in per tenant at deployment, so the tenant holds the GUID and",
-        "not the token. A check that takes the token as the expected value is red by definition.",
-        "",
-        "## Two things to know when reading a finding",
-        "",
-        "**The checks match on content, not on name.** A policy the customer has named differently",
-        "simply counts — that is deliberate. The flip side: a leftover policy under an *old* name",
-        "keeps its check green, even if the new one was never created. The baseline is therefore no",
-        `safety net for a name migration; see [PLAN.en.md](${V.link("../PLAN.md")}#${ANCHOR.planFase3.en}).`,
-        "",
-        "**checkIds are external identifiers.** The platform, findings and exceptions refer",
-        "to them, so they do not change when a file is renamed. Six numbers have been retired",
-        "(008, 017, 023, 025, 028 and 144) and will not be issued again — see",
-        "`RETIRED_CHECK_NUMBERS` in [`scripts/generate-baseline.js`](../scripts/generate-baseline.js).",
-        "",
-        "---",
-        "",
-        `Back to the [main README](${V.link("../README.md")}).`,
-      ],
-      fr: [
-        "Tous les types de policy ne produisent pas un contrôle. `Device`, `deviceCompliancePolicies` et",
-        "`AppProtection` n'ont pas de correspondance dans le moteur ; une règle avec un type inconnu est un contrôle",
-        "qui ne teste silencieusement rien. Pour la conformité et la protection des applications, 001–006 couvrent le sujet de façon générique.",
-        "",
-        "Les paramètres dont la valeur est un jeton CIPP (`%OrganizationId%` et apparentés) restent volontairement",
-        "hors des contrôles : CIPP les renseigne par tenant au déploiement, le tenant contient donc le GUID et",
-        "non le jeton. Un contrôle qui prend le jeton comme valeur attendue est rouge par définition.",
-        "",
-        "## Deux choses à savoir en lisant un constat",
-        "",
-        "**Les contrôles portent sur le contenu, pas sur le nom.** Une policy que le client a nommée autrement",
-        "compte quand même — c'est voulu. Revers de la médaille : une policy restée sous un *ancien* nom",
-        "garde son contrôle au vert, même si la nouvelle n'a jamais été créée. La baseline n'est donc pas un",
-        `filet de sécurité pour une migration de noms ; voir [PLAN.fr.md](${V.link("../PLAN.md")}#${ANCHOR.planFase3.fr}).`,
-        "",
-        "**Les checkId sont des identifiants externes.** La plateforme, les constats et les exceptions y",
-        "font référence, ils ne changent donc pas quand un fichier est renommé. Six numéros ont été supprimés",
-        "(008, 017, 023, 025, 028 et 144) et ne seront pas réattribués — voir",
-        "`RETIRED_CHECK_NUMBERS` dans [`scripts/generate-baseline.js`](../scripts/generate-baseline.js).",
-        "",
-        "---",
-        "",
-        `Retour au [README principal](${V.link("../README.md")}).`,
-      ],
-    }),
-    "",
-  ].join("\n");
-}
-
 function main() {
   const checkOnly = process.argv.includes("--check");
   const dumpMissing = process.argv.includes("--missend");
   const quiet = dumpMissing;
   const log = (...a) => (quiet ? null : console.log(...a));
   const templates = readTemplates(TEMPLATE_DIR);
-  const checkIds = checkIdsByBaseName();
   const assignments = fs.existsSync(ASSIGNMENTS_PATH) ? JSON.parse(fs.readFileSync(ASSIGNMENTS_PATH, "utf8")) : {};
   const manifest = fs.existsSync(MANIFEST_PATH) ? JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8")) : { policies: [] };
   const manifestByTarget = new Map(manifest.policies.map((p) => [p.target, p]));
   const vocab = fs.existsSync(CONTROLS_PATH) ? JSON.parse(fs.readFileSync(CONTROLS_PATH, "utf8")) : { iso27001: { controls: [] } };
   const isoById = new Map(vocab.iso27001.controls.map((c) => [c.id, c]));
 
-  if (!checkIds) {
-    console.warn(`Let op: ${path.relative(REPO_ROOT, BASELINE_PATH)} bestaat niet — de checkId-kolom blijft leeg. Draai eerst generate-baseline.js.`);
-  }
-
-  const ctx = { checkIds, assignments, manifestByTarget, manifest, isoById };
+  const ctx = { assignments, manifestByTarget, manifest, isoById };
   const files = [];
   const translators = [];
 
@@ -1366,9 +1118,6 @@ function main() {
 
     add(path.join(REPO_ROOT, "OVERZICHT.md"), overviewDocument(templates, ctx));
     add(path.join(TEMPLATE_DIR, "README.md"), overviewReadme(templates, ctx));
-
-    const baselineDoc = baselineReadme();
-    if (baselineDoc) add(path.join(REPO_ROOT, "baseline", "README.md"), baselineDoc);
 
     for (const platform of Object.keys(PLATFORMS)) {
       const list = templates.filter((t) => parseBaseName(t.baseName).platform === platform);

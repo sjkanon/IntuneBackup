@@ -12,7 +12,6 @@ Blocks GitHub Copilot on personal accounts in Visual Studio; the business licenc
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-125-DAITooling` |
 | Source | ISO/IEC 27001:2022 A.5.10 and A.8.1 — setting from IntuneAdmin's Visual Studio benchmark |
 | File | [`Baseline_WIN_D_AI_Tooling.json`](Baseline_WIN_D_AI_Tooling.json) |
 

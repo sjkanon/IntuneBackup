@@ -12,7 +12,6 @@ After a restart for updates, automatically signs the user back in, locked, so th
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-056-DAutomaticRestartSignOn` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Automatic Restart Sign-On |
 | File | [`Baseline_WIN_D_Automatic_Restart_Sign_On.json`](Baseline_WIN_D_Automatic_Restart_Sign_On.json) |
 

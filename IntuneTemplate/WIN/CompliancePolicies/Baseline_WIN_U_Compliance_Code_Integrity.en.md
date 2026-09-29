@@ -12,7 +12,6 @@ Checks whether code integrity is on, so that Windows only loads signed drivers a
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity |
 | File | [`Baseline_WIN_U_Compliance_Code_Integrity.json`](Baseline_WIN_U_Compliance_Code_Integrity.json) |
 

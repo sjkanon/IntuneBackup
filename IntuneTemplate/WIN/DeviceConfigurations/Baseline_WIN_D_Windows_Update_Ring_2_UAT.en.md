@@ -12,7 +12,6 @@ Second update ring: gets Windows updates after the pilot and before production.
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT |
 | File | [`Baseline_WIN_D_Windows_Update_Ring_2_UAT.json`](Baseline_WIN_D_Windows_Update_Ring_2_UAT.json) |
 

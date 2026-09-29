@@ -12,7 +12,6 @@ Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeepe
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security |
 | Bestand | [`Baseline_MAC_U_Compliance_Device_Security.json`](Baseline_MAC_U_Compliance_Device_Security.json) |
 

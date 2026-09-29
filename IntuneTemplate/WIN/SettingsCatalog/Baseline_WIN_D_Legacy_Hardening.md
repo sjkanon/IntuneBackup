@@ -12,7 +12,6 @@ De hardeningsinstellingen uit de oude Administrative Templates-policy waar OpenI
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-070-DLegacyHardening` |
 | Bron | Eigen hardening-instellingen zonder tegenhanger in OpenIntuneBaseline |
 | Bestand | [`Baseline_WIN_D_Legacy_Hardening.json`](Baseline_WIN_D_Legacy_Hardening.json) |
 

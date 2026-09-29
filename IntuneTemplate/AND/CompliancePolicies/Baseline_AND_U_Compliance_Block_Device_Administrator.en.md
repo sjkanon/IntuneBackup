@@ -12,7 +12,6 @@ Marks every Android device still managed with the legacy device administrator as
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | Intune compliance for Android device administrator (`securityBlockDeviceAdministratorManagedDevices`); recommendation from UniFy Android Enterprise Baseline v1.5.1, guide 9 (Enrollment Restrictions) |
 | File | [`Baseline_AND_U_Compliance_Block_Device_Administrator.json`](Baseline_AND_U_Compliance_Block_Device_Administrator.json) |
 

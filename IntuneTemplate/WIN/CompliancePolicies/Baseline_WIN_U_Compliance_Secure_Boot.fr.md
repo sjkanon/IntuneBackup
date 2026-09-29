@@ -12,7 +12,6 @@ Vérifie que l'appareil démarre avec Secure Boot, afin qu'un bootkit ne puisse 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot |
 | Fichier | [`Baseline_WIN_U_Compliance_Secure_Boot.json`](Baseline_WIN_U_Compliance_Secure_Boot.json) |
 

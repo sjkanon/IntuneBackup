@@ -4,20 +4,19 @@
 
 Doel: de baseline uitbreiden en actueel houden op basis van
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), met een
-expliciete platform- en device/user-scheiding, zonder bestaande checkId's onnodig te breken —
-en met een aparte tenant-laag (ScubaGear / Maester) als sluitstuk.
+expliciete platform- en device/user-scheiding — en met een aparte tenant-laag (ScubaGear / Maester) als sluitstuk.
 
 Status: **fase 1, 2, 4, 5, 6 en 7 zijn uitgevoerd** (repo). Fase 3 (de tenant) en fase 8 staan
 nog open. De tenant is nog niet aangeraakt.
 
 | Fase | Wat | Risico | Status |
 |---|---|---|---|
-| 1 | Scriptwijzigingen (`CHECK_ID_SLUGS`, `check-scope.js`, `-Scope`, harde assignment-check) | laag | ✅ |
+| 1 | Scriptwijzigingen (`check-scope.js`, `-Scope`, harde assignment-check) | laag | ✅ |
 | 2 | D/U-hernoeming + 2 splitsingen in `IntuneTemplate/` | laag in de repo | ✅ |
 | 4 | Compliance-policies (pijplijnwerk + 7 policies) | midden | ✅ |
 | 5 | Hardening-gaten dichten uit OIB | midden | ✅ |
 | 6 | Update-ringen | laag | ✅ |
-| 7 | Administrative Templates thematisch opsplitsen | midden — breekt checkId 008 | ✅ |
+| 7 | Administrative Templates thematisch opsplitsen | midden | ✅ |
 | — | macOS, BYOD en de platform-as in de naamgeving | midden | ✅ |
 | 3 | **Tenant-migratie** via `Rename-BaselinePolicy.ps1` | **hoog** — eerst `-WhatIf`, eerst in een pilot-tenant | open |
 | 8 | Tenant-laag ScubaGear/Maester | apart traject | open |
@@ -34,14 +33,12 @@ plaats van twee keer achter elkaar hernoemd worden.
 een nieuwe OIB-versie binnenhaalt.
 
 **Fase 1 en 2** (eerder): device/user-scheiding, hernoeming naar `[Baseline] - D/U - Item`,
-`check-scope.js` als blokkerende CI-stap, `CHECK_ID_SLUGS` om checkId's een hernoeming te
-laten overleven.
+`check-scope.js` als blokkerende CI-stap.
 
 **Fase 4 — compliance.** Er waren er nul. Zonder compliance-policy is "vereis een compliant
 apparaat" in Conditional Access betekenisloos. Er zijn er nu 7 (4 Windows, 3 macOS), met een
 nieuw CIPP-`Type` `deviceCompliancePolicies` en de map `Device Compliance Policies` in de
-export. Ze leveren geen eigen check op — de platform-engine heeft er geen matcher voor en de
-generieke checks 001–006 dekken het af.
+export.
 
 **Fase 5 — hardening.** De hele OIB-Windows-set is overgenomen: Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D en U),
@@ -59,8 +56,6 @@ Driver update profiles blijven buiten scope: IntuneBackupAndRestore 4.0.1 onders
 in Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) en wat kleinere. De 15 instellingen zonder OIB-tegenhanger staan in
 `WIN - D - Legacy Hardening`, los gehouden zodat een OIB-upgrade ze niet meesleept of weggooit.
-Kosten, zoals voorzien: checkId `008-AdministrativeTemplates` is opgeheven. Vier andere
-checkId's zijn dat ook (017, 023, 025, 028) — zie de README.
 
 **Platform-as.** Alle policies heten nu `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` en
 staan in `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 policies) en BYOD app protection
@@ -106,8 +101,8 @@ fase 1 staat. Die volgt apart met `-GroupName 'SEC-Baseline-Pilot'` — de lijst
 ### Wat als er nog policies met de oude naam in de tenant staan
 
 Dat scenario is niet theoretisch: een rename die halverwege stopt, een policy die iemand
-eerder handmatig hernoemde, een tweede tenant waar CIPP nog onder de oude naam uitrolde. Drie
-manieren waarop dat misgaat, van vervelend naar gevaarlijk:
+eerder handmatig hernoemde, een tweede tenant waar CIPP nog onder de oude naam uitrolde. Twee
+manieren waarop dat misgaat:
 
 **1. Conflicterende instellingen.** Twee Settings Catalog-policies die dezelfde
 `settingDefinitionId` met een verschillende waarde zetten leveren een *Conflict* op — de
@@ -118,17 +113,6 @@ achterblijft.
 **2. Stille assignment-drift.** `Set-BaselineAssignment.ps1 -Scope D` filtert op de naam. Een
 policy die de conventie niet volgt valt buiten élk filter en behoudt dus gewoon zijn oude All
 Devices-toewijzing. Het script waarschuwt daarover — negeer die waarschuwing niet.
-
-**3. Een groene check op de verkeerde policy.** Dit is de gevaarlijkste. De
-`settings-catalog-match`-regels matchen **op inhoud, niet op naam**. Een achtergebleven
-`[Baseline] Bitlocker` bevat nog steeds de settings van `INTUNE-BASE-011-Bitlocker`, dus die
-check blijft groen — ook als `[Baseline] - WIN - D - BitLocker` nooit is aangemaakt, of leeg
-is, of nergens is toegewezen. Het platform meldt dan niets terwijl de baseline feitelijk niet
-meer landt.
-
-Die naam-onafhankelijkheid is bewust en op zichzelf juist (een klant mag zijn policies anders
-noemen), maar het betekent dat de baseline-check **geen** vangnet is voor deze migratie. Dat
-vangnet moet apart.
 
 ### Nog te bouwen: `scripts/Get-BaselinePolicyState.ps1`
 
@@ -155,16 +139,8 @@ Teams en Power Platform. Maester bundelt EIDSCA, CISA SCuBA, CIS Microsoft 365 F
 ORCA, en heeft daarnaast een handvol Intune-checks (LAPS, ASR, App Control for Business,
 Managed Installer).
 
-Aanpak:
-
-- **Aparte baseline, niet mengen.** `baseline/tenant/baseline-v1.0.json` naast
-  `baseline/intune/baseline-v1.0.json`. De matchers verschillen fundamenteel (Graph device
-  management vs. Entra/Exchange/Teams-API's); één bestand met twee werelden erin levert checks
-  op die stil niets testen — dezelfde valkuil als `Type: "Device"` vandaag.
-- **Eigen checkId-reeks**, bv. `TENANT-BASE-001-...`, zodat de nummerruimte van
-  `INTUNE-BASE-*` ongemoeid blijft.
-- Volgorde: eerst ScubaGear draaien voor een nulmeting, dan Maester inrichten als de
-  doorlopende controle, dan pas de bevindingen omzetten naar baseline-regels.
+Aanpak: eerst ScubaGear draaien voor een nulmeting, dan Maester inrichten als de doorlopende
+controle.
 
 De vier Intune-checks van Maester overlappen met deze repo. Die zijn de natuurlijke koppeling
 tussen beide lagen — begin daar.

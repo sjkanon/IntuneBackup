@@ -12,7 +12,6 @@ Staat de generatieve AI-functies in Paint en in de Windows-instellingen uitdrukk
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, waarden ongewijzigd overgenomen |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Features_Permitted.json`](Baseline_WIN_D_Windows_AI_Features_Permitted.json) |
 

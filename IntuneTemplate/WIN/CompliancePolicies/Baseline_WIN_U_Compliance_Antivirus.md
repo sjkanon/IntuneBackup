@@ -12,7 +12,6 @@ Toetst of er een actieve antivirusoplossing in Windows-beveiliging geregistreerd
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antivirus |
 | Bestand | [`Baseline_WIN_U_Compliance_Antivirus.json`](Baseline_WIN_U_Compliance_Antivirus.json) |
 

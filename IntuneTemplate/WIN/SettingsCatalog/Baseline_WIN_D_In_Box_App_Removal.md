@@ -12,7 +12,6 @@ Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapp
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-068-DInBoxAppRemoval` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Apps - D - In-Box App Removal |
 | Bestand | [`Baseline_WIN_D_In_Box_App_Removal.json`](Baseline_WIN_D_In_Box_App_Removal.json) |
 

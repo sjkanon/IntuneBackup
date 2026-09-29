@@ -117,13 +117,6 @@ display name (see `Get-CIPPTextReplacement` in CIPP-API; the replacement is case
 The OneDrive policies in this baseline already use that construct for their tenant list and for
 Known Folder Move, so the Teams policy now does the same.
 
-That exposed an existing bug. Until now the baseline check took those tokens as the
-expected value, while the tenant contains the filled-in GUID. Five checks were therefore
-permanently red — not because the tenant deviated, but because the baseline compared something that is never
-stored that way. Such a check is worse than no check: it demands attention every round and teaches everyone to
-ignore red. `generate-baseline.js` now skips those settings, with a message per
-case, just as it already skipped the EDR onboarding token.
-
 **Watch out with the other deployment route:** CIPP does that replacement, `Start-IntuneRestoreConfig` does not.
 Anyone deploying via IntuneBackupAndRestore keeps `%OrganizationId%` literally in the policy and has to
 fill in the id by hand.
@@ -139,26 +132,20 @@ nothing is configured any more. `check-scope.js` guards that.
 
 | Pair | Restricted | Permitted |
 |---|---|---|
-| `WIN - D - Windows AI` (112) | Recall not available, no screenshots, Click To Do off | all three allowed, set explicitly |
-| `WIN - D - Windows AI Features` (147 / 146) | Cocreator, Image Creator, Generative Fill and Settings Agent off | the same four on |
-| `WIN - U - AI Usage Control` (139 / 149) | Edge blocks ten public AI services plus the Store website | only the four Store rules; the AI services stay reachable |
+| `WIN - D - Windows AI` | Recall not available, no screenshots, Click To Do off | all three allowed, set explicitly |
+| `WIN - D - Windows AI Features` | Cocreator, Image Creator, Generative Fill and Settings Agent off | the same four on |
+| `WIN - U - AI Usage Control` | Edge blocks ten public AI services plus the Store website | only the four Store rules; the AI services stay reachable |
 
-Two things were done deliberately here:
-
-- **The Restricted variant keeps the old checkId.** 112 and 139 already existed; that variant is the
-  continuation of the policy as it was, so existing findings stay attached to it. The
-  Permitted counterparts got 148 and 149. checkId 144 — the Windows AI Features policy before
-  its split — has been retired and not reused.
-- **The Permitted variant of AI Usage Control does not drop the block list.** Before the AI round that list
-  already contained four rules for the Store website. It was cut back to those four
-  instead of removing the whole setting — otherwise allowing AI would silently also
-  have lifted the Store block, and that is a different decision.
+**The Permitted variant of AI Usage Control deliberately does not drop the block list.** Before the
+AI round that list already contained four rules for the Store website. It was cut back to those four
+instead of removing the whole setting — otherwise allowing AI would silently also
+have lifted the Store block, and that is a different decision.
 
 The Permitted variants are not a recommendation. They are in phase 5 (do not deploy) because the
 baseline chooses the Restricted side by default; anyone who wants the other side swaps the assignment.
 
-For those who do, there is a third policy: **`WIN - D - Windows AI Recall Boundaries`** (150,
-phase 3). Allowing Recall is not all-or-nothing. The damage of an index is not
+For those who do, there is a third policy: **`WIN - D - Windows AI Recall Boundaries`** (phase
+3). Allowing Recall is not all-or-nothing. The damage of an index is not
 evenly distributed — one snapshot of an open password vault or of the Entra portal
 weighs more than a thousand of a word processor. That policy takes out exactly those places:
 
@@ -320,7 +307,7 @@ what is left now is not applicable, duplicate, or deprecated.
 
 | Addition | Why |
 |---|---|
-| `WIN - D - Defender Ransomware Protection` (153) | Modern ransomware does not encrypt the device it lands on but the shares around it. The whole baseline looked at what happens *on* the device; this is the first that looks at what the device does to *others*. Block at Low: only at 100% certainty, because a false positive here hits a backup or sync tool. |
+| `WIN - D - Defender Ransomware Protection` | Modern ransomware does not encrypt the device it lands on but the shares around it. The whole baseline looked at what happens *on* the device; this is the first that looks at what the device does to *others*. Block at Low: only at 100% certainty, because a false positive here hits a backup or sync tool. |
 | `Attachment Scanning` + Mark of the Web | Zone information on a downloaded file is preserved. That mark is what Office Protected View and SmartScreen rely on; if it disappears, a download opens as if it came from the local disk. |
 | `Logon Hardening` + two | The user's email address no longer appears on the sign-in screen, and connected users are not enumerated. |
 | `Privacy and Telemetry` + six | Search location, SMS sync, consumer content, online tips, font providers and sharing app data between users. All six CIS L1. |
@@ -341,7 +328,7 @@ with a placeholder.
 | 1 | BASELINE2 on a pilot group | especially `Kernel DMA Protection` (test with the docks from the fleet) and `Logon Hardening` (announce CTRL+ALT+DEL to users in advance) |
 | 2 | Decision on the three MAM settings | a change to the agreed baseline; can still be done now without migration |
 | 3 | ~~Check the ISMP mapping in `_manifest.json`~~ | dropped: the mapping to one organisation's ISMS documents was removed from the manifest in September 2026, so the baseline is generic. ISO 27001, NIS2 and Part-IS are still there |
-| 4 | Happy with a policy? | move it to `IntuneTemplate/` under the `Baseline_` name, with checkId and assignment |
+| 4 | Happy with a policy? | move it to `IntuneTemplate/` under the `Baseline_` name, with assignment |
 | 5 | Next round | application control (WDAC/Smart App Control), and iOS/Android compliance as soon as phones are enrolled |
 
 # Round OIB Windows v4.0 (14 September 2026)
@@ -377,7 +364,7 @@ order of settings; a second run writes nothing.
 
 | | |
 |---|---|
-| **Compliance** | Four bundled policies (Device Health, Device Security, Defender for Endpoint, Password) become nine separate ones: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence and Defender Real Time Protection. Password is dropped: those requirements run through the EAS engine, are enforced rather than checked, and only affect local accounts. Locking after 15 minutes is now in Device Lock. checkId 093–096 have been retired; `_renames.json` says for each old policy where it ended up. |
+| **Compliance** | Four bundled policies (Device Health, Device Security, Defender for Endpoint, Password) become nine separate ones: TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence and Defender Real Time Protection. Password is dropped: those requirements run through the EAS engine, are enforced rather than checked, and only affect local accounts. Locking after 15 minutes is now in Device Lock. `_renames.json` says for each old policy where it ended up. |
 | **Local Security Policies / LAPS** | The 24H2+ variants are the only ones. For LAPS nothing changes in substance; Local Security Policies now disables the built-in Administrator account. LAPS manages its own account, so that does not affect recovery. |
 | **Defender** | Moderate and high to quarantine (was remove); exploit protection overrides by users blocked; the extended Windows Security notifications off (fewer superfluous notifications). |
 | **Edge** | Five security settings from the Edge v151 baseline (process isolation, renderer app container, network service sandbox, code integrity guard); no sign-in with non-Microsoft accounts; no automatic download of local AI models; new policy **Microsoft Edge Management** (phase 2). |
@@ -521,6 +508,6 @@ In addition:
 4. **OIB macOS v2.0**: with that import OIB's Restrictions will itself set Apple Intelligence and hardening ids;
    the Restricted/Permitted pair and Restrictions Hardening will then have to be compared against the source again.
 5. **CA**: check whether CIPP sends `insiderRiskLevels` along (otherwise `1190` blocks everyone); decision
-   on `3010` to 4 hours (CIS); the platform engine does not yet compare insider and agent conditions.
+   on `3010` to 4 hours (CIS).
 6. **Not tested on real devices**: the new macOS, iOS and Android policies and the scripts in
    `extras/`. First one pilot device per platform.

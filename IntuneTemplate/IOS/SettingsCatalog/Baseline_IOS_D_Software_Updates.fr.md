@@ -12,7 +12,6 @@ Impose sur les iPhone et iPad inscrits la dernière version d'iOS au plus tard 1
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-192-IOSDSoftwareUpdates` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Software Update - Corporate Devices (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0), comparé avec IntuneAdmin Apple iOS Benchmarks (Enforce Latest Software Update Version, Recommendation Cadence, Rapid Security Response) ; période de report volontairement omise |
 | Fichier | [`Baseline_IOS_D_Software_Updates.json`](Baseline_IOS_D_Software_Updates.json) |
 

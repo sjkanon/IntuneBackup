@@ -12,7 +12,6 @@ Checks whether an active antivirus solution is registered in Windows Security.
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antivirus |
 | File | [`Baseline_WIN_U_Compliance_Antivirus.json`](Baseline_WIN_U_Compliance_Antivirus.json) |
 

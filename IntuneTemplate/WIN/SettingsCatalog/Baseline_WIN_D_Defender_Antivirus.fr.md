@@ -12,7 +12,6 @@ Configuration de base de Defender Antivirus : protection en temps réel, protect
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-012-DefaultAVPolicy` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration |
 | Fichier | [`Baseline_WIN_D_Defender_Antivirus.json`](Baseline_WIN_D_Defender_Antivirus.json) |
 

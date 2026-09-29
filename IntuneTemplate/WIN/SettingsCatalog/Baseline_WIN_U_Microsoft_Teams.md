@@ -12,7 +12,6 @@ Beperkt aanmelden in Teams tot de eigen tenant en voorkomt dat Teams zichzelf na
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-145-UMicrosoftTeams` |
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams |
 | Bestand | [`Baseline_WIN_U_Microsoft_Teams.json`](Baseline_WIN_U_Microsoft_Teams.json) |
 

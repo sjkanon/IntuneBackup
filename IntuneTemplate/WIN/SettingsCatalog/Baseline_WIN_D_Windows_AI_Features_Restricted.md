@@ -12,7 +12,6 @@ Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocre
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 

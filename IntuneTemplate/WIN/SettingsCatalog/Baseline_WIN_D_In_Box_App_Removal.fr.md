@@ -12,7 +12,6 @@ Supprime les applications grand public livrées par défaut avec Windows et qui 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-068-DInBoxAppRemoval` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows Apps - D - In-Box App Removal |
 | Fichier | [`Baseline_WIN_D_In_Box_App_Removal.json`](Baseline_WIN_D_In_Box_App_Removal.json) |
 

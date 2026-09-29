@@ -12,7 +12,6 @@ Dwingt op ingeschreven iPhones en iPads de nieuwste iOS-versie af uiterlijk 14 d
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-192-IOSDSoftwareUpdates` |
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Software Update - Corporate Devices (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0), vergeleken met IntuneAdmin Apple iOS Benchmarks (Enforce Latest Software Update Version, Recommendation Cadence, Rapid Security Response); uitstelperiode bewust weggelaten |
 | Bestand | [`Baseline_IOS_D_Software_Updates.json`](Baseline_IOS_D_Software_Updates.json) |
 

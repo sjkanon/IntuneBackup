@@ -12,7 +12,6 @@ Turns off the generative Apple Intelligence features on enrolled iPhones and iPa
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted` |
 | Source | Declarative configurations com.apple.configuration.intelligence.settings and external-intelligence.settings in the iOS settings catalog; selection from UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate and IntuneAdmin — Disable Apple Intelligence, with Writing Tools off where UniFy allows it. The com.apple.applicationaccess variants that IntuneAdmin uses are marked as Deprecated in the catalog |
 | File | [`Baseline_IOS_D_Apple_Intelligence_Restricted.json`](Baseline_IOS_D_Apple_Intelligence_Restricted.json) |
 

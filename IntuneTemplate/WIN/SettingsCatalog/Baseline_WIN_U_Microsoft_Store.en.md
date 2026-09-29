@@ -12,7 +12,6 @@ The user side of the Store restrictions.
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-104-UMicrosoftStore` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration |
 | File | [`Baseline_WIN_U_Microsoft_Store.json`](Baseline_WIN_U_Microsoft_Store.json) |
 

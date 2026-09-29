@@ -12,7 +12,6 @@ Active le mode Exchange mis en cache pour la boîte aux lettres de l'utilisateur
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-160-UMicrosoftOutlookCachedModeManaged` |
 | Source | baseline propre |
 | Fichier | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json) |
 

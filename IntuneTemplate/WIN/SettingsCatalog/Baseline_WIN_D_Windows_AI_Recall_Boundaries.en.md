@@ -12,7 +12,6 @@ Limits Recall when it is allowed: no snapshots of the management portals and the
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-150-DWindowsAIRecallBoundaries` |
 | Source | Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport); values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Windows_AI_Recall_Boundaries.json`](Baseline_WIN_D_Windows_AI_Recall_Boundaries.json) |
 

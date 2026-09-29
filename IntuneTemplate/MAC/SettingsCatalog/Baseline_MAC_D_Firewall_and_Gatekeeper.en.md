@@ -12,7 +12,6 @@ Turns on the macOS firewall and lets Gatekeeper allow only software signed by an
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` |
 | Source | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | File | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 

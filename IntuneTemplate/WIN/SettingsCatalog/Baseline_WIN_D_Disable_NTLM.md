@@ -12,7 +12,6 @@ Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-066-DDisableNTLM` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM |
 | Bestand | [`Baseline_WIN_D_Disable_NTLM.json`](Baseline_WIN_D_Disable_NTLM.json) |
 

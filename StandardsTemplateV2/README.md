@@ -26,8 +26,8 @@ af, dan zet CIPP hem terug.
 
 De pijplijnen in `scripts/` kennen vijf CIPP-policytypes (`Catalog`, `Admin`, `Device`,
 `deviceCompliancePolicies`, `AppProtection`) en een standards-template is geen van die vijf.
-Dit bestand wordt dus **niet** opgepikt door `check-scope.js`, `check-sets.js`,
-`generate-baseline.js` of `export-intunebackup.js`, en er hoort geen `checkId` bij. Het heeft
+Dit bestand wordt dus **niet** opgepikt door `check-scope.js`, `check-sets.js`
+of `export-intunebackup.js`. Het heeft
 ook geen naamconventie met platform en scope — die slaat nergens op voor een tenantinstelling.
 
 CIPP leest het wél rechtstreeks, net als de policysets: het bestand eindigt op `.json` en zit

@@ -12,7 +12,6 @@ L'expérience Edge au quotidien : page de démarrage, suggestions de recherche, 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-101-UMicrosoftEdgeUserExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience |
 | Fichier | [`Baseline_WIN_U_Microsoft_Edge_User_Experience.json`](Baseline_WIN_U_Microsoft_Edge_User_Experience.json) |
 

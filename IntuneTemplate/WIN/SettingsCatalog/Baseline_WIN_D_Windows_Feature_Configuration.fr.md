@@ -12,7 +12,6 @@ Désactive les fonctionnalités Windows susceptibles de faire sortir des donnée
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_Feature_Configuration.json`](Baseline_WIN_D_Windows_Feature_Configuration.json) |
 

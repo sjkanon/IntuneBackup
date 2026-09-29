@@ -12,7 +12,6 @@ Eist een alfanumerieke Windows Hello-PIN: minstens een cijfer, een kleine letter
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric` |
 | Bron | Eigen keuze, PassportForWork CSP — Policies/PINComplexity |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.json`](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.json) |
 

@@ -12,7 +12,6 @@ Stuurt Windows-gebeurtenissen door naar een centrale Windows Event Collector, zo
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-207-DWindowsEventForwarding` |
 | Bron | Microsoft Learn — 'Use Windows Event Forwarding to help with intrusion detection' en Policy CSP ADMX_EventForwarding/SubscriptionManager; waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Windows_Event_Forwarding.json`](Baseline_WIN_D_Windows_Event_Forwarding.json) |
 

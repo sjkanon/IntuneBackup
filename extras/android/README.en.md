@@ -4,8 +4,8 @@
 
 What belongs in a complete Android baseline but is none of the five CIPP policy types. These
 files are therefore **outside** `IntuneTemplate/`, just like `enrollment/macos/` and
-`compliance/macos/`: `generate-baseline.js`, `export-intunebackup.js` and
-`Set-BaselineAssignment.ps1` do not pick them up, and there is no `checkId` for them.
+`compliance/macos/`: `export-intunebackup.js` and `Set-BaselineAssignment.ps1` do not pick
+them up.
 
 | Folder | What | Graph resource |
 |---|---|---|

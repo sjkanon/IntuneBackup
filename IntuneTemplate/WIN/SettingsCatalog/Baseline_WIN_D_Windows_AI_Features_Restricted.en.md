@@ -12,7 +12,6 @@ Turns off the generative AI features in Paint and in Windows Settings: Cocreator
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, but with the value inverted: that set actually turns the features on |
 | File | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 

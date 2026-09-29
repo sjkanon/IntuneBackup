@@ -4,8 +4,8 @@
 
 Ce qui fait partie d'une baseline Android complète mais ne relève d'aucun des cinq types de stratégies CIPP. Ces
 fichiers se trouvent donc **en dehors** de `IntuneTemplate/`, comme `enrollment/macos/` et
-`compliance/macos/` : `generate-baseline.js`, `export-intunebackup.js` et
-`Set-BaselineAssignment.ps1` ne les prennent pas en compte, et aucun `checkId` n'y est associé.
+`compliance/macos/` : `export-intunebackup.js` et `Set-BaselineAssignment.ps1` ne les prennent
+pas en compte.
 
 | Dossier | Quoi | Ressource Graph |
 |---|---|---|

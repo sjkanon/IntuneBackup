@@ -12,7 +12,6 @@ Le volet utilisateur de OneDrive : quels écrans et notifications l'utilisateur 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-032-UMicrosoftOneDrive` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration |
 | Fichier | [`Baseline_WIN_U_Microsoft_OneDrive.json`](Baseline_WIN_U_Microsoft_OneDrive.json) |
 

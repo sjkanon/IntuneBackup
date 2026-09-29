@@ -12,7 +12,6 @@ Fixe explicitement le PIN Windows Hello numérique : chiffres exigés, lettres e
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric` |
 | Source | Choix propre, PassportForWork CSP — Policies/PINComplexity |
 | Fichier | [`Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.json`](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.json) |
 

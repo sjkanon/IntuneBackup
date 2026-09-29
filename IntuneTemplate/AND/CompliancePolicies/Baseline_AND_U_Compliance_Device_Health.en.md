@@ -12,7 +12,6 @@ Marks an Android device with a personal work profile as non-compliant when it is
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline convention for compliance, content compared with IntuneAdmin (Personally-owned work profile - Device Health) and UniFy-Endpoint Android BYOD. |
 | File | [`Baseline_AND_U_Compliance_Device_Health.json`](Baseline_AND_U_Compliance_Device_Health.json) |
 

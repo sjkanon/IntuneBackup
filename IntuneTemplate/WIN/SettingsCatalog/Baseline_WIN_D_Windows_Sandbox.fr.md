@@ -12,7 +12,6 @@ Restreint Windows Sandbox, qui ouvre sinon un Windows jetable ayant accès au r�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-089-DWindowsSandbox` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox |
 | Fichier | [`Baseline_WIN_D_Windows_Sandbox.json`](Baseline_WIN_D_Windows_Sandbox.json) |
 

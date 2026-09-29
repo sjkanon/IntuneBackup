@@ -12,7 +12,6 @@ Marque un appareil Android fully managed ou corporate-owned comme non conforme l
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed et Corp-Work-Profile - v1.5 (partie santé), comparé à IntuneAdmin Baseline - Android Enterprise - Device Health ; seuil d'OS relevé de 13.0 à n-1 (16.0) et niveau de correctif ajouté |
 | Fichier | [`Baseline_AND_U_Compliance_Corporate_Device_Health.json`](Baseline_AND_U_Compliance_Corporate_Device_Health.json) |
 

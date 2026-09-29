@@ -12,7 +12,6 @@ Désactive les fonctions d'IA générative dans Paint et dans les Paramètres Wi
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-147-DWindowsAIFeaturesRestricted` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, mais avec la valeur inversée : cet ensemble active justement les fonctionnalités |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 

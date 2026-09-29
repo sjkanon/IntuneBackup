@@ -12,7 +12,6 @@ Warns in the System log as soon as the Security log is 90% full and logs pipelin
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-205-DSecurityLogMonitoring` |
 | Source | CIS v4 Windows 11 L1 (MSS WarningLevel, IntuneAdmin CISv4 profile) and the Microsoft recommendation for PowerShell logging ('PowerShell ♥ the Blue Team') — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Security_Log_Monitoring.json`](Baseline_WIN_D_Security_Log_Monitoring.json) |
 

@@ -12,7 +12,6 @@ Bloque l'écriture sur le stockage amovible : clés USB et disques externes, ain
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-111-DRemovableStorage` |
 | Source | baseline propre — comparaison avec IntuneAdmin/IntuneBaselines, août 2026 |
 | Fichier | [`Baseline_WIN_D_Removable_Storage.json`](Baseline_WIN_D_Removable_Storage.json) |
 

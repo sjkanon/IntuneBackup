@@ -12,7 +12,6 @@ Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opl
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-084-DWindowsFeatureConfiguration` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Feature_Configuration.json`](Baseline_WIN_D_Windows_Feature_Configuration.json) |
 

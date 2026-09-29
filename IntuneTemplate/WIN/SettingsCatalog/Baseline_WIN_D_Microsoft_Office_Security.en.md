@@ -12,7 +12,6 @@ Office macro security: blocks macros in files from the internet, restricts Activ
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-075-DMicrosoftOfficeSecurity` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security |
 | File | [`Baseline_WIN_D_Microsoft_Office_Security.json`](Baseline_WIN_D_Microsoft_Office_Security.json) |
 

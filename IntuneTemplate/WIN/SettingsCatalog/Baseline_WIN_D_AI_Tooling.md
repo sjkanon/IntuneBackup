@@ -12,7 +12,6 @@ Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-125-DAITooling` |
 | Bron | ISO/IEC 27001:2022 A.5.10 en A.8.1 — instelling uit de Visual Studio-benchmark van IntuneAdmin |
 | Bestand | [`Baseline_WIN_D_AI_Tooling.json`](Baseline_WIN_D_AI_Tooling.json) |
 

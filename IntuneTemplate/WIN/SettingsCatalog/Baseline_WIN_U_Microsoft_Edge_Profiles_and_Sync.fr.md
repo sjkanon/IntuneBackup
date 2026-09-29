@@ -12,7 +12,6 @@ Détermine avec quel compte les utilisateurs se connectent à Edge et ce qui est
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync |
 | Fichier | [`Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json) |
 

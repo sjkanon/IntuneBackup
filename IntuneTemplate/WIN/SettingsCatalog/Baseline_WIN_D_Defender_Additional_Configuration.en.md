@@ -12,7 +12,6 @@ Defender settings that do not fit in the Endpoint Security template and therefor
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-059-DDefenderAdditionalConfiguration` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration |
 | File | [`Baseline_WIN_D_Defender_Additional_Configuration.json`](Baseline_WIN_D_Defender_Additional_Configuration.json) |
 

@@ -12,7 +12,6 @@ Sur un appareil avec profil professionnel personnel, définit un code propre au 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - USR - Personal-Work-Profile - v1.5 ; sans expiration du mot de passe, blocages des contacts et de l'identification de l'appelant, blocage des comptes ni blocage des sources inconnues côté personnel ; délai de verrouillage de 15 au lieu de 5 minutes, comme Compliance Password |
 | Fichier | [`Baseline_AND_U_Work_Profile_Restrictions.json`](Baseline_AND_U_Work_Profile_Restrictions.json) |
 

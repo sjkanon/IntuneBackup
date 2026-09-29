@@ -12,7 +12,6 @@ Vérifie si un appareil Android avec profil professionnel personnel dispose d'un
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Convention OpenIntuneBaseline pour la conformité ; valeurs alignées sur l'exigence de PIN à six caractères de la policy App Protection existante et sur l'exigence Android d'IntuneAdmin. |
 | Fichier | [`Baseline_AND_U_Compliance_Password.json`](Baseline_AND_U_Compliance_Password.json) |
 

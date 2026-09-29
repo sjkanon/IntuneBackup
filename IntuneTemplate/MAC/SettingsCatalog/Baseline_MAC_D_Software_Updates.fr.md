@@ -12,7 +12,6 @@ Comment et quand macOS télécharge et installe ses propres mises à jour.
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-047-MACDSoftwareUpdates` |
 | Source | baseline propre — politique logicielle déclarative (DDM) ; complétée par Software Update Enforce Latest et la désactivation des bêtas, issus d'OpenIntuneBaseline macOS v2.0 beta (SC - Updates - D - Update Configuration) et de microsoft/intune-my-macs (pol-sys-103, pol-sys-106), avec un délai propre ; CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 1.1–1.6 |
 | Fichier | [`Baseline_MAC_D_Software_Updates.json`](Baseline_MAC_D_Software_Updates.json) |
 

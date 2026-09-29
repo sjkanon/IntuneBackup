@@ -12,7 +12,6 @@ Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en leg
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-016-Firewall` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 

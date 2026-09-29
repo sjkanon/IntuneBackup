@@ -5,7 +5,7 @@
 The CIPP pipelines carry five policy types (Catalog, Device, compliance, App Protection,
 Admin). A complete iOS baseline needs more: tenant settings in Apple Business,
 an ADE enrollment profile, app configuration and two dynamic groups. Those live here. Nothing
-in this folder is picked up by `generate-baseline.js`, `export-intunebackup.js` or
+in this folder is picked up by `export-intunebackup.js` or
 `Set-BaselineAssignment.ps1`.
 
 | Folder | What | Deploy |

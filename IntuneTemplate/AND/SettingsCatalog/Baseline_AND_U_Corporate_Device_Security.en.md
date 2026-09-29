@@ -12,7 +12,6 @@ Hardens fully managed and corporate-owned Android devices: six-digit code (numer
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-181-ANDUCorporateDeviceSecurity` |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - Device-Password, System-Security, Applications, Connectivity, General-Settings and Data-Sharing-Controls (Fully-Managed and Corp-Work-Profile) - v1.5; USB access limited to file transfer instead of all data, without password expiry, screen timeout 15 minutes |
 | File | [`Baseline_AND_U_Corporate_Device_Security.json`](Baseline_AND_U_Corporate_Device_Security.json) |
 

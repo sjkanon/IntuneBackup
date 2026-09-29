@@ -12,7 +12,6 @@ Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf e
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-127-DBusinessContinuity` |
 | Bron | ISO/IEC 27001:2022 A.5.29, A.5.30 en A.8.14, NIS2 art. 21(2)(c) — instellingen uit de Modern Workplace-set van IntuneAdmin |
 | Bestand | [`Baseline_WIN_D_Business_Continuity.json`](Baseline_WIN_D_Business_Continuity.json) |
 

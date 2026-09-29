@@ -12,7 +12,6 @@ Active le Pare-feu Windows pour les profils domaine, privé et public et défini
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-016-Firewall` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 

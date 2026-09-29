@@ -12,7 +12,6 @@ Autorise l'Edge Management Service sur les appareils gérés et fait primer la p
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-171-UMicrosoftEdgeManagement` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management |
 | Fichier | [`Baseline_WIN_U_Microsoft_Edge_Management.json`](Baseline_WIN_U_Microsoft_Edge_Management.json) |
 

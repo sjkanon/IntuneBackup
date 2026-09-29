@@ -12,7 +12,6 @@ Checks whether the Mac requires a password and how strong it must be.
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Password |
 | File | [`Baseline_MAC_U_Compliance_Password.json`](Baseline_MAC_U_Compliance_Password.json) |
 

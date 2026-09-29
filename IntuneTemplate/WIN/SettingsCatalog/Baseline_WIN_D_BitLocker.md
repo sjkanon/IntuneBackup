@@ -12,7 +12,6 @@ Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en ve
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-011-Bitlocker` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | Bestand | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 

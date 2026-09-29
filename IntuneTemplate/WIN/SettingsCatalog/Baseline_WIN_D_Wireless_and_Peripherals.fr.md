@@ -12,7 +12,6 @@ Rend l'appareil invisible via Bluetooth et ferme Windows Connect Now, afin que l
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | Source | ISO/IEC 27001:2022 A.8.20 et A.7.9, NIS2 art. 21(2)(e) — paramètres issus de l'ensemble Endpoint Security d'IntuneAdmin |
 | Fichier | [`Baseline_WIN_D_Wireless_and_Peripherals.json`](Baseline_WIN_D_Wireless_and_Peripherals.json) |
 

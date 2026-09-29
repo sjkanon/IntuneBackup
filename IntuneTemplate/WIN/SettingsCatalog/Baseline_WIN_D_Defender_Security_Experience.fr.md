@@ -12,7 +12,6 @@ Détermine ce que l'utilisateur voit dans l'application Sécurité Windows et ce
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-060-DDefenderSecurityExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience |
 | Fichier | [`Baseline_WIN_D_Defender_Security_Experience.json`](Baseline_WIN_D_Defender_Security_Experience.json) |
 

@@ -12,7 +12,6 @@ Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zij
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-009-Auditing` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging |
 | Bestand | [`Baseline_WIN_D_Audit_and_Event_Logging.json`](Baseline_WIN_D_Audit_and_Event_Logging.json) |
 

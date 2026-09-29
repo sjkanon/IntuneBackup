@@ -5,7 +5,7 @@
 # IntuneTemplate — 197 policies
 
 La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui
-se trouve dans `baseline/` et `export/` en est dérivé et généré.
+se trouve dans `export/` et `BaselineTemplate/` en est dérivé et généré.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|

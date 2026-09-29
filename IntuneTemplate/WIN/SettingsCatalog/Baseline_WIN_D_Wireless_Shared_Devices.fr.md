@@ -12,7 +12,6 @@ Sur les appareils partagés, n'autorise que les réseaux déployés via Intune. 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-138-DWirelessSharedDevices` |
 | Source | ISO/IEC 27001:2022 A.8.20 et A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration |
 | Fichier | [`Baseline_WIN_D_Wireless_Shared_Devices.json`](Baseline_WIN_D_Wireless_Shared_Devices.json) |
 

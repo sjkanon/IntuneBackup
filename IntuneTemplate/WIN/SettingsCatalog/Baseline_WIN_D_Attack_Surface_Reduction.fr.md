@@ -12,7 +12,6 @@ Bloque les techniques d'attaque visées par les règles Attack Surface Reduction
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-007-ASRDefaultRules` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2) |
 | Fichier | [`Baseline_WIN_D_Attack_Surface_Reduction.json`](Baseline_WIN_D_Attack_Surface_Reduction.json) |
 

@@ -12,7 +12,6 @@ Détermine quels paramètres Windows sont synchronisés entre appareils.
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-081-DSettingsSync` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Settings Sync |
 | Fichier | [`Baseline_WIN_D_Settings_Sync.json`](Baseline_WIN_D_Settings_Sync.json) |
 

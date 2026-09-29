@@ -12,7 +12,6 @@ Checks whether the Mac's disk is encrypted, the firewall is enabled and Gatekeep
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security |
 | File | [`Baseline_MAC_U_Compliance_Device_Security.json`](Baseline_MAC_U_Compliance_Device_Security.json) |
 

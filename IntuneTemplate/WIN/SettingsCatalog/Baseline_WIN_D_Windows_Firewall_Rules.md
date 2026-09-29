@@ -12,7 +12,6 @@ Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebrui
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-085-DWindowsFirewallRules` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules |
 | Bestand | [`Baseline_WIN_D_Windows_Firewall_Rules.json`](Baseline_WIN_D_Windows_Firewall_Rules.json) |
 

@@ -12,7 +12,6 @@ Active Windows Protected Print, interdit aux utilisateurs standard d'installer d
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-133-DPrintingHardening` |
 | Source | CIS v4 Windows 11 L1 et la Microsoft Security Baseline — paramètres repris d'IntuneAdmin, valeurs vérifiées par rapport aux définitions du settings catalog. |
 | Fichier | [`Baseline_WIN_D_Printing_Hardening.json`](Baseline_WIN_D_Printing_Hardening.json) |
 

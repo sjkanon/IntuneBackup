@@ -12,7 +12,6 @@ Définit quels événements Windows enregistre et quelle est la taille des journ
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-009-Auditing` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging |
 | Fichier | [`Baseline_WIN_D_Audit_and_Event_Logging.json`](Baseline_WIN_D_Audit_and_Event_Logging.json) |
 

@@ -12,7 +12,6 @@ Déploie le réseau de l'entreprise sous forme de profil Wi-Fi sur chaque Mac, a
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Baseline propre — profil Wi-Fi Intune (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 et A.8.21, NIS2 art. 21(2)(e). |
 | Fichier | [`Baseline_MAC_D_Wifi_Corporate.json`](Baseline_MAC_D_Wifi_Corporate.json) |
 

@@ -12,7 +12,6 @@ Determines which privacy-sensitive data apps may request, such as location and s
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-022-Privacy` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy |
 | File | [`Baseline_WIN_D_Location_and_Privacy.json`](Baseline_WIN_D_Location_and_Privacy.json) |
 

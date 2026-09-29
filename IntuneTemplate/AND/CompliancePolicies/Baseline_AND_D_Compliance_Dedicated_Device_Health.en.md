@@ -12,7 +12,6 @@ Marks a dedicated Android device (kiosk or shared) as non-compliant when it is r
 | Scope | Device (D) — assign to device groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Corp-Dedicated - Kiosk and Shared - v1.5; without password and OS version requirements, patch level added |
 | File | [`Baseline_AND_D_Compliance_Dedicated_Device_Health.json`](Baseline_AND_D_Compliance_Dedicated_Device_Health.json) |
 

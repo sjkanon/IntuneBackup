@@ -12,7 +12,6 @@ Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-044-MACDMicrosoftOneDrive` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access |
 | Bestand | [`Baseline_MAC_D_Microsoft_OneDrive.json`](Baseline_MAC_D_Microsoft_OneDrive.json) |
 

@@ -12,7 +12,6 @@ Nettoie automatiquement les fichiers temporaires, la Corbeille et les anciens t�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-143-DStorageSense` |
 | Source | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Storage Sense |
 | Fichier | [`Baseline_WIN_D_Storage_Sense.json`](Baseline_WIN_D_Storage_Sense.json) |
 

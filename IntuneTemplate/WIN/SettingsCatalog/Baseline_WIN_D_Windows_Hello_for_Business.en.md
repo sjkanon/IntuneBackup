@@ -12,7 +12,6 @@ Lets users sign in with a PIN or biometrics instead of a password. Requires a TP
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Hello for Business - D - WHfB Configuration |
 | File | [`Baseline_WIN_D_Windows_Hello_for_Business.json`](Baseline_WIN_D_Windows_Hello_for_Business.json) |
 

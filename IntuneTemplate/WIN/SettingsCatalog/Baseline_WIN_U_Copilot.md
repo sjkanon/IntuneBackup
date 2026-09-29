@@ -12,7 +12,6 @@ Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-097-UCopilot` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - U - Copilot |
 | Bestand | [`Baseline_WIN_U_Copilot.json`](Baseline_WIN_U_Copilot.json) |
 

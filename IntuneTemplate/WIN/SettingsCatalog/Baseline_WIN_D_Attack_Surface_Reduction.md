@@ -12,7 +12,6 @@ Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: m
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-007-ASRDefaultRules` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2) |
 | Bestand | [`Baseline_WIN_D_Attack_Surface_Reduction.json`](Baseline_WIN_D_Attack_Surface_Reduction.json) |
 

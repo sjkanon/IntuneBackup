@@ -12,7 +12,6 @@ Après un redémarrage pour mises à jour, reconnecte automatiquement l'utilisat
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-056-DAutomaticRestartSignOn` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Automatic Restart Sign-On |
 | Fichier | [`Baseline_WIN_D_Automatic_Restart_Sign_On.json`](Baseline_WIN_D_Automatic_Restart_Sign_On.json) |
 

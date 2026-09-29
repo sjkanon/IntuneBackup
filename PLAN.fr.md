@@ -4,20 +4,19 @@
 
 Objectif : étendre la baseline et la maintenir à jour sur la base
 d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), avec une
-séparation explicite par plateforme et appareil/utilisateur, sans casser inutilement les checkId
-existants — et avec une couche tenant distincte (ScubaGear / Maester) pour finir.
+séparation explicite par plateforme et appareil/utilisateur — et avec une couche tenant distincte (ScubaGear / Maester) pour finir.
 
 Statut : **les phases 1, 2, 4, 5, 6 et 7 sont réalisées** (dépôt). La phase 3 (le tenant) et la
 phase 8 restent ouvertes. Le tenant n'a pas encore été touché.
 
 | Phase | Quoi | Risque | Statut |
 |---|---|---|---|
-| 1 | Modifications de scripts (`CHECK_ID_SLUGS`, `check-scope.js`, `-Scope`, contrôle strict des affectations) | faible | ✅ |
+| 1 | Modifications de scripts (`check-scope.js`, `-Scope`, contrôle strict des affectations) | faible | ✅ |
 | 2 | Renommage D/U + 2 scissions dans `IntuneTemplate/` | faible dans le dépôt | ✅ |
 | 4 | Stratégies de conformité (travail sur le pipeline + 7 stratégies) | moyen | ✅ |
 | 5 | Combler les lacunes de durcissement à partir d'OIB | moyen | ✅ |
 | 6 | Anneaux de mise à jour | faible | ✅ |
-| 7 | Scinder les Administrative Templates par thème | moyen — casse le checkId 008 | ✅ |
+| 7 | Scinder les Administrative Templates par thème | moyen | ✅ |
 | — | macOS, BYOD et l'axe plateforme dans le nommage | moyen | ✅ |
 | 3 | **Migration du tenant** via `Rename-BaselinePolicy.ps1` | **élevé** — d'abord `-WhatIf`, d'abord dans un tenant pilote | ouvert |
 | 8 | Couche tenant ScubaGear/Maester | chantier séparé | ouvert |
@@ -34,14 +33,12 @@ La phase 3 vient volontairement après le reste : le dépôt est maintenant comp
 façon d'intégrer une nouvelle version d'OIB.
 
 **Phases 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `[Baseline] - D/U - Item`,
-`check-scope.js` comme étape bloquante de la CI, `CHECK_ID_SLUGS` pour que les checkId survivent à
-un renommage.
+`check-scope.js` comme étape bloquante de la CI.
 
 **Phase 4 — conformité.** Il n'y en avait aucune. Sans stratégie de conformité, « exiger un appareil
 conforme » dans Conditional Access n'a aucun sens. Il y en a désormais 7 (4 Windows, 3 macOS), avec un
 nouveau `Type` CIPP `deviceCompliancePolicies` et le dossier `Device Compliance Policies` dans
-l'export. Elles ne produisent pas de contrôle propre — le moteur de la plateforme n'a pas de matcher
-pour elles et les contrôles génériques 001–006 les couvrent.
+l'export.
 
 **Phase 5 — durcissement.** L'ensemble Windows d'OIB a été repris en entier : Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D et U),
@@ -60,8 +57,7 @@ IntuneBackupAndRestore 4.0.1 ne les prend pas en charge.
 Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) et quelques plus petits. Les 15 paramètres sans équivalent OIB se trouvent dans
 `WIN - D - Legacy Hardening`, tenus à part pour qu'une mise à niveau d'OIB ne les entraîne ni ne
-les supprime. Le coût, comme prévu : le checkId `008-AdministrativeTemplates` a été supprimé. Quatre
-autres checkId aussi (017, 023, 025, 028) — voir le README.
+les supprime.
 
 **Axe plateforme.** Toutes les stratégies s'appellent désormais `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>`
 et se trouvent dans `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 stratégies) et la protection
@@ -107,8 +103,8 @@ trouve dans [OVERZICHT.fr.md](OVERZICHT.fr.md#dabord-en-pilote).
 ### Et s'il reste des stratégies avec l'ancien nom dans le tenant
 
 Ce scénario n'est pas théorique : un renommage qui s'arrête à mi-chemin, une stratégie que quelqu'un
-a renommée à la main auparavant, un second tenant où CIPP déployait encore sous l'ancien nom. Trois
-façons dont cela tourne mal, de gênant à dangereux :
+a renommée à la main auparavant, un second tenant où CIPP déployait encore sous l'ancien nom. Deux
+façons dont cela tourne mal :
 
 **1. Paramètres en conflit.** Deux stratégies Settings Catalog qui définissent le même
 `settingDefinitionId` avec une valeur différente produisent un *Conflict* — le paramètre n'est alors
@@ -119,16 +115,6 @@ appliqué par aucune des deux. Avec 95 stratégies, ce risque est plus grand qu'
 Une stratégie qui ne suit pas la convention échappe à tous les filtres et conserve donc tout
 simplement son ancienne affectation All Devices. Le script avertit à ce sujet — n'ignorez pas cet
 avertissement.
-
-**3. Un contrôle vert sur la mauvaise stratégie.** C'est le plus dangereux. Les règles
-`settings-catalog-match` comparent **le contenu, pas le nom**. Un `[Baseline] Bitlocker` resté en
-place contient toujours les paramètres d'`INTUNE-BASE-011-Bitlocker`, donc ce contrôle reste vert —
-même si `[Baseline] - WIN - D - BitLocker` n'a jamais été créée, ou est vide, ou n'est affectée
-nulle part. La plateforme ne signale alors rien alors que la baseline n'arrive en fait plus.
-
-Cette indépendance vis-à-vis du nom est voulue et juste en soi (un client peut nommer ses stratégies
-autrement), mais elle signifie que le contrôle de baseline n'est **pas** un filet de sécurité pour
-cette migration. Ce filet doit être construit à part.
 
 ### Reste à construire: `scripts/Get-BaselinePolicyState.ps1`
 
@@ -155,16 +141,8 @@ Teams et Power Platform. Maester regroupe EIDSCA, CISA SCuBA, CIS Microsoft 365 
 ORCA, et dispose en outre d'une poignée de contrôles Intune (LAPS, ASR, App Control for Business,
 Managed Installer).
 
-Approche :
-
-- **Baseline séparée, ne pas mélanger.** `baseline/tenant/baseline-v1.0.json` à côté de
-  `baseline/intune/baseline-v1.0.json`. Les matchers diffèrent fondamentalement (Graph device
-  management vs. API Entra/Exchange/Teams) ; un seul fichier contenant deux mondes produit des
-  contrôles qui ne testent silencieusement rien — le même piège que `Type: "Device"` aujourd'hui.
-- **Série de checkId propre**, p. ex. `TENANT-BASE-001-...`, afin que l'espace de numérotation de
-  `INTUNE-BASE-*` reste intact.
-- Ordre : d'abord exécuter ScubaGear pour un état initial, puis mettre en place Maester comme
-  contrôle continu, et seulement ensuite convertir les constats en règles de baseline.
+Approche : d'abord exécuter ScubaGear pour un état initial, puis mettre en place Maester comme
+contrôle continu.
 
 Les quatre contrôles Intune de Maester recoupent ce dépôt. Ils constituent le lien naturel
 entre les deux couches — commencez par là.

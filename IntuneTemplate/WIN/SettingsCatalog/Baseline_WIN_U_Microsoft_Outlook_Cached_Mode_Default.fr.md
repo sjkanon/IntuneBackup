@@ -12,7 +12,6 @@ Active uniquement le mode Exchange mis en cache et laisse le reste à la valeur 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-159-UMicrosoftOutlookCachedModeDefault` |
 | Source | baseline propre |
 | Fichier | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.json) |
 

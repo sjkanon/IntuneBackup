@@ -12,7 +12,6 @@ Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric` |
 | Bron | Eigen keuze, PassportForWork CSP — Policies/PINComplexity |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.json`](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.json) |
 

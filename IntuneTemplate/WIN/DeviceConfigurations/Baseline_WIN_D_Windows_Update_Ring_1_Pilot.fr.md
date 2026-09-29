@@ -12,7 +12,6 @@ Premier anneau de mise à jour : reçoit les mises à jour Windows immédiatemen
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot |
 | Fichier | [`Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json) |
 

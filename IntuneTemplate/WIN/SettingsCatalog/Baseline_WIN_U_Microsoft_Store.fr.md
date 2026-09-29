@@ -12,7 +12,6 @@ Le volet utilisateur des restrictions du Store.
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-104-UMicrosoftStore` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration |
 | Fichier | [`Baseline_WIN_U_Microsoft_Store.json`](Baseline_WIN_U_Microsoft_Store.json) |
 

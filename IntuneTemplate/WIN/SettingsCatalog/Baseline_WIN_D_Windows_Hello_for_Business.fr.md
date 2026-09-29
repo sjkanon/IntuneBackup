@@ -12,7 +12,6 @@ Permet aux utilisateurs de se connecter avec un PIN ou la biométrie au lieu d'u
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-087-DWindowsHelloForBusiness` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Hello for Business - D - WHfB Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_Hello_for_Business.json`](Baseline_WIN_D_Windows_Hello_for_Business.json) |
 

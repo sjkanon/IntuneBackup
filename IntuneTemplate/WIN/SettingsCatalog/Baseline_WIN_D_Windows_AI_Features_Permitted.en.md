@@ -12,7 +12,6 @@ Explicitly allows the generative AI features in Paint and in Windows Settings: C
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, values adopted unchanged |
 | File | [`Baseline_WIN_D_Windows_AI_Features_Permitted.json`](Baseline_WIN_D_Windows_AI_Features_Permitted.json) |
 

@@ -12,7 +12,6 @@ Le volet utilisateur de la sécurité Office : comportement des macros, emplacem
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-103-UMicrosoftOfficeSecurity` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security |
 | Fichier | [`Baseline_WIN_U_Microsoft_Office_Security.json`](Baseline_WIN_U_Microsoft_Office_Security.json) |
 

@@ -12,11 +12,10 @@ Warns as soon as a user types their work password on a phishing site, reuses it 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-024-Smartscreen` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection |
 | File | [`Baseline_WIN_D_Enhanced_Phishing_Protection.json`](Baseline_WIN_D_Enhanced_Phishing_Protection.json) |
 
-> Successor to the SmartScreen policy (checkId 024 remains). Four of the six old settings are here, the two shell SmartScreen settings are in Security Hardening.
+> Successor to the SmartScreen policy. Four of the six old settings are here, the two shell SmartScreen settings are in Security Hardening.
 
 ## Standards
 

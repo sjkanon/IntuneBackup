@@ -12,7 +12,6 @@ Turns off Recall and Click To Do: Windows then takes no screen captures of what 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-112-DWindowsAI` |
 | Source | own baseline — comparison with IntuneAdmin/IntuneBaselines, August 2026 |
 | File | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 

@@ -12,7 +12,6 @@ Restricts the macOS features through which corporate data can leave the device.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-046-MACDRestrictions` |
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | File | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 

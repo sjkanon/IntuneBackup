@@ -12,7 +12,6 @@ Toont op het vergrendelscherm van een bedrijfs-iPhone of -iPad een tekst voor de
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-189-IOSDLockScreen` |
 | Bron | Apple Shared Device Configuration-payload (com.apple.shareddeviceconfiguration) in de iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate en IntuneAdmin — Lock Screen Message. De vergrendelscherm-restricties uit dezelfde UniFy-policy staan in [Baseline] - IOS - D - Restrictions Corporate |
 | Bestand | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 

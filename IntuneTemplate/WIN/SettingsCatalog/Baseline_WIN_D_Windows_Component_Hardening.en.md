@@ -12,7 +12,6 @@ Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-206-DWindowsComponentHardening` |
 | Source | CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) — instance structures adopted from IntuneAdmin, values verified against the settings catalog definitions; 'Enumerate local users' deliberately deviates from the IntuneAdmin value |
 | File | [`Baseline_WIN_D_Windows_Component_Hardening.json`](Baseline_WIN_D_Windows_Component_Hardening.json) |
 

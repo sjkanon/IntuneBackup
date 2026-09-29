@@ -12,7 +12,6 @@ Marque comme non conforme un iPhone ou iPad qui a été jailbreaké.
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Convention OpenIntuneBaseline pour la conformité, contenu comparé avec IntuneAdmin (Baseline - iOSiPadOS - Device Health) et UniFy-Endpoint iOS BYOD. |
 | Fichier | [`Baseline_IOS_U_Compliance_Device_Health.json`](Baseline_IOS_U_Compliance_Device_Health.json) |
 

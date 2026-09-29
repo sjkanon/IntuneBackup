@@ -12,7 +12,6 @@ Vérifie que l'appareil exécute une version de Windows capable d'appliquer rée
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Policy propre ; le seuil minimal découle de ce que la baseline exige déjà elle-même — Account Lockout nécessite 22H2 avec KB5053657 ou 24H2, Administrator Protection et Windows Protected Print nécessitent 24H2 |
 | Fichier | [`Baseline_WIN_U_Compliance_OS_Version.json`](Baseline_WIN_U_Compliance_OS_Version.json) |
 

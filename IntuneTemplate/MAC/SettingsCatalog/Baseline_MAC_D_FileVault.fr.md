@@ -12,7 +12,6 @@ Chiffre le disque du Mac et stocke la clé de récupération dans Intune. L'équ
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-038-MACDFileVault` |
 | Source | OpenIntuneBaseline macOS v1.0 — Disk Encryption - D - FileVault |
 | Fichier | [`Baseline_MAC_D_FileVault.json`](Baseline_MAC_D_FileVault.json) |
 

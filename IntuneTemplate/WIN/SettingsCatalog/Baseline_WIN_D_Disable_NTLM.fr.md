@@ -12,7 +12,6 @@ Désactive l'authentification NTLM obsolète au profit de Kerberos. Casse les an
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-066-DDisableNTLM` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM |
 | Fichier | [`Baseline_WIN_D_Disable_NTLM.json`](Baseline_WIN_D_Disable_NTLM.json) |
 

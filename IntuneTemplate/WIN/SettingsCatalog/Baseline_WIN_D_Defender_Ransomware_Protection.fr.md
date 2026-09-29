@@ -12,7 +12,6 @@ Empêche un appareil infecté de chiffrer des fichiers sur d'autres machines via
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-153-DDefenderRansomwareProtection` |
 | Source | IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection ; valeurs vérifiées par rapport aux définitions du settings catalog. IntuneAdmin règle sur Audit ; ici c'est Block. |
 | Fichier | [`Baseline_WIN_D_Defender_Ransomware_Protection.json`](Baseline_WIN_D_Defender_Ransomware_Protection.json) |
 

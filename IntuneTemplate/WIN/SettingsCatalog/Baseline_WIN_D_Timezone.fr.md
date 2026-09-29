@@ -12,7 +12,6 @@ Laisse Windows déterminer automatiquement le fuseau horaire, afin que les journ
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-082-DTimezone` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | Fichier | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 

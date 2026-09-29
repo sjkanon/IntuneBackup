@@ -12,7 +12,6 @@ Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | Eigen policy; de ondergrens volgt uit wat de baseline zelf al vereist — Account Lockout vraagt 22H2 met KB5053657 of 24H2, Administrator Protection en Windows Protected Print vragen 24H2 |
 | Bestand | [`Baseline_WIN_U_Compliance_OS_Version.json`](Baseline_WIN_U_Compliance_OS_Version.json) |
 

@@ -12,7 +12,6 @@ Marks an Android device with a personal work profile as non-compliant when Defen
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Personal-Devices - v1.5; compared with IntuneAdmin Baseline - Personally-owned work profile - Microsoft Defender for Endpoint (level medium) |
 | File | [`Baseline_AND_U_Compliance_Defender_for_Endpoint.json`](Baseline_AND_U_Compliance_Defender_for_Endpoint.json) |
 

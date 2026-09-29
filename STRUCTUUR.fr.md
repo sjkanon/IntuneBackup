@@ -12,9 +12,8 @@ généré, quels systèmes le lisent et comment il arrive dans un tenant. Pour l
   entre Windows (132), macOS (37), iOS/iPadOS (14) et Android (14).
 - **Trois sources en entrée :** OpenIntuneBaseline (94 stratégies), IntuneAdmin/IntuneBaselines (22)
   et travail propre (81).
-- **Trois dérivés en sortie :** les contrôles de baseline pour le TEST Policies Platform, un export
-  de restauration pour IntuneBackupAndRestore et la baseline CIPP. CIPP lit lui-même les templates
-  directement.
+- **Deux dérivés en sortie :** un export de restauration pour IntuneBackupAndRestore et la baseline
+  CIPP. CIPP lit lui-même les templates directement.
 - **Deux voies vers le tenant :** CIPP ou le module PowerShell IntuneBackupAndRestore. L'affectation
   et le renommage se font avec nos propres scripts via Microsoft Graph.
 - **Rien de ce qui est généré n'est modifié à la main.** Un workflow GitHub le régénère après
@@ -30,7 +29,6 @@ flowchart LR
 
   T["<b>IntuneTemplate/</b><br/>197 stratégies · _manifest.json"]
 
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]
   T -->|generate-docs.js<br/>generate-compliance.js| DOC["OVERZICHT · COMPLIANCE<br/>README"]
@@ -38,11 +36,9 @@ flowchart LR
 
   T -.->|synchro| CIPP["CIPP"]
   BT -.->|Community Repos → Import| CIPP
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TEN[("Tenant Intune")]
   CIPP -->|stages de baseline| TEN
   T -->|Set-BaselineAssignment.ps1<br/>Rename-BaselinePolicy.ps1| TEN
-  PLAT -.->|contrôle| TEN
 
   style T stroke-width:3px
 ```
@@ -54,7 +50,6 @@ Les flèches pleines écrivent ; les pointillés ne font que lire.
 | Dossier | Contenu | Créé par | Repris par |
 |---|---|---|---|
 | [`IntuneTemplate/`](IntuneTemplate/README.fr.md) | Les stratégies, par plateforme et type de stratégie, plus les fichiers `_` qui les pilotent | main + scripts d'import | tous les scripts, CIPP |
-| [`baseline/intune/`](baseline/README.fr.md) | `baseline-v1.0.json` : 162 contrôles | `generate-baseline.js` | TEST Policies Platform |
 | [`export/NativeImport/`](export/README.fr.md) | Format de restauration, avec affectations | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](BaselineTemplate/README.fr.md) | La baseline CIPP : packages par stage | `generate-baseline-template.js` | CIPP (import manuel) |
 | [`StandardsTemplateV2/`](StandardsTemplateV2/README.fr.md) | Standards CIPP pour les paramètres du tenant (incitation MFA, migration passkey) | main | CIPP |
@@ -123,16 +118,15 @@ Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deu
 | – | `import-intunebackup.js` | une sauvegarde de tenant | `IntuneTemplate/` |
 | 1 | `set-packages.js` | `_manifest.json`, `_assignments.json` | `Package` dans chaque template |
 | 2 | `check-scope.js` | tout `IntuneTemplate/` | rien — échoue en cas d'erreur |
-| 3 | `generate-baseline.js` | `IntuneTemplate/` | `baseline/intune/baseline-v1.0.json` |
-| 4 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
-| 5 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
-| 6 | `generate-docs.js` | `IntuneTemplate/`, baseline | `OVERZICHT.md`, README, `.md` par stratégie |
-| 7 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json`, baseline | `COMPLIANCE.md` |
+| 3 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
+| 4 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
+| 5 | `generate-docs.js` | `IntuneTemplate/` | `OVERZICHT.md`, README, `.md` par stratégie |
+| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `COMPLIANCE.md` |
 | – | `check-osversion.js` | versions minimales d'OS, endoflife.date | un rapport uniquement |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | affectations dans le tenant |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | noms des stratégies dans le tenant |
 
-Les étapes 1 à 7 sont exécutées par [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
+Les étapes 1 à 6 sont exécutées par [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
 après chaque modification dans `IntuneTemplate/`. Tous les scripts Node du pipeline partagent
 `scripts/lib/templates.js`. Détails : [scripts/README.fr.md](scripts/README.fr.md).
 
@@ -144,7 +138,6 @@ après chaque modification dans `IntuneTemplate/`. Tous les scripts Node du pipe
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | source → dépôt | `import-intuneadmin.js` | JSON en UTF-16LE |
 | [CA-Policies](https://github.com/sjkanon/CA-Policies) | dépôt ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git contient la version `--no-ca` ; la CI ne voit pas l'autre dépôt |
 | CIPP | dépôt → CIPP | synchronisation du dépôt de templates sur ce dépôt | `BaselineTemplate/Baseline.json` n'est repris que via Tools → Community Repos → Import |
-| TEST Policies Platform | dépôt → plateforme | récupère `baseline/intune/baseline-v1.0.json` | ne pas déplacer le chemin |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | dépôt → tenant | `Start-IntuneRestoreConfig` et `…Assignments` avec `-RestoreById $false` | restaurer séparément les affectations App Protection |
 | Microsoft Graph | dépôt → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | d'abord `-WhatIf` |
 | endoflife.date | source → rapport | `check-osversion.js` | n'échoue jamais, simple signal |
@@ -156,8 +149,8 @@ après chaque modification dans `IntuneTemplate/`. Tous les scripts Node du pipe
 - **`NativeImport` dans un chemin l'exclut de la synchronisation.** C'est pourquoi l'export de
   restauration se trouve sous `export/NativeImport/`. Sans ce mot, CIPP fait de chaque stratégie un
   second template.
-- **Tout autre `.json` devient une ligne de template sans nom.** Cela vaut pour les fichiers `_`, la
-  baseline, le profil ADE et `extras/`. Cette ligne ne fait rien et peut être supprimée dans CIPP.
+- **Tout autre `.json` devient une ligne de template sans nom.** Cela vaut pour les fichiers `_`, le
+  profil ADE et `extras/`. Cette ligne ne fait rien et peut être supprimée dans CIPP.
 
 ## Paramètres du tenant qui ne sont pas une stratégie
 
@@ -179,7 +172,7 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 - **S'écarter d'OpenIntuneBaseline** se fait via `overrides` dans `_manifest.json`, avec une raison.
 - **Jamais de secrets dans git.** Le dépôt est public ; les placeholders s'appellent `…-INVULLEN` et
   sont renseignés dans `local/`.
-- **Généré, ne pas modifier à la main :** `baseline/`, `export/`, `BaselineTemplate/Baseline.json`,
+- **Généré, ne pas modifier à la main :** `export/`, `BaselineTemplate/Baseline.json`,
   `OVERZICHT.md`, `COMPLIANCE.md`, les README dans `IntuneTemplate/` et le `.md` par stratégie.
 
 ## Pour aller plus loin

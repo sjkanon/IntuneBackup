@@ -10,8 +10,7 @@ Ces deux fichiers se trouvent volontairement **en dehors** de
 [`shellscripts/macos/`](../../shellscripts/macos/README.fr.md) et
 [`enrollment/macos/`](../../enrollment/macos/README.fr.md) : dans Graph, un script de conformité
 est une ressource à part (`deviceManagement/deviceComplianceScripts`) et n'entre dans aucun des
-cinq types de stratégie CIPP. Les pipelines ne prennent pas en compte ce dossier, et il n'y a
-donc pas de `checkId`.
+cinq types de stratégie CIPP. Les pipelines ne prennent pas en compte ce dossier.
 
 | Fichier | Description |
 |---|---|

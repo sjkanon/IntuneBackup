@@ -12,7 +12,6 @@ First update ring: gets Windows updates immediately, so that problems become vis
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot |
 | File | [`Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.json) |
 

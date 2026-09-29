@@ -12,7 +12,6 @@ Checks whether the Mac runs macOS 14 or later — the version required by the ba
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | Own policy; the minimum follows from what the baseline itself already requires — MAC - D - Software Updates uses declarative update policy (DDM) and that requires macOS 14 |
 | File | [`Baseline_MAC_U_Compliance_OS_Version.json`](Baseline_MAC_U_Compliance_OS_Version.json) |
 

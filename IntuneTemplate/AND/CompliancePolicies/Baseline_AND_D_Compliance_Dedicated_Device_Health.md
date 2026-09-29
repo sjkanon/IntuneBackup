@@ -12,7 +12,6 @@ Merkt een dedicated Android-toestel (kiosk of gedeeld) als niet-compliant wannee
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Corp-Dedicated - Kiosk en Shared - v1.5; zonder wachtwoord- en OS-versie-eisen, patchniveau toegevoegd |
 | Bestand | [`Baseline_AND_D_Compliance_Dedicated_Device_Health.json`](Baseline_AND_D_Compliance_Dedicated_Device_Health.json) |
 

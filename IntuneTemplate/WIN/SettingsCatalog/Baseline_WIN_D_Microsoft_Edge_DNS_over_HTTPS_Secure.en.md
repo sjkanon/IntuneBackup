@@ -12,7 +12,6 @@ Enforces DNS over HTTPS in Edge without fallback: every DNS request goes encrypt
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure` |
 | Source | Microsoft Edge policy DnsOverHttpsMode and DnsOverHttpsTemplates (Edge 83+) — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 

@@ -12,7 +12,6 @@ Keeps corporate data on every enrolled device separate from personal apps: docum
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-185-IOSDDataProtection` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — SC - Data Protection - BYOD/Corporate and SC - iCloud & Storage - BYOD/Corporate (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0); merged into a single policy for all enrolled devices, because every key also works without supervision and with user enrolment |
 | File | [`Baseline_IOS_D_Data_Protection.json`](Baseline_IOS_D_Data_Protection.json) |
 

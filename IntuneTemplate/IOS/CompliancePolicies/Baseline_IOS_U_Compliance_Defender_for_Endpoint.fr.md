@@ -12,7 +12,6 @@ Marque un iPhone ou iPad comme non conforme dès que Microsoft Defender for Endp
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint et UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (tous deux Medium) ; UniFy Corporate exige Low |
 | Fichier | [`Baseline_IOS_U_Compliance_Defender_for_Endpoint.json`](Baseline_IOS_U_Compliance_Defender_for_Endpoint.json) |
 

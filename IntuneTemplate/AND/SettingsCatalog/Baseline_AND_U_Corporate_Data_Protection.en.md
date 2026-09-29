@@ -12,7 +12,6 @@ Blocks screenshots, file sharing via Bluetooth and factory reset by the user on 
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-180-ANDUCorporateDataProtection` |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings and Connectivity (Fully-Managed and Corp-Work-Profile) - v1.5 |
 | File | [`Baseline_AND_U_Corporate_Data_Protection.json`](Baseline_AND_U_Corporate_Data_Protection.json) |
 

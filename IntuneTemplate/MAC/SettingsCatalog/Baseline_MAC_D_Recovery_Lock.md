@@ -12,7 +12,6 @@ Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-198-MACDRecoveryLock` |
 | Bron | Microsoft Learn — Configure Recovery Lock using the settings catalog (juni 2026); vorm uit microsoft/intune-my-macs pol-sec-007-recovery-lock (daar maandelijkse rotatie, hier zes maanden) |
 | Bestand | [`Baseline_MAC_D_Recovery_Lock.json`](Baseline_MAC_D_Recovery_Lock.json) |
 

@@ -12,7 +12,6 @@ Vult de macOS-restricties aan met vijf maatregelen die OpenIntuneBaseline macOS 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-199-MACDRestrictionsHardening` |
 | Bron | OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions en D - Gatekeeper (zelfde waarden); CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.6.3.1 (diagnostische gegevens) |
 | Bestand | [`Baseline_MAC_D_Restrictions_Hardening.json`](Baseline_MAC_D_Restrictions_Hardening.json) |
 

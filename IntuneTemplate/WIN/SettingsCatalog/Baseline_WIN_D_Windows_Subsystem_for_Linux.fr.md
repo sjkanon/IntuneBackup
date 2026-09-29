@@ -12,7 +12,6 @@ Restreint le Sous-système Windows pour Linux, qui ouvre sinon un second environ
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-090-DWindowsSubsystemForLinux` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux |
 | Fichier | [`Baseline_WIN_D_Windows_Subsystem_for_Linux.json`](Baseline_WIN_D_Windows_Subsystem_for_Linux.json) |
 

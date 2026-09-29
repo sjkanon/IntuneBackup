@@ -12,7 +12,6 @@ Restreint le Microsoft Store, afin que les utilisateurs ne puissent pas installe
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-019-MicrosoftAppStore` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration |
 | Fichier | [`Baseline_WIN_D_Microsoft_Store.json`](Baseline_WIN_D_Microsoft_Store.json) |
 

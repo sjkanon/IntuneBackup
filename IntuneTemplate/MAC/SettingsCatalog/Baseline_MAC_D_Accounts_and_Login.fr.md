@@ -12,7 +12,6 @@ Détermine ce qui est visible à la connexion et quels comptes un Mac peut avoir
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-035-MACDAccountsAndLogin` |
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Accounts and Login |
 | Fichier | [`Baseline_MAC_D_Accounts_and_Login.json`](Baseline_MAC_D_Accounts_and_Login.json) |
 

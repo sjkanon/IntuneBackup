@@ -12,7 +12,6 @@ Deploys the guest network as a second profile to every Windows laptop, so that a
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | Own baseline — Intune Wi-Fi profile (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(c) and (e). |
 | File | [`Baseline_WIN_D_Wifi_Guest.json`](Baseline_WIN_D_Wifi_Guest.json) |
 

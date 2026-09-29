@@ -12,7 +12,6 @@ Vérifie si System Integrity Protection est activé sur le Mac.
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Health |
 | Fichier | [`Baseline_MAC_U_Compliance_Device_Health.json`](Baseline_MAC_U_Compliance_Device_Health.json) |
 

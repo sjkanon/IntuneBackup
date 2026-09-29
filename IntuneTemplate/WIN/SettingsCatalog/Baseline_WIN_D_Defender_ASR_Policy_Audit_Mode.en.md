@@ -12,7 +12,6 @@ Sets the same Attack Surface Reduction rules as the blocking ASR policy to audit
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
 | Source | CIPP standard template |
 | File | [`Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json`](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json) |
 

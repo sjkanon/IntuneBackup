@@ -12,7 +12,6 @@ Place en audit les mêmes règles Attack Surface Reduction que la policy ASR blo
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
 | Source | Template standard CIPP |
 | Fichier | [`Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json`](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json) |
 

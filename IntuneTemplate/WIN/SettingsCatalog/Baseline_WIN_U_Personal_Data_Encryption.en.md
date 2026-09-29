@@ -12,7 +12,6 @@ Encrypts the user's personal folders with a key tied to their Windows Hello sign
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-105-UPersonalDataEncryption` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption |
 | File | [`Baseline_WIN_U_Personal_Data_Encryption.json`](Baseline_WIN_U_Personal_Data_Encryption.json) |
 

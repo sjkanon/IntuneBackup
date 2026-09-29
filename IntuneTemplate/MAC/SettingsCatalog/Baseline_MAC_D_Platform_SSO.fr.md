@@ -12,7 +12,6 @@ Lie la connexion sur le Mac à Entra ID via le plug-in SSO Microsoft, afin que l
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-045-MACDPlatformSSO` |
 | Source | OpenIntuneBaseline macOS v1.0 — Authentication - D - Platform SSO |
 | Fichier | [`Baseline_MAC_D_Platform_SSO.json`](Baseline_MAC_D_Platform_SSO.json) |
 

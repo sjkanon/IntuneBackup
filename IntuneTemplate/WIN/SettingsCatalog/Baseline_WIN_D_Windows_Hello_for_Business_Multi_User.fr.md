@@ -12,7 +12,6 @@ Windows Hello for Business pour les appareils partagés sur lesquels plusieurs u
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser` |
 | Source | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, complétée par DisablePostLogonProvisioning |
 | Fichier | [`Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.json`](Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.json) |
 

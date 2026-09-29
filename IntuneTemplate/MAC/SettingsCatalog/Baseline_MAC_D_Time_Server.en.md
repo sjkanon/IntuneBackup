@@ -12,7 +12,6 @@ Has the Mac synchronise its clock with time.apple.com, so that timestamps in log
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-201-MACDTimeServer` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.3.2.1 (mSCP branch tahoe, ODV time.apple.com); form taken from microsoft/intune-my-macs pol-sys-100-ntp |
 | File | [`Baseline_MAC_D_Time_Server.json`](Baseline_MAC_D_Time_Server.json) |
 

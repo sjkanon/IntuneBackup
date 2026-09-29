@@ -12,7 +12,6 @@ Les paramètres de sécurité d'Edge sur macOS : SmartScreen, contrôle des tél
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security |
 | Fichier | [`Baseline_MAC_D_Microsoft_Edge_Security.json`](Baseline_MAC_D_Microsoft_Edge_Security.json) |
 

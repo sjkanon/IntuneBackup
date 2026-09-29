@@ -12,7 +12,6 @@ Explicitly sets the numeric PIN for the Windows Hello for Business passkey: digi
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric` |
 | Source | Own choice, PassportForWork CSP — Policies/PINComplexity |
 | File | [`Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.json`](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.json) |
 

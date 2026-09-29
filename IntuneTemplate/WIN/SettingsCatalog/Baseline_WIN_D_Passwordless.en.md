@@ -12,7 +12,6 @@ Hides the password field at sign-in, so that users use Windows Hello or a securi
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-076-DPasswordless` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Credential Management - D - Passwordless |
 | File | [`Baseline_WIN_D_Passwordless.json`](Baseline_WIN_D_Passwordless.json) |
 

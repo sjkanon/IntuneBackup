@@ -12,7 +12,6 @@ Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien i
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-131-DLogging` |
 | Bron | ISO/IEC 27001:2022 A.8.15 en A.8.16, NIS2 art. 21(2)(b) — instellingen uit CIS v4 Windows 11 L2 |
 | Bestand | [`Baseline_WIN_D_Logging.json`](Baseline_WIN_D_Logging.json) |
 

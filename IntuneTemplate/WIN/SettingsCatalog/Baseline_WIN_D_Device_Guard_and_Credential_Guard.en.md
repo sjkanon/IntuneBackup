@@ -12,7 +12,6 @@ Turns on virtualisation-based security, Credential Guard and memory integrity, s
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Device Guard, Credential Guard and HVCI |
 | File | [`Baseline_WIN_D_Device_Guard_and_Credential_Guard.json`](Baseline_WIN_D_Device_Guard_and_Credential_Guard.json) |
 

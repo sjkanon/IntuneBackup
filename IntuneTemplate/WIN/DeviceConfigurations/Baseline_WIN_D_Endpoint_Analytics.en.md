@@ -12,7 +12,6 @@ Sends startup and performance data to Endpoint Analytics, so that slow devices b
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | All Devices |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — TP - Health Monitoring - D - Endpoint Analytics |
 | File | [`Baseline_WIN_D_Endpoint_Analytics.json`](Baseline_WIN_D_Endpoint_Analytics.json) |
 

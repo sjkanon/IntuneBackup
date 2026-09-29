@@ -12,7 +12,6 @@ Makes a device non-compliant as soon as Defender for Endpoint rates the risk lev
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Compliance, 'Microsoft Defender for Endpoint Risk score' (deviceThreatProtectionEnabled, RequiredSecurityLevel medium); body aligned with the OIB v4.0 compliance policies, fields verified against DCv1 |
 | File | [`Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json`](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json) |
 

@@ -12,7 +12,6 @@ Marks an iPhone or iPad that has been jailbroken as non-compliant.
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline convention for compliance, content compared with IntuneAdmin (Baseline - iOSiPadOS - Device Health) and UniFy-Endpoint iOS BYOD. |
 | File | [`Baseline_IOS_U_Compliance_Device_Health.json`](Baseline_IOS_U_Compliance_Device_Health.json) |
 

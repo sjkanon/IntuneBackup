@@ -12,7 +12,6 @@ Staat op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functie
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-183-IOSDAppleIntelligencePermitted` |
 | Bron | Tegenhanger van [Baseline] - IOS - D - Apple Intelligence Restricted; dezelfde declaratieve sleutels op de Apple-standaardwaarde, expliciet vastgelegd |
 | Bestand | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 

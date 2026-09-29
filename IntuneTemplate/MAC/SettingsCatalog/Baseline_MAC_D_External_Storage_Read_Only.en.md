@@ -12,7 +12,6 @@ Lets macOS mount only external storage that is itself read-only. Ordinary USB st
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-196-MACDExternalStorageReadOnly` |
 | Source | Apple declarative management, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, supervised only); settingDefinitionIds and options verified against the settings catalog definitions |
 | File | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 

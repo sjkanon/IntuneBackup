@@ -12,7 +12,6 @@ Lets Windows determine the time zone automatically, so that logs and certificate
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-082-DTimezone` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | File | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 

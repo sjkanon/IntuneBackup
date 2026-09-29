@@ -12,7 +12,6 @@ Collection of individual hardening settings: outdated SMB and NTLM variants, Aut
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-080-DSecurityHardening` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening |
 | File | [`Baseline_WIN_D_Security_Hardening.json`](Baseline_WIN_D_Security_Hardening.json) |
 

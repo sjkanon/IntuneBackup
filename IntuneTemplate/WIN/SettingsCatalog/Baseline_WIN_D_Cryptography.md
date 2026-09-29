@@ -12,7 +12,6 @@ Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-128-DCryptography` |
 | Bron | ISO/IEC 27001:2022 A.8.24, NIS2 art. 21(2)(h) — instelling uit CIS v3 Microsoft Edge L1 |
 | Bestand | [`Baseline_WIN_D_Cryptography.json`](Baseline_WIN_D_Cryptography.json) |
 

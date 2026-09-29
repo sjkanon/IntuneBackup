@@ -12,7 +12,6 @@ Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd.
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-021-OfficeUpdates` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates |
 | Bestand | [`Baseline_WIN_D_Microsoft_Office_Updates.json`](Baseline_WIN_D_Microsoft_Office_Updates.json) |
 

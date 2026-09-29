@@ -12,7 +12,6 @@ Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Device config |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | eigen baseline — Apple staat schermopname niet toe in de settings catalog-vorm van PPPC |
 | Bestand | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 

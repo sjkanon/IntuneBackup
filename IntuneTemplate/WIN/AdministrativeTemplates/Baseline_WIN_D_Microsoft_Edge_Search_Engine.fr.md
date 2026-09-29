@@ -12,7 +12,6 @@ Définit Google comme moteur de recherche par défaut dans Edge. Un choix du cli
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | ADMX |
 | Affectation | — |
-| checkId | `INTUNE-BASE-015-EdgeStandardSearchEngineGoogle` |
 | Source | baseline propre (ADMX) |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_Search_Engine.json`](Baseline_WIN_D_Microsoft_Edge_Search_Engine.json) |
 

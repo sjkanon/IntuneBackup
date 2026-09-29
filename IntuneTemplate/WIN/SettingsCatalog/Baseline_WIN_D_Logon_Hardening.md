@@ -12,7 +12,6 @@ Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergr
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-132-DLogonHardening` |
 | Bron | CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie. |
 | Bestand | [`Baseline_WIN_D_Logon_Hardening.json`](Baseline_WIN_D_Logon_Hardening.json) |
 

@@ -12,7 +12,6 @@ Zet meldingen op het vergrendelscherm en automatisch aanvullen in Internet Explo
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-031-UWindowsUserExperience` |
 | Bron | eigen baseline — uit de splitsing van Administrative Templates |
 | Bestand | [`Baseline_WIN_U_Windows_User_Experience.json`](Baseline_WIN_U_Windows_User_Experience.json) |
 

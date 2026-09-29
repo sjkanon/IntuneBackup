@@ -12,7 +12,6 @@ Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zi
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-098-UMicrosoftEdgeExtensions` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Extensions.json`](Baseline_WIN_U_Microsoft_Edge_Extensions.json) |
 

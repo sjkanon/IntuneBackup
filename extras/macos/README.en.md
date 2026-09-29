@@ -3,9 +3,9 @@
 # extras/macos/
 
 Parts of the macOS baseline that are none of the five CIPP policy types (Catalog, Device,
-deviceCompliancePolicies, AppProtection, Admin). The pipelines (`generate-baseline.js`,
-`export-intunebackup.js`, `check-scope.js`, `Set-BaselineAssignment.ps1`) do not pick up this folder
-and there are no `checkId`s for it — just like `enrollment/macos/`, `shellscripts/macos/` and
+deviceCompliancePolicies, AppProtection, Admin). The pipelines
+(`export-intunebackup.js`, `check-scope.js`, `Set-BaselineAssignment.ps1`) do not pick up this folder
+— just like `enrollment/macos/`, `shellscripts/macos/` and
 `compliance/macos/`.
 
 | Folder | What | How to deploy |

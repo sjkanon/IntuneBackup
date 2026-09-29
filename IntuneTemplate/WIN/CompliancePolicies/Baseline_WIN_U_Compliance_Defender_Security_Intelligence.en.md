@@ -12,7 +12,6 @@ Checks whether Microsoft Defender is on and the security intelligence is up to d
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence |
 | File | [`Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json`](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json) |
 

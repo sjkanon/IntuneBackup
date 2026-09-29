@@ -12,7 +12,6 @@ Explicitly sets the numeric Windows Hello PIN: digits required, letters and spec
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric` |
 | Source | Own choice, PassportForWork CSP — Policies/PINComplexity |
 | File | [`Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.json`](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.json) |
 

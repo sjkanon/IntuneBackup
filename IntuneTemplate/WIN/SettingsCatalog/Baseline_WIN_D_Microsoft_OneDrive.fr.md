@@ -12,7 +12,6 @@ Connecte automatiquement le client OneDrive avec le compte professionnel et dép
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-029-OnedriveSilentLogin` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration |
 | Fichier | [`Baseline_WIN_D_Microsoft_OneDrive.json`](Baseline_WIN_D_Microsoft_OneDrive.json) |
 

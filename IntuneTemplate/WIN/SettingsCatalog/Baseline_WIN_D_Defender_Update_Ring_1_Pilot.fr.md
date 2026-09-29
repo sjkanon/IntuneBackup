@@ -12,7 +12,6 @@ Récupère en premier les nouvelles définitions et versions de moteur Defender,
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot |
 | Fichier | [`Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json) |
 

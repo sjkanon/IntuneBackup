@@ -4,8 +4,7 @@
 
 Wat bij een complete Android-baseline hoort maar geen van de vijf CIPP-policytypes is. Deze
 bestanden staan daarom **buiten** `IntuneTemplate/`, net als `enrollment/macos/` en
-`compliance/macos/`: `generate-baseline.js`, `export-intunebackup.js` en
-`Set-BaselineAssignment.ps1` pikken ze niet op, en er hoort geen `checkId` bij.
+`compliance/macos/`: `export-intunebackup.js` en `Set-BaselineAssignment.ps1` pikken ze niet op.
 
 | Map | Wat | Graph-resource |
 |---|---|---|

@@ -7,8 +7,7 @@ raison que les [profils d'inscription ADE](../../enrollment/macos/README.fr.md) 
 connaissent cinq types de stratégies CIPP, et un script shell n'en fait pas partie. Il se situe sous
 `deviceManagement/deviceShellScripts`, `Set-CIPPIntunePolicy` n'a pas de `TemplateType` pour lui,
 et `Start-IntuneRestoreConfig` ne le restaure pas. Un fichier placé ici n'est donc **pas**
-pris en compte par `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js` ou
-`Set-BaselineAssignment.ps1`, et il n'a pas de `checkId`.
+pris en compte par `export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`.
 
 | Fichier | Ce qu'il fait | Portée |
 |---|---|---|

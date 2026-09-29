@@ -12,7 +12,6 @@ Change automatiquement le mot de passe du compte administrateur local et le stoc
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-027-WindowsLAPSPolicy` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 

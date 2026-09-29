@@ -12,7 +12,6 @@ Houdt bedrijfsgegevens op elk ingeschreven toestel gescheiden van privé-apps: d
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-185-IOSDDataProtection` |
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — SC - Data Protection - BYOD/Corporate en SC - iCloud & Storage - BYOD/Corporate (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0); samengevoegd tot één policy voor alle ingeschreven toestellen, omdat elke sleutel ook zonder supervisie en bij user enrollment werkt |
 | Bestand | [`Baseline_IOS_D_Data_Protection.json`](Baseline_IOS_D_Data_Protection.json) |
 

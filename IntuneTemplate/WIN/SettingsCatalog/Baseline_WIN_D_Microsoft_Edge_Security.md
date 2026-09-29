@@ -12,7 +12,6 @@ De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaat
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-020-MicrosoftEdge` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_Security.json`](Baseline_WIN_D_Microsoft_Edge_Security.json) |
 

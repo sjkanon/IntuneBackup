@@ -12,7 +12,6 @@ Configuration de base de Defender Antivirus telle que CIPP la fournit : protecti
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-108-DDefenderAVPolicy` |
 | Source | Template standard CIPP |
 | Fichier | [`Baseline_WIN_D_Defender_AV_Policy.json`](Baseline_WIN_D_Defender_AV_Policy.json) |
 

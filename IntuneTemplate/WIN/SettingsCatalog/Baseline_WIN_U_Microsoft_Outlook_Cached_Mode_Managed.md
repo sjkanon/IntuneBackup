@@ -12,7 +12,6 @@ Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-160-UMicrosoftOutlookCachedModeManaged` |
 | Bron | eigen baseline |
 | Bestand | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.json) |
 

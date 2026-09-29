@@ -12,7 +12,6 @@ Zet Apple Intelligence-functies uit die tekst, e-mail, notities, webpagina's of 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-195-MACDAppleIntelligenceRestricted` |
 | Bron | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.5.1.1–2.5.1.4 en 2.18.1 (mSCP branch tahoe); ids en waarden gelijk aan OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions, behalve Safari-samenvattingen (OIB: aan, hier uit) |
 | Bestand | [`Baseline_MAC_D_Apple_Intelligence_Restricted.json`](Baseline_MAC_D_Apple_Intelligence_Restricted.json) |
 

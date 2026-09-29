@@ -12,7 +12,6 @@ Edge's security settings on macOS: SmartScreen, download control and certificate
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security |
 | File | [`Baseline_MAC_D_Microsoft_Edge_Security.json`](Baseline_MAC_D_Microsoft_Edge_Security.json) |
 

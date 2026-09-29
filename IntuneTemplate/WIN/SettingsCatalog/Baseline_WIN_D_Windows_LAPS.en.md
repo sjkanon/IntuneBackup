@@ -12,7 +12,6 @@ Automatically rotates the password of the local administrator account and stores
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-027-WindowsLAPSPolicy` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | File | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 

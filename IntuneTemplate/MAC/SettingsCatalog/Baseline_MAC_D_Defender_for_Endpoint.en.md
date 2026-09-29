@@ -12,7 +12,6 @@ Gives Defender the system permissions macOS requires before it can work: system 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
 | Source | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration |
 | File | [`Baseline_MAC_D_Defender_for_Endpoint.json`](Baseline_MAC_D_Defender_for_Endpoint.json) |
 

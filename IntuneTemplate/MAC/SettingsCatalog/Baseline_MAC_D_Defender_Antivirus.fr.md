@@ -12,7 +12,6 @@ Protection en temps réel, protection cloud et comportement d'analyse de Defende
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-036-MACDDefenderAntivirus` |
 | Source | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - Antivirus Configuration |
 | Fichier | [`Baseline_MAC_D_Defender_Antivirus.json`](Baseline_MAC_D_Defender_Antivirus.json) |
 

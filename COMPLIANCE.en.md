@@ -11,10 +11,8 @@ itself on top of that. Intended for a CISO, DPO or auditor. Everything below is 
 [`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).
 
 **Read this first.** This document states what the *baseline* enforces, not what a *tenant* does. Whether
-the policies are present and correct in a tenant is verified by TEST Policies Platform with the checkIds listed
-(source: [`baseline/intune/baseline-v1.0.json`](baseline/intune/baseline-v1.0.json)). A policy
-without its own checkId (compliance, device configuration, app protection) can be evidenced through
-Intune reporting and, where stated, through a generic check.
+the policies are present and applied in a tenant is evidenced through Intune reporting: the
+assignment and the per-device status of every policy named below.
 
 | Status | Meaning |
 |---|---|
@@ -24,7 +22,6 @@ Intune reporting and, where stated, through a generic check.
 | ○ No technical measure in the baseline | can be implemented technically, but this baseline does not (or only with an alternative in phase 5) |
 
 > **Conditional Access is deliberately not included** (`--no-ca`). MFA (NIS2 (j)) and access conditions rely largely on CA; the accountability for that is in the CA repo.
-
 ## Contents
 
 1. [Summary](#summary)
@@ -141,7 +138,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.5.33** Protection of records](#a533-protection-of-records) | partial | ◐ Pilot, waiting or dedicated group only | – | 1 | Define retention periods and protection of records (retention policy, log retention). |
 | [**A.5.34** Privacy and protection of PII](#a534-privacy-and-protection-of-pii) | partial | ● Covered (phase 1) | 4 | 10 | GDPR accountability: record of processing activities, DPIA for telemetry, monitoring and AI features, alignment with the DPO and works council. |
 | **A.5.35** Independent review of information security | organisational | ▢ Organisational | – | – | Internal audit or external review at planned intervals. |
-| **A.5.36** Compliance with policies, rules and standards for information security | partial | ○ No technical measure in the baseline | – | – | Review compliance periodically; compliance policies and baseline checks provide the measurement, the review and follow-up are organisational. |
+| **A.5.36** Compliance with policies, rules and standards for information security | partial | ○ No technical measure in the baseline | – | – | Review compliance periodically; compliance policies and Intune compliance reporting provide the measurement, the review and follow-up are organisational. |
 | **A.5.37** Documented operating procedures | organisational | ▢ Organisational | – | – | Document administration procedures (deployment, exceptions, recovery); the generated documentation in this repo is part of that. |
 
 ### 6 People controls
@@ -217,508 +214,508 @@ control can be implemented with endpoint or identity policy; **Status** states w
 
 ### Measures per control
 
-All policies per control, with checkId and phase. Phase 5 is an alternative that is not deployed and does not count towards the status.
+All policies per control, with their phase. Phase 5 is an alternative that is not deployed and does not count towards the status.
 
 #### A.5.9 Inventory of information and other associated assets
 
-- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2) — `INTUNE-BASE-141-DEnrollmentHardening`
-- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
-- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
+- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
+- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
 
 #### A.5.10 Acceptable use of information and other associated assets
 
-- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1) — `INTUNE-BASE-125-DAITooling`
-- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1) — `INTUNE-BASE-112-DWindowsAI`
-- [`WIN - U - Copilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.en.md) (phase 1) — `INTUNE-BASE-097-UCopilot`
-- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2) — `INTUNE-BASE-179-ANDUCorporateAIRestricted`
-- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2) — `INTUNE-BASE-195-MACDAppleIntelligenceRestricted`
-- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2) — `INTUNE-BASE-197-MACDLoginWindow`
-- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2) — `INTUNE-BASE-147-DWindowsAIFeaturesRestricted`
-- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2) — `INTUNE-BASE-139-UAIUsageControl`
-- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
-- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-183-IOSDAppleIntelligencePermitted`
-- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-194-MACDAppleIntelligencePermitted`
-- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5) — `INTUNE-BASE-146-DWindowsAIFeaturesPermitted`
-- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5) — `INTUNE-BASE-148-DWindowsAIPermitted`
-- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5) — `INTUNE-BASE-149-UAIUsageControlPermitted`
+- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1)
+- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
+- [`WIN - U - Copilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.en.md) (phase 1)
+- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
+- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2)
+- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
+- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2)
+- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
+- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3)
+- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5)
+- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5)
 
 #### A.5.14 Information transfer
 
-- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1) — `INTUNE-BASE-046-MACDRestrictions`
-- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2) — `INTUNE-BASE-145-UMicrosoftTeams`
+- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
+- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2)
 
 #### A.5.15 Access control
 
-- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1) — `INTUNE-BASE-035-MACDAccountsAndLogin`
-- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
-- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1) — `INTUNE-BASE-026-UserRights`
-- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2) — `INTUNE-BASE-123-DAccessControl`
-- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2) — `INTUNE-BASE-124-DAccountLockout`
-- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2) — `INTUNE-BASE-141-DEnrollmentHardening`
-- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2) — `INTUNE-BASE-132-DLogonHardening`
-- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2) — `INTUNE-BASE-135-DRemoteAccessHardening`
-- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2) — `INTUNE-BASE-145-UMicrosoftTeams`
-- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1)
+- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
+- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1)
+- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
+- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2)
+- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
+- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
+- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2)
+- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2)
+- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3)
+- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
 
 #### A.5.16 Identity management
 
-- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
-- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
+- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
+- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
 
 #### A.5.17 Authentication information
 
-- [`MAC - D - Microsoft Edge Password Management`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) (phase 1) — `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`
-- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1) — `INTUNE-BASE-013-DeviceLock`
-- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1) — `INTUNE-BASE-024-Smartscreen`
-- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1) — `INTUNE-BASE-070-DLegacyHardening`
-- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1) — `INTUNE-BASE-072-DLoginAndLockScreen`
-- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1) — `INTUNE-BASE-076-DPasswordless`
-- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1) — `INTUNE-BASE-081-DSettingsSync`
-- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1) — `INTUNE-BASE-027-WindowsLAPSPolicy`
-- [`WIN - U - Microsoft Edge Password Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) (phase 1) — `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`
-- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
-- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
-- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
-- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2) — `INTUNE-BASE-123-DAccessControl`
-- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2) — `INTUNE-BASE-124-DAccountLockout`
-- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
-- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
-- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2) — `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric`
-- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
-- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`MAC - D - Microsoft Edge Password Management`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) (phase 1)
+- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
+- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
+- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1)
+- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1)
+- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
+- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1)
+- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Password Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) (phase 1)
+- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
+- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
+- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
+- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
+- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2)
+- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
+- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2)
+- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2)
+- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
-- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3) — `INTUNE-BASE-190-IOSDPasscode`
-- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
-- [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5) — `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric`
-- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
-- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
+- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
+- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
+- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
+- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
+- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
+- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5)
 
 #### A.5.19 Information security in supplier relationships
 
-- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2) — `INTUNE-BASE-139-UAIUsageControl`
-- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5) — `INTUNE-BASE-149-UAIUsageControlPermitted`
+- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
+- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5)
 
 #### A.5.29 Information security during disruption
 
-- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1) — `INTUNE-BASE-127-DBusinessContinuity`
-- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1) — `INTUNE-BASE-153-DDefenderRansomwareProtection`
+- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1)
+- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1)
 
 #### A.5.30 ICT readiness for business continuity
 
-- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1) — `INTUNE-BASE-127-DBusinessContinuity`
-- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1) — `INTUNE-BASE-143-DStorageSense`
+- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1)
+- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1)
 
 #### A.5.33 Protection of records
 
-- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3) — `INTUNE-BASE-150-DWindowsAIRecallBoundaries`
+- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3)
 
 #### A.5.34 Privacy and protection of PII
 
-- [`WIN - D - Data Minimisation`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Data_Minimisation.en.md) (phase 1) — `INTUNE-BASE-129-DDataMinimisation`
-- [`WIN - D - Location and Privacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Location_and_Privacy.en.md) (phase 1) — `INTUNE-BASE-022-Privacy`
-- [`WIN - D - Privacy and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.en.md) (phase 1) — `INTUNE-BASE-134-DPrivacyAndTelemetry`
-- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1) — `INTUNE-BASE-112-DWindowsAI`
-- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2) — `INTUNE-BASE-179-ANDUCorporateAIRestricted`
-- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2) — `INTUNE-BASE-195-MACDAppleIntelligenceRestricted`
-- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
-- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2) — `INTUNE-BASE-147-DWindowsAIFeaturesRestricted`
-- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
-- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3) — `INTUNE-BASE-150-DWindowsAIRecallBoundaries`
-- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-183-IOSDAppleIntelligencePermitted`
-- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-194-MACDAppleIntelligencePermitted`
-- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5) — `INTUNE-BASE-146-DWindowsAIFeaturesPermitted`
-- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5) — `INTUNE-BASE-148-DWindowsAIPermitted`
+- [`WIN - D - Data Minimisation`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Data_Minimisation.en.md) (phase 1)
+- [`WIN - D - Location and Privacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Location_and_Privacy.en.md) (phase 1)
+- [`WIN - D - Privacy and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.en.md) (phase 1)
+- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
+- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
+- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2)
+- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
+- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2)
+- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3)
+- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3)
+- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5)
 
 #### A.7.7 Clear desk and clear screen
 
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1) — `INTUNE-BASE-013-DeviceLock`
-- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1) — `INTUNE-BASE-072-DLoginAndLockScreen`
-- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1) — `INTUNE-BASE-142-DPowerManagement`
-- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
-- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
-- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2) — `INTUNE-BASE-200-MACDScreensaver`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
+- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1)
+- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1)
+- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
+- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
+- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
 
 #### A.7.9 Security of assets off-premises
 
-- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1) — `INTUNE-BASE-011-Bitlocker`
-- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1) — `INTUNE-BASE-137-DWirelessAndPeripherals`
-- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
-- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2) — `INTUNE-BASE-038-MACDFileVault`
-- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
-- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2) — `INTUNE-BASE-130-DKernelDMAProtection`
-- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4) — `INTUNE-BASE-189-IOSDLockScreen`
+- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1)
+- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1)
+- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
+- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
+- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
+- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2)
+- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4)
 
 #### A.7.10 Storage media
 
-- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1) — `INTUNE-BASE-011-Bitlocker`
-- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2) — `INTUNE-BASE-111-DRemovableStorage`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
-- [`MAC - D - External Storage Read Only`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.en.md) (phase 5) — `INTUNE-BASE-196-MACDExternalStorageReadOnly`
+- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1)
+- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
+- [`MAC - D - External Storage Read Only`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.en.md) (phase 5)
 
 #### A.8.1 User endpoint devices
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1) — `INTUNE-BASE-046-MACDRestrictions`
-- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1) — `INTUNE-BASE-125-DAITooling`
-- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1) — `INTUNE-BASE-011-Bitlocker`
-- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1) — `INTUNE-BASE-013-DeviceLock`
-- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1) — `INTUNE-BASE-142-DPowerManagement`
-- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1) — `INTUNE-BASE-112-DWindowsAI`
-- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1) — `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1) — `INTUNE-BASE-105-UPersonalDataEncryption`
-- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
-- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2) — `INTUNE-BASE-038-MACDFileVault`
-- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
-- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
-- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2) — `INTUNE-BASE-200-MACDScreensaver`
-- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
-- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2) — `INTUNE-BASE-141-DEnrollmentHardening`
-- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2) — `INTUNE-BASE-130-DKernelDMAProtection`
-- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2) — `INTUNE-BASE-147-DWindowsAIFeaturesRestricted`
-- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2) — `INTUNE-BASE-206-DWindowsComponentHardening`
-- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2) — `INTUNE-BASE-139-UAIUsageControl`
-- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
+- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1)
+- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1)
+- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
+- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1)
+- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
+- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1)
+- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1)
+- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1)
+- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1)
+- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
+- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
+- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1)
+- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
+- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
+- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
+- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
+- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
+- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
+- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
+- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2)
+- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2)
+- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2)
+- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
+- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3)
+- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3) — `INTUNE-BASE-185-IOSDDataProtection`
-- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3) — `INTUNE-BASE-190-IOSDPasscode`
-- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
+- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
+- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3)
+- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
 - [`MAC - D - Wifi Corporate`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Corporate.en.md) (phase 3)
 - [`WIN - D - Wifi Corporate`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.en.md) (phase 3)
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4) — `INTUNE-BASE-189-IOSDLockScreen`
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
-- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
-- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
-- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
-- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-194-MACDAppleIntelligencePermitted`
-- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5) — `INTUNE-BASE-146-DWindowsAIFeaturesPermitted`
-- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5) — `INTUNE-BASE-148-DWindowsAIPermitted`
-- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5) — `INTUNE-BASE-149-UAIUsageControlPermitted`
-- [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) (phase 5) — `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff`
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
+- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4)
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
+- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
+- [`MAC - D - Apple Intelligence Permitted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Features Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5)
+- [`WIN - D - Windows AI Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5)
+- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5)
+- [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) (phase 5)
 
 #### A.8.2 Privileged access rights
 
-- [`WIN - D - Local Administrators`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.en.md) (phase 1) — `INTUNE-BASE-071-DLocalAdministrators`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-019-MicrosoftAppStore`
-- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1) — `INTUNE-BASE-026-UserRights`
-- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1) — `INTUNE-BASE-027-WindowsLAPSPolicy`
-- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-104-UMicrosoftStore`
-- [`WIN - D - Administrator Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) (phase 2) — `INTUNE-BASE-055-DAdministratorProtection`
-- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
-- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
+- [`WIN - D - Local Administrators`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1)
+- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1)
+- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1)
+- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1)
+- [`WIN - D - Administrator Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) (phase 2)
+- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
 
 #### A.8.3 Information access restriction
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2) — `INTUNE-BASE-209-UFileSharingRestrictions`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2)
 
 #### A.8.5 Secure authentication
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1) — `INTUNE-BASE-035-MACDAccountsAndLogin`
-- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1) — `INTUNE-BASE-013-DeviceLock`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1) — `INTUNE-BASE-076-DPasswordless`
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1) — `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`
-- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2) — `INTUNE-BASE-197-MACDLoginWindow`
-- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
-- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2) — `INTUNE-BASE-200-MACDScreensaver`
-- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2) — `INTUNE-BASE-123-DAccessControl`
-- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2) — `INTUNE-BASE-124-DAccountLockout`
-- [`WIN - D - Disable NTLM`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.en.md) (phase 2) — `INTUNE-BASE-066-DDisableNTLM`
-- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2) — `INTUNE-BASE-132-DLogonHardening`
-- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
-- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
-- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2) — `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric`
-- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
-- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1)
+- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
+- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
+- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
+- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
+- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
+- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2)
+- [`WIN - D - Disable NTLM`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.en.md) (phase 2)
+- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
+- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
+- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2)
+- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2)
+- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
-- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3) — `INTUNE-BASE-190-IOSDPasscode`
-- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) (phase 3) — `INTUNE-BASE-154-MACDAzureFilesCloudKerberos`
-- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
-- [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5) — `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric`
-- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5) — `INTUNE-BASE-210-DWindowsHelloPINComplexityAlphanumeric`
-- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5) — `INTUNE-BASE-211-DWindowsHelloPINComplexityNumeric`
+- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
+- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
+- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
+- [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) (phase 3)
+- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
+- [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
+- [`WIN - D - Windows Hello PIN Complexity Numeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5)
 
 #### A.8.6 Capacity management
 
-- [`WIN - D - Delivery Optimisation`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Delivery_Optimisation.en.md) (phase 1) — `INTUNE-BASE-064-DDeliveryOptimisation`
+- [`WIN - D - Delivery Optimisation`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Delivery_Optimisation.en.md) (phase 1)
 - [`WIN - D - Endpoint Analytics`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Endpoint_Analytics.en.md) (phase 1)
-- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1) — `INTUNE-BASE-143-DStorageSense`
+- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1)
 
 #### A.8.7 Protection against malware
 
-- [`MAC - D - Defender Antivirus`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md) (phase 1) — `INTUNE-BASE-036-MACDDefenderAntivirus`
-- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1) — `INTUNE-BASE-037-MACDDefenderForEndpoint`
-- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1) — `INTUNE-BASE-039-MACDFirewallAndGatekeeper`
-- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
-- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1) — `INTUNE-BASE-007-ASRDefaultRules`
-- [`WIN - D - Defender Additional Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.en.md) (phase 1) — `INTUNE-BASE-059-DDefenderAdditionalConfiguration`
-- [`WIN - D - Defender Antivirus`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.en.md) (phase 1) — `INTUNE-BASE-012-DefaultAVPolicy`
-- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1) — `INTUNE-BASE-109-DDefenderEDRPolicy`
-- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1) — `INTUNE-BASE-153-DDefenderRansomwareProtection`
-- [`WIN - D - Defender Security Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.en.md) (phase 1) — `INTUNE-BASE-060-DDefenderSecurityExperience`
-- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1) — `INTUNE-BASE-063-DDefenderUpdateRing3Production`
-- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1) — `INTUNE-BASE-069-DInternetExplorerLegacy`
-- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-020-MicrosoftEdge`
-- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-075-DMicrosoftOfficeSecurity`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1) — `INTUNE-BASE-136-DThreatProtection`
-- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1) — `INTUNE-BASE-085-DWindowsFirewallRules`
-- [`WIN - U - Attachment Scanning`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.en.md) (phase 1) — `INTUNE-BASE-140-UAttachmentScanning`
-- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-103-UMicrosoftOfficeSecurity`
-- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
-- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2) — `INTUNE-BASE-133-DPrintingHardening`
-- [`WIN - D - Script File Associations`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Script_File_Associations.en.md) (phase 2) — `INTUNE-BASE-079-DScriptFileAssociations`
-- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
-- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - D - Defender Antivirus`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md) (phase 1)
+- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1)
+- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1)
+- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1)
+- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1)
+- [`WIN - D - Defender Additional Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.en.md) (phase 1)
+- [`WIN - D - Defender Antivirus`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.en.md) (phase 1)
+- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1)
+- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1)
+- [`WIN - D - Defender Security Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.en.md) (phase 1)
+- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1)
+- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1)
+- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1)
+- [`WIN - U - Attachment Scanning`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.en.md) (phase 1)
+- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1)
+- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1)
+- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1)
+- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
+- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
+- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2)
+- [`WIN - D - Script File Associations`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Script_File_Associations.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
+- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3)
+- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
 - [`IOS - D - Defender for Endpoint Onboarding Supervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.en.md) (phase 4)
 - [`IOS - D - Defender for Endpoint Onboarding Unsupervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.en.md) (phase 4)
-- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4) — `INTUNE-BASE-107-DDefenderASRPolicyAuditMode`
-- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4) — `INTUNE-BASE-061-DDefenderUpdateRing1Pilot`
-- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4) — `INTUNE-BASE-062-DDefenderUpdateRing2UAT`
-- [`WIN - D - Defender AV Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.en.md) (phase 5) — `INTUNE-BASE-108-DDefenderAVPolicy`
-- [`WIN - D - Defender for Endpoint EDR`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) (phase 5) — `INTUNE-BASE-014-EDRConfiguration`
+- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4)
+- [`WIN - D - Defender AV Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.en.md) (phase 5)
+- [`WIN - D - Defender for Endpoint EDR`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) (phase 5)
 
 #### A.8.8 Management of technical vulnerabilities
 
-- [`MAC - D - Microsoft AutoUpdate`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_AutoUpdate.en.md) (phase 1) — `INTUNE-BASE-040-MACDMicrosoftAutoUpdate`
-- [`MAC - U - Microsoft Edge Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.en.md) (phase 1) — `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates`
-- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1) — `INTUNE-BASE-007-ASRDefaultRules`
-- [`WIN - D - Automatic Restart Sign-On`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) (phase 1) — `INTUNE-BASE-056-DAutomaticRestartSignOn`
-- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1) — `INTUNE-BASE-063-DDefenderUpdateRing3Production`
-- [`WIN - D - Microsoft Edge Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.en.md) (phase 1) — `INTUNE-BASE-074-DMicrosoftEdgeUpdates`
-- [`WIN - D - Microsoft Office Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.en.md) (phase 1) — `INTUNE-BASE-021-OfficeUpdates`
-- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1) — `INTUNE-BASE-077-DPrinting`
-- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1) — `INTUNE-BASE-136-DThreatProtection`
-- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1) — `INTUNE-BASE-083-DUpdateReportsAndTelemetry`
+- [`MAC - D - Microsoft AutoUpdate`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_AutoUpdate.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.en.md) (phase 1)
+- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1)
+- [`WIN - D - Automatic Restart Sign-On`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) (phase 1)
+- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.en.md) (phase 1)
+- [`WIN - D - Microsoft Office Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.en.md) (phase 1)
+- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1)
+- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1)
+- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1)
 - [`WIN - D - Windows Update Ring 3 Production`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_3_Production.en.md) (phase 1)
-- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2) — `INTUNE-BASE-047-MACDSoftwareUpdates`
-- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-003-CompliancePolicyMinOsVersion`, `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2)
+- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
+- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2)
 - [`AND - D - System Updates`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_D_System_Updates.en.md) (phase 3)
-- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
-- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3) — `INTUNE-BASE-192-IOSDSoftwareUpdates`
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4) — `INTUNE-BASE-061-DDefenderUpdateRing1Pilot`
-- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4) — `INTUNE-BASE-062-DDefenderUpdateRing2UAT`
+- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
+- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3)
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 1 Pilot`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 2 UAT`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) (phase 4)
 
 #### A.8.9 Configuration management
 
-- [`MAC - D - Microsoft Office`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Office.en.md) (phase 1) — `INTUNE-BASE-043-MACDMicrosoftOffice`
-- [`MAC - D - Microsoft OneDrive`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.en.md) (phase 1) — `INTUNE-BASE-044-MACDMicrosoftOneDrive`
-- [`WIN - D - Cloud Optimized Content`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.en.md) (phase 1) — `INTUNE-BASE-057-DCloudOptimizedContent`
-- [`WIN - D - Config Refresh`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) (phase 1) — `INTUNE-BASE-058-DConfigRefresh`
-- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1) — `INTUNE-BASE-069-DInternetExplorerLegacy`
-- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1) — `INTUNE-BASE-070-DLegacyHardening`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-020-MicrosoftEdge`
-- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-075-DMicrosoftOfficeSecurity`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Windows Feature Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) (phase 1) — `INTUNE-BASE-084-DWindowsFeatureConfiguration`
-- [`WIN - D - Windows Sandbox`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Sandbox.en.md) (phase 1) — `INTUNE-BASE-089-DWindowsSandbox`
-- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1) — `INTUNE-BASE-090-DWindowsSubsystemForLinux`
-- [`WIN - U - Microsoft Edge User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_User_Experience.en.md) (phase 1) — `INTUNE-BASE-101-UMicrosoftEdgeUserExperience`
-- [`WIN - U - Microsoft Office Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Experience.en.md) (phase 1) — `INTUNE-BASE-102-UMicrosoftOfficeExperience`
-- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-103-UMicrosoftOfficeSecurity`
-- [`WIN - U - Microsoft Outlook`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook.en.md) (phase 1) — `INTUNE-BASE-010-AutomaticConfigurationOfOutlook`
-- [`WIN - U - Windows Spotlight`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Spotlight.en.md) (phase 1) — `INTUNE-BASE-106-UWindowsSpotlight`
-- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
-- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2) — `INTUNE-BASE-206-DWindowsComponentHardening`
-- [`WIN - U - Microsoft Edge Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Management.en.md) (phase 2) — `INTUNE-BASE-171-UMicrosoftEdgeManagement`
-- [`WIN - U - Microsoft Outlook Cached Mode Managed`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.en.md) (phase 2) — `INTUNE-BASE-160-UMicrosoftOutlookCachedModeManaged`
-- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3) — `INTUNE-BASE-192-IOSDSoftwareUpdates`
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
-- [`WIN - D - Microsoft Edge Search Engine`](IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) (phase 5) — `INTUNE-BASE-015-EdgeStandardSearchEngineGoogle`
-- [`WIN - U - Microsoft Outlook Cached Mode Default`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) (phase 5) — `INTUNE-BASE-159-UMicrosoftOutlookCachedModeDefault`
-- [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) (phase 5) — `INTUNE-BASE-161-UMicrosoftOutlookCachedModeOff`
+- [`MAC - D - Microsoft Office`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Office.en.md) (phase 1)
+- [`MAC - D - Microsoft OneDrive`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.en.md) (phase 1)
+- [`WIN - D - Cloud Optimized Content`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.en.md) (phase 1)
+- [`WIN - D - Config Refresh`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) (phase 1)
+- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1)
+- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Windows Feature Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) (phase 1)
+- [`WIN - D - Windows Sandbox`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Sandbox.en.md) (phase 1)
+- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_User_Experience.en.md) (phase 1)
+- [`WIN - U - Microsoft Office Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Experience.en.md) (phase 1)
+- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - U - Microsoft Outlook`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook.en.md) (phase 1)
+- [`WIN - U - Windows Spotlight`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Spotlight.en.md) (phase 1)
+- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
+- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2)
+- [`WIN - U - Microsoft Edge Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Management.en.md) (phase 2)
+- [`WIN - U - Microsoft Outlook Cached Mode Managed`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.en.md) (phase 2)
+- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3)
+- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3)
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
+- [`WIN - D - Microsoft Edge Search Engine`](IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) (phase 5)
+- [`WIN - U - Microsoft Outlook Cached Mode Default`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) (phase 5)
+- [`WIN - U - Microsoft Outlook Cached Mode Off`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) (phase 5)
 
 #### A.8.11 Data masking
 
-- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3) — `INTUNE-BASE-150-DWindowsAIRecallBoundaries`
+- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3)
 
 #### A.8.12 Data leakage prevention
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1) — `INTUNE-BASE-046-MACDRestrictions`
-- [`MAC - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1) — `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync`
-- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1) — `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM`
-- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1) — `INTUNE-BASE-125-DAITooling`
-- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
-- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1) — `INTUNE-BASE-029-OnedriveSilentLogin`
-- [`WIN - D - Privacy and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.en.md) (phase 1) — `INTUNE-BASE-134-DPrivacyAndTelemetry`
-- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1) — `INTUNE-BASE-112-DWindowsAI`
-- [`WIN - D - Windows Feature Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) (phase 1) — `INTUNE-BASE-084-DWindowsFeatureConfiguration`
-- [`WIN - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1) — `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`
-- [`WIN - U - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_OneDrive.en.md) (phase 1) — `INTUNE-BASE-032-UMicrosoftOneDrive`
-- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2) — `INTUNE-BASE-179-ANDUCorporateAIRestricted`
-- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
-- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2) — `INTUNE-BASE-195-MACDAppleIntelligenceRestricted`
-- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2) — `INTUNE-BASE-111-DRemovableStorage`
-- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2) — `INTUNE-BASE-209-UFileSharingRestrictions`
-- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2) — `INTUNE-BASE-145-UMicrosoftTeams`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1)
+- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1)
+- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1)
+- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
+- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1)
+- [`WIN - D - Privacy and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.en.md) (phase 1)
+- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
+- [`WIN - D - Windows Feature Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1)
+- [`WIN - U - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_OneDrive.en.md) (phase 1)
+- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
+- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
+- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2)
+- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2)
+- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2)
+- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
-- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3) — `INTUNE-BASE-185-IOSDDataProtection`
-- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3) — `INTUNE-BASE-150-DWindowsAIRecallBoundaries`
-- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5) — `INTUNE-BASE-183-IOSDAppleIntelligencePermitted`
-- [`MAC - D - External Storage Read Only`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.en.md) (phase 5) — `INTUNE-BASE-196-MACDExternalStorageReadOnly`
+- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3)
+- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
+- [`WIN - D - Windows AI Recall Boundaries`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) (phase 3)
+- [`IOS - D - Apple Intelligence Permitted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5)
+- [`MAC - D - External Storage Read Only`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.en.md) (phase 5)
 
 #### A.8.13 Information backup
 
-- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1) — `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM`
-- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1) — `INTUNE-BASE-029-OnedriveSilentLogin`
-- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1) — `INTUNE-BASE-081-DSettingsSync`
+- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1)
+- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1)
+- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1)
 
 #### A.8.15 Logging
 
-- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1) — `INTUNE-BASE-201-MACDTimeServer`
-- [`WIN - D - Audit and Event Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) (phase 1) — `INTUNE-BASE-009-Auditing`
-- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1) — `INTUNE-BASE-126-DAuditPolicyEnforcement`
-- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1) — `INTUNE-BASE-131-DLogging`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1) — `INTUNE-BASE-016-Firewall`
-- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2) — `INTUNE-BASE-205-DSecurityLogMonitoring`
-- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3) — `INTUNE-BASE-207-DWindowsEventForwarding`
+- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1)
+- [`WIN - D - Audit and Event Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) (phase 1)
+- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1)
+- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1)
+- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2)
+- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3)
 
 #### A.8.16 Monitoring activities
 
-- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1) — `INTUNE-BASE-037-MACDDefenderForEndpoint`
-- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1) — `INTUNE-BASE-126-DAuditPolicyEnforcement`
-- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1) — `INTUNE-BASE-109-DDefenderEDRPolicy`
-- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1) — `INTUNE-BASE-131-DLogging`
-- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2) — `INTUNE-BASE-205-DSecurityLogMonitoring`
-- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3) — `INTUNE-BASE-207-DWindowsEventForwarding`
-- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4) — `INTUNE-BASE-107-DDefenderASRPolicyAuditMode`
-- [`WIN - D - Defender for Endpoint EDR`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) (phase 5) — `INTUNE-BASE-014-EDRConfiguration`
+- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1)
+- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1)
+- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1)
+- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1)
+- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3)
+- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
+- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4)
+- [`WIN - D - Defender for Endpoint EDR`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) (phase 5)
 
 #### A.8.17 Clock synchronization
 
-- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1) — `INTUNE-BASE-201-MACDTimeServer`
-- [`WIN - D - Timezone`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) (phase 1) — `INTUNE-BASE-082-DTimezone`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1)
+- [`WIN - D - Timezone`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) (phase 1)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 
 #### A.8.18 Use of privileged utility programs
 
-- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1) — `INTUNE-BASE-026-UserRights`
-- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
-- [`MAC - D - Privacy Preferences`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.en.md) (phase 4) — `INTUNE-BASE-110-MACDPrivacyPreferences`
+- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1)
+- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
+- [`MAC - D - Privacy Preferences`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.en.md) (phase 4)
 - [`MAC - D - Screen Recording`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Screen_Recording.en.md) (phase 4)
 
 #### A.8.19 Installation of software on operational systems
 
-- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1) — `INTUNE-BASE-039-MACDFirewallAndGatekeeper`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Microsoft Edge Extensions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) (phase 1) — `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions`
-- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-019-MicrosoftAppStore`
-- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1) — `INTUNE-BASE-077-DPrinting`
-- [`WIN - D - Windows Package Manager`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Package_Manager.en.md) (phase 1) — `INTUNE-BASE-088-DWindowsPackageManager`
-- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1) — `INTUNE-BASE-090-DWindowsSubsystemForLinux`
-- [`WIN - U - Copilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.en.md) (phase 1) — `INTUNE-BASE-097-UCopilot`
-- [`WIN - U - Microsoft Edge Extensions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Extensions.en.md) (phase 1) — `INTUNE-BASE-098-UMicrosoftEdgeExtensions`
-- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-104-UMicrosoftStore`
-- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
-- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2) — `INTUNE-BASE-047-MACDSoftwareUpdates`
-- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - In-Box App Removal`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.en.md) (phase 2) — `INTUNE-BASE-068-DInBoxAppRemoval`
-- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2) — `INTUNE-BASE-133-DPrintingHardening`
-- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-003-CompliancePolicyMinOsVersion`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
+- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Extensions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) (phase 1)
+- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1)
+- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1)
+- [`WIN - D - Windows Package Manager`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Package_Manager.en.md) (phase 1)
+- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1)
+- [`WIN - U - Copilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Extensions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Extensions.en.md) (phase 1)
+- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1)
+- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
+- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2)
+- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
+- [`WIN - D - In-Box App Removal`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.en.md) (phase 2)
+- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2)
+- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
 
 #### A.8.20 Networks security
 
-- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1) — `INTUNE-BASE-039-MACDFirewallAndGatekeeper`
-- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1) — `INTUNE-BASE-153-DDefenderRansomwareProtection`
-- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1) — `INTUNE-BASE-070-DLegacyHardening`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1) — `INTUNE-BASE-077-DPrinting`
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1) — `INTUNE-BASE-016-Firewall`
-- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1) — `INTUNE-BASE-085-DWindowsFirewallRules`
-- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1) — `INTUNE-BASE-137-DWirelessAndPeripherals`
-- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2) — `INTUNE-BASE-132-DLogonHardening`
-- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
-- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
-- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2) — `INTUNE-BASE-133-DPrintingHardening`
-- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2) — `INTUNE-BASE-135-DRemoteAccessHardening`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1)
+- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1)
+- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1)
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1)
+- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1)
+- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1)
+- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
+- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
+- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
+- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2)
+- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`MAC - D - Wifi Corporate`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Corporate.en.md) (phase 3)
 - [`MAC - D - Wifi Guest`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Guest.en.md) (phase 3)
 - [`WIN - D - Wifi Corporate`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.en.md) (phase 3)
 - [`WIN - D - Wifi Guest`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.en.md) (phase 3)
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
-- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
-- [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) (phase 5) — `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure`
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
+- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
+- [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) (phase 5)
 
 #### A.8.21 Security of network services
 
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2) — `INTUNE-BASE-135-DRemoteAccessHardening`
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2)
 - [`MAC - D - Wifi Corporate`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Corporate.en.md) (phase 3)
 - [`MAC - D - Wifi Guest`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Guest.en.md) (phase 3)
 - [`WIN - D - Wifi Corporate`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.en.md) (phase 3)
@@ -726,40 +723,40 @@ All policies per control, with checkId and phase. Phase 5 is an alternative that
 
 #### A.8.23 Web filtering
 
-- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
-- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1) — `INTUNE-BASE-024-Smartscreen`
-- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-020-MicrosoftEdge`
-- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2) — `INTUNE-BASE-139-UAIUsageControl`
+- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
 - [`IOS - D - Defender for Endpoint Onboarding Supervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.en.md) (phase 4)
 - [`IOS - D - Defender for Endpoint Onboarding Unsupervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.en.md) (phase 4)
-- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5) — `INTUNE-BASE-149-UAIUsageControlPermitted`
+- [`WIN - U - AI Usage Control Permitted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5)
 
 #### A.8.24 Use of cryptography
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1) — `INTUNE-BASE-011-Bitlocker`
-- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-020-MicrosoftEdge`
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1) — `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1) — `INTUNE-BASE-105-UPersonalDataEncryption`
-- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2) — `INTUNE-BASE-038-MACDFileVault`
-- [`WIN - D - Cryptography`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) (phase 2) — `INTUNE-BASE-128-DCryptography`
-- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
-- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3) — `INTUNE-BASE-185-IOSDDataProtection`
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) (phase 5) — `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1)
+- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
+- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1)
+- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
+- [`WIN - D - Cryptography`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) (phase 2)
+- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
+- [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) (phase 5)
 
 #### A.8.32 Change management
 
-- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1) — `INTUNE-BASE-063-DDefenderUpdateRing3Production`
+- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1)
 - [`WIN - D - Windows Update Ring 3 Production`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_3_Production.en.md) (phase 1)
-- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4) — `INTUNE-BASE-061-DDefenderUpdateRing1Pilot`
-- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4) — `INTUNE-BASE-062-DDefenderUpdateRing2UAT`
+- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 1 Pilot`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 2 UAT`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) (phase 4)
 
@@ -797,27 +794,27 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (8)**
 
-- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1) — `INTUNE-BASE-037-MACDDefenderForEndpoint`
-- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1) — `INTUNE-BASE-201-MACDTimeServer`
-- [`WIN - D - Audit and Event Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) (phase 1) — `INTUNE-BASE-009-Auditing`
-- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1) — `INTUNE-BASE-126-DAuditPolicyEnforcement`
-- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1) — `INTUNE-BASE-109-DDefenderEDRPolicy`
-- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1) — `INTUNE-BASE-131-DLogging`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Timezone`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) (phase 1) — `INTUNE-BASE-082-DTimezone`
+- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1)
+- [`MAC - D - Time Server`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1)
+- [`WIN - D - Audit and Event Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) (phase 1)
+- [`WIN - D - Audit Policy Enforcement`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1)
+- [`WIN - D - Defender EDR Policy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1)
+- [`WIN - D - Logging`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Timezone`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (6)**
 
-- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2) — `INTUNE-BASE-205-DSecurityLogMonitoring`
-- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3) — `INTUNE-BASE-207-DWindowsEventForwarding`
-- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`WIN - D - Security Log Monitoring`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`WIN - D - Windows Event Forwarding`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3)
+- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
 
 **Alternative, not deployed (1)**: `WIN - D - Defender for Endpoint EDR`
 
-**Evidence route.** TEST Policies Platform verifies 8 checkIds: `INTUNE-BASE-009-Auditing`, `INTUNE-BASE-037-MACDDefenderForEndpoint`, `INTUNE-BASE-080-DSecurityHardening`, `INTUNE-BASE-082-DTimezone`, `INTUNE-BASE-109-DDefenderEDRPolicy`, `INTUNE-BASE-126-DAuditPolicyEnforcement`, `INTUNE-BASE-131-DLogging`, `INTUNE-BASE-201-MACDTimeServer`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -835,19 +832,19 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (6)**
 
-- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1) — `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM`
-- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1) — `INTUNE-BASE-127-DBusinessContinuity`
-- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1) — `INTUNE-BASE-153-DDefenderRansomwareProtection`
-- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1) — `INTUNE-BASE-029-OnedriveSilentLogin`
-- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1) — `INTUNE-BASE-081-DSettingsSync`
-- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1) — `INTUNE-BASE-143-DStorageSense`
+- [`MAC - U - Microsoft OneDrive KFM`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) (phase 1)
+- [`WIN - D - Business Continuity`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) (phase 1)
+- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1)
+- [`WIN - D - Microsoft OneDrive`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1)
+- [`WIN - D - Settings Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1)
+- [`WIN - D - Storage Sense`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (2)**
 
 - [`MAC - D - Wifi Guest`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Guest.en.md) (phase 3)
 - [`WIN - D - Wifi Guest`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.en.md) (phase 3)
 
-**Evidence route.** TEST Policies Platform verifies 6 checkIds: `INTUNE-BASE-029-OnedriveSilentLogin`, `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM`, `INTUNE-BASE-081-DSettingsSync`, `INTUNE-BASE-127-DBusinessContinuity`, `INTUNE-BASE-143-DStorageSense`, `INTUNE-BASE-153-DDefenderRansomwareProtection`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -864,20 +861,20 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (2)**
 
-- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1) — `INTUNE-BASE-125-DAITooling`
-- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1) — `INTUNE-BASE-112-DWindowsAI`
+- [`WIN - D - AI Tooling`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1)
+- [`WIN - D - Windows AI Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (5)**
 
-- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2) — `INTUNE-BASE-179-ANDUCorporateAIRestricted`
-- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2) — `INTUNE-BASE-195-MACDAppleIntelligenceRestricted`
-- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2) — `INTUNE-BASE-147-DWindowsAIFeaturesRestricted`
-- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2) — `INTUNE-BASE-139-UAIUsageControl`
-- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3) — `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted`
+- [`AND - U - Corporate AI Restricted`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
+- [`MAC - D - Apple Intelligence Restricted`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2)
+- [`WIN - D - Windows AI Features Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) (phase 2)
+- [`WIN - U - AI Usage Control Restricted`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
+- [`IOS - D - Apple Intelligence Restricted`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3)
 
 **Alternative, not deployed (5)**: `IOS - D - Apple Intelligence Permitted`, `MAC - D - Apple Intelligence Permitted`, `WIN - D - Windows AI Features Permitted`, `WIN - D - Windows AI Permitted`, `WIN - U - AI Usage Control Permitted`
 
-**Evidence route.** TEST Policies Platform verifies 2 checkIds: `INTUNE-BASE-112-DWindowsAI`, `INTUNE-BASE-125-DAITooling`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -894,96 +891,96 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (48)**
 
-- [`MAC - D - Defender Antivirus`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md) (phase 1) — `INTUNE-BASE-036-MACDDefenderAntivirus`
-- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1) — `INTUNE-BASE-037-MACDDefenderForEndpoint`
-- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1) — `INTUNE-BASE-039-MACDFirewallAndGatekeeper`
-- [`MAC - D - Microsoft AutoUpdate`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_AutoUpdate.en.md) (phase 1) — `INTUNE-BASE-040-MACDMicrosoftAutoUpdate`
-- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
-- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Microsoft Edge Extensions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) (phase 1) — `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions`
-- [`MAC - U - Microsoft Edge Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.en.md) (phase 1) — `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates`
-- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1) — `INTUNE-BASE-007-ASRDefaultRules`
-- [`WIN - D - Automatic Restart Sign-On`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) (phase 1) — `INTUNE-BASE-056-DAutomaticRestartSignOn`
-- [`WIN - D - Config Refresh`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) (phase 1) — `INTUNE-BASE-058-DConfigRefresh`
-- [`WIN - D - Defender Additional Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.en.md) (phase 1) — `INTUNE-BASE-059-DDefenderAdditionalConfiguration`
-- [`WIN - D - Defender Antivirus`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.en.md) (phase 1) — `INTUNE-BASE-012-DefaultAVPolicy`
-- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1) — `INTUNE-BASE-153-DDefenderRansomwareProtection`
-- [`WIN - D - Defender Security Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.en.md) (phase 1) — `INTUNE-BASE-060-DDefenderSecurityExperience`
-- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1) — `INTUNE-BASE-063-DDefenderUpdateRing3Production`
-- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1) — `INTUNE-BASE-069-DInternetExplorerLegacy`
-- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1) — `INTUNE-BASE-070-DLegacyHardening`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-020-MicrosoftEdge`
-- [`WIN - D - Microsoft Edge Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.en.md) (phase 1) — `INTUNE-BASE-074-DMicrosoftEdgeUpdates`
-- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-075-DMicrosoftOfficeSecurity`
-- [`WIN - D - Microsoft Office Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.en.md) (phase 1) — `INTUNE-BASE-021-OfficeUpdates`
-- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-019-MicrosoftAppStore`
-- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1) — `INTUNE-BASE-077-DPrinting`
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1) — `INTUNE-BASE-080-DSecurityHardening`
-- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1) — `INTUNE-BASE-136-DThreatProtection`
-- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1) — `INTUNE-BASE-083-DUpdateReportsAndTelemetry`
-- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1) — `INTUNE-BASE-016-Firewall`
-- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1) — `INTUNE-BASE-085-DWindowsFirewallRules`
-- [`WIN - D - Windows Package Manager`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Package_Manager.en.md) (phase 1) — `INTUNE-BASE-088-DWindowsPackageManager`
-- [`WIN - D - Windows Sandbox`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Sandbox.en.md) (phase 1) — `INTUNE-BASE-089-DWindowsSandbox`
-- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1) — `INTUNE-BASE-090-DWindowsSubsystemForLinux`
+- [`MAC - D - Defender Antivirus`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md) (phase 1)
+- [`MAC - D - Defender for Endpoint`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1)
+- [`MAC - D - Firewall and Gatekeeper`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1)
+- [`MAC - D - Microsoft AutoUpdate`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_AutoUpdate.en.md) (phase 1)
+- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Extensions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Updates.en.md) (phase 1)
+- [`WIN - D - Attack Surface Reduction`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) (phase 1)
+- [`WIN - D - Automatic Restart Sign-On`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) (phase 1)
+- [`WIN - D - Config Refresh`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) (phase 1)
+- [`WIN - D - Defender Additional Configuration`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.en.md) (phase 1)
+- [`WIN - D - Defender Antivirus`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.en.md) (phase 1)
+- [`WIN - D - Defender Ransomware Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) (phase 1)
+- [`WIN - D - Defender Security Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.en.md) (phase 1)
+- [`WIN - D - Defender Update Ring 3 Production`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) (phase 1)
+- [`WIN - D - Internet Explorer Legacy`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) (phase 1)
+- [`WIN - D - Legacy Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Microsoft Edge Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.en.md) (phase 1)
+- [`WIN - D - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - D - Microsoft Office Updates`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.en.md) (phase 1)
+- [`WIN - D - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1)
+- [`WIN - D - Printing`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) (phase 1)
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - D - Security Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
+- [`WIN - D - Threat Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) (phase 1)
+- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1)
+- [`WIN - D - Windows Firewall`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) (phase 1)
+- [`WIN - D - Windows Firewall Rules`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1)
+- [`WIN - D - Windows Package Manager`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Package_Manager.en.md) (phase 1)
+- [`WIN - D - Windows Sandbox`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Sandbox.en.md) (phase 1)
+- [`WIN - D - Windows Subsystem for Linux`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Subsystem_for_Linux.en.md) (phase 1)
 - [`WIN - D - Windows Update Ring 3 Production`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_3_Production.en.md) (phase 1)
-- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1) — `INTUNE-BASE-137-DWirelessAndPeripherals`
-- [`WIN - U - Attachment Scanning`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.en.md) (phase 1) — `INTUNE-BASE-140-UAttachmentScanning`
-- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Microsoft Edge Extensions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Extensions.en.md) (phase 1) — `INTUNE-BASE-098-UMicrosoftEdgeExtensions`
-- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1) — `INTUNE-BASE-103-UMicrosoftOfficeSecurity`
-- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1) — `INTUNE-BASE-104-UMicrosoftStore`
+- [`WIN - D - Wireless and Peripherals`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1)
+- [`WIN - U - Attachment Scanning`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.en.md) (phase 1)
+- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1)
+- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1)
+- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1)
+- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Extensions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Extensions.en.md) (phase 1)
+- [`WIN - U - Microsoft Office Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1)
+- [`WIN - U - Microsoft Store`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (35)**
 
-- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
-- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2) — `INTUNE-BASE-047-MACDSoftwareUpdates`
-- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
-- [`WIN - D - In-Box App Removal`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.en.md) (phase 2) — `INTUNE-BASE-068-DInBoxAppRemoval`
-- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2) — `INTUNE-BASE-130-DKernelDMAProtection`
-- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
-- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2) — `INTUNE-BASE-133-DPrintingHardening`
-- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2) — `INTUNE-BASE-135-DRemoteAccessHardening`
-- [`WIN - D - Script File Associations`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Script_File_Associations.en.md) (phase 2) — `INTUNE-BASE-079-DScriptFileAssociations`
-- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2) — `INTUNE-BASE-206-DWindowsComponentHardening`
-- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-003-CompliancePolicyMinOsVersion`, `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
+- [`MAC - D - Software Updates`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2)
+- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
+- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
+- [`WIN - D - In-Box App Removal`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.en.md) (phase 2)
+- [`WIN - D - Kernel DMA Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) (phase 2)
+- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
+- [`WIN - D - Printing Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) (phase 2)
+- [`WIN - D - Remote Access Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) (phase 2)
+- [`WIN - D - Script File Associations`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Script_File_Associations.en.md) (phase 2)
+- [`WIN - D - Windows Component Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) (phase 2)
+- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2)
 - [`AND - D - System Updates`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_D_System_Updates.en.md) (phase 3)
-- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
-- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3) — `INTUNE-BASE-192-IOSDSoftwareUpdates`
-- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`AND - U - Compliance Corporate Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Defender for Endpoint`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
+- [`IOS - D - Software Updates`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Software_Updates.en.md) (phase 3)
+- [`IOS - U - Compliance Defender for Endpoint`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
+- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3)
 - [`MAC - D - Wifi Corporate`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Corporate.en.md) (phase 3)
 - [`MAC - D - Wifi Guest`](IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Wifi_Guest.en.md) (phase 3)
 - [`WIN - D - Wifi Corporate`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.en.md) (phase 3)
 - [`WIN - D - Wifi Guest`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.en.md) (phase 3)
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
 - [`IOS - D - Defender for Endpoint Onboarding Supervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.en.md) (phase 4)
 - [`IOS - D - Defender for Endpoint Onboarding Unsupervised`](IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.en.md) (phase 4)
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
-- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4) — `INTUNE-BASE-107-DDefenderASRPolicyAuditMode`
-- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4) — `INTUNE-BASE-061-DDefenderUpdateRing1Pilot`
-- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4) — `INTUNE-BASE-062-DDefenderUpdateRing2UAT`
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
+- [`WIN - D - Defender ASR Policy Audit Mode`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 1 Pilot`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) (phase 4)
+- [`WIN - D - Defender Update Ring 2 UAT`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 1 Pilot`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) (phase 4)
 - [`WIN - D - Windows Update Ring 2 UAT`](IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) (phase 4)
-- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4) — `INTUNE-BASE-138-DWirelessSharedDevices`
+- [`WIN - D - Wireless Shared Devices`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
 
 **Alternative, not deployed (1)**: `WIN - D - Defender AV Policy`
 
-**Evidence route.** TEST Policies Platform verifies 40 checkIds: `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-007-ASRDefaultRules`, `INTUNE-BASE-012-DefaultAVPolicy`, `INTUNE-BASE-016-Firewall`, `INTUNE-BASE-018-LocalPoliciesSecurityOptions`, `INTUNE-BASE-019-MicrosoftAppStore`, `INTUNE-BASE-020-MicrosoftEdge`, `INTUNE-BASE-021-OfficeUpdates`, `INTUNE-BASE-036-MACDDefenderAntivirus`, `INTUNE-BASE-037-MACDDefenderForEndpoint`, `INTUNE-BASE-039-MACDFirewallAndGatekeeper`, `INTUNE-BASE-040-MACDMicrosoftAutoUpdate`, `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions`, `INTUNE-BASE-053-MACUMicrosoftEdgeUpdates`, `INTUNE-BASE-056-DAutomaticRestartSignOn`, `INTUNE-BASE-058-DConfigRefresh`, `INTUNE-BASE-059-DDefenderAdditionalConfiguration`, `INTUNE-BASE-060-DDefenderSecurityExperience`, `INTUNE-BASE-063-DDefenderUpdateRing3Production`, `INTUNE-BASE-069-DInternetExplorerLegacy`, `INTUNE-BASE-070-DLegacyHardening`, `INTUNE-BASE-074-DMicrosoftEdgeUpdates`, `INTUNE-BASE-075-DMicrosoftOfficeSecurity`, `INTUNE-BASE-077-DPrinting`, `INTUNE-BASE-078-DRemoteDesktopAndRPC`, `INTUNE-BASE-080-DSecurityHardening`, `INTUNE-BASE-083-DUpdateReportsAndTelemetry`, `INTUNE-BASE-085-DWindowsFirewallRules`, `INTUNE-BASE-088-DWindowsPackageManager`, `INTUNE-BASE-089-DWindowsSandbox`, `INTUNE-BASE-090-DWindowsSubsystemForLinux`, `INTUNE-BASE-098-UMicrosoftEdgeExtensions`, `INTUNE-BASE-103-UMicrosoftOfficeSecurity`, `INTUNE-BASE-104-UMicrosoftStore`, `INTUNE-BASE-136-DThreatProtection`, `INTUNE-BASE-137-DWirelessAndPeripherals`, `INTUNE-BASE-140-UAttachmentScanning`, `INTUNE-BASE-153-DDefenderRansomwareProtection`. Without their own check (evidenced through Intune reporting): `WIN - D - Windows Update Ring 3 Production`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -996,36 +993,36 @@ of the technical part, not a replacement for that assessment.
 
 *Policies and procedures to assess the effectiveness of cybersecurity risk-management measures* — elaborated in Annex §7 of the implementing regulation.
 
-**Technical implementation.** Compliance policies and the baseline checks in TEST Policies Platform measure whether the measures are actually in place; that is evidence, not an assessment.
+**Technical implementation.** Compliance policies and Intune compliance reporting measure whether the measures are actually in place; that is evidence, not an assessment.
 
 **Intune, phase 1 (13)**
 
-- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1) — `INTUNE-BASE-083-DUpdateReportsAndTelemetry`
-- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1) — `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1) — `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - U - Compliance Device Health`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Health.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`WIN - D - Update Reports and Telemetry`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) (phase 1)
+- [`WIN - U - Compliance Antispyware`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) (phase 1)
+- [`WIN - U - Compliance Antivirus`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) (phase 1)
+- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1)
+- [`WIN - U - Compliance Code Integrity`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Real Time Protection`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) (phase 1)
+- [`WIN - U - Compliance Defender Security Intelligence`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) (phase 1)
+- [`WIN - U - Compliance Firewall`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- [`WIN - U - Compliance Secure Boot`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
+- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (2)**
 
-- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2) — `INTUNE-BASE-003-CompliancePolicyMinOsVersion`, `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - U - Compliance OS Version`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
+- [`WIN - U - Compliance OS Version`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) (phase 2)
 
-**Evidence route.** TEST Policies Platform verifies 4 checkIds: `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-006-DefenderEnabled`, `INTUNE-BASE-083-DUpdateReportsAndTelemetry`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
 - Established assessment programme (internal audit, penetration test, management review)
 - KPIs and reporting to the management body
-- Follow-up of deviations from the baseline checks and compliance reporting
+- Follow-up of deviations from compliance reporting
 - Periodic recalibration of this baseline against new threats
 
 ### art. 21(2)(g) basic cyber hygiene practices and cybersecurity training
@@ -1036,14 +1033,14 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (1)**
 
-- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1) — `INTUNE-BASE-024-Smartscreen`
+- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (2)**
 
-- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2) — `INTUNE-BASE-197-MACDLoginWindow`
-- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2) — `INTUNE-BASE-199-MACDRestrictionsHardening`
+- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
+- [`MAC - D - Restrictions Hardening`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
 
-**Evidence route.** TEST Policies Platform verifies 1 checkIds: `INTUNE-BASE-024-Smartscreen`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -1060,28 +1057,28 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (8)**
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1) — `INTUNE-BASE-011-Bitlocker`
-- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1) — `INTUNE-BASE-078-DRemoteDesktopAndRPC`
-- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1) — `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1) — `INTUNE-BASE-105-UPersonalDataEncryption`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - U - Compliance Device Security`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
+- [`WIN - D - BitLocker`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) (phase 1)
+- [`WIN - D - Remote Desktop and RPC`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
+- [`WIN - U - Compliance BitLocker`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) (phase 1)
+- [`WIN - U - Compliance TPM`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
+- [`WIN - U - Personal Data Encryption`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (7)**
 
-- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2) — `INTUNE-BASE-038-MACDFileVault`
-- [`WIN - D - Cryptography`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) (phase 2) — `INTUNE-BASE-128-DCryptography`
-- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
-- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3) — `INTUNE-BASE-185-IOSDDataProtection`
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
+- [`MAC - D - FileVault`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
+- [`WIN - D - Cryptography`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) (phase 2)
+- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
+- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
 
 **Alternative, not deployed (1)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`
 
-**Evidence route.** TEST Policies Platform verifies 6 checkIds: `INTUNE-BASE-001-DeviceEncryptionRequired`, `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-011-Bitlocker`, `INTUNE-BASE-078-DRemoteDesktopAndRPC`, `INTUNE-BASE-105-UPersonalDataEncryption`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -1097,72 +1094,72 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (22)**
 
-- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1) — `INTUNE-BASE-004-AppProtectionPolicyExists`
-- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1) — `INTUNE-BASE-035-MACDAccountsAndLogin`
-- [`MAC - D - Microsoft Edge Password Management`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) (phase 1) — `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`
-- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1) — `INTUNE-BASE-045-MACDPlatformSSO`
-- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1) — `INTUNE-BASE-046-MACDRestrictions`
-- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1) — `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync`
-- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1) — `INTUNE-BASE-013-DeviceLock`
-- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1) — `INTUNE-BASE-024-Smartscreen`
-- [`WIN - D - Local Administrators`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.en.md) (phase 1) — `INTUNE-BASE-071-DLocalAdministrators`
-- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1) — `INTUNE-BASE-018-LocalPoliciesSecurityOptions`
-- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1) — `INTUNE-BASE-072-DLoginAndLockScreen`
-- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1) — `INTUNE-BASE-073-DMicrosoftAccounts`
-- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1) — `INTUNE-BASE-076-DPasswordless`
-- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1) — `INTUNE-BASE-142-DPowerManagement`
-- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1) — `INTUNE-BASE-026-UserRights`
-- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1) — `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`
-- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1) — `INTUNE-BASE-027-WindowsLAPSPolicy`
-- [`WIN - U - Microsoft Edge Password Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) (phase 1) — `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`
-- [`WIN - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1) — `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`
-- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1) — `INTUNE-BASE-031-UWindowsUserExperience`
+- [`AND - U - App Protection`](IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- [`IOS - U - App Protection`](IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
+- [`MAC - D - Accounts and Login`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1)
+- [`MAC - D - Microsoft Edge Password Management`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) (phase 1)
+- [`MAC - D - Platform SSO`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
+- [`MAC - D - Restrictions`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
+- [`MAC - U - Compliance Password`](IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
+- [`MAC - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1)
+- [`WIN - D - Device Lock`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
+- [`WIN - D - Enhanced Phishing Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
+- [`WIN - D - Local Administrators`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.en.md) (phase 1)
+- [`WIN - D - Local Security Policies`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Login and Lock Screen`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1)
+- [`WIN - D - Microsoft Accounts`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
+- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
+- [`WIN - D - Power Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1)
+- [`WIN - D - User Rights`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1)
+- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
+- [`WIN - D - Windows LAPS`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Password Management`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) (phase 1)
+- [`WIN - U - Microsoft Edge Profiles and Sync`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1)
+- [`WIN - U - Windows User Experience`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (37)**
 
-- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2) — `INTUNE-BASE-180-ANDUCorporateDataProtection`
-- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2) — `INTUNE-BASE-197-MACDLoginWindow`
-- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2) — `INTUNE-BASE-121-MACDPasscodeAndScreenLock`
-- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2) — `INTUNE-BASE-198-MACDRecoveryLock`
-- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2) — `INTUNE-BASE-200-MACDScreensaver`
-- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2) — `INTUNE-BASE-123-DAccessControl`
-- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2) — `INTUNE-BASE-124-DAccountLockout`
-- [`WIN - D - Administrator Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) (phase 2) — `INTUNE-BASE-055-DAdministratorProtection`
-- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2) — `INTUNE-BASE-065-DDeviceGuardAndCredentialGuard`
-- [`WIN - D - Disable NTLM`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.en.md) (phase 2) — `INTUNE-BASE-066-DDisableNTLM`
-- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2) — `INTUNE-BASE-141-DEnrollmentHardening`
-- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2) — `INTUNE-BASE-132-DLogonHardening`
-- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2) — `INTUNE-BASE-111-DRemovableStorage`
-- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
-- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2) — `INTUNE-BASE-209-UFileSharingRestrictions`
-- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2) — `INTUNE-BASE-145-UMicrosoftTeams`
-- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
-- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3) — `INTUNE-BASE-181-ANDUCorporateDeviceSecurity`
+- [`AND - U - Corporate Data Protection`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
+- [`MAC - D - Login Window`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
+- [`MAC - D - Passcode and Screen Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
+- [`MAC - D - Recovery Lock`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
+- [`MAC - D - Screensaver`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
+- [`WIN - D - Access Control`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
+- [`WIN - D - Account Lockout`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2)
+- [`WIN - D - Administrator Protection`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) (phase 2)
+- [`WIN - D - Device Guard and Credential Guard`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
+- [`WIN - D - Disable NTLM`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.en.md) (phase 2)
+- [`WIN - D - Enrollment Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
+- [`WIN - D - Logon Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
+- [`WIN - D - Removable Storage`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2)
+- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2)
+- [`WIN - U - File Sharing Restrictions`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2)
+- [`WIN - U - Microsoft Teams`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2)
+- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2)
+- [`AND - U - Compliance Block Device Administrator`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) (phase 3)
+- [`AND - U - Compliance Corporate Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Corporate Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.en.md) (phase 3)
+- [`AND - U - Compliance Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.en.md) (phase 3)
+- [`AND - U - Compliance Password`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.en.md) (phase 3)
+- [`AND - U - Corporate Device Security`](IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
 - [`AND - U - Work Profile Restrictions`](IntuneTemplate/AND/DeviceConfigurations/Baseline_AND_U_Work_Profile_Restrictions.en.md) (phase 3)
-- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3) — `INTUNE-BASE-185-IOSDDataProtection`
-- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
-- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3) — `INTUNE-BASE-190-IOSDPasscode`
-- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) (phase 3) — `INTUNE-BASE-154-MACDAzureFilesCloudKerberos`
-- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4) — `INTUNE-BASE-002-CompliancePolicyAssigned`
-- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4) — `INTUNE-BASE-189-IOSDLockScreen`
-- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4) — `INTUNE-BASE-191-IOSDRestrictionsCorporate`
-- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-115-MACDEnrollmentProfileAdministratorUserAffinity`
-- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4) — `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity`
-- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- [`IOS - D - Data Protection`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
+- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
+- [`IOS - D - Passcode`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
+- [`IOS - U - Compliance Device Health`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.en.md) (phase 3)
+- [`IOS - U - Compliance Password`](IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
+- [`MAC - D - Azure Files Cloud Kerberos`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) (phase 3)
+- [`WIN - U - Compliance Defender for Endpoint Risk`](IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
+- [`AND - D - Compliance Dedicated Device Health`](IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
+- [`IOS - D - Lock Screen`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Lock_Screen.en.md) (phase 4)
+- [`IOS - D - Restrictions Corporate`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Administrator User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
+- [`MAC - D - Enrollment Profile Standard User Affinity`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
 
 **Alternative, not deployed (1)**: `MAC - D - External Storage Read Only`
 
-**Evidence route.** TEST Policies Platform verifies 21 checkIds: `INTUNE-BASE-002-CompliancePolicyAssigned`, `INTUNE-BASE-004-AppProtectionPolicyExists`, `INTUNE-BASE-013-DeviceLock`, `INTUNE-BASE-018-LocalPoliciesSecurityOptions`, `INTUNE-BASE-024-Smartscreen`, `INTUNE-BASE-026-UserRights`, `INTUNE-BASE-027-WindowsLAPSPolicy`, `INTUNE-BASE-031-UWindowsUserExperience`, `INTUNE-BASE-035-MACDAccountsAndLogin`, `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement`, `INTUNE-BASE-045-MACDPlatformSSO`, `INTUNE-BASE-046-MACDRestrictions`, `INTUNE-BASE-052-MACUMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-071-DLocalAdministrators`, `INTUNE-BASE-072-DLoginAndLockScreen`, `INTUNE-BASE-073-DMicrosoftAccounts`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`, `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement`, `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync`, `INTUNE-BASE-142-DPowerManagement`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -1179,23 +1176,23 @@ of the technical part, not a replacement for that assessment.
 
 **Intune, phase 1 (3)**
 
-- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1) — `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`
-- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1) — `INTUNE-BASE-076-DPasswordless`
-- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1) — `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`
+- [`MAC - D - Microsoft Edge Security`](IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
+- [`WIN - D - Passwordless`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
+- [`WIN - D - Windows Hello Cloud Kerberos Trust`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
 
 **Prepared — pilot, waiting or dedicated group (7)**
 
-- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2) — `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic`
-- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2) — `INTUNE-BASE-204-DNetworkAuthenticationHardening`
-- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-087-DWindowsHelloForBusiness`
-- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2) — `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric`
-- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2) — `INTUNE-BASE-114-UWindowsHelloForBusiness`
-- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3) — `INTUNE-BASE-188-IOSDEnterpriseSSO`
-- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4) — `INTUNE-BASE-113-DWindowsHelloForBusinessMultiUser`
+- [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
+- [`WIN - D - Network Authentication Hardening`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
+- [`WIN - D - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2)
+- [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2)
+- [`WIN - U - Windows Hello for Business`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2)
+- [`IOS - D - Enterprise SSO`](IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
+- [`WIN - D - Windows Hello for Business Multi User`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
 
 **Alternative, not deployed (4)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
 
-**Evidence route.** TEST Policies Platform verifies 3 checkIds: `INTUNE-BASE-042-MACDMicrosoftEdgeSecurity`, `INTUNE-BASE-076-DPasswordless`, `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust`.
+**Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
 **Needed organisationally**
 
@@ -1818,7 +1815,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.5.33** Protection of records | yes | baseline security; confirm with the risk analysis | Technically prepared: 1 policy in pilot, waiting or dedicated group. Organisational: Define retention periods and protection of records (retention policy, log retention). | — |
 | **A.5.34** Privacy and protection of PII | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 4 policies in phase 1, 6 prepared. Organisational: GDPR accountability: record of processing activities, DPIA for telemetry, monitoring and AI features, alignment with the DPO and works council. | (d) (e) (g) |
 | **A.5.35** Independent review of information security | yes | baseline security; confirm with the risk analysis | Organisational: Internal audit or external review at planned intervals. | — |
-| **A.5.36** Compliance with policies, rules and standards for information security | yes | baseline security; confirm with the risk analysis | Organisational: Review compliance periodically; compliance policies and baseline checks provide the measurement, the review and follow-up are organisational. | — |
+| **A.5.36** Compliance with policies, rules and standards for information security | yes | baseline security; confirm with the risk analysis | Organisational: Review compliance periodically; compliance policies and Intune compliance reporting provide the measurement, the review and follow-up are organisational. | — |
 | **A.5.37** Documented operating procedures | yes | baseline security; confirm with the risk analysis | Organisational: Document administration procedures (deployment, exceptions, recovery); the generated documentation in this repo is part of that. | — |
 | **A.6.1** Screening | yes | baseline security; confirm with the risk analysis | Organisational: Background check (certificate of conduct) proportionate to the risk of the role. | — |
 | **A.6.2** Terms and conditions of employment | yes | baseline security; confirm with the risk analysis | Organisational: Include security obligations in the terms of employment. | — |

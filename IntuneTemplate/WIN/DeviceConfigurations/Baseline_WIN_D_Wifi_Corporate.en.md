@@ -12,7 +12,6 @@ Deploys the corporate network as a Wi-Fi profile to every Windows laptop, so tha
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | Own baseline — Intune Wi-Fi profile (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(e). |
 | File | [`Baseline_WIN_D_Wifi_Corporate.json`](Baseline_WIN_D_Wifi_Corporate.json) |
 

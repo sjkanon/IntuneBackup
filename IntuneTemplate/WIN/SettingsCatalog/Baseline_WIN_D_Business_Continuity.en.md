@@ -12,7 +12,6 @@ Turns on Quick Machine Recovery: a device that no longer boots fetches a recover
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-127-DBusinessContinuity` |
 | Source | ISO/IEC 27001:2022 A.5.29, A.5.30 and A.8.14, NIS2 art. 21(2)(c) — settings from IntuneAdmin's Modern Workplace set |
 | File | [`Baseline_WIN_D_Business_Continuity.json`](Baseline_WIN_D_Business_Continuity.json) |
 

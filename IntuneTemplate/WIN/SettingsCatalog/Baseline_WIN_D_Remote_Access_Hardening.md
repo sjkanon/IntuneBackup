@@ -12,7 +12,6 @@ Sluit de WinRM-remoteshell af en verbreekt een inactieve SMB-sessie na vijftien 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-135-DRemoteAccessHardening` |
 | Bron | CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities. |
 | Bestand | [`Baseline_WIN_D_Remote_Access_Hardening.json`](Baseline_WIN_D_Remote_Access_Hardening.json) |
 

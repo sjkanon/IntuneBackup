@@ -12,7 +12,6 @@ Turns off Apple Intelligence features that have text, email, notes, web pages or
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-195-MACDAppleIntelligenceRestricted` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.5.1.1–2.5.1.4 and 2.18.1 (mSCP branch tahoe); ids and values identical to OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions, except Safari summaries (OIB: on, here off) |
 | File | [`Baseline_MAC_D_Apple_Intelligence_Restricted.json`](Baseline_MAC_D_Apple_Intelligence_Restricted.json) |
 

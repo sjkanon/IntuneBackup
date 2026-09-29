@@ -12,7 +12,6 @@ Blocks writing to removable storage: USB sticks and external drives, and phones 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-111-DRemovableStorage` |
 | Source | own baseline — comparison with IntuneAdmin/IntuneBaselines, August 2026 |
 | File | [`Baseline_WIN_D_Removable_Storage.json`](Baseline_WIN_D_Removable_Storage.json) |
 

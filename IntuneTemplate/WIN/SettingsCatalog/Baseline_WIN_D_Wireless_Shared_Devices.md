@@ -12,7 +12,6 @@ Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-138-DWirelessSharedDevices` |
 | Bron | ISO/IEC 27001:2022 A.8.20 en A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration |
 | Bestand | [`Baseline_WIN_D_Wireless_Shared_Devices.json`](Baseline_WIN_D_Wireless_Shared_Devices.json) |
 

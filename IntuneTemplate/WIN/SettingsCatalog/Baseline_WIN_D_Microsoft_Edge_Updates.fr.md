@@ -12,7 +12,6 @@ Comment et quand Edge se met à jour, et le fait qu'un utilisateur ne peut pas l
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-074-DMicrosoftEdgeUpdates` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_Updates.json`](Baseline_WIN_D_Microsoft_Edge_Updates.json) |
 

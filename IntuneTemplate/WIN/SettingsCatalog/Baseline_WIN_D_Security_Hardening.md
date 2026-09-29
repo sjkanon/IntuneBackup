@@ -12,7 +12,6 @@ Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, aut
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-080-DSecurityHardening` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening |
 | Bestand | [`Baseline_WIN_D_Security_Hardening.json`](Baseline_WIN_D_Security_Hardening.json) |
 

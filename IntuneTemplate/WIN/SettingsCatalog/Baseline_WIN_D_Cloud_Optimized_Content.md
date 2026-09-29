@@ -12,7 +12,6 @@ Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-057-DCloudOptimizedContent` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (device-deel) |
 | Bestand | [`Baseline_WIN_D_Cloud_Optimized_Content.json`](Baseline_WIN_D_Cloud_Optimized_Content.json) |
 

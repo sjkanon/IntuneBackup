@@ -4,8 +4,7 @@
 
 Ce qui fait partie d'une baseline complète mais ne relève d'aucun des cinq types de stratégies CIPP (`Catalog`,
 `Admin`, `Device`, `deviceCompliancePolicies`, `AppProtection`). Rien ici n'est pris en compte par
-`check-scope.js`, `generate-baseline.js`, `export-intunebackup.js` ou `Set-BaselineAssignment.ps1`,
-et aucun `checkId` n'y est associé. Chaque dossier a son propre README avec la voie de déploiement, les prérequis
+`check-scope.js`, `export-intunebackup.js` ou `Set-BaselineAssignment.ps1`. Chaque dossier a son propre README avec la voie de déploiement, les prérequis
 et les normes que le composant couvre.
 
 Même logique que [`enrollment/macos/`](../enrollment/macos/README.fr.md),

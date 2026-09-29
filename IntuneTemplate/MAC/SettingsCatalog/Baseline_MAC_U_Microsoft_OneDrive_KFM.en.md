@@ -12,7 +12,6 @@ Moves the Mac's Desktop and Documents to OneDrive, so that nothing is stored onl
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move |
 | File | [`Baseline_MAC_U_Microsoft_OneDrive_KFM.json`](Baseline_MAC_U_Microsoft_OneDrive_KFM.json) |
 

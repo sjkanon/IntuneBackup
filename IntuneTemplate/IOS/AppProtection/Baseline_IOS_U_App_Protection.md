@@ -12,7 +12,6 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iP
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | App Protection |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline BYOD — iOS App Protection |
 | Bestand | [`Baseline_IOS_U_App_Protection.json`](Baseline_IOS_U_App_Protection.json) |
 

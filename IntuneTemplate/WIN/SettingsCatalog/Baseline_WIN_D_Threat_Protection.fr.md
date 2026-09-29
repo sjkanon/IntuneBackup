@@ -12,7 +12,6 @@ Supprime les échappatoires locales de la protection anti-malware : les utilisat
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-136-DThreatProtection` |
 | Source | ISO/IEC 27001:2022 A.8.7 et A.8.8, NIS2 art. 21(2)(e) — paramètres issus de CIS v4 Windows 11 L1 |
 | Fichier | [`Baseline_WIN_D_Threat_Protection.json`](Baseline_WIN_D_Threat_Protection.json) |
 

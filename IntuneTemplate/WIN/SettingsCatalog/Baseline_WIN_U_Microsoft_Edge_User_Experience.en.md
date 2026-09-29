@@ -12,7 +12,6 @@ The everyday Edge experience: start page, search suggestions, notifications and 
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-101-UMicrosoftEdgeUserExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience |
 | File | [`Baseline_WIN_U_Microsoft_Edge_User_Experience.json`](Baseline_WIN_U_Microsoft_Edge_User_Experience.json) |
 

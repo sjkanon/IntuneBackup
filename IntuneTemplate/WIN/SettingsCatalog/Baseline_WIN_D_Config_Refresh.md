@@ -12,7 +12,6 @@ Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft,
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-058-DConfigRefresh` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Config Refresh |
 | Bestand | [`Baseline_WIN_D_Config_Refresh.json`](Baseline_WIN_D_Config_Refresh.json) |
 

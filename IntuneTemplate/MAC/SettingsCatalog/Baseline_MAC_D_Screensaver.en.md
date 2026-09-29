@@ -12,7 +12,6 @@ Requires the password no later than five seconds after the screen saver starts, 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-200-MACDScreensaver` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 and 2.11.2 (mSCP branch tahoe, cis_lvl1); form from OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, with askForPasswordDelay 5 instead of 60 |
 | File | [`Baseline_MAC_D_Screensaver.json`](Baseline_MAC_D_Screensaver.json) |
 

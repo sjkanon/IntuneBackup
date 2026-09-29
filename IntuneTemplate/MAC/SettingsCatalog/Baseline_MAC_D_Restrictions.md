@@ -12,7 +12,6 @@ Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-046-MACDRestrictions` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | Bestand | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 

@@ -12,7 +12,6 @@ Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-153-DDefenderRansomwareProtection` |
 | Bron | IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection; waarden geverifieerd tegen de settings catalog-definities. IntuneAdmin zet Audit; hier staat Block. |
 | Bestand | [`Baseline_WIN_D_Defender_Ransomware_Protection.json`](Baseline_WIN_D_Defender_Ransomware_Protection.json) |
 

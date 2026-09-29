@@ -12,7 +12,6 @@ Sépare les données de l'entreprise des applications personnelles sur chaque ap
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-185-IOSDDataProtection` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — SC - Data Protection - BYOD/Corporate et SC - iCloud & Storage - BYOD/Corporate (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0) ; fusionnés en une seule policy pour tous les appareils inscrits, car chaque clé fonctionne aussi sans supervision et avec l'inscription utilisateur |
 | Fichier | [`Baseline_IOS_D_Data_Protection.json`](Baseline_IOS_D_Data_Protection.json) |
 

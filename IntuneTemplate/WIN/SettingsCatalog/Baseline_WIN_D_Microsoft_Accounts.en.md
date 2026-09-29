@@ -12,7 +12,6 @@ Determines whether personal Microsoft accounts may be used and added on a work d
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-073-DMicrosoftAccounts` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration |
 | File | [`Baseline_WIN_D_Microsoft_Accounts.json`](Baseline_WIN_D_Microsoft_Accounts.json) |
 

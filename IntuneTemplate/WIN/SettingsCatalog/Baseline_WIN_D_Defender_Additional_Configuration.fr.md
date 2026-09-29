@@ -12,7 +12,6 @@ Paramètres Defender qui ne rentrent pas dans le modèle Endpoint Security et n�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-059-DDefenderAdditionalConfiguration` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration |
 | Fichier | [`Baseline_WIN_D_Defender_Additional_Configuration.json`](Baseline_WIN_D_Defender_Additional_Configuration.json) |
 

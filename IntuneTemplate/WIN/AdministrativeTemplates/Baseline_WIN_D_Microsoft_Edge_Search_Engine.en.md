@@ -12,7 +12,6 @@ Sets Google as the default search engine in Edge. A customer decision, not a sec
 | Scope | Device (D) — assign to device groups |
 | Type | ADMX |
 | Assignment | — |
-| checkId | `INTUNE-BASE-015-EdgeStandardSearchEngineGoogle` |
 | Source | own baseline (ADMX) |
 | File | [`Baseline_WIN_D_Microsoft_Edge_Search_Engine.json`](Baseline_WIN_D_Microsoft_Edge_Search_Engine.json) |
 

@@ -12,7 +12,6 @@ Forwards Windows events to a central Windows Event Collector, so that logs are k
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-207-DWindowsEventForwarding` |
 | Source | Microsoft Learn — 'Use Windows Event Forwarding to help with intrusion detection' and Policy CSP ADMX_EventForwarding/SubscriptionManager; values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Windows_Event_Forwarding.json`](Baseline_WIN_D_Windows_Event_Forwarding.json) |
 

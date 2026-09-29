@@ -12,7 +12,6 @@ Automatically cleans up temporary files, the Recycle Bin and old downloads as so
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-143-DStorageSense` |
 | Source | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Storage Sense |
 | File | [`Baseline_WIN_D_Storage_Sense.json`](Baseline_WIN_D_Storage_Sense.json) |
 

@@ -12,7 +12,6 @@ Productiering voor Windows-updates: installeert dagelijks om 13:00 met een uitst
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Device config |
 | Toewijzing | All Devices |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | eigen baseline — tenant-specifieke installatievensters |
 | Bestand | [`Baseline_WIN_D_Windows_Update_Ring_3_Production.json`](Baseline_WIN_D_Windows_Update_Ring_3_Production.json) |
 

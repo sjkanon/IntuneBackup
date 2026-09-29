@@ -12,7 +12,6 @@ Envoie les données de démarrage et de performance à Endpoint Analytics, afin 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | All Devices |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — TP - Health Monitoring - D - Endpoint Analytics |
 | Fichier | [`Baseline_WIN_D_Endpoint_Analytics.json`](Baseline_WIN_D_Endpoint_Analytics.json) |
 

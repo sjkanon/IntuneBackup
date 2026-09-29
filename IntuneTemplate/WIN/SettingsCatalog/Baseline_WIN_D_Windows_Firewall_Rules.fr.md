@@ -12,7 +12,6 @@ Bloque le trafic sortant des programmes Windows intégrés que les malwares util
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-085-DWindowsFirewallRules` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules |
 | Fichier | [`Baseline_WIN_D_Windows_Firewall_Rules.json`](Baseline_WIN_D_Windows_Firewall_Rules.json) |
 

@@ -12,7 +12,6 @@ Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerke
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-040-MACDMicrosoftAutoUpdate` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft AutoUpdate - D - MAU Configuration |
 | Bestand | [`Baseline_MAC_D_Microsoft_AutoUpdate.json`](Baseline_MAC_D_Microsoft_AutoUpdate.json) |
 

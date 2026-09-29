@@ -12,7 +12,6 @@ Maintains the Edge block list for the Store website, but explicitly leaves the A
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-149-UAIUsageControlPermitted` |
 | Source | Counterpart of the Restricted variant: the same block list without the AI domains |
 | File | [`Baseline_WIN_U_AI_Usage_Control_Permitted.json`](Baseline_WIN_U_AI_Usage_Control_Permitted.json) |
 

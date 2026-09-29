@@ -12,7 +12,6 @@ Determines whether Edge may save and show passwords, so that work passwords do n
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-099-UMicrosoftEdgePasswordManagement` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Password Management |
 | File | [`Baseline_WIN_U_Microsoft_Edge_Password_Management.json`](Baseline_WIN_U_Microsoft_Edge_Password_Management.json) |
 

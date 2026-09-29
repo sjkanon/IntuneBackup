@@ -12,7 +12,6 @@ Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-086-DWindowsHelloCloudKerberosTrust` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows Hello for Business - D - Cloud Kerberos Trust |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.json`](Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.json) |
 

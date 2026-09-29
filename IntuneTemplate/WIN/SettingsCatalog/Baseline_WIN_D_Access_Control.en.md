@@ -12,7 +12,6 @@ Shows a warning before sign-in that the system is for authorised users only, and
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-123-DAccessControl` |
 | Source | ISO/IEC 27001:2022 A.5.15 and A.8.5, NIS2 art. 21(2)(i) — settings from CIS v4 Windows 11 L1 |
 | File | [`Baseline_WIN_D_Access_Control.json`](Baseline_WIN_D_Access_Control.json) |
 

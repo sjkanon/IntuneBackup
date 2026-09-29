@@ -7,8 +7,8 @@ dezelfde reden als de [macOS-shellscripts](../../shellscripts/macos/README.md): 
 daar kennen vijf CIPP-policytypes en een platformscript is geen van die vijf. Het hangt onder
 `deviceManagement/deviceManagementScripts`, `Set-CIPPIntunePolicy` heeft er geen
 `TemplateType` voor, en `Start-IntuneRestoreConfig` zet het niet terug. Een bestand hier wordt
-dus **niet** opgepikt door `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js`
-of `Set-BaselineAssignment.ps1`, en er hoort geen `checkId` bij.
+dus **niet** opgepikt door `export-intunebackup.js`, `check-scope.js` of
+`Set-BaselineAssignment.ps1`.
 
 De map heet `platformscripts/` en niet `shellscripts/` omdat Intune ze zelf zo noemt: op
 Windows staan ze onder *Scripts and remediations → Platform scripts*, op macOS onder

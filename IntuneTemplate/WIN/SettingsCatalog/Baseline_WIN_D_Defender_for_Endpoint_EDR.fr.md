@@ -12,7 +12,6 @@ Connecte l'appareil à Defender for Endpoint avec un paquet d'onboarding fixe. C
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityEndpointDetectionAndResponse) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-014-EDRConfiguration` |
 | Source | baseline propre — OpenIntuneBaseline n'a pas de policy d'onboarding EDR |
 | Fichier | [`Baseline_WIN_D_Defender_for_Endpoint_EDR.json`](Baseline_WIN_D_Defender_for_Endpoint_EDR.json) |
 

@@ -8,8 +8,8 @@ les nouveaux ordinateurs portables grand public.
 Se trouve en dehors de [`IntuneTemplate/`](../../../IntuneTemplate/README.fr.md), tout comme
 [`shellscripts/macos/`](../../../shellscripts/macos/README.fr.md) et
 [`compliance/macos/`](../../../compliance/macos/README.fr.md) : une application Win32 n'est pas une
-stratégie et n'entre dans aucun des cinq types de stratégie CIPP. Pas de `checkId`, et aucun
-pipeline ne prend en compte ce dossier.
+stratégie et n'entre dans aucun des cinq types de stratégie CIPP. Aucun pipeline
+ne prend en compte ce dossier.
 
 ## Pourquoi cela fait partie de la baseline
 
@@ -21,7 +21,7 @@ Protection et la nouvelle Remote Encryption Protection reposent toutes sur un mo
 actif.
 
 Le plus sournois, c'est que rien de tout cela ne signale d'erreur. Les stratégies arrivent
-correctement, le contrôle de la baseline est au vert, et les paramètres ne font rien parce que
+correctement, Intune les signale comme réussies, et les paramètres ne font rien parce que
 le moteur censé les appliquer est sur le banc de touche. Cela reste ainsi jusqu'à l'expiration de
 l'essai McAfee — et l'appareil reste alors un certain temps sans antivirus fonctionnel.
 

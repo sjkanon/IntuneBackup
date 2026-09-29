@@ -12,7 +12,6 @@ Lets devices exchange updates among themselves instead of each downloading them 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-064-DDeliveryOptimisation` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation |
 | File | [`Baseline_WIN_D_Delivery_Optimisation.json`](Baseline_WIN_D_Delivery_Optimisation.json) |
 

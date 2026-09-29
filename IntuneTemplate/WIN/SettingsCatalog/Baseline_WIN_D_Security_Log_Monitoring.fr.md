@@ -12,7 +12,6 @@ Avertit dans le journal Système dès que le journal Sécurité est plein à 90 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-205-DSecurityLogMonitoring` |
 | Source | CIS v4 Windows 11 L1 (MSS WarningLevel, profil CISv4 d'IntuneAdmin) et la recommandation Microsoft pour la journalisation PowerShell ('PowerShell ♥ the Blue Team') — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Security_Log_Monitoring.json`](Baseline_WIN_D_Security_Log_Monitoring.json) |
 

@@ -12,7 +12,6 @@ Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS.
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-036-MACDDefenderAntivirus` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - Antivirus Configuration |
 | Bestand | [`Baseline_MAC_D_Defender_Antivirus.json`](Baseline_MAC_D_Defender_Antivirus.json) |
 

@@ -12,7 +12,6 @@ Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebesc
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM |
 | Bestand | [`Baseline_WIN_U_Compliance_TPM.json`](Baseline_WIN_U_Compliance_TPM.json) |
 

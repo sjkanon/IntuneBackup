@@ -11,7 +11,6 @@ This is the summary; the details are in the [main README](README.en.md) and per 
 | | Count |
 |---|---:|
 | Policies | 197 |
-| Baseline checks | 162 |
 | Without assignment (deliberately) | 96 |
 | Deployed in the tenant | 0 |
 
@@ -37,19 +36,16 @@ CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 31 of
 Per control and per NIS2 point what the baseline enforces, how it is verified and what the organisation
 has to arrange itself: [COMPLIANCE.en.md](COMPLIANCE.en.md).
 
-## One source, three derivatives
+## One source, two derivatives
 
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline"] -->|import-oib.js| T
   T["<b>IntuneTemplate/</b><br/>the source"]
-  T -->|generate-baseline.js| BL["baseline/intune/<br/>baseline-v1.0.json"]
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -.->|reads directly| CIPP[CIPP]
-  BL --> PLAT["TEST Policies Platform"]
   EX -->|Start-IntuneRestoreConfig| TENANT[("Intune tenant")]
   CIPP --> TENANT
-  PLAT -.->|verifies| TENANT
   style T stroke-width:3px
 ```
 
@@ -61,13 +57,12 @@ From 24 in-house policies to the current set.
 
 | | Count | |
 |---|---:|---|
-| Rewritten on OIB content | 15 | checkId kept; Edge Security went from 2 to 54 settings, Defender Antivirus from 11 to 28, Audit from 23 to 40 |
+| Rewritten on OIB content | 15 | Edge Security went from 2 to 54 settings, Defender Antivirus from 11 to 28, Audit from 23 to 40 |
 | New | 75 | including Windows Hello for Business, Credential Guard, Local Administrators, Office Security, 7 compliance policies, 20 macOS policies, 2 BYOD MAM |
 | Merged into another policy | 6 | Administrative Templates (300 settings) split up; Network Security, System Services, Windows Search and OneDrive KFM absorbed |
 | Carried over unchanged | 5 | where OIB has no counterpart: EDR onboarding, Outlook autoconfiguration, Edge search engine, update ring 3, user experience |
 
-Five checkIds were retired as a result (008, 017, 023, 025, 028) and will not be issued
-again. Settings that only we had — encryption of fixed and removable drives,
+Settings that only we had — encryption of fixed and removable drives,
 for example — were kept during a rewrite instead of silently
 disappearing.
 
@@ -105,7 +100,7 @@ and three corrections:
 | | |
 |---|---|
 | `MAC - D - Enrollment Profile Administrator / Standard User Affinity` | two ADE enrolment profiles that differ in exactly one setting: whether the signed-in account becomes administrator or standard user. Alternatives to each other, so neither is assigned. |
-| `MAC - D - Software Updates` | from the classic `com.apple.softwareupdate` payload to declarative update management (DDM, macOS 14+): deferral of 7 days for minor, 14 for major and 21 for system updates, Rapid Security Responses on including rollback. checkId 047 stays. |
+| `MAC - D - Software Updates` | from the classic `com.apple.softwareupdate` payload to declarative update management (DDM, macOS 14+): deferral of 7 days for minor, 14 for major and 21 for system updates, Rapid Security Responses on including rollback. |
 | `MAC - D - Defender for Endpoint` | the organisation name of the content filter was set to *JAMF Software* — a leftover from the Jamf profiles the MDE documentation relies on. The user sees that name in System Settings → Network → Filters. |
 | `MAC - U - Compliance Device Health` and `Device Security` | carried each other's description. Device Health checks System Integrity Protection; Device Security checks encryption, the firewall and Gatekeeper. |
 
@@ -129,10 +124,6 @@ step 4 before step 3 produces two policies that contradict each other.
 | 5 | Deploy | the new policies via CIPP or `Start-IntuneRestoreConfig` |
 | 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SEC-Baseline-Pilot'` |
 | 7 | Inventory again | the list of orphaned policies must be empty |
-
-> **The baseline check is not a safety net here.** The checks compare on content, not on name.
-> A leftover policy under the *old* name therefore keeps its check green, even if the new one
-> was never created or is not assigned anywhere.
 
 ## Pilot first
 

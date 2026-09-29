@@ -12,7 +12,6 @@ Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je ee
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-061-DDefenderUpdateRing1Pilot` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot |
 | Bestand | [`Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json`](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.json) |
 

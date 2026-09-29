@@ -12,7 +12,6 @@ Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een he
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-039-MACDFirewallAndGatekeeper` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | Bestand | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 

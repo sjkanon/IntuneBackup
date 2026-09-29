@@ -12,7 +12,6 @@ Determines which Edge extensions users may install, and which are mandatory.
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-098-UMicrosoftEdgeExtensions` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions |
 | File | [`Baseline_WIN_U_Microsoft_Edge_Extensions.json`](Baseline_WIN_U_Microsoft_Edge_Extensions.json) |
 

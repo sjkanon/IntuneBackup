@@ -12,7 +12,6 @@ Limits sign-in in Teams to the organisation's own tenant and prevents Teams from
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-145-UMicrosoftTeams` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams |
 | File | [`Baseline_WIN_U_Microsoft_Teams.json`](Baseline_WIN_U_Microsoft_Teams.json) |
 

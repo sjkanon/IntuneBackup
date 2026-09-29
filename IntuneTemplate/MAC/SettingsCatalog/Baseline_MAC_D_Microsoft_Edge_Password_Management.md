@@ -12,7 +12,6 @@ Bepaalt of Edge op de Mac wachtwoorden mag opslaan en tonen.
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-041-MACDMicrosoftEdgePasswordManagement` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Password Management |
 | Bestand | [`Baseline_MAC_D_Microsoft_Edge_Password_Management.json`](Baseline_MAC_D_Microsoft_Edge_Password_Management.json) |
 

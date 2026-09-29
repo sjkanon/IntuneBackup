@@ -12,7 +12,6 @@ Toont vóór het aanmelden een waarschuwing dat het systeem alleen voor geautori
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-123-DAccessControl` |
 | Bron | ISO/IEC 27001:2022 A.5.15 en A.8.5, NIS2 art. 21(2)(i) — instellingen uit CIS v4 Windows 11 L1 |
 | Bestand | [`Baseline_WIN_D_Access_Control.json`](Baseline_WIN_D_Access_Control.json) |
 

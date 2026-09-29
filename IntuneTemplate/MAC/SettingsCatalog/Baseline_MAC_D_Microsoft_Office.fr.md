@@ -12,7 +12,6 @@ Configuration de base d'Office sur macOS.
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-043-MACDMicrosoftOffice` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Office - D - Office Configuration |
 | Fichier | [`Baseline_MAC_D_Microsoft_Office.json`](Baseline_MAC_D_Microsoft_Office.json) |
 

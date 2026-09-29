@@ -12,7 +12,6 @@ Blokkeert in Edge de AI-diensten die het beleid niet heeft goedgekeurd. Microsof
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-139-UAIUsageControl` |
 | Bron | ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy |
 | Bestand | [`Baseline_WIN_U_AI_Usage_Control_Restricted.json`](Baseline_WIN_U_AI_Usage_Control_Restricted.json) |
 

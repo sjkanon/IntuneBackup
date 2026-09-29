@@ -12,7 +12,6 @@ Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-127-DBusinessContinuity` |
 | Source | ISO/IEC 27001:2022 A.5.29, A.5.30 et A.8.14, NIS2 art. 21(2)(c) — paramètres issus de l'ensemble Modern Workplace d'IntuneAdmin |
 | Fichier | [`Baseline_WIN_D_Business_Continuity.json`](Baseline_WIN_D_Business_Continuity.json) |
 

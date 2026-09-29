@@ -12,7 +12,6 @@ Rolt het gastnetwerk uit als tweede profiel op elke Windows-laptop, zodat een ap
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Device config |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e). |
 | Bestand | [`Baseline_WIN_D_Wifi_Guest.json`](Baseline_WIN_D_Wifi_Guest.json) |
 

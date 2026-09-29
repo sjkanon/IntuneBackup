@@ -12,7 +12,6 @@ Désactive les fonctions Apple Intelligence qui font traiter du texte, des e-mai
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-195-MACDAppleIntelligenceRestricted` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.5.1.1–2.5.1.4 et 2.18.1 (mSCP branch tahoe) ; ids et valeurs identiques à OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions, sauf les résumés Safari (OIB : activés, ici désactivés) |
 | Fichier | [`Baseline_MAC_D_Apple_Intelligence_Restricted.json`](Baseline_MAC_D_Apple_Intelligence_Restricted.json) |
 

@@ -12,7 +12,6 @@ Requires CTRL+ALT+DEL before sign-in and removes the network selection from the 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-132-DLogonHardening` |
 | Source | CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definition. |
 | File | [`Baseline_WIN_D_Logon_Hardening.json`](Baseline_WIN_D_Logon_Hardening.json) |
 

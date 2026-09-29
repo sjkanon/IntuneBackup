@@ -12,7 +12,6 @@ Uniquement pour les organisations qui utilisent NinjaOne ou TeamViewer. Définit
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | baseline propre — Apple n'autorise pas l'enregistrement d'écran dans la forme settings catalog de PPPC |
 | Fichier | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 

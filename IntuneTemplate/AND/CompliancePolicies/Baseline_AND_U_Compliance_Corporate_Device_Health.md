@@ -12,7 +12,6 @@ Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wa
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed en Corp-Work-Profile - v1.5 (gezondheidsdeel), vergeleken met IntuneAdmin Baseline - Android Enterprise - Device Health; OS-ondergrens van 13.0 naar n-1 (16.0) en patchniveau toegevoegd |
 | Bestand | [`Baseline_AND_U_Compliance_Corporate_Device_Health.json`](Baseline_AND_U_Compliance_Corporate_Device_Health.json) |
 

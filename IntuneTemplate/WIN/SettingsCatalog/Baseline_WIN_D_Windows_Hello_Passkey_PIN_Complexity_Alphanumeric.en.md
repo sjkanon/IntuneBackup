@@ -12,7 +12,6 @@ Requires an alphanumeric PIN for the Windows Hello for Business passkey: at leas
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-212-DWindowsHelloPasskeyPINComplexityAlphanumeric` |
 | Source | Own choice, PassportForWork CSP — Policies/PINComplexity |
 | File | [`Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.json`](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.json) |
 

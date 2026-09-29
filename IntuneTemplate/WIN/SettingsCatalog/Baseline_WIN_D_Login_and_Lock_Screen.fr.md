@@ -12,7 +12,6 @@ Détermine ce qui est visible et possible sur l'écran de connexion et l'écran 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-072-DLoginAndLockScreen` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Login and Lock Screen |
 | Fichier | [`Baseline_WIN_D_Login_and_Lock_Screen.json`](Baseline_WIN_D_Login_and_Lock_Screen.json) |
 

@@ -12,7 +12,6 @@ Makes network authentication less susceptible to abuse: the system account uses 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-204-DNetworkAuthenticationHardening` |
 | Source | CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) and the Microsoft Security Baseline for Windows 11 — values verified against the settings catalog definitions; PKU2U deliberately deviates from the IntuneAdmin value |
 | File | [`Baseline_WIN_D_Network_Authentication_Hardening.json`](Baseline_WIN_D_Network_Authentication_Hardening.json) |
 

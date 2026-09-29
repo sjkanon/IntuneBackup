@@ -12,7 +12,6 @@ Zet op een toestel met persoonlijk werkprofiel een eigen werkprofielcode (zes ci
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Device config |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - USR - Personal-Work-Profile - v1.5; zonder wachtwoordverloop, contact- en beller-ID-blokkades, accountblokkade en blokkade van onbekende bronnen aan de privékant; vergrendeltijd 15 in plaats van 5 minuten, gelijk aan Compliance Password |
 | Bestand | [`Baseline_AND_U_Work_Profile_Restrictions.json`](Baseline_AND_U_Work_Profile_Restrictions.json) |
 

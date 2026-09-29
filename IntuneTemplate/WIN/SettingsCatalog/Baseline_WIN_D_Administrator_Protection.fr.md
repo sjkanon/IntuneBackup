@@ -12,7 +12,6 @@ Fait travailler les administrateurs sans droits élevés par défaut et leur fai
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-055-DAdministratorProtection` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection |
 | Fichier | [`Baseline_WIN_D_Administrator_Protection.json`](Baseline_WIN_D_Administrator_Protection.json) |
 

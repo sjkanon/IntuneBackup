@@ -549,7 +549,7 @@ function main() {
   if (manifest.excluded && manifest.excluded.length > 0) {
     console.log(`\n${manifest.excluded.length} OIB-policy(s) bewust niet overgenomen — zie "excluded" in het manifest.`);
   }
-  console.log("\nDaarna: node scripts/check-scope.js && node scripts/generate-baseline.js && node scripts/export-intunebackup.js");
+  console.log("\nDaarna: node scripts/set-packages.js && node scripts/check-scope.js && node scripts/export-intunebackup.js && node scripts/generate-docs.js");
 }
 
 main();

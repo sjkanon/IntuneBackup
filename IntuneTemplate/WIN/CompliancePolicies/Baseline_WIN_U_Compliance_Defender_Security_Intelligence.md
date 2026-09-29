@@ -12,7 +12,6 @@ Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is.
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence |
 | Bestand | [`Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json`](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json) |
 

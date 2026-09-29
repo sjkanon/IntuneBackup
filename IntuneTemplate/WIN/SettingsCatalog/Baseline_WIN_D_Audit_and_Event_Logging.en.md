@@ -12,7 +12,6 @@ Defines which events Windows records and how large the logs are — the basis fo
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-009-Auditing` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging |
 | File | [`Baseline_WIN_D_Audit_and_Event_Logging.json`](Baseline_WIN_D_Audit_and_Event_Logging.json) |
 

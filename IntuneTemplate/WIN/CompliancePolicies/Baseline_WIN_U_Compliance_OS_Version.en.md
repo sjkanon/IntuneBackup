@@ -12,7 +12,6 @@ Checks whether the device runs a Windows version that can actually apply the bas
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | Own policy; the minimum follows from what the baseline itself already requires — Account Lockout needs 22H2 with KB5053657 or 24H2, Administrator Protection and Windows Protected Print need 24H2 |
 | File | [`Baseline_WIN_U_Compliance_OS_Version.json`](Baseline_WIN_U_Compliance_OS_Version.json) |
 

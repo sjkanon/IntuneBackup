@@ -12,7 +12,6 @@ Allows the Edge Management Service on managed devices and lets the policy config
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-171-UMicrosoftEdgeManagement` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management |
 | File | [`Baseline_WIN_U_Microsoft_Edge_Management.json`](Baseline_WIN_U_Microsoft_Edge_Management.json) |
 

@@ -6,8 +6,7 @@ Getting the FileVault recovery key into Intune after all for a Mac that was alre
 
 Lives outside `IntuneTemplate/` for the same reason as [`shellscripts/macos/`](../../../shellscripts/macos/README.en.md):
 a shell script (`deviceShellScripts`) is none of the five CIPP policy types. Not picked up
-by `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js` or
-`Set-BaselineAssignment.ps1`, and gets no `checkId`. Belongs in
+by `export-intunebackup.js`, `check-scope.js` or `Set-BaselineAssignment.ps1`. Belongs in
 `shellscripts/macos/` when merged.
 
 | File | What it does | Scope |

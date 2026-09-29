@@ -9,7 +9,7 @@ These two files deliberately live **outside** [`IntuneTemplate/`](../../IntuneTe
 for the same reason as [`shellscripts/macos/`](../../shellscripts/macos/README.en.md) and
 [`enrollment/macos/`](../../enrollment/macos/README.en.md): in Graph a compliance script is a
 resource of its own (`deviceManagement/deviceComplianceScripts`) and does not fit any of the five
-CIPP policy types. The pipelines do not pick this folder up, so there is no `checkId` either.
+CIPP policy types. The pipelines do not pick this folder up.
 
 | File | What it is |
 |---|---|

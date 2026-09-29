@@ -12,7 +12,6 @@ Locks an account for 15 minutes after ten failed sign-in attempts, including tha
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-124-DAccountLockout` |
 | Source | CIS v4 Windows 11 L1 and the Microsoft Security Baseline — values verified against Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) and LocalPoliciesSecurityOptions. |
 | File | [`Baseline_WIN_D_Account_Lockout.json`](Baseline_WIN_D_Account_Lockout.json) |
 

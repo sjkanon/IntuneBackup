@@ -12,7 +12,6 @@ Shows a message for the finder on the lock screen of a corporate iPhone or iPad,
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-189-IOSDLockScreen` |
 | Source | Apple Shared Device Configuration payload (com.apple.shareddeviceconfiguration) in the iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate and IntuneAdmin — Lock Screen Message. The lock screen restrictions from the same UniFy policy are in [Baseline] - IOS - D - Restrictions Corporate |
 | File | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 

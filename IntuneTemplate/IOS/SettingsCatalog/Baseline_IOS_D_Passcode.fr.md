@@ -12,7 +12,6 @@ Définit sur les iPhone et iPad inscrits le code d'accès que la policy de confo
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-190-IOSDPasscode` |
 | Source | Payload Apple Passcode (com.apple.mobiledevice.passwordpolicy) dans le settings catalog iOS, même payload qu'UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate ; valeurs alignées sur [Baseline] - IOS - U - Compliance Password, inactivité selon CIS Apple iOS/iPadOS 26 Benchmark |
 | Fichier | [`Baseline_IOS_D_Passcode.json`](Baseline_IOS_D_Passcode.json) |
 

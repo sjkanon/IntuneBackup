@@ -12,7 +12,6 @@ Vérifie si un iPhone ou iPad exige un code d'accès d'au moins six caractères,
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Convention OpenIntuneBaseline pour la conformité ; valeurs alignées sur l'exigence d'un PIN de six caractères de la policy App Protection existante. |
 | Fichier | [`Baseline_IOS_U_Compliance_Password.json`](Baseline_IOS_U_Compliance_Password.json) |
 

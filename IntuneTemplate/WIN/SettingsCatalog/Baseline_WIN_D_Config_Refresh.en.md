@@ -12,7 +12,6 @@ Periodically resets locally changed settings to what Intune prescribes, so that 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-058-DConfigRefresh` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Config Refresh |
 | File | [`Baseline_WIN_D_Config_Refresh.json`](Baseline_WIN_D_Config_Refresh.json) |
 

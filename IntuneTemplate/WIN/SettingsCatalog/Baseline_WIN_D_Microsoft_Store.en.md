@@ -12,7 +12,6 @@ Restricts the Microsoft Store, so that users cannot install arbitrary apps.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-019-MicrosoftAppStore` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration |
 | File | [`Baseline_WIN_D_Microsoft_Store.json`](Baseline_WIN_D_Microsoft_Store.json) |
 

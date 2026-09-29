@@ -12,7 +12,6 @@ Makes closing the lid and the power button put the device to sleep, so that the 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-142-DPowerManagement` |
 | Source | IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; values verified against the settings catalog definitions (1 = Sleep) |
 | File | [`Baseline_WIN_D_Power_Management.json`](Baseline_WIN_D_Power_Management.json) |
 

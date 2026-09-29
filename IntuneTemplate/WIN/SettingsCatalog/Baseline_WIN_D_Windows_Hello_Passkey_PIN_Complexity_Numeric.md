@@ -12,7 +12,6 @@ Legt de numerieke PIN voor de Windows Hello for Business-passkey expliciet vast:
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-213-DWindowsHelloPasskeyPINComplexityNumeric` |
 | Bron | Eigen keuze, PassportForWork CSP — Policies/PINComplexity |
 | Bestand | [`Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.json`](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.json) |
 

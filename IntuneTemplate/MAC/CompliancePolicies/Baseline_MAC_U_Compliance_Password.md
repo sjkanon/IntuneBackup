@@ -12,7 +12,6 @@ Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn.
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline macOS v1.0 — Compliance - U - Password |
 | Bestand | [`Baseline_MAC_U_Compliance_Password.json`](Baseline_MAC_U_Compliance_Password.json) |
 

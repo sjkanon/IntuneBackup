@@ -12,7 +12,6 @@ Dwingt in Edge DNS over HTTPS af zonder terugval: elk DNS-verzoek gaat versleute
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure` |
 | Bron | Microsoft Edge-beleid DnsOverHttpsMode en DnsOverHttpsTemplates (Edge 83+) — waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 

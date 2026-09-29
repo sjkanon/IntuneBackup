@@ -12,7 +12,6 @@ Deuxième anneau pour les mises à jour Defender : en retard sur le pilote et en
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-062-DDefenderUpdateRing2UAT` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT |
 | Fichier | [`Baseline_WIN_D_Defender_Update_Ring_2_UAT.json`](Baseline_WIN_D_Defender_Update_Ring_2_UAT.json) |
 

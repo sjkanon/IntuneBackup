@@ -12,7 +12,6 @@ Checks whether the device boots with Secure Boot, so that a bootkit cannot load 
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot |
 | File | [`Baseline_WIN_U_Compliance_Secure_Boot.json`](Baseline_WIN_U_Compliance_Secure_Boot.json) |
 

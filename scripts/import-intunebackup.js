@@ -2,7 +2,7 @@
 /**
  * Reads an IntuneBackupAndRestore export (folders per policy type, one JSON per policy,
  * plus an Assignments/ subfolder) and rewrites it into the CIPP template format in
- * IntuneTemplate/ — the source that generate-baseline.js and export-intunebackup.js run on.
+ * IntuneTemplate/ — the source that export-intunebackup.js and the doc generators run on.
  *
  * Counterpart of scripts/export-intunebackup.js; together they make the baseline usable in
  * both tools: CIPP reads IntuneTemplate/ directly, IntuneBackupAndRestore reads the folder
@@ -278,7 +278,7 @@ function main() {
   report("Overgeslagen", skipped);
   report("MISLUKT", failed);
   console.log(`\n${dryRun ? "[dry-run] " : ""}Assignments bijgewerkt voor ${Object.keys(assignments).length} policies -> ${path.relative(REPO_ROOT, ASSIGNMENTS_PATH)}`);
-  if (added.length || overwritten.length) console.log("Draai hierna `node scripts/generate-baseline.js` om de baseline bij te werken.");
+  if (added.length || overwritten.length) console.log("Draai hierna de pijplijn uit scripts/README.md (set-packages.js, check-scope.js, export-intunebackup.js, generate-docs.js).");
   if (failed.length) process.exit(1);
 }
 

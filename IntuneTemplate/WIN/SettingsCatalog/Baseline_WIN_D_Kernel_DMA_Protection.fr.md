@@ -12,7 +12,6 @@ Bloque les périphériques qui peuvent lire directement la mémoire et ne prenne
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-130-DKernelDMAProtection` |
 | Source | Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — valeur vérifiée par rapport à Policy CSP DmaGuard/DeviceEnumerationPolicy. |
 | Fichier | [`Baseline_WIN_D_Kernel_DMA_Protection.json`](Baseline_WIN_D_Kernel_DMA_Protection.json) |
 

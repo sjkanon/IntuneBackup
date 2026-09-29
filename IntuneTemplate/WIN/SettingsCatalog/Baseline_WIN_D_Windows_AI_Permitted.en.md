@@ -12,7 +12,6 @@ Explicitly allows Recall and Click To Do, including saving snapshots.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-148-DWindowsAIPermitted` |
 | Source | Counterpart of the Restricted variant; values are the Windows defaults, set explicitly |
 | File | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 

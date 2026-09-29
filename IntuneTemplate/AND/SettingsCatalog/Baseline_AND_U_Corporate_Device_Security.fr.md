@@ -12,7 +12,6 @@ Durcit les appareils Android fully managed et corporate-owned : code à six chif
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-181-ANDUCorporateDeviceSecurity` |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - Device-Password, System-Security, Applications, Connectivity, General-Settings et Data-Sharing-Controls (Fully-Managed et Corp-Work-Profile) - v1.5 ; accès USB limité au transfert de fichiers au lieu de toutes les données, sans expiration du mot de passe, mise en veille de l'écran à 15 minutes |
 | Fichier | [`Baseline_AND_U_Corporate_Device_Security.json`](Baseline_AND_U_Corporate_Device_Security.json) |
 

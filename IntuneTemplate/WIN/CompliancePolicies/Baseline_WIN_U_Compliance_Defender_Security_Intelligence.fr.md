@@ -12,7 +12,6 @@ Vérifie que Microsoft Defender est activé et que les informations de sécurit�
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Security Intelligence |
 | Fichier | [`Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json`](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.json) |
 

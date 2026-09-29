@@ -12,7 +12,6 @@ Marque un appareil Android avec profil professionnel personnel comme non conform
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Convention OpenIntuneBaseline pour la conformité, contenu comparé à IntuneAdmin (Personally-owned work profile - Device Health) et à UniFy-Endpoint Android BYOD. |
 | Fichier | [`Baseline_AND_U_Compliance_Device_Health.json`](Baseline_AND_U_Compliance_Device_Health.json) |
 

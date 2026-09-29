@@ -12,7 +12,6 @@ Encrypts the OS drive and, via the retained custom settings, also fixed and remo
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-011-Bitlocker` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | File | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 

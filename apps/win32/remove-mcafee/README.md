@@ -8,7 +8,7 @@ vanaf de fabriek meekomt.
 Staat buiten [`IntuneTemplate/`](../../../IntuneTemplate/README.md), net als
 [`shellscripts/macos/`](../../../shellscripts/macos/README.md) en
 [`compliance/macos/`](../../../compliance/macos/README.md): een Win32-app is geen policy en past
-niet in een van de vijf CIPP-policytypes. Geen `checkId`, en geen enkele pijplijn pikt deze map op.
+niet in een van de vijf CIPP-policytypes. Geen enkele pijplijn pikt deze map op.
 
 ## Waarom dit bij de baseline hoort
 
@@ -18,8 +18,8 @@ mode*. Realtimebeveiliging stopt, en daarmee vervalt de bodem onder een flink de
 baseline — de ASR-regels, Controlled Folder Access, Network Protection en de nieuwe
 Remote Encryption Protection leunen allemaal op een actieve Defender-engine.
 
-Het gemene is dat niets daarvan een fout meldt. De policies komen netjes aan, de baseline-check
-staat groen, en de instellingen doen niets omdat de engine die ze zou uitvoeren op de reservebank
+Het gemene is dat niets daarvan een fout meldt. De policies komen netjes aan, Intune meldt ze
+als geslaagd, en de instellingen doen niets omdat de engine die ze zou uitvoeren op de reservebank
 zit. Dat blijft zo tot de proefperiode van McAfee afloopt — en dan staat het apparaat een tijd
 lang zonder werkende antivirus.
 

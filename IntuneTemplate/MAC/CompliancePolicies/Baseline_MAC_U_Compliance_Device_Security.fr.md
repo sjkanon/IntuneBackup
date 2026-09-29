@@ -12,7 +12,6 @@ Vérifie si le disque du Mac est chiffré, si le pare-feu est activé et si Gate
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Security |
 | Fichier | [`Baseline_MAC_U_Compliance_Device_Security.json`](Baseline_MAC_U_Compliance_Device_Security.json) |
 

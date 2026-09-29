@@ -12,7 +12,6 @@ Fait ouvrir les fichiers .js, .vbs et .hta dans le Bloc-notes au lieu de l'hôte
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-079-DScriptFileAssociations` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
 | Fichier | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 

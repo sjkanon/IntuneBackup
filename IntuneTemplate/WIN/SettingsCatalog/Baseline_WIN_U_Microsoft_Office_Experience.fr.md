@@ -12,7 +12,6 @@ L'expérience Office par utilisateur : écrans de premier lancement, services co
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-102-UMicrosoftOfficeExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience |
 | Fichier | [`Baseline_WIN_U_Microsoft_Office_Experience.json`](Baseline_WIN_U_Microsoft_Office_Experience.json) |
 

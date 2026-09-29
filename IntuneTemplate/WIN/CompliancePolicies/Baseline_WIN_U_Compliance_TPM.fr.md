@@ -12,7 +12,6 @@ Vérifie que l'appareil dispose d'un TPM. Sans TPM, pas de BitLocker avec protec
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - TPM |
 | Fichier | [`Baseline_WIN_U_Compliance_TPM.json`](Baseline_WIN_U_Compliance_TPM.json) |
 

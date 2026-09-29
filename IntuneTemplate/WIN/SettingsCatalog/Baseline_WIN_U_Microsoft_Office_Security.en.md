@@ -12,7 +12,6 @@ The user side of Office security: macro behaviour, trusted locations and Protect
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-103-UMicrosoftOfficeSecurity` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security |
 | File | [`Baseline_WIN_U_Microsoft_Office_Security.json`](Baseline_WIN_U_Microsoft_Office_Security.json) |
 

@@ -12,7 +12,6 @@ Vérifie si le Mac exige un mot de passe et quelle doit être sa robustesse.
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | All Users |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Password |
 | Fichier | [`Baseline_MAC_U_Compliance_Password.json`](Baseline_MAC_U_Compliance_Password.json) |
 

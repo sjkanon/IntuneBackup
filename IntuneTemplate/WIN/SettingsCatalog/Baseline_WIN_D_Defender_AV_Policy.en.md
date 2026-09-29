@@ -12,7 +12,6 @@ Core configuration of Defender Antivirus as CIPP ships it: real-time protection,
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-108-DDefenderAVPolicy` |
 | Source | CIPP standard template |
 | File | [`Baseline_WIN_D_Defender_AV_Policy.json`](Baseline_WIN_D_Defender_AV_Policy.json) |
 

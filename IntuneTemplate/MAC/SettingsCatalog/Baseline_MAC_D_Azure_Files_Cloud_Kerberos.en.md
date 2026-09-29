@@ -12,7 +12,6 @@ Gives the Mac a Kerberos ticket for the Entra Cloud Kerberos realm, so that an S
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-154-MACDAzureFilesCloudKerberos` |
 | Source | Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), and the Entra guide for Kerberos SSO in Platform SSO; settingDefinitionIds verified against the settings catalog definitions |
 | File | [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json`](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json) |
 
@@ -20,7 +19,7 @@ Gives the Mac a Kerberos ticket for the Entra Cloud Kerberos realm, so that an S
 >
 > A second policy alongside Platform SSO and not an extension of it: the settings catalog has two separate forms for `com.apple.extensiblesso`, the Platform SSO form (`com.apple.extensiblesso_com.apple.extensiblesso`) and the Kerberos form this policy uses (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Each Kerberos realm is one such form, with its own `Realm` and its own `Hosts`. On the Mac those profiles are installed side by side and macOS merges the payloads; check-scope.js therefore deliberately does not report that overlap on Apple as a conflict.
 >
-> The tenant id is in the `preferredKDCs` URL as `%OrganizationId%`, the same construction as in the OneDrive KFM and Teams policies: CIPP replaces that token at deployment with the tenant's customerId (see Get-CIPPTextReplacement in CIPP-API); `%tenantid%` does the same. If you deploy with IntuneBackupAndRestore instead of CIPP, that replacement does not happen and you have to fill in the id by hand. `generate-baseline.js` deliberately leaves that one setting out of the check — the tenant holds the GUID and not the token, so a check that uses the token as the expected value is red by definition.
+> The tenant id is in the `preferredKDCs` URL as `%OrganizationId%`, the same construction as in the OneDrive KFM and Teams policies: CIPP replaces that token at deployment with the tenant's customerId (see Get-CIPPTextReplacement in CIPP-API); `%tenantid%` does the same. If you deploy with IntuneBackupAndRestore instead of CIPP, that replacement does not happen and you have to fill in the id by hand.
 >
 > On the tenant side, four things must be in place before this profile achieves anything: Entra Kerberos enabled on the storage account, admin consent on the associated service principal, MFA off for that storage account's Entra app, and share-level permissions on the share itself. If the file share already exists, the identifier URI of that app registration is `CIFS/<account>.file.core.windows.net` — in capitals. macOS only mounts on `cifs/` in lower case; Microsoft provides `updateappmanifestazurefiles.ps1` for this in azure-files-samples. New shares do not have that problem.
 >

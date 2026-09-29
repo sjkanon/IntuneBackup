@@ -12,7 +12,6 @@ Active le plug-in Microsoft Enterprise SSO de Microsoft Authenticator, afin que 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-188-IOSDEnterpriseSSO` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices ; liste d'URL et clés alignées sur Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices) |
 | Fichier | [`Baseline_IOS_D_Enterprise_SSO.json`](Baseline_IOS_D_Enterprise_SSO.json) |
 

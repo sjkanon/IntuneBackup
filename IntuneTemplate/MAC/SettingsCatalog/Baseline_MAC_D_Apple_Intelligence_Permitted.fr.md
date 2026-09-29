@@ -12,7 +12,6 @@ Autorise explicitement les mêmes fonctions Apple Intelligence : Writing Tools, 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-194-MACDAppleIntelligencePermitted` |
 | Source | Baseline propre — image miroir de [Baseline] - MAC - D - Apple Intelligence Restricted ; ids issus d'OpenIntuneBaseline macOS v2.0 beta et de CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe) |
 | Fichier | [`Baseline_MAC_D_Apple_Intelligence_Permitted.json`](Baseline_MAC_D_Apple_Intelligence_Permitted.json) |
 

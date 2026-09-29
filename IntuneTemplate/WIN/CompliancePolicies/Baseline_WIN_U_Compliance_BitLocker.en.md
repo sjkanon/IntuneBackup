@@ -12,7 +12,6 @@ Checks whether the system drive is encrypted with BitLocker. Twelve hours' grace
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - BitLocker |
 | File | [`Baseline_WIN_U_Compliance_BitLocker.json`](Baseline_WIN_U_Compliance_BitLocker.json) |
 

@@ -12,7 +12,6 @@ Fait synchroniser l'horloge du Mac avec time.apple.com, afin que les horodatages
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-201-MACDTimeServer` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.3.2.1 (mSCP branche tahoe, ODV time.apple.com) ; forme reprise de microsoft/intune-my-macs pol-sys-100-ntp |
 | Fichier | [`Baseline_MAC_D_Time_Server.json`](Baseline_MAC_D_Time_Server.json) |
 

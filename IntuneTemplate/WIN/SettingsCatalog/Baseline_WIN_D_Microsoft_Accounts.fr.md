@@ -12,7 +12,6 @@ Détermine si des comptes Microsoft personnels peuvent être utilisés et ajout�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-073-DMicrosoftAccounts` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration |
 | Fichier | [`Baseline_WIN_D_Microsoft_Accounts.json`](Baseline_WIN_D_Microsoft_Accounts.json) |
 

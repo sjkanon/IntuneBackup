@@ -12,7 +12,6 @@ Intègre Microsoft Defender for Endpoint sans action de l'utilisateur sur les ap
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — DC - Zero-Touch-Control-Filter - MDE - Corporate Devices (iosCustomConfiguration avec le mobileconfig Control Filter de Microsoft : com.apple.webcontent-filter, plug-in com.microsoft.scmx, SilentOnboard) ; champs vérifiés par rapport à pl4nty DCv1 iOSCustomConfiguration |
 | Fichier | [`Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.json`](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.json) |
 

@@ -12,7 +12,6 @@ Enforces the latest iOS version on enrolled iPhones and iPads no later than 14 d
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-192-IOSDSoftwareUpdates` |
 | Source | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Software Update - Corporate Devices (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0), compared with IntuneAdmin Apple iOS Benchmarks (Enforce Latest Software Update Version, Recommendation Cadence, Rapid Security Response); deferral period deliberately omitted |
 | File | [`Baseline_IOS_D_Software_Updates.json`](Baseline_IOS_D_Software_Updates.json) |
 

@@ -12,7 +12,6 @@ Empêche, sur les appareils Android fully managed et corporate-owned, que le con
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-179-ANDUCorporateAIRestricted` |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) et Applications (appfunctions), Fully-Managed et Corp-Work-Profile - v1.5 |
 | Fichier | [`Baseline_AND_U_Corporate_AI_Restricted.json`](Baseline_AND_U_Corporate_AI_Restricted.json) |
 

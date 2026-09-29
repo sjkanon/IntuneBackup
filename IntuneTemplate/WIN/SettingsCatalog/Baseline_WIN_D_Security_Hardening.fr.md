@@ -12,7 +12,6 @@ Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolète
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-080-DSecurityHardening` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening |
 | Fichier | [`Baseline_WIN_D_Security_Hardening.json`](Baseline_WIN_D_Security_Hardening.json) |
 

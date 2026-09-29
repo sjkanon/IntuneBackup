@@ -12,7 +12,6 @@ Durcissement contre PrintNightmare : restreint Point and Print et l'installation
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-077-DPrinting` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Printing |
 | Fichier | [`Baseline_WIN_D_Printing.json`](Baseline_WIN_D_Printing.json) |
 

@@ -12,7 +12,6 @@ Anneau de production pour les mises à jour Defender : ne reçoit les définitio
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-063-DDefenderUpdateRing3Production` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production |
 | Fichier | [`Baseline_WIN_D_Defender_Update_Ring_3_Production.json`](Baseline_WIN_D_Defender_Update_Ring_3_Production.json) |
 

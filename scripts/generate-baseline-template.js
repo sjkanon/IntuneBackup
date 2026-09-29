@@ -92,9 +92,9 @@ function build(manifest, assignments) {
     TemplateType: "BaselineTemplate",
     templateName: TEMPLATE_NAME,
     description:
-      "De afgesproken Intune-baseline uit de baseline-repository. Elke stage rolt " +
-      "Intune-templatepakketten uit; het lidmaatschap van een pakket volgt de repo, dus een " +
-      "nieuwe policy komt er vanzelf bij. Wijs de tenants toe voor je hem laat draaien.",
+      "The agreed Intune baseline from the baseline repository. Every stage deploys Intune " +
+      "template packages; package membership follows the repo, so a new policy is added " +
+      "automatically. Assign the tenants before you run it.",
     // CIPP's eigen export zet hier dezelfde placeholder: een geïmporteerde baseline hoort
     // zichtbaar nog niet toegewezen te zijn.
     assignedTenants: [{ label: "Exported Template", value: "Exported Template", type: "Tenant" }],

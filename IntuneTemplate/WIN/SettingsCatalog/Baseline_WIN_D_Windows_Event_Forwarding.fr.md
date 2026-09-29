@@ -12,7 +12,6 @@ Transfère les événements Windows vers un Windows Event Collector central, afi
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-207-DWindowsEventForwarding` |
 | Source | Microsoft Learn — 'Use Windows Event Forwarding to help with intrusion detection' et Policy CSP ADMX_EventForwarding/SubscriptionManager ; valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Windows_Event_Forwarding.json`](Baseline_WIN_D_Windows_Event_Forwarding.json) |
 

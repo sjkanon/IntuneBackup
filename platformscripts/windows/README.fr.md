@@ -7,9 +7,8 @@ Les scripts de plateforme Intune (`deviceManagementScripts`) se trouvent **en de
 les pipelines de ce dossier connaissent cinq types de stratégie CIPP et un script de plateforme
 n'est aucun de ces cinq. Il dépend de `deviceManagement/deviceManagementScripts`,
 `Set-CIPPIntunePolicy` n'a pas de `TemplateType` pour lui, et `Start-IntuneRestoreConfig` ne le
-restaure pas. Un fichier ici n'est donc **pas** pris en compte par `generate-baseline.js`,
-`export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`, et il n'a pas de
-`checkId`.
+restaure pas. Un fichier ici n'est donc **pas** pris en compte par
+`export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`.
 
 Le dossier s'appelle `platformscripts/` et non `shellscripts/` parce qu'Intune les nomme
 lui-même ainsi : sous Windows, ils se trouvent sous *Scripts and remediations → Platform

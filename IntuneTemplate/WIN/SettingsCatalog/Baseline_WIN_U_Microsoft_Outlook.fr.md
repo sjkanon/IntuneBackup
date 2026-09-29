@@ -12,7 +12,6 @@ Configure automatiquement le profil Exchange Online de l'utilisateur, afin qu'Ou
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-010-AutomaticConfigurationOfOutlook` |
 | Source | baseline propre |
 | Fichier | [`Baseline_WIN_U_Microsoft_Outlook.json`](Baseline_WIN_U_Microsoft_Outlook.json) |
 

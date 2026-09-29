@@ -12,7 +12,6 @@ Merkt elk Android-toestel dat nog met het verouderde device administrator wordt 
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | Intune-compliance voor Android device administrator (`securityBlockDeviceAdministratorManagedDevices`); aanbeveling uit UniFy Android Enterprise Baseline v1.5.1, gids 9 (Enrollment Restrictions) |
 | Bestand | [`Baseline_AND_U_Compliance_Block_Device_Administrator.json`](Baseline_AND_U_Compliance_Block_Device_Administrator.json) |
 

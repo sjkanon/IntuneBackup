@@ -12,7 +12,6 @@ Onboardt Microsoft Defender for Endpoint zonder gebruikersactie op niet-supervis
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Device config |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — DC - Zero-Touch-Onboarding-VPN - MDE - BYOD Devices (iosVpnConfiguration: customVpn com.microsoft.scmx, server 127.0.0.1, SilentOnboard en SingleSignOn); velden geverifieerd tegen Graph beta iosVpnConfiguration en pl4nty DCv1 |
 | Bestand | [`Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.json`](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.json) |
 

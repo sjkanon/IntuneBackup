@@ -12,7 +12,6 @@ Zet op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-184-IOSDAppleIntelligenceRestricted` |
 | Bron | Declaratieve configuraties com.apple.configuration.intelligence.settings en external-intelligence.settings in de iOS settings catalog; selectie uit UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate en IntuneAdmin — Disable Apple Intelligence, met Writing Tools uit waar UniFy het toestaat. De com.apple.applicationaccess-varianten die IntuneAdmin gebruikt zijn in de catalogus als Deprecated gemarkeerd |
 | Bestand | [`Baseline_IOS_D_Apple_Intelligence_Restricted.json`](Baseline_IOS_D_Apple_Intelligence_Restricted.json) |
 

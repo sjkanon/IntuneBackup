@@ -12,7 +12,6 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (enrollmentConfiguration) |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity` |
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel |
 | Bestand | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 

@@ -12,7 +12,6 @@ Le canal de mise à jour d'Office et la rapidité d'installation des mises à jo
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-021-OfficeUpdates` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates |
 | Fichier | [`Baseline_WIN_D_Microsoft_Office_Updates.json`](Baseline_WIN_D_Microsoft_Office_Updates.json) |
 

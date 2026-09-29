@@ -12,7 +12,6 @@ Voorkomt op fully managed en corporate-owned Android-toestellen dat scherminhoud
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-179-ANDUCorporateAIRestricted` |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) en Applications (appfunctions), Fully-Managed en Corp-Work-Profile - v1.5 |
 | Bestand | [`Baseline_AND_U_Corporate_AI_Restricted.json`](Baseline_AND_U_Corporate_AI_Restricted.json) |
 

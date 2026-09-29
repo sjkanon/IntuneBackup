@@ -12,7 +12,6 @@ Fournit au Mac un ticket Kerberos pour le realm Entra Cloud Kerberos, afin qu'un
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-154-MACDAzureFilesCloudKerberos` |
 | Source | Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), et le guide Entra pour Kerberos SSO dans Platform SSO ; settingDefinitionId vérifiés par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json`](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json) |
 
@@ -20,7 +19,7 @@ Fournit au Mac un ticket Kerberos pour le realm Entra Cloud Kerberos, afin qu'un
 >
 > Une seconde policy à côté de Platform SSO et non une extension de celle-ci : le settings catalog connaît pour `com.apple.extensiblesso` deux formes distinctes, la forme Platform SSO (`com.apple.extensiblesso_com.apple.extensiblesso`) et la forme Kerberos qu'utilise cette policy (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Chaque realm Kerberos correspond à une telle forme, avec son propre `Realm` et ses propres `Hosts`. Sur le Mac, ces profils sont installés côte à côte et macOS fusionne les payloads ; check-scope.js ne signale donc volontairement pas ce chevauchement chez Apple comme un conflit.
 >
-> L'id du tenant figure sous la forme `%OrganizationId%` dans l'URL `preferredKDCs`, la même construction que dans les policies OneDrive KFM et Teams : CIPP remplace ce jeton lors du déploiement par le customerId du tenant (voir Get-CIPPTextReplacement dans CIPP-API) ; `%tenantid%` fait de même. Si vous déployez avec IntuneBackupAndRestore au lieu de CIPP, ce remplacement n'a pas lieu et vous devez saisir l'id à la main. `generate-baseline.js` exclut volontairement ce paramètre du contrôle — le tenant contient le GUID et non le jeton, donc un contrôle qui prend le jeton comme valeur attendue est rouge par définition.
+> L'id du tenant figure sous la forme `%OrganizationId%` dans l'URL `preferredKDCs`, la même construction que dans les policies OneDrive KFM et Teams : CIPP remplace ce jeton lors du déploiement par le customerId du tenant (voir Get-CIPPTextReplacement dans CIPP-API) ; `%tenantid%` fait de même. Si vous déployez avec IntuneBackupAndRestore au lieu de CIPP, ce remplacement n'a pas lieu et vous devez saisir l'id à la main.
 >
 > Côté tenant, quatre éléments doivent être en place avant que ce profil produise quoi que ce soit : Entra Kerberos activé sur le storage account, le consentement administrateur sur le service principal associé, la MFA désactivée pour l'app Entra de ce storage account, et des share-level permissions sur le partage lui-même. Si le file share existe déjà, l'URI d'identifiant de cet enregistrement d'app est `CIFS/<account>.file.core.windows.net` — en majuscules. macOS ne monte que sur `cifs/` en minuscules ; Microsoft fournit `updateappmanifestazurefiles.ps1` pour cela dans azure-files-samples. Les nouveaux partages n'ont pas ce problème.
 >

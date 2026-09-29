@@ -5,7 +5,7 @@
 De CIPP-pijplijnen dragen vijf policytypes (Catalog, Device, compliance, App Protection,
 Admin). Voor een complete iOS-baseline is meer nodig: tenantinstellingen in Apple Business,
 een ADE-inschrijfprofiel, app-configuratie en twee dynamische groepen. Die staan hier. Niets
-in deze map wordt opgepikt door `generate-baseline.js`, `export-intunebackup.js` of
+in deze map wordt opgepikt door `export-intunebackup.js` of
 `Set-BaselineAssignment.ps1`.
 
 | Map | Wat | Uitrollen |

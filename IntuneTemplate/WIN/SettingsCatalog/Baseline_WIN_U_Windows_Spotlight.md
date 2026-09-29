@@ -12,7 +12,6 @@ Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen a
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-106-UWindowsSpotlight` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user-deel) |
 | Bestand | [`Baseline_WIN_U_Windows_Spotlight.json`](Baseline_WIN_U_Windows_Spotlight.json) |
 

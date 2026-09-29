@@ -12,7 +12,6 @@ Donne la priorité aux paramètres d'audit avancés sur les anciens paramètres 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-126-DAuditPolicyEnforcement` |
 | Source | CIS v4 Windows 11 L1 et la Microsoft Security Baseline — paramètre repris du profil NIS2 d'IntuneAdmin, valeur vérifiée par rapport à la définition du settings catalog. |
 | Fichier | [`Baseline_WIN_D_Audit_Policy_Enforcement.json`](Baseline_WIN_D_Audit_Policy_Enforcement.json) |
 

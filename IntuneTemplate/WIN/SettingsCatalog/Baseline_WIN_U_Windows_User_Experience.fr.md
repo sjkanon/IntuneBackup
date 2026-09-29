@@ -12,7 +12,6 @@ Désactive les notifications sur l'écran de verrouillage et la saisie semi-auto
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-031-UWindowsUserExperience` |
 | Source | baseline propre — issue de la scission d'Administrative Templates |
 | Fichier | [`Baseline_WIN_U_Windows_User_Experience.json`](Baseline_WIN_U_Windows_User_Experience.json) |
 

@@ -12,7 +12,6 @@ De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthentic
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-018-LocalPoliciesSecurityOptions` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies |
 | Bestand | [`Baseline_WIN_D_Local_Security_Policies.json`](Baseline_WIN_D_Local_Security_Policies.json) |
 

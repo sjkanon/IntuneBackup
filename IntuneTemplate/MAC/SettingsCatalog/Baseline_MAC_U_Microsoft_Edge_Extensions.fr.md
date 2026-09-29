@@ -12,7 +12,6 @@ Détermine quelles extensions Edge les utilisateurs peuvent installer sur le Mac
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-051-MACUMicrosoftEdgeExtensions` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Extensions |
 | Fichier | [`Baseline_MAC_U_Microsoft_Edge_Extensions.json`](Baseline_MAC_U_Microsoft_Edge_Extensions.json) |
 

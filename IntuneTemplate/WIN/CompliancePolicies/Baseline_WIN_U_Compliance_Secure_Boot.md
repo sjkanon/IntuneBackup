@@ -12,7 +12,6 @@ Toetst of het apparaat met Secure Boot opstart, zodat een bootkit niet vóór Wi
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot |
 | Bestand | [`Baseline_WIN_U_Compliance_Secure_Boot.json`](Baseline_WIN_U_Compliance_Secure_Boot.json) |
 

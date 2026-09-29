@@ -117,13 +117,6 @@ nom d'affichage (voir `Get-CIPPTextReplacement` dans CIPP-API ; le remplacement 
 Les stratégies OneDrive de cette baseline utilisent déjà cette construction pour leur liste de tenants et pour
 Known Folder Move, la stratégie Teams fait donc désormais de même.
 
-Cela a mis au jour une erreur existante. Jusqu'ici, le contrôle de baseline prenait ces tokens comme
-valeur attendue, alors que le tenant contient le GUID renseigné. Cinq contrôles étaient de ce fait
-rouges en permanence — non pas parce que le tenant divergeait, mais parce que la baseline comparait quelque chose qui n'est jamais
-stocké ainsi. Un tel contrôle est pire que pas de contrôle : il réclame de l'attention à chaque passage et apprend à tout le monde à
-ignorer le rouge. `generate-baseline.js` ignore désormais ces paramètres, avec un message pour chaque
-cas, comme il ignorait déjà le token d'intégration EDR.
-
 **Attention avec l'autre voie de déploiement :** CIPP effectue ce remplacement, `Start-IntuneRestoreConfig` non.
 Qui déploie via IntuneBackupAndRestore conserve `%OrganizationId%` littéralement dans la stratégie et doit
 renseigner l'identifiant à la main.
@@ -139,26 +132,20 @@ rien n'est donc réglé. `check-scope.js` y veille.
 
 | Paire | Restricted | Permitted |
 |---|---|---|
-| `WIN - D - Windows AI` (112) | Recall indisponible, pas de captures d'écran, Click To Do désactivé | les trois autorisés, définis explicitement |
-| `WIN - D - Windows AI Features` (147 / 146) | Cocreator, Image Creator, Generative Fill et Settings Agent désactivés | les quatre mêmes activés |
-| `WIN - U - AI Usage Control` (139 / 149) | Edge bloque dix services d'IA publics plus le site du Store | uniquement les quatre règles du Store ; les services d'IA restent accessibles |
+| `WIN - D - Windows AI` | Recall indisponible, pas de captures d'écran, Click To Do désactivé | les trois autorisés, définis explicitement |
+| `WIN - D - Windows AI Features` | Cocreator, Image Creator, Generative Fill et Settings Agent désactivés | les quatre mêmes activés |
+| `WIN - U - AI Usage Control` | Edge bloque dix services d'IA publics plus le site du Store | uniquement les quatre règles du Store ; les services d'IA restent accessibles |
 
-Deux choix délibérés à cet égard :
-
-- **La variante Restricted conserve l'ancien checkId.** 112 et 139 existaient déjà ; cette variante est la
-  continuation de la stratégie telle qu'elle était, les constatations existantes y restent donc rattachées. Les
-  contreparties Permitted ont reçu 148 et 149. Le checkId 144 — la stratégie Windows AI Features avant
-  sa scission — a été supprimé et n'est pas réutilisé.
-- **La variante Permitted d'AI Usage Control ne supprime pas la liste de blocage.** Avant l'itération IA, cette liste
-  contenait déjà quatre règles pour le site du Store. Elle a été ramenée à ces quatre
-  plutôt que de supprimer tout le paramètre — sinon autoriser l'IA aurait aussi levé discrètement
-  le blocage du Store, et c'est une autre décision.
+**La variante Permitted d'AI Usage Control ne supprime délibérément pas la liste de blocage.** Avant
+l'itération IA, cette liste contenait déjà quatre règles pour le site du Store. Elle a été ramenée à ces quatre
+plutôt que de supprimer tout le paramètre — sinon autoriser l'IA aurait aussi levé discrètement
+le blocage du Store, et c'est une autre décision.
 
 Les variantes Permitted ne sont pas une recommandation. Elles sont en phase 5 (ne pas déployer) parce que la
 baseline choisit par défaut le côté Restricted ; qui veut l'autre côté inverse l'affectation.
 
-Pour ceux qui le font, il existe une troisième stratégie : **`WIN - D - Windows AI Recall Boundaries`** (150,
-phase 3). Autoriser Recall n'est en effet pas du tout-ou-rien. Le préjudice d'un index n'est pas
+Pour ceux qui le font, il existe une troisième stratégie : **`WIN - D - Windows AI Recall Boundaries`** (phase
+3). Autoriser Recall n'est en effet pas du tout-ou-rien. Le préjudice d'un index n'est pas
 réparti uniformément — un seul instantané d'un coffre de mots de passe ouvert ou du portail Entra
 pèse plus lourd que mille d'un traitement de texte. Cette stratégie retire précisément ces endroits :
 
@@ -320,7 +307,7 @@ ce qui reste n'est pas applicable, fait doublon, ou est abandonné.
 
 | Ajout | Pourquoi |
 |---|---|
-| `WIN - D - Defender Ransomware Protection` (153) | Les rançongiciels modernes ne chiffrent pas l'appareil sur lequel ils arrivent mais les partages qui l'entourent. Toute la baseline regardait ce qui se passe *sur* l'appareil ; celle-ci est la première à regarder ce que l'appareil fait *aux autres*. Blocage au niveau Low : uniquement à 100 % de certitude, car un faux positif touche ici un outil de sauvegarde ou de synchronisation. |
+| `WIN - D - Defender Ransomware Protection` | Les rançongiciels modernes ne chiffrent pas l'appareil sur lequel ils arrivent mais les partages qui l'entourent. Toute la baseline regardait ce qui se passe *sur* l'appareil ; celle-ci est la première à regarder ce que l'appareil fait *aux autres*. Blocage au niveau Low : uniquement à 100 % de certitude, car un faux positif touche ici un outil de sauvegarde ou de synchronisation. |
 | `Attachment Scanning` + Mark of the Web | Les informations de zone d'un fichier téléchargé sont conservées. C'est sur ce marquage que s'appuient le Mode protégé d'Office et SmartScreen ; s'il disparaît, un téléchargement s'ouvre comme s'il venait du disque local. |
 | `Logon Hardening` + deux | L'adresse e-mail de l'utilisateur n'apparaît plus sur l'écran de connexion, et les utilisateurs connectés ne sont pas énumérés. |
 | `Privacy and Telemetry` + six | Emplacement de recherche, synchronisation des SMS, contenu grand public, astuces en ligne, fournisseurs de polices et partage des données d'applications entre utilisateurs. Tous les six CIS L1. |
@@ -341,7 +328,7 @@ avec un espace réservé.
 | 1 | BASELINE2 sur un groupe pilote | surtout `Kernel DMA Protection` (tester avec les stations d'accueil du parc) et `Logon Hardening` (annoncer CTRL+ALT+DEL aux utilisateurs à l'avance) |
 | 2 | Décision sur les trois paramètres MAM | modification de la baseline convenue ; encore possible maintenant sans migration |
 | 3 | ~~Vérifier le rattachement ISMP dans `_manifest.json`~~ | caduc : le rattachement aux documents ISMS d'une seule organisation a été retiré du manifeste en septembre 2026, afin que la baseline soit générique. ISO 27001, NIS2 et Part-IS y figurent toujours |
-| 4 | Une stratégie donne satisfaction ? | la déplacer vers `IntuneTemplate/` sous le nom `Baseline_`, avec checkId et affectation |
+| 4 | Une stratégie donne satisfaction ? | la déplacer vers `IntuneTemplate/` sous le nom `Baseline_`, avec affectation |
 | 5 | Prochaine itération | contrôle des applications (WDAC/Smart App Control), et conformité iOS/Android dès que des téléphones sont inscrits |
 
 # Itération OIB Windows v4.0 (14 septembre 2026)
@@ -377,7 +364,7 @@ l'ordre des paramètres ; une deuxième exécution n'écrit rien.
 
 | | |
 |---|---|
-| **Conformité** | Quatre stratégies groupées (Device Health, Device Security, Defender for Endpoint, Password) deviennent neuf stratégies distinctes : TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence et Defender Real Time Protection. Password disparaît : ces exigences passent par le moteur EAS, sont imposées plutôt que contrôlées et ne touchent que les comptes locaux. Le verrouillage après 15 minutes figure désormais dans Device Lock. Les checkId 093–096 ont été supprimés ; `_renames.json` indique pour chaque ancienne stratégie ce qu'elle est devenue. |
+| **Conformité** | Quatre stratégies groupées (Device Health, Device Security, Defender for Endpoint, Password) deviennent neuf stratégies distinctes : TPM, Firewall, Antivirus, Antispyware, Secure Boot, Code Integrity, BitLocker, Defender Security Intelligence et Defender Real Time Protection. Password disparaît : ces exigences passent par le moteur EAS, sont imposées plutôt que contrôlées et ne touchent que les comptes locaux. Le verrouillage après 15 minutes figure désormais dans Device Lock. `_renames.json` indique pour chaque ancienne stratégie ce qu'elle est devenue. |
 | **Local Security Policies / LAPS** | Les variantes 24H2+ sont les seules. Pour LAPS, rien ne change sur le fond ; Local Security Policies désactive désormais le compte Administrateur intégré. LAPS gère son propre compte, cela n'affecte donc pas la récupération. |
 | **Defender** | Modéré et élevé en quarantaine (auparavant suppression) ; overrides de la protection contre les exploits par les utilisateurs bloqués ; notifications étendues de Sécurité Windows désactivées (moins de notifications superflues). |
 | **Edge** | Cinq paramètres de sécurité de la baseline Edge v151 (process isolation, renderer app container, network service sandbox, code integrity guard) ; pas de connexion avec des comptes non Microsoft ; pas de téléchargement automatique de modèles d'IA locaux ; nouvelle stratégie **Microsoft Edge Management** (phase 2). |
@@ -521,6 +508,6 @@ En outre :
 4. **OIB macOS v2.0** : lors de cette importation, les Restrictions d'OIB définiront elles-mêmes des id Apple Intelligence et de durcissement ;
    la paire Restricted/Permitted et Restrictions Hardening devront alors être de nouveau comparées à la source.
 5. **CA** : vérifier si CIPP transmet `insiderRiskLevels` (sinon `1190` bloque tout le monde) ; décision
-   sur `3010` à 4 heures (CIS) ; le moteur de plateforme ne compare pas encore les conditions insider et agent.
+   sur `3010` à 4 heures (CIS).
 6. **Non testé sur de vrais appareils** : les nouvelles stratégies macOS, iOS et Android et les scripts dans
    `extras/`. D'abord un appareil pilote par plateforme.

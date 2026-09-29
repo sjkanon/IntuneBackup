@@ -6,7 +6,7 @@ Advice and template: do not let personal Macs enrol in Intune.
 
 An enrollment restriction (`deviceEnrollmentPlatformRestrictionConfiguration`) is none of the
 five CIPP policy types and lives under `deviceManagement/deviceEnrollmentConfigurations`. Not
-picked up by the pipelines, no `checkId`.
+picked up by the pipelines.
 
 | File | What it is |
 |---|---|

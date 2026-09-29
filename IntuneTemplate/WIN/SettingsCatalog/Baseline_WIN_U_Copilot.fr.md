@@ -12,7 +12,6 @@ Détermine si Copilot dans Windows est disponible pour l'utilisateur.
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-097-UCopilot` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - U - Copilot |
 | Fichier | [`Baseline_WIN_U_Copilot.json`](Baseline_WIN_U_Copilot.json) |
 

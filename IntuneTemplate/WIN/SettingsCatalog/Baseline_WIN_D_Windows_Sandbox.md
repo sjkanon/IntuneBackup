@@ -12,7 +12,6 @@ Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot he
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-089-DWindowsSandbox` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox |
 | Bestand | [`Baseline_WIN_D_Windows_Sandbox.json`](Baseline_WIN_D_Windows_Sandbox.json) |
 

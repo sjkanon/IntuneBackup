@@ -12,7 +12,6 @@ De gebruikerskant van de Store-beperkingen.
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-104-UMicrosoftStore` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration |
 | Bestand | [`Baseline_WIN_U_Microsoft_Store.json`](Baseline_WIN_U_Microsoft_Store.json) |
 

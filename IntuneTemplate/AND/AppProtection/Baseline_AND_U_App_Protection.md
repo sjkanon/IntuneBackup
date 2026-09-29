@@ -12,7 +12,6 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-tele
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | App Protection |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline BYOD — Android App Protection |
 | Bestand | [`Baseline_AND_U_App_Protection.json`](Baseline_AND_U_App_Protection.json) |
 

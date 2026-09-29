@@ -12,7 +12,6 @@ Restreint le Bureau à distance et les appels de procédure distants, deux point
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-078-DRemoteDesktopAndRPC` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC |
 | Fichier | [`Baseline_WIN_D_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_Remote_Desktop_and_RPC.json) |
 

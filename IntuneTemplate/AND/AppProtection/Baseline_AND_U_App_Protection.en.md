@@ -12,7 +12,6 @@ Protects corporate data within the Microsoft apps on a personal Android phone: s
 | Scope | User (U) — assign to user groups |
 | Type | App Protection |
 | Assignment | All Users |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline BYOD — Android App Protection |
 | File | [`Baseline_AND_U_App_Protection.json`](Baseline_AND_U_App_Protection.json) |
 

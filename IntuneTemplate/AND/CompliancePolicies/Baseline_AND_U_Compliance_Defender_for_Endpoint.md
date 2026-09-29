@@ -12,7 +12,6 @@ Merkt een Android-toestel met persoonlijk werkprofiel als niet-compliant wanneer
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Personal-Devices - v1.5; vergeleken met IntuneAdmin Baseline - Personally-owned work profile - Microsoft Defender for Endpoint (niveau medium) |
 | Bestand | [`Baseline_AND_U_Compliance_Defender_for_Endpoint.json`](Baseline_AND_U_Compliance_Defender_for_Endpoint.json) |
 

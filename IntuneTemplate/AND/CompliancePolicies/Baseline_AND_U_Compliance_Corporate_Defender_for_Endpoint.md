@@ -12,7 +12,6 @@ Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wa
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Corp-Devices - v1.5; vergeleken met IntuneAdmin Baseline - Android Enterprise - Microsoft Defender for Endpoint (niveau medium) |
 | Bestand | [`Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.json`](Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.json) |
 

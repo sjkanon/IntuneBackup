@@ -12,7 +12,6 @@ Ne laisse macOS monter que le stockage externe qui est lui-même en lecture seul
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-196-MACDExternalStorageReadOnly` |
 | Source | Gestion déclarative Apple, com.apple.configuration.diskmanagement.settings (apple/device-management : macOS 15.0, supervisé uniquement) ; settingDefinitionId et options vérifiés par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 

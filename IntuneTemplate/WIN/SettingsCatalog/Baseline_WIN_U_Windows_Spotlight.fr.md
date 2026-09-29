@@ -12,7 +12,6 @@ Désactive Windows Spotlight, les astuces et les suggestions orientées grand pu
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-106-UWindowsSpotlight` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (partie utilisateur) |
 | Fichier | [`Baseline_WIN_U_Windows_Spotlight.json`](Baseline_WIN_U_Windows_Spotlight.json) |
 

@@ -12,7 +12,6 @@ Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op au
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAttackSurfaceReduction) |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-107-DDefenderASRPolicyAuditMode` |
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json`](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json) |
 

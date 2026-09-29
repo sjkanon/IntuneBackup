@@ -12,7 +12,6 @@ Restricts Windows Sandbox, which otherwise opens a disposable Windows with acces
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-089-DWindowsSandbox` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox |
 | File | [`Baseline_WIN_D_Windows_Sandbox.json`](Baseline_WIN_D_Windows_Sandbox.json) |
 

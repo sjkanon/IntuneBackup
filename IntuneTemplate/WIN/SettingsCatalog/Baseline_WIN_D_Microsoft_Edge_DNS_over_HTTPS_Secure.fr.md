@@ -12,7 +12,6 @@ Impose DNS over HTTPS dans Edge sans repli : chaque requête DNS part chiffrée 
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-203-DMicrosoftEdgeDNSOverHTTPSSecure` |
 | Source | Policy Microsoft Edge DnsOverHttpsMode et DnsOverHttpsTemplates (Edge 83+) — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 

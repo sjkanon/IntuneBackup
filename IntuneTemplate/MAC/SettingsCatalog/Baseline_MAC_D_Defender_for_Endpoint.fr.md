@@ -12,7 +12,6 @@ Accorde à Defender les autorisations système que macOS exige avant qu'il puiss
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
 | Source | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration |
 | Fichier | [`Baseline_MAC_D_Defender_for_Endpoint.json`](Baseline_MAC_D_Defender_for_Endpoint.json) |
 

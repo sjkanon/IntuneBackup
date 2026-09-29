@@ -12,7 +12,6 @@ Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook 
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-159-UMicrosoftOutlookCachedModeDefault` |
 | Bron | eigen baseline |
 | Bestand | [`Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.json`](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.json) |
 

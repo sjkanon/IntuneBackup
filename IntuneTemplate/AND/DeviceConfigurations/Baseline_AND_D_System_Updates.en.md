@@ -12,7 +12,6 @@ Installs Android system updates on organisation-owned devices automatically in a
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - DEV - Additional-Settings - Fully-Managed - v1.5, only the three systemUpdate fields |
 | File | [`Baseline_AND_D_System_Updates.json`](Baseline_AND_D_System_Updates.json) |
 

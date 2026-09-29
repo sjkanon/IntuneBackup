@@ -12,7 +12,6 @@ Staat dezelfde Apple Intelligence-functies uitdrukkelijk toe: Writing Tools, sam
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-194-MACDAppleIntelligencePermitted` |
 | Bron | Eigen baseline — spiegelbeeld van [Baseline] - MAC - D - Apple Intelligence Restricted; ids uit OpenIntuneBaseline macOS v2.0 beta en CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe) |
 | Bestand | [`Baseline_MAC_D_Apple_Intelligence_Permitted.json`](Baseline_MAC_D_Apple_Intelligence_Permitted.json) |
 

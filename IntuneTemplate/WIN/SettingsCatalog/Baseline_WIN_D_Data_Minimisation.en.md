@@ -12,7 +12,6 @@ Limits what goes into the diagnostic data: no additional log files and no memory
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-129-DDataMinimisation` |
 | Source | ISO/IEC 27001:2022 A.5.34 and A.8.11, GDPR art. 5(1)(c) data minimisation — settings from CIS v4 Windows 11 L1 |
 | File | [`Baseline_WIN_D_Data_Minimisation.json`](Baseline_WIN_D_Data_Minimisation.json) |
 

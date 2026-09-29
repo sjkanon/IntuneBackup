@@ -12,7 +12,6 @@ Déploie le réseau invité comme second profil sur chaque portable Windows, afi
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Device config |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Baseline propre — profil Wi-Fi Intune (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 et A.8.21, NIS2 art. 21(2)(c) et (e). |
 | Fichier | [`Baseline_WIN_D_Wifi_Guest.json`](Baseline_WIN_D_Wifi_Guest.json) |
 

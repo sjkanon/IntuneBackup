@@ -12,7 +12,6 @@ Maakt een apparaat niet-compliant zodra Defender for Endpoint het risiconiveau h
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Compliance, 'Microsoft Defender for Endpoint Risk score' (deviceThreatProtectionEnabled, RequiredSecurityLevel medium); body gelijkgetrokken met de OIB v4.0-compliancepolicies, velden geverifieerd tegen DCv1 |
 | Bestand | [`Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json`](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.json) |
 

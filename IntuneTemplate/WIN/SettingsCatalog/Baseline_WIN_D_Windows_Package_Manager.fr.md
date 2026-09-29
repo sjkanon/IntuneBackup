@@ -12,7 +12,6 @@ Restreint winget, afin que les utilisateurs ne puissent pas installer de logicie
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-088-DWindowsPackageManager` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Package Manager |
 | Fichier | [`Baseline_WIN_D_Windows_Package_Manager.json`](Baseline_WIN_D_Windows_Package_Manager.json) |
 

@@ -26,8 +26,8 @@ CIPP puts it back.
 
 The pipelines in `scripts/` know five CIPP policy types (`Catalog`, `Admin`, `Device`,
 `deviceCompliancePolicies`, `AppProtection`) and a standards template is none of those five.
-So this file is **not** picked up by `check-scope.js`, `check-sets.js`,
-`generate-baseline.js` or `export-intunebackup.js`, and it has no `checkId`. Nor does it follow
+So this file is **not** picked up by `check-scope.js`, `check-sets.js`
+or `export-intunebackup.js`. Nor does it follow
 the naming convention with platform and scope — that makes no sense for a tenant setting.
 
 CIPP does read it directly, just like the policy sets: the file ends in `.json` and is not

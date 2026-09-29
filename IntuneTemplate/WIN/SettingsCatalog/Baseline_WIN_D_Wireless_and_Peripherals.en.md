@@ -12,7 +12,6 @@ Makes the device invisible over Bluetooth and shuts off Windows Connect Now, so 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-137-DWirelessAndPeripherals` |
 | Source | ISO/IEC 27001:2022 A.8.20 and A.7.9, NIS2 art. 21(2)(e) — settings from the IntuneAdmin Endpoint Security set |
 | File | [`Baseline_WIN_D_Wireless_and_Peripherals.json`](Baseline_WIN_D_Wireless_and_Peripherals.json) |
 

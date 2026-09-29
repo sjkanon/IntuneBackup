@@ -12,7 +12,6 @@ Production ring for Windows updates: installs daily at 13:00 with a deferral per
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | All Devices |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | own baseline — tenant-specific installation windows |
 | File | [`Baseline_WIN_D_Windows_Update_Ring_3_Production.json`](Baseline_WIN_D_Windows_Update_Ring_3_Production.json) |
 

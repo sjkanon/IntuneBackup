@@ -4,8 +4,7 @@
 
 What belongs in a complete baseline but is none of the five CIPP policy types (`Catalog`,
 `Admin`, `Device`, `deviceCompliancePolicies`, `AppProtection`). Nothing here is picked up by
-`check-scope.js`, `generate-baseline.js`, `export-intunebackup.js` or `Set-BaselineAssignment.ps1`,
-and there is no `checkId` for it. Each folder has its own README with the deployment route, prerequisites
+`check-scope.js`, `export-intunebackup.js` or `Set-BaselineAssignment.ps1`. Each folder has its own README with the deployment route, prerequisites
 and the standards the component covers.
 
 Same approach as [`enrollment/macos/`](../enrollment/macos/README.en.md),

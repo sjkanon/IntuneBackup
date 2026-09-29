@@ -12,7 +12,6 @@ Hardt fully managed en corporate-owned Android-toestellen: code van zes cijfers 
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-181-ANDUCorporateDeviceSecurity` |
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - Device-Password, System-Security, Applications, Connectivity, General-Settings en Data-Sharing-Controls (Fully-Managed en Corp-Work-Profile) - v1.5; USB-toegang op bestandsoverdracht in plaats van alle data, zonder wachtwoordverloop, schermtime-out 15 minuten |
 | Bestand | [`Baseline_AND_U_Corporate_Device_Security.json`](Baseline_AND_U_Corporate_Device_Security.json) |
 

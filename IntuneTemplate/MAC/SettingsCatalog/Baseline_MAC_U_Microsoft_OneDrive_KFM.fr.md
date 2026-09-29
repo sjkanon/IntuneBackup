@@ -12,7 +12,6 @@ Déplace le Bureau et les Documents du Mac vers OneDrive, afin que rien ne soit 
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-054-MACUMicrosoftOneDriveKFM` |
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - U - Known Folder Move |
 | Fichier | [`Baseline_MAC_U_Microsoft_OneDrive_KFM.json`](Baseline_MAC_U_Microsoft_OneDrive_KFM.json) |
 

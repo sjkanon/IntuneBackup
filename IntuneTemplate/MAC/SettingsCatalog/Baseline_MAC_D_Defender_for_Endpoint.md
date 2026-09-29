@@ -12,7 +12,6 @@ Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeeme
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
 | Bron | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration |
 | Bestand | [`Baseline_MAC_D_Defender_for_Endpoint.json`](Baseline_MAC_D_Defender_for_Endpoint.json) |
 

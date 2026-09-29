@@ -12,7 +12,6 @@ The per-user Office experience: first-run screens, connected services and which 
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-102-UMicrosoftOfficeExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience |
 | File | [`Baseline_WIN_U_Microsoft_Office_Experience.json`](Baseline_WIN_U_Microsoft_Office_Experience.json) |
 

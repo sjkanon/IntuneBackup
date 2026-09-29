@@ -12,7 +12,6 @@ Determines when the screen locks and which requirements apply to the passcode, p
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-013-DeviceLock` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock |
 | File | [`Baseline_WIN_D_Device_Lock.json`](Baseline_WIN_D_Device_Lock.json) |
 

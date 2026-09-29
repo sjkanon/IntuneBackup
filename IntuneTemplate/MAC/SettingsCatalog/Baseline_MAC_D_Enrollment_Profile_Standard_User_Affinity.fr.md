@@ -12,7 +12,6 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog (enrollmentConfiguration) |
 | Affectation | — |
-| checkId | `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity` |
 | Source | baseline propre — OpenIntuneBaseline n'a pas de profil d'inscription |
 | Fichier | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 

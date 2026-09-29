@@ -12,7 +12,6 @@ Defines who has which rights on the device: log on as a service, make backups, s
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-026-UserRights` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights |
 | File | [`Baseline_WIN_D_User_Rights.json`](Baseline_WIN_D_User_Rights.json) |
 

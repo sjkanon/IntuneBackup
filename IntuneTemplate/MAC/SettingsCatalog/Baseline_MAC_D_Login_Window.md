@@ -12,7 +12,6 @@ Laat het inlogvenster om accountnaam én wachtwoord vragen in plaats van een lij
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-197-MACDLoginWindow` |
 | Bron | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.3 (inlogbanner) en 2.11.4 (naam en wachtwoord vragen), mSCP branch tahoe; settingDefinitionId's geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_MAC_D_Login_Window.json`](Baseline_MAC_D_Login_Window.json) |
 

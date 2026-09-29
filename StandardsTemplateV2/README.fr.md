@@ -27,7 +27,7 @@ tenant s'en écarte, CIPP le rétablit.
 Les pipelines de `scripts/` connaissent cinq types de stratégie CIPP (`Catalog`, `Admin`,
 `Device`, `deviceCompliancePolicies`, `AppProtection`) et un template de standards n'est aucun
 de ces cinq. Ce fichier n'est donc **pas** pris en compte par `check-scope.js`,
-`check-sets.js`, `generate-baseline.js` ou `export-intunebackup.js`, et il n'a pas de `checkId`.
+`check-sets.js` ou `export-intunebackup.js`.
 Il ne suit pas non plus de convention de nommage avec plateforme et portée — cela n'a aucun sens
 pour un paramètre de tenant.
 

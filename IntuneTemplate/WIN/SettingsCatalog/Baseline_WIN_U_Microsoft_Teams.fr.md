@@ -12,7 +12,6 @@ Limite la connexion à Teams au tenant de l'organisation et empêche Teams de se
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-145-UMicrosoftTeams` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams |
 | Fichier | [`Baseline_WIN_U_Microsoft_Teams.json`](Baseline_WIN_U_Microsoft_Teams.json) |
 

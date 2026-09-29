@@ -12,7 +12,6 @@ Windows Hello for Business par utilisateur plutôt que par appareil : les mêmes
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-114-UWindowsHelloForBusiness` |
 | Source | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, convertie en portée utilisateur |
 | Fichier | [`Baseline_WIN_U_Windows_Hello_for_Business.json`](Baseline_WIN_U_Windows_Hello_for_Business.json) |
 

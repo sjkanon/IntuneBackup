@@ -12,7 +12,6 @@ Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart h
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-027-WindowsLAPSPolicy` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 

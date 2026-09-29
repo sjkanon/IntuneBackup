@@ -12,7 +12,6 @@ The user side of OneDrive: which screens and notifications the user sees.
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-032-UMicrosoftOneDrive` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration |
 | File | [`Baseline_WIN_U_Microsoft_OneDrive.json`](Baseline_WIN_U_Microsoft_OneDrive.json) |
 

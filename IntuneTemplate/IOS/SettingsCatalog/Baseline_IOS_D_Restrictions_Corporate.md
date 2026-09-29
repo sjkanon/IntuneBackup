@@ -12,7 +12,6 @@ Hardening voor supervised bedrijfs-iPhones en -iPads: geen handmatig geïnstalle
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-191-IOSDRestrictionsCorporate` |
 | Bron | UniFy iOS/iPadOS Baseline v1.2 (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0, L1) — samengevoegd uit SC - Device Restrictions, Device Security, Device Pairing, Lock Screen, Safari Browser, Web-App-Store (EU) en Apple Intelligence & Siri - Corporate; IntuneAdmin — Disable Web Distribution App Installation EU. Waarden gecorrigeerd waar UniFy `_false` als 'niet afdwingen' gebruikt |
 | Bestand | [`Baseline_IOS_D_Restrictions_Corporate.json`](Baseline_IOS_D_Restrictions_Corporate.json) |
 

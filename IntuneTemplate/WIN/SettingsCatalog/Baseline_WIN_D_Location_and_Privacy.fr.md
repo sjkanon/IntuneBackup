@@ -12,7 +12,6 @@ Détermine quelles données sensibles pour la vie privée les applications peuve
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-022-Privacy` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy |
 | Fichier | [`Baseline_WIN_D_Location_and_Privacy.json`](Baseline_WIN_D_Location_and_Privacy.json) |
 

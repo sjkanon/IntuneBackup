@@ -12,7 +12,6 @@ Sur les Mac équipés d'Apple silicon, définit un mot de passe aléatoire gér�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-198-MACDRecoveryLock` |
 | Source | Microsoft Learn — Configure Recovery Lock using the settings catalog (juin 2026) ; forme issue de microsoft/intune-my-macs pol-sec-007-recovery-lock (rotation mensuelle là-bas, six mois ici) |
 | Fichier | [`Baseline_MAC_D_Recovery_Lock.json`](Baseline_MAC_D_Recovery_Lock.json) |
 

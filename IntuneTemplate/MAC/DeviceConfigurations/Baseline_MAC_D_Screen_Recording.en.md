@@ -12,7 +12,6 @@ Only for organisations that use NinjaOne or TeamViewer. Sets screen recording fo
 | Scope | Device (D) — assign to device groups |
 | Type | Device config |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | own baseline — Apple does not allow screen recording in the settings catalog form of PPPC |
 | File | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 

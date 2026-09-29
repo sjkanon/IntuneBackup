@@ -12,7 +12,6 @@ Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroni
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-100-UMicrosoftEdgeProfilesAndSync` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync |
 | Bestand | [`Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json`](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.json) |
 

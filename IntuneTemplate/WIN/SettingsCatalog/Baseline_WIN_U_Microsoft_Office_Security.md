@@ -12,7 +12,6 @@ De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Users |
-| checkId | `INTUNE-BASE-103-UMicrosoftOfficeSecurity` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security |
 | Bestand | [`Baseline_WIN_U_Microsoft_Office_Security.json`](Baseline_WIN_U_Microsoft_Office_Security.json) |
 

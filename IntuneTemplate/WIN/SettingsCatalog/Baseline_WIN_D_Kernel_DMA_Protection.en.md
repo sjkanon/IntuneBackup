@@ -12,7 +12,6 @@ Blocks peripherals that can read directly from memory and do not support DMA rem
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-130-DKernelDMAProtection` |
 | Source | Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — value verified against Policy CSP DmaGuard/DeviceEnumerationPolicy. |
 | File | [`Baseline_WIN_D_Kernel_DMA_Protection.json`](Baseline_WIN_D_Kernel_DMA_Protection.json) |
 

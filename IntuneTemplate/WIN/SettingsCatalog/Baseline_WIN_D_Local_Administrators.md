@@ -12,7 +12,6 @@ Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerd
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityAccountProtection) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-071-DLocalAdministrators` |
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators |
 | Bestand | [`Baseline_WIN_D_Local_Administrators.json`](Baseline_WIN_D_Local_Administrators.json) |
 

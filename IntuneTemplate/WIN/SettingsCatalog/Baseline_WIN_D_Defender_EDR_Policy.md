@@ -12,7 +12,6 @@ Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaa
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog (endpointSecurityEndpointDetectionAndResponse) |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-109-DDefenderEDRPolicy` |
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 

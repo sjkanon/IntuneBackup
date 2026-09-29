@@ -12,7 +12,6 @@ Laat de Mac zijn klok gelijkzetten met time.apple.com, zodat tijdstempels in log
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-201-MACDTimeServer` |
 | Bron | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.3.2.1 (mSCP branch tahoe, ODV time.apple.com); vorm uit microsoft/intune-my-macs pol-sys-100-ntp |
 | Bestand | [`Baseline_MAC_D_Time_Server.json`](Baseline_MAC_D_Time_Server.json) |
 

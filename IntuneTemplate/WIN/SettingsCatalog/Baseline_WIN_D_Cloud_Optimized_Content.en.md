@@ -12,7 +12,6 @@ Turns off Windows' cloud-driven content recommendations — the device part of t
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-057-DCloudOptimizedContent` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (device part) |
 | File | [`Baseline_WIN_D_Cloud_Optimized_Content.json`](Baseline_WIN_D_Cloud_Optimized_Content.json) |
 

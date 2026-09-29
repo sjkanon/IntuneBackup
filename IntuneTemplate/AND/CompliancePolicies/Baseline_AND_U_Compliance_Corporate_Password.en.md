@@ -12,7 +12,6 @@ Checks whether a fully managed or corporate-owned Android device has a numeric c
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed and Corp-Work-Profile - v1.5 (password part); without expiry after 365 days, lock time 15 instead of 5 minutes |
 | File | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 

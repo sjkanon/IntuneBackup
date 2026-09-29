@@ -12,7 +12,6 @@ Sets DNS over HTTPS in Edge to 'automatic': Edge encrypts DNS requests as soon a
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-202-DMicrosoftEdgeDNSOverHTTPSAutomatic` |
 | Source | Microsoft Edge policy DnsOverHttpsMode (Edge 83+) — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json) |
 

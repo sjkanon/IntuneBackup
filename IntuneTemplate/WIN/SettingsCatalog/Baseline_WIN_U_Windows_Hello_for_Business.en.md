@@ -12,7 +12,6 @@ Windows Hello for Business per user instead of per device: the same requirements
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-114-UWindowsHelloForBusiness` |
 | Source | OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, converted to user scope |
 | File | [`Baseline_WIN_U_Windows_Hello_for_Business.json`](Baseline_WIN_U_Windows_Hello_for_Business.json) |
 

@@ -12,7 +12,6 @@ Autorise explicitement les fonctions d'IA générative dans Paint et dans les Pa
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-146-DWindowsAIFeaturesPermitted` |
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, valeurs reprises sans modification |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Features_Permitted.json`](Baseline_WIN_D_Windows_AI_Features_Permitted.json) |
 

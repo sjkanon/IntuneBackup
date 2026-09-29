@@ -12,7 +12,6 @@ Vraagt het wachtwoord uiterlijk vijf seconden nadat de schermbeveiliging start, 
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-200-MACDScreensaver` |
 | Bron | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 en 2.11.2 (mSCP branch tahoe, cis_lvl1); vorm uit OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, met askForPasswordDelay 5 in plaats van 60 |
 | Bestand | [`Baseline_MAC_D_Screensaver.json`](Baseline_MAC_D_Screensaver.json) |
 

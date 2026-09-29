@@ -12,7 +12,6 @@ Makes the virus scanner check every attachment at the moment the user opens it, 
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | All Users |
-| checkId | `INTUNE-BASE-140-UAttachmentScanning` |
 | Source | CIS v4 Windows 11 L1 — setting adopted from IntuneAdmin, value verified against the settings catalog definition. |
 | File | [`Baseline_WIN_U_Attachment_Scanning.json`](Baseline_WIN_U_Attachment_Scanning.json) |
 

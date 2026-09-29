@@ -12,7 +12,6 @@ Envoie les données de diagnostic dont Windows Update for Business Reports a bes
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-083-DUpdateReportsAndTelemetry` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Reports and Telemetry |
 | Fichier | [`Baseline_WIN_D_Update_Reports_and_Telemetry.json`](Baseline_WIN_D_Update_Reports_and_Telemetry.json) |
 

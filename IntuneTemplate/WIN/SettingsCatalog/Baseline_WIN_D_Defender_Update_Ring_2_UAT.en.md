@@ -12,7 +12,6 @@ Second ring for Defender updates: runs behind the pilot and ahead of production.
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-062-DDefenderUpdateRing2UAT` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT |
 | File | [`Baseline_WIN_D_Defender_Update_Ring_2_UAT.json`](Baseline_WIN_D_Defender_Update_Ring_2_UAT.json) |
 

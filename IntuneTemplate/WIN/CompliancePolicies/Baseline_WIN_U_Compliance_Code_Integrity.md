@@ -12,7 +12,6 @@ Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprog
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity |
 | Bestand | [`Baseline_WIN_U_Compliance_Code_Integrity.json`](Baseline_WIN_U_Compliance_Code_Integrity.json) |
 

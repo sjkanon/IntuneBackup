@@ -12,7 +12,6 @@ Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerporta
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-150-DWindowsAIRecallBoundaries` |
 | Bron | Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport); waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Recall_Boundaries.json`](Baseline_WIN_D_Windows_AI_Recall_Boundaries.json) |
 

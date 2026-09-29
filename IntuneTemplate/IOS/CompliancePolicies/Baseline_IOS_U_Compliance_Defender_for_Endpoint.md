@@ -12,7 +12,6 @@ Merkt een iPhone of iPad als niet-compliant zodra Microsoft Defender for Endpoin
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | — |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint en UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (beide Medium); UniFy Corporate eist Low |
 | Bestand | [`Baseline_IOS_U_Compliance_Defender_for_Endpoint.json`](Baseline_IOS_U_Compliance_Defender_for_Endpoint.json) |
 

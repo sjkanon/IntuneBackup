@@ -3,9 +3,9 @@
 # extras/macos/
 
 Onderdelen van de macOS-baseline die geen van de vijf CIPP-policytypes zijn (Catalog, Device,
-deviceCompliancePolicies, AppProtection, Admin). De pijplijnen (`generate-baseline.js`,
-`export-intunebackup.js`, `check-scope.js`, `Set-BaselineAssignment.ps1`) pikken deze map niet op
-en er horen geen `checkId`'s bij — net als `enrollment/macos/`, `shellscripts/macos/` en
+deviceCompliancePolicies, AppProtection, Admin). De pijplijnen
+(`export-intunebackup.js`, `check-scope.js`, `Set-BaselineAssignment.ps1`) pikken deze map niet op
+— net als `enrollment/macos/`, `shellscripts/macos/` en
 `compliance/macos/`.
 
 | Map | Wat | Hoe uitrollen |

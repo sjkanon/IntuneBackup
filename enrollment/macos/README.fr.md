@@ -5,9 +5,9 @@
 Les profils Apple Automated Device Enrollment (`depMacOSEnrollmentProfile`) se trouvent **en dehors**
 de `IntuneTemplate/`. Les pipelines de ce dossier connaissent cinq types de stratégies CIPP et un
 profil d'inscription n'en fait pas partie : il dépend d'un token ABM
-(`depOnboardingSettings/{id}/enrollmentProfiles`), ne passe pas par le bouton « Import profile », et
-n'a aucun paramètre que le moteur de baseline puisse contrôler. Un fichier placé ici n'est donc **pas**
-repris par `generate-baseline.js`, `export-intunebackup.js` ou `Set-BaselineAssignment.ps1`.
+(`depOnboardingSettings/{id}/enrollmentProfiles`) et ne passe pas par le bouton « Import profile ».
+Un fichier placé ici n'est donc **pas** repris par `export-intunebackup.js` ou
+`Set-BaselineAssignment.ps1`.
 Le déploiement se fait via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | Fichier | Token | Profil par défaut |

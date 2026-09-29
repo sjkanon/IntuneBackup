@@ -12,7 +12,6 @@ Runs Setup Assistant for a corporate Mac with user affinity and locked enrolment
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (enrollmentConfiguration) |
 | Assignment | — |
-| checkId | `INTUNE-BASE-116-MACDEnrollmentProfileStandardUserAffinity` |
 | Source | own baseline — OpenIntuneBaseline has no enrollment profile |
 | File | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 

@@ -12,7 +12,6 @@ Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Burea
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | All Devices |
-| checkId | `INTUNE-BASE-029-OnedriveSilentLogin` |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration |
 | Bestand | [`Baseline_WIN_D_Microsoft_OneDrive.json`](Baseline_WIN_D_Microsoft_OneDrive.json) |
 

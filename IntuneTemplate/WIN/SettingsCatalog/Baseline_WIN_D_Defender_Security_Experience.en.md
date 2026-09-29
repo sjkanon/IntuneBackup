@@ -12,7 +12,6 @@ Determines what the user sees in the Windows Security app and may turn off thems
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityAntivirus) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-060-DDefenderSecurityExperience` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience |
 | File | [`Baseline_WIN_D_Defender_Security_Experience.json`](Baseline_WIN_D_Defender_Security_Experience.json) |
 

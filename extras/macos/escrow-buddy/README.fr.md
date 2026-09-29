@@ -6,8 +6,7 @@ Faire tout de même arriver la clé de récupération FileVault dans Intune pour
 
 Se trouve en dehors de `IntuneTemplate/` pour la même raison que [`shellscripts/macos/`](../../../shellscripts/macos/README.fr.md) :
 un script shell (`deviceShellScripts`) n'est aucun des cinq types de stratégies CIPP. Non pris en compte
-par `generate-baseline.js`, `export-intunebackup.js`, `check-scope.js` ou
-`Set-BaselineAssignment.ps1`, et ne reçoit pas de `checkId`. Sa place est dans
+par `export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`. Sa place est dans
 `shellscripts/macos/` lors de la fusion.
 
 | Fichier | Ce qu'il fait | Portée |

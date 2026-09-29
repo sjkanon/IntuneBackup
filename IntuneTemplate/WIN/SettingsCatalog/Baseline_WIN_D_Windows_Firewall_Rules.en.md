@@ -12,7 +12,6 @@ Blocks outbound traffic from built-in Windows programs that malware uses to disg
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog (endpointSecurityFirewall) |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-085-DWindowsFirewallRules` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules |
 | File | [`Baseline_WIN_D_Windows_Firewall_Rules.json`](Baseline_WIN_D_Windows_Firewall_Rules.json) |
 

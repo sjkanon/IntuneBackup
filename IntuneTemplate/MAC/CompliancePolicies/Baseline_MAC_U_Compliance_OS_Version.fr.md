@@ -12,7 +12,6 @@ Vérifie si le Mac exécute macOS 14 ou une version ultérieure — la version r
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | Policy propre ; le minimum découle de ce que la baseline exige déjà elle-même — MAC - D - Software Updates utilise une politique de mise à jour déclarative (DDM), qui requiert macOS 14 |
 | Fichier | [`Baseline_MAC_U_Compliance_OS_Version.json`](Baseline_MAC_U_Compliance_OS_Version.json) |
 

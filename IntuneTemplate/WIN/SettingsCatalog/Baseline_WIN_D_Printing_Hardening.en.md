@@ -12,7 +12,6 @@ Turns on Windows Protected Print, prohibits standard users from installing print
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-133-DPrintingHardening` |
 | Source | CIS v4 Windows 11 L1 and the Microsoft Security Baseline — settings taken from IntuneAdmin, values verified against the settings catalog definitions. |
 | File | [`Baseline_WIN_D_Printing_Hardening.json`](Baseline_WIN_D_Printing_Hardening.json) |
 

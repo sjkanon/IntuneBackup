@@ -12,7 +12,6 @@ Vérifie si un appareil Android fully managed ou corporate-owned dispose d'un co
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Compliance |
 | Affectation | — |
-| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed et Corp-Work-Profile - v1.5 (partie mot de passe) ; sans expiration après 365 jours, délai de verrouillage de 15 au lieu de 5 minutes |
 | Fichier | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 

@@ -12,7 +12,6 @@ Exige le mot de passe au plus tard cinq secondes après le démarrage de l'écon
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-200-MACDScreensaver` |
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 et 2.11.2 (mSCP branch tahoe, cis_lvl1) ; forme issue d'OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, avec askForPasswordDelay 5 au lieu de 60 |
 | Fichier | [`Baseline_MAC_D_Screensaver.json`](Baseline_MAC_D_Screensaver.json) |
 

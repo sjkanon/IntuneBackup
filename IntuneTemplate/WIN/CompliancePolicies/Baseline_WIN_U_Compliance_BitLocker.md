@@ -12,7 +12,6 @@ Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omd
 | Scope | User (U) — toewijzen aan gebruikersgroepen |
 | Type | Compliance |
 | Toewijzing | All Users |
-| checkId | geen — de platform-engine heeft geen matcher voor dit policytype |
 | Bron | OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - BitLocker |
 | Bestand | [`Baseline_WIN_U_Compliance_BitLocker.json`](Baseline_WIN_U_Compliance_BitLocker.json) |
 

@@ -12,7 +12,6 @@ Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, e
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-111-DRemovableStorage` |
 | Bron | eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026 |
 | Bestand | [`Baseline_WIN_D_Removable_Storage.json`](Baseline_WIN_D_Removable_Storage.json) |
 

@@ -12,7 +12,6 @@ Bloque dans Edge les services d'IA que la politique n'a pas approuvés. Microsof
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog |
 | Affectation | — |
-| checkId | `INTUNE-BASE-139-UAIUsageControl` |
 | Source | ISO/IEC 27001:2022 A.5.10, A.5.19 et A.8.1, NIS2 art. 21(2)(d) — mécanisme issu de la policy Edge existante |
 | Fichier | [`Baseline_WIN_U_AI_Usage_Control_Restricted.json`](Baseline_WIN_U_AI_Usage_Control_Restricted.json) |
 

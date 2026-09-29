@@ -12,7 +12,6 @@ Removes the local escape routes from malware protection: users cannot override E
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | All Devices |
-| checkId | `INTUNE-BASE-136-DThreatProtection` |
 | Source | ISO/IEC 27001:2022 A.8.7 and A.8.8, NIS2 art. 21(2)(e) — settings from CIS v4 Windows 11 L1 |
 | File | [`Baseline_WIN_D_Threat_Protection.json`](Baseline_WIN_D_Threat_Protection.json) |
 

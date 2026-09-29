@@ -12,11 +12,10 @@ Avertit dès qu'un utilisateur saisit son mot de passe professionnel sur un site
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-024-Smartscreen` |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection |
 | Fichier | [`Baseline_WIN_D_Enhanced_Phishing_Protection.json`](Baseline_WIN_D_Enhanced_Phishing_Protection.json) |
 
-> Successeur de la policy SmartScreen (le checkId 024 est conservé). Quatre des six anciens paramètres sont ici, les deux paramètres SmartScreen du shell sont dans Security Hardening.
+> Successeur de la policy SmartScreen. Quatre des six anciens paramètres sont ici, les deux paramètres SmartScreen du shell sont dans Security Hardening.
 
 ## Normes
 

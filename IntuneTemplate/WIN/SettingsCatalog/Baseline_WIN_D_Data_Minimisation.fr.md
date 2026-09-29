@@ -12,7 +12,6 @@ Limite ce qui est inclus dans les données de diagnostic : pas de fichiers journ
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-129-DDataMinimisation` |
 | Source | ISO/IEC 27001:2022 A.5.34 et A.8.11, RGPD art. 5(1)(c) minimisation des données — paramètres issus de CIS v4 Windows 11 L1 |
 | Fichier | [`Baseline_WIN_D_Data_Minimisation.json`](Baseline_WIN_D_Data_Minimisation.json) |
 

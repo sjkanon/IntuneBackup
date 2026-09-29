@@ -12,7 +12,6 @@ Sluit een account 15 minuten af na tien mislukte aanmeldpogingen, ook dat van de
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| checkId | `INTUNE-BASE-124-DAccountLockout` |
 | Bron | CIS v4 Windows 11 L1 en de Microsoft Security Baseline — waarden geverifieerd tegen Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) en LocalPoliciesSecurityOptions. |
 | Bestand | [`Baseline_WIN_D_Account_Lockout.json`](Baseline_WIN_D_Account_Lockout.json) |
 

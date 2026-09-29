@@ -12,7 +12,6 @@ Prevents a user from sharing files from their own profile with other users or th
 | Scope | User (U) — assign to user groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| checkId | `INTUNE-BASE-209-UFileSharingRestrictions` |
 | Source | CIS v4 Windows 11 L1 — IntuneAdmin CISv4 profile 'Prevent users from sharing files within their profile (User)', instance adopted unchanged |
 | File | [`Baseline_WIN_U_File_Sharing_Restrictions.json`](Baseline_WIN_U_File_Sharing_Restrictions.json) |
 

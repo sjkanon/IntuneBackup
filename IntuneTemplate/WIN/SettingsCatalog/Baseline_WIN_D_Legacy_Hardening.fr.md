@@ -12,7 +12,6 @@ Les paramètres de durcissement de l'ancienne policy Administrative Templates po
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-070-DLegacyHardening` |
 | Source | Paramètres de durcissement propres sans équivalent dans OpenIntuneBaseline |
 | Fichier | [`Baseline_WIN_D_Legacy_Hardening.json`](Baseline_WIN_D_Legacy_Hardening.json) |
 

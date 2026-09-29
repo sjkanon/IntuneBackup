@@ -1,11 +1,10 @@
-# Regenerates baseline/intune/baseline-v1.0.json from IntuneTemplate/Baseline_*.json on every
-# push to main that changes that folder, and opens a PR for it — never a silent commit on main,
-# for the same reason as writeBackBaseline in the linked platform (TEST Policies Platform): a
-# generated file that nobody reviews is exactly the kind of unseen change that causes baseline
-# drift.
+# Regenerates everything derived from IntuneTemplate/ — the restore export, the CIPP baseline and
+# the documentation — on every push to main that changes that folder, and opens a PR for it: never
+# a silent commit on main. A generated file that nobody reviews is exactly the kind of unseen change
+# that causes baseline drift.
 #
-# Run the script locally (`node scripts/generate-baseline.js`) to see what a change to a policy
-# template produces before you push it.
+# Run the pipeline from scripts/README.md locally to see what a change to a policy template
+# produces before you push it.
 
 name: Generate baseline from IntuneTemplate
 
@@ -14,7 +13,6 @@ on:
     branches: [main]
     paths:
       - "IntuneTemplate/**"
-      - "scripts/generate-baseline.js"
       - "scripts/generate-compliance.js"
       - "scripts/generate-docs.js"
       - "scripts/export-intunebackup.js"
@@ -49,12 +47,8 @@ jobs:
       - name: Check that Package and Description in every template are up to date
         run: node scripts/set-packages.js --check
 
-      - name: Generate baseline/intune/baseline-v1.0.json
-        run: node scripts/generate-baseline.js
       - name: Generate the restore formats of all sets
         run: node scripts/export-intunebackup.js
-      # After generate-baseline: the policy tables show the checkIds, and those come from the
-      # baseline that was just written.
       - name: Generate the CIPP baseline in BaselineTemplate/
         run: node scripts/generate-baseline-template.js
       # Writes every document in Dutch, English and French. Texts from the data without a
@@ -73,9 +67,7 @@ jobs:
       #     path: .ca-policies
       #     token: ${{ secrets.CA_POLICIES_TOKEN }}
 
-      # After generate-baseline: the accountability lists the checkIds per control and per NIS2
-      # point from the baseline that was just written. --strict is a second safety net next to
-      # check-scope.js for anyone who only runs this script. With the CA checkout above: replace
+      # --strict is a second safety net next to check-scope.js for anyone who only runs this script. With the CA checkout above: replace
       # --no-ca with --ca .ca-policies/controls/ca-controls.json.
       - name: Generate COMPLIANCE.md (ISO 27001, NIS2, CIS, NIST CSF; nl, en, fr)
         run: node scripts/generate-compliance.js --strict --no-ca
@@ -83,16 +75,14 @@ jobs:
       - name: Open PR with the generated baseline (if anything changed)
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "chore: regenerate baseline/intune/baseline-v1.0.json from IntuneTemplate/"
+          commit-message: "chore: regenerate the export, the CIPP baseline and the docs from IntuneTemplate/"
           title: "Baseline regenerated from IntuneTemplate/"
           body: >
             Generated automatically by `.github/workflows/generate-baseline.yml` after a
-            change in `IntuneTemplate/`. Review the diff — especially new/removed
-            checkIds and changed `params.settings` — before you merge.
-            `baseline/intune/baseline-v1.0.json` is the source for the `intune` category in the
-            baseline link of TEST Policies Platform (Settings → Baseline links);
-            `export/NativeImport/IntuneBackupAndRestore/` is the same baseline in the restore
-            format of the IntuneBackupAndRestore module. Every set next to it goes to
+            change in `IntuneTemplate/`. Review the diff before you merge.
+            `export/NativeImport/IntuneBackupAndRestore/` is the baseline in the restore
+            format of the IntuneBackupAndRestore module; `BaselineTemplate/Baseline.json` is the
+            CIPP baseline with its stages and packages. Every set next to it goes to
             `export/NativeImport/IntuneBackupAndRestore-<SET>/` — separately, so that a restore of
             the baseline does not drag those sets along. `COMPLIANCE.md` is the accountability to
             ISO 27001, NIS2, CIS and NIST CSF: with a changed phase or mapping, check whether a
@@ -102,9 +92,7 @@ jobs:
           branch: auto/regenerate-baseline
           delete-branch: true
           add-paths: |
-            baseline/intune/baseline-v1.0.json
             BaselineTemplate/Baseline.json
-            baseline/README*.md
             export/NativeImport/**
             OVERZICHT*.md
             COMPLIANCE*.md

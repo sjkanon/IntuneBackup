@@ -12,7 +12,6 @@ Chiffre les dossiers personnels de l'utilisateur avec une clé liée à sa conne
 | Scope | User (U) — affecter à des groupes d'utilisateurs |
 | Type | Settings Catalog (endpointSecurityDiskEncryption) |
 | Affectation | All Users |
-| checkId | `INTUNE-BASE-105-UPersonalDataEncryption` |
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption |
 | Fichier | [`Baseline_WIN_U_Personal_Data_Encryption.json`](Baseline_WIN_U_Personal_Data_Encryption.json) |
 

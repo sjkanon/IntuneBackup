@@ -12,7 +12,6 @@ Bloque GitHub Copilot sur les comptes personnels dans Visual Studio ; la licence
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | All Devices |
-| checkId | `INTUNE-BASE-125-DAITooling` |
 | Source | ISO/IEC 27001:2022 A.5.10 et A.8.1 — paramètre issu du benchmark Visual Studio d'IntuneAdmin |
 | Fichier | [`Baseline_WIN_D_AI_Tooling.json`](Baseline_WIN_D_AI_Tooling.json) |
 

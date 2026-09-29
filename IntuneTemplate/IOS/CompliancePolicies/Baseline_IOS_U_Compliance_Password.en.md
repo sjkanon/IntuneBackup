@@ -12,7 +12,6 @@ Checks whether an iPhone or iPad requires a passcode of at least six characters,
 | Scope | User (U) — assign to user groups |
 | Type | Compliance |
 | Assignment | — |
-| checkId | none — the platform engine has no matcher for this policy type |
 | Source | OpenIntuneBaseline convention for compliance; values aligned with the six-character PIN requirement in the existing App Protection policy. |
 | File | [`Baseline_IOS_U_Compliance_Password.json`](Baseline_IOS_U_Compliance_Password.json) |
 
