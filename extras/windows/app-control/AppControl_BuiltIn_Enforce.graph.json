@@ -1,6 +1,6 @@
 {
   "name": "[Baseline] - WIN - D - App Control Enforced",
-  "description": "Laat alleen Windows-onderdelen, Store-apps, apps met een goede reputatie (Intelligent Security Graph) en apps van de Intune managed installer draaien; al het andere blokkeert App Control for Business. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Learn — Manage App Control for Business (ingebouwde controls), template d3849ba8-bf95-467c-9640-aa2334eae9e3_1; setting-ids geverifieerd tegen pl4nty DCv2/Settings.",
+  "description": "Allows only Windows components, Store apps, apps with a good reputation (Intelligent Security Graph) and apps from the Intune managed installer to run; App Control for Business blocks everything else. Baseline assignment: none — this policy belongs on a dedicated group, not on everyone. Source: Microsoft Learn — Manage App Control for Business (built-in controls), template d3849ba8-bf95-467c-9640-aa2334eae9e3_1; setting ids verified against pl4nty DCv2/Settings.",
   "platforms": "windows10",
   "technologies": "mdm",
   "roleScopeTagIds": ["0"],

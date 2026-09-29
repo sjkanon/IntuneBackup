@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Account Lockout",
-    "description": "Sluit een account 15 minuten af na tien mislukte aanmeldpogingen, ook dat van de ingebouwde beheerder, en zet het apparaat na tien mislukte pogingen in BitLocker-herstel. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS v4 Windows 11 L1 en de Microsoft Security Baseline — waarden geverifieerd tegen Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) en LocalPoliciesSecurityOptions..",
+    "description": "Locks an account for 15 minutes after ten failed sign-in attempts, including that of the built-in administrator, and puts the device into BitLocker recovery after ten failed attempts. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS v4 Windows 11 L1 and the Microsoft Security Baseline — values verified against Policy CSP DeviceLock (AccountLockoutPolicy, AllowAdministratorLockout) and LocalPoliciesSecurityOptions..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

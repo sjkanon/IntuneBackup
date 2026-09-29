@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Off",
-    "description": "Zet Outlook in Online mode en verbiedt het aanmaken van een OST-bestand, zodat er geen mailbox-inhoud op de schijf van het apparaat landt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline.",
+    "description": "Puts Outlook in Online mode and prohibits creating an OST file, so that no mailbox content lands on the device's disk. Baseline assignment: none — an alternative that is not deployed. Source: own baseline.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

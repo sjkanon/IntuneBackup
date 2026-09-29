@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Apple Intelligence Permitted",
-    "description": "Staat dezelfde Apple Intelligence-functies uitdrukkelijk toe: Writing Tools, samenvattingen in Mail, Notities en Safari, Genmoji, Image Playground, de externe AI-integratie en dicteren via Apple's servers. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Eigen baseline — spiegelbeeld van [Baseline] - MAC - D - Apple Intelligence Restricted; ids uit OpenIntuneBaseline macOS v2.0 beta en CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe).",
+    "description": "Explicitly allows the same Apple Intelligence features: Writing Tools, summaries in Mail, Notes and Safari, Genmoji, Image Playground, the external AI integration and dictation via Apple's servers. Baseline assignment: none — an alternative that is not deployed. Source: Own baseline — mirror image of [Baseline] - MAC - D - Apple Intelligence Restricted; ids from OpenIntuneBaseline macOS v2.0 beta and CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe).",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

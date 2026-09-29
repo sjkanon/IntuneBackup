@@ -502,7 +502,7 @@ Trois règles de `_renames.json` exigent un travail manuel et sont seulement sig
   modèle Endpoint Security et `Microsoft Office Updates` est passé de l'ADMX au Settings
   Catalog. L'ancienne stratégie doit disparaître avant que la nouvelle soit ajoutée.
 - **retire** — disparaît entièrement ; `replacedBy` indique où se trouvent désormais les paramètres.
-- **doublon / les deux présents** — l'ancien et le nouveau nom existent tous deux. Déterminer d'abord lequel
+- **doublon / les deux présents** (`DUPLICATE` / `BOTH PRESENT` dans la sortie) — l'ancien et le nouveau nom existent tous deux. Déterminer d'abord lequel
   est le vrai.
 
 **Attention :** les contrôles `settings-catalog-match` font la correspondance sur le contenu, pas sur le nom. Une

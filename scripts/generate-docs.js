@@ -1,30 +1,30 @@
 #!/usr/bin/env node
 /**
- * Genereert de documentatie die uit IntuneTemplate/ af te leiden is:
+ * Generates the documentation that can be derived from IntuneTemplate/:
  *
- *   OVERZICHT.md                          de samenvatting om te delen
- *   IntuneTemplate/README.md              de matrix en de mapindeling
- *   IntuneTemplate/<PLAT>/README.md       elke policy met wat hij doet en waar hij landt
- *   IntuneTemplate/<PLAT>/<CAT>/*.md      per policy élke instelling die hij zet, en de normen die hij invult
+ *   OVERZICHT.md                          the summary to share
+ *   IntuneTemplate/README.md              the matrix and the folder layout
+ *   IntuneTemplate/<PLAT>/README.md       every policy with what it does and where it lands
+ *   IntuneTemplate/<PLAT>/<CAT>/*.md      per policy *every* setting it sets, and the standards it fulfils
  *
- * Elk document in drie talen: `X.md` in het Nederlands, `X.en.md` en `X.fr.md` ernaast. Vaste
- * tekst staat hieronder als { nl, en, fr }; tekst uit de data (`doel`, `note`, `faseWaarom`)
- * komt uit IntuneTemplate/_i18n/<taal>.json — zie lib/i18n.js.
+ * Every document in three languages: `X.md` in Dutch, `X.en.md` and `X.fr.md` next to it. Fixed
+ * text is below as { nl, en, fr }; text from the data (`doel`, `note`, `faseWaarom`) comes from
+ * IntuneTemplate/_i18n/<lang>.json — see lib/i18n.js.
  *
- * COMPLIANCE.md — de verantwoording naar ISO 27001, NIS2, CIS en NIST CSF — komt uit
- * generate-compliance.js; hier staat per policy alleen de verwijzing ernaar.
+ * COMPLIANCE.md — the justification against ISO 27001, NIS2, CIS and NIST CSF — comes from
+ * generate-compliance.js; here each policy only carries the reference to it.
  *
- * Gegenereerd en niet met de hand geschreven, om dezelfde reden als baseline-v1.0.json: bijna
- * honderd policies met duizenden instellingen bijhouden gaat mis, en een tabel die niet meer
- * klopt is erger dan geen tabel — die leest namelijk nog steeds alsof hij klopt.
+ * Generated and not written by hand, for the same reason as baseline-v1.0.json: keeping nearly
+ * a hundred policies with thousands of settings up to date goes wrong, and a table that is no
+ * longer correct is worse than no table — because it still reads as if it were correct.
  *
- * Leest baseline/intune/baseline-v1.0.json mee voor de checkId's, dus draai
- * generate-baseline.js eerst. Ontbreekt dat bestand, dan blijft de checkId-kolom leeg met een
- * melding erbij in plaats van stilzwijgend.
+ * Also reads baseline/intune/baseline-v1.0.json for the checkIds, so run generate-baseline.js
+ * first. If that file is missing, the checkId column stays empty with a notice alongside
+ * instead of silently.
  *
- * Gebruik: node scripts/generate-docs.js [--check] [--missend]
- *   --check    schrijft niets en geeft exit 1 als een README niet meer klopt (voor CI).
- *   --missend  schrijft niets en drukt de teksten zonder vertaling af als JSON.
+ * Usage: node scripts/generate-docs.js [--check] [--missend]
+ *   --check    writes nothing and exits 1 if a README is out of date (for CI).
+ *   --missend  writes nothing and prints the texts without a translation as JSON.
  */
 
 const fs = require("fs");
@@ -469,14 +469,14 @@ function platformReadme(platform, templates, ctx) {
     ...V.t({
       nl: [
         "**Wat het doet** komt uit `doel` in [`_manifest.json`](../_manifest.json). Diezelfde zin",
-        "staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het",
-        "template — en dus straks in de tenant naast de policy.",
+        "staat in het Engels, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld",
+        "van het template — en dus straks in de tenant naast de policy.",
         "",
         "Een lege **checkId** betekent dat de platform-engine geen matcher voor dat policytype heeft",
         `(Device config, compliance, app protection) — zie de [hoofd-README](${V.link("../../README.md")}#${ANCHOR.typesCheck.nl}).`,
       ],
       en: [
-        "**What it does** comes from `doel` in [`_manifest.json`](../_manifest.json) (translated). The same Dutch",
+        "**What it does** comes from `doel` in [`_manifest.json`](../_manifest.json) (translated). The same",
         "sentence sits, together with the assignment target and the origin, in the template's `Description`",
         "field — and so later in the tenant next to the policy.",
         "",
@@ -485,7 +485,7 @@ function platformReadme(platform, templates, ctx) {
       ],
       fr: [
         "**Ce qu'elle fait** provient de `doel` dans [`_manifest.json`](../_manifest.json) (traduit). La même phrase,",
-        "en néerlandais, figure avec la cible d'affectation et l'origine dans le champ `Description` du",
+        "en anglais, figure avec la cible d'affectation et l'origine dans le champ `Description` du",
         "template — et donc plus tard dans le tenant, à côté de la policy.",
         "",
         "Un **checkId** vide signifie que le moteur de la plateforme n'a pas de correspondance pour ce type de policy",

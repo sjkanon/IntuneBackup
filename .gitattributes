@@ -1,8 +1,8 @@
-# Shell-scripts moeten LF houden. Deze repo wordt op Windows onderhouden met
-# core.autocrlf=true; zonder deze regel krijgt een .sh bij checkout CRLF-regeleindes en
-# faalt hij op de Mac met "bad interpreter: /bin/bash^M" — een fout die je pas ziet als het
-# script al is geüpload.
+# Shell scripts must keep LF. This repo is maintained on Windows with core.autocrlf=true;
+# without this rule a .sh gets CRLF line endings on checkout and fails on the Mac with
+# "bad interpreter: /bin/bash^M" — an error you only see once the script has already been
+# uploaded.
 *.sh text eol=lf
 
-# De ingevulde uitrolkopieën in local/ zijn shellscripts en moeten dus ook LF houden.
+# The filled-in deployment copies in local/ are shell scripts and must therefore keep LF too.
 local/*.sh text eol=lf

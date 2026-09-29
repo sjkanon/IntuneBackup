@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Windows User Experience",
-    "description": "Zet meldingen op het vergrendelscherm en automatisch aanvullen in Internet Explorer uit. Toewijzing volgens baseline: alle gebruikers. Bron: eigen baseline — uit de splitsing van Administrative Templates.",
+    "description": "Turns off notifications on the lock screen and AutoComplete in Internet Explorer. Baseline assignment: all users. Source: own baseline — from the split of Administrative Templates.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

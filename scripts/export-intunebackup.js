@@ -1,44 +1,44 @@
 #!/usr/bin/env node
 /**
- * Schrijft IntuneTemplate/ weg in de mapstructuur die IntuneBackupAndRestore verwacht,
- * zodat `Start-IntuneRestoreConfig` de baseline in een tenant kan terugzetten. CIPP leest
- * IntuneTemplate/ rechtstreeks; deze exporter is er puur voor de andere tool.
+ * Writes IntuneTemplate/ out in the folder structure that IntuneBackupAndRestore expects,
+ * so that `Start-IntuneRestoreConfig` can restore the baseline into a tenant. CIPP reads
+ * IntuneTemplate/ directly; this exporter exists purely for the other tool.
  *
- * Mapnamen en bodyvorm zijn afgeleid uit module 4.0.1 zelf (Invoke-IntuneRestore*.ps1):
- * "Settings Catalog" POST't het hele bestand minus id/createdDateTime/lastModifiedDateTime/
- * settingCount/creationSource; "Administrative Templates" gebruikt de BESTANDSNAAM als
- * displayName en POST't elk arrayelement los naar definitionValues; "Device Configurations"
- * POST't het bestand minus id/createdDateTime/lastModifiedDateTime/version; "Device
- * Compliance Policies" idem, maar vult een ontbrekende scheduledActionsForRule zelf aan;
- * "App Protection Policies" POST't naar deviceAppManagement/managedAppPolicies.
+ * Folder names and body shape are derived from module 4.0.1 itself (Invoke-IntuneRestore*.ps1):
+ * "Settings Catalog" POSTs the whole file minus id/createdDateTime/lastModifiedDateTime/
+ * settingCount/creationSource; "Administrative Templates" uses the FILE NAME as displayName
+ * and POSTs each array element separately to definitionValues; "Device Configurations"
+ * POSTs the file minus id/createdDateTime/lastModifiedDateTime/version; "Device
+ * Compliance Policies" likewise, but fills in a missing scheduledActionsForRule itself;
+ * "App Protection Policies" POSTs to deviceAppManagement/managedAppPolicies.
  *
- * Tegenhanger van scripts/import-intunebackup.js. De sets zelf blijven de bron: de export is
- * een afgeleide en wordt bij elke run volledig opnieuw geschreven.
+ * Counterpart of scripts/import-intunebackup.js. The sets themselves remain the source: the
+ * export is a derivative and is completely rewritten on every run.
  *
- * Elke set uit SET_PREFIXES (lib/templates.js) krijgt een eigen doelmap — bewust niet één
- * gedeelde:
+ * Each set from SET_PREFIXES (lib/templates.js) gets its own target folder — deliberately not
+ * one shared folder:
  *
- *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/            de uitgerolde baseline, mét assignments
+ *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/            the deployed baseline, with assignments
  *
- * `Start-IntuneRestoreConfig` krijgt één pad mee en zet alles terug wat eronder staat. Stonden
- * de sets in dezelfde map, dan rolt wie de baseline terugzet ongemerkt de voorstellen mee uit
- * — en die veranderen gedrag dat gebruikers direct merken. Aparte paden houden dat een bewuste
- * keuze. De voorstelsets krijgen om dezelfde reden géén Assignments/-submap: die policies horen
- * na de restore met de hand op een pilotgroep.
+ * `Start-IntuneRestoreConfig` takes one path and restores everything underneath it. If the
+ * sets were in the same folder, whoever restores the baseline would unknowingly deploy the
+ * proposals along with it — and those change behaviour that users notice immediately.
+ * Separate paths keep that a deliberate choice. For the same reason the proposal sets get *no*
+ * Assignments/ subfolder: those policies belong on a pilot group, by hand, after the restore.
  *
- * Een nieuwe set toevoegen is één regel in SET_PREFIXES; deze exporter pikt hem daarna vanzelf
- * op. Dat is de bedoeling: een set die niet exporteert is een set die alleen via CIPP uitrolt,
- * en dat verschil hoort niet stilzwijgend te ontstaan.
+ * Adding a new set is one line in SET_PREFIXES; this exporter then picks it up automatically.
+ * That is intentional: a set that does not export is a set that only deploys via CIPP, and
+ * that difference should not arise silently.
  *
- * Gebruik: node scripts/export-intunebackup.js [doelmap]
- *   standaard doelmap: export/NativeImport/IntuneBackupAndRestore/
- *   elke set naast de baseline gaat naar diezelfde map met "-<SET>" erachter
+ * Usage: node scripts/export-intunebackup.js [target-dir]
+ *   default target-dir: export/NativeImport/IntuneBackupAndRestore/
+ *   every set besides the baseline goes to that same folder with "-<SET>" appended
  *
- * Die `NativeImport` in het pad is geen beschrijving maar een uitsluiting. CIPP scant een
- * template-repository met `git/trees?recursive=1` en negeert precies twee dingen: bestanden
- * die niet op `.json` eindigen, en paden waarin `NativeImport` voorkomt. Zonder dat woord in
- * het pad importeert CIPP deze map óók — dezelfde 98 policies, maar zonder RowKey, dus als
- * duplicaat met een eigen GUID naast het echte template. Zie export/README.md.
+ * That `NativeImport` in the path is not a description but an exclusion. CIPP scans a
+ * template repository with `git/trees?recursive=1` and ignores exactly two things: files
+ * that do not end in `.json`, and paths containing `NativeImport`. Without that word in the
+ * path CIPP imports this folder *too* — the same 98 policies, but without a RowKey, so as a
+ * duplicate with its own GUID next to the real template. See export/README.md.
  */
 
 const fs = require("fs");

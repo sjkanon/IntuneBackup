@@ -502,7 +502,7 @@ Three rules in `_renames.json` require manual work and are only reported by the 
   Endpoint Security template and `Microsoft Office Updates` moved from ADMX to Settings
   Catalog. The old policy must be removed before the new one is added.
 - **retire** — goes away entirely; `replacedBy` says where the settings are now.
-- **duplicate / both present** — old and new name both exist. First work out which
+- **duplicate / both present** (`DUPLICATE` / `BOTH PRESENT` in the output) — old and new name both exist. First work out which
   is the real one.
 
 **Note:** the `settings-catalog-match` checks match on content, not on name. A

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Event Forwarding",
-    "description": "Stuurt Windows-gebeurtenissen door naar een centrale Windows Event Collector, zodat logboeken buiten bereik van een aanvaller op het apparaat worden bewaard. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Learn — 'Use Windows Event Forwarding to help with intrusion detection' en Policy CSP ADMX_EventForwarding/SubscriptionManager; waarden geverifieerd tegen de settings catalog-definities.",
+    "description": "Forwards Windows events to a central Windows Event Collector, so that logs are kept out of reach of an attacker on the device. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Microsoft Learn — 'Use Windows Event Forwarding to help with intrusion detection' and Policy CSP ADMX_EventForwarding/SubscriptionManager; values verified against the settings catalog definitions.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

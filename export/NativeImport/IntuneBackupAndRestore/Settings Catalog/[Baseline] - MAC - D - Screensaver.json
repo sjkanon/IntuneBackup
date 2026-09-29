@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Screensaver",
-    "description": "Vraagt het wachtwoord uiterlijk vijf seconden nadat de schermbeveiliging start, en start de schermbeveiliging na vijftien minuten inactiviteit — ook in het inlogvenster. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 en 2.11.2 (mSCP branch tahoe, cis_lvl1); vorm uit OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, met askForPasswordDelay 5 in plaats van 60.",
+    "description": "Requires the password no later than five seconds after the screen saver starts, and starts the screen saver after fifteen minutes of inactivity — including at the login window. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 and 2.11.2 (mSCP branch tahoe, cis_lvl1); form from OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, with askForPasswordDelay 5 instead of 60.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

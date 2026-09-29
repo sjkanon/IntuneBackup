@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Storage Sense",
-    "description": "Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra de schijf vol dreigt te raken, en maakt lokaal gecachte OneDrive-bestanden weer online-only. Toewijzing volgens baseline: alle apparaten. Bron: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Storage Sense.",
+    "description": "Automatically cleans up temporary files, the Recycle Bin and old downloads as soon as the disk threatens to fill up, and makes locally cached OneDrive files online-only again. Baseline assignment: all devices. Source: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Storage Sense.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

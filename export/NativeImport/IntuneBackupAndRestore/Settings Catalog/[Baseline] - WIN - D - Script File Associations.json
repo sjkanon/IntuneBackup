@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Script File Associations",
-    "description": "Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations.",
+    "description": "Makes .js, .vbs and .hta files open in Notepad instead of the script host, so that double-clicking such an attachment executes nothing. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

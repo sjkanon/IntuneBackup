@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Edge Updates",
-    "description": "Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates.",
+    "description": "How and when Edge updates itself, and that a user cannot postpone it. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

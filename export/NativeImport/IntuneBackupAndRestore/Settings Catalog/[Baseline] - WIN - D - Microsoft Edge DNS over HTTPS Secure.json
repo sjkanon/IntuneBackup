@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure",
-    "description": "Dwingt in Edge DNS over HTTPS af zonder terugval: elk DNS-verzoek gaat versleuteld naar de opgegeven DoH-resolver, en zonder die resolver lost Edge niets op. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Edge-beleid DnsOverHttpsMode en DnsOverHttpsTemplates (Edge 83+) — waarden geverifieerd tegen de settings catalog-definities.",
+    "description": "Enforces DNS over HTTPS in Edge without fallback: every DNS request goes encrypted to the specified DoH resolver, and without that resolver Edge resolves nothing. Baseline assignment: none — an alternative that is not deployed. Source: Microsoft Edge policy DnsOverHttpsMode and DnsOverHttpsTemplates (Edge 83+) — values verified against the settings catalog definitions.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

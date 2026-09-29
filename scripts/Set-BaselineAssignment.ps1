@@ -1,91 +1,90 @@
 ﻿#Requires -Modules Microsoft.Graph.Authentication
 <#
 .SYNOPSIS
-Wijst de baseline-policies in een tenant toe aan All Devices, All Users of een groep.
+Assigns the baseline policies in a tenant to All Devices, All Users or a group.
 
 .DESCRIPTION
-Zoekt in de tenant de policies op die in IntuneTemplate/ staan — over alle vijf de
-policytypes heen (Settings Catalog, Administrative Templates/ADMX, klassieke Device
-Configurations, compliance-policies en App Protection/MAM) — en zet daar in één keer een
-assignment op.
+Looks up in the tenant the policies that are in IntuneTemplate/ — across all five policy
+types (Settings Catalog, Administrative Templates/ADMX, classic Device Configurations,
+compliance policies and App Protection/MAM) — and sets an assignment on them in one go.
 
-De policylijst komt standaard uit IntuneTemplate/, niet uit een naamfilter op "[Baseline]".
-Dat is bewust: een policy die de prefix (nog) niet draagt zou stilzwijgend worden
-overgeslagen. Met -Name kun je een eigen lijst opgeven.
+By default the policy list comes from IntuneTemplate/, not from a name filter on "[Baseline]".
+That is deliberate: a policy that does not (yet) carry the prefix would be silently
+skipped. With -Name you can supply your own list.
 
-Welke policies bij het doel horen volgt uit de fase in _manifest.json, dezelfde afleiding als
-de CIPP-pakketten: -AllDevices en -AllUsers nemen fase 1 met dat doel uit _assignments.json,
--GroupName 'SEC-Baseline-Pilot' neemt fase 2, en -GroupName met een `faseGroep` neemt de
-fase 4-policies van die groep. Fase 3 en 5 wijst dit script nooit vanzelf toe. Een
-uitsluiting (-Exclude) gaat wél op alle policies: die haalt alleen iets weg.
+Which policies belong to the target follows from the fase (phase) in _manifest.json, the same
+derivation as the CIPP packages: -AllDevices and -AllUsers take phase 1 with that target from
+_assignments.json, -GroupName 'SEC-Baseline-Pilot' takes phase 2, and -GroupName with a
+`faseGroep` takes that group's phase 4 policies. This script never assigns phase 3 and 5 on
+its own. An exclusion (-Exclude) does go on all policies: it only takes something away.
 
-Assignments worden standaard AANGEVULD, niet vervangen. Graph's /assign-endpoint overschrijft
-namelijk altijd de volledige lijst, dus dit script leest eerst de bestaande assignments en
-POST't de samenvoeging. Met -Replace gooi je de bestaande juist weg.
+Assignments are ADDED to by default, not replaced. Graph's /assign endpoint always overwrites
+the complete list, so this script first reads the existing assignments and POSTs the merged
+set. With -Replace you throw the existing ones away instead.
 
 .PARAMETER AllDevices
-Wijst toe aan alle apparaten (#microsoft.graph.allDevicesAssignmentTarget).
+Assigns to all devices (#microsoft.graph.allDevicesAssignmentTarget).
 
 .PARAMETER AllUsers
-Wijst toe aan alle gelicentieerde gebruikers (#microsoft.graph.allLicensedUsersAssignmentTarget).
+Assigns to all licensed users (#microsoft.graph.allLicensedUsersAssignmentTarget).
 
 .PARAMETER GroupId
-Object-id van de Entra-groep waaraan toegewezen wordt.
+Object id of the Entra group to assign to.
 
 .PARAMETER GroupName
-Weergavenaam van de Entra-groep; wordt opgezocht en moet exact één groep opleveren.
+Display name of the Entra group; it is looked up and must return exactly one group.
 
 .PARAMETER Exclude
-Maakt er een uitsluiting van in plaats van een toewijzing. Alleen zinvol bij een groep.
+Makes it an exclusion instead of an assignment. Only meaningful with a group.
 
 .PARAMETER Name
-Expliciete policynamen in plaats van de lijst uit IntuneTemplate/.
+Explicit policy names instead of the list from IntuneTemplate/.
 
 .PARAMETER Scope
-Beperkt de policylijst tot device-scoped ('D') of user-scoped ('U') policies, op basis van de
-"[Baseline] - PLATFORM - D/U - Item"-naamconventie. Standaard 'Both': dan blijft de lijst
-ongefilterd, inclusief policies die die conventie (nog) niet volgen. Werkt ook op -Name.
+Limits the policy list to device-scoped ('D') or user-scoped ('U') policies, based on the
+"[Baseline] - PLATFORM - D/U - Item" naming convention. Default 'Both': the list then stays
+unfiltered, including policies that do not (yet) follow that convention. Also works on -Name.
 
 .PARAMETER Platform
-Beperkt de policylijst tot één platform: 'WIN', 'MAC', 'IOS' of 'AND'. Standaard 'All'.
-Handig om een nieuw platform apart uit te rollen zonder de Windows-baseline aan te raken.
+Limits the policy list to one platform: 'WIN', 'MAC', 'IOS' or 'AND'. Default 'All'.
+Handy for rolling out a new platform separately without touching the Windows baseline.
 
 .PARAMETER Replace
-Vervangt bestaande assignments in plaats van ze aan te vullen.
+Replaces existing assignments instead of adding to them.
 
 .PARAMETER IgnoreFase
-Neemt alle templates uit IntuneTemplate/, ongeacht hun fase. Alleen voor een testtenant: een
-fase 5-policy naast zijn tegenhanger levert een Conflict op, waarna Intune de betwiste
-instelling door géén van beide toepast.
+Takes all templates from IntuneTemplate/, regardless of their phase. Only for a test tenant: a
+phase 5 policy next to its counterpart produces a Conflict, after which Intune applies the
+disputed setting through neither of them.
 
 .PARAMETER FilterId
-Object-id van een assignmentfilter dat op de assignment gezet wordt.
+Object id of an assignment filter to put on the assignment.
 
 .PARAMETER FilterType
-'include' of 'exclude' — verplicht samen met -FilterId.
+'include' or 'exclude' — required together with -FilterId.
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -AllDevices -WhatIf
-Laat zien wat er zou gebeuren, zonder iets te wijzigen.
+Shows what would happen, without changing anything.
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -GroupName 'SEC-Baseline-Pilot'
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -AllDevices -Replace
-Gooit bestaande assignments weg en zet alleen All Devices erop.
+Throws away existing assignments and puts only All Devices on.
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -Scope D -AllDevices
 .\Set-BaselineAssignment.ps1 -Scope U -AllUsers
-De dagelijkse bediening: device-policies naar apparaten, user-policies naar gebruikers.
+The day-to-day operation: device policies to devices, user policies to users.
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -Platform MAC -Scope D -AllDevices -WhatIf
-Alleen de macOS-device-policies, eerst als dry run.
+Only the macOS device policies, as a dry run first.
 #>
-# ConfirmImpact bewust op Medium: met High vraagt PowerShell per policy om bevestiging en
-# klik je je bij bijna honderd policies suf. Draai eerst -WhatIf; dat is hier de dry run.
+# ConfirmImpact deliberately at Medium: with High PowerShell asks for confirmation per policy and
+# with nearly a hundred policies you click yourself silly. Run -WhatIf first; that is the dry run here.
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium', DefaultParameterSetName = 'AllDevices')]
 param(
     [Parameter(Mandatory, ParameterSetName = 'AllDevices')]
@@ -127,11 +126,11 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# Settings Catalog gebruikt 'name', de rest 'displayName' — anders vindt de match niets.
+# Settings Catalog uses 'name', the rest 'displayName' — otherwise the match finds nothing.
 #
-# App Protection staat apart: je vindt de policies via managedAppPolicies, maar toewijzen kan
-# alleen via de platformspecifieke collectie (iosManagedAppProtections /
-# androidManagedAppProtections). Een POST naar managedAppPolicies/{id}/assign bestaat niet.
+# App Protection is a separate case: you find the policies via managedAppPolicies, but assigning
+# only works via the platform-specific collection (iosManagedAppProtections /
+# androidManagedAppProtections). A POST to managedAppPolicies/{id}/assign does not exist.
 $PolicyTypes = @(
     [pscustomobject]@{ Label = 'Settings Catalog';        Endpoint = 'deviceManagement/configurationPolicies';      NameField = 'name' }
     [pscustomobject]@{ Label = 'Administrative Template'; Endpoint = 'deviceManagement/groupPolicyConfigurations';  NameField = 'displayName' }
@@ -140,7 +139,7 @@ $PolicyTypes = @(
     [pscustomobject]@{ Label = 'App Protection';          Endpoint = 'deviceAppManagement/managedAppPolicies';      NameField = 'displayName' }
 )
 
-# @odata.type van een app protection-policy -> de collectie waar /assign wél op werkt.
+# @odata.type of an app protection policy -> the collection where /assign does work.
 $AppProtectionEndpoints = @{
     '#microsoft.graph.iosManagedAppProtection'              = 'deviceAppManagement/iosManagedAppProtections'
     '#microsoft.graph.androidManagedAppProtection'          = 'deviceAppManagement/androidManagedAppProtections'
@@ -150,8 +149,8 @@ $AppProtectionEndpoints = @{
 }
 
 function Get-GraphCollection {
-    <# Volgt @odata.nextLink; zonder paginering mis je policies zodra een tenant er meer dan
-       één pagina van heeft — precies het soort stille omissie dat hier niet mag. #>
+    <# Follows @odata.nextLink; without paging you miss policies as soon as a tenant has more
+       than one page of them — exactly the kind of silent omission that must not happen here. #>
     param([Parameter(Mandatory)][string]$Uri)
 
     $items = @()
@@ -165,8 +164,8 @@ function Get-GraphCollection {
 }
 
 function Get-TemplateDisplayName {
-    <# Leest de Displayname uit de CIPP-templates in IntuneTemplate/ (genestelde JSON-string).
-       -Recurse omdat de templates per platform en policytype in submappen staan. #>
+    <# Reads the Displayname from the CIPP templates in IntuneTemplate/ (nested JSON string).
+       -Recurse because the templates sit in subfolders per platform and policy type. #>
     param([Parameter(Mandatory)][string]$TemplateDir)
 
     Get-ChildItem -Path $TemplateDir -Filter 'Baseline_*.json' -File -Recurse | ForEach-Object {
@@ -175,8 +174,8 @@ function Get-TemplateDisplayName {
 }
 
 function Get-TargetKey {
-    <# Twee targets zijn hetzelfde als type, groep én filter gelijk zijn. Zonder deze sleutel
-       zou aanvullen elke run een duplicaat toevoegen. #>
+    <# Two targets are the same if type, group and filter are all equal. Without this key,
+       adding would append a duplicate on every run. #>
     param($Target)
 
     $type = $Target.'@odata.type'
@@ -186,9 +185,9 @@ function Get-TargetKey {
     return "$type|$group|$filter|$filterType"
 }
 
-# --- doelgroep bepalen ---------------------------------------------------------------
-if ($FilterId -and -not $FilterType) { throw "-FilterId vereist ook -FilterType ('include' of 'exclude')." }
-if ($FilterType -and -not $FilterId) { throw "-FilterType vereist ook -FilterId." }
+# --- determine the target -----------------------------------------------------------
+if ($FilterId -and -not $FilterType) { throw "-FilterId also requires -FilterType ('include' or 'exclude')." }
+if ($FilterType -and -not $FilterId) { throw "-FilterType also requires -FilterId." }
 
 if ($null -eq (Get-MgContext)) {
     Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All', 'Group.Read.All' | Out-Null
@@ -198,10 +197,10 @@ $resolvedGroupId = $GroupId
 if ($GroupName) {
     $escaped = $GroupName.Replace("'", "''")
     $groups = Get-GraphCollection -Uri "v1.0/groups?`$filter=displayName eq '$escaped'&`$select=id,displayName"
-    if ($groups.Count -eq 0) { throw "Geen groep gevonden met displayName '$GroupName'." }
-    if ($groups.Count -gt 1) { throw "$($groups.Count) groepen heten '$GroupName' — gebruik -GroupId om de juiste aan te wijzen." }
+    if ($groups.Count -eq 0) { throw "No group found with displayName '$GroupName'." }
+    if ($groups.Count -gt 1) { throw "$($groups.Count) groups are named '$GroupName' — use -GroupId to point at the right one." }
     $resolvedGroupId = $groups[0].id
-    Write-Host "Groep '$GroupName' -> $resolvedGroupId" -ForegroundColor Cyan
+    Write-Host "Group '$GroupName' -> $resolvedGroupId" -ForegroundColor Cyan
 }
 
 $target = switch ($PSCmdlet.ParameterSetName) {
@@ -217,24 +216,24 @@ $target = switch ($PSCmdlet.ParameterSetName) {
 $target['deviceAndAppManagementAssignmentFilterId'] = if ($FilterId) { $FilterId } else { $null }
 $target['deviceAndAppManagementAssignmentFilterType'] = if ($FilterType) { $FilterType } else { 'none' }
 
-# --- policylijst bepalen -------------------------------------------------------------
-# Standaard volgt de lijst de fase in _manifest.json, niet "alles wat in IntuneTemplate/ staat".
-# Zonder dat onderscheid zet -AllDevices ook de pilot, de wachtkamer en de alternatieven op alle
-# apparaten — en een fase 5-policy naast zijn tegenhanger levert een Conflict op, waarna Intune
-# de betwiste instelling door géén van beide toepast. Dezelfde afleiding als packageFor() in
-# scripts/lib/templates.js, zodat CIPP en dit script hetzelfde naar hetzelfde doel uitrollen:
-# fase 1 staat met zijn doel in _assignments.json, fase 2 hoort op de pilotgroep, fase 4 op zijn
-# `faseGroep`, en fase 3 en 5 worden door niets toegewezen.
+# --- determine the policy list ------------------------------------------------------
+# By default the list follows the fase (phase) in _manifest.json, not "everything in IntuneTemplate/".
+# Without that distinction -AllDevices would also put the pilot, the waiting room and the
+# alternatives on all devices — and a phase 5 policy next to its counterpart produces a Conflict,
+# after which Intune applies the disputed setting through neither of them. The same derivation as
+# packageFor() in scripts/lib/templates.js, so CIPP and this script roll out the same thing to the
+# same target: phase 1 is listed with its target in _assignments.json, phase 2 belongs on the pilot
+# group, phase 4 on its `faseGroep`, and phase 3 and 5 are assigned by nothing.
 $PilotGroup = 'SEC-Baseline-Pilot'
 
 if ($Name) {
     $wanted = $Name
 } else {
     $templateDir = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate'
-    if (-not (Test-Path $templateDir)) { throw "IntuneTemplate/ niet gevonden op $templateDir — geef -Name mee om zonder de repo te draaien." }
+    if (-not (Test-Path $templateDir)) { throw "IntuneTemplate/ not found at $templateDir — pass -Name to run without the repo." }
 
     if ($IgnoreFase -or $Exclude) {
-        # Een uitsluiting op elke baseline-policy kan geen kwaad: die haalt alleen iets weg.
+        # An exclusion on every baseline policy can do no harm: it only takes something away.
         $wanted = @(Get-TemplateDisplayName -TemplateDir $templateDir)
     } else {
         $manifest = Get-Content -LiteralPath (Join-Path $templateDir '_manifest.json') -Raw | ConvertFrom-Json
@@ -258,29 +257,29 @@ if ($Name) {
                     ForEach-Object displayName
             }
             'GroupId' {
-                throw "Met alleen -GroupId is niet te zeggen welke fase bij die groep hoort. Gebruik -GroupName, geef de policies op met -Name, of neem met -IgnoreFase alles."
+                throw "With only -GroupId there is no telling which phase belongs to that group. Use -GroupName, specify the policies with -Name, or take everything with -IgnoreFase."
             }
         })
 
         if ($wanted.Count -eq 0) {
             $known = @($PilotGroup) + @($manifest.policies | Where-Object { $_.fase -eq 4 } | ForEach-Object { ($_.faseGroep -split ' \(')[0].Trim() }) | Sort-Object -Unique
-            throw "Geen policy hoort volgens de fase bij dit doel. Groepen die de fase kent: $($known -join ', '). Voor een andere groep: -Name of -IgnoreFase."
+            throw "No policy belongs to this target according to the phase. Groups the phase knows: $($known -join ', '). For another group: -Name or -IgnoreFase."
         }
-        Write-Host "Policylijst volgens de fase in _manifest.json ($($wanted.Count) policies)" -ForegroundColor Cyan
+        Write-Host "Policy list according to the phase in _manifest.json ($($wanted.Count) policies)" -ForegroundColor Cyan
     }
 }
-if ($wanted.Count -eq 0) { throw 'Geen policynamen om toe te wijzen.' }
+if ($wanted.Count -eq 0) { throw 'No policy names to assign.' }
 
-# Scope-filter: device-policies horen naar apparaten, user-policies naar gebruikers. De scope
-# leest het script uit de naam ("[Baseline] - D - Item"), want dat is het enige wat zowel de
-# repo als de tenant kent — een policy-id zegt er niets over. Policies die de conventie nog
-# niet volgen vallen dus buiten elk scope-filter; dat is bewust zichtbaar in plaats van stil,
-# anders wijs je na een halve migratie de helft van de baseline niet meer toe.
+# Scope filter: device policies belong on devices, user policies on users. The script reads
+# the scope from the name ("[Baseline] - D - Item"), because that is the only thing both the
+# repo and the tenant know — a policy id says nothing about it. Policies that do not yet follow
+# the convention therefore fall outside every scope filter; that is deliberately visible instead
+# of silent, otherwise after a half-finished migration you would no longer assign half the baseline.
 if ($Scope -ne 'Both' -or $Platform -ne 'All') {
     $before = $wanted
     $notConvention = @($before | Where-Object { $_ -notmatch '^\[Baseline\] - (WIN|MAC|IOS|AND) - [DU] - ' })
     if ($notConvention.Count -gt 0) {
-        Write-Warning "$($notConvention.Count) policy/policies volgen de '[Baseline] - PLATFORM - D/U - Item'-conventie niet en vallen buiten élk filter:"
+        Write-Warning "$($notConvention.Count) policy/policies do not follow the '[Baseline] - PLATFORM - D/U - Item' convention and fall outside every filter:"
         $notConvention | ForEach-Object { Write-Warning "  $_" }
     }
 
@@ -289,20 +288,20 @@ if ($Scope -ne 'Both' -or $Platform -ne 'All') {
     $wanted = @($before | Where-Object { $_ -match "^\[Baseline\] - $platformPattern - $scopePattern - " })
 
     if ($wanted.Count -eq 0) {
-        throw "Geen policies gevonden voor platform '$Platform' en scope '$Scope'. Draai zonder filter om alles toe te wijzen."
+        throw "No policies found for platform '$Platform' and scope '$Scope'. Run without a filter to assign everything."
     }
 }
 
-Write-Host "$($wanted.Count) policies uit de baseline, doel: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
-if ($Scope -ne 'Both') { Write-Host "Scope-filter: $Scope" -ForegroundColor Cyan }
-if ($Platform -ne 'All') { Write-Host "Platformfilter: $Platform" -ForegroundColor Cyan }
-Write-Host ("Modus: {0}" -f $(if ($Replace) { 'bestaande assignments VERVANGEN' } else { 'aanvullen op bestaande assignments' })) -ForegroundColor Cyan
+Write-Host "$($wanted.Count) policies from the baseline, target: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
+if ($Scope -ne 'Both') { Write-Host "Scope filter: $Scope" -ForegroundColor Cyan }
+if ($Platform -ne 'All') { Write-Host "Platform filter: $Platform" -ForegroundColor Cyan }
+Write-Host ("Mode: {0}" -f $(if ($Replace) { 'REPLACE existing assignments' } else { 'add to existing assignments' })) -ForegroundColor Cyan
 
-# --- policies ophalen ----------------------------------------------------------------
+# --- fetch policies -----------------------------------------------------------------
 $found = @{}
 foreach ($type in $PolicyTypes) {
-    # Bij App Protection geen $select: de @odata.type is nodig om te bepalen op welke
-    # collectie /assign werkt, en die kun je niet selecteren.
+    # No $select for App Protection: the @odata.type is needed to determine which collection
+    # /assign works on, and you cannot select it.
     $uri = if ($type.Label -eq 'App Protection') {
         "$ApiVersion/$($type.Endpoint)"
     } else {
@@ -317,23 +316,23 @@ foreach ($type in $PolicyTypes) {
         if ($type.Label -eq 'App Protection') {
             $endpoint = $AppProtectionEndpoints[[string]$policy.'@odata.type']
             if (-not $endpoint) {
-                Write-Warning "'$policyName' heeft een onbekend app protection-type ($($policy.'@odata.type')) — overgeslagen."
+                Write-Warning "'$policyName' has an unknown app protection type ($($policy.'@odata.type')) — skipped."
                 continue
             }
         }
 
         if ($found.ContainsKey($policyName)) {
-            Write-Warning "'$policyName' bestaat meerdere keren in de tenant — alleen de eerste ($($found[$policyName].Label)) wordt toegewezen."
+            Write-Warning "'$policyName' exists more than once in the tenant — only the first one ($($found[$policyName].Label)) is assigned."
             continue
         }
         $found[$policyName] = [pscustomobject]@{ Id = $policy.id; Label = $type.Label; Endpoint = $endpoint; Name = $policyName }
     }
 }
 
-# --- toewijzen -----------------------------------------------------------------------
+# --- assign -------------------------------------------------------------------------
 $results = foreach ($policyName in $wanted) {
     if (-not $found.ContainsKey($policyName)) {
-        [pscustomobject]@{ Policy = $policyName; Type = '-'; Actie = 'NIET GEVONDEN'; Assignments = 0 }
+        [pscustomobject]@{ Policy = $policyName; Type = '-'; Action = 'NOT FOUND'; Assignments = 0 }
         continue
     }
     $policy = $found[$policyName]
@@ -346,30 +345,30 @@ $results = foreach ($policyName in $wanted) {
 
     $isNew = $seen.Add((Get-TargetKey $target))
     if (-not $isNew) {
-        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'al toegewezen'; Assignments = $targets.Count }
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'already assigned'; Assignments = $targets.Count }
         continue
     }
     [void]$targets.Add($target)
 
     $body = @{ assignments = @($targets | ForEach-Object { @{ target = $_ } }) } | ConvertTo-Json -Depth 10
-    if ($PSCmdlet.ShouldProcess($policyName, "assignment zetten ($($targets.Count) target(s))")) {
+    if ($PSCmdlet.ShouldProcess($policyName, "set assignment ($($targets.Count) target(s))")) {
         try {
             Invoke-MgGraphRequest -Method POST -Uri "$uri/assign" -Body $body | Out-Null
-            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = $(if ($Replace) { 'vervangen' } else { 'toegevoegd' }); Assignments = $targets.Count }
+            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = $(if ($Replace) { 'replaced' } else { 'added' }); Assignments = $targets.Count }
         } catch {
-            Write-Error "$policyName - assignment mislukt: $_" -ErrorAction Continue
-            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'MISLUKT'; Assignments = 0 }
+            Write-Error "$policyName - assignment failed: $_" -ErrorAction Continue
+            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'FAILED'; Assignments = 0 }
         }
     } else {
-        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Actie = 'overgeslagen (WhatIf)'; Assignments = $targets.Count }
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'skipped (WhatIf)'; Assignments = $targets.Count }
     }
 }
 
 $results | Format-Table -AutoSize
 
-$missing = @($results | Where-Object Actie -eq 'NIET GEVONDEN')
-$failed = @($results | Where-Object Actie -eq 'MISLUKT')
+$missing = @($results | Where-Object Action -eq 'NOT FOUND')
+$failed = @($results | Where-Object Action -eq 'FAILED')
 if ($missing.Count -gt 0) {
-    Write-Warning "$($missing.Count) policy/policies staan niet in de tenant. Rol ze eerst uit (CIPP, of Start-IntuneRestoreConfig op export/NativeImport/IntuneBackupAndRestore/) en draai dit script opnieuw."
+    Write-Warning "$($missing.Count) policy/policies are not in the tenant. Roll them out first (CIPP, or Start-IntuneRestoreConfig on export/NativeImport/IntuneBackupAndRestore/) and run this script again."
 }
-if ($failed.Count -gt 0) { throw "$($failed.Count) assignment(s) mislukt — zie de fouten hierboven." }
+if ($failed.Count -gt 0) { throw "$($failed.Count) assignment(s) failed — see the errors above." }

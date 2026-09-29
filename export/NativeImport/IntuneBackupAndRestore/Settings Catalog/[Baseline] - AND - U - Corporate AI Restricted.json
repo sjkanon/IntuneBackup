@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - AND - U - Corporate AI Restricted",
-    "description": "Voorkomt op fully managed en corporate-owned Android-toestellen dat scherminhoud naar een assistent-app gaat (zoals Gemini of Circle to Search) en dat apps functies aan AI-agenten aanbieden. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) en Applications (appfunctions), Fully-Managed en Corp-Work-Profile - v1.5.",
+    "description": "Prevents screen content from being sent to an assistant app (such as Gemini or Circle to Search) on fully managed and corporate-owned Android devices, and prevents apps from exposing functions to AI agents. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) and Applications (appfunctions), Fully-Managed and Corp-Work-Profile - v1.5.",
     "platforms": "androidEnterprise",
     "technologies": "android",
     "templateReference": {

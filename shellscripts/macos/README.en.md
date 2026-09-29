@@ -616,14 +616,14 @@ order of likelihood:
 1. **The mount got stuck on a sign-in window.** If the Mac does have a Kerberos ticket but
    the share does not accept it, NetFS falls back to a dialog and waits for someone to fill
    it in. From a LaunchAgent that never happens; the script hangs and the Intune agent
-   kills it. Since the 30-second timeout this no longer happens — the script then records
-   `Mount liep vast … afgebroken` and carries on.
+   kills it. Since the 60-second timeout this no longer happens — the script then records
+   `hung and was aborted after 60s` and carries on.
 2. **An older version is in Intune.** The placeholder check is the only other path
-   that gives exit 1. The log then literally says `staat nog op de placeholder`.
+   that gives exit 1. The log then literally says `is still set to the placeholder`.
 3. **The script never started.** Line endings or a BOM from a Windows editor turn
    the first line into `#!/bin/bash^M` and then nothing starts. See *Line endings* above.
 
-You can tell 2 and 3 apart from the log: if there is a `Gestart als …` line, the
+You can tell 2 and 3 apart from the log: if there is a `Started as …` line, the
 script ran and the error is in the logic; if there is no log file, it never
 started.
 
@@ -726,8 +726,18 @@ It tries to read the user's TCC database
 older versions). If that works, the script knows for sure and asks nothing.
 
 That database is protected: without Full Disk Access nobody may read it. If reading fails,
-that is not an error — the user is asked instead, with a button **Staat al aan** ("Already on")
+that is not an error — the user is asked instead, with a button **Already on**
 that makes the script stop. Better to ask once too often than to make up a permission status.
+
+### In the user's language
+
+The dialog follows the signed-in user's language preference (the first language in
+`AppleLanguages`, otherwise `AppleLocale`): Dutch, French, and English in every other case.
+The buttons are then **Later** / **Staat al aan** / **Open instellingen**, **Plus tard** /
+**Déjà activé** / **Ouvrir les réglages** or **Later** / **Already on** / **Open Settings**.
+`ORG_NAAM` at the top of the script is empty by default; the text then says "de IT-afdeling",
+"le service informatique" or "the IT department". If you fill in a name, it appears as is in
+every language. The log is always in English.
 
 ### It stops at some point
 

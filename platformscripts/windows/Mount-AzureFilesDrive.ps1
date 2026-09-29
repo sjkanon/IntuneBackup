@@ -1,70 +1,69 @@
 <#
 .SYNOPSIS
-Koppelt een Azure Files-share als netwerkschijf met het Entra Kerberos-ticket van de
-aangemelde gebruiker.
+Maps an Azure Files share as a network drive using the signed-in user's Entra Kerberos
+ticket.
 
 .DESCRIPTION
-Het Windows-equivalent van mount-azure-files.sh op de Mac, en de vervanger van de drive maps
-uit Group Policy Preferences.
+The Windows equivalent of mount-azure-files.sh on the Mac, and the replacement for the drive
+maps from Group Policy Preferences.
 
-Waarom een script en geen policy: er is er geen. Alle 18.329 settingDefinitionId's van de
-settings catalog zijn nagezocht op iets dat een netwerkschijf koppelt — dat bestaat niet.
-`..._userprofiles_user_home_drive_letter` gaat over de home-drive uit AD en niet over een
-mapping die je zelf kiest, en GPP Drive Maps is geen ADMX en dus ook niet te ingesten.
+Why a script and not a policy: there is none. All 18,329 settingDefinitionIds in the settings
+catalog were searched for anything that maps a network drive — it does not exist.
+`..._userprofiles_user_home_drive_letter` is about the home drive from AD, not about a mapping
+you choose yourself, and GPP Drive Maps is not an ADMX, so it cannot be ingested either.
 
-Waarom dit script maar één keer hoeft te draaien: `New-PSDrive -Persist` schrijft de mapping
-in `HKCU\Network`, en Windows herstelt persistente mappings bij elke aanmelding. Een
-Intune-platformscript draait één keer per gebruiker per apparaat, en dat is hier genoeg.
-Haalt de gebruiker de mapping daarna zelf weg, dan komt hij niet terug — dat is een keuze,
-geen tekortkoming, dezelfde lijn als bij configure-dock.sh. Wil je 'm wél laten terugkomen,
-dan is dit script het verkeerde middel en wordt het een remediation (detect + remediate, met
-een eigen schema).
+Why this script only needs to run once: `New-PSDrive -Persist` writes the mapping to
+`HKCU\Network`, and Windows restores persistent mappings at every sign-in. An Intune platform
+script runs once per user per device, and that is enough here. If the user removes the mapping
+afterwards, it does not come back — that is a choice, not a shortcoming, the same line as with
+configure-dock.sh. If you do want it to come back, this script is the wrong tool and it becomes
+a remediation (detect + remediate, with its own schedule).
 
-Er wordt bewust geen -Credential meegegeven: het Kerberos-ticket doet het werk. Komt er toch
-een aanmeldvenster, dan is dat het symptoom — zie de README naast dit bestand.
+No -Credential is passed on purpose: the Kerberos ticket does the work. If a sign-in prompt
+appears anyway, that is the symptom — see the README next to this file.
 
-Vereisten die buiten dit script vallen:
-  - Kerberos/CloudKerberosTicketRetrievalEnabled = 1. Staat al in de baseline, via
-    [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, op alle apparaten.
-  - Het apparaat is Entra joined of Entra hybrid joined.
-  - De diensten WinHttpAutoProxySvc en iphlpsvc draaien. De baseline zet ze niet uit — de
-    enige diensten die [Baseline] - WIN - D - Security Hardening uitschakelt zijn de vier
-    Xbox-diensten.
-  - Entra Kerberos aan op het storage account, admin consent gegeven, MFA uitgesloten voor de
-    Entra-app van dat account, en share-level permissions op dezelfde groep als waaraan dit
-    script is toegewezen.
+Requirements outside the scope of this script:
+  - Kerberos/CloudKerberosTicketRetrievalEnabled = 1. Already in the baseline, via
+    [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, on all devices.
+  - The device is Entra joined or Entra hybrid joined.
+  - The WinHttpAutoProxySvc and iphlpsvc services are running. The baseline does not disable
+    them — the only services [Baseline] - WIN - D - Security Hardening disables are the four
+    Xbox services.
+  - Entra Kerberos enabled on the storage account, admin consent granted, MFA excluded for the
+    storage account's Entra app, and share-level permissions on the same group this script is
+    assigned to.
 
 .NOTES
 In Intune: Devices → Scripts and remediations → Platform scripts → Add → Windows 10 and later.
 
-  Run this script using the logged on credentials   Yes   een netwerkschijf hoort bij een
-                                                          gebruikersprofiel; als SYSTEM
-                                                          landt hij nergens
+  Run this script using the logged on credentials   Yes   a network drive belongs to a user
+                                                          profile; as SYSTEM it ends up
+                                                          nowhere
   Enforce script signature check                    No
   Run script in 64 bit PowerShell Host              Yes
 
-Toewijzen aan een gebruikersgroep, niet aan apparaten.
+Assign to a user group, not to devices.
 #>
 
-# --- De share ------------------------------------------------------------------------------
+# --- The share -----------------------------------------------------------------------------
 #
-# \\<account>.file.core.windows.net\<share>\<submap>, in losse velden. SMB kent maar één
-# sharelaag: `<share>` is de share, `<submap>` is een map dáárin. Dat onderscheid is niet
-# cosmetisch — de verbinding en de share-level permissions hangen aan de share, de submap is
-# alleen het punt waar de schijf begint.
+# \\<account>.file.core.windows.net\<share>\<subfolder>, in separate fields. SMB has only one
+# share level: `<share>` is the share, `<subfolder>` is a folder inside it. That distinction is
+# not cosmetic — the connection and the share-level permissions belong to the share, the
+# subfolder is only the point where the drive starts.
 #
-# $ShareSubPath leeg laten koppelt de hele share.
+# Leaving $ShareSubPath empty maps the whole share.
 #
-# Deze vier staan bewust als platte tekst in dit bestand en niet als CIPP-token: een
-# platformscript gaat niet door Get-CIPPTextReplacement heen — dat werkt alleen op de
-# templates in IntuneTemplate/. Wat hier staat is wat er op het apparaat draait.
+# These four are deliberately plain text in this file and not CIPP tokens: a platform script
+# does not pass through Get-CIPPTextReplacement — that only works on the templates in
+# IntuneTemplate/. What is here is what runs on the device.
 
 $StorageAccount = 'STORAGE-ACCOUNT-INVULLEN'
 $ShareName      = 'SHARE-NAAM-INVULLEN'
 $ShareSubPath   = ''
 $DriveLetter    = 'Z'
 
-# --- Vanaf hier niets meer aanpassen -------------------------------------------------------
+# --- Do not change anything below this line ------------------------------------------------
 
 $ErrorActionPreference = 'Stop'
 
@@ -82,37 +81,37 @@ function Write-Log {
 }
 
 if ($StorageAccount -eq 'STORAGE-ACCOUNT-INVULLEN' -or $ShareName -eq 'SHARE-NAAM-INVULLEN') {
-    Write-Log 'Storage account of share staat nog op de placeholder - niets gedaan.'
+    Write-Log 'Storage account or share is still set to the placeholder - nothing done.'
     exit 1
 }
 
-# Al goed gekoppeld? Dan is er niets te doen. Wijst de letter naar iets anders, dan is dat
-# een bewuste mapping van iemand anders en blijft hij staan: een bestaande schijf onder de
-# gebruiker vandaan trekken is erger dan deze niet koppelen.
+# Already mapped correctly? Then there is nothing to do. If the letter points to something
+# else, that is a deliberate mapping by someone else and it stays: pulling an existing drive
+# out from under the user is worse than not mapping this one.
 $existing = Get-PSDrive -Name $DriveLetter -PSProvider FileSystem -ErrorAction SilentlyContinue
 if ($existing) {
     $current = $existing.DisplayRoot
     if ($current -eq $root) {
-        Write-Log "Schijf ${DriveLetter}: staat al op $root."
+        Write-Log "Drive ${DriveLetter}: already points to $root."
         exit 0
     }
-    Write-Log "Schijf ${DriveLetter}: is bezet door $current - niet aangeraakt."
+    Write-Log "Drive ${DriveLetter}: is in use by $current - left untouched."
     exit 1
 }
 
-# Poort 445 wordt door veel providers geblokkeerd. Zonder deze test is de foutmelding van
-# New-PSDrive een generieke netwerkfout en zoekt de helpdesk in de verkeerde hoek.
+# Port 445 is blocked by many providers. Without this test, the error from New-PSDrive is a
+# generic network error and the helpdesk looks in the wrong place.
 $tcp = New-Object System.Net.Sockets.TcpClient
 try {
     $connect = $tcp.BeginConnect($server, 445, $null, $null)
     if (-not $connect.AsyncWaitHandle.WaitOne(5000, $false)) {
-        Write-Log "Poort 445 op $server is niet bereikbaar binnen 5 seconden - waarschijnlijk geblokkeerd door het netwerk."
+        Write-Log "Port 445 on $server is not reachable within 5 seconds - probably blocked by the network."
         exit 1
     }
     $tcp.EndConnect($connect)
 }
 catch {
-    Write-Log "Poort 445 op $server is niet bereikbaar: $($_.Exception.Message)"
+    Write-Log "Port 445 on $server is not reachable: $($_.Exception.Message)"
     exit 1
 }
 finally {
@@ -121,10 +120,10 @@ finally {
 
 try {
     New-PSDrive -Name $DriveLetter -PSProvider FileSystem -Root $root -Persist -Scope Global | Out-Null
-    Write-Log "Gekoppeld: ${DriveLetter}: op $root"
+    Write-Log "Mapped: ${DriveLetter}: to $root"
     exit 0
 }
 catch {
-    Write-Log "Koppelen mislukt: $($_.Exception.Message)"
+    Write-Log "Mapping failed: $($_.Exception.Message)"
     exit 1
 }

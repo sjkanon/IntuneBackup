@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Logon Hardening",
-    "description": "Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergrendelscherm weg. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definitie..",
+    "description": "Requires CTRL+ALT+DEL before sign-in and removes the network selection from the lock screen. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definition..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Removable Storage",
-    "description": "Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, en telefoons en camera's die zich als WPD-apparaat aanmelden. Lezen blijft mogelijk. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026.",
+    "description": "Blocks writing to removable storage: USB sticks and external drives, and phones and cameras that present themselves as a WPD device. Reading remains possible. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: own baseline — comparison with IntuneAdmin/IntuneBaselines, August 2026.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

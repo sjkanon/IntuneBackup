@@ -162,8 +162,8 @@ Toewijzen aan gebruikersgroepen.
 ---
 
 **Wat het doet** komt uit `doel` in [`_manifest.json`](../_manifest.json). Diezelfde zin
-staat, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld van het
-template — en dus straks in de tenant naast de policy.
+staat in het Engels, samen met het toewijzingsdoel en de herkomst, in het `Description`-veld
+van het template — en dus straks in de tenant naast de policy.
 
 Een lege **checkId** betekent dat de platform-engine geen matcher voor dat policytype heeft
 (Device config, compliance, app protection) — zie de [hoofd-README](../../README.md#welke-types-een-check-opleveren).

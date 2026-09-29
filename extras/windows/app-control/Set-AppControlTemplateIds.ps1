@@ -1,18 +1,18 @@
 #Requires -Modules Microsoft.Graph.Authentication
 <#
 .SYNOPSIS
-    Vult de settingInstanceTemplateId in de App Control for Business-bodies in vanuit de eigen tenant.
+    Fills in the settingInstanceTemplateId in the App Control for Business bodies from your own tenant.
 
 .DESCRIPTION
-    De bodies AppControl_BuiltIn_Audit.graph.json en AppControl_BuiltIn_Enforce.graph.json bevatten
-    de placeholder SETTINGINSTANCETEMPLATEID-INVULLEN, omdat de id niet in een publieke definitiebron
-    staat. Dit script haalt de setting templates van template d3849ba8-bf95-467c-9640-aa2334eae9e3_1
-    op, zoekt de template voor device_vendor_msft_policy_config_applicationcontrolv2_buildoptions,
-    vult de id (en, als die bestaat, de settingValueTemplateId van de gekozen optie) in en schrijft
-    <naam>.resolved.json naast het origineel.
+    The bodies AppControl_BuiltIn_Audit.graph.json and AppControl_BuiltIn_Enforce.graph.json contain
+    the placeholder SETTINGINSTANCETEMPLATEID-INVULLEN, because the id is not in any public definition
+    source. This script retrieves the setting templates of template d3849ba8-bf95-467c-9640-aa2334eae9e3_1,
+    looks up the template for device_vendor_msft_policy_config_applicationcontrolv2_buildoptions,
+    fills in the id (and, if it exists, the settingValueTemplateId of the chosen option) and writes
+    <name>.resolved.json next to the original.
 
-    Met -Create worden beide policies ook aangemaakt, zonder toewijzing. Toewijzen gebeurt bewust
-    met de hand: audit eerst op de pilotgroep, afdwingen alleen op een eigen groep (zie README.md).
+    With -Create both policies are also created, without assignment. Assigning is deliberately done
+    by hand: audit first on the pilot group, enforce only on a dedicated group (see README.md).
 
 .EXAMPLE
     Connect-MgGraph -Scopes DeviceManagementConfiguration.ReadWrite.All
@@ -28,7 +28,7 @@ $ErrorActionPreference = 'Stop'
 $templateId = 'd3849ba8-bf95-467c-9640-aa2334eae9e3_1'
 $settingId = 'device_vendor_msft_policy_config_applicationcontrolv2_buildoptions'
 
-if (-not (Get-MgContext)) { throw 'Eerst Connect-MgGraph -Scopes DeviceManagementConfiguration.ReadWrite.All' }
+if (-not (Get-MgContext)) { throw 'Run Connect-MgGraph -Scopes DeviceManagementConfiguration.ReadWrite.All first' }
 
 $uri = "https://graph.microsoft.com/beta/deviceManagement/configurationPolicyTemplates('$templateId')/settingTemplates?`$expand=settingDefinitions&`$top=1000"
 $templates = @()
@@ -39,7 +39,7 @@ do {
 } while ($uri)
 
 $match = $templates | Where-Object { $_.settingInstanceTemplate.settingDefinitionId -eq $settingId } | Select-Object -First 1
-if (-not $match) { throw "Geen setting template voor $settingId in $templateId gevonden. Is de template-versie veranderd? Controleer in Intune → Endpoint security → App Control for Business." }
+if (-not $match) { throw "No setting template found for $settingId in $templateId. Has the template version changed? Check in Intune → Endpoint security → App Control for Business." }
 
 $instanceTemplateId = $match.settingInstanceTemplate.settingInstanceTemplateId
 $valueTemplateId = $match.settingInstanceTemplate.choiceSettingValueTemplate.settingValueTemplateId
@@ -59,16 +59,16 @@ foreach ($file in 'AppControl_BuiltIn_Audit.graph.json', 'AppControl_BuiltIn_Enf
     }
     $json = $body | ConvertTo-Json -Depth 50
     $out = $path -replace '\.graph\.json$', '.resolved.json'
-    if ($PSCmdlet.ShouldProcess($out, 'Schrijf body met ingevulde template-ids')) {
+    if ($PSCmdlet.ShouldProcess($out, 'Write body with filled-in template ids')) {
         Set-Content -Path $out -Value $json -Encoding utf8
     }
-    if ($Create -and $PSCmdlet.ShouldProcess($body.name, 'Maak App Control-policy aan (zonder toewijzing)')) {
+    if ($Create -and $PSCmdlet.ShouldProcess($body.name, 'Create App Control policy (without assignment)')) {
         $existing = Invoke-MgGraphRequest -Method GET -OutputType PSObject -Uri ("https://graph.microsoft.com/beta/deviceManagement/configurationPolicies?`$filter=name eq '{0}'" -f ($body.name -replace "'", "''"))
         if ($existing.value.Count -gt 0) {
-            Write-Warning "Bestaat al: $($body.name) — overgeslagen."
+            Write-Warning "Already exists: $($body.name) — skipped."
             continue
         }
         $result = Invoke-MgGraphRequest -Method POST -Uri 'https://graph.microsoft.com/beta/deviceManagement/configurationPolicies' -Body $json -ContentType 'application/json'
-        Write-Host "Aangemaakt: $($body.name) ($($result.id))"
+        Write-Host "Created: $($body.name) ($($result.id))"
     }
 }

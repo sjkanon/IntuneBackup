@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Microsoft OneDrive",
-    "description": "Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 'm de toegangsrechten die macOS eist. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access.",
+    "description": "Automatically signs the OneDrive client on the Mac in with the work account and gives it the access rights macOS requires. Baseline assignment: all devices. Source: OpenIntuneBaseline macOS v1.0 — Microsoft OneDrive - D - Service and Access.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

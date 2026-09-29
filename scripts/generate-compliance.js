@@ -1,39 +1,40 @@
 #!/usr/bin/env node
 /**
- * Genereert COMPLIANCE.md: de verantwoording van de baseline naar ISO/IEC 27001:2022 Annex A,
- * NIS2 art. 21(2), CIS Controls v8.1 en NIST CSF 2.0, voor een CISO of auditor.
+ * Generates COMPLIANCE.md: the justification of the baseline against ISO/IEC 27001:2022 Annex A,
+ * NIS2 art. 21(2), CIS Controls v8.1 and NIST CSF 2.0, for a CISO or auditor.
  *
- * Bronnen:
+ * Sources:
  *   IntuneTemplate/_manifest.json     controls, fase, faseWaarom, faseGroep per policy
- *   IntuneTemplate/_assignments.json  wat er werkelijk is toegewezen (fase 1)
- *   IntuneTemplate/_controls.json     de canonieke vocabulaire: alle 93 Annex A-controls, de tien
- *                                     NIS2-punten, de CIS-safeguards en de CSF-subcategorieën
- *   baseline/intune/baseline-v1.0.json de checkId's die TEST Policies Platform toetst
- *   ../CA-Policies/controls/ca-controls.json en ../CA-Policies/baseline/conditional-access/
- *                                     baseline-v1.0.json — optioneel, pad met --ca
+ *   IntuneTemplate/_assignments.json  what is actually assigned (fase 1)
+ *   IntuneTemplate/_controls.json     the canonical vocabulary: all 93 Annex A controls, the ten
+ *                                     NIS2 items, the CIS safeguards and the CSF subcategories
+ *   baseline/intune/baseline-v1.0.json the checkIds that TEST Policies Platform verifies
+ *   ../CA-Policies/controls/ca-controls.json and ../CA-Policies/baseline/conditional-access/
+ *                                     baseline-v1.0.json — optional, path via --ca
  *
- * Gegenereerd om dezelfde reden als de rest van de documentatie: een normenmatrix die met de
- * hand wordt bijgehouden loopt binnen een kwartaal achter op de policies, en leest dan nog
- * steeds alsof hij klopt. Een auditor die een control volgt naar een policy die er niet meer
- * is, vertrouwt de rest van het document ook niet meer.
+ * Generated for the same reason as the rest of the documentation: a standards matrix that is
+ * maintained by hand falls behind the policies within a quarter, and then still reads as if
+ * it were correct. An auditor who follows a control to a policy that no longer exists no
+ * longer trusts the rest of the document either.
  *
- * Wat "afgedekt" hier betekent: er is een policy in fase 1 (of een actieve CA-policy) die de
- * control technisch afdwingt of toetst. Dat is een uitspraak over de baseline, niet over een
- * tenant — of de policy daar ook staat, toont de baseline-check in TEST Policies Platform.
+ * What "covered" means here: there is a policy in fase 1 (or an active CA policy) that
+ * technically enforces or verifies the control. That is a statement about the baseline, not
+ * about a tenant — whether the policy is actually present there is shown by the baseline check
+ * in TEST Policies Platform.
  *
- * Draai generate-baseline.js eerst: de checkId's komen uit het gegenereerde bestand.
+ * Run generate-baseline.js first: the checkIds come from the generated file.
  *
- * In drie talen: COMPLIANCE.md, COMPLIANCE.en.md en COMPLIANCE.fr.md. Vaste tekst staat hieronder
- * als { nl, en, fr }; de teksten uit _controls.json, _manifest.json en _licenties.json komen uit
- * IntuneTemplate/_i18n/<taal>.json — zie lib/i18n.js. ISO-titels in het Engels komen uit
- * `titelEn` in de vocabulaire zelf, want dat is de officiële tekst van de norm.
+ * In three languages: COMPLIANCE.md, COMPLIANCE.en.md and COMPLIANCE.fr.md. Fixed text is below
+ * as { nl, en, fr }; the texts from _controls.json, _manifest.json and _licenties.json come from
+ * IntuneTemplate/_i18n/<lang>.json — see lib/i18n.js. English ISO titles come from `titelEn`
+ * in the vocabulary itself, because that is the official text of the standard.
  *
- * Gebruik: node scripts/generate-compliance.js [--check] [--strict] [--missend] [--ca <pad naar ca-controls.json> | --no-ca]
- *   --check    schrijft niets en geeft exit 1 als COMPLIANCE.md niet meer klopt (voor CI)
- *   --strict   exit 1 als een policy geen controls heeft of een label buiten de vocabulaire gebruikt
- *   --missend  schrijft niets en drukt de teksten zonder vertaling af als JSON
- *   --ca       pad naar ca-controls.json; standaard ../CA-Policies/controls/ca-controls.json naast deze repo
- *   --no-ca    Conditional Access niet meenemen, ook als die repo er staat (zelfde uitkomst lokaal en in CI)
+ * Usage: node scripts/generate-compliance.js [--check] [--strict] [--missend] [--ca <path to ca-controls.json> | --no-ca]
+ *   --check    writes nothing and exits 1 if COMPLIANCE.md is out of date (for CI)
+ *   --strict   exit 1 if a policy has no controls or uses a label outside the vocabulary
+ *   --missend  writes nothing and prints the texts without a translation as JSON
+ *   --ca       path to ca-controls.json; default ../CA-Policies/controls/ca-controls.json next to this repo
+ *   --no-ca    leave out Conditional Access, even if that repo is present (same result locally and in CI)
  */
 
 const fs = require("fs");

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows AI Restricted",
-    "description": "Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. Toewijzing volgens baseline: alle apparaten. Bron: eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026.",
+    "description": "Turns off Recall and Click To Do: Windows then takes no screen captures of what happens on the screen and does not analyse them either. Baseline assignment: all devices. Source: own baseline — comparison with IntuneAdmin/IntuneBaselines, August 2026.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

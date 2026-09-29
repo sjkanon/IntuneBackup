@@ -1,14 +1,14 @@
 <#
-    Detectiescript voor de Win32-app "Verwijder voorgeinstalleerde McAfee".
+    Detection script for the Win32 app "Remove pre-installed McAfee".
 
-    Exit 0 + uitvoer op stdout = gevonden, dus nog aanwezig -> Intune ziet de app als
-    "niet geinstalleerd" en voert de installatie (lees: de verwijdering) uit.
-    Exit 1 zonder uitvoer      = niets meer gevonden -> klaar.
+    Exit 0 + output on stdout = found, so still present -> Intune sees the app as
+    "not installed" and runs the installation (read: the removal).
+    Exit 1 without output      = nothing found any more -> done.
 
-    Waarom op meerdere plekken kijken: MCPR laat regelmatig een half verwijderde staat achter
-    waarin de diensten weg zijn maar de registratie blijft. Kijken naar alleen een map of alleen
-    een dienst zegt daarom niets. De 32-bits registerweergave staat er apart bij omdat een deel
-    van de McAfee-installaties zich daar registreert, ook op een 64-bits systeem.
+    Why look in several places: MCPR regularly leaves a half-removed state behind in which the
+    services are gone but the registration remains. Looking at only a folder or only a service
+    therefore says nothing. The 32-bit registry view is listed separately because part of the
+    McAfee installations register there, even on a 64-bit system.
 #>
 
 $Sporen = @()
@@ -28,16 +28,16 @@ foreach ($Pad in $RegistryPaden) {
             Where-Object { $_.DisplayName -match 'McAfee|WebAdvisor' }
         foreach ($T in $Treffers) { $Sporen += "Uninstall: $($T.DisplayName)" }
     } else {
-        $Sporen += "Registersleutel: $Pad"
+        $Sporen += "Registry key: $Pad"
     }
 }
 
 foreach ($Map in @("${env:ProgramFiles}\McAfee", "${env:ProgramFiles(x86)}\McAfee", "$env:ProgramData\McAfee")) {
-    if (Test-Path $Map) { $Sporen += "Map: $Map" }
+    if (Test-Path $Map) { $Sporen += "Folder: $Map" }
 }
 
 foreach ($Dienst in (Get-Service -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '^mc|McAfee' })) {
-    $Sporen += "Dienst: $($Dienst.Name)"
+    $Sporen += "Service: $($Dienst.Name)"
 }
 
 if ($Sporen.Count -gt 0) {

@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
   "displayName": "[Baseline] - IOS - Outlook - Managed Devices",
-  "description": "Outlook op ingeschreven toestellen: account vooraf ingevuld met moderne authenticatie, alleen het werkaccount, waarschuwing bij externe ontvangers, contacten naar de Contacten-app voor naamweergave bij gesprekken.",
+  "description": "Outlook on enrolled devices: account prefilled with modern authentication, work account only, warning for external recipients, contacts synced to the Contacts app for caller name display.",
   "roleScopeTagIds": [
     "0"
   ],

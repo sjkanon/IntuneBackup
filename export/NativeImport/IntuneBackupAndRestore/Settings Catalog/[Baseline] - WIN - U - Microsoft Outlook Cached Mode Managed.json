@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed",
-    "description": "Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is erbuiten: gedeelde mailmappen, gedeelde agenda's en Public Folder Favorites worden niet naar het OST-bestand gekopieerd. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline.",
+    "description": "Turns on Cached Exchange Mode for the user's own mailbox and keeps everything shared out of it: shared mail folders, shared calendars and Public Folder Favorites are not copied to the OST file. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: own baseline.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

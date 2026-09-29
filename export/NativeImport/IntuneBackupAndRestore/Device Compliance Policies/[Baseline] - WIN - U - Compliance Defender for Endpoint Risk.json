@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Maakt een apparaat niet-compliant zodra Defender for Endpoint het risiconiveau hoger dan 'gemiddeld' inschat, zodat Conditional Access een apparaat met een actieve dreiging de toegang tot bedrijfsgegevens ontzegt. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Compliance, 'Microsoft Defender for Endpoint Risk score' (deviceThreatProtectionEnabled, RequiredSecurityLevel medium); body gelijkgetrokken met de OIB v4.0-compliancepolicies, velden geverifieerd tegen DCv1.",
+    "description": "Makes a device non-compliant as soon as Defender for Endpoint rates the risk level higher than 'medium', so that Conditional Access denies a device with an active threat access to company data. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: IntuneAdmin/IntuneBaselines — Windows 11 Compliance, 'Microsoft Defender for Endpoint Risk score' (deviceThreatProtectionEnabled, RequiredSecurityLevel medium); body aligned with the OIB v4.0 compliance policies, fields verified against DCv1.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": true,
     "displayName": "[Baseline] - WIN - U - Compliance Defender for Endpoint Risk",

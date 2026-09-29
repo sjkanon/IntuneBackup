@@ -502,7 +502,7 @@ Drie regels in `_renames.json` vragen om handwerk en worden door het script alle
   Endpoint Security-template en `Microsoft Office Updates` ging van ADMX naar Settings
   Catalog. De oude policy moet weg vóór de nieuwe erbij komt.
 - **retire** — gaat helemaal weg; `replacedBy` zegt waar de instellingen nu staan.
-- **duplicaat / beide aanwezig** — oude en nieuwe naam bestaan allebei. Eerst uitzoeken welke
+- **duplicaat / beide aanwezig** (`DUPLICATE` / `BOTH PRESENT` in de uitvoer) — oude en nieuwe naam bestaan allebei. Eerst uitzoeken welke
   de echte is.
 
 **Let op:** de `settings-catalog-match`-checks matchen op inhoud, niet op naam. Een

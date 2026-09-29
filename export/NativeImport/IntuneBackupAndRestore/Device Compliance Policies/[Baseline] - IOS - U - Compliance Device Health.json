@@ -37,5 +37,5 @@
         }
     ],
     "displayName": "[Baseline] - IOS - U - Compliance Device Health",
-    "description": "Merkt een iPhone of iPad die met een jailbreak is opengebroken als niet-compliant. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Baseline - iOSiPadOS - Device Health) en UniFy-Endpoint iOS BYOD.."
+    "description": "Marks an iPhone or iPad that has been jailbroken as non-compliant. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: OpenIntuneBaseline convention for compliance, content compared with IntuneAdmin (Baseline - iOSiPadOS - Device Health) and UniFy-Endpoint iOS BYOD.."
 }

@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 /**
- * Leest een IntuneBackupAndRestore-export (mappen per policytype, één JSON per policy,
- * plus een Assignments/-submap) en schrijft die om naar het CIPP-templateformaat in
- * IntuneTemplate/ — de bron waar generate-baseline.js en export-intunebackup.js op draaien.
+ * Reads an IntuneBackupAndRestore export (folders per policy type, one JSON per policy,
+ * plus an Assignments/ subfolder) and rewrites it into the CIPP template format in
+ * IntuneTemplate/ — the source that generate-baseline.js and export-intunebackup.js run on.
  *
- * Tegenhanger van scripts/export-intunebackup.js; samen maken ze de baseline in beide
- * tools bruikbaar: CIPP leest IntuneTemplate/ rechtstreeks, IntuneBackupAndRestore leest
- * de map die de exporter schrijft.
+ * Counterpart of scripts/export-intunebackup.js; together they make the baseline usable in
+ * both tools: CIPP reads IntuneTemplate/ directly, IntuneBackupAndRestore reads the folder
+ * the exporter writes.
  *
- * Standaard worden alleen policies toegevoegd die nog niet in IntuneTemplate/ staan.
- * Bestaande templates worden NIET overschreven zonder --overwrite: een export uit een
- * tenant is niet automatisch verser dan wat hier staat, en een half doorgevoerde
- * baselinewijziging zou er stilzwijgend mee teruggedraaid worden.
+ * By default only policies that are not yet in IntuneTemplate/ are added. Existing templates
+ * are NOT overwritten without --overwrite: an export from a tenant is not automatically more
+ * current than what is here, and a half-applied baseline change would be silently reverted
+ * by it.
  *
- * Gebruik: node scripts/import-intunebackup.js <backup-map> [--overwrite] [--dry-run]
- *   bv.   node scripts/import-intunebackup.js "C:\\Temp\\BaselineIntuneBackup"
+ * Usage: node scripts/import-intunebackup.js <backup-dir> [--overwrite] [--dry-run]
+ *   e.g.  node scripts/import-intunebackup.js "C:\\Temp\\BaselineIntuneBackup"
  */
 
 const fs = require("fs");

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - External Storage Read Only",
-    "description": "Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-sticks en externe schijven — die lees-schrijf zijn — worden helemaal niet gekoppeld. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Apple declaratief beheer, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, alleen supervised); settingDefinitionId's en opties geverifieerd tegen de settings catalog-definities.",
+    "description": "Lets macOS mount only external storage that is itself read-only. Ordinary USB sticks and external drives — which are read-write — are not mounted at all. Baseline assignment: none — an alternative that is not deployed. Source: Apple declarative management, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, supervised only); settingDefinitionIds and options verified against the settings catalog definitions.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

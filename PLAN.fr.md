@@ -96,7 +96,7 @@ Ordre :
    OneDrive KFM. `replacedBy` dans `_renames.json` indique où se trouvent désormais leurs paramètres.
 6. Déployer les ~65 nouvelles stratégies via CIPP ou `Start-IntuneRestoreConfig`.
 7. `Set-BaselineAssignment.ps1 -Scope D -AllDevices` et `-Scope U -AllUsers`, d'abord avec
-   `-WhatIf`. Pour les stratégies existantes, il doit signaler « déjà affectée ».
+   `-WhatIf`. Pour les stratégies existantes, il doit signaler « already assigned ».
 8. Appeler `Invoke-IntuneRestoreAppProtectionPolicyAssignment` séparément (voir README).
 9. **Refaire l'inventaire** — la liste des stratégies orphelines doit être vide.
 

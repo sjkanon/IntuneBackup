@@ -95,7 +95,7 @@ Volgorde:
    OneDrive KFM. `replacedBy` in `_renames.json` zegt waar hun instellingen nu staan.
 6. De ~65 nieuwe policies uitrollen via CIPP of `Start-IntuneRestoreConfig`.
 7. `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers`, eerst met
-   `-WhatIf`. Voor de bestaande policies moet dat "al toegewezen" melden.
+   `-WhatIf`. Voor de bestaande policies moet dat "already assigned" melden.
 8. `Invoke-IntuneRestoreAppProtectionPolicyAssignment` apart aanroepen (zie README).
 9. **Opnieuw inventariseren** — de lijst met wees-policies moet leeg zijn.
 

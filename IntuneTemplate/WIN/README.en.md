@@ -161,7 +161,7 @@ Assign to user groups.
 
 ---
 
-**What it does** comes from `doel` in [`_manifest.json`](../_manifest.json) (translated). The same Dutch
+**What it does** comes from `doel` in [`_manifest.json`](../_manifest.json) (translated). The same
 sentence sits, together with the assignment target and the origin, in the template's `Description`
 field — and so later in the tenant next to the policy.
 

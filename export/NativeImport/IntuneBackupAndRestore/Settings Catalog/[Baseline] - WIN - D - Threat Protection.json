@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Threat Protection",
-    "description": "Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker. Toewijzing volgens baseline: alle apparaten. Bron: ISO/IEC 27001:2022 A.8.7 en A.8.8, NIS2 art. 21(2)(e) — instellingen uit CIS v4 Windows 11 L1.",
+    "description": "Removes the local escape routes from malware protection: users cannot override Exploit Protection or turn off cloud reporting locally, and DLL hijacking becomes harder. Baseline assignment: all devices. Source: ISO/IEC 27001:2022 A.8.7 and A.8.8, NIS2 art. 21(2)(e) — settings from CIS v4 Windows 11 L1.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

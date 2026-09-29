@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - U - Microsoft Edge Extensions",
-    "description": "Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Extensions.",
+    "description": "Determines which Edge extensions users may install on the Mac. Baseline assignment: all users. Source: OpenIntuneBaseline macOS v1.0 — Microsoft Edge - U - Extensions.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

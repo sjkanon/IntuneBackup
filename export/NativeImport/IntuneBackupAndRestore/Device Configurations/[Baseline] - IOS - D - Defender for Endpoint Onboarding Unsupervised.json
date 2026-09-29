@@ -55,5 +55,5 @@
     ],
     "disableOnDemandUserOverride": true,
     "displayName": "[Baseline] - IOS - D - Defender for Endpoint Onboarding Unsupervised",
-    "description": "Onboardt Microsoft Defender for Endpoint zonder gebruikersactie op niet-supervised ingeschreven toestellen via Defender's lokale loopback-VPN, die webbescherming levert zonder verkeer van het toestel te sturen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy iOS/iPadOS Baseline v1.2 — DC - Zero-Touch-Onboarding-VPN - MDE - BYOD Devices (iosVpnConfiguration: customVpn com.microsoft.scmx, server 127.0.0.1, SilentOnboard en SingleSignOn); velden geverifieerd tegen Graph beta iosVpnConfiguration en pl4nty DCv1."
+    "description": "Onboards Microsoft Defender for Endpoint without user action on unsupervised enrolled devices via Defender's local loopback VPN, which provides web protection without sending traffic off the device. Baseline assignment: none by default — belongs on SEC-iOS-BYOD. Source: UniFy iOS/iPadOS Baseline v1.2 — DC - Zero-Touch-Onboarding-VPN - MDE - BYOD Devices (iosVpnConfiguration: customVpn com.microsoft.scmx, server 127.0.0.1, SilentOnboard and SingleSignOn); fields verified against Graph beta iosVpnConfiguration and pl4nty DCv1."
 }

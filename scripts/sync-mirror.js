@@ -1,28 +1,27 @@
 #!/usr/bin/env node
 /**
- * Spiegelt deze repo naar een tweede clone — dezelfde inhoud, een eigen geschiedenis.
+ * Mirrors this repo to a second clone — the same content, its own history.
  *
- * Bedoeld voor een clone die naar een ándere remote pusht dan `origin` (een interne kopie
- * naast de publieke repo). Een spiegel via `git push --force` zou de geschiedenis van die
- * kant overschrijven; dit script zet alleen de bestánden gelijk en maakt daar een gewone
- * commit van. De doelclone houdt zo zijn eigen log, zijn eigen workflowruns en zijn eigen
- * branches.
+ * Intended for a clone that pushes to a *different* remote than `origin` (an internal copy
+ * next to the public repo). A mirror via `git push --force` would overwrite the history on
+ * that side; this script only brings the *files* in line and makes a regular commit of that.
+ * The target clone thus keeps its own log, its own workflow runs and its own branches.
  *
- * Wat meegaat is precies wat hier in git zit — `git ls-files`, dus niet wat `.gitignore`
- * buiten de deur houdt. Dat is het hele punt: `local/` bevat uitrolkopieën mét geheimen, en
- * een spiegel die van de schijf kopieert in plaats van uit de index zou die meenemen naar een
- * tweede remote. Bestanden die hier wég zijn, gaan daar ook weg — maar alleen als ze aan de
- * andere kant in git staan; wat daar lokaal is aangemaakt blijft met rust.
+ * What goes along is exactly what is in git here — `git ls-files`, so not what `.gitignore`
+ * keeps out. That is the whole point: `local/` contains deployment copies *with* secrets, and
+ * a mirror that copies from disk instead of from the index would carry those to a second
+ * remote. Files that are *gone* here are removed there too — but only if they are in git on
+ * the other side; whatever was created locally there is left alone.
  *
- * De doelclone wordt niet gepusht zonder `--push`, en de werkmap van de bron hoeft niet schoon
- * te zijn — maar een spiegel van ongecommitte wijzigingen is een spiegel van iets dat hier nog
- * kan veranderen, dus daar waarschuwt hij voor.
+ * The target clone is not pushed without `--push`, and the source working tree does not have
+ * to be clean — but a mirror of uncommitted changes is a mirror of something that can still
+ * change here, so it warns about that.
  *
- * Gebruik:
- *   node scripts/sync-mirror.js <doelmap>              # kopieer en commit
- *   node scripts/sync-mirror.js <doelmap> --dry-run    # laat alleen zien wat er zou gebeuren
- *   node scripts/sync-mirror.js <doelmap> --push       # en push de doelclone
- *   node scripts/sync-mirror.js <doelmap> --message "…"
+ * Usage:
+ *   node scripts/sync-mirror.js <target-dir>              # copy and commit
+ *   node scripts/sync-mirror.js <target-dir> --dry-run    # only show what would happen
+ *   node scripts/sync-mirror.js <target-dir> --push       # and push the target clone
+ *   node scripts/sync-mirror.js <target-dir> --message "…"
  */
 
 const fs = require("fs");

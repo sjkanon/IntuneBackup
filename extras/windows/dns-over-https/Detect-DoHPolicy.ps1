@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Intune-remediation (detectie): staat DNS over HTTPS van Windows op de gewenste modus?
+    Intune remediation (detection): is Windows DNS over HTTPS set to the desired mode?
 .NOTES
-    2 = DoH toestaan (baseline, fase 2) · 3 = DoH vereisen (alternatief, fase 5).
-    Exit 0 = in orde, exit 1 = herstel nodig.
+    2 = allow DoH (baseline, phase 2) · 3 = require DoH (alternative, phase 5).
+    Exit 0 = compliant, exit 1 = remediation needed.
 #>
 $Expected = 2
 
@@ -15,8 +15,8 @@ try {
 }
 
 if ($current -eq $Expected) {
-    Write-Output "DoHPolicy = $current (verwacht $Expected)"
+    Write-Output "DoHPolicy = $current (expected $Expected)"
     exit 0
 }
-Write-Output "DoHPolicy = $(if ($null -eq $current) { 'niet gezet' } else { $current }) (verwacht $Expected)"
+Write-Output "DoHPolicy = $(if ($null -eq $current) { 'not set' } else { $current }) (expected $Expected)"
 exit 1

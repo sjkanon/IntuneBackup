@@ -1,41 +1,39 @@
 #!/usr/bin/env node
 /**
- * Rapporteert hoe ver de OS-ondergrenzen in IntuneTemplate/ achterlopen op de n-1-versie van
- * elk platform, met endoflife.date als bron.
+ * Reports how far the OS minimums in IntuneTemplate/ lag behind the n-1 version of each
+ * platform, using endoflife.date as the source.
  *
- * **Exitcode altijd 0.** Dit is een rapportage, geen poort. `check-scope.js` blokkeert omdat
- * een scope-fout fóút is; een verouderde ondergrens is een besluit dat wacht. Zou dit script
- * CI laten falen, dan verhoogt iemand het getal om de build groen te krijgen — en dat is
- * precies het besluit dat een mens hoort te nemen. Een waarde in deze repo is namelijk niet
- * altijd een actualiteitsdoel: WIN 10.0.22621 en MAC 14.0 zijn *capaciteitsvloeren* die uit
- * andere policies in de baseline volgen (Account Lockout, Administrator Protection,
- * declaratief updatebeleid), en die mogen niet meebewegen met n-1. IOS 16.0 en AND 12.0 zijn
- * OIB-conventie en dus wél kandidaat. Dit script zegt niet welke van de twee een waarde is;
- * het laat alleen de afstand zien.
+ * **Exit code always 0.** This is a report, not a gate. `check-scope.js` blocks because a
+ * scope error is *wrong*; an outdated minimum is a decision waiting to be made. If this script
+ * failed CI, someone would bump the number to get the build green — and that is exactly the
+ * decision a human is supposed to make. A value in this repo is not always a currency target:
+ * WIN 10.0.22621 and MAC 14.0 are *capability floors* that follow from other policies in the
+ * baseline (Account Lockout, Administrator Protection, declarative update policy), and they
+ * must not move along with n-1. IOS 16.0 and AND 12.0 are OIB convention and therefore *are*
+ * candidates. This script does not say which of the two a value is; it only shows the gap.
  *
- * Drie dingen die niet vanzelf goed gaan bij het afleiden van n-1, alle drie gemeten:
+ * Three things that do not come out right by themselves when deriving n-1, all three measured:
  *
- *  1. **Windows staat er dubbel in.** Elke feature-update heeft een `-e`-cyclus
- *     (Enterprise/Education) en een `-w`-cyclus (consument): zelfde build, andere einddatum.
- *     Positie 0 en 1 zijn dus dezelfde release en "n-1" levert **n** op. Er wordt daarom eerst
- *     ontdubbeld op de build (`latest.name`).
- *  2. **Android geeft geen `latest`.** Alle cycli hebben `latest: null`; daar is `cycle` de
- *     enige bruikbare waarde. Voor Windows is dat juist uitsluitend `latest`.
- *  3. **Apple telt in jaartallen.** iOS ging van 18 naar 26, macOS van 15 naar 26. n-1
- *     *rekenen* geeft 25 en die bestaat niet — n-1 is een pósitie in de lijst, nooit een som.
+ *  1. **Windows is listed twice.** Every feature update has an `-e` cycle
+ *     (Enterprise/Education) and a `-w` cycle (consumer): same build, different end date.
+ *     Positions 0 and 1 are therefore the same release and "n-1" yields **n**. So the list is
+ *     first deduplicated on the build (`latest.name`).
+ *  2. **Android has no `latest`.** All cycles have `latest: null`; there `cycle` is the only
+ *     usable value. For Windows, on the contrary, only `latest` is.
+ *  3. **Apple counts in years.** iOS went from 18 to 26, macOS from 15 to 26. *Computing* n-1
+ *     gives 25, which does not exist — n-1 is a *position* in the list, never a subtraction.
  *
- * De API is v1, niet de platte v0-array die her en der rondgaat: v1 heeft een expliciete
- * `schema_version`, en dat is het enige haakje waarmee dit script kan merken dát de bron van
- * vorm veranderd is in plaats van er stilletjes iets verkeerds uit af te leiden. Begint die
- * niet met "1.", dan wordt er voor dat platform géén n-1 gerapporteerd.
+ * The API is v1, not the flat v0 array that circulates here and there: v1 has an explicit
+ * `schema_version`, and that is the only hook this script has to notice *that* the source has
+ * changed shape instead of silently deriving something wrong from it. If it does not start
+ * with "1.", no n-1 is reported for that platform.
  *
- * Welke bestanden meetellen volgt uit het **veld**, niet uit de bestandsnaam: voor iOS en
- * Android bestaat er geen aparte OS Version-policy en zit de ondergrens in Device Health.
- * Het platform volgt uit het platformwoord in `@odata.type`, niet uit een vaste lijst
- * typenamen — er bestaan vier Android-compliancetypes en een klanttenant kan elk ervan
- * hebben.
+ * Which files count follows from the **field**, not from the file name: for iOS and Android
+ * there is no separate OS Version policy and the minimum lives in Device Health. The platform
+ * follows from the platform word in `@odata.type`, not from a fixed list of type names —
+ * there are four Android compliance types and a customer tenant can have any of them.
  *
- * Gebruik:
+ * Usage:
  *   node scripts/check-osversion.js
  */
 

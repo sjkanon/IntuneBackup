@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - AND - U - Corporate Data Protection",
-    "description": "Blokkeert op fully managed en corporate-owned Android-toestellen schermafdrukken, delen van bestanden via Bluetooth en het terugzetten naar fabrieksinstellingen door de gebruiker. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings en Connectivity (Fully-Managed en Corp-Work-Profile) - v1.5.",
+    "description": "Blocks screenshots, file sharing via Bluetooth and factory reset by the user on fully managed and corporate-owned Android devices. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings and Connectivity (Fully-Managed and Corp-Work-Profile) - v1.5.",
     "platforms": "androidEnterprise",
     "technologies": "android",
     "templateReference": {

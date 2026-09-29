@@ -1,43 +1,42 @@
 #!/usr/bin/env node
 /**
- * Zet profielen uit IntuneAdmin/IntuneBaselines om naar IntuneTemplate/Baseline_*.json,
- * gestuurd door het `intuneadmin`-blok in IntuneTemplate/_manifest.json.
+ * Converts profiles from IntuneAdmin/IntuneBaselines into IntuneTemplate/Baseline_*.json,
+ * driven by the `intuneadmin` block in IntuneTemplate/_manifest.json.
  *
- * Tegenhanger van import-oib.js, en met opzet een eigen script in plaats van een tweede modus
- * daarin: de twee bronnen leveren een ander bestandsformaat, en één importer die op twee
- * plekken moet raden is precies hoe je een stille misconversie krijgt. Wat ze wél delen —
- * hoe een CIPP-template eruitziet, hoe je een settings-array uitleest — staat in
- * lib/templates.js.
+ * Counterpart of import-oib.js, and deliberately a separate script instead of a second mode
+ * in it: the two sources deliver a different file format, and one importer that has to guess
+ * in two places is exactly how you get a silent misconversion. What they *do* share — what a
+ * CIPP template looks like, how to read a settings array — lives in lib/templates.js.
  *
- * Gebruik:
+ * Usage:
  *   git clone --depth 1 https://github.com/IntuneAdmin/IntuneBaselines .intuneadmin-source
  *   node scripts/import-intuneadmin.js --dry-run
  *   node scripts/import-intuneadmin.js
  *
- * Vier dingen die dit script bewust doet:
+ * Four things this script does deliberately:
  *
- *  1. **UTF-16LE lezen.** Elk van de 874 bestanden in die repo staat in UTF-16LE met BOM.
- *     `readFileSync(f, "utf8")` levert daar mojibake op en `JSON.parse` faalt — op alle 874,
- *     dus dat merk je meteen. Erger is het geval waarin iemand de BOM wegstript en de eerste
- *     helft van de tekens overhoudt; vandaar dat de codering hier expliciet wordt bepaald.
- *  2. **GUID's blijven behouden.** De RowKey identificeert de CIPP-templaterij. Een herschreven
- *     template met een nieuwe GUID levert bij de volgende sync een tweede rij op met dezelfde
- *     naam.
- *  3. **Template-referenties gaan eruit.** IntuneAdmin exporteert profielen die uit een
- *     Endpoint Security-template komen, inclusief `settingInstanceTemplateReference` en
- *     `settingValueTemplateReference` met id's uit hún tenant. Overnemen levert een template op
- *     dat in een andere tenant niet importeert. De instellingen zelf blijven, de referenties
- *     niet.
- *  4. **Bewuste afwijkingen blijven staan.** Net als bij OIB: een andere waarde dan de bron
- *     zet, hoort als `overrides` in het manifest te staan mét een `reason`. Verdwijnt het
- *     ankerpunt uit een nieuwe versie van de bron, dan **stopt de import met een fout** in
- *     plaats van de afwijking stil te laten vervallen — dat laatste is het gevaarlijkst, want
- *     dan klopt het bestand nog steeds terwijl de reden weg is.
+ *  1. **Read UTF-16LE.** Each of the 874 files in that repo is in UTF-16LE with a BOM.
+ *     `readFileSync(f, "utf8")` produces mojibake there and `JSON.parse` fails — on all 874,
+ *     so you notice that immediately. Worse is the case where someone strips the BOM and keeps
+ *     the first half of the characters; hence the encoding is determined explicitly here.
+ *  2. **GUIDs are preserved.** The RowKey identifies the CIPP template row. A rewritten
+ *     template with a new GUID produces a second row with the same name on the next sync.
+ *  3. **Template references are removed.** IntuneAdmin exports profiles that come from an
+ *     Endpoint Security template, including `settingInstanceTemplateReference` and
+ *     `settingValueTemplateReference` with ids from *their* tenant. Copying them over produces
+ *     a template that does not import in another tenant. The settings themselves stay, the
+ *     references do not.
+ *  4. **Deliberate deviations stay in place.** Just like with OIB: a value different from what
+ *     the source sets belongs in the manifest as `overrides`, *with* a `reason`. If the anchor
+ *     disappears from a new version of the source, **the import stops with an error** instead
+ *     of silently dropping the deviation — the latter is the most dangerous, because then the
+ *     file still looks correct while the reason is gone.
  */
 
 const fs = require("fs");
 const path = require("path");
-const { listTemplateFiles, readTemplate, relativePathFor, collectSettingIds, packageFor } = require("./lib/templates");
+const { listTemplateFiles, readTemplate, relativePathFor, collectSettingIds, packageFor, composeDescription: composeTenantDescription } = require("./lib/templates");
+const { Translator } = require("./lib/i18n");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -83,20 +82,9 @@ function clean(node) {
 /** Settings-array normaliseren naar {id, settingInstance} met oplopende id's. */
 const renumber = (settings) => settings.map((s, i) => ({ id: String(i), settingInstance: s.settingInstance }));
 
-function assignmentText(list) {
-  if (!list || list.length === 0) return "geen — zie de fase in _manifest.json";
-  const t = list[0].target["@odata.type"] || "";
-  if (t.endsWith("allDevicesAssignmentTarget")) return "alle apparaten";
-  if (t.endsWith("allLicensedUsersAssignmentTarget")) return "alle gebruikers";
-  return "een groep";
-}
-
+/** De omschrijving in de tenant — Engels, uit lib/templates.js, dezelfde als set-packages.js schrijft. */
 function composeDescription(entry, assignments) {
-  const parts = [];
-  if (entry.doel) parts.push(entry.doel);
-  parts.push(`Toewijzing volgens baseline: ${assignmentText(assignments[entry.displayName])}.`);
-  if (entry.bron) parts.push(`Bron: ${entry.bron}.`);
-  return parts.join(" ");
+  return composeTenantDescription(entry, assignments[entry.displayName], new Translator("en"));
 }
 
 /**

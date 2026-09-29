@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline — Apple staat schermopname niet toe in de settings catalog-vorm van PPPC.",
+    "description": "Only for organisations that use NinjaOne or TeamViewer. Sets screen recording for NinjaOne Remote and TeamViewer to AllowStandardUserToSetSystemService: a user without administrator rights can tick the box themselves, without an administrator password. Enabling it remains a manual click — macOS does not allow an MDM to grant screen recording. Baseline assignment: none by default — belongs on SEC-Remote-Support-macOS. Source: own baseline — Apple does not allow screen recording in the settings catalog form of PPPC.",
     "displayName": "[Baseline] - MAC - D - Screen Recording",
     "deploymentChannel": "deviceChannel",
     "payloadName": "Screen Recording",

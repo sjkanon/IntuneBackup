@@ -1,36 +1,36 @@
 #!/usr/bin/env node
 /**
- * Genereert `BaselineTemplate/Baseline.json`: de CIPP-baseline zelf, als bestand.
+ * Generates `BaselineTemplate/Baseline.json`: the CIPP baseline itself, as a file.
  *
- * `IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen — uitrollen
- * doet een **baseline**: een stel *standards* verdeeld over stages, waar tenants doorheen
- * schuiven. Dat scherm met de hand invullen betekent negen keer dezelfde standard toevoegen
- * en elke keer het juiste toewijzingsdoel kiezen; één typefout zet 80 policies op het
- * verkeerde publiek. Dus komt de baseline uit dezelfde bron als de rest.
+ * `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there — deploying is
+ * done by a **baseline**: a set of *standards* spread over stages that tenants move through.
+ * Filling in that screen by hand means adding the same standard nine times and picking the
+ * right assignment target each time; one typo puts 80 policies on the wrong audience. So the
+ * baseline comes from the same source as everything else.
  *
- * CIPP herkent het bestand aan `TemplateType: "BaselineTemplate"` en aan de map
- * `BaselineTemplate/` (Import-CIPPBaselineTemplate); het gaat niet naar de templates-tabel
- * maar naar de baseline-editor. Importeren: Tools → Community Repos → deze repo → dit bestand
+ * CIPP recognises the file by `TemplateType: "BaselineTemplate"` and by the folder
+ * `BaselineTemplate/` (Import-CIPPBaselineTemplate); it does not go to the templates table
+ * but to the baseline editor. To import: Tools → Community Repos → this repo → this file
  * → Import.
  *
- * Drie dingen die bewust zo staan:
+ * Three things that are deliberately this way:
  *
- * 1. **Pakketten, geen losse templates.** Elke stage krijgt `IntuneTemplatePackage`-instances
- *    en geen 141 losse `IntuneTemplate`-instances. CIPP lost het lidmaatschap van een pakket
- *    bij iedere run opnieuw op, dus een nieuwe policy in deze repo schuift vanzelf mee zonder
- *    dat de baseline wordt aangeraakt. Een baseline die CIPP zélf exporteert klapt pakketten
- *    plat naar losse templates — dat is een momentopname en precies wat we niet willen.
- * 2. **`assignedTenants` is de placeholder.** CIPP's eigen export doet hetzelfde: een
- *    geïmporteerde baseline is aan niemand toegewezen, zodat wie hem binnenhaalt bewust de
- *    tenants kiest. Er rolt dus niets uit door dit bestand alleen.
- * 3. **`remediateEnabled` staat aan.** Zonder dat rapporteert de baseline alleen en zet hij
- *    niets recht; dát is wat "de baseline bewaakt de tenant" betekent. `verifyAssignments`
- *    staat aan voor elk pakket dat toewijst, want een policy die er wél staat maar aan
- *    niemand hangt is precies de stille drift die dit hoort te vangen.
+ * 1. **Packages, not individual templates.** Each stage gets `IntuneTemplatePackage` instances
+ *    and not 141 individual `IntuneTemplate` instances. CIPP resolves the membership of a
+ *    package again on every run, so a new policy in this repo comes along automatically
+ *    without the baseline being touched. A baseline that CIPP exports *itself* flattens
+ *    packages into individual templates — that is a snapshot and exactly what we do not want.
+ * 2. **`assignedTenants` is the placeholder.** CIPP's own export does the same: an imported
+ *    baseline is assigned to no one, so that whoever pulls it in chooses the tenants
+ *    deliberately. So nothing gets deployed by this file alone.
+ * 3. **`remediateEnabled` is on.** Without it the baseline only reports and fixes nothing;
+ *    *that* is what "the baseline guards the tenant" means. `verifyAssignments` is on for
+ *    every package that assigns, because a policy that *does* exist but is assigned to no one
+ *    is exactly the silent drift this is meant to catch.
  *
- * Gebruik:
- *   node scripts/generate-baseline-template.js            schrijft het bestand
- *   node scripts/generate-baseline-template.js --check     schrijft niets, exit 1 als het achterloopt
+ * Usage:
+ *   node scripts/generate-baseline-template.js            writes the file
+ *   node scripts/generate-baseline-template.js --check     writes nothing, exit 1 if it is out of date
  */
 
 const fs = require("fs");

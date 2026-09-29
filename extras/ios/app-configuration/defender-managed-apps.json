@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
   "displayName": "[Baseline] - IOS - Microsoft Defender - Managed Apps",
-  "description": "Microsoft Defender for Endpoint zonder inschrijving (MAM): netwerkbescherming aan, afmelden in de app uitgeschakeld.",
+  "description": "Microsoft Defender for Endpoint without enrolment (MAM): network protection on, signing out in the app disabled.",
   "roleScopeTagIds": [
     "0"
   ],

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Privacy and Telemetry",
-    "description": "Zet de advertentie-id uit, blokkeert het klembord tussen apparaten, stopt het uploaden van gebruikersactiviteiten en houdt wat de gebruiker typt en inspreekt op het apparaat. Toewijzing volgens baseline: alle apparaten. Bron: CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities..",
+    "description": "Turns off the advertising ID, blocks the clipboard between devices, stops uploading user activities and keeps what the user types and speaks on the device. Baseline assignment: all devices. Source: CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definitions..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

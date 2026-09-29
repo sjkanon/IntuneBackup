@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - IOS - D - Enterprise SSO",
-    "description": "Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat beheerde apps en Safari één Entra-aanmelding delen en het apparaat zich bij Conditional Access kan bewijzen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices; URL-lijst en sleutels gelijkgetrokken met Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices).",
+    "description": "Enables the Microsoft Enterprise SSO plug-in of Microsoft Authenticator, so that managed apps and Safari share a single Entra sign-in and the device can prove itself to Conditional Access. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices; URL list and keys aligned with Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices).",
     "platforms": "iOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

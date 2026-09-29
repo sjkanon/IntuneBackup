@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Local Security Policies",
-    "description": "De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies.",
+    "description": "Windows' local security options: anonymous access, the network authentication level, User Account Control behaviour and locking after inactivity. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

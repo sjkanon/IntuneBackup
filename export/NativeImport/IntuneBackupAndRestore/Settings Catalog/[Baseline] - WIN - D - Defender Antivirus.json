@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Antivirus",
-    "description": "Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration.",
+    "description": "Core configuration of Defender Antivirus: real-time protection, cloud protection, scan schedule, and what happens on a detection. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

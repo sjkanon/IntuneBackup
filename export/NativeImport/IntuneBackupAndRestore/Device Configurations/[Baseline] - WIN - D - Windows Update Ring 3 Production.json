@@ -22,7 +22,7 @@
     "automaticUpdateMode": "autoInstallAndRebootAtScheduledTime",
     "scheduleRestartWarningInHours": null,
     "autoRestartNotificationDismissal": "notConfigured",
-    "description": "Productiering voor Windows-updates: installeert dagelijks om 13:00 met een uitsteltermijn van twee dagen. Toewijzing volgens baseline: alle apparaten. Bron: eigen baseline — tenant-specifieke installatievensters.",
+    "description": "Production ring for Windows updates: installs daily at 13:00 with a deferral period of two days. Baseline assignment: all devices. Source: own baseline — tenant-specific installation windows.",
     "userPauseAccess": "disabled",
     "deadlineForFeatureUpdatesInDays": 2,
     "updateWeeks": "everyWeek",

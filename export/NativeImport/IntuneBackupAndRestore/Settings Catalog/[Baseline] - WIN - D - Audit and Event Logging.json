@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Audit and Event Logging",
-    "description": "Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging.",
+    "description": "Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

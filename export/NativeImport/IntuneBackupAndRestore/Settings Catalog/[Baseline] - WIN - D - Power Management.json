@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Power Management",
-    "description": "Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand zetten, zodat de bestaande eis om een wachtwoord te vragen bij ontwaken ook echt tot een vergrendeld scherm leidt. Toewijzing volgens baseline: alle apparaten. Bron: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; waarden geverifieerd tegen de settings catalog-definities (1 = Sleep).",
+    "description": "Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen. Baseline assignment: all devices. Source: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; values verified against the settings catalog definitions (1 = Sleep).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

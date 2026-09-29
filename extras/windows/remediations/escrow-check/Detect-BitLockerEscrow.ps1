@@ -1,25 +1,25 @@
 <#
 .SYNOPSIS
-    Intune-remediation (detectie): is de BitLocker-herstelsleutel van de OS-schijf aantoonbaar naar Entra ID gestuurd?
+    Intune remediation (detection): has the BitLocker recovery key of the OS drive demonstrably been sent to Entra ID?
 .NOTES
-    Exit 0 = niet versleuteld (niets te controleren) of backup aantoonbaar · exit 1 = herstel nodig.
+    Exit 0 = not encrypted (nothing to check) or backup demonstrable · exit 1 = remediation needed.
 #>
 $mount = $env:SystemDrive
 try {
     $volume = Get-BitLockerVolume -MountPoint $mount -ErrorAction Stop
 } catch {
-    Write-Output "BitLocker-status niet leesbaar: $($_.Exception.Message)"
+    Write-Output "BitLocker status not readable: $($_.Exception.Message)"
     exit 1
 }
 
 if ($volume.VolumeStatus -eq 'FullyDecrypted') {
-    Write-Output "$mount is niet versleuteld; niets te controleren (Compliance BitLocker toetst dat)."
+    Write-Output "$mount is not encrypted; nothing to check (Compliance BitLocker checks that)."
     exit 0
 }
 
 $protectors = @($volume.KeyProtector | Where-Object KeyProtectorType -eq 'RecoveryPassword')
 if ($protectors.Count -eq 0) {
-    Write-Output "$mount is versleuteld zonder herstelwachtwoord-protector."
+    Write-Output "$mount is encrypted without a recovery password protector."
     exit 1
 }
 
@@ -30,8 +30,8 @@ $missing = foreach ($p in $protectors) {
 }
 
 if ($missing) {
-    Write-Output "Geen Entra-backup gelogd voor protector(s): $($missing -join ', ')"
+    Write-Output "No Entra backup logged for protector(s): $($missing -join ', ')"
     exit 1
 }
-Write-Output "Entra-backup gelogd voor alle $($protectors.Count) herstelwachtwoord-protector(s) op $mount."
+Write-Output "Entra backup logged for all $($protectors.Count) recovery password protector(s) on $mount."
 exit 0

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows AI Recall Boundaries",
-    "description": "Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerportalen en de wachtwoordkluis, hoogstens 30 dagen bewaren, hoogstens 10 GB, en gebruikers kunnen hun Recall-gegevens niet exporteren. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport); waarden geverifieerd tegen de settings catalog-definities.",
+    "description": "Limits Recall when it is allowed: no snapshots of the management portals and the password vault, retention of at most 30 days, at most 10 GB, and users cannot export their Recall data. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Policy CSP WindowsAI (SetDenyAppListForRecall, SetDenyUriListForRecall, SetMaximumStorageDurationForRecallSnapshots, SetMaximumStorageSpaceForRecallSnapshots, AllowRecallExport); values verified against the settings catalog definitions.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

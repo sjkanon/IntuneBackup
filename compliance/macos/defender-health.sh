@@ -1,20 +1,20 @@
 #!/bin/bash
-# Aangepaste compliance-check: is Microsoft Defender for Endpoint op deze Mac aanwezig,
-# draaiend en actueel?
+# Custom compliance check: is Microsoft Defender for Endpoint present, running and up to date
+# on this Mac?
 #
-# Waarom dit een script is en geen instelling in een compliance-policy: macOSCompliancePolicy
-# kent wel `deviceThreatProtectionEnabled`, maar dat toetst de risicoscore die Defender for
-# Endpoint aan het apparaat toekent — niet of Defender überhaupt draait. Een Mac waarop de
-# agent nooit is geïnstalleerd of waar het achtergrondproces is gestopt, levert geen risicoscore
-# en komt daarmee als "geen probleem" door de toets. Dat is precies het apparaat dat je wilt zien.
+# Why this is a script and not a setting in a compliance policy: macOSCompliancePolicy does
+# have `deviceThreatProtectionEnabled`, but that checks the risk score Defender for Endpoint
+# assigns to the device — not whether Defender is running at all. A Mac on which the agent was
+# never installed, or where the background process has stopped, produces no risk score and so
+# passes the check as "no problem". That is exactly the device you want to see.
 #
-# Intune verwacht op stdout één regel geldige JSON, zonder witruimte ervoor of erna. Alles wat
-# dit script verder wil melden gaat naar het logbestand, niet naar stdout — één regel extra
-# uitvoer maakt de hele evaluatie ongeldig.
+# Intune expects exactly one line of valid JSON on stdout, with no whitespace before or after
+# it. Anything else this script wants to report goes to the log file, not to stdout — a single
+# extra line of output invalidates the whole evaluation.
 #
-# Uitrol: Apparaten > Compliancebeleid > Scripts > Toevoegen (macOS), daarna een
-# macOS-compliancebeleid met "Aangepaste compliance" aan en dit script plus
-# defender-health.json eraan gekoppeld. Zie README.md in deze map.
+# Deployment: Devices > Compliance > Scripts > Add (macOS), then a macOS compliance policy with
+# "Custom compliance" turned on and this script plus defender-health.json linked to it. See
+# README.md in this folder.
 
 LOG_DIR="/Library/Logs/Microsoft/IntuneScripts/Compliance"
 LOG="${LOG_DIR}/defender-health.log"
@@ -31,33 +31,33 @@ healthy=false
 realtime=false
 definities=false
 
-# 1. Aanwezig. De app én de opdrachtregeltool: alleen de app zegt niets over een werkende agent,
-#    en alleen de tool bestaat ook nog na een halve verwijdering.
+# 1. Present. Both the app and the command-line tool: the app alone says nothing about a
+#    working agent, and the tool alone still exists after a half-finished removal.
 if [ -d "${APP}" ] && [ -x "${MDATP}" ]; then
   installed=true
 fi
 
-# 2. Draaiend. wdavdaemon is het proces dat het werk doet; de app kan dicht staan.
+# 2. Running. wdavdaemon is the process that does the work; the app can be closed.
 if pgrep -x "wdavdaemon" >/dev/null 2>&1; then
   running=true
 fi
 
-# `mdatp health` vraagt om een draaiende daemon. Zonder die controle vooraf blijft de aanroep
-# hangen tot Intune het script afbreekt, en dan is er geen uitvoer en geen oordeel.
+# `mdatp health` needs a running daemon. Without checking that first the call hangs until
+# Intune aborts the script, and then there is no output and no verdict.
 if [ "${installed}" = true ] && [ "${running}" = true ]; then
   veld() { "${MDATP}" health --field "$1" 2>>"${LOG}" | tr -d '"' | tr '[:upper:]' '[:lower:]' | xargs; }
 
   [ "$(veld healthy)" = "true" ] && healthy=true
   [ "$(veld real_time_protection_enabled)" = "true" ] && realtime=true
 
-  # definitions_status kent meerdere waarden; alleen "up_to_date" is goed. "up_to_date" met een
-  # verlopen abonnement bestaat niet, maar "unknown" wel — die telt hier als niet in orde.
+  # definitions_status has several values; only "up_to_date" is good. "up_to_date" with an
+  # expired subscription does not exist, but "unknown" does — that counts as not OK here.
   case "$(veld definitions_status)" in
     up_to_date) definities=true ;;
     *) echo "definitions_status: $(veld definitions_status)" >>"${LOG}" ;;
   esac
 fi
 
-echo "installed=${installed} running=${running} healthy=${healthy} realtime=${realtime} definities=${definities}" >>"${LOG}"
+echo "installed=${installed} running=${running} healthy=${healthy} realtime=${realtime} definitions=${definities}" >>"${LOG}"
 
 echo "{\"DefenderInstalled\":${installed},\"DefenderRunning\":${running},\"DefenderHealthy\":${healthy},\"DefenderRealtimeProtection\":${realtime},\"DefenderDefinitionsCurrent\":${definities}}"

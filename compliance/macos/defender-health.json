@@ -16,6 +16,11 @@
           "Language": "en_US",
           "Title": "Microsoft Defender is missing on this Mac",
           "Description": "Defender for Endpoint is not installed. Open Company Portal and install Microsoft Defender, or contact the service desk."
+        },
+        {
+          "Language": "fr_FR",
+          "Title": "Microsoft Defender est absent de ce Mac",
+          "Description": "Defender for Endpoint n'est pas installé. Ouvrez Portail d'entreprise et installez Microsoft Defender, ou contactez le service d'assistance."
         }
       ]
     },
@@ -35,6 +40,11 @@
           "Language": "en_US",
           "Title": "Microsoft Defender is not running",
           "Description": "Defender is installed but its background process is not running. Restart the Mac. If the message persists, contact the service desk."
+        },
+        {
+          "Language": "fr_FR",
+          "Title": "Microsoft Defender ne fonctionne pas",
+          "Description": "Defender est installé mais son processus en arrière-plan ne fonctionne pas. Redémarrez le Mac. Si le message persiste, contactez le service d'assistance."
         }
       ]
     },
@@ -54,6 +64,11 @@
           "Language": "en_US",
           "Title": "Microsoft Defender reports a problem",
           "Description": "Defender is running but reports itself as unhealthy. This is often a missing permission under System Settings, Privacy and Security, such as Full Disk Access. Contact the service desk."
+        },
+        {
+          "Language": "fr_FR",
+          "Title": "Microsoft Defender signale un problème",
+          "Description": "Defender fonctionne mais se signale lui-même comme défaillant. Il manque souvent une autorisation dans Réglages Système, Confidentialité et sécurité, comme l'Accès complet au disque. Contactez le service d'assistance."
         }
       ]
     },
@@ -73,6 +88,11 @@
           "Language": "en_US",
           "Title": "Real-time protection is off",
           "Description": "Defender is running but is not scanning as you work. Contact the service desk."
+        },
+        {
+          "Language": "fr_FR",
+          "Title": "La protection en temps réel est désactivée",
+          "Description": "Defender fonctionne mais n'analyse pas pendant que vous travaillez. Contactez le service d'assistance."
         }
       ]
     },
@@ -92,6 +112,11 @@
           "Language": "en_US",
           "Title": "Virus definitions are out of date",
           "Description": "Defender does not yet recognise the newest threats. Make sure the Mac has an internet connection and leave it on for a few minutes."
+        },
+        {
+          "Language": "fr_FR",
+          "Title": "Les définitions de virus sont obsolètes",
+          "Description": "Defender ne reconnaît pas encore les menaces les plus récentes. Vérifiez que le Mac est connecté à Internet et laissez-le allumé quelques minutes."
         }
       ]
     }

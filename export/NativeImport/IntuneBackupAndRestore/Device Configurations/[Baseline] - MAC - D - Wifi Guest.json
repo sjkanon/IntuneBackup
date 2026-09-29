@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Rolt het gastnetwerk uit als tweede profiel op elke Mac, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Eigen baseline — Intune wifi-profiel (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(c) en (e)..",
+    "description": "Deploys the guest network as a second profile to every Mac, so that a device stays online when the corporate network is unavailable. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Own baseline — Intune Wi-Fi profile (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(c) and (e)..",
     "displayName": "[Baseline] - MAC - D - Wifi Guest",
     "ssid": "<SSID-GUEST>",
     "networkName": "<SSID-GUEST>",

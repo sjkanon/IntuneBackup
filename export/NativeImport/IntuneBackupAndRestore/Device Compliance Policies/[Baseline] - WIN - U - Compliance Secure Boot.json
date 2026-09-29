@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Toetst of het apparaat met Secure Boot opstart, zodat een bootkit niet vóór Windows kan laden. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot.",
+    "description": "Checks whether the device boots with Secure Boot, so that a bootkit cannot load before Windows. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - SecureBoot.",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "[Baseline] - WIN - U - Compliance Secure Boot",

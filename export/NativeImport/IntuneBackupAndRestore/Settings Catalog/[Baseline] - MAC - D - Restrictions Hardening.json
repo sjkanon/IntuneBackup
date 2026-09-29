@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Restrictions Hardening",
-    "description": "Vult de macOS-restricties aan met vijf maatregelen die OpenIntuneBaseline macOS v1.0 niet zet: geen handmatig geïnstalleerde configuratieprofielen of certificaten, geen Gatekeeper-omzeiling via de Finder, geen diagnostische gegevens naar Apple, geen internetresultaten in Spotlight en geen contentcaching. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions en D - Gatekeeper (zelfde waarden); CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.6.3.1 (diagnostische gegevens).",
+    "description": "Supplements the macOS restrictions with five measures that OpenIntuneBaseline macOS v1.0 does not set: no manually installed configuration profiles or certificates, no Gatekeeper bypass via the Finder, no diagnostic data to Apple, no internet results in Spotlight and no content caching. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions and D - Gatekeeper (same values); CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.6.3.1 (diagnostic data).",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

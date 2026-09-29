@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.depIOSEnrollmentProfile",
   "displayName": "iOS Corporate ADE Baseline",
-  "description": "Baseline-inschrijfprofiel voor bedrijfs-iPhones en -iPads via Automated Device Enrollment: user affinity met moderne authenticatie, supervised, vergrendelde inschrijving, wachten op configuratie.",
+  "description": "Baseline enrolment profile for corporate iPhones and iPads via Automated Device Enrollment: user affinity with modern authentication, supervised, locked enrolment, await configuration.",
   "isDefault": true,
   "requiresUserAuthentication": true,
   "enableAuthenticationViaCompanyPortal": true,

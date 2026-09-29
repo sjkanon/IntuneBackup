@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Software Updates",
-    "description": "Hoe en wanneer macOS zijn eigen updates ophaalt en installeert. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline — declaratief softwarebeleid (DDM); uitgebreid met Software Update Enforce Latest en beta-uit uit OpenIntuneBaseline macOS v2.0 beta (SC - Updates - D - Update Configuration) en microsoft/intune-my-macs (pol-sys-103, pol-sys-106), met eigen termijn; CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 1.1–1.6.",
+    "description": "How and when macOS downloads and installs its own updates. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: own baseline — declarative software policy (DDM); extended with Software Update Enforce Latest and beta off from OpenIntuneBaseline macOS v2.0 beta (SC - Updates - D - Update Configuration) and microsoft/intune-my-macs (pol-sys-103, pol-sys-106), with its own deadline; CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 1.1–1.6.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

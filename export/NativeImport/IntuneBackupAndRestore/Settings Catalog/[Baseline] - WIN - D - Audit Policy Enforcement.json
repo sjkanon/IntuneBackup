@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Audit Policy Enforcement",
-    "description": "Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellingen, zodat de auditpolicy van de baseline daadwerkelijk bepaalt wat er wordt gelogd. Toewijzing volgens baseline: alle apparaten. Bron: CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instelling overgenomen uit het NIS2-profiel van IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie..",
+    "description": "Makes the advanced audit settings take precedence over the old category settings, so that the baseline's audit policy actually determines what is logged. Baseline assignment: all devices. Source: CIS v4 Windows 11 L1 and the Microsoft Security Baseline — setting taken from IntuneAdmin's NIS2 profile, value verified against the settings catalog definition..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

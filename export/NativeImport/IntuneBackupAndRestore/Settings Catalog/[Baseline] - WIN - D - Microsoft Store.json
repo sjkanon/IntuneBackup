@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Microsoft Store",
-    "description": "Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration.",
+    "description": "Restricts the Microsoft Store, so that users cannot install arbitrary apps. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

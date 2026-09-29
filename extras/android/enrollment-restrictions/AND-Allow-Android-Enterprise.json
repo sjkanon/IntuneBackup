@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
   "displayName": "[Baseline] - AND - Allow Android Enterprise Enrollment",
-  "description": "Staat inschrijving met Android Enterprise toe, ook het persoonlijke werkprofiel. Device administrator staat in een eigen restrictie op Block (zie README).",
+  "description": "Allows enrolment with Android Enterprise, including the personal work profile. Device administrator is set to Block in a separate restriction (see README).",
   "priority": 1,
   "roleScopeTagIds": [
     "0"

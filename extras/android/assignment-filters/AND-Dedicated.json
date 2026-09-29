@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
   "displayName": "AND - Dedicated",
-  "description": "Dedicated Android-toestellen (kiosk, gedeeld), herkend aan het inschrijfprofiel.",
+  "description": "Dedicated Android devices (kiosk, shared), recognised by their enrolment profile.",
   "platform": "androidForWork",
   "rule": "(device.enrollmentProfileName -eq \"DEDICATED-INSCHRIJFPROFIEL-INVULLEN\")",
   "roleScopeTags": [

@@ -2,7 +2,7 @@
   "@odata.type": "#microsoft.graph.depMacOSEnrollmentProfile",
 
   "displayName": "macOS Corporate ADE Baseline",
-  "description": "Standaard ADE-enrollmentprofiel voor beheerde bedrijfs-Macs. User affinity, locked enrollment, FileVault afgedwongen door beleid, consumentenschermen verborgen.",
+  "description": "Standard ADE enrolment profile for managed corporate Macs. User affinity, locked enrolment, FileVault enforced by policy, consumer screens hidden.",
 
   "isDefault": true,
   "isMandatory": true,

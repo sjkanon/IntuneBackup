@@ -1,37 +1,37 @@
 ﻿#Requires -Modules Microsoft.Graph.Authentication
 <#
 .SYNOPSIS
-Brengt de policynamen in een tenant op de huidige conventie, volgens IntuneTemplate/_renames.json.
+Brings the policy names in a tenant in line with the current convention, according to IntuneTemplate/_renames.json.
 
 .DESCRIPTION
-De baseline is twee keer hernoemd: eerst naar "[Baseline] - D/U - Item", daarna naar
-"[Baseline] - PLATFORM - D/U - Item". In een tenant kan een policy dus nog onder een van
-twee oude namen staan. Dit script zoekt ze op en hernoemt ze.
+The baseline has been renamed twice: first to "[Baseline] - D/U - Item", then to
+"[Baseline] - PLATFORM - D/U - Item". In a tenant a policy may therefore still sit under one of
+two old names. This script looks them up and renames them.
 
-Hernoemen en niet opnieuw uitrollen: een PATCH laat het policy-id, de assignments en de
-toewijzingsgeschiedenis intact. Start-IntuneRestoreConfig maakt policies aan op naam en zou
-onder de nieuwe naam een duplicaat naast de oude zetten — twee policies met overlappende,
-mogelijk conflicterende instellingen op dezelfde apparaten.
+Renaming rather than redeploying: a PATCH leaves the policy id, the assignments and the
+assignment history intact. Start-IntuneRestoreConfig creates policies by name and would put a
+duplicate under the new name next to the old one — two policies with overlapping, possibly
+conflicting settings on the same devices.
 
-Drie soorten regels in _renames.json:
+Three kinds of rules in _renames.json:
 
-  rename   PATCH op de naam. Dat is alles wat dit script doet; de inhoud werk je daarna bij
-           via CIPP of Start-IntuneRestoreConfig.
-  replace  Het policytype zelf verandert (ander endpoint of andere templateReference). Dat
-           kan geen PATCH zijn. Het script meldt het en raakt niets aan — de oude policy moet
-           weg en de nieuwe erbij, in die volgorde en met een controle ertussen.
-  retire   Gaat helemaal weg; de instellingen zitten voortaan in andere policies. Ook hier
-           alleen een melding: verwijderen is onomkeerbaar en hoort een bewuste handeling te
-           zijn, niet iets wat een naamscript en passant doet.
+  rename   PATCH on the name. That is all this script does; you update the content afterwards
+           via CIPP or Start-IntuneRestoreConfig.
+  replace  The policy type itself changes (different endpoint or different templateReference).
+           That cannot be a PATCH. The script reports it and touches nothing — the old policy
+           has to go and the new one come in, in that order and with a check in between.
+  retire   Goes away entirely; the settings now live in other policies. Here too only a
+           report: deleting is irreversible and should be a deliberate act, not something a
+           naming script does in passing.
 
-Draai altijd eerst met -WhatIf.
+Always run with -WhatIf first.
 
 .PARAMETER WhatIf
-Toont wat er zou gebeuren zonder iets te wijzigen.
+Shows what would happen without changing anything.
 
 .EXAMPLE
 .\Rename-BaselinePolicy.ps1 -WhatIf
-Verplichte eerste run: controleer dat elke oude naam precies één keer gevonden wordt.
+Mandatory first run: check that every old name is found exactly once.
 
 .EXAMPLE
 .\Rename-BaselinePolicy.ps1
@@ -46,9 +46,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# Settings Catalog gebruikt 'name', de rest 'displayName' — dezelfde valkuil als in
-# Set-BaselineAssignment.ps1: een PATCH op het verkeerde veld levert geen fout op, alleen een
-# policy die niet hernoemd is.
+# Settings Catalog uses 'name', the rest 'displayName' — the same pitfall as in
+# Set-BaselineAssignment.ps1: a PATCH on the wrong field produces no error, just a
+# policy that has not been renamed.
 $PolicyTypes = @(
     [pscustomobject]@{ Label = 'Settings Catalog';        Endpoint = 'deviceManagement/configurationPolicies';      NameField = 'name' }
     [pscustomobject]@{ Label = 'Administrative Template'; Endpoint = 'deviceManagement/groupPolicyConfigurations';  NameField = 'displayName' }
@@ -73,16 +73,16 @@ function Get-GraphCollection {
 if (-not $RenamesPath) {
     $RenamesPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate/_renames.json'
 }
-if (-not (Test-Path $RenamesPath)) { throw "_renames.json niet gevonden op $RenamesPath" }
+if (-not (Test-Path $RenamesPath)) { throw "_renames.json not found at $RenamesPath" }
 $renames = (Get-Content -LiteralPath $RenamesPath -Raw | ConvertFrom-Json).policies
 
 if ($null -eq (Get-MgContext)) {
     Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All', 'DeviceManagementApps.ReadWrite.All' | Out-Null
 }
 
-# Alles één keer ophalen: per policy alle vijf de collecties langsgaan zou bij ~25 regels
-# 125 aanroepen kosten.
-Write-Host 'Policies ophalen uit de tenant...' -ForegroundColor Cyan
+# Fetch everything once: going through all five collections per policy would cost
+# 125 calls with ~25 rules.
+Write-Host 'Fetching policies from the tenant...' -ForegroundColor Cyan
 $inTenant = @()
 foreach ($type in $PolicyTypes) {
     $uri = if ($type.Label -eq 'App Protection') { "$ApiVersion/$($type.Endpoint)" } else { "$ApiVersion/$($type.Endpoint)?`$select=id,$($type.NameField)" }
@@ -96,61 +96,61 @@ foreach ($type in $PolicyTypes) {
         }
     }
 }
-Write-Host "$($inTenant.Count) policies gevonden.`n" -ForegroundColor Cyan
+Write-Host "$($inTenant.Count) policies found.`n" -ForegroundColor Cyan
 
 $results = foreach ($rename in $renames) {
     $current = @($inTenant | Where-Object { $rename.previousNames -contains $_.Name })
     $alreadyDone = @($inTenant | Where-Object { $rename.target -and $_.Name -eq $rename.target })
 
     if ($current.Count -eq 0) {
-        $state = if ($alreadyDone.Count -gt 0) { 'al bijgewerkt' } else { 'niet in tenant' }
-        [pscustomobject]@{ Policy = ($rename.previousNames -join ' / '); Type = '-'; Actie = $state; Naar = $rename.target }
+        $state = if ($alreadyDone.Count -gt 0) { 'already updated' } else { 'not in tenant' }
+        [pscustomobject]@{ Policy = ($rename.previousNames -join ' / '); Type = '-'; Action = $state; To = $rename.target }
         continue
     }
     if ($current.Count -gt 1) {
-        Write-Warning "'$($rename.previousNames -join " / ")' komt $($current.Count) keer voor in de tenant — waarschijnlijk duplicaten. Handmatig opruimen; overgeslagen."
-        [pscustomobject]@{ Policy = $current[0].Name; Type = $current[0].Label; Actie = 'DUPLICAAT'; Naar = $rename.target }
+        Write-Warning "'$($rename.previousNames -join " / ")' occurs $($current.Count) times in the tenant — probably duplicates. Clean up by hand; skipped."
+        [pscustomobject]@{ Policy = $current[0].Name; Type = $current[0].Label; Action = 'DUPLICATE'; To = $rename.target }
         continue
     }
 
     $policy = $current[0]
 
     if ($rename.action -ne 'rename') {
-        # replace/retire: alleen melden. Zie de kop voor waarom dit script niets verwijdert.
+        # replace/retire: report only. See the header for why this script deletes nothing.
         $vervangers = if ($rename.replacedBy) { $rename.replacedBy -join ', ' } else { $rename.target }
-        Write-Warning "'$($policy.Name)' vraagt om '$($rename.action)', niet om hernoemen: $($rename.reason)"
-        Write-Warning "  Vervangen door: $vervangers"
-        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Actie = $rename.action.ToUpper(); Naar = $vervangers }
+        Write-Warning "'$($policy.Name)' calls for '$($rename.action)', not for a rename: $($rename.reason)"
+        Write-Warning "  Replaced by: $vervangers"
+        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Action = $rename.action.ToUpper(); To = $vervangers }
         continue
     }
 
     if ($alreadyDone.Count -gt 0) {
-        Write-Warning "'$($policy.Name)' bestaat nog én '$($rename.target)' bestaat al — hernoemen zou twee policies met dezelfde naam opleveren. Overgeslagen."
-        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Actie = 'BEIDE AANWEZIG'; Naar = $rename.target }
+        Write-Warning "'$($policy.Name)' still exists and '$($rename.target)' already exists — renaming would produce two policies with the same name. Skipped."
+        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Action = 'BOTH PRESENT'; To = $rename.target }
         continue
     }
 
     $body = @{ $policy.NameField = $rename.target } | ConvertTo-Json
-    if ($PSCmdlet.ShouldProcess($policy.Name, "hernoemen naar '$($rename.target)'")) {
+    if ($PSCmdlet.ShouldProcess($policy.Name, "rename to '$($rename.target)'")) {
         try {
             Invoke-MgGraphRequest -Method PATCH -Uri "$ApiVersion/$($policy.Endpoint)/$($policy.Id)" -Body $body | Out-Null
-            [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Actie = 'hernoemd'; Naar = $rename.target }
+            [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Action = 'renamed'; To = $rename.target }
         } catch {
-            Write-Error "$($policy.Name) - hernoemen mislukt: $_" -ErrorAction Continue
-            [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Actie = 'MISLUKT'; Naar = $rename.target }
+            Write-Error "$($policy.Name) - rename failed: $_" -ErrorAction Continue
+            [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Action = 'FAILED'; To = $rename.target }
         }
     } else {
-        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Actie = 'overgeslagen (WhatIf)'; Naar = $rename.target }
+        [pscustomobject]@{ Policy = $policy.Name; Type = $policy.Label; Action = 'skipped (WhatIf)'; To = $rename.target }
     }
 }
 
 $results | Format-Table -AutoSize
 
-$failed = @($results | Where-Object Actie -eq 'MISLUKT')
-$manual = @($results | Where-Object { $_.Actie -in @('REPLACE', 'RETIRE', 'DUPLICAAT', 'BEIDE AANWEZIG') })
+$failed = @($results | Where-Object Action -eq 'FAILED')
+$manual = @($results | Where-Object { $_.Action -in @('REPLACE', 'RETIRE', 'DUPLICATE', 'BOTH PRESENT') })
 if ($manual.Count -gt 0) {
-    Write-Warning "$($manual.Count) policy/policies vragen om handwerk — zie de waarschuwingen hierboven en _renames.json."
+    Write-Warning "$($manual.Count) policy/policies need manual work — see the warnings above and _renames.json."
 }
-Write-Host "`nDaarna: werk de inhoud bij via CIPP of Start-IntuneRestoreConfig, en controleer met" -ForegroundColor Cyan
-Write-Host "  .\Set-BaselineAssignment.ps1 -Scope D -AllDevices -WhatIf   (moet 'al toegewezen' melden)" -ForegroundColor Cyan
-if ($failed.Count -gt 0) { throw "$($failed.Count) hernoeming(en) mislukt — zie de fouten hierboven." }
+Write-Host "`nNext: update the content via CIPP or Start-IntuneRestoreConfig, and check with" -ForegroundColor Cyan
+Write-Host "  .\Set-BaselineAssignment.ps1 -Scope D -AllDevices -WhatIf   (should report 'already assigned')" -ForegroundColor Cyan
+if ($failed.Count -gt 0) { throw "$($failed.Count) rename(s) failed — see the errors above." }

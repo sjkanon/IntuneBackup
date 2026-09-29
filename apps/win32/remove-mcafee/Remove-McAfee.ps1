@@ -1,19 +1,19 @@
 <#
-    Verwijdert voorgeinstalleerde McAfee met MCPR, de officiele verwijdertool van McAfee.
+    Removes pre-installed McAfee with MCPR, McAfee's official removal tool.
 
-    Drie dingen die dit script bewust doet:
+    Three things this script does on purpose:
 
-    1. MCPR draait meerdere keren. Elke ronde geeft bestandsvergrendelingen vrij die de vorige
-       ronde nog in de weg zaten, waardoor de volgende ronde verder komt. Een keer draaien laat
-       vrijwel altijd resten achter.
-    2. Een niet-nul exitcode van MCPR is geen fout. "Incomplete uninstallation" betekent dat de
-       verwijdering via PendingFileRenameOperations is uitgesteld tot de herstart. Dit script
-       stopt daar dus niet op.
-    3. De herstart is de laatste stap van de verwijdering, geen bijzaak. Zet in Intune bij deze
-       app "Gedrag bij opnieuw opstarten van apparaat" op *Intune dwingt een verplichte herstart
-       af*. Zonder die herstart blijft het apparaat in een half verwijderde staat staan.
+    1. MCPR runs several times. Each round releases file locks that were still in the way of the
+       previous round, so the next round gets further. Running it once almost always leaves
+       remnants behind.
+    2. A non-zero exit code from MCPR is not an error. "Incomplete uninstallation" means the
+       removal has been deferred until the restart via PendingFileRenameOperations. So this
+       script does not stop on it.
+    3. The restart is the last step of the removal, not an afterthought. In Intune, set this
+       app's "Device restart behavior" to *Intune will force a mandatory device restart*.
+       Without that restart the device stays in a half-removed state.
 
-    Logt naar C:\Windows\Logs\Baseline\remove-mcafee.log.
+    Logs to C:\Windows\Logs\Baseline\remove-mcafee.log.
 #>
 
 $LogMap = 'C:\Windows\Logs\Baseline'
@@ -29,38 +29,38 @@ Schrijf '--- start'
 
 $Mcpr = Join-Path $PSScriptRoot 'MCPR.exe'
 if (-not (Test-Path $Mcpr)) {
-    Schrijf "FOUT: MCPR.exe staat niet naast dit script. Haal hem bij McAfee en verpak hem mee."
+    Schrijf "ERROR: MCPR.exe is not next to this script. Get it from McAfee and package it along."
     exit 1
 }
 
 for ($Ronde = 1; $Ronde -le 3; $Ronde++) {
-    Schrijf "MCPR ronde $Ronde"
+    Schrijf "MCPR round $Ronde"
     try {
         $Proces = Start-Process -FilePath $Mcpr -ArgumentList '/quiet', '/silent' -Wait -PassThru -ErrorAction Stop
-        Schrijf "  exitcode $($Proces.ExitCode)"
+        Schrijf "  exit code $($Proces.ExitCode)"
     } catch {
-        Schrijf "  ronde $Ronde mislukt: $($_.Exception.Message)"
+        Schrijf "  round $Ronde failed: $($_.Exception.Message)"
     }
     Start-Sleep -Seconds 30
 }
 
-# Wat MCPR laat staan, gaat er hier af. Alleen mappen en Appx-pakketten; het register raken we
-# niet aan, want daar zit ook de administratie van de uitgestelde verwijdering in.
+# Whatever MCPR leaves behind is removed here. Only folders and Appx packages; we do not touch
+# the registry, because it also holds the bookkeeping of the deferred removal.
 foreach ($Map in @("${env:ProgramFiles}\McAfee", "${env:ProgramFiles(x86)}\McAfee", "$env:ProgramData\McAfee")) {
     if (Test-Path $Map) {
-        Schrijf "Restmap opruimen: $Map"
+        Schrijf "Cleaning up leftover folder: $Map"
         Remove-Item -Path $Map -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 
 foreach ($Pakket in (Get-AppxPackage -AllUsers | Where-Object { $_.Name -match 'McAfee' })) {
-    Schrijf "Appx verwijderen: $($Pakket.Name)"
+    Schrijf "Removing Appx: $($Pakket.Name)"
     Remove-AppxPackage -Package $Pakket.PackageFullName -AllUsers -ErrorAction SilentlyContinue
 }
 foreach ($Provisioned in (Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -match 'McAfee' })) {
-    Schrijf "Appx-provisioning verwijderen: $($Provisioned.DisplayName)"
+    Schrijf "Removing Appx provisioning: $($Provisioned.DisplayName)"
     Remove-AppxProvisionedPackage -Online -PackageName $Provisioned.PackageName -ErrorAction SilentlyContinue
 }
 
-Schrijf '--- klaar; de herstart maakt de verwijdering af'
+Schrijf '--- done; the restart completes the removal'
 exit 0

@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Toetst of System Integrity Protection op de Mac aanstaat. Toewijzing volgens baseline: alle gebruikers. Bron: OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Health.",
+    "description": "Checks whether System Integrity Protection is enabled on the Mac. Baseline assignment: all users. Source: OpenIntuneBaseline macOS v1.0 — Compliance - U - Device Health.",
     "displayName": "[Baseline] - MAC - U - Compliance Device Health",
     "passwordRequired": false,
     "passwordBlockSimple": false,

@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
   "displayName": "[Baseline] - IOS - Edge - Managed Devices",
-  "description": "Microsoft Edge op ingeschreven toestellen: alleen het werkaccount, Defender SmartScreen aan, certificaatfouten niet te negeren.",
+  "description": "Microsoft Edge on enrolled devices: work account only, Defender SmartScreen on, certificate errors cannot be ignored.",
   "roleScopeTagIds": [
     "0"
   ],

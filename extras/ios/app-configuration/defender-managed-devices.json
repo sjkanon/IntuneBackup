@@ -1,7 +1,7 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
   "displayName": "[Baseline] - IOS - Microsoft Defender - Managed Devices",
-  "description": "Microsoft Defender for Endpoint op ingeschreven toestellen: supervisiestatus doorgeven, webbescherming en netwerkbescherming aan, onbeveiligde netwerken melden, afmelden in de app uitgeschakeld.",
+  "description": "Microsoft Defender for Endpoint on enrolled devices: pass on supervision status, web protection and network protection on, report unsecured networks, signing out in the app disabled.",
   "roleScopeTagIds": [
     "0"
   ],

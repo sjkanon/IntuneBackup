@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Default",
-    "description": "Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook staan — gedeelde mappen worden dus wél meegecachet. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline.",
+    "description": "Only turns on Cached Exchange Mode and leaves the rest at Outlook's default — so shared folders are cached too. Baseline assignment: none — an alternative that is not deployed. Source: own baseline.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

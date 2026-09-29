@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 /**
- * Zet de rauwe Intune Settings Catalog-exports in IntuneTemplate/Baseline_*.json om naar
- * apps/dsc-functions/baseline/intune/baseline-v1.0.json-vormige JSON (BaselineRule-schema
- * van het TEST Policies Platform, packages/shared/src/caBaseline.ts), zodat de bestaande
- * baseline-koppeling (TPPBaselineSource) deze categorie kan lezen zonder dat het platform
- * zelf iets van dit rauwe exportformaat hoeft te weten.
+ * Converts the raw Intune Settings Catalog exports in IntuneTemplate/Baseline_*.json into
+ * JSON shaped like apps/dsc-functions/baseline/intune/baseline-v1.0.json (BaselineRule schema
+ * of the TEST Policies Platform, packages/shared/src/caBaseline.ts), so that the existing
+ * baseline integration (TPPBaselineSource) can read this category without the platform
+ * itself needing to know anything about this raw export format.
  *
- * Eén rule per Baseline_*.json-bestand (niet per losse instelling — Administrative_Templates
- * alleen al heeft 300+ instellingen). Elke rule krijgt `type: "settings-catalog-match"` en
- * `params.settings`: de volledig uitgeklapte lijst van {settingDefinitionId, expectedValue}
- * die de policy moet bevatten. Het platform vergelijkt dat tegen de live tenant.
+ * One rule per Baseline_*.json file (not per individual setting — Administrative_Templates
+ * alone has 300+ settings). Each rule gets `type: "settings-catalog-match"` and
+ * `params.settings`: the fully expanded list of {settingDefinitionId, expectedValue} that
+ * the policy must contain. The platform compares that against the live tenant.
  *
- * Herbruikbaar: opnieuw draaien na een wijziging in IntuneTemplate/ regenereert het bestand
- * deterministisch (zelfde input -> zelfde output, op reviewedAt na).
+ * Reusable: running it again after a change in IntuneTemplate/ regenerates the file
+ * deterministically (same input -> same output, except for reviewedAt).
  *
- * Gebruik: node scripts/generate-baseline.js
- * (vanuit de root van deze repo; verwacht IntuneTemplate/ naast scripts/)
+ * Usage: node scripts/generate-baseline.js
+ * (from the root of this repo; expects IntuneTemplate/ next to scripts/)
  */
 
 const fs = require("fs");

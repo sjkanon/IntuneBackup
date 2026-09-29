@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Wireless and Peripherals",
-    "description": "Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken. Toewijzing volgens baseline: alle apparaten. Bron: ISO/IEC 27001:2022 A.8.20 en A.7.9, NIS2 art. 21(2)(e) — instellingen uit de Endpoint Security-set van IntuneAdmin.",
+    "description": "Makes the device invisible over Bluetooth and shuts off Windows Connect Now, so that wireless settings cannot be transferred from one device to another outside management. Already paired devices keep working. Baseline assignment: all devices. Source: ISO/IEC 27001:2022 A.8.20 and A.7.9, NIS2 art. 21(2)(e) — settings from the IntuneAdmin Endpoint Security set.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

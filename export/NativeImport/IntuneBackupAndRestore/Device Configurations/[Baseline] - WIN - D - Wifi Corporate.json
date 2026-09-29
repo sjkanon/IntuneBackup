@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Windows-laptop, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Eigen baseline — Intune wifi-profiel (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 en A.8.21, NIS2 art. 21(2)(e)..",
+    "description": "Deploys the corporate network as a Wi-Fi profile to every Windows laptop, so that a device connects automatically after enrolment and a user never has to know or type the network password. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Own baseline — Intune Wi-Fi profile (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(e)..",
     "displayName": "[Baseline] - WIN - D - Wifi Corporate",
     "ssid": "<SSID-CORPORATE>",
     "networkName": "<SSID-CORPORATE>",

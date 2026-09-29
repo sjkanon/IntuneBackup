@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Ransomware Protection",
-    "description": "Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk versleutelt. Toewijzing volgens baseline: alle apparaten. Bron: IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection; waarden geverifieerd tegen de settings catalog-definities. IntuneAdmin zet Audit; hier staat Block..",
+    "description": "Blocks an infected device from encrypting files on other machines over the network. Baseline assignment: all devices. Source: IntuneAdmin/IntuneBaselines — Microsoft Endpoint Security, Remote Encryption Protection; values verified against the settings catalog definitions. IntuneAdmin sets Audit; here it is Block..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

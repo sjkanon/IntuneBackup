@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Delivery Optimisation",
-    "description": "Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van internet te halen, en begrenst hoeveel bandbreedte dat mag kosten. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation.",
+    "description": "Lets devices exchange updates among themselves instead of each downloading them separately from the internet, and caps how much bandwidth that may use. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

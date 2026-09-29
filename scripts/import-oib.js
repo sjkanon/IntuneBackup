@@ -1,45 +1,45 @@
 #!/usr/bin/env node
 /**
- * Zet policies uit OpenIntuneBaseline (SkipToTheEndpoint/OpenIntuneBaseline) om naar
- * IntuneTemplate/Baseline_*.json in CIPP-templateformaat, gestuurd door
+ * Converts policies from OpenIntuneBaseline (SkipToTheEndpoint/OpenIntuneBaseline) into
+ * IntuneTemplate/Baseline_*.json in CIPP template format, driven by
  * IntuneTemplate/_manifest.json.
  *
- * Waarom een importer en geen handwerk: OIB brengt een paar keer per jaar een nieuwe versie
- * uit. Handmatig overgetypte settingDefinitionId's zijn niet te reviewen en niet te
- * verversen; een manifest + importer maakt "trek OIB v3.9 binnen" een herhaalbare run met
- * een leesbare diff.
+ * Why an importer and not manual work: OIB releases a new version a few times a year.
+ * Manually retyped settingDefinitionIds cannot be reviewed and cannot be refreshed; a
+ * manifest + importer turns "pull in OIB v3.9" into a repeatable run with a readable diff.
  *
- * Gebruik:
+ * Usage:
  *   git clone --depth 1 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source
- *   node scripts/import-oib.js                 # schrijft IntuneTemplate/
- *   node scripts/import-oib.js --dry-run       # toont alleen wat er zou veranderen
- *   node scripts/import-oib.js --source <pad>  # andere locatie van de OIB-checkout
+ *   node scripts/import-oib.js                 # writes IntuneTemplate/
+ *   node scripts/import-oib.js --dry-run       # only shows what would change
+ *   node scripts/import-oib.js --source <path> # different location of the OIB checkout
  *
- * Windows-tip: OIB heeft bestandsnamen die over MAX_PATH heen gaan. Klonen met
- * `git -c core.longpaths=true clone ...` of de checkout dicht bij de schijfwortel zetten.
+ * Windows tip: OIB has file names that exceed MAX_PATH. Clone with
+ * `git -c core.longpaths=true clone ...` or put the checkout close to the drive root.
  *
- * Drie dingen die deze importer bewust doet:
+ * Three things this importer does deliberately:
  *
- * 1. **GUID's blijven behouden.** De RowKey/GUID van een CIPP-template identificeert de rij
- *    in Table Storage. Een bestaand template dat herschreven wordt houdt zijn GUID, anders
- *    krijgt CIPP bij de volgende sync een tweede template met dezelfde naam.
+ * 1. **GUIDs are preserved.** The RowKey/GUID of a CIPP template identifies the row in Table
+ *    Storage. An existing template that is rewritten keeps its GUID, otherwise CIPP gets a
+ *    second template with the same name on the next sync.
  *
- * 2. **Eigen instellingen die OIB niet kent blijven staan** (`carryFrom`). Onze BitLocker-
- *    policy dekt ook vaste en verwisselbare schijven, OIB alleen de OS-schijf; klakkeloos
- *    overschrijven zou dat stilzwijgend uitzetten. De regel is: een top-level instelling uit
- *    het oude template blijft, tenzij die settingDefinitionId érgens in de geïmporteerde
- *    OIB-set voorkomt — dan is OIB leidend en zou behouden een dubbele (dus conflicterende)
- *    instelling opleveren.
+ * 2. **Our own settings that OIB does not know stay in place** (`carryFrom`). Our BitLocker
+ *    policy also covers fixed and removable drives, OIB only the OS drive; blindly
+ *    overwriting would silently turn that off. The rule is: a top-level setting from the old
+ *    template stays, unless that settingDefinitionId occurs *anywhere* in the imported OIB
+ *    set — then OIB takes precedence and keeping it would produce a duplicate (and therefore
+ *    conflicting) setting.
  *
- * 3. **Idempotent.** Bij een tweede run is het doelbestand zelf de `carryFrom`-bron: het
- *    bevat OIB-instellingen plus de overgenomen extra's, en die extra's zijn per definitie
- *    precies de instellingen die niet in de OIB-set zitten. Zelfde input -> zelfde output.
+ * 3. **Idempotent.** On a second run the target file itself is the `carryFrom` source: it
+ *    contains the OIB settings plus the carried-over extras, and those extras are by
+ *    definition exactly the settings that are not in the OIB set. Same input -> same output.
  */
 
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, stripDeprecatedTccAllowed, packageFor } = require("./lib/templates");
+const { relativePathFor, listTemplateFiles, readTemplate, collectSettingIds, stripDeprecatedTccAllowed, packageFor, composeDescription: composeTenantDescription } = require("./lib/templates");
+const { Translator } = require("./lib/i18n");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -99,37 +99,9 @@ function stableGuid(name) {
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-5${h.slice(13, 16)}-${v.toString(16)}${h.slice(17, 20)}-${h.slice(20, 32)}`;
 }
 
-/** Toewijzingsdoel in gewone taal, voor in de omschrijving. */
-function assignmentText(assignment) {
-  if (!assignment || assignment.length === 0) return "geen — deze policy hoort op een eigen groep, niet op iedereen";
-  return assignment
-    .map((a) => {
-      const type = a.target["@odata.type"] || "";
-      if (type.includes("allDevices")) return "alle apparaten";
-      if (type.includes("allLicensedUsers")) return "alle gebruikers";
-      if (type.includes("exclusionGroup")) return "uitgesloten groep";
-      if (type.includes("group")) return "een groep";
-      return type.replace("#microsoft.graph.", "");
-    })
-    .join(", ");
-}
-
-/**
- * De omschrijving die in de tenant naast de policy komt te staan. CIPP zet 'm uit het
- * Description-veld van het template, IntuneBackupAndRestore uit `description` in de body —
- * beide komen hier vandaan.
- *
- * Drie delen, omdat iemand die de policy in Intune openslaat drie dingen wil weten: wat doet
- * dit, hoort het hier te landen, en waar komt het vandaan. Het toewijzingsdoel komt uit
- * _assignments.json en niet uit een los tekstveld, zodat de omschrijving niet uit de pas kan
- * lopen met wat de export en Set-BaselineAssignment.ps1 werkelijk doen.
- */
+/** De omschrijving in de tenant — Engels, uit lib/templates.js, dezelfde als set-packages.js schrijft. */
 function composeDescription(entry, assignments) {
-  const parts = [];
-  if (entry.doel) parts.push(entry.doel);
-  parts.push(`Toewijzing volgens baseline: ${assignmentText(assignments[entry.displayName])}.`);
-  if (entry.bron) parts.push(`Bron: ${entry.bron}.`);
-  return parts.join(" ");
+  return composeTenantDescription(entry, assignments[entry.displayName], new Translator("en"));
 }
 
 /**

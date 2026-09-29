@@ -1,15 +1,15 @@
 /**
- * Gedeelde kennis over IntuneTemplate/: hoe de map is ingedeeld, hoe je 'm uitleest en waar
- * een nieuw template hoort. Vier scripts lazen die map eerder elk op hun eigen manier uit
- * (`readdirSync` + `startsWith("Baseline_")`); met een mappenstructuur zou die aanname op
- * vier plekken stilzwijgend het verkeerde antwoord geven — vandaar één bron.
+ * Shared knowledge about IntuneTemplate/: how the folder is laid out, how to read it and where
+ * a new template belongs. Four scripts previously each read that folder in their own way
+ * (`readdirSync` + `startsWith("Baseline_")`); with a folder structure that assumption would
+ * silently give the wrong answer in four places — hence a single source.
  *
- * Indeling: IntuneTemplate/<PLATFORM>/<CATEGORIE>/Baseline_<PLATFORM>_<SCOPE>_<Item>.json
+ * Layout: IntuneTemplate/<PLATFORM>/<CATEGORY>/Baseline_<PLATFORM>_<SCOPE>_<Item>.json
  *
- * De map is afleidbaar uit de bestandsnaam (platform) en het CIPP-`Type` (categorie), dus
- * hij draagt geen informatie die niet ook in het bestand staat. Dat is bewust: de map is er
- * om in te bladeren en om per platform te kunnen filteren, niet als tweede waarheid die uit
- * de pas kan lopen. `check-scope.js` controleert daarom dat elk bestand op zijn plek staat.
+ * The folder can be derived from the file name (platform) and the CIPP `Type` (category), so
+ * it carries no information that is not also in the file. That is deliberate: the folder is
+ * there for browsing and for filtering per platform, not as a second truth that can get out
+ * of step. `check-scope.js` therefore checks that every file is in its place.
  */
 
 const fs = require("fs");
@@ -193,6 +193,42 @@ function deployOptionsForPackage(pkg) {
   if (pkg === PACKAGE_PREFIX + "Pilot") return { assignTo: "customGroup", customGroup: PILOT_GROUP };
   if (PACKAGE_WITHOUT_GROUP.has(pkg)) return { assignTo: "On", customGroup: "" };
   return { assignTo: "customGroup", customGroup: pkg.slice(PACKAGE_PREFIX.length) };
+}
+
+/**
+ * De omschrijving die in de tenant naast de policy komt te staan: CIPP zet 'm uit `Description`
+ * van het template, IntuneBackupAndRestore uit `description` in de body.
+ *
+ * Drie delen, omdat iemand die de policy in Intune openslaat drie dingen wil weten: wat doet
+ * dit, hoort het hier te landen, en waar komt het vandaan. Het toewijzingsdoel komt uit
+ * _assignments.json en niet uit een los tekstveld, zodat de omschrijving niet uit de pas kan
+ * lopen met wat de export en Set-BaselineAssignment.ps1 werkelijk doen.
+ *
+ * In het Engels: een tenant heeft maar één omschrijving per policy, en die moet te lezen zijn
+ * voor elke beheerder, niet alleen de Nederlandstalige. `doel` en `bron` blijven Nederlands in
+ * het manifest; de Engelse tekst komt uit IntuneTemplate/_i18n/en.json, net als in de
+ * documentatie. `translator` is een lib/i18n.js-Translator voor "en".
+ */
+function composeDescription(entry, assignment, translator) {
+  const parts = [];
+  if (entry.doel) parts.push(translator.d(entry.doel));
+  parts.push(`Baseline assignment: ${assignmentText(assignment, entry)}.`);
+  if (entry.bron) parts.push(`Source: ${translator.d(entry.bron)}.`);
+  return parts.join(" ");
+}
+
+function assignmentText(assignment, entry) {
+  const targets = assignmentTargets(assignment);
+  if (targets.length === 0) {
+    if (entry.fase === 2) return `none by default — pilot group ${PILOT_GROUP} first`;
+    if (entry.fase === 3) return "none yet — waits for a prerequisite, see the phase reason";
+    if (entry.fase === 4 && groupOfFaseGroep(entry.faseGroep)) return `none by default — belongs on ${groupOfFaseGroep(entry.faseGroep)}`;
+    if (entry.fase === 5) return "none — an alternative that is not deployed";
+    return "none — see the phase in _manifest.json";
+  }
+  return targets
+    .map((t) => (t === "allDevicesAssignmentTarget" ? "all devices" : t === "allLicensedUsersAssignmentTarget" ? "all users" : t.includes("exclusion") ? "excluded group" : "a group"))
+    .join(", ");
 }
 
 /** Diezelfde keuze in mensentaal, voor de tabellen in de documentatie. */
@@ -396,4 +432,4 @@ function versionFloors(raw) {
   return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
 }
 
-module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };
+module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

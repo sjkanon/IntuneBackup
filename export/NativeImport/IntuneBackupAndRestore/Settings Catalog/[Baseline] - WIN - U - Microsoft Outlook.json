@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Outlook",
-    "description": "Configureert het Exchange Online-profiel van de gebruiker automatisch, zodat Outlook werkt zonder handmatig een account toe te voegen. Toewijzing volgens baseline: alle gebruikers. Bron: eigen baseline.",
+    "description": "Configures the user's Exchange Online profile automatically, so that Outlook works without manually adding an account. Baseline assignment: all users. Source: own baseline.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

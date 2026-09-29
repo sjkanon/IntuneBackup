@@ -616,14 +616,14 @@ ordre de probabilité :
 1. **Le montage s'est bloqué sur une fenêtre de connexion.** Si le Mac a bien un ticket Kerberos mais
    que le partage ne l'accepte pas, NetFS se rabat sur une boîte de dialogue et attend que quelqu'un la
    remplisse. Depuis un LaunchAgent, cela n'arrive jamais ; le script reste bloqué et l'agent Intune
-   l'interrompt. Depuis le délai d'expiration de 30 secondes, cela ne se produit plus — le script note
-   alors `Mount liep vast … afgebroken` et continue.
+   l'interrompt. Depuis le délai d'expiration de 60 secondes, cela ne se produit plus — le script note
+   alors `hung and was aborted after 60s` et continue.
 2. **Une ancienne version se trouve dans Intune.** La vérification de l'espace réservé est le seul autre chemin
-   qui renvoie exit 1. Le journal indique alors littéralement `staat nog op de placeholder`.
+   qui renvoie exit 1. Le journal indique alors littéralement `is still set to the placeholder`.
 3. **Le script n'a jamais démarré.** Des fins de ligne ou un BOM provenant d'un éditeur Windows transforment
    la première ligne en `#!/bin/bash^M` et rien ne démarre. Voir *Fins de ligne* ci-dessus.
 
-La distinction entre 2 et 3 se voit dans le journal : s'il contient une ligne `Gestart als …`, le
+La distinction entre 2 et 3 se voit dans le journal : s'il contient une ligne `Started as …`, le
 script s'est exécuté et l'erreur est dans la logique ; s'il n'y a pas de fichier journal, il n'a jamais
 démarré.
 
@@ -726,8 +726,18 @@ Il essaie de lire la base de données TCC de l'utilisateur
 versions plus anciennes). Si cela réussit, le script en est certain et ne demande rien.
 
 Cette base de données est protégée : sans Accès complet au disque, personne ne peut la lire. Si la lecture échoue,
-ce n'est pas une erreur — la question est alors posée à l'utilisateur, avec un bouton **Staat al aan** (« Déjà activé »)
+ce n'est pas une erreur — la question est alors posée à l'utilisateur, avec un bouton **Déjà activé**
 qui arrête le script. Mieux vaut demander une fois de trop qu'inventer un état d'autorisation.
+
+### Dans la langue de l'utilisateur
+
+La boîte de dialogue suit la préférence de langue de l'utilisateur connecté (la première langue de
+`AppleLanguages`, sinon `AppleLocale`) : néerlandais, français, et anglais dans tous les autres cas.
+Les boutons sont alors **Later** / **Staat al aan** / **Open instellingen**, **Plus tard** /
+**Déjà activé** / **Ouvrir les réglages** ou **Later** / **Already on** / **Open Settings**.
+`ORG_NAAM` en haut du script est vide par défaut ; le texte indique alors « de IT-afdeling »,
+« le service informatique » ou « the IT department ». Si vous indiquez un nom, il apparaît tel quel
+dans chaque langue. Le journal est toujours en anglais.
 
 ### Il finit par s'arrêter
 

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Recovery Lock",
-    "description": "Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op recoveryOS en de opstartopties, en vervangt het elke zes maanden. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Microsoft Learn — Configure Recovery Lock using the settings catalog (juni 2026); vorm uit microsoft/intune-my-macs pol-sec-007-recovery-lock (daar maandelijkse rotatie, hier zes maanden).",
+    "description": "On Macs with Apple silicon, sets a random, Intune-managed password on recoveryOS and the startup options, and replaces it every six months. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Microsoft Learn — Configure Recovery Lock using the settings catalog (June 2026); form from microsoft/intune-my-macs pol-sec-007-recovery-lock (monthly rotation there, six months here).",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

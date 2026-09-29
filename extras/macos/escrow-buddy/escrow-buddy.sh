@@ -1,44 +1,44 @@
 #!/bin/bash
 #
-# Zorgt dat een Mac die al versleuteld was vóór hij onder beheer kwam, alsnog een
-# FileVault-herstelsleutel in Intune krijgt. Installeert daarvoor Escrow Buddy en laat bij
-# de eerstvolgende aanmelding een nieuwe persoonlijke herstelsleutel aanmaken.
+# Makes sure a Mac that was already encrypted before it came under management still gets a
+# FileVault recovery key in Intune. To do so it installs Escrow Buddy and has a new personal
+# recovery key generated at the next sign-in.
 #
-# Waarom dit script bestaat:
+# Why this script exists:
 #
-#   [Baseline] - MAC - D - FileVault zet FileVault aan en bewaart de herstelsleutel in
-#   Intune — maar alleen voor een Mac die op het moment van versleutelen het escrow-profiel
-#   (com.apple.security.FDERecoveryKeyEscrow) al had. Een Mac die de gebruiker zelf al had
-#   versleuteld, of die vóór de inschrijving door Setup Assistant is versleuteld, heeft een
-#   sleutel die Intune nooit heeft gezien. Intune toont dan geen herstelsleutel, en een
-#   vergeten wachtwoord betekent een verloren schijf.
+#   [Baseline] - MAC - D - FileVault turns on FileVault and stores the recovery key in
+#   Intune — but only for a Mac that already had the escrow profile
+#   (com.apple.security.FDERecoveryKeyEscrow) at the moment of encryption. A Mac that the user
+#   had already encrypted themselves, or that was encrypted by Setup Assistant before
+#   enrollment, has a key that Intune has never seen. Intune then shows no recovery key, and a
+#   forgotten password means a lost disk.
 #
-#   macOS escrowt alleen een sleutel die wordt áángemaakt terwijl het escrow-profiel er staat.
-#   Escrow Buddy (macadmins/escrow-buddy, oorspronkelijk van Netflix) is een authorization
-#   plugin die bij het aanmelden precies dat doet: met het wachtwoord dat de gebruiker toch al
-#   intypt een nieuwe persoonlijke herstelsleutel aanmaken. De gebruiker merkt er niets van.
+#   macOS only escrows a key that is created while the escrow profile is present.
+#   Escrow Buddy (macadmins/escrow-buddy, originally from Netflix) is an authorization plugin
+#   that does exactly that at sign-in: using the password the user types anyway, it creates a
+#   new personal recovery key. The user notices nothing.
 #
-# In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
+# In Intune: Devices → macOS → Shell scripts. Required settings:
 #
-#   Run script as signed-in user   No     installeren en de authorization database wijzigen
-#                                         vraagt root
+#   Run script as signed-in user   No     installing and changing the authorization database
+#                                         requires root
 #   Hide script notifications      Yes
 #   Script frequency               Every 1 day
 #   Max number of retries          3
 #
-# Toewijzen aan een apparaatgroep. Zie README.md naast dit script.
+# Assign to a device group. See README.md next to this script.
 
 set -u
 
-# --- Wat er geïnstalleerd wordt ----------------------------------------------------------
+# --- What gets installed -----------------------------------------------------------------
 #
-# Vaste versie en vaste ondertekenaar. "latest" ophalen zou betekenen dat een wijziging op
-# GitHub zonder review op elke Mac terechtkomt. Het pakket wordt alleen geïnstalleerd als het
-# door Apple genotariseerd is én is ondertekend met Developer ID Installer van het team
-# hieronder; anders stopt het script en staat de werkelijke ondertekenaar in de log.
+# Fixed version and fixed signer. Fetching "latest" would mean that a change on GitHub lands
+# on every Mac without review. The package is only installed if it is notarized by Apple and
+# signed with Developer ID Installer of the team below; otherwise the script stops and the
+# actual signer is in the log.
 #
-# T4SK8ZXCXG is "Mac Admins Open Source", de identiteit waarmee de build-workflow van
-# macadmins/escrow-buddy (.github/workflows/build_main.yml) het pakket ondertekent.
+# T4SK8ZXCXG is "Mac Admins Open Source", the identity with which the build workflow of
+# macadmins/escrow-buddy (.github/workflows/build_main.yml) signs the package.
 
 EB_VERSION="1.0.0"
 EB_URL="https://github.com/macadmins/escrow-buddy/releases/download/v${EB_VERSION}/Escrow.Buddy-${EB_VERSION}.pkg"
@@ -60,78 +60,78 @@ log() {
 }
 
 if [[ $EUID -ne 0 ]]; then
-  log "FOUT: dit script moet als root draaien (Run script as signed-in user = No)."
+  log "ERROR: this script must run as root (Run script as signed-in user = No)."
   exit 1
 fi
 
-# --- 1. Is er iets te doen? ----------------------------------------------------------------
+# --- 1. Is there anything to do? -----------------------------------------------------------
 
 if ! /usr/bin/fdesetup status | grep -q "FileVault is On"; then
-  # Niet versleuteld: de FileVault-policy versleutelt de schijf en escrowt de sleutel dan
-  # zelf. Escrow Buddy is daar niet voor nodig.
-  log "FileVault staat niet aan; niets te doen (de FileVault-policy regelt versleuteling en escrow)."
+  # Not encrypted: the FileVault policy encrypts the disk and then escrows the key itself.
+  # Escrow Buddy is not needed for that.
+  log "FileVault is not on; nothing to do (the FileVault policy handles encryption and escrow)."
   exit 0
 fi
 
 if [[ -f "$MARKER" ]]; then
-  log "Nieuwe sleutel is al eerder aangevraagd ($(cat "$MARKER")); niets te doen."
+  log "A new key was already requested earlier ($(cat "$MARKER")); nothing to do."
   exit 0
 fi
 
-# Zonder escrow-profiel wordt een nieuwe sleutel wél aangemaakt maar nergens bewaard — dan is
-# de situatie slechter dan ervoor. Wachten tot [Baseline] - MAC - D - FileVault er staat.
+# Without the escrow profile a new key is created but stored nowhere — then the situation is
+# worse than before. Wait until [Baseline] - MAC - D - FileVault is in place.
 if ! /usr/bin/profiles show -output stdout-xml 2>/dev/null | grep -q "com.apple.security.FDERecoveryKeyEscrow"; then
-  log "Het escrow-profiel (FDERecoveryKeyEscrow) staat nog niet op deze Mac; volgende run opnieuw."
+  log "The escrow profile (FDERecoveryKeyEscrow) is not on this Mac yet; trying again on the next run."
   exit 1
 fi
 
-# --- 2. Escrow Buddy installeren -----------------------------------------------------------
+# --- 2. Installing Escrow Buddy ------------------------------------------------------------
 
 if [[ ! -d "$EB_BUNDLE" ]]; then
   TMP="$(mktemp -d /private/tmp/escrow-buddy.XXXXXX)"
   PKG="$TMP/EscrowBuddy.pkg"
   trap 'rm -rf "$TMP"' EXIT
 
-  log "Escrow Buddy $EB_VERSION ophalen."
+  log "Downloading Escrow Buddy $EB_VERSION."
   if ! /usr/bin/curl --fail --silent --show-error --location --max-time 300 -o "$PKG" "$EB_URL" >>"$LOG" 2>&1; then
-    log "FOUT: downloaden mislukt; volgende run opnieuw."
+    log "ERROR: download failed; trying again on the next run."
     exit 1
   fi
 
   SIG="$(/usr/sbin/pkgutil --check-signature "$PKG" 2>&1)"
   if ! printf '%s' "$SIG" | grep -q "Developer ID Installer: .*(${EB_TEAM_ID})"; then
-    log "FOUT: pakket is niet ondertekend door team $EB_TEAM_ID. Niet geïnstalleerd. Ondertekening:"
+    log "ERROR: package is not signed by team $EB_TEAM_ID. Not installed. Signature:"
     printf '%s\n' "$SIG" >>"$LOG"
     exit 1
   fi
   if ! /usr/sbin/spctl --assess --type install "$PKG" >>"$LOG" 2>&1; then
-    log "FOUT: Gatekeeper keurt het pakket af (niet genotariseerd?). Niet geïnstalleerd."
+    log "ERROR: Gatekeeper rejects the package (not notarized?). Not installed."
     exit 1
   fi
 
-  log "Installeren."
+  log "Installing."
   if ! /usr/sbin/installer -pkg "$PKG" -target / >>"$LOG" 2>&1; then
-    log "FOUT: installatie mislukt."
+    log "ERROR: installation failed."
     exit 1
   fi
 fi
 
-# De postinstall van het pakket zet het mechanisme in system.login.console. Controleren in
-# plaats van aannemen: zonder die regel draait de plugin nooit en gebeurt er stil niets.
+# The package's postinstall adds the mechanism to system.login.console. Check instead of
+# assuming: without that entry the plugin never runs and silently nothing happens.
 if ! /usr/bin/security authorizationdb read system.login.console 2>/dev/null | grep -q "<string>${EB_MECHANISM}</string>"; then
   if [[ -x "$EB_BUNDLE/Contents/Resources/AuthDBSetup.sh" ]]; then
-    log "Mechanisme ontbreekt in de authorization database; AuthDBSetup.sh uit de bundle draaien."
+    log "Mechanism missing from the authorization database; running AuthDBSetup.sh from the bundle."
     "$EB_BUNDLE/Contents/Resources/AuthDBSetup.sh" >>"$LOG" 2>&1
   fi
   if ! /usr/bin/security authorizationdb read system.login.console 2>/dev/null | grep -q "<string>${EB_MECHANISM}</string>"; then
-    log "FOUT: Escrow Buddy staat niet in system.login.console; er wordt geen sleutel aangemaakt."
+    log "ERROR: Escrow Buddy is not in system.login.console; no key will be created."
     exit 1
   fi
 fi
 
-# --- 3. Nieuwe sleutel aanvragen -----------------------------------------------------------
+# --- 3. Requesting a new key ---------------------------------------------------------------
 
 /usr/bin/defaults write "$EB_PREFS" GenerateNewKey -bool true
 date '+%Y-%m-%d %H:%M:%S' >"$MARKER"
-log "GenerateNewKey gezet. Bij de volgende aanmelding van een FileVault-gebruiker maakt macOS een nieuwe herstelsleutel aan en stuurt hem naar Intune."
+log "GenerateNewKey set. At the next sign-in of a FileVault user macOS creates a new recovery key and sends it to Intune."
 exit 0

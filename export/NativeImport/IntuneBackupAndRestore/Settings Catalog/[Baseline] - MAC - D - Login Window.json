@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Login Window",
-    "description": "Laat het inlogvenster om accountnaam én wachtwoord vragen in plaats van een lijst met accounts te tonen, en toont een korte melding dat het apparaat alleen voor geautoriseerd gebruik is. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.3 (inlogbanner) en 2.11.4 (naam en wachtwoord vragen), mSCP branch tahoe; settingDefinitionId's geverifieerd tegen de settings catalog-definities.",
+    "description": "Makes the login window ask for account name and password instead of showing a list of accounts, and shows a short message that the device is for authorised use only. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.3 (login banner) and 2.11.4 (prompt for name and password), mSCP branch tahoe; settingDefinitionIds verified against the settings catalog definitions.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

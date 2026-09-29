@@ -616,14 +616,14 @@ volgorde van waarschijnlijkheid:
 1. **De mount liep vast op een aanmeldvenster.** Heeft de Mac wel een Kerberos-ticket maar
    accepteert de share het niet, dan valt NetFS terug op een dialoog en wacht tot iemand het
    invult. Uit een LaunchAgent gebeurt dat nooit; het script blijft hangen en de Intune-agent
-   breekt het af. Sinds de timeout van 30 seconden gebeurt dat niet meer — het script noteert
-   dan `Mount liep vast … afgebroken` en gaat verder.
+   breekt het af. Sinds de timeout van 60 seconden gebeurt dat niet meer — het script noteert
+   dan `hung and was aborted after 60s` en gaat verder.
 2. **Er staat een oudere versie in Intune.** De placeholdercontrole is het enige andere pad
-   dat exit 1 geeft. In de log staat dan letterlijk `staat nog op de placeholder`.
+   dat exit 1 geeft. In de log staat dan letterlijk `is still set to the placeholder`.
 3. **Het script is nooit begonnen.** Regeleindes of een BOM uit een Windows-editor maken van
    de eerste regel `#!/bin/bash^M` en dan start er niets. Zie *Regeleindes* hierboven.
 
-Het onderscheid tussen 2 en 3 zie je aan de log: staat er een `Gestart als …`-regel, dan heeft
+Het onderscheid tussen 2 en 3 zie je aan de log: staat er een `Started as …`-regel, dan heeft
 het script gedraaid en zit de fout in de logica; is er geen logbestand, dan is het nooit
 begonnen.
 
@@ -728,6 +728,16 @@ oudere versies). Lukt dat, dan weet het script het zeker en vraagt het niets.
 Die database is beschermd: zonder Volledige Schijftoegang mag niemand hem lezen. Lukt het niet,
 dan is dat geen fout — dan wordt het aan de gebruiker gevraagd, met een knop **Staat al aan**
 die het script laat stoppen. Beter één keer te veel vragen dan een rechtenstatus verzinnen.
+
+### In de taal van de gebruiker
+
+De dialoog volgt de taalvoorkeur van de ingelogde gebruiker (de eerste taal in
+`AppleLanguages`, anders `AppleLocale`): Nederlands, Frans, en in alle andere gevallen Engels.
+De knoppen heten dan **Later** / **Staat al aan** / **Open instellingen**, **Plus tard** /
+**Déjà activé** / **Ouvrir les réglages** of **Later** / **Already on** / **Open Settings**.
+`ORG_NAAM` bovenin het script is standaard leeg; dan staat er "de IT-afdeling", "le service
+informatique" of "the IT department". Vul je een naam in, dan komt die in elke taal zo in de
+tekst. De log is altijd Engels.
 
 ### Het houdt een keer op
 

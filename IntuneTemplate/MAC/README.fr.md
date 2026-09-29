@@ -66,7 +66,7 @@ Affecter à des groupes d'utilisateurs.
 ---
 
 **Ce qu'elle fait** provient de `doel` dans [`_manifest.json`](../_manifest.json) (traduit). La même phrase,
-en néerlandais, figure avec la cible d'affectation et l'origine dans le champ `Description` du
+en anglais, figure avec la cible d'affectation et l'origine dans le champ `Description` du
 template — et donc plus tard dans le tenant, à côté de la policy.
 
 Un **checkId** vide signifie que le moteur de la plateforme n'a pas de correspondance pour ce type de policy

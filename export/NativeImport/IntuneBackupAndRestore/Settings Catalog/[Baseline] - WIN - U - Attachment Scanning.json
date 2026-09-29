@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Attachment Scanning",
-    "description": "Laat de virusscanner elke bijlage controleren op het moment dat de gebruiker hem opent, niet alleen bij het opslaan. Toewijzing volgens baseline: alle gebruikers. Bron: CIS v4 Windows 11 L1 — instelling overgenomen uit IntuneAdmin, waarde geverifieerd tegen de settings catalog-definitie..",
+    "description": "Makes the virus scanner check every attachment at the moment the user opens it, not only when it is saved. Baseline assignment: all users. Source: CIS v4 Windows 11 L1 — setting adopted from IntuneAdmin, value verified against the settings catalog definition..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

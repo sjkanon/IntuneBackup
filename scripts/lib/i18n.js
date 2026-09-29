@@ -1,24 +1,24 @@
 /**
- * De gegenereerde documentatie in drie talen: Nederlands (de bron), Engels en Frans.
+ * The generated documentation in three languages: Dutch (the source), English and French.
  *
- * Twee soorten tekst, twee routes:
+ * Two kinds of text, two routes:
  *
- *   vaste tekst uit een script   staat als { nl, en, fr } in dat script zelf, naast de plek waar
- *                                hij gebruikt wordt — een aparte sleutelstabel zou je bij elke
- *                                zin laten zoeken wat er eigenlijk staat.
- *   tekst uit de data            `doel`, `note`, `faseWaarom` in _manifest.json, de titels en
- *                                toelichtingen in _controls.json en _licenties.json. Die blijft
- *                                Nederlands in de data; de vertaling staat in
- *                                IntuneTemplate/_i18n/<taal>.json, met de Nederlandse tekst als
- *                                sleutel.
+ *   fixed text from a script     lives as { nl, en, fr } in that script itself, next to where
+ *                                it is used — a separate key table would make you look up
+ *                                what is actually written for every sentence.
+ *   text from the data           `doel`, `note`, `faseWaarom` in _manifest.json, the titles and
+ *                                explanations in _controls.json and _licenties.json. That stays
+ *                                Dutch in the data; the translation lives in
+ *                                IntuneTemplate/_i18n/<lang>.json, with the Dutch text as the
+ *                                key.
  *
- * Sleutelen op de Nederlandse tekst en niet op policy + veld is bewust: wijzigt iemand een
- * `doel`, dan past de oude vertaling niet meer en valt hij weg in plaats van dat hij stilzwijgend
- * een zin blijft vertalen die er niet meer staat. De tekst komt dan in het Nederlands in het
- * Engelse document en het script meldt hem als ontbrekend — zichtbaar, niet fout.
+ * Keying on the Dutch text and not on policy + field is deliberate: if someone changes a
+ * `doel`, the old translation no longer matches and drops out, instead of silently continuing
+ * to translate a sentence that is no longer there. The text then appears in Dutch in the
+ * English document and the script reports it as missing — visible, not wrong.
  *
- * `--missend` bij generate-docs.js en generate-compliance.js drukt die ontbrekende teksten af als
- * JSON, klaar om te vertalen en in _i18n/<taal>.json te zetten.
+ * `--missend` on generate-docs.js and generate-compliance.js prints those missing texts as
+ * JSON, ready to be translated and put into _i18n/<lang>.json.
  */
 
 const fs = require("fs");

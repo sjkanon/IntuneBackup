@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender Additional Configuration",
-    "description": "Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration.",
+    "description": "Defender settings that do not fit in the Endpoint Security template and therefore require a separate policy. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Defender Antivirus - D - Additional Configuration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

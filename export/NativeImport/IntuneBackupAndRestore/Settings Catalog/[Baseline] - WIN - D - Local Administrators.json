@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Local Administrators",
-    "description": "Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerde groep beheert in plaats van wat er toevallig op het apparaat staat. Toewijzing volgens baseline: alle apparaten. Bron: OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators.",
+    "description": "Determines who is a member of the local Administrators group, so that LAPS manages a controlled group instead of whatever happens to be on the device. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

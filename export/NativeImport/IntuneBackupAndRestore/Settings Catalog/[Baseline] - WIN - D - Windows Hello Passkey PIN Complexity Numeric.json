@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric",
-    "description": "Legt de numerieke PIN voor de Windows Hello for Business-passkey expliciet vast: cijfers vereist, letters en leestekens geblokkeerd. Geldt alleen voor de PIN van de Windows Hello for Business-passkey, niet voor de PIN van een FIDO2-beveiligingssleutel: die staat op de sleutel zelf en wordt daar ingesteld. De minimumlengte zit hier bewust niet in; die staat al op 6 in WIN - D - Windows Hello for Business. Alternatief van de Alphanumeric-variant; wijs er nooit twee tegelijk toe.",
+    "description": "Explicitly sets the numeric PIN for the Windows Hello for Business passkey: digits required, letters and special characters blocked. Baseline assignment: none — an alternative that is not deployed. Source: Own choice, PassportForWork CSP — Policies/PINComplexity.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

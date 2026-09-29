@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Teams",
-    "description": "Beperkt aanmelden in Teams tot de eigen tenant en voorkomt dat Teams zichzelf na installatie meteen start. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams.",
+    "description": "Limits sign-in in Teams to the organisation's own tenant and prevents Teams from starting itself immediately after installation. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

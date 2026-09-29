@@ -1,40 +1,40 @@
 #!/usr/bin/env node
 /**
- * Bewaakt de indeling van IntuneTemplate/ (zie PLAN.md).
+ * Guards the layout of IntuneTemplate/ (see PLAN.md).
  *
- * Vijf dingen moeten kloppen:
- *  1. Eén policy bevat nooit zowel device- als user-scoped settings. Een gemengde policy kun
- *     je niet eenduidig toewijzen, en bij troubleshooting zie je niet of een instelling niet
- *     aankomt omdat het apparaat of omdat de gebruiker buiten scope valt.
- *  2. Bestandsnaam (Baseline_<PLATFORM>_<D|U>_*) en policynaam ([Baseline] - PLATFORM - D/U -
- *     Item) dragen hetzelfde platform en dezelfde scope.
- *  3. Die aangekondigde scope komt overeen met wat er werkelijk in de settings staat.
- *  4. Het bestand staat in de map die bij zijn platform en Type hoort.
- *  5. Geen twee toegewezen policies zetten dezelfde settingDefinitionId — dat levert in
- *     Intune een *Conflict* op, waarna de instelling door géén van beide wordt toegepast.
- *  6. Het veld `Package` klopt met de fase en de toewijzing. Dat veld bepaalt in welk
- *     CIPP-pakket een policy uitrolt en met welk doel; loopt het achter, dan rolt de policy
- *     naar het verkeerde publiek uit of helemaal niet.
- *  7. Elke policy heeft `controls`, en elk label daarin staat letterlijk in
- *     IntuneTemplate/_controls.json. COMPLIANCE.md telt per control welke policies hem invullen:
- *     een policy zonder controls valt daar stil buiten, en een label met een eigen schrijfwijze
- *     telt als een andere control.
+ * Seven things must be right:
+ *  1. A policy never contains both device- and user-scoped settings. A mixed policy cannot be
+ *     assigned unambiguously, and when troubleshooting you cannot tell whether a setting does
+ *     not arrive because the device or because the user is out of scope.
+ *  2. File name (Baseline_<PLATFORM>_<D|U>_*) and policy name ([Baseline] - PLATFORM - D/U -
+ *     Item) carry the same platform and the same scope.
+ *  3. That declared scope matches what is actually in the settings.
+ *  4. The file is in the folder that belongs to its platform and Type.
+ *  5. No two assigned policies set the same settingDefinitionId — in Intune that produces a
+ *     *Conflict*, after which the setting is applied by *neither* of them.
+ *  6. The `Package` field matches the fase and the assignment. That field determines in which
+ *     CIPP package a policy is deployed and to which target; if it lags behind, the policy is
+ *     deployed to the wrong audience or not at all.
+ *  7. Every policy has `controls`, and every label in it appears verbatim in
+ *     IntuneTemplate/_controls.json. COMPLIANCE.md counts per control which policies fulfil it:
+ *     a policy without controls silently drops out there, and a label with its own spelling
+ *     counts as a different control.
  *
- * De scope volgt uit de settingDefinitionId, niet uit het onderwerp: alles wat begint met
- * `user_` is user-scoped, de rest is device-scoped. Let op de derde vorm die in deze repo
- * voorkomt — Firewall en BitLocker gebruiken ids die met `vendor_msft_` beginnen, zonder
- * device-prefix; die zijn device-scoped.
+ * The scope follows from the settingDefinitionId, not from the subject: everything that starts
+ * with `user_` is user-scoped, the rest is device-scoped. Watch out for the third form that
+ * occurs in this repo — Firewall and BitLocker use ids starting with `vendor_msft_`, without a
+ * device prefix; those are device-scoped.
  *
- * **Alleen voor Windows.** Bij macOS, iOS en Android zegt de settingDefinitionId niets over
- * device- of user-scope (`com.apple.*`, geen prefix), en bij Type "Admin", "Device",
- * "deviceCompliancePolicies" en "AppProtection" staan er helemaal geen settings in het
- * bestand. Daar is D/U een keuze over het toewijzingsdoel en wordt alleen de naamconventie
- * gecontroleerd. Dat is ook hoe OpenIntuneBaseline de letters gebruikt; voor Windows houden
- * we de strengere, afleidbare regel aan omdat die wél te controleren is.
+ * **Windows only.** On macOS, iOS and Android the settingDefinitionId says nothing about
+ * device or user scope (`com.apple.*`, no prefix), and for Type "Admin", "Device",
+ * "deviceCompliancePolicies" and "AppProtection" there are no settings in the file at all.
+ * There D/U is a choice about the assignment target and only the naming convention is
+ * checked. That is also how OpenIntuneBaseline uses the letters; for Windows we keep the
+ * stricter, derivable rule because that one *can* be checked.
  *
- * Gebruik:
- *   node scripts/check-scope.js            controleert alles, exit 1 bij problemen
- *   node scripts/check-scope.js --report    alleen het overzicht, exit altijd 0
+ * Usage:
+ *   node scripts/check-scope.js            checks everything, exit 1 on problems
+ *   node scripts/check-scope.js --report    overview only, always exit 0
  */
 
 const fs = require("fs");

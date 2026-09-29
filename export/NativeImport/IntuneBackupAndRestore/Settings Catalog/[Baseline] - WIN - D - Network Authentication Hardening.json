@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Network Authentication Hardening",
-    "description": "Maakt netwerkauthenticatie minder vatbaar voor misbruik: het systeemaccount gebruikt de computeridentiteit voor NTLM, PKU2U met online identiteiten gaat dicht, LDAP-verkeer vraagt ondertekening, de Kerberos-client ondersteunt armoring en NetBIOS-namen worden niet meer via broadcast opgelost. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS v4 Windows 11 L1 (IntuneAdmin CISv4-profielen) en de Microsoft Security Baseline voor Windows 11 — waarden geverifieerd tegen de settings catalog-definities; PKU2U wijkt bewust af van de IntuneAdmin-waarde.",
+    "description": "Makes network authentication less susceptible to abuse: the system account uses the computer identity for NTLM, PKU2U with online identities is closed, LDAP traffic requests signing, the Kerberos client supports armoring and NetBIOS names are no longer resolved via broadcast. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) and the Microsoft Security Baseline for Windows 11 — values verified against the settings catalog definitions; PKU2U deliberately deviates from the IntuneAdmin value.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

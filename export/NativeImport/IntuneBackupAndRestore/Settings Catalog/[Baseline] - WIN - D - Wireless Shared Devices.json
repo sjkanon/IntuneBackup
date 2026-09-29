@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Wireless Shared Devices",
-    "description": "Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: ISO/IEC 27001:2022 A.8.20 en A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration.",
+    "description": "On shared devices, allows only the networks deployed via Intune. Wi-Fi networks added by users are removed and no new ones can be added. Baseline assignment: none by default — belongs on SEC-Shared-Devices. Source: ISO/IEC 27001:2022 A.8.20 and A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

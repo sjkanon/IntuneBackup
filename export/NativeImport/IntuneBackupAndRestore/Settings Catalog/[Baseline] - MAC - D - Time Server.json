@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Time Server",
-    "description": "Laat de Mac zijn klok gelijkzetten met time.apple.com, zodat tijdstempels in logboeken, Kerberos-tickets en certificaatcontroles kloppen. Toewijzing volgens baseline: alle apparaten. Bron: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.3.2.1 (mSCP branch tahoe, ODV time.apple.com); vorm uit microsoft/intune-my-macs pol-sys-100-ntp.",
+    "description": "Has the Mac synchronise its clock with time.apple.com, so that timestamps in logs, Kerberos tickets and certificate checks are correct. Baseline assignment: all devices. Source: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.3.2.1 (mSCP branch tahoe, ODV time.apple.com); form taken from microsoft/intune-my-macs pol-sys-100-ntp.",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

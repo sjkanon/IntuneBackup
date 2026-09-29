@@ -1,48 +1,48 @@
 #!/bin/bash
 #
-# Vraagt de gebruiker om schermopname aan te zetten voor de remote-supporttools van de
-# organisatie, en opent daarbij meteen het juiste paneel. Stopt zodra het geregeld is.
+# Asks the user to turn on screen recording for the organisation's remote support tools, and
+# opens the right panel straight away. Stops as soon as it is sorted.
 #
-# Waarom dit script bestaat:
+# Why this script exists:
 #
-#   Schermopname is de enige maatregel in deze baseline die een MDM niet kan afdwingen. Uit
-#   Apple's eigen schema voor de PPPC-payload (apple/device-management,
-#   com.apple.TCC.configuration-profile-policy.yaml), bij de key ScreenCapture:
+#   Screen recording is the only measure in this baseline that an MDM cannot enforce. From
+#   Apple's own schema for the PPPC payload (apple/device-management,
+#   com.apple.TCC.configuration-profile-policy.yaml), at the key ScreenCapture:
 #
 #     "Access to the contents can't be given in a profile; it can only be denied."
 #
-#   Dezelfde categorie als Camera en Microphone. De waarde AllowStandardUserToSetSystemService
-#   bestaat volgens datzelfde schema alléén voor ListenEvent en ScreenCapture — Apple heeft die
-#   gemaakt omdát deze twee niet te verlenen zijn. Dat Intune in de settings catalog ook
-#   `Allow` aanbiedt zegt niets: dat schema is generiek over alle TCC-diensten en macOS negeert
-#   de waarde hier.
+#   The same category as Camera and Microphone. According to that same schema the value
+#   AllowStandardUserToSetSystemService exists only for ListenEvent and ScreenCapture — Apple
+#   created it precisely because these two cannot be granted. That Intune also offers `Allow`
+#   in the settings catalog means nothing: that schema is generic across all TCC services and
+#   macOS ignores the value here.
 #
-#   [Baseline] - MAC - D - Screen Recording zet daarom AllowStandardUserToSetSystemService.
-#   Dat is het maximum: een gewone gebruiker mag de schakelaar zelf omzetten, zonder
-#   beheerderswachtwoord. Zonder dat profiel kan een niet-admin het sinds Big Sur helemaal
-#   niet. De klik blijft van de gebruiker; dit script zorgt dat hij hem ook doet.
+#   [Baseline] - MAC - D - Screen Recording therefore sets AllowStandardUserToSetSystemService.
+#   That is the maximum: a standard user may flip the switch themselves, without an
+#   administrator password. Without that profile a non-admin cannot do it at all since Big Sur.
+#   The click remains the user's; this script makes sure they actually do it.
 #
-# In Intune: Devices → macOS → Shell scripts. Vereiste instellingen:
+# In Intune: Devices → macOS → Shell scripts. Required settings:
 #
-#   Run script as signed-in user   Yes    het gaat om de rechten van déze gebruiker, en een
-#                                         dialoog uit root ziet niemand
+#   Run script as signed-in user   Yes    it is about this user's permissions, and nobody sees
+#                                         a dialog from root
 #   Hide script notifications      Yes
 #   Script frequency               Every 1 hour
 #   Max number of retries          3
 #
-# Toewijzen aan een gebruikersgroep. Geen apparaatgroep: op een gedeelde Mac heeft elke
-# gebruiker zijn eigen TCC-database en dus zijn eigen klik.
+# Assign to a user group. Not a device group: on a shared Mac each user has their own TCC
+# database and therefore their own click.
 
 set -u
 
-# --- De apps waar het om gaat --------------------------------------------------------------
+# --- The apps this is about ----------------------------------------------------------------
 #
-# Bundle-id's, in dezelfde volgorde als in het Screen Recording-profiel. Een app die niet
-# geïnstalleerd is verschijnt niet in het paneel en telt hier dus ook niet mee — anders zou dit
-# script blijven vragen om een vinkje dat nergens staat.
+# Bundle IDs, in the same order as in the Screen Recording profile. An app that is not
+# installed does not appear in the panel and so does not count here either — otherwise this
+# script would keep asking for a checkbox that is not there.
 
-# Standaard NinjaOne en TeamViewer, gelijk aan [Baseline] - MAC - D - Screen Recording. Gebruikt de
-# organisatie andere tools, vervang ze dan hier én in dat profiel.
+# By default NinjaOne and TeamViewer, matching [Baseline] - MAC - D - Screen Recording. If the
+# organisation uses other tools, replace them here and in that profile.
 BUNDLES=(
   "com.ninjarmm.ncstreamer"
   "com.teamviewer.TeamViewer"
@@ -51,15 +51,18 @@ BUNDLES=(
   "com.teamviewer.TeamViewerQS"
 )
 
-ORG_NAAM="de IT-afdeling"
+# The name of the IT organisation as it appears in the dialog. Leave empty for a generic name in
+# the user's language ("de IT-afdeling", "le service informatique", "the IT department"). A name
+# filled in here is used as is in every language.
+ORG_NAAM=""
 
-# Na dit aantal pogingen houdt het script op met vragen. Bij een run per uur is dat vier
-# dagen. Langer blijven vragen verandert een herinnering in een ergernis, en dan klikt iemand
-# hem weg zonder te lezen. Wat er dan nog ontbreekt staat in de log en hoort in een gesprek,
-# niet in een dialoog.
+# After this many attempts the script stops asking. With one run per hour that is four days.
+# Asking for longer turns a reminder into an annoyance, and then someone clicks it away without
+# reading. Whatever is still missing by then is in the log and belongs in a conversation, not in
+# a dialog.
 MAX_POGINGEN=96
 
-# --- Vanaf hier niets meer aanpassen -------------------------------------------------------
+# --- Do not change anything below this line ------------------------------------------------
 
 STATE_DIR="$HOME/Library/Application Support/Baseline"
 LOG_DIR="$HOME/Library/Logs/Baseline"
@@ -75,14 +78,14 @@ log() {
   printf '%s  %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" | tee -a "$LOG"
 }
 
-log "Gestart als $(id -un), macOS $(/usr/bin/sw_vers -productVersion)."
+log "Started as $(id -un), macOS $(/usr/bin/sw_vers -productVersion)."
 
 if [ -f "$MARKER" ]; then
-  log "Al geregeld op $(cat "$MARKER") — niets te doen."
+  log "Already sorted on $(cat "$MARKER") — nothing to do."
   exit 0
 fi
 
-# --- Welke apps staan er eigenlijk op dit toestel? -----------------------------------------
+# --- Which apps are actually on this device? -----------------------------------------------
 
 geinstalleerd() {
   /usr/bin/mdfind "kMDItemCFBundleIdentifier == '$1'" 2>/dev/null | /usr/bin/grep -q . ||
@@ -95,19 +98,19 @@ for b in "${BUNDLES[@]}"; do
 done
 
 if [ "${#AANWEZIG[@]}" -eq 0 ]; then
-  log "Geen van de apps is geïnstalleerd — nog niets te vragen."
+  log "None of the apps is installed — nothing to ask yet."
   exit 0
 fi
 
-# --- Staat het al aan? ---------------------------------------------------------------------
+# --- Is it already on? ---------------------------------------------------------------------
 #
-# De TCC-database van de gebruiker is het enige eerlijke antwoord, maar hij is beschermd: een
-# proces zonder Volledige Schijftoegang mag hem niet lezen. Lukt het, dan weten we het zeker en
-# vraagt dit script niets. Lukt het niet, dan is dat geen fout — dan vragen we het gewoon aan
-# de gebruiker. Beter één keer te veel vragen dan een rechtenstatus verzinnen.
+# The user's TCC database is the only honest answer, but it is protected: a process without
+# Full Disk Access may not read it. If reading works, we know for sure and this script asks
+# nothing. If it does not, that is not an error — then we simply ask the user. Better to ask
+# once too often than to make up a permission state.
 #
-# De kolom heet `auth_value` sinds Big Sur (2 = toegestaan) en `allowed` daarvoor. Beide
-# proberen; welke van de twee er is, verschilt per macOS-versie.
+# The column is called `auth_value` since Big Sur (2 = allowed) and `allowed` before that. Try
+# both; which of the two exists differs per macOS version.
 
 tcc_zegt_aan() {
   local bundle="$1" uit
@@ -140,54 +143,97 @@ done
 
 if [ "$ZEKER" -eq 1 ] && [ "${#ONTBREEKT[@]}" -eq 0 ]; then
   date '+%Y-%m-%d %H:%M:%S' >"$MARKER"
-  log "Schermopname staat aan voor: ${AANWEZIG[*]} — klaar."
+  log "Screen recording is on for: ${AANWEZIG[*]} — done."
   exit 0
 fi
 
 if [ "$ZEKER" -eq 0 ]; then
-  log "TCC-database niet leesbaar (geen Volledige Schijftoegang) — de gebruiker wordt het gevraagd."
+  log "TCC database not readable (no Full Disk Access) — the user will be asked."
 fi
 
-# --- Vragen --------------------------------------------------------------------------------
+# --- Asking -------------------------------------------------------------------------------
 
 POGING=$(cat "$POGINGEN" 2>/dev/null || echo 0)
 POGING=$((POGING + 1))
 echo "$POGING" >"$POGINGEN"
 
 if [ "$POGING" -gt "$MAX_POGINGEN" ]; then
-  log "Poging $POGING — na $MAX_POGINGEN keer wordt er niet meer gevraagd. Ontbreekt nog: ${ONTBREEKT[*]}"
+  log "Attempt $POGING — no longer asking after $MAX_POGINGEN times. Still missing: ${ONTBREEKT[*]}"
   exit 0
 fi
 
-TEKST="Om op afstand te kunnen meekijken bij een storing heeft de helpdesk toestemming voor schermopname nodig.
+# The dialog is shown in the user's own language: Dutch, French, or otherwise English. This
+# script runs as the signed-in user, so `defaults read -g` reads that user's preferences. The
+# first entry of AppleLanguages is the preferred language ("nl-NL", "fr", "en-GB"); AppleLocale
+# ("nl_NL") is the fallback if that list is missing.
+TAAL=$(/usr/bin/defaults read -g AppleLanguages 2>/dev/null |
+  /usr/bin/sed -n 's/^[[:space:]]*"\{0,1\}\([A-Za-z][A-Za-z]\).*/\1/p' | /usr/bin/head -1)
+[ -n "$TAAL" ] || TAAL=$(/usr/bin/defaults read -g AppleLocale 2>/dev/null | /usr/bin/cut -c1-2)
+
+LIJST=$(printf '   • %s\n' "${ONTBREEKT[@]}")
+
+case "$TAAL" in
+nl* | NL*)
+  ORG="${ORG_NAAM:-de IT-afdeling}"
+  TITEL="Schermopname voor de helpdesk"
+  KNOP_LATER="Later"
+  KNOP_AAN="Staat al aan"
+  KNOP_OPEN="Open instellingen"
+  TEKST="Om op afstand te kunnen meekijken bij een storing heeft de helpdesk toestemming voor schermopname nodig.
 
 Zet in het venster dat nu opent de schakelaar aan bij:
-$(printf '   • %s\n' "${ONTBREEKT[@]}")
-Je hebt hier geen beheerderswachtwoord voor nodig. Dit is de enige stap die $ORG_NAAM niet voor je kan doen — Apple staat niet toe dat toestemming voor schermopname op afstand wordt gegeven."
+$LIJST
+Je hebt hier geen beheerderswachtwoord voor nodig. Dit is de enige stap die $ORG niet voor je kan doen — Apple staat niet toe dat toestemming voor schermopname op afstand wordt gegeven."
+  ;;
+fr* | FR*)
+  ORG="${ORG_NAAM:-le service informatique}"
+  TITEL="Enregistrement de l’écran pour le support"
+  KNOP_LATER="Plus tard"
+  KNOP_AAN="Déjà activé"
+  KNOP_OPEN="Ouvrir les réglages"
+  TEKST="Pour pouvoir voir votre écran à distance en cas de problème, le support a besoin de l’autorisation d’enregistrement de l’écran.
+
+Dans la fenêtre qui s’ouvre maintenant, activez l’interrupteur pour :
+$LIJST
+Aucun mot de passe administrateur n’est nécessaire. C’est la seule étape que $ORG ne peut pas faire à votre place — Apple ne permet pas d’accorder à distance l’autorisation d’enregistrement de l’écran."
+  ;;
+*)
+  ORG="${ORG_NAAM:-the IT department}"
+  TITEL="Screen recording for the helpdesk"
+  KNOP_LATER="Later"
+  KNOP_AAN="Already on"
+  KNOP_OPEN="Open Settings"
+  TEKST="So that the helpdesk can view your screen remotely when something goes wrong, it needs permission for screen recording.
+
+In the window that opens now, turn on the switch for:
+$LIJST
+You do not need an administrator password for this. This is the only step $ORG cannot do for you — Apple does not allow screen recording permission to be granted remotely."
+  ;;
+esac
 
 ANTWOORD=$(/usr/bin/osascript <<OSA 2>>"$LOG"
 display dialog "$TEKST" ¬
-  with title "Schermopname voor de helpdesk" ¬
-  buttons {"Later", "Staat al aan", "Open instellingen"} ¬
-  default button "Open instellingen" ¬
+  with title "$TITEL" ¬
+  buttons {"$KNOP_LATER", "$KNOP_AAN", "$KNOP_OPEN"} ¬
+  default button "$KNOP_OPEN" ¬
   with icon caution ¬
   giving up after 300
 OSA
 )
 
 case "$ANTWOORD" in
-*"Open instellingen"*)
+*"$KNOP_OPEN"*)
   /usr/bin/open "$PANEEL"
-  log "Poging $POGING — paneel geopend voor: ${ONTBREEKT[*]}"
+  log "Attempt $POGING — panel opened for: ${ONTBREEKT[*]}"
   ;;
-*"Staat al aan"*)
-  # Op zijn woord. Is de TCC-database leesbaar, dan had dit script het zelf al gezien en was
-  # het hier niet gekomen; is hij dat niet, dan is de gebruiker de enige die het kan zien.
+*"$KNOP_AAN"*)
+  # Taken at their word. If the TCC database is readable, this script would have seen it
+  # itself and would not have got here; if it is not, the user is the only one who can see it.
   date '+%Y-%m-%d %H:%M:%S' >"$MARKER"
-  log "Poging $POGING — gebruiker bevestigt dat het aanstaat. Niet meer vragen."
+  log "Attempt $POGING — user confirms it is on. Not asking again."
   ;;
 *)
-  log "Poging $POGING — uitgesteld door de gebruiker."
+  log "Attempt $POGING — postponed by the user."
   ;;
 esac
 

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Printing Hardening",
-    "description": "Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van printerdrivers bij een gedeelde printer, en sluit printen over HTTP af. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities..",
+    "description": "Turns on Windows Protected Print, prohibits standard users from installing printer drivers for a shared printer, and shuts off printing over HTTP. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS v4 Windows 11 L1 and the Microsoft Security Baseline — settings taken from IntuneAdmin, values verified against the settings catalog definitions..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

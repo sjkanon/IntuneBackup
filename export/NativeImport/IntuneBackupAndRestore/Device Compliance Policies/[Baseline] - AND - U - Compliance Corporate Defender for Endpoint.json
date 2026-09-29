@@ -21,5 +21,5 @@
         }
     ],
     "displayName": "[Baseline] - AND - U - Compliance Corporate Defender for Endpoint",
-    "description": "Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wanneer Defender for Endpoint er een risicoscore hoger dan laag aan geeft. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Corp-Devices - v1.5; vergeleken met IntuneAdmin Baseline - Android Enterprise - Microsoft Defender for Endpoint (niveau medium)."
+    "description": "Marks a fully managed or corporate-owned Android device as non-compliant when Defender for Endpoint gives it a risk score higher than low. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Defender - Corp-Devices - v1.5; compared with IntuneAdmin Baseline - Android Enterprise - Microsoft Defender for Endpoint (level medium)."
 }

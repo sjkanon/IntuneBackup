@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - IOS - D - Passcode",
-    "description": "Stelt op ingeschreven iPhones en iPads de toegangscode in die de compliance-policy toetst: minimaal zes tekens, geen eenvoudige code, direct vergrendelen, automatisch vergrendelen na hoogstens vijf minuten, en wissen pas na tien foute pogingen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de iOS settings catalog, zelfde payload als UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; waarden gelijkgetrokken met [Baseline] - IOS - U - Compliance Password, inactiviteit volgens CIS Apple iOS/iPadOS 26 Benchmark.",
+    "description": "Sets the passcode on enrolled iPhones and iPads that the compliance policy checks: at least six characters, no simple code, lock immediately, auto-lock after at most five minutes, and wipe only after ten failed attempts. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the iOS settings catalog, the same payload as UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; values aligned with [Baseline] - IOS - U - Compliance Password, inactivity according to CIS Apple iOS/iPadOS 26 Benchmark.",
     "platforms": "iOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

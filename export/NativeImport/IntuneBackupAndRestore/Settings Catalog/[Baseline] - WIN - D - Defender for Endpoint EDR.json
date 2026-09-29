@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender for Endpoint EDR",
-    "description": "Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. Dat pakket is tenant-specifiek; in een andere tenant moet het opnieuw gekoppeld worden. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: eigen baseline — OpenIntuneBaseline heeft geen EDR-onboardingpolicy.",
+    "description": "Connects the device to Defender for Endpoint with a fixed onboarding package. That package is tenant-specific; in another tenant it must be connected again. Baseline assignment: none — an alternative that is not deployed. Source: own baseline — OpenIntuneBaseline has no EDR onboarding policy.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

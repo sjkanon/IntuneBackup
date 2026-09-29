@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Disable NTLM",
-    "description": "Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM.",
+    "description": "Turns off the outdated NTLM authentication in favour of Kerberos. Breaks old on-prem applications and devices that do not speak Kerberos — test first. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

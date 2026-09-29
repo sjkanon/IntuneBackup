@@ -78,7 +78,7 @@ Mac. Phase : identique à FileVault (pilote d'abord).
 ## Vérification
 
 - Sur le Mac, après connexion : `sudo profiles show -type configuration | grep -i escrow` affiche le
-  profil, et le journal se termine par « GenerateNewKey gezet ». Après la connexion suivante,
+  profil, et le journal se termine par « GenerateNewKey set ». Après la connexion suivante,
   `GenerateNewKey` repasse à false (`defaults read /Library/Preferences/com.netflix.Escrow-Buddy.plist`).
 - Dans Intune : Devices → l'appareil → **Recovery keys** affiche une clé.
 

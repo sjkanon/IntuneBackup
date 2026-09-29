@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Intune-remediation (herstel): vergroot de operationele beveiligingslogboeken. Verkleint nooit.
+    Intune remediation (remediate): enlarges the operational security event logs. Never shrinks them.
 #>
 $Channels = [ordered]@{
     'Microsoft-Windows-PowerShell/Operational'       = 256MB
@@ -18,7 +18,7 @@ foreach ($name in $Channels.Keys) {
             Write-Output "$name -> $([math]::Round($Channels[$name] / 1MB)) MB"
         }
     } catch {
-        Write-Output "Fout bij ${name}: $($_.Exception.Message)"
+        Write-Output "Error on ${name}: $($_.Exception.Message)"
         $failed = $true
     }
 }

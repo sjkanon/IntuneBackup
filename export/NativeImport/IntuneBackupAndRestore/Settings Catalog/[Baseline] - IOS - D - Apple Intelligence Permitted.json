@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - IOS - D - Apple Intelligence Permitted",
-    "description": "Staat op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies en de koppeling met externe AI-diensten uitdrukkelijk toe. Toewijzing volgens baseline: geen — deze policy hoort op een eigen groep, niet op iedereen. Bron: Tegenhanger van [Baseline] - IOS - D - Apple Intelligence Restricted; dezelfde declaratieve sleutels op de Apple-standaardwaarde, expliciet vastgelegd.",
+    "description": "Explicitly allows the generative Apple Intelligence features and the integration with external AI services on enrolled iPhones and iPads. Baseline assignment: none — an alternative that is not deployed. Source: Counterpart of [Baseline] - IOS - D - Apple Intelligence Restricted; the same declarative keys at the Apple default value, recorded explicitly.",
     "platforms": "iOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {
