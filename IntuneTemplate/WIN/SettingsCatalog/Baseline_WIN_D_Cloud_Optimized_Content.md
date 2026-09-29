@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Cloud_Optimized_Content.en.md) · [Français](Baseline_WIN_D_Cloud_Optimized_Content.fr.md)
+
 # [Baseline] - WIN - D - Cloud Optimized Content
 
 Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight.

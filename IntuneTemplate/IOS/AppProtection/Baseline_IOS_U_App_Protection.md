@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_U_App_Protection.en.md) · [Français](Baseline_IOS_U_App_Protection.fr.md)
+
 # [Baseline] - IOS - U - App Protection
 
 Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt.

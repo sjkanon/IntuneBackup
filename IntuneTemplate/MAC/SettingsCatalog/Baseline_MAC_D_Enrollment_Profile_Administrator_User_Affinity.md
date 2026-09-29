@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) · [Français](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.fr.md)
+
 # [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity
 
 Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.

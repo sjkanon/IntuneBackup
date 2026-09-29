@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Component_Hardening.en.md) · [Français](Baseline_WIN_D_Windows_Component_Hardening.fr.md)
+
 # [Baseline] - WIN - D - Windows Component Hardening
 
 Zet zeven kleine CIS-gaten dicht in Windows-onderdelen: geen automatische aanmelding, geen NTP-server, geen doorwerken op een ander apparaat, geen opsomming van lokale gebruikers, beschermde modus voor het shellprotocol, geen WinRT-toegang vanuit gehoste inhoud en geen upgrade-aanbod via de Store.

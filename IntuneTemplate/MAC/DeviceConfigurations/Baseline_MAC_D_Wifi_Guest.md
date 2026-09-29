@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Wifi_Guest.en.md) · [Français](Baseline_MAC_D_Wifi_Guest.fr.md)
+
 # [Baseline] - MAC - D - Wifi Guest
 
 Rolt het gastnetwerk uit als tweede profiel op elke Mac, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is.

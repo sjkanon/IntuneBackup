@@ -1,0 +1,66 @@
+<!-- Généré par scripts/generate-docs.js — ne pas modifier à la main. -->
+
+[Nederlands](Baseline_MAC_U_Compliance_Password.md) · [English](Baseline_MAC_U_Compliance_Password.en.md) · **Français**
+
+# [Baseline] - MAC - U - Compliance Password
+
+Vérifie si le Mac exige un mot de passe et quelle doit être sa robustesse.
+
+| | |
+|---|---|
+| Platform | macOS |
+| Scope | User (U) — affecter à des groupes d'utilisateurs |
+| Type | Compliance |
+| Affectation | All Users |
+| checkId | aucun — le moteur de la plateforme n'a pas de correspondance pour ce type de policy |
+| Source | OpenIntuneBaseline macOS v1.0 — Compliance - U - Password |
+| Fichier | [`Baseline_MAC_U_Compliance_Password.json`](Baseline_MAC_U_Compliance_Password.json) |
+
+## Normes
+
+| Référentiel | Mesures |
+|---|---|
+| ISO/IEC 27001:2022 | A.5.17 Informations d'authentification<br>A.7.7 Bureau propre et écran vide<br>A.8.1 Terminaux finaux des utilisateurs<br>A.8.5 Authentification sécurisée |
+| NIS2 art. 21(2) | art. 21(2)(f) évaluation de l'efficacité<br>art. 21(2)(i) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs |
+| CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
+| NIST CSF 2.0 | PR.AA-03<br>DE.CM-09 |
+
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+
+## Propriétés — 27
+
+Une policy de conformité n'a pas de settingDefinitionId mais des propriétés fixes. `scheduledActionsForRule` détermine ce qui se passe lorsqu'un appareil n'est pas conforme.
+
+| Propriété | Valeur |
+|---|---|
+| `passwordRequired` | true |
+| `passwordBlockSimple` | true |
+| `passwordExpirationDays` | — |
+| `passwordMinimumLength` | 8 |
+| `passwordMinutesOfInactivityBeforeLock` | 15 |
+| `passwordPreviousPasswordBlockCount` | 1 |
+| `passwordMinimumCharacterSetCount` | 1 |
+| `passwordRequiredType` | alphanumeric |
+| `osMinimumVersion` | — |
+| `osMaximumVersion` | — |
+| `osMinimumBuildVersion` | — |
+| `osMaximumBuildVersion` | — |
+| `systemIntegrityProtectionEnabled` | false |
+| `deviceThreatProtectionEnabled` | false |
+| `deviceThreatProtectionRequiredSecurityLevel` | unavailable |
+| `advancedThreatProtectionRequiredSecurityLevel` | unavailable |
+| `storageRequireEncryption` | false |
+| `gatekeeperAllowedAppSource` | notConfigured |
+| `firewallEnabled` | false |
+| `firewallBlockAllIncoming` | false |
+| `firewallEnableStealthMode` | false |
+| `scheduledActionsForRule[0].ruleName` | PasswordRequired |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].@odata.type` | #microsoft.graph.deviceComplianceActionItem |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].gracePeriodHours` | 0 |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].actionType` | block |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].notificationTemplateId` | 00000000-0000-0000-0000-000000000000 |
+| `scheduledActionsForRule[0].scheduledActionConfigurations[0].notificationMessageCCList` | — |
+
+---
+
+Retour à la [vue d'ensemble macOS](../README.fr.md) · [README principal](../../../README.fr.md)

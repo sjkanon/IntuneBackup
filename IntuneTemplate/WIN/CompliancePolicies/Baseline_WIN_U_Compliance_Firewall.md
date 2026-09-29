@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Compliance_Firewall.en.md) · [Français](Baseline_WIN_U_Compliance_Firewall.fr.md)
+
 # [Baseline] - WIN - U - Compliance Firewall
 
 Toetst of Windows Firewall actief is.

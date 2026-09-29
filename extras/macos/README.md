@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # extras/macos/
 
 Onderdelen van de macOS-baseline die geen van de vijf CIPP-policytypes zijn (Catalog, Device,

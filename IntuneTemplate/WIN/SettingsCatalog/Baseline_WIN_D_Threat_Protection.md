@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Threat_Protection.en.md) · [Français](Baseline_WIN_D_Threat_Protection.fr.md)
+
 # [Baseline] - WIN - D - Threat Protection
 
 Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker.

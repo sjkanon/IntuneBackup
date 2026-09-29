@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Printing_Hardening.en.md) · [Français](Baseline_WIN_D_Printing_Hardening.fr.md)
+
 # [Baseline] - WIN - D - Printing Hardening
 
 Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van printerdrivers bij een gedeelde printer, en sluit printen over HTTP af.

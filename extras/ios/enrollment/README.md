@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # iOS/iPadOS ADE-inschrijfprofiel
 
 `iOS-Corporate-ADE-Baseline.json` is een `depIOSEnrollmentProfile` (Graph beta). Net als

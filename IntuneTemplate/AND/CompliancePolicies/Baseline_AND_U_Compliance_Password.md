@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_AND_U_Compliance_Password.en.md) · [Français](Baseline_AND_U_Compliance_Password.fr.md)
+
 # [Baseline] - AND - U - Compliance Password
 
 Toetst of een Android-toestel met persoonlijk werkprofiel een schermvergrendeling van gemiddelde complexiteit heeft, of het werkprofiel daarnaast een eigen code van minimaal zes cijfers (numeriek complex, gemiddelde complexiteit) vraagt die na vijftien minuten vergrendelt, en of de opslag versleuteld is.

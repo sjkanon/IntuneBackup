@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Privacy_and_Telemetry.en.md) · [Français](Baseline_WIN_D_Privacy_and_Telemetry.fr.md)
+
 # [Baseline] - WIN - D - Privacy and Telemetry
 
 Zet de advertentie-id uit, blokkeert het klembord tussen apparaten, stopt het uploaden van gebruikersactiviteiten en houdt wat de gebruiker typt en inspreekt op het apparaat.

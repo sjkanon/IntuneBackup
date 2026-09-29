@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) · [Français](Baseline_WIN_D_Windows_AI_Features_Restricted.fr.md)
+
 # [Baseline] - WIN - D - Windows AI Features Restricted
 
 Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent.

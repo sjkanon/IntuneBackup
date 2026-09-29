@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) · [Français](Baseline_WIN_D_Windows_AI_Recall_Boundaries.fr.md)
+
 # [Baseline] - WIN - D - Windows AI Recall Boundaries
 
 Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerportalen en de wachtwoordkluis, hoogstens 30 dagen bewaren, hoogstens 10 GB, en gebruikers kunnen hun Recall-gegevens niet exporteren.

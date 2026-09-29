@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Data_Minimisation.en.md) · [Français](Baseline_WIN_D_Data_Minimisation.fr.md)
+
 # [Baseline] - WIN - D - Data Minimisation
 
 Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestanden en geen geheugendumps naar Microsoft.

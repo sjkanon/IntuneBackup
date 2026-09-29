@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic
 
 Legt in Edge DNS over HTTPS vast op 'automatisch': Edge versleutelt DNS-verzoeken zodra de ingestelde DNS-server DoH ondersteunt en valt anders terug op gewone DNS, zonder dat de gebruiker het kan uitzetten.

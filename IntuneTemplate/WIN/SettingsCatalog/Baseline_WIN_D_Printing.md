@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Printing.en.md) · [Français](Baseline_WIN_D_Printing.fr.md)
+
 # [Baseline] - WIN - D - Printing
 
 Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Defender_Antivirus.en.md) · [Français](Baseline_MAC_D_Defender_Antivirus.fr.md)
+
 # [Baseline] - MAC - D - Defender Antivirus
 
 Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS.

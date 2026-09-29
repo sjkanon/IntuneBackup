@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Update_Reports_and_Telemetry.en.md) · [Français](Baseline_WIN_D_Update_Reports_and_Telemetry.fr.md)
+
 # [Baseline] - WIN - D - Update Reports and Telemetry
 
 Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen.

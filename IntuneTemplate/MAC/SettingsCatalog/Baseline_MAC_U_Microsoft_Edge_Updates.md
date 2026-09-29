@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_U_Microsoft_Edge_Updates.en.md) · [Français](Baseline_MAC_U_Microsoft_Edge_Updates.fr.md)
+
 # [Baseline] - MAC - U - Microsoft Edge Updates
 
 Hoe en wanneer Edge op de Mac zichzelf bijwerkt.

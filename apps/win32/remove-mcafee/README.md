@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # Verwijder voorgeïnstalleerde McAfee
 
 Een Win32-app die de McAfee-proefversie verwijdert die op vrijwel elke nieuwe consumentenlaptop

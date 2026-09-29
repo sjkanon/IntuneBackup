@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) · [Français](Baseline_IOS_D_Apple_Intelligence_Permitted.fr.md)
+
 # [Baseline] - IOS - D - Apple Intelligence Permitted
 
 Staat op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies en de koppeling met externe AI-diensten uitdrukkelijk toe.

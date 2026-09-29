@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_AI_Tooling.en.md) · [Français](Baseline_WIN_D_AI_Tooling.fr.md)
+
 # [Baseline] - WIN - D - AI Tooling
 
 Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke licentie blijft werken.

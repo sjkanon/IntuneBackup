@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Restrictions_Hardening.en.md) · [Français](Baseline_MAC_D_Restrictions_Hardening.fr.md)
+
 # [Baseline] - MAC - D - Restrictions Hardening
 
 Vult de macOS-restricties aan met vijf maatregelen die OpenIntuneBaseline macOS v1.0 niet zet: geen handmatig geïnstalleerde configuratieprofielen of certificaten, geen Gatekeeper-omzeiling via de Finder, geen diagnostische gegevens naar Apple, geen internetresultaten in Spotlight en geen contentcaching.

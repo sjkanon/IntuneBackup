@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_External_Storage_Read_Only.en.md) · [Français](Baseline_MAC_D_External_Storage_Read_Only.fr.md)
+
 # [Baseline] - MAC - D - External Storage Read Only
 
 Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-sticks en externe schijven — die lees-schrijf zijn — worden helemaal niet gekoppeld.

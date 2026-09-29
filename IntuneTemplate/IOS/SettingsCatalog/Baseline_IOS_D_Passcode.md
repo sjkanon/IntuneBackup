@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Passcode.en.md) · [Français](Baseline_IOS_D_Passcode.fr.md)
+
 # [Baseline] - IOS - D - Passcode
 
 Stelt op ingeschreven iPhones en iPads de toegangscode in die de compliance-policy toetst: minimaal zes tekens, geen eenvoudige code, direct vergrendelen, automatisch vergrendelen na hoogstens vijf minuten, en wissen pas na tien foute pogingen.

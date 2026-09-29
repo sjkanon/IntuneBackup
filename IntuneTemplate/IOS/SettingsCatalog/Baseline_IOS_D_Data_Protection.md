@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Data_Protection.en.md) · [Français](Baseline_IOS_D_Data_Protection.fr.md)
+
 # [Baseline] - IOS - D - Data Protection
 
 Houdt bedrijfsgegevens op elk ingeschreven toestel gescheiden van privé-apps: documenten uit beheerde apps openen niet in onbeheerde apps, AirDrop telt als onbeheerd, beheerde apps synchroniseren niet naar iCloud, privé-apps lezen geen werkcontacten en lokale back-ups zijn versleuteld.

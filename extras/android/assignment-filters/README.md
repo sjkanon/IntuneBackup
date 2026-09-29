@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # Toewijzingsfilters voor Android Enterprise
 
 Drie `deviceAndAppManagementAssignmentFilter`-bodies. Een filter verfijnt een toewijzing aan een

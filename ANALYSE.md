@@ -1,3 +1,5 @@
+**Nederlands** · [English](ANALYSE.en.md) · [Français](ANALYSE.fr.md)
+
 # Gapanalyse — wat missen we voor een eerste baseline?
 
 Handgeschreven, in tegenstelling tot [`README.md`](README.md) ernaast. Dit legt vast *hoe* de
@@ -38,7 +40,7 @@ Drie dingen die daarbij misgaan als je ze niet weet:
    gevolgd door `JSON.parse` faalt op alle 874.
 2. **Een `GroupSettingCollection` is een container, geen instelling.** Twee policies die dezelfde
    macOS-payload gebruiken maar andere kinderen zetten, botsen niet. `flattenSettings` in
-   [`scripts/lib/templates.js`](../scripts/lib/templates.js) maakt dat onderscheid al.
+   [`scripts/lib/templates.js`](scripts/lib/templates.js) maakt dat onderscheid al.
 3. **Waarden uit een externe set zijn niet vanzelf goed.** Zie *Fouten in de bronnen* hieronder.
 
 ## Uitkomst in cijfers
@@ -199,7 +201,7 @@ Weinig, en dat is een bevinding op zich.
   die wij daaruit niet zetten gaat het om zaken als `cryptowalletenabled`, `gamermodeenabled`,
   `aigenthemesenabled` en `browseraddprofileenabled`. Dat zijn nette Edge-instellingen, maar ze
   volgen niet uit ISO 27001 en ze zijn niet apparaatkritisch. Onze
-  [`Baseline_WIN_D_Microsoft_Edge_Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.md)
+  [`Baseline_WIN_D_Microsoft_Edge_Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.md)
   (54 instellingen) dekt de beveiligingskant al. **Geen enkele overgenomen.**
 - De **NIS2-map** bevat een Edge- en een Windows 11-profiel. Het Windows 11-profiel leverde 11
   instellingen op die wij niet zetten. Daarvan zijn er **vier overgenomen** (de accountlockout-

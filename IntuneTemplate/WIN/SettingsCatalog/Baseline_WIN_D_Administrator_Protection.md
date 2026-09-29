@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Administrator_Protection.en.md) · [Français](Baseline_WIN_D_Administrator_Protection.fr.md)
+
 # [Baseline] - WIN - D - Administrator Protection
 
 Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # IntuneTemplate — 197 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
@@ -43,6 +45,7 @@ bestand op zijn plek staat.
 | [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, waarom er afgeweken wordt en in welke fase hij uitrolt | `import-oib.js`, `set-packages.js` |
 | [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
 | [`_controls.json`](_controls.json) | de normenvocabulaire: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |
+| [`_i18n/`](_i18n/) | de Engelse en Franse vertaling van de teksten uit de data, voor de gegenereerde documentatie | `generate-docs.js`, `generate-compliance.js` |
 
 Assignments staan bewust niet in het template zelf: CIPP wijst apart toe, maar
 IntuneBackupAndRestore heeft ze wél nodig om compleet terug te kunnen zetten.

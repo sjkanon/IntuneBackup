@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Microsoft_Edge_Security.en.md) · [Français](Baseline_MAC_D_Microsoft_Edge_Security.fr.md)
+
 # [Baseline] - MAC - D - Microsoft Edge Security
 
 De beveiligingsinstellingen van Edge op macOS: SmartScreen, downloadcontrole en certificaatgedrag.

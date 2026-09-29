@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # extras/macos/enrollment-restriction/
 
 Advies en template: persoonlijke Macs niet laten inschrijven in Intune.

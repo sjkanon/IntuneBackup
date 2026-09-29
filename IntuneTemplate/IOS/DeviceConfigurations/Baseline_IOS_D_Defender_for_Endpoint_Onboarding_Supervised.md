@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.en.md) · [Français](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.fr.md)
+
 # [Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised
 
 Onboardt Microsoft Defender for Endpoint zonder gebruikersactie op supervised bedrijfstoestellen met een content filter-profiel, zodat webbescherming werkt zonder lokale VPN.

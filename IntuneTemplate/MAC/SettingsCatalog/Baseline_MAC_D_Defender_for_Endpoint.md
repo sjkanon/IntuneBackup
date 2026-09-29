@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Defender_for_Endpoint.en.md) · [Français](Baseline_MAC_D_Defender_for_Endpoint.fr.md)
+
 # [Baseline] - MAC - D - Defender for Endpoint
 
 Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeemextensie, netwerkfilter en volledige schijftoegang. Zonder deze policy blijft Defender op een Mac half geïnstalleerd.

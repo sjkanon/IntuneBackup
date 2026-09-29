@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # macOS shell-scripts
 
 Intune-shellscripts (`deviceShellScripts`) staan **buiten** `IntuneTemplate/`, om dezelfde

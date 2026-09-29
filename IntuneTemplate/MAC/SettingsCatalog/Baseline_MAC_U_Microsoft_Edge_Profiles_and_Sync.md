@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.en.md) · [Français](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.fr.md)
+
 # [Baseline] - MAC - U - Microsoft Edge Profiles and Sync
 
 Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt.

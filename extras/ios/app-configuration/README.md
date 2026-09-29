@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # iOS/iPadOS app-configuratie
 
 Zes Graph-bodies, twee per app. App-configuratie is geen CIPP-type en staat daarom hier.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_U_Compliance_Device_Health.en.md) · [Français](Baseline_MAC_U_Compliance_Device_Health.fr.md)
+
 # [Baseline] - MAC - U - Compliance Device Health
 
 Toetst of System Integrity Protection op de Mac aanstaat.

@@ -44,6 +44,7 @@
 const fs = require("fs");
 const path = require("path");
 const { SET_PREFIXES, readTemplates } = require("./lib/templates");
+const { LANGS, variantPath, languageBar } = require("./lib/i18n");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, SET_PREFIXES.Baseline);
@@ -204,45 +205,114 @@ const SIDECARS = [
     sourceDir: "enrollment",
     folder: "Apple ADE Enrollment Profiles",
     extensions: [".json"],
-    how: (files, folder) => [
-      "`Start-IntuneRestoreConfig` slaat deze map over: IntuneBackupAndRestore kent geen",
-      "restore-functie voor Apple ADE-enrollmentprofielen, en CIPP kent ze ook niet. Ze reizen",
-      "hier mee omdat een tenant die je uit deze export opnieuw inricht ze wél nodig heeft — een",
-      "Mac die zonder enrollmentprofiel uit Apple Business synct, faalt in de enrollment.",
-      "",
-      "Terugzetten gaat per profiel, met het ABM-token erbij:",
-      "",
-      "```powershell",
-      ...files.map((f) => `.\\scripts\\New-MacOSEnrollmentPolicy.ps1 -TokenName <TOKEN> -Path '.\\${folder}\\${f.split("/").join("\\")}' -WhatIf`),
-      "```",
-      "",
-      "Haal `-WhatIf` weg als het klopt. Toewijzen blijft handwerk in de portal (Enrollment",
-      "program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde",
-      "serienummers levert Macs op die zonder wipe niet terug te draaien zijn.",
-      "",
-      "Zie `enrollment/macos/README.md` in de repo voor wat er in het profiel staat en waarom.",
-    ],
+    how: {
+      nl: (files, folder) => [
+        "`Start-IntuneRestoreConfig` slaat deze map over: IntuneBackupAndRestore kent geen",
+        "restore-functie voor Apple ADE-enrollmentprofielen, en CIPP kent ze ook niet. Ze reizen",
+        "hier mee omdat een tenant die je uit deze export opnieuw inricht ze wél nodig heeft — een",
+        "Mac die zonder enrollmentprofiel uit Apple Business synct, faalt in de enrollment.",
+        "",
+        "Terugzetten gaat per profiel, met het ABM-token erbij:",
+        "",
+        ...restoreCommands(files, folder),
+        "",
+        "Haal `-WhatIf` weg als het klopt. Toewijzen blijft handwerk in de portal (Enrollment",
+        "program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde",
+        "serienummers levert Macs op die zonder wipe niet terug te draaien zijn.",
+        "",
+        "Zie `enrollment/macos/README.md` in de repo voor wat er in het profiel staat en waarom.",
+      ],
+      en: (files, folder) => [
+        "`Start-IntuneRestoreConfig` skips this folder: IntuneBackupAndRestore has no restore",
+        "function for Apple ADE enrolment profiles, and CIPP does not know them either. They travel",
+        "along here because a tenant you rebuild from this export does need them — a Mac that",
+        "syncs from Apple Business without an enrolment profile fails enrolment.",
+        "",
+        "Restoring is done per profile, with the ABM token:",
+        "",
+        ...restoreCommands(files, folder),
+        "",
+        "Remove `-WhatIf` once it is correct. Assigning remains manual work in the portal (Enrollment",
+        "program tokens → token → Devices), and that is deliberate: a profile on the wrong",
+        "serial numbers produces Macs that cannot be reverted without a wipe.",
+        "",
+        "See `enrollment/macos/README.en.md` in the repo for what the profile contains and why.",
+      ],
+      fr: (files, folder) => [
+        "`Start-IntuneRestoreConfig` ignore ce dossier : IntuneBackupAndRestore n'a pas de fonction",
+        "de restauration pour les profils d'inscription Apple ADE, et CIPP ne les connaît pas non plus.",
+        "Ils voyagent ici parce qu'un tenant reconstruit à partir de cet export en a besoin — un Mac",
+        "qui se synchronise depuis Apple Business sans profil d'inscription échoue à l'inscription.",
+        "",
+        "La restauration se fait profil par profil, avec le jeton ABM :",
+        "",
+        ...restoreCommands(files, folder),
+        "",
+        "Retirez `-WhatIf` quand tout est correct. L'affectation reste un travail manuel dans le portail",
+        "(Enrollment program tokens → token → Devices), et c'est voulu : un profil sur les mauvais",
+        "numéros de série donne des Mac qu'on ne peut pas rétablir sans effacement.",
+        "",
+        "Voir `enrollment/macos/README.fr.md` dans le dépôt pour le contenu du profil et sa raison d'être.",
+      ],
+    },
   },
   {
     sourceDir: "shellscripts",
     folder: "macOS Shell Scripts",
     extensions: [".sh"],
-    how: () => [
-      "`Start-IntuneRestoreConfig` slaat deze map over: `deviceShellScripts` heeft geen",
-      "restore-functie in de module en geen `TemplateType` in CIPP. Deze scripts reizen mee",
-      "omdat ze bij een herinrichting anders vergeten worden.",
-      "",
-      "Aanmaken gaat met de hand: **Devices → macOS → Shell scripts → Add**. De instellingen",
-      "per script (uitvoeren als aangemelde gebruiker, frequentie, toewijzing) staan in",
-      "`shellscripts/macos/README.md` in de repo — die waarden zijn geen detail: een dockscript",
-      "dat als root draait schrijft naar de verkeerde Dock en de gebruiker ziet niets.",
-    ],
+    how: {
+      nl: () => [
+        "`Start-IntuneRestoreConfig` slaat deze map over: `deviceShellScripts` heeft geen",
+        "restore-functie in de module en geen `TemplateType` in CIPP. Deze scripts reizen mee",
+        "omdat ze bij een herinrichting anders vergeten worden.",
+        "",
+        "Aanmaken gaat met de hand: **Devices → macOS → Shell scripts → Add**. De instellingen",
+        "per script (uitvoeren als aangemelde gebruiker, frequentie, toewijzing) staan in",
+        "`shellscripts/macos/README.md` in de repo — die waarden zijn geen detail: een dockscript",
+        "dat als root draait schrijft naar de verkeerde Dock en de gebruiker ziet niets.",
+      ],
+      en: () => [
+        "`Start-IntuneRestoreConfig` skips this folder: `deviceShellScripts` has no restore",
+        "function in the module and no `TemplateType` in CIPP. These scripts travel along",
+        "because they would otherwise be forgotten in a rebuild.",
+        "",
+        "Creating them is manual: **Devices → macOS → Shell scripts → Add**. The settings",
+        "per script (run as signed-in user, frequency, assignment) are in",
+        "`shellscripts/macos/README.en.md` in the repo — those values are not a detail: a Dock script",
+        "that runs as root writes to the wrong Dock and the user sees nothing.",
+      ],
+      fr: () => [
+        "`Start-IntuneRestoreConfig` ignore ce dossier : `deviceShellScripts` n'a pas de fonction",
+        "de restauration dans le module ni de `TemplateType` dans CIPP. Ces scripts voyagent ici",
+        "parce qu'ils seraient sinon oubliés lors d'une reconstruction.",
+        "",
+        "La création se fait à la main : **Devices → macOS → Shell scripts → Add**. Les paramètres",
+        "de chaque script (exécution en tant qu'utilisateur connecté, fréquence, affectation) figurent dans",
+        "`shellscripts/macos/README.fr.md` dans le dépôt — ces valeurs ne sont pas un détail : un script",
+        "de Dock exécuté en root écrit dans le mauvais Dock et l'utilisateur ne voit rien.",
+      ],
+    },
   },
 ];
 
+function restoreCommands(files, folder) {
+  return [
+    "```powershell",
+    ...files.map((f) => `.\\scripts\\New-MacOSEnrollmentPolicy.ps1 -TokenName <TOKEN> -Path '.\\${folder}\\${f.split("/").join("\\")}' -WhatIf`),
+    "```",
+  ];
+}
+
+const SIDECAR_GENERATED = {
+  nl: (sourceDir) => `**Gegenereerd** uit \`${sourceDir}/\` — niet met de hand bijwerken.`,
+  en: (sourceDir) => `**Generated** from \`${sourceDir}/\` — do not edit by hand.`,
+  fr: (sourceDir) => `**Généré** à partir de \`${sourceDir}/\` — ne pas modifier à la main.`,
+};
+
 /**
  * Kopieert één sidecar-map naar de export. Geeft de gekopieerde bestanden terug (relatief aan
- * de doelmap), of een lege lijst als de bronmap niet bestaat.
+ * de doelmap), of een lege lijst als de bronmap niet bestaat. De README komt in drie talen, net
+ * als de rest van de documentatie.
  */
 function exportSidecar(outDir, { sourceDir, folder, extensions, how }) {
   const from = path.join(REPO_ROOT, sourceDir);
@@ -261,8 +331,10 @@ function exportSidecar(outDir, { sourceDir, folder, extensions, how }) {
   }
   if (written.length === 0) return written;
 
-  const lines = [`# ${folder}`, "", `**Gegenereerd** uit \`${sourceDir}/\` — niet met de hand bijwerken.`, "", ...how(written, folder), ""];
-  fs.writeFileSync(path.join(outDir, folder, "README.md"), lines.join("\n"));
+  for (const lang of LANGS) {
+    const lines = [languageBar("README.md", lang), "", `# ${folder}`, "", SIDECAR_GENERATED[lang](sourceDir), "", ...how[lang](written, folder), ""];
+    fs.writeFileSync(path.join(outDir, folder, variantPath("README.md", lang)), lines.join("\n"));
+  }
   return written;
 }
 

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_Updates.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_Updates.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Edge Updates
 
 Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Accounts_and_Login.en.md) · [Français](Baseline_MAC_D_Accounts_and_Login.fr.md)
+
 # [Baseline] - MAC - D - Accounts and Login
 
 Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben.

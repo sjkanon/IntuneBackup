@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_Additional_Configuration.en.md) · [Français](Baseline_WIN_D_Defender_Additional_Configuration.fr.md)
+
 # [Baseline] - WIN - D - Defender Additional Configuration
 
 Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen.

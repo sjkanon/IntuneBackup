@@ -1,3 +1,5 @@
+**Nederlands** · [English](PLAN.en.md) · [Français](PLAN.fr.md)
+
 # Plan: van 24 eigen policies naar een baseline op OpenIntuneBaseline
 
 Doel: de baseline uitbreiden en actueel houden op basis van

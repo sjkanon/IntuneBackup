@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_AV_Policy.en.md) · [Français](Baseline_WIN_D_Defender_AV_Policy.fr.md)
+
 # [Baseline] - WIN - D - Defender AV Policy
 
 Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie.

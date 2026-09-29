@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Edge_User_Experience.en.md) · [Français](Baseline_WIN_U_Microsoft_Edge_User_Experience.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Edge User Experience
 
 De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn.

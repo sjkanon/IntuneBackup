@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Audit_Policy_Enforcement.en.md) · [Français](Baseline_WIN_D_Audit_Policy_Enforcement.fr.md)
+
 # [Baseline] - WIN - D - Audit Policy Enforcement
 
 Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellingen, zodat de auditpolicy van de baseline daadwerkelijk bepaalt wat er wordt gelogd.

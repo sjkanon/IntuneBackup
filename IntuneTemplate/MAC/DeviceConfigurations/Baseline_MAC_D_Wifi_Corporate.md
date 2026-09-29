@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Wifi_Corporate.en.md) · [Français](Baseline_MAC_D_Wifi_Corporate.fr.md)
+
 # [Baseline] - MAC - D - Wifi Corporate
 
 Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Mac, zodat een apparaat na inschrijving vanzelf verbinding heeft en een gebruiker het netwerkwachtwoord nooit hoeft te kennen of in te typen.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_AI_Restricted.en.md) · [Français](Baseline_WIN_D_Windows_AI_Restricted.fr.md)
+
 # [Baseline] - WIN - D - Windows AI Restricted
 
 Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.

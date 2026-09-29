@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_U_Compliance_Password.en.md) · [Français](Baseline_IOS_U_Compliance_Password.fr.md)
+
 # [Baseline] - IOS - U - Compliance Password
 
 Toetst of een iPhone of iPad een toegangscode van minimaal zes tekens vereist, geen eenvoudige code, en na vijftien minuten vergrendelt.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_Search_Engine.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Edge Search Engine
 
 Zet Google als standaardzoekmachine in Edge. Een klantkeuze, geen beveiligingsinstelling.

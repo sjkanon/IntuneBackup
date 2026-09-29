@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Login_and_Lock_Screen.en.md) · [Français](Baseline_WIN_D_Login_and_Lock_Screen.fr.md)
+
 # [Baseline] - WIN - D - Login and Lock Screen
 
 Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoals de laatst aangemelde gebruiker en camera-toegang.

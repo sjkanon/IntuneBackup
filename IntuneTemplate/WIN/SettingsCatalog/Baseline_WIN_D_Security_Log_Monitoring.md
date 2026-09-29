@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Security_Log_Monitoring.en.md) · [Français](Baseline_WIN_D_Security_Log_Monitoring.fr.md)
+
 # [Baseline] - WIN - D - Security Log Monitoring
 
 Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is en logt de pijplijnuitvoering van alle PowerShell-modules, zodat het logboek bij een incident niet ongemerkt is overschreven en PowerShell-activiteit volledig herleidbaar is.

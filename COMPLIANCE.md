@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-compliance.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](COMPLIANCE.en.md) · [Français](COMPLIANCE.fr.md)
+
 # Normenkader en verantwoording
 
 Hoe deze baseline invulling geeft aan **ISO/IEC 27001:2022 Annex A**, **NIS2 (richtlijn 2022/2555,

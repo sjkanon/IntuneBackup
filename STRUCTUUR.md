@@ -1,3 +1,5 @@
+**Nederlands** · [English](STRUCTUUR.en.md) · [Français](STRUCTUUR.fr.md)
+
 # Structuur en koppelingen
 
 Hoe deze repo in elkaar zit en waar hij aan vastzit: welke bronnen hem voeden, wat eruit wordt

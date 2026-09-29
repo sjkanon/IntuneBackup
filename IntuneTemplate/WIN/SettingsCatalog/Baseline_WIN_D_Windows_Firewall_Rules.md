@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Firewall_Rules.en.md) · [Français](Baseline_WIN_D_Windows_Firewall_Rules.fr.md)
+
 # [Baseline] - WIN - D - Windows Firewall Rules
 
 Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe).

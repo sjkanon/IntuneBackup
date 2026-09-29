@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Microsoft_Office.en.md) · [Français](Baseline_MAC_D_Microsoft_Office.fr.md)
+
 # [Baseline] - MAC - D - Microsoft Office
 
 Basisconfiguratie van Office op macOS.

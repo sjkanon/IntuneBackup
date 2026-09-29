@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Accounts.en.md) · [Français](Baseline_WIN_D_Microsoft_Accounts.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Accounts
 
 Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toegevoegd mogen worden.

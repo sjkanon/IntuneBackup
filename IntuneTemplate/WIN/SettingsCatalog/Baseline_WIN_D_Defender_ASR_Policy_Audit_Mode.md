@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) · [Français](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.fr.md)
+
 # [Baseline] - WIN - D - Defender ASR Policy Audit Mode
 
 Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren.

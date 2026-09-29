@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Legacy_Hardening.en.md) · [Français](Baseline_WIN_D_Legacy_Hardening.fr.md)
+
 # [Baseline] - WIN - D - Legacy Hardening
 
 De hardeningsinstellingen uit de oude Administrative Templates-policy waar OpenIntuneBaseline geen tegenhanger voor heeft: hardened UNC-paden, WDigest, blokkade van apparaatklassen, multicast-DNS en het verwerken van registerbeleid.

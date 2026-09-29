@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Business_Continuity.en.md) · [Français](Baseline_WIN_D_Business_Continuity.fr.md)
+
 # [Baseline] - WIN - D - Business Continuity
 
 Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten.

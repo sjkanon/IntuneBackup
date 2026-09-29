@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) · [Français](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.fr.md)
+
 # [Baseline] - WIN - D - Windows Hello PIN Complexity Numeric
 
 Legt de numerieke Windows Hello-PIN expliciet vast: cijfers vereist, letters en leestekens geblokkeerd.

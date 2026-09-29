@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Audit_and_Event_Logging.en.md) · [Français](Baseline_WIN_D_Audit_and_Event_Logging.fr.md)
+
 # [Baseline] - WIN - D - Audit and Event Logging
 
 Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf.

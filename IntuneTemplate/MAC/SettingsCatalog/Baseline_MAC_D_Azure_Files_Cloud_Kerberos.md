@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) · [Français](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.fr.md)
+
 # [Baseline] - MAC - D - Azure Files Cloud Kerberos
 
 Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_AND_U_Compliance_Corporate_Password.en.md) · [Français](Baseline_AND_U_Compliance_Corporate_Password.fr.md)
+
 # [Baseline] - AND - U - Compliance Corporate Password
 
 Toetst of een fully managed of corporate-owned Android-toestel een numeriek complexe code van minimaal zes cijfers heeft, na vijftien minuten vergrendelt, de laatste vijf codes niet hergebruikt en versleuteld is.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Enterprise_SSO.en.md) · [Français](Baseline_IOS_D_Enterprise_SSO.fr.md)
+
 # [Baseline] - IOS - D - Enterprise SSO
 
 Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat beheerde apps en Safari één Entra-aanmelding delen en het apparaat zich bij Conditional Access kan bewijzen.

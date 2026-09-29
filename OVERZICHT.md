@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](OVERZICHT.en.md) · [Français](OVERZICHT.fr.md)
+
 # Intune-baseline — overzicht
 
 197 policies over 4 platformen, met

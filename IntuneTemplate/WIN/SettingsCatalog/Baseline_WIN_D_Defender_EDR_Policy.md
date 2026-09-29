@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_EDR_Policy.en.md) · [Français](Baseline_WIN_D_Defender_EDR_Policy.fr.md)
+
 # [Baseline] - WIN - D - Defender EDR Policy
 
 Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat.

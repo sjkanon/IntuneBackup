@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Logging.en.md) · [Français](Baseline_WIN_D_Logging.fr.md)
+
 # [Baseline] - WIN - D - Logging
 
 Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien is wat een beheerder werkelijk heeft uitgevoerd.

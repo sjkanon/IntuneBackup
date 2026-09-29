@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Lock_Screen.en.md) · [Français](Baseline_IOS_D_Lock_Screen.fr.md)
+
 # [Baseline] - IOS - D - Lock Screen
 
 Toont op het vergrendelscherm van een bedrijfs-iPhone of -iPad een tekst voor de vinder, zodat een verloren toestel terug kan naar de organisatie.

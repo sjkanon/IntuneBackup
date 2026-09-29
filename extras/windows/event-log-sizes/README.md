@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # Logboekgroottes voor PowerShell, Defender en Code Integrity
 
 | | |

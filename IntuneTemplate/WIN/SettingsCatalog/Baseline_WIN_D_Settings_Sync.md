@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Settings_Sync.en.md) · [Français](Baseline_WIN_D_Settings_Sync.fr.md)
+
 # [Baseline] - WIN - D - Settings Sync
 
 Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden.

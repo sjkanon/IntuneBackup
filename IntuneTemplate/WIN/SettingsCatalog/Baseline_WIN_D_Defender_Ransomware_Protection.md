@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_Ransomware_Protection.en.md) · [Français](Baseline_WIN_D_Defender_Ransomware_Protection.fr.md)
+
 # [Baseline] - WIN - D - Defender Ransomware Protection
 
 Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk versleutelt.

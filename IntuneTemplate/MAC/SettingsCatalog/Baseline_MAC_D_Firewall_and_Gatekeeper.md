@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) · [Français](Baseline_MAC_D_Firewall_and_Gatekeeper.fr.md)
+
 # [Baseline] - MAC - D - Firewall and Gatekeeper
 
 Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een herkende ontwikkelaar is ondertekend.

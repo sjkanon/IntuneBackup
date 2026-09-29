@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Storage_Sense.en.md) · [Français](Baseline_WIN_D_Storage_Sense.fr.md)
+
 # [Baseline] - WIN - D - Storage Sense
 
 Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra de schijf vol dreigt te raken, en maakt lokaal gecachte OneDrive-bestanden weer online-only.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) · [Français](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Outlook Cached Mode Default
 
 Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook staan — gedeelde mappen worden dus wél meegecachet.

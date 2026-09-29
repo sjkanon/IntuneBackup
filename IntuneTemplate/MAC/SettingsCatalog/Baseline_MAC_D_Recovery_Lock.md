@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Recovery_Lock.en.md) · [Français](Baseline_MAC_D_Recovery_Lock.fr.md)
+
 # [Baseline] - MAC - D - Recovery Lock
 
 Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op recoveryOS en de opstartopties, en vervangt het elke zes maanden.

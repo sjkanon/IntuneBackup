@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) · [Français](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.fr.md)
+
 # [Baseline] - WIN - D - Windows Update Ring 1 Pilot
 
 Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar worden op een kleine groep.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) · [Français](Baseline_MAC_U_Microsoft_Edge_Extensions.fr.md)
+
 # [Baseline] - MAC - U - Microsoft Edge Extensions
 
 Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren.

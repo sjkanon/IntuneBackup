@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Screen_Recording.en.md) · [Français](Baseline_MAC_D_Screen_Recording.fr.md)
+
 # [Baseline] - MAC - D - Screen Recording
 
 Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Restrictions_Corporate.en.md) · [Français](Baseline_IOS_D_Restrictions_Corporate.fr.md)
+
 # [Baseline] - IOS - D - Restrictions Corporate
 
 Hardening voor supervised bedrijfs-iPhones en -iPads: geen handmatig geïnstalleerde profielen of ontwikkelaarsapps, geen apps van buiten de App Store, onbetrouwbare TLS-certificaten automatisch geweigerd, geen wissen via Instellingen, een vergrendelscherm zonder Control Center, meldingenhistorie, Today-weergave en Siri, en Activation Lock alleen met een door Intune bewaarde bypasscode.

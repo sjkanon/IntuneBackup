@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_AND_U_Compliance_Device_Health.en.md) · [Français](Baseline_AND_U_Compliance_Device_Health.fr.md)
+
 # [Baseline] - AND - U - Compliance Device Health
 
 Merkt een Android-toestel met persoonlijk werkprofiel als niet-compliant wanneer het geroot is, USB-foutopsporing aanstaat, apps van buiten de Play Store zijn toegestaan, Play Integrity niet hardwarematig bevestigd kan worden, of de laatste beveiligingspatch ouder is dan de ondergrens.

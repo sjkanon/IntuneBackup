@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Endpoint_Analytics.en.md) · [Français](Baseline_WIN_D_Endpoint_Analytics.fr.md)
+
 # [Baseline] - WIN - D - Endpoint Analytics
 
 Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen.

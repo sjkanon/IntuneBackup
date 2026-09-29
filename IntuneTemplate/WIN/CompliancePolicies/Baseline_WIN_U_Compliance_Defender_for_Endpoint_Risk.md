@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) · [Français](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md)
+
 # [Baseline] - WIN - U - Compliance Defender for Endpoint Risk
 
 Maakt een apparaat niet-compliant zodra Defender for Endpoint het risiconiveau hoger dan 'gemiddeld' inschat, zodat Conditional Access een apparaat met een actieve dreiging de toegang tot bedrijfsgegevens ontzegt.

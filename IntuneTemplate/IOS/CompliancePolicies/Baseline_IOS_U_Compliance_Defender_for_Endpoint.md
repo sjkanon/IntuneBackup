@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) · [Français](Baseline_IOS_U_Compliance_Defender_for_Endpoint.fr.md)
+
 # [Baseline] - IOS - U - Compliance Defender for Endpoint
 
 Merkt een iPhone of iPad als niet-compliant zodra Microsoft Defender for Endpoint het machinerisico hoger dan Medium inschat.

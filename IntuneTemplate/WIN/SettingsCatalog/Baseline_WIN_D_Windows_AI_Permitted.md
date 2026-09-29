@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_AI_Permitted.en.md) · [Français](Baseline_WIN_D_Windows_AI_Permitted.fr.md)
+
 # [Baseline] - WIN - D - Windows AI Permitted
 
 Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van schermafdrukken.

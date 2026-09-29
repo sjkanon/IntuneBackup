@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Screensaver.en.md) · [Français](Baseline_MAC_D_Screensaver.fr.md)
+
 # [Baseline] - MAC - D - Screensaver
 
 Vraagt het wachtwoord uiterlijk vijf seconden nadat de schermbeveiliging start, en start de schermbeveiliging na vijftien minuten inactiviteit — ook in het inlogvenster.

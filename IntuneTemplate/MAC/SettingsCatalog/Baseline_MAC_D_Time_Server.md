@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Time_Server.en.md) · [Français](Baseline_MAC_D_Time_Server.fr.md)
+
 # [Baseline] - MAC - D - Time Server
 
 Laat de Mac zijn klok gelijkzetten met time.apple.com, zodat tijdstempels in logboeken, Kerberos-tickets en certificaatcontroles kloppen.

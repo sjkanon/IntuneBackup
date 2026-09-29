@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Platform_SSO.en.md) · [Français](Baseline_MAC_D_Platform_SSO.fr.md)
+
 # [Baseline] - MAC - D - Platform SSO
 
 Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat het Mac-wachtwoord en het werkaccount samenvallen.

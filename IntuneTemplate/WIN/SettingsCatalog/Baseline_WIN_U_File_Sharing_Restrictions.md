@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_File_Sharing_Restrictions.en.md) · [Français](Baseline_WIN_U_File_Sharing_Restrictions.fr.md)
+
 # [Baseline] - WIN - U - File Sharing Restrictions
 
 Voorkomt dat een gebruiker bestanden uit zijn eigen profiel via 'Delen' in Verkenner met andere gebruikers of het netwerk deelt.

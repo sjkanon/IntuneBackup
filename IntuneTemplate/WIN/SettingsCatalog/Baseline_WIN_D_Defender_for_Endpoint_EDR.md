@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) · [Français](Baseline_WIN_D_Defender_for_Endpoint_EDR.fr.md)
+
 # [Baseline] - WIN - D - Defender for Endpoint EDR
 
 Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. Dat pakket is tenant-specifiek; in een andere tenant moet het opnieuw gekoppeld worden.

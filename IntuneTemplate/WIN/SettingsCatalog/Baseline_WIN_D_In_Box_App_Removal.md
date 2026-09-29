@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_In_Box_App_Removal.en.md) · [Français](Baseline_WIN_D_In_Box_App_Removal.fr.md)
+
 # [Baseline] - WIN - D - In-Box App Removal
 
 Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben.

@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # scripts/
 
 `IntuneTemplate/` is de enige bron. Alles wat hier staat vult die map, controleert 'm, of
@@ -88,6 +90,33 @@ node scripts/generate-compliance.js --strict --no-ca   # laatst: idem, plus de f
 Die volgorde staat ook in [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml),
 die na elke wijziging in `IntuneTemplate/` een PR opent met de geregenereerde bestanden. Dat is
 de enige workflow: één bron, één pijplijn, één plek waar de volgorde staat.
+
+## Drie talen
+
+Elk document staat er in het Nederlands (`X.md`), Engels (`X.en.md`) en Frans (`X.fr.md`), met
+een taalbalk bovenaan. Nederlands is de bron; de andere twee volgen.
+
+De gegenereerde documenten vertalen zichzelf: `generate-docs.js`, `generate-compliance.js` en
+`export-intunebackup.js` schrijven alle drie de talen in één run, via
+[`lib/i18n.js`](lib/i18n.js). Vaste tekst staat in het script als `{ nl, en, fr }`; tekst uit de
+data — `doel`, `note`, `faseWaarom` in het manifest, de toelichtingen in `_controls.json` en
+`_licenties.json` — blijft Nederlands in de data en wordt vertaald via
+`IntuneTemplate/_i18n/en.json` en `fr.json`, met de Nederlandse tekst als sleutel.
+
+Wijzigt er zo'n tekst, dan past de oude vertaling niet meer: de zin komt in het Nederlands in het
+Engelse en Franse document en beide scripts melden hoeveel teksten er zo zijn. Wat er ontbreekt:
+
+```bash
+node scripts/generate-docs.js --missend
+node scripts/generate-compliance.js --no-ca --missend
+```
+
+Dat geeft per taal een JSON-object met de Nederlandse teksten als sleutel en een lege waarde.
+Vul die in `_i18n/<taal>.json` in en draai de generatoren opnieuw. Een tekst die niet meer
+voorkomt blijft in dat bestand staan tot iemand hem opruimt; hij doet niets.
+
+De handgeschreven documenten — de README's, `ANALYSE.md`, `PLAN.md`, `STRUCTUUR.md` — worden met
+de hand vertaald: een wijziging in `X.md` hoort in dezelfde commit ook in `X.en.md` en `X.fr.md`.
 
 ## Spiegelen naar een tweede clone
 

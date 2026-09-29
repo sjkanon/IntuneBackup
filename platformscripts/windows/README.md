@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # Windows-platformscripts
 
 Intune-platformscripts (`deviceManagementScripts`) staan **buiten** `IntuneTemplate/`, om

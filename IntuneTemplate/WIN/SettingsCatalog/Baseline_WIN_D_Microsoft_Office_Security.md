@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Office_Security.en.md) · [Français](Baseline_WIN_D_Microsoft_Office_Security.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Office Security
 
 De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, beperkt ActiveX en oude bestandsformaten. Het zwaartepunt van deze baseline voor phishing via bijlagen.

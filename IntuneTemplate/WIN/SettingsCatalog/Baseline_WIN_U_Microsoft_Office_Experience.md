@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Office_Experience.en.md) · [Français](Baseline_WIN_U_Microsoft_Office_Experience.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Office Experience
 
 De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en welke functies zichtbaar zijn.

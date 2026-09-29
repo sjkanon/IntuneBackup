@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) · [Français](Baseline_IOS_D_Apple_Intelligence_Restricted.fr.md)
+
 # [Baseline] - IOS - D - Apple Intelligence Restricted
 
 Zet op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies uit — Writing Tools, Genmoji, Image Playground, Image Wand, gepersonaliseerd handschrift, samenvattingen in Mail, Notities, Safari en Visual Intelligence — en de koppeling met externe AI-diensten zoals ChatGPT.

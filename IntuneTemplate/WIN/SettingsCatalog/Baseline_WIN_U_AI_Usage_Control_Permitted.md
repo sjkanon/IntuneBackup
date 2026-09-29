@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) · [Français](Baseline_WIN_U_AI_Usage_Control_Permitted.fr.md)
+
 # [Baseline] - WIN - U - AI Usage Control Permitted
 
 Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten.

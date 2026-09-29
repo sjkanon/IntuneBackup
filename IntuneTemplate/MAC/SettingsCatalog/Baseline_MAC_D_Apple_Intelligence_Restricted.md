@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) · [Français](Baseline_MAC_D_Apple_Intelligence_Restricted.fr.md)
+
 # [Baseline] - MAC - D - Apple Intelligence Restricted
 
 Zet Apple Intelligence-functies uit die tekst, e-mail, notities, webpagina's of afbeeldingen door een taalmodel laten verwerken of naar een externe AI-dienst sturen, en houdt dicteren op het apparaat.

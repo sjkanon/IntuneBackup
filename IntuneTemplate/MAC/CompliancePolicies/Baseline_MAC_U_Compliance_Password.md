@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_U_Compliance_Password.en.md) · [Français](Baseline_MAC_U_Compliance_Password.fr.md)
+
 # [Baseline] - MAC - U - Compliance Password
 
 Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn.

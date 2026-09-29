@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) · [Français](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.fr.md)
+
 # [Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric
 
 Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken.

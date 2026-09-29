@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Location_and_Privacy.en.md) · [Français](Baseline_WIN_D_Location_and_Privacy.fr.md)
+
 # [Baseline] - WIN - D - Location and Privacy
 
 Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en spraak.

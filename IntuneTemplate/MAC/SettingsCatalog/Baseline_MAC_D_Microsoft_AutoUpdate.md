@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Microsoft_AutoUpdate.en.md) · [Français](Baseline_MAC_D_Microsoft_AutoUpdate.fr.md)
+
 # [Baseline] - MAC - D - Microsoft AutoUpdate
 
 Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerken.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Attachment_Scanning.en.md) · [Français](Baseline_WIN_U_Attachment_Scanning.fr.md)
+
 # [Baseline] - WIN - U - Attachment Scanning
 
 Laat de virusscanner elke bijlage controleren op het moment dat de gebruiker hem opent, niet alleen bij het opslaan.

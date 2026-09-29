@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) · [Français](Baseline_WIN_D_Windows_Update_Ring_2_UAT.fr.md)
+
 # [Baseline] - WIN - D - Windows Update Ring 2 UAT
 
 Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.

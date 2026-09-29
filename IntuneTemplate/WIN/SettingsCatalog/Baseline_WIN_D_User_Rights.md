@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_User_Rights.en.md) · [Français](Baseline_WIN_D_User_Rights.fr.md)
+
 # [Baseline] - WIN - D - User Rights
 
 Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden.

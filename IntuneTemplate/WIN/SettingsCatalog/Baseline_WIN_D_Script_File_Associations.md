@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Script_File_Associations.en.md) · [Français](Baseline_WIN_D_Script_File_Associations.fr.md)
+
 # [Baseline] - WIN - D - Script File Associations
 
 Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert.

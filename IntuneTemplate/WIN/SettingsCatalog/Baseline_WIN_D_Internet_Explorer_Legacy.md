@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Internet_Explorer_Legacy.en.md) · [Français](Baseline_WIN_D_Internet_Explorer_Legacy.fr.md)
+
 # [Baseline] - WIN - D - Internet Explorer Legacy
 
 Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen.

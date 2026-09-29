@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Local_Administrators.en.md) · [Français](Baseline_WIN_D_Local_Administrators.fr.md)
+
 # [Baseline] - WIN - D - Local Administrators
 
 Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerde groep beheert in plaats van wat er toevallig op het apparaat staat.

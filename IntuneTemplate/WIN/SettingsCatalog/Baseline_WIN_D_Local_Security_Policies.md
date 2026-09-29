@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Local_Security_Policies.en.md) · [Français](Baseline_WIN_D_Local_Security_Policies.fr.md)
+
 # [Baseline] - WIN - D - Local Security Policies
 
 De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit.

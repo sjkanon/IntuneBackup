@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_Security_Experience.en.md) · [Français](Baseline_WIN_D_Defender_Security_Experience.fr.md)
+
 # [Baseline] - WIN - D - Defender Security Experience
 
 Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten.

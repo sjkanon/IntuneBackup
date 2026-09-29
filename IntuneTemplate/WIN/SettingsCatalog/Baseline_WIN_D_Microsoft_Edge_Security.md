@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_Security.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_Security.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Edge Security
 
 De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaatgedrag en welke sites onbeveiligde inhoud mogen laden.

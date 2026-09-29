@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Feature_Configuration.en.md) · [Français](Baseline_WIN_D_Windows_Feature_Configuration.fr.md)
+
 # [Baseline] - WIN - D - Windows Feature Configuration
 
 Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu.

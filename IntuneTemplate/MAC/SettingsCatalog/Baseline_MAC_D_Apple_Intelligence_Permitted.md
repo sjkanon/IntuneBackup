@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) · [Français](Baseline_MAC_D_Apple_Intelligence_Permitted.fr.md)
+
 # [Baseline] - MAC - D - Apple Intelligence Permitted
 
 Staat dezelfde Apple Intelligence-functies uitdrukkelijk toe: Writing Tools, samenvattingen in Mail, Notities en Safari, Genmoji, Image Playground, de externe AI-integratie en dicteren via Apple's servers.

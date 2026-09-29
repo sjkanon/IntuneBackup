@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Restrictions.en.md) · [Français](Baseline_MAC_D_Restrictions.fr.md)
+
 # [Baseline] - MAC - D - Restrictions
 
 Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.

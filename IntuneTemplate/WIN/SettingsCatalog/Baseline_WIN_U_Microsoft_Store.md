@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Store.en.md) · [Français](Baseline_WIN_U_Microsoft_Store.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Store
 
 De gebruikerskant van de Store-beperkingen.

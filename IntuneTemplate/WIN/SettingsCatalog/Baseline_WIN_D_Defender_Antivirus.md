@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Defender_Antivirus.en.md) · [Français](Baseline_WIN_D_Defender_Antivirus.fr.md)
+
 # [Baseline] - WIN - D - Defender Antivirus
 
 Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie.

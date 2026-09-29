@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # iOS/iPadOS — wat níet in `IntuneTemplate/` past
 
 De CIPP-pijplijnen dragen vijf policytypes (Catalog, Device, compliance, App Protection,

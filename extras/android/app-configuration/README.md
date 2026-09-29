@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # App-configuratie voor Android (ingeschreven toestellen)
 
 Drie `androidManagedStoreAppConfiguration`-bodies: de app-configuratie die Managed Google Play

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_FileVault.en.md) · [Français](Baseline_MAC_D_FileVault.fr.md)
+
 # [Baseline] - MAC - D - FileVault
 
 Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macOS-tegenhanger van BitLocker.

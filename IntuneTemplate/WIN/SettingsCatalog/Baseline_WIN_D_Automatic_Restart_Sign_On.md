@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) · [Français](Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md)
+
 # [Baseline] - WIN - D - Automatic Restart Sign-On
 
 Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer aan, zodat opstartprogramma's draaien zonder dat het apparaat onbeheerd ontgrendeld staat.

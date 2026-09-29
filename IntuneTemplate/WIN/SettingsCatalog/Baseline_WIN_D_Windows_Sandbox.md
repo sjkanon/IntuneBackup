@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Sandbox.en.md) · [Français](Baseline_WIN_D_Windows_Sandbox.fr.md)
+
 # [Baseline] - WIN - D - Windows Sandbox
 
 Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot het netwerk en het klembord van de host.

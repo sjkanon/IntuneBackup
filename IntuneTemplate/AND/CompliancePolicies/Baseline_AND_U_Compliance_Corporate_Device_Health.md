@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) · [Français](Baseline_AND_U_Compliance_Corporate_Device_Health.fr.md)
+
 # [Baseline] - AND - U - Compliance Corporate Device Health
 
 Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wanneer het geroot is, Play Integrity niet hardwarematig slaagt, de Intune-app gemanipuleerd is, het onder Android 16 draait of de laatste beveiligingspatch ouder is dan de ondergrens.

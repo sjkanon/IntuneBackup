@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.en.md) · [Français](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed
 
 Zet Cached Exchange Mode aan voor de eigen mailbox en houdt alles wat gedeeld is erbuiten: gedeelde mailmappen, gedeelde agenda's en Public Folder Favorites worden niet naar het OST-bestand gekopieerd.

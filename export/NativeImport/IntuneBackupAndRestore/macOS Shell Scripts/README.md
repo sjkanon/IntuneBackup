@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # macOS Shell Scripts
 
 **Gegenereerd** uit `shellscripts/` — niet met de hand bijwerken.

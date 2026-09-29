@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # extras/macos/defender-onboarding/
 
 Hoe een Mac wordt aangemeld bij Microsoft Defender for Endpoint — en waarom daar geen

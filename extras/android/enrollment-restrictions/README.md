@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # Android-inschrijvingsrestricties
 
 Een inschrijvingsrestrictie beslist *vóór* de inschrijving of een toestel er überhaupt in mag.

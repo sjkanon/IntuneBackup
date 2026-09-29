@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Config_Refresh.en.md) · [Français](Baseline_WIN_D_Config_Refresh.fr.md)
+
 # [Baseline] - WIN - D - Config Refresh
 
 Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # baseline/
 
 **Gegenereerd — niet met de hand bijwerken.** `intune/baseline-v1.0.json` is de bron voor de

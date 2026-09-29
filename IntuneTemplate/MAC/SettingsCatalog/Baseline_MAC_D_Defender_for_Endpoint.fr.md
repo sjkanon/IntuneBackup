@@ -1,0 +1,109 @@
+<!-- Généré par scripts/generate-docs.js — ne pas modifier à la main. -->
+
+[Nederlands](Baseline_MAC_D_Defender_for_Endpoint.md) · [English](Baseline_MAC_D_Defender_for_Endpoint.en.md) · **Français**
+
+# [Baseline] - MAC - D - Defender for Endpoint
+
+Accorde à Defender les autorisations système que macOS exige avant qu'il puisse fonctionner : extension système, filtre réseau et accès complet au disque. Sans cette policy, Defender reste à moitié installé sur un Mac.
+
+| | |
+|---|---|
+| Platform | macOS |
+| Scope | Device (D) — affecter à des groupes d'appareils |
+| Type | Settings Catalog |
+| Affectation | All Devices |
+| checkId | `INTUNE-BASE-037-MACDDefenderForEndpoint` |
+| Source | OpenIntuneBaseline macOS v1.0 — Defender Antivirus - D - MDE Configuration |
+| Fichier | [`Baseline_MAC_D_Defender_for_Endpoint.json`](Baseline_MAC_D_Defender_for_Endpoint.json) |
+
+## Normes
+
+| Référentiel | Mesures |
+|---|---|
+| ISO/IEC 27001:2022 | A.8.7 Protection contre les programmes malveillants<br>A.8.16 Activités de surveillance |
+| NIS2 art. 21(2) | art. 21(2)(b) gestion des incidents<br>art. 21(2)(e) sécurité de l'acquisition, du développement et de la maintenance des réseaux et des systèmes d'information, y compris le traitement des vulnérabilités |
+| CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
+| NIST CSF 2.0 | DE.CM-09 |
+
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+
+## Paramètres — 64
+
+Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le
+paramètre parent a la valeur indiquée.
+
+| Paramètre | Valeur |
+|---|---|
+| `com.apple.servicemanagement_com.apple.servicemanagement` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules` | *(2 items)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*item 1* | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules_item_ruletype` | 3 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules_item_rulevalue` | com.microsoft.fresno |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*item 2* | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules_item_ruletype` | 3 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.servicemanagement_rules_item_rulevalue` | com.microsoft.dlp |
+| `com.apple.managedclient.preferences_applicationssystem` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.managedclient.preferences_applicationssystem_applications_microsoft defender.app` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.managedclient.preferences_applicationssystem_applications_microsoft defender.app_application id` | WDAV00 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.managedclient.preferences_applicationssystem_applications_microsoft defender.app_lcid` | 1033 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.managedclient.preferences_applicationssystem_applications_microsoft defender.app_manifestserver` | 0 |
+| `com.apple.tcc.configuration-profile-policy_com.apple.tcc.configuration-profile-policy` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility_item_authorization` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility_item_coderequirement` | identifier "com.microsoft.dlp.daemon" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6… |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifier` | com.microsoft.dlp.daemon |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility_item_identifiertype` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_accessibility_item_staticcode` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_authorization` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_coderequirement` | identifier "com.microsoft.dlp.daemon" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6… |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_identifier` | com.microsoft.dlp.daemon |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_identifiertype` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_bluetoothalways_item_staticcode` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles` | *(3 items)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*item 1* | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement` | identifier "com.microsoft.wdav" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] … |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier` | com.microsoft.wdav |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*item 2* | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement` | identifier "com.microsoft.wdav.epsext" and anchor apple generic and certificate 1[field.1.2.840.113635.100.… |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier` | com.microsoft.wdav.epsext |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*item 3* | |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_authorization` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_coderequirement` | identifier "com.microsoft.dlp.daemon" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6… |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifier` | com.microsoft.dlp.daemon |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_identifiertype` | 0 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.tcc.configuration-profile-policy_services_systempolicyallfiles_item_staticcode` | false |
+| `com.apple.system-extension-policy_com.apple.system-extension-policy` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.system-extension-policy_allowedsystemextensions` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.system-extension-policy_allowedsystemextensions_generickey` | com.microsoft.wdav.epsext, com.microsoft.wdav.netext |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.system-extension-policy_allowedsystemextensions_generickey_keytobereplaced` | UBF8T346G9 |
+| `com.apple.notificationsettings_com.apple.notificationsettings` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_alerttype` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_badgesenabled` | true |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_bundleidentifier` | com.microsoft.wdav.tray |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_criticalalertenabled` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_notificationsenabled` | true |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_showinlockscreen` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_showinnotificationcenter` | true |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`com.apple.notificationsettings_notificationsettings_item_soundsenabled` | true |
+| `com.apple.webcontent-filter_com.apple.webcontent-filter` | *(groupe)* |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filterdataproviderbundleidentifier` | com.microsoft.wdav.netext |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filterdataproviderdesignatedrequirement` | identifier "com.microsoft.wdav.netext" and anchor apple generic and certificate 1[field.1.2.840.113635.100.… |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filtergrade` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filterpackets` | false |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_filtersockets` | true |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_organization` | Microsoft Defender |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_pluginbundleid` | com.microsoft.wdav |
+| &nbsp;&nbsp;&nbsp;&nbsp;`com.apple.webcontent-filter_userdefinedname` | Microsoft Defender Content Filter |
+
+---
+
+Retour à la [vue d'ensemble macOS](../README.fr.md) · [README principal](../../../README.fr.md)

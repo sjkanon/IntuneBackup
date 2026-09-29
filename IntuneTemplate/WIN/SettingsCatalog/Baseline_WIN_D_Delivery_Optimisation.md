@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Delivery_Optimisation.en.md) · [Français](Baseline_WIN_D_Delivery_Optimisation.fr.md)
+
 # [Baseline] - WIN - D - Delivery Optimisation
 
 Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van internet te halen, en begrenst hoeveel bandbreedte dat mag kosten.

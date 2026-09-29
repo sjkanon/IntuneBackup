@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Login_Window.en.md) · [Français](Baseline_MAC_D_Login_Window.fr.md)
+
 # [Baseline] - MAC - D - Login Window
 
 Laat het inlogvenster om accountnaam én wachtwoord vragen in plaats van een lijst met accounts te tonen, en toont een korte melding dat het apparaat alleen voor geautoriseerd gebruik is.

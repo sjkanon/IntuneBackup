@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Windows_Firewall.en.md) · [Français](Baseline_WIN_D_Windows_Firewall.fr.md)
+
 # [Baseline] - WIN - D - Windows Firewall
 
 Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast.

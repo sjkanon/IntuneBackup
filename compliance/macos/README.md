@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # compliance/macos/
 
 Een aangepaste compliance-check voor macOS: draait Microsoft Defender for Endpoint op deze Mac,

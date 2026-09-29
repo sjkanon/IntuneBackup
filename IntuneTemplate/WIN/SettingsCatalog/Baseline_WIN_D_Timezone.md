@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Timezone.en.md) · [Français](Baseline_WIN_D_Timezone.fr.md)
+
 # [Baseline] - WIN - D - Timezone
 
 Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan.

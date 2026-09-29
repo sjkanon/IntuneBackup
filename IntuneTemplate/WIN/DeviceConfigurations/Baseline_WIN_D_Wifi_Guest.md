@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Wifi_Guest.en.md) · [Français](Baseline_WIN_D_Wifi_Guest.fr.md)
+
 # [Baseline] - WIN - D - Wifi Guest
 
 Rolt het gastnetwerk uit als tweede profiel op elke Windows-laptop, zodat een apparaat online blijft wanneer het bedrijfsnetwerk niet bereikbaar is en vanzelf terugvalt naar het bedrijfsnetwerk zodra dat weer in de lucht is.

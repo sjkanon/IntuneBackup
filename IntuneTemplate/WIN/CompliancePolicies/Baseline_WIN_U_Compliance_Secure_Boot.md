@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Compliance_Secure_Boot.en.md) · [Français](Baseline_WIN_U_Compliance_Secure_Boot.fr.md)
+
 # [Baseline] - WIN - U - Compliance Secure Boot
 
 Toetst of het apparaat met Secure Boot opstart, zodat een bootkit niet vóór Windows kan laden.

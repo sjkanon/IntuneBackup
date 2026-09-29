@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_U_Microsoft_Edge_Management.en.md) · [Français](Baseline_WIN_U_Microsoft_Edge_Management.fr.md)
+
 # [Baseline] - WIN - U - Microsoft Edge Management
 
 Staat de Edge Management Service toe op beheerde apparaten en laat het beleid dat daar wordt ingesteld vóór lokaal en MDM-beleid gaan, zodat Intune en die dienst elkaar niet tegenwerken.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Enrollment_Hardening.en.md) · [Français](Baseline_WIN_D_Enrollment_Hardening.fr.md)
+
 # [Baseline] - WIN - D - Enrollment Hardening
 
 Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat niet zonder beheer langs de inschrijving kan komen.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # macOS — 37 policies
 
 Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.

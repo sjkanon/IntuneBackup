@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Privacy_Preferences.en.md) · [Français](Baseline_MAC_D_Privacy_Preferences.fr.md)
+
 # [Baseline] - MAC - D - Privacy Preferences
 
 Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet de privacyrechten (PPPC) van de beheertools vast: NinjaOne Remote en TeamViewer krijgen Toegankelijkheid zodat besturing op afstand werkt, en de drie NinjaOne-onderdelen krijgen Volledige schijftoegang — zonder dat de gebruiker het hoeft goed te keuren, en zonder dat hij het kan intrekken.

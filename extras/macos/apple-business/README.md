@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # extras/macos/apple-business/
 
 De instellingen in Apple Business (Manager) waar de macOS-baseline op leunt. Geen template —

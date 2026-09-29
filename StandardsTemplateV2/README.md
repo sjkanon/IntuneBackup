@@ -1,3 +1,5 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
 # StandardsTemplateV2/
 
 Eén CIPP **standards**-template. Dat is iets anders dan alles in `IntuneTemplate/`,

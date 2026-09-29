@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.fr.md)
+
 # [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure
 
 Dwingt in Edge DNS over HTTPS af zonder terugval: elk DNS-verzoek gaat versleuteld naar de opgegeven DoH-resolver, en zonder die resolver lost Edge niets op.

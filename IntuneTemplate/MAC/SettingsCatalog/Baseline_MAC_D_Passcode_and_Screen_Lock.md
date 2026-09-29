@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) · [Français](Baseline_MAC_D_Passcode_and_Screen_Lock.fr.md)
+
 # [Baseline] - MAC - D - Passcode and Screen Lock
 
 Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-policy al eist: minimaal acht tekens, geen eenvoudig wachtwoord, vergrendelen na vijftien minuten.

@@ -1,5 +1,7 @@
 <!-- Gegenereerd door scripts/generate-docs.js — niet met de hand bijwerken. -->
 
+**Nederlands** · [English](Baseline_WIN_D_Microsoft_OneDrive.en.md) · [Français](Baseline_WIN_D_Microsoft_OneDrive.fr.md)
+
 # [Baseline] - WIN - D - Microsoft OneDrive
 
 Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat.
