@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Defender for Endpoint EDR
 
-Connects the device to Defender for Endpoint with a fixed onboarding package. That package is tenant-specific; in another tenant it must be connected again.
+Connects the device to Defender for Endpoint via the Defender connector; same onboarding as [Baseline] - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal).
 
 | | |
 |---|---|

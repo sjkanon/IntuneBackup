@@ -15,7 +15,7 @@ Connects the device to Defender for Endpoint via the Defender connector instead 
 | Source | CIPP standard template |
 | File | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 
-> Comes from CIPP, not from OIB. Does the same as [Baseline] - WIN - D - Defender for Endpoint EDR, but usable across tenants: onboarding_fromconnector is set to the placeholder "Microsoft ATP connector enabled" instead of a fixed tenant GUID. Since September 2026 the variant that is deployed; the token variant is in phase 5. Requires the Defender for Endpoint connector in Intune to be enabled.
+> Comes from CIPP, not from OIB. Usable across tenants: onboarding_fromconnector is set to the placeholder "Microsoft ATP connector enabled" instead of a fixed tenant GUID. Since September 2026 the variant that is deployed; [Baseline] - WIN - D - Defender for Endpoint EDR is in phase 5 as a duplicate variant. Requires the Defender for Endpoint connector in Intune to be enabled.
 
 ## Standards
 

@@ -15,7 +15,7 @@ Autorise explicitement Recall et Click To Do, y compris la conservation des capt
 | Source | Pendant de la variante Restricted ; les valeurs sont les valeurs par défaut de Windows, fixées explicitement |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 
-> **Alternative à [Baseline] - WIN - D - Windows AI Restricted.** Avant de la choisir, vérifiez que les conséquences sont bien comprises : Recall conserve sur le disque des captures d'écran consultables par recherche, et cet index est soumis aux mêmes durées de conservation et obligations de suppression que les données qu'il contient. Envisagez alors aussi les listes d'exclusion de Recall (setdenyapplistforrecall, setdenyurilistforrecall) et une durée de conservation — elles ne figurent volontairement pas dans cette policy car elles varient d'un client à l'autre.
+> **Alternative à [Baseline] - WIN - D - Windows AI Restricted.** Avant de la choisir, vérifiez que les conséquences sont bien comprises : Recall conserve sur le disque des captures d'écran consultables par recherche, et cet index est soumis aux mêmes durées de conservation et obligations de suppression que les données qu'il contient. Envisagez alors aussi les listes d'exclusion de Recall (setdenyapplistforrecall, setdenyurilistforrecall) et une durée de conservation — elles ne figurent volontairement pas dans cette policy car elles varient d'une organisation à l'autre.
 
 ## Normes
 

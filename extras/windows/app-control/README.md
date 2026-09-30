@@ -2,7 +2,7 @@
 
 # App Control for Business (WDAC) — generiek startpunt
 
-De grootste inhoudelijke leemte van de baseline (ANALYSE.md, *Bewust niet overgenomen*):
+De grootste inhoudelijke leemte van de baseline ([ANALYSE.md, *Bewust niet overgenomen*](../../../docs/ANALYSE.md#bewust-niet-overgenomen--windows-en-macos)):
 er was geen applicatiecontrole. Dit is het generieke deel dat voor elke tenant hetzelfde is.
 De uitzonderingen die daarna volgen zijn per organisatie en horen **niet** in deze repo.
 

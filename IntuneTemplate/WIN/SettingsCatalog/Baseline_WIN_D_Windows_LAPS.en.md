@@ -15,7 +15,7 @@ Automatically rotates the password of the local administrator account and stores
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | File | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 
-> Since OIB v4.0 the only LAPS variant; up to v3.8 this was the 24H2+ variant alongside a basic variant, and we had not adopted that basic variant because our policy already had automatic account management. The custom administrator account name was removed in September 2026: with automatic account management enabled, Windows ignores that setting, and the value was the account name of a single organisation.
+> Since OIB v4.0 the only LAPS variant; up to v3.8 this was the 24H2+ variant alongside a basic variant, and that basic variant had already not been adopted because the own policy already had automatic account management. The custom administrator account name was removed in September 2026: with automatic account management enabled, Windows ignores that setting, and the value was the account name of a single organisation.
 
 ## Standards
 

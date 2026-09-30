@@ -62,14 +62,14 @@ set -u
 #
 # Only letters, digits and hyphens.
 
-SET_NAAM="public"
+SET_NAAM="SET-NAAM-INVULLEN"
 
 # --- The shares ----------------------------------------------------------------------------
 #
 # One line per share, and several are allowed: everything in this list belongs to the same group.
 #
 # A bare share name is best — it becomes the name of the volume and so the name in the Finder
-# sidebar. A subfolder is allowed too ("data/Public"), but then Finder cannot link the mount to
+# sidebar. A subfolder is allowed too ("<share>/<folder>"), but then Finder cannot link the mount to
 # a share and shows the server name instead of the folder name.
 #
 # Each share lands in /Volumes/<name>.
@@ -130,6 +130,11 @@ case "$SET_NAAM" in
     exit 1
     ;;
 esac
+
+if [ "$SET_NAAM" = "SET-NAAM-INVULLEN" ]; then
+  log "SET_NAAM is still set to the placeholder — nothing done."
+  exit 1
+fi
 
 if [ "$STORAGE_ACCOUNT" = "STORAGE-ACCOUNT-INVULLEN" ]; then
   log "Storage account is still set to the placeholder — nothing done."

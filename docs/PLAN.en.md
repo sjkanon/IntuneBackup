@@ -6,10 +6,13 @@ Goal: extend the baseline and keep it current based on
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), with an
 explicit platform and device/user split — and with a separate tenant layer (ScubaGear / Maester) as the final piece.
 
-Status: **phases 1, 2, 4, 5, 6 and 7 are done** (repo). Phase 3 (the tenant) and phase 8 are
+Status: **steps 1, 2, 4, 5, 6 and 7 are done** (repo). Step 3 (the tenant) and step 8 are
 still open. The tenant has not been touched yet.
 
-| Phase | What | Risk | Status |
+These are project steps. They are separate from rollout phases 1–5 (`fase` in `_manifest.json`),
+which determine when a policy rolls out.
+
+| Step | What | Risk | Status |
 |---|---|---|---|
 | 1 | Script changes (`check-scope.js`, `-Scope`, hard assignment check) | low | ✅ |
 | 2 | D/U renaming + 2 splits in `IntuneTemplate/` | low in the repo | ✅ |
@@ -21,7 +24,7 @@ still open. The tenant has not been touched yet.
 | 3 | **Tenant migration** via `Rename-BaselinePolicy.ps1` | **high** — `-WhatIf` first, in a pilot tenant first | open |
 | 8 | Tenant layer ScubaGear/Maester | separate track | open |
 
-Phase 3 deliberately comes after the rest: the repo is now complete and the tenant can be brought
+Step 3 deliberately comes after the rest: the repo is now complete and the tenant can be brought
 up to date in one go, instead of being renamed twice in a row.
 
 ---
@@ -32,15 +35,15 @@ up to date in one go, instead of being renamed twice in a row.
 `scripts/import-oib.js`; see [README.en.md](../README.en.md) for the layout, the naming and how to
 pull in a new OIB version.
 
-**Phases 1 and 2** (earlier): device/user split, renaming to `[Baseline] - D/U - Item`,
+**Steps 1 and 2** (earlier): device/user split, renaming to `[Baseline] - D/U - Item`,
 `check-scope.js` as a blocking CI step.
 
-**Phase 4 — compliance.** There were none. Without a compliance policy, "require a compliant
+**Step 4 — compliance.** There were none. Without a compliance policy, "require a compliant
 device" in Conditional Access is meaningless. There are now 7 (4 Windows, 3 macOS), with a
 new CIPP `Type` `deviceCompliancePolicies` and the folder `Device Compliance Policies` in the
 export.
 
-**Phase 5 — hardening.** The entire OIB Windows set has been adopted: Windows Hello for Business,
+**Step 5 — hardening.** The entire OIB Windows set has been adopted: Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D and U),
 the Edge split, Disable NTLM, Administrator Protection, Config Refresh, In-Box App
 Removal, Delivery Optimisation, Personal Data Encryption, Windows Sandbox, WSL, Package
@@ -48,11 +51,11 @@ Manager, Script File Associations, Timezone and more. 15 existing policies have 
 OIB content; the settings OIB does not have were kept (see point 2 in the README under
 "Updating OpenIntuneBaseline").
 
-**Phase 6 — update rings.** Ring 1 (Pilot) and Ring 2 (UAT) added next to the existing Ring 3,
+**Step 6 — update rings.** Ring 1 (Pilot) and Ring 2 (UAT) added next to the existing Ring 3,
 plus the three Defender antivirus update rings. Ring 1 and 2 deliberately have no assignment.
 Driver update profiles stay out of scope: IntuneBackupAndRestore 4.0.1 does not support them.
 
-**Phase 7 — Administrative Templates split up.** The block of 300 settings has been divided
+**Step 7 — Administrative Templates split up.** The block of 300 settings has been divided
 into Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) and some smaller ones. The 15 settings with no OIB counterpart are in
 `WIN - D - Legacy Hardening`, kept separate so an OIB upgrade neither drags them along nor throws them away.
@@ -63,13 +66,13 @@ for iOS and Android (2) are new.
 
 ---
 
-## Phase 3 — Tenant migration
+## Step 3 — Tenant migration
 
 This is the risky part. The policies already exist in the tenant under their old name, and some
 have been replaced in substance.
 
 `IntuneTemplate/_renames.json` records per policy what it used to be called (both the original
-name and the intermediate step from phase 2) and what belongs to it now. `scripts/Rename-BaselinePolicy.ps1`
+name and the intermediate name from step 2) and what belongs to it now. `scripts/Rename-BaselinePolicy.ps1`
 carries that out with a `PATCH`: the name changes, the id stays, all existing assignments and
 assignment history remain intact.
 
@@ -94,8 +97,8 @@ Order:
 8. Call `Invoke-IntuneRestoreAppProtectionPolicyAssignment` separately (see README).
 9. **Take inventory again** — the list of orphaned policies must be empty.
 
-The pilot (phase 2) is not included in step 7: `-AllDevices` and `-AllUsers` only take what is in
-phase 1. It follows separately with `-GroupName 'SEC-Baseline-Pilot'` — the list is in
+The pilot (rollout phase 2) is not included in item 7 above: `-AllDevices` and `-AllUsers` only
+take what is in rollout phase 1. It follows separately with `-GroupName 'SEC-Baseline-Pilot'` — the list is in
 [OVERZICHT.en.md](OVERZICHT.en.md#pilot-first).
 
 ### What if policies with the old name are still in the tenant
@@ -127,11 +130,11 @@ Tenant-side counterpart of `check-scope.js`. Reads across the five policy types 
 | policy without any assignment | deploys nowhere |
 | the same `settingDefinitionId` with a different value in two assigned policies | conflict |
 
-Run before and after phase 3, and periodically after that. Read-only, no `-WhatIf` needed.
+Run before and after step 3, and periodically after that. Read-only, no `-WhatIf` needed.
 
 ---
 
-## Phase 8 — Tenant layer: ScubaGear and Maester
+## Step 8 — Tenant layer: ScubaGear and Maester
 
 Not to be confused with the above: **ScubaGear does not look at Intune device policies.** It
 assesses tenant configuration for Entra ID, Exchange Online, Defender, SharePoint/OneDrive,
@@ -151,7 +154,7 @@ between the two layers — start there.
 
 - **AppLocker / WDAC / App Control for Business** — OIB explicitly leaves this out because of
   environment dependency, and rightly so: this is a project, not a policy. Note that Maester
-  does test for it (phase 8) — that check will be red; this is a deliberate choice and should be
+  does test for it (step 8) — that check will be red; this is a deliberate choice and should be
   recorded as an exception, not as an open finding.
 - **Driver update profiles** — IntuneBackupAndRestore 4.0.1 does not support them. Via CIPP it
   would be possible, but then the two restore routes diverge.

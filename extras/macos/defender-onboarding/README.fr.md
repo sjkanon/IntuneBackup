@@ -14,7 +14,7 @@ La baseline prépare bien Defender sur macOS —
 (protection en temps réel, tamper protection) — mais **n'intègre le Mac nulle part**. Sans intégration,
 l'agent fonctionne sans licence : `mdatp health` indique `licensed: false`, aucun
 signal EDR n'arrive dans le portail Defender et le contrôle de conformité de
-[`compliance/macos/`](../../../compliance/macos/README.fr.md) reste rouge.
+[`extras/macos/compliance-scripts/`](../compliance-scripts/README.fr.md) reste rouge.
 
 ## Est-ce faisable de façon générique, comme sur Windows ? Non.
 
@@ -56,7 +56,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
 5. **Vérifier.** Sur le Mac : `mdatp health --field licensed` → `true`, et
    `mdatp health --field org_id` affiche le tenant. L'appareil apparaît dans le portail en
    une heure environ. Test EDR : Microsoft Learn *EDR detection test*.
-6. **Conformité.** Seulement ensuite, affectez la conformité personnalisée de `compliance/macos/`, et — si
+6. **Conformité.** Seulement ensuite, affectez la conformité personnalisée de `extras/macos/compliance-scripts/`, et — si
    l'organisation veut piloter selon le niveau de risque — `deviceThreatProtectionEnabled` dans la
    conformité macOS.
 

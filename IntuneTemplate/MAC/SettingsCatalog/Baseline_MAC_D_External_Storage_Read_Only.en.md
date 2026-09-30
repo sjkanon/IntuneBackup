@@ -15,7 +15,7 @@ Lets macOS mount only external storage that is itself read-only. Ordinary USB st
 | Source | Apple declarative management, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, supervised only); settingDefinitionIds and options verified against the settings catalog definitions |
 | File | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 
-> Anyone who wants the Windows approach — reading allowed, writing not — needs Microsoft Defender for Endpoint Device Control on macOS (a removable media policy with read-only rights). That requires an onboarded Defender agent (extras/macos/defender-onboarding) and a separate JSON policy, and is not part of this round. An external Time Machine disk is also no longer mounted with this policy; in this baseline, backup is meant to go through OneDrive (KFM). If a customer chooses this, deploy to a pilot group first and then treat it as phase 2. No overlap: no other template sets diskmanagement_*.
+> Anyone who wants the Windows approach — reading allowed, writing not — needs Microsoft Defender for Endpoint Device Control on macOS (a removable media policy with read-only rights). That requires an onboarded Defender agent (extras/macos/defender-onboarding) and a separate JSON policy, and is not part of this round. An external Time Machine disk is also no longer mounted with this policy; in this baseline, backup is meant to go through OneDrive (KFM). If an organisation chooses this, deploy to a pilot group first and then treat it as phase 2. No overlap: no other template sets diskmanagement_*.
 
 ## Standards
 

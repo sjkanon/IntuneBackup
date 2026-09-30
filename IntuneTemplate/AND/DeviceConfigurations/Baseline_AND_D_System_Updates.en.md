@@ -15,7 +15,7 @@ Installs Android system updates on organisation-owned devices automatically in a
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - DEV - Additional-Settings - Fully-Managed - v1.5, only the three systemUpdate fields |
 | File | [`Baseline_AND_D_System_Updates.json`](Baseline_AND_D_System_Updates.json) |
 
-> Only the systemUpdate fields of `androidDeviceOwnerGeneralDeviceConfiguration`; the Settings Catalog has no system update setting. A device that is switched off at night or cannot complete an update within the window installs only at a later opportunity (UniFy W-15) — which is why the compliance policy checks the patch date. No `systemUpdateFreezePeriods`: a freeze period (e.g. around a year-end close) is a customer decision. Dedicated devices in 24-hour use: choose a different window in your own copy, not in this policy. No other fields of this type are set, so there is no overlap with any kiosk or Additional Settings policy — provided that policy leaves the systemUpdate fields empty.
+> Only the systemUpdate fields of `androidDeviceOwnerGeneralDeviceConfiguration`; the Settings Catalog has no system update setting. A device that is switched off at night or cannot complete an update within the window installs only at a later opportunity (UniFy W-15) — which is why the compliance policy checks the patch date. No `systemUpdateFreezePeriods`: a freeze period (e.g. around a year-end close) is an organisational decision. Dedicated devices in 24-hour use: choose a different window in your own copy, not in this policy. No other fields of this type are set, so there is no overlap with any kiosk or Additional Settings policy — provided that policy leaves the systemUpdate fields empty.
 
 ## Standards
 

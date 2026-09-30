@@ -14,16 +14,16 @@ et quand un tenant passe à l'étape suivante.
 ## Pourquoi ce fichier est ici
 
 `IntuneTemplate/` fournit les stratégies, mais dans CIPP les templates ne font que s'y trouver :
-c'est une baseline qui déploie. Remplir cet écran à la main, c'est ajouter neuf fois le même
-standard et choisir neuf fois la bonne cible d'affectation — un seul faux clic place 80
-stratégies sur le mauvais public. Ce fichier provient donc de la même source que le reste du
+c'est une baseline qui déploie. Remplir cet écran à la main, c'est ajouter treize fois le même
+standard et choisir treize fois la bonne cible d'affectation — un seul faux clic place jusqu'à 69
+stratégies (le paquet `Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
 dépôt : le manifeste.
 
 ## Contenu
 
 | Étape | Paquets | Passage à cette étape |
 |---:|---|---|
-| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les trois paquets de groupe | — l'étape 1 s'applique toujours |
+| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les huit paquets de groupe `Baseline-SEC-*` | — l'étape 1 s'applique toujours |
 | 2 · Pilote | `Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
 | 3 · En attente d'un prérequis | `Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
 
@@ -71,8 +71,14 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
 
 - **Affecter des tenants.** Sans cela, la baseline ne s'exécute nulle part.
 - **Veiller à ce que les groupes existent.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`,
-  `SEC-Update-Ring2` et `SEC-Shared-Devices` doivent exister dans le tenant ; CIPP les recherche
-  par nom (les caractères génériques sont autorisés).
+  `SEC-Update-Ring2`, `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`,
+  `SEC-iOS-Corporate` et `SEC-Remote-Support-macOS` doivent exister dans le tenant ; CIPP les
+  recherche par nom (les caractères génériques sont autorisés). Ce sont des noms par défaut. Si un
+  groupe s'appelle autrement, modifiez `faseGroep` dans
+  [`_manifest.json`](../IntuneTemplate/_manifest.json) — pour le groupe pilote aussi `PILOT_GROUP`
+  dans `scripts/lib/templates.js` et `$PilotGroup` dans `scripts/Set-BaselineAssignment.ps1` — et
+  relancez le pipeline. Modifier le groupe uniquement dans CIPP fonctionne aussi, mais une
+  réimportation de ce fichier remet le nom par défaut.
 - **Lier les profils ADE.** `Baseline-ADE-token` n'est volontairement pas affecté : un profil
   d'inscription macOS dépend d'un jeton ADE, pas d'un groupe Entra, et vous choisissez l'un des
   deux par jeton.
@@ -81,9 +87,9 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
 
 Pas à la main : exécutez `node scripts/generate-baseline-template.js`. Les paquets et leur
 affectation découlent de `fase` dans [`_manifest.json`](../IntuneTemplate/_manifest.json) et de la
-cible dans [`_assignments.json`](../IntuneTemplate/_assignments.json) ; `--check` échoue en CI
-lorsque ce fichier est en retard.
+cible dans [`_assignments.json`](../IntuneTemplate/_assignments.json) ; `--check` n'écrit rien et
+échoue lorsque ce fichier est en retard.
 
-Attention en réexportant depuis CIPP : l'export propre de CIPP aplatit les paquets en 141
-références de template distinctes — un instantané, après lequel une nouvelle stratégie n'est
+Attention en réexportant depuis CIPP : l'export propre de CIPP aplatit les paquets en
+références de template distinctes, une par stratégie — un instantané, après lequel une nouvelle stratégie n'est
 plus incluse automatiquement. Générer dans ce sens préserve la liaison tardive.

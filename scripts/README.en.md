@@ -34,10 +34,10 @@ flowchart TD
 | [`set-packages.js`](set-packages.js) | **within** the source | Sets `Package` in every template — the CIPP package the policy is deployed in — derived from the phase in `_manifest.json` and the target in `_assignments.json` — and the English description shown next to the policy in the tenant (`doel` + assignment + source, translated via `_i18n/en.json`). Run after every change to those files. |
 | [`check-scope.js`](check-scope.js) | check | Scope, naming convention, folder layout, conflicting settings, the CIPP package and the migration table. Blocking in CI. |
 | [`check-osversion.js`](check-osversion.js) | check | Reports how far the OS minimums lag behind n-1 per platform, using endoflife.date as the source. **Exit code always 0** — an outdated minimum is a decision waiting to be made, not an error; if this made CI fail, someone would bump the number just to get the build green. |
-| [`export-intunebackup.js`](export-intunebackup.js) | **out of** the source | Writes the folder structure IntuneBackupAndRestore expects — `IntuneTemplate/` with assignments, and each set additionally in its own folder without. |
+| [`export-intunebackup.js`](export-intunebackup.js) | **out of** the source | Writes the folder structure IntuneBackupAndRestore expects — `IntuneTemplate/` with the phase 1 assignments — and copies the macOS ADE profiles and shell scripts from `extras/macos/` along as a sidecar. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **out of** the source | Writes `BaselineTemplate/Baseline.json`: the CIPP baseline with its stages and packages. `--check` fails if it is out of date. |
-| [`generate-docs.js`](generate-docs.js) | **out of** the source | Generates `OVERZICHT.md`, the READMEs in `IntuneTemplate/` and, per policy, a markdown file with every setting it applies. `--check` fails if they are out of date. |
-| [`generate-compliance.js`](generate-compliance.js) | **out of** the source | Writes `COMPLIANCE.md`: for each ISO 27001, NIS2, CIS and NIST CSF item, which policies cover it, from `controls` in `_manifest.json` and the vocabulary in `_controls.json`. `--strict` fails on an unknown or deviating label, `--check` if the document is out of date. With `--ca` the Conditional Access side is counted too — see below. |
+| [`generate-docs.js`](generate-docs.js) | **out of** the source | Generates `docs/OVERZICHT.md`, the READMEs in `IntuneTemplate/` and, per policy, a markdown file with every setting it applies. `--check` fails if they are out of date. |
+| [`generate-compliance.js`](generate-compliance.js) | **out of** the source | Writes `docs/COMPLIANCE.md`: for each ISO 27001, NIS2, CIS and NIST CSF item, which policies cover it, from `controls` in `_manifest.json` and the vocabulary in `_controls.json`. `--strict` fails on an unknown or deviating label, `--check` if the document is out of date. With `--ca` the Conditional Access side is counted too — see below. |
 
 All ten scripts share [`lib/templates.js`](lib/templates.js): how the folder is laid out,
 how to read it and where a new template belongs. Four scripts used to read that folder each in
@@ -46,9 +46,9 @@ four places.
 
 ### The CA side of COMPLIANCE.md
 
-`generate-compliance.js` can include the Conditional Access policies from the sister repo
-[CA-Policies](https://github.com/sjkanon/CA-Policies), which maintains `controls/ca-controls.json`
-for this purpose in the same vocabulary:
+`generate-compliance.js` can include the Conditional Access policies from the CA-Policies repo
+(cloned next to this one as `../CA-Policies`), which maintains `controls/ca-controls.json` for
+this purpose in the same vocabulary:
 
 ```bash
 node scripts/generate-compliance.js --strict --ca ../CA-Policies/controls/ca-controls.json
@@ -61,13 +61,14 @@ How to get the CA side into CI after all is described in [ANALYSE.en.md](../docs
 
 ## PowerShell
 
-Both require PowerShell 7 (`pwsh`) or Windows PowerShell 5.1, and
+All three require PowerShell 7 (`pwsh`) or Windows PowerShell 5.1, and
 `Microsoft.Graph.Authentication`. Run them with `-WhatIf` first.
 
 | Script | What it does |
 |---|---|
 | [`Set-BaselineAssignment.ps1`](Set-BaselineAssignment.ps1) | Assigns in one go the baseline policies that, according to their phase, belong to that target, across the five policy types: `-AllDevices`/`-AllUsers` phase 1, `-GroupName` the pilot or a `faseGroep`. `-Scope D\|U`, `-Platform WIN\|MAC\|IOS\|AND`, `-Replace`, `-FilterId`, `-IgnoreFase`. Adds by default, does not replace. |
 | [`Rename-BaselinePolicy.ps1`](Rename-BaselinePolicy.ps1) | Brings the policy names in a tenant in line with the current convention, according to `_renames.json`. `PATCH`, so id and assignments are kept. Reports the cases that need manual work instead of forcing them. |
+| [`New-MacOSEnrollmentPolicy.ps1`](New-MacOSEnrollmentPolicy.ps1) | Creates a macOS ADE enrollment profile under an ABM token from a JSON in [`extras/macos/enrollment/`](../extras/macos/enrollment/README.en.md), or exports the existing profiles to JSON (`-Export`). Deliberately does not assign. |
 
 Still to build: `Get-BaselinePolicyState.ps1`, the tenant-side counterpart of
 `check-scope.js` — see [PLAN.en.md](../docs/PLAN.en.md#still-to-build-scriptsget-baselinepolicystateps1).

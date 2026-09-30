@@ -1,15 +1,16 @@
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# compliance/macos/
+# extras/macos/compliance-scripts/
 
 A custom compliance check for macOS: is Microsoft Defender for Endpoint running on this Mac,
 and is it healthy?
 
-These two files deliberately live **outside** [`IntuneTemplate/`](../../IntuneTemplate/README.en.md),
-for the same reason as [`shellscripts/macos/`](../../shellscripts/macos/README.en.md) and
-[`enrollment/macos/`](../../enrollment/macos/README.en.md): in Graph a compliance script is a
+These two files deliberately live **outside** [`IntuneTemplate/`](../../../IntuneTemplate/README.en.md),
+for the same reason as [`extras/macos/shell-scripts/`](../shell-scripts/README.en.md) and
+[`extras/macos/enrollment/`](../enrollment/README.en.md): in Graph a compliance script is a
 resource of its own (`deviceManagement/deviceComplianceScripts`) and does not fit any of the five
-CIPP policy types. The pipelines do not pick this folder up.
+CIPP policy types. CIPP, `check-scope.js`, `export-intunebackup.js` and
+`Set-BaselineAssignment.ps1` do nothing with this folder; deployment is manual, see below.
 
 | File | What it is |
 |---|---|
@@ -19,8 +20,8 @@ CIPP policy types. The pipelines do not pick this folder up.
 ## Why this is needed
 
 The baseline deploys Defender for Endpoint on macOS
-([`MAC - D - Defender for Endpoint`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md)
-and [`MAC - D - Defender Antivirus`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md)),
+([`MAC - D - Defender for Endpoint`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md)
+and [`MAC - D - Defender Antivirus`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.en.md)),
 but nowhere checked whether that actually succeeded. Windows does have that check —
 `WIN - U - Compliance Defender Real Time Protection` and `Defender Security Intelligence` test
 whether Defender is on, real-time protection is active and the definitions are current. On macOS
@@ -72,7 +73,7 @@ Two things that often go wrong with a custom compliance check:
 - **`DefenderHealthy` at `false` while the rest is fine** usually points to a missing
   permission under System Settings → Privacy & Security, usually Full Disk Access.
   The baseline sets that via
-  [`MAC - D - Privacy Preferences`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.en.md);
+  [`MAC - D - Privacy Preferences`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.en.md);
   if that policy does not arrive, this is the first place you notice.
 
 Source for the approach: [Custom compliance for Defender on macOS](https://www.oddsandendpoints.co.uk/posts/macos-custom-defender-compliance/)

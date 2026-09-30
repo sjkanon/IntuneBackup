@@ -5,8 +5,8 @@
 Conseil et modèle : ne pas laisser les Mac personnels s'inscrire dans Intune.
 
 Une restriction d'inscription (`deviceEnrollmentPlatformRestrictionConfiguration`) n'est aucun des
-cinq types de stratégies CIPP et se trouve sous `deviceManagement/deviceEnrollmentConfigurations`. Non
-prise en compte par les pipelines.
+cinq types de stratégies CIPP et se trouve sous `deviceManagement/deviceEnrollmentConfigurations`. CIPP,
+`check-scope.js`, `export-intunebackup.js` et `Set-BaselineAssignment.ps1` n'en font rien.
 
 | Fichier | Ce que c'est |
 |---|---|
@@ -28,7 +28,7 @@ Pourquoi :
   Mac inscrit manuellement n'est pas supervisé et en est exclu sans bruit, alors qu'il peut
   bel et bien devenir conforme et donc obtenir l'accès.
 - L'utilisateur peut lui-même retirer de la gestion un Mac inscrit manuellement ; pas un Mac ADE avec
-  inscription verrouillée (voir `enrollment/macos/`).
+  inscription verrouillée (voir `extras/macos/enrollment/`).
 
 Par défaut, Intune considère un Mac comme **propriété personnelle**. Il n'est propriété de l'entreprise que
 s'il (Microsoft Learn, *Overview of enrollment restrictions*, « Blocking personal Macs ») :

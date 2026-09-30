@@ -13,7 +13,7 @@
     "  retire  - gaat helemaal weg; de instellingen zitten voortaan in 'replacedBy'.",
     "",
     "previousNames staat in volgorde: eerst de oorspronkelijke naam, daarna de tussenstap uit",
-    "PLAN.md fase 2. Een policy kan onder beide namen in een tenant staan."
+    "PLAN.md stap 2. Een policy kan onder beide namen in een tenant staan."
   ],
   "policies": [
     {

@@ -15,7 +15,7 @@ Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is e
 | Bron | CIS v4 Windows 11 L1 (MSS WarningLevel, IntuneAdmin CISv4-profiel) en de Microsoft-aanbeveling voor PowerShell-logging ('PowerShell ♥ the Blue Team') — waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Security_Log_Monitoring.json`](Baseline_WIN_D_Security_Log_Monitoring.json) |
 
-> Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in extras/windows/event-log-sizes.
+> Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in extras/windows/remediations/event-log-sizes.
 
 ## Normen
 

@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Controls** | ISO A.8.20 Networks security, A.8.24 Use of cryptography · NIS2 art. 21(2)(h) cryptography and encryption, art. 21(2)(j) multi-factor authentication and secured communications · CIS Controls v8.1 3.10 Encrypt Sensitive Data in Transit, 4.9 Configure Trusted DNS Servers on Enterprise Assets · NIST CSF 2.0 PR.DS-02 |
-| **Phase** | *Allow* 2 (pilot) · *Require* 5 (alternative, customer decision) |
+| **Phase** | *Allow* 2 (pilot) · *Require* 5 (alternative, organisational decision) |
 
 ## Why a script and not a template
 
@@ -35,7 +35,7 @@ the catalog and is included as a template pair in `IntuneTemplate/WIN/SettingsCa
 
 *Require* suits an organisation that routes all its DNS through its own or a contracted DoH resolver
 (DNS filtering service), which also supports split DNS, and that deploys the server template per adapter or via
-`netsh dns add encryption` in advance. That is a customer decision.
+`netsh dns add encryption` in advance. That is an organisational decision.
 
 ## Interaction with Defender Network Protection
 

@@ -5,11 +5,12 @@
 Une application Win32 qui supprime la version d'essai de McAfee livrée d'usine sur presque tous
 les nouveaux ordinateurs portables grand public.
 
-Se trouve en dehors de [`IntuneTemplate/`](../../../IntuneTemplate/README.fr.md), tout comme
-[`shellscripts/macos/`](../../../shellscripts/macos/README.fr.md) et
-[`compliance/macos/`](../../../compliance/macos/README.fr.md) : une application Win32 n'est pas une
-stratégie et n'entre dans aucun des cinq types de stratégie CIPP. Aucun pipeline
-ne prend en compte ce dossier.
+Se trouve en dehors de [`IntuneTemplate/`](../../../../IntuneTemplate/README.fr.md), tout comme
+[`extras/macos/shell-scripts/`](../../../macos/shell-scripts/README.fr.md) et
+[`extras/macos/compliance-scripts/`](../../../macos/compliance-scripts/README.fr.md) : une application Win32 n'est pas une
+stratégie et n'entre dans aucun des cinq types de stratégie CIPP. CIPP, `check-scope.js`,
+`export-intunebackup.js` et `Set-BaselineAssignment.ps1` ne font rien avec ce dossier ; l'application
+se package et se téléverse à la main.
 
 ## Pourquoi cela fait partie de la baseline
 

@@ -3,14 +3,14 @@
 # Scripts de plateforme Windows
 
 Les scripts de plateforme Intune (`deviceManagementScripts`) se trouvent **en dehors** de
-`IntuneTemplate/`, pour la même raison que les [scripts shell macOS](../../shellscripts/macos/README.fr.md) :
+`IntuneTemplate/`, pour la même raison que les [scripts shell macOS](../../macos/shell-scripts/README.fr.md) :
 les pipelines de ce dossier connaissent cinq types de stratégie CIPP et un script de plateforme
 n'est aucun de ces cinq. Il dépend de `deviceManagement/deviceManagementScripts`,
 `Set-CIPPIntunePolicy` n'a pas de `TemplateType` pour lui, et `Start-IntuneRestoreConfig` ne le
 restaure pas. Un fichier ici n'est donc **pas** pris en compte par
-`export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`.
+CIPP, `export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`.
 
-Le dossier s'appelle `platformscripts/` et non `shellscripts/` parce qu'Intune les nomme
+Le dossier s'appelle `platform-scripts/` et non `shell-scripts/` parce qu'Intune les nomme
 lui-même ainsi : sous Windows, ils se trouvent sous *Scripts and remediations → Platform
 scripts*, sous macOS sous *macOS → Shell scripts*. Deux noms pour la même idée, mais ainsi
 quiconque cherche dans le portail les retrouve.
@@ -21,7 +21,7 @@ quiconque cherche dans le portail les retrouve.
 
 ## Mount-AzureFilesDrive.ps1
 
-L'équivalent Windows de [`mount-azure-files.sh`](../../shellscripts/macos/README.fr.md) sur le
+L'équivalent Windows de [`mount-azure-files.sh`](../../macos/shell-scripts/README.fr.md) sur le
 Mac, et le remplaçant des mappages de lecteurs des Group Policy Preferences.
 
 ### Pourquoi un script et non une stratégie
@@ -85,10 +85,10 @@ Laisser `$ShareSubPath` vide connecte l'ensemble du partage.
 
 | Prérequis | Où |
 |---|---|
-| `Kerberos/CloudKerberosTicketRetrievalEnabled` = 1 | **déjà dans la baseline** — [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust`](../../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.fr.md), tous les appareils |
+| `Kerberos/CloudKerberosTicketRetrievalEnabled` = 1 | **déjà dans la baseline** — [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust`](../../../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.fr.md), tous les appareils |
 | L'appareil est Entra joined ou Entra hybrid joined | inscription |
 | `WinHttpAutoProxySvc` et `iphlpsvc` sont en cours d'exécution | **non désactivés par la baseline** — les seuls services que `Security Hardening` désactive sont les quatre services Xbox |
-| Entra Kerberos activé sur le compte de stockage, consentement administrateur, prise en charge des groupes cloud-only, MFA exclue pour l'application Entra, autorisations au niveau du partage | Portail Azure — les étapes sont décrites une fois pour l'équivalent macOS, sous [Le côté Azure](../../shellscripts/macos/README.fr.md#côté-azure--un-second-compte-de-stockage-avec-entra-kerberos). Elles s'appliquent telles quelles à Windows. |
+| Entra Kerberos activé sur le compte de stockage, consentement administrateur, prise en charge des groupes cloud-only, MFA exclue pour l'application Entra, autorisations au niveau du partage | Portail Azure — les étapes sont décrites une fois pour l'équivalent macOS, sous [Le côté Azure](../../macos/shell-scripts/README.fr.md#côté-azure--un-second-compte-de-stockage-avec-entra-kerberos). Elles s'appliquent telles quelles à Windows. |
 
 Les identités cloud-only nécessitent en outre Windows 11 24H2 ou ultérieur avec la mise à jour
 cumulative de mars 2026 (KB5079391 / KB5079489) ; les identités hybrides fonctionnent à partir

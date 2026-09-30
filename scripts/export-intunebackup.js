@@ -12,42 +12,33 @@
  * Compliance Policies" likewise, but fills in a missing scheduledActionsForRule itself;
  * "App Protection Policies" POSTs to deviceAppManagement/managedAppPolicies.
  *
- * Counterpart of scripts/import-intunebackup.js. The sets themselves remain the source: the
- * export is a derivative and is completely rewritten on every run.
+ * Counterpart of scripts/import-intunebackup.js. IntuneTemplate/ remains the source: the
+ * export is a derivative and is completely rewritten on every run. Assignments come from
+ * IntuneTemplate/_assignments.json and land in an Assignments/ subfolder per policy type; a
+ * policy without an entry there (a phase that is not deployed automatically) is restored
+ * unassigned.
  *
- * Each set from SET_PREFIXES (lib/templates.js) gets its own target folder — deliberately not
- * one shared folder:
- *
- *   IntuneTemplate/  ->  .../IntuneBackupAndRestore/            the deployed baseline, with assignments
- *
- * `Start-IntuneRestoreConfig` takes one path and restores everything underneath it. If the
- * sets were in the same folder, whoever restores the baseline would unknowingly deploy the
- * proposals along with it — and those change behaviour that users notice immediately.
- * Separate paths keep that a deliberate choice. For the same reason the proposal sets get *no*
- * Assignments/ subfolder: those policies belong on a pilot group, by hand, after the restore.
- *
- * Adding a new set is one line in SET_PREFIXES; this exporter then picks it up automatically.
- * That is intentional: a set that does not export is a set that only deploys via CIPP, and
- * that difference should not arise silently.
+ * Next to the policies, the export carries two sidecar folders the module does not know:
+ * the macOS ADE enrolment profiles (extras/macos/enrollment/) and the macOS shell scripts
+ * (extras/macos/shell-scripts/). See SIDECARS below.
  *
  * Usage: node scripts/export-intunebackup.js [target-dir]
  *   default target-dir: export/NativeImport/IntuneBackupAndRestore/
- *   every set besides the baseline goes to that same folder with "-<SET>" appended
  *
  * That `NativeImport` in the path is not a description but an exclusion. CIPP scans a
  * template repository with `git/trees?recursive=1` and ignores exactly two things: files
  * that do not end in `.json`, and paths containing `NativeImport`. Without that word in the
- * path CIPP imports this folder *too* — the same 98 policies, but without a RowKey, so as a
+ * path CIPP imports this folder *too* — the same policies, but without a RowKey, so as a
  * duplicate with its own GUID next to the real template. See export/README.md.
  */
 
 const fs = require("fs");
 const path = require("path");
-const { SET_PREFIXES, readTemplates } = require("./lib/templates");
+const { readTemplates } = require("./lib/templates");
 const { LANGS, variantPath, languageBar } = require("./lib/i18n");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
-const TEMPLATE_DIR = path.join(REPO_ROOT, SET_PREFIXES.Baseline);
+const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const DEFAULT_OUT = path.join(REPO_ROOT, "export", "NativeImport", "IntuneBackupAndRestore");
 
@@ -118,11 +109,10 @@ function appProtectionAssignmentFile(guid, displayName, assignment) {
 }
 
 /**
- * Schrijft één set weg. Geeft terug wat er is geschreven, zodat main() beide sets in één
- * overzicht kan samenvatten.
+ * Schrijft de templates weg in de mappen van de module. Geeft terug wat er is geschreven,
+ * zodat main() het kan samenvatten.
  */
-function exportSet({ label, sourceDir, outDir, assignments }) {
-  const templates = readTemplates(sourceDir);
+function exportTemplates({ templates, outDir, assignments }) {
 
   // Volledig herschrijven: een template dat uit de bronmap verdwijnt moet ook uit de export
   // verdwijnen, anders rolt een restore later een policy uit die niet meer bestaat.
@@ -165,7 +155,7 @@ function exportSet({ label, sourceDir, outDir, assignments }) {
     return acc;
   }, {});
 
-  console.log(`${label}: geschreven naar ${outDir} (${written.length} policies):`);
+  console.log(`Geschreven naar ${outDir} (${written.length} policies):`);
   for (const [folder, count] of Object.entries(perFolder)) console.log(`  ${String(count).padStart(3)}  ${folder}`);
   if (skipped.length > 0) {
     console.log(`\n${skipped.length} overgeslagen:`);
@@ -174,12 +164,6 @@ function exportSet({ label, sourceDir, outDir, assignments }) {
 
   return { written, perFolder, withoutAssignment };
 }
-
-/**
- * Doelmap van een set naast de baseline: zusje van de baselinemap, niet een submap ervan.
- * Alles ónder het pad dat je aan Start-IntuneRestoreConfig meegeeft wordt teruggezet.
- */
-const outDirFor = (baseOut, set) => `${baseOut}-${set}`;
 
 /**
  * Twee soorten configuratie reizen mee in de baseline-export, in mappen die de module niet
@@ -197,12 +181,16 @@ const outDirFor = (baseOut, set) => `${baseOut}-${set}`;
  * ADE-profiel uit Apple Business synct, faalt in de enrollment. De README die hier per map bij
  * wordt geschreven zegt hoe ze er wél in gaan.
  *
- * enrollment/ en shellscripts/ blijven de bron; dit zijn kopieën die bij elke run opnieuw
- * worden geschreven, net als de rest van de export.
+ * extras/macos/enrollment/ en extras/macos/shell-scripts/ blijven de bron; dit zijn kopieën
+ * die bij elke run opnieuw worden geschreven, net als de rest van de export. `platform` is de
+ * submap in de export (macos/), zodat de exportpaden niet afhangen van waar de bron in de repo
+ * staat. De bron is bewust de macOS-map en niet heel extras/: extras/ios/enrollment/ bevat een
+ * iOS-profiel met een ander Graph-type, dat New-MacOSEnrollmentPolicy.ps1 niet aanmaakt.
  */
 const SIDECARS = [
   {
-    sourceDir: "enrollment",
+    sourceDir: "extras/macos/enrollment",
+    platform: "macos",
     folder: "Apple ADE Enrollment Profiles",
     extensions: [".json"],
     how: {
@@ -220,7 +208,7 @@ const SIDECARS = [
         "program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde",
         "serienummers levert Macs op die zonder wipe niet terug te draaien zijn.",
         "",
-        "Zie `enrollment/macos/README.md` in de repo voor wat er in het profiel staat en waarom.",
+        "Zie `extras/macos/enrollment/README.md` in de repo voor wat er in het profiel staat en waarom.",
       ],
       en: (files, folder) => [
         "`Start-IntuneRestoreConfig` skips this folder: IntuneBackupAndRestore has no restore",
@@ -236,7 +224,7 @@ const SIDECARS = [
         "program tokens → token → Devices), and that is deliberate: a profile on the wrong",
         "serial numbers produces Macs that cannot be reverted without a wipe.",
         "",
-        "See `enrollment/macos/README.en.md` in the repo for what the profile contains and why.",
+        "See `extras/macos/enrollment/README.en.md` in the repo for what the profile contains and why.",
       ],
       fr: (files, folder) => [
         "`Start-IntuneRestoreConfig` ignore ce dossier : IntuneBackupAndRestore n'a pas de fonction",
@@ -252,12 +240,13 @@ const SIDECARS = [
         "(Enrollment program tokens → token → Devices), et c'est voulu : un profil sur les mauvais",
         "numéros de série donne des Mac qu'on ne peut pas rétablir sans effacement.",
         "",
-        "Voir `enrollment/macos/README.fr.md` dans le dépôt pour le contenu du profil et sa raison d'être.",
+        "Voir `extras/macos/enrollment/README.fr.md` dans le dépôt pour le contenu du profil et sa raison d'être.",
       ],
     },
   },
   {
-    sourceDir: "shellscripts",
+    sourceDir: "extras/macos/shell-scripts",
+    platform: "macos",
     folder: "macOS Shell Scripts",
     extensions: [".sh"],
     how: {
@@ -268,7 +257,7 @@ const SIDECARS = [
         "",
         "Aanmaken gaat met de hand: **Devices → macOS → Shell scripts → Add**. De instellingen",
         "per script (uitvoeren als aangemelde gebruiker, frequentie, toewijzing) staan in",
-        "`shellscripts/macos/README.md` in de repo — die waarden zijn geen detail: een dockscript",
+        "`extras/macos/shell-scripts/README.md` in de repo — die waarden zijn geen detail: een dockscript",
         "dat als root draait schrijft naar de verkeerde Dock en de gebruiker ziet niets.",
       ],
       en: () => [
@@ -278,7 +267,7 @@ const SIDECARS = [
         "",
         "Creating them is manual: **Devices → macOS → Shell scripts → Add**. The settings",
         "per script (run as signed-in user, frequency, assignment) are in",
-        "`shellscripts/macos/README.en.md` in the repo — those values are not a detail: a Dock script",
+        "`extras/macos/shell-scripts/README.en.md` in the repo — those values are not a detail: a Dock script",
         "that runs as root writes to the wrong Dock and the user sees nothing.",
       ],
       fr: () => [
@@ -288,7 +277,7 @@ const SIDECARS = [
         "",
         "La création se fait à la main : **Devices → macOS → Shell scripts → Add**. Les paramètres",
         "de chaque script (exécution en tant qu'utilisateur connecté, fréquence, affectation) figurent dans",
-        "`shellscripts/macos/README.fr.md` dans le dépôt — ces valeurs ne sont pas un détail : un script",
+        "`extras/macos/shell-scripts/README.fr.md` dans le dépôt — ces valeurs ne sont pas un détail : un script",
         "de Dock exécuté en root écrit dans le mauvais Dock et l'utilisateur ne voit rien.",
       ],
     },
@@ -310,24 +299,21 @@ const SIDECAR_GENERATED = {
 };
 
 /**
- * Kopieert één sidecar-map naar de export. Geeft de gekopieerde bestanden terug (relatief aan
- * de doelmap), of een lege lijst als de bronmap niet bestaat. De README komt in drie talen, net
- * als de rest van de documentatie.
+ * Kopieert één sidecar-map naar de export, onder `<folder>/<platform>/`. Geeft de gekopieerde
+ * bestanden terug (relatief aan de doelmap), of een lege lijst als de bronmap niet bestaat. De
+ * README komt in drie talen, net als de rest van de documentatie.
  */
-function exportSidecar(outDir, { sourceDir, folder, extensions, how }) {
+function exportSidecar(outDir, { sourceDir, platform, folder, extensions, how }) {
   const from = path.join(REPO_ROOT, sourceDir);
   if (!fs.existsSync(from)) return [];
 
   const written = [];
-  for (const platform of fs.readdirSync(from, { withFileTypes: true })) {
-    if (!platform.isDirectory()) continue;
-    for (const file of fs.readdirSync(path.join(from, platform.name))) {
-      if (!extensions.some((e) => file.endsWith(e))) continue;
-      const target = path.join(outDir, folder, platform.name);
-      fs.mkdirSync(target, { recursive: true });
-      fs.copyFileSync(path.join(from, platform.name, file), path.join(target, file));
-      written.push(`${platform.name}/${file}`);
-    }
+  for (const file of fs.readdirSync(from).sort()) {
+    if (!extensions.some((e) => file.endsWith(e))) continue;
+    const target = path.join(outDir, folder, platform);
+    fs.mkdirSync(target, { recursive: true });
+    fs.copyFileSync(path.join(from, file), path.join(target, file));
+    written.push(`${platform}/${file}`);
   }
   if (written.length === 0) return written;
 
@@ -365,19 +351,7 @@ function main() {
     process.exit(1);
   }
 
-  const baseline = exportSet({ label: "Baseline", sourceDir: TEMPLATE_DIR, outDir, assignments });
-
-  // Elke set naast de baseline, in de volgorde van SET_PREFIXES. Een set is optioneel: de
-  // exporter moet ook werken in een checkout met alleen de baseline. Assignments
-  // bewust leeg — die sets hebben er geen, en dat is de bedoeling.
-  const extra = [];
-  for (const [set, dirName] of Object.entries(SET_PREFIXES)) {
-    if (set === "Baseline") continue;
-    const sourceDir = path.join(REPO_ROOT, dirName);
-    if (!fs.existsSync(sourceDir)) continue;
-    console.log("");
-    extra.push({ set, outDir: outDirFor(outDir, set), ...exportSet({ label: `${set} (voorstel)`, sourceDir, outDir: outDirFor(outDir, set), assignments: {} }) });
-  }
+  const baseline = exportTemplates({ templates, outDir, assignments });
 
   const sidecars = SIDECARS.map((s) => ({ ...s, files: exportSidecar(outDir, s) })).filter((s) => s.files.length > 0);
   for (const s of sidecars) {
@@ -399,13 +373,6 @@ function main() {
   }
   console.log("Let op: -RestoreById $false is vereist — de assignments in de export bevatten bewust geen tenant-id's,");
   console.log("de module matcht dan op policynaam. Dat is ook de enige modus die cross-tenant klopt.");
-
-  if (extra.length > 0) {
-    console.log(`\n${extra.length === 1 ? "Eén set staat" : `${extra.length} sets staan`} apart en ${extra.length === 1 ? "wordt" : "worden"} door bovenstaande aanroep niet meegenomen:`);
-    for (const e of extra) console.log(`  Start-IntuneRestoreConfig -Path '${e.outDir}'`);
-    console.log("Geen Start-IntuneRestoreAssignments: die policies horen ongetoewezen terug en daarna met de hand");
-    console.log("op een pilotgroep — niet op All Devices. Zie de README van de set.");
-  }
 
   if (sidecars.length > 0) {
     console.log(`\nDeze kent de module niet en gaan apart — zie de README in elke map:`);

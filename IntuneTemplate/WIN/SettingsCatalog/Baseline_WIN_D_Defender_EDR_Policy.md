@@ -15,7 +15,7 @@ Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaa
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 
-> Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder "Microsoft ATP connector enabled" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; de token-variant staat in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.
+> Komt uit CIPP, niet uit OIB. Cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder "Microsoft ATP connector enabled" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; [Baseline] - WIN - D - Defender for Endpoint EDR staat als dubbele variant in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.
 
 ## Normen
 

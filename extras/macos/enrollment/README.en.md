@@ -6,8 +6,9 @@ Apple Automated Device Enrollment profiles (`depMacOSEnrollmentProfile`) live **
 `IntuneTemplate/`. The pipelines there know five CIPP policy types and an enrollment profile is
 none of those five: it sits under an ABM token
 (`depOnboardingSettings/{id}/enrollmentProfiles`) and does not go through the "Import profile"
-button. A file here is therefore **not** picked up by `export-intunebackup.js` or
-`Set-BaselineAssignment.ps1`.
+button. `export-intunebackup.js` does copy every `.json` in this folder as a sidecar to
+`export/.../Apple ADE Enrollment Profiles/macos/`, so the profile is not forgotten in a rebuild;
+CIPP, `check-scope.js` and `Set-BaselineAssignment.ps1` do nothing with it.
 Deployment goes via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | File | Token | Default profile |
@@ -50,8 +51,8 @@ Open, not solved by this file:
 
 - **Rotation does not restrict reading.** Who may retrieve the escrowed password is controlled with
   RBAC/PIM, not here. Check who holds that role.
-- **`mlapsadmin` is predictable tenant-wide.** For an administrator with multiple customers, a
-  name per customer (`<prefix>-<customercode>-adm`) is better.
+- **`mlapsadmin` is predictable tenant-wide.** Anyone managing multiple tenants is better off
+  choosing a name per tenant (`<prefix>-<tenantcode>-adm`).
 - **`supportPhoneNumber` is set to `SERVICEDESK-TELEFOON-INVULLEN`.** The user sees that
   number during setup; fill it in per organisation before you create the profile.
 - **Check that escrow is enabled** under Devices → macOS → Local admin password, otherwise
@@ -231,6 +232,6 @@ script diagnosis.
 If everything is in order and it still says `NotRun`, you simply wait for the agent: it fetches scripts
 **every 8 hours**, independently of the MDM sync.
 
-Like the click for screen recording (see [`shellscripts/macos/`](../../shellscripts/macos/README.en.md)),
+Like the click for screen recording (see [`extras/macos/shell-scripts/`](../shell-scripts/README.en.md)),
 user affinity is a per-Mac action that no policy can take over. Both belong in the
 handover of a new device.

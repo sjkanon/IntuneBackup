@@ -15,7 +15,7 @@ Ne laisse macOS monter que le stockage externe qui est lui-même en lecture seul
 | Source | Gestion déclarative Apple, com.apple.configuration.diskmanagement.settings (apple/device-management : macOS 15.0, supervisé uniquement) ; settingDefinitionId et options vérifiés par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 
-> Qui souhaite l'approche Windows — lecture autorisée, écriture non — a besoin sur macOS de Microsoft Defender for Endpoint Device Control (une politique de supports amovibles en lecture seule). Cela demande un agent Defender onboardé (extras/macos/defender-onboarding) et une politique JSON distincte, et ne fait pas partie de cette itération. Un disque Time Machine externe n'est plus monté non plus avec cette policy ; dans cette baseline, la sauvegarde doit passer par OneDrive (KFM). Si un client choisit ceci, déployez d'abord sur un groupe pilote puis traitez-le comme phase 2. Pas de chevauchement : aucun autre template ne définit diskmanagement_*.
+> Qui souhaite l'approche Windows — lecture autorisée, écriture non — a besoin sur macOS de Microsoft Defender for Endpoint Device Control (une politique de supports amovibles en lecture seule). Cela demande un agent Defender onboardé (extras/macos/defender-onboarding) et une politique JSON distincte, et ne fait pas partie de cette itération. Un disque Time Machine externe n'est plus monté non plus avec cette policy ; dans cette baseline, la sauvegarde doit passer par OneDrive (KFM). Si une organisation choisit ceci, déployez d'abord sur un groupe pilote puis traitez-le comme phase 2. Pas de chevauchement : aucun autre template ne définit diskmanagement_*.
 
 ## Normes
 

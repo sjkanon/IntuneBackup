@@ -5,10 +5,11 @@
 Een Win32-app die de McAfee-proefversie verwijdert die op vrijwel elke nieuwe consumentenlaptop
 vanaf de fabriek meekomt.
 
-Staat buiten [`IntuneTemplate/`](../../../IntuneTemplate/README.md), net als
-[`shellscripts/macos/`](../../../shellscripts/macos/README.md) en
-[`compliance/macos/`](../../../compliance/macos/README.md): een Win32-app is geen policy en past
-niet in een van de vijf CIPP-policytypes. Geen enkele pijplijn pikt deze map op.
+Staat buiten [`IntuneTemplate/`](../../../../IntuneTemplate/README.md), net als
+[`extras/macos/shell-scripts/`](../../../macos/shell-scripts/README.md) en
+[`extras/macos/compliance-scripts/`](../../../macos/compliance-scripts/README.md): een Win32-app is geen policy en past
+niet in een van de vijf CIPP-policytypes. CIPP, `check-scope.js`, `export-intunebackup.js` en
+`Set-BaselineAssignment.ps1` doen niets met deze map; de app pak je in en upload je met de hand.
 
 ## Waarom dit bij de baseline hoort
 

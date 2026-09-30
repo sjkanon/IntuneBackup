@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Controls** | ISO A.8.20 Netwerkbeveiliging, A.8.24 Gebruik van cryptografie · NIS2 art. 21(2)(h) cryptografie en versleuteling, art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie · CIS Controls v8.1 3.10 Encrypt Sensitive Data in Transit, 4.9 Configure Trusted DNS Servers on Enterprise Assets · NIST CSF 2.0 PR.DS-02 |
-| **Fase** | *Allow* 2 (pilot) · *Require* 5 (alternatief, klantkeuze) |
+| **Fase** | *Allow* 2 (pilot) · *Require* 5 (alternatief, organisatiekeuze) |
 
 ## Waarom een script en geen template
 
@@ -35,7 +35,7 @@ de catalog en staat als template-paar in `IntuneTemplate/WIN/SettingsCatalog/`
 
 *Vereisen* hoort bij een organisatie die al haar DNS via een eigen of gecontracteerde DoH-resolver
 (DNS-filterdienst) laat lopen, die ook split-DNS kan, en die de server-template per adapter of via
-`netsh dns add encryption` vooraf uitrolt. Dat is een klantbesluit.
+`netsh dns add encryption` vooraf uitrolt. Dat is een organisatiebesluit.
 
 ## Samenspel met Defender Network Protection
 

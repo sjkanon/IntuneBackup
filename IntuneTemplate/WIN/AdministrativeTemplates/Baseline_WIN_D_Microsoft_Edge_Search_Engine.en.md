@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Microsoft Edge Search Engine
 
-Sets Google as the default search engine in Edge. A customer decision, not a security setting.
+Sets Google as the default search engine in Edge. An organisational decision, not a security setting.
 
 | | |
 |---|---|

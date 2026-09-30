@@ -6,8 +6,9 @@ Apple Automated Device Enrollment-profielen (`depMacOSEnrollmentProfile`) staan 
 `IntuneTemplate/`. De pijplijnen daar kennen vijf CIPP-policytypes en een enrollmentprofiel is
 geen van die vijf: het hangt onder een ABM-token
 (`depOnboardingSettings/{id}/enrollmentProfiles`) en gaat niet door de "Import profile"-knop.
-Een bestand hier wordt dus **niet** opgepikt door `export-intunebackup.js` of
-`Set-BaselineAssignment.ps1`.
+`export-intunebackup.js` kopieert elke `.json` uit deze map wel als sidecar naar
+`export/.../Apple ADE Enrollment Profiles/macos/`, zodat het profiel bij een herinrichting niet
+vergeten wordt; CIPP, `check-scope.js` en `Set-BaselineAssignment.ps1` doen er niets mee.
 Uitrollen gaat via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | Bestand | Token | Standaardprofiel |
@@ -50,8 +51,8 @@ Openstaand, niet opgelost door dit bestand:
 
 - **Rotatie beperkt lezen niet.** Wie het geëscroweerde wachtwoord mag opvragen regel je met
   RBAC/PIM, niet hier. Controleer wie die rol heeft.
-- **`mlapsadmin` is tenantbreed voorspelbaar.** Voor een beheerder met meerdere klanten is een
-  naam per klant (`<prefix>-<klantcode>-adm`) beter.
+- **`mlapsadmin` is tenantbreed voorspelbaar.** Wie meerdere tenants beheert, kiest beter een
+  naam per tenant (`<prefix>-<tenantcode>-adm`).
 - **`supportPhoneNumber` staat op `SERVICEDESK-TELEFOON-INVULLEN`.** De gebruiker ziet dat
   nummer tijdens de inrichting; vul het per organisatie in vóór je het profiel aanmaakt.
 - **Controleer dat escrow aanstaat** onder Devices → macOS → Local admin password, anders
@@ -231,6 +232,6 @@ scriptdiagnose komen.
 Is alles in orde en staat er toch `NotRun`, dan wacht je gewoon op de agent: die haalt scripts
 **elke 8 uur** op, los van de MDM-sync.
 
-Net als de klik voor schermopname (zie [`shellscripts/macos/`](../../shellscripts/macos/README.md))
+Net als de klik voor schermopname (zie [`extras/macos/shell-scripts/`](../shell-scripts/README.md))
 is de gebruikerskoppeling een handeling per Mac die geen policy kan overnemen. Beide horen in de
 overdracht van een nieuw toestel.

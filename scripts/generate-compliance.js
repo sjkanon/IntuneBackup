@@ -291,7 +291,7 @@ const HEADINGS = {
   nis2: { nl: "NIS2 art. 21 lid 2", en: "NIS2 art. 21(2)", fr: "NIS2 art. 21, paragraphe 2" },
   cis: { nl: "CIS Controls v8.1", en: "CIS Controls v8.1", fr: "CIS Controls v8.1" },
   csf: { nl: "NIST CSF 2.0", en: "NIST CSF 2.0", fr: "NIST CSF 2.0" },
-  keuzes: { nl: "Klantkeuzes en restrisico's", en: "Customer decisions and residual risks", fr: "Choix du client et risques résiduels" },
+  keuzes: { nl: "Organisatiekeuzes en restrisico's", en: "Organisational decisions and residual risks", fr: "Choix de l'organisation et risques résiduels" },
   licenties: { nl: "Wat een licentie zou toevoegen", en: "What a licence would add", fr: "Ce qu'une licence apporterait" },
   soa: { nl: "Verklaring van toepasselijkheid — startpunt", en: "Statement of Applicability — starting point", fr: "Déclaration d'applicabilité — point de départ" },
   controle: { nl: "Controle van de mapping", en: "Mapping check", fr: "Contrôle du mappage" },
@@ -810,15 +810,15 @@ function sectionKeuzes(ctx, data) {
     "",
     ...V.t({
       nl: [
-        "Alternatieven voor een policy die wél uitrolt, of klantkeuzes zonder technisch juist antwoord. Twee",
+        "Alternatieven voor een policy die wél uitrolt, of organisatiekeuzes zonder technisch juist antwoord. Twee",
         "varianten tegelijk toewijzen levert in Intune een Conflict op, waarna géén van beide wordt toegepast.",
       ],
       en: [
-        "Alternatives to a policy that is deployed, or customer decisions without a technically correct answer. Assigning two",
+        "Alternatives to a policy that is deployed, or organisational decisions without a technically correct answer. Assigning two",
         "variants at the same time produces a Conflict in Intune, after which neither is applied.",
       ],
       fr: [
-        "Alternatives à une policy qui, elle, est déployée, ou choix du client sans réponse techniquement juste. Affecter deux",
+        "Alternatives à une policy qui, elle, est déployée, ou choix de l'organisation sans réponse techniquement juste. Affecter deux",
         "variantes en même temps produit un Conflit dans Intune, après quoi aucune des deux n'est appliquée.",
       ],
     }),
@@ -951,18 +951,18 @@ function sectionLicenties(ctx) {
     ...V.t({
       nl: [
         "Hieronder staat per licentie welke policies uit deze baseline erdoor gaan werken, en welke",
-        "normen dat raakt. Policies die op een pilot, een klantbesluit of een inschrijving wachten staan",
-        `hier **niet** in — die hebben hun eigen reden in [Klantkeuzes](#${anchor(heading("keuzes"))}).`,
+        "normen dat raakt. Policies die op een pilot, een organisatiebesluit of een inschrijving wachten staan",
+        `hier **niet** in — die hebben hun eigen reden in [Organisatiekeuzes](#${anchor(heading("keuzes"))}).`,
       ],
       en: [
         "Below, per licence, which policies from this baseline start working because of it, and which",
-        "standards that touches. Policies waiting on a pilot, a customer decision or an enrolment are",
-        `**not** listed here — they have their own reason in [Customer decisions](#${anchor(heading("keuzes"))}).`,
+        "standards that touches. Policies waiting on a pilot, an organisational decision or an enrolment are",
+        `**not** listed here — they have their own reason in [Organisational decisions](#${anchor(heading("keuzes"))}).`,
       ],
       fr: [
         "Ci-dessous, pour chaque licence, les policies de cette baseline qui deviennent opérantes grâce à elle, et les",
-        "normes concernées. Les policies en attente d'un pilote, d'une décision du client ou d'une inscription",
-        `n'y figurent **pas** — elles ont leur propre raison dans [Choix du client](#${anchor(heading("keuzes"))}).`,
+        "normes concernées. Les policies en attente d'un pilote, d'une décision de l'organisation ou d'une inscription",
+        `n'y figurent **pas** — elles ont leur propre raison dans [Choix de l'organisation](#${anchor(heading("keuzes"))}).`,
       ],
     }),
     "",

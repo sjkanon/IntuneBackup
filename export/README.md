@@ -2,28 +2,19 @@
 
 # export/
 
-**Gegenereerd — niet met de hand bijwerken.** Dit zijn de drie policysets van deze repo in
-het formaat dat de PowerShell-module
-[IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) verwacht. Wijzig je
-hier iets, dan is het bij de volgende `node scripts/export-intunebackup.js` weer weg.
+De baseline uit `IntuneTemplate/` in het formaat dat de PowerShell-module
+[IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) verwacht.
 
-Elke bronmap krijgt een eigen doelmap:
+**De inhoud van `NativeImport/` is gegenereerd — niet met de hand bijwerken.** Wijzig je daar
+iets, dan is het bij de volgende `node scripts/export-intunebackup.js` weer weg. Alleen deze
+README is handwerk.
 
 | Bron | Export | Policies | Assignments |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 106 | ja, uit `_assignments.json` |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 197 | 101, uit `_assignments.json` (fase 1) |
 
-Aparte mappen en niet één gedeelde, omdat `Start-IntuneRestoreConfig` één pad meekrijgt en
-alles terugzet wat eronder staat. Samen in één map zou wie de baseline terugzet de zestien
-voorstelpolicies ongemerkt mee uitrollen — en die veranderen gedrag dat gebruikers direct
-merken. Die exports hebben om dezelfde reden geen `Assignments/`: die policies horen ná de
-restore met de hand op een pilotgroep, niet op All Devices. Zie
-[`IntuneTemplate/`](../IntuneTemplate/README.md).
-
-Een set toevoegen aan `SET_PREFIXES` in `scripts/lib/templates.js` is genoeg: de exporter
-schrijft hem daarna vanzelf naar `NativeImport/IntuneBackupAndRestore-<SET>/`.
-
-CIPP heeft deze map niet nodig; die leest de drie bronmappen rechtstreeks.
+In totaal 299 JSON-bestanden: 197 policies, 101 assignment-bestanden en het meegereisde
+macOS ADE-profiel. CIPP heeft deze map niet nodig; die leest `IntuneTemplate/` rechtstreeks.
 
 ## Waarom `NativeImport` in het pad staat
 
@@ -32,12 +23,12 @@ Omdat CIPP dat woord als enige uitsluiting kent. Een template-repository wordt g
 `.json` eindigen, en het pad mag `NativeImport` niet bevatten. Een instelling voor "kijk
 alleen in deze submap" bestaat niet.
 
-Zonder dat woord importeert CIPP deze 219 bestanden dus ook. Ze bevatten dezelfde 122 policies
-(plus het meegereisde ADE-profiel), maar in Graph-vorm zonder `RowKey` — en dan valt CIPP terug
-op het raden van het policytype
-uit de inhoud en maakt er een **tweede** template van, met dezelfde naam en een eigen GUID.
-Twee templates met dezelfde naam is precies het geval waar CIPP zelf een foutmelding voor
-heeft ("a same-named duplicate row shadowed the one selected").
+Zonder dat woord importeert CIPP deze 299 bestanden dus ook. Ze bevatten dezelfde 197 policies
+(plus hun assignments en het ADE-profiel), maar in Graph-vorm zonder `RowKey` — en dan valt
+CIPP terug op het raden van het policytype uit de inhoud en maakt er een **tweede** template
+van, met dezelfde naam en een eigen GUID. Twee templates met dezelfde naam is precies het geval
+waar CIPP zelf een foutmelding voor heeft ("a same-named duplicate row shadowed the one
+selected").
 
 De naam is dus een misnomer — dit is geen native import-formaat — maar het is de enige haak
 die CIPP biedt. OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden: ook daar staan
@@ -46,7 +37,6 @@ dezelfde policies in twee formaten in één repository.
 ```mermaid
 flowchart LR
   T["IntuneTemplate/"] -->|export-intunebackup.js| E["export/NativeImport/IntuneBackupAndRestore/"]
-  EI -->|Start-IntuneRestoreConfig| PI["voorstelpolicies, ongetoewezen"]
   E -->|Start-IntuneRestoreConfig| P["policies in de tenant"]
   E -->|Start-IntuneRestoreAssignments<br/>-RestoreById $false| A["assignments"]
   E -->|Invoke-IntuneRestoreApp&#8203;ProtectionPolicyAssignment| M["MAM-assignments"]
@@ -69,29 +59,24 @@ wél de assignments van Settings Catalog, ADMX, device configurations en complia
 **niet** die van App Protection. Zonder die losse aanroep staan de twee MAM-policies er wel,
 maar zonder toewijzing — en dan beschermen ze niets.
 
-De twee voorstelsets staan hier niet bij en gaan apart, zonder assignments:
-
-```powershell
-```
-
-En het macOS ADE-enrollmentprofiel gaat door geen van beide: dat kent de module niet. Het reist
-mee in `Apple ADE Enrollment Profiles/` en gaat er met een eigen script in — zie hieronder.
+Het macOS ADE-enrollmentprofiel en de macOS-shellscripts gaan door geen van deze aanroepen: die
+kent de module niet. Ze reizen mee als sidecar en gaan er met de hand of met een eigen script
+in — zie hieronder.
 
 ## Mappen
 
-| Map | Policies | Restore-functie |
+| Map | Inhoud | Terugzetten |
 |---|---:|---|
-| `Settings Catalog/` | 91 | `Invoke-IntuneRestoreConfigurationPolicy` |
-| `Device Compliance Policies/` | 7 | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
-| `Device Configurations/` | 5 | `Invoke-IntuneRestoreDeviceConfiguration` |
-| `App Protection Policies/` | 2 | `Invoke-IntuneRestoreAppProtectionPolicy` |
-| `Administrative Templates/` | 1 | `Invoke-IntuneRestoreGroupPolicyConfiguration` |
+| `Settings Catalog/` | 155 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Device Compliance Policies/` | 26 policies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
+| `Device Configurations/` | 13 policies | `Invoke-IntuneRestoreDeviceConfiguration` |
+| `App Protection Policies/` | 2 policies | `Invoke-IntuneRestoreAppProtectionPolicy` |
+| `Administrative Templates/` | 1 policy | `Invoke-IntuneRestoreGroupPolicyConfiguration` |
+| `Apple ADE Enrollment Profiles/` | 1 profiel (sidecar, uit `extras/macos/enrollment/`) | `scripts/New-MacOSEnrollmentPolicy.ps1` — zie de README in die map |
+| `macOS Shell Scripts/` | 4 scripts (sidecar, uit `extras/macos/shell-scripts/`) | met de hand in Intune — zie de README in die map |
 
-De twee exports ernaast hebben elk één map — `Settings Catalog/`, met tien respectievelijk
-zes policies — en geen `Assignments/`.
-
-Elke map van de baseline-export heeft een `Assignments/`-submap. Twee vormen, allebei zoals de module ze zelf
-wegschrijft:
+Elke policymap heeft een `Assignments/`-submap voor de policies die er een hebben. Twee vormen,
+allebei zoals de module ze zelf wegschrijft:
 
 - **App Protection**: bestandsnaam `<guid> - <policynaam>.json`, en de lijst zit in een
   `value`-property. De module leest de policynaam als alles ná het eerste ` - `, en leest
@@ -100,13 +85,12 @@ wegschrijft:
 
 ## Policies zonder assignment
 
-De update- en Defender-ringen 1 en 2 (`Windows Update Ring 1 Pilot`, `Windows Update Ring 2
-UAT`, `Defender Update Ring 1 Pilot`, `Defender Update Ring 2 UAT`) zetten dezelfde
-instellingen als hun ring 3 met andere waarden. Alle ringen op All Devices zou een conflict
-opleveren; ring 1 en 2 horen op een pilot- respectievelijk UAT-groep. Wijs ze na de restore
-handmatig toe. `node scripts/export-intunebackup.js` noemt bij elke run de volledige lijst.
+Alleen fase 1 heeft een assignment. De 96 policies in fase 2 tot en met 5 komen met opzet
+ongetoewezen terug — zie `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json). Wijs
+ze na de restore toe volgens hun fase: de pilot op `SEC-Baseline-Pilot`, fase 4 op de groep uit
+`faseGroep`, fase 3 zodra de voorwaarde er is, fase 5 niet. `node scripts/export-intunebackup.js`
+noemt bij elke run de volledige lijst.
 
-De 24 policies in fase 2 tot en met 5 vallen hier helemaal onder: die zijn met opzet nog ongetoewezen — zie `fase` in IntuneTemplate/_manifest.json.
-
-Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en de
-lijst met policies die eerst in een pilot horen.
+Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en
+[OVERZICHT.md](../docs/OVERZICHT.md#eerst-in-een-pilot) voor de policies die eerst in een pilot
+horen.

@@ -2,7 +2,7 @@
 
 # App Control for Business (WDAC) — generic starting point
 
-The biggest substantive gap in the baseline (ANALYSE.md, *Deliberately not adopted*):
+The biggest substantive gap in the baseline ([ANALYSE.md, *Deliberately not adopted*](../../../docs/ANALYSE.en.md#deliberately-not-adopted--windows-and-macos)):
 there was no application control. This is the generic part that is the same for every tenant.
 The exceptions that follow are per organisation and do **not** belong in this repo.
 

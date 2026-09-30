@@ -53,15 +53,10 @@ Solid arrows write; dotted lines only read.
 | [`export/NativeImport/`](../export/README.en.md) | Restore format, with assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.en.md) | The CIPP baseline: packages per stage | `generate-baseline-template.js` | CIPP (manual import) |
 | [`StandardsTemplateV2/`](../StandardsTemplateV2/README.en.md) | CIPP standards for tenant settings (MFA nudge, passkey migration) | hand | CIPP |
-| [`extras/`](../extras/README.en.md) | What is not a CIPP policy type: enrollment restrictions, app configuration, filters, App Control, remediations | hand | nobody automatically — deploy as described in the README |
-| [`enrollment/macos/`](../enrollment/macos/README.en.md) | ADE enrollment profile for Macs | hand | nobody automatically |
-| [`compliance/macos/`](../compliance/macos/README.en.md) | Custom compliance check for Defender on macOS | hand | nobody automatically |
-| [`shellscripts/macos/`](../shellscripts/macos/README.en.md) | Dock, Azure Files mount, screen recording nudge | hand | nobody automatically |
-| [`platformscripts/windows/`](../platformscripts/windows/README.en.md) | Mapping an Azure Files drive | hand | nobody automatically |
-| [`apps/win32/`](../apps/win32/remove-mcafee/README.en.md) | Win32 app that removes McAfee | hand | nobody automatically |
+| [`extras/`](../extras/README.en.md) | Everything that is not a CIPP policy type, per platform: enrollment profiles and restrictions, app configuration, filters, App Control, remediations, shell and platform scripts, compliance scripts, Win32 apps | hand | nobody automatically — deploy as described in the README; `extras/macos/enrollment/` and `extras/macos/shell-scripts/` travel with the export as a sidecar |
 | `docs/` | Documentation: overview, compliance framework, analysis, plan and this structure | hand + `generate-docs.js`, `generate-compliance.js` | readers |
 | [`scripts/`](../scripts/README.en.md) | The pipeline: import, checks, generation, tenant scripts | hand | GitHub workflow |
-| `local/` | Deployment copies with filled-in secrets and customer reports | hand | **not in git** (`.gitignore`) |
+| `local/` | Deployment copies with filled-in secrets and tenant reports | hand | **not in git** (`.gitignore`) |
 
 `.oib-source/` and `.intuneadmin-source/` are local checkouts of the external sources and are
 not in git either.
@@ -75,6 +70,7 @@ IntuneTemplate/
   _controls.json      vocabulary for ISO 27001, NIS2, CIS and NIST CSF
   _licenties.json     which controls can be covered with a licence
   _renames.json       former names in the tenant
+  _i18n/              English and French translations of the text in the data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
@@ -87,7 +83,7 @@ Next to every `.json` template sits a generated `.md` listing every setting it a
 
 | File | Determines | Read by |
 |---|---|---|
-| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `controls`, `overrides` on the source, excluded source policies | all Node scripts except `check-osversion.js`, `Set-BaselineAssignment.ps1` |
+| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `controls`, `overrides` on the source, excluded source policies | all Node scripts except `export-intunebackup.js` and `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
 | `_assignments.json` | Who a phase 1 policy goes to (all devices, all users) | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, the generation scripts, `Set-BaselineAssignment.ps1` |
 | `_controls.json` | Which standard labels exist and what they mean | `generate-compliance.js`, `generate-docs.js`, `check-scope.js` |
 | `_licenties.json` | Which empty controls can be solved with a SKU rather than a process | `generate-compliance.js` |
@@ -128,8 +124,10 @@ passed. Stage 3 is advanced by hand.
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | assignments in the tenant |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policy names in the tenant |
 
-Steps 1 to 6 are run by [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)
-after every change in `IntuneTemplate/`. All Node scripts in the pipeline share `scripts/lib/templates.js`.
+Locally you run steps 1 to 6 in this order. [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)
+runs after every change in `IntuneTemplate/`: first `check-scope.js`, then
+`set-packages.js --check` instead of step 1 — CI does not silently correct a wrong package —
+and then steps 3 to 6. All Node scripts in the pipeline share `scripts/lib/templates.js`.
 Details: [scripts/README.en.md](../scripts/README.en.md).
 
 ## External connections
@@ -138,7 +136,7 @@ Details: [scripts/README.en.md](../scripts/README.en.md).
 |---|---|---|---|
 | [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) | source → repo | `import-oib.js` on a local clone | Windows v4.0 taken from a branch at commit `f247604`; re-import once the tag exists |
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | source → repo | `import-intuneadmin.js` | JSONs in UTF-16LE |
-| [CA-Policies](https://github.com/sjkanon/CA-Policies) | repo ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git holds the `--no-ca` version; CI cannot see the other repo |
+| CA-Policies repo (cloned next to this one as `../CA-Policies`) | repo ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git holds the `--no-ca` version; CI cannot see the other repo |
 | CIPP | repo → CIPP | template repository sync on this repo | `BaselineTemplate/Baseline.json` only comes along via Tools → Community Repos → Import |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | repo → tenant | `Start-IntuneRestoreConfig` and `…Assignments` with `-RestoreById $false` | restore App Protection assignments separately |
 | Microsoft Graph | repo → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | `-WhatIf` first |
@@ -150,8 +148,10 @@ Details: [scripts/README.en.md](../scripts/README.en.md).
 
 - **`NativeImport` in a path excludes it from the sync.** That is why the restore export lives under
   `export/NativeImport/`. Without that word CIPP turns every policy into a second template.
-- **Every other `.json` becomes one nameless template row.** That applies to the `_` files, the
-  ADE profile and `extras/`. That row does nothing and can be deleted in CIPP.
+- **Every other `.json` becomes one nameless template row.** That applies to the `_` files in
+  `IntuneTemplate/` (including `_i18n/*.json`), everything under `extras/` — ADE profiles, Graph bodies and
+  the JSON part of the compliance check — and, with the automatic sync, also
+  `BaselineTemplate/Baseline.json`. That row does nothing and can be deleted in CIPP.
 
 ## Tenant settings that are not a policy
 
@@ -173,8 +173,8 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 - **Deviating from OpenIntuneBaseline** is done via `overrides` in `_manifest.json`, with a reason.
 - **Never put secrets in git.** The repo is public; placeholders are named `…-INVULLEN` and are
   filled in under `local/`.
-- **Generated, do not edit by hand:** `export/`, `BaselineTemplate/Baseline.json`,
-  `OVERZICHT.md`, `COMPLIANCE.md`, the READMEs in `IntuneTemplate/` and the `.md` per policy.
+- **Generated, do not edit by hand:** `export/NativeImport/`, `BaselineTemplate/Baseline.json`,
+  `docs/OVERZICHT.md`, `docs/COMPLIANCE.md`, the READMEs in `IntuneTemplate/` and the `.md` per policy.
 
 ## Further reading
 

@@ -14,7 +14,7 @@ De baseline zet Defender op macOS wel klaar —
 (realtimebeveiliging, tamper protection) — maar **meldt de Mac nergens aan**. Zonder aanmelding
 draait de agent zonder licentie: `mdatp health` meldt `licensed: false`, er komen geen
 EDR-signalen in het Defender-portaal en de compliance-check in
-[`compliance/macos/`](../../../compliance/macos/README.md) blijft rood.
+[`extras/macos/compliance-scripts/`](../compliance-scripts/README.md) blijft rood.
 
 ## Kan het generiek, zoals op Windows? Nee.
 
@@ -56,7 +56,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
 5. **Controleren.** Op de Mac: `mdatp health --field licensed` → `true`, en
    `mdatp health --field org_id` toont de tenant. In het portaal verschijnt het apparaat binnen
    ongeveer een uur. EDR-test: Microsoft Learn *EDR detection test*.
-6. **Compliance.** Pas daarna de custom compliance uit `compliance/macos/` toewijzen, en — als de
+6. **Compliance.** Pas daarna de custom compliance uit `extras/macos/compliance-scripts/` toewijzen, en — als de
    organisatie op risiconiveau wil sturen — `deviceThreatProtectionEnabled` in de
    macOS-compliance.
 

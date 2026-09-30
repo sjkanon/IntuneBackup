@@ -34,10 +34,10 @@ flowchart TD
 | [`set-packages.js`](set-packages.js) | **in** de bron | Zet `Package` in elk template — het CIPP-pakket waarin de policy uitrolt — afgeleid uit de fase in `_manifest.json` en het doel in `_assignments.json` — en de Engelse omschrijving die in de tenant naast de policy staat (`doel` + toewijzing + bron, vertaald via `_i18n/en.json`). Draaien na elke wijziging in die bestanden. |
 | [`check-scope.js`](check-scope.js) | controle | Scope, naamconventie, mapindeling, conflicterende instellingen, het CIPP-pakket en de migratietabel. Blokkerend in CI. |
 | [`check-osversion.js`](check-osversion.js) | controle | Rapporteert hoe ver de OS-ondergrenzen achterlopen op n-1 per platform, met endoflife.date als bron. **Exitcode altijd 0** — een verouderde ondergrens is een besluit dat wacht, geen fout; zou dit CI laten falen, dan verhoogt iemand het getal om de build groen te krijgen. |
-| [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` mét assignments, elke set daarnaast in een eigen map zonder. |
+| [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` met de assignments van fase 1 — en kopieert de macOS ADE-profielen en shellscripts uit `extras/macos/` als sidecar mee. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **uit** de bron | Schrijft `BaselineTemplate/Baseline.json`: de CIPP-baseline met zijn stages en pakketten. `--check` faalt als hij achterloopt. |
-| [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
-| [`generate-compliance.js`](generate-compliance.js) | **uit** de bron | Schrijft `COMPLIANCE.md`: per ISO 27001-, NIS2-, CIS- en NIST CSF-item welke policies hem invullen, uit `controls` in `_manifest.json` en de vocabulaire in `_controls.json`. `--strict` faalt op een onbekend of afwijkend label, `--check` als het document achterloopt. Met `--ca` telt ook de Conditional Access-kant mee — zie hieronder. |
+| [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `docs/OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet. `--check` faalt als ze achterlopen. |
+| [`generate-compliance.js`](generate-compliance.js) | **uit** de bron | Schrijft `docs/COMPLIANCE.md`: per ISO 27001-, NIS2-, CIS- en NIST CSF-item welke policies hem invullen, uit `controls` in `_manifest.json` en de vocabulaire in `_controls.json`. `--strict` faalt op een onbekend of afwijkend label, `--check` als het document achterloopt. Met `--ca` telt ook de Conditional Access-kant mee — zie hieronder. |
 
 Alle tien de scripts delen [`lib/templates.js`](lib/templates.js): hoe de map is ingedeeld,
 hoe je 'm uitleest en waar een nieuw template hoort. Vier scripts lazen die map eerder elk op
@@ -46,9 +46,9 @@ antwoord geven.
 
 ### De CA-kant van COMPLIANCE.md
 
-`generate-compliance.js` kan de Conditional Access-policies meenemen uit de zusterrepo
-[CA-Policies](https://github.com/sjkanon/CA-Policies), die daarvoor `controls/ca-controls.json`
-bijhoudt in dezelfde vocabulaire:
+`generate-compliance.js` kan de Conditional Access-policies meenemen uit de CA-Policies-repo
+(naast deze gekloond als `../CA-Policies`), die daarvoor `controls/ca-controls.json` bijhoudt in
+dezelfde vocabulaire:
 
 ```bash
 node scripts/generate-compliance.js --strict --ca ../CA-Policies/controls/ca-controls.json
@@ -61,13 +61,14 @@ Hoe je de CA-kant wél in CI krijgt staat in [ANALYSE.md](../docs/ANALYSE.md#ope
 
 ## PowerShell
 
-Beide vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
+Alle drie vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
 `Microsoft.Graph.Authentication`. Draai ze eerst met `-WhatIf`.
 
 | Script | Wat het doet |
 |---|---|
 | [`Set-BaselineAssignment.ps1`](Set-BaselineAssignment.ps1) | Zet in één keer een assignment op de baseline-policies die volgens hun fase bij dat doel horen, over de vijf policytypes heen: `-AllDevices`/`-AllUsers` fase 1, `-GroupName` de pilot of een `faseGroep`. `-Scope D\|U`, `-Platform WIN\|MAC\|IOS\|AND`, `-Replace`, `-FilterId`, `-IgnoreFase`. Vult standaard aan, vervangt niet. |
 | [`Rename-BaselinePolicy.ps1`](Rename-BaselinePolicy.ps1) | Brengt de policynamen in een tenant op de huidige conventie, volgens `_renames.json`. `PATCH`, dus id en assignments blijven. Meldt de gevallen die handwerk vragen in plaats van ze te forceren. |
+| [`New-MacOSEnrollmentPolicy.ps1`](New-MacOSEnrollmentPolicy.ps1) | Maakt een macOS ADE-inschrijfprofiel aan onder een ABM-token uit een JSON in [`extras/macos/enrollment/`](../extras/macos/enrollment/README.md), of exporteert de bestaande profielen naar JSON (`-Export`). Wijst bewust niet toe. |
 
 Nog te bouwen: `Get-BaselinePolicyState.ps1`, de tenant-zijdige tegenhanger van
 `check-scope.js` — zie [PLAN.md](../docs/PLAN.md#nog-te-bouwen-scriptsget-baselinepolicystateps1).

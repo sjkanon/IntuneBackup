@@ -2,13 +2,18 @@
 
 # Analyse des écarts — que nous manque-t-il pour une première baseline ?
 
+> **Instantané du 3 septembre 2026.** `BASELINE2/` et `ISMSTemplate/` ont depuis été
+> fusionnés dans `IntuneTemplate/` ; ce que faisaient les dossiers séparés, c'est désormais le champ
+> `fase` de `_manifest.json` qui le fait. Les nombres et noms de dossiers ci-dessous sont ceux de
+> l'époque. Les itérations suivantes figurent en bas, chacune avec sa propre date.
+
 Rédigé à la main, contrairement au [`README.md`](../README.fr.md) voisin. Ce document consigne *comment*
 l'ensemble BASELINE2 a vu le jour et — plus important — ce qui n'y figure délibérément **pas** et pourquoi.
 Sans ce dernier point, la prochaine itération est condamnée à réévaluer les mêmes 500 paramètres.
 
 Date : 3 septembre 2026. La baseline compte 134 stratégies. Cette analyse décrit les 25 ajoutées en septembre 2026 : 15 issues de cette analyse et les 10 qui, jusqu'à cette
-date, se trouvaient dans `ISMSTemplate/` et y ont été fusionnées. L'objectif final est une baseline unique — ce dossier
-est la salle d'attente, `IntuneTemplate/` la destination.
+date, se trouvaient dans `ISMSTemplate/` et y ont été fusionnées. L'objectif final était une baseline unique — le
+dossier `BASELINE2/` de l'époque était la salle d'attente, `IntuneTemplate/` la destination.
 
 ## La question
 
@@ -47,7 +52,7 @@ Trois pièges si on ne les connaît pas :
 
 Au moment de la comparaison, nos deux ensembles définissaient ensemble 1 908 paramètres
 (`IntuneTemplate/` 106 stratégies / 1 877 paramètres, `ISMSTemplate/` 10 / 31 — ce dernier a
-depuis été fusionné dans ce dossier). Face à cela, IntuneAdmin a fourni **509 `settingDefinitionId`
+depuis été fusionné dans le dossier `BASELINE2/` de l'époque). Face à cela, IntuneAdmin a fourni **509 `settingDefinitionId`
 que nous ne définissons nulle part**. Ils se répartissent ainsi :
 
 | | Nombre | Ce qu'il en est advenu |
@@ -98,7 +103,7 @@ Defender sur Linux. Il reste **cinq baselines qui comptent vraiment** :
 | `WIN - D - Power Management` | La baseline exige déjà un mot de passe à la sortie de veille, mais fermer le capot ne faisait rien — l'écran restait donc déverrouillé. C'est le moment où un portable reste sans surveillance. | 1 |
 | `WIN - D - Storage Sense` | Un disque plein casse Windows Update, le chiffrement BitLocker et les mises à jour de définitions Defender. C'est l'état dans lequel un appareil prend silencieusement du retard. | 1 |
 | `WIN - D - Enrollment Hardening` | Sauter l'étape réseau pendant l'OOBE est la manière la plus connue de contourner Autopilot. Un paramètre suffit à la fermer. | 2 |
-| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill et le Settings Agent envoient des entrées à un service génératif. Voir *L'IA est une décision du client* ci-dessous. | 2 / 5 |
+| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill et le Settings Agent envoient des entrées à un service génératif. Voir *L'IA est une décision de l'organisation* ci-dessous. | 2 / 5 |
 | `WIN - U - Microsoft Teams` | Sans restriction de tenant, un utilisateur peut se connecter à un tenant étranger dans le client Teams professionnel et y glisser des fichiers — un flux de données sortant qui n'est journalisé nulle part. | 3 |
 
 S'y ajoutent trois droits utilisateur CIS L1 ajoutés à la stratégie existante `WIN - D - User Rights` :
@@ -122,10 +127,10 @@ Qui déploie via IntuneBackupAndRestore conserve `%OrganizationId%` littéraleme
 renseigner l'identifiant à la main.
 
 
-### L'IA est une décision du client, donc chaque stratégie IA forme une paire
+### L'IA est une décision de l'organisation, donc chaque stratégie IA forme une paire
 
-Autoriser ou non l'IA générative sur le poste de travail n'est pas un fait technique mais une politique, et cela diffère d'un
-client à l'autre. Les trois stratégies IA existent donc en deux variantes qui définissent les mêmes paramètres à la
+Autoriser ou non l'IA générative sur le poste de travail n'est pas un fait technique mais une politique, et cela diffère d'une
+organisation à l'autre. Les trois stratégies IA existent donc en deux variantes qui définissent les mêmes paramètres à la
 valeur opposée. **Affectez-en une par paire** — les deux à la fois produisent dans Intune un
 Conflict, après quoi le paramètre disputé n'est appliqué par *aucune* des deux stratégies et plus
 rien n'est donc réglé. `check-scope.js` y veille.
@@ -158,7 +163,7 @@ pèse plus lourd que mille d'un traitement de texte. Cette stratégie retire pr�
 | `AllowRecallExport` | désactivé | le bouton d'export est la voie par laquelle l'index entier quitte l'appareil |
 
 La liste d'URI est valable pour tout tenant M365. **La liste d'applications est délibérément incomplète** et doit
-être complétée pour chaque client avec ce qui y affiche des données sensibles : le logiciel RH, le système de dossiers, l'environnement
+être complétée pour chaque organisation avec ce qui y affiche des données sensibles : le logiciel RH, le système de dossiers, l'environnement
 bancaire. Les noms peuvent être un exécutable (`app.exe`) ou un AUMID pour les applications du Store.
 
 Un point demeure quelle que soit cette délimitation : l'index est soumis aux mêmes durées de conservation et
@@ -228,12 +233,12 @@ Ce qui manque :
 | `screenCaptureConfigurationState` (iOS) | non défini | `blocked` | Android bloque déjà les captures d'écran (`screenCaptureBlocked: true`) ; sur iOS, il n'existait pas de paramètre avant iOS 26. Il existe désormais — et l'asymétrie n'est pas voulue. |
 | `previousPinBlockCount` (les deux) | `0` | `5` | Pas d'historique de PIN : lors d'une réinitialisation, un utilisateur peut choisir à nouveau le même PIN. Aucune friction à corriger. |
 
-Ces trois points figurent dans ce dossier sous `BASELINE2 - IOS/AND - U - App Protection` : une copie complète
+Ces trois points figuraient dans le dossier `BASELINE2/` de l'époque sous `BASELINE2 - IOS/AND - U - App Protection` : une copie complète
 de la stratégie de baseline avec le durcissement intégré. **Déployez-la à la place de la variante de baseline,
 pas à côté.** Deux stratégies App Protection sur les mêmes applications ne s'empilent pas proprement — Intune choisit
 la valeur la plus stricte par paramètre, mais on ne peut alors plus lire quelle stratégie fournit un paramètre.
 À terme, la modification doit revenir dans la stratégie de baseline elle-même ; c'est une décision sur la
-baseline convenue *avec* le client, pas un nettoyage, et c'est pourquoi elle figure d'abord ici.
+baseline convenue *avec* l'organisation, pas un nettoyage, et c'est pourquoi elle figure d'abord ici.
 
 Délibérément non repris des ensembles UniFy : `pinRequiredInsteadOfBiometricTimeout` à 30 minutes
 (nous : 12 heures — friction perceptible, et le PIN n'est pas la seule protection),
@@ -325,10 +330,10 @@ avec un espace réservé.
 
 | # | Étape | |
 |---:|---|---|
-| 1 | BASELINE2 sur un groupe pilote | surtout `Kernel DMA Protection` (tester avec les stations d'accueil du parc) et `Logon Hardening` (annoncer CTRL+ALT+DEL aux utilisateurs à l'avance) |
-| 2 | Décision sur les trois paramètres MAM | modification de la baseline convenue ; encore possible maintenant sans migration |
+| 1 | ~~BASELINE2 sur un groupe pilote~~ | fait : ces stratégies sont désormais dans `IntuneTemplate/` en phase 2 et sont déployées via `Baseline-Pilot` vers `SEC-Baseline-Pilot` — `Kernel DMA Protection` et `Logon Hardening` compris |
+| 2 | ~~Décision sur les trois paramètres MAM~~ | fait : le durcissement se trouve dans les stratégies de baseline elles-mêmes (`Baseline_IOS_U_App_Protection`, `Baseline_AND_U_App_Protection`) |
 | 3 | ~~Vérifier le rattachement ISMP dans `_manifest.json`~~ | caduc : le rattachement aux documents ISMS d'une seule organisation a été retiré du manifeste en septembre 2026, afin que la baseline soit générique. ISO 27001, NIS2 et Part-IS y figurent toujours |
-| 4 | Une stratégie donne satisfaction ? | la déplacer vers `IntuneTemplate/` sous le nom `Baseline_`, avec affectation |
+| 4 | ~~Une stratégie donne satisfaction ?~~ | fait : tous les ensembles ont été fusionnés dans `IntuneTemplate/` sous le nom `Baseline_` ; l'affectation découle de `fase` |
 | 5 | Prochaine itération | contrôle des applications (WDAC/Smart App Control), et conformité iOS/Android dès que des téléphones sont inscrits |
 
 # Itération OIB Windows v4.0 (14 septembre 2026)
@@ -393,7 +398,7 @@ Control.
 
 La baseline portait les traces d'une seule organisation : la numérotation de ses documents ISMS
 (`controls.isms` et références ISMP dans les explications), un compte de stockage et un label LaunchAgent
-dans les scripts de montage, le compte administrateur dans les profils d'inscription macOS, et deux rapports clients.
+dans les scripts de montage, le compte administrateur dans les profils d'inscription macOS, et deux rapports de tenant.
 Ils ont été supprimés ou remplacés par des espaces réservés ; les rapports se trouvent dans `local/`, ignoré par git.
 Attention : ils figurent toujours dans l'historique git.
 
@@ -416,7 +421,7 @@ Access 2070 — qui exige une application conforme pour iOS et Android — n'aut
 appareil. Les deux stratégies sont désormais sur `unspecified` : elles s'appliquent à chaque appareil,
 inscrit ou non. 2070 accepte désormais un appareil conforme *ou* une application conforme, et
 exclut l'application Intune Enrollment afin que l'inscription elle-même ne se bloque pas (voir l'itération 4 dans
-CA-Policies/ANALYSE.md).
+`docs/ANALYSE.md` du dépôt CA-Policies).
 
 Parallèlement, trois valeurs durcies à la main après l'importation OIB figurent désormais dans le manifeste comme
 `veldOverrides` : `previousPinBlockCount` (iOS et Android),
@@ -436,7 +441,7 @@ intégré, et le tout a été fusionné avec `check-scope.js` au vert.
 
 38 nouvelles stratégies ; la baseline en compte désormais 193 (contre 155). Les nouvelles stratégies sont presque toutes
 en phase 2 à 5 : elles existent, mais ne sont déployées qu'après un pilote, un prérequis (un appareil
-inscrit, une licence, un connecteur) ou une décision du client.
+inscrit, une licence, un connecteur) ou une décision de l'organisation.
 
 | Plateforme | Nouvelles | Stratégies |
 |---|---:|---|
@@ -458,10 +463,10 @@ En outre :
 - **Référentiel de conformité** : chaque stratégie a des `controls` (iso, nis2, cis, nistcsf) issus du vocabulaire de
   `IntuneTemplate/_controls.json`. `check-scope.js` refuse une stratégie sans label ou avec un label inconnu ;
   `scripts/generate-compliance.js` en génère [`COMPLIANCE.md`](COMPLIANCE.fr.md) : matrice Annexe A,
-  NIS2 par mesure avec voie de preuve, couverture CIS et CSF, choix du client et point de départ pour la
+  NIS2 par mesure avec voie de preuve, couverture CIS et CSF, choix de l'organisation et point de départ pour la
   Déclaration d'applicabilité. Sur les 38 rattachements existants, 34 ont été normalisés ou
   corrigés.
-- **Conditional Access** (itération 5 dans CA-Policies/ANALYSE.md) : `2060` exclut iOS/Android, les modèles P2 et
+- **Conditional Access** (itération 5 dans `docs/ANALYSE.md` du dépôt CA-Policies) : `2060` exclut iOS/Android, les modèles P2 et
   token protection sont optionnels, `1100` activé à côté de `1090`, `2055`/`2120` en report-only,
   `2180` exclut les invités, nouveau `1190` insider risk, et `controls/ca-controls.json` avec un test.
 - **`import-oib.js`** est de nouveau idempotent (voir la section sur OIB v4.0 ci-dessus).
@@ -503,7 +508,7 @@ En outre :
    ligne ouvrirait à chaque exécution CI une PR qui l'annule. La différence est surtout sensible pour NIS2 (j) :
    3 stratégies Intune sans CA, 13 avec. Il reste possible de choisir une seule ligne, et alors celle-ci : renseigner
    `secrets.CA_POLICIES_TOKEN` et retirer le commentaire sur le checkout CA dans
-   `.github/workflows/generate-baseline.yml` (le dépôt y figure déjà : `sjkanon/CA-Policies`), et remplacer
+   `.github/workflows/generate-baseline.yml` (y renseigner `<owner>/CA-Policies`), et remplacer
    dans ce même workflow `--no-ca` par `--ca .ca-policies/controls/ca-controls.json`.
 4. **OIB macOS v2.0** : lors de cette importation, les Restrictions d'OIB définiront elles-mêmes des id Apple Intelligence et de durcissement ;
    la paire Restricted/Permitted et Restrictions Hardening devront alors être de nouveau comparées à la source.

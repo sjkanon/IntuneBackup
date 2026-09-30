@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Microsoft Edge Search Engine
 
-Zet Google als standaardzoekmachine in Edge. Een klantkeuze, geen beveiligingsinstelling.
+Zet Google als standaardzoekmachine in Edge. Een organisatiekeuze, geen beveiligingsinstelling.
 
 | | |
 |---|---|

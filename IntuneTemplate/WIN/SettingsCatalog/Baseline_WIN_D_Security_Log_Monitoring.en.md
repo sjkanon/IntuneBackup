@@ -15,7 +15,7 @@ Warns in the System log as soon as the Security log is 90% full and logs pipelin
 | Source | CIS v4 Windows 11 L1 (MSS WarningLevel, IntuneAdmin CISv4 profile) and the Microsoft recommendation for PowerShell logging ('PowerShell ♥ the Blue Team') — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Security_Log_Monitoring.json`](Baseline_WIN_D_Security_Log_Monitoring.json) |
 
-> No overlap: `turnonpowershellscriptblocklogging` (Security Hardening) and `enabletranscripting` (Logging) are different ids. The size of the PowerShell/Operational log cannot be set through the settings catalog — there is a remediation for that in extras/windows/event-log-sizes.
+> No overlap: `turnonpowershellscriptblocklogging` (Security Hardening) and `enabletranscripting` (Logging) are different ids. The size of the PowerShell/Operational log cannot be set through the settings catalog — there is a remediation for that in extras/windows/remediations/event-log-sizes.
 
 ## Standards
 

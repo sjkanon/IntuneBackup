@@ -33,7 +33,7 @@ des préférences de l'utilisateur et a été omis.
 obligatoirement dans Edge (App Protection), et ils doivent aboutir dans le profil professionnel d'Edge, pas dans
 un compte privé. Les clés comme la page d'accueil, le moteur de recherche, SmartScreen et les fonctionnalités désactivées
 ont été délibérément omises : leurs types Android n'ont pas pu être vérifiés par rapport à un export Android,
-et la plupart relèvent d'un choix du client.
+et la plupart relèvent d'un choix de l'organisation.
 
 **Defender** — inchangé par rapport à UniFy : `EnableLowTouchOnboarding` et `UserUPN` pour un onboarding
 sans intervention, `DefenderNetworkProtectionEnable`, `antiphishing` et `vpn` pour la

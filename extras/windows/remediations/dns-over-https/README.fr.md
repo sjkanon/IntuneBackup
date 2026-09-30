@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Mesures** | ISO A.8.20 Sécurité des réseaux, A.8.24 Utilisation de la cryptographie · NIS2 art. 21(2)(h) cryptographie et chiffrement, art. 21(2)(j) authentification multifacteur et communications sécurisées · CIS Controls v8.1 3.10 Encrypt Sensitive Data in Transit, 4.9 Configure Trusted DNS Servers on Enterprise Assets · NIST CSF 2.0 PR.DS-02 |
-| **Phase** | *Allow* 2 (pilote) · *Require* 5 (alternative, choix du client) |
+| **Phase** | *Allow* 2 (pilote) · *Require* 5 (alternative, choix de l'organisation) |
 
 ## Pourquoi un script et pas un template
 
@@ -35,7 +35,7 @@ le catalog et figure comme paire de templates dans `IntuneTemplate/WIN/SettingsC
 
 *Exiger* convient à une organisation qui fait passer tout son DNS par un résolveur DoH propre ou sous contrat
 (service de filtrage DNS), qui gère aussi le split DNS, et qui déploie au préalable le template de serveur par carte réseau ou via
-`netsh dns add encryption`. C'est un choix du client.
+`netsh dns add encryption`. C'est une décision de l'organisation.
 
 ## Interaction avec Defender Network Protection
 

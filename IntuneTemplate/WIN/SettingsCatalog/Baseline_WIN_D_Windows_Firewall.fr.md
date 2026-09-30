@@ -15,7 +15,7 @@ Active le Pare-feu Windows pour les profils domaine, privé et public et défini
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 
-> Nos 23 paramètres propres figurent tous parmi les 31 d'OIB. Attention : notre policy était une policy Settings Catalog ordinaire, celle d'OIB est un template Endpoint Security (endpointSecurityFirewall) — dans le tenant, il ne s'agit pas d'un PATCH mais d'un remplacement.
+> Les 23 paramètres propres figurent tous parmi les 31 d'OIB. Attention : la policy propre était une policy Settings Catalog ordinaire, celle d'OIB est un template Endpoint Security (endpointSecurityFirewall) — dans le tenant, il ne s'agit pas d'un PATCH mais d'un remplacement.
 
 ## Normes
 

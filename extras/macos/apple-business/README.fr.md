@@ -7,7 +7,7 @@ Apple Business n'a pas d'API permettant de déployer cela depuis un dépôt — 
 car une erreur ici ne devient visible dans Intune que lorsqu'un Mac ne s'inscrit plus.
 
 S'applique aux Mac d'entreprise via Automated Device Enrollment (ADE) : les profils de
-[`enrollment/macos/`](../../../enrollment/macos/README.fr.md) et les stratégies
+[`extras/macos/enrollment/`](../enrollment/README.fr.md) et les stratégies
 `MAC - D - Enrollment Profile …` partent du principe que ceci est en place.
 
 ## 1. Organisation et administrateurs
@@ -40,7 +40,7 @@ l'adresse de l'entreprise, que l'organisation ne peut pas révoquer, et l'offboa
 | **Serveur MDM par défaut pour Mac** sur ce serveur Intune | Apple Business → Préférences → Affectation de la gestion des appareils. Sans valeur par défaut, un Mac nouvellement acheté n'arrive pas de lui-même dans Intune |
 | Lier les achats | enregistrer le numéro client Apple ou l'ID revendeur, afin que les Mac d'Apple et des revendeurs agréés apparaissent automatiquement dans Apple Business |
 | Mac existants | ajouter avec Apple Configurator pour iPhone ; un tel Mac a une période provisoire de 30 jours pendant laquelle l'utilisateur peut le retirer de la gestion |
-| Profil d'inscription | l'associer au jeton dans Intune et le définir par défaut (`enrollment/macos/`), avant d'allumer le premier Mac |
+| Profil d'inscription | l'associer au jeton dans Intune et le définir par défaut (`extras/macos/enrollment/`), avant d'allumer le premier Mac |
 
 ## 4. Jetons et certificats qui expirent chaque année
 

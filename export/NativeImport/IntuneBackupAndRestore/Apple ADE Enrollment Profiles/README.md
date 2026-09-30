@@ -2,7 +2,7 @@
 
 # Apple ADE Enrollment Profiles
 
-**Gegenereerd** uit `enrollment/` — niet met de hand bijwerken.
+**Gegenereerd** uit `extras/macos/enrollment/` — niet met de hand bijwerken.
 
 `Start-IntuneRestoreConfig` slaat deze map over: IntuneBackupAndRestore kent geen
 restore-functie voor Apple ADE-enrollmentprofielen, en CIPP kent ze ook niet. Ze reizen
@@ -19,4 +19,4 @@ Haal `-WhatIf` weg als het klopt. Toewijzen blijft handwerk in de portal (Enroll
 program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde
 serienummers levert Macs op die zonder wipe niet terug te draaien zijn.
 
-Zie `enrollment/macos/README.md` in de repo voor wat er in het profiel staat en waarom.
+Zie `extras/macos/enrollment/README.md` in de repo voor wat er in het profiel staat en waarom.

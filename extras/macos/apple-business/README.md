@@ -7,7 +7,7 @@ Apple Business heeft geen API waarmee dit vanuit een repo uit te rollen is — m
 omdat een fout hier niet in Intune zichtbaar wordt totdat een Mac niet meer inschrijft.
 
 Geldt voor bedrijfs-Macs via Automated Device Enrollment (ADE): de profielen in
-[`enrollment/macos/`](../../../enrollment/macos/README.md) en de
+[`extras/macos/enrollment/`](../enrollment/README.md) en de
 `MAC - D - Enrollment Profile …`-policies gaan ervan uit dat dit staat.
 
 ## 1. Organisatie en beheerders
@@ -40,7 +40,7 @@ bedrijfsadres die de organisatie niet kan intrekken, en loopt offboarding via tw
 | **Standaard-MDM-server voor Mac** op deze Intune-server | Apple Business → Voorkeuren → Toewijzing apparaatbeheer. Zonder standaard komt een nieuw gekochte Mac niet vanzelf in Intune |
 | Aankopen koppelen | Apple-klantnummer of reseller-ID vastleggen, zodat Macs van Apple en erkende resellers automatisch in Apple Business verschijnen |
 | Bestaande Macs | toevoegen met Apple Configurator voor iPhone; zo'n Mac heeft een voorlopige periode van 30 dagen waarin de gebruiker hem uit beheer kan halen |
-| Inschrijfprofiel | in Intune aan het token hangen en als standaard instellen (`enrollment/macos/`), vóórdat de eerste Mac wordt aangezet |
+| Inschrijfprofiel | in Intune aan het token hangen en als standaard instellen (`extras/macos/enrollment/`), vóórdat de eerste Mac wordt aangezet |
 
 ## 4. Tokens en certificaten die jaarlijks verlopen
 

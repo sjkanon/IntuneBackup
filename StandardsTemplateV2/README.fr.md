@@ -22,16 +22,16 @@ les paramètres du tenant que CIPP surveille et rétablit lui-même.
 `isDriftTemplate` est renseigné ; CIPP peut donc l'utiliser pour surveiller la dérive : si le
 tenant s'en écarte, CIPP le rétablit.
 
-## Pourquoi ici et pas dans l'un des jeux de stratégies
+## Pourquoi ici et pas dans IntuneTemplate/
 
 Les pipelines de `scripts/` connaissent cinq types de stratégie CIPP (`Catalog`, `Admin`,
 `Device`, `deviceCompliancePolicies`, `AppProtection`) et un template de standards n'est aucun
-de ces cinq. Ce fichier n'est donc **pas** pris en compte par `check-scope.js`,
-`check-sets.js` ou `export-intunebackup.js`.
+de ces cinq. Ce fichier n'est donc **pas** pris en compte par `check-scope.js`
+ou `export-intunebackup.js`.
 Il ne suit pas non plus de convention de nommage avec plateforme et portée — cela n'a aucun sens
 pour un paramètre de tenant.
 
-CIPP le lit en revanche directement, comme les jeux de stratégies : le fichier se termine par
+CIPP le lit en revanche directement, comme les templates de `IntuneTemplate/` : le fichier se termine par
 `.json` et ne se trouve pas sous un chemin `NativeImport`. Voir le
 [README principal](../README.fr.md#restaurer-dans-un-tenant) pour le fonctionnement de ce
 balayage.

@@ -15,7 +15,7 @@ Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en leg
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 
-> Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.
+> Alle 23 eigen instellingen zitten in OIB's 31. Let op: de eigen policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.
 
 ## Normen
 

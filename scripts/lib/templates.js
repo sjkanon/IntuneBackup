@@ -44,11 +44,7 @@ const TYPE_TO_CATEGORY = {
  * een eigen groep, fase 5 wordt niet uitgerold. _assignments.json volgt daaruit en
  * check-scope.js bewaakt dat die twee niet uit elkaar lopen. Zo staat alles in één map zonder
  * dat er iets wordt uitgerold dat er nog niet klaar voor is.
- *
- * SET_PREFIXES blijft een map en geen constante: de exporter en de docs lopen erover heen, en
- * een tweede set toevoegen moet één regel blijven in plaats van een refactor.
  */
-const SET_PREFIXES = { Baseline: "IntuneTemplate" };
 const BASE_NAME_RE = /^(Baseline)_(WIN|MAC|IOS|AND)_([DU])_(.+)$/;
 
 /** "Baseline_WIN_D_BitLocker" -> { set: "Baseline", platform: "WIN", scope: "D", item: "BitLocker" } */
@@ -432,4 +428,4 @@ function versionFloors(raw) {
   return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
 }
 
-module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, SET_PREFIXES, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };
+module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

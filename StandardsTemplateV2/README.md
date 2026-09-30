@@ -2,8 +2,7 @@
 
 # StandardsTemplateV2/
 
-Eén CIPP **standards**-template. Dat is iets anders dan alles in `IntuneTemplate/`,
-`IntuneTemplate/`: die gaat over Intune-policies op apparaten, dit gaat over
+Eén CIPP **standards**-template. Dat is iets anders dan alles in `IntuneTemplate/`: dat gaat over Intune-policies op apparaten, dit gaat over
 tenantinstellingen die CIPP zelf bewaakt en herstelt.
 
 | | |
@@ -22,15 +21,14 @@ tenantinstellingen die CIPP zelf bewaakt en herstelt.
 `isDriftTemplate` staat gevuld, dus CIPP kan dit als driftbewaking gebruiken: wijkt de tenant
 af, dan zet CIPP hem terug.
 
-## Waarom hier en niet in een van de policysets
+## Waarom hier en niet in IntuneTemplate/
 
 De pijplijnen in `scripts/` kennen vijf CIPP-policytypes (`Catalog`, `Admin`, `Device`,
 `deviceCompliancePolicies`, `AppProtection`) en een standards-template is geen van die vijf.
-Dit bestand wordt dus **niet** opgepikt door `check-scope.js`, `check-sets.js`
-of `export-intunebackup.js`. Het heeft
+Dit bestand wordt dus **niet** opgepikt door `check-scope.js` of `export-intunebackup.js`. Het heeft
 ook geen naamconventie met platform en scope — die slaat nergens op voor een tenantinstelling.
 
-CIPP leest het wél rechtstreeks, net als de policysets: het bestand eindigt op `.json` en zit
+CIPP leest het wél rechtstreeks, net als de templates in `IntuneTemplate/`: het bestand eindigt op `.json` en zit
 niet onder een `NativeImport`-pad. Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant)
 voor hoe die scan werkt.
 

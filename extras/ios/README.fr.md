@@ -5,8 +5,8 @@
 Les pipelines CIPP transportent cinq types de stratégies (Catalog, Device, compliance, App Protection,
 Admin). Une baseline iOS complète demande davantage : des paramètres de tenant dans Apple Business,
 un profil d'inscription ADE, la configuration des applications et deux groupes dynamiques. Ils se trouvent ici. Rien
-dans ce dossier n'est pris en compte par `export-intunebackup.js` ou
-`Set-BaselineAssignment.ps1`.
+dans ce dossier n'est pris en compte par CIPP, `check-scope.js`, `export-intunebackup.js` ou
+`Set-BaselineAssignment.ps1` ; le déploiement suit le README de chaque dossier.
 
 | Dossier | Quoi | Déploiement |
 |---|---|---|
@@ -73,7 +73,7 @@ Une seule fois par tenant, en dehors d'Intune :
 ## Paramètres de tenant Intune
 
 - **Restriction d'inscription iOS/iPadOS** (Devices → Enrollment → Device platform restriction) :
-  autoriser ou bloquer les appareils inscrits à titre personnel est un choix du client. Si vous voulez le BYOD uniquement
+  autoriser ou bloquer les appareils inscrits à titre personnel est une décision de l'organisation. Si vous voulez le BYOD uniquement
   via App Protection, bloquez *Personally owned* — `SEC-iOS-BYOD` et la variante VPN
   de Defender deviennent alors inutiles.
 - **Connecteur Defender for Endpoint** (Endpoint security → Microsoft Defender for Endpoint) :

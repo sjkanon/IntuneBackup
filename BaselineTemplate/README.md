@@ -14,15 +14,15 @@ wanneer een tenant doorschuift.
 ## Waarom dit hier staat
 
 `IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen: uitrollen doet
-een baseline. Dat scherm met de hand invullen is negen keer dezelfde standard toevoegen en
-negen keer het juiste toewijzingsdoel kiezen — één misklik zet 80 policies op het verkeerde
-publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
+een baseline. Dat scherm met de hand invullen is dertien keer dezelfde standard toevoegen en
+dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 69 policies (het pakket
+`Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
 
 ## Wat erin staat
 
 | Stage | Pakketten | Doorschuiven naar deze stage |
 |---:|---|---|
-| 1 · Nu | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` en de drie groepspakketten | — stage 1 geldt altijd |
+| 1 · Nu | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` en de acht groepspakketten `Baseline-SEC-*` | — stage 1 geldt altijd |
 | 2 · Pilot | `Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
 | 3 · Wacht op voorwaarde | `Baseline-Wacht` | `manual` — iemand zet 'm door |
 
@@ -67,8 +67,14 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
 ## Wat je erna zelf doet
 
 - **Tenants toewijzen.** Zonder dat draait de baseline nergens.
-- **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2` en
-  `SEC-Shared-Devices` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
+- **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
+  `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` en
+  `SEC-Remote-Support-macOS` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
+  Het zijn standaardnamen. Heet een groep anders, pas dan `faseGroep` in
+  [`_manifest.json`](../IntuneTemplate/_manifest.json) aan — voor de pilotgroep ook `PILOT_GROUP`
+  in `scripts/lib/templates.js` en `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — en
+  draai de pijplijn opnieuw. De groep alleen in CIPP wijzigen kan ook, maar een her-import van
+  dit bestand zet de standaardnaam terug.
 - **De ADE-profielen koppelen.** `Baseline-ADE-token` wordt bewust niet toegewezen: een
   macOS-inschrijfprofiel hangt aan een ADE-token, niet aan een Entra-groep, en je kiest er per
   token één van de twee.
@@ -77,9 +83,9 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
 
 Niet met de hand: draai `node scripts/generate-baseline-template.js`. De pakketten en hun
 toewijzing volgen uit `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json) en het
-doel in [`_assignments.json`](../IntuneTemplate/_assignments.json); `--check` faalt in CI als
-dit bestand achterloopt.
+doel in [`_assignments.json`](../IntuneTemplate/_assignments.json); `--check` schrijft niets en
+faalt als dit bestand achterloopt.
 
 Pas op met opnieuw exporteren vanuit CIPP: CIPP's eigen export klapt de pakketten plat naar
-141 losse templateverwijzingen — een momentopname, waarna een nieuwe policy niet meer vanzelf
+losse templateverwijzingen, één per policy — een momentopname, waarna een nieuwe policy niet meer vanzelf
 meekomt. Deze kant op genereren houdt de late binding intact.

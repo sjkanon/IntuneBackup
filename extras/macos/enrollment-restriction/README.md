@@ -5,8 +5,8 @@
 Advies en template: persoonlijke Macs niet laten inschrijven in Intune.
 
 Een inschrijvingsrestrictie (`deviceEnrollmentPlatformRestrictionConfiguration`) is geen van de
-vijf CIPP-policytypes en hangt onder `deviceManagement/deviceEnrollmentConfigurations`. Niet
-opgepikt door de pijplijnen.
+vijf CIPP-policytypes en hangt onder `deviceManagement/deviceEnrollmentConfigurations`. CIPP,
+`check-scope.js`, `export-intunebackup.js` en `Set-BaselineAssignment.ps1` doen er niets mee.
 
 | Bestand | Wat het is |
 |---|---|
@@ -28,7 +28,7 @@ Waarom:
   handmatig ingeschreven Mac is niet supervised en valt daar stil buiten, terwijl hij wél
   compliant kan worden en dus toegang krijgt.
 - Een handmatig ingeschreven Mac kan de gebruiker zelf uit beheer halen; een ADE-Mac met
-  vergrendelde inschrijving niet (zie `enrollment/macos/`).
+  vergrendelde inschrijving niet (zie `extras/macos/enrollment/`).
 
 Intune rekent een Mac standaard tot **persoonlijk eigendom**. Bedrijfseigendom is hij alleen als
 hij (Microsoft Learn, *Overview of enrollment restrictions*, "Blocking personal Macs"):

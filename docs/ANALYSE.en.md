@@ -2,13 +2,18 @@
 
 # Gap analysis — what are we missing for a first baseline?
 
+> **Snapshot of 3 September 2026.** `BASELINE2/` and `ISMSTemplate/` have since been
+> merged into `IntuneTemplate/`; what the separate folders did is now done by the `fase` field in
+> `_manifest.json`. Counts and folder names below are those of that time. The later rounds are
+> at the bottom, each with its own date.
+
 Hand-written, unlike [`README.md`](../README.en.md) next to it. This records *how* the
 BASELINE2 set came about and — more importantly — what is deliberately **not** in it and why.
 Without that last part, the next round is doomed to weigh the same 500 settings all over again.
 
 Date: 3 September 2026. The baseline has 134 policies. This analysis describes the 25 added in September 2026: 15 from this analysis and the 10 that until this
-date lived in `ISMSTemplate/` and have been merged in here. The end goal is a single baseline — this folder
-is the waiting room, `IntuneTemplate/` the destination.
+date lived in `ISMSTemplate/` and have been merged in here. The end goal was a single baseline — the
+then folder `BASELINE2/` was the waiting room, `IntuneTemplate/` the destination.
 
 ## The question
 
@@ -47,7 +52,7 @@ Three things that go wrong if you don't know them:
 
 At the time of the comparison our two sets together set 1,908 settings
 (`IntuneTemplate/` 106 policies / 1,877 settings, `ISMSTemplate/` 10 / 31 — the latter has
-since been merged into this folder). Against that, IntuneAdmin yielded **509 `settingDefinitionId`s
+since been merged into the then folder `BASELINE2/`). Against that, IntuneAdmin yielded **509 `settingDefinitionId`s
 that we set nowhere**. They break down as follows:
 
 | | Count | What happened to them |
@@ -98,7 +103,7 @@ Defender on Linux. What remained were **five baselines that do matter**:
 | `WIN - D - Power Management` | The baseline already requires a password on wake, but closing the lid did nothing — so the screen stayed unlocked. That is the moment a laptop is left unattended. | 1 |
 | `WIN - D - Storage Sense` | A full disk breaks Windows Update, BitLocker encryption and Defender definition updates. That is the state in which a device silently falls behind. | 1 |
 | `WIN - D - Enrollment Hardening` | Skipping the network step during OOBE is the best-known way to bypass Autopilot. One setting closes it. | 2 |
-| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill and the Settings Agent send input to a generative service. See *AI is a customer decision* below. | 2 / 5 |
+| `WIN - D - Windows AI Features Restricted` / `Permitted` | Cocreator, Image Creator, Generative Fill and the Settings Agent send input to a generative service. See *AI is an organisational decision* below. | 2 / 5 |
 | `WIN - U - Microsoft Teams` | Without a tenant restriction a user can sign in to a foreign tenant in the corporate Teams client and drag files there — an outbound data flow that is logged nowhere. | 3 |
 
 Plus three CIS L1 user rights added to the existing `WIN - D - User Rights`:
@@ -122,10 +127,10 @@ Anyone deploying via IntuneBackupAndRestore keeps `%OrganizationId%` literally i
 fill in the id by hand.
 
 
-### AI is a customer decision, so every AI policy is a pair
+### AI is an organisational decision, so every AI policy is a pair
 
 Whether generative AI is allowed on the workstation is not a technical fact but policy, and that differs per
-customer. All three AI policies therefore exist in two variants that set the same settings to the
+organisation. All three AI policies therefore exist in two variants that set the same settings to the
 opposite value. **Assign one per pair** — both produces a
 Conflict in Intune, after which the disputed setting is applied by *neither* policy and so
 nothing is configured any more. `check-scope.js` guards that.
@@ -158,7 +163,7 @@ weighs more than a thousand of a word processor. That policy takes out exactly t
 | `AllowRecallExport` | off | the export button is the route by which the whole index leaves the device |
 
 The URI list is correct for every M365 tenant. **The app list is deliberately incomplete** and must be
-supplemented per customer with whatever shows sensitive data there: the HR package, the case management system, the
+supplemented per organisation with whatever shows sensitive data there: the HR package, the case management system, the
 banking environment. Names may be an executable (`app.exe`) or an AUMID for Store apps.
 
 One thing stands regardless of these boundaries: the index is subject to the same retention periods and
@@ -228,12 +233,12 @@ What is missing:
 | `screenCaptureConfigurationState` (iOS) | not set | `blocked` | Android already blocks screenshots (`screenCaptureBlocked: true`); on iOS there was no setting for it until iOS 26. Now there is — and the asymmetry is not intended. |
 | `previousPinBlockCount` (both) | `0` | `5` | No PIN history: on a reset a user can choose the same PIN again. No friction at all to fix. |
 
-These three are in this folder as `BASELINE2 - IOS/AND - U - App Protection`: a full copy
+These three were in the then folder `BASELINE2/` as `BASELINE2 - IOS/AND - U - App Protection`: a full copy
 of the baseline policy with the tightening applied. **Deploy that instead of the baseline variant,
 not alongside it.** Two App Protection policies on the same apps do not stack neatly — Intune picks
 the strictest value per setting, but which policy supplies a setting can then no longer be
 read off. Ultimately the change belongs back in the baseline policy itself; that is a decision about the
-baseline agreed *with* the customer, not a clean-up, and that is why it is here first.
+baseline agreed *with* the organisation, not a clean-up, and that is why it is here first.
 
 Deliberately not adopted from the UniFy sets: `pinRequiredInsteadOfBiometricTimeout` at 30 minutes
 (ours: 12 hours — noticeable friction, and the PIN is not the only protection),
@@ -325,10 +330,10 @@ with a placeholder.
 
 | # | Step | |
 |---:|---|---|
-| 1 | BASELINE2 on a pilot group | especially `Kernel DMA Protection` (test with the docks from the fleet) and `Logon Hardening` (announce CTRL+ALT+DEL to users in advance) |
-| 2 | Decision on the three MAM settings | a change to the agreed baseline; can still be done now without migration |
+| 1 | ~~BASELINE2 on a pilot group~~ | done: those policies are now in `IntuneTemplate/` in phase 2 and roll out via `Baseline-Pilot` to `SEC-Baseline-Pilot` — `Kernel DMA Protection` and `Logon Hardening` included |
+| 2 | ~~Decision on the three MAM settings~~ | done: the tightening is in the baseline policies themselves (`Baseline_IOS_U_App_Protection`, `Baseline_AND_U_App_Protection`) |
 | 3 | ~~Check the ISMP mapping in `_manifest.json`~~ | dropped: the mapping to one organisation's ISMS documents was removed from the manifest in September 2026, so the baseline is generic. ISO 27001, NIS2 and Part-IS are still there |
-| 4 | Happy with a policy? | move it to `IntuneTemplate/` under the `Baseline_` name, with assignment |
+| 4 | ~~Happy with a policy?~~ | done: all sets have been merged into `IntuneTemplate/` under the `Baseline_` name; the assignment follows from `fase` |
 | 5 | Next round | application control (WDAC/Smart App Control), and iOS/Android compliance as soon as phones are enrolled |
 
 # Round OIB Windows v4.0 (14 September 2026)
@@ -393,7 +398,7 @@ Control variants.
 
 The baseline bore traces of one organisation: the numbering of its ISMS documents
 (`controls.isms` and ISMP references in the explanations), a storage account and LaunchAgent label
-in the mount scripts, the admin account in the macOS enrolment profiles, and two customer reports.
+in the mount scripts, the admin account in the macOS enrolment profiles, and two tenant reports.
 Those are gone or replaced by placeholders; the reports are in the git-ignored `local/`.
 Note: they are still in the git history.
 
@@ -416,7 +421,7 @@ Access 2070 — which requires a compliant app for iOS and Android — then no l
 device. Both policies are now set to `unspecified`: they apply to every device,
 enrolled or not. 2070 now accepts a compliant device *or* a compliant app, and
 excludes the Intune Enrollment app so that enrolment itself does not get stuck (see round 4 in
-CA-Policies/ANALYSE.md).
+`docs/ANALYSE.md` in the CA-Policies repo).
 
 At the same time three values that were tightened by hand after the OIB import are now in the manifest as
 `veldOverrides`: `previousPinBlockCount` (iOS and Android),
@@ -436,7 +441,7 @@ in, and everything was merged with `check-scope.js` green.
 
 38 new policies; the baseline now has 193 (was 155). New policies are almost all
 in phase 2 to 5: they exist, but only roll out after a pilot, a prerequisite (an enrolled
-device, a licence, a connector) or a customer decision.
+device, a licence, a connector) or an organisational decision.
 
 | Platform | New | Policies |
 |---|---:|---|
@@ -458,10 +463,10 @@ In addition:
 - **Compliance framework**: every policy has `controls` (iso, nis2, cis, nistcsf) from the vocabulary in
   `IntuneTemplate/_controls.json`. `check-scope.js` rejects a policy without a label or with an unknown
   one; `scripts/generate-compliance.js` turns them into [`COMPLIANCE.md`](COMPLIANCE.en.md): Annex A matrix,
-  NIS2 per measure with evidence route, CIS and CSF coverage, customer decisions and a starting point for the
+  NIS2 per measure with evidence route, CIS and CSF coverage, organisational decisions and a starting point for the
   Statement of Applicability. Of the 38 existing mappings, 34 were normalised or
   corrected.
-- **Conditional Access** (round 5 in CA-Policies/ANALYSE.md): `2060` excludes iOS/Android, P2 and
+- **Conditional Access** (round 5 in `docs/ANALYSE.md` in the CA-Policies repo): `2060` excludes iOS/Android, P2 and
   token protection templates are optional, `1100` on alongside `1090`, `2055`/`2120` report-only,
   `2180` excludes guests, new `1190` insider risk, and `controls/ca-controls.json` with a test.
 - **`import-oib.js`** is idempotent again (see the section on OIB v4.0 above).
@@ -503,7 +508,7 @@ In addition:
    other line would open a PR on every CI run that reverts it. It makes the most difference for NIS2 (j):
    3 Intune policies without CA, 13 with. Choosing one line is still possible, and then this one: fill
    `secrets.CA_POLICIES_TOKEN` and remove the comment on the CA checkout in
-   `.github/workflows/generate-baseline.yml` (the repo is already in it: `sjkanon/CA-Policies`), and in
+   `.github/workflows/generate-baseline.yml` (fill in `<owner>/CA-Policies` there), and in
    the same workflow replace `--no-ca` with `--ca .ca-policies/controls/ca-controls.json`.
 4. **OIB macOS v2.0**: with that import OIB's Restrictions will itself set Apple Intelligence and hardening ids;
    the Restricted/Permitted pair and Restrictions Hardening will then have to be compared against the source again.

@@ -34,10 +34,10 @@ flowchart TD
 | [`set-packages.js`](set-packages.js) | **dans** la source | Définit `Package` dans chaque template — le package CIPP dans lequel la stratégie est déployée — déduit de la phase dans `_manifest.json` et de la cible dans `_assignments.json` — ainsi que la description en anglais affichée à côté de la stratégie dans le tenant (`doel` + affectation + source, traduits via `_i18n/en.json`). À exécuter après chaque modification de ces fichiers. |
 | [`check-scope.js`](check-scope.js) | contrôle | Périmètre, convention de nommage, organisation des dossiers, paramètres en conflit, le package CIPP et la table de migration. Bloquant en CI. |
 | [`check-osversion.js`](check-osversion.js) | contrôle | Indique de combien les versions minimales d'OS sont en retard sur n-1 par plateforme, avec endoflife.date comme source. **Code de sortie toujours 0** — un minimum obsolète est une décision en attente, pas une erreur ; si cela faisait échouer la CI, quelqu'un augmenterait le chiffre juste pour rendre le build vert. |
-| [`export-intunebackup.js`](export-intunebackup.js) | **depuis** la source | Écrit l'arborescence attendue par IntuneBackupAndRestore — `IntuneTemplate/` avec affectations, et chaque ensemble en plus dans son propre dossier sans. |
+| [`export-intunebackup.js`](export-intunebackup.js) | **depuis** la source | Écrit l'arborescence attendue par IntuneBackupAndRestore — `IntuneTemplate/` avec les affectations de la phase 1 — et y copie en sidecar les profils ADE macOS et les scripts shell de `extras/macos/`. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **depuis** la source | Écrit `BaselineTemplate/Baseline.json` : la baseline CIPP avec ses stages et ses packages. `--check` échoue s'il n'est pas à jour. |
-| [`generate-docs.js`](generate-docs.js) | **depuis** la source | Génère `OVERZICHT.md`, les README dans `IntuneTemplate/` et, par stratégie, un markdown avec chaque paramètre qu'elle définit. `--check` échoue s'ils ne sont pas à jour. |
-| [`generate-compliance.js`](generate-compliance.js) | **depuis** la source | Écrit `COMPLIANCE.md` : pour chaque élément ISO 27001, NIS2, CIS et NIST CSF, quelles stratégies le couvrent, à partir de `controls` dans `_manifest.json` et du vocabulaire de `_controls.json`. `--strict` échoue sur un libellé inconnu ou divergent, `--check` si le document n'est pas à jour. Avec `--ca`, le volet Conditional Access est également pris en compte — voir ci-dessous. |
+| [`generate-docs.js`](generate-docs.js) | **depuis** la source | Génère `docs/OVERZICHT.md`, les README dans `IntuneTemplate/` et, par stratégie, un markdown avec chaque paramètre qu'elle définit. `--check` échoue s'ils ne sont pas à jour. |
+| [`generate-compliance.js`](generate-compliance.js) | **depuis** la source | Écrit `docs/COMPLIANCE.md` : pour chaque élément ISO 27001, NIS2, CIS et NIST CSF, quelles stratégies le couvrent, à partir de `controls` dans `_manifest.json` et du vocabulaire de `_controls.json`. `--strict` échoue sur un libellé inconnu ou divergent, `--check` si le document n'est pas à jour. Avec `--ca`, le volet Conditional Access est également pris en compte — voir ci-dessous. |
 
 Les dix scripts partagent [`lib/templates.js`](lib/templates.js) : comment le dossier est organisé,
 comment le lire et où un nouveau template doit aller. Auparavant, quatre scripts lisaient ce dossier
@@ -46,8 +46,8 @@ mauvaise réponse à quatre endroits.
 
 ### Le volet CA de COMPLIANCE.md
 
-`generate-compliance.js` peut intégrer les stratégies Conditional Access du dépôt frère
-[CA-Policies](https://github.com/sjkanon/CA-Policies), qui tient à cet effet `controls/ca-controls.json`
+`generate-compliance.js` peut intégrer les stratégies Conditional Access du dépôt CA-Policies
+(cloné à côté de celui-ci sous `../CA-Policies`), qui tient à cet effet `controls/ca-controls.json`
 dans le même vocabulaire :
 
 ```bash
@@ -62,13 +62,14 @@ décrit dans [ANALYSE.fr.md](../docs/ANALYSE.fr.md#points-ouverts), point ouvert
 
 ## PowerShell
 
-Les deux nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi que
+Les trois nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi que
 `Microsoft.Graph.Authentication`. Exécutez-les d'abord avec `-WhatIf`.
 
 | Script | Ce qu'il fait |
 |---|---|
 | [`Set-BaselineAssignment.ps1`](Set-BaselineAssignment.ps1) | Affecte en une fois les stratégies de baseline qui, selon leur phase, relèvent de cette cible, sur l'ensemble des cinq types de stratégies : `-AllDevices`/`-AllUsers` la phase 1, `-GroupName` le pilote ou un `faseGroep`. `-Scope D\|U`, `-Platform WIN\|MAC\|IOS\|AND`, `-Replace`, `-FilterId`, `-IgnoreFase`. Par défaut, complète sans remplacer. |
 | [`Rename-BaselinePolicy.ps1`](Rename-BaselinePolicy.ps1) | Aligne les noms des stratégies d'un tenant sur la convention actuelle, selon `_renames.json`. `PATCH`, donc l'id et les affectations sont conservés. Signale les cas qui demandent une intervention manuelle au lieu de les forcer. |
+| [`New-MacOSEnrollmentPolicy.ps1`](New-MacOSEnrollmentPolicy.ps1) | Crée un profil d'inscription ADE macOS sous un jeton ABM à partir d'un JSON de [`extras/macos/enrollment/`](../extras/macos/enrollment/README.fr.md), ou exporte les profils existants en JSON (`-Export`). N'affecte délibérément rien. |
 
 Reste à construire : `Get-BaselinePolicyState.ps1`, le pendant côté tenant de
 `check-scope.js` — voir [PLAN.fr.md](../docs/PLAN.fr.md#reste-à-construire-scriptsget-baselinepolicystateps1).

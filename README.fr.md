@@ -46,35 +46,34 @@ de l'annexe A de l'ISO/IEC 27001:2022, chaque mesure NIS2 (art. 21, par. 2), cha
 sous-catégorie NIST CSF 2.0, quelles stratégies la mettent en œuvre techniquement, dans quelle phase — et ce qui
 reste organisationnel. Généré par `scripts/generate-compliance.js` à partir des `controls` de
 `_manifest.json` et du vocabulaire de `IntuneTemplate/_controls.json` ; `check-scope.js` refuse une
-stratégie sans étiquette ou avec une étiquette inconnue. Ce qui est dans git ne concerne qu'Intune ; les 41
-stratégies Conditional Access de [CA-Policies](https://github.com/sjkanon/CA-Policies) s'y ajoutent avec
-`--ca ../CA-Policies/controls/ca-controls.json` — nécessaire pour une image honnête de NIS2 (j), car la MFA
-dépend presque entièrement de ce dépôt. Voir [`scripts/README.md`](scripts/README.fr.md#le-volet-ca-de-compliancemd).
+stratégie sans étiquette ou avec une étiquette inconnue. Ce qui est dans git ne concerne qu'Intune ; les
+stratégies Conditional Access du dépôt CA-Policies (cloné à côté de celui-ci sous `../CA-Policies`)
+s'y ajoutent avec `--ca ../CA-Policies/controls/ca-controls.json` — nécessaire pour une image honnête
+de NIS2 (j), car la MFA dépend presque entièrement de ce dépôt. Voir [`scripts/README.md`](scripts/README.fr.md#le-volet-ca-de-compliancemd).
 
 **[`extras/`](extras/README.fr.md)** contient ce qui fait partie d'une baseline complète sans relever d'aucun des cinq
-types de stratégie CIPP : restrictions d'inscription, configuration d'applications, filtres d'affectation, App Control for
-Business, remédiations et scripts — par plateforme, avec des instructions de déploiement.
+types de stratégie CIPP — par plateforme, avec des instructions de déploiement : profils et
+restrictions d'inscription, configuration d'applications, filtres d'affectation, App Control for Business,
+remédiations, scripts shell et de plateforme, un contrôle de conformité personnalisé et une application Win32.
+Entre autres les profils d'inscription ADE macOS ([`extras/macos/enrollment/`](extras/macos/enrollment/README.fr.md)),
+les scripts shell macOS ([`extras/macos/shell-scripts/`](extras/macos/shell-scripts/README.fr.md)),
+les scripts de plateforme Windows ([`extras/windows/platform-scripts/`](extras/windows/platform-scripts/README.fr.md)),
+le contrôle de conformité pour Defender sur macOS ([`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.fr.md))
+et l'application Win32 qui supprime le McAfee préinstallé
+([`extras/windows/win32-apps/remove-mcafee/`](extras/windows/win32-apps/remove-mcafee/README.fr.md)).
+`export-intunebackup.js` copie les profils ADE et les scripts shell macOS dans l'export en tant que
+fichiers annexes (sidecar) ; CIPP, `check-scope.js` et `Set-BaselineAssignment.ps1` ne font rien de `extras/`.
 
 Chaque dossier possède un README avec les détails : [`IntuneTemplate/`](IntuneTemplate/README.fr.md) (avec
 un tableau par plateforme), [`scripts/`](scripts/README.fr.md) et [`export/`](export/README.fr.md).
 
-Cinq sortes de configuration n'entrent pas dans les cinq types de stratégie CIPP et se trouvent donc en dehors de
-`IntuneTemplate/`, chacune avec son propre README : les profils d'inscription ADE macOS dans
-[`enrollment/macos/`](enrollment/macos/README.fr.md), les scripts shell macOS dans
-[`shellscripts/macos/`](shellscripts/macos/README.fr.md), les scripts de plateforme Windows dans
-[`platformscripts/windows/`](platformscripts/windows/README.fr.md), le contrôle de conformité personnalisé
-pour Defender sur macOS dans [`compliance/macos/`](compliance/macos/README.fr.md) et l'application Win32 qui
-supprime le McAfee préinstallé dans
-[`apps/win32/remove-mcafee/`](apps/win32/remove-mcafee/README.fr.md). Aucun des
-pipelines ne les prend en compte.
-
-Les deux dossiers de scripts font la même chose sous deux formes : un **mappage de lecteur n'est pas une stratégie**. Aucun
+Les scripts shell et de plateforme pour Azure Files font la même chose sous deux formes : un **mappage de lecteur n'est pas une stratégie**. Aucun
 des 18 329 settingDefinitionId du settings catalog ne mappe un lecteur réseau, et Group
 Policy Preferences → Drive Maps n'est pas de l'ADMX et ne peut donc pas être ingéré. Pour fournir un partage à un
 groupe d'utilisateurs, on utilise un script en contexte utilisateur affecté à un
 groupe d'utilisateurs.
 
-Le dernier élément figure ici pour une seule raison : McAfee met **Microsoft Defender en mode passif**. Les
+L'application McAfee figure ici pour une seule raison : McAfee met **Microsoft Defender en mode passif**. Les
 règles ASR, Controlled Folder Access, Network Protection et Remote Encryption Protection de cette
 baseline reposent toutes sur un moteur Defender actif. Si elles arrivent sur un appareil avec McAfee,
 Intune les indique comme réussies alors que rien n'est appliqué.
@@ -90,7 +89,7 @@ partie du reste ne fait rien. Définissez-les avant de commencer les affectation
 | **Connecteur Defender for Endpoint** | Intune → Endpoint Security → Microsoft Defender for Endpoint | Nécessaire pour l'intégration via `WIN - D - Defender EDR Policy` et pour un contrôle du score de risque de Defender. Ce contrôle ne figure volontairement pas dans la baseline — OpenIntuneBaseline v4.0 ne l'a pas non plus ; `WIN - U - Compliance Defender Real Time Protection` et `Defender Security Intelligence` contrôlent ce qui se trouve *sur* l'appareil et fonctionnent sans connecteur. Si vous voulez malgré tout prendre en compte le score de risque, activez d'abord le connecteur : sans lui, le score n'arrive jamais et le contrôle reste muet, sans verdict. |
 
 Sur macOS, le volet Defender est un troisième cas : ce contrôle n'existe pas en tant que paramètre et nécessite un
-script — voir [`compliance/macos/`](compliance/macos/README.fr.md).
+script — voir [`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.fr.md).
 
 À côté de chaque modèle se trouve un fichier markdown listant **chaque paramètre que cette stratégie définit** — par exemple
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.fr.md).
@@ -118,21 +117,32 @@ La phase détermine aussi le **paquet CIPP** d'une stratégie — le champ `Pack
 sur lequel CIPP regroupe ses baselines. Voir [déployer via une baseline CIPP](#déployer-via-une-baseline-cipp).
 
 **[`ANALYSE.md`](docs/ANALYSE.fr.md)** consigne comment le complément de septembre 2026 a vu le jour :
-quelles sources ont été comparées, les 509 paramètres qu'IntuneAdmin définit en plus des nôtres, pourquoi
+quelles sources ont été comparées, les 509 paramètres qu'IntuneAdmin définit en plus de cette baseline, pourquoi
 14 d'entre eux ont été retenus, et — surtout — ce qui n'y figure volontairement *pas* et pourquoi.
 
 ## Organisation
 
 ```
-IntuneTemplate/
-  _assignments.json     cible d'affectation par stratégie
-  _manifest.json        pourquoi chaque stratégie existe, d'où elle vient et dans quelle phase
-  _renames.json         nom des stratégies dans le tenant (source pour Rename-BaselinePolicy.ps1)
-  WIN/  SettingsCatalog/ AdministrativeTemplates/ DeviceConfigurations/ CompliancePolicies/
-  MAC/  SettingsCatalog/ CompliancePolicies/
-  IOS/  AppProtection/
-  AND/  AppProtection/
+IntuneTemplate/        la source : les stratégies au format de modèle CIPP
+  _manifest.json      par stratégie : objectif, origine, phase, normes, écarts par rapport à la source
+  _assignments.json   cible d'affectation par stratégie de phase 1
+  _controls.json      vocabulaire pour ISO 27001, NIS2, CIS et NIST CSF
+  _licenties.json     quels contrôles une licence permet de couvrir
+  _renames.json       anciens noms dans le tenant (source pour Rename-BaselinePolicy.ps1)
+  _i18n/              traductions anglaises et françaises des textes issus des données
+  WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+  MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+  IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+  AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+BaselineTemplate/      la baseline CIPP (générée)
+StandardsTemplateV2/   standards CIPP pour les paramètres du tenant
+export/NativeImport/   export de restauration pour IntuneBackupAndRestore (généré)
+extras/                ce qui n'est pas un type de stratégie CIPP, par plateforme (android, ios, macos, windows)
+docs/                  vue d'ensemble, conformité, analyse, plan et structure
+scripts/               le pipeline et les scripts de tenant
 ```
+
+Voir [STRUCTUUR.md](docs/STRUCTUUR.fr.md#dossiers) pour le contenu de chaque dossier et qui le lit.
 
 Le dossier se déduit du nom de fichier (plateforme) et du `Type` CIPP (type de stratégie) et ne
 porte donc aucune information qui ne figure pas aussi dans le fichier. C'est voulu : le dossier sert à
@@ -202,12 +212,11 @@ plusieurs stratégies fournissent le même payload : Apple fusionne les profils,
 
 S'exécute comme première étape de `.github/workflows/generate-baseline.yml` et est bloquant.
 
-## Trois dérivés d'une seule source
+## Dérivés d'une seule source
 
 | Cible | Chemin | Script |
 |---|---|---|
 | Format de restauration pour IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
-| Idem pour chaque ensemble supplémentaire | `export/NativeImport/IntuneBackupAndRestore-<SET>/` | le même script |
 | Baseline CIPP (stages et paquets) | `BaselineTemplate/Baseline.json` | `node scripts/generate-baseline-template.js` |
 | CIPP | *aucune conversion* — CIPP lit `IntuneTemplate/` directement | |
 
@@ -241,7 +250,7 @@ Cinq choses que l'importeur fait délibérément :
 1. **Les GUID sont conservés.** Le RowKey/GUID identifie la ligne de modèle CIPP ; un
    modèle réécrit qui recevrait un nouveau GUID produirait, à la synchronisation suivante, un
    second modèle portant le même nom.
-2. **Nos propres paramètres inconnus d'OIB sont conservés.** Notre stratégie BitLocker couvre aussi
+2. **Nos propres paramètres inconnus d'OIB sont conservés.** La stratégie BitLocker de cette baseline couvre aussi
    les lecteurs fixes et amovibles, OIB seulement le lecteur du système ; écraser aveuglément désactiverait
    cela silencieusement. La règle : un paramètre de premier niveau de l'ancien modèle est conservé,
    sauf si ce settingDefinitionId apparaît *quelque part* dans l'ensemble OIB importé. L'exécution indique
@@ -276,7 +285,7 @@ Cinq choses que l'importeur fait délibérément :
    clés pour la même décision : `Allowed` (macOS 10.14) et `Authorization` (macOS 11+).
    Elles ne peuvent pas figurer ensemble dans une même règle. OIB fournit les deux, et macOS rejette alors le
    payload TCC **entier** : Intune signale `10022` sur chaque champ de cette règle et l'application n'obtient
-   aucun droit — pas même celui qui était correctement défini. Cela touchait nos stratégies macOS pour
+   aucun droit — pas même celui qui était correctement défini. Cela touchait les stratégies macOS pour
    OneDrive et Defender for Endpoint. Voir [OpenIntuneBaseline issue
    #62](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline/issues/62) ; elle est toujours
    ouverte, donc cela se produit à chaque import plutôt qu'une seule fois dans les modèles.
@@ -284,19 +293,19 @@ Cinq choses que l'importeur fait délibérément :
 5. **Idempotent.** Lors d'une deuxième exécution, le fichier cible lui-même est la source de ces paramètres
    repris, donc même entrée → même sortie.
 
-Six stratégies OIB n'ont volontairement pas été reprises (variantes d'audit, alternatives 24H2, driver
-update profiles, Windows 365) — avec leur raison, dans `"excluded"` du manifeste.
+Quatre éléments d'OIB n'ont volontairement pas été repris (la variante d'audit ASR, les driver
+update profiles, l'anneau de mise à jour 3 et Windows 365) — avec leur raison, dans `"excluded"` du manifeste.
 
 ## Restaurer dans un tenant
 
 **Via CIPP :** faites pointer le dépôt de modèles vers ce dépôt. Les cinq valeurs de `.Type`
-correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 141
+correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 197
 modèles figurent dans CIPP sous Tenant Administration → Templates.
 
 ### Déployer via une baseline CIPP
 
 Dans CIPP, les modèles ne font qu'être présents ; le déploiement est l'affaire d'une **baseline** (Tenant Administration →
-Baselines). Une baseline se compose de *standards*, et le standard qui déploie nos stratégies s'appelle
+Baselines). Une baseline se compose de *standards*, et le standard qui déploie ces stratégies s'appelle
 **Intune Template Package** : il déploie en une fois *chaque* modèle portant la même valeur `Package`,
 et redétermine cette appartenance à chaque exécution. Une nouvelle stratégie dans ce dépôt
 entre donc d'elle-même dans la baseline — rien n'est à cliquer dans CIPP.
@@ -325,7 +334,7 @@ Les stages qu'elle contient :
 
 | Stage | Paquets | Passage à *ce* stage |
 |---:|---|---|
-| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les trois paquets de groupe | — le stage 1 s'applique toujours |
+| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les huit paquets de groupe `Baseline-SEC-*` (phase 4, un par groupe) | — le stage 1 s'applique toujours |
 | 2 · Pilote | `Baseline-Pilot` | `success` (tout le stage 1 est conforme) **et** `time` de deux semaines |
 | 3 · En attente d'un prérequis | `Baseline-Wacht` | `manual` — quelqu'un le fait avancer |
 
@@ -339,7 +348,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 219 fichiers — les mêmes 122 stratégies plus leurs affectations et le
+CIPP importerait *aussi* ces 299 fichiers JSON — les mêmes 197 stratégies plus leurs 101 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.
@@ -349,12 +358,17 @@ celle-ci ne regarde pas `TemplateType` et en fait donc aussi une ligne sans nom.
 Community Repos → Import, il *est* reconnu comme baseline. Voir
 [ci-dessous](#déployer-via-une-baseline-cipp).
 
-Ce qui reste : six fichiers sont bien des `.json` mais pas des stratégies — les trois fichiers `_` de
-`IntuneTemplate/`, les deux `_manifest.json` et le profil ADE macOS dans `enrollment/macos/`. CIPP
-en fait une seule ligne sans nom et sans type (ils se confondent parce que la
-déduplication se fait sur `Displayname`, vide pour les six). Cette ligne ne fait rien ;
+Ce qui reste, ce sont les fichiers qui sont bien des `.json` mais pas des stratégies :
+
+- les fichiers `_` de `IntuneTemplate/`, y compris les traductions dans `_i18n/` ;
+- tout ce qui se trouve sous `extras/` : profils ADE, corps Graph pour les restrictions, la configuration
+  d'applications et les filtres, App Control et la partie JSON du contrôle de conformité ;
+- avec la synchronisation automatique, aussi `BaselineTemplate/Baseline.json`.
+
+CIPP en fait une seule ligne sans nom et sans type (ils se confondent parce que la
+déduplication se fait sur `Displayname`, vide pour tous ces fichiers). Cette ligne ne fait rien ;
 on peut la nettoyer en la supprimant dans CIPP. Les placer sous un chemin `NativeImport` n'est pas possible :
-ils sont lus par les scripts à côté de leur propre dossier.
+les scripts les lisent là où ils se trouvent.
 
 **Via IntuneBackupAndRestore** (testé avec le module 4.0.1) :
 
@@ -373,22 +387,22 @@ affectations du Settings Catalog, de l'ADMX, des device configurations et de la 
 celles d'App Protection. Sans cet appel séparé, les deux stratégies MAM sont bien présentes, mais
 sans affectation — et elles ne protègent alors rien.
 
-Pas de `Start-IntuneRestoreAssignments` à la suite : cet export ne contient volontairement pas de dossier
-`Assignments/`. Après la restauration, les stratégies doivent être affectées à la main à un groupe pilote, pas à All
-Devices — voir les phases ci-dessus. Et deux dossiers au lieu d'un, parce que
-`Start-IntuneRestoreConfig` restaure tout ce qui se trouve sous le chemin indiqué : réunis dans un seul dossier,
-quiconque restaure la baseline déploierait à son insu l'ensemble pilote avec elle.
+Seule la phase 1 a une affectation dans l'export. Tout le reste revient sans affectation et
+s'affecte ensuite selon sa phase — voir [Affecter dans un tenant](#affecter-dans-un-tenant).
 
 L'exporteur écrit les affectations d'app protection sous la forme attendue par le module :
 nom de fichier `<guid> - <policynaam>.json` (le module lit comme nom tout ce qui suit le premier
 ` - `) et la liste dans une propriété `value` au lieu d'un tableau nu. Pour les autres
 types de stratégie, le nom de fichier est le nom de la stratégie et le contenu *est* un tableau nu.
 
-**Valeurs propres au tenant :** le jeton d'intégration EDR dans `Baseline_WIN_D_Defender_for_Endpoint_EDR`
-est un `encryptedValueToken` qui n'a de sens que dans le tenant source. C'est pourquoi, depuis
-septembre 2026, c'est la variante connecteur `Baseline_WIN_D_Defender_EDR_Policy` qui est déployée et
-celle-ci est en phase 5. Lors d'une restauration dans un autre tenant, ce paramètre doit être relié à
-nouveau manuellement.
+**Valeurs propres au tenant :** les modèles et l'export n'en contiennent aucune. L'intégration EDR
+passe par le connecteur Defender : `onboarding_fromconnector` est défini sur l'espace réservé `Microsoft ATP connector
+enabled` (non chiffré), et Intune renseigne lui-même le véritable package d'intégration du tenant
+tant que le connecteur est activé. Jusqu'en septembre 2026, `Baseline_WIN_D_Defender_for_Endpoint_EDR`
+portait le jeton d'intégration chiffré (`encryptedValueToken`) d'un seul tenant ; il a été remplacé
+par la même valeur de connecteur. Cette stratégie est en phase 5, à côté de `Baseline_WIN_D_Defender_EDR_Policy`,
+qui est celle déployée. Là où une valeur de tenant *est* nécessaire figure un jeton CIPP (`%OrganizationId%`) — seul
+CIPP le remplace ; lors d'une restauration avec IntuneBackupAndRestore, vous le renseignez à la main.
 
 ## Affecter dans un tenant
 
@@ -409,6 +423,10 @@ pour les paquets CIPP : `-AllDevices` et `-AllUsers` prennent la phase 1 avec ce
 — jusqu'en septembre 2026, `-AllDevices` le faisait, alternatives et pilote compris.
 `-IgnoreFase` prend tout malgré tout, pour un tenant de test ; `-Exclude` s'applique toujours à toutes les stratégies.
 
+Les groupes `SEC-*` (`SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Shared-Devices`, …) sont des
+noms par défaut, pas une exigence. S'ils portent un autre nom dans le tenant, voir
+[le README de BaselineTemplate](BaselineTemplate/README.fr.md#ce-que-vous-faites-ensuite-vous-même) pour savoir où les renommer.
+
 `-Scope D|U` filtre ensuite sur la portée indiquée dans le nom, `-Platform` sur la plateforme. Les stratégies qui
 ne suivent pas la convention de nommage échappent à *tout* filtre ; le script le signale explicitement
 au lieu de les ignorer silencieusement.
@@ -425,24 +443,15 @@ supprimez au contraire les existantes. En option, `-FilterId` + `-FilterType` po
 Les stratégies absentes du tenant sont signalées, pas créées — déployez-les d'abord via
 CIPP ou `Start-IntuneRestoreConfig`.
 
-### Neuf stratégies sont volontairement sans affectation
+### Stratégies sans affectation
 
-Chacune d'elles est une *alternative* à une stratégie qui, elle, *est* affectée, et non un complément
-à celle-ci. Deux stratégies affectées qui définissent le même paramètre sur une valeur différente provoquent dans
-Intune un Conflict, après quoi le paramètre n'est appliqué par aucune des deux — c'est
-pire que de n'avoir aucune des deux stratégies. `check-scope.js` y veille.
-
-| Stratégie | Alternative à | Destinée à |
-|---|---|---|
-| `WIN - D - Windows Update Ring 1 Pilot` | anneau de mise à jour 3 | groupe pilote |
-| `WIN - D - Windows Update Ring 2 UAT` | anneau de mise à jour 3 | groupe UAT |
-| `WIN - D - Defender Update Ring 1 Pilot` | anneau Defender 3 | groupe pilote |
-| `WIN - D - Defender Update Ring 2 UAT` | anneau Defender 3 | groupe UAT |
-| `WIN - D - Defender ASR Policy Audit Mode` | `Attack Surface Reduction` — les mêmes 16 règles en audit au lieu de block | groupe pilote, et alors *sans* la stratégie bloquante |
-| `WIN - D - Defender AV Policy` | `Defender Antivirus` — le modèle CIPP à côté de la version OIB, plus permissif sur trois points | rien ; la version OIB est plus stricte |
-| `WIN - D - Defender for Endpoint EDR` | `Defender EDR Policy` — même intégration, mais avec le jeton d'intégration fixe d'un seul tenant au lieu du connecteur | uniquement le tenant d'où provient ce jeton |
-| `WIN - D - Microsoft Edge Search Engine` | aucune — Google comme moteur de recherche par défaut est un choix du client, pas un paramètre de sécurité | uniquement une organisation qui l'a décidé |
-| `WIN - D - Windows Hello for Business Multi User` | `Windows Hello for Business` — mêmes exigences, mais sans provisionnement juste après la connexion | groupe avec des appareils partagés |
+Tout ce qui est au-delà de la phase 1 ne reçoit volontairement pas d'affectation. Quelles stratégies
+sont concernées et pourquoi figure par phase dans [OVERZICHT.md](docs/OVERZICHT.fr.md#dabord-en-pilote) (le pilote) et dans
+[COMPLIANCE.md](docs/COMPLIANCE.fr.md#choix-de-lorganisation-et-risques-résiduels) (phases 2 à 5, avec le
+`faseWaarom` du manifeste). La phase 5 est à chaque fois une *alternative* à une stratégie qui, elle, *est*
+affectée, et non un complément à celle-ci : deux stratégies affectées qui définissent le même paramètre sur
+une valeur différente provoquent dans Intune un Conflict, après quoi le paramètre n'est appliqué par aucune
+des deux. `check-scope.js` y veille.
 
 ```powershell
 .\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'

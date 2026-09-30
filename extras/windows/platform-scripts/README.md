@@ -3,14 +3,14 @@
 # Windows-platformscripts
 
 Intune-platformscripts (`deviceManagementScripts`) staan **buiten** `IntuneTemplate/`, om
-dezelfde reden als de [macOS-shellscripts](../../shellscripts/macos/README.md): de pijplijnen
+dezelfde reden als de [macOS-shellscripts](../../macos/shell-scripts/README.md): de pijplijnen
 daar kennen vijf CIPP-policytypes en een platformscript is geen van die vijf. Het hangt onder
 `deviceManagement/deviceManagementScripts`, `Set-CIPPIntunePolicy` heeft er geen
 `TemplateType` voor, en `Start-IntuneRestoreConfig` zet het niet terug. Een bestand hier wordt
-dus **niet** opgepikt door `export-intunebackup.js`, `check-scope.js` of
+dus **niet** opgepikt door CIPP, `export-intunebackup.js`, `check-scope.js` of
 `Set-BaselineAssignment.ps1`.
 
-De map heet `platformscripts/` en niet `shellscripts/` omdat Intune ze zelf zo noemt: op
+De map heet `platform-scripts/` en niet `shell-scripts/` omdat Intune ze zelf zo noemt: op
 Windows staan ze onder *Scripts and remediations → Platform scripts*, op macOS onder
 *macOS → Shell scripts*. Twee namen voor hetzelfde idee, maar wie in de portal zoekt vindt ze
 zo terug.
@@ -21,7 +21,7 @@ zo terug.
 
 ## Mount-AzureFilesDrive.ps1
 
-Het Windows-equivalent van [`mount-azure-files.sh`](../../shellscripts/macos/README.md) op de
+Het Windows-equivalent van [`mount-azure-files.sh`](../../macos/shell-scripts/README.md) op de
 Mac, en de vervanger van de drive maps uit Group Policy Preferences.
 
 ### Waarom een script en geen policy
@@ -81,10 +81,10 @@ NTFS-rechten in de map te krijgen, niet door hier een andere waarde in te vullen
 
 | Voorwaarde | Waar |
 |---|---|
-| `Kerberos/CloudKerberosTicketRetrievalEnabled` = 1 | **staat al in de baseline** — [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust`](../../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md), alle apparaten |
+| `Kerberos/CloudKerberosTicketRetrievalEnabled` = 1 | **staat al in de baseline** — [`Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust`](../../../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md), alle apparaten |
 | Apparaat is Entra joined of Entra hybrid joined | inschrijving |
 | `WinHttpAutoProxySvc` en `iphlpsvc` draaien | **niet uitgezet door de baseline** — de enige diensten die `Security Hardening` uitschakelt zijn de vier Xbox-diensten |
-| Entra Kerberos aan op het storage account, admin consent, cloud-only groepsondersteuning, MFA uitgesloten voor de Entra-app, share-level permissions | Azure-portal — de stappen staan één keer uitgeschreven bij de macOS-tegenhanger, onder [De Azure-kant](../../shellscripts/macos/README.md#de-azure-kant-een-tweede-storage-account-met-entra-kerberos). Ze gelden onverkort voor Windows. |
+| Entra Kerberos aan op het storage account, admin consent, cloud-only groepsondersteuning, MFA uitgesloten voor de Entra-app, share-level permissions | Azure-portal — de stappen staan één keer uitgeschreven bij de macOS-tegenhanger, onder [De Azure-kant](../../macos/shell-scripts/README.md#de-azure-kant-een-tweede-storage-account-met-entra-kerberos). Ze gelden onverkort voor Windows. |
 
 Cloud-only identiteiten vragen bovendien Windows 11 24H2 of hoger met de cumulatieve update
 van maart 2026 (KB5079391 / KB5079489); hybride identiteiten werken vanaf Windows 10 2004.

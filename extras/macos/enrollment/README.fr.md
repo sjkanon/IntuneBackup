@@ -6,8 +6,9 @@ Les profils Apple Automated Device Enrollment (`depMacOSEnrollmentProfile`) se t
 de `IntuneTemplate/`. Les pipelines de ce dossier connaissent cinq types de stratégies CIPP et un
 profil d'inscription n'en fait pas partie : il dépend d'un token ABM
 (`depOnboardingSettings/{id}/enrollmentProfiles`) et ne passe pas par le bouton « Import profile ».
-Un fichier placé ici n'est donc **pas** repris par `export-intunebackup.js` ou
-`Set-BaselineAssignment.ps1`.
+`export-intunebackup.js` copie bien chaque `.json` de ce dossier comme sidecar vers
+`export/.../Apple ADE Enrollment Profiles/macos/`, pour que le profil ne soit pas oublié lors d'une
+reconstruction ; CIPP, `check-scope.js` et `Set-BaselineAssignment.ps1` n'en font rien.
 Le déploiement se fait via `scripts/New-MacOSEnrollmentPolicy.ps1`.
 
 | Fichier | Token | Profil par défaut |
@@ -50,8 +51,8 @@ En suspens, non résolu par ce fichier :
 
 - **La rotation ne restreint pas la lecture.** Qui peut consulter le mot de passe séquestré se règle
   avec RBAC/PIM, pas ici. Vérifiez qui détient ce rôle.
-- **`mlapsadmin` est prévisible à l'échelle du tenant.** Pour un administrateur gérant plusieurs
-  clients, un nom par client (`<prefix>-<codeclient>-adm`) est préférable.
+- **`mlapsadmin` est prévisible à l'échelle du tenant.** Qui gère plusieurs tenants a intérêt à
+  choisir un nom par tenant (`<prefix>-<codetenant>-adm`).
 - **`supportPhoneNumber` vaut `SERVICEDESK-TELEFOON-INVULLEN`.** L'utilisateur voit ce numéro pendant
   la configuration ; renseignez-le pour chaque organisation avant de créer le profil.
 - **Vérifiez que le séquestre est activé** sous Devices → macOS → Local admin password, sinon le mot
@@ -234,6 +235,6 @@ passent avant tout diagnostic de script.
 Si tout est en ordre et que `NotRun` s'affiche malgré tout, il suffit d'attendre l'agent : il
 récupère les scripts **toutes les 8 heures**, indépendamment de la synchronisation MDM.
 
-Comme le clic pour l'enregistrement d'écran (voir [`shellscripts/macos/`](../../shellscripts/macos/README.fr.md)),
+Comme le clic pour l'enregistrement d'écran (voir [`extras/macos/shell-scripts/`](../shell-scripts/README.fr.md)),
 l'affinité utilisateur est une action par Mac qu'aucune stratégie ne peut reprendre. Les deux font
 partie de la remise d'un nouvel appareil.

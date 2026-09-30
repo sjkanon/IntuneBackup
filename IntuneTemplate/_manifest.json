@@ -125,7 +125,7 @@
         {
           "veld": "minimumWarningOsVersion",
           "soort": "actualiteitsdoel",
-          "waarom": "App protection is de BYOD-kant: het toestel is niet van ons en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde Android-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
+          "waarom": "App protection is de BYOD-kant: het toestel is niet van de organisatie en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde Android-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
         },
         {
           "veld": "minimumWarningPatchVersion",
@@ -212,7 +212,7 @@
         ]
       },
       "bron": "OpenIntuneBaseline-conventie voor compliance, inhoud vergeleken met IntuneAdmin (Personally-owned work profile - Device Health) en UniFy-Endpoint Android BYOD.",
-      "bewijs": "Root, USB-foutopsporing en installatie uit onbekende bronnen zijn de drie voorwaarden waaronder de Android-sandbox niet meer houdt wat hij belooft. Play Integrity op `hardwareBacked` is daarbij het verschil dat telt: de basisvariant is in software te vervalsen, de hardware-variant leunt op de sleutelattestatie van het toestel. IntuneAdmin en UniFy zetten die op `basic`; wij houden `hardwareBacked` aan, gelijk aan wat de App Protection-policy al eist. De patchdatum is de toets die er het meest toe doet en het minst kost: een toestel dat een half jaar geen beveiligingsupdate kreeg heeft publiek bekende, vaak actief misbruikte kwetsbaarheden open (Android Security Bulletins). CIS Google Android Benchmark v1.6.0 noemt een minimaal patchniveau als L1 voor persoonlijke toestellen; UniFy laat hem bewust leeg, wij niet.",
+      "bewijs": "Root, USB-foutopsporing en installatie uit onbekende bronnen zijn de drie voorwaarden waaronder de Android-sandbox niet meer houdt wat hij belooft. Play Integrity op `hardwareBacked` is daarbij het verschil dat telt: de basisvariant is in software te vervalsen, de hardware-variant leunt op de sleutelattestatie van het toestel. IntuneAdmin en UniFy zetten die op `basic`; deze baseline houdt `hardwareBacked` aan, gelijk aan wat de App Protection-policy al eist. De patchdatum is de toets die er het meest toe doet en het minst kost: een toestel dat een half jaar geen beveiligingsupdate kreeg heeft publiek bekende, vaak actief misbruikte kwetsbaarheden open (Android Security Bulletins). CIS Google Android Benchmark v1.6.0 noemt een minimaal patchniveau als L1 voor persoonlijke toestellen; UniFy laat hem bewust leeg, deze baseline niet.",
       "universeel": "Geldt voor elk toestel met een persoonlijk werkprofiel (BYOD). **Voorbehoud:** zonder Android-inschrijvingen doet deze toets niets. Fully managed, corporate-owned work profile en dedicated vallen erbuiten — die hebben een `androidDeviceOwnerCompliancePolicy` nodig: zie Compliance Corporate Device Health en Compliance Dedicated Device Health.",
       "note": "Als `androidWorkProfileCompliancePolicy` geschreven — het persoonlijke werkprofiel. `hardwareBacked` sluit oudere toestellen zonder ondersteunde hardware-attestatie uit — dat is bedoeld, maar controleer het tegen de vloot vóór je toewijst. Sinds september 2026 eist deze policy ook een beveiligingspatch van 2026-03-01 of later (zes maanden terug, gelijk aan de waarschuwing in App Protection); toestellen van fabrikanten die per kwartaal patchen blijven daarmee ruim binnen. De OS-ondergrens (12.0) en de patchdatum verouderen: draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Beide zijn actualiteitsdoelen (zie `ondergrens`) en mogen meebewegen, maar niet zonder te kijken hoeveel toestellen eronder zitten. Defender for Endpoint staat bewust in een aparte policy (Compliance Defender for Endpoint), omdat die een licentie en connector vraagt.",
       "ondergrens": [
@@ -400,7 +400,7 @@
       },
       "bewijs": "Zonder beleid beslist de gebruiker wanneer een systeemupdate wordt geïnstalleerd, en uitstellen kan onbeperkt. Een vast nachtelijk venster zorgt dat een beschikbare update binnen een dag op het toestel staat zonder dat de herstart midden in het werk valt. CIS Google Android Benchmark v1.6.0 en het Microsoft-framework noemen automatische systeemupdates voor corporate toestellen; Compliance Corporate Device Health en Compliance Dedicated Device Health toetsen met de patchdatum of het ook werkt.",
       "universeel": "Elk device owner-toestel: fully managed, corporate-owned work profile en dedicated. Daarom D: dedicated toestellen hebben geen gebruiker. Persoonlijke werkprofielen worden niet geraakt — die updates zijn van de eigenaar.",
-      "note": "Alleen de systemUpdate-velden van `androidDeviceOwnerGeneralDeviceConfiguration`; de Settings Catalog kent geen systeemupdate-instelling. Een toestel dat 's nachts uit staat of geen update in het venster kan afronden, installeert pas bij een volgende gelegenheid (UniFy W-15) — daarom toetst de compliance de patchdatum. Geen `systemUpdateFreezePeriods`: een bevriezingsperiode (bijv. rond een jaarafsluiting) is een klantbesluit. Dedicated toestellen in 24-uursgebruik: kies een ander venster in een eigen kopie, niet in deze policy. Geen andere velden van dit type gezet, dus geen overlap met een eventuele kiosk- of Additional Settings-policy — mits die de systemUpdate-velden leeg laat.",
+      "note": "Alleen de systemUpdate-velden van `androidDeviceOwnerGeneralDeviceConfiguration`; de Settings Catalog kent geen systeemupdate-instelling. Een toestel dat 's nachts uit staat of geen update in het venster kan afronden, installeert pas bij een volgende gelegenheid (UniFy W-15) — daarom toetst de compliance de patchdatum. Geen `systemUpdateFreezePeriods`: een bevriezingsperiode (bijv. rond een jaarafsluiting) is een organisatiebesluit. Dedicated toestellen in 24-uursgebruik: kies een ander venster in een eigen kopie, niet in deze policy. Geen andere velden van dit type gezet, dus geen overlap met een eventuele kiosk- of Additional Settings-policy — mits die de systemUpdate-velden leeg laat.",
       "metadataOnly": true
     },
     {
@@ -487,7 +487,7 @@
       "bron": "UniFy Android Enterprise Baseline v1.5.1 — AND - SC - DR - DEV - General-Settings (assistcontentpolicy) en Applications (appfunctions), Fully-Managed en Corp-Work-Profile - v1.5",
       "herkomst": "eigen",
       "fase": 2,
-      "faseWaarom": "Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een klantbesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een klant die deze assistenten toestaat.",
+      "faseWaarom": "Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een organisatiebesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een organisatie die deze assistenten toestaat.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -505,7 +505,7 @@
         ]
       },
       "bewijs": "Met assist content stuurt Android een schermafdruk en de app-structuur van wat er op dat moment openstaat naar de assistent-app — voor Gemini en Circle to Search is dat een clouddienst buiten de verwerkersovereenkomst van de organisatie. App functions (Android 16) laat apps acties aanbieden die een AI-agent namens de gebruiker uitvoert, en daarmee kan een agent bij werkgegevens. Voor een organisatie die generatieve AI beperkt tot goedgekeurde diensten zijn beide een lek. CIS Google Android Benchmark v1.6.0 noemt de assist content-blokkade als L2.",
-      "universeel": "Elk fully managed en corporate-owned work profile-toestel met een gebruiker; op corporate-owned work profile alleen voor het werkprofiel. Of hij past is een klantbesluit, geen technisch feit.",
+      "universeel": "Elk fully managed en corporate-owned work profile-toestel met een gebruiker; op corporate-owned work profile alleen voor het werkprofiel. Of hij past is een organisatiebesluit, geen technisch feit.",
       "note": "**Bewust geen Permitted-tegenhanger** zoals bij Windows AI: voor `assistcontentpolicy` betekent `_false` \"Intune verandert niets\" en niet \"expliciet toegestaan\", dus een Permitted-variant zou geen besluit vastleggen. Wie de assistenten toestaat, wijst deze policy gewoon niet toe. Microsoft 365 Copilot binnen de Microsoft-apps valt hier niet onder; die volgt App Protection. Op toestellen onder Android 16 doet `appfunctions` niets.",
       "metadataOnly": true
     },
@@ -564,7 +564,7 @@
         ]
       },
       "bewijs": "Defender for Endpoint op Android detecteert schadelijke apps, phishing en onveilige netwerken en geeft het toestel een risicoscore. Deze policy maakt die score een toegangsvoorwaarde: boven *laag* is het toestel niet-compliant en houdt Conditional Access het tegen tot de dreiging is opgelost. Dat is automatische inperking van een incident, en de enige Android-maatregel in de baseline die actief naar malware kijkt. Niveau *laag* is wat het Microsoft Android Enterprise security configuration framework op niveau 2 noemt en wat UniFy aanhoudt; IntuneAdmin gebruikt *medium*.",
-      "universeel": "Elk toestel met persoonlijk werkprofiel, bij een klant met Defender for Endpoint-licentie. Defender kijkt op een persoonlijk toestel alleen naar het werkprofiel; wat privé is, ziet hij niet.",
+      "universeel": "Elk toestel met persoonlijk werkprofiel, in een tenant met Defender for Endpoint-licentie. Defender kijkt op een persoonlijk toestel alleen naar het werkprofiel; wat privé is, ziet hij niet.",
       "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in extras/android/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
       "metadataOnly": true
     },
@@ -594,7 +594,7 @@
         ]
       },
       "bewijs": "Defender for Endpoint op Android detecteert schadelijke apps, phishing en onveilige netwerken en geeft het toestel een risicoscore. Deze policy maakt die score een toegangsvoorwaarde: boven *laag* is het toestel niet-compliant en houdt Conditional Access het tegen tot de dreiging is opgelost. Dat is automatische inperking van een incident, en de enige Android-maatregel in de baseline die actief naar malware kijkt. Niveau *laag* is wat het Microsoft Android Enterprise security configuration framework op niveau 2 noemt en wat UniFy aanhoudt; IntuneAdmin gebruikt *medium*.",
-      "universeel": "Elk fully managed en corporate-owned work profile-toestel met een gebruiker, bij een klant met Defender for Endpoint-licentie. Dedicated toestellen vallen buiten deze gebruikerstoewijzing; wie Defender daar ook uitrolt, wijst hem aanvullend aan de dedicated apparaatgroep toe.",
+      "universeel": "Elk fully managed en corporate-owned work profile-toestel met een gebruiker, in een tenant met Defender for Endpoint-licentie. Dedicated toestellen vallen buiten deze gebruikerstoewijzing; wie Defender daar ook uitrolt, wijst hem aanvullend aan de dedicated apparaatgroep toe.",
       "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in extras/android/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
       "metadataOnly": true
     },
@@ -648,13 +648,13 @@
       "doel": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt.",
       "bron": "OpenIntuneBaseline BYOD — iOS App Protection",
       "type": "AppProtection",
-      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een klantbesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.",
+      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een organisatiebesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.",
       "herkomst": "oib",
       "ondergrens": [
         {
           "veld": "minimumWarningOsVersion",
           "soort": "actualiteitsdoel",
-          "waarom": "App protection is de BYOD-kant: het toestel is niet van ons en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde iOS-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
+          "waarom": "App protection is de BYOD-kant: het toestel is niet van de organisatie en wordt niet beheerd, dus er is geen instelling in de baseline die een bepaalde iOS-versie nodig heeft. Er is dus ook geen vloer die vastligt — n-1 is hier de juiste regel en deze waarde mag meebewegen."
         }
       ],
       "veldOverrides": [
@@ -903,7 +903,7 @@
       },
       "bewijs": "Een handmatig geïnstalleerd configuratieprofiel of rootcertificaat is de klassieke manier om het verkeer van een iPhone te onderscheppen; allowuiconfigurationprofileinstallation=false sluit dat af, en allowuntrustedtlsprompt=false laat de gebruiker een vervalst certificaat niet meer wegklikken. Web distribution en alternatieve marktplaatsen (EU, Digital Markets Act) en het vertrouwen van ontwikkelaarsprofielen omzeilen de App Store-review. Control Center op het vergrendelscherm laat vliegtuigmodus aanzetten vóór ontgrendeling, zodat een gestolen toestel niet meer te lokaliseren of te wissen is. Wachtwoorden delen via AirDrop en wachtwoordverzoeken van toestellen in de buurt gaan buiten beheer om. Alle instellingen staan in de CIS Apple iOS/iPadOS 26 Benchmark L1-set van UniFy.",
       "universeel": "Alleen supervised bedrijfstoestellen (ADE). Op een niet-supervised toestel negeert iOS de supervised-only sleutels; op een persoonlijk toestel horen ze niet thuis.",
-      "note": "Bewust **niet** opgenomen: allowpasswordautofill=false (UniFy Corporate) — dat zet ook passkeys en wachtwoordmanagers uit; in plaats daarvan forceauthenticationbeforeautofill. iCloud-back-up en iCloud Drive uit (UniFy Corporate) — een klantbesluit over waar gegevens mogen staan, geen hardening; beheerde apps synchroniseren al niet naar iCloud via [Baseline] - IOS - D - Data Protection. Bluetooth-, NFC-, hotspot- en VPN-wijzigingen blokkeren (Connectivity Controls, L2) — breekt carkits, betaalpassen en thuiswerken. Siri volledig uit — alleen Siri op het vergrendelscherm staat uit. Host pairing (Finder/iTunes) regelt het inschrijfprofiel (iTunesPairingMode disallow), niet deze policy. allowopenfromunmanagedtomanaged niet geblokkeerd: dan kan een foto uit de Foto's-app niet meer in Outlook of Teams worden gedeeld — dezelfde afweging als bij allowedInboundDataTransferSources in App Protection. Controlecenter op het vergrendelscherm uit betekent ook: geen zaklamp zonder ontgrendelen. Correcties op UniFy: forceautomaticdateandtime staat daar op false (= niet afdwingen), hier true. Activation Lock: UniFy blokkeert het (false); hier toegestaan (true), omdat een supervised toestel dan diefstalbescherming heeft terwijl Intune de bypasscode bewaart (apparaatactie 'Activeringsslot uitschakelen'). Controleer vóór uitrol dat Intune voor een testtoestel een bypasscode toont; zonder die code is een teruggebracht toestel met een privé-Apple Account niet opnieuw te gebruiken — kies dan false. Deze policy deelt de top-levelgroep com.apple.applicationaccess met Data Protection maar zet geen enkele sleutel dubbel; iOS voegt restrictiepayloads samen.",
+      "note": "Bewust **niet** opgenomen: allowpasswordautofill=false (UniFy Corporate) — dat zet ook passkeys en wachtwoordmanagers uit; in plaats daarvan forceauthenticationbeforeautofill. iCloud-back-up en iCloud Drive uit (UniFy Corporate) — een organisatiebesluit over waar gegevens mogen staan, geen hardening; beheerde apps synchroniseren al niet naar iCloud via [Baseline] - IOS - D - Data Protection. Bluetooth-, NFC-, hotspot- en VPN-wijzigingen blokkeren (Connectivity Controls, L2) — breekt carkits, betaalpassen en thuiswerken. Siri volledig uit — alleen Siri op het vergrendelscherm staat uit. Host pairing (Finder/iTunes) regelt het inschrijfprofiel (iTunesPairingMode disallow), niet deze policy. allowopenfromunmanagedtomanaged niet geblokkeerd: dan kan een foto uit de Foto's-app niet meer in Outlook of Teams worden gedeeld — dezelfde afweging als bij allowedInboundDataTransferSources in App Protection. Controlecenter op het vergrendelscherm uit betekent ook: geen zaklamp zonder ontgrendelen. Correcties op UniFy: forceautomaticdateandtime staat daar op false (= niet afdwingen), hier true. Activation Lock: UniFy blokkeert het (false); hier toegestaan (true), omdat een supervised toestel dan diefstalbescherming heeft terwijl Intune de bypasscode bewaart (apparaatactie 'Activeringsslot uitschakelen'). Controleer vóór uitrol dat Intune voor een testtoestel een bypasscode toont; zonder die code is een teruggebracht toestel met een privé-Apple Account niet opnieuw te gebruiken — kies dan false. Deze policy deelt de top-levelgroep com.apple.applicationaccess met Data Protection maar zet geen enkele sleutel dubbel; iOS voegt restrictiepayloads samen.",
       "metadataOnly": true
     },
     {
@@ -945,7 +945,7 @@
       "bron": "Declaratieve configuraties com.apple.configuration.intelligence.settings en external-intelligence.settings in de iOS settings catalog; selectie uit UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate en IntuneAdmin — Disable Apple Intelligence, met Writing Tools uit waar UniFy het toestaat. De com.apple.applicationaccess-varianten die IntuneAdmin gebruikt zijn in de catalogus als Deprecated gemarkeerd",
       "herkomst": "eigen",
       "fase": 3,
-      "faseWaarom": "Wacht op de eerste iOS-inschrijving. Daarnaast een klantbesluit: kies tussen deze en de Permitted-variant, nooit allebei.",
+      "faseWaarom": "Wacht op de eerste iOS-inschrijving. Daarnaast een organisatiebesluit: kies tussen deze en de Permitted-variant, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -964,8 +964,8 @@
         ]
       },
       "bewijs": "Voor een AI-beleid dat alleen goedgekeurde AI-diensten toestaat. De ChatGPT-integratie stuurt tekst en afbeeldingen naar een partij buiten de afspraken met Microsoft en Apple; Writing Tools en samenvattingen verwerken bedrijfsmail en notities in Apple's Private Cloud Compute zodra het model op het toestel niet volstaat. Door ze uit te zetten kan bedrijfsinformatie die weg niet op. Zelfde patroon als [Baseline] - WIN - D - Windows AI Features Restricted.",
-      "universeel": "Elk ingeschreven toestel dat Apple Intelligence ondersteunt; op andere toestellen doet de configuratie niets. Apple beperkte de oudere restrictiesleutels voor deze functies tot supervised toestellen; voor de declaratieve variant is dat nagegaan in Apple's schema: com.apple.configuration.intelligence.settings bestaat vanaf iOS 26.4 en staat alleen supervised inschrijving toe, dus op een persoonlijk ingeschreven toestel landt deze policy niet. Óf hij past is een klantbesluit — zie de Permitted-variant.",
-      "note": "**Alternatief van [Baseline] - IOS - D - Apple Intelligence Permitted** — die zet dezelfde sleutels op true; allebei toewijzen levert een Conflict op, waarna geen van beide iets doet. Siri zelf blijft aan; alleen Siri op het vergrendelscherm staat uit via Restrictions Corporate. Bewust niet: allowappleintelligencereport=false (dat rapport is juist de transparantie over wat naar Private Cloud Compute ging) en forceondeviceonlydictation/-translation (geen generatieve functie). Voor toestellen zónder inschrijving bestaan in App Protection de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState; die staan bewust niet in de fase-1-policy, omdat dit een klantbesluit is en App Protection maar één policy voor iedereen is — zie RAPPORT.",
+      "universeel": "Elk ingeschreven toestel dat Apple Intelligence ondersteunt; op andere toestellen doet de configuratie niets. Apple beperkte de oudere restrictiesleutels voor deze functies tot supervised toestellen; voor de declaratieve variant is dat nagegaan in Apple's schema: com.apple.configuration.intelligence.settings bestaat vanaf iOS 26.4 en staat alleen supervised inschrijving toe, dus op een persoonlijk ingeschreven toestel landt deze policy niet. Óf hij past is een organisatiebesluit — zie de Permitted-variant.",
+      "note": "**Alternatief van [Baseline] - IOS - D - Apple Intelligence Permitted** — die zet dezelfde sleutels op true; allebei toewijzen levert een Conflict op, waarna geen van beide iets doet. Siri zelf blijft aan; alleen Siri op het vergrendelscherm staat uit via Restrictions Corporate. Bewust niet: allowappleintelligencereport=false (dat rapport is juist de transparantie over wat naar Private Cloud Compute ging) en forceondeviceonlydictation/-translation (geen generatieve functie). Voor toestellen zónder inschrijving bestaan in App Protection de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState; die staan bewust niet in de fase-1-policy, omdat dit een organisatiebesluit is en App Protection maar één policy voor iedereen is — zie RAPPORT.",
       "metadataOnly": true
     },
     {
@@ -975,7 +975,7 @@
       "bron": "Tegenhanger van [Baseline] - IOS - D - Apple Intelligence Restricted; dezelfde declaratieve sleutels op de Apple-standaardwaarde, expliciet vastgelegd",
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die Apple Intelligence op bedrijfstoestellen toestaat. Wijs er één toe, nooit allebei.",
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een organisatie die Apple Intelligence op bedrijfstoestellen toestaat. Wijs er één toe, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -994,7 +994,7 @@
         ]
       },
       "bewijs": "Waar generatieve AI is toegestaan is het beter dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Apple een standaard verandert.",
-      "universeel": "Elk ingeschreven toestel dat Apple Intelligence ondersteunt, maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
+      "universeel": "Elk ingeschreven toestel dat Apple Intelligence ondersteunt, maar alleen bij een organisatie die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
       "note": "**Alternatief van [Baseline] - IOS - D - Apple Intelligence Restricted.** Weeg vóór je deze kiest mee dat de ChatGPT-integratie (externalintelligencesettings_enabled) gegevens naar een externe partij stuurt; wie alleen de functies op het toestel wil toestaan, zet in deze policy externalintelligencesettings_enabled op false. De per-workspace-beperking (allowedworkspaceids) staat er bewust niet in: die vraagt een tenant- of workspace-ID.",
       "metadataOnly": true
     },
@@ -1205,7 +1205,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het standaard-inschrijfprofiel; ze verschillen in precies één instelling. Vergrendelde inschrijving is achteraf alleen met een wipe terug te draaien.",
@@ -1235,7 +1235,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als standaardgebruiker; beheer loopt via het verborgen servicedeskaccount.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met enrollment/macos/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
+      "note": "Alternatief voor [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het beheerders-inschrijfprofiel; ze verschillen in precies één instelling.",
@@ -1515,10 +1515,10 @@
       "displayName": "[Baseline] - MAC - D - Azure Files Cloud Kerberos",
       "doel": "Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt.",
       "bron": "Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities",
-      "note": "Hoort bij [Baseline] - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Een storage account dat al een andere identity source heeft valt af.** Gebruikt het account Microsoft Entra Domain Services — bijvoorbeeld omdat een AVD-omgeving eraan hangt — dan staan Entra Kerberos en AD DS in het portaal grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in shellscripts/macos/README.md.\n\n**Wat er nodig is om dit uit te rollen.** Een storage account met Entra Kerberos als identity source. Staat het bestaande account op iets anders en kan dat niet om, dan is er een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `shellscripts/macos/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — deze baseline gaat uit van cloud-only apparaten. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
+      "note": "Hoort bij [Baseline] - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Een storage account dat al een andere identity source heeft valt af.** Gebruikt het account Microsoft Entra Domain Services dan staan Entra Kerberos en AD DS in het portaal grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in extras/macos/shell-scripts/README.md.\n\n**Wat er nodig is om dit uit te rollen.** Een storage account met Entra Kerberos als identity source. Staat het bestaande account op iets anders en kan dat niet om, dan is er een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `extras/macos/shell-scripts/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — deze baseline gaat uit van cloud-only apparaten. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
       "herkomst": "eigen",
       "fase": 3,
-      "faseWaarom": "Wacht op een storage account met Entra Kerberos als identity source. Een account dat al op Microsoft Entra Domain Services of AD DS staat — bijvoorbeeld omdat een AVD-omgeving eraan hangt — kan dat niet tegelijk hebben, en omzetten raakt alles wat al op dat account draait. Op een Mac met een geldig cloud-TGT levert zo'n account AADSTS700016 op — de KDC kent geen toepassing voor die fileservice. Het profiel zelf is af en account-onafhankelijk: `Hosts` staat op `.windows.net` en dekt dus elk storage account. Zodra er één is met Entra Kerberos kan dit naar fase 1, met als tweede voorwaarde dat Microsoft de tenant voor de macOS-preview aanzet (azurefiles@microsoft.com).",
+      "faseWaarom": "Wacht tot er een storage account met Entra Kerberos als identity source is. Een account dat al op Microsoft Entra Domain Services of AD DS staat kan dat niet tegelijk hebben, en omzetten raakt alles wat al op dat account draait. Op een Mac met een geldig cloud-TGT levert zo'n account AADSTS700016 op — de KDC kent geen toepassing voor die fileservice. Het profiel zelf is af en account-onafhankelijk: `Hosts` staat op `.windows.net` en dekt dus elk storage account. Zodra er één is met Entra Kerberos kan dit naar fase 1, met als tweede voorwaarde dat Microsoft de tenant voor de macOS-preview aanzet (azurefiles@microsoft.com).",
       "controls": {
         "iso": [
           "A.8.5 Veilige authenticatie"
@@ -1612,7 +1612,7 @@
       "doel": "Hoe en wanneer macOS zijn eigen updates ophaalt en installeert.",
       "bron": "eigen baseline — declaratief softwarebeleid (DDM); uitgebreid met Software Update Enforce Latest en beta-uit uit OpenIntuneBaseline macOS v2.0 beta (SC - Updates - D - Update Configuration) en microsoft/intune-my-macs (pol-sys-103, pol-sys-106), met eigen termijn; CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 1.1–1.6",
       "metadataOnly": true,
-      "note": "Declaratieve variant (DDM) in plaats van de com.apple.softwareupdate-instellingen die OpenIntuneBaseline v1.0 levert. Uitstel: 7 dagen voor kleine updates, 14 voor grote, 21 voor systeemupdates; Rapid Security Responses (Background Security Improvements) aan inclusief terugdraaien door de gebruiker (Apple-standaard, laat een kapotte update ongedaan maken zonder IT); meldingen aan; standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties staan op AlwaysOn (`_1`); tot september 2026 stonden ze op `_0` (Allowed), en dan werd er niets afgedwongen.\n\n**Enforce Latest (september 2026).** Delay in Days 30, Install Time 12:30. Microsoft: de vertraging telt vanaf de publicatiedatum van de update (of het aanmaken van de policy) en 'only determines the target enforcement date and not the date that the update is offered to users'. 30 is bewust groter dan elk uitstel hierboven (7/14/21): met OIB's 3 dagen zou de deadline vallen vóórdat een grote update door het uitstel van 14 dagen zichtbaar is. 30 dagen is ook de CIS-grens (1.1, 1.6) en het maximum van de instelling. 12:30 omdat een Mac overdag aanstaat; 's nachts slaapt hij en installeert hij pas bij het openen. Enforce Latest dwingt de nieuwste versie voor dat model af, **inclusief een nieuwe hoofdversie**: macOS 27 wordt 14 dagen na uitgave zichtbaar en na 30 dagen afgedwongen. Wil een klant hoofdversies zelf vrijgeven, haal dan deze groep weg en gebruik een policy met een doelversie. Microsoft Learn: 'When an update enforcement is assigned, the device ignores software update settings, including automatic update actions' — zolang er een deadline openstaat bepaalt die het gedrag; de automatische acties werken daarbuiten.\n\n**Beta** (softwareupdate_beta ProgramEnrollment AlwaysOff): geen AppleSeed/beta-builds op bedrijfs-Macs; macOS 15.4+, supervised.\n\n**App-updates en configuratiedata** via twee sleutels uit de klassieke com.apple.SoftwareUpdate-payload (AutomaticallyInstallAppUpdates, ConfigDataInstall), omdat de DDM-declaratie daar geen tegenhanger voor heeft — mSCP (branch tahoe) koppelt precies deze twee CIS-regels ook alleen aan de profielsleutels. Beide zijn in macOS al standaard aan; de policy maakt ze niet meer uitschakelbaar. De andere sleutels uit die payload zijn bewust niet gezet, omdat DDM ze dekt.\n\nOpen punt: of SystemPeriodInDays (21) ook XProtect- en configuratiedata vertraagt, is niet in Apple's schema vastgelegd. Blijkt dat zo, verlaag hem dan.",
+      "note": "Declaratieve variant (DDM) in plaats van de com.apple.softwareupdate-instellingen die OpenIntuneBaseline v1.0 levert. Uitstel: 7 dagen voor kleine updates, 14 voor grote, 21 voor systeemupdates; Rapid Security Responses (Background Security Improvements) aan inclusief terugdraaien door de gebruiker (Apple-standaard, laat een kapotte update ongedaan maken zonder IT); meldingen aan; standaardgebruikers mogen zelf een OS-update installeren. De drie automatische acties staan op AlwaysOn (`_1`); tot september 2026 stonden ze op `_0` (Allowed), en dan werd er niets afgedwongen.\n\n**Enforce Latest (september 2026).** Delay in Days 30, Install Time 12:30. Microsoft: de vertraging telt vanaf de publicatiedatum van de update (of het aanmaken van de policy) en 'only determines the target enforcement date and not the date that the update is offered to users'. 30 is bewust groter dan elk uitstel hierboven (7/14/21): met OIB's 3 dagen zou de deadline vallen vóórdat een grote update door het uitstel van 14 dagen zichtbaar is. 30 dagen is ook de CIS-grens (1.1, 1.6) en het maximum van de instelling. 12:30 omdat een Mac overdag aanstaat; 's nachts slaapt hij en installeert hij pas bij het openen. Enforce Latest dwingt de nieuwste versie voor dat model af, **inclusief een nieuwe hoofdversie**: macOS 27 wordt 14 dagen na uitgave zichtbaar en na 30 dagen afgedwongen. Wil een organisatie hoofdversies zelf vrijgeven, haal dan deze groep weg en gebruik een policy met een doelversie. Microsoft Learn: 'When an update enforcement is assigned, the device ignores software update settings, including automatic update actions' — zolang er een deadline openstaat bepaalt die het gedrag; de automatische acties werken daarbuiten.\n\n**Beta** (softwareupdate_beta ProgramEnrollment AlwaysOff): geen AppleSeed/beta-builds op bedrijfs-Macs; macOS 15.4+, supervised.\n\n**App-updates en configuratiedata** via twee sleutels uit de klassieke com.apple.SoftwareUpdate-payload (AutomaticallyInstallAppUpdates, ConfigDataInstall), omdat de DDM-declaratie daar geen tegenhanger voor heeft — mSCP (branch tahoe) koppelt precies deze twee CIS-regels ook alleen aan de profielsleutels. Beide zijn in macOS al standaard aan; de policy maakt ze niet meer uitschakelbaar. De andere sleutels uit die payload zijn bewust niet gezet, omdat DDM ze dekt.\n\nOpen punt: of SystemPeriodInDays (21) ook XProtect- en configuratiedata vertraagt, is niet in Apple's schema vastgelegd. Blijkt dat zo, verlaag hem dan.",
       "herkomst": "eigen",
       "fase": 2,
       "faseWaarom": "Updates worden automatisch geïnstalleerd en uiterlijk 30 dagen na uitgave afgedwongen met een herstart om 12:30 — ook voor een nieuwe hoofdversie van macOS. Kijk in de pilot hoe het herstartmoment valt en of bedrijfsapps de nieuwe hoofdversie aankunnen. Beta-inschrijving is niet meer mogelijk.",
@@ -1952,7 +1952,7 @@
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 2,
-      "faseWaarom": "Gebruikers zien Writing Tools, samenvattingen, Genmoji, Image Playground en de ChatGPT-integratie verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen.",
+      "faseWaarom": "Gebruikers zien Writing Tools, samenvattingen, Genmoji, Image Playground en de ChatGPT-integratie verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per organisatie tussen deze en de Permitted-variant — nooit allebei toewijzen.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -1971,7 +1971,7 @@
         ]
       },
       "bewijs": "CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 schrijft voor: externe intelligentie-integraties en het aanmelden daarbij uit (2.5.1.1), Writing Tools uit (2.5.1.2), e-mailsamenvattingen uit (2.5.1.3), transcriptie en transcriptiesamenvatting in Notities uit (2.5.1.4) en dicteren alleen op het apparaat (2.18.1). Writing Tools en de samenvattingen verwerken bedrijfsinformatie in een model, deels via Apple's Private Cloud Compute; de externe integratie stuurt de invoer naar een derde partij zonder verwerkersovereenkomst met de organisatie. Voor een AI-beleid dat alleen goedgekeurde diensten toestaat staat geen van deze functies op de lijst — dezelfde lijn als [Baseline] - WIN - D - Windows AI Features Restricted.",
-      "universeel": "Elke Mac met Apple silicon en macOS 15.1 of later waar Apple Intelligence beschikbaar is; op andere Macs doen de instellingen niets. Of hij past is een klantbesluit en geen technisch feit: een organisatie die deze functies toestaat kiest de Permitted-variant.",
+      "universeel": "Elke Mac met Apple silicon en macOS 15.1 of later waar Apple Intelligence beschikbaar is; op andere Macs doen de instellingen niets. Of hij past is een organisatiebesluit en geen technisch feit: een organisatie die deze functies toestaat kiest de Permitted-variant.",
       "note": "**Alternatief van [Baseline] - MAC - D - Apple Intelligence Permitted** — die zet dezelfde twaalf instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets. Gecontroleerd: [Baseline] - MAC - D - Restrictions (OpenIntuneBaseline macOS v1.0) zet geen van deze twaalf ids, en geen ander template doet dat. Siri staat daar al uit (allowAssistant), dus de ChatGPT-integratie via Siri was al grotendeels dicht; deze policy sluit ook de integratie in Writing Tools en het aanmelden bij een externe dienst. Profielsleutels (com.apple.applicationaccess) en geen DDM: Apple markeert in september 2026 alle twaalf sleutels als deprecated vanaf 26.4, ten gunste van de declaratieve configuraties com.apple.configuration.intelligence.settings en com.apple.configuration.external-intelligence.settings (in Intune: intelligencesettings_* en externalintelligencesettings_*, die ook voor macOS bestaan). Toch blijven de profielsleutels staan, en dat is nagerekend in plaats van uitgesteld: die DDM-configuraties bestaan pas vanaf macOS 26.4 en Apple staat er alleen supervised inschrijving bij toe, terwijl deze payload het ook doet op macOS 15 en op een Mac die de gebruiker zelf heeft ingeschreven. Nu omzetten zou Apple Intelligence op 15.x en op 26.0 tot 26.3 juist onbeperkt laten, en dat is een verslechtering. Deprecated is bij Apple ook niet verwijderd: de sleutels werken nog, en mSCP en OpenIntuneBaseline v2.0 beta gebruiken dezelfde. Overstappen zodra de vloot op 26.4 of hoger zit en via ADE is ingeschreven; zet dan de hele policy om en meng de twee vormen niet. De omzetting is een op een: intelligencesettings_allowwritingtools, _allowgenmoji, _allowimageplayground, _allowappleintelligencereport en _forceondeviceonlydictation, de samenvattingen onder intelligencesettings_apps_mail, _apps_notes en _apps_safari, en externalintelligencesettings_enabled en _allowsignin. DDM kan daarnaast wat deze payload niet kan (AllowImageWand, AllowVisualIntelligence, AllowPersonalizedHandwritingResults, ForceOnDeviceOnlyTranslation, Apps/Calendar) en dat is een nieuwe keuze, geen onderdeel van de omzetting. [Baseline] - IOS - D - Apple Intelligence Restricted is al wel declaratief; daar was geen dekking van oudere versies te verliezen. allowMailSummary blokkeert volgens Apple alleen het handmatig samenvatten van een e-mail, niet de automatische samenvattingen. Wie de ChatGPT-integratie wel wil toestaan maar alleen met de eigen zakelijke werkruimte, gebruikt allowedExternalIntelligenceWorkspaceIDs — organisatiespecifiek, daarom niet opgenomen. Apple Intelligence draait alleen op Macs met Apple silicon en macOS 15.1 of later; op andere Macs doen de instellingen niets. Allemaal ook op iOS/iPadOS geldig; deze policy is alleen voor macOS. Bewuste afwijking van OpenIntuneBaseline v2.0 beta: die laat allowSafariSummary op true; hier false, want een samengevatte webpagina kan een intranet- of SharePoint-pagina zijn. Het Apple Intelligence-rapport (allowAppleIntelligenceReport) staat uit zoals in OIB."
     },
     {
@@ -1982,7 +1982,7 @@
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die Apple Intelligence op de werkplek toestaat. Wijs er één toe, nooit allebei.",
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een organisatie die Apple Intelligence op de werkplek toestaat. Wijs er één toe, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -1999,8 +1999,8 @@
           "PR.PS-01"
         ]
       },
-      "bewijs": "Niet elke organisatie beperkt generatieve AI. Waar het wél is toegestaan is het beter dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en houdt stand als Apple een standaard verandert. Let op: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 vraagt het tegendeel; een klant die deze variant kiest wijkt bewust af van CIS 2.5.1.1–2.5.1.4 en 2.18.1 en hoort dat in zijn risicoregister te zetten.",
-      "universeel": "Elke Mac met Apple silicon en macOS 15.1 of later — maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze, geen technische.",
+      "bewijs": "Niet elke organisatie beperkt generatieve AI. Waar het wél is toegestaan is het beter dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en houdt stand als Apple een standaard verandert. Let op: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 vraagt het tegendeel; een organisatie die deze variant kiest wijkt bewust af van CIS 2.5.1.1–2.5.1.4 en 2.18.1 en hoort dat in zijn risicoregister te zetten.",
+      "universeel": "Elke Mac met Apple silicon en macOS 15.1 of later — maar alleen bij een organisatie die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze, geen technische.",
       "note": "**Alternatief van [Baseline] - MAC - D - Apple Intelligence Restricted.** Die zet dezelfde twaalf instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. forceOnDeviceOnlyDictation staat hier op false: dicteren mag via Apple's servers. De ChatGPT-integratie beperken tot de eigen zakelijke werkruimte kan met allowedExternalIntelligenceWorkspaceIDs; organisatiespecifiek, daarom niet opgenomen. Siri blijft uit via [Baseline] - MAC - D - Restrictions (allowAssistant); wie de externe integratie via Siri wil, moet ook dat besluit heroverwegen. Die sleutel is sinds macOS 26.4 deprecated ten gunste van DDM sirisettings_enabled; waarom hij blijft staan, staat in de note bij Restrictions."
     },
     {
@@ -2133,7 +2133,7 @@
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Klantkeuze. Pariteit met [Baseline] - WIN - D - Removable Storage (fase 2, schrijven geblokkeerd, lezen toegestaan) is op macOS niet te maken: bij ReadOnly koppelt macOS lees-schrijfmedia niet alsnog als alleen-lezen — Apple: 'external storage that is read-write will not be mounted read-only'. In de praktijk blokkeert dit dus vrijwel alle USB-sticks en externe schijven, ook om te lezen. Dat is een ander besluit dan op Windows, en daarom geen fase 2.",
+      "faseWaarom": "Organisatiekeuze. Pariteit met [Baseline] - WIN - D - Removable Storage (fase 2, schrijven geblokkeerd, lezen toegestaan) is op macOS niet te maken: bij ReadOnly koppelt macOS lees-schrijfmedia niet alsnog als alleen-lezen — Apple: 'external storage that is read-write will not be mounted read-only'. In de praktijk blokkeert dit dus vrijwel alle USB-sticks en externe schijven, ook om te lezen. Dat is een ander besluit dan op Windows, en daarom geen fase 2.",
       "controls": {
         "iso": [
           "A.7.10 Opslagmedia",
@@ -2152,7 +2152,7 @@
       },
       "bewijs": "Een USB-stick of externe schijf is de eenvoudigste weg om bedrijfsgegevens buiten elke logging om mee te nemen, en een bekende route voor malware naar binnen (A.7.10, A.8.12). CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 heeft hier geen instelling voor: 5.3.2 eist alleen dat externe APFS/HFS-volumes versleuteld zijn, en dat is geen MDM-instelling. Deze declaratie is de enige ingebouwde macOS-maatregel die externe opslag weert zonder extra software.",
       "universeel": "Supervised Macs (ADE) met macOS 15 of later; oudere of niet-supervised Macs negeren de declaratie. Netwerkopslag (NetworkStorage) is bewust niet gezet: dat zou SMB-shares en Azure Files breken.",
-      "note": "Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (extras/macos/defender-onboarding) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een klant hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*."
+      "note": "Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (extras/macos/defender-onboarding) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een organisatie hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*."
     },
     {
       "target": "Baseline_WIN_D_Access_Control",
@@ -2634,7 +2634,7 @@
       "doel": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat.",
       "bron": "CIPP-standaardtemplate",
       "metadataOnly": true,
-      "note": "Komt uit CIPP, niet uit OIB. Doet hetzelfde als [Baseline] - WIN - D - Defender for Endpoint EDR, maar cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder \"Microsoft ATP connector enabled\" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; de token-variant staat in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.",
+      "note": "Komt uit CIPP, niet uit OIB. Cross-tenant bruikbaar: onboarding_fromconnector staat op de placeholder \"Microsoft ATP connector enabled\" in plaats van op een vaste tenant-GUID. Sinds september 2026 de variant die uitrolt; [Baseline] - WIN - D - Defender for Endpoint EDR staat als dubbele variant in fase 5. Vereist dat de Defender for Endpoint-connector in Intune aanstaat.",
       "herkomst": "eigen",
       "fase": 1,
       "controls": {
@@ -2658,12 +2658,12 @@
     {
       "target": "Baseline_WIN_D_Defender_for_Endpoint_EDR",
       "displayName": "[Baseline] - WIN - D - Defender for Endpoint EDR",
-      "doel": "Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. Dat pakket is tenant-specifiek; in een andere tenant moet het opnieuw gekoppeld worden.",
+      "doel": "Koppelt het apparaat aan Defender for Endpoint via de Defender-connector; zelfde onboarding als [Baseline] - WIN - D - Defender EDR Policy, plus een expliciete telemetriefrequentie (normaal).",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen EDR-onboardingpolicy",
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Draagt het onboarding-token van de tenant waaruit het template is geëxporteerd en werkt dus alleen daar. Voor elke andere tenant is [Baseline] - WIN - D - Defender EDR Policy de policy die uitrolt: zelfde onboarding, via de Defender-connector.",
+      "faseWaarom": "Dubbel met [Baseline] - WIN - D - Defender EDR Policy, die uitrolt: allebei toewijzen zet twee EDR-policies op hetzelfde apparaat. Tot september 2026 droeg dit template het versleutelde onboarding-token van de tenant waaruit het was geëxporteerd; dat is vervangen door de connector-waarde, zodat de repo geen tenant-specifieke waarde meer bevat.",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -3282,12 +3282,12 @@
     {
       "target": "Baseline_WIN_D_Microsoft_Edge_Search_Engine",
       "displayName": "[Baseline] - WIN - D - Microsoft Edge Search Engine",
-      "doel": "Zet Google als standaardzoekmachine in Edge. Een klantkeuze, geen beveiligingsinstelling.",
+      "doel": "Zet Google als standaardzoekmachine in Edge. Een organisatiekeuze, geen beveiligingsinstelling.",
       "bron": "eigen baseline (ADMX)",
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Een klantkeuze, geen beveiligingsinstelling: welke zoekmachine standaard is hoort niet in een generieke baseline. Wijs hem alleen toe als de organisatie dat zo besloten heeft.",
+      "faseWaarom": "Een organisatiekeuze, geen beveiligingsinstelling: welke zoekmachine standaard is hoort niet in een generieke baseline. Wijs hem alleen toe als de organisatie dat zo besloten heeft.",
       "controls": {
         "iso": [
           "A.8.9 Configuratiebeheer"
@@ -3553,7 +3553,7 @@
         ]
       },
       "bron": "CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities.",
-      "bewijs": "De printspooler is al jaren de meest misbruikte weg naar SYSTEM-rechten op Windows: PrintNightmare (CVE-2021-34527) werkte precies doordat een gewone gebruiker een printerdriver mocht installeren bij het verbinden met een gedeelde printer. Windows Protected Print draait de spooler in een beperkte modus die alleen nog Mopria-drivers gebruikt en de hele klasse aanvallen wegneemt; Microsoft noemt het zelf de opvolger van de losse mitigaties. Onze baseline heeft wel een Printing-policy, maar die zet deze drie niet.",
+      "bewijs": "De printspooler is al jaren de meest misbruikte weg naar SYSTEM-rechten op Windows: PrintNightmare (CVE-2021-34527) werkte precies doordat een gewone gebruiker een printerdriver mocht installeren bij het verbinden met een gedeelde printer. Windows Protected Print draait de spooler in een beperkte modus die alleen nog Mopria-drivers gebruikt en de hele klasse aanvallen wegneemt; Microsoft noemt het zelf de opvolger van de losse mitigaties. Deze baseline heeft wel een Printing-policy, maar die zet deze drie niet.",
       "universeel": "Elk Windows-apparaat heeft een printspooler, ook een apparaat dat nooit print. Dat is nu juist het punt: de dienst draait en is aanvalbaar ongeacht of er een printer is.",
       "note": "Windows Protected Print vraagt Windows 11 24H2 of hoger en laat printers vallen die geen Mopria-driver hebben — dat zijn in de praktijk oudere netwerkprinters en labelprinters. Inventariseer de printervloot vóór je dit breed toewijst; op een vloot zonder eigen printers is het gratis. De andere twee instellingen zijn onvoorwaardelijk veilig. Overlap gecontroleerd (september 2026): `printers_configurewindowsprotectedprint` staat alleen in deze policy; [Baseline] - WIN - D - Printing zet twintig andere printer-ids (Point and Print, RPC, RedirectionGuard, driverinstallatie alleen door beheerders) en botst niet. ANALYSE.md noemt Protected Print nog als 'bewust niet overgenomen' — dat klopt niet meer: hij staat hier, in fase 2.",
       "herkomst": "intuneadmin",
@@ -3932,7 +3932,7 @@
       "herkomst": "intuneadmin",
       "toewijzingTekst": "geen — fase 5",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die generatieve AI op de werkplek toestaat. Wijs er één toe, nooit allebei.",
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een organisatie die generatieve AI op de werkplek toestaat. Wijs er één toe, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -3948,7 +3948,7 @@
         ]
       },
       "bewijs": "Niet elke organisatie beperkt generatieve AI. Waar generatieve AI wél is toegestaan is het beter om dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait. Dat is precies wat deze vier instellingen doen.",
-      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten — maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
+      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten — maar alleen bij een organisatie die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
       "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Features Restricted.** Die zet dezelfde vier instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Let op dat dit alleen de vier Paint- en Settings-functies betreft: Recall en Click To Do staan los daarvan uit via [Baseline] - WIN - D - Windows AI Restricted, en de Edge-blokkeerlijst via [Baseline] - WIN - U - AI Usage Control Restricted. Wie AI breed wil toestaan, moet ook die twee wegen."
     },
     {
@@ -3959,7 +3959,7 @@
       "herkomst": "intuneadmin",
       "toewijzingTekst": "geen — fase 2",
       "fase": 2,
-      "faseWaarom": "Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per klant tussen deze en de Permitted-variant — nooit allebei toewijzen.",
+      "faseWaarom": "Gebruikers zien de AI-knoppen in Paint verdwijnen. Dat is de bedoeling, maar het is zichtbaar en verdient een aankondiging. Kies per organisatie tussen deze en de Permitted-variant — nooit allebei toewijzen.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -3975,7 +3975,7 @@
         ]
       },
       "bewijs": "Voor een AI-beleid dat alleen Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars toestaat. Cocreator, Image Creator en Generative Fill sturen wat de gebruiker invoert naar een generatieve dienst, en de Settings Agent doet dat met zoekopdrachten in de Windows-instellingen. Geen daarvan staat dan op de goedgekeurde lijst. LET OP: IntuneAdmin levert deze vier profielen met de waarde die de functies juist inschakelt — Disable X op Disabled.",
-      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets. Of hij past is echter een klantbesluit, geen technisch feit: een organisatie die generatieve AI op de werkplek toestaat kiest de Permitted-variant.",
+      "universeel": "Elk Windows 11-apparaat waar deze functies op zitten. Op een apparaat zonder de betreffende Paint-versie doet de instelling niets. Of hij past is echter een organisatiebesluit, geen technisch feit: een organisatie die generatieve AI op de werkplek toestaat kiest de Permitted-variant.",
       "note": "Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets."
     },
     {
@@ -3986,10 +3986,10 @@
       "herkomst": "eigen",
       "toewijzingTekst": "geen — fase 5",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die Recall en Click To Do toestaat. Wijs er één toe, nooit allebei.",
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een organisatie die Recall en Click To Do toestaat. Wijs er één toe, nooit allebei.",
       "bewijs": "Waar Recall is toegestaan is het beter dat expliciet vast te leggen dan het aan de standaardwaarde over te laten: een expliciete policy laat in een audit zien dat het een besluit was, en hij houdt stand als Microsoft de standaard ooit omdraait.",
-      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware, maar alleen bij een klant die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
-      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per klant verschillen.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware, maar alleen bij een organisatie die dit gebruik heeft goedgekeurd. Dat is een beleidskeuze en geen technische.",
+      "note": "**Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per organisatie verschillen.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -4013,7 +4013,7 @@
       "herkomst": "eigen",
       "toewijzingTekst": "geen — fase 3",
       "fase": 3,
-      "faseWaarom": "Hoort bij [Baseline] - WIN - D - Windows AI Permitted en doet niets zonder die policy: staat Recall uit, dan valt er ook niets te begrenzen. Wijs hem pas toe als de klant Recall toestaat, en vul dan eerst de app-lijst aan met de programma's die in die omgeving gevoelige gegevens tonen.",
+      "faseWaarom": "Hoort bij [Baseline] - WIN - D - Windows AI Permitted en doet niets zonder die policy: staat Recall uit, dan valt er ook niets te begrenzen. Wijs hem pas toe als de organisatie Recall toestaat, en vul dan eerst de app-lijst aan met de programma's die in die omgeving gevoelige gegevens tonen.",
       "controls": {
         "iso": [
           "A.5.33 Bescherming van registraties",
@@ -4030,7 +4030,7 @@
         ]
       },
       "bewijs": "Recall bewaart een doorzoekbare index van alles wat op het scherm is geweest. De schade daarvan is niet uniform verdeeld: één momentopname van een geopende wachtwoordkluis of van het Entra-beheerportaal weegt zwaarder dan duizend van een tekstverwerker. Deze policy haalt juist die plekken eruit, begrenst hoe lang en hoeveel er wordt bewaard, en sluit de exportknop af waarmee een gebruiker zijn hele index naar een app of website kan sturen. Dat laatste is de weg waarlangs de index het apparaat verlaat.",
-      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware waar Recall is toegestaan. De URI-lijst klopt voor elke M365-tenant; de app-lijst is een startpunt dat per klant moet worden aangevuld.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware waar Recall is toegestaan. De URI-lijst klopt voor elke M365-tenant; de app-lijst is een startpunt dat per organisatie moet worden aangevuld.",
       "note": "**De app-lijst is bewust onvolledig.** Wat erin staat is wat overal verdedigbaar is — een RDP-sessie toont het scherm van een ander systeem, een wachtwoordkluis toont wachtwoorden. Vul aan met de programma's die in deze omgeving gevoelige gegevens tonen: het HR-pakket, het dossiersysteem, de bankomgeving. Namen mogen een uitvoerbaar bestand zijn (`app.exe`) of een AUMID voor Store-apps. Let op dat de bewaartermijn van 30 dagen niets zegt over verwijderingsplichten: staat er een persoonsgegeven in de index, dan valt die index onder dezelfde regels als de bron. Exporteren staat standaard al uit; het staat hier expliciet zodat het een besluit is en geen toevalligheid."
     },
     {
@@ -4044,7 +4044,7 @@
       "fase": 1,
       "toewijzingTekst": "alle apparaten",
       "bewijs": "Recall maakt elke paar seconden een schermafdruk en bewaart die doorzoekbaar op de schijf. Alles wat een gebruiker op het scherm heeft gehad staat daarmee in één index: wachtwoordkluizen, salarisbestanden, het patiëntdossier dat even openstond. Wie de schijf of het account overneemt, neemt die index mee. Click To Do stuurt bovendien schermdata naar een generatieve dienst. Voor een organisatie die generatieve AI beperkt is dat geen afweging maar een verbod, en ook zonder zo'n beleid vergroot het de schade van elk incident.",
-      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware. Op andere apparaten bestaat Recall niet en doet de instelling niets — hij is dus overal veilig toe te wijzen. Óf hij past is wel een klantbesluit: zie de Permitted-variant.",
+      "universeel": "Elk Windows 11-apparaat met Copilot+-hardware. Op andere apparaten bestaat Recall niet en doet de instelling niets — hij is dus overal veilig toe te wijzen. Óf hij past is wel een organisatiebesluit: zie de Permitted-variant.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -4090,7 +4090,7 @@
       "displayName": "[Baseline] - WIN - D - Windows Firewall",
       "doel": "Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast.",
       "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration",
-      "note": "Alle 23 eigen instellingen zitten in OIB's 31. Let op: onze policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.",
+      "note": "Alle 23 eigen instellingen zitten in OIB's 31. Let op: de eigen policy was een gewone Settings Catalog-policy, OIB's is een Endpoint Security-template (endpointSecurityFirewall) — in de tenant is dat geen PATCH maar een vervanging.",
       "overrides": [
         {
           "parent": "vendor_msft_firewall_mdmstore_domainprofile_enablefirewall",
@@ -4346,7 +4346,7 @@
       "displayName": "[Baseline] - WIN - D - Windows LAPS",
       "doel": "Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat.",
       "bron": "OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration",
-      "note": "Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant hadden we al niet overgenomen omdat onze policy het automatische accountbeheer al had. De eigen administratoraccountname is in september 2026 weggehaald: met automatisch accountbeheer aan negeert Windows die instelling, en de waarde was de accountnaam van één organisatie.",
+      "note": "Sinds OIB v4.0 de enige LAPS-variant; tot v3.8 was dit de 24H2+-variant naast een basisvariant, en die basisvariant was al niet overgenomen omdat de eigen policy het automatische accountbeheer al had. De eigen administratoraccountname is in september 2026 weggehaald: met automatisch accountbeheer aan negeert Windows die instelling, en de waarde was de accountnaam van één organisatie.",
       "herkomst": "oib",
       "fase": 1,
       "controls": {
@@ -4577,7 +4577,7 @@
       "herkomst": "eigen",
       "toewijzingTekst": "geen — fase 5",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Restricted-variant, voor een klant die publieke AI-diensten toestaat. Wijs er één toe, nooit allebei.",
+      "faseWaarom": "Alternatief van de Restricted-variant, voor een organisatie die publieke AI-diensten toestaat. Wijs er één toe, nooit allebei.",
       "controls": {
         "iso": [
           "A.5.10 Aanvaardbaar gebruik",
@@ -4593,8 +4593,8 @@
           "PR.DS-02"
         ]
       },
-      "bewijs": "Een klant die publieke AI-diensten toestaat heeft nog steeds de Store-blokkade nodig die hier vóór de AI-ronde al in zat. Die twee dingen in één lijst zetten betekent dat je ze niet los kunt kiezen — deze variant knipt ze uit elkaar zonder de Store-regels te verliezen.",
-      "universeel": "Elke gebruiker met Edge, maar alleen bij een klant die publieke AI-diensten heeft goedgekeurd.",
+      "bewijs": "Een organisatie die publieke AI-diensten toestaat heeft nog steeds de Store-blokkade nodig die hier vóór de AI-ronde al in zat. Die twee dingen in één lijst zetten betekent dat je ze niet los kunt kiezen — deze variant knipt ze uit elkaar zonder de Store-regels te verliezen.",
+      "universeel": "Elke gebruiker met Edge, maar alleen bij een organisatie die publieke AI-diensten heeft goedgekeurd.",
       "note": "**Alternatief van [Baseline] - WIN - U - AI Usage Control Restricted.** Een URL-blokkeerlijst is sowieso frictie en geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. Wie AI-gebruik echt wil sturen doet dat met de categorie Generative AI in Defender Web Content Filtering — dat staat in het Defender-portaal, niet in deze repo."
     },
     {
@@ -4634,7 +4634,7 @@
         }
       ],
       "fase": 2,
-      "faseWaarom": "Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per klant tussen deze en de Permitted-variant; nooit allebei toewijzen."
+      "faseWaarom": "Neemt de Edge-URL-blokkeerlijst over van Microsoft Edge User Experience — die instelling is daar al weggehaald. Controleer in de pilot dat er geen legitieme site geblokkeerd wordt. Kies per organisatie tussen deze en de Permitted-variant; nooit allebei toewijzen."
     },
     {
       "target": "Baseline_WIN_U_Attachment_Scanning",
@@ -5227,7 +5227,7 @@
       "metadataOnly": true,
       "herkomst": "eigen",
       "fase": 5,
-      "faseWaarom": "Alternatief van de Managed-variant, voor een klant die gedeelde mailboxen wél gecachet wil hebben. Wijs er één toe, nooit twee — ze zetten dezelfde instelling en leveren samen een Conflict op.",
+      "faseWaarom": "Alternatief van de Managed-variant, voor een organisatie die gedeelde mailboxen wél gecachet wil hebben. Wijs er één toe, nooit twee — ze zetten dezelfde instelling en leveren samen een Conflict op.",
       "controls": {
         "iso": [
           "A.8.9 Configuratiebeheer"
@@ -5504,7 +5504,7 @@
       "bron": "CIS v4 Windows 11 L1 (MSS WarningLevel, IntuneAdmin CISv4-profiel) en de Microsoft-aanbeveling voor PowerShell-logging ('PowerShell ♥ the Blue Team') — waarden geverifieerd tegen de settings catalog-definities",
       "herkomst": "eigen",
       "fase": 2,
-      "faseWaarom": "Module-logging voor alle modules (*) levert veel gebeurtenis 4103 op in Microsoft-Windows-PowerShell/Operational. Eerst op de pilotgroep kijken wat dat met de logomvang en een eventuele SIEM-ingest doet; zie extras/windows/event-log-sizes voor de logboekgrootte.",
+      "faseWaarom": "Module-logging voor alle modules (*) levert veel gebeurtenis 4103 op in Microsoft-Windows-PowerShell/Operational. Eerst op de pilotgroep kijken wat dat met de logomvang en een eventuele SIEM-ingest doet; zie extras/windows/remediations/event-log-sizes voor de logboekgrootte.",
       "controls": {
         "iso": [
           "A.8.15 Logging",
@@ -5525,7 +5525,7 @@
       },
       "bewijs": "Scriptblok-logging (Security Hardening) laat zien welke code is geladen, transcriptie (Logging) de sessie; module-logging legt vast welke cmdlets met welke parameters in de pijplijn zijn uitgevoerd, ook wanneer de code versluierd was of uit een module kwam. Samen is dat de set die Microsoft en de NSA-publicatie 'Keep PowerShell' aanraden voor incidentonderzoek. De WarningLevel-waarschuwing (gebeurtenis 523) is CIS L1 18.4.x: met 'overschrijven indien nodig' in Audit and Event Logging verdwijnen oude beveiligingsgebeurtenissen stil; deze drempel maakt dat zichtbaar vóór het gebeurt.",
       "universeel": "Elk Windows-apparaat. Ontbreekt een SIEM, dan blijft het lokaal nog steeds de eerste bron bij onderzoek; met Defender for Endpoint gaan PowerShell-gebeurtenissen daarnaast via AMSI al naar de cloud.",
-      "note": "Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in extras/windows/event-log-sizes.",
+      "note": "Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in extras/windows/remediations/event-log-sizes.",
       "metadataOnly": true
     },
     {
@@ -5583,7 +5583,7 @@
         ]
       },
       "bewijs": "DNS in platte tekst laat op elk openbaar wifi-netwerk zien welke sites iemand bezoekt en is te manipuleren. In automatische modus 'upgradet' Edge alleen naar DoH als de al ingestelde DNS-server (van DHCP of VPN) op Microsofts lijst van bekende DoH-aanbieders staat; interne resolvers blijven gewoon via klassieke DNS werken. Dat maakt het de verdedigbare generieke waarde: versleuteling waar het kan, geen breuk waar het niet kan.",
-      "universeel": "Elk Windows-apparaat met Edge. Werkt onafhankelijk van de DoH-instelling van Windows zelf (zie extras/windows/dns-over-https).",
+      "universeel": "Elk Windows-apparaat met Edge. Werkt onafhankelijk van de DoH-instelling van Windows zelf (zie extras/windows/remediations/dns-over-https).",
       "note": "**Alternatief van [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure** — beide zetten `dnsoverhttpsmode` op een andere waarde; wijs er één toe. Defender Network Protection (fase 1, Defender Antivirus) inspecteert verkeer van Edge via SmartScreen en blijft dus werken; voor browsers van derden steunt Network Protection op DNS/TLS-inspectie, en Microsoft adviseert daar DoH en QUIC in die browser uit te zetten — dat valt buiten deze Edge-policy.",
       "metadataOnly": true
     },

@@ -14,7 +14,7 @@ The baseline does prepare Defender on macOS —
 (real-time protection, tamper protection) — but **does not onboard the Mac anywhere**. Without onboarding
 the agent runs unlicensed: `mdatp health` reports `licensed: false`, no
 EDR signals reach the Defender portal and the compliance check in
-[`compliance/macos/`](../../../compliance/macos/README.en.md) stays red.
+[`extras/macos/compliance-scripts/`](../compliance-scripts/README.en.md) stays red.
 
 ## Can it be done generically, as on Windows? No.
 
@@ -56,7 +56,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
 5. **Verify.** On the Mac: `mdatp health --field licensed` → `true`, and
    `mdatp health --field org_id` shows the tenant. The device appears in the portal within
    about an hour. EDR test: Microsoft Learn *EDR detection test*.
-6. **Compliance.** Only then assign the custom compliance from `compliance/macos/`, and — if the
+6. **Compliance.** Only then assign the custom compliance from `extras/macos/compliance-scripts/`, and — if the
    organisation wants to steer on risk level — `deviceThreatProtectionEnabled` in the
    macOS compliance.
 

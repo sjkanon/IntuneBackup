@@ -15,7 +15,7 @@ Change automatiquement le mot de passe du compte administrateur local et le stoc
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_LAPS.json`](Baseline_WIN_D_Windows_LAPS.json) |
 
-> Depuis OIB v4.0, la seule variante LAPS ; jusqu'à la v3.8, c'était la variante 24H2+ à côté d'une variante de base, que nous n'avions déjà pas reprise car notre policy disposait déjà de la gestion automatique des comptes. Le nom de compte administrateur personnalisé a été supprimé en septembre 2026 : avec la gestion automatique des comptes activée, Windows ignore ce paramètre, et la valeur était le nom de compte d'une seule organisation.
+> Depuis OIB v4.0, la seule variante LAPS ; jusqu'à la v3.8, c'était la variante 24H2+ à côté d'une variante de base, qui n'avait déjà pas été reprise car la policy disposait déjà de la gestion automatique des comptes. Le nom de compte administrateur personnalisé a été supprimé en septembre 2026 : avec la gestion automatique des comptes activée, Windows ignore ce paramètre, et la valeur était le nom de compte d'une seule organisation.
 
 ## Normes
 

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender for Endpoint EDR",
-    "description": "Connects the device to Defender for Endpoint with a fixed onboarding package. That package is tenant-specific; in another tenant it must be connected again. Baseline assignment: none — an alternative that is not deployed. Source: own baseline — OpenIntuneBaseline has no EDR onboarding policy.",
+    "description": "Connects the device to Defender for Endpoint via the Defender connector; same onboarding as [Baseline] - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal). Baseline assignment: none — an alternative that is not deployed. Source: own baseline — OpenIntuneBaseline has no EDR onboarding policy.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {
@@ -38,8 +38,8 @@
                             "simpleSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationSecretSettingValue",
                                 "settingValueTemplateReference": null,
-                                "value": "92e9d377-88c1-4ad7-9614-459185f44411",
-                                "valueState": "encryptedValueToken"
+                                "value": "Microsoft ATP connector enabled",
+                                "valueState": "NotEncrypted"
                             }
                         }
                     ]

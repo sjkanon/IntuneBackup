@@ -1,15 +1,16 @@
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# compliance/macos/
+# extras/macos/compliance-scripts/
 
 Een aangepaste compliance-check voor macOS: draait Microsoft Defender for Endpoint op deze Mac,
 en is hij gezond?
 
-Deze twee bestanden staan bewust **buiten** [`IntuneTemplate/`](../../IntuneTemplate/README.md),
-om dezelfde reden als [`shellscripts/macos/`](../../shellscripts/macos/README.md) en
-[`enrollment/macos/`](../../enrollment/macos/README.md): een compliance-script is in Graph een
+Deze twee bestanden staan bewust **buiten** [`IntuneTemplate/`](../../../IntuneTemplate/README.md),
+om dezelfde reden als [`extras/macos/shell-scripts/`](../shell-scripts/README.md) en
+[`extras/macos/enrollment/`](../enrollment/README.md): een compliance-script is in Graph een
 eigen resource (`deviceManagement/deviceComplianceScripts`) en past niet in een van de vijf
-CIPP-policytypes. De pijplijnen pikken deze map niet op.
+CIPP-policytypes. CIPP, `check-scope.js`, `export-intunebackup.js` en
+`Set-BaselineAssignment.ps1` doen niets met deze map; uitrollen gaat met de hand, zie hieronder.
 
 | Bestand | Wat het is |
 |---|---|
@@ -19,8 +20,8 @@ CIPP-policytypes. De pijplijnen pikken deze map niet op.
 ## Waarom dit nodig is
 
 De baseline rolt Defender for Endpoint uit op macOS
-([`MAC - D - Defender for Endpoint`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md)
-en [`MAC - D - Defender Antivirus`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md)),
+([`MAC - D - Defender for Endpoint`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md)
+en [`MAC - D - Defender Antivirus`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md)),
 maar controleerde nergens of dat ook is gelukt. Windows heeft die controle wél —
 `WIN - U - Compliance Defender Real Time Protection` en `Defender Security Intelligence` toetsen
 of Defender aanstaat, de realtimebeveiliging actief is en de definities actueel zijn. Op macOS
@@ -72,7 +73,7 @@ Twee dingen die vaak misgaan bij een aangepaste compliance-check:
 - **`DefenderHealthy` op `false` terwijl de rest goed staat** wijst meestal op een ontbrekende
   toestemming onder Systeeminstellingen → Privacy en beveiliging, meestal Volledige schijftoegang.
   De baseline zet die via
-  [`MAC - D - Privacy Preferences`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.md);
+  [`MAC - D - Privacy Preferences`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.md);
   komt die policy niet aan, dan is dat hier het eerste dat je merkt.
 
 Bron voor de aanpak: [Custom compliance for Defender on macOS](https://www.oddsandendpoints.co.uk/posts/macos-custom-defender-compliance/)

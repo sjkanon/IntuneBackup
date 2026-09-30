@@ -2,7 +2,7 @@
 
 # App Control for Business (WDAC) — point de départ générique
 
-La plus grande lacune de fond de la baseline (ANALYSE.md, *Délibérément non repris*) :
+La plus grande lacune de fond de la baseline ([ANALYSE.md, *Délibérément non repris*](../../../docs/ANALYSE.fr.md#délibérément-non-repris--windows-et-macos)) :
 il n'y avait aucun contrôle des applications. Voici la partie générique, identique pour chaque tenant.
 Les exceptions qui suivent sont propres à chaque organisation et n'ont **pas** leur place dans ce dépôt.
 

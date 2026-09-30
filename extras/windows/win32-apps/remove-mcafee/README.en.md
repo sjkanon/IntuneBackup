@@ -5,10 +5,11 @@
 A Win32 app that removes the McAfee trial that ships from the factory on almost every new
 consumer laptop.
 
-Lives outside [`IntuneTemplate/`](../../../IntuneTemplate/README.en.md), just like
-[`shellscripts/macos/`](../../../shellscripts/macos/README.en.md) and
-[`compliance/macos/`](../../../compliance/macos/README.en.md): a Win32 app is not a policy and does
-not fit any of the five CIPP policy types. No pipeline picks this folder up.
+Lives outside [`IntuneTemplate/`](../../../../IntuneTemplate/README.en.md), just like
+[`extras/macos/shell-scripts/`](../../../macos/shell-scripts/README.en.md) and
+[`extras/macos/compliance-scripts/`](../../../macos/compliance-scripts/README.en.md): a Win32 app is not a policy and does
+not fit any of the five CIPP policy types. CIPP, `check-scope.js`, `export-intunebackup.js` and
+`Set-BaselineAssignment.ps1` do nothing with this folder; you package and upload the app by hand.
 
 ## Why this belongs to the baseline
 

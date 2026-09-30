@@ -5,8 +5,8 @@
 Advice and template: do not let personal Macs enrol in Intune.
 
 An enrollment restriction (`deviceEnrollmentPlatformRestrictionConfiguration`) is none of the
-five CIPP policy types and lives under `deviceManagement/deviceEnrollmentConfigurations`. Not
-picked up by the pipelines.
+five CIPP policy types and lives under `deviceManagement/deviceEnrollmentConfigurations`. CIPP,
+`check-scope.js`, `export-intunebackup.js` and `Set-BaselineAssignment.ps1` do nothing with it.
 
 | File | What it is |
 |---|---|
@@ -28,7 +28,7 @@ Why:
   manually enrolled Mac is not supervised and silently falls outside those, while it
   can still become compliant and therefore get access.
 - The user can remove a manually enrolled Mac from management themselves; an ADE Mac with
-  locked enrollment cannot be (see `enrollment/macos/`).
+  locked enrollment cannot be (see `extras/macos/enrollment/`).
 
 Intune treats a Mac as **personally owned** by default. It is corporate-owned only if
 it (Microsoft Learn, *Overview of enrollment restrictions*, "Blocking personal Macs"):

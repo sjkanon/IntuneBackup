@@ -3,13 +3,12 @@
 # extras/android/
 
 What belongs in a complete Android baseline but is none of the five CIPP policy types. These
-files are therefore **outside** `IntuneTemplate/`, just like `enrollment/macos/` and
-`compliance/macos/`: `export-intunebackup.js` and `Set-BaselineAssignment.ps1` do not pick
-them up.
+files are therefore **outside** `IntuneTemplate/`: CIPP, `check-scope.js`,
+`export-intunebackup.js` and `Set-BaselineAssignment.ps1` do nothing with them.
 
 | Folder | What | Graph resource |
 |---|---|---|
-| [`enrollment-restrictions/`](enrollment-restrictions/README.en.md) | Allow Android Enterprise, block device administrator | `deviceManagement/deviceEnrollmentConfigurations` |
+| [`enrollment-restriction/`](enrollment-restriction/README.en.md) | Allow Android Enterprise, block device administrator | `deviceManagement/deviceEnrollmentConfigurations` |
 | [`app-configuration/`](app-configuration/README.en.md) | Outlook, Edge and Defender on enrolled devices | `deviceAppManagement/mobileAppConfigurations` |
 | [`assignment-filters/`](assignment-filters/README.en.md) | Keep personal, corporate and dedicated apart | `deviceManagement/assignmentFilters` |
 

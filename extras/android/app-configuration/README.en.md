@@ -33,7 +33,7 @@ user preference and has been left out.
 open in Edge (App Protection), and they have to land in Edge's work profile, not in
 a private account. Keys such as home page, search engine, SmartScreen and disabled features
 have deliberately been left out: their Android types could not be verified against an Android export,
-and most of them are a customer decision.
+and most of them are an organisational decision.
 
 **Defender** — unchanged from UniFy: `EnableLowTouchOnboarding` and `UserUPN` for onboarding
 without user actions, `DefenderNetworkProtectionEnable`, `antiphishing` and `vpn` for

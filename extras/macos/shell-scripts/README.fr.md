@@ -2,18 +2,20 @@
 
 # Scripts shell macOS
 
-Les scripts shell Intune (`deviceShellScripts`) se trouvent **en dehors** de `IntuneTemplate/`, pour la même
-raison que les [profils d'inscription ADE](../../enrollment/macos/README.fr.md) : les pipelines de ce dossier
+Les scripts shell Intune (`deviceShellScripts`) se trouvent **en dehors** de `IntuneTemplate/` : les pipelines de ce dossier
 connaissent cinq types de stratégies CIPP, et un script shell n'en fait pas partie. Il se situe sous
 `deviceManagement/deviceShellScripts`, `Set-CIPPIntunePolicy` n'a pas de `TemplateType` pour lui,
-et `Start-IntuneRestoreConfig` ne le restaure pas. Un fichier placé ici n'est donc **pas**
-pris en compte par `export-intunebackup.js`, `check-scope.js` ou `Set-BaselineAssignment.ps1`.
+et `Start-IntuneRestoreConfig` ne le restaure pas. `export-intunebackup.js` copie bien chaque
+`.sh` de ce dossier dans `export/.../macOS Shell Scripts/macos/` en tant que sidecar, pour que les
+scripts ne soient pas oubliés lors d'une reconstruction ; CIPP, `check-scope.js` et
+`Set-BaselineAssignment.ps1` n'en font rien. La création et l'affectation se font à la main.
 
 | Fichier | Ce qu'il fait | Portée |
 |---|---|---|
 | `configure-dock.sh` | Configure le Dock une fois par utilisateur, puis n'y touche plus | Utilisateur |
 | `mount-azure-files.sh` | Installe un LaunchAgent qui monte le partage Azure Files dans la session de l'utilisateur | Appareil |
 | `nudge-screen-recording.sh` | Demande à l'utilisateur d'activer l'enregistrement de l'écran pour les outils d'assistance à distance (NinjaOne et TeamViewer par défaut), et ouvre le panneau | Utilisateur |
+| `escrow-buddy.sh` | Installe Escrow Buddy (version figée, signature vérifiée) et demande une seule fois une nouvelle clé de récupération FileVault | Appareil |
 
 ## configure-dock.sh
 
@@ -92,7 +94,7 @@ Intune accepte le script sans broncher et l'erreur n'apparaît que sur l'apparei
 Monte un partage Azure Files dans `/Volumes` avec le ticket Kerberos délivré par Platform SSO,
 de sorte que l'utilisateur n'a pas à saisir de mot de passe et que le partage apparaît dans la
 barre latérale du Finder. L'équivalent macOS d'un mappage de lecteur, et le pendant de
-[`Mount-AzureFilesDrive.ps1`](../../platformscripts/windows/README.fr.md) sous Windows.
+[`Mount-AzureFilesDrive.ps1`](../../windows/platform-scripts/README.fr.md) sous Windows.
 
 ### Pourquoi un script et pas un profil de configuration
 
@@ -134,8 +136,8 @@ sur l'identifier URI n'est nécessaire que pour les partages qui existaient déj
    `System error 1327` lors d'un `net use`.
 6. **Attribuez les autorisations au niveau du partage** (share-level permissions) au même groupe d'utilisateurs que celui auquel vous affectez
    le script. Ensuite, les droits NTFS dans le partage déterminent le reste.
-7. **Renseignez le nom du compte** dans `shellscripts/macos/mount-azure-files.sh` et
-   `platformscripts/windows/Mount-AzureFilesDrive.ps1`, et faites passer cette stratégie de la phase 3 à la
+7. **Renseignez le nom du compte** dans `extras/macos/shell-scripts/mount-azure-files.sh` et
+   `extras/windows/platform-scripts/Mount-AzureFilesDrive.ps1`, et faites passer cette stratégie de la phase 3 à la
    phase 1.
 
 Côté client : l'appareil doit être Entra joined ou Entra hybrid joined. Windows fonctionne alors
@@ -248,9 +250,9 @@ l'assistant avant sa mise en service.
 En haut du script figurent deux champs qui déterminent ensemble ce que fait ce déploiement :
 
 ```bash
-SET_NAAM="public"
+SET_NAAM="group-a"
 SHARES=(
-  "algemeen"
+  "share-a"
 )
 ```
 
@@ -263,8 +265,8 @@ le libellé du LaunchAgent et le journal uniques :
 
 | `SET_NAAM` | assistant | libellé |
 |---|---|---|
-| `public` | `/Library/Scripts/Baseline/mount-azure-files-public.sh` | `…baseline.mount-azure-files-public` |
-| `media` | `/Library/Scripts/Baseline/mount-azure-files-media.sh` | `…baseline.mount-azure-files-media` |
+| `group-a` | `/Library/Scripts/Baseline/mount-azure-files-group-a.sh` | `…baseline.mount-azure-files-group-a` |
+| `group-b` | `/Library/Scripts/Baseline/mount-azure-files-group-b.sh` | `…baseline.mount-azure-files-group-b` |
 
 Sans cette distinction, deux déploiements écrasent mutuellement leur assistant et se disputent le même
 libellé — le dernier exécuté l'emporte, et l'autre groupe perd son lecteur sans que personne
@@ -303,7 +305,7 @@ et dans ce cas c'est bien l'affectation qui détermine qui peut y accéder.
 
 ### Ce qui doit être en place en dehors de ce script
 
-[`Baseline_MAC_D_Azure_Files_Cloud_Kerberos`](../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.fr.md)
+[`Baseline_MAC_D_Azure_Files_Cloud_Kerberos`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.fr.md)
 doit être déployé — sans ce profil, il n'y a pas de ticket pour le realm
 `KERBEROS.MICROSOFTONLINE.COM` et le montage demande quand même un mot de passe. Ce profil
 est aujourd'hui en **phase 3** : l'accès à Azure Files via le ticket Platform SSO est une
@@ -512,7 +514,7 @@ share-level permissions dans Azure dépendent de `<share>`, le sous-dossier n'es
 d'entrée. Qui n'a accès qu'à un seul sous-dossier doit l'obtenir via les droits sur ce dossier, et non
 en saisissant ici une autre valeur.
 
-Laisser `SHARE_SUBPATH` vide monte le partage entier.
+Une ligne de `SHARES` avec seulement `<share>`, sans sous-dossier, monte le partage entier.
 
 La vérification « est-il déjà là ? » porte donc sur le **partage** et non sur le sous-dossier ou le
 chemin de montage : NetFS décide lui-même s'il place le montage sur `/Volumes/<submap>` ou sur `/Volumes/<share>`,
@@ -696,7 +698,7 @@ Que le settings catalog d'Intune propose aussi `Allow` pour `Authorization` ne s
 liste est générique pour les 24 services TCC. Si vous la réglez ici sur `Allow`, Intune accepte
 le profil et macOS ignore la valeur.
 
-[`Baseline_MAC_D_Screen_Recording`](../../IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Screen_Recording.fr.md)
+[`Baseline_MAC_D_Screen_Recording`](../../../IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Screen_Recording.fr.md)
 obtient donc le maximum : un **utilisateur standard** peut basculer l'interrupteur lui-même, sans
 mot de passe administrateur. Sans ce profil, un non-administrateur ne le peut plus du tout depuis Big Sur.
 Le clic reste celui de l'utilisateur ; ce script veille à ce qu'il le fasse.
@@ -767,3 +769,102 @@ rm -f ~/Library/Application\ Support/Baseline/screen-recording-ok \
 ```
 
 Le journal se trouve dans `~/Library/Logs/Baseline/screen-recording.log`.
+
+## escrow-buddy.sh
+
+Faire tout de même arriver la clé de récupération FileVault dans Intune pour un Mac qui était déjà chiffré.
+
+### La faille
+
+[`MAC - D - FileVault`](../../../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.fr.md)
+conserve la clé de récupération dans Intune, mais macOS ne place sous séquestre qu'une clé qui est
+**créée** alors que le profil de séquestre (`com.apple.security.FDERecoveryKeyEscrow`) est présent sur le Mac.
+Trois situations passent donc entre les mailles :
+
+- l'utilisateur avait déjà activé FileVault lui-même avant l'inscription du Mac ;
+- un Mac a été inscrit via Company Portal alors qu'il était déjà chiffré ;
+- le profil n'est arrivé qu'après que Setup Assistant a déjà chiffré le disque.
+
+Intune n'affiche alors aucune clé de récupération pour l'appareil, et la rotation de la stratégie FileVault
+(`recoverykeyrotationinmonths`) ne fonctionne que sur une clé qu'Intune connaît déjà. Un mot de passe
+oublié signifie dans ce cas un disque perdu.
+
+### Fonctionnement
+
+[Escrow Buddy](https://github.com/macadmins/escrow-buddy) (Apache 2.0, Mac Admins Open Source,
+à l'origine Netflix) est un authorization plugin. Le package place le mécanisme
+`Escrow Buddy:Invoke,privileged` dans `system.login.console`, juste avant `loginwindow:done`. Si
+`GenerateNewKey` dans `/Library/Preferences/com.netflix.Escrow-Buddy.plist` vaut true, le
+plugin crée, lors de la connexion suivante d'un utilisateur FileVault et avec le mot de passe saisi,
+une nouvelle clé de récupération personnelle. macOS l'envoie à Intune via le profil de séquestre.
+L'utilisateur ne remarque rien ; aucune boîte de dialogue n'apparaît.
+
+Le script :
+
+1. s'arrête si FileVault est désactivé (la stratégie FileVault gère alors le chiffrement et le séquestre) ;
+2. s'arrête s'il a déjà demandé une clé auparavant (marqueur dans
+   `/Library/Application Support/Baseline/escrow-buddy-requested`) ;
+3. attend si le profil de séquestre n'est pas encore présent — une nouvelle clé sans séquestre aggrave
+   la situation, car l'ancienne clé personnelle disparaît alors aussi ;
+4. télécharge Escrow Buddy **1.0.0** depuis la release GitHub et n'installe que si le package
+   est notarié par Apple (`spctl --assess --type install`) et signé avec
+   *Developer ID Installer* de l'équipe **T4SK8ZXCXG** (Mac Admins Open Source — l'identité issue de
+   `.github/workflows/build_main.yml` du projet). Un autre signataire : ne pas
+   installer, signature dans le journal ;
+5. vérifie que le mécanisme figure réellement dans l'authorization database ;
+6. définit `GenerateNewKey`.
+
+Journal : `/Library/Logs/Baseline/escrow-buddy.log`.
+
+Il n'y a aucun mal à ce que le script s'exécute aussi sur un Mac dont Intune possédait déjà la clé :
+la clé est alors remplacée une fois et remise sous séquestre, exactement ce que fait aussi la rotation de la
+stratégie FileVault. C'est pourquoi on ne tente pas de deviner depuis le Mac si Intune possède une
+clé — le Mac ne peut pas le voir.
+
+### Paramètres dans Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Paramètre | Valeur | Pourquoi |
+|---|---|---|
+| Run script as signed-in user | **No** | installer et modifier `authorizationdb` requiert root |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 day** | le script attend le profil de séquestre ; après le marqueur, il ne fait plus rien |
+| Max number of retries | 3 | |
+
+Affecter au même **groupe d'appareils** que `MAC - D - FileVault`, et seulement une fois cette stratégie présente sur le
+Mac. Phase : identique à FileVault (pilote d'abord).
+
+### Vérification
+
+- Sur le Mac, après connexion : `sudo profiles show -type configuration | grep -i escrow` affiche le
+  profil, et le journal se termine par « GenerateNewKey set ». Après la connexion suivante,
+  `GenerateNewKey` repasse à false (`defaults read /Library/Preferences/com.netflix.Escrow-Buddy.plist`).
+- Dans Intune : Devices → l'appareil → **Recovery keys** affiche une clé.
+
+### Nouvelle version
+
+Mettre à jour `EB_VERSION` et, avant le déploiement, vérifier sur un Mac que
+`pkgutil --check-signature` affiche toujours `Developer ID Installer: Mac Admins Open Source (T4SK8ZXCXG)`.
+Si le signataire change, le script s'arrête volontairement — ne modifiez `EB_TEAM_ID` qu'après
+vérification auprès du projet.
+
+**Point ouvert :** la release 1.0.0 date de juin 2023 ; la signature de cette release n'a pas été
+vérifiée sur un Mac depuis ce poste de travail. Le script échoue de façon sûre si le team id ne correspond pas ;
+vérifiez-le dans le journal sur le premier Mac pilote.
+
+### Suppression
+
+```bash
+sudo "/Library/Security/SecurityAgentPlugins/Escrow Buddy.bundle/Contents/Resources/AuthDBTeardown.sh"
+sudo rm -rf "/Library/Security/SecurityAgentPlugins/Escrow Buddy.bundle"
+sudo pkgutil --forget com.netflix.Escrow-Buddy
+```
+
+C'est aussi ce que fait `scripts/uninstall.sh` du projet. Ne laissez pas le plugin sur un Mac
+qui sort de la gestion : un mécanisme dans `system.login.console` dont le bundle est absent
+bloque la connexion.
+
+### Fins de ligne
+
+LF, comme tous les `*.sh` de ce dépôt (`.gitattributes`).

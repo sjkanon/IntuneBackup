@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Defender for Endpoint EDR
 
-Connecte l'appareil à Defender for Endpoint avec un paquet d'onboarding fixe. Ce paquet est propre au tenant ; dans un autre tenant, il faut refaire la connexion.
+Connecte l'appareil à Defender for Endpoint via le connecteur Defender ; même onboarding que [Baseline] - WIN - D - Defender EDR Policy, plus une fréquence explicite de rapport de télémétrie (normale).
 
 | | |
 |---|---|

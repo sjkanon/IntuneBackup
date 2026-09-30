@@ -15,7 +15,7 @@ Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van scherma
 | Bron | Tegenhanger van de Restricted-variant; waarden zijn de Windows-standaarden, expliciet vastgelegd |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 
-> **Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per klant verschillen.
+> **Alternatief van [Baseline] - WIN - D - Windows AI Restricted.** Weeg vóór je deze kiest of de gevolgen bekend zijn: Recall bewaart doorzoekbare schermafdrukken op de schijf, en die index valt onder dezelfde bewaartermijnen en verwijderingsplichten als de gegevens die erin staan. Overweeg dan ook de Recall-uitsluitingslijsten (setdenyapplistforrecall, setdenyurilistforrecall) en een bewaartermijn — die staan bewust niet in deze policy omdat ze per organisatie verschillen.
 
 ## Normen
 

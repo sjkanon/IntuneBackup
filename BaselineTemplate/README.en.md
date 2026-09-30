@@ -14,15 +14,15 @@ tenant moves on.
 ## Why this lives here
 
 `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there: a baseline is
-what deploys them. Filling in that screen by hand means adding the same standard nine times and
-picking the right assignment target nine times — one misclick puts 80 policies on the wrong
-audience. So this file comes from the same source as the rest of the repo: the manifest.
+what deploys them. Filling in that screen by hand means adding the same standard thirteen times and
+picking the right assignment target thirteen times — one misclick puts up to 69 policies (the
+`Baseline-Devices` package) on the wrong audience. So this file comes from the same source as the rest of the repo: the manifest.
 
 ## What's in it
 
 | Stage | Packages | Moving on to this stage |
 |---:|---|---|
-| 1 · Now | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` and the three group packages | — stage 1 always applies |
+| 1 · Now | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` and the eight group packages `Baseline-SEC-*` | — stage 1 always applies |
 | 2 · Pilot | `Baseline-Pilot` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
 | 3 · Awaiting prerequisite | `Baseline-Wacht` | `manual` — someone moves it on |
 
@@ -65,8 +65,14 @@ filters that word out too, and then the file can no longer be found with the but
 ## What you do yourself afterwards
 
 - **Assign tenants.** Without that the baseline runs nowhere.
-- **Make sure the groups exist.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2` and
-  `SEC-Shared-Devices` must exist in the tenant; CIPP looks them up by name (wildcards allowed).
+- **Make sure the groups exist.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
+  `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` and
+  `SEC-Remote-Support-macOS` must exist in the tenant; CIPP looks them up by name (wildcards allowed).
+  These are default names. If a group is called something else, change `faseGroep` in
+  [`_manifest.json`](../IntuneTemplate/_manifest.json) — for the pilot group also `PILOT_GROUP`
+  in `scripts/lib/templates.js` and `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — and
+  run the pipeline again. Changing the group only in CIPP also works, but re-importing this file
+  puts the default name back.
 - **Link the ADE profiles.** `Baseline-ADE-token` is deliberately not assigned: a macOS
   enrolment profile hangs off an ADE token, not an Entra group, and per token you pick one of
   the two.
@@ -75,9 +81,9 @@ filters that word out too, and then the file can no longer be found with the but
 
 Not by hand: run `node scripts/generate-baseline-template.js`. The packages and their
 assignment follow from `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json) and the
-target in [`_assignments.json`](../IntuneTemplate/_assignments.json); `--check` fails in CI when
-this file falls behind.
+target in [`_assignments.json`](../IntuneTemplate/_assignments.json); `--check` writes nothing and
+fails when this file falls behind.
 
-Be careful with re-exporting from CIPP: CIPP's own export flattens the packages into 141
-separate template references — a snapshot, after which a new policy no longer comes along
+Be careful with re-exporting from CIPP: CIPP's own export flattens the packages into
+separate template references, one per policy — a snapshot, after which a new policy no longer comes along
 automatically. Generating in this direction keeps the late binding intact.

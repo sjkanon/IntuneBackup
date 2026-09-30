@@ -3,7 +3,7 @@
 # iOS/iPadOS ADE-inschrijfprofiel
 
 `iOS-Corporate-ADE-Baseline.json` is een `depIOSEnrollmentProfile` (Graph beta). Net als
-`enrollment/macos/` staat het buiten `IntuneTemplate/`: het hangt onder een ADE-token
+`extras/macos/enrollment/` staat het buiten `IntuneTemplate/`: het hangt onder een ADE-token
 (`depOnboardingSettings/{id}/enrollmentProfiles`) en is geen van de vijf CIPP-types.
 
 ## Waarom geen Settings Catalog-template

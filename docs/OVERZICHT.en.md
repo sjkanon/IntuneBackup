@@ -62,7 +62,7 @@ From 24 in-house policies to the current set.
 | Merged into another policy | 6 | Administrative Templates (300 settings) split up; Network Security, System Services, Windows Search and OneDrive KFM absorbed |
 | Carried over unchanged | 5 | where OIB has no counterpart: EDR onboarding, Outlook autoconfiguration, Edge search engine, update ring 3, user experience |
 
-Settings that only we had — encryption of fixed and removable drives,
+Settings that only the own baseline had — encryption of fixed and removable drives,
 for example — were kept during a rewrite instead of silently
 disappearing.
 
@@ -75,7 +75,7 @@ adjustments:
 
 | | |
 |---|---|
-| `WIN - D - Windows AI` | Recall and Click To Do off. OIB v4.0 has no Windows AI policy yet, so neither did we. |
+| `WIN - D - Windows AI` | Recall and Click To Do off. OIB v4.0 has no Windows AI policy yet, so the baseline did not have one either. |
 | `WIN - D - Removable Storage` | writing to USB storage and WPD devices blocked; removable media was not restricted anywhere. |
 | `WIN - U - Windows Hello for Business` | WHfB per user alongside the existing per-device policy. |
 | `WIN - D - Windows Hello for Business Multi User` | WHfB for shared devices, without provisioning right after sign-in. |
@@ -149,19 +149,19 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `WIN - D - Remote Access Hardening` | Check that no management script or monitoring tool relies on winrs. Enter-PSSession and Invoke-Command keep working, winrs does not. |
 | `WIN - D - Removable Storage` | Writing to USB sticks, external drives and phones is blocked, and a user notices that immediately. Note: until this policy is broadly deployed, removable storage is not restricted anywhere — BitLocker deliberately leaves removabledrivesrequireencryption off, because this block covers it. |
 | `WIN - D - Script File Associations` | Double-clicking a .js, .vbs or .hta file will now open Notepad. A logon or installation script started that way will then do nothing; check in the pilot whether such scripts are in circulation. |
-| `WIN - D - Security Log Monitoring` | Module logging for all modules (*) produces a lot of event 4103 in Microsoft-Windows-PowerShell/Operational. First check on the pilot group what that does to log volume and any SIEM ingest; see extras/windows/event-log-sizes for the log size. |
-| `WIN - D - Windows AI Features Restricted` | Users see the AI buttons in Paint disappear. That is intended, but it is visible and deserves an announcement. Choose per customer between this one and the Permitted variant — never assign both. |
+| `WIN - D - Security Log Monitoring` | Module logging for all modules (*) produces a lot of event 4103 in Microsoft-Windows-PowerShell/Operational. First check on the pilot group what that does to log volume and any SIEM ingest; see extras/windows/remediations/event-log-sizes for the log size. |
+| `WIN - D - Windows AI Features Restricted` | Users see the AI buttons in Paint disappear. That is intended, but it is visible and deserves an announcement. Choose per organisation between this one and the Permitted variant — never assign both. |
 | `WIN - D - Windows Component Hardening` | Noticeable in two places: 'Continue on this device' (Continue experiences) disappears, and a kiosk device that uses AutoAdminLogon no longer signs in automatically. Pilot group first; keep kiosks out of this policy. |
 | `WIN - D - Windows Hello for Business` | Every user is guided through PIN setup at their next sign-in, and a device without a TPM does not get WHfB. Goes into the pilot together with WIN - U - Windows Hello for Business: one in the pilot and the other on everyone makes the pilot pointless. |
 | `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` | Goes into the pilot together with WIN - D - Windows Hello for Business and WIN - U - Windows Hello for Business — they are in the same phase and await this same decision. Assigning complexity to users without WHfB set up does nothing; conversely, a user with WHfB but without this policy falls back to six digits. Watch the number of PIN resets in the pilot: that is the cost of this variant. There are four PIN complexity policies and only one may ever be assigned: `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` / `Numeric` (the passkey-named set) and `WIN - D - Windows Hello PIN Complexity Alphanumeric` / `Numeric` (the generic, older one). Two assigned policies that set the same setting to a different value produce a Conflict in Intune, after which neither is applied. |
-| `WIN - U - AI Usage Control Restricted` | Takes over the Edge URL block list from Microsoft Edge User Experience — that setting has already been removed there. Check in the pilot that no legitimate site is blocked. Choose per customer between this one and the Permitted variant; never assign both. |
+| `WIN - U - AI Usage Control Restricted` | Takes over the Edge URL block list from Microsoft Edge User Experience — that setting has already been removed there. Check in the pilot that no legitimate site is blocked. Choose per organisation between this one and the Permitted variant; never assign both. |
 | `WIN - U - Compliance OS Version` | A device below the minimum becomes non-compliant and thereby loses access via Conditional Access. First check in the reporting how many devices this affects — the answer should be zero, but you must have seen that rather than assumed it. Grace period is 72 hours. |
 | `WIN - U - File Sharing Restrictions` | A user who is used to sharing a folder from their profile via File Explorer will see that option disappear. Sharing via OneDrive and Teams keeps working. |
 | `WIN - U - Microsoft Edge Management` | Reverses precedence: policy from the Edge Management Service then wins over the Edge policy from this baseline. Anyone with the Edge Administrator role can therefore override settings from Microsoft Edge Security and User Experience. First record who has that role before this is broadly deployed. |
 | `WIN - U - Microsoft Outlook Cached Mode Managed` | Affects every existing profile: Outlook rebuilds the OST and a shared mailbox in the profile goes from cached to online. That is visible — the first synchronisation takes time and bandwidth, and anyone used to working offline in a shared mailbox notices it immediately. Pilot group first, and check there how many profiles have a shared mailbox. |
 | `WIN - U - Microsoft Teams` | Blocks signing in with an account from another tenant. That is intended, but anyone using a second work account in Teams notices it immediately — check in the pilot whether that occurs. |
 | `WIN - U - Windows Hello for Business` | Belongs with WIN - D - Windows Hello for Business and goes into the pilot together with it — on all users it would still set up WHfB on every device, and then the pilot tests nothing. |
-| `MAC - D - Apple Intelligence Restricted` | Users see Writing Tools, summaries, Genmoji, Image Playground and the ChatGPT integration disappear. That is intended, but it is visible and deserves an announcement. Choose per customer between this one and the Permitted variant — never assign both. |
+| `MAC - D - Apple Intelligence Restricted` | Users see Writing Tools, summaries, Genmoji, Image Playground and the ChatGPT integration disappear. That is intended, but it is visible and deserves an announcement. Choose per organisation between this one and the Permitted variant — never assign both. |
 | `MAC - D - FileVault` | Encrypts the disk and asks the user to cooperate. Check in the pilot that the recovery key actually appears in Intune before you deploy broadly. |
 | `MAC - D - Login Window` | At the login window, users must type their account name instead of clicking their name. Announce it. After a restart the user still sees the account list of the FileVault unlock screen; this setting applies to the login window after that (sign out, switch users). |
 | `MAC - D - Passcode and Screen Lock` | Users with a shorter or simpler password must change it at their next sign-in. |
@@ -170,7 +170,7 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `MAC - D - Screensaver` | Anyone used to getting the screen back without a password within a minute of the screen saver must now use their password or Touch ID straight away. Noticeable, not breaking; pilot and announce first. |
 | `MAC - D - Software Updates` | Updates are installed automatically and enforced no later than 30 days after release with a restart at 12:30 — including for a new major version of macOS. Check in the pilot how the restart time falls and whether business apps can handle the new major version. Beta enrolment is no longer possible. |
 | `MAC - U - Compliance OS Version` | A Mac below macOS 14 becomes non-compliant and loses access via Conditional Access. OVERZICHT.md already mentions that older Macs do not get the update profile; this policy makes that visible instead of silent. First check how many Macs it affects. Grace period is 72 hours. |
-| `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is a customer decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for a customer that allows these assistants. |
+| `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is an organisational decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for an organisation that allows these assistants. |
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
 96 are without assignment: the 39 above, 26 awaiting a prerequisite,

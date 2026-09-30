@@ -5,8 +5,8 @@
 De CIPP-pijplijnen dragen vijf policytypes (Catalog, Device, compliance, App Protection,
 Admin). Voor een complete iOS-baseline is meer nodig: tenantinstellingen in Apple Business,
 een ADE-inschrijfprofiel, app-configuratie en twee dynamische groepen. Die staan hier. Niets
-in deze map wordt opgepikt door `export-intunebackup.js` of
-`Set-BaselineAssignment.ps1`.
+in deze map wordt opgepikt door CIPP, `check-scope.js`, `export-intunebackup.js` of
+`Set-BaselineAssignment.ps1`; uitrollen gaat volgens de README per map.
 
 | Map | Wat | Uitrollen |
 |---|---|---|
@@ -73,7 +73,7 @@ Eenmalig per tenant, buiten Intune:
 ## Intune-tenantinstellingen
 
 - **Inschrijvingsrestrictie iOS/iPadOS** (Devices → Enrollment → Device platform restriction):
-  persoonlijk ingeschreven toestellen toestaan of blokkeren is een klantbesluit. Wie BYOD alleen
+  persoonlijk ingeschreven toestellen toestaan of blokkeren is een organisatiebesluit. Wie BYOD alleen
   via App Protection wil, blokkeert *Personally owned* — dan zijn `SEC-iOS-BYOD` en de VPN-variant
   van Defender overbodig.
 - **Defender for Endpoint-connector** (Endpoint security → Microsoft Defender for Endpoint):

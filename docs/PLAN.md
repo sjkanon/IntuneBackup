@@ -6,10 +6,13 @@ Doel: de baseline uitbreiden en actueel houden op basis van
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), met een
 expliciete platform- en device/user-scheiding — en met een aparte tenant-laag (ScubaGear / Maester) als sluitstuk.
 
-Status: **fase 1, 2, 4, 5, 6 en 7 zijn uitgevoerd** (repo). Fase 3 (de tenant) en fase 8 staan
+Status: **stap 1, 2, 4, 5, 6 en 7 zijn uitgevoerd** (repo). Stap 3 (de tenant) en stap 8 staan
 nog open. De tenant is nog niet aangeraakt.
 
-| Fase | Wat | Risico | Status |
+Dit zijn projectstappen. Ze staan los van de uitrolfases 1–5 (`fase` in `_manifest.json`),
+die bepalen wanneer een policy uitrolt.
+
+| Stap | Wat | Risico | Status |
 |---|---|---|---|
 | 1 | Scriptwijzigingen (`check-scope.js`, `-Scope`, harde assignment-check) | laag | ✅ |
 | 2 | D/U-hernoeming + 2 splitsingen in `IntuneTemplate/` | laag in de repo | ✅ |
@@ -21,7 +24,7 @@ nog open. De tenant is nog niet aangeraakt.
 | 3 | **Tenant-migratie** via `Rename-BaselinePolicy.ps1` | **hoog** — eerst `-WhatIf`, eerst in een pilot-tenant | open |
 | 8 | Tenant-laag ScubaGear/Maester | apart traject | open |
 
-Fase 3 staat bewust ná de rest: de repo is nu compleet en de tenant kan in één keer bij, in
+Stap 3 staat bewust ná de rest: de repo is nu compleet en de tenant kan in één keer bij, in
 plaats van twee keer achter elkaar hernoemd worden.
 
 ---
@@ -32,15 +35,15 @@ plaats van twee keer achter elkaar hernoemd worden.
 `scripts/import-oib.js`; zie [README.md](../README.md) voor de indeling, de naamgeving en hoe je
 een nieuwe OIB-versie binnenhaalt.
 
-**Fase 1 en 2** (eerder): device/user-scheiding, hernoeming naar `[Baseline] - D/U - Item`,
+**Stap 1 en 2** (eerder): device/user-scheiding, hernoeming naar `[Baseline] - D/U - Item`,
 `check-scope.js` als blokkerende CI-stap.
 
-**Fase 4 — compliance.** Er waren er nul. Zonder compliance-policy is "vereis een compliant
+**Stap 4 — compliance.** Er waren er nul. Zonder compliance-policy is "vereis een compliant
 apparaat" in Conditional Access betekenisloos. Er zijn er nu 7 (4 Windows, 3 macOS), met een
 nieuw CIPP-`Type` `deviceCompliancePolicies` en de map `Device Compliance Policies` in de
 export.
 
-**Fase 5 — hardening.** De hele OIB-Windows-set is overgenomen: Windows Hello for Business,
+**Stap 5 — hardening.** De hele OIB-Windows-set is overgenomen: Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D en U),
 de Edge-opsplitsing, Disable NTLM, Administrator Protection, Config Refresh, In-Box App
 Removal, Delivery Optimisation, Personal Data Encryption, Windows Sandbox, WSL, Package
@@ -48,11 +51,11 @@ Manager, Script File Associations, Timezone en meer. 15 bestaande policies zijn 
 OIB-inhoud; de instellingen die OIB niet kent zijn behouden (zie punt 2 in de README onder
 "OpenIntuneBaseline bijwerken").
 
-**Fase 6 — update-ringen.** Ring 1 (Pilot) en Ring 2 (UAT) erbij naast de bestaande Ring 3,
+**Stap 6 — update-ringen.** Ring 1 (Pilot) en Ring 2 (UAT) erbij naast de bestaande Ring 3,
 plus de drie Defender-antivirus-updateringen. Ring 1 en 2 staan bewust zonder assignment.
 Driver update profiles blijven buiten scope: IntuneBackupAndRestore 4.0.1 ondersteunt ze niet.
 
-**Fase 7 — Administrative Templates opgesplitst.** Het blok van 300 instellingen is opgegaan
+**Stap 7 — Administrative Templates opgesplitst.** Het blok van 300 instellingen is opgegaan
 in Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) en wat kleinere. De 15 instellingen zonder OIB-tegenhanger staan in
 `WIN - D - Legacy Hardening`, los gehouden zodat een OIB-upgrade ze niet meesleept of weggooit.
@@ -63,13 +66,13 @@ voor iOS en Android (2) zijn nieuw.
 
 ---
 
-## Fase 3 — Tenant-migratie
+## Stap 3 — Tenant-migratie
 
 Dit is het riskante deel. De policies bestaan al ónder hun oude naam in de tenant, en sommige
 zijn inhoudelijk vervangen.
 
 `IntuneTemplate/_renames.json` legt per policy vast hoe die heette (zowel de oorspronkelijke
-naam als de tussenstap uit fase 2) en wat er nu bij hoort. `scripts/Rename-BaselinePolicy.ps1`
+naam als de tussenstap uit stap 2) en wat er nu bij hoort. `scripts/Rename-BaselinePolicy.ps1`
 voert dat uit met een `PATCH`: naam wijzigt, id blijft, alle bestaande assignments en
 toewijzingsgeschiedenis blijven intact.
 
@@ -94,8 +97,8 @@ Volgorde:
 8. `Invoke-IntuneRestoreAppProtectionPolicyAssignment` apart aanroepen (zie README).
 9. **Opnieuw inventariseren** — de lijst met wees-policies moet leeg zijn.
 
-De pilot (fase 2) gaat niet mee in stap 7: `-AllDevices` en `-AllUsers` nemen alleen wat in
-fase 1 staat. Die volgt apart met `-GroupName 'SEC-Baseline-Pilot'` — de lijst staat in
+De pilot (uitrolfase 2) gaat niet mee in punt 7 hierboven: `-AllDevices` en `-AllUsers` nemen
+alleen wat in uitrolfase 1 staat. Die volgt apart met `-GroupName 'SEC-Baseline-Pilot'` — de lijst staat in
 [OVERZICHT.md](OVERZICHT.md#eerst-in-een-pilot).
 
 ### Wat als er nog policies met de oude naam in de tenant staan
@@ -127,11 +130,11 @@ Tenant-zijdige tegenhanger van `check-scope.js`. Leest over de vijf policytypes 
 | policy zonder enige assignment | rolt nergens uit |
 | dezelfde `settingDefinitionId` met een andere waarde in twee toegewezen policies | conflict |
 
-Draaien vóór én na fase 3, en daarna periodiek. Read-only, geen `-WhatIf` nodig.
+Draaien vóór én na stap 3, en daarna periodiek. Read-only, geen `-WhatIf` nodig.
 
 ---
 
-## Fase 8 — Tenant-laag: ScubaGear en Maester
+## Stap 8 — Tenant-laag: ScubaGear en Maester
 
 Niet verwarren met het bovenstaande: **ScubaGear kijkt niet naar Intune device-policies.** Het
 toetst tenant-configuratie voor Entra ID, Exchange Online, Defender, SharePoint/OneDrive,
@@ -151,7 +154,7 @@ tussen beide lagen — begin daar.
 
 - **AppLocker / WDAC / App Control for Business** — OIB laat dit expliciet weg wegens
   omgevingsafhankelijkheid, en terecht: dit is een project, geen policy. Let op dat Maester
-  hier wél op test (fase 8) — die check zal rood staan, dat is een bewuste keuze en hoort als
+  hier wél op test (stap 8) — die check zal rood staan, dat is een bewuste keuze en hoort als
   uitzondering vastgelegd, niet als openstaande bevinding.
 - **Driver update profiles** — IntuneBackupAndRestore 4.0.1 ondersteunt ze niet. Via CIPP zou
   het kunnen, maar dan lopen de twee restore-routes uiteen.

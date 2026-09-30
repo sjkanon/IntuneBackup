@@ -7,7 +7,7 @@ Apple Business has no API with which this could be deployed from a repo — but 
 because a mistake here does not become visible in Intune until a Mac no longer enrols.
 
 Applies to corporate Macs via Automated Device Enrollment (ADE): the profiles in
-[`enrollment/macos/`](../../../enrollment/macos/README.en.md) and the
+[`extras/macos/enrollment/`](../enrollment/README.en.md) and the
 `MAC - D - Enrollment Profile …` policies assume this is in place.
 
 ## 1. Organisation and administrators
@@ -40,7 +40,7 @@ company address that the organisation cannot revoke, and offboarding runs throug
 | **Default MDM server for Mac** set to this Intune server | Apple Business → Preferences → Device management assignment. Without a default, a newly bought Mac does not end up in Intune by itself |
 | Link purchases | record the Apple customer number or reseller ID, so Macs from Apple and authorised resellers appear in Apple Business automatically |
 | Existing Macs | add with Apple Configurator for iPhone; such a Mac has a 30-day provisional period in which the user can remove it from management |
-| Enrollment profile | attach it to the token in Intune and set it as default (`enrollment/macos/`), before the first Mac is switched on |
+| Enrollment profile | attach it to the token in Intune and set it as default (`extras/macos/enrollment/`), before the first Mac is switched on |
 
 ## 4. Tokens and certificates that expire yearly
 

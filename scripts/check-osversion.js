@@ -236,7 +236,7 @@ function soortenByTarget() {
   const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"));
   const map = new Map();
   for (const p of manifest.policies || []) {
-    for (const rule of p.ondergrens || []) map.set(`${p.target} ${rule.veld}`, rule.soort);
+    for (const rule of p.ondergrens || []) map.set(`${p.target}\u0000${rule.veld}`, rule.soort);
   }
   return map;
 }
@@ -254,7 +254,7 @@ function collectRows(templates) {
         baseName: t.baseName,
         field: veld,
         value: waarde,
-        soort: soorten.get(`${t.baseName} ${veld}`) || "?",
+        soort: soorten.get(`${t.baseName}\u0000${veld}`) || "?",
         odataType: t.raw["@odata.type"],
       });
     }

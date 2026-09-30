@@ -22,15 +22,15 @@ tenant settings that CIPP itself monitors and restores.
 `isDriftTemplate` is set, so CIPP can use this for drift monitoring: if the tenant deviates,
 CIPP puts it back.
 
-## Why here and not in one of the policy sets
+## Why here and not in IntuneTemplate/
 
 The pipelines in `scripts/` know five CIPP policy types (`Catalog`, `Admin`, `Device`,
 `deviceCompliancePolicies`, `AppProtection`) and a standards template is none of those five.
-So this file is **not** picked up by `check-scope.js`, `check-sets.js`
+So this file is **not** picked up by `check-scope.js`
 or `export-intunebackup.js`. Nor does it follow
 the naming convention with platform and scope — that makes no sense for a tenant setting.
 
-CIPP does read it directly, just like the policy sets: the file ends in `.json` and is not
+CIPP does read it directly, just like the templates in `IntuneTemplate/`: the file ends in `.json` and is not
 under a `NativeImport` path. See the [main README](../README.en.md#restoring-into-a-tenant)
 for how that scan works.
 

@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Defender for Endpoint EDR
 
-Koppelt het apparaat aan Defender for Endpoint met een vast onboarding-pakket. Dat pakket is tenant-specifiek; in een andere tenant moet het opnieuw gekoppeld worden.
+Koppelt het apparaat aan Defender for Endpoint via de Defender-connector; zelfde onboarding als [Baseline] - WIN - D - Defender EDR Policy, plus een expliciete telemetriefrequentie (normaal).
 
 | | |
 |---|---|

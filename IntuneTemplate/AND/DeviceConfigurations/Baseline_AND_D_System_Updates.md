@@ -15,7 +15,7 @@ Installeert Android-systeemupdates op toestellen van de organisatie automatisch 
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - DEV - Additional-Settings - Fully-Managed - v1.5, alleen de drie systemUpdate-velden |
 | Bestand | [`Baseline_AND_D_System_Updates.json`](Baseline_AND_D_System_Updates.json) |
 
-> Alleen de systemUpdate-velden van `androidDeviceOwnerGeneralDeviceConfiguration`; de Settings Catalog kent geen systeemupdate-instelling. Een toestel dat 's nachts uit staat of geen update in het venster kan afronden, installeert pas bij een volgende gelegenheid (UniFy W-15) — daarom toetst de compliance de patchdatum. Geen `systemUpdateFreezePeriods`: een bevriezingsperiode (bijv. rond een jaarafsluiting) is een klantbesluit. Dedicated toestellen in 24-uursgebruik: kies een ander venster in een eigen kopie, niet in deze policy. Geen andere velden van dit type gezet, dus geen overlap met een eventuele kiosk- of Additional Settings-policy — mits die de systemUpdate-velden leeg laat.
+> Alleen de systemUpdate-velden van `androidDeviceOwnerGeneralDeviceConfiguration`; de Settings Catalog kent geen systeemupdate-instelling. Een toestel dat 's nachts uit staat of geen update in het venster kan afronden, installeert pas bij een volgende gelegenheid (UniFy W-15) — daarom toetst de compliance de patchdatum. Geen `systemUpdateFreezePeriods`: een bevriezingsperiode (bijv. rond een jaarafsluiting) is een organisatiebesluit. Dedicated toestellen in 24-uursgebruik: kies een ander venster in een eigen kopie, niet in deze policy. Geen andere velden van dit type gezet, dus geen overlap met een eventuele kiosk- of Additional Settings-policy — mits die de systemUpdate-velden leeg laat.
 
 ## Normen
 

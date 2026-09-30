@@ -15,7 +15,7 @@ Turns on Windows Firewall for the domain, private and public profiles and define
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration |
 | File | [`Baseline_WIN_D_Windows_Firewall.json`](Baseline_WIN_D_Windows_Firewall.json) |
 
-> All 23 of our own settings are in OIB's 31. Note: our policy was a regular Settings Catalog policy, OIB's is an Endpoint Security template (endpointSecurityFirewall) — in the tenant that is not a PATCH but a replacement.
+> All 23 of the own settings are in OIB's 31. Note: the own policy was a regular Settings Catalog policy, OIB's is an Endpoint Security template (endpointSecurityFirewall) — in the tenant that is not a PATCH but a replacement.
 
 ## Standards
 

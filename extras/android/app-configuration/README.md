@@ -33,7 +33,7 @@ gebruikersvoorkeur en is weggelaten.
 verplicht in Edge (App Protection), en die moeten in het werkprofiel van Edge landen, niet in
 een privéaccount. Sleutels als startpagina, zoekmachine, SmartScreen en uitgeschakelde functies
 zijn bewust weggelaten: hun Android-typen konden niet tegen een Android-export worden
-geverifieerd, en de meeste zijn een klantkeuze.
+geverifieerd, en de meeste zijn een organisatiekeuze.
 
 **Defender** — ongewijzigd uit UniFy: `EnableLowTouchOnboarding` en `UserUPN` voor onboarding
 zonder handelingen, `DefenderNetworkProtectionEnable`, `antiphishing` en `vpn` voor

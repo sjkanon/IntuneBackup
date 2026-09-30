@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Microsoft Edge Search Engine
 
-Définit Google comme moteur de recherche par défaut dans Edge. Un choix du client, pas un paramètre de sécurité.
+Définit Google comme moteur de recherche par défaut dans Edge. Un choix de l'organisation, pas un paramètre de sécurité.
 
 | | |
 |---|---|

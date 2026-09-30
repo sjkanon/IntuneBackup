@@ -6,10 +6,13 @@ Objectif : étendre la baseline et la maintenir à jour sur la base
 d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline), avec une
 séparation explicite par plateforme et appareil/utilisateur — et avec une couche tenant distincte (ScubaGear / Maester) pour finir.
 
-Statut : **les phases 1, 2, 4, 5, 6 et 7 sont réalisées** (dépôt). La phase 3 (le tenant) et la
-phase 8 restent ouvertes. Le tenant n'a pas encore été touché.
+Statut : **les étapes 1, 2, 4, 5, 6 et 7 sont réalisées** (dépôt). L'étape 3 (le tenant) et
+l'étape 8 restent ouvertes. Le tenant n'a pas encore été touché.
 
-| Phase | Quoi | Risque | Statut |
+Ce sont des étapes du projet. Elles sont distinctes des phases de déploiement 1–5 (`fase`
+dans `_manifest.json`), qui déterminent quand une stratégie est déployée.
+
+| Étape | Quoi | Risque | Statut |
 |---|---|---|---|
 | 1 | Modifications de scripts (`check-scope.js`, `-Scope`, contrôle strict des affectations) | faible | ✅ |
 | 2 | Renommage D/U + 2 scissions dans `IntuneTemplate/` | faible dans le dépôt | ✅ |
@@ -21,7 +24,7 @@ phase 8 restent ouvertes. Le tenant n'a pas encore été touché.
 | 3 | **Migration du tenant** via `Rename-BaselinePolicy.ps1` | **élevé** — d'abord `-WhatIf`, d'abord dans un tenant pilote | ouvert |
 | 8 | Couche tenant ScubaGear/Maester | chantier séparé | ouvert |
 
-La phase 3 vient volontairement après le reste : le dépôt est maintenant complet et le tenant peut
+L'étape 3 vient volontairement après le reste : le dépôt est maintenant complet et le tenant peut
 être mis à niveau en une seule fois, au lieu d'être renommé deux fois de suite.
 
 ---
@@ -32,15 +35,15 @@ La phase 3 vient volontairement après le reste : le dépôt est maintenant comp
 `scripts/import-oib.js` ; voir [README.fr.md](../README.fr.md) pour l'organisation, le nommage et la
 façon d'intégrer une nouvelle version d'OIB.
 
-**Phases 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `[Baseline] - D/U - Item`,
+**Étapes 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `[Baseline] - D/U - Item`,
 `check-scope.js` comme étape bloquante de la CI.
 
-**Phase 4 — conformité.** Il n'y en avait aucune. Sans stratégie de conformité, « exiger un appareil
+**Étape 4 — conformité.** Il n'y en avait aucune. Sans stratégie de conformité, « exiger un appareil
 conforme » dans Conditional Access n'a aucun sens. Il y en a désormais 7 (4 Windows, 3 macOS), avec un
 nouveau `Type` CIPP `deviceCompliancePolicies` et le dossier `Device Compliance Policies` dans
 l'export.
 
-**Phase 5 — durcissement.** L'ensemble Windows d'OIB a été repris en entier : Windows Hello for Business,
+**Étape 5 — durcissement.** L'ensemble Windows d'OIB a été repris en entier : Windows Hello for Business,
 Cloud Kerberos Trust, Credential/Device Guard, Local Administrators, Office Security (D et U),
 la scission d'Edge, Disable NTLM, Administrator Protection, Config Refresh, In-Box App
 Removal, Delivery Optimisation, Personal Data Encryption, Windows Sandbox, WSL, Package
@@ -48,12 +51,12 @@ Manager, Script File Associations, Timezone et d'autres. 15 stratégies existant
 sur le contenu d'OIB ; les paramètres qu'OIB ne connaît pas ont été conservés (voir le point 2 du
 README sous « Mettre à jour OpenIntuneBaseline »).
 
-**Phase 6 — anneaux de mise à jour.** Ring 1 (Pilot) et Ring 2 (UAT) ajoutés à côté du Ring 3
+**Étape 6 — anneaux de mise à jour.** Ring 1 (Pilot) et Ring 2 (UAT) ajoutés à côté du Ring 3
 existant, plus les trois anneaux de mise à jour de l'antivirus Defender. Ring 1 et 2 sont
 volontairement sans affectation. Les Driver update profiles restent hors périmètre :
 IntuneBackupAndRestore 4.0.1 ne les prend pas en charge.
 
-**Phase 7 — Administrative Templates scindés.** Le bloc de 300 paramètres a été réparti entre
+**Étape 7 — Administrative Templates scindés.** Le bloc de 300 paramètres a été réparti entre
 Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Remote Desktop and
 RPC (9) et quelques plus petits. Les 15 paramètres sans équivalent OIB se trouvent dans
 `WIN - D - Legacy Hardening`, tenus à part pour qu'une mise à niveau d'OIB ne les entraîne ni ne
@@ -65,13 +68,13 @@ d'applications BYOD pour iOS et Android (2) sont nouveaux.
 
 ---
 
-## Phase 3 — Migration du tenant
+## Étape 3 — Migration du tenant
 
 C'est la partie risquée. Les stratégies existent déjà dans le tenant sous leur ancien nom, et
 certaines ont été remplacées sur le fond.
 
 `IntuneTemplate/_renames.json` consigne pour chaque stratégie son ancien nom (à la fois le nom
-d'origine et l'étape intermédiaire de la phase 2) et ce qui lui correspond aujourd'hui.
+d'origine et le nom intermédiaire de l'étape 2) et ce qui lui correspond aujourd'hui.
 `scripts/Rename-BaselinePolicy.ps1` l'exécute avec un `PATCH` : le nom change, l'id reste, toutes
 les affectations existantes et l'historique d'affectation restent intacts.
 
@@ -96,8 +99,8 @@ Ordre :
 8. Appeler `Invoke-IntuneRestoreAppProtectionPolicyAssignment` séparément (voir README).
 9. **Refaire l'inventaire** — la liste des stratégies orphelines doit être vide.
 
-Le pilote (phase 2) n'est pas inclus dans l'étape 7 : `-AllDevices` et `-AllUsers` ne prennent que
-ce qui est en phase 1. Il suit séparément avec `-GroupName 'SEC-Baseline-Pilot'` — la liste se
+Le pilote (phase de déploiement 2) n'est pas inclus dans le point 7 ci-dessus : `-AllDevices` et
+`-AllUsers` ne prennent que ce qui est en phase de déploiement 1. Il suit séparément avec `-GroupName 'SEC-Baseline-Pilot'` — la liste se
 trouve dans [OVERZICHT.fr.md](OVERZICHT.fr.md#dabord-en-pilote).
 
 ### Et s'il reste des stratégies avec l'ancien nom dans le tenant
@@ -129,11 +132,11 @@ Pendant côté tenant de `check-scope.js`. Lit l'ensemble des cinq types de stra
 | stratégie sans aucune affectation | n'est déployée nulle part |
 | le même `settingDefinitionId` avec une valeur différente dans deux stratégies affectées | conflit |
 
-À exécuter avant et après la phase 3, puis périodiquement. En lecture seule, pas besoin de `-WhatIf`.
+À exécuter avant et après l'étape 3, puis périodiquement. En lecture seule, pas besoin de `-WhatIf`.
 
 ---
 
-## Phase 8 — Couche tenant : ScubaGear et Maester
+## Étape 8 — Couche tenant : ScubaGear et Maester
 
 À ne pas confondre avec ce qui précède : **ScubaGear n'examine pas les stratégies d'appareils Intune.**
 Il évalue la configuration du tenant pour Entra ID, Exchange Online, Defender, SharePoint/OneDrive,
@@ -153,7 +156,7 @@ entre les deux couches — commencez par là.
 
 - **AppLocker / WDAC / App Control for Business** — OIB l'exclut explicitement en raison de sa
   dépendance à l'environnement, et à juste titre : c'est un projet, pas une stratégie. Notez que
-  Maester le teste bel et bien (phase 8) — ce contrôle sera rouge ; c'est un choix délibéré qui doit
+  Maester le teste bel et bien (étape 8) — ce contrôle sera rouge ; c'est un choix délibéré qui doit
   être consigné comme exception, et non comme constat ouvert.
 - **Driver update profiles** — IntuneBackupAndRestore 4.0.1 ne les prend pas en charge. Via CIPP ce
   serait possible, mais les deux voies de restauration divergeraient alors.
