@@ -49,17 +49,18 @@ Doorgetrokken pijlen schrijven; stippellijnen lezen alleen.
 
 | Map | Wat erin staat | Gemaakt door | Opgepikt door |
 |---|---|---|---|
-| [`IntuneTemplate/`](IntuneTemplate/README.md) | De policies, per platform en policytype, plus de `_`-bestanden die ze sturen | hand + import-scripts | alle scripts, CIPP |
-| [`export/NativeImport/`](export/README.md) | Restore-formaat, met assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
-| [`BaselineTemplate/`](BaselineTemplate/README.md) | De CIPP-baseline: pakketten per stage | `generate-baseline-template.js` | CIPP (handmatige import) |
-| [`StandardsTemplateV2/`](StandardsTemplateV2/README.md) | CIPP-standards voor tenantinstellingen (MFA-nudge, passkey-migratie) | hand | CIPP |
-| [`extras/`](extras/README.md) | Wat geen CIPP-policytype is: inschrijvingsrestricties, app-configuratie, filters, App Control, remediations | hand | niemand automatisch — uitrollen volgens README |
-| [`enrollment/macos/`](enrollment/macos/README.md) | ADE-inschrijfprofiel voor Macs | hand | niemand automatisch |
-| [`compliance/macos/`](compliance/macos/README.md) | Eigen compliance-check voor Defender op macOS | hand | niemand automatisch |
-| [`shellscripts/macos/`](shellscripts/macos/README.md) | Dock, Azure Files-mount, screen recording-nudge | hand | niemand automatisch |
-| [`platformscripts/windows/`](platformscripts/windows/README.md) | Azure Files-schijf koppelen | hand | niemand automatisch |
-| [`apps/win32/`](apps/win32/remove-mcafee/README.md) | Win32-app die McAfee verwijdert | hand | niemand automatisch |
-| [`scripts/`](scripts/README.md) | De pijplijn: import, controle, generatie, tenantscripts | hand | GitHub-workflow |
+| [`IntuneTemplate/`](../IntuneTemplate/README.md) | De policies, per platform en policytype, plus de `_`-bestanden die ze sturen | hand + import-scripts | alle scripts, CIPP |
+| [`export/NativeImport/`](../export/README.md) | Restore-formaat, met assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
+| [`BaselineTemplate/`](../BaselineTemplate/README.md) | De CIPP-baseline: pakketten per stage | `generate-baseline-template.js` | CIPP (handmatige import) |
+| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.md) | CIPP-standards voor tenantinstellingen (MFA-nudge, passkey-migratie) | hand | CIPP |
+| [`extras/`](../extras/README.md) | Wat geen CIPP-policytype is: inschrijvingsrestricties, app-configuratie, filters, App Control, remediations | hand | niemand automatisch — uitrollen volgens README |
+| [`enrollment/macos/`](../enrollment/macos/README.md) | ADE-inschrijfprofiel voor Macs | hand | niemand automatisch |
+| [`compliance/macos/`](../compliance/macos/README.md) | Eigen compliance-check voor Defender op macOS | hand | niemand automatisch |
+| [`shellscripts/macos/`](../shellscripts/macos/README.md) | Dock, Azure Files-mount, screen recording-nudge | hand | niemand automatisch |
+| [`platformscripts/windows/`](../platformscripts/windows/README.md) | Azure Files-schijf koppelen | hand | niemand automatisch |
+| [`apps/win32/`](../apps/win32/remove-mcafee/README.md) | Win32-app die McAfee verwijdert | hand | niemand automatisch |
+| `docs/` | Documentatie: overzicht, normenkader (compliance), analyse, plan en deze structuur | hand + `generate-docs.js`, `generate-compliance.js` | lezers |
+| [`scripts/`](../scripts/README.md) | De pijplijn: import, controle, generatie, tenantscripts | hand | GitHub-workflow |
 | `local/` | Uitrolkopieën met ingevulde geheimen en klantrapporten | hand | **niet in git** (`.gitignore`) |
 
 `.oib-source/` en `.intuneadmin-source/` zijn lokale checkouts van de externe bronnen en staan ook
@@ -120,15 +121,15 @@ zijn. Stage 3 zet iemand met de hand door.
 | 2 | `check-scope.js` | alles in `IntuneTemplate/` | niets — faalt bij fouten |
 | 3 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
 | 4 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
-| 5 | `generate-docs.js` | `IntuneTemplate/` | `OVERZICHT.md`, README's, `.md` per policy |
-| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `COMPLIANCE.md` |
+| 5 | `generate-docs.js` | `IntuneTemplate/` | `docs/OVERZICHT.md`, README's, `.md` per policy |
+| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | OS-ondergrenzen, endoflife.date | alleen een rapport |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | toewijzingen in de tenant |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policynamen in de tenant |
 
-Stap 1 t/m 6 draait [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
+Stap 1 t/m 6 draait [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)
 na elke wijziging in `IntuneTemplate/`. Alle Node-scripts in de pijplijn delen `scripts/lib/templates.js`.
-Details: [scripts/README.md](scripts/README.md).
+Details: [scripts/README.md](../scripts/README.md).
 
 ## Externe koppelingen
 
@@ -178,7 +179,7 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 
 | Document | Voor |
 |---|---|
-| [README.md](README.md) | Volledige uitleg: import, restore, toewijzen, CIPP |
+| [README.md](../README.md) | Volledige uitleg: import, restore, toewijzen, CIPP |
 | [OVERZICHT.md](OVERZICHT.md) | Samenvatting om te delen |
 | [COMPLIANCE.md](COMPLIANCE.md) | CISO of auditor |
 | [ANALYSE.md](ANALYSE.md) | Waarom wat wel en niet in de baseline zit |

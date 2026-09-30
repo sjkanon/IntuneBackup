@@ -26,7 +26,7 @@ Protects corporate data within the Microsoft apps on a personal Android phone: s
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>4.11 Enforce Remote Wipe Capability on Portable End-User Devices<br>4.12 Separate Enterprise Workspaces on Mobile End-User Devices |
 | NIST CSF 2.0 | PR.AA-03<br>PR.DS-01<br>PR.DS-10 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 86
 

@@ -26,7 +26,7 @@ Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en leg
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>8.2 Collect Audit Logs |
 | NIST CSF 2.0 | PR.IR-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 35
 

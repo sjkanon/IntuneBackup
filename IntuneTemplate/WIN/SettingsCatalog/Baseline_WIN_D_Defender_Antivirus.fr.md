@@ -26,7 +26,7 @@ Configuration de base de Defender Antivirus : protection en temps réel, protect
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.2 Configure Automatic Anti-Malware Signature Updates<br>10.4 Configure Automatic Anti-Malware Scanning of Removable Media<br>10.6 Centrally Manage Anti-Malware Software<br>10.7 Use Behavior-Based Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 32
 

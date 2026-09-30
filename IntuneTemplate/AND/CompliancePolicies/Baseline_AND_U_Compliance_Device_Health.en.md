@@ -26,7 +26,7 @@ Marks an Android device with a personal work profile as non-compliant when it is
 | CIS Controls v8.1 | 2.3 Address Unauthorized Software<br>4.1 Establish and Maintain a Secure Configuration Process<br>7.3 Perform Automated Operating System Patch Management<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-02<br>PR.PS-05<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 37
 

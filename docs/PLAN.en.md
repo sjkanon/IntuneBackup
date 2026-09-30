@@ -29,7 +29,7 @@ up to date in one go, instead of being renamed twice in a row.
 ## What has happened in the repo
 
 24 → 95 policies. The source is now `IntuneTemplate/_manifest.json` plus
-`scripts/import-oib.js`; see [README.en.md](README.en.md) for the layout, the naming and how to
+`scripts/import-oib.js`; see [README.en.md](../README.en.md) for the layout, the naming and how to
 pull in a new OIB version.
 
 **Phases 1 and 2** (earlier): device/user split, renaming to `[Baseline] - D/U - Item`,

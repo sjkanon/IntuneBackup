@@ -26,7 +26,7 @@ Supplements the macOS restrictions with five measures that OpenIntuneBaseline ma
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>2.5 Allowlist Authorized Software<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 7
 

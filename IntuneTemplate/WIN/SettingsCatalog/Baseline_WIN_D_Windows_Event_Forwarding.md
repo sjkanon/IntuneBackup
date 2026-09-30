@@ -26,7 +26,7 @@ Stuurt Windows-gebeurtenissen door naar een centrale Windows Event Collector, zo
 | CIS Controls v8.1 | 8.9 Centralize Audit Logs |
 | NIST CSF 2.0 | PR.PS-04<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

@@ -26,7 +26,7 @@ Empêche, sur les appareils Android fully managed et corporate-owned, que le con
 | CIS Controls v8.1 | 3.13 Deploy a Data Loss Prevention Solution |
 | NIST CSF 2.0 | PR.DS-10 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

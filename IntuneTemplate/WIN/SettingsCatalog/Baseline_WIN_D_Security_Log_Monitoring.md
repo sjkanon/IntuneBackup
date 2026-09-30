@@ -26,7 +26,7 @@ Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is e
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.3 Ensure Adequate Audit Log Storage<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 4
 

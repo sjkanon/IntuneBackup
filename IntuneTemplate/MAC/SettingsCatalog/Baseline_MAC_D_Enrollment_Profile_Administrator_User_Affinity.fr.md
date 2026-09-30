@@ -26,7 +26,7 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 | CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory<br>4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | ID.AM-01<br>PR.PS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 40
 

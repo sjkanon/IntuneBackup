@@ -26,7 +26,7 @@ Empêche un appareil infecté de chiffrer des fichiers sur d'autres machines via
 | CIS Controls v8.1 | 10.7 Use Behavior-Based Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

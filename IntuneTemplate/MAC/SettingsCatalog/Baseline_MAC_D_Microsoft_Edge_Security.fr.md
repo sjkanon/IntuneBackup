@@ -26,7 +26,7 @@ Les paramètres de sécurité d'Edge sur macOS : SmartScreen, contrôle des tél
 | CIS Controls v8.1 | 9.3 Maintain and Enforce Network-Based URL Filters<br>10.1 Deploy and Maintain Anti-Malware Software<br>3.10 Encrypt Sensitive Data in Transit |
 | NIST CSF 2.0 | PR.PS-01<br>DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 31
 

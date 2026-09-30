@@ -49,17 +49,18 @@ Les flèches pleines écrivent ; les pointillés ne font que lire.
 
 | Dossier | Contenu | Créé par | Repris par |
 |---|---|---|---|
-| [`IntuneTemplate/`](IntuneTemplate/README.fr.md) | Les stratégies, par plateforme et type de stratégie, plus les fichiers `_` qui les pilotent | main + scripts d'import | tous les scripts, CIPP |
-| [`export/NativeImport/`](export/README.fr.md) | Format de restauration, avec affectations | `export-intunebackup.js` | IntuneBackupAndRestore |
-| [`BaselineTemplate/`](BaselineTemplate/README.fr.md) | La baseline CIPP : packages par stage | `generate-baseline-template.js` | CIPP (import manuel) |
-| [`StandardsTemplateV2/`](StandardsTemplateV2/README.fr.md) | Standards CIPP pour les paramètres du tenant (incitation MFA, migration passkey) | main | CIPP |
-| [`extras/`](extras/README.fr.md) | Ce qui n'est pas un type de stratégie CIPP : restrictions d'inscription, configuration d'applications, filtres, App Control, remédiations | main | personne automatiquement — déployer selon le README |
-| [`enrollment/macos/`](enrollment/macos/README.fr.md) | Profil d'inscription ADE pour les Mac | main | personne automatiquement |
-| [`compliance/macos/`](compliance/macos/README.fr.md) | Contrôle de conformité personnalisé pour Defender sur macOS | main | personne automatiquement |
-| [`shellscripts/macos/`](shellscripts/macos/README.fr.md) | Dock, montage Azure Files, incitation à l'enregistrement d'écran | main | personne automatiquement |
-| [`platformscripts/windows/`](platformscripts/windows/README.fr.md) | Connexion d'un lecteur Azure Files | main | personne automatiquement |
-| [`apps/win32/`](apps/win32/remove-mcafee/README.fr.md) | Application Win32 qui supprime McAfee | main | personne automatiquement |
-| [`scripts/`](scripts/README.fr.md) | Le pipeline : import, contrôle, génération, scripts de tenant | main | workflow GitHub |
+| [`IntuneTemplate/`](../IntuneTemplate/README.fr.md) | Les stratégies, par plateforme et type de stratégie, plus les fichiers `_` qui les pilotent | main + scripts d'import | tous les scripts, CIPP |
+| [`export/NativeImport/`](../export/README.fr.md) | Format de restauration, avec affectations | `export-intunebackup.js` | IntuneBackupAndRestore |
+| [`BaselineTemplate/`](../BaselineTemplate/README.fr.md) | La baseline CIPP : packages par stage | `generate-baseline-template.js` | CIPP (import manuel) |
+| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.fr.md) | Standards CIPP pour les paramètres du tenant (incitation MFA, migration passkey) | main | CIPP |
+| [`extras/`](../extras/README.fr.md) | Ce qui n'est pas un type de stratégie CIPP : restrictions d'inscription, configuration d'applications, filtres, App Control, remédiations | main | personne automatiquement — déployer selon le README |
+| [`enrollment/macos/`](../enrollment/macos/README.fr.md) | Profil d'inscription ADE pour les Mac | main | personne automatiquement |
+| [`compliance/macos/`](../compliance/macos/README.fr.md) | Contrôle de conformité personnalisé pour Defender sur macOS | main | personne automatiquement |
+| [`shellscripts/macos/`](../shellscripts/macos/README.fr.md) | Dock, montage Azure Files, incitation à l'enregistrement d'écran | main | personne automatiquement |
+| [`platformscripts/windows/`](../platformscripts/windows/README.fr.md) | Connexion d'un lecteur Azure Files | main | personne automatiquement |
+| [`apps/win32/`](../apps/win32/remove-mcafee/README.fr.md) | Application Win32 qui supprime McAfee | main | personne automatiquement |
+| `docs/` | Documentation : vue d'ensemble, référentiel de conformité, analyse, plan et cette structure | main + `generate-docs.js`, `generate-compliance.js` | lecteurs |
+| [`scripts/`](../scripts/README.fr.md) | Le pipeline : import, contrôle, génération, scripts de tenant | main | workflow GitHub |
 | `local/` | Copies de déploiement avec secrets renseignés et rapports clients | main | **pas dans git** (`.gitignore`) |
 
 `.oib-source/` et `.intuneadmin-source/` sont des checkouts locaux des sources externes et ne sont
@@ -120,15 +121,15 @@ Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deu
 | 2 | `check-scope.js` | tout `IntuneTemplate/` | rien — échoue en cas d'erreur |
 | 3 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
 | 4 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
-| 5 | `generate-docs.js` | `IntuneTemplate/` | `OVERZICHT.md`, README, `.md` par stratégie |
-| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `COMPLIANCE.md` |
+| 5 | `generate-docs.js` | `IntuneTemplate/` | `docs/OVERZICHT.md`, README, `.md` par stratégie |
+| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | versions minimales d'OS, endoflife.date | un rapport uniquement |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | affectations dans le tenant |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | noms des stratégies dans le tenant |
 
-Les étapes 1 à 6 sont exécutées par [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
+Les étapes 1 à 6 sont exécutées par [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)
 après chaque modification dans `IntuneTemplate/`. Tous les scripts Node du pipeline partagent
-`scripts/lib/templates.js`. Détails : [scripts/README.fr.md](scripts/README.fr.md).
+`scripts/lib/templates.js`. Détails : [scripts/README.fr.md](../scripts/README.fr.md).
 
 ## Liaisons externes
 
@@ -179,7 +180,7 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 
 | Document | Pour |
 |---|---|
-| [README.fr.md](README.fr.md) | Explication complète : import, restauration, affectation, CIPP |
+| [README.fr.md](../README.fr.md) | Explication complète : import, restauration, affectation, CIPP |
 | [OVERZICHT.fr.md](OVERZICHT.fr.md) | Résumé à partager |
 | [COMPLIANCE.fr.md](COMPLIANCE.fr.md) | RSSI ou auditeur |
 | [ANALYSE.fr.md](ANALYSE.fr.md) | Pourquoi certaines choses sont ou ne sont pas dans la baseline |

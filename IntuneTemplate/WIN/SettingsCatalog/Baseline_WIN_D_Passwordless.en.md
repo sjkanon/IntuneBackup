@@ -23,7 +23,7 @@ Hides the password field at sign-in, so that users use Windows Hello or a securi
 | NIS2 art. 21(2) | art. 21(2)(i) human resources security, access control policies and asset management<br>art. 21(2)(j) multi-factor authentication and secured communications |
 | NIST CSF 2.0 | PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

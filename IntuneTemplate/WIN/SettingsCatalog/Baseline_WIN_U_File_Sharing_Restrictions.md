@@ -26,7 +26,7 @@ Voorkomt dat een gebruiker bestanden uit zijn eigen profiel via 'Delen' in Verke
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists |
 | NIST CSF 2.0 | PR.AA-05<br>PR.DS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 1
 

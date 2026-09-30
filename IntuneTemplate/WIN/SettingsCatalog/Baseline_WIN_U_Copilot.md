@@ -23,7 +23,7 @@ Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.
 | CIS Controls v8.1 | 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.PS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

@@ -26,7 +26,7 @@ Connecte l'appareil à Defender for Endpoint via le connecteur Defender au lieu 
 | CIS Controls v8.1 | 13.1 Centralize Security Event Alerting<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
 | NIST CSF 2.0 | DE.CM-09<br>DE.AE-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

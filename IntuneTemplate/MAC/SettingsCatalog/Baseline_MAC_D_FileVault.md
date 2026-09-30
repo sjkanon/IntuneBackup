@@ -26,7 +26,7 @@ Versleutelt de schijf van de Mac en bewaart de herstelsleutel in Intune. De macO
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>3.11 Encrypt Sensitive Data at Rest |
 | NIST CSF 2.0 | PR.DS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 10
 

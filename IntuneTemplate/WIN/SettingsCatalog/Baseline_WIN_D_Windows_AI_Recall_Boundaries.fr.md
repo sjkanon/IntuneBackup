@@ -25,7 +25,7 @@ Encadre Recall lorsqu'il est autorisé : pas d'instantanés des portails d'admin
 | CIS Controls v8.1 | 3.4 Enforce Data Retention |
 | NIST CSF 2.0 | PR.DS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 5
 

@@ -25,7 +25,7 @@ Shows a warning before sign-in that the system is for authorised users only, and
 | NIS2 art. 21(2) | art. 21(2)(i) human resources security, access control policies and asset management |
 | NIST CSF 2.0 | PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 6
 

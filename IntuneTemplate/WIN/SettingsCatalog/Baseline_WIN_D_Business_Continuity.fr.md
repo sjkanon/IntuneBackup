@@ -25,7 +25,7 @@ Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-
 | NIS2 art. 21(2) | art. 21(2)(c) continuité des activités et gestion des crises |
 | NIST CSF 2.0 | PR.IR-03<br>RC.RP-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 4
 

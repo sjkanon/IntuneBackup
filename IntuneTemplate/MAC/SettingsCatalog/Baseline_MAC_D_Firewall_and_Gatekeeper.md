@@ -26,7 +26,7 @@ Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een he
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>2.5 Allowlist Authorized Software<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.IR-01<br>PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 9
 

@@ -26,7 +26,7 @@ Donne la priorité aux paramètres d'audit avancés sur les anciens paramètres 
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.5 Collect Detailed Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

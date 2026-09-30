@@ -49,17 +49,18 @@ Solid arrows write; dotted lines only read.
 
 | Folder | What it contains | Created by | Picked up by |
 |---|---|---|---|
-| [`IntuneTemplate/`](IntuneTemplate/README.en.md) | The policies, per platform and policy type, plus the `_` files that drive them | hand + import scripts | all scripts, CIPP |
-| [`export/NativeImport/`](export/README.en.md) | Restore format, with assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
-| [`BaselineTemplate/`](BaselineTemplate/README.en.md) | The CIPP baseline: packages per stage | `generate-baseline-template.js` | CIPP (manual import) |
-| [`StandardsTemplateV2/`](StandardsTemplateV2/README.en.md) | CIPP standards for tenant settings (MFA nudge, passkey migration) | hand | CIPP |
-| [`extras/`](extras/README.en.md) | What is not a CIPP policy type: enrollment restrictions, app configuration, filters, App Control, remediations | hand | nobody automatically — deploy as described in the README |
-| [`enrollment/macos/`](enrollment/macos/README.en.md) | ADE enrollment profile for Macs | hand | nobody automatically |
-| [`compliance/macos/`](compliance/macos/README.en.md) | Custom compliance check for Defender on macOS | hand | nobody automatically |
-| [`shellscripts/macos/`](shellscripts/macos/README.en.md) | Dock, Azure Files mount, screen recording nudge | hand | nobody automatically |
-| [`platformscripts/windows/`](platformscripts/windows/README.en.md) | Mapping an Azure Files drive | hand | nobody automatically |
-| [`apps/win32/`](apps/win32/remove-mcafee/README.en.md) | Win32 app that removes McAfee | hand | nobody automatically |
-| [`scripts/`](scripts/README.en.md) | The pipeline: import, checks, generation, tenant scripts | hand | GitHub workflow |
+| [`IntuneTemplate/`](../IntuneTemplate/README.en.md) | The policies, per platform and policy type, plus the `_` files that drive them | hand + import scripts | all scripts, CIPP |
+| [`export/NativeImport/`](../export/README.en.md) | Restore format, with assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
+| [`BaselineTemplate/`](../BaselineTemplate/README.en.md) | The CIPP baseline: packages per stage | `generate-baseline-template.js` | CIPP (manual import) |
+| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.en.md) | CIPP standards for tenant settings (MFA nudge, passkey migration) | hand | CIPP |
+| [`extras/`](../extras/README.en.md) | What is not a CIPP policy type: enrollment restrictions, app configuration, filters, App Control, remediations | hand | nobody automatically — deploy as described in the README |
+| [`enrollment/macos/`](../enrollment/macos/README.en.md) | ADE enrollment profile for Macs | hand | nobody automatically |
+| [`compliance/macos/`](../compliance/macos/README.en.md) | Custom compliance check for Defender on macOS | hand | nobody automatically |
+| [`shellscripts/macos/`](../shellscripts/macos/README.en.md) | Dock, Azure Files mount, screen recording nudge | hand | nobody automatically |
+| [`platformscripts/windows/`](../platformscripts/windows/README.en.md) | Mapping an Azure Files drive | hand | nobody automatically |
+| [`apps/win32/`](../apps/win32/remove-mcafee/README.en.md) | Win32 app that removes McAfee | hand | nobody automatically |
+| `docs/` | Documentation: overview, compliance framework, analysis, plan and this structure | hand + `generate-docs.js`, `generate-compliance.js` | readers |
+| [`scripts/`](../scripts/README.en.md) | The pipeline: import, checks, generation, tenant scripts | hand | GitHub workflow |
 | `local/` | Deployment copies with filled-in secrets and customer reports | hand | **not in git** (`.gitignore`) |
 
 `.oib-source/` and `.intuneadmin-source/` are local checkouts of the external sources and are
@@ -121,15 +122,15 @@ passed. Stage 3 is advanced by hand.
 | 2 | `check-scope.js` | everything in `IntuneTemplate/` | nothing — fails on errors |
 | 3 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
 | 4 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
-| 5 | `generate-docs.js` | `IntuneTemplate/` | `OVERZICHT.md`, READMEs, `.md` per policy |
-| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `COMPLIANCE.md` |
+| 5 | `generate-docs.js` | `IntuneTemplate/` | `docs/OVERZICHT.md`, READMEs, `.md` per policy |
+| 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | OS minimums, endoflife.date | a report only |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | assignments in the tenant |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policy names in the tenant |
 
-Steps 1 to 6 are run by [`.github/workflows/generate-baseline.yml`](.github/workflows/generate-baseline.yml)
+Steps 1 to 6 are run by [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)
 after every change in `IntuneTemplate/`. All Node scripts in the pipeline share `scripts/lib/templates.js`.
-Details: [scripts/README.en.md](scripts/README.en.md).
+Details: [scripts/README.en.md](../scripts/README.en.md).
 
 ## External connections
 
@@ -179,7 +180,7 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 
 | Document | For |
 |---|---|
-| [README.en.md](README.en.md) | Full explanation: import, restore, assignment, CIPP |
+| [README.en.md](../README.en.md) | Full explanation: import, restore, assignment, CIPP |
 | [OVERZICHT.en.md](OVERZICHT.en.md) | Summary to share |
 | [COMPLIANCE.en.md](COMPLIANCE.en.md) | CISO or auditor |
 | [ANALYSE.en.md](ANALYSE.en.md) | Why things are or are not in the baseline |

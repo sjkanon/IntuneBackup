@@ -26,7 +26,7 @@ Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omd
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices |
 | NIST CSF 2.0 | DE.CM-09<br>PR.DS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 43
 

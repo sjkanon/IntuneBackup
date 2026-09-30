@@ -26,7 +26,7 @@ Blocks an infected device from encrypting files on other machines over the netwo
 | CIS Controls v8.1 | 10.7 Use Behavior-Based Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

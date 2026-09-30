@@ -24,7 +24,7 @@ Zet alleen Cached Exchange Mode aan en laat de rest op de standaard van Outlook 
 | ISO/IEC 27001:2022 | A.8.9 Configuratiebeheer |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 1
 

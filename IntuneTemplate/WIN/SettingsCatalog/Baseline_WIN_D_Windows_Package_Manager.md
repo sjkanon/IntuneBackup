@@ -24,7 +24,7 @@ Beperkt winget, zodat gebruikers geen software van willekeurige bronnen kunnen i
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 5
 

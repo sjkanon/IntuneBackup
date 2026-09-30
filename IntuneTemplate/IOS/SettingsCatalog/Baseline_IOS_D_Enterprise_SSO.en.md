@@ -26,7 +26,7 @@ Enables the Microsoft Enterprise SSO plug-in of Microsoft Authenticator, so that
 | CIS Controls v8.1 | 6.7 Centralize Access Control |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 21
 

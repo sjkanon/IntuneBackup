@@ -26,7 +26,7 @@ Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wa
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 9
 

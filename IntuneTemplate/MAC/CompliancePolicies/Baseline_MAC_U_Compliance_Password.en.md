@@ -24,7 +24,7 @@ Checks whether the Mac requires a password and how strong it must be.
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
 | NIST CSF 2.0 | PR.AA-03<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 27
 

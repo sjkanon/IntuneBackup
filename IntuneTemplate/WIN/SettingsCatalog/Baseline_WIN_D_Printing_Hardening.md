@@ -26,7 +26,7 @@ Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van 
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>2.3 Address Unauthorized Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

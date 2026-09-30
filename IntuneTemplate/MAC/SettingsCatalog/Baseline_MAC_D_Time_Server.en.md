@@ -26,7 +26,7 @@ Has the Mac synchronise its clock with time.apple.com, so that timestamps in log
 | CIS Controls v8.1 | 8.4 Standardize Time Synchronization |
 | NIST CSF 2.0 | PR.PS-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

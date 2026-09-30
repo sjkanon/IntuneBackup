@@ -26,7 +26,7 @@ Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-05<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

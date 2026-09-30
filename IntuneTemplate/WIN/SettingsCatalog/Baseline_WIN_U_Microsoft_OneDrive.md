@@ -22,7 +22,7 @@ De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet.
 | ISO/IEC 27001:2022 | A.8.12 Voorkomen van datalekken |
 | NIST CSF 2.0 | PR.DS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 9
 

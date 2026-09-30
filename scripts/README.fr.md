@@ -58,7 +58,7 @@ Ce qui est dans git est volontairement la version `--no-ca`, car c'est ce que le
 CI ne voit pas cet autre dépôt. Avoir les deux dans git signifierait que COMPLIANCE.md basculerait
 d'une version à l'autre à chaque PR. L'écart est le plus grand pour NIS2 (j), authentification
 multifacteur : 3 stratégies sans CA, 13 avec. Comment intégrer malgré tout le volet CA dans la CI est
-décrit dans [ANALYSE.fr.md](../ANALYSE.fr.md#points-ouverts), point ouvert 3.
+décrit dans [ANALYSE.fr.md](../docs/ANALYSE.fr.md#points-ouverts), point ouvert 3.
 
 ## PowerShell
 
@@ -71,7 +71,7 @@ Les deux nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi que
 | [`Rename-BaselinePolicy.ps1`](Rename-BaselinePolicy.ps1) | Aligne les noms des stratégies d'un tenant sur la convention actuelle, selon `_renames.json`. `PATCH`, donc l'id et les affectations sont conservés. Signale les cas qui demandent une intervention manuelle au lieu de les forcer. |
 
 Reste à construire : `Get-BaselinePolicyState.ps1`, le pendant côté tenant de
-`check-scope.js` — voir [PLAN.fr.md](../PLAN.fr.md#reste-à-construire-scriptsget-baselinepolicystateps1).
+`check-scope.js` — voir [PLAN.fr.md](../docs/PLAN.fr.md#reste-à-construire-scriptsget-baselinepolicystateps1).
 
 ## Ordre d'exécution
 

@@ -26,7 +26,7 @@ Protège les données de l'entreprise dans les applications Microsoft sur un té
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>4.11 Enforce Remote Wipe Capability on Portable End-User Devices<br>4.12 Separate Enterprise Workspaces on Mobile End-User Devices |
 | NIST CSF 2.0 | PR.AA-03<br>PR.DS-01<br>PR.DS-10 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 86
 

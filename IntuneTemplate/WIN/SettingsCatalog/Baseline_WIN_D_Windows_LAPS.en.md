@@ -26,7 +26,7 @@ Automatically rotates the password of the local administrator account and stores
 | CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software<br>5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 12
 

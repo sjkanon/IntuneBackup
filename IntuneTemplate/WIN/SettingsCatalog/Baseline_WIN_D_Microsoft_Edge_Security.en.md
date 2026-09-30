@@ -26,7 +26,7 @@ Edge's security settings: SmartScreen, download control, certificate behaviour a
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>9.6 Block Unnecessary File Types<br>10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 59
 

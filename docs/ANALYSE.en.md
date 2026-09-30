@@ -2,7 +2,7 @@
 
 # Gap analysis — what are we missing for a first baseline?
 
-Hand-written, unlike [`README.md`](README.en.md) next to it. This records *how* the
+Hand-written, unlike [`README.md`](../README.en.md) next to it. This records *how* the
 BASELINE2 set came about and — more importantly — what is deliberately **not** in it and why.
 Without that last part, the next round is doomed to weigh the same 500 settings all over again.
 
@@ -40,7 +40,7 @@ Three things that go wrong if you don't know them:
    followed by `JSON.parse` fails on all 874.
 2. **A `GroupSettingCollection` is a container, not a setting.** Two policies that use the same
    macOS payload but set different children do not conflict. `flattenSettings` in
-   [`scripts/lib/templates.js`](scripts/lib/templates.js) already makes that distinction.
+   [`scripts/lib/templates.js`](../scripts/lib/templates.js) already makes that distinction.
 3. **Values from an external set are not automatically correct.** See *Errors in the sources* below.
 
 ## Outcome in numbers
@@ -188,7 +188,7 @@ Little, and that is a finding in itself.
   from it that we do not set, these are things like `cryptowalletenabled`, `gamermodeenabled`,
   `aigenthemesenabled` and `browseraddprofileenabled`. Those are tidy Edge settings, but they do
   not follow from ISO 27001 and they are not device-critical. Our
-  [`Baseline_WIN_D_Microsoft_Edge_Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md)
+  [`Baseline_WIN_D_Microsoft_Edge_Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md)
   (54 settings) already covers the security side. **None adopted.**
 - The **NIS2 folder** contains an Edge and a Windows 11 profile. The Windows 11 profile yielded 11
   settings we do not set. Of those, **four were adopted** (the account lockout
@@ -452,7 +452,7 @@ In addition:
   Android Device Health (minimum patch level), iOS App Protection (widget sync off), macOS Software
   Updates (Enforce Latest after 30 days, beta off), Firewall and Gatekeeper (XProtect upload after prompt),
   Edge Security on macOS (no SSL error override).
-- **[`extras/`](extras/README.en.md)**: what is not a CIPP type — enrolment restrictions, app configuration,
+- **[`extras/`](../extras/README.en.md)**: what is not a CIPP type — enrolment restrictions, app configuration,
   assignment filters, App Control for Business, DNS over HTTPS for Windows, remediations for
   BitLocker/LAPS escrow, Escrow Buddy, Apple Business checklists.
 - **Compliance framework**: every policy has `controls` (iso, nis2, cis, nistcsf) from the vocabulary in

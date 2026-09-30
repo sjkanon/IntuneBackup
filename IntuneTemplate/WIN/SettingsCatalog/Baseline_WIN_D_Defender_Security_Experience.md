@@ -24,7 +24,7 @@ Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzette
 | CIS Controls v8.1 | 10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 4
 

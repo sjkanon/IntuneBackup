@@ -24,7 +24,7 @@ Realtimebeveiliging, cloudbescherming en scangedrag van Defender op macOS.
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.2 Configure Automatic Anti-Malware Signature Updates<br>10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 26
 

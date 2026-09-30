@@ -220,9 +220,9 @@ function controlsSection(controls, ctx) {
     ...rows,
     "",
     V.t({
-      nl: `Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](${V.link("../../../COMPLIANCE.md")}).`,
-      en: `What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](${V.link("../../../COMPLIANCE.md")}).`,
-      fr: `Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](${V.link("../../../COMPLIANCE.md")}).`,
+      nl: `Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](${V.link("../../../docs/COMPLIANCE.md")}).`,
+      en: `What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](${V.link("../../../docs/COMPLIANCE.md")}).`,
+      fr: `Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](${V.link("../../../docs/COMPLIANCE.md")}).`,
     }),
     "",
   ];
@@ -706,7 +706,7 @@ function overviewDocument(templates, ctx) {
       const list = perPlatform(p);
       if (list.length === 0) return null;
       const counts = types.map((ty) => list.filter((t) => t.type === ty).length);
-      return `| [${PLATFORMS[p].label}](${V.link(`IntuneTemplate/${p}/README.md`)}) | ${counts.map((c) => (c === 0 ? "–" : c)).join(" | ")} | **${list.length}** |`;
+      return `| [${PLATFORMS[p].label}](${V.link(`../IntuneTemplate/${p}/README.md`)}) | ${counts.map((c) => (c === 0 ? "–" : c)).join(" | ")} | **${list.length}** |`;
     })
     .filter(Boolean);
 
@@ -723,17 +723,17 @@ function overviewDocument(templates, ctx) {
       nl: [
         `${templates.length} policies over ${nPlatforms} platformen, met`,
         "[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.",
-        `Dit is de samenvatting; de details staan in de [hoofd-README](${V.link("README.md")}) en per map.`,
+        `Dit is de samenvatting; de details staan in de [hoofd-README](${V.link("../README.md")}) en per map.`,
       ],
       en: [
         `${templates.length} policies across ${nPlatforms} platforms, with`,
         "[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) as the source.",
-        `This is the summary; the details are in the [main README](${V.link("README.md")}) and per folder.`,
+        `This is the summary; the details are in the [main README](${V.link("../README.md")}) and per folder.`,
       ],
       fr: [
         `${templates.length} policies sur ${nPlatforms} plateformes, avec`,
         "[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) comme source.",
-        `Ceci est le résumé ; les détails se trouvent dans le [README principal](${V.link("README.md")}) et dans chaque dossier.`,
+        `Ceci est le résumé ; les détails se trouvent dans le [README principal](${V.link("../README.md")}) et dans chaque dossier.`,
       ],
     }),
     "",
@@ -754,7 +754,7 @@ function overviewDocument(templates, ctx) {
       en: "Each platform has a table with **every policy, what it does and where it lands**:",
       fr: "Chaque plateforme dispose d'un tableau avec **chaque policy, ce qu'elle fait et où elle atterrit** :",
     }),
-    ...platforms.filter((p) => perPlatform(p).length > 0).map((p) => `- [${PLATFORMS[p].label}](${V.link(`IntuneTemplate/${p}/README.md`)}) — ${policies(perPlatform(p).length)}`),
+    ...platforms.filter((p) => perPlatform(p).length > 0).map((p) => `- [${PLATFORMS[p].label}](${V.link(`../IntuneTemplate/${p}/README.md`)}) — ${policies(perPlatform(p).length)}`),
     "",
     V.t({ nl: "## Normenkader", en: "## Compliance framework", fr: "## Référentiel de conformité" }),
     "",
@@ -1116,7 +1116,7 @@ function main() {
     translators.push(V);
     const add = (file, content) => files.push({ file: variantPath(file, lang), content });
 
-    add(path.join(REPO_ROOT, "OVERZICHT.md"), overviewDocument(templates, ctx));
+    add(path.join(REPO_ROOT, "docs", "OVERZICHT.md"), overviewDocument(templates, ctx));
     add(path.join(TEMPLATE_DIR, "README.md"), overviewReadme(templates, ctx));
 
     for (const platform of Object.keys(PLATFORMS)) {

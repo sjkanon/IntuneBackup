@@ -24,7 +24,7 @@ Détermine si Edge peut enregistrer et afficher des mots de passe, afin que les 
 | CIS Controls v8.1 | 5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 5
 

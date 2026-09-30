@@ -25,7 +25,7 @@ Rolt het bedrijfsnetwerk als wifi-profiel uit op elke Windows-laptop, zodat een 
 | NIS2 art. 21(2) | art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden |
 | NIST CSF 2.0 | PR.IR-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 9
 

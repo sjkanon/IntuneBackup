@@ -26,7 +26,7 @@ Requires a network connection during initial setup, so that a device cannot get 
 | CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory |
 | NIST CSF 2.0 | ID.AM-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 1
 

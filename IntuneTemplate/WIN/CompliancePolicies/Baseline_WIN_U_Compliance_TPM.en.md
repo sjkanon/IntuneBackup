@@ -25,7 +25,7 @@ Checks whether the device has a TPM. Without a TPM there is no BitLocker with ha
 | NIS2 art. 21(2) | art. 21(2)(f) assessing the effectiveness<br>art. 21(2)(h) cryptography and encryption |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 43
 

@@ -26,7 +26,7 @@ De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthentic
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.AA-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 24
 

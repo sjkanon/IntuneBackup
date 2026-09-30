@@ -26,7 +26,7 @@ Checks whether a fully managed or corporate-owned Android device has a numeric c
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>4.3 Configure Automatic Session Locking on Enterprise Assets |
 | NIST CSF 2.0 | PR.AA-03<br>PR.DS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 28
 

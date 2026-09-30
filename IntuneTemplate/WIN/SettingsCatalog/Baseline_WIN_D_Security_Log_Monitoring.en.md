@@ -26,7 +26,7 @@ Warns in the System log as soon as the Security log is 90% full and logs pipelin
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.3 Ensure Adequate Audit Log Storage<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

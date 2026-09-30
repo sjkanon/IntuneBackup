@@ -26,7 +26,7 @@ Blocks screenshots, file sharing via Bluetooth and factory reset by the user on 
 | CIS Controls v8.1 | 3.13 Deploy a Data Loss Prevention Solution<br>4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.DS-01<br>PR.DS-10<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

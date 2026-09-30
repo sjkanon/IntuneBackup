@@ -26,7 +26,7 @@ Runs Setup Assistant for a corporate Mac with user affinity and locked enrolment
 | CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory<br>4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | ID.AM-01<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 40
 

@@ -26,7 +26,7 @@ Koppelt het aanmelden op de Mac aan Entra ID via de Microsoft-SSO-plug-in, zodat
 | CIS Controls v8.1 | 5.6 Centralize Account Management<br>6.7 Centralize Access Control |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 28
 

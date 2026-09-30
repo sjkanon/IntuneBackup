@@ -26,7 +26,7 @@ Impose que Microsoft Edge n'établisse pas de connexions en dessous de TLS 1.2, 
 | CIS Controls v8.1 | 3.10 Encrypt Sensitive Data in Transit |
 | NIST CSF 2.0 | PR.DS-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

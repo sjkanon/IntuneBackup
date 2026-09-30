@@ -26,7 +26,7 @@ Makes the advanced audit settings take precedence over the old category settings
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.5 Collect Detailed Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

@@ -25,7 +25,7 @@ Turns on Quick Machine Recovery: a device that no longer boots fetches a recover
 | NIS2 art. 21(2) | art. 21(2)(c) business continuity and crisis management |
 | NIST CSF 2.0 | PR.IR-03<br>RC.RP-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

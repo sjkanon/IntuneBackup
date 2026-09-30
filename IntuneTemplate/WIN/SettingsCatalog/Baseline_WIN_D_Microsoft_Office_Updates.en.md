@@ -26,7 +26,7 @@ Which update channel Office is on and how quickly updates are installed.
 | CIS Controls v8.1 | 7.4 Perform Automated Application Patch Management |
 | NIST CSF 2.0 | PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 6
 

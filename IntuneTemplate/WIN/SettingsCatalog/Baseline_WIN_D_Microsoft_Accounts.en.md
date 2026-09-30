@@ -24,7 +24,7 @@ Determines whether personal Microsoft accounts may be used and added on a work d
 | CIS Controls v8.1 | 5.6 Centralize Account Management |
 | NIST CSF 2.0 | PR.AA-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 5
 

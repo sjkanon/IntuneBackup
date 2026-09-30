@@ -26,7 +26,7 @@ Toetst of het apparaat op een Windows-versie draait die de baseline ook echt kan
 | CIS Controls v8.1 | 2.2 Ensure Authorized Software is Currently Supported |
 | NIST CSF 2.0 | DE.CM-09<br>PR.PS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 38
 

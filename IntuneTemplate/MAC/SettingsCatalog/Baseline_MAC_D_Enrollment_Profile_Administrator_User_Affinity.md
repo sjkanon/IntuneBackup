@@ -26,7 +26,7 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 | CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory<br>4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | ID.AM-01<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 40
 

@@ -26,7 +26,7 @@ Onboardt Microsoft Defender for Endpoint zonder gebruikersactie op supervised be
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>9.3 Maintain and Enforce Network-Based URL Filters |
 | NIST CSF 2.0 | DE.CM-09<br>DE.CM-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 3
 

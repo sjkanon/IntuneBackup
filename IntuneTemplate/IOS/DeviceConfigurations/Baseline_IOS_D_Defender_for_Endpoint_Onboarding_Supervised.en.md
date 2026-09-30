@@ -26,7 +26,7 @@ Onboards Microsoft Defender for Endpoint without user action on supervised corpo
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>9.3 Maintain and Enforce Network-Based URL Filters |
 | NIST CSF 2.0 | DE.CM-09<br>DE.CM-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 3
 

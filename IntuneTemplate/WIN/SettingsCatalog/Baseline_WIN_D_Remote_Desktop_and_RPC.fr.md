@@ -24,7 +24,7 @@ Restreint le Bureau à distance et les appels de procédure distants, deux point
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>12.6 Use of Secure Network Management and Communication Protocols |
 | NIST CSF 2.0 | PR.IR-01<br>PR.DS-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 12
 

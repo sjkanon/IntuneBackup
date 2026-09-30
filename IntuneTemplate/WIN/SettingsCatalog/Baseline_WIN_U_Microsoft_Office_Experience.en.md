@@ -22,7 +22,7 @@ The per-user Office experience: first-run screens, connected services and which 
 | ISO/IEC 27001:2022 | A.8.9 Configuration management |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 29
 

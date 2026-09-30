@@ -26,7 +26,7 @@ Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand 
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 6
 

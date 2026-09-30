@@ -25,7 +25,7 @@ Staat Recall en Click To Do uitdrukkelijk toe, inclusief het bewaren van scherma
 | NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

@@ -26,7 +26,7 @@ Toetst of de Mac op macOS 14 of hoger draait — de versie die het declaratieve 
 | CIS Controls v8.1 | 2.2 Ensure Authorized Software is Currently Supported |
 | NIST CSF 2.0 | DE.CM-09<br>PR.PS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 27
 

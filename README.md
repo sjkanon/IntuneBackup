@@ -6,7 +6,7 @@
 Storage-rij met een genestelde `JSON`/`RAWJson`-string). De inhoud komt sinds augustus 2026
 grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
-overgenomen vóór de officiële release — zie [`ANALYSE.md`](ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
+overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
 197 policies over vier platformen:
 
@@ -35,13 +35,13 @@ flowchart LR
   style T stroke-width:3px
 ```
 
-**[OVERZICHT.md](OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
+**[OVERZICHT.md](docs/OVERZICHT.md)** is de samenvatting om te delen: wat er in zit, wat er veranderde
 en wat er in de tenant nog moet gebeuren.
 
-**[STRUCTUUR.md](STRUCTUUR.md)** is de plattegrond: welke map wat bevat, welk script wat leest en
+**[STRUCTUUR.md](docs/STRUCTUUR.md)** is de plattegrond: welke map wat bevat, welk script wat leest en
 schrijft, en aan welke systemen de repo vastzit.
 
-**[COMPLIANCE.md](COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
+**[COMPLIANCE.md](docs/COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
 Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
 2.0-subcategorie welke policies hem technisch invullen, in welke fase — en wat
 organisatorisch nodig blijft. Gegenereerd door `scripts/generate-compliance.js` uit de `controls` in
@@ -117,7 +117,7 @@ beide policies wordt toegepast. Elke policy boven fase 1 heeft een verplichte `f
 De fase bepaalt ook het **CIPP-pakket** van een policy — het veld `Package` in het template,
 waarop CIPP zijn baselines groepeert. Zie [uitrollen via een CIPP-baseline](#uitrollen-via-een-cipp-baseline).
 
-**[`ANALYSE.md`](ANALYSE.md)** legt vast hoe de aanvulling van september 2026 tot stand kwam:
+**[`ANALYSE.md`](docs/ANALYSE.md)** legt vast hoe de aanvulling van september 2026 tot stand kwam:
 welke bronnen zijn vergeleken, de 509 instellingen die IntuneAdmin meer zet dan wij, waarom er
 14 van overbleven, en — belangrijker — wat er bewust *niet* in zit en waarom.
 
@@ -459,7 +459,7 @@ gebruikers of oude systemen direct raken. OpenIntuneBaseline zegt hetzelfde: het
 startpunt, geen kant-en-klare productieconfiguratie.
 
 Dat is fase 2, en de lijst staat — met per policy het waarom — in
-[OVERZICHT.md](OVERZICHT.md#eerst-in-een-pilot). Hij wordt gegenereerd uit `faseWaarom` in het
+[OVERZICHT.md](docs/OVERZICHT.md#eerst-in-een-pilot). Hij wordt gegenereerd uit `faseWaarom` in het
 manifest. Tot september 2026 stond hier een eigen lijst, en die liep uit de pas: negen van de
 policies erop stonden in fase 1 en rolden via `Baseline-Devices` gewoon naar alle apparaten.
 Windows Hello for Business gaat daarbij als paar de pilot in, device én user — de een in de

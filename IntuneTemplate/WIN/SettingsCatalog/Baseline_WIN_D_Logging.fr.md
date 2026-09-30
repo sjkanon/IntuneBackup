@@ -26,7 +26,7 @@ Enregistre une transcription de chaque session PowerShell, afin de pouvoir voir 
 | CIS Controls v8.1 | 8.5 Collect Detailed Audit Logs<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

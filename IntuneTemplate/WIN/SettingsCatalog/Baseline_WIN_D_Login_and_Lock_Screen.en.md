@@ -24,7 +24,7 @@ Determines what is visible and possible on the sign-in and lock screen, such as 
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 8
 

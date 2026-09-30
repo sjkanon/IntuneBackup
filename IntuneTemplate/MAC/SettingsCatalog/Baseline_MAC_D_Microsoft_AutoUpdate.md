@@ -24,7 +24,7 @@ Hoe en wanneer Office, Edge en andere Microsoft-apps op de Mac zichzelf bijwerke
 | CIS Controls v8.1 | 7.4 Perform Automated Application Patch Management |
 | NIST CSF 2.0 | PR.PS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 16
 

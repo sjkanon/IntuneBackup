@@ -26,7 +26,7 @@ Collection of individual hardening settings: outdated SMB and NTLM variants, Aut
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software<br>8.8 Collect Command-Line Audit Logs<br>10.3 Disable Autorun and Autoplay for Removable Media |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 96
 

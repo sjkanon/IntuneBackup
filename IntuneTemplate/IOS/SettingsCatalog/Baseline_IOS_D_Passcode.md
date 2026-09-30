@@ -26,7 +26,7 @@ Stelt op ingeschreven iPhones en iPads de toegangscode in die de compliance-poli
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets<br>4.10 Enforce Automatic Device Lockout on Portable End-User Devices |
 | NIST CSF 2.0 | PR.AA-03<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 7
 

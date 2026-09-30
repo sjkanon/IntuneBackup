@@ -22,7 +22,7 @@ Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van
 | ISO/IEC 27001:2022 | A.8.6 Capaciteitsbeheer |
 | NIST CSF 2.0 | PR.IR-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 12
 

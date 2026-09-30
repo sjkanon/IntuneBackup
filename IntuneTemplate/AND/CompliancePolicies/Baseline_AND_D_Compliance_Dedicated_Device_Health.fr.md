@@ -26,7 +26,7 @@ Marque un appareil Android dédié (kiosque ou partagé) comme non conforme lors
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>4.1 Establish and Maintain a Secure Configuration Process<br>7.3 Perform Automated Operating System Patch Management |
 | NIST CSF 2.0 | PR.PS-02<br>PR.DS-01<br>DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 28
 

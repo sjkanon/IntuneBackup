@@ -26,7 +26,7 @@ Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, aut
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software<br>8.8 Collect Command-Line Audit Logs<br>10.3 Disable Autorun and Autoplay for Removable Media |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 96
 

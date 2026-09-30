@@ -26,7 +26,7 @@ Définit quels événements Windows enregistre et quelle est la taille des journ
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.3 Ensure Adequate Audit Log Storage<br>8.5 Collect Detailed Audit Logs<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 40
 

@@ -26,7 +26,7 @@ Turns on virtualisation-based security, Credential Guard and memory integrity, s
 | CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | PR.AA-01<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 8
 

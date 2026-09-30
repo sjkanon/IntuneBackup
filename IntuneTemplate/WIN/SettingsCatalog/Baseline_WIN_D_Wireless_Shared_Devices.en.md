@@ -25,7 +25,7 @@ On shared devices, allows only the networks deployed via Intune. Wi-Fi networks 
 | NIS2 art. 21(2) | art. 21(2)(e) security in network and information systems acquisition, development and maintenance, including vulnerability handling |
 | NIST CSF 2.0 | PR.IR-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 1
 

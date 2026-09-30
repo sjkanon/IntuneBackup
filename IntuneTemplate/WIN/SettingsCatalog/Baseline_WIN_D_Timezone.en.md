@@ -24,7 +24,7 @@ Lets Windows determine the time zone automatically, so that logs and certificate
 | CIS Controls v8.1 | 8.4 Standardize Time Synchronization |
 | NIST CSF 2.0 | PR.PS-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 10
 

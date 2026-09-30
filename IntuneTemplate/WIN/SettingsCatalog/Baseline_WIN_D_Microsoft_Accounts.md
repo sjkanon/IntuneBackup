@@ -24,7 +24,7 @@ Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toege
 | CIS Controls v8.1 | 5.6 Centralize Account Management |
 | NIST CSF 2.0 | PR.AA-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 5
 

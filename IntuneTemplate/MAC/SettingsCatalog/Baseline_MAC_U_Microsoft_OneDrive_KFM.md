@@ -24,7 +24,7 @@ Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets all
 | CIS Controls v8.1 | 11.2 Perform Automated Backups |
 | NIST CSF 2.0 | PR.DS-11 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 15
 

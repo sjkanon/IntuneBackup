@@ -26,7 +26,7 @@ De beveiligingsinstellingen van Edge op macOS: SmartScreen, downloadcontrole en 
 | CIS Controls v8.1 | 9.3 Maintain and Enforce Network-Based URL Filters<br>10.1 Deploy and Maintain Anti-Malware Software<br>3.10 Encrypt Sensitive Data in Transit |
 | NIST CSF 2.0 | PR.PS-01<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 31
 

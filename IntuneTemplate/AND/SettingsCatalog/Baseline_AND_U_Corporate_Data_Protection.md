@@ -26,7 +26,7 @@ Blokkeert op fully managed en corporate-owned Android-toestellen schermafdrukken
 | CIS Controls v8.1 | 3.13 Deploy a Data Loss Prevention Solution<br>4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.DS-01<br>PR.DS-10<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

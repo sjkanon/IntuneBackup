@@ -26,7 +26,7 @@ Merkt elk Android-toestel dat nog met het verouderde device administrator wordt 
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.PS-01<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 7
 

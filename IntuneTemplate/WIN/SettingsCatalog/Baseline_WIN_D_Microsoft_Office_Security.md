@@ -26,7 +26,7 @@ De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, bep
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 209
 

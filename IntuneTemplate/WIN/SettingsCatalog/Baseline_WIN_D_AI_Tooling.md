@@ -25,7 +25,7 @@ Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke
 | NIS2 art. 21(2) | art. 21(2)(d) beveiliging van de toeleveringsketen |
 | NIST CSF 2.0 | PR.DS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 1
 

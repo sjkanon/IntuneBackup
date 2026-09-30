@@ -26,7 +26,7 @@ Lie la connexion sur le Mac à Entra ID via le plug-in SSO Microsoft, afin que l
 | CIS Controls v8.1 | 5.6 Centralize Account Management<br>6.7 Centralize Access Control |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 28
 

@@ -26,7 +26,7 @@ Zet op een toestel met persoonlijk werkprofiel een eigen werkprofielcode (zes ci
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets<br>4.10 Enforce Automatic Device Lockout on Portable End-User Devices<br>4.12 Separate Enterprise Workspaces on Mobile End-User Devices<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.AA-03<br>PR.DS-10<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 15
 

@@ -24,7 +24,7 @@ Geeft Defender de systeemrechten die macOS eist voordat het kan werken: systeeme
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 64
 

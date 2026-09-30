@@ -26,7 +26,7 @@ Marks a dedicated Android device (kiosk or shared) as non-compliant when it is r
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices<br>4.1 Establish and Maintain a Secure Configuration Process<br>7.3 Perform Automated Operating System Patch Management |
 | NIST CSF 2.0 | PR.PS-02<br>PR.DS-01<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 28
 

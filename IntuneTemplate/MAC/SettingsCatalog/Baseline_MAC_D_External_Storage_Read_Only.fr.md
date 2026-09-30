@@ -26,7 +26,7 @@ Ne laisse macOS monter que le stockage externe qui est lui-même en lecture seul
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists |
 | NIST CSF 2.0 | PR.DS-01<br>PR.PS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

@@ -26,7 +26,7 @@ Vérifie que le disque système est chiffré avec BitLocker. Délai de grâce de
 | CIS Controls v8.1 | 3.6 Encrypt Data on End-User Devices |
 | NIST CSF 2.0 | DE.CM-09<br>PR.DS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 43
 

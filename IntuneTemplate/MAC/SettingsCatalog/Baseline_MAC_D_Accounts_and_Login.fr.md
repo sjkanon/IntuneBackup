@@ -24,7 +24,7 @@ Détermine ce qui est visible à la connexion et quels comptes un Mac peut avoir
 | CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.AA-03<br>PR.PS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 8
 

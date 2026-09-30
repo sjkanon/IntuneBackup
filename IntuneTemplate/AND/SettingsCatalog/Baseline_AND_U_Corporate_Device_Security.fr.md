@@ -26,7 +26,7 @@ Durcit les appareils Android fully managed et corporate-owned : code à six chif
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.3 Configure Automatic Session Locking on Enterprise Assets<br>4.10 Enforce Automatic Device Lockout on Portable End-User Devices<br>4.12 Separate Enterprise Workspaces on Mobile End-User Devices<br>7.4 Perform Automated Application Patch Management<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.AA-03<br>PR.DS-01<br>PR.PS-01<br>PR.PS-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 14
 

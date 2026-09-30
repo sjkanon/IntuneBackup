@@ -26,7 +26,7 @@ Legt de numerieke Windows Hello-PIN expliciet vast: cijfers vereist, letters en 
 | CIS Controls v8.1 | 5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 5
 

@@ -26,7 +26,7 @@ Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprog
 | CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 43
 

@@ -84,7 +84,7 @@ jobs:
             format of the IntuneBackupAndRestore module; `BaselineTemplate/Baseline.json` is the
             CIPP baseline with its stages and packages. Every set next to it goes to
             `export/NativeImport/IntuneBackupAndRestore-<SET>/` — separately, so that a restore of
-            the baseline does not drag those sets along. `COMPLIANCE.md` is the accountability to
+            the baseline does not drag those sets along. `docs/COMPLIANCE.md` is the accountability to
             ISO 27001, NIS2, CIS and NIST CSF: with a changed phase or mapping, check whether a
             control changes status. Every generated document also exists in English and French
             (`.en.md`, `.fr.md`); a changed `doel`, `note` or `faseWaarom` stays Dutch in those until
@@ -94,7 +94,7 @@ jobs:
           add-paths: |
             BaselineTemplate/Baseline.json
             export/NativeImport/**
-            OVERZICHT*.md
-            COMPLIANCE*.md
+            docs/OVERZICHT*.md
+            docs/COMPLIANCE*.md
             IntuneTemplate/*.md
             IntuneTemplate/**/*.md

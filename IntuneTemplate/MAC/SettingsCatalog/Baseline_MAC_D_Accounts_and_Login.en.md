@@ -24,7 +24,7 @@ Determines what is visible at sign-in and which accounts a Mac may have.
 | CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.AA-03<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 8
 

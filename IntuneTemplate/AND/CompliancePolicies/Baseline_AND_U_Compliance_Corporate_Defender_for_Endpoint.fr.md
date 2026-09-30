@@ -26,7 +26,7 @@ Marque un appareil Android fully managed ou corporate-owned comme non conforme l
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 9
 

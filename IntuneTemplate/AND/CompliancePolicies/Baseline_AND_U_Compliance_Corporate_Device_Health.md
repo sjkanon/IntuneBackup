@@ -26,7 +26,7 @@ Merkt een fully managed of corporate-owned Android-toestel als niet-compliant wa
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>7.3 Perform Automated Operating System Patch Management |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-02<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 28
 

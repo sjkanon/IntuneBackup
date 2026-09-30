@@ -26,7 +26,7 @@ Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerd
 | CIS Controls v8.1 | 5.4 Restrict Administrator Privileges to Dedicated Administrator Accounts |
 | NIST CSF 2.0 | PR.AA-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 6
 

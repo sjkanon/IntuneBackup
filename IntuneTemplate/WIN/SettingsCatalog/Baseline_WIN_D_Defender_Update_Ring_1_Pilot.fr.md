@@ -26,7 +26,7 @@ Récupère en premier les nouvelles définitions et versions de moteur Defender,
 | CIS Controls v8.1 | 10.2 Configure Automatic Anti-Malware Signature Updates |
 | NIST CSF 2.0 | PR.PS-02 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

@@ -26,7 +26,7 @@ Protects corporate data within the Microsoft apps on a personal iPhone or iPad: 
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists<br>3.11 Encrypt Sensitive Data at Rest<br>4.11 Enforce Remote Wipe Capability on Portable End-User Devices |
 | NIST CSF 2.0 | PR.DS-01<br>PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 68
 

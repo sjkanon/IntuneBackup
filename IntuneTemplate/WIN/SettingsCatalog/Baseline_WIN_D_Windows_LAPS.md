@@ -26,7 +26,7 @@ Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart h
 | CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software<br>5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 12
 

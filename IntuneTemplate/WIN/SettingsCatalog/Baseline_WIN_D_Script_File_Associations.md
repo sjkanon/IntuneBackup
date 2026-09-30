@@ -26,7 +26,7 @@ Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de script
 | CIS Controls v8.1 | 9.6 Block Unnecessary File Types |
 | NIST CSF 2.0 | PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 1
 

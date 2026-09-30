@@ -26,7 +26,7 @@ Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat nie
 | CIS Controls v8.1 | 1.1 Establish and Maintain Detailed Enterprise Asset Inventory |
 | NIST CSF 2.0 | ID.AM-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 1
 

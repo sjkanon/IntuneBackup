@@ -24,7 +24,7 @@ Accorde à Defender les autorisations système que macOS exige avant qu'il puiss
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 64
 

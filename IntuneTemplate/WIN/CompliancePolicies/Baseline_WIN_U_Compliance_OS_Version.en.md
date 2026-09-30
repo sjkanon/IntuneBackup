@@ -26,7 +26,7 @@ Checks whether the device runs a Windows version that can actually apply the bas
 | CIS Controls v8.1 | 2.2 Ensure Authorized Software is Currently Supported |
 | NIST CSF 2.0 | DE.CM-09<br>PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 38
 

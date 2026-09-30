@@ -25,7 +25,7 @@ Begrenst Recall wanneer die is toegestaan: geen momentopnamen van de beheerporta
 | CIS Controls v8.1 | 3.4 Enforce Data Retention |
 | NIST CSF 2.0 | PR.DS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 5
 

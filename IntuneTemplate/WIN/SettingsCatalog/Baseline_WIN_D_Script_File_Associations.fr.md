@@ -26,7 +26,7 @@ Fait ouvrir les fichiers .js, .vbs et .hta dans le Bloc-notes au lieu de l'hôte
 | CIS Controls v8.1 | 9.6 Block Unnecessary File Types |
 | NIST CSF 2.0 | PR.PS-05 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 1
 

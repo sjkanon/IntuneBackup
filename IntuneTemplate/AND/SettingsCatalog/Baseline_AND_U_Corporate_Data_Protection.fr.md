@@ -26,7 +26,7 @@ Bloque, sur les appareils Android fully managed et corporate-owned, les captures
 | CIS Controls v8.1 | 3.13 Deploy a Data Loss Prevention Solution<br>4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.DS-01<br>PR.DS-10<br>PR.PS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

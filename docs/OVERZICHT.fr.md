@@ -6,7 +6,7 @@
 
 197 policies sur 4 plateformes, avec
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) comme source.
-Ceci est le résumé ; les détails se trouvent dans le [README principal](README.fr.md) et dans chaque dossier.
+Ceci est le résumé ; les détails se trouvent dans le [README principal](../README.fr.md) et dans chaque dossier.
 
 | | Nombre |
 |---|---:|
@@ -18,16 +18,16 @@ Ceci est le résumé ; les détails se trouvent dans le [README principal](READM
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](IntuneTemplate/WIN/README.fr.md) | 114 | 1 | 6 | 11 | – | **132** |
-| [macOS](IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
-| [iOS/iPadOS](IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
-| [Android](IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
+| [Windows](../IntuneTemplate/WIN/README.fr.md) | 114 | 1 | 6 | 11 | – | **132** |
+| [macOS](../IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
+| [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
+| [Android](../IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Chaque plateforme dispose d'un tableau avec **chaque policy, ce qu'elle fait et où elle atterrit** :
-- [Windows](IntuneTemplate/WIN/README.fr.md) — 132 policies
-- [macOS](IntuneTemplate/MAC/README.fr.md) — 37 policies
-- [iOS/iPadOS](IntuneTemplate/IOS/README.fr.md) — 14 policies
-- [Android](IntuneTemplate/AND/README.fr.md) — 14 policies
+- [Windows](../IntuneTemplate/WIN/README.fr.md) — 132 policies
+- [macOS](../IntuneTemplate/MAC/README.fr.md) — 37 policies
+- [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) — 14 policies
+- [Android](../IntuneTemplate/AND/README.fr.md) — 14 policies
 
 ## Référentiel de conformité
 

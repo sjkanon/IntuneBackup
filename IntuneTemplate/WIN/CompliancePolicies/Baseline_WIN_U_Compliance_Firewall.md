@@ -26,7 +26,7 @@ Toetst of Windows Firewall actief is.
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 43
 

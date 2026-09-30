@@ -26,7 +26,7 @@ Fetches new Defender definitions and engine versions first, so that you notice a
 | CIS Controls v8.1 | 10.2 Configure Automatic Anti-Malware Signature Updates |
 | NIST CSF 2.0 | PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

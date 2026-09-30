@@ -26,7 +26,7 @@ Détermine quand l'écran se verrouille et quelles exigences s'appliquent au cod
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
 | NIST CSF 2.0 | PR.AA-03 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 16
 

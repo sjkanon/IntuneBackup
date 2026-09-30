@@ -26,7 +26,7 @@ Turns on Windows Firewall for the domain, private and public profiles and define
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>8.2 Collect Audit Logs |
 | NIST CSF 2.0 | PR.IR-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 35
 

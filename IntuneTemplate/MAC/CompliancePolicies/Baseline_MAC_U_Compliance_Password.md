@@ -24,7 +24,7 @@ Toetst of de Mac een wachtwoord vereist en hoe sterk die moet zijn.
 | CIS Controls v8.1 | 4.3 Configure Automatic Session Locking on Enterprise Assets |
 | NIST CSF 2.0 | PR.AA-03<br>DE.CM-09 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 27
 

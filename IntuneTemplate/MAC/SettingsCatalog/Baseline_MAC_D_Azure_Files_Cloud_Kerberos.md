@@ -42,7 +42,7 @@ Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een 
 | CIS Controls v8.1 | 6.7 Centralize Access Control |
 | NIST CSF 2.0 | PR.AA-03<br>PR.AA-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 10
 

@@ -26,7 +26,7 @@ Sets DNS over HTTPS in Edge to 'automatic': Edge encrypts DNS requests as soon a
 | CIS Controls v8.1 | 3.10 Encrypt Sensitive Data in Transit<br>4.9 Configure Trusted DNS Servers on Enterprise Assets |
 | NIST CSF 2.0 | PR.DS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

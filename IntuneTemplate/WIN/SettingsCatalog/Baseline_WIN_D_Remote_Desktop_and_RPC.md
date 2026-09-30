@@ -24,7 +24,7 @@ Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>12.6 Use of Secure Network Management and Communication Protocols |
 | NIST CSF 2.0 | PR.IR-01<br>PR.DS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 12
 

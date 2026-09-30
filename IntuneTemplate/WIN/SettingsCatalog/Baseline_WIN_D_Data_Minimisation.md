@@ -24,7 +24,7 @@ Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestand
 | ISO/IEC 27001:2022 | A.5.34 Privacy en bescherming van persoonsgegevens |
 | NIST CSF 2.0 | PR.DS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

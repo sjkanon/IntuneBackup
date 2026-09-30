@@ -26,7 +26,7 @@ On Macs with Apple silicon, sets a random, Intune-managed password on recoveryOS
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-05<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

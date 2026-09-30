@@ -24,7 +24,7 @@ Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebb
 | CIS Controls v8.1 | 4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.AA-03<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 8
 

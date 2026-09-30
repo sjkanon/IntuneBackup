@@ -26,7 +26,7 @@ Explicitly sets the numeric Windows Hello PIN: digits required, letters and spec
 | CIS Controls v8.1 | 5.2 Use Unique Passwords |
 | NIST CSF 2.0 | PR.AA-01<br>PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 5
 

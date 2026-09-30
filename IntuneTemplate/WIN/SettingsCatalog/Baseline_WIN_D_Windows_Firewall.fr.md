@@ -26,7 +26,7 @@ Active le Pare-feu Windows pour les profils domaine, privé et public et défini
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>8.2 Collect Audit Logs |
 | NIST CSF 2.0 | PR.IR-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 35
 

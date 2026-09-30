@@ -26,7 +26,7 @@ La sécurité des macros Office : bloque les macros dans les fichiers provenant 
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 209
 

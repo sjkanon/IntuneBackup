@@ -26,7 +26,7 @@ Turns on the macOS firewall and lets Gatekeeper allow only software signed by an
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>2.5 Allowlist Authorized Software<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.IR-01<br>PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 9
 

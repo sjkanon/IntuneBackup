@@ -26,7 +26,7 @@ Hardening of the Internet Explorer engine, which still runs under Edge's IE mode
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 206
 

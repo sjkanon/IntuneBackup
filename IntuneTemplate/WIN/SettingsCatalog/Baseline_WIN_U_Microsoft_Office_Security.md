@@ -24,7 +24,7 @@ De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>9.6 Block Unnecessary File Types |
 | NIST CSF 2.0 | PR.PS-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 228
 

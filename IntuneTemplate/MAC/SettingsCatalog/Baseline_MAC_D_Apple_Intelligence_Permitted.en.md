@@ -26,7 +26,7 @@ Explicitly allows the same Apple Intelligence features: Writing Tools, summaries
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 13
 

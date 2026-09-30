@@ -26,7 +26,7 @@ Windows' local security options: anonymous access, the network authentication le
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.7 Manage Default Accounts on Enterprise Assets and Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.AA-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 24
 

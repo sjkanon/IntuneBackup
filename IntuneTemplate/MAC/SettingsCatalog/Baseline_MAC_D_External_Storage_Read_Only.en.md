@@ -26,7 +26,7 @@ Lets macOS mount only external storage that is itself read-only. Ordinary USB st
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists |
 | NIST CSF 2.0 | PR.DS-01<br>PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

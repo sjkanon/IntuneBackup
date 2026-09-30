@@ -26,7 +26,7 @@ Vérifie que Microsoft Defender est activé et que les informations de sécurit�
 | CIS Controls v8.1 | 10.2 Configure Automatic Anti-Malware Signature Updates |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 43
 

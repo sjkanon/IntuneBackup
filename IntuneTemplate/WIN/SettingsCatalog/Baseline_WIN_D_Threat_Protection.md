@@ -26,7 +26,7 @@ Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kun
 | CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features<br>10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

@@ -25,7 +25,7 @@ Automatically cleans up temporary files, the Recycle Bin and old downloads as so
 | NIS2 art. 21(2) | art. 21(2)(c) business continuity and crisis management |
 | NIST CSF 2.0 | PR.IR-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 6
 

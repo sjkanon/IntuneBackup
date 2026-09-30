@@ -24,7 +24,7 @@ Shows a message for the finder on the lock screen of a corporate iPhone or iPad,
 | ISO/IEC 27001:2022 | A.7.9 Security of assets off-premises<br>A.8.1 User endpoint devices |
 | NIS2 art. 21(2) | art. 21(2)(i) human resources security, access control policies and asset management |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

@@ -24,7 +24,7 @@ Blocks outbound traffic from built-in Windows programs that malware uses to disg
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices |
 | NIST CSF 2.0 | PR.IR-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 49
 

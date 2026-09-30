@@ -26,7 +26,7 @@ Prevents screen content from being sent to an assistant app (such as Gemini or C
 | CIS Controls v8.1 | 3.13 Deploy a Data Loss Prevention Solution |
 | NIST CSF 2.0 | PR.DS-10 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

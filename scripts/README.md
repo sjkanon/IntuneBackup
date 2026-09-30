@@ -57,7 +57,7 @@ node scripts/generate-compliance.js --strict --ca ../CA-Policies/controls/ca-con
 Wat in git staat is bewust de `--no-ca`-versie, want dat is wat de workflow regenereert — CI ziet
 die andere repo niet. Beide lijnen in git zou betekenen dat COMPLIANCE.md bij elke PR heen en weer
 wisselt. Het scheelt het meest bij NIS2 (j), multifactorauthenticatie: 3 policies zonder CA, 13 met.
-Hoe je de CA-kant wél in CI krijgt staat in [ANALYSE.md](../ANALYSE.md#open-punten), open punt 3.
+Hoe je de CA-kant wél in CI krijgt staat in [ANALYSE.md](../docs/ANALYSE.md#open-punten), open punt 3.
 
 ## PowerShell
 
@@ -70,7 +70,7 @@ Beide vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
 | [`Rename-BaselinePolicy.ps1`](Rename-BaselinePolicy.ps1) | Brengt de policynamen in een tenant op de huidige conventie, volgens `_renames.json`. `PATCH`, dus id en assignments blijven. Meldt de gevallen die handwerk vragen in plaats van ze te forceren. |
 
 Nog te bouwen: `Get-BaselinePolicyState.ps1`, de tenant-zijdige tegenhanger van
-`check-scope.js` — zie [PLAN.md](../PLAN.md#nog-te-bouwen-scriptsget-baselinepolicystateps1).
+`check-scope.js` — zie [PLAN.md](../docs/PLAN.md#nog-te-bouwen-scriptsget-baselinepolicystateps1).
 
 ## Volgorde
 

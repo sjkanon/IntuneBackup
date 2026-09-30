@@ -25,7 +25,7 @@ Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, h
 | NIS2 art. 21(2) | art. 21(2)(g) basispraktijken cyberhygiene en training<br>art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
 | NIST CSF 2.0 | PR.AA-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 4
 

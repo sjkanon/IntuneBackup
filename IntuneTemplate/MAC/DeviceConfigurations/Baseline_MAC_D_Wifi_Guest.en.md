@@ -25,7 +25,7 @@ Deploys the guest network as a second profile to every Mac, so that a device sta
 | NIS2 art. 21(2) | art. 21(2)(c) business continuity and crisis management<br>art. 21(2)(e) security in network and information systems acquisition, development and maintenance, including vulnerability handling |
 | NIST CSF 2.0 | PR.IR-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 7
 

@@ -25,7 +25,7 @@ Limits Recall when it is allowed: no snapshots of the management portals and the
 | CIS Controls v8.1 | 3.4 Enforce Data Retention |
 | NIST CSF 2.0 | PR.DS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 5
 

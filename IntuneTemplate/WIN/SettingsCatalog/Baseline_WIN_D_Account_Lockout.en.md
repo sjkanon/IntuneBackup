@@ -26,7 +26,7 @@ Locks an account for 15 minutes after ten failed sign-in attempts, including tha
 | CIS Controls v8.1 | 4.10 Enforce Automatic Device Lockout on Portable End-User Devices |
 | NIST CSF 2.0 | PR.AA-03 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

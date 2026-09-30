@@ -26,7 +26,7 @@ Edge's security settings on macOS: SmartScreen, download control and certificate
 | CIS Controls v8.1 | 9.3 Maintain and Enforce Network-Based URL Filters<br>10.1 Deploy and Maintain Anti-Malware Software<br>3.10 Encrypt Sensitive Data in Transit |
 | NIST CSF 2.0 | PR.PS-01<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 31
 

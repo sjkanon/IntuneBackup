@@ -26,7 +26,7 @@ Dwingt op ingeschreven iPhones en iPads de nieuwste iOS-versie af uiterlijk 14 d
 | CIS Controls v8.1 | 7.3 Perform Automated Operating System Patch Management |
 | NIST CSF 2.0 | PR.PS-02<br>ID.RA-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 14
 

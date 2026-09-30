@@ -26,7 +26,7 @@ Maakt een apparaat niet-compliant zodra Defender for Endpoint het risiconiveau h
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.1 Centralize Security Event Alerting |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 43
 

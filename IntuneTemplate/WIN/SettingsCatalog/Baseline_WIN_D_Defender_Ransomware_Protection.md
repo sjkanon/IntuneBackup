@@ -26,7 +26,7 @@ Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk
 | CIS Controls v8.1 | 10.7 Use Behavior-Based Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>RS.MI-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

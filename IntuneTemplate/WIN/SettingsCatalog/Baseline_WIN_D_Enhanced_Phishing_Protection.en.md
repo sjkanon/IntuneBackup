@@ -25,7 +25,7 @@ Warns as soon as a user types their work password on a phishing site, reuses it 
 | NIS2 art. 21(2) | art. 21(2)(g) basic cyber hygiene practices and cybersecurity training<br>art. 21(2)(i) human resources security, access control policies and asset management |
 | NIST CSF 2.0 | PR.AA-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

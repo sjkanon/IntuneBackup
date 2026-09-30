@@ -24,7 +24,7 @@ Determines which privacy-sensitive data apps may request, such as location and s
 | ISO/IEC 27001:2022 | A.5.34 Privacy and protection of PII |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

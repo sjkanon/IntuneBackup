@@ -26,7 +26,7 @@ Transfère les événements Windows vers un Windows Event Collector central, afi
 | CIS Controls v8.1 | 8.9 Centralize Audit Logs |
 | NIST CSF 2.0 | PR.PS-04<br>DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

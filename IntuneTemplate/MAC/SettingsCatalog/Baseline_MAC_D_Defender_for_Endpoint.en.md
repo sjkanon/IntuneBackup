@@ -24,7 +24,7 @@ Gives Defender the system permissions macOS requires before it can work: system 
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>13.2 Deploy a Host-Based Intrusion Detection Solution |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 64
 

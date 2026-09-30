@@ -24,7 +24,7 @@ Determines which Windows settings are synchronised between devices.
 | CIS Controls v8.1 | 11.2 Perform Automated Backups |
 | NIST CSF 2.0 | PR.DS-11 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

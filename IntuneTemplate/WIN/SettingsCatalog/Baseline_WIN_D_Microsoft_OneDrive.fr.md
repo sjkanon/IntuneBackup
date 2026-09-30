@@ -26,7 +26,7 @@ Connecte automatiquement le client OneDrive avec le compte professionnel et dép
 | CIS Controls v8.1 | 11.2 Perform Automated Backups |
 | NIST CSF 2.0 | PR.DS-11 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 19
 

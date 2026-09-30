@@ -26,7 +26,7 @@ Verrouille un compte pendant 15 minutes après dix tentatives de connexion écho
 | CIS Controls v8.1 | 4.10 Enforce Automatic Device Lockout on Portable End-User Devices |
 | NIST CSF 2.0 | PR.AA-03 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

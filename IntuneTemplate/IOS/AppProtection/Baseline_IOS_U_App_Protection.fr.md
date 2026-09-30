@@ -26,7 +26,7 @@ Protège les données de l'entreprise dans les applications Microsoft sur un iPh
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists<br>3.11 Encrypt Sensitive Data at Rest<br>4.11 Enforce Remote Wipe Capability on Portable End-User Devices |
 | NIST CSF 2.0 | PR.DS-01<br>PR.AA-03 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 68
 

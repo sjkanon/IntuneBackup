@@ -26,7 +26,7 @@ Hardening for supervised corporate iPhones and iPads: no manually installed prof
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>2.5 Allowlist Authorized Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 22
 

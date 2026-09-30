@@ -26,7 +26,7 @@ Marks an iPhone or iPad as non-compliant as soon as Microsoft Defender for Endpo
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09<br>PR.AA-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 25
 

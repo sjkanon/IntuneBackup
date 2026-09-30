@@ -26,7 +26,7 @@ Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-s
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists |
 | NIST CSF 2.0 | PR.DS-01<br>PR.PS-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

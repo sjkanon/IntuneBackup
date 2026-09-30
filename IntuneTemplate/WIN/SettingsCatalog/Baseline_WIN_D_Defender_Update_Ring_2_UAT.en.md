@@ -24,7 +24,7 @@ Second ring for Defender updates: runs behind the pilot and ahead of production.
 | CIS Controls v8.1 | 10.2 Configure Automatic Anti-Malware Signature Updates |
 | NIST CSF 2.0 | PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

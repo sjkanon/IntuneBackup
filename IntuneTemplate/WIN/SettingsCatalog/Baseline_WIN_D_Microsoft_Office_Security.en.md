@@ -26,7 +26,7 @@ Office macro security: blocks macros in files from the internet, restricts Activ
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>10.5 Enable Anti-Exploitation Features |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 209
 

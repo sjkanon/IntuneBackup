@@ -26,7 +26,7 @@ Checks whether Microsoft Defender is on and real-time protection is active.
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 43
 

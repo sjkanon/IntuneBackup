@@ -26,7 +26,7 @@ Schrijft een transcript van elke PowerShell-sessie weg, zodat achteraf te zien i
 | CIS Controls v8.1 | 8.5 Collect Detailed Audit Logs<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 3
 

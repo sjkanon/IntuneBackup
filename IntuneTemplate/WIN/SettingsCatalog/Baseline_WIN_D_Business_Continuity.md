@@ -25,7 +25,7 @@ Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf e
 | NIS2 art. 21(2) | art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer |
 | NIST CSF 2.0 | PR.IR-03<br>RC.RP-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 4
 

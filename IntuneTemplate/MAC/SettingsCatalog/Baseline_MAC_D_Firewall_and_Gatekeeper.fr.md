@@ -26,7 +26,7 @@ Active le pare-feu macOS et fait en sorte que Gatekeeper n'autorise que les logi
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices<br>2.5 Allowlist Authorized Software<br>10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | PR.IR-01<br>PR.PS-05 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 9
 

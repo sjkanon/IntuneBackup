@@ -26,7 +26,7 @@ Houdt bedrijfsgegevens op elk ingeschreven toestel gescheiden van privé-apps: d
 | CIS Controls v8.1 | 3.3 Configure Data Access Control Lists<br>3.11 Encrypt Sensitive Data at Rest |
 | NIST CSF 2.0 | PR.DS-01<br>PR.DS-02 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 7
 

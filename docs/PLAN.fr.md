@@ -29,7 +29,7 @@ La phase 3 vient volontairement après le reste : le dépôt est maintenant comp
 ## Ce qui a été fait dans le dépôt
 
 24 → 95 stratégies. La source est désormais `IntuneTemplate/_manifest.json` plus
-`scripts/import-oib.js` ; voir [README.fr.md](README.fr.md) pour l'organisation, le nommage et la
+`scripts/import-oib.js` ; voir [README.fr.md](../README.fr.md) pour l'organisation, le nommage et la
 façon d'intégrer une nouvelle version d'OIB.
 
 **Phases 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `[Baseline] - D/U - Item`,

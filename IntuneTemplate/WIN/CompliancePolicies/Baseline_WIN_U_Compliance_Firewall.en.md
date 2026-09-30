@@ -26,7 +26,7 @@ Checks whether Windows Firewall is active.
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 43
 

@@ -25,7 +25,7 @@ Vérifie que l'appareil dispose d'un TPM. Sans TPM, pas de BitLocker avec protec
 | NIS2 art. 21(2) | art. 21(2)(f) évaluation de l'efficacité<br>art. 21(2)(h) cryptographie et chiffrement |
 | NIST CSF 2.0 | DE.CM-09 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 43
 

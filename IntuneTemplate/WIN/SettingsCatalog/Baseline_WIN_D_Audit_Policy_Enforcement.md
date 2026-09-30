@@ -26,7 +26,7 @@ Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellin
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.5 Collect Detailed Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

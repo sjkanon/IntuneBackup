@@ -24,7 +24,7 @@ How and when Office, Edge and other Microsoft apps on the Mac update themselves.
 | CIS Controls v8.1 | 7.4 Perform Automated Application Patch Management |
 | NIST CSF 2.0 | PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 16
 

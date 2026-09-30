@@ -26,7 +26,7 @@ Supprime les échappatoires locales de la protection anti-malware : les utilisat
 | CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features<br>10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | PR.PS-01 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

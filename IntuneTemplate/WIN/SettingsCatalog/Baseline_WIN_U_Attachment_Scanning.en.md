@@ -26,7 +26,7 @@ Makes the virus scanner check every attachment at the moment the user opens it, 
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

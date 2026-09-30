@@ -6,7 +6,7 @@
 Table Storage avec une chaîne `JSON`/`RAWJson` imbriquée). Depuis août 2026, le contenu provient
 en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
 (Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
-repris avant la publication officielle — voir [`ANALYSE.md`](ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
+repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
 197 stratégies sur quatre plateformes :
 
@@ -35,13 +35,13 @@ flowchart LR
   style T stroke-width:3px
 ```
 
-**[OVERZICHT.md](OVERZICHT.fr.md)** est le résumé à partager : ce qu'il contient, ce qui a changé
+**[OVERZICHT.md](docs/OVERZICHT.fr.md)** est le résumé à partager : ce qu'il contient, ce qui a changé
 et ce qui reste à faire dans le tenant.
 
-**[STRUCTUUR.md](STRUCTUUR.fr.md)** est le plan : quel dossier contient quoi, quel script lit et
+**[STRUCTUUR.md](docs/STRUCTUUR.fr.md)** est le plan : quel dossier contient quoi, quel script lit et
 écrit quoi, et à quels systèmes le dépôt est lié.
 
-**[COMPLIANCE.md](COMPLIANCE.fr.md)** est la justification destinée à un RSSI ou à un auditeur : pour chaque mesure
+**[COMPLIANCE.md](docs/COMPLIANCE.fr.md)** est la justification destinée à un RSSI ou à un auditeur : pour chaque mesure
 de l'annexe A de l'ISO/IEC 27001:2022, chaque mesure NIS2 (art. 21, par. 2), chaque safeguard CIS Controls v8.1 et chaque
 sous-catégorie NIST CSF 2.0, quelles stratégies la mettent en œuvre techniquement, dans quelle phase — et ce qui
 reste organisationnel. Généré par `scripts/generate-compliance.js` à partir des `controls` de
@@ -117,7 +117,7 @@ des deux stratégies. Toute stratégie au-delà de la phase 1 a un `faseWaarom` 
 La phase détermine aussi le **paquet CIPP** d'une stratégie — le champ `Package` du modèle,
 sur lequel CIPP regroupe ses baselines. Voir [déployer via une baseline CIPP](#déployer-via-une-baseline-cipp).
 
-**[`ANALYSE.md`](ANALYSE.fr.md)** consigne comment le complément de septembre 2026 a vu le jour :
+**[`ANALYSE.md`](docs/ANALYSE.fr.md)** consigne comment le complément de septembre 2026 a vu le jour :
 quelles sources ont été comparées, les 509 paramètres qu'IntuneAdmin définit en plus des nôtres, pourquoi
 14 d'entre eux ont été retenus, et — surtout — ce qui n'y figure volontairement *pas* et pourquoi.
 
@@ -460,7 +460,7 @@ touche directement les utilisateurs ou les anciens systèmes. OpenIntuneBaseline
 point de départ, pas une configuration de production clé en main.
 
 C'est la phase 2, et la liste — avec pour chaque stratégie le pourquoi — se trouve dans
-[OVERZICHT.md](OVERZICHT.fr.md#dabord-en-pilote). Elle est générée à partir de `faseWaarom` dans le
+[OVERZICHT.md](docs/OVERZICHT.fr.md#dabord-en-pilote). Elle est générée à partir de `faseWaarom` dans le
 manifeste. Jusqu'en septembre 2026, une liste distincte figurait ici, et elle a divergé : neuf des
 stratégies qui y figuraient étaient en phase 1 et étaient tout simplement déployées sur tous les appareils via `Baseline-Devices`.
 Windows Hello for Business entre en pilote en tant que paire, device *et* user — l'une en

@@ -24,7 +24,7 @@ Toont op het vergrendelscherm van een bedrijfs-iPhone of -iPad een tekst voor de
 | ISO/IEC 27001:2022 | A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein<br>A.8.1 Eindpuntapparatuur van gebruikers |
 | NIS2 art. 21(2) | art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 2
 

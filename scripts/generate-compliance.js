@@ -44,7 +44,7 @@ const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
 const LICENTIES_PATH = path.join(TEMPLATE_DIR, "_licenties.json");
-const OUTPUT_PATH = path.join(REPO_ROOT, "COMPLIANCE.md");
+const OUTPUT_PATH = path.join(REPO_ROOT, "docs", "COMPLIANCE.md");
 /**
  * De repo heet op GitHub CA-Policies; dit script kende hem als CA-policies. Op Windows maakt dat
  * niets uit en op Linux mislukt hij stil: geen bestand, dus geen CA, dus een COMPLIANCE.md die
@@ -236,7 +236,7 @@ function buildIndex(ctx) {
       platform: parsed.platform,
       fase: entry.fase,
       entry,
-      link: `IntuneTemplate/${parsed.platform}/${TYPE_TO_CATEGORY[template.type]}/${entry.target}.md`,
+      link: `../IntuneTemplate/${parsed.platform}/${TYPE_TO_CATEGORY[template.type]}/${entry.target}.md`,
     };
     const hasControls = entry.controls && Object.values(entry.controls).some((list) => Array.isArray(list) && list.length > 0);
     if (!hasControls) problems.zonderControls.push(ref.naam);
@@ -315,8 +315,8 @@ function sectionIntro(ctx) {
         "Hoe deze baseline invulling geeft aan **ISO/IEC 27001:2022 Annex A**, **NIS2 (richtlijn 2022/2555,",
         "art. 21 lid 2)**, **CIS Controls v8.1** en **NIST CSF 2.0** — en wat de organisatie daarnaast zelf",
         "moet regelen. Bedoeld voor een CISO, FG of auditor. Alles hieronder is afgeleid uit het veld",
-        "`controls` in [`IntuneTemplate/_manifest.json`](IntuneTemplate/_manifest.json) en de vocabulaire in",
-        "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
+        "`controls` in [`IntuneTemplate/_manifest.json`](../IntuneTemplate/_manifest.json) en de vocabulaire in",
+        "[`IntuneTemplate/_controls.json`](../IntuneTemplate/_controls.json).",
         "",
         "**Lees dit eerst.** Dit document zegt wat de *baseline* afdwingt, niet wat een *tenant* doet. Of de",
         "policies in een tenant staan en worden toegepast, toon je aan met de Intune-rapportage: de",
@@ -328,8 +328,8 @@ function sectionIntro(ctx) {
         "How this baseline implements **ISO/IEC 27001:2022 Annex A**, **NIS2 (Directive 2022/2555,",
         "art. 21(2))**, **CIS Controls v8.1** and **NIST CSF 2.0** — and what the organisation has to arrange",
         "itself on top of that. Intended for a CISO, DPO or auditor. Everything below is derived from the",
-        "`controls` field in [`IntuneTemplate/_manifest.json`](IntuneTemplate/_manifest.json) and the vocabulary in",
-        "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
+        "`controls` field in [`IntuneTemplate/_manifest.json`](../IntuneTemplate/_manifest.json) and the vocabulary in",
+        "[`IntuneTemplate/_controls.json`](../IntuneTemplate/_controls.json).",
         "",
         "**Read this first.** This document states what the *baseline* enforces, not what a *tenant* does. Whether",
         "the policies are present and applied in a tenant is evidenced through Intune reporting: the",
@@ -341,8 +341,8 @@ function sectionIntro(ctx) {
         "Comment cette baseline met en œuvre l'**ISO/IEC 27001:2022 Annexe A**, **NIS2 (directive 2022/2555,",
         "art. 21, paragraphe 2)**, les **CIS Controls v8.1** et le **NIST CSF 2.0** — et ce que l'organisation doit",
         "régler elle-même en plus. Destiné à un RSSI, un DPO ou un auditeur. Tout ce qui suit est dérivé du champ",
-        "`controls` de [`IntuneTemplate/_manifest.json`](IntuneTemplate/_manifest.json) et du vocabulaire de",
-        "[`IntuneTemplate/_controls.json`](IntuneTemplate/_controls.json).",
+        "`controls` de [`IntuneTemplate/_manifest.json`](../IntuneTemplate/_manifest.json) et du vocabulaire de",
+        "[`IntuneTemplate/_controls.json`](../IntuneTemplate/_controls.json).",
         "",
         "**À lire d'abord.** Ce document indique ce que la *baseline* impose, pas ce que fait un *tenant*. La présence",
         "et l'application des policies dans un tenant se démontrent par les rapports Intune : l'affectation",
@@ -1137,7 +1137,7 @@ function sectionControle(ctx, data) {
         "",
         "---",
         "",
-        `Terug naar de [hoofd-README](${V.link("README.md")}) · [OVERZICHT.md](${V.link("OVERZICHT.md")})`,
+        `Terug naar de [hoofd-README](${V.link("../README.md")}) · [OVERZICHT.md](${V.link("OVERZICHT.md")})`,
       ],
       en: [
         "Only map what a policy actually enforces or verifies. `check-scope.js` rejects a policy without",
@@ -1145,7 +1145,7 @@ function sectionControle(ctx, data) {
         "",
         "---",
         "",
-        `Back to the [main README](${V.link("README.md")}) · [OVERZICHT.en.md](${V.link("OVERZICHT.md")})`,
+        `Back to the [main README](${V.link("../README.md")}) · [OVERZICHT.en.md](${V.link("OVERZICHT.md")})`,
       ],
       fr: [
         "Ne mappez que ce qu'une policy impose ou vérifie réellement. `check-scope.js` refuse une policy sans",
@@ -1153,7 +1153,7 @@ function sectionControle(ctx, data) {
         "",
         "---",
         "",
-        `Retour au [README principal](${V.link("README.md")}) · [OVERZICHT.fr.md](${V.link("OVERZICHT.md")})`,
+        `Retour au [README principal](${V.link("../README.md")}) · [OVERZICHT.fr.md](${V.link("OVERZICHT.md")})`,
       ],
     }),
     ""

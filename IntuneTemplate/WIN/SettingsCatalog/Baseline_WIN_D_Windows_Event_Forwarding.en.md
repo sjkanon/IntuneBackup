@@ -26,7 +26,7 @@ Forwards Windows events to a central Windows Event Collector, so that logs are k
 | CIS Controls v8.1 | 8.9 Centralize Audit Logs |
 | NIST CSF 2.0 | PR.PS-04<br>DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

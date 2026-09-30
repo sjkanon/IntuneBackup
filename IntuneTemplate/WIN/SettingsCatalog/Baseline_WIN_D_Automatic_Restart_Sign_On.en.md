@@ -24,7 +24,7 @@ After a restart for updates, automatically signs the user back in, locked, so th
 | CIS Controls v8.1 | 7.3 Perform Automated Operating System Patch Management |
 | NIST CSF 2.0 | PR.PS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 3
 

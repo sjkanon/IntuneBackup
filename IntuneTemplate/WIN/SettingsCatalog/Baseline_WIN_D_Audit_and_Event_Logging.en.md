@@ -26,7 +26,7 @@ Defines which events Windows records and how large the logs are — the basis fo
 | CIS Controls v8.1 | 8.2 Collect Audit Logs<br>8.3 Ensure Adequate Audit Log Storage<br>8.5 Collect Detailed Audit Logs<br>8.8 Collect Command-Line Audit Logs |
 | NIST CSF 2.0 | PR.PS-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 40
 

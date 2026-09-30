@@ -24,7 +24,7 @@ Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten ni
 | CIS Controls v8.1 | 8.4 Standardize Time Synchronization |
 | NIST CSF 2.0 | PR.PS-04 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 10
 

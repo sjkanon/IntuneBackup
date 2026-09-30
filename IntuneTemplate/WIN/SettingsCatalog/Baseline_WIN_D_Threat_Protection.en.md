@@ -26,7 +26,7 @@ Removes the local escape routes from malware protection: users cannot override E
 | CIS Controls v8.1 | 10.5 Enable Anti-Exploitation Features<br>10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | PR.PS-01 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 2
 

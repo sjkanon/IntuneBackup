@@ -2,7 +2,7 @@
 
 # Analyse des écarts — que nous manque-t-il pour une première baseline ?
 
-Rédigé à la main, contrairement au [`README.md`](README.fr.md) voisin. Ce document consigne *comment*
+Rédigé à la main, contrairement au [`README.md`](../README.fr.md) voisin. Ce document consigne *comment*
 l'ensemble BASELINE2 a vu le jour et — plus important — ce qui n'y figure délibérément **pas** et pourquoi.
 Sans ce dernier point, la prochaine itération est condamnée à réévaluer les mêmes 500 paramètres.
 
@@ -40,7 +40,7 @@ Trois pièges si on ne les connaît pas :
    suivi de `JSON.parse` échoue sur les 874.
 2. **Un `GroupSettingCollection` est un conteneur, pas un paramètre.** Deux stratégies qui utilisent le même
    payload macOS mais définissent des enfants différents n'entrent pas en conflit. `flattenSettings` dans
-   [`scripts/lib/templates.js`](scripts/lib/templates.js) fait déjà cette distinction.
+   [`scripts/lib/templates.js`](../scripts/lib/templates.js) fait déjà cette distinction.
 3. **Les valeurs d'un ensemble externe ne sont pas correctes d'office.** Voir *Erreurs dans les sources* ci-dessous.
 
 ## Résultat en chiffres
@@ -188,7 +188,7 @@ Peu de chose, et c'est un constat en soi.
   que nous n'en reprenons pas, il s'agit de choses comme `cryptowalletenabled`, `gamermodeenabled`,
   `aigenthemesenabled` et `browseraddprofileenabled`. Ce sont des paramètres Edge soignés, mais ils ne
   découlent pas d'ISO 27001 et ne sont pas critiques pour l'appareil. Notre
-  [`Baseline_WIN_D_Microsoft_Edge_Security`](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.fr.md)
+  [`Baseline_WIN_D_Microsoft_Edge_Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.fr.md)
   (54 paramètres) couvre déjà le volet sécurité. **Aucun repris.**
 - Le **dossier NIS2** contient un profil Edge et un profil Windows 11. Le profil Windows 11 a fourni 11
   paramètres que nous ne définissons pas. Parmi eux, **quatre ont été repris** (les seuils de
@@ -452,7 +452,7 @@ En outre :
   Android Device Health (niveau de correctif minimal), iOS App Protection (synchronisation des widgets désactivée), macOS Software
   Updates (Enforce Latest après 30 jours, bêta désactivée), Firewall and Gatekeeper (envoi XProtect après demande),
   Edge Security sur macOS (pas de contournement des erreurs SSL).
-- **[`extras/`](extras/README.fr.md)** : ce qui n'est pas un type CIPP — restrictions d'inscription, configuration d'applications,
+- **[`extras/`](../extras/README.fr.md)** : ce qui n'est pas un type CIPP — restrictions d'inscription, configuration d'applications,
   filtres d'affectation, App Control for Business, DNS over HTTPS pour Windows, remédiations pour
   l'escrow BitLocker/LAPS, Escrow Buddy, listes de contrôle Apple Business.
 - **Référentiel de conformité** : chaque stratégie a des `controls` (iso, nis2, cis, nistcsf) issus du vocabulaire de

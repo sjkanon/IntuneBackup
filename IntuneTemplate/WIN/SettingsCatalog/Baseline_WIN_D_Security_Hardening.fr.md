@@ -26,7 +26,7 @@ Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolète
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software<br>8.8 Collect Command-Line Audit Logs<br>10.3 Disable Autorun and Autoplay for Removable Media |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-04 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 96
 

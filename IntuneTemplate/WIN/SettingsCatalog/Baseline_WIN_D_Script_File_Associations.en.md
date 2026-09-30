@@ -26,7 +26,7 @@ Makes .js, .vbs and .hta files open in Notepad instead of the script host, so th
 | CIS Controls v8.1 | 9.6 Block Unnecessary File Types |
 | NIST CSF 2.0 | PR.PS-05 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 1
 

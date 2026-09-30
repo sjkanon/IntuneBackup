@@ -24,7 +24,7 @@ Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname 
 | ISO/IEC 27001:2022 | A.8.18 Gebruik van speciale systeemhulpmiddelen |
 | NIST CSF 2.0 | PR.AA-05 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Eigenschappen — 4
 

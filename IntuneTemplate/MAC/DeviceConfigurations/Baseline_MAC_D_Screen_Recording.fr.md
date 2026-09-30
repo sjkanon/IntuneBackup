@@ -24,7 +24,7 @@ Uniquement pour les organisations qui utilisent NinjaOne ou TeamViewer. Définit
 | ISO/IEC 27001:2022 | A.8.18 Utilisation de programmes utilitaires à privilèges |
 | NIST CSF 2.0 | PR.AA-05 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Propriétés — 4
 

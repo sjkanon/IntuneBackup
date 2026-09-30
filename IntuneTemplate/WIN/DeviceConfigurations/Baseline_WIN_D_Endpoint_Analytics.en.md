@@ -22,7 +22,7 @@ Sends startup and performance data to Endpoint Analytics, so that slow devices b
 | ISO/IEC 27001:2022 | A.8.6 Capacity management |
 | NIST CSF 2.0 | PR.IR-04 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Properties — 3
 

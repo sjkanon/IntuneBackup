@@ -24,7 +24,7 @@ Affiche sur l'écran verrouillé d'un iPhone ou iPad d'entreprise un texte desti
 | ISO/IEC 27001:2022 | A.7.9 Sécurité des actifs hors des locaux<br>A.8.1 Terminaux finaux des utilisateurs |
 | NIS2 art. 21(2) | art. 21(2)(i) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 2
 

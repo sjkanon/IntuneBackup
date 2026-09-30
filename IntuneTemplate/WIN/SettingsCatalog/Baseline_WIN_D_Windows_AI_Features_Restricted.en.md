@@ -25,7 +25,7 @@ Turns off the generative AI features in Paint and in Windows Settings: Cocreator
 | NIS2 art. 21(2) | art. 21(2)(d) supply chain security |
 | NIST CSF 2.0 | PR.DS-02 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 4
 

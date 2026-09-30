@@ -26,7 +26,7 @@ Active Windows Protected Print, interdit aux utilisateurs standard d'installer d
 | CIS Controls v8.1 | 4.1 Establish and Maintain a Secure Configuration Process<br>2.3 Address Unauthorized Software |
 | NIST CSF 2.0 | PR.PS-01<br>PR.PS-05 |
 
-Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../COMPLIANCE.fr.md).
+Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
 ## Paramètres — 3
 

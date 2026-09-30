@@ -23,7 +23,7 @@ Sends the diagnostic data that Windows Update for Business Reports needs to show
 | NIS2 art. 21(2) | art. 21(2)(e) security in network and information systems acquisition, development and maintenance, including vulnerability handling<br>art. 21(2)(f) assessing the effectiveness |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 5
 

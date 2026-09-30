@@ -24,7 +24,7 @@ Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebrui
 | CIS Controls v8.1 | 4.5 Implement and Manage a Firewall on End-User Devices |
 | NIST CSF 2.0 | PR.IR-01 |
 
-Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../COMPLIANCE.md).
+Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
 ## Instellingen — 49
 

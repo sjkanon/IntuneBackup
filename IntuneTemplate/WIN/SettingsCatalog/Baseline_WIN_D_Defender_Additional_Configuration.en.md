@@ -26,7 +26,7 @@ Defender settings that do not fit in the Endpoint Security template and therefor
 | CIS Controls v8.1 | 10.1 Deploy and Maintain Anti-Malware Software<br>10.5 Enable Anti-Exploitation Features<br>10.6 Centrally Manage Anti-Malware Software |
 | NIST CSF 2.0 | DE.CM-09 |
 
-What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../COMPLIANCE.en.md).
+What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
 ## Settings — 9
 
