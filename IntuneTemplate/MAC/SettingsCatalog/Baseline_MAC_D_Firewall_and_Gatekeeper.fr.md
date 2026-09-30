@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Firewall_and_Gatekeeper.md) · [English](Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) · **Français**
 
-# [Baseline] - MAC - D - Firewall and Gatekeeper
+# CXNM - Standard - MAC - D - Firewall and Gatekeeper
 
 Active le pare-feu macOS et fait en sorte que Gatekeeper n'autorise que les logiciels signés par un développeur identifié.
 
@@ -15,7 +15,7 @@ Active le pare-feu macOS et fait en sorte que Gatekeeper n'autorise que les logi
 | Source | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | Fichier | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 
-> Pare-feu et mode furtif activés (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper activé avec App Store et développeurs identifiés (2.6.5). « Bloquer toutes les connexions entrantes » est volontairement désactivé — cela casse la réception AirPlay et le partage d'écran ; depuis septembre 2026, la policy de conformité ne l'exige plus non plus. Depuis septembre 2026, Gatekeeper peut proposer d'envoyer à Apple un fichier malveillant bloqué (enablexprotectmalwareupload, override). Le blocage du contournement via le Finder (com.apple.systempolicy.managed DisableOverride) ne se trouve pas ici mais dans [Baseline] - MAC - D - Restrictions Hardening : c'est un autre payload qu'OIB v1.0 ne fournit pas, et un override ne peut pas ajouter un nouveau groupe de payload.
+> Pare-feu et mode furtif activés (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper activé avec App Store et développeurs identifiés (2.6.5). « Bloquer toutes les connexions entrantes » est volontairement désactivé — cela casse la réception AirPlay et le partage d'écran ; depuis septembre 2026, la policy de conformité ne l'exige plus non plus. Depuis septembre 2026, Gatekeeper peut proposer d'envoyer à Apple un fichier malveillant bloqué (enablexprotectmalwareupload, override). Le blocage du contournement via le Finder (com.apple.systempolicy.managed DisableOverride) ne se trouve pas ici mais dans CXNM - Standard - MAC - D - Restrictions Hardening : c'est un autre payload qu'OIB v1.0 ne fournit pas, et un override ne peut pas ajouter un nouveau groupe de payload.
 
 ## Normes
 

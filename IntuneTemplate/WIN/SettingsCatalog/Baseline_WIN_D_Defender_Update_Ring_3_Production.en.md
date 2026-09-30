@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Update_Ring_3_Production.md) · **English** · [Français](Baseline_WIN_D_Defender_Update_Ring_3_Production.fr.md)
 
-# [Baseline] - WIN - D - Defender Update Ring 3 Production
+# CXNM - Standard - WIN - D - Defender Update Ring 3 Production
 
 Production ring for Defender updates: only gets definitions and engine versions after rings 1 and 2 have run them without problems.
 

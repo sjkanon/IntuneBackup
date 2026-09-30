@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) · [Français](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.fr.md)
 
-# [Baseline] - WIN - U - Compliance Defender Security Intelligence
+# CXNM - Standard - WIN - U - Compliance Defender Security Intelligence
 
 Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is.
 

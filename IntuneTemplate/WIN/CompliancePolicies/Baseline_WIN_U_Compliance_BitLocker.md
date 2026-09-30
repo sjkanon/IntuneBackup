@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Compliance_BitLocker.en.md) · [Français](Baseline_WIN_U_Compliance_BitLocker.fr.md)
 
-# [Baseline] - WIN - U - Compliance BitLocker
+# CXNM - Standard - WIN - U - Compliance BitLocker
 
 Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omdat het versleutelen na de inschrijving even duurt.
 

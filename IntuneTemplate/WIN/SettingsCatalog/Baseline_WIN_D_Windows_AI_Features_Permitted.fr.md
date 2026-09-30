@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Features_Permitted.md) · [English](Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows AI Features Permitted
+# CXNM - Standard - WIN - D - Windows AI Features Permitted
 
 Autorise explicitement les fonctions d'IA générative dans Paint et dans les Paramètres Windows : Cocreator, Image Creator, Generative Fill et le Settings Agent.
 
@@ -15,7 +15,7 @@ Autorise explicitement les fonctions d'IA générative dans Paint et dans les Pa
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, valeurs reprises sans modification |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Features_Permitted.json`](Baseline_WIN_D_Windows_AI_Features_Permitted.json) |
 
-> **Alternative à [Baseline] - WIN - D - Windows AI Features Restricted.** Celle-ci définit les quatre mêmes paramètres sur la valeur opposée ; affecter les deux provoque un Conflict, après quoi Intune n'en applique aucune. Notez que cela ne concerne que les quatre fonctionnalités de Paint et des Paramètres : Recall et Click To Do sont désactivés séparément via [Baseline] - WIN - D - Windows AI Restricted, et la liste de blocage Edge via [Baseline] - WIN - U - AI Usage Control Restricted. Qui veut autoriser l'IA de manière large doit aussi réexaminer ces deux-là.
+> **Alternative à CXNM - Standard - WIN - D - Windows AI Features Restricted.** Celle-ci définit les quatre mêmes paramètres sur la valeur opposée ; affecter les deux provoque un Conflict, après quoi Intune n'en applique aucune. Notez que cela ne concerne que les quatre fonctionnalités de Paint et des Paramètres : Recall et Click To Do sont désactivés séparément via CXNM - Standard - WIN - D - Windows AI Restricted, et la liste de blocage Edge via CXNM - Standard - WIN - U - AI Usage Control Restricted. Qui veut autoriser l'IA de manière large doit aussi réexaminer ces deux-là.
 
 ## Normes
 

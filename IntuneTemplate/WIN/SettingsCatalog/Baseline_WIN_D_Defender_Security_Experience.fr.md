@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Security_Experience.md) · [English](Baseline_WIN_D_Defender_Security_Experience.en.md) · **Français**
 
-# [Baseline] - WIN - D - Defender Security Experience
+# CXNM - Standard - WIN - D - Defender Security Experience
 
 Détermine ce que l'utilisateur voit dans l'application Sécurité Windows et ce qu'il peut désactiver lui-même.
 

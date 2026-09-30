@@ -6,7 +6,7 @@
   "roleScopeTagIds": [
     "0"
   ],
-  "displayName": "[Baseline] - AND - Outlook Managed Devices",
+  "displayName": "CXNM - Standard - AND - Outlook Managed Devices",
   "description": "Sets up Outlook with the work account (modern authentication), allows only the organisation account and shows a warning for external recipients. For every Android Enterprise profile type.",
   "packageId": "app:com.microsoft.office.outlook",
   "payloadJson": "eyJraW5kIjoiYW5kcm9pZGVudGVycHJpc2UjbWFuYWdlZENvbmZpZ3VyYXRpb24iLCJwcm9kdWN0SWQiOiJhcHA6Y29tLm1pY3Jvc29mdC5vZmZpY2Uub3V0bG9vayIsIm1hbmFnZWRQcm9wZXJ0eSI6W3sia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLkVtYWlsUHJvZmlsZS5BY2NvdW50VHlwZSIsInZhbHVlU3RyaW5nIjoiTW9kZXJuQXV0aCJ9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLkVtYWlsUHJvZmlsZS5FbWFpbFVQTiIsInZhbHVlU3RyaW5nIjoie3t1c2VycHJpbmNpcGFsbmFtZX19In0seyJrZXkiOiJjb20ubWljcm9zb2Z0Lm91dGxvb2suRW1haWxQcm9maWxlLkVtYWlsQWRkcmVzcyIsInZhbHVlU3RyaW5nIjoie3ttYWlsfX0ifSx7ImtleSI6IkludHVuZU1BTUFsbG93ZWRBY2NvdW50c09ubHkiLCJ2YWx1ZVN0cmluZyI6IkVuYWJsZWQifSx7ImtleSI6ImNvbS5taWNyb3NvZnQuaW50dW5lLm1hbS5BbGxvd2VkQWNjb3VudFVQTnMiLCJ2YWx1ZVN0cmluZyI6Int7dXNlcnByaW5jaXBhbG5hbWV9fSJ9LHsia2V5IjoiY29tLm1pY3Jvc29mdC5vdXRsb29rLk1haWwuRXh0ZXJuYWxSZWNpcGllbnRzVG9vbFRpcEVuYWJsZWQiLCJ2YWx1ZUJvb2wiOnRydWV9XX0=",

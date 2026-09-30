@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Feature_Configuration.md) · **English** · [Français](Baseline_WIN_D_Windows_Feature_Configuration.fr.md)
 
-# [Baseline] - WIN - D - Windows Feature Configuration
+# CXNM - Standard - WIN - D - Windows Feature Configuration
 
 Turns off Windows features that can move business data outside or create noise, such as web search from the Start menu.
 

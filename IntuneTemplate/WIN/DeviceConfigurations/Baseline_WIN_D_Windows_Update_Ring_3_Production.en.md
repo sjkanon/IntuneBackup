@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Update_Ring_3_Production.md) · **English** · [Français](Baseline_WIN_D_Windows_Update_Ring_3_Production.fr.md)
 
-# [Baseline] - WIN - D - Windows Update Ring 3 Production
+# CXNM - Standard - WIN - D - Windows Update Ring 3 Production
 
 Production ring for Windows updates: installs daily at 13:00 with a deferral period of two days.
 

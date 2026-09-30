@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.md) · **English** · [Français](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.fr.md)
 
-# [Baseline] - WIN - D - Defender Update Ring 1 Pilot
+# CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot
 
 Fetches new Defender definitions and engine versions first, so that you notice a bad update before the rest of the organisation gets it.
 

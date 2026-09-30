@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Threat_Protection.en.md) · [Français](Baseline_WIN_D_Threat_Protection.fr.md)
 
-# [Baseline] - WIN - D - Threat Protection
+# CXNM - Standard - WIN - D - Threat Protection
 
 Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker.
 
@@ -15,7 +15,7 @@ Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kun
 | Bron | ISO/IEC 27001:2022 A.8.7 en A.8.8, NIS2 art. 21(2)(e) — instellingen uit CIS v4 Windows 11 L1 |
 | Bestand | [`Baseline_WIN_D_Threat_Protection.json`](Baseline_WIN_D_Threat_Protection.json) |
 
-> LSA-bescherming stond al in [Baseline] - WIN - D - Device Guard and Credential Guard; wat ontbrak zijn de lokale overrides. Malwarebescherming hoort niet door de eindgebruiker te wijzigen te zijn, en dit waren de plekken waar dat wél kon; het blokkeren van eigen exploit-protectioninstellingen staat sinds OpenIntuneBaseline v4.0 in [Baseline] - WIN - D - Defender Additional Configuration. SafeDllSearchMode is de oudste en nog steeds de goedkoopste verdediging tegen DLL-kaping.
+> LSA-bescherming stond al in CXNM - Standard - WIN - D - Device Guard and Credential Guard; wat ontbrak zijn de lokale overrides. Malwarebescherming hoort niet door de eindgebruiker te wijzigen te zijn, en dit waren de plekken waar dat wél kon; het blokkeren van eigen exploit-protectioninstellingen staat sinds OpenIntuneBaseline v4.0 in CXNM - Standard - WIN - D - Defender Additional Configuration. SafeDllSearchMode is de oudste en nog steeds de goedkoopste verdediging tegen DLL-kaping.
 
 ## Normen
 

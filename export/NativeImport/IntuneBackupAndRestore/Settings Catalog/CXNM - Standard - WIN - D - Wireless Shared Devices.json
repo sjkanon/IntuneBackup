@@ -1,0 +1,32 @@
+{
+    "name": "CXNM - Standard - WIN - D - Wireless Shared Devices",
+    "description": "On shared devices, allows only the networks deployed via Intune. Wi-Fi networks added by users are removed and no new ones can be added. Baseline assignment: none by default — belongs on SEC-Shared-Devices. Source: ISO/IEC 27001:2022 A.8.20 and A.8.1, NIS2 art. 21(2)(e) — Policy CSP Wifi/AllowManualWiFiConfiguration.",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_wifi_allowmanualwificonfiguration",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_wifi_allowmanualwificonfiguration_0",
+                    "children": []
+                }
+            }
+        }
+    ]
+}

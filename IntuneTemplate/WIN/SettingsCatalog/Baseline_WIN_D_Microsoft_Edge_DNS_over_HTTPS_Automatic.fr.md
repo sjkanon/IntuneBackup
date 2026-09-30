@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.md) · [English](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) · **Français**
 
-# [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic
+# CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic
 
 Fixe DNS over HTTPS dans Edge sur « automatique » : Edge chiffre les requêtes DNS dès que le serveur DNS configuré prend en charge DoH et se rabat sinon sur le DNS classique, sans que l'utilisateur puisse le désactiver.
 
@@ -15,7 +15,7 @@ Fixe DNS over HTTPS dans Edge sur « automatique » : Edge chiffre les requêtes
 | Source | Policy Microsoft Edge DnsOverHttpsMode (Edge 83+) — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json) |
 
-> **Alternative à [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure** — les deux définissent `dnsoverhttpsmode` sur une valeur différente ; affectez-en une seule. Defender Network Protection (phase 1, Defender Antivirus) inspecte le trafic d'Edge via SmartScreen et continue donc de fonctionner ; pour les navigateurs tiers, Network Protection s'appuie sur l'inspection DNS/TLS, et Microsoft conseille d'y désactiver DoH et QUIC — cela sort du cadre de cette policy Edge.
+> **Alternative à CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure** — les deux définissent `dnsoverhttpsmode` sur une valeur différente ; affectez-en une seule. Defender Network Protection (phase 1, Defender Antivirus) inspecte le trafic d'Edge via SmartScreen et continue donc de fonctionner ; pour les navigateurs tiers, Network Protection s'appuie sur l'inspection DNS/TLS, et Microsoft conseille d'y désactiver DoH et QUIC — cela sort du cadre de cette policy Edge.
 
 ## Normes
 

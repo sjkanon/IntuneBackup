@@ -4,7 +4,7 @@
 
 # Android — 14 policies
 
-All policies are named `[Baseline] - AND - <D|U> - <Item>`; the tables below show the `<Item>` part.
+All policies are named `CXNM - Standard - AND - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|

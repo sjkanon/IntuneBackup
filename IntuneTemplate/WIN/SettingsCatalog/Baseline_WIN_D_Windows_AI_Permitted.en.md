@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Permitted.md) · **English** · [Français](Baseline_WIN_D_Windows_AI_Permitted.fr.md)
 
-# [Baseline] - WIN - D - Windows AI Permitted
+# CXNM - Standard - WIN - D - Windows AI Permitted
 
 Explicitly allows Recall and Click To Do, including saving snapshots.
 
@@ -15,7 +15,7 @@ Explicitly allows Recall and Click To Do, including saving snapshots.
 | Source | Counterpart of the Restricted variant; values are the Windows defaults, set explicitly |
 | File | [`Baseline_WIN_D_Windows_AI_Permitted.json`](Baseline_WIN_D_Windows_AI_Permitted.json) |
 
-> **Alternative to [Baseline] - WIN - D - Windows AI Restricted.** Before choosing this one, weigh whether the consequences are understood: Recall stores searchable screenshots on disk, and that index falls under the same retention periods and deletion obligations as the data it contains. In that case, also consider the Recall exclusion lists (setdenyapplistforrecall, setdenyurilistforrecall) and a retention period — these are deliberately not in this policy because they differ per organisation.
+> **Alternative to CXNM - Standard - WIN - D - Windows AI Restricted.** Before choosing this one, weigh whether the consequences are understood: Recall stores searchable screenshots on disk, and that index falls under the same retention periods and deletion obligations as the data it contains. In that case, also consider the Recall exclusion lists (setdenyapplistforrecall, setdenyurilistforrecall) and a retention period — these are deliberately not in this policy because they differ per organisation.
 
 ## Standards
 

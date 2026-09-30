@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Restrictions.md) · **English** · [Français](Baseline_MAC_D_Restrictions.fr.md)
 
-# [Baseline] - MAC - D - Restrictions
+# CXNM - Standard - MAC - D - Restrictions
 
 Restricts the macOS features through which corporate data can leave the device.
 
@@ -15,7 +15,7 @@ Restricts the macOS features through which corporate data can leave the device.
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | File | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 
-> Turns Siri off with allowAssistant. Since macOS 26.4 Apple marks that key as deprecated, in favour of the declarative configuration com.apple.configuration.siri.settings (in Intune: sirisettings_sirisettings with sirisettings_enabled). It stays for now for the same reason as in [Baseline] - MAC - D - Apple Intelligence Restricted: that DDM configuration only exists from macOS 26.4 and only on supervised Macs, whereas this payload also works on macOS 14 and 15 and on a Mac the user enrolled themselves. [Baseline] - IOS - D - Restrictions Corporate already uses sirisettings (allowwhilelocked), because on iOS the old restriction applied differently. Switch over once the fleet is on 26.4 or later and enrolled via ADE.
+> Turns Siri off with allowAssistant. Since macOS 26.4 Apple marks that key as deprecated, in favour of the declarative configuration com.apple.configuration.siri.settings (in Intune: sirisettings_sirisettings with sirisettings_enabled). It stays for now for the same reason as in CXNM - Standard - MAC - D - Apple Intelligence Restricted: that DDM configuration only exists from macOS 26.4 and only on supervised Macs, whereas this payload also works on macOS 14 and 15 and on a Mac the user enrolled themselves. CXNM - Standard - IOS - D - Restrictions Corporate already uses sirisettings (allowwhilelocked), because on iOS the old restriction applied differently. Switch over once the fleet is on 26.4 or later and enrolled via ADE.
 
 ## Standards
 

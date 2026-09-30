@@ -127,7 +127,7 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 
 ## Eerst in een pilot
 
-Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `Baseline-Pilot` uit naar
+Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `CXNM - Standard - Baseline-Pilot` uit naar
 `SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
 verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.
 

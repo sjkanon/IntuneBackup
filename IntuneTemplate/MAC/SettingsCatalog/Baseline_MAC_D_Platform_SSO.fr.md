@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Platform_SSO.md) · [English](Baseline_MAC_D_Platform_SSO.en.md) · **Français**
 
-# [Baseline] - MAC - D - Platform SSO
+# CXNM - Standard - MAC - D - Platform SSO
 
 Lie la connexion sur le Mac à Entra ID via le plug-in SSO Microsoft, afin que le mot de passe du Mac et le compte professionnel ne fassent qu'un.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Remote_Access_Hardening.en.md) · [Français](Baseline_WIN_D_Remote_Access_Hardening.fr.md)
 
-# [Baseline] - WIN - D - Remote Access Hardening
+# CXNM - Standard - WIN - D - Remote Access Hardening
 
 Sluit de WinRM-remoteshell af en verbreekt een inactieve SMB-sessie na vijftien minuten.
 

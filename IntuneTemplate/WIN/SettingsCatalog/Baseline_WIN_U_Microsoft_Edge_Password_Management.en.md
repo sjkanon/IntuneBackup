@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Edge_Password_Management.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Edge_Password_Management.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Edge Password Management
+# CXNM - Standard - WIN - U - Microsoft Edge Password Management
 
 Determines whether Edge may save and show passwords, so that work passwords do not end up in a browser profile.
 

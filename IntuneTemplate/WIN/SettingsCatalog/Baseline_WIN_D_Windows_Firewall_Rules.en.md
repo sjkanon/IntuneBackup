@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Firewall_Rules.md) · **English** · [Français](Baseline_WIN_D_Windows_Firewall_Rules.fr.md)
 
-# [Baseline] - WIN - D - Windows Firewall Rules
+# CXNM - Standard - WIN - D - Windows Firewall Rules
 
 Blocks outbound traffic from built-in Windows programs that malware uses to disguise traffic (calc.exe, notepad.exe, mshta.exe).
 

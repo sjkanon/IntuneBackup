@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.md) · **English** · [Français](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.fr.md)
 
-# [Baseline] - WIN - D - Windows Hello PIN Complexity Numeric
+# CXNM - Standard - WIN - D - Windows Hello PIN Complexity Numeric
 
 Explicitly sets the numeric Windows Hello PIN: digits required, letters and special characters blocked.
 

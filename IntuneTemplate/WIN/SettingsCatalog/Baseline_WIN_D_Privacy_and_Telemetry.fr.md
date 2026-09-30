@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Privacy_and_Telemetry.md) · [English](Baseline_WIN_D_Privacy_and_Telemetry.en.md) · **Français**
 
-# [Baseline] - WIN - D - Privacy and Telemetry
+# CXNM - Standard - WIN - D - Privacy and Telemetry
 
 Désactive l'identifiant de publicité, bloque le presse-papiers entre appareils, arrête l'envoi des activités de l'utilisateur et conserve sur l'appareil ce que l'utilisateur tape et dicte.
 
@@ -15,7 +15,7 @@ Désactive l'identifiant de publicité, bloque le presse-papiers entre appareils
 | Source | CIS v4 Windows 11 L1 — paramètres repris d'IntuneAdmin, valeurs vérifiées par rapport aux définitions du settings catalog. |
 | Fichier | [`Baseline_WIN_D_Privacy_and_Telemetry.json`](Baseline_WIN_D_Privacy_and_Telemetry.json) |
 
-> Perceptible sur un point : les suggestions de texte deviennent moins personnalisées avec le temps. Complète `[Baseline] - WIN - D - Data Minimisation` sans entrer en conflit avec elle — elle limite ce qui est inclus dans les données de diagnostic, celle-ci désactive trois canaux distincts. Le presse-papiers entre appareils figurait aussi ici, mais OpenIntuneBaseline le définit lui-même depuis v4.0 dans [Baseline] - WIN - D - Windows Feature Configuration. Six canaux ajoutés, tous les six CIS L1 : la recherche n'utilise plus la localisation, la synchronisation des SMS vers le cloud est désactivée, le contenu grand public sur l'écran de connexion disparaît, les conseils en ligne ne récupèrent plus rien auprès de Microsoft, les polices ne sont plus téléchargées depuis fs.microsoft.com, et les apps ne peuvent plus partager de données entre utilisateurs du même appareil. Ce dernier est le seul avec un effet perceptible : une app qui partage volontairement des données entre utilisateurs ne fonctionne plus ainsi.
+> Perceptible sur un point : les suggestions de texte deviennent moins personnalisées avec le temps. Complète `CXNM - Standard - WIN - D - Data Minimisation` sans entrer en conflit avec elle — elle limite ce qui est inclus dans les données de diagnostic, celle-ci désactive trois canaux distincts. Le presse-papiers entre appareils figurait aussi ici, mais OpenIntuneBaseline le définit lui-même depuis v4.0 dans CXNM - Standard - WIN - D - Windows Feature Configuration. Six canaux ajoutés, tous les six CIS L1 : la recherche n'utilise plus la localisation, la synchronisation des SMS vers le cloud est désactivée, le contenu grand public sur l'écran de connexion disparaît, les conseils en ligne ne récupèrent plus rien auprès de Microsoft, les polices ne sont plus téléchargées depuis fs.microsoft.com, et les apps ne peuvent plus partager de données entre utilisateurs du même appareil. Ce dernier est le seul avec un effet perceptible : une app qui partage volontairement des données entre utilisateurs ne fonctionne plus ainsi.
 
 ## Normes
 

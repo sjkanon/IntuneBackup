@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.md) · [English](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric
+# CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Numeric
 
 Fixe explicitement le PIN numérique pour la passkey Windows Hello for Business : chiffres exigés, lettres et caractères spéciaux bloqués.
 

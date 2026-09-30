@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) · [Français](Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Edge Profiles and Sync
+# CXNM - Standard - WIN - U - Microsoft Edge Profiles and Sync
 
 Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_OS_Version.md) · [English](Baseline_WIN_U_Compliance_OS_Version.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance OS Version
+# CXNM - Standard - WIN - U - Compliance OS Version
 
 Vérifie que l'appareil exécute une version de Windows capable d'appliquer réellement la baseline : au minimum Windows 11 22H2.
 

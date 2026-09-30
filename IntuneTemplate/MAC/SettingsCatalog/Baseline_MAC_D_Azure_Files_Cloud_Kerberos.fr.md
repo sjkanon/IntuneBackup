@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) · [English](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) · **Français**
 
-# [Baseline] - MAC - D - Azure Files Cloud Kerberos
+# CXNM - Standard - MAC - D - Azure Files Cloud Kerberos
 
 Fournit au Mac un ticket Kerberos pour le realm Entra Cloud Kerberos, afin qu'un partage SMB sur Azure Files s'ouvre sans que l'utilisateur se reconnecte.
 
@@ -15,7 +15,7 @@ Fournit au Mac un ticket Kerberos pour le realm Entra Cloud Kerberos, afin qu'un
 | Source | Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), et le guide Entra pour Kerberos SSO dans Platform SSO ; settingDefinitionId vérifiés par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json`](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json) |
 
-> Va de pair avec [Baseline] - MAC - D - Platform SSO et ne fait rien sans cette policy : le TGT cloud est émis par Platform SSO ; ce profil indique seulement à l'extension Kerberos d'Apple quel realm lui correspond et qu'elle peut utiliser ce TGT (`usePlatformSSOTGT`). `performKerberosOnly` tient l'extension à l'écart des contrôles d'expiration de mot de passe, de la synchronisation des mots de passe et du chemin du dossier de départ — cela relève de Platform SSO, pas d'ici.
+> Va de pair avec CXNM - Standard - MAC - D - Platform SSO et ne fait rien sans cette policy : le TGT cloud est émis par Platform SSO ; ce profil indique seulement à l'extension Kerberos d'Apple quel realm lui correspond et qu'elle peut utiliser ce TGT (`usePlatformSSOTGT`). `performKerberosOnly` tient l'extension à l'écart des contrôles d'expiration de mot de passe, de la synchronisation des mots de passe et du chemin du dossier de départ — cela relève de Platform SSO, pas d'ici.
 >
 > Une seconde policy à côté de Platform SSO et non une extension de celle-ci : le settings catalog connaît pour `com.apple.extensiblesso` deux formes distinctes, la forme Platform SSO (`com.apple.extensiblesso_com.apple.extensiblesso`) et la forme Kerberos qu'utilise cette policy (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Chaque realm Kerberos correspond à une telle forme, avec son propre `Realm` et ses propres `Hosts`. Sur le Mac, ces profils sont installés côte à côte et macOS fusionne les payloads ; check-scope.js ne signale donc volontairement pas ce chevauchement chez Apple comme un conflit.
 >

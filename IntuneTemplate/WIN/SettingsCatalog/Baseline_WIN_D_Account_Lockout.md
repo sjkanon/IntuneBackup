@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Account_Lockout.en.md) · [Français](Baseline_WIN_D_Account_Lockout.fr.md)
 
-# [Baseline] - WIN - D - Account Lockout
+# CXNM - Standard - WIN - D - Account Lockout
 
 Sluit een account 15 minuten af na tien mislukte aanmeldpogingen, ook dat van de ingebouwde beheerder, en zet het apparaat na tien mislukte pogingen in BitLocker-herstel.
 

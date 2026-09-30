@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Update_Ring_3_Production.en.md) · [Français](Baseline_WIN_D_Windows_Update_Ring_3_Production.fr.md)
 
-# [Baseline] - WIN - D - Windows Update Ring 3 Production
+# CXNM - Standard - WIN - D - Windows Update Ring 3 Production
 
 Productiering voor Windows-updates: installeert dagelijks om 13:00 met een uitsteltermijn van twee dagen.
 

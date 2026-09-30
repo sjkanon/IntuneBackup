@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_TPM.md) · [English](Baseline_WIN_U_Compliance_TPM.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance TPM
+# CXNM - Standard - WIN - U - Compliance TPM
 
 Vérifie que l'appareil dispose d'un TPM. Sans TPM, pas de BitLocker avec protection matérielle, pas de Windows Hello for Business et pas de Credential Guard.
 

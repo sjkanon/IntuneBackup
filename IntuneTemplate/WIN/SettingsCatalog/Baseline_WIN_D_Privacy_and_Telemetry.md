@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Privacy_and_Telemetry.en.md) · [Français](Baseline_WIN_D_Privacy_and_Telemetry.fr.md)
 
-# [Baseline] - WIN - D - Privacy and Telemetry
+# CXNM - Standard - WIN - D - Privacy and Telemetry
 
 Zet de advertentie-id uit, blokkeert het klembord tussen apparaten, stopt het uploaden van gebruikersactiviteiten en houdt wat de gebruiker typt en inspreekt op het apparaat.
 
@@ -15,7 +15,7 @@ Zet de advertentie-id uit, blokkeert het klembord tussen apparaten, stopt het up
 | Bron | CIS v4 Windows 11 L1 — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities. |
 | Bestand | [`Baseline_WIN_D_Privacy_and_Telemetry.json`](Baseline_WIN_D_Privacy_and_Telemetry.json) |
 
-> Merkbaar op één punt: de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `[Baseline] - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet drie aparte kanalen uit. Het klembord tussen apparaten stond hier ook, maar dat zet OpenIntuneBaseline sinds v4.0 zelf in [Baseline] - WIN - D - Windows Feature Configuration. Zes kanalen erbij, alle zes CIS L1: zoeken gebruikt de locatie niet meer, sms-synchronisatie naar de cloud gaat uit, consumentencontent op het aanmeldscherm verdwijnt, online tips halen niets meer op bij Microsoft, lettertypen worden niet meer van fs.microsoft.com gedownload, en apps kunnen geen gegevens meer delen tussen gebruikers van hetzelfde apparaat. Die laatste is de enige met een merkbare kant: een app die bewust gegevens tussen gebruikers deelt werkt niet meer zo.
+> Merkbaar op één punt: de tekstsuggesties worden na verloop van tijd minder persoonlijk. Vult `CXNM - Standard - WIN - D - Data Minimisation` aan zonder ermee te botsen — die beperkt wat er in de diagnostische gegevens meegaat, deze zet drie aparte kanalen uit. Het klembord tussen apparaten stond hier ook, maar dat zet OpenIntuneBaseline sinds v4.0 zelf in CXNM - Standard - WIN - D - Windows Feature Configuration. Zes kanalen erbij, alle zes CIS L1: zoeken gebruikt de locatie niet meer, sms-synchronisatie naar de cloud gaat uit, consumentencontent op het aanmeldscherm verdwijnt, online tips halen niets meer op bij Microsoft, lettertypen worden niet meer van fs.microsoft.com gedownload, en apps kunnen geen gegevens meer delen tussen gebruikers van hetzelfde apparaat. Die laatste is de enige met een merkbare kant: een app die bewust gegevens tussen gebruikers deelt werkt niet meer zo.
 
 ## Normen
 

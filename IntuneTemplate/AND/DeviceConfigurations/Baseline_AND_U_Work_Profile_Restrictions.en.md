@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Work_Profile_Restrictions.md) · **English** · [Français](Baseline_AND_U_Work_Profile_Restrictions.fr.md)
 
-# [Baseline] - AND - U - Work Profile Restrictions
+# CXNM - Standard - AND - U - Work Profile Restrictions
 
 On a device with a personal work profile, sets a separate work profile code (six digits, medium complexity, locks after fifteen minutes, wipes only the work profile after ten attempts), blocks copying, sharing and screenshots from work to personal, and turns on Play Protect.
 

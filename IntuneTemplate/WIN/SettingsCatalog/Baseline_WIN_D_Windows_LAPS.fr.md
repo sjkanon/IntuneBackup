@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_LAPS.md) · [English](Baseline_WIN_D_Windows_LAPS.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows LAPS
+# CXNM - Standard - WIN - D - Windows LAPS
 
 Change automatiquement le mot de passe du compte administrateur local et le stocke dans Entra ID, afin qu'aucun mot de passe administrateur partagé ne circule plus.
 

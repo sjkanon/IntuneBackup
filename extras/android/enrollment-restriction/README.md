@@ -33,7 +33,7 @@ Er staat hier bewust **geen JSON** voor. De Graph-waarde daarvoor (`platformType
 hetzelfde type) kon in deze ronde niet worden geverifieerd tegen een bron-export of de
 pl4nty-definities, en de standaardbeperking bestaat al in elke tenant (die werk je bij met
 PATCH, niet met een nieuwe POST). Toestellen die al met device administrator zijn ingeschreven
-vangt `[Baseline] - AND - U - Compliance Block Device Administrator` op.
+vangt `CXNM - Standard - AND - U - Compliance Block Device Administrator` op.
 
 ## Uitrollen
 

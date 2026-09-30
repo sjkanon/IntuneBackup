@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_LAPS.md) · **English** · [Français](Baseline_WIN_D_Windows_LAPS.fr.md)
 
-# [Baseline] - WIN - D - Windows LAPS
+# CXNM - Standard - WIN - D - Windows LAPS
 
 Automatically rotates the password of the local administrator account and stores it in Entra ID, so that no shared administrator password circulates any more.
 

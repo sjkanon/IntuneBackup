@@ -3,7 +3,7 @@
     Intune remediation (detection only): has Windows LAPS demonstrably updated the password in Entra ID recently?
 .NOTES
     Microsoft-Windows-LAPS/Operational 10029 = password updated in Entra ID.
-    $MaxAgeDays slightly longer than passwordagedays_aad (7) in [Baseline] - WIN - D - Windows LAPS.
+    $MaxAgeDays slightly longer than passwordagedays_aad (7) in CXNM - Standard - WIN - D - Windows LAPS.
     Exit 0 = recent successful update · exit 1 = no evidence; see the last LAPS error message in the output.
 #>
 $MaxAgeDays = 10

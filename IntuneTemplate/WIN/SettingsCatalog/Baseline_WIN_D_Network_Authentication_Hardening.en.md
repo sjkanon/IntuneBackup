@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Network_Authentication_Hardening.md) · **English** · [Français](Baseline_WIN_D_Network_Authentication_Hardening.fr.md)
 
-# [Baseline] - WIN - D - Network Authentication Hardening
+# CXNM - Standard - WIN - D - Network Authentication Hardening
 
 Makes network authentication less susceptible to abuse: the system account uses the computer identity for NTLM, PKU2U with online identities is closed, LDAP traffic requests signing, the Kerberos client supports armoring and NetBIOS names are no longer resolved via broadcast.
 

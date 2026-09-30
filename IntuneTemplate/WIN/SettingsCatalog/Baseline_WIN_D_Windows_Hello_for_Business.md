@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Hello_for_Business.en.md) · [Français](Baseline_WIN_D_Windows_Hello_for_Business.fr.md)
 
-# [Baseline] - WIN - D - Windows Hello for Business
+# CXNM - Standard - WIN - D - Windows Hello for Business
 
 Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning.
 

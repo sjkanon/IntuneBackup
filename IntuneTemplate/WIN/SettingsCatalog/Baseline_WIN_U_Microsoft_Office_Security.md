@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Microsoft_Office_Security.en.md) · [Français](Baseline_WIN_U_Microsoft_Office_Security.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Office Security
+# CXNM - Standard - WIN - U - Microsoft Office Security
 
 De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave.
 

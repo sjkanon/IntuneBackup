@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_BitLocker.md) · [English](Baseline_WIN_D_BitLocker.en.md) · **Français**
 
-# [Baseline] - WIN - D - BitLocker
+# CXNM - Standard - WIN - D - BitLocker
 
 Chiffre le disque du système d'exploitation et, via les paramètres personnalisés conservés, également les disques fixes et amovibles. Les clés de récupération sont stockées dans Entra ID.
 

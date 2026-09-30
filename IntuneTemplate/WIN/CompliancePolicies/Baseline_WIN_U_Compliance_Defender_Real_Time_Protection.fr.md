@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.md) · [English](Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Defender Real Time Protection
+# CXNM - Standard - WIN - U - Compliance Defender Real Time Protection
 
 Vérifie que Microsoft Defender est activé et que la protection en temps réel est active.
 

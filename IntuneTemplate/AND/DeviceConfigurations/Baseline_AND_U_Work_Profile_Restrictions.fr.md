@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Work_Profile_Restrictions.md) · [English](Baseline_AND_U_Work_Profile_Restrictions.en.md) · **Français**
 
-# [Baseline] - AND - U - Work Profile Restrictions
+# CXNM - Standard - AND - U - Work Profile Restrictions
 
 Sur un appareil avec profil professionnel personnel, définit un code propre au profil professionnel (six chiffres, complexité moyenne, verrouillage après quinze minutes, effacement du seul profil professionnel après dix tentatives), bloque la copie, le partage et les captures d'écran du professionnel vers le personnel, et active Play Protect.
 

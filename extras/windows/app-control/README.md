@@ -41,8 +41,8 @@ gebruiken de v2-ids. Neem die niet naast deze op.
 
 | Bestand | Wat |
 |---|---|
-| `AppControl_BuiltIn_Audit.graph.json` | `POST /beta/deviceManagement/configurationPolicies` — Windows-onderdelen + Store-apps vertrouwd, ISG (goede reputatie) en managed installer vertrouwd, **auditmodus**. Naam `[Baseline] - WIN - D - App Control Audit`. |
-| `AppControl_BuiltIn_Enforce.graph.json` | Zelfde body, **afdwingen**. Naam `[Baseline] - WIN - D - App Control Enforced`. Nooit tegelijk met de audit-policy op hetzelfde apparaat. |
+| `AppControl_BuiltIn_Audit.graph.json` | `POST /beta/deviceManagement/configurationPolicies` — Windows-onderdelen + Store-apps vertrouwd, ISG (goede reputatie) en managed installer vertrouwd, **auditmodus**. Naam `CXNM - Standard - WIN - D - App Control Audit`. |
+| `AppControl_BuiltIn_Enforce.graph.json` | Zelfde body, **afdwingen**. Naam `CXNM - Standard - WIN - D - App Control Enforced`. Nooit tegelijk met de audit-policy op hetzelfde apparaat. |
 | `Set-AppControlTemplateIds.ps1` | Haalt de `settingInstanceTemplateId` (en `settingValueTemplateId`) uit `GET /beta/deviceManagement/configurationPolicyTemplates('d3849ba8-bf95-467c-9640-aa2334eae9e3_1')/settingTemplates`, vult ze in beide bodies in en maakt desgewenst de policies aan (`-Create`, geen toewijzing). |
 | `hunting-queries.kql` | Advanced Hunting-queries voor de auditfase en de bewaking na afdwingen. |
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Recovery_Lock.md) · **English** · [Français](Baseline_MAC_D_Recovery_Lock.fr.md)
 
-# [Baseline] - MAC - D - Recovery Lock
+# CXNM - Standard - MAC - D - Recovery Lock
 
 On Macs with Apple silicon, sets a random, Intune-managed password on recoveryOS and the startup options, and replaces it every six months.
 
@@ -15,7 +15,7 @@ On Macs with Apple silicon, sets a random, Intune-managed password on recoveryOS
 | Source | Microsoft Learn — Configure Recovery Lock using the settings catalog (June 2026); form from microsoft/intune-my-macs pol-sec-007-recovery-lock (monthly rotation there, six months here) |
 | File | [`Baseline_MAC_D_Recovery_Lock.json`](Baseline_MAC_D_Recovery_Lock.json) |
 
-> Rotation every 6 months (option _5), same as the rotation of the FileVault recovery key in [Baseline] - MAC - D - FileVault; intune-my-macs rotates monthly, which mainly generates service desk traffic without lowering the risk — the password is only used by whoever requests it. Viewing the password: Devices → device → Passwords and keys → Recovery Lock Password. That requires the Intune permissions 'Remote tasks/View macOS recovery lock password' (and for rotation 'Rotate macOS recovery lock password'); limit who has them, preferably via PIM. After use: device action 'Rotate recovery lock passcode'. Unenrolling from Intune wipes the password from the Mac; removing the assignment makes Intune attempt to wipe it. So a Mac that leaves the organisation should first be unenrolled, then released in Apple Business (see extras/macos/apple-business).
+> Rotation every 6 months (option _5), same as the rotation of the FileVault recovery key in CXNM - Standard - MAC - D - FileVault; intune-my-macs rotates monthly, which mainly generates service desk traffic without lowering the risk — the password is only used by whoever requests it. Viewing the password: Devices → device → Passwords and keys → Recovery Lock Password. That requires the Intune permissions 'Remote tasks/View macOS recovery lock password' (and for rotation 'Rotate macOS recovery lock password'); limit who has them, preferably via PIM. After use: device action 'Rotate recovery lock passcode'. Unenrolling from Intune wipes the password from the Mac; removing the assignment makes Intune attempt to wipe it. So a Mac that leaves the organisation should first be unenrolled, then released in Apple Business (see extras/macos/apple-business).
 
 ## Standards
 

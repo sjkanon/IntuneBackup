@@ -120,7 +120,7 @@ function readTemplates(templateDir) {
  * waarde (`Where-Object { $_.Package }`), dus die policies verschijnen in geen enkel pakket.
  * Los kiezen kan nog steeds — dat is de bedoeling, ze bestaan als alternatief.
  */
-const PACKAGE_PREFIX = "Baseline-";
+const PACKAGE_PREFIX = "CXNM - Standard - Baseline-";
 
 /** Toewijzingsdoel in _assignments.json -> package. Alleen fase 1 komt hier langs. */
 const PACKAGE_BY_TARGET = {

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_BitLocker.md) · [English](Baseline_WIN_U_Compliance_BitLocker.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance BitLocker
+# CXNM - Standard - WIN - U - Compliance BitLocker
 
 Vérifie que le disque système est chiffré avec BitLocker. Délai de grâce de douze heures, car le chiffrement prend un certain temps après l'inscription.
 

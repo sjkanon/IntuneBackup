@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_Updates.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Edge_Updates.fr.md)
 
-# [Baseline] - WIN - D - Microsoft Edge Updates
+# CXNM - Standard - WIN - D - Microsoft Edge Updates
 
 How and when Edge updates itself, and that a user cannot postpone it.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Script_File_Associations.md) · [English](Baseline_WIN_D_Script_File_Associations.en.md) · **Français**
 
-# [Baseline] - WIN - D - Script File Associations
+# CXNM - Standard - WIN - D - Script File Associations
 
 Fait ouvrir les fichiers .js, .vbs et .hta dans le Bloc-notes au lieu de l'hôte de script, afin qu'un double-clic sur une telle pièce jointe n'exécute rien.
 

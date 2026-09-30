@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Platform_SSO.md) · **English** · [Français](Baseline_MAC_D_Platform_SSO.fr.md)
 
-# [Baseline] - MAC - D - Platform SSO
+# CXNM - Standard - MAC - D - Platform SSO
 
 Ties sign-in on the Mac to Entra ID via the Microsoft SSO plug-in, so that the Mac password and the work account coincide.
 

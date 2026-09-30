@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) · **English** · [Français](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md)
 
-# [Baseline] - WIN - U - Compliance Defender for Endpoint Risk
+# CXNM - Standard - WIN - U - Compliance Defender for Endpoint Risk
 
 Makes a device non-compliant as soon as Defender for Endpoint rates the risk level higher than 'medium', so that Conditional Access denies a device with an active threat access to company data.
 

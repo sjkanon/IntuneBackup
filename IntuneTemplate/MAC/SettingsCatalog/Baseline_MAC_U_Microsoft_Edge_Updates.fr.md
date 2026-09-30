@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Microsoft_Edge_Updates.md) · [English](Baseline_MAC_U_Microsoft_Edge_Updates.en.md) · **Français**
 
-# [Baseline] - MAC - U - Microsoft Edge Updates
+# CXNM - Standard - MAC - U - Microsoft Edge Updates
 
 Comment et quand Edge se met à jour sur le Mac.
 

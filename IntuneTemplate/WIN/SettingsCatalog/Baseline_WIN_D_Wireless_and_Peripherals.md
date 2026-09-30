@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Wireless_and_Peripherals.en.md) · [Français](Baseline_WIN_D_Wireless_and_Peripherals.fr.md)
 
-# [Baseline] - WIN - D - Wireless and Peripherals
+# CXNM - Standard - WIN - D - Wireless and Peripherals
 
 Maakt het apparaat onzichtbaar over Bluetooth en sluit Windows Connect Now af, zodat draadloze instellingen niet buiten het beheer om van het ene apparaat naar het andere kunnen worden overgezet. Al gekoppelde apparaten blijven werken.
 

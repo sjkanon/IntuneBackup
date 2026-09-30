@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed
+# CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Managed
 
 Turns on Cached Exchange Mode for the user's own mailbox and keeps everything shared out of it: shared mail folders, shared calendars and Public Folder Favorites are not copied to the OST file.
 

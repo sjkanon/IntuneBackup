@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Antivirus.md) · [English](Baseline_WIN_D_Defender_Antivirus.en.md) · **Français**
 
-# [Baseline] - WIN - D - Defender Antivirus
+# CXNM - Standard - WIN - D - Defender Antivirus
 
 Configuration de base de Defender Antivirus : protection en temps réel, protection cloud, planification des analyses et ce qui se passe lors d'une détection.
 

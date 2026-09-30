@@ -16,15 +16,15 @@ tenant moves on.
 `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there: a baseline is
 what deploys them. Filling in that screen by hand means adding the same standard thirteen times and
 picking the right assignment target thirteen times — one misclick puts up to 69 policies (the
-`Baseline-Devices` package) on the wrong audience. So this file comes from the same source as the rest of the repo: the manifest.
+`CXNM - Standard - Baseline-Devices` package) on the wrong audience. So this file comes from the same source as the rest of the repo: the manifest.
 
 ## What's in it
 
 | Stage | Packages | Moving on to this stage |
 |---:|---|---|
-| 1 · Now | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` and the eight group packages `Baseline-SEC-*` | — stage 1 always applies |
-| 2 · Pilot | `Baseline-Pilot` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
-| 3 · Awaiting prerequisite | `Baseline-Wacht` | `manual` — someone moves it on |
+| 1 · Now | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` and the eight group packages `CXNM - Standard - Baseline-SEC-*` | — stage 1 always applies |
+| 2 · Pilot | `CXNM - Standard - Baseline-Pilot` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
+| 3 · Awaiting prerequisite | `CXNM - Standard - Baseline-Wacht` | `manual` — someone moves it on |
 
 Which policies are in which package is listed in the
 [`IntuneTemplate` README](../IntuneTemplate/README.en.md#cipp-packages).
@@ -73,7 +73,7 @@ filters that word out too, and then the file can no longer be found with the but
   in `scripts/lib/templates.js` and `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — and
   run the pipeline again. Changing the group only in CIPP also works, but re-importing this file
   puts the default name back.
-- **Link the ADE profiles.** `Baseline-ADE-token` is deliberately not assigned: a macOS
+- **Link the ADE profiles.** `CXNM - Standard - Baseline-ADE-token` is deliberately not assigned: a macOS
   enrolment profile hangs off an ADE token, not an Entra group, and per token you pick one of
   the two.
 

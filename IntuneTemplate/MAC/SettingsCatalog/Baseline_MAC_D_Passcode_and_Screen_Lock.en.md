@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Passcode_and_Screen_Lock.md) · **English** · [Français](Baseline_MAC_D_Passcode_and_Screen_Lock.fr.md)
 
-# [Baseline] - MAC - D - Passcode and Screen Lock
+# CXNM - Standard - MAC - D - Passcode and Screen Lock
 
 Sets on the Mac the password and screen lock that the compliance policy already requires: at least eight characters, no simple password, lock after fifteen minutes.
 
@@ -12,10 +12,10 @@ Sets on the Mac the password and screen lock that the compliance policy already 
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the macOS settings catalog — values taken one-to-one from [Baseline] - MAC - U - Compliance Password and verified against the settings catalog definitions (minLength max 16, maxInactivity max 15). |
+| Source | Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the macOS settings catalog — values taken one-to-one from CXNM - Standard - MAC - U - Compliance Password and verified against the settings catalog definitions (minLength max 16, maxInactivity max 15). |
 | File | [`Baseline_MAC_D_Passcode_and_Screen_Lock.json`](Baseline_MAC_D_Passcode_and_Screen_Lock.json) |
 
-> maxInactivity cannot be set higher than 15 minutes in the settings catalog — which happens to be exactly the value the compliance policy requires. maxFailedAttempts is deliberately omitted: on macOS it leads to an increasing wait time and eventually a lockout that can only be opened with the FileVault recovery key, and that is a separate trade-off. This policy sets no com.apple.applicationaccess or com.apple.screensaver setting and therefore does not clash with MAC - D - Restrictions. Since Apple OS 27, Microsoft lists the classic Passcode payload as deprecated, with the declarative passcode configuration (passcode_*, macOS 13 and later) as its successor. Whether RequireComplexPasscode there means the same as no simple passcode is uncertain, because the Intune catalog and Apple's schema contradict each other; the trade-off is described at [Baseline] - IOS - D - Passcode. Note: users with a shorter or simpler password must change it at their next sign-in. Since September 2026 [Baseline] - MAC - D - Screensaver sets the com.apple.screensaver keys: ask for the password 5 seconds after the screen saver starts and start the screen saver after 900 seconds, also in the login window. Those are the same 15 minutes as maxInactivity here, with different settingDefinitionIds — no conflict, and only together do they make a Mac that really asks for a password after 15 minutes.
+> maxInactivity cannot be set higher than 15 minutes in the settings catalog — which happens to be exactly the value the compliance policy requires. maxFailedAttempts is deliberately omitted: on macOS it leads to an increasing wait time and eventually a lockout that can only be opened with the FileVault recovery key, and that is a separate trade-off. This policy sets no com.apple.applicationaccess or com.apple.screensaver setting and therefore does not clash with MAC - D - Restrictions. Since Apple OS 27, Microsoft lists the classic Passcode payload as deprecated, with the declarative passcode configuration (passcode_*, macOS 13 and later) as its successor. Whether RequireComplexPasscode there means the same as no simple passcode is uncertain, because the Intune catalog and Apple's schema contradict each other; the trade-off is described at CXNM - Standard - IOS - D - Passcode. Note: users with a shorter or simpler password must change it at their next sign-in. Since September 2026 CXNM - Standard - MAC - D - Screensaver sets the com.apple.screensaver keys: ask for the password 5 seconds after the screen saver starts and start the screen saver after 900 seconds, also in the login window. Those are the same 15 minutes as maxInactivity here, with different settingDefinitionIds — no conflict, and only together do they make a Mac that really asks for a password after 15 minutes.
 
 ## Standards
 

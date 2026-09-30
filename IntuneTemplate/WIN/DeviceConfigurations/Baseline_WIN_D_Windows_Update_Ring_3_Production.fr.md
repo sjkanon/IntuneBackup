@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Update_Ring_3_Production.md) · [English](Baseline_WIN_D_Windows_Update_Ring_3_Production.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Update Ring 3 Production
+# CXNM - Standard - WIN - D - Windows Update Ring 3 Production
 
 Anneau de production pour les mises à jour Windows : installe quotidiennement à 13:00 avec un délai de report de deux jours.
 

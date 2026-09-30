@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Defender_for_Endpoint.md) · [English](Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Defender for Endpoint
+# CXNM - Standard - AND - U - Compliance Defender for Endpoint
 
 Marque un appareil Android avec profil professionnel personnel comme non conforme lorsque Defender for Endpoint lui attribue un score de risque supérieur à faible.
 

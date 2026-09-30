@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Power_Management.md) · [English](Baseline_WIN_D_Power_Management.en.md) · **Français**
 
-# [Baseline] - WIN - D - Power Management
+# CXNM - Standard - WIN - D - Power Management
 
 Fait en sorte que la fermeture du capot et le bouton d'alimentation mettent l'appareil en veille, afin que l'exigence existante de demander un mot de passe au réveil aboutisse réellement à un écran verrouillé.
 

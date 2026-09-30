@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.md) · **English** · [Français](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.fr.md)
 
-# [Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric
+# CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric
 
 Requires an alphanumeric PIN for the Windows Hello for Business passkey: at least one digit, one lowercase letter, one uppercase letter and one special character.
 

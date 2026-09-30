@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Enrollment_Hardening.md) · **English** · [Français](Baseline_WIN_D_Enrollment_Hardening.fr.md)
 
-# [Baseline] - WIN - D - Enrollment Hardening
+# CXNM - Standard - WIN - D - Enrollment Hardening
 
 Requires a network connection during initial setup, so that a device cannot get past enrolment without management.
 

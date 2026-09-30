@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_Device_Security.md) · **English** · [Français](Baseline_MAC_U_Compliance_Device_Security.fr.md)
 
-# [Baseline] - MAC - U - Compliance Device Security
+# CXNM - Standard - MAC - U - Compliance Device Security
 
 Checks whether the Mac's disk is encrypted, the firewall is enabled and Gatekeeper only allows signed software.
 

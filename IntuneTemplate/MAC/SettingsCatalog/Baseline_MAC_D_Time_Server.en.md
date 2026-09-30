@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Time_Server.md) · **English** · [Français](Baseline_MAC_D_Time_Server.fr.md)
 
-# [Baseline] - MAC - D - Time Server
+# CXNM - Standard - MAC - D - Time Server
 
 Has the Mac synchronise its clock with time.apple.com, so that timestamps in logs, Kerberos tickets and certificate checks are correct.
 

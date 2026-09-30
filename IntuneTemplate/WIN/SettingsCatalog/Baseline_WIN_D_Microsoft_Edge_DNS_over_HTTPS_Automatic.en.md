@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.fr.md)
 
-# [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic
+# CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic
 
 Sets DNS over HTTPS in Edge to 'automatic': Edge encrypts DNS requests as soon as the configured DNS server supports DoH and otherwise falls back to plain DNS, without the user being able to turn it off.
 
@@ -15,7 +15,7 @@ Sets DNS over HTTPS in Edge to 'automatic': Edge encrypts DNS requests as soon a
 | Source | Microsoft Edge policy DnsOverHttpsMode (Edge 83+) — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.json) |
 
-> **Alternative to [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure** — both set `dnsoverhttpsmode` to a different value; assign one of them. Defender Network Protection (phase 1, Defender Antivirus) inspects Edge traffic via SmartScreen and therefore keeps working; for third-party browsers Network Protection relies on DNS/TLS inspection, and Microsoft advises turning off DoH and QUIC in that browser — that falls outside this Edge policy.
+> **Alternative to CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure** — both set `dnsoverhttpsmode` to a different value; assign one of them. Defender Network Protection (phase 1, Defender Antivirus) inspects Edge traffic via SmartScreen and therefore keeps working; for third-party browsers Network Protection relies on DNS/TLS inspection, and Microsoft advises turning off DoH and QUIC in that browser — that falls outside this Edge policy.
 
 ## Standards
 

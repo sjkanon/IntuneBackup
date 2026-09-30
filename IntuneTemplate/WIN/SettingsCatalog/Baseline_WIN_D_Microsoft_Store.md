@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Microsoft_Store.en.md) · [Français](Baseline_WIN_D_Microsoft_Store.fr.md)
 
-# [Baseline] - WIN - D - Microsoft Store
+# CXNM - Standard - WIN - D - Microsoft Store
 
 Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren.
 

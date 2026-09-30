@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_EDR_Policy.md) · **English** · [Français](Baseline_WIN_D_Defender_EDR_Policy.fr.md)
 
-# [Baseline] - WIN - D - Defender EDR Policy
+# CXNM - Standard - WIN - D - Defender EDR Policy
 
 Connects the device to Defender for Endpoint via the Defender connector instead of a fixed onboarding package. As a result the template contains no tenant-specific token and also works in another tenant after a restore, provided the Defender for Endpoint connector is enabled there.
 
@@ -15,7 +15,7 @@ Connects the device to Defender for Endpoint via the Defender connector instead 
 | Source | CIPP standard template |
 | File | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 
-> Comes from CIPP, not from OIB. Usable across tenants: onboarding_fromconnector is set to the placeholder "Microsoft ATP connector enabled" instead of a fixed tenant GUID. Since September 2026 the variant that is deployed; [Baseline] - WIN - D - Defender for Endpoint EDR is in phase 5 as a duplicate variant. Requires the Defender for Endpoint connector in Intune to be enabled.
+> Comes from CIPP, not from OIB. Usable across tenants: onboarding_fromconnector is set to the placeholder "Microsoft ATP connector enabled" instead of a fixed tenant GUID. Since September 2026 the variant that is deployed; CXNM - Standard - WIN - D - Defender for Endpoint EDR is in phase 5 as a duplicate variant. Requires the Defender for Endpoint connector in Intune to be enabled.
 
 ## Standards
 

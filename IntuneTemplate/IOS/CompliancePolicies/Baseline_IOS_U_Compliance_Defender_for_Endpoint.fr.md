@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_U_Compliance_Defender_for_Endpoint.md) · [English](Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) · **Français**
 
-# [Baseline] - IOS - U - Compliance Defender for Endpoint
+# CXNM - Standard - IOS - U - Compliance Defender for Endpoint
 
 Marque un iPhone ou iPad comme non conforme dès que Microsoft Defender for Endpoint évalue le risque de la machine au-dessus de Medium.
 
@@ -15,7 +15,7 @@ Marque un iPhone ou iPad comme non conforme dès que Microsoft Defender for Endp
 | Source | IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint et UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (tous deux Medium) ; UniFy Corporate exige Low |
 | Fichier | [`Baseline_IOS_U_Compliance_Defender_for_Endpoint.json`](Baseline_IOS_U_Compliance_Defender_for_Endpoint.json) |
 
-> Volontairement une seule policy avec Medium au lieu du Low d'UniFy pour les appareils d'entreprise : Low rend un appareil non conforme dès un risque faible, ce qui demande d'abord de l'expérience sur la fréquence à laquelle cela se produit. Une policy distincte à côté de Compliance Device Health, afin qu'un tenant sans licence MDE puisse continuer à utiliser Device Health ; les policies de conformité sont évaluées séparément et n'entrent pas en conflit. Action de blocage après 24 heures, comme les autres policies de conformité iOS. Le champ advancedThreatProtectionRequiredSecurityLevel ne figure pas dans pl4nty DCv1 pour iOS, mais bien dans Graph beta iosCompliancePolicy et dans les deux exports sources. Onboarding : [Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised et … Unsupervised ; configuration de l'app dans extras/ios/app-configuration.
+> Volontairement une seule policy avec Medium au lieu du Low d'UniFy pour les appareils d'entreprise : Low rend un appareil non conforme dès un risque faible, ce qui demande d'abord de l'expérience sur la fréquence à laquelle cela se produit. Une policy distincte à côté de Compliance Device Health, afin qu'un tenant sans licence MDE puisse continuer à utiliser Device Health ; les policies de conformité sont évaluées séparément et n'entrent pas en conflit. Action de blocage après 24 heures, comme les autres policies de conformité iOS. Le champ advancedThreatProtectionRequiredSecurityLevel ne figure pas dans pl4nty DCv1 pour iOS, mais bien dans Graph beta iosCompliancePolicy et dans les deux exports sources. Onboarding : CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised et … Unsupervised ; configuration de l'app dans extras/ios/app-configuration.
 
 ## Normes
 

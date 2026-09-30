@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.md) · **English** · [Français](Baseline_WIN_U_Compliance_Defender_Security_Intelligence.fr.md)
 
-# [Baseline] - WIN - U - Compliance Defender Security Intelligence
+# CXNM - Standard - WIN - U - Compliance Defender Security Intelligence
 
 Checks whether Microsoft Defender is on and the security intelligence is up to date.
 

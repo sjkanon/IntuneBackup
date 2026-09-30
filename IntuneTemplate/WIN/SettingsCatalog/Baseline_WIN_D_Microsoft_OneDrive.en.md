@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_OneDrive.md) · **English** · [Français](Baseline_WIN_D_Microsoft_OneDrive.fr.md)
 
-# [Baseline] - WIN - D - Microsoft OneDrive
+# CXNM - Standard - WIN - D - Microsoft OneDrive
 
 Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally.
 

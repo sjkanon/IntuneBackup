@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) · [Français](Baseline_AND_D_Compliance_Dedicated_Device_Health.fr.md)
 
-# [Baseline] - AND - D - Compliance Dedicated Device Health
+# CXNM - Standard - AND - D - Compliance Dedicated Device Health
 
 Merkt een dedicated Android-toestel (kiosk of gedeeld) als niet-compliant wanneer het geroot is, Play Integrity niet hardwarematig slaagt, de Intune-app gemanipuleerd is, de opslag niet versleuteld is of de laatste beveiligingspatch ouder is dan de ondergrens.
 

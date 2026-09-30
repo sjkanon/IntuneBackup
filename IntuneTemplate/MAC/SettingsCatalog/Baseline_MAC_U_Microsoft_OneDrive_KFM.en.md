@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Microsoft_OneDrive_KFM.md) · **English** · [Français](Baseline_MAC_U_Microsoft_OneDrive_KFM.fr.md)
 
-# [Baseline] - MAC - U - Microsoft OneDrive KFM
+# CXNM - Standard - MAC - U - Microsoft OneDrive KFM
 
 Moves the Mac's Desktop and Documents to OneDrive, so that nothing is stored only locally.
 

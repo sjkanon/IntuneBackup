@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Automatic_Restart_Sign_On.md) · **English** · [Français](Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md)
 
-# [Baseline] - WIN - D - Automatic Restart Sign-On
+# CXNM - Standard - WIN - D - Automatic Restart Sign-On
 
 After a restart for updates, automatically signs the user back in, locked, so that startup programs run without the device sitting unlocked and unattended.
 

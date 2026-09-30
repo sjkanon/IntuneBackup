@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.md) · [English](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Update Ring 1 Pilot
+# CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot
 
 Premier anneau de mise à jour : reçoit les mises à jour Windows immédiatement, afin que les problèmes apparaissent sur un petit groupe.
 

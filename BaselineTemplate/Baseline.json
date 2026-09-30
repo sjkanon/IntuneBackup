@@ -1,6 +1,6 @@
 {
   "TemplateType": "BaselineTemplate",
-  "templateName": "Baseline",
+  "templateName": "CXNM - Standard - Baseline",
   "description": "The agreed Intune baseline from the baseline repository. Every stage deploys Intune template packages; package membership follows the repo, so a new policy is added automatically. Assign the tenants before you run it.",
   "assignedTenants": [
     {
@@ -22,7 +22,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#devices",
           "variables": {
-            "intuneTemplatePackage": "Baseline-Devices",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-Devices",
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "",
@@ -39,7 +39,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#users",
           "variables": {
-            "intuneTemplatePackage": "Baseline-Users",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-Users",
             "assignTo": "allLicensedUsers",
             "customGroup": "",
             "excludeGroup": "",
@@ -56,7 +56,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#ade-token",
           "variables": {
-            "intuneTemplatePackage": "Baseline-ADE-token",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-ADE-token",
             "assignTo": "On",
             "customGroup": "",
             "excludeGroup": "",
@@ -73,7 +73,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-android-dedicated",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Android-Dedicated",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Android-Dedicated",
             "assignTo": "customGroup",
             "customGroup": "SEC-Android-Dedicated",
             "excludeGroup": "",
@@ -90,7 +90,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-baseline-pilot",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Baseline-Pilot",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Baseline-Pilot",
             "assignTo": "customGroup",
             "customGroup": "SEC-Baseline-Pilot",
             "excludeGroup": "",
@@ -107,7 +107,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-ios-byod",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-iOS-BYOD",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-iOS-BYOD",
             "assignTo": "customGroup",
             "customGroup": "SEC-iOS-BYOD",
             "excludeGroup": "",
@@ -124,7 +124,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-ios-corporate",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-iOS-Corporate",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-iOS-Corporate",
             "assignTo": "customGroup",
             "customGroup": "SEC-iOS-Corporate",
             "excludeGroup": "",
@@ -141,7 +141,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-remote-support-macos",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Remote-Support-macOS",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Remote-Support-macOS",
             "assignTo": "customGroup",
             "customGroup": "SEC-Remote-Support-macOS",
             "excludeGroup": "",
@@ -158,7 +158,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-shared-devices",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Shared-Devices",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Shared-Devices",
             "assignTo": "customGroup",
             "customGroup": "SEC-Shared-Devices",
             "excludeGroup": "",
@@ -175,7 +175,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-update-ring1",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Update-Ring1",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Update-Ring1",
             "assignTo": "customGroup",
             "customGroup": "SEC-Update-Ring1",
             "excludeGroup": "",
@@ -192,7 +192,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-update-ring2",
           "variables": {
-            "intuneTemplatePackage": "Baseline-SEC-Update-Ring2",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-SEC-Update-Ring2",
             "assignTo": "customGroup",
             "customGroup": "SEC-Update-Ring2",
             "excludeGroup": "",
@@ -225,7 +225,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#pilot",
           "variables": {
-            "intuneTemplatePackage": "Baseline-Pilot",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-Pilot",
             "assignTo": "customGroup",
             "customGroup": "SEC-Baseline-Pilot",
             "excludeGroup": "",
@@ -253,7 +253,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#wacht",
           "variables": {
-            "intuneTemplatePackage": "Baseline-Wacht",
+            "intuneTemplatePackage": "CXNM - Standard - Baseline-Wacht",
             "assignTo": "On",
             "customGroup": "",
             "excludeGroup": "",

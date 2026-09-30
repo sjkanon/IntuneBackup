@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_OS_Version.md) · [English](Baseline_MAC_U_Compliance_OS_Version.en.md) · **Français**
 
-# [Baseline] - MAC - U - Compliance OS Version
+# CXNM - Standard - MAC - U - Compliance OS Version
 
 Vérifie si le Mac exécute macOS 14 ou une version ultérieure — la version requise par la policy de mise à jour déclarative de la baseline.
 

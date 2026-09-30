@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_U_Compliance_Device_Security.en.md) · [Français](Baseline_MAC_U_Compliance_Device_Security.fr.md)
 
-# [Baseline] - MAC - U - Compliance Device Security
+# CXNM - Standard - MAC - U - Compliance Device Security
 
 Toetst of de schijf van de Mac versleuteld is, de firewall aanstaat en Gatekeeper alleen ondertekende software toelaat.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Delivery_Optimisation.md) · [English](Baseline_WIN_D_Delivery_Optimisation.en.md) · **Français**
 
-# [Baseline] - WIN - D - Delivery Optimisation
+# CXNM - Standard - WIN - D - Delivery Optimisation
 
 Permet aux appareils d'échanger les mises à jour entre eux au lieu de les télécharger chacun séparément depuis Internet, et limite la bande passante que cela peut consommer.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Update_Reports_and_Telemetry.md) · **English** · [Français](Baseline_WIN_D_Update_Reports_and_Telemetry.fr.md)
 
-# [Baseline] - WIN - D - Update Reports and Telemetry
+# CXNM - Standard - WIN - D - Update Reports and Telemetry
 
 Sends the diagnostic data that Windows Update for Business Reports needs to show which devices are lagging behind.
 

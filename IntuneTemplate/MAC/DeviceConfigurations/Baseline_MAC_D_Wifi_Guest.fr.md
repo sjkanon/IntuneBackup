@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Wifi_Guest.md) · [English](Baseline_MAC_D_Wifi_Guest.en.md) · **Français**
 
-# [Baseline] - MAC - D - Wifi Guest
+# CXNM - Standard - MAC - D - Wifi Guest
 
 Déploie le réseau invité comme second profil sur chaque Mac, afin qu'un appareil reste en ligne lorsque le réseau de l'entreprise n'est pas joignable.
 
@@ -15,7 +15,7 @@ Déploie le réseau invité comme second profil sur chaque Mac, afin qu'un appar
 | Source | Baseline propre — profil Wi-Fi Intune (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 et A.8.21, NIS2 art. 21(2)(c) et (e). |
 | Fichier | [`Baseline_MAC_D_Wifi_Guest.json`](Baseline_MAC_D_Wifi_Guest.json) |
 
-> Le SSID et la PSK sont définis sur `<SSID-GUEST>` et `<PSK-GUEST>`. Renseignez-les avant d'affecter. Le mot de passe se retrouve dans ce template et donc dans ce repo. Il n'existe pas de token CIPP pour une PSK comme %OrganizationId% l'est pour l'ID du tenant, et laisser un placeholder ne fonctionne pas ici : Graph ne renvoie jamais une PSK — une sauvegarde du tenant ne contient que `preSharedKeyIsSet: true`. Si vous la renseignez donc dans le tenant plutôt qu'ici, la synchronisation CIPP suivante réécrit le placeholder par-dessus et chaque appareil perd son Wi-Fi. Renseignez-la ici, et uniquement tant que ce repo est privé ; s'il est un jour partagé, changez la PSK. Que la PSK reste de toute façon un secret partagé est déjà expliqué dans les notes de [Baseline] - WIN - D - Wireless and Peripherals : un administrateur local la lit simplement avec `netsh wlan show profile key=clear`, et la mesure qui résout vraiment cela est le 802.1X avec certificats. Ce profil est la solution de repli, pas le premier choix : ne le déployez qu'à côté de Wifi Corporate, sinon toute la flotte se retrouve par défaut sur le réseau invité. macOS détermine lui-même l'ordre de préférence en fonction de l'ordre des réseaux de l'appareil ; si vous voulez le figer, cela demande une intervention manuelle ou un script, pas ce profil.
+> Le SSID et la PSK sont définis sur `<SSID-GUEST>` et `<PSK-GUEST>`. Renseignez-les avant d'affecter. Le mot de passe se retrouve dans ce template et donc dans ce repo. Il n'existe pas de token CIPP pour une PSK comme %OrganizationId% l'est pour l'ID du tenant, et laisser un placeholder ne fonctionne pas ici : Graph ne renvoie jamais une PSK — une sauvegarde du tenant ne contient que `preSharedKeyIsSet: true`. Si vous la renseignez donc dans le tenant plutôt qu'ici, la synchronisation CIPP suivante réécrit le placeholder par-dessus et chaque appareil perd son Wi-Fi. Renseignez-la ici, et uniquement tant que ce repo est privé ; s'il est un jour partagé, changez la PSK. Que la PSK reste de toute façon un secret partagé est déjà expliqué dans les notes de CXNM - Standard - WIN - D - Wireless and Peripherals : un administrateur local la lit simplement avec `netsh wlan show profile key=clear`, et la mesure qui résout vraiment cela est le 802.1X avec certificats. Ce profil est la solution de repli, pas le premier choix : ne le déployez qu'à côté de Wifi Corporate, sinon toute la flotte se retrouve par défaut sur le réseau invité. macOS détermine lui-même l'ordre de préférence en fonction de l'ordre des réseaux de l'appareil ; si vous voulez le figer, cela demande une intervention manuelle ou un script, pas ce profil.
 
 ## Normes
 

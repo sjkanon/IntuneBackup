@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_U_Compliance_Password.md) · **English** · [Français](Baseline_IOS_U_Compliance_Password.fr.md)
 
-# [Baseline] - IOS - U - Compliance Password
+# CXNM - Standard - IOS - U - Compliance Password
 
 Checks whether an iPhone or iPad requires a passcode of at least six characters, no simple code, and locks after fifteen minutes.
 

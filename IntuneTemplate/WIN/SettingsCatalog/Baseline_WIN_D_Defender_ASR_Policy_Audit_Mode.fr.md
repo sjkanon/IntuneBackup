@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) · [English](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) · **Français**
 
-# [Baseline] - WIN - D - Defender ASR Policy Audit Mode
+# CXNM - Standard - WIN - D - Defender ASR Policy Audit Mode
 
 Place en audit les mêmes règles Attack Surface Reduction que la policy ASR bloquante : Defender journalise ce qu'il bloquerait, mais ne bloque rien. Destiné à mesurer l'impact d'une règle avant de la passer en blocage.
 
@@ -15,7 +15,7 @@ Place en audit les mêmes règles Attack Surface Reduction que la policy ASR blo
 | Source | Template standard CIPP |
 | Fichier | [`Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json`](Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.json) |
 
-> Provient de CIPP, pas d'OIB — import-oib.js ne touche donc pas aux paramètres. Règle sur audit 16 règles ASR que [Baseline] - WIN - D - Attack Surface Reduction règle sur block ou warn. C'est pourquoi, depuis la comparaison avec IntuneAdmin/IntuneBaselines, elle est volontairement sans affectation : les deux sur tous les appareils produisaient un Conflict sur chacune de ces 16 règles, après quoi Intune n'applique la règle via aucune des deux policies. Elle doit aller sur un groupe pilote, et alors sans la policy ASR bloquante.
+> Provient de CIPP, pas d'OIB — import-oib.js ne touche donc pas aux paramètres. Règle sur audit 16 règles ASR que CXNM - Standard - WIN - D - Attack Surface Reduction règle sur block ou warn. C'est pourquoi, depuis la comparaison avec IntuneAdmin/IntuneBaselines, elle est volontairement sans affectation : les deux sur tous les appareils produisaient un Conflict sur chacune de ces 16 règles, après quoi Intune n'applique la règle via aucune des deux policies. Elle doit aller sur un groupe pilote, et alors sans la policy ASR bloquante.
 
 ## Normes
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Location_and_Privacy.en.md) · [Français](Baseline_WIN_D_Location_and_Privacy.fr.md)
 
-# [Baseline] - WIN - D - Location and Privacy
+# CXNM - Standard - WIN - D - Location and Privacy
 
 Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en spraak.
 

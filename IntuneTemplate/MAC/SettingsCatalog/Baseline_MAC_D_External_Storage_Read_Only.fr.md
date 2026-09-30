@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_External_Storage_Read_Only.md) · [English](Baseline_MAC_D_External_Storage_Read_Only.en.md) · **Français**
 
-# [Baseline] - MAC - D - External Storage Read Only
+# CXNM - Standard - MAC - D - External Storage Read Only
 
 Ne laisse macOS monter que le stockage externe qui est lui-même en lecture seule. Les clés USB et disques externes ordinaires — en lecture-écriture — ne sont pas montés du tout.
 

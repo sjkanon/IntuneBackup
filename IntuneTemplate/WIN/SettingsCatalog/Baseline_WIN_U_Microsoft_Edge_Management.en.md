@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Edge_Management.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Edge_Management.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Edge Management
+# CXNM - Standard - WIN - U - Microsoft Edge Management
 
 Allows the Edge Management Service on managed devices and lets the policy configured there take precedence over local and MDM policy, so that Intune and that service do not work against each other.
 

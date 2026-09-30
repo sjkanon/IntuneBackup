@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Outlook.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Outlook.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Outlook
+# CXNM - Standard - WIN - U - Microsoft Outlook
 
 Configures the user's Exchange Online profile automatically, so that Outlook works without manually adding an account.
 

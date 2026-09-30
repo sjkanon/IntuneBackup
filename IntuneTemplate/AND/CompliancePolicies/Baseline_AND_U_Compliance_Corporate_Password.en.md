@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Corporate_Password.md) · **English** · [Français](Baseline_AND_U_Compliance_Corporate_Password.fr.md)
 
-# [Baseline] - AND - U - Compliance Corporate Password
+# CXNM - Standard - AND - U - Compliance Corporate Password
 
 Checks whether a fully managed or corporate-owned Android device has a numeric complex code of at least six digits, locks after fifteen minutes, does not reuse the last five codes and is encrypted.
 
@@ -15,7 +15,7 @@ Checks whether a fully managed or corporate-owned Android device has a numeric c
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed and Corp-Work-Profile - v1.5 (password part); without expiry after 365 days, lock time 15 instead of 5 minutes |
 | File | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 
-> Deliberately no `passwordExpirationDays` (UniFy: 365): NIST SP 800-63B advises against mandatory rotation. Fifteen minutes instead of UniFy's five, the same as iOS, macOS, Windows and the work profile; CIS specifies ≤ 2 minutes, and UniFy also deliberately deviates from that. The settings themselves are set by [Baseline] - AND - U - Corporate Device Security; without that policy the user is not prompted to choose a code that meets these requirements.
+> Deliberately no `passwordExpirationDays` (UniFy: 365): NIST SP 800-63B advises against mandatory rotation. Fifteen minutes instead of UniFy's five, the same as iOS, macOS, Windows and the work profile; CIS specifies ≤ 2 minutes, and UniFy also deliberately deviates from that. The settings themselves are set by CXNM - Standard - AND - U - Corporate Device Security; without that policy the user is not prompted to choose a code that meets these requirements.
 
 ## Standards
 

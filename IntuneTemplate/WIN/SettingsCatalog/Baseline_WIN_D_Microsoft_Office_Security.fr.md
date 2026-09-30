@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Office_Security.md) · [English](Baseline_WIN_D_Microsoft_Office_Security.en.md) · **Français**
 
-# [Baseline] - WIN - D - Microsoft Office Security
+# CXNM - Standard - WIN - D - Microsoft Office Security
 
 La sécurité des macros Office : bloque les macros dans les fichiers provenant d'Internet, restreint ActiveX et les anciens formats de fichier. Le point central de cette baseline contre l'hameçonnage par pièces jointes.
 

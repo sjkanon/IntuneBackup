@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Microsoft_Edge_Security.md) · **English** · [Français](Baseline_MAC_D_Microsoft_Edge_Security.fr.md)
 
-# [Baseline] - MAC - D - Microsoft Edge Security
+# CXNM - Standard - MAC - D - Microsoft Edge Security
 
 Edge's security settings on macOS: SmartScreen, download control and certificate behaviour.
 
@@ -15,7 +15,7 @@ Edge's security settings on macOS: SmartScreen, download control and certificate
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security |
 | File | [`Baseline_MAC_D_Microsoft_Edge_Security.json`](Baseline_MAC_D_Microsoft_Edge_Security.json) |
 
-> Since September 2026 this policy sets two settings that OpenIntuneBaseline macOS v1.0 does not have: SSLErrorOverrideAllowed=false (a user can no longer click through a certificate error — the classic interception of a connection) and MicrosoftEdgeInsiderPromotionEnabled=false. Both identical to [Baseline] - WIN - D - Microsoft Edge Security and to OIB macOS v2.0 beta. They are not in the OIB v1.0 source and remain as own settings on a new import (carry, see the header of import-oib.js). Watch out for internal sites with a self-signed certificate: they can no longer be opened in Edge until the certificate is correct. DownloadRestrictions deliberately stays at 1 (Block dangerous downloads). OIB v2.0 beta and the Windows policy set 4 (Block malicious downloads), and that blocks less: 1 stops every download with a SmartScreen warning, 4 only downloads that SmartScreen flags as known malware.
+> Since September 2026 this policy sets two settings that OpenIntuneBaseline macOS v1.0 does not have: SSLErrorOverrideAllowed=false (a user can no longer click through a certificate error — the classic interception of a connection) and MicrosoftEdgeInsiderPromotionEnabled=false. Both identical to CXNM - Standard - WIN - D - Microsoft Edge Security and to OIB macOS v2.0 beta. They are not in the OIB v1.0 source and remain as own settings on a new import (carry, see the header of import-oib.js). Watch out for internal sites with a self-signed certificate: they can no longer be opened in Edge until the certificate is correct. DownloadRestrictions deliberately stays at 1 (Block dangerous downloads). OIB v2.0 beta and the Windows policy set 4 (Block malicious downloads), and that blocks less: 1 stops every download with a SmartScreen warning, 4 only downloads that SmartScreen flags as known malware.
 
 ## Standards
 

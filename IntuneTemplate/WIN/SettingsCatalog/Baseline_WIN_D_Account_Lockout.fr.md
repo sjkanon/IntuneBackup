@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Account_Lockout.md) · [English](Baseline_WIN_D_Account_Lockout.en.md) · **Français**
 
-# [Baseline] - WIN - D - Account Lockout
+# CXNM - Standard - WIN - D - Account Lockout
 
 Verrouille un compte pendant 15 minutes après dix tentatives de connexion échouées, y compris celui de l'administrateur intégré, et place l'appareil en récupération BitLocker après dix tentatives échouées.
 

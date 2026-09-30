@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
-  "displayName": "[Baseline] - IOS - Microsoft Defender - Managed Devices",
+  "displayName": "CXNM - Standard - IOS - Microsoft Defender - Managed Devices",
   "description": "Microsoft Defender for Endpoint on enrolled devices: pass on supervision status, web protection and network protection on, report unsecured networks, signing out in the app disabled.",
   "roleScopeTagIds": [
     "0"

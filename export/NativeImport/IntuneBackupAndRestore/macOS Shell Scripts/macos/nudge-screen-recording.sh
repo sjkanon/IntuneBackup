@@ -17,7 +17,7 @@
 #   in the settings catalog means nothing: that schema is generic across all TCC services and
 #   macOS ignores the value here.
 #
-#   [Baseline] - MAC - D - Screen Recording therefore sets AllowStandardUserToSetSystemService.
+#   CXNM - Standard - MAC - D - Screen Recording therefore sets AllowStandardUserToSetSystemService.
 #   That is the maximum: a standard user may flip the switch themselves, without an
 #   administrator password. Without that profile a non-admin cannot do it at all since Big Sur.
 #   The click remains the user's; this script makes sure they actually do it.
@@ -41,7 +41,7 @@ set -u
 # installed does not appear in the panel and so does not count here either — otherwise this
 # script would keep asking for a checkbox that is not there.
 
-# By default NinjaOne and TeamViewer, matching [Baseline] - MAC - D - Screen Recording. If the
+# By default NinjaOne and TeamViewer, matching CXNM - Standard - MAC - D - Screen Recording. If the
 # organisation uses other tools, replace them here and in that profile.
 BUNDLES=(
   "com.ninjarmm.ncstreamer"

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) · [Français](Baseline_MAC_D_Firewall_and_Gatekeeper.fr.md)
 
-# [Baseline] - MAC - D - Firewall and Gatekeeper
+# CXNM - Standard - MAC - D - Firewall and Gatekeeper
 
 Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een herkende ontwikkelaar is ondertekend.
 
@@ -15,7 +15,7 @@ Zet de macOS-firewall aan en laat Gatekeeper alleen software toe die door een he
 | Bron | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | Bestand | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 
-> Firewall en stealth mode aan (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper aan met App Store en geïdentificeerde ontwikkelaars (2.6.5). 'Alle inkomende verbindingen blokkeren' staat bewust uit — dat breekt AirPlay-ontvangst en schermdeling; de compliance-policy eist het sinds september 2026 ook niet meer. Sinds september 2026 mag Gatekeeper vragen een geblokkeerd malwarebestand naar Apple te sturen (enablexprotectmalwareupload, override). Het blokkeren van de Finder-omzeiling (com.apple.systempolicy.managed DisableOverride) staat niet hier maar in [Baseline] - MAC - D - Restrictions Hardening: het is een andere payload die OIB v1.0 niet levert, en een override kan geen nieuwe payloadgroep toevoegen.
+> Firewall en stealth mode aan (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper aan met App Store en geïdentificeerde ontwikkelaars (2.6.5). 'Alle inkomende verbindingen blokkeren' staat bewust uit — dat breekt AirPlay-ontvangst en schermdeling; de compliance-policy eist het sinds september 2026 ook niet meer. Sinds september 2026 mag Gatekeeper vragen een geblokkeerd malwarebestand naar Apple te sturen (enablexprotectmalwareupload, override). Het blokkeren van de Finder-omzeiling (com.apple.systempolicy.managed DisableOverride) staat niet hier maar in CXNM - Standard - MAC - D - Restrictions Hardening: het is een andere payload die OIB v1.0 niet levert, en een override kan geen nieuwe payloadgroep toevoegen.
 
 ## Normen
 

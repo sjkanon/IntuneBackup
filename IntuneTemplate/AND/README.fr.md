@@ -4,7 +4,7 @@
 
 # Android — 14 policies
 
-Toutes les policies s'appellent `[Baseline] - AND - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
+Toutes les policies s'appellent `CXNM - Standard - AND - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|

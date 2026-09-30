@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Remote_Desktop_and_RPC.md) · [English](Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) · **Français**
 
-# [Baseline] - WIN - D - Remote Desktop and RPC
+# CXNM - Standard - WIN - D - Remote Desktop and RPC
 
 Restreint le Bureau à distance et les appels de procédure distants, deux points d'entrée souvent utilisés pour le mouvement latéral lors d'une intrusion.
 

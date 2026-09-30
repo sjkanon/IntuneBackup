@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_OneDrive.md) · [English](Baseline_WIN_U_Microsoft_OneDrive.en.md) · **Français**
 
-# [Baseline] - WIN - U - Microsoft OneDrive
+# CXNM - Standard - WIN - U - Microsoft OneDrive
 
 Le volet utilisateur de OneDrive : quels écrans et notifications l'utilisateur voit.
 

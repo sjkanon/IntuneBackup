@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.md) · **English** · [Français](Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.fr.md)
 
-# [Baseline] - MAC - U - Microsoft Edge Profiles and Sync
+# CXNM - Standard - MAC - U - Microsoft Edge Profiles and Sync
 
 Determines which account users sign in to Edge with and what is synchronised.
 

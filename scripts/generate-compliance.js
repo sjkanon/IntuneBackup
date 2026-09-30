@@ -97,7 +97,7 @@ const faseWord = () => V.t({ nl: "fase", en: "phase", fr: "phase" });
 
 const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const escapePipes = (text) => String(text ?? "").replace(/\|/g, "\\|").replace(/\n+/g, " ");
-const shortName = (displayName) => displayName.replace(/^\[Baseline\] - /, "");
+const shortName = (displayName) => displayName.replace(/^CXNM - Standard - /, "");
 const byNumber = (a, b) => a.localeCompare(b, "en", { numeric: true });
 
 /** GitHub-anker van een kop, zodat de matrix naar de details kan linken. */

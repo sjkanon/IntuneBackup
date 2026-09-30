@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) · [Français](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.fr.md)
 
-# [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity
+# CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity
 
 Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.
 
@@ -15,7 +15,7 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 | Bron | eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel |
 | Bestand | [`Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json) |
 
-> Alternatief voor [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.
+> Alternatief voor CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.
 
 ## Normen
 

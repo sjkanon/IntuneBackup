@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Microsoft_AutoUpdate.md) · **English** · [Français](Baseline_MAC_D_Microsoft_AutoUpdate.fr.md)
 
-# [Baseline] - MAC - D - Microsoft AutoUpdate
+# CXNM - Standard - MAC - D - Microsoft AutoUpdate
 
 How and when Office, Edge and other Microsoft apps on the Mac update themselves.
 

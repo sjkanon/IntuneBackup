@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_User_Experience.md) · [English](Baseline_WIN_U_Windows_User_Experience.en.md) · **Français**
 
-# [Baseline] - WIN - U - Windows User Experience
+# CXNM - Standard - WIN - U - Windows User Experience
 
 Désactive les notifications sur l'écran de verrouillage et la saisie semi-automatique dans Internet Explorer.
 

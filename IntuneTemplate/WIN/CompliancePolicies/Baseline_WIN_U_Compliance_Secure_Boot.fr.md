@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Secure_Boot.md) · [English](Baseline_WIN_U_Compliance_Secure_Boot.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Secure Boot
+# CXNM - Standard - WIN - U - Compliance Secure Boot
 
 Vérifie que l'appareil démarre avec Secure Boot, afin qu'un bootkit ne puisse pas se charger avant Windows.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Office_Security.md) · [English](Baseline_WIN_U_Microsoft_Office_Security.en.md) · **Français**
 
-# [Baseline] - WIN - U - Microsoft Office Security
+# CXNM - Standard - WIN - U - Microsoft Office Security
 
 Le volet utilisateur de la sécurité Office : comportement des macros, emplacements approuvés et mode protégé.
 

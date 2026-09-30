@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Removable_Storage.en.md) · [Français](Baseline_WIN_D_Removable_Storage.fr.md)
 
-# [Baseline] - WIN - D - Removable Storage
+# CXNM - Standard - WIN - D - Removable Storage
 
 Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, en telefoons en camera's die zich als WPD-apparaat aanmelden. Lezen blijft mogelijk.
 

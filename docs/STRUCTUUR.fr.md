@@ -97,10 +97,10 @@ la traduit en package CIPP ; `check-scope.js` vérifie que phase, affectation et
 
 | Phase | Signification | Stratégies | Package CIPP | Stage CIPP |
 |---:|---|---:|---|---:|
-| 1 | Déployer immédiatement | 101 | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` | 1 |
-| 2 | D'abord en pilote | 39 | `Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
-| 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `Baseline-Wacht`, non affecté | 3 |
-| 4 | Groupe dédié (`faseGroep`) | 16 | `Baseline-SEC-<groupe>` | 1 |
+| 1 | Déployer immédiatement | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | D'abord en pilote | 39 | `CXNM - Standard - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
+| 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `CXNM - Standard - Baseline-Wacht`, non affecté | 3 |
+| 4 | Groupe dédié (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groupe>` | 1 |
 | 5 | Ne pas déployer — alternative à une autre stratégie | 15 | aucun | – |
 
 Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deux semaines se sont
@@ -164,7 +164,7 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 
 ## Conventions
 
-- **Nommage :** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` dans le tenant,
+- **Nommage :** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` dans le tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` comme fichier. Sans le préfixe `Baseline_`, un fichier
   disparaît silencieusement de tous les pipelines.
 - **D ou U :** pour le Settings Catalog Windows, cela découle du `settingDefinitionId` (`user_` = U).

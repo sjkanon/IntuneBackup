@@ -9,8 +9,8 @@
 
 ## Pourquoi
 
-`[Baseline] - WIN - D - BitLocker` exige que la clé de récupération soit envoyée vers Entra ID et
-`[Baseline] - WIN - D - Windows LAPS` que le mot de passe administrateur y soit stocké. Les deux stratégies
+`CXNM - Standard - WIN - D - BitLocker` exige que la clé de récupération soit envoyée vers Entra ID et
+`CXNM - Standard - WIN - D - Windows LAPS` que le mot de passe administrateur y soit stocké. Les deux stratégies
 signalent **Réussi** dès que le paramètre est appliqué — et non si la clé ou le mot de passe
 est effectivement arrivé. Le contrôle de conformité `Compliance BitLocker` vérifie seulement si le
 disque est chiffré. Un appareil chiffré sans clé de récupération utilisable dans Entra
@@ -30,7 +30,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**, pou
 
 | Champ | Valeur |
 |---|---|
-| Nom | `[Baseline] - WIN - D - BitLocker Escrow Check` / `[Baseline] - WIN - D - LAPS Escrow Check` |
+| Nom | `CXNM - Standard - WIN - D - BitLocker Escrow Check` / `CXNM - Standard - WIN - D - LAPS Escrow Check` |
 | Exécuter avec les informations d'identification de l'utilisateur connecté | Non (SYSTEM) |
 | PowerShell 64 bits | Oui |
 | Planification | Quotidienne |

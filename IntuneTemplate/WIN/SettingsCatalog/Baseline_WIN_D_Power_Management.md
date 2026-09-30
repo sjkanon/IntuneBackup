@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Power_Management.en.md) · [Français](Baseline_WIN_D_Power_Management.fr.md)
 
-# [Baseline] - WIN - D - Power Management
+# CXNM - Standard - WIN - D - Power Management
 
 Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand zetten, zodat de bestaande eis om een wachtwoord te vragen bij ontwaken ook echt tot een vergrendeld scherm leidt.
 

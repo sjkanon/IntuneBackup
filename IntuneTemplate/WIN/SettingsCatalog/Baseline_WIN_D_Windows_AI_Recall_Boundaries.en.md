@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Recall_Boundaries.md) · **English** · [Français](Baseline_WIN_D_Windows_AI_Recall_Boundaries.fr.md)
 
-# [Baseline] - WIN - D - Windows AI Recall Boundaries
+# CXNM - Standard - WIN - D - Windows AI Recall Boundaries
 
 Limits Recall when it is allowed: no snapshots of the management portals and the password vault, retention of at most 30 days, at most 10 GB, and users cannot export their Recall data.
 

@@ -4,7 +4,7 @@
 
 # macOS — 37 policies
 
-All policies are named `[Baseline] - MAC - <D|U> - <Item>`; the tables below show the `<Item>` part.
+All policies are named `CXNM - Standard - MAC - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|

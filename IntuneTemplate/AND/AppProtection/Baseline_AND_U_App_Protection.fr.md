@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_App_Protection.md) · [English](Baseline_AND_U_App_Protection.en.md) · **Français**
 
-# [Baseline] - AND - U - App Protection
+# CXNM - Standard - AND - U - App Protection
 
 Protège les données de l'entreprise dans les applications Microsoft sur un téléphone Android personnel : PIN distinct, chiffrement, pas de copie vers les applications personnelles, et effacement à distance des seules données professionnelles.
 

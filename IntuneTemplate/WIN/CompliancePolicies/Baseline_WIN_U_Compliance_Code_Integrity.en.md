@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Code_Integrity.md) · **English** · [Français](Baseline_WIN_U_Compliance_Code_Integrity.fr.md)
 
-# [Baseline] - WIN - U - Compliance Code Integrity
+# CXNM - Standard - WIN - U - Compliance Code Integrity
 
 Checks whether code integrity is on, so that Windows only loads signed drivers and system files.
 

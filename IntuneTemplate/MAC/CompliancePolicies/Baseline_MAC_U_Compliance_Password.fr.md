@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_Password.md) · [English](Baseline_MAC_U_Compliance_Password.en.md) · **Français**
 
-# [Baseline] - MAC - U - Compliance Password
+# CXNM - Standard - MAC - U - Compliance Password
 
 Vérifie si le Mac exige un mot de passe et quelle doit être sa robustesse.
 

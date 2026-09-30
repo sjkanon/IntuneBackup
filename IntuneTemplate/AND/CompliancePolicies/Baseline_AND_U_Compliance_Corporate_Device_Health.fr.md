@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Corporate_Device_Health.md) · [English](Baseline_AND_U_Compliance_Corporate_Device_Health.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Corporate Device Health
+# CXNM - Standard - AND - U - Compliance Corporate Device Health
 
 Marque un appareil Android fully managed ou corporate-owned comme non conforme lorsqu'il est rooté, que Play Integrity ne réussit pas avec attestation matérielle, que l'application Intune a été manipulée, qu'il fonctionne sous une version antérieure à Android 16 ou que le dernier correctif de sécurité est plus ancien que le seuil minimal.
 

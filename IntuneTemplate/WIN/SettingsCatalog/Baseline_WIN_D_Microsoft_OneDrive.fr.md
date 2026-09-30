@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_OneDrive.md) · [English](Baseline_WIN_D_Microsoft_OneDrive.en.md) · **Français**
 
-# [Baseline] - WIN - D - Microsoft OneDrive
+# CXNM - Standard - WIN - D - Microsoft OneDrive
 
 Connecte automatiquement le client OneDrive avec le compte professionnel et déplace Bureau, Documents et Images vers OneDrive, afin que rien ne soit stocké uniquement en local.
 

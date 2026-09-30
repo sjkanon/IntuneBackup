@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Antispyware.md) · [English](Baseline_WIN_U_Compliance_Antispyware.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Antispyware
+# CXNM - Standard - WIN - U - Compliance Antispyware
 
 Vérifie qu'une solution anti-espion active est enregistrée dans Sécurité Windows.
 

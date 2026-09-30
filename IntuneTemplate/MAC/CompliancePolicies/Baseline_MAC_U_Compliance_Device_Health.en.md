@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_Device_Health.md) · **English** · [Français](Baseline_MAC_U_Compliance_Device_Health.fr.md)
 
-# [Baseline] - MAC - U - Compliance Device Health
+# CXNM - Standard - MAC - U - Compliance Device Health
 
 Checks whether System Integrity Protection is enabled on the Mac.
 

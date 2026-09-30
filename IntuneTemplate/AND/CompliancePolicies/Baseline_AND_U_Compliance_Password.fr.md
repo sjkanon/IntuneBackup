@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Password.md) · [English](Baseline_AND_U_Compliance_Password.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Password
+# CXNM - Standard - AND - U - Compliance Password
 
 Vérifie si un appareil Android avec profil professionnel personnel dispose d'un verrouillage d'écran de complexité moyenne, si le profil professionnel exige en outre son propre code d'au moins six chiffres (numérique complexe, complexité moyenne) qui se verrouille après quinze minutes, et si le stockage est chiffré.
 
@@ -15,7 +15,7 @@ Vérifie si un appareil Android avec profil professionnel personnel dispose d'un
 | Source | Convention OpenIntuneBaseline pour la conformité ; valeurs alignées sur l'exigence de PIN à six caractères de la policy App Protection existante et sur l'exigence Android d'IntuneAdmin. |
 | Fichier | [`Baseline_AND_U_Compliance_Password.json`](Baseline_AND_U_Compliance_Password.json) |
 
-> **Correction septembre 2026.** Le texte indiquait jusqu'ici que l'organisation n'impose aucune exigence côté personnel ; la policy exigeait pourtant déjà un verrouillage de l'appareil (`passwordRequired`, `requiredPasswordComplexity: medium`). L'exigence est maintenue et le texte a été rectifié : elle demande seulement qu'il existe un verrouillage de complexité moyenne, pas quel code, et l'organisation ne voit pas ce code. Qui juge cela inacceptable pour des appareils personnels doit aussi reconsidérer l'exigence App Protection sur la complexité de l'appareil — sinon App Protection bloque quand même les applications. Volontairement pas de `passwordExpirationDays` (NIST SP 800-63B déconseille la rotation obligatoire) ni de blocage d'un verrouillage commun à l'appareil et au profil professionnel (`blockUnifiedPasswordForWorkProfile`, UniFy W-11) : deux codes sur un appareil personnel génèrent surtout des demandes d'assistance, et le code de l'appareil est déjà vérifié ici. Quinze minutes est aligné sur iOS, macOS et Windows. Les paramètres eux-mêmes sont définis par [Baseline] - AND - U - Work Profile Restrictions ; cette policy les vérifie.
+> **Correction septembre 2026.** Le texte indiquait jusqu'ici que l'organisation n'impose aucune exigence côté personnel ; la policy exigeait pourtant déjà un verrouillage de l'appareil (`passwordRequired`, `requiredPasswordComplexity: medium`). L'exigence est maintenue et le texte a été rectifié : elle demande seulement qu'il existe un verrouillage de complexité moyenne, pas quel code, et l'organisation ne voit pas ce code. Qui juge cela inacceptable pour des appareils personnels doit aussi reconsidérer l'exigence App Protection sur la complexité de l'appareil — sinon App Protection bloque quand même les applications. Volontairement pas de `passwordExpirationDays` (NIST SP 800-63B déconseille la rotation obligatoire) ni de blocage d'un verrouillage commun à l'appareil et au profil professionnel (`blockUnifiedPasswordForWorkProfile`, UniFy W-11) : deux codes sur un appareil personnel génèrent surtout des demandes d'assistance, et le code de l'appareil est déjà vérifié ici. Quinze minutes est aligné sur iOS, macOS et Windows. Les paramètres eux-mêmes sont définis par CXNM - Standard - AND - U - Work Profile Restrictions ; cette policy les vérifie.
 
 ## Normes
 

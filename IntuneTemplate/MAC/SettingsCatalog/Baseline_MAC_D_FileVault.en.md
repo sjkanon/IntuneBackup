@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_FileVault.md) · **English** · [Français](Baseline_MAC_D_FileVault.fr.md)
 
-# [Baseline] - MAC - D - FileVault
+# CXNM - Standard - MAC - D - FileVault
 
 Encrypts the Mac's disk and stores the recovery key in Intune. The macOS counterpart of BitLocker.
 

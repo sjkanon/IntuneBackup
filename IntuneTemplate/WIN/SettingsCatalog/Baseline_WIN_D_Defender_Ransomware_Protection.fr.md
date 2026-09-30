@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Ransomware_Protection.md) · [English](Baseline_WIN_D_Defender_Ransomware_Protection.en.md) · **Français**
 
-# [Baseline] - WIN - D - Defender Ransomware Protection
+# CXNM - Standard - WIN - D - Defender Ransomware Protection
 
 Empêche un appareil infecté de chiffrer des fichiers sur d'autres machines via le réseau.
 

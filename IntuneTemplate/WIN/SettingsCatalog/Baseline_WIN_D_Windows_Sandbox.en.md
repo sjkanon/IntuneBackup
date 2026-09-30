@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Sandbox.md) · **English** · [Français](Baseline_WIN_D_Windows_Sandbox.fr.md)
 
-# [Baseline] - WIN - D - Windows Sandbox
+# CXNM - Standard - WIN - D - Windows Sandbox
 
 Restricts Windows Sandbox, which otherwise opens a disposable Windows with access to the network and the host's clipboard.
 

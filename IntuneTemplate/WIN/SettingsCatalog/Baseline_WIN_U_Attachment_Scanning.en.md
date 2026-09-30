@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Attachment_Scanning.md) · **English** · [Français](Baseline_WIN_U_Attachment_Scanning.fr.md)
 
-# [Baseline] - WIN - U - Attachment Scanning
+# CXNM - Standard - WIN - U - Attachment Scanning
 
 Makes the virus scanner check every attachment at the moment the user opens it, not only when it is saved.
 

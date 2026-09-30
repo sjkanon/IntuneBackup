@@ -18,7 +18,7 @@ EDR-signalen in het Defender-portaal en de compliance-check in
 
 ## Kan het generiek, zoals op Windows? Nee.
 
-Op Windows zet `[Baseline] - WIN - D - Defender for Endpoint EDR` de instelling
+Op Windows zet `CXNM - Standard - WIN - D - Defender for Endpoint EDR` de instelling
 `device_vendor_msft_windowsadvancedthreatprotection_onboarding_fromconnector`: Intune haalt het
 aanmeldpakket zelf op via de Defender-connector, dus het template bevat niets tenantspecifieks.
 
@@ -51,7 +51,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
    macOS, Connectivity type *Streamlined*, Deployment method *Mobile Device Management / Microsoft
    Intune* → Download. Uit de zip: `intune/WindowsDefenderATPOnboarding.xml`.
 4. **Profiel.** Devices → macOS → Configuration → Create → Templates → **Custom**. Naam
-   `[Baseline] - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
+   `CXNM - Standard - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
    bestand `WindowsDefenderATPOnboarding.xml`. Toewijzen aan dezelfde groep.
 5. **Controleren.** Op de Mac: `mdatp health --field licensed` → `true`, en
    `mdatp health --field org_id` toont de tenant. In het portaal verschijnt het apparaat binnen

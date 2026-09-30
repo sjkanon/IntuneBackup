@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Device_Health.md) · [English](Baseline_AND_U_Compliance_Device_Health.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Device Health
+# CXNM - Standard - AND - U - Compliance Device Health
 
 Marque un appareil Android avec profil professionnel personnel comme non conforme lorsqu'il est rooté, que le débogage USB est activé, que les applications hors du Play Store sont autorisées, que Play Integrity ne peut pas être confirmé avec attestation matérielle, ou que le dernier correctif de sécurité est plus ancien que le seuil minimal.
 

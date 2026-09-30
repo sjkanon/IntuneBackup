@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Timezone.md) · [English](Baseline_WIN_D_Timezone.en.md) · **Français**
 
-# [Baseline] - WIN - D - Timezone
+# CXNM - Standard - WIN - D - Timezone
 
 Laisse Windows déterminer automatiquement le fuseau horaire, afin que les journaux et les certificats ne soient pas à une heure erronée.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Recovery_Lock.en.md) · [Français](Baseline_MAC_D_Recovery_Lock.fr.md)
 
-# [Baseline] - MAC - D - Recovery Lock
+# CXNM - Standard - MAC - D - Recovery Lock
 
 Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op recoveryOS en de opstartopties, en vervangt het elke zes maanden.
 
@@ -15,7 +15,7 @@ Zet op Macs met Apple silicon een willekeurig, door Intune beheerd wachtwoord op
 | Bron | Microsoft Learn — Configure Recovery Lock using the settings catalog (juni 2026); vorm uit microsoft/intune-my-macs pol-sec-007-recovery-lock (daar maandelijkse rotatie, hier zes maanden) |
 | Bestand | [`Baseline_MAC_D_Recovery_Lock.json`](Baseline_MAC_D_Recovery_Lock.json) |
 
-> Rotatie op 6 maanden (optie _5), gelijk aan de rotatie van de FileVault-herstelsleutel in [Baseline] - MAC - D - FileVault; intune-my-macs roteert maandelijks, wat vooral servicedeskverkeer oplevert zonder dat het risico daalt — het wachtwoord wordt alleen gebruikt wie het opvraagt. Wachtwoord bekijken: Devices → apparaat → Passwords and keys → Recovery Lock Password. Dat vraagt de Intune-rechten 'Remote tasks/View macOS recovery lock password' (en voor rotatie 'Rotate macOS recovery lock password'); beperk wie die heeft, bij voorkeur via PIM. Na gebruik: device action 'Rotate recovery lock passcode'. Uitschrijven uit Intune wist het wachtwoord van de Mac; de toewijzing weghalen laat Intune het proberen te wissen. Een Mac die de organisatie verlaat dus eerst uitschrijven, dan vrijgeven in Apple Business (zie extras/macos/apple-business).
+> Rotatie op 6 maanden (optie _5), gelijk aan de rotatie van de FileVault-herstelsleutel in CXNM - Standard - MAC - D - FileVault; intune-my-macs roteert maandelijks, wat vooral servicedeskverkeer oplevert zonder dat het risico daalt — het wachtwoord wordt alleen gebruikt wie het opvraagt. Wachtwoord bekijken: Devices → apparaat → Passwords and keys → Recovery Lock Password. Dat vraagt de Intune-rechten 'Remote tasks/View macOS recovery lock password' (en voor rotatie 'Rotate macOS recovery lock password'); beperk wie die heeft, bij voorkeur via PIM. Na gebruik: device action 'Rotate recovery lock passcode'. Uitschrijven uit Intune wist het wachtwoord van de Mac; de toewijzing weghalen laat Intune het proberen te wissen. Een Mac die de organisatie verlaat dus eerst uitschrijven, dan vrijgeven in Apple Business (zie extras/macos/apple-business).
 
 ## Normen
 

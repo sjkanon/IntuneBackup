@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
-  "displayName": "[Baseline] - MAC - Enrollment Restriction Corporate Only",
+  "displayName": "CXNM - Standard - MAC - Enrollment Restriction Corporate Only",
   "description": "Blocks enrolment of personal Macs. Only Macs via Apple Automated Device Enrollment or with a registered serial number (corporate identifier) can enrol. Source: own baseline — see extras/macos/enrollment-restriction/README.en.md.",
   "platformType": "mac",
   "platformRestriction": {

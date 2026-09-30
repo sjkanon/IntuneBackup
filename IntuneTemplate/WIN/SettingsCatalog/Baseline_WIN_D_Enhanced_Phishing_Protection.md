@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) · [Français](Baseline_WIN_D_Enhanced_Phishing_Protection.fr.md)
 
-# [Baseline] - WIN - D - Enhanced Phishing Protection
+# CXNM - Standard - WIN - D - Enhanced Phishing Protection
 
 Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand.
 

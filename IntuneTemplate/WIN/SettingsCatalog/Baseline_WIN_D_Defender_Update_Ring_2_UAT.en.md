@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Update_Ring_2_UAT.md) · **English** · [Français](Baseline_WIN_D_Defender_Update_Ring_2_UAT.fr.md)
 
-# [Baseline] - WIN - D - Defender Update Ring 2 UAT
+# CXNM - Standard - WIN - D - Defender Update Ring 2 UAT
 
 Second ring for Defender updates: runs behind the pilot and ahead of production.
 

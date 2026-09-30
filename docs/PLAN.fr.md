@@ -62,7 +62,7 @@ RPC (9) et quelques plus petits. Les 15 paramètres sans équivalent OIB se trou
 `WIN - D - Legacy Hardening`, tenus à part pour qu'une mise à niveau d'OIB ne les entraîne ni ne
 les supprime.
 
-**Axe plateforme.** Toutes les stratégies s'appellent désormais `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>`
+**Axe plateforme.** Toutes les stratégies s'appellent désormais `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>`
 et se trouvent dans `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 stratégies) et la protection
 d'applications BYOD pour iOS et Android (2) sont nouveaux.
 

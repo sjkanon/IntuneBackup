@@ -6,7 +6,7 @@
   "roleScopeTagIds": [
     "0"
   ],
-  "displayName": "[Baseline] - AND - Edge Managed Devices",
+  "displayName": "CXNM - Standard - AND - Edge Managed Devices",
   "description": "Allows only the organisation account in Microsoft Edge, so that work links from Outlook and Teams do not open in a personal profile. For every Android Enterprise profile type.",
   "packageId": "app:com.microsoft.emmx",
   "payloadJson": "eyJraW5kIjoiYW5kcm9pZGVudGVycHJpc2UjbWFuYWdlZENvbmZpZ3VyYXRpb24iLCJwcm9kdWN0SWQiOiJhcHA6Y29tLm1pY3Jvc29mdC5lbW14IiwibWFuYWdlZFByb3BlcnR5IjpbeyJrZXkiOiJJbnR1bmVNQU1BbGxvd2VkQWNjb3VudHNPbmx5IiwidmFsdWVTdHJpbmciOiJFbmFibGVkIn0seyJrZXkiOiJjb20ubWljcm9zb2Z0LmludHVuZS5tYW0uQWxsb3dlZEFjY291bnRVUE5zIiwidmFsdWVTdHJpbmciOiJ7e3VzZXJwcmluY2lwYWxuYW1lfX0ifV19",

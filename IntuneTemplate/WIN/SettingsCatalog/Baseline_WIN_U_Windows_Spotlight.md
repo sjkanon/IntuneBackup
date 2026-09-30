@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Windows_Spotlight.en.md) · [Français](Baseline_WIN_U_Windows_Spotlight.fr.md)
 
-# [Baseline] - WIN - U - Windows Spotlight
+# CXNM - Standard - WIN - U - Windows Spotlight
 
 Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen.
 

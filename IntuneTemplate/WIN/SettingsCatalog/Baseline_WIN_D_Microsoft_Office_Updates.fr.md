@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Office_Updates.md) · [English](Baseline_WIN_D_Microsoft_Office_Updates.en.md) · **Français**
 
-# [Baseline] - WIN - D - Microsoft Office Updates
+# CXNM - Standard - WIN - D - Microsoft Office Updates
 
 Le canal de mise à jour d'Office et la rapidité d'installation des mises à jour.
 

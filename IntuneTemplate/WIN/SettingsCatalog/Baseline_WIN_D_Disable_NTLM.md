@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Disable_NTLM.en.md) · [Français](Baseline_WIN_D_Disable_NTLM.fr.md)
 
-# [Baseline] - WIN - D - Disable NTLM
+# CXNM - Standard - WIN - D - Disable NTLM
 
 Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen.
 
@@ -15,7 +15,7 @@ Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM |
 | Bestand | [`Baseline_WIN_D_Disable_NTLM.json`](Baseline_WIN_D_Disable_NTLM.json) |
 
-> NTLMv1 en LM zijn al weg op elk apparaat: lanmanagerauthenticationlevel 5 staat ook in [Baseline] - WIN - D - Local Security Policies, in fase 1. Deze policy doet de rest — NTLM helemaal weigeren. Microsoft zet NTLM pas in de volgende grote Windows-release standaard uit en bestaande versies blijven het ondersteunen, dus haast is er niet; audit eerst. Local Security Policies logt inkomend NTLM dat deze policy zou weigeren (auditincomingntlmtraffic), uitgaand is op 24H2 zonder policy te zien.
+> NTLMv1 en LM zijn al weg op elk apparaat: lanmanagerauthenticationlevel 5 staat ook in CXNM - Standard - WIN - D - Local Security Policies, in fase 1. Deze policy doet de rest — NTLM helemaal weigeren. Microsoft zet NTLM pas in de volgende grote Windows-release standaard uit en bestaande versies blijven het ondersteunen, dus haast is er niet; audit eerst. Local Security Policies logt inkomend NTLM dat deze policy zou weigeren (auditincomingntlmtraffic), uitgaand is op 24H2 zonder policy te zien.
 
 ## Normen
 

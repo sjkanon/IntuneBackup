@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Lock_Screen.md) · [English](Baseline_IOS_D_Lock_Screen.en.md) · **Français**
 
-# [Baseline] - IOS - D - Lock Screen
+# CXNM - Standard - IOS - D - Lock Screen
 
 Affiche sur l'écran verrouillé d'un iPhone ou iPad d'entreprise un texte destiné à la personne qui le trouve, afin qu'un appareil perdu puisse être rendu à l'organisation.
 
@@ -12,7 +12,7 @@ Affiche sur l'écran verrouillé d'un iPhone ou iPad d'entreprise un texte desti
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| Source | Payload Apple Shared Device Configuration (com.apple.shareddeviceconfiguration) dans le settings catalog iOS ; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate et IntuneAdmin — Lock Screen Message. Les restrictions de l'écran verrouillé de la même policy UniFy figurent dans [Baseline] - IOS - D - Restrictions Corporate |
+| Source | Payload Apple Shared Device Configuration (com.apple.shareddeviceconfiguration) dans le settings catalog iOS ; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate et IntuneAdmin — Lock Screen Message. Les restrictions de l'écran verrouillé de la même policy UniFy figurent dans CXNM - Standard - IOS - D - Restrictions Corporate |
 | Fichier | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 
 > **Renseignez VERLOREN-TOESTEL-TEKST-INVULLEN** avant l'affectation, par exemple 'Trouvé ? Appelez le service desk : <numéro>' — pas de nom de personne, c'est une information utile à un voleur. Le dépôt ne dispose d'aucun jeton CIPP pour le nom de l'organisation ou le numéro de téléphone (%OrganizationId% est un GUID), d'où le texte à remplacer. Étiquette d'inventaire (assettaginformation) volontairement non définie : UniFy y utilise {{DEVICENAME}}, et je n'ai pas pu vérifier si Intune remplace ce jeton dans ce payload.

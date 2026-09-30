@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_AND_U_Compliance_Corporate_Password.en.md) · [Français](Baseline_AND_U_Compliance_Corporate_Password.fr.md)
 
-# [Baseline] - AND - U - Compliance Corporate Password
+# CXNM - Standard - AND - U - Compliance Corporate Password
 
 Toetst of een fully managed of corporate-owned Android-toestel een numeriek complexe code van minimaal zes cijfers heeft, na vijftien minuten vergrendelt, de laatste vijf codes niet hergebruikt en versleuteld is.
 
@@ -15,7 +15,7 @@ Toetst of een fully managed of corporate-owned Android-toestel een numeriek comp
 | Bron | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed en Corp-Work-Profile - v1.5 (wachtwoorddeel); zonder verloop na 365 dagen, vergrendeltijd 15 in plaats van 5 minuten |
 | Bestand | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 
-> Bewust géén `passwordExpirationDays` (UniFy: 365): NIST SP 800-63B raadt verplichte rotatie af. Vijftien minuten in plaats van UniFy's vijf, gelijk aan iOS, macOS, Windows en het werkprofiel; CIS noemt ≤ 2 minuten, UniFy wijkt daar ook bewust van af. De instellingen zelf zet [Baseline] - AND - U - Corporate Device Security; zonder die policy wordt de gebruiker niet gevraagd een code te kiezen die hier aan voldoet.
+> Bewust géén `passwordExpirationDays` (UniFy: 365): NIST SP 800-63B raadt verplichte rotatie af. Vijftien minuten in plaats van UniFy's vijf, gelijk aan iOS, macOS, Windows en het werkprofiel; CIS noemt ≤ 2 minuten, UniFy wijkt daar ook bewust van af. De instellingen zelf zet CXNM - Standard - AND - U - Corporate Device Security; zonder die policy wordt de gebruiker niet gevraagd een code te kiezen die hier aan voldoet.
 
 ## Normen
 

@@ -9,8 +9,8 @@
 
 ## Why
 
-`[Baseline] - WIN - D - BitLocker` requires the recovery key to go to Entra ID and
-`[Baseline] - WIN - D - Windows LAPS` requires the administrator password to be stored there. Both policies
+`CXNM - Standard - WIN - D - BitLocker` requires the recovery key to go to Entra ID and
+`CXNM - Standard - WIN - D - Windows LAPS` requires the administrator password to be stored there. Both policies
 report **Succeeded** as soon as the setting has been applied — not whether the key or the password
 actually arrived. The compliance check `Compliance BitLocker` only looks at whether the
 disk is encrypted. A device that is encrypted without a usable recovery key in Entra
@@ -30,7 +30,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**, per
 
 | Field | Value |
 |---|---|
-| Name | `[Baseline] - WIN - D - BitLocker Escrow Check` / `[Baseline] - WIN - D - LAPS Escrow Check` |
+| Name | `CXNM - Standard - WIN - D - BitLocker Escrow Check` / `CXNM - Standard - WIN - D - LAPS Escrow Check` |
 | Run this script using the logged-on credentials | No (SYSTEM) |
 | 64-bit PowerShell | Yes |
 | Schedule | Daily |

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Antivirus.md) · **English** · [Français](Baseline_WIN_U_Compliance_Antivirus.fr.md)
 
-# [Baseline] - WIN - U - Compliance Antivirus
+# CXNM - Standard - WIN - U - Compliance Antivirus
 
 Checks whether an active antivirus solution is registered in Windows Security.
 

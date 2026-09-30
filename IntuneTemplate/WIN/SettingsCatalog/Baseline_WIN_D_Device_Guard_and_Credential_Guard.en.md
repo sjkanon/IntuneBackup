@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Device_Guard_and_Credential_Guard.md) · **English** · [Français](Baseline_WIN_D_Device_Guard_and_Credential_Guard.fr.md)
 
-# [Baseline] - WIN - D - Device Guard and Credential Guard
+# CXNM - Standard - WIN - D - Device Guard and Credential Guard
 
 Turns on virtualisation-based security, Credential Guard and memory integrity, so that credentials are held in an isolated part of memory. Requires a restart and can block old drivers.
 

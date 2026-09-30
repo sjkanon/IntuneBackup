@@ -127,7 +127,7 @@ step 4 before step 3 produces two policies that contradict each other.
 
 ## Pilot first
 
-Phase 2 in `_manifest.json`. These policies are deployed via the package `Baseline-Pilot` to
+Phase 2 in `_manifest.json`. These policies are deployed via the package `CXNM - Standard - Baseline-Pilot` to
 `SEC-Baseline-Pilot`, and only to everyone once they move to phase 1 — a PR, because that
 changes who they are deployed to. The reason per policy is the `faseWaarom` from the manifest.
 

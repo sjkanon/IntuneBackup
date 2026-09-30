@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Password.md) · **English** · [Français](Baseline_AND_U_Compliance_Password.fr.md)
 
-# [Baseline] - AND - U - Compliance Password
+# CXNM - Standard - AND - U - Compliance Password
 
 Checks whether an Android device with a personal work profile has a screen lock of medium complexity, whether the work profile additionally requires its own code of at least six digits (numeric complex, medium complexity) that locks after fifteen minutes, and whether storage is encrypted.
 
@@ -15,7 +15,7 @@ Checks whether an Android device with a personal work profile has a screen lock 
 | Source | OpenIntuneBaseline convention for compliance; values aligned with the six-character PIN requirement in the existing App Protection policy and with the Android requirement in IntuneAdmin. |
 | File | [`Baseline_AND_U_Compliance_Password.json`](Baseline_AND_U_Compliance_Password.json) |
 
-> **Correction September 2026.** Until now the text said that the organisation places no requirements on the personal side; the policy already required a device lock at the time (`passwordRequired`, `requiredPasswordComplexity: medium`). The requirement stays and the text has been corrected: it only requires that there is a lock of medium complexity, not which code, and the organisation does not see that code. Anyone who finds this unacceptable for personal devices must also reconsider the App Protection requirement on device complexity — otherwise App Protection blocks the apps anyway. Deliberately no `passwordExpirationDays` (NIST SP 800-63B advises against mandatory rotation) and no blocking of a shared lock for device and work profile (`blockUnifiedPasswordForWorkProfile`, UniFy W-11): two codes on a personal device mainly generates support requests, and the device code is already checked here. Fifteen minutes is aligned with iOS, macOS and Windows. The settings themselves are set by [Baseline] - AND - U - Work Profile Restrictions; this policy checks them.
+> **Correction September 2026.** Until now the text said that the organisation places no requirements on the personal side; the policy already required a device lock at the time (`passwordRequired`, `requiredPasswordComplexity: medium`). The requirement stays and the text has been corrected: it only requires that there is a lock of medium complexity, not which code, and the organisation does not see that code. Anyone who finds this unacceptable for personal devices must also reconsider the App Protection requirement on device complexity — otherwise App Protection blocks the apps anyway. Deliberately no `passwordExpirationDays` (NIST SP 800-63B advises against mandatory rotation) and no blocking of a shared lock for device and work profile (`blockUnifiedPasswordForWorkProfile`, UniFy W-11): two codes on a personal device mainly generates support requests, and the device code is already checked here. Fifteen minutes is aligned with iOS, macOS and Windows. The settings themselves are set by CXNM - Standard - AND - U - Work Profile Restrictions; this policy checks them.
 
 ## Standards
 

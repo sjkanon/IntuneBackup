@@ -162,8 +162,8 @@ Five policy types, distinguished by `.Type` in the template:
 ## Naming
 
 ```
-[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>      policy name in the tenant
-Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json         file name
+CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>      policy name in the tenant
+Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json              file name
 ```
 
 The `Baseline_` prefix remains mandatory: `export-intunebackup.js`, `generate-docs.js` and
@@ -334,9 +334,9 @@ The stages it contains:
 
 | Stage | Packages | Moving on to *this* stage |
 |---:|---|---|
-| 1 · Now | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` and the eight group packages `Baseline-SEC-*` (phase 4, one per group) | — stage 1 always applies |
-| 2 · Pilot | `Baseline-Pilot` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
-| 3 · Awaiting prerequisite | `Baseline-Wacht` | `manual` — someone moves it on |
+| 1 · Now | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` and the eight group packages `CXNM - Standard - Baseline-SEC-*` (phase 4, one per group) | — stage 1 always applies |
+| 2 · Pilot | `CXNM - Standard - Baseline-Pilot` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
+| 3 · Awaiting prerequisite | `CXNM - Standard - Baseline-Wacht` | `manual` — someone moves it on |
 
 Later stages stack on stage 1, and the condition belongs to the stage a tenant
 **enters**, not the stage it leaves. CIPP has five: `time`, `variable`,
@@ -454,8 +454,8 @@ value cause a Conflict in Intune, after which the setting is applied by neither.
 `check-scope.js` guards this.
 
 ```powershell
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
 ```
 
 The WHfB variant for shared devices is the only one you can assign *alongside* its counterpart:
@@ -471,7 +471,7 @@ starting point, not a ready-made production configuration.
 That is phase 2, and the list — with the reason per policy — is in
 [OVERZICHT.md](docs/OVERZICHT.en.md#pilot-first). It is generated from `faseWaarom` in the
 manifest. Until September 2026 there was a separate list here, and it drifted: nine of the
-policies on it were in phase 1 and were simply deployed to all devices via `Baseline-Devices`.
+policies on it were in phase 1 and were simply deployed to all devices via `CXNM - Standard - Baseline-Devices`.
 Windows Hello for Business goes into the pilot as a pair, device *and* user — one in the
 pilot and the other on everyone makes the pilot pointless.
 

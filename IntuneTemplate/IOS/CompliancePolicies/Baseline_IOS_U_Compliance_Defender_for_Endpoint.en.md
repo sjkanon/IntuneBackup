@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_U_Compliance_Defender_for_Endpoint.md) · **English** · [Français](Baseline_IOS_U_Compliance_Defender_for_Endpoint.fr.md)
 
-# [Baseline] - IOS - U - Compliance Defender for Endpoint
+# CXNM - Standard - IOS - U - Compliance Defender for Endpoint
 
 Marks an iPhone or iPad as non-compliant as soon as Microsoft Defender for Endpoint rates the machine risk higher than Medium.
 
@@ -15,7 +15,7 @@ Marks an iPhone or iPad as non-compliant as soon as Microsoft Defender for Endpo
 | Source | IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint and UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (both Medium); UniFy Corporate requires Low |
 | File | [`Baseline_IOS_U_Compliance_Defender_for_Endpoint.json`](Baseline_IOS_U_Compliance_Defender_for_Endpoint.json) |
 
-> Deliberately one policy with Medium instead of UniFy's Low for corporate devices: Low makes a device non-compliant at even a low risk, and that first requires experience with how often that happens. A separate policy alongside Compliance Device Health, so that a tenant without an MDE licence can keep using Device Health as is; compliance policies are evaluated independently and do not conflict. Block action after 24 hours, same as the other iOS compliance policies. The field advancedThreatProtectionRequiredSecurityLevel is not in pl4nty DCv1 for iOS but is in Graph beta iosCompliancePolicy and in both source exports. Onboarding: [Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised and … Unsupervised; app configuration in extras/ios/app-configuration.
+> Deliberately one policy with Medium instead of UniFy's Low for corporate devices: Low makes a device non-compliant at even a low risk, and that first requires experience with how often that happens. A separate policy alongside Compliance Device Health, so that a tenant without an MDE licence can keep using Device Health as is; compliance policies are evaluated independently and do not conflict. Block action after 24 hours, same as the other iOS compliance policies. The field advancedThreatProtectionRequiredSecurityLevel is not in pl4nty DCv1 for iOS but is in Graph beta iosCompliancePolicy and in both source exports. Onboarding: CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised and … Unsupervised; app configuration in extras/ios/app-configuration.
 
 ## Standards
 

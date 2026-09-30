@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Windows_Hello_for_Business.en.md) · [Français](Baseline_WIN_U_Windows_Hello_for_Business.fr.md)
 
-# [Baseline] - WIN - U - Windows Hello for Business
+# CXNM - Standard - WIN - U - Windows Hello for Business
 
 Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen.
 

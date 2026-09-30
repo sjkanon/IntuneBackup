@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Wireless_Shared_Devices.md) · **English** · [Français](Baseline_WIN_D_Wireless_Shared_Devices.fr.md)
 
-# [Baseline] - WIN - D - Wireless Shared Devices
+# CXNM - Standard - WIN - D - Wireless Shared Devices
 
 On shared devices, allows only the networks deployed via Intune. Wi-Fi networks added by users are removed and no new ones can be added.
 

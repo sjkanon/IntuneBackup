@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.md) · [English](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Managed.en.md) · **Français**
 
-# [Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed
+# CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Managed
 
 Active le mode Exchange mis en cache pour la boîte aux lettres de l'utilisateur et en exclut tout ce qui est partagé : les dossiers de courrier partagés, les calendriers partagés et les Public Folder Favorites ne sont pas copiés dans le fichier OST.
 

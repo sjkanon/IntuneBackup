@@ -412,9 +412,9 @@ function platformReadme(platform, templates, ctx) {
     `# ${label} — ${policies(templates.length)}`,
     "",
     V.t({
-      nl: `Alle policies heten \`[Baseline] - ${platform} - <D|U> - <Item>\`; de tabellen hieronder laten het \`<Item>\`-deel zien.`,
-      en: `All policies are named \`[Baseline] - ${platform} - <D|U> - <Item>\`; the tables below show the \`<Item>\` part.`,
-      fr: `Toutes les policies s'appellent \`[Baseline] - ${platform} - <D|U> - <Item>\` ; les tableaux ci-dessous montrent la partie \`<Item>\`.`,
+      nl: `Alle policies heten \`CXNM - Standard - ${platform} - <D|U> - <Item>\`; de tabellen hieronder laten het \`<Item>\`-deel zien.`,
+      en: `All policies are named \`CXNM - Standard - ${platform} - <D|U> - <Item>\`; the tables below show the \`<Item>\` part.`,
+      fr: `Toutes les policies s'appellent \`CXNM - Standard - ${platform} - <D|U> - <Item>\` ; les tableaux ci-dessous montrent la partie \`<Item>\`.`,
     }),
     "",
     V.t({ nl: "| Map | Aantal |", en: "| Folder | Count |", fr: "| Dossier | Nombre |" }),
@@ -692,7 +692,7 @@ function overviewDocument(templates, ctx) {
   const unassigned = templates.filter((t) => !ctx.assignments[t.displayName]);
   // De pilottabel komt uit `fase` en `faseWaarom`. Tot september 2026 stond hij hier als vaste
   // tekst, en die liep uit de pas: negen van de tien policies erin stonden in fase 1 en rolden
-  // via Baseline-Devices gewoon naar alle apparaten.
+  // via CXNM - Standard - Baseline-Devices gewoon naar alle apparaten.
   const faseOf = (t) => (ctx.manifestByTarget.get(t.baseName) || {}).fase;
   const byFase = (n) => templates.filter((t) => faseOf(t) === n).length;
   const platformRank = (t) => platforms.indexOf(parseBaseName(t.baseName).platform);
@@ -880,7 +880,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## Eerst in een pilot",
         "",
-        "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `Baseline-Pilot` uit naar",
+        "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `CXNM - Standard - Baseline-Pilot` uit naar",
         "`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat",
         "verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.",
         "",
@@ -963,7 +963,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## Pilot first",
         "",
-        "Phase 2 in `_manifest.json`. These policies are deployed via the package `Baseline-Pilot` to",
+        "Phase 2 in `_manifest.json`. These policies are deployed via the package `CXNM - Standard - Baseline-Pilot` to",
         "`SEC-Baseline-Pilot`, and only to everyone once they move to phase 1 — a PR, because that",
         "changes who they are deployed to. The reason per policy is the `faseWaarom` from the manifest.",
         "",
@@ -1046,7 +1046,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## D'abord en pilote",
         "",
-        "Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `Baseline-Pilot` vers",
+        "Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `CXNM - Standard - Baseline-Pilot` vers",
         "`SEC-Baseline-Pilot`, et à tout le monde seulement lorsqu'elles passent en phase 1 — une PR, car cela",
         "change à qui elles sont déployées. La raison pour chaque policy est le `faseWaarom` du manifeste.",
         "",
@@ -1054,7 +1054,7 @@ function overviewDocument(templates, ctx) {
       ],
     }),
     "|---|---|",
-    ...pilot.map((p) => `| \`${p.displayName.replace(/^\[Baseline\] - /, "")}\` | ${escapePipes(V.d(p.faseWaarom))} |`),
+    ...pilot.map((p) => `| \`${p.displayName.replace(/^CXNM - Standard - /, "")}\` | ${escapePipes(V.d(p.faseWaarom))} |`),
     "",
     ...V.t({
       nl: [

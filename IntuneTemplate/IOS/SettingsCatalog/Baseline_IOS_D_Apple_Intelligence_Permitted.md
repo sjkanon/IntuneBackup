@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) · [Français](Baseline_IOS_D_Apple_Intelligence_Permitted.fr.md)
 
-# [Baseline] - IOS - D - Apple Intelligence Permitted
+# CXNM - Standard - IOS - D - Apple Intelligence Permitted
 
 Staat op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functies en de koppeling met externe AI-diensten uitdrukkelijk toe.
 
@@ -12,10 +12,10 @@ Staat op ingeschreven iPhones en iPads de generatieve Apple Intelligence-functie
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | Tegenhanger van [Baseline] - IOS - D - Apple Intelligence Restricted; dezelfde declaratieve sleutels op de Apple-standaardwaarde, expliciet vastgelegd |
+| Bron | Tegenhanger van CXNM - Standard - IOS - D - Apple Intelligence Restricted; dezelfde declaratieve sleutels op de Apple-standaardwaarde, expliciet vastgelegd |
 | Bestand | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 
-> **Alternatief van [Baseline] - IOS - D - Apple Intelligence Restricted.** Weeg vóór je deze kiest mee dat de ChatGPT-integratie (externalintelligencesettings_enabled) gegevens naar een externe partij stuurt; wie alleen de functies op het toestel wil toestaan, zet in deze policy externalintelligencesettings_enabled op false. De per-workspace-beperking (allowedworkspaceids) staat er bewust niet in: die vraagt een tenant- of workspace-ID.
+> **Alternatief van CXNM - Standard - IOS - D - Apple Intelligence Restricted.** Weeg vóór je deze kiest mee dat de ChatGPT-integratie (externalintelligencesettings_enabled) gegevens naar een externe partij stuurt; wie alleen de functies op het toestel wil toestaan, zet in deze policy externalintelligencesettings_enabled op false. De per-workspace-beperking (allowedworkspaceids) staat er bewust niet in: die vraagt een tenant- of workspace-ID.
 
 ## Normen
 

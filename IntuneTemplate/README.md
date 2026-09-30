@@ -68,19 +68,19 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 
 | `Package` | In CIPP toewijzen aan | Stage | Policies |
 |---|---|---:|---:|
-| `Baseline-Devices` | Assign to all devices | 1 | 69 |
-| `Baseline-Users` | Assign to all users | 1 | 32 |
-| `Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 39 |
-| `Baseline-Wacht` | Do not assign | 3 | 26 |
-| `Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
-| `Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
-| `Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
-| `Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
-| `Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
-| `Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
-| `Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
-| `Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
-| `Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
+| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 69 |
+| `CXNM - Standard - Baseline-Users` | Assign to all users | 1 | 32 |
+| `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 39 |
+| `CXNM - Standard - Baseline-Wacht` | Do not assign | 3 | 26 |
+| `CXNM - Standard - Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
+| `CXNM - Standard - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
+| `CXNM - Standard - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
+| `CXNM - Standard - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
+| `CXNM - Standard - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
 | *(leeg)* | wordt niet uitgerold | – | 15 |
 
 De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),

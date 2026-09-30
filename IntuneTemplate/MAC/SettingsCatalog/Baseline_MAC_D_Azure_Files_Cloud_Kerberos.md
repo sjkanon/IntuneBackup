@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) · [Français](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.fr.md)
 
-# [Baseline] - MAC - D - Azure Files Cloud Kerberos
+# CXNM - Standard - MAC - D - Azure Files Cloud Kerberos
 
 Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt.
 
@@ -15,7 +15,7 @@ Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een 
 | Bron | Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json`](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json) |
 
-> Hoort bij [Baseline] - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.
+> Hoort bij CXNM - Standard - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.
 >
 > Een tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.
 >

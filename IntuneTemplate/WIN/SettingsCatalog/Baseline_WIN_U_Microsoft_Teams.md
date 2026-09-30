@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Microsoft_Teams.en.md) · [Français](Baseline_WIN_U_Microsoft_Teams.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Teams
+# CXNM - Standard - WIN - U - Microsoft Teams
 
 Beperkt aanmelden in Teams tot de eigen tenant en voorkomt dat Teams zichzelf na installatie meteen start.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Network_Authentication_Hardening.en.md) · [Français](Baseline_WIN_D_Network_Authentication_Hardening.fr.md)
 
-# [Baseline] - WIN - D - Network Authentication Hardening
+# CXNM - Standard - WIN - D - Network Authentication Hardening
 
 Maakt netwerkauthenticatie minder vatbaar voor misbruik: het systeemaccount gebruikt de computeridentiteit voor NTLM, PKU2U met online identiteiten gaat dicht, LDAP-verkeer vraagt ondertekening, de Kerberos-client ondersteunt armoring en NetBIOS-namen worden niet meer via broadcast opgelost.
 

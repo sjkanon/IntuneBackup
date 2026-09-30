@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_Device_Security.md) · [English](Baseline_MAC_U_Compliance_Device_Security.en.md) · **Français**
 
-# [Baseline] - MAC - U - Compliance Device Security
+# CXNM - Standard - MAC - U - Compliance Device Security
 
 Vérifie si le disque du Mac est chiffré, si le pare-feu est activé et si Gatekeeper n'autorise que les logiciels signés.
 

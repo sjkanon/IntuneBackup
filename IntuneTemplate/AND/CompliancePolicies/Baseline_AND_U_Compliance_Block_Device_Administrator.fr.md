@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Block_Device_Administrator.md) · [English](Baseline_AND_U_Compliance_Block_Device_Administrator.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Block Device Administrator
+# CXNM - Standard - AND - U - Compliance Block Device Administrator
 
 Marque comme non conforme tout appareil Android encore géré avec l'ancien device administrator, afin qu'il doive passer à Android Enterprise.
 

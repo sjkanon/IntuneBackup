@@ -4,7 +4,7 @@
 
 # Windows — 132 policies
 
-All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
+All policies are named `CXNM - Standard - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
@@ -38,7 +38,7 @@ Assign to device groups.
 | [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) | Sets the same Attack Surface Reduction rules as the blocking ASR policy to audit: Defender logs what it would stop, but stops nothing. Intended to measure the impact of a rule before you let it block. | Settings Catalog | 19 | — |
 | [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.en.md) | Core configuration of Defender Antivirus as CIPP ships it: real-time protection, cloud protection, scan schedule and what happens on a detection. | Settings Catalog | 19 | — |
 | [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) | Connects the device to Defender for Endpoint via the Defender connector instead of a fixed onboarding package. As a result the template contains no tenant-specific token and also works in another tenant after a restore, provided the Defender for Endpoint connector is enabled there. | Settings Catalog | 2 | All Devices |
-| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) | Connects the device to Defender for Endpoint via the Defender connector; same onboarding as [Baseline] - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal). | Settings Catalog | 3 | — |
+| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) | Connects the device to Defender for Endpoint via the Defender connector; same onboarding as CXNM - Standard - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal). | Settings Catalog | 3 | — |
 | [**Defender Ransomware Protection**](SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.en.md) | Blocks an infected device from encrypting files on other machines over the network. | Settings Catalog | 2 | All Devices |
 | [**Defender Security Experience**](SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.en.md) | Determines what the user sees in the Windows Security app and may turn off themselves. | Settings Catalog | 4 | All Devices |
 | [**Defender Update Ring 1 Pilot**](SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) | Fetches new Defender definitions and engine versions first, so that you notice a bad update before the rest of the organisation gets it. | Settings Catalog | 3 | — |

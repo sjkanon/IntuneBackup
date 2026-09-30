@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_U_Microsoft_Edge_Extensions.en.md) · [Français](Baseline_MAC_U_Microsoft_Edge_Extensions.fr.md)
 
-# [Baseline] - MAC - U - Microsoft Edge Extensions
+# CXNM - Standard - MAC - U - Microsoft Edge Extensions
 
 Bepaalt welke Edge-extensies gebruikers op de Mac mogen installeren.
 

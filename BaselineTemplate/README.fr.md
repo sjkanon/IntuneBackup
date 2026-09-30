@@ -16,16 +16,16 @@ et quand un tenant passe à l'étape suivante.
 `IntuneTemplate/` fournit les stratégies, mais dans CIPP les templates ne font que s'y trouver :
 c'est une baseline qui déploie. Remplir cet écran à la main, c'est ajouter treize fois le même
 standard et choisir treize fois la bonne cible d'affectation — un seul faux clic place jusqu'à 69
-stratégies (le paquet `Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
+stratégies (le paquet `CXNM - Standard - Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
 dépôt : le manifeste.
 
 ## Contenu
 
 | Étape | Paquets | Passage à cette étape |
 |---:|---|---|
-| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les huit paquets de groupe `Baseline-SEC-*` | — l'étape 1 s'applique toujours |
-| 2 · Pilote | `Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
-| 3 · En attente d'un prérequis | `Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
+| 1 · Immédiat | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` et les huit paquets de groupe `CXNM - Standard - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
+| 2 · Pilote | `CXNM - Standard - Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
+| 3 · En attente d'un prérequis | `CXNM - Standard - Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
 
 Les stratégies contenues dans chaque paquet sont listées dans le
 [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp).
@@ -79,7 +79,7 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
   dans `scripts/lib/templates.js` et `$PilotGroup` dans `scripts/Set-BaselineAssignment.ps1` — et
   relancez le pipeline. Modifier le groupe uniquement dans CIPP fonctionne aussi, mais une
   réimportation de ce fichier remet le nom par défaut.
-- **Lier les profils ADE.** `Baseline-ADE-token` n'est volontairement pas affecté : un profil
+- **Lier les profils ADE.** `CXNM - Standard - Baseline-ADE-token` n'est volontairement pas affecté : un profil
   d'inscription macOS dépend d'un jeton ADE, pas d'un groupe Entra, et vous choisissez l'un des
   deux par jeton.
 

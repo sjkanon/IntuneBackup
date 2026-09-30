@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Timezone.md) · **English** · [Français](Baseline_WIN_D_Timezone.fr.md)
 
-# [Baseline] - WIN - D - Timezone
+# CXNM - Standard - WIN - D - Timezone
 
 Lets Windows determine the time zone automatically, so that logs and certificates are not on the wrong time.
 

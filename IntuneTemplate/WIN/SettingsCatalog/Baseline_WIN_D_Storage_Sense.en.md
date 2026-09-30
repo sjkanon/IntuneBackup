@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Storage_Sense.md) · **English** · [Français](Baseline_WIN_D_Storage_Sense.fr.md)
 
-# [Baseline] - WIN - D - Storage Sense
+# CXNM - Standard - WIN - D - Storage Sense
 
 Automatically cleans up temporary files, the Recycle Bin and old downloads as soon as the disk threatens to fill up, and makes locally cached OneDrive files online-only again.
 

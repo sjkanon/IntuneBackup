@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.md) · [English](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) · **Français**
 
-# [Baseline] - MAC - D - Enrollment Profile Standard User Affinity
+# CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity
 
 Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisateur et inscription verrouillée, et crée le compte connecté en tant qu'utilisateur standard ; l'administration passe par le compte service desk masqué.
 
@@ -15,7 +15,7 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 | Source | baseline propre — OpenIntuneBaseline n'a pas de profil d'inscription |
 | Fichier | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 
-> Alternative à [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mlapsadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mlapsadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
+> Alternative à CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mlapsadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mlapsadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
 
 ## Normes
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Firewall_Rules.md) · [English](Baseline_WIN_D_Windows_Firewall_Rules.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Firewall Rules
+# CXNM - Standard - WIN - D - Windows Firewall Rules
 
 Bloque le trafic sortant des programmes Windows intégrés que les malwares utilisent pour camoufler leur trafic (calc.exe, notepad.exe, mshta.exe).
 

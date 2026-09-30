@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_U_Compliance_Password.md) · [English](Baseline_IOS_U_Compliance_Password.en.md) · **Français**
 
-# [Baseline] - IOS - U - Compliance Password
+# CXNM - Standard - IOS - U - Compliance Password
 
 Vérifie si un iPhone ou iPad exige un code d'accès d'au moins six caractères, sans code simple, et se verrouille après quinze minutes.
 

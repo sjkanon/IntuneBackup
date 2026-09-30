@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Defender_for_Endpoint.md) · [English](Baseline_MAC_D_Defender_for_Endpoint.en.md) · **Français**
 
-# [Baseline] - MAC - D - Defender for Endpoint
+# CXNM - Standard - MAC - D - Defender for Endpoint
 
 Accorde à Defender les autorisations système que macOS exige avant qu'il puisse fonctionner : extension système, filtre réseau et accès complet au disque. Sans cette policy, Defender reste à moitié installé sur un Mac.
 

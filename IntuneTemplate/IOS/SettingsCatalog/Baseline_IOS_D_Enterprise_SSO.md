@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Enterprise_SSO.en.md) · [Français](Baseline_IOS_D_Enterprise_SSO.fr.md)
 
-# [Baseline] - IOS - D - Enterprise SSO
+# CXNM - Standard - IOS - D - Enterprise SSO
 
 Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat beheerde apps en Safari één Entra-aanmelding delen en het apparaat zich bij Conditional Access kan bewijzen.
 
@@ -15,7 +15,7 @@ Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat b
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices; URL-lijst en sleutels gelijkgetrokken met Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices) |
 | Bestand | [`Baseline_IOS_D_Enterprise_SSO.json`](Baseline_IOS_D_Enterprise_SSO.json) |
 
-> Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met [Baseline] - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie extras/ios/README.md.
+> Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met CXNM - Standard - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie extras/ios/README.md.
 
 ## Normen
 

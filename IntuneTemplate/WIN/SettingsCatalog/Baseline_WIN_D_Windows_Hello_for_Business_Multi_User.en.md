@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) · **English** · [Français](Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.fr.md)
 
-# [Baseline] - WIN - D - Windows Hello for Business Multi User
+# CXNM - Standard - WIN - D - Windows Hello for Business Multi User
 
 Windows Hello for Business for shared devices that several users sign in to. Same requirements as the regular device policy, but without setup immediately after sign-in: on a shared device every user would otherwise be guided through PIN setup at their first sign-in.
 

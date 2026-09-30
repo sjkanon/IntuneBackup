@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Endpoint_Analytics.md) · [English](Baseline_WIN_D_Endpoint_Analytics.en.md) · **Français**
 
-# [Baseline] - WIN - D - Endpoint Analytics
+# CXNM - Standard - WIN - D - Endpoint Analytics
 
 Envoie les données de démarrage et de performance à Endpoint Analytics, afin que les appareils lents deviennent visibles avant que les utilisateurs n'appellent à leur sujet.
 

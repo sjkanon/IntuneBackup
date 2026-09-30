@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Package_Manager.md) · [English](Baseline_WIN_D_Windows_Package_Manager.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Package Manager
+# CXNM - Standard - WIN - D - Windows Package Manager
 
 Restreint winget, afin que les utilisateurs ne puissent pas installer de logiciels depuis des sources arbitraires.
 

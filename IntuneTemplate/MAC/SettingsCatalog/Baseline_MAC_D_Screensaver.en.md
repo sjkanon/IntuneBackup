@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Screensaver.md) · **English** · [Français](Baseline_MAC_D_Screensaver.fr.md)
 
-# [Baseline] - MAC - D - Screensaver
+# CXNM - Standard - MAC - D - Screensaver
 
 Requires the password no later than five seconds after the screen saver starts, and starts the screen saver after fifteen minutes of inactivity — including at the login window.
 
@@ -15,7 +15,7 @@ Requires the password no later than five seconds after the screen saver starts, 
 | Source | CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.11.1 and 2.11.2 (mSCP branch tahoe, cis_lvl1); form from OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Screensaver, with askForPasswordDelay 5 instead of 60 |
 | File | [`Baseline_MAC_D_Screensaver.json`](Baseline_MAC_D_Screensaver.json) |
 
-> Deliberate deviation from OpenIntuneBaseline v2.0 beta: it sets askForPasswordDelay to 60 seconds, this policy to 5, the CIS value. Sixty seconds means that someone who walks away just as the screen saver starts leaves an open Mac behind for a minute; with Touch ID, unlocking immediately costs the user almost nothing. OIB's moduleName (Flurry) is omitted: cosmetic. Relationship with [Baseline] - MAC - D - Passcode and Screen Lock: there maxInactivity is set to 15 minutes (com.apple.mobiledevice.passwordpolicy), which macOS translates into a maximum for the screen saver. Here idleTime (com.apple.screensaver.user) and loginWindowIdleTime (com.apple.screensaver) are set to 900 seconds: the same 15 minutes, different settingDefinitionIds, so no Intune conflict and no contradictory value. maxGracePeriod is not set in that policy; askForPasswordDelay here is therefore the only grace period. com.apple.screensaver.user is a payload of its own in the settings catalog; microsoft/intune-my-macs (pol-sec-005) delivers it in the same form at device level. Check in the pilot with `sudo profiles show -type configuration` that idleTime arrives; if it does not, maxInactivity already covers the 15 minutes.
+> Deliberate deviation from OpenIntuneBaseline v2.0 beta: it sets askForPasswordDelay to 60 seconds, this policy to 5, the CIS value. Sixty seconds means that someone who walks away just as the screen saver starts leaves an open Mac behind for a minute; with Touch ID, unlocking immediately costs the user almost nothing. OIB's moduleName (Flurry) is omitted: cosmetic. Relationship with CXNM - Standard - MAC - D - Passcode and Screen Lock: there maxInactivity is set to 15 minutes (com.apple.mobiledevice.passwordpolicy), which macOS translates into a maximum for the screen saver. Here idleTime (com.apple.screensaver.user) and loginWindowIdleTime (com.apple.screensaver) are set to 900 seconds: the same 15 minutes, different settingDefinitionIds, so no Intune conflict and no contradictory value. maxGracePeriod is not set in that policy; askForPasswordDelay here is therefore the only grace period. com.apple.screensaver.user is a payload of its own in the settings catalog; microsoft/intune-my-macs (pol-sec-005) delivers it in the same form at device level. Check in the pilot with `sudo profiles show -type configuration` that idleTime arrives; if it does not, maxInactivity already covers the 15 minutes.
 
 ## Standards
 

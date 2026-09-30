@@ -98,10 +98,10 @@ agree.
 
 | Phase | Meaning | Policies | CIPP package | CIPP stage |
 |---:|---|---:|---|---:|
-| 1 | Deploy now | 101 | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` | 1 |
-| 2 | Pilot first | 39 | `Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
-| 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `Baseline-Wacht`, not assigned | 3 |
-| 4 | Dedicated group (`faseGroep`) | 16 | `Baseline-SEC-<group>` | 1 |
+| 1 | Deploy now | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | Pilot first | 39 | `CXNM - Standard - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
+| 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `CXNM - Standard - Baseline-Wacht`, not assigned | 3 |
+| 4 | Dedicated group (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<group>` | 1 |
 | 5 | Do not deploy — alternative to another policy | 15 | none | – |
 
 Moving on to stage 2 happens once everything from stage 1 is compliant **and** two weeks have
@@ -164,7 +164,7 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 
 ## Conventions
 
-- **Naming:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in the tenant,
+- **Naming:** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in the tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` as a file. Without the `Baseline_` prefix a file
   silently drops out of every pipeline.
 - **D or U:** for Windows Settings Catalog it follows from the `settingDefinitionId` (`user_` = U).

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) · [English](Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Defender for Endpoint Risk
+# CXNM - Standard - WIN - U - Compliance Defender for Endpoint Risk
 
 Rend un appareil non conforme dès que Defender for Endpoint évalue le niveau de risque au-dessus de « moyen », afin que Conditional Access refuse à un appareil présentant une menace active l'accès aux données de l'entreprise.
 

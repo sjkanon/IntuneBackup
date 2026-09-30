@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Logon_Hardening.md) · [English](Baseline_WIN_D_Logon_Hardening.en.md) · **Français**
 
-# [Baseline] - WIN - D - Logon Hardening
+# CXNM - Standard - WIN - D - Logon Hardening
 
 Exige CTRL+ALT+DEL avant la connexion et retire le choix du réseau de l'écran de verrouillage.
 

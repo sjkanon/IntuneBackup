@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Teams.md) · [English](Baseline_WIN_U_Microsoft_Teams.en.md) · **Français**
 
-# [Baseline] - WIN - U - Microsoft Teams
+# CXNM - Standard - WIN - U - Microsoft Teams
 
 Limite la connexion à Teams au tenant de l'organisation et empêche Teams de se lancer automatiquement juste après l'installation.
 

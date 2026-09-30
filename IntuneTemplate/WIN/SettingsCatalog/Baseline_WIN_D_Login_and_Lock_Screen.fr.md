@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Login_and_Lock_Screen.md) · [English](Baseline_WIN_D_Login_and_Lock_Screen.en.md) · **Français**
 
-# [Baseline] - WIN - D - Login and Lock Screen
+# CXNM - Standard - WIN - D - Login and Lock Screen
 
 Détermine ce qui est visible et possible sur l'écran de connexion et l'écran de verrouillage, comme le dernier utilisateur connecté et l'accès à la caméra.
 

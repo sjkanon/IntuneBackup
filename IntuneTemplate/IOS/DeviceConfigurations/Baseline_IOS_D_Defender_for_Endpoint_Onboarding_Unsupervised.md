@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.en.md) · [Français](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.fr.md)
 
-# [Baseline] - IOS - D - Defender for Endpoint Onboarding Unsupervised
+# CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Unsupervised
 
 Onboardt Microsoft Defender for Endpoint zonder gebruikersactie op niet-supervised ingeschreven toestellen via Defender's lokale loopback-VPN, die webbescherming levert zonder verkeer van het toestel te sturen.
 

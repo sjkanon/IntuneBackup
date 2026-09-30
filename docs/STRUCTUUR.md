@@ -97,10 +97,10 @@ naar het CIPP-pakket; `check-scope.js` bewaakt dat fase, toewijzing en pakket kl
 
 | Fase | Betekenis | Policies | CIPP-pakket | CIPP-stage |
 |---:|---|---:|---|---:|
-| 1 | Nu uitrollen | 101 | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` | 1 |
-| 2 | Eerst pilot | 39 | `Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
-| 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `Baseline-Wacht`, niet toegewezen | 3 |
-| 4 | Eigen groep (`faseGroep`) | 16 | `Baseline-SEC-<groep>` | 1 |
+| 1 | Nu uitrollen | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | Eerst pilot | 39 | `CXNM - Standard - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
+| 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `CXNM - Standard - Baseline-Wacht`, niet toegewezen | 3 |
+| 4 | Eigen groep (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groep>` | 1 |
 | 5 | Niet uitrollen — alternatief voor een andere policy | 15 | geen | – |
 
 Doorschuiven naar stage 2 gebeurt als alles uit stage 1 compliant is **en** er twee weken voorbij
@@ -163,7 +163,7 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 
 ## Afspraken
 
-- **Naamgeving:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in de tenant,
+- **Naamgeving:** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in de tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` als bestand. Zonder `Baseline_`-prefix verdwijnt een
   bestand stil uit alle pijplijnen.
 - **D of U:** bij Windows Settings Catalog volgt het uit de `settingDefinitionId` (`user_` = U).

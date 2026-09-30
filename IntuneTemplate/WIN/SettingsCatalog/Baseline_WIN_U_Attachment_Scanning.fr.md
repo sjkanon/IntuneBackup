@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Attachment_Scanning.md) · [English](Baseline_WIN_U_Attachment_Scanning.en.md) · **Français**
 
-# [Baseline] - WIN - U - Attachment Scanning
+# CXNM - Standard - WIN - U - Attachment Scanning
 
 Fait vérifier chaque pièce jointe par l'antivirus au moment où l'utilisateur l'ouvre, et pas seulement lors de l'enregistrement.
 

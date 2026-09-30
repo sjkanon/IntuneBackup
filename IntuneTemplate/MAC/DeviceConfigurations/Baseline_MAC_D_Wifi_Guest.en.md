@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Wifi_Guest.md) · **English** · [Français](Baseline_MAC_D_Wifi_Guest.fr.md)
 
-# [Baseline] - MAC - D - Wifi Guest
+# CXNM - Standard - MAC - D - Wifi Guest
 
 Deploys the guest network as a second profile to every Mac, so that a device stays online when the corporate network is unavailable.
 
@@ -15,7 +15,7 @@ Deploys the guest network as a second profile to every Mac, so that a device sta
 | Source | Own baseline — Intune Wi-Fi profile (macOSWiFiConfiguration), WPA/WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(c) and (e). |
 | File | [`Baseline_MAC_D_Wifi_Guest.json`](Baseline_MAC_D_Wifi_Guest.json) |
 
-> SSID and PSK are set to `<SSID-GUEST>` and `<PSK-GUEST>`. Fill them in before you assign. The password ends up in this template and therefore in this repo. There is no CIPP token for a PSK like %OrganizationId% is for the tenant ID, and leaving a placeholder does not work here: Graph never returns a PSK — a tenant backup only includes `preSharedKeyIsSet: true`. So if you fill it in in the tenant instead of here, the next CIPP sync writes the placeholder over it again and every device loses its Wi-Fi. Fill it in here, and only as long as this repo is private; if it is ever shared, rotate the PSK. That the PSK remains a shared secret anyway is already explained in the notes for [Baseline] - WIN - D - Wireless and Peripherals: a local administrator simply reads it with `netsh wlan show profile key=clear`, and the control that does solve that is 802.1X with certificates. This profile is the fallback, not the first choice: only deploy it alongside Wifi Corporate, otherwise the whole fleet ends up on the guest network by default. macOS determines the preference order itself based on the device's network order; if you want to fix it firmly, that takes manual work or a script and not this profile.
+> SSID and PSK are set to `<SSID-GUEST>` and `<PSK-GUEST>`. Fill them in before you assign. The password ends up in this template and therefore in this repo. There is no CIPP token for a PSK like %OrganizationId% is for the tenant ID, and leaving a placeholder does not work here: Graph never returns a PSK — a tenant backup only includes `preSharedKeyIsSet: true`. So if you fill it in in the tenant instead of here, the next CIPP sync writes the placeholder over it again and every device loses its Wi-Fi. Fill it in here, and only as long as this repo is private; if it is ever shared, rotate the PSK. That the PSK remains a shared secret anyway is already explained in the notes for CXNM - Standard - WIN - D - Wireless and Peripherals: a local administrator simply reads it with `netsh wlan show profile key=clear`, and the control that does solve that is 802.1X with certificates. This profile is the fallback, not the first choice: only deploy it alongside Wifi Corporate, otherwise the whole fleet ends up on the guest network by default. macOS determines the preference order itself based on the device's network order; if you want to fix it firmly, that takes manual work or a script and not this profile.
 
 ## Standards
 

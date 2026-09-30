@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Code_Integrity.md) · [English](Baseline_WIN_U_Compliance_Code_Integrity.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Code Integrity
+# CXNM - Standard - WIN - U - Compliance Code Integrity
 
 Vérifie que l'intégrité du code est activée, afin que Windows ne charge que des pilotes et fichiers système signés.
 

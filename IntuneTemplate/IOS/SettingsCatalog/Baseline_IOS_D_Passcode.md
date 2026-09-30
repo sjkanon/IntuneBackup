@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Passcode.en.md) · [Français](Baseline_IOS_D_Passcode.fr.md)
 
-# [Baseline] - IOS - D - Passcode
+# CXNM - Standard - IOS - D - Passcode
 
 Stelt op ingeschreven iPhones en iPads de toegangscode in die de compliance-policy toetst: minimaal zes tekens, geen eenvoudige code, direct vergrendelen, automatisch vergrendelen na hoogstens vijf minuten, en wissen pas na tien foute pogingen.
 
@@ -12,10 +12,10 @@ Stelt op ingeschreven iPhones en iPads de toegangscode in die de compliance-poli
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de iOS settings catalog, zelfde payload als UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; waarden gelijkgetrokken met [Baseline] - IOS - U - Compliance Password, inactiviteit volgens CIS Apple iOS/iPadOS 26 Benchmark |
+| Bron | Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de iOS settings catalog, zelfde payload als UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; waarden gelijkgetrokken met CXNM - Standard - IOS - U - Compliance Password, inactiviteit volgens CIS Apple iOS/iPadOS 26 Benchmark |
 | Bestand | [`Baseline_IOS_D_Passcode.json`](Baseline_IOS_D_Passcode.json) |
 
-> Keuze voor de klassieke payload en niet voor de declaratieve passcode-configuratie (passcode_*). Beide gelden voor iOS en geen van beide vraagt supervisie, maar over 'geen eenvoudige code' spreken twee bronnen elkaar tegen. De Intune-catalogus zegt bij RequireComplexPasscode dat de code ook een teken buiten cijfers en letters moet bevatten, wat een numerieke code van zes cijfers onmogelijk maakt; Apple's eigen schema zegt alleen dat de code geen herhaalde of op- of aflopende tekens mag bevatten (zoals 123 of CBA), precies wat allowSimple=false deed, en legt de eis van een bijzonder teken bij een andere sleutel: MinimumComplexCharacters. Welke van de twee het gedrag beschrijft is hier niet getest, dus de klassieke payload blijft staan. Het is wel een openstaande vraag en geen eindpunt, want Microsoft voert de klassieke Passcode-payload sinds Apple OS 27 als deprecated op. De payload hier is dezelfde als in [Baseline] - MAC - D - Passcode and Screen Lock en in beide UniFy-sets. Vijf minuten inactiviteit is strenger dan de vijftien minuten die Compliance Password toetst; een toestel met deze policy is dus altijd compliant. Bewust geen maxpinageindays (NIST SP 800-63B: geen rotatie zonder aanleiding) en geen pinhistory. UniFy Corporate zet 1 minuut en 5 pogingen; een wipe na vijf pogingen is strijdig met de normregel van deze baseline.
+> Keuze voor de klassieke payload en niet voor de declaratieve passcode-configuratie (passcode_*). Beide gelden voor iOS en geen van beide vraagt supervisie, maar over 'geen eenvoudige code' spreken twee bronnen elkaar tegen. De Intune-catalogus zegt bij RequireComplexPasscode dat de code ook een teken buiten cijfers en letters moet bevatten, wat een numerieke code van zes cijfers onmogelijk maakt; Apple's eigen schema zegt alleen dat de code geen herhaalde of op- of aflopende tekens mag bevatten (zoals 123 of CBA), precies wat allowSimple=false deed, en legt de eis van een bijzonder teken bij een andere sleutel: MinimumComplexCharacters. Welke van de twee het gedrag beschrijft is hier niet getest, dus de klassieke payload blijft staan. Het is wel een openstaande vraag en geen eindpunt, want Microsoft voert de klassieke Passcode-payload sinds Apple OS 27 als deprecated op. De payload hier is dezelfde als in CXNM - Standard - MAC - D - Passcode and Screen Lock en in beide UniFy-sets. Vijf minuten inactiviteit is strenger dan de vijftien minuten die Compliance Password toetst; een toestel met deze policy is dus altijd compliant. Bewust geen maxpinageindays (NIST SP 800-63B: geen rotatie zonder aanleiding) en geen pinhistory. UniFy Corporate zet 1 minuut en 5 pogingen; een wipe na vijf pogingen is strijdig met de normregel van deze baseline.
 
 ## Normen
 

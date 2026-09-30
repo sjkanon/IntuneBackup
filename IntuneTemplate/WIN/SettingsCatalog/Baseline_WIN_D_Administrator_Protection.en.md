@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Administrator_Protection.md) · **English** · [Français](Baseline_WIN_D_Administrator_Protection.fr.md)
 
-# [Baseline] - WIN - D - Administrator Protection
+# CXNM - Standard - WIN - D - Administrator Protection
 
 Makes administrators work without elevated rights by default and ask for consent per action. Windows 11 24H2 and later.
 

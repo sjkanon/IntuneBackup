@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_U_Microsoft_OneDrive_KFM.en.md) · [Français](Baseline_MAC_U_Microsoft_OneDrive_KFM.fr.md)
 
-# [Baseline] - MAC - U - Microsoft OneDrive KFM
+# CXNM - Standard - MAC - U - Microsoft OneDrive KFM
 
 Verplaatst Bureaublad en Documenten van de Mac naar OneDrive, zodat er niets alleen lokaal staat.
 

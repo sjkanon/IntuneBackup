@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Antispyware.md) · **English** · [Français](Baseline_WIN_U_Compliance_Antispyware.fr.md)
 
-# [Baseline] - WIN - U - Compliance Antispyware
+# CXNM - Standard - WIN - U - Compliance Antispyware
 
 Checks whether an active antispyware solution is registered in Windows Security.
 

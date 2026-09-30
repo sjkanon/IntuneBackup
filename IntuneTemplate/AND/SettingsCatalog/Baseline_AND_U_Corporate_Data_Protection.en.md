@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Corporate_Data_Protection.md) · **English** · [Français](Baseline_AND_U_Corporate_Data_Protection.fr.md)
 
-# [Baseline] - AND - U - Corporate Data Protection
+# CXNM - Standard - AND - U - Corporate Data Protection
 
 Blocks screenshots, file sharing via Bluetooth and factory reset by the user on fully managed and corporate-owned Android devices.
 

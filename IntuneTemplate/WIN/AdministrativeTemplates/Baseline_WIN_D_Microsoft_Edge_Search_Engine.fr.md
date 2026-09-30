@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_Search_Engine.md) · [English](Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) · **Français**
 
-# [Baseline] - WIN - D - Microsoft Edge Search Engine
+# CXNM - Standard - WIN - D - Microsoft Edge Search Engine
 
 Définit Google comme moteur de recherche par défaut dans Edge. Un choix de l'organisation, pas un paramètre de sécurité.
 

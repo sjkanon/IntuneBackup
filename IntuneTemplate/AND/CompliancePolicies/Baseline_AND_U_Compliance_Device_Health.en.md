@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Device_Health.md) · **English** · [Français](Baseline_AND_U_Compliance_Device_Health.fr.md)
 
-# [Baseline] - AND - U - Compliance Device Health
+# CXNM - Standard - AND - U - Compliance Device Health
 
 Marks an Android device with a personal work profile as non-compliant when it is rooted, USB debugging is enabled, apps from outside the Play Store are allowed, Play Integrity cannot be confirmed with hardware backing, or the latest security patch is older than the minimum.
 

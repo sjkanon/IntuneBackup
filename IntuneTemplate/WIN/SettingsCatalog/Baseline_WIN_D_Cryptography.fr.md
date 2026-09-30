@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Cryptography.md) · [English](Baseline_WIN_D_Cryptography.en.md) · **Français**
 
-# [Baseline] - WIN - D - Cryptography
+# CXNM - Standard - WIN - D - Cryptography
 
 Impose que Microsoft Edge n'établisse pas de connexions en dessous de TLS 1.2, même si un serveur le propose.
 

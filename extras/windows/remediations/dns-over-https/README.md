@@ -39,7 +39,7 @@ de catalog en staat als template-paar in `IntuneTemplate/WIN/SettingsCatalog/`
 
 ## Samenspel met Defender Network Protection
 
-Network Protection (aan in `[Baseline] - WIN - D - Defender Antivirus`) blokkeert kwaadaardige
+Network Protection (aan in `CXNM - Standard - WIN - D - Defender Antivirus`) blokkeert kwaadaardige
 domeinen door DNS- en TLS-verkeer op het apparaat te inspecteren. DoH van **Windows zelf** loopt
 via de DNS-client van het besturingssysteem en blijft zichtbaar voor Defender. DoH **binnen een
 browser van derden** (Chrome, Firefox) omzeilt de DNS-client; Microsoft adviseert in de
@@ -53,7 +53,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 
 | Veld | Waarde |
 |---|---|
-| Naam | `[Baseline] - WIN - D - DNS over HTTPS Allow` (of `… Require`) |
+| Naam | `CXNM - Standard - WIN - D - DNS over HTTPS Allow` (of `… Require`) |
 | Detectiescript | `Detect-DoHPolicy.ps1`; pas `$Expected` bovenaan aan naar 2 (Allow) of 3 (Require) |
 | Herstelscript | `Remediate-DoHPolicy.ps1` met `$Mode = 'Allow'` of `'Require'` bovenaan |
 | Uitvoeren met aanmeldingsreferenties | Nee (SYSTEM) |

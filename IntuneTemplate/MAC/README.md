@@ -4,7 +4,7 @@
 
 # macOS — 37 policies
 
-Alle policies heten `[Baseline] - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
+Alle policies heten `CXNM - Standard - MAC - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|

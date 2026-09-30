@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Printing_Hardening.en.md) · [Français](Baseline_WIN_D_Printing_Hardening.fr.md)
 
-# [Baseline] - WIN - D - Printing Hardening
+# CXNM - Standard - WIN - D - Printing Hardening
 
 Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van printerdrivers bij een gedeelde printer, en sluit printen over HTTP af.
 
@@ -15,7 +15,7 @@ Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van 
 | Bron | CIS v4 Windows 11 L1 en de Microsoft Security Baseline — instellingen overgenomen uit IntuneAdmin, waarden geverifieerd tegen de settings catalog-definities. |
 | Bestand | [`Baseline_WIN_D_Printing_Hardening.json`](Baseline_WIN_D_Printing_Hardening.json) |
 
-> Windows Protected Print vraagt Windows 11 24H2 of hoger en laat printers vallen die geen Mopria-driver hebben — dat zijn in de praktijk oudere netwerkprinters en labelprinters. Inventariseer de printervloot vóór je dit breed toewijst; op een vloot zonder eigen printers is het gratis. De andere twee instellingen zijn onvoorwaardelijk veilig. Overlap gecontroleerd (september 2026): `printers_configurewindowsprotectedprint` staat alleen in deze policy; [Baseline] - WIN - D - Printing zet twintig andere printer-ids (Point and Print, RPC, RedirectionGuard, driverinstallatie alleen door beheerders) en botst niet. ANALYSE.md noemt Protected Print nog als 'bewust niet overgenomen' — dat klopt niet meer: hij staat hier, in fase 2.
+> Windows Protected Print vraagt Windows 11 24H2 of hoger en laat printers vallen die geen Mopria-driver hebben — dat zijn in de praktijk oudere netwerkprinters en labelprinters. Inventariseer de printervloot vóór je dit breed toewijst; op een vloot zonder eigen printers is het gratis. De andere twee instellingen zijn onvoorwaardelijk veilig. Overlap gecontroleerd (september 2026): `printers_configurewindowsprotectedprint` staat alleen in deze policy; CXNM - Standard - WIN - D - Printing zet twintig andere printer-ids (Point and Print, RPC, RedirectionGuard, driverinstallatie alleen door beheerders) en botst niet. ANALYSE.md noemt Protected Print nog als 'bewust niet overgenomen' — dat klopt niet meer: hij staat hier, in fase 2.
 
 ## Normen
 

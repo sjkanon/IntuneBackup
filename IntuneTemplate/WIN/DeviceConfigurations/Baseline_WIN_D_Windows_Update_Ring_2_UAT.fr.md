@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Update_Ring_2_UAT.md) · [English](Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Update Ring 2 UAT
+# CXNM - Standard - WIN - D - Windows Update Ring 2 UAT
 
 Deuxième anneau de mise à jour : reçoit les mises à jour Windows après le pilote et avant la production.
 

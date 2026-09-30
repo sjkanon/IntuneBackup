@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Firewall.md) · [English](Baseline_WIN_U_Compliance_Firewall.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Firewall
+# CXNM - Standard - WIN - U - Compliance Firewall
 
 Vérifie que le Pare-feu Windows est actif.
 

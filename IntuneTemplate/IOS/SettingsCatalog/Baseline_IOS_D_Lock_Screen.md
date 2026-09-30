@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Lock_Screen.en.md) · [Français](Baseline_IOS_D_Lock_Screen.fr.md)
 
-# [Baseline] - IOS - D - Lock Screen
+# CXNM - Standard - IOS - D - Lock Screen
 
 Toont op het vergrendelscherm van een bedrijfs-iPhone of -iPad een tekst voor de vinder, zodat een verloren toestel terug kan naar de organisatie.
 
@@ -12,7 +12,7 @@ Toont op het vergrendelscherm van een bedrijfs-iPhone of -iPad een tekst voor de
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | Apple Shared Device Configuration-payload (com.apple.shareddeviceconfiguration) in de iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate en IntuneAdmin — Lock Screen Message. De vergrendelscherm-restricties uit dezelfde UniFy-policy staan in [Baseline] - IOS - D - Restrictions Corporate |
+| Bron | Apple Shared Device Configuration-payload (com.apple.shareddeviceconfiguration) in de iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate en IntuneAdmin — Lock Screen Message. De vergrendelscherm-restricties uit dezelfde UniFy-policy staan in CXNM - Standard - IOS - D - Restrictions Corporate |
 | Bestand | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 
 > **Vul VERLOREN-TOESTEL-TEKST-INVULLEN in** vóór toewijzing, bijvoorbeeld 'Gevonden? Bel de servicedesk: <nummer>' — geen persoonsnaam, dat is informatie voor een dief. De repo kent geen CIPP-token voor organisatienaam of telefoonnummer (%OrganizationId% is een GUID), vandaar de placeholder. Assettag (assettaginformation) bewust niet gezet: UniFy gebruikt daar {{DEVICENAME}}, en of Intune dat token in deze payload vervangt heb ik niet kunnen verifiëren.

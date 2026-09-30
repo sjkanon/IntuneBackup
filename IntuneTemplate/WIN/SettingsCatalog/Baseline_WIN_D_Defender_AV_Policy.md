@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Defender_AV_Policy.en.md) · [Français](Baseline_WIN_D_Defender_AV_Policy.fr.md)
 
-# [Baseline] - WIN - D - Defender AV Policy
+# CXNM - Standard - WIN - D - Defender AV Policy
 
 Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie.
 
@@ -15,7 +15,7 @@ Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveil
 | Bron | CIPP-standaardtemplate |
 | Bestand | [`Baseline_WIN_D_Defender_AV_Policy.json`](Baseline_WIN_D_Defender_AV_Policy.json) |
 
-> Komt uit CIPP, niet uit OIB. Overlapt met [Baseline] - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor). Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: het is het CIPP-alternatief voor de OIB-policy, geen aanvulling erop. De OIB-versie is op alle drie de punten strenger (network protection op block in plaats van audit, cloud block level op high in plaats van niet-geconfigureerd).
+> Komt uit CIPP, niet uit OIB. Overlapt met CXNM - Standard - WIN - D - Defender Antivirus: 15 instellingen identiek, 3 met een andere waarde (enablenetworkprotection, cloudblocklevel, avgcpuloadfactor). Daarom sinds de vergelijking met IntuneAdmin/IntuneBaselines bewust zónder toewijzing: het is het CIPP-alternatief voor de OIB-policy, geen aanvulling erop. De OIB-versie is op alle drie de punten strenger (network protection op block in plaats van audit, cloud block level op high in plaats van niet-geconfigureerd).
 
 ## Normen
 

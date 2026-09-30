@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceEnrollmentPlatformRestrictionConfiguration",
-  "displayName": "[Baseline] - AND - Allow Android Enterprise Enrollment",
+  "displayName": "CXNM - Standard - AND - Allow Android Enterprise Enrollment",
   "description": "Allows enrolment with Android Enterprise, including the personal work profile. Device administrator is set to Block in a separate restriction (see README).",
   "priority": 1,
   "roleScopeTagIds": [

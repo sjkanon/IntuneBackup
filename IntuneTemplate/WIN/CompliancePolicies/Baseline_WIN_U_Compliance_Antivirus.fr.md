@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Antivirus.md) · [English](Baseline_WIN_U_Compliance_Antivirus.en.md) · **Français**
 
-# [Baseline] - WIN - U - Compliance Antivirus
+# CXNM - Standard - WIN - U - Compliance Antivirus
 
 Vérifie qu'une solution antivirus active est enregistrée dans Sécurité Windows.
 

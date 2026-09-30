@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) · [Français](Baseline_WIN_U_Microsoft_Edge_Password_Management.fr.md)
 
-# [Baseline] - WIN - U - Microsoft Edge Password Management
+# CXNM - Standard - WIN - U - Microsoft Edge Password Management
 
 Bepaalt of Edge wachtwoorden mag opslaan en tonen, zodat werkwachtwoorden niet in een browserprofiel belanden.
 

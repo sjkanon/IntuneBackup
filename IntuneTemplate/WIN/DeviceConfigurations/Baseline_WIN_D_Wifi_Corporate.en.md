@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Wifi_Corporate.md) · **English** · [Français](Baseline_WIN_D_Wifi_Corporate.fr.md)
 
-# [Baseline] - WIN - D - Wifi Corporate
+# CXNM - Standard - WIN - D - Wifi Corporate
 
 Deploys the corporate network as a Wi-Fi profile to every Windows laptop, so that a device connects automatically after enrolment and a user never has to know or type the network password.
 
@@ -15,7 +15,7 @@ Deploys the corporate network as a Wi-Fi profile to every Windows laptop, so tha
 | Source | Own baseline — Intune Wi-Fi profile (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(e). |
 | File | [`Baseline_WIN_D_Wifi_Corporate.json`](Baseline_WIN_D_Wifi_Corporate.json) |
 
-> SSID and PSK are set to `<SSID-CORPORATE>` and `<PSK-CORPORATE>`. Fill them in before you assign; with the placeholder in place, the profile connects on no device at all. The password ends up in this template and therefore in this repo. There is no CIPP token for a PSK the way %OrganizationId% exists for the tenant id, and leaving a placeholder does not work here: Graph never returns a PSK — a tenant backup only includes `preSharedKeyIsSet: true`. So if you fill it in in the tenant instead of here, the next CIPP sync writes the placeholder over it again and every device loses its Wi-Fi. Fill it in here, and only as long as this repo is private; if it is ever shared, rotate the PSK. That the PSK remains a shared secret regardless is already covered in the notes for [Baseline] - WIN - D - Wireless and Peripherals: a local administrator simply reads it with `netsh wlan show profile key=clear`, and the measure that does solve this is 802.1X with certificates. `connectToPreferredNetwork` is deliberately false here and true in Wifi Guest: this is the preferred network, so Windows does not need to look elsewhere. Note the interplay with [Baseline] - WIN - D - Wireless Shared Devices: that policy only allows networks deployed by Intune and therefore needs this profile to avoid taking a shared device offline. This is the policy that is the prerequisite for it.
+> SSID and PSK are set to `<SSID-CORPORATE>` and `<PSK-CORPORATE>`. Fill them in before you assign; with the placeholder in place, the profile connects on no device at all. The password ends up in this template and therefore in this repo. There is no CIPP token for a PSK the way %OrganizationId% exists for the tenant id, and leaving a placeholder does not work here: Graph never returns a PSK — a tenant backup only includes `preSharedKeyIsSet: true`. So if you fill it in in the tenant instead of here, the next CIPP sync writes the placeholder over it again and every device loses its Wi-Fi. Fill it in here, and only as long as this repo is private; if it is ever shared, rotate the PSK. That the PSK remains a shared secret regardless is already covered in the notes for CXNM - Standard - WIN - D - Wireless and Peripherals: a local administrator simply reads it with `netsh wlan show profile key=clear`, and the measure that does solve this is 802.1X with certificates. `connectToPreferredNetwork` is deliberately false here and true in Wifi Guest: this is the preferred network, so Windows does not need to look elsewhere. Note the interplay with CXNM - Standard - WIN - D - Wireless Shared Devices: that policy only allows networks deployed by Intune and therefore needs this profile to avoid taking a shared device offline. This is the policy that is the prerequisite for it.
 
 ## Standards
 

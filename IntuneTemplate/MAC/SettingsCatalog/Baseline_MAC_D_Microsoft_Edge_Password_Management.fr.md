@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Microsoft_Edge_Password_Management.md) · [English](Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) · **Français**
 
-# [Baseline] - MAC - D - Microsoft Edge Password Management
+# CXNM - Standard - MAC - D - Microsoft Edge Password Management
 
 Détermine si Edge sur le Mac peut enregistrer et afficher des mots de passe.
 

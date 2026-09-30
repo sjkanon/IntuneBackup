@@ -4,7 +4,7 @@
 
 # Android — 14 policies
 
-Alle policies heten `[Baseline] - AND - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
+Alle policies heten `CXNM - Standard - AND - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|

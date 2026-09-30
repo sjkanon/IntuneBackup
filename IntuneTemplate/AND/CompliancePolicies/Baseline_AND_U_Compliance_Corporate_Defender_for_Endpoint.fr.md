@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.md) · [English](Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) · **Français**
 
-# [Baseline] - AND - U - Compliance Corporate Defender for Endpoint
+# CXNM - Standard - AND - U - Compliance Corporate Defender for Endpoint
 
 Marque un appareil Android fully managed ou corporate-owned comme non conforme lorsque Defender for Endpoint lui attribue un score de risque supérieur à faible.
 

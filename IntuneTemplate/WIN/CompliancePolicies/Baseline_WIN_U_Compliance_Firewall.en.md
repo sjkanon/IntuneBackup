@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_Firewall.md) · **English** · [Français](Baseline_WIN_U_Compliance_Firewall.fr.md)
 
-# [Baseline] - WIN - U - Compliance Firewall
+# CXNM - Standard - WIN - U - Compliance Firewall
 
 Checks whether Windows Firewall is active.
 

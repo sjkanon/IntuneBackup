@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Security_Log_Monitoring.md) · **English** · [Français](Baseline_WIN_D_Security_Log_Monitoring.fr.md)
 
-# [Baseline] - WIN - D - Security Log Monitoring
+# CXNM - Standard - WIN - D - Security Log Monitoring
 
 Warns in the System log as soon as the Security log is 90% full and logs pipeline execution of all PowerShell modules, so that during an incident the log has not been overwritten unnoticed and PowerShell activity is fully traceable.
 

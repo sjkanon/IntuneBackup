@@ -18,7 +18,7 @@ EDR signals reach the Defender portal and the compliance check in
 
 ## Can it be done generically, as on Windows? No.
 
-On Windows, `[Baseline] - WIN - D - Defender for Endpoint EDR` sets the setting
+On Windows, `CXNM - Standard - WIN - D - Defender for Endpoint EDR` sets the setting
 `device_vendor_msft_windowsadvancedthreatprotection_onboarding_fromconnector`: Intune fetches the
 onboarding package itself via the Defender connector, so the template contains nothing tenant-specific.
 
@@ -51,7 +51,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
    macOS, Connectivity type *Streamlined*, Deployment method *Mobile Device Management / Microsoft
    Intune* → Download. From the zip: `intune/WindowsDefenderATPOnboarding.xml`.
 4. **Profile.** Devices → macOS → Configuration → Create → Templates → **Custom**. Name
-   `[Baseline] - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
+   `CXNM - Standard - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
    file `WindowsDefenderATPOnboarding.xml`. Assign to the same group.
 5. **Verify.** On the Mac: `mdatp health --field licensed` → `true`, and
    `mdatp health --field org_id` shows the tenant. The device appears in the portal within

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Event_Forwarding.en.md) · [Français](Baseline_WIN_D_Windows_Event_Forwarding.fr.md)
 
-# [Baseline] - WIN - D - Windows Event Forwarding
+# CXNM - Standard - WIN - D - Windows Event Forwarding
 
 Stuurt Windows-gebeurtenissen door naar een centrale Windows Event Collector, zodat logboeken buiten bereik van een aanvaller op het apparaat worden bewaard.
 

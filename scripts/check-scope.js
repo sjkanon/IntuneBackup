@@ -6,7 +6,7 @@
  *  1. A policy never contains both device- and user-scoped settings. A mixed policy cannot be
  *     assigned unambiguously, and when troubleshooting you cannot tell whether a setting does
  *     not arrive because the device or because the user is out of scope.
- *  2. File name (Baseline_<PLATFORM>_<D|U>_*) and policy name ([Baseline] - PLATFORM - D/U -
+ *  2. File name (Baseline_<PLATFORM>_<D|U>_*) and policy name (CXNM - Standard - PLATFORM - D/U -
  *     Item) carry the same platform and the same scope.
  *  3. That declared scope matches what is actually in the settings.
  *  4. The file is in the folder that belongs to its platform and Type.
@@ -48,7 +48,7 @@ const RENAMES_PATH = path.join(TEMPLATE_DIR, "_renames.json");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
 
-const DISPLAY_NAME_RE = /^\[Baseline\] - (WIN|MAC|IOS|AND) - ([DU]) - .+$/;
+const DISPLAY_NAME_RE = /^CXNM - Standard - (WIN|MAC|IOS|AND) - ([DU]) - .+$/;
 
 /**
  * Update-ringen zetten bewust dezelfde instellingen met andere waarden — dat is geen
@@ -69,7 +69,7 @@ function analyse(template) {
   const nameMatch = (displayName || "").match(DISPLAY_NAME_RE);
 
   if (!parsed) problems.push("bestandsnaam volgt niet Baseline_<WIN|MAC|IOS|AND>_<D|U>_Item");
-  if (!nameMatch) problems.push(`policynaam volgt niet "[Baseline] - PLATFORM - D/U - Item" (nu: "${displayName}")`);
+  if (!nameMatch) problems.push(`policynaam volgt niet "CXNM - Standard - PLATFORM - D/U - Item" (nu: "${displayName}")`);
   if (parsed && nameMatch) {
     if (parsed.platform !== nameMatch[1]) problems.push(`bestandsnaam zegt platform ${parsed.platform}, policynaam zegt ${nameMatch[1]}`);
     if (parsed.scope !== nameMatch[2]) problems.push(`bestandsnaam zegt scope ${parsed.scope}, policynaam zegt ${nameMatch[2]}`);

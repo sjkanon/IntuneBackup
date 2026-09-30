@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Automatic_Restart_Sign_On.md) · [English](Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) · **Français**
 
-# [Baseline] - WIN - D - Automatic Restart Sign-On
+# CXNM - Standard - WIN - D - Automatic Restart Sign-On
 
 Après un redémarrage pour mises à jour, reconnecte automatiquement l'utilisateur en session verrouillée, afin que les programmes de démarrage s'exécutent sans que l'appareil reste déverrouillé sans surveillance.
 

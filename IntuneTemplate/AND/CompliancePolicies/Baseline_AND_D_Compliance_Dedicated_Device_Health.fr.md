@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_D_Compliance_Dedicated_Device_Health.md) · [English](Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) · **Français**
 
-# [Baseline] - AND - D - Compliance Dedicated Device Health
+# CXNM - Standard - AND - D - Compliance Dedicated Device Health
 
 Marque un appareil Android dédié (kiosque ou partagé) comme non conforme lorsqu'il est rooté, que Play Integrity ne réussit pas avec attestation matérielle, que l'application Intune a été manipulée, que le stockage n'est pas chiffré ou que le dernier correctif de sécurité est plus ancien que le seuil minimal.
 

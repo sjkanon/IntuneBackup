@@ -33,7 +33,7 @@ There is deliberately **no JSON** for this here. The Graph value for it (`platfo
 the same type) could not be verified in this round against a source export or the
 pl4nty definitions, and the default restriction already exists in every tenant (you update it with
 PATCH, not with a new POST). Devices already enrolled with device administrator
-are caught by `[Baseline] - AND - U - Compliance Block Device Administrator`.
+are caught by `CXNM - Standard - AND - U - Compliance Block Device Administrator`.
 
 ## Deploying
 

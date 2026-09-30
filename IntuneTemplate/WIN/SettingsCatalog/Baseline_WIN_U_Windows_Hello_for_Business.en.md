@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_Hello_for_Business.md) · **English** · [Français](Baseline_WIN_U_Windows_Hello_for_Business.fr.md)
 
-# [Baseline] - WIN - U - Windows Hello for Business
+# CXNM - Standard - WIN - U - Windows Hello for Business
 
 Windows Hello for Business per user instead of per device: the same requirements as the device policy — TPM required, PIN of at least six characters, PIN recovery on — but bound to the user. Intended for users with their own device; shared devices should be excluded here with a device filter.
 

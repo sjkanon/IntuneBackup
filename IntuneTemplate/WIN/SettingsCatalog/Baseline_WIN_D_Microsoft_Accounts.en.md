@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Accounts.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Accounts.fr.md)
 
-# [Baseline] - WIN - D - Microsoft Accounts
+# CXNM - Standard - WIN - D - Microsoft Accounts
 
 Determines whether personal Microsoft accounts may be used and added on a work device.
 

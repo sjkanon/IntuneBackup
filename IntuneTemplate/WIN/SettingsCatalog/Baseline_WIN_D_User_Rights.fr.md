@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_User_Rights.md) · [English](Baseline_WIN_D_User_Rights.en.md) · **Français**
 
-# [Baseline] - WIN - D - User Rights
+# CXNM - Standard - WIN - D - User Rights
 
 Définit qui a quels droits sur l'appareil : ouvrir une session en tant que service, effectuer des sauvegardes, arrêter l'appareil, charger des pilotes.
 

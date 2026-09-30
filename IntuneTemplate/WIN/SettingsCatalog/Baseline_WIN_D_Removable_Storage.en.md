@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Removable_Storage.md) · **English** · [Français](Baseline_WIN_D_Removable_Storage.fr.md)
 
-# [Baseline] - WIN - D - Removable Storage
+# CXNM - Standard - WIN - D - Removable Storage
 
 Blocks writing to removable storage: USB sticks and external drives, and phones and cameras that present themselves as a WPD device. Reading remains possible.
 

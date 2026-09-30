@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Microsoft_Office.md) · [English](Baseline_MAC_D_Microsoft_Office.en.md) · **Français**
 
-# [Baseline] - MAC - D - Microsoft Office
+# CXNM - Standard - MAC - D - Microsoft Office
 
 Configuration de base d'Office sur macOS.
 

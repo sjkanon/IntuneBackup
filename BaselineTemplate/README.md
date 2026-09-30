@@ -16,15 +16,15 @@ wanneer een tenant doorschuift.
 `IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen: uitrollen doet
 een baseline. Dat scherm met de hand invullen is dertien keer dezelfde standard toevoegen en
 dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 69 policies (het pakket
-`Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
+`CXNM - Standard - Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
 
 ## Wat erin staat
 
 | Stage | Pakketten | Doorschuiven naar deze stage |
 |---:|---|---|
-| 1 · Nu | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` en de acht groepspakketten `Baseline-SEC-*` | — stage 1 geldt altijd |
-| 2 · Pilot | `Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
-| 3 · Wacht op voorwaarde | `Baseline-Wacht` | `manual` — iemand zet 'm door |
+| 1 · Nu | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` en de acht groepspakketten `CXNM - Standard - Baseline-SEC-*` | — stage 1 geldt altijd |
+| 2 · Pilot | `CXNM - Standard - Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
+| 3 · Wacht op voorwaarde | `CXNM - Standard - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Welke policies in welk pakket zitten staat in de
 [`IntuneTemplate`-README](../IntuneTemplate/README.md#cipp-pakketten).
@@ -75,7 +75,7 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
   in `scripts/lib/templates.js` en `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — en
   draai de pijplijn opnieuw. De groep alleen in CIPP wijzigen kan ook, maar een her-import van
   dit bestand zet de standaardnaam terug.
-- **De ADE-profielen koppelen.** `Baseline-ADE-token` wordt bewust niet toegewezen: een
+- **De ADE-profielen koppelen.** `CXNM - Standard - Baseline-ADE-token` wordt bewust niet toegewezen: een
   macOS-inschrijfprofiel hangt aan een ADE-token, niet aan een Entra-groep, en je kiest er per
   token één van de twee.
 

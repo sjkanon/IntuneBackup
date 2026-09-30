@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Apple_Intelligence_Permitted.md) · [English](Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) · **Français**
 
-# [Baseline] - IOS - D - Apple Intelligence Permitted
+# CXNM - Standard - IOS - D - Apple Intelligence Permitted
 
 Autorise explicitement, sur les iPhone et iPad inscrits, les fonctionnalités génératives d'Apple Intelligence et l'intégration avec des services d'IA externes.
 
@@ -12,10 +12,10 @@ Autorise explicitement, sur les iPhone et iPad inscrits, les fonctionnalités g�
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| Source | Contrepartie de [Baseline] - IOS - D - Apple Intelligence Restricted ; les mêmes clés déclaratives sur la valeur par défaut d'Apple, définies explicitement |
+| Source | Contrepartie de CXNM - Standard - IOS - D - Apple Intelligence Restricted ; les mêmes clés déclaratives sur la valeur par défaut d'Apple, définies explicitement |
 | Fichier | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 
-> **Alternative à [Baseline] - IOS - D - Apple Intelligence Restricted.** Avant de choisir celle-ci, tenez compte du fait que l'intégration ChatGPT (externalintelligencesettings_enabled) envoie des données à un tiers externe ; qui veut uniquement autoriser les fonctions sur l'appareil définit externalintelligencesettings_enabled sur false dans cette policy. La restriction par espace de travail (allowedworkspaceids) n'y figure volontairement pas : elle requiert un ID de tenant ou d'espace de travail.
+> **Alternative à CXNM - Standard - IOS - D - Apple Intelligence Restricted.** Avant de choisir celle-ci, tenez compte du fait que l'intégration ChatGPT (externalintelligencesettings_enabled) envoie des données à un tiers externe ; qui veut uniquement autoriser les fonctions sur l'appareil définit externalintelligencesettings_enabled sur false dans cette policy. La restriction par espace de travail (allowedworkspaceids) n'y figure volontairement pas : elle requiert un ID de tenant ou d'espace de travail.
 
 ## Normes
 

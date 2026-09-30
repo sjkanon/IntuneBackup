@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_In_Box_App_Removal.md) · **English** · [Français](Baseline_WIN_D_In_Box_App_Removal.fr.md)
 
-# [Baseline] - WIN - D - In-Box App Removal
+# CXNM - Standard - WIN - D - In-Box App Removal
 
 Removes the consumer apps that ship with Windows by default and have no business on a work device.
 

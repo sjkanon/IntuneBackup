@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Time_Server.md) · [English](Baseline_MAC_D_Time_Server.en.md) · **Français**
 
-# [Baseline] - MAC - D - Time Server
+# CXNM - Standard - MAC - D - Time Server
 
 Fait synchroniser l'horloge du Mac avec time.apple.com, afin que les horodatages des journaux, les tickets Kerberos et les vérifications de certificats soient corrects.
 

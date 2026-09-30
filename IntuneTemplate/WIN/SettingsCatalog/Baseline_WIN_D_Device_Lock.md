@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Device_Lock.en.md) · [Français](Baseline_WIN_D_Device_Lock.fr.md)
 
-# [Baseline] - WIN - D - Device Lock
+# CXNM - Standard - WIN - D - Device Lock
 
 Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden, plus het gedrag bij dichtklappen en stroom.
 

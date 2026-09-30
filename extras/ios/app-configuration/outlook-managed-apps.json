@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
-  "displayName": "[Baseline] - IOS - Outlook - Managed Apps",
+  "displayName": "CXNM - Standard - IOS - Outlook - Managed Apps",
   "description": "Outlook on every iOS device (also without enrolment): warning for external recipients.",
   "roleScopeTagIds": [
     "0"

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Audit_Policy_Enforcement.md) · **English** · [Français](Baseline_WIN_D_Audit_Policy_Enforcement.fr.md)
 
-# [Baseline] - WIN - D - Audit Policy Enforcement
+# CXNM - Standard - WIN - D - Audit Policy Enforcement
 
 Makes the advanced audit settings take precedence over the old category settings, so that the baseline's audit policy actually determines what is logged.
 

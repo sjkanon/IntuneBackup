@@ -35,7 +35,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { BASELINE_STAGES, packagePlan } = require("./lib/templates");
+const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -44,11 +44,11 @@ const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const OUT_DIR = path.join(REPO_ROOT, "BaselineTemplate");
 const OUT_PATH = path.join(OUT_DIR, "Baseline.json");
 
-const TEMPLATE_NAME = "Baseline";
+const TEMPLATE_NAME = "CXNM - Standard - Baseline";
 
-/** `Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
+/** `CXNM - Standard - Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
 function instanceSuffix(pkg) {
-  return pkg.replace(/^Baseline-/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  return pkg.slice(PACKAGE_PREFIX.length).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 function standardFor(entry) {

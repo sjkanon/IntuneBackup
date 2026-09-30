@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_for_Business.md) · [English](Baseline_WIN_D_Windows_Hello_for_Business.en.md) · **Français**
 
-# [Baseline] - WIN - D - Windows Hello for Business
+# CXNM - Standard - WIN - D - Windows Hello for Business
 
 Permet aux utilisateurs de se connecter avec un PIN ou la biométrie au lieu d'un mot de passe. Exige un TPM, un PIN d'au moins six caractères et l'anti-usurpation pour la reconnaissance faciale.
 

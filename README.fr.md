@@ -162,8 +162,8 @@ Cinq types de stratégie, distingués par `.Type` dans le modèle :
 ## Nommage
 
 ```
-[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>      nom de la stratégie dans le tenant
-Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json         nom de fichier
+CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>      nom de la stratégie dans le tenant
+Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json              nom de fichier
 ```
 
 Le préfixe `Baseline_` reste obligatoire : `export-intunebackup.js`, `generate-docs.js` et
@@ -334,9 +334,9 @@ Les stages qu'elle contient :
 
 | Stage | Paquets | Passage à *ce* stage |
 |---:|---|---|
-| 1 · Immédiat | `Baseline-Devices`, `Baseline-Users`, `Baseline-ADE-token` et les huit paquets de groupe `Baseline-SEC-*` (phase 4, un par groupe) | — le stage 1 s'applique toujours |
-| 2 · Pilote | `Baseline-Pilot` | `success` (tout le stage 1 est conforme) **et** `time` de deux semaines |
-| 3 · En attente d'un prérequis | `Baseline-Wacht` | `manual` — quelqu'un le fait avancer |
+| 1 · Immédiat | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` et les huit paquets de groupe `CXNM - Standard - Baseline-SEC-*` (phase 4, un par groupe) | — le stage 1 s'applique toujours |
+| 2 · Pilote | `CXNM - Standard - Baseline-Pilot` | `success` (tout le stage 1 est conforme) **et** `time` de deux semaines |
+| 3 · En attente d'un prérequis | `CXNM - Standard - Baseline-Wacht` | `manual` — quelqu'un le fait avancer |
 
 Les stages suivants s'empilent sur le stage 1, et la condition appartient au stage dans lequel un tenant
 **entre**, pas à celui qu'il quitte. CIPP en connaît cinq : `time`, `variable`,
@@ -454,8 +454,8 @@ une valeur différente provoquent dans Intune un Conflict, après quoi le param�
 des deux. `check-scope.js` y veille.
 
 ```powershell
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
 ```
 
 La variante WHfB pour appareils partagés est la seule que l'on peut affecter *à côté* de son pendant :
@@ -471,7 +471,7 @@ point de départ, pas une configuration de production clé en main.
 C'est la phase 2, et la liste — avec pour chaque stratégie le pourquoi — se trouve dans
 [OVERZICHT.md](docs/OVERZICHT.fr.md#dabord-en-pilote). Elle est générée à partir de `faseWaarom` dans le
 manifeste. Jusqu'en septembre 2026, une liste distincte figurait ici, et elle a divergé : neuf des
-stratégies qui y figuraient étaient en phase 1 et étaient tout simplement déployées sur tous les appareils via `Baseline-Devices`.
+stratégies qui y figuraient étaient en phase 1 et étaient tout simplement déployées sur tous les appareils via `CXNM - Standard - Baseline-Devices`.
 Windows Hello for Business entre en pilote en tant que paire, device *et* user — l'une en
 pilote et l'autre pour tout le monde rend le pilote inutile.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_AI_Restricted.en.md) · [Français](Baseline_WIN_D_Windows_AI_Restricted.fr.md)
 
-# [Baseline] - WIN - D - Windows AI Restricted
+# CXNM - Standard - WIN - D - Windows AI Restricted
 
 Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet.
 
@@ -15,7 +15,7 @@ Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er o
 | Bron | eigen baseline — vergelijking met IntuneAdmin/IntuneBaselines, augustus 2026 |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 
-> **Alternatief van [Baseline] - WIN - D - Windows AI Permitted.** Die zet dezelfde drie instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Dit is de variant die de baseline standaard uitrolt.
+> **Alternatief van CXNM - Standard - WIN - D - Windows AI Permitted.** Die zet dezelfde drie instellingen op de andere waarde; allebei toewijzen levert een Conflict op waarna Intune er géén toepast. Dit is de variant die de baseline standaard uitrolt.
 
 ## Normen
 

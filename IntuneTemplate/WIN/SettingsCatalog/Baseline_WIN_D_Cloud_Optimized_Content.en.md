@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Cloud_Optimized_Content.md) · **English** · [Français](Baseline_WIN_D_Cloud_Optimized_Content.fr.md)
 
-# [Baseline] - WIN - D - Cloud Optimized Content
+# CXNM - Standard - WIN - D - Cloud Optimized Content
 
 Turns off Windows' cloud-driven content recommendations — the device part of the same OIB policy as Windows Spotlight.
 

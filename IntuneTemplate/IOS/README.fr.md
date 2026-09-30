@@ -4,7 +4,7 @@
 
 # iOS/iPadOS — 14 policies
 
-Toutes les policies s'appellent `[Baseline] - IOS - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
+Toutes les policies s'appellent `CXNM - Standard - IOS - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.md) · [English](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) · **Français**
 
-# [Baseline] - WIN - U - Microsoft Outlook Cached Mode Off
+# CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Off
 
 Met Outlook en mode Online et interdit la création d'un fichier OST, afin qu'aucun contenu de boîte aux lettres n'atterrisse sur le disque de l'appareil.
 

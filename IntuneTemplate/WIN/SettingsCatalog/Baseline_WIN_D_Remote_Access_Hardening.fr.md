@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Remote_Access_Hardening.md) · [English](Baseline_WIN_D_Remote_Access_Hardening.en.md) · **Français**
 
-# [Baseline] - WIN - D - Remote Access Hardening
+# CXNM - Standard - WIN - D - Remote Access Hardening
 
 Ferme le shell distant WinRM et déconnecte une session SMB inactive après quinze minutes.
 

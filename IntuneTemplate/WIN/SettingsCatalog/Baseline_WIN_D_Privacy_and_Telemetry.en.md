@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Privacy_and_Telemetry.md) · **English** · [Français](Baseline_WIN_D_Privacy_and_Telemetry.fr.md)
 
-# [Baseline] - WIN - D - Privacy and Telemetry
+# CXNM - Standard - WIN - D - Privacy and Telemetry
 
 Turns off the advertising ID, blocks the clipboard between devices, stops uploading user activities and keeps what the user types and speaks on the device.
 
@@ -15,7 +15,7 @@ Turns off the advertising ID, blocks the clipboard between devices, stops upload
 | Source | CIS v4 Windows 11 L1 — settings taken from IntuneAdmin, values verified against the settings catalog definitions. |
 | File | [`Baseline_WIN_D_Privacy_and_Telemetry.json`](Baseline_WIN_D_Privacy_and_Telemetry.json) |
 
-> Noticeable on one point: text suggestions become less personal over time. Complements `[Baseline] - WIN - D - Data Minimisation` without clashing with it — that one limits what is included in the diagnostic data, this one turns off three separate channels. The cross-device clipboard used to be here too, but since v4.0 OpenIntuneBaseline sets that itself in [Baseline] - WIN - D - Windows Feature Configuration. Six channels added, all six CIS L1: search no longer uses the location, SMS synchronisation to the cloud is turned off, consumer content on the sign-in screen disappears, online tips no longer fetch anything from Microsoft, fonts are no longer downloaded from fs.microsoft.com, and apps can no longer share data between users of the same device. That last one is the only one with a noticeable side: an app that deliberately shares data between users no longer works that way.
+> Noticeable on one point: text suggestions become less personal over time. Complements `CXNM - Standard - WIN - D - Data Minimisation` without clashing with it — that one limits what is included in the diagnostic data, this one turns off three separate channels. The cross-device clipboard used to be here too, but since v4.0 OpenIntuneBaseline sets that itself in CXNM - Standard - WIN - D - Windows Feature Configuration. Six channels added, all six CIS L1: search no longer uses the location, SMS synchronisation to the cloud is turned off, consumer content on the sign-in screen disappears, online tips no longer fetch anything from Microsoft, fonts are no longer downloaded from fs.microsoft.com, and apps can no longer share data between users of the same device. That last one is the only one with a noticeable side: an app that deliberately shares data between users no longer works that way.
 
 ## Standards
 

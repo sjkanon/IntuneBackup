@@ -39,7 +39,7 @@ le catalog et figure comme paire de templates dans `IntuneTemplate/WIN/SettingsC
 
 ## Interaction avec Defender Network Protection
 
-Network Protection (activé dans `[Baseline] - WIN - D - Defender Antivirus`) bloque les domaines
+Network Protection (activé dans `CXNM - Standard - WIN - D - Defender Antivirus`) bloque les domaines
 malveillants en inspectant le trafic DNS et TLS sur l'appareil. Le DoH de **Windows lui-même** passe
 par le client DNS du système d'exploitation et reste visible pour Defender. Le DoH **dans un
 navigateur tiers** (Chrome, Firefox) contourne le client DNS ; dans la documentation de
@@ -53,7 +53,7 @@ Intune admin center → **Devices → Scripts and remediations → Create** :
 
 | Champ | Valeur |
 |---|---|
-| Nom | `[Baseline] - WIN - D - DNS over HTTPS Allow` (ou `… Require`) |
+| Nom | `CXNM - Standard - WIN - D - DNS over HTTPS Allow` (ou `… Require`) |
 | Script de détection | `Detect-DoHPolicy.ps1` ; réglez `$Expected` en haut du script sur 2 (Allow) ou 3 (Require) |
 | Script de remédiation | `Remediate-DoHPolicy.ps1` avec `$Mode = 'Allow'` ou `'Require'` en haut du script |
 | Exécuter avec les informations d'identification de l'utilisateur connecté | Non (SYSTEM) |

@@ -33,7 +33,7 @@ Il n'y a délibérément **pas de JSON** pour cela ici. La valeur Graph correspo
 le même type) n'a pas pu être vérifiée lors de cette itération par rapport à un export source ou aux
 définitions pl4nty, et la restriction par défaut existe déjà dans chaque tenant (on la met à jour avec
 PATCH, pas avec un nouveau POST). Les appareils déjà inscrits avec device administrator
-sont interceptés par `[Baseline] - AND - U - Compliance Block Device Administrator`.
+sont interceptés par `CXNM - Standard - AND - U - Compliance Block Device Administrator`.
 
 ## Déploiement
 

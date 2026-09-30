@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Compliance_BitLocker.md) · **English** · [Français](Baseline_WIN_U_Compliance_BitLocker.fr.md)
 
-# [Baseline] - WIN - U - Compliance BitLocker
+# CXNM - Standard - WIN - U - Compliance BitLocker
 
 Checks whether the system drive is encrypted with BitLocker. Twelve hours' grace, because encryption takes a while after enrolment.
 

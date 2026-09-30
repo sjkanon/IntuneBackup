@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Power_Management.md) · **English** · [Français](Baseline_WIN_D_Power_Management.fr.md)
 
-# [Baseline] - WIN - D - Power Management
+# CXNM - Standard - WIN - D - Power Management
 
 Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen.
 

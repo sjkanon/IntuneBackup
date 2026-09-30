@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
-  "displayName": "[Baseline] - IOS - Outlook - Managed Devices",
+  "displayName": "CXNM - Standard - IOS - Outlook - Managed Devices",
   "description": "Outlook on enrolled devices: account prefilled with modern authentication, work account only, warning for external recipients, contacts synced to the Contacts app for caller name display.",
   "roleScopeTagIds": [
     "0"

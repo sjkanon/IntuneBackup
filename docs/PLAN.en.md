@@ -60,7 +60,7 @@ into Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Rem
 RPC (9) and some smaller ones. The 15 settings with no OIB counterpart are in
 `WIN - D - Legacy Hardening`, kept separate so an OIB upgrade neither drags them along nor throws them away.
 
-**Platform axis.** All policies are now named `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` and
+**Platform axis.** All policies are now named `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` and
 live in `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 policies) and BYOD app protection
 for iOS and Android (2) are new.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Compliance_Code_Integrity.en.md) · [Français](Baseline_WIN_U_Compliance_Code_Integrity.fr.md)
 
-# [Baseline] - WIN - U - Compliance Code Integrity
+# CXNM - Standard - WIN - U - Compliance Code Integrity
 
 Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprogramma's en systeembestanden laadt.
 

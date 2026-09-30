@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Threat_Protection.md) · **English** · [Français](Baseline_WIN_D_Threat_Protection.fr.md)
 
-# [Baseline] - WIN - D - Threat Protection
+# CXNM - Standard - WIN - D - Threat Protection
 
 Removes the local escape routes from malware protection: users cannot override Exploit Protection or turn off cloud reporting locally, and DLL hijacking becomes harder.
 
@@ -15,7 +15,7 @@ Removes the local escape routes from malware protection: users cannot override E
 | Source | ISO/IEC 27001:2022 A.8.7 and A.8.8, NIS2 art. 21(2)(e) — settings from CIS v4 Windows 11 L1 |
 | File | [`Baseline_WIN_D_Threat_Protection.json`](Baseline_WIN_D_Threat_Protection.json) |
 
-> LSA protection was already in [Baseline] - WIN - D - Device Guard and Credential Guard; what was missing were the local overrides. Malware protection should not be changeable by the end user, and these were the places where it could be; blocking local exploit protection settings has been in [Baseline] - WIN - D - Defender Additional Configuration since OpenIntuneBaseline v4.0. SafeDllSearchMode is the oldest and still the cheapest defence against DLL hijacking.
+> LSA protection was already in CXNM - Standard - WIN - D - Device Guard and Credential Guard; what was missing were the local overrides. Malware protection should not be changeable by the end user, and these were the places where it could be; blocking local exploit protection settings has been in CXNM - Standard - WIN - D - Defender Additional Configuration since OpenIntuneBaseline v4.0. SafeDllSearchMode is the oldest and still the cheapest defence against DLL hijacking.
 
 ## Standards
 
