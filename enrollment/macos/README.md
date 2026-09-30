@@ -42,7 +42,7 @@ configureert, ook als je hem uit zou zetten.
 
 ### Accounts
 
-`mdmadmin` is LAPS-beheerd: Intune genereert een willekeurig wachtwoord van 15 tekens en
+`mlapsadmin` is LAPS-beheerd: Intune genereert een willekeurig wachtwoord van 15 tekens en
 bewaart het versleuteld. Daarom staat `adminAccountPassword` hier niet in. Rotatie op 14 dagen
 is een keuze; de Intune-standaard is zes maanden.
 
@@ -50,7 +50,7 @@ Openstaand, niet opgelost door dit bestand:
 
 - **Rotatie beperkt lezen niet.** Wie het geëscroweerde wachtwoord mag opvragen regel je met
   RBAC/PIM, niet hier. Controleer wie die rol heeft.
-- **`mdmadmin` is tenantbreed voorspelbaar.** Voor een beheerder met meerdere klanten is een
+- **`mlapsadmin` is tenantbreed voorspelbaar.** Voor een beheerder met meerdere klanten is een
   naam per klant (`<prefix>-<klantcode>-adm`) beter.
 - **`supportPhoneNumber` staat op `SERVICEDESK-TELEFOON-INVULLEN`.** De gebruiker ziet dat
   nummer tijdens de inrichting; vul het per organisatie in vóór je het profiel aanmaakt.
@@ -58,7 +58,7 @@ Openstaand, niet opgelost door dit bestand:
   roteert het wachtwoord wel maar is het niet op te halen.
 
 Het primaire account is `setPrimarySetupAccountAsRegularUser: true` — een **standaard** account,
-niet admin. Dat mag omdat `mdmadmin` de adminrol vult; macOS eist minstens één adminaccount.
+niet admin. Dat mag omdat `mlapsadmin` de adminrol vult; macOS eist minstens één adminaccount.
 
 De twee prefill-velden accepteren verschillende variabelen:
 

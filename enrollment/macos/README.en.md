@@ -42,7 +42,7 @@ even if you were to turn it off.
 
 ### Accounts
 
-`mdmadmin` is LAPS-managed: Intune generates a random 15-character password and
+`mlapsadmin` is LAPS-managed: Intune generates a random 15-character password and
 stores it encrypted. That is why `adminAccountPassword` is not in here. Rotation every 14 days
 is a choice; the Intune default is six months.
 
@@ -50,7 +50,7 @@ Open, not solved by this file:
 
 - **Rotation does not restrict reading.** Who may retrieve the escrowed password is controlled with
   RBAC/PIM, not here. Check who holds that role.
-- **`mdmadmin` is predictable tenant-wide.** For an administrator with multiple customers, a
+- **`mlapsadmin` is predictable tenant-wide.** For an administrator with multiple customers, a
   name per customer (`<prefix>-<customercode>-adm`) is better.
 - **`supportPhoneNumber` is set to `SERVICEDESK-TELEFOON-INVULLEN`.** The user sees that
   number during setup; fill it in per organisation before you create the profile.
@@ -58,7 +58,7 @@ Open, not solved by this file:
   the password does rotate but cannot be retrieved.
 
 The primary account is `setPrimarySetupAccountAsRegularUser: true` — a **standard** account,
-not admin. That is fine because `mdmadmin` fills the admin role; macOS requires at least one admin account.
+not admin. That is fine because `mlapsadmin` fills the admin role; macOS requires at least one admin account.
 
 The two prefill fields accept different variables:
 

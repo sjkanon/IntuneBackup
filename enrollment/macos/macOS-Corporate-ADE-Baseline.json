@@ -19,7 +19,7 @@
   "autoAdvanceSetupEnabled": false,
   "requestRequiresNetworkTether": false,
 
-  "adminAccountUserName": "mdmadmin",
+  "adminAccountUserName": "mlapsadmin",
   "adminAccountFullName": "IT Servicedesk",
   "hideAdminAccount": true,
   "depProfileAdminAccountPasswordRotationSetting": {

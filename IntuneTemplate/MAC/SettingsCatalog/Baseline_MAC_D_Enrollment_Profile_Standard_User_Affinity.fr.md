@@ -15,7 +15,7 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 | Source | baseline propre — OpenIntuneBaseline n'a pas de profil d'inscription |
 | Fichier | [`Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.json) |
 
-> Alternative à [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec enrollment/macos/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mdmadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mdmadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
+> Alternative à [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec enrollment/macos/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mlapsadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mlapsadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
 
 ## Normes
 
@@ -42,7 +42,7 @@ paramètre parent a la valeur indiquée.
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountfullname` | IT Servicedesk |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_hideusersgroups` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountpasswordrotation` | 14 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | mdmadmin |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | mlapsadmin |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_createlocalprimary` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_prefillaccountinfo` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_restrictediting` | 1 |

@@ -15,7 +15,7 @@ Runs Setup Assistant for a corporate Mac with user affinity and locked enrolment
 | Source | own baseline — OpenIntuneBaseline has no enrollment profile |
 | File | [`Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json) |
 
-> Alternative to [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, not an addition: the two profiles differ in exactly one setting — whether the signed-in account becomes an administrator or a standard user. Both on All Devices would cause a conflict, so they are deliberately left unassigned and belong on a dedicated group. They also overlap with enrollment/macos/macOS-Corporate-ADE-Baseline.json, which deploys the same enrollment profile via depMacOSEnrollmentProfile and uses the same administrator account (mdmadmin) there — choose one of the two routes. The administrator account is called mdmadmin and the department in Setup Assistant is IT Servicedesk; the phone number is set to SERVICEDESK-TELEFOON-INVULLEN and must be filled in per organisation before the profile is linked to a token — the user sees it during setup.
+> Alternative to [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, not an addition: the two profiles differ in exactly one setting — whether the signed-in account becomes an administrator or a standard user. Both on All Devices would cause a conflict, so they are deliberately left unassigned and belong on a dedicated group. They also overlap with enrollment/macos/macOS-Corporate-ADE-Baseline.json, which deploys the same enrollment profile via depMacOSEnrollmentProfile and uses the same administrator account (mlapsadmin) there — choose one of the two routes. The administrator account is called mlapsadmin and the department in Setup Assistant is IT Servicedesk; the phone number is set to SERVICEDESK-TELEFOON-INVULLEN and must be filled in per organisation before the profile is linked to a token — the user sees it during setup.
 
 ## Standards
 
@@ -39,7 +39,7 @@ setting has the value shown.
 | &nbsp;&nbsp;&nbsp;&nbsp;`ade_macos_authenticationmethod` | 2 |
 | `ade_macos_awaitconfiguration` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_createlocaladmin` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | mdmadmin |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountname` | mlapsadmin |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountfullname` | IT Servicedesk |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_hideusersgroups` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ade_accountsettings_adminaccountpasswordrotation` | 14 |

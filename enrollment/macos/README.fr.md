@@ -42,7 +42,7 @@ locaux, même si vous le désactiviez.
 
 ### Comptes
 
-`mdmadmin` est géré par LAPS : Intune génère un mot de passe aléatoire de 15 caractères et le
+`mlapsadmin` est géré par LAPS : Intune génère un mot de passe aléatoire de 15 caractères et le
 conserve chiffré. C'est pourquoi `adminAccountPassword` n'y figure pas. La rotation tous les 14 jours
 est un choix ; la valeur par défaut d'Intune est de six mois.
 
@@ -50,7 +50,7 @@ En suspens, non résolu par ce fichier :
 
 - **La rotation ne restreint pas la lecture.** Qui peut consulter le mot de passe séquestré se règle
   avec RBAC/PIM, pas ici. Vérifiez qui détient ce rôle.
-- **`mdmadmin` est prévisible à l'échelle du tenant.** Pour un administrateur gérant plusieurs
+- **`mlapsadmin` est prévisible à l'échelle du tenant.** Pour un administrateur gérant plusieurs
   clients, un nom par client (`<prefix>-<codeclient>-adm`) est préférable.
 - **`supportPhoneNumber` vaut `SERVICEDESK-TELEFOON-INVULLEN`.** L'utilisateur voit ce numéro pendant
   la configuration ; renseignez-le pour chaque organisation avant de créer le profil.
@@ -58,7 +58,7 @@ En suspens, non résolu par ce fichier :
   de passe change bien mais ne peut pas être récupéré.
 
 Le compte principal est `setPrimarySetupAccountAsRegularUser: true` — un compte **standard**, pas
-administrateur. C'est possible parce que `mdmadmin` remplit le rôle d'administrateur ; macOS exige au
+administrateur. C'est possible parce que `mlapsadmin` remplit le rôle d'administrateur ; macOS exige au
 moins un compte administrateur.
 
 Les deux champs de préremplissage acceptent des variables différentes :
