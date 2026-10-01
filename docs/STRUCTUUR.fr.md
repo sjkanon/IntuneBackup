@@ -70,6 +70,7 @@ IntuneTemplate/
   _controls.json      vocabulaire pour ISO 27001, NIS2, CIS et NIST CSF
   _licenties.json     quelles mesures peuvent être couvertes par une licence
   _renames.json       anciens noms dans le tenant
+  _ca.json            quelles stratégies CA s'appuient sur une stratégie (copie)
   _i18n/              traductions anglaises et françaises des textes des données
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
@@ -87,6 +88,7 @@ IntuneTemplate/
 | `_assignments.json` | À qui va une stratégie de phase 1 (tous les appareils, tous les utilisateurs) | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, les scripts de génération, `Set-BaselineAssignment.ps1` |
 | `_controls.json` | Quels libellés de normes existent et ce qu'ils signifient | `generate-compliance.js`, `generate-docs.js`, `check-scope.js` |
 | `_licenties.json` | Quelles mesures vides peuvent être résolues par un SKU plutôt que par un processus | `generate-compliance.js` |
+| `_ca.json` | Par stratégie les stratégies CA qui s'appuient sur elle, et pourquoi — copie de `docs/policies.json` du dépôt CA-Policies | `generate-docs.js` |
 | `_renames.json` | Comment les stratégies s'appelaient dans le tenant : `rename`, `replace` ou `retire` | `Rename-BaselinePolicy.ps1`, `check-scope.js`, `generate-docs.js` |
 | `Package` (champ de chaque template) | Dans quel package CIPP la stratégie est déployée | CIPP, surveillé par `check-scope.js` |
 
@@ -117,7 +119,7 @@ Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deu
 | 2 | `check-scope.js` | tout `IntuneTemplate/` | rien — échoue en cas d'erreur |
 | 3 | `export-intunebackup.js` | `IntuneTemplate/`, `_assignments.json` | `export/NativeImport/…` |
 | 4 | `generate-baseline-template.js` | `_manifest.json`, `_assignments.json` | `BaselineTemplate/Baseline.json` |
-| 5 | `generate-docs.js` | `IntuneTemplate/` | `docs/OVERZICHT.md`, README, `.md` par stratégie |
+| 5 | `generate-docs.js` | `IntuneTemplate/`, `../CA-Policies/docs/policies.json` s'il est présent, sinon `_ca.json` | `docs/OVERZICHT.md`, README, `.md` par stratégie, `_ca.json` |
 | 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | versions minimales d'OS, endoflife.date | un rapport uniquement |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | affectations dans le tenant |
@@ -136,6 +138,7 @@ package — puis les étapes 3 à 6. Tous les scripts Node du pipeline partagent
 | [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) | source → dépôt | `import-oib.js` sur un clone local | Windows v4.0 repris d'une branche au commit `f247604` ; réimporter dès que le tag existe |
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | source → dépôt | `import-intuneadmin.js` | JSON en UTF-16LE |
 | Dépôt CA-Policies (cloné à côté de celui-ci sous `../CA-Policies`) | dépôt ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git contient la version `--no-ca` ; la CI ne voit pas l'autre dépôt |
+| Dépôt CA-Policies | dépôt ← CA, par stratégie | `generate-docs.js` lit `docs/policies.json` et indique sur chaque stratégie Intune les stratégies CA qui s'y appuient ; les README CA renvoient ici | La CI lit la copie `_ca.json` ; les liens pointent vers les miroirs sur GitHub (ConXioN-ITCE) |
 | CIPP | dépôt → CIPP | synchronisation du dépôt de templates sur ce dépôt | `BaselineTemplate/Baseline.json` n'est repris que via Tools → Community Repos → Import |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | dépôt → tenant | `Start-IntuneRestoreConfig` et `…Assignments` avec `-RestoreById $false` | restaurer séparément les affectations App Protection |
 | Microsoft Graph | dépôt → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | d'abord `-WhatIf` |

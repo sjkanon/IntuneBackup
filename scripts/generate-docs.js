@@ -14,6 +14,11 @@
  * COMPLIANCE.md — the justification against ISO 27001, NIS2, CIS and NIST CSF — comes from
  * generate-compliance.js; here each policy only carries the reference to it.
  *
+ * Each policy README also lists the Conditional Access policies that rely on it, from
+ * docs/policies.json in the CA-Policies repo. With that repo next to this one the links come from
+ * there and IntuneTemplate/_ca.json is rewritten as a copy; without it (in CI) they come from
+ * that copy, so the output does not depend on what is cloned next to the repo.
+ *
  * Generated and not written by hand: keeping nearly
  * a hundred policies with thousands of settings up to date goes wrong, and a table that is no
  * longer correct is worse than no table — because it still reads as if it were correct.
@@ -33,6 +38,17 @@ const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
+
+/**
+ * Welke CA-policies op een Intune-policy leunen, staat in de CA-Policies-repo
+ * (docs/policies.json). Staat die repo ernaast, dan komt het daarvandaan en wordt de kopie in
+ * _ca.json bijgewerkt; zo niet — in CI — dan uit die kopie. Zonder kopie zou de sectie in CI
+ * wegvallen en het document bij elke run tussen twee versies wisselen.
+ */
+const CA_SNAPSHOT_PATH = path.join(TEMPLATE_DIR, "_ca.json");
+const CA_SIBLINGS = ["CA-Policies", "CA-policies", "CIPP-Templates-ConditionalAccess"].map((d) => path.resolve(REPO_ROOT, "..", d));
+/** Links naar de CA-kant gaan naar de gedeelde mirror: een relatief pad naar ../CA-Policies werkt op GitHub niet. */
+const CA_URL = "https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/";
 
 const TYPE_LABEL = {
   Catalog: "Settings Catalog",
@@ -228,6 +244,69 @@ function controlsSection(controls, ctx) {
   ];
 }
 
+/**
+ * De koppeling met Conditional Access, van de Intune-kant gezien: per Intune-policy de CA-policies
+ * die erop leunen. Uit de CA-Policies-repo als die ernaast staat (en dan ook als nieuwe inhoud van
+ * _ca.json), anders uit _ca.json zelf.
+ */
+function loadCaLinks() {
+  const root = CA_SIBLINGS.find((d) => fs.existsSync(path.join(d, "docs", "policies.json")) && fs.existsSync(path.join(d, "CATemplate")));
+  if (!root) {
+    const snapshot = fs.existsSync(CA_SNAPSHOT_PATH) ? JSON.parse(fs.readFileSync(CA_SNAPSHOT_PATH, "utf8")) : { koppelingen: {} };
+    return { root: null, snapshot, content: null };
+  }
+  const data = JSON.parse(fs.readFileSync(path.join(root, "docs", "policies.json"), "utf8"));
+  const groups = data.groepen || {};
+  const koppelingen = {};
+  for (const ca of Object.keys(data.policies).sort()) {
+    const file = path.join(root, "CATemplate", `${ca}.json`);
+    if (!fs.existsSync(file)) continue;
+    const inner = JSON.parse(JSON.parse(fs.readFileSync(file, "utf8")).JSON);
+    for (const link of data.policies[ca].intune || []) {
+      for (const target of link.targets.flatMap((t) => (t.startsWith("@") ? groups[t.slice(1)] || [] : [t]))) {
+        const baseName = path.posix.basename(target);
+        const list = (koppelingen[baseName] = koppelingen[baseName] || []);
+        if (!list.some((x) => x.ca === ca)) list.push({ ca, displayName: inner.displayName, state: inner.state, waarom: link.waarom });
+      }
+    }
+  }
+  const snapshot = {
+    _comment: [
+      "Gegenereerd door scripts/generate-docs.js uit docs/policies.json in de CA-Policies-repo — niet met de hand bijwerken.",
+      "Per Intune-policy de Conditional Access-policies die erop leunen, en waarom. Een kopie, zodat de",
+      "README per policy ook in CI (zonder de CA-repo ernaast) dezelfde sectie 'Conditional Access' krijgt.",
+      "Wijzigen gebeurt in de CA-Policies-repo; draai daarna hier generate-docs.js met die repo ernaast.",
+    ],
+    koppelingen: Object.fromEntries(Object.keys(koppelingen).sort().map((k) => [k, koppelingen[k]])),
+  };
+  return { root, snapshot, content: JSON.stringify(snapshot, null, 2) + "\n" };
+}
+
+const CA_STATE = { enabled: "enabled", enabledForReportingButNotEnforced: "report-only", disabled: "disabled" };
+
+function caSection(baseName, ctx) {
+  const links = (ctx.ca.snapshot.koppelingen || {})[baseName] || [];
+  if (links.length === 0) return [];
+  return [
+    "## Conditional Access",
+    "",
+    V.t({
+      nl: `Deze Conditional Access-policies uit de [CA-Policies-repo](${CA_URL.replace(/blob\/main\/$/, "")}) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.`,
+      en: `These Conditional Access policies from the [CA-Policies repo](${CA_URL.replace(/blob\/main\/$/, "")}) rely on this policy. Before you change or remove it, check what that does there.`,
+      fr: `Ces stratégies Conditional Access du [dépôt CA-Policies](${CA_URL.replace(/blob\/main\/$/, "")}) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.`,
+    }),
+    "",
+    V.t({ nl: "| CA-policy | State | Wat deze policy ervoor doet |", en: "| CA policy | State | What this policy does for it |", fr: "| Stratégie CA | State | Ce que cette policy fait pour elle |" }),
+    "|---|---|---|",
+    ...links.map((l) => {
+      const doc = V.link(`${l.ca}.md`);
+      const label = l.displayName.replace(/^CXNM - STANDARD - /, "");
+      return `| [${escapePipes(label)}](${CA_URL}CATemplate/${doc}) | ${CA_STATE[l.state] || l.state} | ${escapePipes(l.waarom[V.lang] || l.waarom.nl)} |`;
+    }),
+    "",
+  ];
+}
+
 /** Hoeveel verschillende Annex A-controls de policies in fase 1 samen raken — voor OVERZICHT.md. */
 function isoControlsInFase1(templates, manifestByTarget) {
   const ids = new Set();
@@ -311,6 +390,7 @@ function policyDocument(template, ctx) {
   }
 
   if (entry.controls) lines.push(...controlsSection(entry.controls, ctx));
+  lines.push(...caSection(baseName, ctx));
 
   if (type === "Catalog") {
     const rows = [];
@@ -550,6 +630,11 @@ function overviewReadme(templates, ctx) {
       nl: "| [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
       en: "| [`_renames.json`](_renames.json) | what policies were called in the tenant and what they map to now | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
       fr: "| [`_renames.json`](_renames.json) | le nom des policies dans le tenant et leur correspondance actuelle | `Rename-BaselinePolicy.ps1`, `check-scope.js` |",
+    }),
+    V.t({
+      nl: "| [`_ca.json`](_ca.json) | per policy de Conditional Access-policies die erop leunen — een kopie uit `docs/policies.json` in de CA-Policies-repo | `generate-docs.js` (schrijft hem ook, met die repo ernaast) |",
+      en: "| [`_ca.json`](_ca.json) | per policy the Conditional Access policies that rely on it — a copy from `docs/policies.json` in the CA-Policies repo | `generate-docs.js` (also writes it, with that repo next to this one) |",
+      fr: "| [`_ca.json`](_ca.json) | par policy les stratégies Conditional Access qui s'appuient sur elle — une copie de `docs/policies.json` du dépôt CA-Policies | `generate-docs.js` (l'écrit aussi, avec ce dépôt à côté) |",
     }),
     V.t({
       nl: "| [`_controls.json`](_controls.json) | de normenvocabulaire: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |",
@@ -1107,8 +1192,15 @@ function main() {
   const vocab = fs.existsSync(CONTROLS_PATH) ? JSON.parse(fs.readFileSync(CONTROLS_PATH, "utf8")) : { iso27001: { controls: [] } };
   const isoById = new Map(vocab.iso27001.controls.map((c) => [c.id, c]));
 
-  const ctx = { assignments, manifestByTarget, manifest, isoById };
-  const files = [];
+  const ca = loadCaLinks();
+  const known = new Set(templates.map((t) => t.baseName));
+  for (const baseName of Object.keys(ca.snapshot.koppelingen || {})) {
+    if (!known.has(baseName)) console.warn(`Let op: CA-koppeling naar ${baseName}, maar dat template bestaat hier niet — pas docs/policies.json in de CA-Policies-repo aan.`);
+  }
+  if (!ca.root && !quiet) log("CA-Policies-repo niet ernaast: de CA-koppelingen komen uit IntuneTemplate/_ca.json.");
+
+  const ctx = { assignments, manifestByTarget, manifest, isoById, ca };
+  const files = ca.content ? [{ file: CA_SNAPSHOT_PATH, content: ca.content }] : [];
   const translators = [];
 
   for (const lang of LANGS) {

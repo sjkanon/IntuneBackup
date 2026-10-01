@@ -28,6 +28,16 @@ Active le plug-in Microsoft Enterprise SSO de Microsoft Authenticator, afin que 
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
+## Conditional Access
+
+Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+
+| Stratégie CA | State | Ce que cette policy fait pour elle |
+|---|---|---|
+| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.fr.md) | disabled | Active le plug-in Microsoft Enterprise SSO, qui transmet l'identité de l'appareil lors d'une connexion Entra. Sans le plug-in, un appareil conforme ne peut pas être reconnu comme tel dans les apps qui n'utilisent pas MSAL. |
+| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.fr.md) | enabled | Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré. |
+| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.fr.md) | enabled | Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré. |
+
 ## Paramètres — 21
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le

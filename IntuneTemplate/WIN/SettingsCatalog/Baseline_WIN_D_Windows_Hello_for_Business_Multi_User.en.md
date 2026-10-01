@@ -27,6 +27,16 @@ Windows Hello for Business for shared devices that several users sign in to. Sam
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
+## Conditional Access
+
+These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+
+| CA policy | State | What this policy does for it |
+|---|---|---|
+| [2055 - GRANT - Phishing Resistant MFA for Admins](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins.en.md) | disabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+| [2120 - GRANT - Phishing Resistant MFA for All Users](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users.en.md) | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+| [2125 - GRANT - Phishing Resistant MFA for Rollout Groups](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups.en.md) | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+
 ## Settings — 6
 
 Indented rows are child settings: they only apply when their parent

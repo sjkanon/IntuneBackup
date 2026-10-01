@@ -28,6 +28,14 @@ Runs Setup Assistant for a corporate Mac with user affinity and locked enrolment
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
+## Conditional Access
+
+These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+
+| CA policy | State | What this policy does for it |
+|---|---|---|
+| [2170 - GRANT - MFA for Intune Enrollment](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment.en.md) | enabled | Setup Assistant with modern authentication signs in to Microsoft Intune Enrollment, so this CA policy asks for MFA there. If the user has no working MFA method at that moment, enrolment gets stuck. |
+
 ## Settings — 40
 
 Indented rows are child settings: they only apply when their parent

@@ -44,6 +44,7 @@ file is in its place.
 | [`_assignments.json`](_assignments.json) | the assignment target per policy | `export-intunebackup.js`, `check-scope.js` |
 | [`_manifest.json`](_manifest.json) | which OIB policy lands where, why it deviates and in which phase it is deployed | `import-oib.js`, `set-packages.js` |
 | [`_renames.json`](_renames.json) | what policies were called in the tenant and what they map to now | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
+| [`_ca.json`](_ca.json) | per policy the Conditional Access policies that rely on it — a copy from `docs/policies.json` in the CA-Policies repo | `generate-docs.js` (also writes it, with that repo next to this one) |
 | [`_controls.json`](_controls.json) | the standards vocabulary: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |
 | [`_i18n/`](_i18n/) | the English and French translation of the texts from the data, for the generated documentation | `generate-docs.js`, `generate-compliance.js` |
 

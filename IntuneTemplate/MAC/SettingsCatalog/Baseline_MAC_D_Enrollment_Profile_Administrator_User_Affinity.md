@@ -28,6 +28,14 @@ Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendeld
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
+## Conditional Access
+
+Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+
+| CA-policy | State | Wat deze policy ervoor doet |
+|---|---|---|
+| [2170 - GRANT - MFA for Intune Enrollment](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment.md) | enabled | Setup Assistant met moderne authenticatie meldt aan bij Microsoft Intune Enrollment, dus deze CA-policy vraagt daar MFA. Heeft de gebruiker op dat moment geen werkend MFA-middel, dan loopt de inschrijving vast. |
+
 ## Instellingen — 40
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

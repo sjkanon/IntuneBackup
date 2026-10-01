@@ -1,0 +1,1920 @@
+{
+  "_comment": [
+    "Gegenereerd door scripts/generate-docs.js uit docs/policies.json in de CA-Policies-repo — niet met de hand bijwerken.",
+    "Per Intune-policy de Conditional Access-policies die erop leunen, en waarom. Een kopie, zodat de",
+    "README per policy ook in CI (zonder de CA-repo ernaast) dezelfde sectie 'Conditional Access' krijgt.",
+    "Wijzigen gebeurt in de CA-Policies-repo; draai daarna hier generate-docs.js met die repo ernaast."
+  ],
+  "koppelingen": {
+    "Baseline_AND_D_Compliance_Dedicated_Device_Health": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_App_Protection": [
+      {
+        "ca": "CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements",
+        "displayName": "CXNM - STANDARD - 2070 - GRANT - Mobile Device Access Requirements",
+        "state": "disabled",
+        "waarom": {
+          "nl": "De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht.",
+          "en": "The app protection policy that `compliantApplication` asks for. Without an assigned policy no app qualifies and access on iOS and Android is closed.",
+          "fr": "L'app protection policy que demande `compliantApplication`. Sans stratégie affectée, aucune app ne satisfait et l'accès sur iOS et Android est fermé."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over.",
+          "en": "One of the two ways to meet this policy: the app is covered by an app protection policy. Without an assigned policy only a compliant device is left.",
+          "fr": "L'une des deux façons de satisfaire à cette stratégie : l'app est couverte par une app protection policy. Sans stratégie affectée, il ne reste qu'un appareil conforme."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Block_Device_Administrator": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Corporate_Device_Health": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Corporate_Password": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Defender_for_Endpoint": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Device_Health": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_AND_U_Compliance_Password": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_IOS_D_Enterprise_SSO": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden.",
+          "en": "Turns on the Microsoft Enterprise SSO plug-in, which passes the device identity along with an Entra sign-in. Without the plug-in a compliant device cannot be recognised as compliant in apps that do not use MSAL.",
+          "fr": "Active le plug-in Microsoft Enterprise SSO, qui transmet l'identité de l'appareil lors d'une connexion Entra. Sans le plug-in, un appareil conforme ne peut pas être reconnu comme tel dans les apps qui n'utilisent pas MSAL."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      }
+    ],
+    "Baseline_IOS_U_App_Protection": [
+      {
+        "ca": "CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements",
+        "displayName": "CXNM - STANDARD - 2070 - GRANT - Mobile Device Access Requirements",
+        "state": "disabled",
+        "waarom": {
+          "nl": "De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht.",
+          "en": "The app protection policy that `compliantApplication` asks for. Without an assigned policy no app qualifies and access on iOS and Android is closed.",
+          "fr": "L'app protection policy que demande `compliantApplication`. Sans stratégie affectée, aucune app ne satisfait et l'accès sur iOS et Android est fermé."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over.",
+          "en": "One of the two ways to meet this policy: the app is covered by an app protection policy. Without an assigned policy only a compliant device is left.",
+          "fr": "L'une des deux façons de satisfaire à cette stratégie : l'app est couverte par une app protection policy. Sans stratégie affectée, il ne reste qu'un appareil conforme."
+        }
+      }
+    ],
+    "Baseline_IOS_U_Compliance_Defender_for_Endpoint": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_IOS_U_Compliance_Device_Health": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_IOS_U_Compliance_Password": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "state": "enabled",
+        "waarom": {
+          "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
+          "en": "The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant.",
+          "fr": "L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity": [
+      {
+        "ca": "CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment",
+        "displayName": "CXNM - STANDARD - 2170 - GRANT - MFA for Intune Enrollment",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Setup Assistant met moderne authenticatie meldt aan bij Microsoft Intune Enrollment, dus deze CA-policy vraagt daar MFA. Heeft de gebruiker op dat moment geen werkend MFA-middel, dan loopt de inschrijving vast.",
+          "en": "Setup Assistant with modern authentication signs in to Microsoft Intune Enrollment, so this CA policy asks for MFA there. If the user has no working MFA method at that moment, enrolment gets stuck.",
+          "fr": "Setup Assistant avec authentification moderne se connecte à Microsoft Intune Enrollment ; cette stratégie CA y demande donc la MFA. Si l'utilisateur n'a pas de méthode MFA fonctionnelle à ce moment, l'inscription est bloquée."
+        }
+      }
+    ],
+    "Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity": [
+      {
+        "ca": "CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment",
+        "displayName": "CXNM - STANDARD - 2170 - GRANT - MFA for Intune Enrollment",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Setup Assistant met moderne authenticatie meldt aan bij Microsoft Intune Enrollment, dus deze CA-policy vraagt daar MFA. Heeft de gebruiker op dat moment geen werkend MFA-middel, dan loopt de inschrijving vast.",
+          "en": "Setup Assistant with modern authentication signs in to Microsoft Intune Enrollment, so this CA policy asks for MFA there. If the user has no working MFA method at that moment, enrolment gets stuck.",
+          "fr": "Setup Assistant avec authentification moderne se connecte à Microsoft Intune Enrollment ; cette stratégie CA y demande donc la MFA. Si l'utilisateur n'a pas de méthode MFA fonctionnelle à ce moment, l'inscription est bloquée."
+        }
+      }
+    ],
+    "Baseline_MAC_D_Platform_SSO": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden.",
+          "en": "Turns on the Microsoft Enterprise SSO plug-in, which passes the device identity along with an Entra sign-in. Without the plug-in a compliant device cannot be recognised as compliant in apps that do not use MSAL.",
+          "fr": "Active le plug-in Microsoft Enterprise SSO, qui transmet l'identité de l'appareil lors d'une connexion Entra. Sans le plug-in, un appareil conforme ne peut pas être reconnu comme tel dans les apps qui n'utilisent pas MSAL."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      }
+    ],
+    "Baseline_MAC_U_Compliance_Device_Health": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_MAC_U_Compliance_Device_Security": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_MAC_U_Compliance_OS_Version": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_MAC_U_Compliance_Password": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Microsoft_Office_Updates": [
+      {
+        "ca": "CXNM__STANDARD__2110__GRANT__Token_Protection",
+        "displayName": "CXNM - STANDARD - 2110 - GRANT - Token Protection",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Token protection werkt alleen in client-versies die gebonden tokens ondersteunen. Een Office-app of OneDrive-sync-client op een te oude versie wordt door deze policy geblokkeerd; deze Intune-policy houdt die clients bij.",
+          "en": "Token protection only works in client versions that support bound tokens. An Office app or OneDrive sync client on too old a version is blocked by this policy; this Intune policy keeps those clients current.",
+          "fr": "La token protection ne fonctionne que dans les versions de client qui prennent en charge les jetons liés. Une app Office ou un client de synchronisation OneDrive trop ancien est bloqué par cette stratégie ; cette stratégie Intune maintient ces clients à jour."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Microsoft_OneDrive": [
+      {
+        "ca": "CXNM__STANDARD__2110__GRANT__Token_Protection",
+        "displayName": "CXNM - STANDARD - 2110 - GRANT - Token Protection",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Token protection werkt alleen in client-versies die gebonden tokens ondersteunen. Een Office-app of OneDrive-sync-client op een te oude versie wordt door deze policy geblokkeerd; deze Intune-policy houdt die clients bij.",
+          "en": "Token protection only works in client versions that support bound tokens. An Office app or OneDrive sync client on too old a version is blocked by this policy; this Intune policy keeps those clients current.",
+          "fr": "La token protection ne fonctionne que dans les versions de client qui prennent en charge les jetons liés. Une app Office ou un client de synchronisation OneDrive trop ancien est bloqué par cette stratégie ; cette stratégie Intune maintient ces clients à jour."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric": [
+      {
+        "ca": "CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys",
+        "displayName": "CXNM - STANDARD - 2190 - GRANT - Windows Hello Passkeys",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet.",
+          "en": "Sets the PIN of the Windows Hello passkey that this CA policy requires. Stricter than users are used to, and registering only succeeds once the PIN meets the requirement.",
+          "fr": "Définit le code PIN de la passkey Windows Hello qu'exige cette stratégie CA. Plus strict que ce dont l'utilisateur a l'habitude, et l'enregistrement ne réussit qu'une fois le PIN conforme."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric": [
+      {
+        "ca": "CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys",
+        "displayName": "CXNM - STANDARD - 2190 - GRANT - Windows Hello Passkeys",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet.",
+          "en": "Sets the PIN of the Windows Hello passkey that this CA policy requires. Stricter than users are used to, and registering only succeeds once the PIN meets the requirement.",
+          "fr": "Définit le code PIN de la passkey Windows Hello qu'exige cette stratégie CA. Plus strict que ce dont l'utilisateur a l'habitude, et l'enregistrement ne réussit qu'une fois le PIN conforme."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Windows_Hello_for_Business": [
+      {
+        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      }
+    ],
+    "Baseline_WIN_D_Windows_Hello_for_Business_Multi_User": [
+      {
+        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Antispyware": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Antivirus": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_BitLocker": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Code_Integrity": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Defender_Real_Time_Protection": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Defender_Security_Intelligence": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Firewall": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_OS_Version": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_Secure_Boot": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Compliance_TPM": [
+      {
+        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
+          "en": "Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it.",
+          "fr": "Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
+          "en": "Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only.",
+          "fr": "Détermine si le terminal depuis lequel travaille un agent user est conforme. S'il ne l'est pas, cette stratégie bloque l'agent user dès qu'elle quitte le report-only."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
+        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
+          "en": "Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it.",
+          "fr": "Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
+          "en": "Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads.",
+          "fr": "Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync": [
+      {
+        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
+          "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
+          "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      }
+    ],
+    "Baseline_WIN_U_Windows_Hello_for_Business": [
+      {
+        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "state": "disabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      }
+    ]
+  }
+}

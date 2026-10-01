@@ -51,6 +51,11 @@ stratégies Conditional Access du dépôt CA-Policies (cloné à côté de celui
 s'y ajoutent avec `--ca ../CA-Policies/controls/ca-controls.json` — nécessaire pour une image honnête
 de NIS2 (j), car la MFA dépend presque entièrement de ce dépôt. Voir [`scripts/README.md`](scripts/README.fr.md#le-volet-ca-de-compliancemd).
 
+Chaque stratégie touchée par une stratégie Conditional Access — conformité, app protection, Windows Hello,
+les plug-ins SSO — a dans son README une section **Conditional Access** : quelles stratégies CA s'appuient
+sur elle et ce qui casse là-bas si vous la modifiez. Le lien est maintenu dans `docs/policies.json` du
+dépôt CA-Policies ; une copie est conservée ici dans `IntuneTemplate/_ca.json`.
+
 **[`extras/`](extras/README.fr.md)** contient ce qui fait partie d'une baseline complète sans relever d'aucun des cinq
 types de stratégie CIPP — par plateforme, avec des instructions de déploiement : profils et
 restrictions d'inscription, configuration d'applications, filtres d'affectation, App Control for Business,
@@ -129,6 +134,7 @@ IntuneTemplate/        la source : les stratégies au format de modèle CIPP
   _controls.json      vocabulaire pour ISO 27001, NIS2, CIS et NIST CSF
   _licenties.json     quels contrôles une licence permet de couvrir
   _renames.json       anciens noms dans le tenant (source pour Rename-BaselinePolicy.ps1)
+  _ca.json            quelles stratégies CA s'appuient sur une stratégie (copie du dépôt CA-Policies)
   _i18n/              traductions anglaises et françaises des textes issus des données
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/

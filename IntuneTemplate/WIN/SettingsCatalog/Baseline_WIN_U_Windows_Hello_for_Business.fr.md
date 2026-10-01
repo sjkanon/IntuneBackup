@@ -27,6 +27,16 @@ Windows Hello for Business par utilisateur plutôt que par appareil : les mêmes
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
+## Conditional Access
+
+Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+
+| Stratégie CA | State | Ce que cette policy fait pour elle |
+|---|---|---|
+| [2055 - GRANT - Phishing Resistant MFA for Admins](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins.fr.md) | disabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
+| [2120 - GRANT - Phishing Resistant MFA for All Users](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users.fr.md) | enabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
+| [2125 - GRANT - Phishing Resistant MFA for Rollout Groups](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups.fr.md) | enabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
+
 ## Paramètres — 5
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le

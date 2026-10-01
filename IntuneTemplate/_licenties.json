@@ -46,10 +46,10 @@
       "ontgrendelt": {
         "intune": [],
         "ca": [
-          "GLOBAL__1090__BLOCK__HighRisk_SignIns",
-          "GLOBAL__1100__BLOCK__HighRisk_Users",
-          "GLOBAL__2010__GRANT__MediumRisk_Signins",
-          "GLOBAL__2020__GRANT__MediumRisk_Users"
+          "CXNM__STANDARD__1090__BLOCK__HighRisk_SignIns",
+          "CXNM__STANDARD__1100__BLOCK__HighRisk_Users",
+          "CXNM__STANDARD__2010__GRANT__MediumRisk_Signins",
+          "CXNM__STANDARD__2020__GRANT__MediumRisk_Users"
         ]
       },
       "extraControls": {
@@ -64,10 +64,10 @@
       "id": "defender-cloud-apps",
       "displayName": "Microsoft Defender for Cloud Apps",
       "verkrijgbaar": "los, of als onderdeel van de Defender Suite for Business Premium",
-      "waarom": "GLOBAL__3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.",
+      "waarom": "CA-policy 3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.",
       "ontgrendelt": {
         "intune": [],
-        "ca": ["GLOBAL__3060__SESSION__Defender_for_Cloud_Apps"]
+        "ca": ["CXNM__STANDARD__3060__SESSION__Defender_for_Cloud_Apps"]
       }
     },
 
@@ -128,7 +128,7 @@
       "waarom": "Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij de Defender Suite: P2 dekt gebruikersrisico, niet workload-risico.",
       "ontgrendelt": {
         "intune": [],
-        "ca": ["GLOBAL__1140__BLOCK__Managed_Identities_At_Risk"]
+        "ca": ["CXNM__STANDARD__1140__BLOCK__Managed_Identities_At_Risk"]
       }
     },
 
@@ -140,11 +140,11 @@
       "ontgrendelt": {
         "intune": [],
         "ca": [
-          "GLOBAL__1150__BLOCK__Risky_Agent_Identities",
-          "GLOBAL__1160__BLOCK__Agent_Identities_To_Agent_Resources",
-          "GLOBAL__1170__BLOCK__Risky_Agent_Users",
-          "GLOBAL__1180__BLOCK__Agent_Users_Outside_Compliant_Network",
-          "GLOBAL__2160__GRANT__Agent_Users_Compliant_Device"
+          "CXNM__STANDARD__1150__BLOCK__Risky_Agent_Identities",
+          "CXNM__STANDARD__1160__BLOCK__Agent_Identities_To_Agent_Resources",
+          "CXNM__STANDARD__1170__BLOCK__Risky_Agent_Users",
+          "CXNM__STANDARD__1180__BLOCK__Agent_Users_Outside_Compliant_Network",
+          "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device"
         ]
       }
     }

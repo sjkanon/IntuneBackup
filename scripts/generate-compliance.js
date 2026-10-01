@@ -1193,6 +1193,17 @@ function main() {
         if (!templateByTarget.has(deel.target)) console.warn(`  licentie "${lic.displayName}" noemt ${deel.target}, maar dat template bestaat niet`);
       }
     }
+    // De CA-kant alleen als de CA-repo ernaast staat — ook met --no-ca, want dit gaat over de
+    // namen, niet over wat er in COMPLIANCE.md komt. Zo bleven de GLOBAL__-namen na de hernoeming
+    // naar CXNM__STANDARD__ ongemerkt staan.
+    const caTemplates = path.resolve(path.dirname(opts.caControls), "..", "CATemplate");
+    if (fs.existsSync(caTemplates)) {
+      for (const lic of licenties.licenties) {
+        for (const t of lic.ontgrendelt.ca || []) {
+          if (!fs.existsSync(path.join(caTemplates, `${t}.json`))) console.warn(`  licentie "${lic.displayName}" noemt CA-template ${t}, maar dat bestaat niet in ${caTemplates}`);
+        }
+      }
+    }
   }
 
   const ctx = { voc, manifest, assignments, templates, ca, licenties, templateByTarget };

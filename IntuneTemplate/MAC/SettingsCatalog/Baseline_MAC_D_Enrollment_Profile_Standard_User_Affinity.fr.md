@@ -28,6 +28,14 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
+## Conditional Access
+
+Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+
+| Stratégie CA | State | Ce que cette policy fait pour elle |
+|---|---|---|
+| [2170 - GRANT - MFA for Intune Enrollment](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment.fr.md) | enabled | Setup Assistant avec authentification moderne se connecte à Microsoft Intune Enrollment ; cette stratégie CA y demande donc la MFA. Si l'utilisateur n'a pas de méthode MFA fonctionnelle à ce moment, l'inscription est bloquée. |
+
 ## Paramètres — 40
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le

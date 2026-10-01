@@ -25,6 +25,15 @@ Determines which account users sign in to Edge with and what is synchronised, so
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
+## Conditional Access
+
+These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+
+| CA policy | State | What this policy does for it |
+|---|---|---|
+| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.en.md) | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
+| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.en.md) | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
+
 ## Settings — 11
 
 Indented rows are child settings: they only apply when their parent

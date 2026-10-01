@@ -28,6 +28,15 @@ Protège les données de l'entreprise dans les applications Microsoft sur un té
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
+## Conditional Access
+
+Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+
+| Stratégie CA | State | Ce que cette policy fait pour elle |
+|---|---|---|
+| [2070 - GRANT - Mobile Device Access Requirements](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements.fr.md) | disabled | L'app protection policy que demande `compliantApplication`. Sans stratégie affectée, aucune app ne satisfait et l'accès sur iOS et Android est fermé. |
+| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.fr.md) | enabled | L'une des deux façons de satisfaire à cette stratégie : l'app est couverte par une app protection policy. Sans stratégie affectée, il ne reste qu'un appareil conforme. |
+
 ## Propriétés — 86
 
 Une policy de protection d'application n'a pas de settingDefinitionId mais des propriétés fixes. `—` signifie non configuré.

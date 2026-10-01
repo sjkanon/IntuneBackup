@@ -27,6 +27,16 @@ Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord.
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
+## Conditional Access
+
+Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+
+| CA-policy | State | Wat deze policy ervoor doet |
+|---|---|---|
+| [2055 - GRANT - Phishing Resistant MFA for Admins](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins.md) | disabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| [2120 - GRANT - Phishing Resistant MFA for All Users](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users.md) | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| [2125 - GRANT - Phishing Resistant MFA for Rollout Groups](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups.md) | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+
 ## Instellingen — 7
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

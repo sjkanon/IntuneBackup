@@ -51,6 +51,11 @@ Conditional Access-policies uit de CA-Policies-repo (naast deze gekloond als `..
 komen erbij met `--ca ../CA-Policies/controls/ca-controls.json` — nodig voor een eerlijk beeld van
 NIS2 (j), want MFA hangt vrijwel helemaal aan die repo. Zie [`scripts/README.md`](scripts/README.md#de-ca-kant-van-compliancemd).
 
+Bij elke policy die een Conditional Access-policy raakt — compliance, app protection, Windows Hello,
+de SSO-plug-ins — staat in zijn README een sectie **Conditional Access**: welke CA-policies erop
+leunen en wat er daar misgaat als je hem wijzigt. De koppeling wordt bijgehouden in
+`docs/policies.json` van de CA-Policies-repo; hier staat een kopie in `IntuneTemplate/_ca.json`.
+
 **[`extras/`](extras/README.md)** bevat wat bij een complete baseline hoort maar geen van de vijf
 CIPP-policytypes is — per platform, met uitrolinstructies: inschrijvingsprofielen en
 -restricties, app-configuratie, toewijzingsfilters, App Control for Business, remediations,
@@ -130,6 +135,7 @@ IntuneTemplate/        de bron: de policies in CIPP-templateformaat
   _controls.json      vocabulaire voor ISO 27001, NIS2, CIS en NIST CSF
   _licenties.json     welke controls met een licentie in te vullen zijn
   _renames.json       vroegere namen in de tenant (bron voor Rename-BaselinePolicy.ps1)
+  _ca.json            welke CA-policies op een policy leunen (kopie uit de CA-Policies-repo)
   _i18n/              Engelse en Franse vertalingen van de teksten uit de data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/

@@ -28,6 +28,14 @@ Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd.
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
+## Conditional Access
+
+Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+
+| CA-policy | State | Wat deze policy ervoor doet |
+|---|---|---|
+| [2110 - GRANT - Token Protection](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2110__GRANT__Token_Protection.md) | enabled | Token protection werkt alleen in client-versies die gebonden tokens ondersteunen. Een Office-app of OneDrive-sync-client op een te oude versie wordt door deze policy geblokkeerd; deze Intune-policy houdt die clients bij. |
+
 ## Instellingen — 6
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende

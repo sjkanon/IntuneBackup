@@ -1695,7 +1695,7 @@ Conditional Access basé sur le risque figure comme « P1: No » dans le propre 
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (4) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 1100 - BLOCK - HighRisk Users`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users` |
+| Conditional Access (4) | `CXNM - STANDARD - 1090 - BLOCK - HighRisk SignIns`, `CXNM - STANDARD - 1100 - BLOCK - HighRisk Users`, `CXNM - STANDARD - 2010 - GRANT - MediumRisk Signins`, `CXNM - STANDARD - 2020 - GRANT - MediumRisk Users` |
 
 **Sans nouvelle policy, mais avec couverture :** Privileged Identity Management : rôles just-in-time plutôt que permanents, avec approbation et piste d'audit. A.5.3 figure désormais explicitement dans COMPLIANCE.md comme « Mettre en place le RBAC Entra/Intune et PIM — hors de cette baseline ».
 
@@ -1705,11 +1705,11 @@ ISO: `A.5.3 Functiescheiding`, `A.8.2 Speciale toegangsrechten` · NIS2: `(i)`
 
 *séparément, ou dans le cadre de la Defender Suite for Business Premium*
 
-GLOBAL__3060 fait passer les sessions de navigateur par MDCA comme contrôle de session. Sans cette licence, le contrôle de session ne peut pas être sélectionné dans la policy.
+La stratégie CA 3060 fait passer les sessions de navigateur par MDCA comme contrôle de session. Sans cette licence, le contrôle de session ne peut pas être sélectionné dans la policy.
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (1) | `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` |
+| Conditional Access (1) | `CXNM - STANDARD - 3060 - SESSION - Defender for Cloud Apps` |
 
 ### Microsoft Defender Suite for Business Premium
 
@@ -1745,7 +1745,7 @@ La détection des risques sur les identités de charge de travail est un SKU dis
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (1) | `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` |
+| Conditional Access (1) | `CXNM - STANDARD - 1140 - BLOCK - Managed Identities At Risk` |
 
 ### Microsoft Entra Agent ID
 
@@ -1755,7 +1755,7 @@ Les cinq templates d'agent nécessitent des identités d'agent. Ce n'est pas une
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (5) | `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources`, `GLOBAL - 1170 - BLOCK - Risky Agent Users`, `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network`, `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` |
+| Conditional Access (5) | `CXNM - STANDARD - 1150 - BLOCK - Risky Agent Identities`, `CXNM - STANDARD - 1160 - BLOCK - Agent Identities To Agent Resources`, `CXNM - STANDARD - 1170 - BLOCK - Risky Agent Users`, `CXNM - STANDARD - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device` |
 
 ### Ce pour quoi il n'est pas nécessaire de payer
 

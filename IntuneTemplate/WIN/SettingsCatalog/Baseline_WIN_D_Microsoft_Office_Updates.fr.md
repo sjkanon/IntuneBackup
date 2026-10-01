@@ -28,6 +28,14 @@ Le canal de mise à jour d'Office et la rapidité d'installation des mises à jo
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
+## Conditional Access
+
+Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+
+| Stratégie CA | State | Ce que cette policy fait pour elle |
+|---|---|---|
+| [2110 - GRANT - Token Protection](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2110__GRANT__Token_Protection.fr.md) | enabled | La token protection ne fonctionne que dans les versions de client qui prennent en charge les jetons liés. Une app Office ou un client de synchronisation OneDrive trop ancien est bloqué par cette stratégie ; cette stratégie Intune maintient ces clients à jour. |
+
 ## Paramètres — 6
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le

@@ -1695,7 +1695,7 @@ Risk-based Conditional Access staat in Microsofts eigen licentietabel op 'P1: No
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (4) | `GLOBAL - 1090 - BLOCK - HighRisk SignIns`, `GLOBAL - 1100 - BLOCK - HighRisk Users`, `GLOBAL - 2010 - GRANT - MediumRisk Signins`, `GLOBAL - 2020 - GRANT - MediumRisk Users` |
+| Conditional Access (4) | `CXNM - STANDARD - 1090 - BLOCK - HighRisk SignIns`, `CXNM - STANDARD - 1100 - BLOCK - HighRisk Users`, `CXNM - STANDARD - 2010 - GRANT - MediumRisk Signins`, `CXNM - STANDARD - 2020 - GRANT - MediumRisk Users` |
 
 **Zonder nieuwe policy, wel dekking:** Privileged Identity Management: rollen just-in-time in plaats van permanent, met goedkeuring en een auditspoor. A.5.3 staat in COMPLIANCE.md nu expliciet als 'Entra/Intune-RBAC en PIM inrichten — valt buiten deze baseline'.
 
@@ -1705,11 +1705,11 @@ ISO: `A.5.3 Functiescheiding`, `A.8.2 Speciale toegangsrechten` · NIS2: `(i)`
 
 *los, of als onderdeel van de Defender Suite for Business Premium*
 
-GLOBAL__3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.
+CA-policy 3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (1) | `GLOBAL - 3060 - SESSION - Defender for Cloud Apps` |
+| Conditional Access (1) | `CXNM - STANDARD - 3060 - SESSION - Defender for Cloud Apps` |
 
 ### Microsoft Defender Suite for Business Premium
 
@@ -1745,7 +1745,7 @@ Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij 
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (1) | `GLOBAL - 1140 - BLOCK - Managed Identities At Risk` |
+| Conditional Access (1) | `CXNM - STANDARD - 1140 - BLOCK - Managed Identities At Risk` |
 
 ### Microsoft Entra Agent ID
 
@@ -1755,7 +1755,7 @@ De vijf agent-templates vragen agent-identiteiten. Dit is geen aankoopbeslissing
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (5) | `GLOBAL - 1150 - BLOCK - Risky Agent Identities`, `GLOBAL - 1160 - BLOCK - Agent Identities To Agent Resources`, `GLOBAL - 1170 - BLOCK - Risky Agent Users`, `GLOBAL - 1180 - BLOCK - Agent Users Outside Compliant Network`, `GLOBAL - 2160 - GRANT - Agent Users Compliant Device` |
+| Conditional Access (5) | `CXNM - STANDARD - 1150 - BLOCK - Risky Agent Identities`, `CXNM - STANDARD - 1160 - BLOCK - Agent Identities To Agent Resources`, `CXNM - STANDARD - 1170 - BLOCK - Risky Agent Users`, `CXNM - STANDARD - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device` |
 
 ### Waar je niet voor hoeft te betalen
 
