@@ -52,7 +52,6 @@ Les flèches pleines écrivent ; les pointillés ne font que lire.
 | [`IntuneTemplate/`](../IntuneTemplate/README.fr.md) | Les stratégies, par plateforme et type de stratégie, plus les fichiers `_` qui les pilotent | main + scripts d'import | tous les scripts, CIPP |
 | [`export/NativeImport/`](../export/README.fr.md) | Format de restauration, avec affectations | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.fr.md) | La baseline CIPP : packages par stage | `generate-baseline-template.js` | CIPP (import manuel) |
-| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.fr.md) | Standards CIPP pour les paramètres du tenant (incitation MFA, migration passkey) | main | CIPP |
 | [`extras/`](../extras/README.fr.md) | Tout ce qui n'est pas un type de stratégie CIPP, par plateforme : profils et restrictions d'inscription, configuration d'applications, filtres, App Control, remédiations, scripts shell et de plateforme, scripts de conformité, applications Win32 | main | personne automatiquement — déployer selon le README ; `extras/macos/enrollment/` et `extras/macos/shell-scripts/` accompagnent l'export comme sidecar |
 | `docs/` | Documentation : vue d'ensemble, référentiel de conformité, analyse, plan et cette structure | main + `generate-docs.js`, `generate-compliance.js` | lecteurs |
 | [`scripts/`](../scripts/README.fr.md) | Le pipeline : import, contrôle, génération, scripts de tenant | main | workflow GitHub |

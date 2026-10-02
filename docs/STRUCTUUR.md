@@ -52,7 +52,6 @@ Doorgetrokken pijlen schrijven; stippellijnen lezen alleen.
 | [`IntuneTemplate/`](../IntuneTemplate/README.md) | De policies, per platform en policytype, plus de `_`-bestanden die ze sturen | hand + import-scripts | alle scripts, CIPP |
 | [`export/NativeImport/`](../export/README.md) | Restore-formaat, met assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.md) | De CIPP-baseline: pakketten per stage | `generate-baseline-template.js` | CIPP (handmatige import) |
-| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.md) | CIPP-standards voor tenantinstellingen (MFA-nudge, passkey-migratie) | hand | CIPP |
 | [`extras/`](../extras/README.md) | Alles wat geen CIPP-policytype is, per platform: inschrijvingsprofielen en -restricties, app-configuratie, filters, App Control, remediations, shell- en platformscripts, compliance-scripts, Win32-apps | hand | niemand automatisch — uitrollen volgens README; `extras/macos/enrollment/` en `extras/macos/shell-scripts/` gaan als sidecar mee in de export |
 | `docs/` | Documentatie: overzicht, normenkader (compliance), analyse, plan en deze structuur | hand + `generate-docs.js`, `generate-compliance.js` | lezers |
 | [`scripts/`](../scripts/README.md) | De pijplijn: import, controle, generatie, tenantscripts | hand | GitHub-workflow |

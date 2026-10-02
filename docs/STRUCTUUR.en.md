@@ -52,7 +52,6 @@ Solid arrows write; dotted lines only read.
 | [`IntuneTemplate/`](../IntuneTemplate/README.en.md) | The policies, per platform and policy type, plus the `_` files that drive them | hand + import scripts | all scripts, CIPP |
 | [`export/NativeImport/`](../export/README.en.md) | Restore format, with assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.en.md) | The CIPP baseline: packages per stage | `generate-baseline-template.js` | CIPP (manual import) |
-| [`StandardsTemplateV2/`](../StandardsTemplateV2/README.en.md) | CIPP standards for tenant settings (MFA nudge, passkey migration) | hand | CIPP |
 | [`extras/`](../extras/README.en.md) | Everything that is not a CIPP policy type, per platform: enrollment profiles and restrictions, app configuration, filters, App Control, remediations, shell and platform scripts, compliance scripts, Win32 apps | hand | nobody automatically — deploy as described in the README; `extras/macos/enrollment/` and `extras/macos/shell-scripts/` travel with the export as a sidecar |
 | `docs/` | Documentation: overview, compliance framework, analysis, plan and this structure | hand + `generate-docs.js`, `generate-compliance.js` | readers |
 | [`scripts/`](../scripts/README.en.md) | The pipeline: import, checks, generation, tenant scripts | hand | GitHub workflow |
