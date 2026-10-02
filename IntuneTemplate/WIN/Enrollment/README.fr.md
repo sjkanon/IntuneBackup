@@ -163,6 +163,22 @@ actif), Microsoft 365 Apps, Portail d'entreprise.
 [`winget-autoupdate`](../Apps/winget-autoupdate/README.fr.md) n'y a pas sa place : il saute
 volontairement sa première exécution pendant l'OOBE.
 
+**BitLocker 256 bits.** Jusqu'à la mise à jour Windows du 14 septembre 2026 (KB5124012), le
+chiffrement automatique de l'appareil démarrait parfois pendant device preparation avant
+l'arrivée de la stratégie BitLocker. Le disque de l'OS recevait alors la valeur par défaut de
+Windows, XTS-AES 128, au lieu du XTS-AES 256 de
+[BitLocker](../SettingsCatalog/Baseline_WIN_D_BitLocker.fr.md). Cela reste ainsi, car la méthode
+est figée dès que le chiffrement commence. À partir de KB5124012, Windows attend la stratégie
+pendant l'OOBE. Deux conséquences :
+
+- Testez sur la build qui vous est livrée. Une image sans le correctif a encore le problème.
+  Chez Patch My PC, 26200.9550 fonctionnait et 26200.9457 pas encore.
+- Les appareils déjà provisionnés via device preparation peuvent être en 128 bits.
+  [Compliance BitLocker](../CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.fr.md) vérifie
+  seulement si le disque est chiffré, donc ces appareils restent conformes. Vérifiez avec
+  `(Get-BitLockerVolume C:).EncryptionMethod`. Revenir à 256 bits impose de déchiffrer puis de
+  chiffrer à nouveau.
+
 Après l'inscription, le nom de la stratégie figure dans `enrollmentProfileName`. Utilisez-le pour
 un groupe dynamique de tout ce qui est arrivé par device preparation :
 
@@ -264,7 +280,7 @@ fait dans le portail :
 | Élément | Phase | Quand avancer |
 |---|---:|---|
 | Profil classique + ESP | 2 | affecter à un groupe pilote d'appareils enregistrés ; après une préparation réussie (redémarrage compris), au groupe dynamique `[ZTDid]` |
-| Device preparation | 3 | attend de nouveaux appareils sous Windows 11 24H2+, le groupe d'appareils, et la décision sur le flux d'appareils qui reste en classique |
+| Device preparation | 3 | attend de nouveaux appareils sous Windows 11 24H2+ avec KB5124012 ou ultérieur (BitLocker 256 bits), le groupe d'appareils, et la décision sur le flux d'appareils qui reste en classique |
 
 Aucun des deux ne touche les appareils existants. Ils ne s'appliquent qu'au prochain OOBE.
 
@@ -273,6 +289,7 @@ Aucun des deux ne touche les appareils existants. Ils ne s'appliquent qu'au proc
 - [Compare Windows Autopilot device preparation and Windows Autopilot](https://learn.microsoft.com/en-us/autopilot/device-preparation/compare)
 - [Windows Autopilot device preparation requirements](https://learn.microsoft.com/en-us/autopilot/device-preparation/requirements)
 - [What's new in Windows Autopilot device preparation](https://learn.microsoft.com/en-us/autopilot/device-preparation/whats-new)
+- [Autopilot Device Preparation BitLocker 256-bit issue fixed — Patch My PC](https://patchmypc.com/blog/autopilot-device-preparation-bitlocker-256-bit-issue/)
 - [Overview of Windows Autopilot device association](https://learn.microsoft.com/en-us/autopilot/device-preparation/device-association/overview)
 - [windowsAutopilotDeploymentProfile — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-enrollment-windowsautopilotdeploymentprofile?view=graph-rest-beta)
 - [windows10EnrollmentCompletionPageConfiguration — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-onboarding-windows10enrollmentcompletionpageconfiguration?view=graph-rest-beta)

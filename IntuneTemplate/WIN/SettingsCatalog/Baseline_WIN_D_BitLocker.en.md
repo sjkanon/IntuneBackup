@@ -15,7 +15,7 @@ Encrypts the OS drive and, via the retained custom settings, also fixed and remo
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | File | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 
-> OIB only covers the OS disk. The 11 own settings for fixed and removable drives and the pre-boot PIN remain — otherwise encryption of data drives would silently be switched off.
+> OIB only covers the OS disk. The 11 own settings for fixed and removable drives and the pre-boot PIN remain — otherwise encryption of data drives would silently be switched off. Before KB5124012 (14 September 2026), device preparation (Autopilot v2) sometimes put the OS disk on XTS-AES 128 instead of 256, because encryption started before this policy arrived; see WIN/Enrollment/README.en.md.
 
 ## Standards
 

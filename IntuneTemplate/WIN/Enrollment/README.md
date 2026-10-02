@@ -159,6 +159,21 @@ Kandidaten voor de app-lijst uit deze repo:
 365 Apps, Bedrijfsportal. [`winget-autoupdate`](../Apps/winget-autoupdate/README.md) hoort er
 niet in: die slaat zijn eerste run tijdens OOBE bewust over.
 
+**BitLocker 256-bit.** Tot de Windows-update van 14 september 2026 (KB5124012) begon de
+automatische apparaatversleuteling tijdens device preparation soms vóórdat de BitLocker-policy
+binnen was. De OS-schijf kreeg dan de Windows-standaard XTS-AES 128 in plaats van de XTS-AES 256
+uit [BitLocker](../SettingsCatalog/Baseline_WIN_D_BitLocker.md). Dat blijft zo, want de methode
+ligt vast zodra de versleuteling begint. Vanaf KB5124012 wacht Windows tijdens OOBE op de policy.
+Twee gevolgen:
+
+- Test op de build die je geleverd krijgt. Een image zonder de oplossing heeft het probleem nog.
+  Bij Patch My PC werkte 26200.9550 wel en 26200.9457 nog niet.
+- Apparaten die al via device preparation zijn ingericht, kunnen op 128-bit staan.
+  [Compliance BitLocker](../CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.md) kijkt
+  alleen óf de schijf versleuteld is, dus die apparaten blijven compliant. Controleer met
+  `(Get-BitLockerVolume C:).EncryptionMethod`. Terug naar 256-bit kan alleen door te
+  ontsleutelen en opnieuw te versleutelen.
+
 Na de inschrijving staat de policynaam in `enrollmentProfileName`. Daarmee maak je een dynamische
 groep voor alles wat via device preparation binnenkwam:
 
@@ -260,7 +275,7 @@ portal:
 | Onderdeel | Fase | Wanneer verder |
 |---|---:|---|
 | Klassiek profiel + ESP | 2 | toewijzen aan een pilotgroep geregistreerde apparaten; na een geslaagde inrichting (inclusief de herstart) aan de dynamische `[ZTDid]`-groep |
-| Device preparation | 3 | wacht op nieuwe apparaten met Windows 11 24H2+, de apparaatgroep, en het besluit welke apparaatstroom klassiek blijft |
+| Device preparation | 3 | wacht op nieuwe apparaten met Windows 11 24H2+ en KB5124012 of later (BitLocker 256-bit), de apparaatgroep, en het besluit welke apparaatstroom klassiek blijft |
 
 Geen van beide raakt bestaande apparaten. Ze gelden pas bij de volgende OOBE.
 
@@ -269,6 +284,7 @@ Geen van beide raakt bestaande apparaten. Ze gelden pas bij de volgende OOBE.
 - [Compare Windows Autopilot device preparation and Windows Autopilot](https://learn.microsoft.com/en-us/autopilot/device-preparation/compare)
 - [Windows Autopilot device preparation requirements](https://learn.microsoft.com/en-us/autopilot/device-preparation/requirements)
 - [What's new in Windows Autopilot device preparation](https://learn.microsoft.com/en-us/autopilot/device-preparation/whats-new)
+- [Autopilot Device Preparation BitLocker 256-bit issue fixed — Patch My PC](https://patchmypc.com/blog/autopilot-device-preparation-bitlocker-256-bit-issue/)
 - [Overview of Windows Autopilot device association](https://learn.microsoft.com/en-us/autopilot/device-preparation/device-association/overview)
 - [windowsAutopilotDeploymentProfile — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-enrollment-windowsautopilotdeploymentprofile?view=graph-rest-beta)
 - [windows10EnrollmentCompletionPageConfiguration — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-onboarding-windows10enrollmentcompletionpageconfiguration?view=graph-rest-beta)

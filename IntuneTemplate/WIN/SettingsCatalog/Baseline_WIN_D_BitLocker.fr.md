@@ -15,7 +15,7 @@ Chiffre le disque du système d'exploitation et, via les paramètres personnalis
 | Source | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | Fichier | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 
-> OIB ne couvre que le disque de l'OS. Les 11 paramètres propres pour les lecteurs fixes et amovibles et le PIN de pré-démarrage sont conservés — sinon le chiffrement des lecteurs de données serait désactivé sans que personne ne le remarque.
+> OIB ne couvre que le disque de l'OS. Les 11 paramètres propres pour les lecteurs fixes et amovibles et le PIN de pré-démarrage sont conservés — sinon le chiffrement des lecteurs de données serait désactivé sans que personne ne le remarque. Avant KB5124012 (14 septembre 2026), device preparation (Autopilot v2) plaçait parfois le disque de l'OS en XTS-AES 128 au lieu de 256, car le chiffrement démarrait avant l'arrivée de cette stratégie ; voir WIN/Enrollment/README.fr.md.
 
 ## Normes
 

@@ -15,7 +15,7 @@ Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en ve
 | Bron | OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk) |
 | Bestand | [`Baseline_WIN_D_BitLocker.json`](Baseline_WIN_D_BitLocker.json) |
 
-> OIB dekt alleen de OS-schijf. De 11 eigen instellingen voor vaste en verwisselbare schijven en de preboot-PIN blijven staan — anders zou versleuteling van datadrives stilzwijgend uitgaan.
+> OIB dekt alleen de OS-schijf. De 11 eigen instellingen voor vaste en verwisselbare schijven en de preboot-PIN blijven staan — anders zou versleuteling van datadrives stilzwijgend uitgaan. Device preparation (Autopilot v2) zette de OS-schijf vóór KB5124012 (14 september 2026) soms op XTS-AES 128 in plaats van 256, omdat versleuteling startte voordat deze policy binnen was; zie WIN/Enrollment/README.md.
 
 ## Normen
 

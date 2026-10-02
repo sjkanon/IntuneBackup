@@ -153,6 +153,21 @@ Candidates for the app list from this repo:
 Microsoft 365 Apps, Company Portal. [`winget-autoupdate`](../Apps/winget-autoupdate/README.en.md)
 does not belong there: it deliberately skips its first run during OOBE.
 
+**BitLocker 256-bit.** Until the Windows update of 14 September 2026 (KB5124012), automatic
+device encryption during device preparation sometimes started before the BitLocker policy had
+arrived. The OS disk then got the Windows default XTS-AES 128 instead of the XTS-AES 256 from
+[BitLocker](../SettingsCatalog/Baseline_WIN_D_BitLocker.en.md). It stays that way, because the
+method is fixed once encryption starts. From KB5124012 on, Windows waits for the policy during
+OOBE. Two consequences:
+
+- Test on the build you get delivered. An image without the fix still has the problem. At
+  Patch My PC, 26200.9550 worked and 26200.9457 did not yet.
+- Devices already provisioned through device preparation may be on 128-bit.
+  [Compliance BitLocker](../CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) only
+  checks whether the disk is encrypted, so those devices stay compliant. Check with
+  `(Get-BitLockerVolume C:).EncryptionMethod`. Going back to 256-bit requires decrypting and
+  encrypting again.
+
 After enrollment the policy name is in `enrollmentProfileName`. Use it for a dynamic group of
 everything that came in through device preparation:
 
@@ -249,7 +264,7 @@ wrong group changes how every new device is set up. That is why assigning happen
 | Part | Phase | When to move on |
 |---|---:|---|
 | Classic profile + ESP | 2 | assign to a pilot group of registered devices; after a successful setup (including the restart), to the dynamic `[ZTDid]` group |
-| Device preparation | 3 | waits for new devices with Windows 11 24H2+, the device group, and the decision which device stream stays classic |
+| Device preparation | 3 | waits for new devices with Windows 11 24H2+ and KB5124012 or later (BitLocker 256-bit), the device group, and the decision which device stream stays classic |
 
 Neither touches existing devices. They only apply at the next OOBE.
 
@@ -258,6 +273,7 @@ Neither touches existing devices. They only apply at the next OOBE.
 - [Compare Windows Autopilot device preparation and Windows Autopilot](https://learn.microsoft.com/en-us/autopilot/device-preparation/compare)
 - [Windows Autopilot device preparation requirements](https://learn.microsoft.com/en-us/autopilot/device-preparation/requirements)
 - [What's new in Windows Autopilot device preparation](https://learn.microsoft.com/en-us/autopilot/device-preparation/whats-new)
+- [Autopilot Device Preparation BitLocker 256-bit issue fixed — Patch My PC](https://patchmypc.com/blog/autopilot-device-preparation-bitlocker-256-bit-issue/)
 - [Overview of Windows Autopilot device association](https://learn.microsoft.com/en-us/autopilot/device-preparation/device-association/overview)
 - [windowsAutopilotDeploymentProfile — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-enrollment-windowsautopilotdeploymentprofile?view=graph-rest-beta)
 - [windows10EnrollmentCompletionPageConfiguration — Graph beta](https://learn.microsoft.com/en-us/graph/api/resources/intune-onboarding-windows10enrollmentcompletionpageconfiguration?view=graph-rest-beta)
