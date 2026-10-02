@@ -23,6 +23,14 @@ const NOTIFY = "DefaultFullAccessWithNotificationPolicy";
 const ADMIN_ONLY = "AdminOnlyAccessPolicy";
 
 /**
+ * Waar de meldingen heen gaan: een CIPP custom variable, geen vast adres. Eén keer globaal
+ * zetten in CIPP (Settings → Custom Variables, *All Tenants*) en per tenant overschrijven waar
+ * het anders moet; CIPP vervangt hem in baselinewaarden per tenant. Zonder die variabele faalt
+ * de remediatie van de drie standards die hem gebruiken.
+ */
+const ALERT_MAIL = "%SecurityAlertMail%";
+
+/**
  * Bovenop de 53 standaardextensies die CIPP altijd meeneemt: scripts, OneNote-bijlagen,
  * schijfimages en SVG — de vormen waarin phishing nu binnenkomt. Een greep uit de CIS
  * 2.1.11-lijst; Office-bestanden en archieven (zip, rar, 7z) bewust niet, die zijn te gewoon.
@@ -36,7 +44,8 @@ const DEFENDER_BASELINE = {
     "anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user " +
     "quarantine notifications every four hours. Custom policies at Microsoft Strict level, so " +
     "CIPP can detect and repair drift. Do not assign the Standard/Strict preset policies in the " +
-    "same tenant: they take precedence. Assign the tenants before you run it.",
+    "same tenant: they take precedence (scripts/Set-DefenderOfficeTenant.ps1 turns them off). " +
+    "Needs the CIPP custom variable %SecurityAlertMail% for the admin alerts. Assign the tenants before you run it.",
   standards: [
     // De digest: 4 uur is het kortste wat Exchange toestaat (anders dagelijks of wekelijks).
     { standard: "GlobalQuarantineNotifications", variables: { NotificationInterval: "04:00:00" } },
@@ -123,11 +132,23 @@ const DEFENDER_BASELINE = {
         FileTypeAction: "Reject",
         OptionalFileTypes: EXTRA_FILE_TYPES.join(","),
         QuarantineTag: ADMIN_ONLY,
-        // Een beheeradres verschilt per tenant; wie het wil zet het in CIPP per tenant aan.
-        EnableInternalSenderAdminNotifications: false,
-        InternalSenderAdminAddress: "",
+        // CIS 2.1.3: beheer hoort het als een interne afzender malware verstuurt — dan is een account gekaapt.
+        EnableInternalSenderAdminNotifications: true,
+        InternalSenderAdminAddress: ALERT_MAIL,
         EnableExternalSenderAdminNotifications: false,
         ExternalSenderAdminAddress: "",
+      },
+    },
+    // Melding aan beheer als een gebruiker vrijgave vraagt van een bericht dat hij niet zelf mag vrijgeven.
+    { standard: "QuarantineRequestAlert", variables: { State: "enabled", NotifyUser: ALERT_MAIL, AllowExtraAddresses: true } },
+    // CIS 2.1.6: melding en een kopie van verdachte uitgaande mail — het eerste teken van een gekaapte mailbox.
+    {
+      standard: "OutBoundSpamAlert",
+      variables: {
+        NotifyOutboundSpam: true,
+        OutboundSpamContact: ALERT_MAIL,
+        BccSuspiciousOutboundMail: true,
+        BccSuspiciousOutboundContact: ALERT_MAIL,
       },
     },
     { standard: "TeamsZAP", variables: {} },
@@ -146,4 +167,4 @@ const DEFENDER_BASELINE = {
   ],
 };
 
-module.exports = { DEFENDER_BASELINE, EXTRA_FILE_TYPES };
+module.exports = { DEFENDER_BASELINE, EXTRA_FILE_TYPES, ALERT_MAIL };

@@ -105,18 +105,29 @@ CISA ScubaGear accept that as equivalent.
 | Attachment filter | 53 default extensions plus scripts, OneNote, VHD and SVG | wider than Strict (part of CIS 2.1.11) |
 | Outbound | 500 / 1000 / 1000, block | Strict: 400 / 800 / 800 |
 | Teams | ZAP, file type and URL checks in chats | — |
+| Admin notifications | malware from an internal sender, outbound spam (with copy), release requests — to `%SecurityAlertMail%` | not in Strict (CIS 2.1.3, 2.1.6) |
 
-**In the tenant:**
+**Before the first run:** set the custom variable `SecurityAlertMail` in CIPP (Settings → Custom
+Variables) — globally for *All Tenants*, with its own value per tenant where it must differ. The
+admin notifications go there; without the variable those three standards fail. In the baseline
+editor the `QuarantineRequestAlert` field only accepts an email address: if you save that field
+there again, the editor wants a real address instead of the token.
 
-- **Do not assign a preset.** A Standard or Strict preset takes precedence over these policies —
-  and CIPP still reports *compliant*. Turn them off in Defender → Email & collaboration →
-  Policies → Preset security policies.
-- **Add VIPs** to the anti-phishing policy (impersonation, max. 350) — that is per tenant.
-- **Notifications that need an address** are off, because the address differs per tenant: admin
-  notification on malware, outbound spam (CIS 2.1.6) and the `QuarantineRequestAlert` for release
-  requests. Turn them on per tenant in CIPP.
-- If a `CIPP Default …` policy already exists, CIPP adopts it instead of creating a second one; it
-  keeps the old name.
+**Per tenant, with [`scripts/Set-DefenderOfficeTenant.ps1`](../scripts/Set-DefenderOfficeTenant.ps1)**
+— two things CIPP has no standard for:
+
+- **Presets off.** A Standard or Strict preset takes precedence over these policies — and CIPP
+  still reports *compliant*. The script turns the preset rules off; you can turn them back on in
+  Defender.
+- **VIPs** from the Entra group `SEC-VIP` go into the anti-phishing policy (impersonation, max.
+  350). The group is the source: whoever leaves it also leaves the list. CIPP does not compare that
+  list, so it does not overwrite it either. Run the script again when the group changes.
+
+Exceptions per tenant — a different address, an extension a customer needs — are made in CIPP on
+the baseline, not in this file.
+
+If a `CIPP Default …` policy already exists, CIPP adopts it instead of creating a second one; it
+keeps the old name.
 
 Importing works as for `Baseline.json`: with the button. Updating: change
 `defender-office.js` and run the script.

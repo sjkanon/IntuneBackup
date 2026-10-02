@@ -112,19 +112,30 @@ acceptés, au niveau Strict. CIS (2.1.x), ORCA et CISA ScubaGear l'acceptent com
 | Filtre de pièces jointes | 53 extensions par défaut plus scripts, OneNote, VHD et SVG | plus large que Strict (partie de CIS 2.1.11) |
 | Sortant | 500 / 1000 / 1000, blocage | Strict : 400 / 800 / 800 |
 | Teams | ZAP, contrôle des types de fichiers et des URL dans les chats | — |
+| Notifications admin | malware d'un expéditeur interne, spam sortant (avec copie), demandes de libération — vers `%SecurityAlertMail%` | absent de Strict (CIS 2.1.3, 2.1.6) |
 
-**Dans le tenant :**
+**Avant la première exécution :** définissez dans CIPP la custom variable `SecurityAlertMail`
+(Settings → Custom Variables) — globalement pour *All Tenants*, avec une valeur propre par tenant
+là où elle doit différer. Les notifications admin y sont envoyées ; sans la variable, ces trois
+standards échouent. Dans l'éditeur de baseline, le champ de `QuarantineRequestAlert` n'accepte
+qu'une adresse e-mail : si vous y enregistrez à nouveau ce champ, l'éditeur exige une vraie adresse
+au lieu du token.
 
-- **N'affectez pas de preset.** Un preset Standard ou Strict passe avant ces policies — et CIPP
-  indique toujours *compliant*. Désactivez-les dans Defender → Email & collaboration → Policies →
-  Preset security policies.
-- **Ajoutez les VIP** à la policy anti-hameçonnage (usurpation d'identité, max. 350) — c'est par
-  tenant.
-- **Les notifications qui exigent une adresse** sont désactivées, car l'adresse diffère par tenant :
-  notification admin en cas de malware, spam sortant (CIS 2.1.6) et la `QuarantineRequestAlert`
-  pour les demandes de libération. Activez-les par tenant dans CIPP.
-- Si une policy `CIPP Default …` existe déjà, CIPP la reprend au lieu d'en créer une seconde ; elle
-  garde son ancien nom.
+**Par tenant, avec [`scripts/Set-DefenderOfficeTenant.ps1`](../scripts/Set-DefenderOfficeTenant.ps1)**
+— deux choses pour lesquelles CIPP n'a pas de standard :
+
+- **Presets désactivés.** Un preset Standard ou Strict passe avant ces policies — et CIPP indique
+  toujours *compliant*. Le script désactive les règles des presets ; on peut les réactiver dans
+  Defender.
+- **Les VIP** du groupe Entra `SEC-VIP` vont dans la policy anti-hameçonnage (usurpation
+  d'identité, max. 350). Le groupe est la source : qui le quitte quitte aussi la liste. CIPP ne
+  compare pas cette liste et ne l'écrase donc pas. Relancez le script quand le groupe change.
+
+Les exceptions par tenant — une autre adresse, une extension dont un client a besoin — se font
+dans CIPP sur la baseline, pas dans ce fichier.
+
+Si une policy `CIPP Default …` existe déjà, CIPP la reprend au lieu d'en créer une seconde ; elle
+garde son ancien nom.
 
 L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : modifiez
 `defender-office.js` et lancez le script.

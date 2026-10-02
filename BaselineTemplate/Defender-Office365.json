@@ -1,7 +1,7 @@
 {
   "TemplateType": "BaselineTemplate",
   "templateName": "CXNM - Standard - Defender for Office 365",
-  "description": "Email and collaboration protection as CIPP standards: Safe Links, Safe Attachments, anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user quarantine notifications every four hours. Custom policies at Microsoft Strict level, so CIPP can detect and repair drift. Do not assign the Standard/Strict preset policies in the same tenant: they take precedence. Assign the tenants before you run it.",
+  "description": "Email and collaboration protection as CIPP standards: Safe Links, Safe Attachments, anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user quarantine notifications every four hours. Custom policies at Microsoft Strict level, so CIPP can detect and repair drift. Do not assign the Standard/Strict preset policies in the same tenant: they take precedence (scripts/Set-DefenderOfficeTenant.ps1 turns them off). Needs the CIPP custom variable %SecurityAlertMail% for the admin alerts. Assign the tenants before you run it.",
   "assignedTenants": [
     {
       "label": "Exported Template",
@@ -131,10 +131,35 @@
             "FileTypeAction": "Reject",
             "OptionalFileTypes": "cpl,hlp,inf,ins,isp,js,jse,one,onepkg,ps1,psm1,svg,vhd,vhdx,xlam",
             "QuarantineTag": "AdminOnlyAccessPolicy",
-            "EnableInternalSenderAdminNotifications": false,
-            "InternalSenderAdminAddress": "",
+            "EnableInternalSenderAdminNotifications": true,
+            "InternalSenderAdminAddress": "%SecurityAlertMail%",
             "EnableExternalSenderAdminNotifications": false,
             "ExternalSenderAdminAddress": ""
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "QuarantineRequestAlert",
+          "instance": "QuarantineRequestAlert",
+          "variables": {
+            "State": "enabled",
+            "NotifyUser": "%SecurityAlertMail%",
+            "AllowExtraAddresses": true
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "OutBoundSpamAlert",
+          "instance": "OutBoundSpamAlert",
+          "variables": {
+            "NotifyOutboundSpam": true,
+            "OutboundSpamContact": "%SecurityAlertMail%",
+            "BccSuspiciousOutboundMail": true,
+            "BccSuspiciousOutboundContact": "%SecurityAlertMail%"
           },
           "remediateEnabled": true,
           "alertEnabled": true,

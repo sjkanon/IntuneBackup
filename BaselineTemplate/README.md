@@ -107,18 +107,28 @@ ORCA en CISA ScubaGear accepteren dat als gelijkwaardig.
 | Bijlagefilter | 53 standaardextensies plus scripts, OneNote, VHD en SVG | ruimer dan Strict (deel van CIS 2.1.11) |
 | Uitgaand | 500 / 1000 / 1000, blokkeren | Strict: 400 / 800 / 800 |
 | Teams | ZAP, bestandstype- en URL-controle in chats | — |
+| Meldingen aan beheer | malware van een interne afzender, uitgaande spam (met kopie), vrijgaveverzoeken — naar `%SecurityAlertMail%` | niet in Strict (CIS 2.1.3, 2.1.6) |
 
-**In de tenant:**
+**Vóór de eerste run:** zet in CIPP de custom variable `SecurityAlertMail` (Settings → Custom
+Variables) — globaal voor *All Tenants*, met een eigen waarde per tenant waar het anders moet.
+De meldingen aan beheer gaan daarheen; zonder de variabele falen die drie standards. In de
+baseline-editor accepteert het veld van `QuarantineRequestAlert` alleen een e-mailadres: bewaar
+je dat veld daar opnieuw, dan wil de editor een echt adres in plaats van het token.
 
-- **Geen preset toewijzen.** Een Standard- of Strict-preset gaat vóór deze policies — en CIPP
-  rapporteert dan nog steeds *compliant*. Zet ze uit in Defender → Email & collaboration →
-  Policies → Preset security policies.
-- **VIP's toevoegen** aan de anti-phishingpolicy (impersonatie, max. 350) — dat is per tenant.
-- **Meldingen die een adres nodig hebben** staan uit, want het adres verschilt per tenant:
-  beheermelding bij malware, uitgaande spam (CIS 2.1.6) en de `QuarantineRequestAlert` voor
-  vrijgaveverzoeken. Zet ze per tenant in CIPP aan.
-- Bestaat er al een `CIPP Default …`-policy, dan neemt CIPP die over in plaats van een tweede te
-  maken; de naam blijft dan de oude.
+**Per tenant, met [`scripts/Set-DefenderOfficeTenant.ps1`](../scripts/Set-DefenderOfficeTenant.ps1)**
+— twee dingen waar CIPP geen standard voor heeft:
+
+- **Presets uit.** Een Standard- of Strict-preset gaat vóór deze policies — en CIPP rapporteert
+  dan nog steeds *compliant*. Het script zet de preset-regels uit; aanzetten kan weer in Defender.
+- **VIP's** uit de Entra-groep `SEC-VIP` komen in de anti-phishingpolicy (impersonatie, max. 350).
+  De groep is de bron: wie eruit gaat, gaat ook uit de lijst. CIPP vergelijkt die lijst niet en
+  overschrijft hem dus ook niet. Draai het script opnieuw als de groep verandert.
+
+Uitzonderingen per tenant — een ander adres, een extensie die een klant nodig heeft — maak je in
+CIPP op de baseline, niet in dit bestand.
+
+Bestaat er al een `CIPP Default …`-policy, dan neemt CIPP die over in plaats van een tweede te
+maken; de naam blijft dan de oude.
 
 Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: pas
 `defender-office.js` aan en draai het script.

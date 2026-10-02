@@ -62,8 +62,8 @@ Hoe je de CA-kant wél in CI krijgt staat in [ANALYSE.md](../docs/ANALYSE.md#ope
 
 ## PowerShell
 
-Alle vier vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
-`Microsoft.Graph.Authentication`. Draai ze eerst met `-WhatIf`.
+Alle vijf vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
+`Microsoft.Graph.Authentication`; `Set-DefenderOfficeTenant.ps1` ook om `ExchangeOnlineManagement`. Draai ze eerst met `-WhatIf`.
 
 | Script | Wat het doet |
 |---|---|
@@ -72,6 +72,7 @@ Alle vier vragen om PowerShell 7 (`pwsh`) of Windows PowerShell 5.1, en om
 | [`New-MacOSEnrollmentPolicy.ps1`](New-MacOSEnrollmentPolicy.ps1) | Maakt een macOS ADE-inschrijfprofiel aan onder een ABM-token uit een JSON in [`IntuneTemplate/MAC/Enrollment/ade-profile/`](../IntuneTemplate/MAC/Enrollment/ade-profile/README.md), of exporteert de bestaande profielen naar JSON (`-Export`). Wijst bewust niet toe. |
 | [`New-WindowsAutopilotPolicy.ps1`](New-WindowsAutopilotPolicy.ps1) | Maakt een Autopilot deployment profile, Enrollment Status Page of device preparation-policy aan uit een JSON in [`IntuneTemplate/WIN/Enrollment/`](../IntuneTemplate/WIN/Enrollment/README.md); voor device preparation ook de apparaatgroep met de Intune Provisioning Client als eigenaar en het membership target. `-Export` haalt ze op als JSON. Wijst bewust niet toe. |
 
+| [`Set-DefenderOfficeTenant.ps1`](Set-DefenderOfficeTenant.ps1) | De twee tenantstappen van [`Defender-Office365.json`](../BaselineTemplate/README.md#defender-office365json--e-mailbeveiliging) waar CIPP geen standard voor heeft: zet de Standard/Strict-presets uit en vult de VIP-lijst van de anti-phishingpolicy uit de groep `SEC-VIP`. `-VipGroupName`, `-SkipPresets`, `-SkipVip`. |
 Nog te bouwen: `Get-BaselinePolicyState.ps1`, de tenant-zijdige tegenhanger van
 `check-scope.js` — zie [PLAN.md](../docs/PLAN.md#nog-te-bouwen-scriptsget-baselinepolicystateps1).
 

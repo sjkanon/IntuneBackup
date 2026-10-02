@@ -63,8 +63,8 @@ décrit dans [ANALYSE.fr.md](../docs/ANALYSE.fr.md#points-ouverts), point ouvert
 
 ## PowerShell
 
-Les quatre nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi que
-`Microsoft.Graph.Authentication`. Exécutez-les d'abord avec `-WhatIf`.
+Les cinq nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi que
+`Microsoft.Graph.Authentication` ; `Set-DefenderOfficeTenant.ps1` aussi `ExchangeOnlineManagement`. Exécutez-les d'abord avec `-WhatIf`.
 
 | Script | Ce qu'il fait |
 |---|---|
@@ -73,6 +73,7 @@ Les quatre nécessitent PowerShell 7 (`pwsh`) ou Windows PowerShell 5.1, ainsi q
 | [`New-MacOSEnrollmentPolicy.ps1`](New-MacOSEnrollmentPolicy.ps1) | Crée un profil d'inscription ADE macOS sous un jeton ABM à partir d'un JSON de [`IntuneTemplate/MAC/Enrollment/ade-profile/`](../IntuneTemplate/MAC/Enrollment/ade-profile/README.fr.md), ou exporte les profils existants en JSON (`-Export`). N'affecte délibérément rien. |
 | [`New-WindowsAutopilotPolicy.ps1`](New-WindowsAutopilotPolicy.ps1) | Crée un profil de déploiement Autopilot, une Enrollment Status Page ou une stratégie device preparation à partir d'un JSON de [`IntuneTemplate/WIN/Enrollment/`](../IntuneTemplate/WIN/Enrollment/README.fr.md) ; pour device preparation, aussi le groupe d'appareils détenu par l'Intune Provisioning Client et la cible d'appartenance. `-Export` les récupère en JSON. N'affecte délibérément rien. |
 
+| [`Set-DefenderOfficeTenant.ps1`](Set-DefenderOfficeTenant.ps1) | Les deux étapes tenant de [`Defender-Office365.json`](../BaselineTemplate/README.fr.md#defender-office365json--protection-de-la-messagerie) pour lesquelles CIPP n'a pas de standard : désactive les presets Standard/Strict et remplit la liste VIP de la policy anti-hameçonnage depuis le groupe `SEC-VIP`. `-VipGroupName`, `-SkipPresets`, `-SkipVip`. |
 Reste à construire : `Get-BaselinePolicyState.ps1`, le pendant côté tenant de
 `check-scope.js` — voir [PLAN.fr.md](../docs/PLAN.fr.md#reste-à-construire-scriptsget-baselinepolicystateps1).
 
