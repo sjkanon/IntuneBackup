@@ -4,7 +4,9 @@
  *
  * - `Baseline.json`: the Intune baseline, packages per stage from the manifest;
  * - `Defender-Office365.json`: email protection (Safe Links, Safe Attachments, anti-spam,
- *   quarantine notifications) as Exchange/Defender standards, from `lib/defender-office.js`.
+ *   quarantine notifications) as Exchange/Defender standards, from `lib/defender-office.js`;
+ * - `Windows-Updates.json`: Windows Update rings, Edge and Microsoft 365 Apps updates as their
+ *   own packages, plus Winget-AutoUpdate as an application template, from `lib/windows-updates.js`.
  *
  * `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there — deploying is
  * done by a **baseline**: a set of *standards* spread over stages that tenants move through.
@@ -41,6 +43,7 @@ const fs = require("fs");
 const path = require("path");
 const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/templates");
 const { DEFENDER_BASELINE } = require("./lib/defender-office");
+const { UPDATES_PREFIX, UPDATE_PACKAGES, UPDATES_BASELINE, WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -49,12 +52,15 @@ const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const OUT_DIR = path.join(REPO_ROOT, "BaselineTemplate");
 const OUT_PATH = path.join(OUT_DIR, "Baseline.json");
 const DEFENDER_OUT_PATH = path.join(OUT_DIR, "Defender-Office365.json");
+const UPDATES_OUT_PATH = path.join(OUT_DIR, "Windows-Updates.json");
+const APP_TEMPLATE_DIR = path.join(REPO_ROOT, "AppTemplate");
 
 const TEMPLATE_NAME = "CXNM - Standard - Baseline";
 
 /** `CXNM - Standard - Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
 function instanceSuffix(pkg) {
-  return pkg.slice(PACKAGE_PREFIX.length).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const prefix = pkg.startsWith(UPDATES_PREFIX) ? UPDATES_PREFIX : PACKAGE_PREFIX;
+  return pkg.slice(prefix.length).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 function standardFor(entry) {
@@ -69,7 +75,7 @@ function standardFor(entry) {
       intuneTemplatePackage: entry.pakket,
       assignTo: entry.opties.assignTo,
       customGroup: entry.opties.customGroup,
-      excludeGroup: "",
+      excludeGroup: entry.opties.excludeGroup || "",
       assignmentFilter: "",
       assignmentFilterType: "include",
       verifyAssignments: entry.opties.assignTo !== "On",
@@ -82,7 +88,8 @@ function standardFor(entry) {
 }
 
 function build(manifest, assignments) {
-  const plan = packagePlan(manifest, assignments).filter((p) => p.pakket);
+  // De update-pakketten staan in Windows-Updates.json, niet hier.
+  const plan = packagePlan(manifest, assignments).filter((p) => p.pakket.startsWith(PACKAGE_PREFIX));
 
   const stages = BASELINE_STAGES.map((stage, i) => ({
     name: stage.name,
@@ -150,6 +157,51 @@ function buildDefender() {
   };
 }
 
+/**
+ * De update-baseline: stage 1 rolt de update-pakketten uit, stage 2 Winget-AutoUpdate als
+ * app-template. Het app-template staat in `referencedTemplates`, zodat de import-knop het uit
+ * deze repo meeneemt vóór de baseline zelf (Import-CIPPBaselineTemplate) — anders verwijst
+ * stage 2 naar een GUID die in CIPP nog niet bestaat.
+ */
+function buildUpdates(manifest, assignments) {
+  const plan = packagePlan(manifest, assignments).filter((p) => UPDATE_PACKAGES[p.pakket]);
+  const missing = Object.keys(UPDATE_PACKAGES).filter((pkg) => !plan.some((p) => p.pakket === pkg));
+  if (missing.length > 0) throw new Error(`update-pakket(ten) zonder policies: ${missing.join(", ")}`);
+
+  const appFile = path.join(APP_TEMPLATE_DIR, WAU_TEMPLATE_FILE);
+  if (!fs.existsSync(appFile)) throw new Error(`AppTemplate/${WAU_TEMPLATE_FILE} ontbreekt. Draai eerst: node scripts/generate-app-templates.js`);
+  const appRow = JSON.parse(fs.readFileSync(appFile, "utf8"));
+  const app = { guid: appRow.GUID, name: JSON.parse(appRow.JSON).Displayname };
+
+  const [nu, wau] = UPDATES_BASELINE.stages;
+  return {
+    TemplateType: "BaselineTemplate",
+    templateName: UPDATES_BASELINE.templateName,
+    description: UPDATES_BASELINE.description,
+    assignedTenants: [{ label: "Exported Template", value: "Exported Template", type: "Tenant" }],
+    excludedTenants: [],
+    alertEmails: "",
+    alertWebhookUrl: "",
+    stages: [
+      { ...nu, standards: plan.map(standardFor) },
+      {
+        ...wau,
+        standards: [
+          {
+            standard: "IntuneAppTemplateDeploy",
+            instance: "IntuneAppTemplateDeploy",
+            variables: { templateIds: [{ label: app.name, value: app.guid }] },
+            remediateEnabled: true,
+            alertEnabled: true,
+            alertOnRemediate: false,
+          },
+        ],
+      },
+    ],
+    referencedTemplates: [{ path: `AppTemplate/${WAU_TEMPLATE_FILE}`, displayName: app.name, partition: "AppTemplate" }],
+  };
+}
+
 /** Schrijft `content` naar `outPath`, of meldt alleen dat hij achterloopt. Geeft false bij een achterstand in --check. */
 function writeOrCheck(outPath, content, checkOnly) {
   const rel = path.relative(REPO_ROOT, outPath).split(path.sep).join("/");
@@ -183,6 +235,17 @@ function main() {
       console.log(`    ${s.variables.intuneTemplatePackage.padEnd(30)}${target}`);
     }
   }
+  const updates = buildUpdates(manifest, assignments);
+  console.log(`  ${updates.templateName}`);
+  for (const stage of updates.stages) {
+    console.log(`    ${stage.name}`);
+    for (const s of stage.standards) {
+      const v = s.variables;
+      const label = v.intuneTemplatePackage || v.templateIds.map((t) => t.label).join(", ");
+      const target = v.intuneTemplatePackage ? `${v.customGroup || v.assignTo}${v.excludeGroup ? ` (zonder ${v.excludeGroup})` : ""}` : "";
+      console.log(`      ${label.padEnd(44)}${target}`);
+    }
+  }
   const defender = buildDefender();
   console.log(`  ${defender.templateName}`);
   for (const s of defender.stages[0].standards) console.log(`    ${s.standard}`);
@@ -191,6 +254,7 @@ function main() {
   const ok = [
     writeOrCheck(OUT_PATH, content, checkOnly),
     writeOrCheck(DEFENDER_OUT_PATH, JSON.stringify(defender, null, 2) + "\n", checkOnly),
+    writeOrCheck(UPDATES_OUT_PATH, JSON.stringify(updates, null, 2) + "\n", checkOnly),
   ];
   if (ok.includes(false)) process.exit(1);
 }

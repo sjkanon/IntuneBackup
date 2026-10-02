@@ -14,6 +14,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { UPDATE_PACKAGES, UPDATE_PACKAGE_BY_TARGET } = require("./windows-updates");
 
 const PLATFORMS = {
   WIN: { label: "Windows", expectedPlatforms: ["windows10", "windows10X"] },
@@ -159,6 +160,8 @@ function assignmentTargets(assignment) {
  */
 function packageFor(entry, assignment) {
   if (!entry || entry.fase === undefined) return null;
+  // De update-policies horen in hun eigen baseline, zie lib/windows-updates.js.
+  if (UPDATE_PACKAGE_BY_TARGET[entry.target]) return UPDATE_PACKAGE_BY_TARGET[entry.target];
   if (entry.fase === 1) {
     const targets = assignmentTargets(assignment);
     if (targets.length !== 1) return null;
@@ -183,6 +186,7 @@ const PILOT_GROUP = "SEC-Baseline-Pilot";
 
 function deployOptionsForPackage(pkg) {
   if (!pkg) return null;
+  if (UPDATE_PACKAGES[pkg]) return UPDATE_PACKAGES[pkg];
   if (pkg === PACKAGE_PREFIX + "Devices") return { assignTo: "AllDevices", customGroup: "" };
   if (pkg === PACKAGE_PREFIX + "Users") return { assignTo: "allLicensedUsers", customGroup: "" };
   if (pkg === PACKAGE_PREFIX + "Wacht") return { assignTo: "On", customGroup: "" };
@@ -236,7 +240,7 @@ function assignmentText(assignment, entry) {
 function assignmentForPackage(pkg) {
   const opties = deployOptionsForPackage(pkg);
   if (!opties) return "wordt niet uitgerold";
-  if (opties.assignTo === "AllDevices") return "Assign to all devices";
+  if (opties.assignTo === "AllDevices") return opties.excludeGroup ? `Assign to all devices, exclude ${opties.excludeGroup.split(",").join(", ")}` : "Assign to all devices";
   if (opties.assignTo === "allLicensedUsers") return "Assign to all users";
   if (opties.assignTo === "customGroup") return `Custom group: ${opties.customGroup}`;
   if (PACKAGE_WITHOUT_GROUP.has(pkg)) return "Do not assign (koppelen aan een ADE-token in Intune)";
@@ -263,6 +267,8 @@ const BASELINE_STAGES = [
 /** In welke stage dit pakket hoort (1-based), of `null` als het niet uitrolt. */
 function stageForPackage(pkg) {
   if (!pkg) return null;
+  // Stage 1 van Windows-Updates.json; Winget-AutoUpdate in stage 2 is geen pakket.
+  if (UPDATE_PACKAGES[pkg]) return 1;
   if (pkg === PACKAGE_PREFIX + "Pilot") return 2;
   if (pkg === PACKAGE_PREFIX + "Wacht") return 3;
   return 1;
@@ -285,7 +291,10 @@ function packagePlan(manifest, assignments) {
     const order = [PACKAGE_PREFIX + "Devices", PACKAGE_PREFIX + "Users", PACKAGE_PREFIX + "Pilot", PACKAGE_PREFIX + "Wacht"];
     const i = order.indexOf(pkg);
     if (i >= 0) return i;
-    return pkg === "" ? order.length + 1 : order.length;
+    // Na de Baseline-pakketten, in de volgorde van lib/windows-updates.js.
+    const u = Object.keys(UPDATE_PACKAGES).indexOf(pkg);
+    if (u >= 0) return order.length + 1 + u;
+    return pkg === "" ? order.length + 1 + Object.keys(UPDATE_PACKAGES).length : order.length;
   };
   return [...plan.values()].sort((a, b) => rank(a.pakket) - rank(b.pakket) || a.pakket.localeCompare(b.pakket));
 }

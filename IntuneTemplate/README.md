@@ -74,7 +74,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 
 | `Package` | In CIPP toewijzen aan | Stage | Policies |
 |---|---|---:|---:|
-| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 70 |
+| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 67 |
 | `CXNM - Standard - Baseline-Users` | Assign to all users | 1 | 32 |
 | `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 42 |
 | `CXNM - Standard - Baseline-Wacht` | Do not assign | 3 | 26 |
@@ -85,12 +85,17 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `CXNM - Standard - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
 | `CXNM - Standard - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
 | `CXNM - Standard - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-Ring3` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `CXNM - Standard - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-Devices` | Assign to all devices | 1 | 2 |
 | *(leeg)* | wordt niet uitgerold | – | 15 |
 
 De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
-de CIPP-baseline die deze pakketten uitrolt.
+de CIPP-baseline die deze pakketten uitrolt. De `Updates-`pakketten rolt een eigen baseline uit,
+[`BaselineTemplate/Windows-Updates.json`](../BaselineTemplate/README.md#windows-updatesjson--patchen).
 
 Fase 5 krijgt bewust een lege waarde: CIPP toont alleen pakketten met een gevulde
 `Package`, dus die policies staan in geen enkel pakket. Los kiezen kan nog steeds — ze

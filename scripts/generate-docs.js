@@ -796,7 +796,8 @@ function overviewReadme(templates, ctx) {
     ...V.t({
       nl: [
         "De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),",
-        "de CIPP-baseline die deze pakketten uitrolt.",
+        "de CIPP-baseline die deze pakketten uitrolt. De `Updates-`pakketten rolt een eigen baseline uit,",
+        "[`BaselineTemplate/Windows-Updates.json`](../BaselineTemplate/README.md#windows-updatesjson--patchen).",
         "",
         "Fase 5 krijgt bewust een lege waarde: CIPP toont alleen pakketten met een gevulde",
         "`Package`, dus die policies staan in geen enkel pakket. Los kiezen kan nog steeds — ze",
@@ -804,7 +805,8 @@ function overviewReadme(templates, ctx) {
       ],
       en: [
         "The stage column is the stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),",
-        "the CIPP baseline that deploys these packages.",
+        "the CIPP baseline that deploys these packages. The `Updates-` packages are deployed by a baseline of",
+        "their own, [`BaselineTemplate/Windows-Updates.json`](../BaselineTemplate/README.en.md#windows-updatesjson--patching).",
         "",
         "Phase 5 deliberately gets an empty value: CIPP only shows packages with a filled-in",
         "`Package`, so those policies are in no package at all. They can still be picked individually —",
@@ -812,7 +814,8 @@ function overviewReadme(templates, ctx) {
       ],
       fr: [
         "La colonne stage est le stage dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),",
-        "la baseline CIPP qui déploie ces packages.",
+        "la baseline CIPP qui déploie ces packages. Les packages `Updates-` sont déployés par une baseline à",
+        "part, [`BaselineTemplate/Windows-Updates.json`](../BaselineTemplate/README.fr.md#windows-updatesjson--correctifs).",
         "",
         "La phase 5 reçoit volontairement une valeur vide : CIPP n'affiche que les packages dont le `Package`",
         "est renseigné, ces policies ne figurent donc dans aucun package. On peut toujours les choisir une à une —",

@@ -102,7 +102,7 @@ jobs:
           branch: auto/regenerate-baseline
           delete-branch: true
           add-paths: |
-            BaselineTemplate/Baseline.json
+            BaselineTemplate/*.json
             export/NativeImport/**
             docs/OVERZICHT*.md
             docs/COMPLIANCE*.md

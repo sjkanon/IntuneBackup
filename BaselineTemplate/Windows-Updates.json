@@ -1,0 +1,130 @@
+{
+  "TemplateType": "BaselineTemplate",
+  "templateName": "CXNM - Standard - Windows Updates",
+  "description": "Patching for Windows devices: Windows Update rings (Ring 3 on all devices except the ring groups SEC-Update-Ring1 and SEC-Update-Ring2), Microsoft Edge and Microsoft 365 Apps update policies, and Winget-AutoUpdate for every other app winget knows, two weeks after the rings are compliant. Package membership follows the repo. Assign the tenants before you run it.",
+  "assignedTenants": [
+    {
+      "label": "Exported Template",
+      "value": "Exported Template",
+      "type": "Tenant"
+    }
+  ],
+  "excludedTenants": [],
+  "alertEmails": "",
+  "alertWebhookUrl": "",
+  "stages": [
+    {
+      "name": "Nu",
+      "logic": "and",
+      "conditions": [],
+      "standards": [
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#ring3",
+          "variables": {
+            "intuneTemplatePackage": "CXNM - Standard - Updates-Ring3",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "SEC-Update-Ring1,SEC-Update-Ring2",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-update-ring1",
+          "variables": {
+            "intuneTemplatePackage": "CXNM - Standard - Updates-SEC-Update-Ring1",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Update-Ring1",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-update-ring2",
+          "variables": {
+            "intuneTemplatePackage": "CXNM - Standard - Updates-SEC-Update-Ring2",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Update-Ring2",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#devices",
+          "variables": {
+            "intuneTemplatePackage": "CXNM - Standard - Updates-Devices",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    },
+    {
+      "name": "Winget-AutoUpdate",
+      "logic": "and",
+      "conditions": [
+        {
+          "type": "success"
+        },
+        {
+          "type": "time",
+          "days": 2,
+          "unit": "weeks"
+        }
+      ],
+      "standards": [
+        {
+          "standard": "IntuneAppTemplateDeploy",
+          "instance": "IntuneAppTemplateDeploy",
+          "variables": {
+            "templateIds": [
+              {
+                "label": "CXNM - Standard - Winget-AutoUpdate - All Devices",
+                "value": "ed2d0ba5-67ed-5a7c-9589-4bff927f3ee3"
+              }
+            ]
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    }
+  ],
+  "referencedTemplates": [
+    {
+      "path": "AppTemplate/Winget-AutoUpdate-AllDevices.json",
+      "displayName": "CXNM - Standard - Winget-AutoUpdate - All Devices",
+      "partition": "AppTemplate"
+    }
+  ]
+}

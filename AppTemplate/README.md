@@ -8,6 +8,7 @@ CIPP-**applicatietemplates**: Win32-apps die CIPP zelf in een tenant zet, zonder
 | Bestand | App | Bron |
 |---|---|---|
 | [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
+| [`Winget-AutoUpdate-AllDevices.json`](Winget-AutoUpdate-AllDevices.json) | dezelfde app, toegewezen aan alle apparaten — voor de baseline [`Windows-Updates.json`](../BaselineTemplate/README.md#windows-updatesjson--patchen) | idem |
 
 ## Hoe het werkt
 

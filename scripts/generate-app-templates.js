@@ -11,8 +11,11 @@
  * The file is a CIPP table row (`PartitionKey: AppTemplate`), so Tools → Community Repos →
  * this repo → the file → Import writes it straight into the templates table. Deploy it from
  * Applications → Application Templates, or with the standard *Deploy Intune Application
- * Template*. The template assigns nothing (`AssignTo: On`): the assignment is chosen when it is
- * deployed, because a fase-2 app goes to the pilot group first.
+ * Template*. `Winget-AutoUpdate.json` assigns nothing (`AssignTo: On`): the assignment is chosen
+ * when it is deployed, because a fase-2 app goes to the pilot group first.
+ * `Winget-AutoUpdate-AllDevices.json` is the same app assigned to all devices, for the baseline
+ * `BaselineTemplate/Windows-Updates.json`: the standard takes the assignment from the template
+ * and has no field of its own for it (see lib/windows-updates.js).
  *
  * The scripts stay the source: this script only reads them. It refuses to build when the
  * pinned version, hash or product code differ between the scripts and New-WAUPackage.ps1, or
@@ -31,6 +34,7 @@ const crypto = require("crypto");
 const REPO_ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(REPO_ROOT, "AppTemplate");
 const WAU_DIR = path.join(REPO_ROOT, "IntuneTemplate", "WIN", "Apps", "winget-autoupdate");
+const { WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
 
 /** Same form as in import-oib.js: a UUIDv5-shaped GUID, stable per name. */
 function stableGuid(name) {
@@ -62,7 +66,11 @@ function assertNoTokens(script, file) {
   if (m) throw new Error(`${file}: contains ${m[0]}, which CIPP would replace per tenant`);
 }
 
-function wauTemplate() {
+/**
+ * `assignTo` is CIPP's value: `On` (do not assign) or `AllDevices`. Both variants deploy an app
+ * with the same name, so a tenant only ever gets one WAU app: the standard sees it as present.
+ */
+function wauTemplate({ file, displayName, assignTo, description }) {
   const install = readScript(WAU_DIR, "Install-WAU.ps1");
   const uninstall = readScript(WAU_DIR, "Uninstall-WAU.ps1");
   const detect = readScript(WAU_DIR, "Detect-WAU.ps1");
@@ -99,19 +107,18 @@ function wauTemplate() {
     runAs32Bit: false,
     enforceSignatureCheck: false,
     InstallationIntent: false,
-    AssignTo: "On",
+    AssignTo: assignTo,
   };
 
-  const displayName = "CXNM - Standard - Winget-AutoUpdate";
   const guid = stableGuid(displayName);
   const json = {
     Displayname: displayName,
-    Description: `Winget-AutoUpdate ${version} as a CIPP custom application. Phase 2: deploy to the pilot group first, then all Windows devices.`,
+    Description: `Winget-AutoUpdate ${version} as a CIPP custom application. ${description}`,
     GUID: guid,
     Apps: [{ appType: "win32ScriptApp", appName, config: JSON.stringify(config) }],
   };
   return {
-    file: "Winget-AutoUpdate.json",
+    file,
     row: { PartitionKey: "AppTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(json) },
   };
 }
@@ -119,7 +126,21 @@ function wauTemplate() {
 function main() {
   const check = process.argv.includes("--check");
   let stale = 0;
-  for (const { file, row } of [wauTemplate()]) {
+  const templates = [
+    wauTemplate({
+      file: "Winget-AutoUpdate.json",
+      displayName: "CXNM - Standard - Winget-AutoUpdate",
+      assignTo: "On",
+      description: "Phase 2: deploy to the pilot group first, then all Windows devices.",
+    }),
+    wauTemplate({
+      file: WAU_TEMPLATE_FILE,
+      displayName: "CXNM - Standard - Winget-AutoUpdate - All Devices",
+      assignTo: "AllDevices",
+      description: "Assigned to all devices (required); deployed by the baseline CXNM - Standard - Windows Updates.",
+    }),
+  ];
+  for (const { file, row } of templates) {
     const target = path.join(OUT_DIR, file);
     const content = JSON.stringify(row, null, 2) + "\n";
     const current = fs.existsSync(target) ? fs.readFileSync(target, "utf8").replace(/\r\n/g, "\n") : null;

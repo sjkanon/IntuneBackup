@@ -74,7 +74,7 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 
 | `Package` | Affecter dans CIPP à | Stage | Policies |
 |---|---|---:|---:|
-| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 70 |
+| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 67 |
 | `CXNM - Standard - Baseline-Users` | Assign to all users | 1 | 32 |
 | `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 42 |
 | `CXNM - Standard - Baseline-Wacht` | Do not assign | 3 | 26 |
@@ -85,12 +85,17 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 | `CXNM - Standard - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
 | `CXNM - Standard - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
 | `CXNM - Standard - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 2 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-Ring3` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `CXNM - Standard - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `CXNM - Standard - Updates-Devices` | Assign to all devices | 1 | 2 |
 | *(vide)* | non déployé | – | 15 |
 
 La colonne stage est le stage dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
-la baseline CIPP qui déploie ces packages.
+la baseline CIPP qui déploie ces packages. Les packages `Updates-` sont déployés par une baseline à
+part, [`BaselineTemplate/Windows-Updates.json`](../BaselineTemplate/README.fr.md#windows-updatesjson--correctifs).
 
 La phase 5 reçoit volontairement une valeur vide : CIPP n'affiche que les packages dont le `Package`
 est renseigné, ces policies ne figurent donc dans aucun package. On peut toujours les choisir une à une —

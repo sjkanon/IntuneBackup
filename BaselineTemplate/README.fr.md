@@ -7,7 +7,7 @@ et quand un tenant passe à l'étape suivante.
 
 | | |
 |---|---|
-| Fichiers | [`Baseline.json`](Baseline.json) (Intune) et [`Defender-Office365.json`](Defender-Office365.json) (e-mail) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Fichiers | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail) et [`Windows-Updates.json`](Windows-Updates.json) (correctifs) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Reconnu à | `TemplateType: "BaselineTemplate"` et au nom de dossier `BaselineTemplate/` |
 | Nom dans CIPP | `Baseline` |
 
@@ -146,6 +146,58 @@ garde son ancien nom.
 
 L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : modifiez
 `defender-office.js` et lancez le script.
+
+## Windows-Updates.json — correctifs
+
+Une troisième baseline, distincte (`CXNM - Standard - Windows Updates`), pour tout ce qui met à
+jour un appareil Windows : Windows lui-même, Edge, Microsoft 365 Apps et les autres applications
+via winget. Séparée de `Baseline.json` parce que tout tenant a besoin des correctifs — y compris
+un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition se trouve dans
+[`scripts/lib/windows-updates.js`](../scripts/lib/windows-updates.js).
+
+| Étape | Standard | Affectation | Ce qu'il fait |
+|---:|---|---|---|
+| 1 · Immédiat | `CXNM - Standard - Updates-Ring3` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
+| 1 · Immédiat | `CXNM - Standard - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
+| 1 · Immédiat | `CXNM - Standard - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
+| 1 · Immédiat | `CXNM - Standard - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) et Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) |
+| 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | tous les appareils (Required) | Winget-AutoUpdate : met à jour chaque jour toute application connue de winget, sauf la [liste d'exclusion](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
+
+L'étape 2 commence lorsque tout ce qui relève de l'étape 1 est conforme **et** que deux semaines
+se sont écoulées — le même seuil que l'étape pilote de `Baseline.json`.
+
+**Ring 3 exclut les groupes d'anneau.** Sans cette exclusion, un appareil de `SEC-Update-Ring1`
+reçoit deux anneaux de mise à jour ; Intune signale alors un Conflict et n'applique les
+paramètres contestés (report, échéance) via aucun des deux. Un paquet partage son affectation avec
+tous ses membres : c'est pourquoi Ring 3 est un paquet à part et que l'exclusion ne touche pas Edge
+et Office.
+
+**Ces stratégies ont été retirées de `Baseline.json`.** Elles se trouvaient dans `Baseline-Devices`
+et `Baseline-SEC-Update-Ring1/2`. Un tenant sous `Baseline.json` a donc *aussi* besoin de cette
+baseline, sinon plus personne ne surveille les stratégies de mise à jour (elles restent en place :
+CIPP ne supprime rien). Les anneaux de mise à jour Defender, *Update Reports and Telemetry* et
+*Google Chrome Updates* restent dans `Baseline.json`.
+
+**Winget-AutoUpdate arrive comme template d'application.** Le standard vérifie seulement qu'une
+application de ce nom existe et prend l'affectation dans le template lui-même — il n'a pas de
+champ propre pour cela. Il déploie donc
+[`AppTemplate/Winget-AutoUpdate-AllDevices.json`](../AppTemplate/Winget-AutoUpdate-AllDevices.json),
+la même application que `Winget-AutoUpdate.json` mais affectée à tous les appareils. Le bouton
+d'import récupère ce template dans ce dépôt avant la baseline elle-même (`referencedTemplates`).
+Deux conséquences :
+
+- Si WAU est déjà dans le tenant (par exemple déployé à la main vers le groupe pilote), le
+  standard le considère comme présent et ne modifie pas l'affectation. Étendez-la vous-même à tous
+  les appareils.
+- Si quelqu'un retire l'affectation, CIPP ne le voit pas : l'application existe toujours.
+
+**Avant la première exécution :** les groupes `SEC-Update-Ring1` et `SEC-Update-Ring2` doivent
+exister (vides, c'est permis), sinon CIPP ne peut ni les affecter ni les exclure. Licence : Intune
+uniquement.
+
+L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : une autre répartition
+dans `windows-updates.js`, les paramètres eux-mêmes dans les stratégies de `IntuneTemplate/WIN/` ;
+lancez ensuite `node scripts/set-packages.js` et le script ci-dessous.
 
 ## Mise à jour
 

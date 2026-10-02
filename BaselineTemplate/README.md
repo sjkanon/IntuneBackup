@@ -7,7 +7,7 @@ wanneer een tenant doorschuift.
 
 | | |
 |---|---|
-| Bestanden | [`Baseline.json`](Baseline.json) (Intune) en [`Defender-Office365.json`](Defender-Office365.json) (e-mail) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Bestanden | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail) en [`Windows-Updates.json`](Windows-Updates.json) (patchen) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Herkend aan | `TemplateType: "BaselineTemplate"` én de mapnaam `BaselineTemplate/` |
 | Naam in CIPP | `Baseline` |
 
@@ -139,6 +139,53 @@ maken; de naam blijft dan de oude.
 
 Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: pas
 `defender-office.js` aan en draai het script.
+
+## Windows-Updates.json — patchen
+
+Een derde, losse baseline (`CXNM - Standard - Windows Updates`) voor alles wat een
+Windows-apparaat bijwerkt: Windows zelf, Edge, Microsoft 365 Apps en de overige apps via winget.
+Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — ook een tenant die
+(nog) niet de hele Intune-baseline krijgt. De indeling staat in
+[`scripts/lib/windows-updates.js`](../scripts/lib/windows-updates.js).
+
+| Stage | Standard | Toewijzing | Wat het doet |
+|---:|---|---|---|
+| 1 · Nu | `CXNM - Standard - Updates-Ring3` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
+| 1 · Nu | `CXNM - Standard - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
+| 1 · Nu | `CXNM - Standard - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
+| 1 · Nu | `CXNM - Standard - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) en Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) |
+| 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | alle apparaten (Required) | Winget-AutoUpdate: werkt dagelijks elke app bij die winget kent, behalve de [uitsluitingslijst](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
+
+Stage 2 begint als alles uit stage 1 compliant is **en** er twee weken voorbij zijn — dezelfde
+drempel als de pilotstage van `Baseline.json`.
+
+**Ring 3 sluit de ringgroepen uit.** Zonder die uitsluiting krijgt een apparaat in
+`SEC-Update-Ring1` twee updaterings; Intune meldt dan een Conflict en past de omstreden
+instellingen (uitstel, deadline) via geen van beide toe. Een pakket deelt zijn toewijzing met al
+zijn leden, daarom is Ring 3 een pakket apart en zit de uitsluiting niet op Edge en Office.
+
+**Deze policies zijn uit `Baseline.json` gehaald.** Ze zaten in `Baseline-Devices` en
+`Baseline-SEC-Update-Ring1/2`. Een tenant met `Baseline.json` heeft deze baseline dus óók nodig,
+anders bewaakt niemand de updatepolicies meer (ze blijven wel staan: CIPP verwijdert niets). De
+Defender-updaterings, *Update Reports and Telemetry* en *Google Chrome Updates* blijven in
+`Baseline.json`.
+
+**Winget-AutoUpdate komt binnen als app-template.** De standard kijkt alleen of er een app met die
+naam bestaat en haalt de toewijzing uit het template zelf — een eigen veld heeft hij niet. Daarom
+rolt hij [`AppTemplate/Winget-AutoUpdate-AllDevices.json`](../AppTemplate/Winget-AutoUpdate-AllDevices.json)
+uit, dezelfde app als `Winget-AutoUpdate.json` maar toegewezen aan alle apparaten. De importknop
+haalt dat template uit deze repo mee vóór de baseline zelf (`referencedTemplates`). Twee gevolgen:
+
+- Staat WAU al in de tenant (bijvoorbeeld met de hand naar de pilotgroep), dan ziet de standard
+  hem als aanwezig en verandert hij de toewijzing niet. Breid die dan zelf uit naar alle apparaten.
+- Haalt iemand de toewijzing weg, dan ziet CIPP dat niet: de app bestaat nog.
+
+**Vóór de eerste run:** de groepen `SEC-Update-Ring1` en `SEC-Update-Ring2` moeten bestaan (leeg
+mag), anders kan CIPP ze niet toewijzen en ook niet uitsluiten. Licentie: alleen Intune.
+
+Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: een andere indeling in
+`windows-updates.js`, de instellingen zelf in de policies in `IntuneTemplate/WIN/`; draai daarna
+`node scripts/set-packages.js` en het script hieronder.
 
 ## Bijwerken
 
