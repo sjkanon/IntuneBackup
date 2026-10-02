@@ -1,0 +1,179 @@
+{
+  "TemplateType": "BaselineTemplate",
+  "templateName": "CXNM - Standard - Defender for Office 365",
+  "description": "Email and collaboration protection as CIPP standards: Safe Links, Safe Attachments, anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user quarantine notifications every four hours. Custom policies at Microsoft Strict level, so CIPP can detect and repair drift. Do not assign the Standard/Strict preset policies in the same tenant: they take precedence. Assign the tenants before you run it.",
+  "assignedTenants": [
+    {
+      "label": "Exported Template",
+      "value": "Exported Template",
+      "type": "Tenant"
+    }
+  ],
+  "excludedTenants": [],
+  "alertEmails": "",
+  "alertWebhookUrl": "",
+  "stages": [
+    {
+      "name": "Nu",
+      "logic": "and",
+      "conditions": [],
+      "standards": [
+        {
+          "standard": "GlobalQuarantineNotifications",
+          "instance": "GlobalQuarantineNotifications",
+          "variables": {
+            "NotificationInterval": "04:00:00"
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "SafeLinksPolicy",
+          "instance": "SafeLinksPolicy",
+          "variables": {
+            "name": "CXNM - Standard - Safe Links",
+            "AllowClickThrough": false,
+            "DisableUrlRewrite": false,
+            "EnableOrganizationBranding": false,
+            "DoNotRewriteUrls": ""
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "SafeAttachmentPolicy",
+          "instance": "SafeAttachmentPolicy",
+          "variables": {
+            "name": "CXNM - Standard - Safe Attachments",
+            "SafeAttachmentAction": "Block",
+            "QuarantineTag": "AdminOnlyAccessPolicy",
+            "Redirect": false,
+            "RedirectAddress": ""
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "AtpPolicyForO365",
+          "instance": "AtpPolicyForO365",
+          "variables": {
+            "AllowSafeDocsOpen": false
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "AntiPhishPolicy",
+          "instance": "AntiPhishPolicy",
+          "variables": {
+            "name": "CXNM - Standard - Anti-Phishing",
+            "PhishThresholdLevel": "3",
+            "EnableFirstContactSafetyTips": true,
+            "EnableSimilarUsersSafetyTips": true,
+            "EnableSimilarDomainsSafetyTips": true,
+            "EnableUnusualCharactersSafetyTips": true,
+            "AuthenticationFailAction": "MoveToJmf",
+            "SpoofQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "MailboxIntelligenceProtectionAction": "Quarantine",
+            "MailboxIntelligenceQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "TargetedUserProtectionAction": "Quarantine",
+            "TargetedUserQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "TargetedDomainProtectionAction": "Quarantine",
+            "TargetedDomainQuarantineTag": "DefaultFullAccessWithNotificationPolicy"
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "SpamFilterPolicy",
+          "instance": "SpamFilterPolicy",
+          "variables": {
+            "name": "CXNM - Standard - Anti-Spam",
+            "SpamAction": "Quarantine",
+            "SpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "HighConfidenceSpamAction": "Quarantine",
+            "HighConfidenceSpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "PhishSpamAction": "Quarantine",
+            "PhishQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
+            "HighConfidencePhishQuarantineTag": "AdminOnlyAccessPolicy",
+            "BulkSpamAction": "MoveToJmf",
+            "BulkQuarantineTag": "DefaultFullAccessPolicy",
+            "BulkThreshold": 6,
+            "BulkMovesEnabled": "",
+            "IncreaseScoreWithImageLinks": false,
+            "IncreaseScoreWithBizOrInfoUrls": false,
+            "MarkAsSpamFramesInHtml": false,
+            "MarkAsSpamObjectTagsInHtml": false,
+            "MarkAsSpamEmbedTagsInHtml": false,
+            "MarkAsSpamFormTagsInHtml": false,
+            "MarkAsSpamWebBugsInHtml": false,
+            "MarkAsSpamSensitiveWordList": false,
+            "EnableLanguageBlockList": false,
+            "LanguageBlockList": "",
+            "EnableRegionBlockList": false,
+            "RegionBlockList": "",
+            "AllowedSenderDomains": ""
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "MalwareFilterPolicy",
+          "instance": "MalwareFilterPolicy",
+          "variables": {
+            "name": "CXNM - Standard - Anti-Malware",
+            "FileTypeAction": "Reject",
+            "OptionalFileTypes": "cpl,hlp,inf,ins,isp,js,jse,one,onepkg,ps1,psm1,svg,vhd,vhdx,xlam",
+            "QuarantineTag": "AdminOnlyAccessPolicy",
+            "EnableInternalSenderAdminNotifications": false,
+            "InternalSenderAdminAddress": "",
+            "EnableExternalSenderAdminNotifications": false,
+            "ExternalSenderAdminAddress": ""
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "TeamsZAP",
+          "instance": "TeamsZAP",
+          "variables": {},
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "TeamsChatProtection",
+          "instance": "TeamsChatProtection",
+          "variables": {
+            "FileTypeCheck": "Enabled",
+            "UrlReputationCheck": "Enabled"
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "EXOOutboundSpamLimits",
+          "instance": "EXOOutboundSpamLimits",
+          "variables": {
+            "recipientLimitExternalPerHour": 500,
+            "recipientLimitInternalPerHour": 1000,
+            "recipientLimitPerDay": 1000,
+            "actionWhenThresholdReached": "BlockUser"
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    }
+  ],
+  "referencedTemplates": []
+}

@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 /**
- * Generates `BaselineTemplate/Baseline.json`: the CIPP baseline itself, as a file.
+ * Generates the CIPP baselines in `BaselineTemplate/`, as files:
+ *
+ * - `Baseline.json`: the Intune baseline, packages per stage from the manifest;
+ * - `Defender-Office365.json`: email protection (Safe Links, Safe Attachments, anti-spam,
+ *   quarantine notifications) as Exchange/Defender standards, from `lib/defender-office.js`.
  *
  * `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there — deploying is
  * done by a **baseline**: a set of *standards* spread over stages that tenants move through.
@@ -30,12 +34,13 @@
  *
  * Usage:
  *   node scripts/generate-baseline-template.js            writes the file
- *   node scripts/generate-baseline-template.js --check     writes nothing, exit 1 if it is out of date
+ *   node scripts/generate-baseline-template.js --check     writes nothing, exit 1 if one is out of date
  */
 
 const fs = require("fs");
 const path = require("path");
 const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/templates");
+const { DEFENDER_BASELINE } = require("./lib/defender-office");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -43,6 +48,7 @@ const MANIFEST_PATH = path.join(TEMPLATE_DIR, "_manifest.json");
 const ASSIGNMENTS_PATH = path.join(TEMPLATE_DIR, "_assignments.json");
 const OUT_DIR = path.join(REPO_ROOT, "BaselineTemplate");
 const OUT_PATH = path.join(OUT_DIR, "Baseline.json");
+const DEFENDER_OUT_PATH = path.join(OUT_DIR, "Defender-Office365.json");
 
 const TEMPLATE_NAME = "CXNM - Standard - Baseline";
 
@@ -110,6 +116,58 @@ function build(manifest, assignments) {
   };
 }
 
+/**
+ * De Defender-baseline: één stage, want hier wacht niets op iets anders. Een eigen
+ * `templateName` omdat CIPP bij een her-import op (repo, templateName) ontdubbelt; met de
+ * Intune-baseline in één bestand zou elke tenant met Intune ook Defender-licenties nodig hebben.
+ */
+function buildDefender() {
+  return {
+    TemplateType: "BaselineTemplate",
+    templateName: DEFENDER_BASELINE.templateName,
+    description: DEFENDER_BASELINE.description,
+    assignedTenants: [{ label: "Exported Template", value: "Exported Template", type: "Tenant" }],
+    excludedTenants: [],
+    alertEmails: "",
+    alertWebhookUrl: "",
+    stages: [
+      {
+        name: "Nu",
+        logic: "and",
+        conditions: [],
+        // Eén instance per standard; zonder `#` is de standardnaam zelf de instance.
+        standards: DEFENDER_BASELINE.standards.map((s) => ({
+          standard: s.standard,
+          instance: s.standard,
+          variables: s.variables,
+          remediateEnabled: true,
+          alertEnabled: true,
+          alertOnRemediate: false,
+        })),
+      },
+    ],
+    referencedTemplates: [],
+  };
+}
+
+/** Schrijft `content` naar `outPath`, of meldt alleen dat hij achterloopt. Geeft false bij een achterstand in --check. */
+function writeOrCheck(outPath, content, checkOnly) {
+  const rel = path.relative(REPO_ROOT, outPath).split(path.sep).join("/");
+  const before = fs.existsSync(outPath) ? fs.readFileSync(outPath, "utf8") : null;
+  if (before === content) {
+    console.log(`${rel} is bij.`);
+    return true;
+  }
+  if (checkOnly) {
+    console.error(`${rel} loopt achter. Draai: node scripts/generate-baseline-template.js`);
+    return false;
+  }
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  fs.writeFileSync(outPath, content);
+  console.log(`${rel} geschreven.`);
+  return true;
+}
+
 function main() {
   const checkOnly = process.argv.includes("--check");
 
@@ -118,7 +176,6 @@ function main() {
   const baseline = build(manifest, assignments);
   const content = JSON.stringify(baseline, null, 2) + "\n";
 
-  const rel = path.relative(REPO_ROOT, OUT_PATH).split(path.sep).join("/");
   for (const stage of baseline.stages) {
     console.log(`  ${stage.name}`);
     for (const s of stage.standards) {
@@ -126,19 +183,16 @@ function main() {
       console.log(`    ${s.variables.intuneTemplatePackage.padEnd(30)}${target}`);
     }
   }
+  const defender = buildDefender();
+  console.log(`  ${defender.templateName}`);
+  for (const s of defender.stages[0].standards) console.log(`    ${s.standard}`);
+  console.log("");
 
-  const before = fs.existsSync(OUT_PATH) ? fs.readFileSync(OUT_PATH, "utf8") : null;
-  if (before === content) {
-    console.log(`\n${rel} is bij.`);
-    return;
-  }
-  if (checkOnly) {
-    console.error(`\n${rel} loopt achter. Draai: node scripts/generate-baseline-template.js`);
-    process.exit(1);
-  }
-  fs.mkdirSync(OUT_DIR, { recursive: true });
-  fs.writeFileSync(OUT_PATH, content);
-  console.log(`\n${rel} geschreven.`);
+  const ok = [
+    writeOrCheck(OUT_PATH, content, checkOnly),
+    writeOrCheck(DEFENDER_OUT_PATH, JSON.stringify(defender, null, 2) + "\n", checkOnly),
+  ];
+  if (ok.includes(false)) process.exit(1);
 }
 
 main();

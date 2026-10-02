@@ -7,7 +7,7 @@ et quand un tenant passe à l'étape suivante.
 
 | | |
 |---|---|
-| Fichier | [`Baseline.json`](Baseline.json) — généré par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Fichiers | [`Baseline.json`](Baseline.json) (Intune) et [`Defender-Office365.json`](Defender-Office365.json) (e-mail) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Reconnu à | `TemplateType: "BaselineTemplate"` et au nom de dossier `BaselineTemplate/` |
 | Nom dans CIPP | `Baseline` |
 
@@ -82,6 +82,52 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
 - **Lier les profils ADE.** `CXNM - Standard - Baseline-ADE-token` n'est volontairement pas affecté : un profil
   d'inscription macOS dépend d'un jeton ADE, pas d'un groupe Entra, et vous choisissez l'un des
   deux par jeton.
+
+## Defender-Office365.json — protection de la messagerie
+
+Une deuxième baseline, distincte (`CXNM - Standard - Defender for Office 365`) : Safe Links, Safe
+Attachments, anti-hameçonnage, anti-spam et anti-malware, Defender pour SharePoint/OneDrive/Teams,
+et la notification de quarantaine aux utilisateurs **toutes les 4 heures** — le plus court
+qu'Exchange permette. Séparée de `Baseline.json` car elle exige Defender for Office 365 Plan 1
+(inclus dans Business Premium) : on veut pouvoir l'affecter à d'autres tenants. Les valeurs et
+leur justification se trouvent dans
+[`scripts/lib/defender-office.js`](../scripts/lib/defender-office.js).
+
+**Volontairement pas de preset policies.** Les presets Standard/Strict de Microsoft ne sont pas
+modifiables et CIPP ne peut pas les mesurer — la dérive passe alors inaperçue. Cette baseline crée,
+avec les standards de CIPP, des policies personnalisées en priorité 0 pour tous les domaines
+acceptés, au niveau Strict. CIS (2.1.x), ORCA et CISA ScubaGear l'acceptent comme équivalent.
+
+| | Valeur | Écart par rapport à Strict |
+|---|---|---|
+| Notification de quarantaine | toutes les 4 heures | — |
+| Safe Links | e-mail, Teams et Office ; analyse avant remise ; aussi en interne ; pas de clic direct | — |
+| Safe Attachments | Block ; SharePoint/OneDrive/Teams activés | — |
+| Spam, spam à haut niveau de confiance, hameçonnage | quarantaine, l'utilisateur est notifié et libère lui-même | — |
+| Hameçonnage à haut niveau de confiance, malware | quarantaine, administrateurs uniquement | — |
+| Bulk | Courrier indésirable dès BCL 6 | Strict : quarantaine dès 5 — rend la notification illisible |
+| Seuil d'hameçonnage | 3 | Strict : 4 — beaucoup de faux positifs |
+| Usurpation (spoof) | Courrier indésirable | Strict : quarantaine ; ORCA-112 recommande Junk |
+| Usurpation d'identité, mailbox intelligence | quarantaine avec notification | — |
+| Filtre de pièces jointes | 53 extensions par défaut plus scripts, OneNote, VHD et SVG | plus large que Strict (partie de CIS 2.1.11) |
+| Sortant | 500 / 1000 / 1000, blocage | Strict : 400 / 800 / 800 |
+| Teams | ZAP, contrôle des types de fichiers et des URL dans les chats | — |
+
+**Dans le tenant :**
+
+- **N'affectez pas de preset.** Un preset Standard ou Strict passe avant ces policies — et CIPP
+  indique toujours *compliant*. Désactivez-les dans Defender → Email & collaboration → Policies →
+  Preset security policies.
+- **Ajoutez les VIP** à la policy anti-hameçonnage (usurpation d'identité, max. 350) — c'est par
+  tenant.
+- **Les notifications qui exigent une adresse** sont désactivées, car l'adresse diffère par tenant :
+  notification admin en cas de malware, spam sortant (CIS 2.1.6) et la `QuarantineRequestAlert`
+  pour les demandes de libération. Activez-les par tenant dans CIPP.
+- Si une policy `CIPP Default …` existe déjà, CIPP la reprend au lieu d'en créer une seconde ; elle
+  garde son ancien nom.
+
+L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : modifiez
+`defender-office.js` et lancez le script.
 
 ## Mise à jour
 
