@@ -102,9 +102,9 @@ acceptés, au niveau Strict. CIS (2.1.x), ORCA et CISA ScubaGear l'acceptent com
 |---|---|---|
 | Notification de quarantaine | toutes les 4 heures | — |
 | Safe Links | e-mail, Teams et Office ; analyse avant remise ; aussi en interne ; pas de clic direct | — |
-| Safe Attachments | Block ; SharePoint/OneDrive/Teams activés | — |
+| Safe Attachments | Block ; SharePoint/OneDrive/Teams activés ; l'utilisateur est notifié et peut demander la libération | Strict : administrateurs uniquement, sans notification |
 | Spam, spam à haut niveau de confiance, hameçonnage | quarantaine, l'utilisateur est notifié et libère lui-même | — |
-| Hameçonnage à haut niveau de confiance, malware | quarantaine, administrateurs uniquement | — |
+| Hameçonnage à haut niveau de confiance, malware (filtre de pièces jointes) | quarantaine, administrateurs uniquement | — |
 | Bulk | Courrier indésirable dès BCL 6 | Strict : quarantaine dès 5 — rend la notification illisible |
 | Seuil d'hameçonnage | 3 | Strict : 4 — beaucoup de faux positifs |
 | Usurpation (spoof) | Courrier indésirable | Strict : quarantaine ; ORCA-112 recommande Junk |

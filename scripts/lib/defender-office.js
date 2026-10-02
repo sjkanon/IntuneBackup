@@ -16,7 +16,8 @@
  * Quarantine policies: CIPP only offers the three built-in ones in these fields.
  * `DefaultFullAccessWithNotificationPolicy` is the one that sends the user the digest (every
  * four hours, see GlobalQuarantineNotifications); `AdminOnlyAccessPolicy` stays on high
- * confidence phish and malware, which users can never release themselves anyway.
+ * confidence phish and the anti-malware filter, which users can never release themselves anyway.
+ * Safe Attachments does notify: users can only request release there, which reaches the admins.
  */
 
 const NOTIFY = "DefaultFullAccessWithNotificationPolicy";
@@ -64,7 +65,10 @@ const DEFENDER_BASELINE = {
       variables: {
         name: "CXNM - Standard - Safe Attachments",
         SafeAttachmentAction: "Block",
-        QuarantineTag: ADMIN_ONLY,
+        // Strict: AdminOnly. Met melding ziet de gebruiker dat er iets is tegengehouden en kan hij
+        // vrijgave aanvragen — zelf vrijgeven kan bij malware nooit — en het verzoek komt via
+        // QuarantineRequestAlert bij beheer.
+        QuarantineTag: NOTIFY,
         Redirect: false,
         RedirectAddress: "",
       },

@@ -48,7 +48,7 @@
           "variables": {
             "name": "CXNM - Standard - Safe Attachments",
             "SafeAttachmentAction": "Block",
-            "QuarantineTag": "AdminOnlyAccessPolicy",
+            "QuarantineTag": "DefaultFullAccessWithNotificationPolicy",
             "Redirect": false,
             "RedirectAddress": ""
           },

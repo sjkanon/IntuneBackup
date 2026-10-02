@@ -95,9 +95,9 @@ CISA ScubaGear accept that as equivalent.
 |---|---|---|
 | Quarantine notification | every 4 hours | — |
 | Safe Links | email, Teams and Office; scan before delivery; internal mail too; no click-through | — |
-| Safe Attachments | Block; SharePoint/OneDrive/Teams on | — |
+| Safe Attachments | Block; SharePoint/OneDrive/Teams on; user is notified and can request release | Strict: admins only, no notification |
 | Spam, high confidence spam, phish | quarantine, user is notified and releases it | — |
-| High confidence phish, malware | quarantine, admins only | — |
+| High confidence phish, malware (attachment filter) | quarantine, admins only | — |
 | Bulk | Junk from BCL 6 | Strict: quarantine from 5 — floods the notification |
 | Phish threshold | 3 | Strict: 4 — many false positives |
 | Spoof | Junk | Strict: quarantine; ORCA-112 recommends Junk |

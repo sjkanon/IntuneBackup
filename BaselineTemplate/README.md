@@ -97,9 +97,9 @@ ORCA en CISA ScubaGear accepteren dat als gelijkwaardig.
 |---|---|---|
 | Quarantainemelding | elke 4 uur | — |
 | Safe Links | e-mail, Teams en Office; scannen vóór aflevering; ook intern; niet doorklikken | — |
-| Safe Attachments | Block; SharePoint/OneDrive/Teams aan | — |
+| Safe Attachments | Block; SharePoint/OneDrive/Teams aan; gebruiker krijgt melding en kan vrijgave aanvragen | Strict: alleen beheer, zonder melding |
 | Spam, high confidence spam, phish | quarantaine, gebruiker krijgt melding en geeft zelf vrij | — |
-| High confidence phish, malware | quarantaine, alleen beheer | — |
+| High confidence phish, malware (bijlagefilter) | quarantaine, alleen beheer | — |
 | Bulk | Junk vanaf BCL 6 | Strict: quarantaine vanaf 5 — maakt de melding onleesbaar |
 | Phish-drempel | 3 | Strict: 4 — veel valse positieven |
 | Spoof | Junk | Strict: quarantaine; ORCA-112 adviseert Junk |
