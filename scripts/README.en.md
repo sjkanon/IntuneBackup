@@ -11,7 +11,7 @@ flowchart TD
   OIB["OpenIntuneBaseline<br/>(.oib-source/)"] -->|import-oib.js| T
   IA["IntuneAdmin/IntuneBaselines"] -->|import-intuneadmin.js| T
   TEN["Tenant backup<br/>(IntuneBackupAndRestore)"] -->|import-intunebackup.js| T
-  T["IntuneTemplate/<br/>197 policies"]
+  T["IntuneTemplate/<br/>200 policies"]
   T -->|check-scope.js| CHK{{"scope · layout · conflicts"}}
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-docs.js| DOC["READMEs per platform"]

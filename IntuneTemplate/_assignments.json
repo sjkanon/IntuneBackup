@@ -449,6 +449,15 @@
       }
     }
   ],
+  "CXNM - Standard - WIN - D - Google Chrome Updates": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "none",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      }
+    }
+  ],
   "CXNM - Standard - WIN - D - Microsoft Office Security": [
     {
       "target": {

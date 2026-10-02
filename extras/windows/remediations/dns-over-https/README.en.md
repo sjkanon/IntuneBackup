@@ -44,7 +44,8 @@ domains by inspecting DNS and TLS traffic on the device. DoH of **Windows itself
 through the operating system's DNS client and remains visible to Defender. DoH **inside a
 third-party browser** (Chrome, Firefox) bypasses the DNS client; in the
 Network Protection documentation Microsoft advises disabling DoH and QUIC in those browsers. Edge does not fall
-under this, because Edge uses SmartScreen. Check it after deployment with a test domain from
+under this, because Edge uses SmartScreen. In Chrome `CXNM - Standard - WIN - D - Google Chrome Security` turns them off, in Firefox
+[`firefox-policies/`](../firefox-policies/README.en.md). Check it after deployment with a test domain from
 `smartscreentestratings2.net` in Chrome.
 
 ## Deployment

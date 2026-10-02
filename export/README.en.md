@@ -11,9 +11,9 @@ handwritten.
 
 | Source | Export | Policies | Assignments |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 197 | 101, from `_assignments.json` (phase 1) |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 200 | 102, from `_assignments.json` (phase 1) |
 
-299 JSON files in total: 197 policies, 101 assignment files and the macOS ADE profile that
+303 JSON files in total: 200 policies, 102 assignment files and the macOS ADE profile that
 travels along. CIPP does not need this folder; it reads `IntuneTemplate/` directly.
 
 ## Why `NativeImport` is in the path
@@ -23,8 +23,8 @@ Because CIPP knows that word as its only exclusion. A template repository is sca
 the path must not contain `NativeImport`. A setting for "only look in this subfolder" does
 not exist.
 
-Without that word, CIPP would therefore import these 299 files as well. They contain the same
-197 policies (plus their assignments and the ADE profile), but in Graph form without a
+Without that word, CIPP would therefore import these 303 files as well. They contain the same
+200 policies (plus their assignments and the ADE profile), but in Graph form without a
 `RowKey` — and then CIPP falls back to guessing the policy type from the content and creates a
 **second** template from it, with the same name and its own GUID. Two templates with the same
 name is exactly the case CIPP itself has an error message for ("a same-named duplicate row
@@ -67,7 +67,7 @@ their own — see below.
 
 | Folder | Content | Restore |
 |---|---:|---|
-| `Settings Catalog/` | 155 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 158 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 26 policies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
 | `Device Configurations/` | 13 policies | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 policies | `Invoke-IntuneRestoreAppProtectionPolicy` |

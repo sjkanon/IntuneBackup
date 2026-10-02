@@ -4,34 +4,34 @@
 
 # Intune-baseline — overzicht
 
-197 policies over 4 platformen, met
+200 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](../README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 197 |
-| Zonder toewijzing (bewust) | 96 |
+| Policies | 200 |
+| Zonder toewijzing (bewust) | 98 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.md) | 114 | 1 | 6 | 11 | – | **132** |
+| [Windows](../IntuneTemplate/WIN/README.md) | 117 | 1 | 6 | 11 | – | **135** |
 | [macOS](../IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](../IntuneTemplate/WIN/README.md) — 132 policies
+- [Windows](../IntuneTemplate/WIN/README.md) — 135 policies
 - [macOS](../IntuneTemplate/MAC/README.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.md) — 14 policies
 
 ## Normenkader
 
-197 van de 197 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+200 van de 200 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 31 van de 93 Annex A-controls.
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
@@ -140,6 +140,8 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `WIN - D - Device Guard and Credential Guard` | Vraagt een herstart, en geheugenintegriteit (HVCI) laadt geen stuurprogramma's die er niet op gebouwd zijn — denk aan oude VPN-, printer- en dockdrivers. Kijk in de pilot of alles nog start. |
 | `WIN - D - Disable NTLM` | Weigert alle NTLM, inkomend en uitgaand. Wat niet via Kerberos kan breekt: toepassingen die op IP-adres verbinden, apparaten buiten het domein, en shares waarvoor het apparaat geen Kerberos-ticket krijgt — een Entra-joined apparaat dat een share op Entra Domain Services opent valt terug op NTLM. Lees vóór de pilot op een paar Windows 11 24H2-apparaten Microsoft-Windows-NTLM/Operational (4020/4021 uitgaand, 4022/4023 inkomend): die logging staat daar standaard aan en laat zien wat er zou breken. |
 | `WIN - D - Enrollment Hardening` | Raakt de eerste installatie van een apparaat, niet een draaiend apparaat. Test op één Autopilot-toestel: zonder netwerk komt de gebruiker niet verder, en dat is de bedoeling — maar het moet wel kloppen met hoe apparaten bij jullie worden uitgerold. |
+| `WIN - D - Google Chrome Extensions` | ExtensionInstallBlocklist '*' schakelt ook extensies uit die al geïnstalleerd zijn, dus elke Chrome-gebruiker verliest zijn extensies. Kijk eerst welke er gebruikt worden (Defender Vulnerability Management → Browser extensions) en zet wat nodig is op ExtensionInstallAllowlist in een tenantspecifieke kopie. |
+| `WIN - D - Google Chrome Security` | Merkbaar voor wie Chrome gebruikt: aanmelden in de browser, synchronisatie en het opslaan van nieuwe wachtwoorden gaan uit. Remote debugging gaat ook uit, en dat breekt geautomatiseerde tests (Puppeteer, Playwright, Selenium) tegen de geïnstalleerde Chrome. Eerst op de pilotgroep. |
 | `WIN - D - In-Box App Removal` | Verwijdert ingebouwde apps, ook van apparaten die al in gebruik zijn. Kijk in de pilot of iemand er een mist. |
 | `WIN - D - Kernel DMA Protection` | Een dock of eGPU zonder DMA-remapping werkt niet meer. Test met de docks die in de vloot zitten. |
 | `WIN - D - Logon Hardening` | Gebruikers moeten voortaan CTRL+ALT+DEL indrukken vóór het aanmeldscherm. Communiceer dat vóór de brede uitrol. |
@@ -173,7 +175,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `AND - U - Corporate AI Restricted` | Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een organisatiebesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een organisatie die deze assistenten toestaat. |
 | `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
-Zonder toewijzing staan er 96: de 39 hierboven, 26 die op een voorwaarde
+Zonder toewijzing staan er 98: de 41 hierboven, 26 die op een voorwaarde
 wachten, 16 voor een eigen groep en 15 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de

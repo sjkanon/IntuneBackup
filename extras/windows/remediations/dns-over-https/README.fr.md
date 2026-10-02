@@ -44,7 +44,8 @@ malveillants en inspectant le trafic DNS et TLS sur l'appareil. Le DoH de **Wind
 par le client DNS du système d'exploitation et reste visible pour Defender. Le DoH **dans un
 navigateur tiers** (Chrome, Firefox) contourne le client DNS ; dans la documentation de
 Network Protection, Microsoft recommande de désactiver DoH et QUIC dans ces navigateurs. Edge n'est pas
-concerné, car Edge utilise SmartScreen. Vérifiez-le après le déploiement avec un domaine de test de
+concerné, car Edge utilise SmartScreen. Dans Chrome, `CXNM - Standard - WIN - D - Google Chrome Security` les désactive, dans Firefox
+[`firefox-policies/`](../firefox-policies/README.fr.md). Vérifiez-le après le déploiement avec un domaine de test de
 `smartscreentestratings2.net` dans Chrome.
 
 ## Déploiement

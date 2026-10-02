@@ -15,7 +15,7 @@ wanneer een tenant doorschuift.
 
 `IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen: uitrollen doet
 een baseline. Dat scherm met de hand invullen is dertien keer dezelfde standard toevoegen en
-dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 69 policies (het pakket
+dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 70 policies (het pakket
 `CXNM - Standard - Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
 
 ## Wat erin staat

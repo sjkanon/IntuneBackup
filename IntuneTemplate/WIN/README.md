@@ -2,18 +2,18 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 132 policies
+# Windows — 135 policies
 
 Alle policies heten `CXNM - Standard - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 114 |
+| `SettingsCatalog/` | 117 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 98
+## Device-scoped (D) — 101
 
 Toewijzen aan apparaatgroepen.
 
@@ -51,6 +51,9 @@ Toewijzen aan apparaatgroepen.
 | [**Endpoint Analytics**](DeviceConfigurations/Baseline_WIN_D_Endpoint_Analytics.md) | Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen. | Device config | — | All Devices |
 | [**Enhanced Phishing Protection**](SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.md) | Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand. | Settings Catalog | 4 | All Devices |
 | [**Enrollment Hardening**](SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.md) | Eist een netwerkverbinding tijdens de eerste installatie, zodat een apparaat niet zonder beheer langs de inschrijving kan komen. | Settings Catalog | 1 | — |
+| [**Google Chrome Extensions**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.md) | Blokkeert extensies in Google Chrome, zoals Microsoft Edge Extensions dat in Edge doet. | Settings Catalog | 2 | — |
+| [**Google Chrome Security**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.md) | Legt de beveiliging van Google Chrome vast op het niveau van Edge: Safe Browsing aan en niet te omzeilen, kwaadaardige downloads geblokkeerd, certificaatfouten niet weg te klikken, en geen bedrijfsgegevens naar een persoonlijk Google-account. | Settings Catalog | 17 | — |
+| [**Google Chrome Updates**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Updates.md) | Zorgt dat een Chrome-update binnen drie dagen actief wordt: herstartmelding verplicht, gedwongen herstart buiten werktijd, en versneld bij een sterk verouderde versie. | Settings Catalog | 9 | All Devices |
 | [**In Box App Removal**](SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.md) | Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben. | Settings Catalog | 27 | — |
 | [**Internet Explorer Legacy**](SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.md) | Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen. | Settings Catalog | 206 | All Devices |
 | [**Kernel DMA Protection**](SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.md) | Blokkeert randapparaten die rechtstreeks in het geheugen kunnen lezen en geen DMA-remapping ondersteunen. | Settings Catalog | 1 | — |

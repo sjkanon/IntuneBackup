@@ -15,7 +15,7 @@ tenant moves on.
 
 `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there: a baseline is
 what deploys them. Filling in that screen by hand means adding the same standard thirteen times and
-picking the right assignment target thirteen times — one misclick puts up to 69 policies (the
+picking the right assignment target thirteen times — one misclick puts up to 70 policies (the
 `CXNM - Standard - Baseline-Devices` package) on the wrong audience. So this file comes from the same source as the rest of the repo: the manifest.
 
 ## What's in it

@@ -8,10 +8,10 @@ gegenereerd, welke systemen het lezen en hoe het in een tenant belandt. Voor het
 
 ## In het kort
 
-- **Eén bron:** `IntuneTemplate/` — 197 policies in CIPP-templateformaat, over Windows (132),
+- **Eén bron:** `IntuneTemplate/` — 200 policies in CIPP-templateformaat, over Windows (135),
   macOS (37), iOS/iPadOS (14) en Android (14).
 - **Drie bronnen erin:** OpenIntuneBaseline (94 policies), IntuneAdmin/IntuneBaselines (22) en
-  eigen werk (81).
+  eigen werk (84).
 - **Twee afgeleiden eruit:** een restore-export voor IntuneBackupAndRestore en de CIPP-baseline.
   CIPP leest de templates zelf rechtstreeks.
 - **Twee wegen naar de tenant:** CIPP of de PowerShell-module IntuneBackupAndRestore. Toewijzen
@@ -27,7 +27,7 @@ flowchart LR
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Tenant-backup<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 
-  T["<b>IntuneTemplate/</b><br/>197 policies · _manifest.json"]
+  T["<b>IntuneTemplate/</b><br/>200 policies · _manifest.json"]
 
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]
@@ -99,8 +99,8 @@ naar het CIPP-pakket; `check-scope.js` bewaakt dat fase, toewijzing en pakket kl
 
 | Fase | Betekenis | Policies | CIPP-pakket | CIPP-stage |
 |---:|---|---:|---|---:|
-| 1 | Nu uitrollen | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | Eerst pilot | 39 | `CXNM - Standard - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
+| 1 | Nu uitrollen | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | Eerst pilot | 41 | `CXNM - Standard - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
 | 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `CXNM - Standard - Baseline-Wacht`, niet toegewezen | 3 |
 | 4 | Eigen groep (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groep>` | 1 |
 | 5 | Niet uitrollen — alternatief voor een andere policy | 15 | geen | – |

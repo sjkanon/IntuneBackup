@@ -11,9 +11,9 @@ README is handwerk.
 
 | Bron | Export | Policies | Assignments |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 197 | 101, uit `_assignments.json` (fase 1) |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 200 | 102, uit `_assignments.json` (fase 1) |
 
-In totaal 299 JSON-bestanden: 197 policies, 101 assignment-bestanden en het meegereisde
+In totaal 303 JSON-bestanden: 200 policies, 102 assignment-bestanden en het meegereisde
 macOS ADE-profiel. CIPP heeft deze map niet nodig; die leest `IntuneTemplate/` rechtstreeks.
 
 ## Waarom `NativeImport` in het pad staat
@@ -23,7 +23,7 @@ Omdat CIPP dat woord als enige uitsluiting kent. Een template-repository wordt g
 `.json` eindigen, en het pad mag `NativeImport` niet bevatten. Een instelling voor "kijk
 alleen in deze submap" bestaat niet.
 
-Zonder dat woord importeert CIPP deze 299 bestanden dus ook. Ze bevatten dezelfde 197 policies
+Zonder dat woord importeert CIPP deze 303 bestanden dus ook. Ze bevatten dezelfde 200 policies
 (plus hun assignments en het ADE-profiel), maar in Graph-vorm zonder `RowKey` — en dan valt
 CIPP terug op het raden van het policytype uit de inhoud en maakt er een **tweede** template
 van, met dezelfde naam en een eigen GUID. Twee templates met dezelfde naam is precies het geval
@@ -67,7 +67,7 @@ in — zie hieronder.
 
 | Map | Inhoud | Terugzetten |
 |---|---:|---|
-| `Settings Catalog/` | 155 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 158 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 26 policies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
 | `Device Configurations/` | 13 policies | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 policies | `Invoke-IntuneRestoreAppProtectionPolicy` |

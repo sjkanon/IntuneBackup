@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 132 policies
+# Windows — 135 policies
 
 Toutes les policies s'appellent `CXNM - Standard - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 114 |
+| `SettingsCatalog/` | 117 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 98
+## Device-scoped (D) — 101
 
 Affecter à des groupes d'appareils.
 
@@ -51,6 +51,9 @@ Affecter à des groupes d'appareils.
 | [**Endpoint Analytics**](DeviceConfigurations/Baseline_WIN_D_Endpoint_Analytics.fr.md) | Envoie les données de démarrage et de performance à Endpoint Analytics, afin que les appareils lents deviennent visibles avant que les utilisateurs n'appellent à leur sujet. | Device config | — | All Devices |
 | [**Enhanced Phishing Protection**](SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.fr.md) | Avertit dès qu'un utilisateur saisit son mot de passe professionnel sur un site d'hameçonnage, le réutilise dans une application ou l'enregistre dans un fichier texte. | Settings Catalog | 4 | All Devices |
 | [**Enrollment Hardening**](SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.fr.md) | Exige une connexion réseau lors de la première installation, afin qu'un appareil ne puisse pas contourner l'inscription et échapper à la gestion. | Settings Catalog | 1 | — |
+| [**Google Chrome Extensions**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.fr.md) | Bloque les extensions dans Google Chrome, comme Microsoft Edge Extensions le fait dans Edge. | Settings Catalog | 2 | — |
+| [**Google Chrome Security**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) | Verrouille la sécurité de Google Chrome au niveau d'Edge : Safe Browsing activé et impossible à contourner, téléchargements malveillants bloqués, erreurs de certificat impossibles à ignorer, et aucune donnée d'entreprise vers un compte Google personnel. | Settings Catalog | 17 | — |
+| [**Google Chrome Updates**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Updates.fr.md) | Garantit qu'une mise à jour de Chrome prend effet sous trois jours : notification de redémarrage obligatoire, redémarrage forcé en dehors des heures de travail, et plus rapide lorsque la version est très en retard. | Settings Catalog | 9 | All Devices |
 | [**In Box App Removal**](SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.fr.md) | Supprime les applications grand public livrées par défaut avec Windows et qui n'ont rien à faire sur un appareil professionnel. | Settings Catalog | 27 | — |
 | [**Internet Explorer Legacy**](SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.fr.md) | Durcissement du moteur Internet Explorer, qui fonctionne encore sous le mode IE d'Edge et au sein d'anciennes applications. | Settings Catalog | 206 | All Devices |
 | [**Kernel DMA Protection**](SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.fr.md) | Bloque les périphériques qui peuvent lire directement la mémoire et ne prennent pas en charge le remappage DMA. | Settings Catalog | 1 | — |

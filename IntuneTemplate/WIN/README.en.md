@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 132 policies
+# Windows — 135 policies
 
 All policies are named `CXNM - Standard - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 114 |
+| `SettingsCatalog/` | 117 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 98
+## Device-scoped (D) — 101
 
 Assign to device groups.
 
@@ -51,6 +51,9 @@ Assign to device groups.
 | [**Endpoint Analytics**](DeviceConfigurations/Baseline_WIN_D_Endpoint_Analytics.en.md) | Sends startup and performance data to Endpoint Analytics, so that slow devices become visible before users call about them. | Device config | — | All Devices |
 | [**Enhanced Phishing Protection**](SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) | Warns as soon as a user types their work password on a phishing site, reuses it in an app or saves it in a text file. | Settings Catalog | 4 | All Devices |
 | [**Enrollment Hardening**](SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) | Requires a network connection during initial setup, so that a device cannot get past enrolment without management. | Settings Catalog | 1 | — |
+| [**Google Chrome Extensions**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.en.md) | Blocks extensions in Google Chrome, as Microsoft Edge Extensions does in Edge. | Settings Catalog | 2 | — |
+| [**Google Chrome Security**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.en.md) | Locks down Google Chrome security to the same level as Edge: Safe Browsing on and impossible to bypass, malicious downloads blocked, certificate errors cannot be clicked through, and no company data to a personal Google account. | Settings Catalog | 17 | — |
+| [**Google Chrome Updates**](SettingsCatalog/Baseline_WIN_D_Google_Chrome_Updates.en.md) | Makes sure a Chrome update takes effect within three days: relaunch notification required, forced relaunch outside working hours, and sooner when the version is badly out of date. | Settings Catalog | 9 | All Devices |
 | [**In Box App Removal**](SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.en.md) | Removes the consumer apps that ship with Windows by default and have no business on a work device. | Settings Catalog | 27 | — |
 | [**Internet Explorer Legacy**](SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.en.md) | Hardening of the Internet Explorer engine, which still runs under Edge's IE mode and within old applications. | Settings Catalog | 206 | All Devices |
 | [**Kernel DMA Protection**](SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.en.md) | Blocks peripherals that can read directly from memory and do not support DMA remapping. | Settings Catalog | 1 | — |

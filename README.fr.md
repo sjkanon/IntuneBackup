@@ -8,11 +8,11 @@ en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/Ope
 (Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
 repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
-197 stratégies sur quatre plateformes :
+200 stratégies sur quatre plateformes :
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.fr.md) | 114 | 1 | 6 | 11 | – | **132** |
+| [Windows](IntuneTemplate/WIN/README.fr.md) | 117 | 1 | 6 | 11 | – | **135** |
 | [macOS](IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.m
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>197 stratégies<br/><i>la source</i>"]
+  T["<b>IntuneTemplate/</b><br/>200 stratégies<br/><i>la source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Tenant Intune")]
 
@@ -107,8 +107,8 @@ sous le préfixe `Baseline_`. Ce que faisaient les dossiers séparés, c'est mai
 
 | Phase | Signification | Nombre |
 |---:|---|---:|
-| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 101 |
-| 2 | **Pilote** — d'abord sur un groupe pilote. Modifie quelque chose que l'utilisateur remarque, ou peut casser quelque chose que vous voulez voir d'abord. | 39 |
+| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 102 |
+| 2 | **Pilote** — d'abord sur un groupe pilote. Modifie quelque chose que l'utilisateur remarque, ou peut casser quelque chose que vous voulez voir d'abord. | 41 |
 | 3 | **En attente d'un prérequis** — prête, mais ne fait rien aujourd'hui. Les stratégies de conformité iOS et Android attendent la première inscription. | 26 |
 | 4 | **Groupe dédié** — destinée à un groupe spécifique, pas à tous les appareils. `faseGroep` indique lequel. | 16 |
 | 5 | **Ne pas déployer** — alternative à une stratégie qui, elle, *est* déployée. L'affecter provoque un Conflict. | 15 |
@@ -305,7 +305,7 @@ update profiles, l'anneau de mise à jour 3 et Windows 365) — avec leur raison
 ## Restaurer dans un tenant
 
 **Via CIPP :** faites pointer le dépôt de modèles vers ce dépôt. Les cinq valeurs de `.Type`
-correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 197
+correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 200
 modèles figurent dans CIPP sous Tenant Administration → Templates.
 
 ### Déployer via une baseline CIPP
@@ -354,7 +354,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 299 fichiers JSON — les mêmes 197 stratégies plus leurs 101 affectations et le
+CIPP importerait *aussi* ces 303 fichiers JSON — les mêmes 200 stratégies plus leurs 102 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.

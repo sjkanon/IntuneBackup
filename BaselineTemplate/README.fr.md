@@ -15,7 +15,7 @@ et quand un tenant passe à l'étape suivante.
 
 `IntuneTemplate/` fournit les stratégies, mais dans CIPP les templates ne font que s'y trouver :
 c'est une baseline qui déploie. Remplir cet écran à la main, c'est ajouter treize fois le même
-standard et choisir treize fois la bonne cible d'affectation — un seul faux clic place jusqu'à 69
+standard et choisir treize fois la bonne cible d'affectation — un seul faux clic place jusqu'à 70
 stratégies (le paquet `CXNM - Standard - Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
 dépôt : le manifeste.
 

@@ -8,10 +8,10 @@ généré, quels systèmes le lisent et comment il arrive dans un tenant. Pour l
 
 ## En bref
 
-- **Une seule source :** `IntuneTemplate/` — 197 stratégies au format de template CIPP, réparties
-  entre Windows (132), macOS (37), iOS/iPadOS (14) et Android (14).
+- **Une seule source :** `IntuneTemplate/` — 200 stratégies au format de template CIPP, réparties
+  entre Windows (135), macOS (37), iOS/iPadOS (14) et Android (14).
 - **Trois sources en entrée :** OpenIntuneBaseline (94 stratégies), IntuneAdmin/IntuneBaselines (22)
-  et travail propre (81).
+  et travail propre (84).
 - **Deux dérivés en sortie :** un export de restauration pour IntuneBackupAndRestore et la baseline
   CIPP. CIPP lit lui-même les templates directement.
 - **Deux voies vers le tenant :** CIPP ou le module PowerShell IntuneBackupAndRestore. L'affectation
@@ -27,7 +27,7 @@ flowchart LR
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Sauvegarde du tenant<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 
-  T["<b>IntuneTemplate/</b><br/>197 stratégies · _manifest.json"]
+  T["<b>IntuneTemplate/</b><br/>200 stratégies · _manifest.json"]
 
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]
@@ -99,8 +99,8 @@ la traduit en package CIPP ; `check-scope.js` vérifie que phase, affectation et
 
 | Phase | Signification | Stratégies | Package CIPP | Stage CIPP |
 |---:|---|---:|---|---:|
-| 1 | Déployer immédiatement | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | D'abord en pilote | 39 | `CXNM - Standard - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
+| 1 | Déployer immédiatement | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | D'abord en pilote | 41 | `CXNM - Standard - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
 | 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `CXNM - Standard - Baseline-Wacht`, non affecté | 3 |
 | 4 | Groupe dédié (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groupe>` | 1 |
 | 5 | Ne pas déployer — alternative à une autre stratégie | 15 | aucun | – |

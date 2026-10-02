@@ -36,21 +36,21 @@ et le statut par appareil de chaque policy citée ci-dessous.
 
 ## Résumé
 
-### Policies par phase — 197 policies Intune
+### Policies par phase — 200 policies Intune
 
 Seule la phase 1 est affectée à tous les appareils ou utilisateurs et compte comme imposée. Le reste
 n'est volontairement pas encore déployé ; la raison pour chaque policy figure dans [Choix de l'organisation et risques résiduels](#choix-de-lorganisation-et-risques-résiduels).
 
 | Phase | Windows | macOS | iOS/iPadOS | Android | Total |
 |---|---:|---:|---:|---:|---:|
-| 1 — Immédiat | 80 | 19 | 1 | 1 | **101** |
-| 2 — Pilote | 28 | 9 | – | 2 | **39** |
+| 1 — Immédiat | 81 | 19 | 1 | 1 | **102** |
+| 2 — Pilote | 30 | 9 | – | 2 | **41** |
 | 3 — En attente d'un prérequis | 5 | 3 | 8 | 10 | **26** |
 | 4 — Groupe dédié | 7 | 4 | 4 | 1 | **16** |
 | 5 — Ne pas déployer | 12 | 2 | 1 | – | **15** |
-| **Total** | **132** | **37** | **14** | **14** | **197** |
+| **Total** | **135** | **37** | **14** | **14** | **200** |
 
-Affectées selon `_assignments.json` : 101 (doit être égal à la phase 1 : 101).
+Affectées selon `_assignments.json` : 102 (doit être égal à la phase 1 : 102).
 
 
 ### ISO/IEC 27001:2022 Annexe A — 93 mesures
@@ -74,11 +74,11 @@ Nombre de policies qui mettent en œuvre le point sur le plan technique. Aucun p
 | [(b)](#art-212b-gestion-des-incidents) gestion des incidents | 8 | s.o. | 6 |
 | [(c)](#art-212c-continuité-des-activités-et-gestion-des-crises) continuité des activités et gestion des crises | 6 | s.o. | 2 |
 | [(d)](#art-212d-sécurité-de-la-chaîne-dapprovisionnement) sécurité de la chaîne d'approvisionnement | 2 | s.o. | 5 |
-| [(e)](#art-212e-sécurité-de-lacquisition-du-développement-et-de-la-maintenance-des-réseaux-et-des-systèmes-dinformation-y-compris-le-traitement-des-vulnérabilités) sécurité de l'acquisition, du développement et de la maintenance des réseaux et des systèmes d'information, y compris le traitement des vulnérabilités | 48 | s.o. | 35 |
+| [(e)](#art-212e-sécurité-de-lacquisition-du-développement-et-de-la-maintenance-des-réseaux-et-des-systèmes-dinformation-y-compris-le-traitement-des-vulnérabilités) sécurité de l'acquisition, du développement et de la maintenance des réseaux et des systèmes d'information, y compris le traitement des vulnérabilités | 49 | s.o. | 37 |
 | [(f)](#art-212f-évaluation-de-lefficacité) évaluation de l'efficacité | 13 | s.o. | 2 |
 | [(g)](#art-212g-pratiques-de-base-en-matière-de-cyberhygiène-et-formation-à-la-cybersécurité) pratiques de base en matière de cyberhygiène et formation à la cybersécurité | 1 | s.o. | 2 |
 | [(h)](#art-212h-cryptographie-et-chiffrement) cryptographie et chiffrement | 8 | s.o. | 7 |
-| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 22 | s.o. | 37 |
+| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 22 | s.o. | 38 |
 | [(j)](#art-212j-authentification-à-plusieurs-facteurs-et-communications-sécurisées) authentification à plusieurs facteurs et communications sécurisées | 3 | s.o. | 7 |
 
 ### CIS Controls v8.1 et NIST CSF 2.0
@@ -183,24 +183,24 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | **A.8.4** Accès aux codes source | organisationnel | ▢ Organisationnel | – | – | Uniquement en cas de développement logiciel interne : gérer l'accès aux dépôts et aux outils de développement. |
 | [**A.8.5** Authentification sécurisée](#a85-authentification-sécurisée) | technique | ● Couvert (phase 1) | 10 | 23 | Établir une politique d'authentification (quelles méthodes, exceptions, break-glass). |
 | [**A.8.6** Dimensionnement](#a86-dimensionnement) | partiel | ● Couvert (phase 1) | 3 | – | Planification des capacités pour le réseau, les licences et le stockage. |
-| [**A.8.7** Protection contre les programmes malveillants](#a87-protection-contre-les-programmes-malveillants) | technique | ● Couvert (phase 1) | 26 | 18 | Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). |
-| [**A.8.8** Gestion des vulnérabilités techniques](#a88-gestion-des-vulnérabilités-techniques) | partiel | ● Couvert (phase 1) | 11 | 13 | Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. |
+| [**A.8.7** Protection contre les programmes malveillants](#a87-protection-contre-les-programmes-malveillants) | technique | ● Couvert (phase 1) | 26 | 19 | Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). |
+| [**A.8.8** Gestion des vulnérabilités techniques](#a88-gestion-des-vulnérabilités-techniques) | partiel | ● Couvert (phase 1) | 12 | 13 | Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. |
 | [**A.8.9** Gestion de la configuration](#a89-gestion-de-la-configuration) | partiel | ● Couvert (phase 1) | 18 | 10 | Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. |
 | **A.8.10** Suppression des informations | partiel | ○ Aucune mesure technique dans la baseline | – | – | Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. |
 | [**A.8.11** Masquage des données](#a811-masquage-des-données) | partiel | ◐ Seulement pilote, en attente ou groupe dédié | – | 1 | Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. |
-| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 13 | 13 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
+| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 13 | 14 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
 | [**A.8.13** Sauvegarde des informations](#a813-sauvegarde-des-informations) | partiel | ● Couvert (phase 1) | 3 | – | Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. |
 | **A.8.14** Redondance des moyens de traitement de l'information | organisationnel | ▢ Organisationnel | – | – | Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. |
 | [**A.8.15** Journalisation](#a815-journalisation) | partiel | ● Couvert (phase 1) | 6 | 2 | Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. |
 | [**A.8.16** Activités de surveillance](#a816-activités-de-surveillance) | partiel | ● Couvert (phase 1) | 4 | 8 | Suivi des alertes 24 h/24 et 7 j/7 ou pendant les heures de bureau, avec des critères d'escalade. |
 | [**A.8.17** Synchronisation des horloges](#a817-synchronisation-des-horloges) | technique | ● Couvert (phase 1) | 2 | 1 | Définir une source de temps approuvée. |
 | [**A.8.18** Utilisation de programmes utilitaires à privilèges](#a818-utilisation-de-programmes-utilitaires-à-privilèges) | partiel | ● Couvert (phase 1) | 1 | 3 | Registre des outils d'administration et d'assistance à distance autorisés et des personnes habilitées à les utiliser. |
-| [**A.8.19** Installation de logiciels sur des systèmes opérationnels](#a819-installation-de-logiciels-sur-des-systèmes-opérationnels) | technique | ● Couvert (phase 1) | 10 | 8 | Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). |
+| [**A.8.19** Installation de logiciels sur des systèmes opérationnels](#a819-installation-de-logiciels-sur-des-systèmes-opérationnels) | technique | ● Couvert (phase 1) | 10 | 9 | Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). |
 | [**A.8.20** Sécurité des réseaux](#a820-sécurité-des-réseaux) | partiel | ● Couvert (phase 1) | 13 | 13 | L'infrastructure réseau (pare-feu, Wi-Fi, VPN) est en grande partie hors de cette baseline. |
 | [**A.8.21** Sécurité des services réseau](#a821-sécurité-des-services-réseau) | partiel | ● Couvert (phase 1) | 1 | 5 | Définir et surveiller les exigences relatives aux services et fournisseurs réseau. |
 | **A.8.22** Cloisonnement des réseaux | organisationnel | ▢ Organisationnel | – | – | La segmentation réseau relève de l'infrastructure et ne peut pas être mise en place via des policies endpoint/identité. |
-| [**A.8.23** Filtrage web](#a823-filtrage-web) | technique | ● Couvert (phase 1) | 3 | 4 | Définir les catégories et les exceptions (Defender Web Content Filtering dans le portail Defender). |
-| [**A.8.24** Utilisation de la cryptographie](#a824-utilisation-de-la-cryptographie) | partiel | ● Couvert (phase 1) | 9 | 8 | Politique cryptographique et gestion des clés (qui a accès aux clés de récupération, rotation). |
+| [**A.8.23** Filtrage web](#a823-filtrage-web) | technique | ● Couvert (phase 1) | 3 | 5 | Définir les catégories et les exceptions (Defender Web Content Filtering dans le portail Defender). |
+| [**A.8.24** Utilisation de la cryptographie](#a824-utilisation-de-la-cryptographie) | partiel | ● Couvert (phase 1) | 9 | 9 | Politique cryptographique et gestion des clés (qui a accès aux clés de récupération, rotation). |
 | **A.8.25** Cycle de vie de développement sécurisé | organisationnel | ▢ Organisationnel | – | – | Uniquement en cas de développement interne. |
 | **A.8.26** Exigences de sécurité des applications | organisationnel | ▢ Organisationnel | – | – | Exigences de sécurité lors du développement ou de l'acquisition d'applications. |
 | **A.8.27** Principes d'ingénierie et d'architecture des systèmes sécurisés | organisationnel | ▢ Organisationnel | – | – | Définir les principes d'architecture (zero trust). |
@@ -508,6 +508,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`WIN - U - Compliance Secure Boot`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.fr.md) (phase 1)
 - [`WIN - U - Microsoft Office Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.fr.md) (phase 1)
 - [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - D - Printing Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.fr.md) (phase 2)
 - [`WIN - D - Script File Associations`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Script_File_Associations.fr.md) (phase 2)
 - [`AND - U - Compliance Corporate Defender for Endpoint`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.fr.md) (phase 3)
@@ -533,6 +534,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`WIN - D - Attack Surface Reduction`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.fr.md) (phase 1)
 - [`WIN - D - Automatic Restart Sign-On`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md) (phase 1)
 - [`WIN - D - Defender Update Ring 3 Production`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.fr.md) (phase 1)
+- [`WIN - D - Google Chrome Updates`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Updates.fr.md) (phase 1)
 - [`WIN - D - Microsoft Edge Updates`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.fr.md) (phase 1)
 - [`WIN - D - Microsoft Office Updates`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.fr.md) (phase 1)
 - [`WIN - D - Printing`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md) (phase 1)
@@ -606,6 +608,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`AND - U - Corporate AI Restricted`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.fr.md) (phase 2)
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.fr.md) (phase 2)
 - [`MAC - D - Apple Intelligence Restricted`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - D - Removable Storage`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.fr.md) (phase 2)
 - [`WIN - U - File Sharing Restrictions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.fr.md) (phase 2)
 - [`WIN - U - Microsoft Teams`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.fr.md) (phase 2)
@@ -677,6 +680,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`MAC - D - Restrictions Hardening`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.fr.md) (phase 2)
 - [`MAC - D - Software Updates`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.fr.md) (phase 2)
 - [`MAC - U - Compliance OS Version`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Extensions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.fr.md) (phase 2)
 - [`WIN - D - In-Box App Removal`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.fr.md) (phase 2)
 - [`WIN - D - Printing Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.fr.md) (phase 2)
 - [`WIN - U - Compliance OS Version`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.fr.md) (phase 2)
@@ -726,6 +730,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`MAC - D - Microsoft Edge Security`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.fr.md) (phase 1)
 - [`WIN - D - Enhanced Phishing Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.fr.md) (phase 1)
 - [`WIN - D - Microsoft Edge Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.fr.md) (phase 1)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - U - AI Usage Control Restricted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.fr.md) (phase 2)
 - [`IOS - D - Defender for Endpoint Onboarding Supervised`](../IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.fr.md) (phase 4)
 - [`IOS - D - Defender for Endpoint Onboarding Unsupervised`](../IntuneTemplate/IOS/DeviceConfigurations/Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Unsupervised.fr.md) (phase 4)
@@ -744,6 +749,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`WIN - U - Personal Data Encryption`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.fr.md) (phase 1)
 - [`MAC - D - FileVault`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.fr.md) (phase 2)
 - [`WIN - D - Cryptography`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.fr.md) (phase 2)
 - [`AND - U - Compliance Corporate Password`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Password.fr.md) (phase 3)
 - [`AND - U - Compliance Password`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Password.fr.md) (phase 3)
@@ -889,7 +895,7 @@ de la partie technique, pas un substitut à cette appréciation.
 
 **Mise en œuvre technique.** Le cœur de la baseline : gestion de la configuration, gestion des correctifs (anneaux de mise à jour), durcissement, protection contre les logiciels malveillants, sécurité réseau sur l'appareil et versions minimales de l'OS.
 
-**Intune, phase 1 (48)**
+**Intune, phase 1 (49)**
 
 - [`MAC - D - Defender Antivirus`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.fr.md) (phase 1)
 - [`MAC - D - Defender for Endpoint`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.fr.md) (phase 1)
@@ -908,6 +914,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - D - Defender Ransomware Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.fr.md) (phase 1)
 - [`WIN - D - Defender Security Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.fr.md) (phase 1)
 - [`WIN - D - Defender Update Ring 3 Production`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_3_Production.fr.md) (phase 1)
+- [`WIN - D - Google Chrome Updates`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Updates.fr.md) (phase 1)
 - [`WIN - D - Internet Explorer Legacy`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.fr.md) (phase 1)
 - [`WIN - D - Legacy Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.fr.md) (phase 1)
 - [`WIN - D - Local Security Policies`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.fr.md) (phase 1)
@@ -940,12 +947,14 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - U - Microsoft Office Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.fr.md) (phase 1)
 - [`WIN - U - Microsoft Store`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.fr.md) (phase 1)
 
-**Préparé — pilote, en attente ou groupe dédié (35)**
+**Préparé — pilote, en attente ou groupe dédié (37)**
 
 - [`MAC - D - Restrictions Hardening`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.fr.md) (phase 2)
 - [`MAC - D - Software Updates`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.fr.md) (phase 2)
 - [`MAC - U - Compliance OS Version`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.fr.md) (phase 2)
 - [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Extensions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - D - In-Box App Removal`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.fr.md) (phase 2)
 - [`WIN - D - Kernel DMA Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.fr.md) (phase 2)
 - [`WIN - D - Network Authentication Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.fr.md) (phase 2)
@@ -1117,7 +1126,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.fr.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.fr.md) (phase 1)
 
-**Préparé — pilote, en attente ou groupe dédié (37)**
+**Préparé — pilote, en attente ou groupe dédié (38)**
 
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.fr.md) (phase 2)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.fr.md) (phase 2)
@@ -1130,6 +1139,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.fr.md) (phase 2)
 - [`WIN - D - Disable NTLM`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.fr.md) (phase 2)
 - [`WIN - D - Enrollment Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.fr.md) (phase 2)
+- [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) (phase 2)
 - [`WIN - D - Logon Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.fr.md) (phase 2)
 - [`WIN - D - Removable Storage`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.fr.md) (phase 2)
 - [`WIN - D - Windows Hello for Business`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.fr.md) (phase 2)
@@ -1250,7 +1260,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 
 | Safeguard | IG | Nature | Statut | Policies |
 |---|---|---|---|---|
-| **4.1** Establish and Maintain a Secure Configuration Process | IG1 | organisationnel | ● Couvert (phase 1) | `WIN - D - Config Refresh`, `WIN - D - Internet Explorer Legacy`, `WIN - D - Legacy Hardening`, `WIN - D - Local Security Policies`, `WIN - D - Login and Lock Screen`, `WIN - D - Microsoft Edge Security` et 24 de plus |
+| **4.1** Establish and Maintain a Secure Configuration Process | IG1 | organisationnel | ● Couvert (phase 1) | `WIN - D - Config Refresh`, `WIN - D - Internet Explorer Legacy`, `WIN - D - Legacy Hardening`, `WIN - D - Local Security Policies`, `WIN - D - Login and Lock Screen`, `WIN - D - Microsoft Edge Security` et 25 de plus |
 | **4.2** Establish and Maintain a Secure Configuration Process for Network Infrastructure | IG1 | organisationnel | ▢ Organisationnel | — |
 | **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technique | ● Couvert (phase 1) | `MAC - U - Compliance Password`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `MAC - D - Passcode and Screen Lock`, `MAC - D - Screensaver`, `AND - U - Compliance Corporate Password` et 5 de plus |
 | **4.4** Implement and Manage a Firewall on Servers | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
@@ -1294,7 +1304,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 | **7.1** Establish and Maintain a Vulnerability Management Process | IG1 | organisationnel | ▢ Organisationnel | — |
 | **7.2** Establish and Maintain a Remediation Process | IG1 | organisationnel | ▢ Organisationnel | — |
 | **7.3** Perform Automated Operating System Patch Management | IG1 | technique | ● Couvert (phase 1) | `WIN - D - Automatic Restart Sign-On`, `WIN - D - Windows Update Ring 3 Production`, `MAC - D - Software Updates`, `AND - D - System Updates`, `AND - U - Compliance Corporate Device Health`, `AND - U - Compliance Device Health` et 4 de plus |
-| **7.4** Perform Automated Application Patch Management | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Microsoft Edge Updates`, `WIN - D - Microsoft Office Updates`, `MAC - D - Software Updates`, `AND - U - Corporate Device Security` |
+| **7.4** Perform Automated Application Patch Management | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates`, `WIN - D - Microsoft Office Updates`, `MAC - D - Software Updates` et 1 de plus |
 | **7.5** Perform Automated Vulnerability Scans of Internal Enterprise Assets | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **7.6** Perform Automated Vulnerability Scans of Externally-Exposed Enterprise Assets | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **7.7** Remediate Detected Vulnerabilities | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
@@ -1320,12 +1330,12 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 
 | Safeguard | IG | Nature | Statut | Policies |
 |---|---|---|---|---|
-| **9.1** Ensure Use of Only Fully Supported Browsers and Email Clients | IG1 | technique | ● Couvert (phase 1) | `MAC - U - Microsoft Edge Updates`, `WIN - D - Microsoft Edge Updates` |
+| **9.1** Ensure Use of Only Fully Supported Browsers and Email Clients | IG1 | technique | ● Couvert (phase 1) | `MAC - U - Microsoft Edge Updates`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates` |
 | **9.2** Use DNS Filtering Services | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **9.3** Maintain and Enforce Network-Based URL Filters | IG2 | technique | ● Couvert (phase 1) | `MAC - D - Microsoft Edge Security`, `IOS - D - Defender for Endpoint Onboarding Supervised`, `IOS - D - Defender for Endpoint Onboarding Unsupervised` |
-| **9.4** Restrict Unnecessary or Unauthorized Browser and Email Client Extensions | IG2 | technique | ● Couvert (phase 1) | `MAC - U - Microsoft Edge Extensions`, `WIN - U - Microsoft Edge Extensions` |
+| **9.4** Restrict Unnecessary or Unauthorized Browser and Email Client Extensions | IG2 | technique | ● Couvert (phase 1) | `MAC - U - Microsoft Edge Extensions`, `WIN - U - Microsoft Edge Extensions`, `WIN - D - Google Chrome Extensions` |
 | **9.5** Implement DMARC | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
-| **9.6** Block Unnecessary File Types | IG2 | technique | ● Couvert (phase 1) | `WIN - D - Microsoft Edge Security`, `WIN - U - Microsoft Office Security`, `WIN - D - Script File Associations` |
+| **9.6** Block Unnecessary File Types | IG2 | technique | ● Couvert (phase 1) | `WIN - D - Microsoft Edge Security`, `WIN - U - Microsoft Office Security`, `WIN - D - Google Chrome Security`, `WIN - D - Script File Associations` |
 | **9.7** Deploy and Maintain Email Server Anti-Malware Protections | IG3 | technique | ○ Aucune mesure technique dans la baseline | — |
 
 ### 10 Malware Defenses
@@ -1336,7 +1346,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 | **10.2** Configure Automatic Anti-Malware Signature Updates | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Defender Antivirus`, `WIN - D - Defender Antivirus`, `WIN - D - Defender Update Ring 3 Production`, `WIN - U - Compliance Defender Security Intelligence`, `WIN - D - Defender Update Ring 1 Pilot`, `WIN - D - Defender Update Ring 2 UAT` |
 | **10.3** Disable Autorun and Autoplay for Removable Media | IG1 | technique | ● Couvert (phase 1) | `WIN - D - Security Hardening` |
 | **10.4** Configure Automatic Anti-Malware Scanning of Removable Media | IG2 | technique | ● Couvert (phase 1) | `WIN - D - Defender Antivirus`, `WIN - D - Defender AV Policy` |
-| **10.5** Enable Anti-Exploitation Features | IG2 | technique | ● Couvert (phase 1) | `MAC - U - Compliance Device Health`, `WIN - D - Attack Surface Reduction`, `WIN - D - Defender Additional Configuration`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Threat Protection` et 5 de plus |
+| **10.5** Enable Anti-Exploitation Features | IG2 | technique | ● Couvert (phase 1) | `MAC - U - Compliance Device Health`, `WIN - D - Attack Surface Reduction`, `WIN - D - Defender Additional Configuration`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Threat Protection` et 6 de plus |
 | **10.6** Centrally Manage Anti-Malware Software | IG2 | technique | ● Couvert (phase 1) | `MAC - D - Defender Antivirus`, `WIN - D - Defender Additional Configuration`, `WIN - D - Defender Antivirus`, `WIN - D - Defender Security Experience`, `WIN - D - Threat Protection`, `WIN - D - Defender AV Policy` |
 | **10.7** Use Behavior-Based Anti-Malware Software | IG2 | technique | ● Couvert (phase 1) | `WIN - D - Defender Antivirus`, `WIN - D - Defender Ransomware Protection`, `WIN - D - Defender AV Policy` |
 
@@ -1467,14 +1477,14 @@ est organisationnel par définition : aucune policy ne le met en œuvre, cette b
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Couvert (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` et 6 de plus |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Aucune mesure technique dans la baseline | — |
 | **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` et 12 de plus |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` et 13 de plus |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` et 14 de plus |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Couvert (phase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
-| **PR.PS-01** | Configuration management practices are established and applied | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - Cloud Optimized Content` et 53 de plus |
-| **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Couvert (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Microsoft Edge Updates`, `WIN - D - Microsoft Office Updates` et 16 de plus |
+| **PR.PS-01** | Configuration management practices are established and applied | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - Cloud Optimized Content` et 54 de plus |
+| **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Couvert (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates` et 17 de plus |
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ Aucune mesure technique dans la baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Couvert (phase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` et 2 de plus |
-| **PR.PS-05** | Installation and execution of unauthorized software are prevented | ● Couvert (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Microsoft Edge Extensions`, `WIN - D - Attack Surface Reduction`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Microsoft Store` et 9 de plus |
+| **PR.PS-05** | Installation and execution of unauthorized software are prevented | ● Couvert (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Microsoft Edge Extensions`, `WIN - D - Attack Surface Reduction`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Microsoft Store` et 11 de plus |
 | **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Couvert (phase 1) | `MAC - D - Firewall and Gatekeeper`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - D - Wireless and Peripherals`, `WIN - D - Network Authentication Hardening` et 4 de plus |
 | **PR.IR-03** | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations | ● Couvert (phase 1) | `WIN - D - Business Continuity`, `MAC - D - Wifi Guest`, `WIN - D - Wifi Guest` |
 | **PR.IR-04** | Adequate resource capacity to ensure availability is maintained | ● Couvert (phase 1) | `WIN - D - Delivery Optimisation`, `WIN - D - Endpoint Analytics`, `WIN - D - Storage Sense` |
@@ -1597,7 +1607,7 @@ Prête, mais n'agit qu'une fois le prérequis rempli. Décision : qui s'en charg
 | [`WIN - D - Windows Event Forwarding`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.fr.md) | N'a aucun effet sans un Windows Event Collector avec des abonnements initiés par la source, joignable depuis les appareils (VPN, Always On VPN ou réseau interne). Quiconque centralise les journaux via Defender for Endpoint, Microsoft Sentinel ou l'Azure Monitor Agent n'a pas besoin de cette policy. | A.8.15, A.8.16 |
 | [`WIN - U - Compliance Defender for Endpoint Risk`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md) | En attente du connecteur Microsoft Defender for Endpoint dans Intune (Endpoint security → Microsoft Defender for Endpoint → 'Connect Windows devices … to Defender for Endpoint' activé) et d'une licence Defender for Endpoint P1/P2 ou Business. Sans connecteur, chaque appareil indique « non conforme » ou « non disponible » pour ce contrôle. | A.5.15, A.8.7, A.8.16 |
 
-### D. Pilote — phase 2 (39)
+### D. Pilote — phase 2 (41)
 
 Perceptible par les utilisateurs ou susceptible de casser quelque chose. Décision : accepter les conséquences après le pilote et passer en phase 1.
 Jusqu'à cette décision, la mesure que la policy met en œuvre n'est pas couverte.
@@ -1622,6 +1632,8 @@ Jusqu'à cette décision, la mesure que la policy met en œuvre n'est pas couver
 | [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.fr.md) | Nécessite un redémarrage, et l'intégrité de la mémoire (HVCI) ne charge pas les pilotes qui n'ont pas été conçus pour elle — pensez aux anciens pilotes VPN, d'imprimante et de station d'accueil. Vérifiez pendant le pilote que tout démarre encore. | A.5.17, A.8.1, A.8.7 |
 | [`WIN - D - Disable NTLM`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.fr.md) | Refuse tout NTLM, entrant et sortant. Ce qui ne peut pas passer par Kerberos casse : les applications qui se connectent par adresse IP, les appareils hors du domaine, et les partages pour lesquels l'appareil n'obtient pas de ticket Kerberos — un appareil joint à Entra qui ouvre un partage sur Entra Domain Services se rabat sur NTLM. Avant le pilote, consultez Microsoft-Windows-NTLM/Operational sur quelques appareils Windows 11 24H2 (4020/4021 sortant, 4022/4023 entrant) : cette journalisation y est activée par défaut et montre ce qui casserait. | A.8.5 |
 | [`WIN - D - Enrollment Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.fr.md) | Concerne la première installation d'un appareil, pas un appareil en service. Testez sur un appareil Autopilot : sans réseau, l'utilisateur ne peut pas aller plus loin, et c'est voulu — mais cela doit correspondre à la manière dont les appareils sont déployés chez vous. | A.5.9, A.5.15, A.8.1 |
+| [`WIN - D - Google Chrome Extensions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.fr.md) | ExtensionInstallBlocklist '*' désactive aussi les extensions déjà installées : chaque utilisateur de Chrome perd ses extensions. Vérifiez d'abord lesquelles sont utilisées (Defender Vulnerability Management → Browser extensions) et ajoutez celles qui sont nécessaires à ExtensionInstallAllowlist dans une copie propre au tenant. | A.8.19 |
+| [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.fr.md) | Visible pour les utilisateurs de Chrome : la connexion au navigateur, la synchronisation et l'enregistrement de nouveaux mots de passe sont désactivés. Le débogage à distance l'est aussi, ce qui casse les tests automatisés (Puppeteer, Playwright, Selenium) sur le Chrome installé. D'abord sur le groupe pilote. | A.8.7, A.8.12, A.8.23, A.8.24 |
 | [`WIN - D - In-Box App Removal`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_In_Box_App_Removal.fr.md) | Supprime les applications intégrées, y compris sur les appareils déjà en service. Vérifiez pendant le pilote si quelqu'un en regrette une. | A.8.19 |
 | [`WIN - D - Kernel DMA Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Kernel_DMA_Protection.fr.md) | Une station d'accueil ou un eGPU sans remappage DMA ne fonctionne plus. Testez avec les stations d'accueil présentes dans le parc. | A.7.9, A.8.1 |
 | [`WIN - D - Logon Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.fr.md) | Les utilisateurs devront désormais appuyer sur CTRL+ALT+DEL avant l'écran de connexion. Communiquez-le avant le déploiement général. | A.5.15, A.8.5, A.8.20 |
@@ -1845,24 +1857,24 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.8.4** Accès aux codes source | selon le cas | applicable uniquement en cas de développement interne de logiciels ou de scripts | Organisationnel : Uniquement en cas de développement logiciel interne : gérer l'accès aux dépôts et aux outils de développement. | — |
 | **A.8.5** Authentification sécurisée | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 10 policies en phase 1, 20 préparée(s). Organisationnel : Établir une politique d'authentification (quelles méthodes, exceptions, break-glass). | (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Dimensionnement | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1. Organisationnel : Planification des capacités pour le réseau, les licences et le stockage. | (c) |
-| **A.8.7** Protection contre les programmes malveillants | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 26 policies en phase 1, 16 préparée(s). Organisationnel : Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). | (b) (c) (e) (f) (i) (j) |
-| **A.8.8** Gestion des vulnérabilités techniques | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 11 policies en phase 1, 13 préparée(s). Organisationnel : Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. | (e) (f) (h) (i) |
+| **A.8.7** Protection contre les programmes malveillants | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 26 policies en phase 1, 17 préparée(s). Organisationnel : Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). | (b) (c) (e) (f) (i) (j) |
+| **A.8.8** Gestion des vulnérabilités techniques | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 12 policies en phase 1, 13 préparée(s). Organisationnel : Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. | (e) (f) (h) (i) |
 | **A.8.9** Gestion de la configuration | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 18 policies en phase 1, 7 préparée(s). Organisationnel : Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. | (b) (e) (g) (i) |
 | **A.8.10** Suppression des informations | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. | — |
 | **A.8.11** Masquage des données | oui | sécurité de base ; à confirmer par l'analyse des risques | Préparé techniquement : 1 policy en pilote, en attente ou groupe dédié. Organisationnel : Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. | — |
-| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 11 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
+| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 12 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
 | **A.8.13** Sauvegarde des informations | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1. Organisationnel : Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. | (c) |
 | **A.8.14** Redondance des moyens de traitement de l'information | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. | — |
 | **A.8.15** Journalisation | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 6 policies en phase 1, 2 préparée(s). Organisationnel : Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. | (b) (e) |
 | **A.8.16** Activités de surveillance | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 4 policies en phase 1, 7 préparée(s). Organisationnel : Suivi des alertes 24 h/24 et 7 j/7 ou pendant les heures de bureau, avec des critères d'escalade. | (b) (e) (i) |
 | **A.8.17** Synchronisation des horloges | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 2 policies en phase 1, 1 préparée(s). Organisationnel : Définir une source de temps approuvée. | (b) (e) (i) |
 | **A.8.18** Utilisation de programmes utilitaires à privilèges | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 1 policy en phase 1, 3 préparée(s). Organisationnel : Registre des outils d'administration et d'assistance à distance autorisés et des personnes habilitées à les utiliser. | (i) |
-| **A.8.19** Installation de logiciels sur des systèmes opérationnels | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 10 policies en phase 1, 8 préparée(s). Organisationnel : Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). | (e) (f) (g) (h) (i) |
+| **A.8.19** Installation de logiciels sur des systèmes opérationnels | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 10 policies en phase 1, 9 préparée(s). Organisationnel : Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). | (e) (f) (g) (h) (i) |
 | **A.8.20** Sécurité des réseaux | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 12 préparée(s). Organisationnel : L'infrastructure réseau (pare-feu, Wi-Fi, VPN) est en grande partie hors de cette baseline. | (b) (c) (e) (f) (h) (i) (j) |
 | **A.8.21** Sécurité des services réseau | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 1 policy en phase 1, 5 préparée(s). Organisationnel : Définir et surveiller les exigences relatives aux services et fournisseurs réseau. | (c) (e) (h) |
 | **A.8.22** Cloisonnement des réseaux | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : La segmentation réseau relève de l'infrastructure et ne peut pas être mise en place via des policies endpoint/identité. | — |
-| **A.8.23** Filtrage web | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1, 3 préparée(s). Organisationnel : Définir les catégories et les exceptions (Defender Web Content Filtering dans le portail Defender). | (d) (e) (g) (i) (j) |
-| **A.8.24** Utilisation de la cryptographie | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 9 policies en phase 1, 7 préparée(s). Organisationnel : Politique cryptographique et gestion des clés (qui a accès aux clés de récupération, rotation). | (e) (f) (h) (i) (j) |
+| **A.8.23** Filtrage web | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1, 4 préparée(s). Organisationnel : Définir les catégories et les exceptions (Defender Web Content Filtering dans le portail Defender). | (d) (e) (g) (i) (j) |
+| **A.8.24** Utilisation de la cryptographie | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 9 policies en phase 1, 8 préparée(s). Organisationnel : Politique cryptographique et gestion des clés (qui a accès aux clés de récupération, rotation). | (e) (f) (h) (i) (j) |
 | **A.8.25** Cycle de vie de développement sécurisé | selon le cas | applicable uniquement en cas de développement logiciel interne | Organisationnel : Uniquement en cas de développement interne. | — |
 | **A.8.26** Exigences de sécurité des applications | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Exigences de sécurité lors du développement ou de l'acquisition d'applications. | — |
 | **A.8.27** Principes d'ingénierie et d'architecture des systèmes sécurisés | selon le cas | applicable uniquement en cas de développement interne de systèmes | Organisationnel : Définir les principes d'architecture (zero trust). | — |
@@ -1878,7 +1890,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 
 | | Nombre |
 |---|---:|
-| Policies Intune avec mesures | 197 sur 197 |
+| Policies Intune avec mesures | 200 sur 200 |
 | Libellés hors vocabulaire | 0 |
 | Libellés avec une graphie divergente (comptés quand même) | 0 |
 

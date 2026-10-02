@@ -8,10 +8,10 @@ from it, which systems read it and how it ends up in a tenant. For the *what* pe
 
 ## In short
 
-- **One source:** `IntuneTemplate/` — 197 policies in CIPP template format, across Windows (132),
+- **One source:** `IntuneTemplate/` — 200 policies in CIPP template format, across Windows (135),
   macOS (37), iOS/iPadOS (14) and Android (14).
 - **Three sources in:** OpenIntuneBaseline (94 policies), IntuneAdmin/IntuneBaselines (22) and
-  our own work (81).
+  our own work (84).
 - **Two derivatives out:** a restore export for IntuneBackupAndRestore and the CIPP baseline.
   CIPP reads the templates directly itself.
 - **Two routes to the tenant:** CIPP or the PowerShell module IntuneBackupAndRestore. Assigning
@@ -27,7 +27,7 @@ flowchart LR
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Tenant backup<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 
-  T["<b>IntuneTemplate/</b><br/>197 policies · _manifest.json"]
+  T["<b>IntuneTemplate/</b><br/>200 policies · _manifest.json"]
 
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]
@@ -100,8 +100,8 @@ agree.
 
 | Phase | Meaning | Policies | CIPP package | CIPP stage |
 |---:|---|---:|---|---:|
-| 1 | Deploy now | 101 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | Pilot first | 39 | `CXNM - Standard - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
+| 1 | Deploy now | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
+| 2 | Pilot first | 41 | `CXNM - Standard - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
 | 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `CXNM - Standard - Baseline-Wacht`, not assigned | 3 |
 | 4 | Dedicated group (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<group>` | 1 |
 | 5 | Do not deploy — alternative to another policy | 15 | none | – |

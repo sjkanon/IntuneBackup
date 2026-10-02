@@ -44,7 +44,8 @@ domeinen door DNS- en TLS-verkeer op het apparaat te inspecteren. DoH van **Wind
 via de DNS-client van het besturingssysteem en blijft zichtbaar voor Defender. DoH **binnen een
 browser van derden** (Chrome, Firefox) omzeilt de DNS-client; Microsoft adviseert in de
 Network Protection-documentatie om in die browsers DoH en QUIC uit te zetten. Edge valt daar niet
-onder, omdat Edge SmartScreen gebruikt. Controleer het na uitrol met een testdomein van
+onder, omdat Edge SmartScreen gebruikt. In Chrome zet `CXNM - Standard - WIN - D - Google Chrome Security` ze uit, in Firefox
+[`firefox-policies/`](../firefox-policies/README.md). Controleer het na uitrol met een testdomein van
 `smartscreentestratings2.net` in Chrome.
 
 ## Uitrol

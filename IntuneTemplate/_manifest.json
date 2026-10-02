@@ -5618,6 +5618,95 @@
       "metadataOnly": true
     },
     {
+      "target": "Baseline_WIN_D_Google_Chrome_Security",
+      "displayName": "CXNM - Standard - WIN - D - Google Chrome Security",
+      "doel": "Legt de beveiliging van Google Chrome vast op het niveau van Edge: Safe Browsing aan en niet te omzeilen, kwaadaardige downloads geblokkeerd, certificaatfouten niet weg te klikken, en geen bedrijfsgegevens naar een persoonlijk Google-account.",
+      "bron": "Google Chrome-beleid in de settings catalog (chromeintunev1, chromeintunev141) — waarden gekozen naar de Edge-tegenhanger in deze baseline; ids, opties en bereik geverifieerd tegen DCv2/Settings in pl4nty/intune-change-tracking",
+      "herkomst": "eigen",
+      "fase": 2,
+      "faseWaarom": "Merkbaar voor wie Chrome gebruikt: aanmelden in de browser, synchronisatie en het opslaan van nieuwe wachtwoorden gaan uit. Remote debugging gaat ook uit, en dat breekt geautomatiseerde tests (Puppeteer, Playwright, Selenium) tegen de geïnstalleerde Chrome. Eerst op de pilotgroep.",
+      "controls": {
+        "iso": [
+          "A.8.7 Bescherming tegen malware",
+          "A.8.12 Voorkomen van datalekken",
+          "A.8.23 Webfiltering",
+          "A.8.24 Gebruik van cryptografie"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden",
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.1 Establish and Maintain a Secure Configuration Process",
+          "CIS Controls v8.1 9.6 Block Unnecessary File Types",
+          "CIS Controls v8.1 10.5 Enable Anti-Exploitation Features"
+        ],
+        "nistcsf": [
+          "PR.PS-01",
+          "PR.PS-05",
+          "PR.DS-02"
+        ]
+      },
+      "bewijs": "Chrome negeert alles wat de Edge-policies afdwingen; zonder eigen policy ligt elke maatregel uit Microsoft Edge Security één klik verderop in een andere browser. Met remote debugging uit en application-bound encryption aan kan een infostealer de cookies van Chrome niet meer via de DevTools-poort of DPAPI uitlezen — de gangbare route om sessietokens te stelen en MFA te omzeilen. DoH en QUIC uit, omdat Defender Network Protection verkeer van browsers van derden alleen via DNS en TLS kan inspecteren en Microsoft adviseert beide in die browser uit te zetten.",
+      "universeel": "Elk Windows-apparaat. Zonder Chrome schrijft de policy alleen registerwaarden en doet hij niets.",
+      "note": "Safe Browsing op standaard (1) en niet op enhanced (2): enhanced stuurt elke bezochte URL naar Google. Downloadrestrictie 4 is 'kwaadaardige downloads blokkeren', dezelfde waarde als in Edge. De wachtwoordmanager gaat uit omdat Edge de beheerde wachtwoordmanager is; Chrome slaat geen nieuwe wachtwoorden meer op, al opgeslagen wachtwoorden blijven volgens Google werken. Extensies staan in een eigen policy (Google Chrome Extensions), net als bij Edge; BlockExternalExtensions staat wél hier, omdat het alleen extensies raakt die andere software via het register installeert. ApplicationBoundEncryptionEnabled staat in de catalogus in de namespace chromeintunev141, de rest op chromeintunev1. Firefox heeft geen settings catalog-definities: zie extras/windows/remediations/firefox-policies.",
+      "metadataOnly": true
+    },
+    {
+      "target": "Baseline_WIN_D_Google_Chrome_Extensions",
+      "displayName": "CXNM - Standard - WIN - D - Google Chrome Extensions",
+      "doel": "Blokkeert extensies in Google Chrome, zoals Microsoft Edge Extensions dat in Edge doet.",
+      "bron": "Google Chrome-beleid in de settings catalog (chromeintunev1, chromeintunev141) — waarden gekozen naar de Edge-tegenhanger in deze baseline; ids, opties en bereik geverifieerd tegen DCv2/Settings in pl4nty/intune-change-tracking",
+      "herkomst": "eigen",
+      "fase": 2,
+      "faseWaarom": "ExtensionInstallBlocklist '*' schakelt ook extensies uit die al geïnstalleerd zijn, dus elke Chrome-gebruiker verliest zijn extensies. Kijk eerst welke er gebruikt worden (Defender Vulnerability Management → Browser extensions) en zet wat nodig is op ExtensionInstallAllowlist in een tenantspecifieke kopie.",
+      "controls": {
+        "iso": [
+          "A.8.19 Installatie van software op operationele systemen"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden"
+        ],
+        "cis": [
+          "CIS Controls v8.1 9.4 Restrict Unnecessary or Unauthorized Browser and Email Client Extensions"
+        ],
+        "nistcsf": [
+          "PR.PS-05"
+        ]
+      },
+      "bewijs": "Een extensie leest alles wat in een tabblad staat, sessietokens inbegrepen; kwaadaardige of overgenomen extensies zijn een bekende route voor diefstal van sessies en gegevens. Alles blokkeren en per uitzondering toestaan is de enige vorm die ook de extensie van morgen tegenhoudt.",
+      "universeel": "Elk Windows-apparaat; zonder Chrome doet hij niets. Een allowlist verschilt per organisatie en staat daarom niet in de baseline.",
+      "note": "Apart van Google Chrome Security omdat dit de policy is die het vaakst een uitzondering vraagt: zo kan de rest van de Chrome-hardening uitrollen terwijl de extensie-inventaris nog loopt.",
+      "metadataOnly": true
+    },
+    {
+      "target": "Baseline_WIN_D_Google_Chrome_Updates",
+      "displayName": "CXNM - Standard - WIN - D - Google Chrome Updates",
+      "doel": "Zorgt dat een Chrome-update binnen drie dagen actief wordt: herstartmelding verplicht, gedwongen herstart buiten werktijd, en versneld bij een sterk verouderde versie.",
+      "bron": "Google Chrome-beleid in de settings catalog (chromeintunev1, chromeintunev141) — waarden gekozen naar de Edge-tegenhanger in deze baseline; ids, opties en bereik geverifieerd tegen DCv2/Settings in pl4nty/intune-change-tracking",
+      "herkomst": "eigen",
+      "fase": 1,
+      "controls": {
+        "iso": [
+          "A.8.8 Beheer van technische kwetsbaarheden"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden"
+        ],
+        "cis": [
+          "CIS Controls v8.1 7.4 Perform Automated Application Patch Management",
+          "CIS Controls v8.1 9.1 Ensure Use of Only Fully Supported Browsers and Email Clients"
+        ],
+        "nistcsf": [
+          "PR.PS-02"
+        ]
+      },
+      "bewijs": "Chrome downloadt updates zelf, maar een update werkt pas na een herstart van de browser — en een browser die nooit dichtgaat draait weken op een versie met bekende, actief misbruikte lekken. Dezelfde termijnen als Microsoft Edge Updates: verplichte herstart na 3 dagen (259200000 ms), binnen het venster 17:00–06:00, en versneld zodra de versie 7 dagen verouderd is.",
+      "universeel": "Elk Windows-apparaat met Chrome; zonder Chrome doet hij niets.",
+      "note": "Google Update zelf (updatebeleid, kanaal) staat niet in de settings catalog: de `update~policy~cat_google~cat_googleupdate`-definities die er wel zijn horen bij de Edge-updater, waarvan de ADMX een fork van Google Update is met de oude categorienamen. Zolang niemand updates via Google Update uitzet, werkt Chrome zichzelf bij; deze policy zorgt dat die updates ook ingaan. RelaunchFastIfOutdated staat in de namespace chromeintunev141, de rest op chromeintunev1. Een apparaat dat 's nachts uit staat, herstart pas in het eerstvolgende venster.",
+      "metadataOnly": true
+    },
+    {
       "target": "Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk",
       "displayName": "CXNM - Standard - WIN - U - Compliance Defender for Endpoint Risk",
       "doel": "Maakt een apparaat niet-compliant zodra Defender for Endpoint het risiconiveau hoger dan 'gemiddeld' inschat, zodat Conditional Access een apparaat met een actieve dreiging de toegang tot bedrijfsgegevens ontzegt.",

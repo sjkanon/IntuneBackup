@@ -11,9 +11,9 @@ la main.
 
 | Source | Export | Stratégies | Affectations |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 197 | 101, issues de `_assignments.json` (phase 1) |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 200 | 102, issues de `_assignments.json` (phase 1) |
 
-299 fichiers JSON au total : 197 stratégies, 101 fichiers d'affectation et le profil ADE macOS
+303 fichiers JSON au total : 200 stratégies, 102 fichiers d'affectation et le profil ADE macOS
 qui les accompagne. CIPP n'a pas besoin de ce dossier ; il lit `IntuneTemplate/` directement.
 
 ## Pourquoi `NativeImport` figure dans le chemin
@@ -23,7 +23,7 @@ Parce que c'est la seule exclusion que connaît CIPP. Un dépôt de templates es
 `.json`, et le chemin ne doit pas contenir `NativeImport`. Un paramètre du type « ne regarder que
 dans ce sous-dossier » n'existe pas.
 
-Sans ce mot, CIPP importerait donc aussi ces 299 fichiers. Ils contiennent les mêmes 197
+Sans ce mot, CIPP importerait donc aussi ces 303 fichiers. Ils contiennent les mêmes 200
 stratégies (plus leurs affectations et le profil ADE), mais sous forme Graph sans `RowKey` — et
 CIPP se rabat alors sur une déduction du type de stratégie à partir du contenu et en crée un
 **second** template, avec le même nom et son propre GUID. Deux templates portant le même nom,
@@ -67,7 +67,7 @@ un script dédié — voir ci-dessous.
 
 | Dossier | Contenu | Restauration |
 |---|---:|---|
-| `Settings Catalog/` | 155 stratégies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 158 stratégies | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 26 stratégies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
 | `Device Configurations/` | 13 stratégies | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 stratégies | `Invoke-IntuneRestoreAppProtectionPolicy` |

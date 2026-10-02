@@ -4,34 +4,34 @@
 
 # Intune baseline — overview
 
-197 policies across 4 platforms, with
+200 policies across 4 platforms, with
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) as the source.
 This is the summary; the details are in the [main README](../README.en.md) and per folder.
 
 | | Count |
 |---|---:|
-| Policies | 197 |
-| Without assignment (deliberately) | 96 |
+| Policies | 200 |
+| Without assignment (deliberately) | 98 |
 | Deployed in the tenant | 0 |
 
 ## What is in it
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.en.md) | 114 | 1 | 6 | 11 | – | **132** |
+| [Windows](../IntuneTemplate/WIN/README.en.md) | 117 | 1 | 6 | 11 | – | **135** |
 | [macOS](../IntuneTemplate/MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Each platform has a table with **every policy, what it does and where it lands**:
-- [Windows](../IntuneTemplate/WIN/README.en.md) — 132 policies
+- [Windows](../IntuneTemplate/WIN/README.en.md) — 135 policies
 - [macOS](../IntuneTemplate/MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.en.md) — 14 policies
 
 ## Compliance framework
 
-197 of the 197 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+200 of the 200 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 31 of the 93 Annex A controls.
 Per control and per NIS2 point what the baseline enforces, how it is verified and what the organisation
 has to arrange itself: [COMPLIANCE.en.md](COMPLIANCE.en.md).
@@ -140,6 +140,8 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `WIN - D - Device Guard and Credential Guard` | Requires a restart, and memory integrity (HVCI) does not load drivers that were not built for it — think of old VPN, printer and dock drivers. Check in the pilot that everything still starts. |
 | `WIN - D - Disable NTLM` | Refuses all NTLM, inbound and outbound. Whatever cannot use Kerberos breaks: applications that connect by IP address, devices outside the domain, and shares for which the device gets no Kerberos ticket — an Entra-joined device opening a share on Entra Domain Services falls back to NTLM. Before the pilot, read Microsoft-Windows-NTLM/Operational on a few Windows 11 24H2 devices (4020/4021 outbound, 4022/4023 inbound): that logging is enabled there by default and shows what would break. |
 | `WIN - D - Enrollment Hardening` | Affects the initial setup of a device, not a running device. Test on one Autopilot device: without a network the user cannot proceed, and that is intended — but it must match how devices are deployed in your organisation. |
+| `WIN - D - Google Chrome Extensions` | ExtensionInstallBlocklist '*' also disables extensions that are already installed, so every Chrome user loses their extensions. First check which ones are in use (Defender Vulnerability Management → Browser extensions) and put what is needed on ExtensionInstallAllowlist in a tenant-specific copy. |
+| `WIN - D - Google Chrome Security` | Noticeable for Chrome users: browser sign-in, sync and saving new passwords are turned off. Remote debugging is turned off too, which breaks automated tests (Puppeteer, Playwright, Selenium) against the installed Chrome. Pilot group first. |
 | `WIN - D - In-Box App Removal` | Removes built-in apps, including from devices already in use. Check in the pilot whether anyone misses one. |
 | `WIN - D - Kernel DMA Protection` | A dock or eGPU without DMA remapping no longer works. Test with the docks present in the fleet. |
 | `WIN - D - Logon Hardening` | Users will now have to press CTRL+ALT+DEL before the sign-in screen. Communicate this before the broad deployment. |
@@ -173,7 +175,7 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is an organisational decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for an organisation that allows these assistants. |
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
-96 are without assignment: the 39 above, 26 awaiting a prerequisite,
+98 are without assignment: the 41 above, 26 awaiting a prerequisite,
 16 for a dedicated group and 15 that are not deployed. The last two are an
 *alternative* to a policy that is assigned, not an addition to it: update rings
 1 and 2 for Windows and Defender set the same settings as ring 3 with different values, the
