@@ -3116,7 +3116,16 @@
         "nistcsf": [
           "PR.AA-05"
         ]
-      }
+      },
+      "overrides": [
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_localusersandgroups_configure_groupconfiguration_accessgroup_users",
+          "value": [
+            "wlapsadmin"
+          ],
+          "reason": "Het LAPS-account heet in deze baseline wlapsadmin, in kleine letters (en mlapsadmin op de Mac); OIB schrijft WLapsAdmin. Windows vergelijkt accountnamen hoofdletterongevoelig, dus functioneel maakt het niets uit — maar zonder deze override zet elke import de schrijfwijze terug die in september 2026 bewust is gelijkgetrokken."
+        }
+      ]
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies - v4.0.json",
@@ -3330,7 +3339,7 @@
       }
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Updates - v3.6.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Updates - v4.0.json",
       "target": "Baseline_WIN_D_Microsoft_Edge_Updates",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Edge Updates",
       "doel": "Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen.",
@@ -3352,7 +3361,11 @@
           "PR.PS-02"
         ]
       },
-      "note": "Twee instellingen erbij die OpenIntuneBaseline niet zet, want zonder die twee heeft een openstaande Edge-update geen harde einddatum: het herstartvenster (relaunchwindow, 17:00 plus 780 minuten, dus 17:00 tot 06:00) en versneld herstarten bij een ernstig verouderde versie (relaunchfastifoutdated, 7 dagen, de laagste waarde die de definitie toestaat). De melding stond al op Required met een periode van 3 dagen; het venster zorgt dat de gedwongen herstart buiten werktijd valt. Let op: een apparaat dat nachts uit staat, herstart pas in het eerstvolgende venster. Die twee staan in de catalogus in een eigen versienamespace (microsoft_edgev93 voor het venster, microsoft_edgev141 voor de verouderde versie), waar de rest van deze policy op microsoft_edge en updatev87/v94/v95 staat; ids geverifieerd tegen de definities in DCv2/Settings."
+      "note": "Twee instellingen erbij die OpenIntuneBaseline niet zet, want zonder die twee heeft een openstaande Edge-update geen harde einddatum: het herstartvenster (relaunchwindow, 17:00 plus 780 minuten, dus 17:00 tot 06:00) en versneld herstarten bij een ernstig verouderde versie (relaunchfastifoutdated, 7 dagen, de laagste waarde die de definitie toestaat). De melding stond al op Required met een periode van 3 dagen; het venster zorgt dat de gedwongen herstart buiten werktijd valt. Let op: een apparaat dat nachts uit staat, herstart pas in het eerstvolgende venster. Die twee staan in de catalogus in een eigen versienamespace (microsoft_edgev93 voor het venster, microsoft_edgev141 voor de verouderde versie), waar de rest van deze policy op microsoft_edge en updatev87/v94/v95 staat; ids geverifieerd tegen de definities in DCv2/Settings.",
+      "dropSettings": [
+        "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge",
+        "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview"
+      ]
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - D - Security - v3.6.json",
@@ -3695,7 +3708,7 @@
       }
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Security Hardening - v3.7.json",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Security Hardening - v4.0.json",
       "target": "Baseline_WIN_D_Security_Hardening",
       "displayName": "CXNM - Standard - WIN - D - Security Hardening",
       "doel": "Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen.",
@@ -4207,7 +4220,8 @@
           "PR.AA-01",
           "PR.AA-03"
         ]
-      }
+      },
+      "metadataOnly": true
     },
     {
       "target": "Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric",
@@ -4233,7 +4247,8 @@
           "PR.AA-01",
           "PR.AA-03"
         ]
-      }
+      },
+      "metadataOnly": true
     },
     {
       "target": "Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric",
@@ -4259,7 +4274,8 @@
           "PR.AA-01",
           "PR.AA-03"
         ]
-      }
+      },
+      "metadataOnly": true
     },
     {
       "target": "Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric",
@@ -4285,7 +4301,8 @@
           "PR.AA-01",
           "PR.AA-03"
         ]
-      }
+      },
+      "metadataOnly": true
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Hello for Business - D - WHfB Configuration - v3.2.json",
@@ -4617,7 +4634,7 @@
         ]
       },
       "bron": "ISO/IEC 27001:2022 A.5.10, A.5.19 en A.8.1, NIS2 art. 21(2)(d) — mechanisme uit de bestaande Edge-policy",
-      "note": "Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. LET OP bij uitrol: CXNM - Standard - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De twee regels voor de Store-website uit OpenIntuneBaseline staan hier al in, zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van CXNM - Standard - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.",
+      "note": "Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. LET OP bij uitrol: CXNM - Standard - WIN - U - Microsoft Edge User Experience zet dezelfde blokkeerlijst. Twee toegewezen policies met een verschillende lijst leveren een conflict op, waarna Intune er géén toepast. Neem deze lijst dus over in die policy, of haal 'm daar weg — niet allebei toewijzen. De drie regels uit OpenIntuneBaseline v4.0 staan hier al in — de Store-website, het protocol ms-windows-store:// en javascript:// (tegen ClickFix) — zodat deze lijst compleet is. Een URL-blokkeerlijst is bovendien frictie, geen grens: hij werkt niet op een telefoon en niet op een privéapparaat. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; dat staat in het Defender-portaal, niet in deze repo. **Alternatief van CXNM - Standard - WIN - U - AI Usage Control Permitted**, die dezelfde blokkeerlijst zet zónder de AI-diensten. Allebei toewijzen levert een Conflict op, en dan wordt er niets geblokkeerd — ook de Store-regels niet.",
       "bewijs": "Voor een AI-beleid dat alle AI-tools verbiedt behalve Microsoft Copilot, Copilot Pro en GitHub Copilot voor ontwikkelaars; zonder deze policy houdt niets een gebruiker tegen. Een URL-blokkeerlijst is daarbij frictie, geen grens — hij werkt niet op een telefoon en niet op een privéapparaat — maar hij maakt de regel zichtbaar en houdt het gemakzuchtige gebruik tegen.",
       "universeel": "Geldt voor elke gebruiker op elk apparaat met Edge. De robuustere variant is de categorie Generative AI in Defender Web Content Filtering; die staat in het Defender-portaal, niet in deze repo.",
       "herkomst": "eigen",
@@ -4625,7 +4642,7 @@
         {
           "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist",
           "policy": "CXNM - Standard - WIN - U - Microsoft Edge User Experience",
-          "reason": "Een apparaat kent een URL-blokkeerlijst en de lijst hier is de complete opvolger: de twee regels voor de Store-website uit OpenIntuneBaseline staan erin, plus de AI-diensten die het AI-beleid niet toestaat."
+          "reason": "Een apparaat kent een URL-blokkeerlijst en de lijst hier is de complete opvolger: de drie regels uit OpenIntuneBaseline v4.0 staan erin (Store-website, ms-windows-store:// en javascript://), plus de AI-diensten die het AI-beleid niet toestaat."
         },
         {
           "settingDefinitionId": "user_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_urlblocklist_urlblocklistdesc",

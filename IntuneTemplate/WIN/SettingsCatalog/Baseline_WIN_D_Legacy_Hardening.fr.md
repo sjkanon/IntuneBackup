@@ -28,7 +28,7 @@ Les paramètres de durcissement de l'ancienne policy Administrative Templates po
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
-## Paramètres — 25
+## Paramètres — 24
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le
 paramètre parent a la valeur indiquée.
@@ -52,7 +52,6 @@ paramètre parent a la valeur indiquée.
 | `device_vendor_msft_policy_config_admx_grouppolicy_cse_registry` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nobackground10` | 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nochanges10` | 1 |
-| `device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin` | 0 |
 | `device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols` | 1 |

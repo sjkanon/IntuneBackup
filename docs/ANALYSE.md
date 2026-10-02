@@ -343,6 +343,21 @@ commit `f247604` (9 september 2026). **Die versie was nog niet uitgebracht** —
 noemt als datum nog `2026-09-xx`. Zodra de tag er is: `.oib-source` op die tag zetten en de
 diff opnieuw nalopen. macOS (v1.0) en BYOD zijn niet veranderd.
 
+**Uitgebracht op 30 september 2026** als tag `windows-v4.0` (commit `1cc71a9`). Op 2 oktober is
+`.oib-source` op die tag gezet en de diff met `f247604` nagelopen. Na de beta veranderden drie
+policies; alleen die zijn overgenomen, alle eigen aanpassingen zijn blijven staan:
+
+| Policy | Wat er veranderde | Bij ons |
+|---|---|---|
+| Security Hardening | "Allow Custom SSPs and APs to be loaded into LSASS" uit; Lanman Server en Workstation minimaal SMB 3.1.1 (was 3.0.0) | overgenomen. De LSASS-instelling stond al in Legacy Hardening met dezelfde waarde en is daar weggehaald, zodat hij niet uit twee policies komt |
+| Microsoft Edge Updates | de oudere, dubbele "Allow Installation"-instellingen voor Edge en WebView2 eruit (gaven een conflict, OIB #254) | overgenomen via `dropSettings`; anders hield de importer ze vast als eigen instelling |
+| Microsoft Edge User Experience | URL-blokkeerlijst: de Store-website als één regel `apps.microsoft.com`, plus `ms-windows-store://*` (OIB #253) en `javascript://*` tegen ClickFix (OIB #250) | die lijst staat bij ons in beide AI Usage Control-varianten; daar bijgewerkt, de AI-domeinen bleven staan |
+
+Twee eigen aanpassingen werden door de importer stilzwijgend teruggedraaid en staan nu vast in
+het manifest: `wlapsadmin` in kleine letters in Local Administrators (een `override`, die nu ook
+lijstwaarden aankan) en de vier Windows Hello PIN Complexity-policies (`metadataOnly`: hun
+`{tenantid}`-instellingen komen ook in OIB's WHfB-policy voor, waardoor de carry-regel ze weggooide).
+
 ## Hoe, en waarom niet met `import-oib.js`
 
 Een volledige run van `import-oib.js` draait op dit moment handwerk terug dat na eerdere imports

@@ -343,6 +343,22 @@ commit `f247604` (9 septembre 2026). **Cette version n'était pas encore publié
 indique encore la date `2026-09-xx`. Dès que le tag existe : pointer `.oib-source` sur ce tag et repasser
 le diff. macOS (v1.0) et BYOD n'ont pas changé.
 
+**Publiée le 30 septembre 2026** sous le tag `windows-v4.0` (commit `1cc71a9`). Le 2 octobre,
+`.oib-source` a été pointé sur ce tag et le diff avec `f247604` repassé. Trois policies ont changé
+après la beta ; seules celles-ci ont été reprises, tous nos propres ajustements sont restés :
+
+| Policy | Ce qui a changé | Chez nous |
+|---|---|---|
+| Security Hardening | « Allow Custom SSPs and APs to be loaded into LSASS » désactivé ; Lanman Server et Workstation au minimum SMB 3.1.1 (au lieu de 3.0.0) | repris. Le paramètre LSASS figurait déjà dans Legacy Hardening avec la même valeur et y a été retiré, pour qu'il ne vienne pas de deux policies |
+| Microsoft Edge Updates | les anciens paramètres « Allow Installation » en double pour Edge et WebView2 retirés (ils causaient un conflit, OIB #254) | repris via `dropSettings` ; sinon l'importeur les gardait comme paramètre propre |
+| Microsoft Edge User Experience | liste de blocage d'URL : le site web du Store en une seule règle `apps.microsoft.com`, plus `ms-windows-store://*` (OIB #253) et `javascript://*` contre ClickFix (OIB #250) | cette liste se trouve chez nous dans les deux variantes AI Usage Control ; mise à jour là, les domaines IA sont restés |
+
+Deux de nos propres ajustements étaient annulés en silence par l'importeur et sont désormais fixés
+dans le manifeste : `wlapsadmin` en minuscules dans Local Administrators (un `override`, qui gère
+désormais aussi les valeurs de liste) et les quatre policies Windows Hello PIN Complexity
+(`metadataOnly` : leurs paramètres `{tenantid}` figurent aussi dans la policy WHfB d'OIB, si bien que
+la règle de report les supprimait).
+
 ## Comment, et pourquoi pas avec `import-oib.js`
 
 Une exécution complète d'`import-oib.js` annule actuellement du travail manuel apporté aux modèles

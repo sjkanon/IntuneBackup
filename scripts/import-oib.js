@@ -248,6 +248,7 @@ function newChildInstance(settingDefinitionId, value) {
  * vergelijking met IntuneAdmin/IntuneBaselines kwamen.
  *
  *   { settingDefinitionId, value }           andere waarde op een instelling die OIB al zet
+ *                                            (bij een lijst: value is een array, vervangt de hele lijst)
  *   { parent, settingDefinitionId, value }   extra kind onder een instelling die OIB al zet
  *
  * Allebei falen hard als hun ankerpunt weg is. Een override die stil niets doet is het
@@ -285,7 +286,15 @@ function applyOverrides(body, entry, applied) {
     }
     if (instance.choiceSettingValue) instance.choiceSettingValue.value = value;
     else if (instance.simpleSettingValue) instance.simpleSettingValue.value = value;
-    else {
+    else if (Array.isArray(instance.simpleSettingCollectionValue) && Array.isArray(value)) {
+      // Lijst van strings (gebruikers, URL's): de hele lijst vervangen, met het type van het
+      // eerste bronelement, zodat de vorm gelijk blijft aan wat OIB exporteert.
+      const template = instance.simpleSettingCollectionValue[0] || {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+        settingValueTemplateReference: null,
+      };
+      instance.simpleSettingCollectionValue = value.map((v) => ({ ...template, value: v }));
+    } else {
       console.error(`FOUT: override voor ${settingDefinitionId} in ${entry.target}: geen choice- of simple-waarde om te overschrijven.`);
       process.exit(1);
     }

@@ -33,12 +33,17 @@
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "https://apps.microsoft.com"
+                                    "value": "apps.microsoft.com"
                                 },
                                 {
                                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                     "settingValueTemplateReference": null,
-                                    "value": "https://apps.microsoft.com/*"
+                                    "value": "ms-windows-store://*"
+                                },
+                                {
+                                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                                    "settingValueTemplateReference": null,
+                                    "value": "javascript://*"
                                 }
                             ]
                         }

@@ -28,7 +28,7 @@ De hardeningsinstellingen uit de oude Administrative Templates-policy waar OpenI
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
-## Instellingen — 25
+## Instellingen — 24
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -52,7 +52,6 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_admx_grouppolicy_cse_registry` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nobackground10` | 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nochanges10` | 1 |
-| `device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin` | 0 |
 | `device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols` | 1 |

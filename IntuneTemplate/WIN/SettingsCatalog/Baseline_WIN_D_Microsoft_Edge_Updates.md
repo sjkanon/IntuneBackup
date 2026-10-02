@@ -28,7 +28,7 @@ Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstel
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
-## Instellingen — 26
+## Instellingen — 24
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -42,7 +42,6 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod_relaunchnotificationperiod` | 259200000 |
 | `device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_part_installpolicy` | 5 |
-| `device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge` | 1 |
 | `device_vendor_msft_policy_config_updatev83diff~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_createdesktopshortcutmicrosoftedge` | 1 |
 | `device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_part_targetchannel` | stable |
@@ -50,7 +49,6 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_part_updatepolicy` | 1 |
 | `device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_part_ecscontrol` | 0 |
-| `device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview` | 1 |
 | `device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_part_updatepolicy` | 1 |
 | `device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview` | 1 |

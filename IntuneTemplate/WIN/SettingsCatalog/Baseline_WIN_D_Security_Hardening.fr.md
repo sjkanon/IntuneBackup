@@ -28,13 +28,34 @@ Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolète
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
-## Paramètres — 96
+## Paramètres — 97
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le
 paramètre parent a la valeur indiquée.
 
 | Paramètre | Valeur |
 |---|---|
+| `device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen_enablesmartscreendropdown` | block |
+| `device_vendor_msft_policy_config_fileexplorer_turnoffdataexecutionpreventionforexplorer` | 0 |
+| `device_vendor_msft_policy_config_connectivity_disabledownloadingofprintdriversoverhttp` | 1 |
+| `device_vendor_msft_policy_config_fileexplorer_turnoffheapterminationoncorruption` | 0 |
+| `device_vendor_msft_policy_config_connectivity_disableinternetdownloadforwebpublishingandonlineorderingwizards` | 1 |
+| `device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices` | 1 |
+| `device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior_noautorun_dropdown` | 1 |
+| `device_vendor_msft_policy_config_autoplay_turnoffautoplay` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box` | 255 |
+| `device_vendor_msft_policy_config_credentialsui_enumerateadministrators` | 0 |
+| `device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle_allowencryptionoracledrop` | 0 |
+| `device_vendor_msft_policy_config_credentialsdelegation_remotehostallowsdelegationofnonexportablecredentials` | 1 |
+| `device_vendor_msft_policy_config_system_bootstartdriverinitialization` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_system_bootstartdriverinitialization_selectdriverloadpolicy` | 3 |
+| `device_vendor_msft_policy_config_admx_sharing_disablehomegroup` | 1 |
+| `device_vendor_msft_policy_config_internetexplorer_disableinternetexplorerapp_v2` | 1 |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_disableinternetexplorerapp_v2_notifydisableieoptions` | 0 |
+| `device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps` | 0 |
 | `device_vendor_msft_policy_config_mssecurityguide_applyuacrestrictionstolocalaccountsonnetworklogon` | 1 |
 | `device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_mssecurityguide_configuresmbv1clientdriver_pol_secguide_smb1clientdriver` | 4 |
@@ -50,33 +71,13 @@ paramètre parent a la valeur indiquée.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_mss-legacy_pol_mss_screensavergraceperiod_screensavergraceperiod` | 0 |
 | `device_vendor_msft_policy_config_connectivity_prohibitinstallationandconfigurationofnetworkbridge` | 1 |
 | `device_vendor_msft_policy_config_admx_networkconnections_nc_stddomainusersetlocation` | 1 |
+| `device_vendor_msft_policy_config_admx_pushtoinstall_disablepushtoinstall` | 1 |
+| `device_vendor_msft_policy_config_remoteassistance_unsolicitedremoteassistance` | 0 |
+| `device_vendor_msft_policy_config_remoteassistance_solicitedremoteassistance` | 0 |
+| `device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading` | 1 |
 | `device_vendor_msft_policy_config_admx_wcm_wcm_minimizeconnections` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_wcm_wcm_minimizeconnections_wcm_minimizeconnections_options` | 3 |
 | `device_vendor_msft_policy_config_windowsconnectionmanager_prohitconnectiontonondomainnetworkswhenconnectedtodomainauthenticatednetwork` | 1 |
-| `device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_credssp_allowencryptionoracle_allowencryptionoracledrop` | 0 |
-| `device_vendor_msft_policy_config_credentialsdelegation_remotehostallowsdelegationofnonexportablecredentials` | 1 |
-| `device_vendor_msft_policy_config_system_bootstartdriverinitialization` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_system_bootstartdriverinitialization_selectdriverloadpolicy` | 3 |
-| `device_vendor_msft_policy_config_connectivity_disabledownloadingofprintdriversoverhttp` | 1 |
-| `device_vendor_msft_policy_config_connectivity_disableinternetdownloadforwebpublishingandonlineorderingwizards` | 1 |
-| `device_vendor_msft_policy_config_remoteassistance_unsolicitedremoteassistance` | 0 |
-| `device_vendor_msft_policy_config_remoteassistance_solicitedremoteassistance` | 0 |
-| `device_vendor_msft_policy_config_autoplay_disallowautoplayfornonvolumedevices` | 1 |
-| `device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_autoplay_setdefaultautorunbehavior_noautorun_dropdown` | 1 |
-| `device_vendor_msft_policy_config_autoplay_turnoffautoplay` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_autoplay_turnoffautoplay_autorun_box` | 255 |
-| `device_vendor_msft_policy_config_credentialsui_enumerateadministrators` | 0 |
-| `device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_windowsexplorer_enablesmartscreen_enablesmartscreendropdown` | block |
-| `device_vendor_msft_policy_config_fileexplorer_turnoffdataexecutionpreventionforexplorer` | 0 |
-| `device_vendor_msft_policy_config_fileexplorer_turnoffheapterminationoncorruption` | 0 |
-| `device_vendor_msft_policy_config_admx_sharing_disablehomegroup` | 1 |
-| `device_vendor_msft_policy_config_internetexplorer_disableinternetexplorerapp_v2` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_internetexplorer_disableinternetexplorerapp_v2_notifydisableieoptions` | 0 |
-| `device_vendor_msft_policy_config_admx_pushtoinstall_disablepushtoinstall` | 1 |
-| `device_vendor_msft_policy_config_internetexplorer_disableenclosuredownloading` | 1 |
 | `device_vendor_msft_policy_config_errorreporting_disablewindowserrorreporting` | 0 |
 | `device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_windowspowershell_turnonpowershellscriptblocklogging_enablescriptblockinvocationlogging` | 0 |
@@ -103,14 +104,14 @@ paramètre parent a la valeur indiquée.
 | `device_vendor_msft_policy_config_lanmanserver_enableauthratelimiter` | 1 |
 | `device_vendor_msft_policy_config_lanmanserver_enablemailslots` | 0 |
 | `device_vendor_msft_policy_config_lanmanserver_maxsmb2dialect` | 785 |
-| `device_vendor_msft_policy_config_lanmanserver_minsmb2dialect` | 768 |
+| `device_vendor_msft_policy_config_lanmanserver_minsmb2dialect` | 785 |
 | `device_vendor_msft_policy_config_lanmanworkstation_auditinsecureguestlogon` | 1 |
 | `device_vendor_msft_policy_config_lanmanworkstation_auditserverdoesnotsupportencryption` | 1 |
 | `device_vendor_msft_policy_config_lanmanworkstation_auditserverdoesnotsupportsigning` | 1 |
 | `device_vendor_msft_policy_config_lanmanworkstation_enableinsecureguestlogons` | 0 |
 | `device_vendor_msft_policy_config_lanmanworkstation_enablemailslots` | 0 |
 | `device_vendor_msft_policy_config_lanmanworkstation_maxsmb2dialect` | 785 |
-| `device_vendor_msft_policy_config_lanmanworkstation_minsmb2dialect` | 768 |
+| `device_vendor_msft_policy_config_lanmanworkstation_minsmb2dialect` | 785 |
 | `device_vendor_msft_policy_config_lanmanworkstation_requireencryption` | 0 |
 | `device_vendor_msft_policy_config_privacy_disableprivacyexperience` | 1 |
 | `device_vendor_msft_policy_config_security_allowaddprovisioningpackage` | 0 |

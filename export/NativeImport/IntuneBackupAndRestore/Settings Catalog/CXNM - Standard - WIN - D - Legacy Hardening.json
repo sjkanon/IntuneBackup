@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 15,
+    "settingCount": 14,
     "settings": [
         {
             "id": "0",
@@ -213,20 +213,6 @@
             "id": "6",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps",
-                "settingInstanceTemplateReference": null,
-                "auditRuleInformation": null,
-                "choiceSettingValue": {
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps_0",
-                    "children": []
-                }
-            }
-        },
-        {
-            "id": "7",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery",
                 "settingInstanceTemplateReference": null,
                 "auditRuleInformation": null,
@@ -238,7 +224,7 @@
             }
         },
         {
-            "id": "8",
+            "id": "7",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin",
@@ -252,7 +238,7 @@
             }
         },
         {
-            "id": "9",
+            "id": "8",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols",
@@ -278,7 +264,7 @@
             }
         },
         {
-            "id": "10",
+            "id": "9",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableblockatfirstseen",
@@ -292,7 +278,7 @@
             }
         },
         {
-            "id": "11",
+            "id": "10",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_realtimeprotection_disablescanonrealtimeenable",
@@ -306,7 +292,7 @@
             }
         },
         {
-            "id": "12",
+            "id": "11",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_scan_disablepackedexescanning",
@@ -320,7 +306,7 @@
             }
         },
         {
-            "id": "13",
+            "id": "12",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_admx_microsoftdefenderantivirus_disableroutinelytakingaction",
@@ -334,7 +320,7 @@
             }
         },
         {
-            "id": "14",
+            "id": "13",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_windowslogon_enablemprnotifications",

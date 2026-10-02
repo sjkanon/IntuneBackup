@@ -12,58 +12,54 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 15,
+    "settingCount": 13,
     "settings": [
         {
             "id": "0",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_componentupdatesenabled",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_componentupdatesenabled_1",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_componentupdatesenabled_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_componentupdatesenabled",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "1",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_relaunchnotification",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_relaunchnotification_2",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_relaunchnotification_2"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_relaunchnotification",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotification",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "2",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
@@ -75,218 +71,190 @@
                                 "value": 259200000
                             }
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edge~policy~microsoft_edge_relaunchnotificationperiod",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "3",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_part_installpolicy",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_part_installpolicy_5",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_part_installpolicy_5"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_part_installpolicy",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updateupdates.1~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "4",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_allowinstallationmicrosoftedge_1",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_updatev83diff~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_createdesktopshortcutmicrosoftedge_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updatev83diff~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_createdesktopshortcutmicrosoftedge",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "5",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev83diff~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_createdesktopshortcutmicrosoftedge",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_part_targetchannel_stable"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_part_targetchannel",
+                            "settingInstanceTemplateReference": null
+                        }
+                    ],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev83diff~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_createdesktopshortcutmicrosoftedge_1",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "6",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_part_targetchannel",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_updatev95~policy~cat_edgeupdate~cat_applications~cat_microsoftedge_pol_targetchannelmicrosoftedge_part_targetchannel_stable",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_part_updatepolicy_1"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_part_updatepolicy",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "7",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_part_updatepolicy",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_applications~cat_microsoftedge_pol_updatepolicymicrosoftedge_part_updatepolicy_1",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_part_ecscontrol_0"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_part_ecscontrol",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "8",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_part_ecscontrol",
-                            "settingInstanceTemplateReference": null,
                             "choiceSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
                                 "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_updatev94~policy~cat_edgeupdate_pol_ecscontrol_part_ecscontrol_0",
-                                "children": []
-                            }
+                                "value": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_part_updatepolicy_1"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_part_updatepolicy",
+                            "settingInstanceTemplateReference": null
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "9",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "children": [
+                        {
+                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                            "choiceSettingValue": {
+                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                                "children": [],
+                                "settingValueTemplateReference": null,
+                                "value": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_part_installpolicy_5"
+                            },
+                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_part_installpolicy",
+                            "settingInstanceTemplateReference": null
+                        }
+                    ],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_1",
-                    "children": []
-                }
+                    "value": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview",
+                "settingInstanceTemplateReference": null
             }
         },
         {
             "id": "10",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview",
-                "settingInstanceTemplateReference": null,
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_1",
-                    "children": [
-                        {
-                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_part_updatepolicy",
-                            "settingInstanceTemplateReference": null,
-                            "choiceSettingValue": {
-                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                                "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_updatev87~policy~cat_edgeupdate~cat_webview_pol_updatepolicymicrosoftedgewebview_part_updatepolicy_1",
-                                "children": []
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "id": "11",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview",
-                "settingInstanceTemplateReference": null,
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_1",
-                    "children": [
-                        {
-                            "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                            "settingDefinitionId": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_part_installpolicy",
-                            "settingInstanceTemplateReference": null,
-                            "choiceSettingValue": {
-                                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                                "settingValueTemplateReference": null,
-                                "value": "device_vendor_msft_policy_config_updatev87.updates.1~policy~cat_edgeupdate~cat_webview_pol_allowinstallationmicrosoftedgewebview_part_installpolicy_5",
-                                "children": []
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "id": "12",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod",
-                "settingInstanceTemplateReference": null,
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod_1",
                     "children": [
                         {
                             "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
@@ -298,12 +266,16 @@
                                 "value": 240
                             }
                         }
-                    ]
-                }
+                    ],
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod_1"
+                },
+                "settingDefinitionId": "device_vendor_msft_policy_config_update~policy~cat_google~cat_googleupdate~cat_preferences_pol_autoupdatecheckperiod",
+                "settingInstanceTemplateReference": null
             }
         },
         {
-            "id": "13",
+            "id": "11",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev93~policy~microsoft_edge_relaunchwindow",
@@ -328,7 +300,7 @@
             }
         },
         {
-            "id": "14",
+            "id": "12",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "settingDefinitionId": "device_vendor_msft_policy_config_microsoft_edgev141~policy~microsoft_edge_relaunchfastifoutdated",

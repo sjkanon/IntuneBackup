@@ -343,6 +343,21 @@ commit `f247604` (9 September 2026). **That version had not yet been released** 
 still gives the date as `2026-09-xx`. Once the tag exists: point `.oib-source` at that tag and go through the
 diff again. macOS (v1.0) and BYOD have not changed.
 
+**Released on 30 September 2026** as tag `windows-v4.0` (commit `1cc71a9`). On 2 October
+`.oib-source` was pointed at that tag and the diff with `f247604` was reviewed. Three policies
+changed after the beta; only those were adopted, all our own adjustments were kept:
+
+| Policy | What changed | Here |
+|---|---|---|
+| Security Hardening | "Allow Custom SSPs and APs to be loaded into LSASS" off; Lanman Server and Workstation minimum SMB 3.1.1 (was 3.0.0) | adopted. The LSASS setting was already in Legacy Hardening with the same value and has been removed there, so it does not come from two policies |
+| Microsoft Edge Updates | the older, duplicate "Allow Installation" settings for Edge and WebView2 removed (caused a conflict, OIB #254) | adopted via `dropSettings`; otherwise the importer kept them as our own setting |
+| Microsoft Edge User Experience | URL block list: the Store website as a single rule `apps.microsoft.com`, plus `ms-windows-store://*` (OIB #253) and `javascript://*` against ClickFix (OIB #250) | that list lives in both AI Usage Control variants here; updated there, the AI domains stayed |
+
+Two of our own adjustments were silently reverted by the importer and are now pinned in the
+manifest: `wlapsadmin` in lower case in Local Administrators (an `override`, which now also
+handles list values) and the four Windows Hello PIN Complexity policies (`metadataOnly`: their
+`{tenantid}` settings also occur in OIB's WHfB policy, so the carry rule threw them away).
+
 ## How, and why not with `import-oib.js`
 
 A full run of `import-oib.js` currently reverts manual work that was put into the templates

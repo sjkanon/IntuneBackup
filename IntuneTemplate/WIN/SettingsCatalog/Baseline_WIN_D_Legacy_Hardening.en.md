@@ -28,7 +28,7 @@ The hardening settings from the old Administrative Templates policy for which Op
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
-## Settings — 25
+## Settings — 24
 
 Indented rows are child settings: they only apply when their parent
 setting has the value shown.
@@ -52,7 +52,6 @@ setting has the value shown.
 | `device_vendor_msft_policy_config_admx_grouppolicy_cse_registry` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nobackground10` | 0 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_grouppolicy_cse_registry_cse_nochanges10` | 1 |
-| `device_vendor_msft_policy_config_localsecurityauthority_allowcustomsspsaps` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbystateswhensleepingonbattery` | 0 |
 | `device_vendor_msft_policy_config_power_allowstandbywhensleepingpluggedin` | 0 |
 | `device_vendor_msft_policy_config_internetexplorer_internetzoneallowautomaticpromptingforactivexcontrols` | 1 |
