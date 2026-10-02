@@ -132,8 +132,14 @@ au lieu du token.
   (usurpation d'identité, max. 350). Le groupe est la source : qui le quitte quitte aussi la liste. CIPP ne
   compare pas cette liste et ne l'écrase donc pas. Relancez le script quand le groupe change.
 
-Les exceptions par tenant — une autre adresse, une extension dont un client a besoin — se font
-dans CIPP sur la baseline, pas dans ce fichier.
+**Modifier dans CIPP est possible, mais au bon endroit :**
+
+- **Par tenant** — une autre adresse, une extension dont un client a besoin, un standard qui ne
+  doit pas s'y appliquer : créez un *override* sur ce standard pour ce tenant, ou excluez le
+  tenant. Un override est stocké à part de la baseline et survit à une réimportation.
+- **Pour tous** — modifier ou retirer un standard : faites-le ici, dans `defender-office.js`.
+  L'éditeur CIPP le permet aussi (CIPP marque alors la baseline *local changes*), mais la
+  prochaine importation depuis ce dépôt remet la baseline à l'état de ce fichier.
 
 Si une policy `CIPP Default …` existe déjà, CIPP la reprend au lieu d'en créer une seconde ; elle
 garde son ancien nom.

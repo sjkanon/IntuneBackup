@@ -125,8 +125,14 @@ je dat veld daar opnieuw, dan wil de editor een echt adres in plaats van het tok
   max. 350). De groep is de bron: wie eruit gaat, gaat ook uit de lijst. CIPP vergelijkt die lijst niet en
   overschrijft hem dus ook niet. Draai het script opnieuw als de groep verandert.
 
-Uitzonderingen per tenant — een ander adres, een extensie die een klant nodig heeft — maak je in
-CIPP op de baseline, niet in dit bestand.
+**Aanpassen in CIPP kan, maar op de goede plek:**
+
+- **Per tenant** — een ander adres, een extensie die een klant nodig heeft, een standard die daar
+  niet moet: maak een *override* op die standard voor die tenant, of sluit de tenant uit. Een
+  override staat los van de baseline en blijft staan als je hem opnieuw importeert.
+- **Voor iedereen** — een standard aanpassen of eruit halen: doe het hier, in
+  `defender-office.js`. In de CIPP-editor kan het ook (CIPP markeert de baseline dan met
+  *local changes*), maar de volgende import uit deze repo zet de baseline terug op dit bestand.
 
 Bestaat er al een `CIPP Default …`-policy, dan neemt CIPP die over in plaats van een tweede te
 maken; de naam blijft dan de oude.

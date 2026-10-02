@@ -124,8 +124,14 @@ there again, the editor wants a real address instead of the token.
   (impersonation, max. 350). The group is the source: whoever leaves it also leaves the list. CIPP does not compare that
   list, so it does not overwrite it either. Run the script again when the group changes.
 
-Exceptions per tenant — a different address, an extension a customer needs — are made in CIPP on
-the baseline, not in this file.
+**Changing things in CIPP works, but in the right place:**
+
+- **Per tenant** — a different address, an extension a customer needs, a standard that should not
+  apply there: create an *override* on that standard for that tenant, or exclude the tenant. An
+  override is stored apart from the baseline and survives a re-import.
+- **For everyone** — changing or removing a standard: do it here, in `defender-office.js`. The
+  CIPP editor can do it too (CIPP then marks the baseline with *local changes*), but the next
+  import from this repo resets the baseline to this file.
 
 If a `CIPP Default …` policy already exists, CIPP adopts it instead of creating a second one; it
 keeps the old name.
