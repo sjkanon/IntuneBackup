@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 135 policies
+# Windows — 136 policies
 
 All policies are named `CXNM - Standard - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 117 |
+| `SettingsCatalog/` | 118 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 101
+## Device-scoped (D) — 102
 
 Assign to device groups.
 
@@ -28,6 +28,7 @@ Assign to device groups.
 | [**Audit Policy Enforcement**](SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) | Makes the advanced audit settings take precedence over the old category settings, so that the baseline's audit policy actually determines what is logged. | Settings Catalog | 2 | All Devices |
 | [**Automatic Restart Sign On**](SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) | After a restart for updates, automatically signs the user back in, locked, so that startup programs run without the device sitting unlocked and unattended. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) | Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID. | Settings Catalog | 36 | All Devices |
+| [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) | Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) | Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.en.md) | Turns off Windows' cloud-driven content recommendations — the device part of the same OIB policy as Windows Spotlight. | Settings Catalog | 1 | All Devices |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) | Periodically resets locally changed settings to what Intune prescribes, so that manual tampering on a device is undone automatically. | Settings Catalog | 2 | All Devices |

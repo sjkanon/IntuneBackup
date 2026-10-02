@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 135 policies
+# Windows — 136 policies
 
 Toutes les policies s'appellent `CXNM - Standard - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 117 |
+| `SettingsCatalog/` | 118 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 101
+## Device-scoped (D) — 102
 
 Affecter à des groupes d'appareils.
 
@@ -28,6 +28,7 @@ Affecter à des groupes d'appareils.
 | [**Audit Policy Enforcement**](SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.fr.md) | Donne la priorité aux paramètres d'audit avancés sur les anciens paramètres par catégorie, afin que la policy d'audit de la baseline détermine réellement ce qui est journalisé. | Settings Catalog | 2 | All Devices |
 | [**Automatic Restart Sign On**](SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md) | Après un redémarrage pour mises à jour, reconnecte automatiquement l'utilisateur en session verrouillée, afin que les programmes de démarrage s'exécutent sans que l'appareil reste déverrouillé sans surveillance. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.fr.md) | Chiffre le disque du système d'exploitation et, via les paramètres personnalisés conservés, également les disques fixes et amovibles. Les clés de récupération sont stockées dans Entra ID. | Settings Catalog | 36 | All Devices |
+| [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.fr.md) | N'autorise en Bluetooth que les souris, claviers, casques, téléphones via Phone Link et passkeys, et bloque le transfert de fichiers, le partage de connexion et les connexions série. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.fr.md) | Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-même un paquet de récupération depuis le cloud au lieu d'attendre un technicien. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.fr.md) | Désactive les recommandations de contenu pilotées par le cloud de Windows — la partie appareil de la même policy OIB que Windows Spotlight. | Settings Catalog | 1 | All Devices |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.fr.md) | Rétablit périodiquement les paramètres modifiés localement à ce qu'Intune prescrit, afin que les bricolages manuels sur un appareil soient annulés automatiquement. | Settings Catalog | 2 | All Devices |

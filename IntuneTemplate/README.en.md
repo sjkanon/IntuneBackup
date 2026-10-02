@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# IntuneTemplate — 200 policies
+# IntuneTemplate — 201 policies
 
 The source of this repo: the agreed Intune policies in CIPP template format. Everything
 in `export/` and `BaselineTemplate/` is derived from it and generated.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.en.md) | 117 | 1 | 6 | 11 | – | **135** |
+| [Windows](WIN/README.en.md) | 118 | 1 | 6 | 11 | – | **136** |
 | [macOS](MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **158** | **1** | **13** | **26** | **2** | **200** |
+| **Total** | **159** | **1** | **13** | **26** | **2** | **201** |
 
 ## Layout
 
@@ -71,7 +71,7 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 |---|---|---:|---:|
 | `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 70 |
 | `CXNM - Standard - Baseline-Users` | Assign to all users | 1 | 32 |
-| `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 41 |
+| `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 42 |
 | `CXNM - Standard - Baseline-Wacht` | Do not assign | 3 | 26 |
 | `CXNM - Standard - Baseline-ADE-token` | Do not assign (link to an ADE token in Intune) | 1 | 2 |
 | `CXNM - Standard - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
@@ -93,7 +93,7 @@ they exist as an alternative to a policy that is deployed.
 
 ## Per platform
 
-- [Windows](WIN/README.en.md) — 135 policies
+- [Windows](WIN/README.en.md) — 136 policies
 - [macOS](MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](IOS/README.en.md) — 14 policies
 - [Android](AND/README.en.md) — 14 policies

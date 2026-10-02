@@ -4561,6 +4561,34 @@
       "fase": 1
     },
     {
+      "target": "Baseline_WIN_D_Bluetooth_Allowed_Services",
+      "displayName": "CXNM - Standard - WIN - D - Bluetooth Allowed Services",
+      "doel": "Staat over Bluetooth alleen muizen, toetsenborden, headsets, telefoons via Phone Link en passkeys toe, en sluit bestandsoverdracht, tethering en seriële verbindingen af.",
+      "controls": {
+        "iso": [
+          "A.8.12 Voorkomen van datalekken",
+          "A.8.20 Netwerkbeveiliging"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software"
+        ],
+        "nistcsf": [
+          "PR.DS-01",
+          "PR.IR-01"
+        ]
+      },
+      "bron": "Bluetooth CSP ServicesAllowedList (Microsoft Learn, ServicesAllowedList usage guide) en de Bluetooth SIG Assigned Numbers — id en vorm geverifieerd tegen DCv2/Settings in pl4nty/intune-change-tracking",
+      "note": "Windows kan Bluetooth niet filteren op soort apparaat (iPhone, Android, merk), alleen op dienst: elke UUID op de lijst is een Bluetooth-profiel dat mag, en alles wat er niet op staat werkt niet meer. De lijst is ingedeeld in blokken, zodat je per tenant een blok kunt weghalen of toevoegen. BLE-basis (1800 Generic Access, 1801 Generic Attribute, 180A Device Information, 180F Battery, 1813 Scan Parameters, 1200 PnP Information) — nooit weghalen, zonder deze zes vallen moderne muizen en toetsenborden weg. Invoer: 1124 HID en 1812 HID over GATT (muis, toetsenbord, pen, gamecontroller). Klassieke audio: 1108/1112 Headset, 111E/111F Handsfree, 110A/110B/110D A2DP, 110C/110E/110F AVRCP. LE Audio voor nieuwere headsets en hoortoestellen: 1843–1855 (volume, microfoon, audiostreams, gesprekken, media, Hearing Access). Telefoon via Phone Link: 111E/111F Handsfree (bellen), 112E/112F/1130 PBAP (contacten), 1132/1133/1134 MAP (berichten), en Apple ANCS 7905F431-… en AMS 89D3502B-… (meldingen en media van een iPhone). Passkeys: FFF9 (telefoon als passkey via QR-code) en FFFD (FIDO-beveiligingssleutel over Bluetooth). Bewust níét op de lijst, en dus geblokkeerd: 1105 OBEX Object Push en 1106 OBEX File Transfer (bestanden versturen), 1115/1116/1117 PAN (tethering), 1101 Serial Port en 1103 Dial-up Networking. Wie bestandsoverdracht wél wil toestaan, voegt 1105 en 1106 toe in een tenantspecifieke kopie; wie geen telefoons wil, haalt het telefoonblok weg (laat Handsfree staan voor headsets). Windows leest de lijst bij het starten van de Bluetooth-stack: na toewijzen of wijzigen werkt hij pas na een herstart. Microsoft documenteert niet of de lijst ook BLE-advertenties raakt die de pc alleen ontvangt (zoals bij een passkey via QR-code); FFF9 staat er daarom voor de zekerheid op. Naast CXNM - Standard - WIN - D - Wireless and Peripherals, geen overlap: die zet alleen de vindbaarheid uit, deze bepaalt welke diensten werken.",
+      "bewijs": "Bluetooth-bestandsoverdracht (OBEX) is een route om bestanden van en naar een beheerd apparaat te krijgen buiten DLP, Defender en de proxy om; tethering (PAN) is een netwerkverbinding buiten het bedrijfsnetwerk om. De allowlist sluit beide af zonder de randapparatuur te raken die een gebruiker nodig heeft. Een allowlist in plaats van een blocklist, omdat Windows alleen die vorm kent: een nieuw profiel dat Microsoft of een fabrikant toevoegt, staat daardoor standaard dicht.",
+      "universeel": "Geldt voor elk Windows-apparaat met Bluetooth. De grens: apparaten die een profiel gebruiken dat niet op de lijst staat — een barcodescanner of meetinstrument over Serial Port (1101), een printer over Bluetooth — werken niet meer. Zulke apparaten vragen een tenantspecifieke kopie met dat profiel erbij.",
+      "herkomst": "eigen",
+      "fase": 2,
+      "faseWaarom": "Een allowlist zet alles uit wat er niet op staat, en welke Bluetooth-apparaten er in gebruik zijn weet je pas als je kijkt. Test in de pilot ten minste een muis, een toetsenbord, een headset (klassiek en LE Audio), bellen via Phone Link met een iPhone en een Android-telefoon, en een passkey-aanmelding met de QR-code. Werkt pas na een herstart."
+    },
+    {
       "target": "Baseline_WIN_D_Wireless_Shared_Devices",
       "displayName": "CXNM - Standard - WIN - D - Wireless Shared Devices",
       "doel": "Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij.",

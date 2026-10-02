@@ -2,18 +2,18 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 135 policies
+# Windows — 136 policies
 
 Alle policies heten `CXNM - Standard - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 117 |
+| `SettingsCatalog/` | 118 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
-## Device-scoped (D) — 101
+## Device-scoped (D) — 102
 
 Toewijzen aan apparaatgroepen.
 
@@ -28,6 +28,7 @@ Toewijzen aan apparaatgroepen.
 | [**Audit Policy Enforcement**](SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.md) | Laat de gedetailleerde auditinstellingen voorgaan op de oude categorie-instellingen, zodat de auditpolicy van de baseline daadwerkelijk bepaalt wat er wordt gelogd. | Settings Catalog | 2 | All Devices |
 | [**Automatic Restart Sign On**](SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.md) | Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer aan, zodat opstartprogramma's draaien zonder dat het apparaat onbeheerd ontgrendeld staat. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.md) | Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard. | Settings Catalog | 36 | All Devices |
+| [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.md) | Staat over Bluetooth alleen muizen, toetsenborden, headsets, telefoons via Phone Link en passkeys toe, en sluit bestandsoverdracht, tethering en seriële verbindingen af. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.md) | Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.md) | Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight. | Settings Catalog | 1 | All Devices |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) | Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt. | Settings Catalog | 2 | All Devices |

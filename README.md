@@ -8,11 +8,11 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
 overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-200 policies over vier platformen:
+201 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 117 | 1 | 6 | 11 | – | **135** |
+| [Windows](IntuneTemplate/WIN/README.md) | 118 | 1 | 6 | 11 | – | **136** |
 | [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>200 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>201 policies<br/><i>de bron</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
 
@@ -109,7 +109,7 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
 | 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 102 |
-| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 41 |
+| 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 42 |
 | 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 26 |
 | 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 16 |
 | 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 15 |
@@ -306,7 +306,7 @@ profiles, update-ring 3 en Windows 365) — met reden, in `"excluded"` in het ma
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 200
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 201
 templates in CIPP onder Tenant Administration → Templates.
 
 ### Uitrollen via een CIPP-baseline
@@ -355,7 +355,7 @@ Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRes
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 303 JSON-bestanden óók importeren — dezelfde 200 policies plus hun 102 assignments en het
+CIPP die 304 JSON-bestanden óók importeren — dezelfde 201 policies plus hun 102 assignments en het
 meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** template van maakt
 met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.

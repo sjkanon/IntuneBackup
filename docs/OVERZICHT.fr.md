@@ -4,34 +4,34 @@
 
 # Baseline Intune — vue d'ensemble
 
-200 policies sur 4 plateformes, avec
+201 policies sur 4 plateformes, avec
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) comme source.
 Ceci est le résumé ; les détails se trouvent dans le [README principal](../README.fr.md) et dans chaque dossier.
 
 | | Nombre |
 |---|---:|
-| Policies | 200 |
-| Sans affectation (volontairement) | 98 |
+| Policies | 201 |
+| Sans affectation (volontairement) | 99 |
 | Déployées dans le tenant | 0 |
 
 ## Contenu
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.fr.md) | 117 | 1 | 6 | 11 | – | **135** |
+| [Windows](../IntuneTemplate/WIN/README.fr.md) | 118 | 1 | 6 | 11 | – | **136** |
 | [macOS](../IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Chaque plateforme dispose d'un tableau avec **chaque policy, ce qu'elle fait et où elle atterrit** :
-- [Windows](../IntuneTemplate/WIN/README.fr.md) — 135 policies
+- [Windows](../IntuneTemplate/WIN/README.fr.md) — 136 policies
 - [macOS](../IntuneTemplate/MAC/README.fr.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.fr.md) — 14 policies
 
 ## Référentiel de conformité
 
-200 des 200 policies renvoient à l'ISO/IEC 27001:2022 Annexe A, à NIS2 art. 21(2),
+201 des 201 policies renvoient à l'ISO/IEC 27001:2022 Annexe A, à NIS2 art. 21(2),
 aux CIS Controls v8.1 et au NIST CSF 2.0 ; ensemble, les policies de la phase 1 couvrent 31 des 93 mesures de l'Annexe A.
 Par mesure et par point NIS2 : ce que la baseline impose, comment c'est vérifié et ce que l'organisation
 doit régler elle-même : [COMPLIANCE.fr.md](COMPLIANCE.fr.md).
@@ -136,6 +136,7 @@ change à qui elles sont déployées. La raison pour chaque policy est le `faseW
 | `WIN - D - Access Control` | Les utilisateurs doivent saisir leur nom complet au lieu de cliquer dessus, et ils voient une bannière. Adaptez d'abord le texte de la bannière au nom de votre organisation. |
 | `WIN - D - Account Lockout` | Le seuil machine place un appareil en récupération BitLocker après dix tentatives échouées. C'est récupérable (la clé est stockée dans Entra ID) mais cela génère une demande au support ; vérifiez pendant le pilote à quelle fréquence cela se produit. |
 | `WIN - D - Administrator Protection` | Change la façon de travailler d'un administrateur : plus de droits élevés en permanence, mais une confirmation pour chaque action. Les scripts et outils qui s'appuient silencieusement sur les droits d'administrateur le remarqueront. Windows 11 24H2 et versions ultérieures ; sur les builds plus anciens, il ne fait rien. |
+| `WIN - D - Bluetooth Allowed Services` | Une liste d'autorisation désactive tout ce qui n'y figure pas, et on ne sait quels appareils Bluetooth sont utilisés qu'en regardant. Dans le pilote, testez au moins une souris, un clavier, un casque (classique et LE Audio), un appel via Phone Link avec un iPhone et un téléphone Android, et une connexion par passkey avec le code QR. Ne s'applique qu'après un redémarrage. |
 | `WIN - D - Cryptography` | Un système interne qui ne parle que TLS 1.0/1.1 devient inaccessible. C'est voulu, mais il faut le savoir. |
 | `WIN - D - Device Guard and Credential Guard` | Nécessite un redémarrage, et l'intégrité de la mémoire (HVCI) ne charge pas les pilotes qui n'ont pas été conçus pour elle — pensez aux anciens pilotes VPN, d'imprimante et de station d'accueil. Vérifiez pendant le pilote que tout démarre encore. |
 | `WIN - D - Disable NTLM` | Refuse tout NTLM, entrant et sortant. Ce qui ne peut pas passer par Kerberos casse : les applications qui se connectent par adresse IP, les appareils hors du domaine, et les partages pour lesquels l'appareil n'obtient pas de ticket Kerberos — un appareil joint à Entra qui ouvre un partage sur Entra Domain Services se rabat sur NTLM. Avant le pilote, consultez Microsoft-Windows-NTLM/Operational sur quelques appareils Windows 11 24H2 (4020/4021 sortant, 4022/4023 entrant) : cette journalisation y est activée par défaut et montre ce qui casserait. |
@@ -175,7 +176,7 @@ change à qui elles sont déployées. La raison pour chaque policy est le `faseW
 | `AND - U - Corporate AI Restricted` | Les utilisateurs perdent Circle to Search et le contexte d'écran de Gemini sur le profil professionnel ou sur tout l'appareil. Que cela convienne relève du choix de l'organisation concernant l'IA générative, comme pour Windows AI Restricted ; d'abord sur un groupe pilote, et ne pas affecter dans une organisation qui autorise ces assistants. |
 | `AND - U - Corporate Data Protection` | Les utilisateurs le remarquent immédiatement : pas de captures d'écran, pas de fichiers via Bluetooth, et un appareil fully managed ne peut plus être réinitialisé par l'utilisateur — l'IT doit l'effacer. D'abord sur un groupe pilote ; sans inscription fully managed ou corporate-owned work profile, il ne fait rien. |
 
-98 sont sans affectation : les 41 ci-dessus, 26 en attente d'un prérequis,
+99 sont sans affectation : les 42 ci-dessus, 26 en attente d'un prérequis,
 16 pour un groupe dédié et 15 qui ne sont pas déployées. Ces deux dernières catégories sont une
 *alternative* à une policy affectée, pas un complément : les anneaux de mise à jour
 1 et 2 pour Windows et Defender définissent les mêmes paramètres que l'anneau 3 avec d'autres valeurs, les

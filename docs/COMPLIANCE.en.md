@@ -36,7 +36,7 @@ assignment and the per-device status of every policy named below.
 
 ## Summary
 
-### Policies per phase — 200 Intune policies
+### Policies per phase — 201 Intune policies
 
 Only phase 1 is assigned to all devices or users and counts as enforced. The rest is
 deliberately not deployed yet; the reason per policy is in [Organisational decisions and residual risks](#organisational-decisions-and-residual-risks).
@@ -44,11 +44,11 @@ deliberately not deployed yet; the reason per policy is in [Organisational decis
 | Phase | Windows | macOS | iOS/iPadOS | Android | Total |
 |---|---:|---:|---:|---:|---:|
 | 1 — Now | 81 | 19 | 1 | 1 | **102** |
-| 2 — Pilot | 30 | 9 | – | 2 | **41** |
+| 2 — Pilot | 31 | 9 | – | 2 | **42** |
 | 3 — Awaiting prerequisite | 5 | 3 | 8 | 10 | **26** |
 | 4 — Dedicated group | 7 | 4 | 4 | 1 | **16** |
 | 5 — Do not deploy | 12 | 2 | 1 | – | **15** |
-| **Total** | **135** | **37** | **14** | **14** | **200** |
+| **Total** | **136** | **37** | **14** | **14** | **201** |
 
 Assigned according to `_assignments.json`: 102 (should equal phase 1: 102).
 
@@ -74,7 +74,7 @@ Number of policies that implement the point technically. No point is done with t
 | [(b)](#art-212b-incident-handling) incident handling | 8 | n/a | 6 |
 | [(c)](#art-212c-business-continuity-and-crisis-management) business continuity and crisis management | 6 | n/a | 2 |
 | [(d)](#art-212d-supply-chain-security) supply chain security | 2 | n/a | 5 |
-| [(e)](#art-212e-security-in-network-and-information-systems-acquisition-development-and-maintenance-including-vulnerability-handling) security in network and information systems acquisition, development and maintenance, including vulnerability handling | 49 | n/a | 37 |
+| [(e)](#art-212e-security-in-network-and-information-systems-acquisition-development-and-maintenance-including-vulnerability-handling) security in network and information systems acquisition, development and maintenance, including vulnerability handling | 49 | n/a | 38 |
 | [(f)](#art-212f-assessing-the-effectiveness) assessing the effectiveness | 13 | n/a | 2 |
 | [(g)](#art-212g-basic-cyber-hygiene-practices-and-cybersecurity-training) basic cyber hygiene practices and cybersecurity training | 1 | n/a | 2 |
 | [(h)](#art-212h-cryptography-and-encryption) cryptography and encryption | 8 | n/a | 7 |
@@ -188,7 +188,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.8.9** Configuration management](#a89-configuration-management) | partial | ● Covered (phase 1) | 18 | 10 | This repo is the recorded configuration; reviewing changes (PR) and following up drift in the tenant remains a process. |
 | **A.8.10** Information deletion | partial | ○ No technical measure in the baseline | – | – | Retention and deletion policy; selective wipe and wipe are technical tools. |
 | [**A.8.11** Data masking](#a811-data-masking) | partial | ◐ Pilot, waiting or dedicated group only | – | 1 | Policy on when data is masked or pseudonymised — largely at application level. |
-| [**A.8.12** Data leakage prevention](#a812-data-leakage-prevention) | partial | ● Covered (phase 1) | 13 | 14 | DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. |
+| [**A.8.12** Data leakage prevention](#a812-data-leakage-prevention) | partial | ● Covered (phase 1) | 13 | 15 | DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. |
 | [**A.8.13** Information backup](#a813-information-backup) | partial | ● Covered (phase 1) | 3 | – | Backup policy for M365 data and periodic restore tests; OneDrive synchronisation is not a full backup. |
 | **A.8.14** Redundancy of information processing facilities | organisational | ▢ Organisational | – | – | Redundancy of services and infrastructure — outside the endpoint/identity domain. |
 | [**A.8.15** Logging](#a815-logging) | partial | ● Covered (phase 1) | 6 | 2 | Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. |
@@ -196,7 +196,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.8.17** Clock synchronization](#a817-clock-synchronization) | technical | ● Covered (phase 1) | 2 | 1 | Define an approved time source. |
 | [**A.8.18** Use of privileged utility programs](#a818-use-of-privileged-utility-programs) | partial | ● Covered (phase 1) | 1 | 3 | Register of permitted administration and remote support tools and who may use them. |
 | [**A.8.19** Installation of software on operational systems](#a819-installation-of-software-on-operational-systems) | technical | ● Covered (phase 1) | 10 | 9 | Process for approving and offering software (Company Portal catalogue). |
-| [**A.8.20** Networks security](#a820-networks-security) | partial | ● Covered (phase 1) | 13 | 13 | Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. |
+| [**A.8.20** Networks security](#a820-networks-security) | partial | ● Covered (phase 1) | 13 | 14 | Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. |
 | [**A.8.21** Security of network services](#a821-security-of-network-services) | partial | ● Covered (phase 1) | 1 | 5 | Define and monitor requirements for network services and providers. |
 | **A.8.22** Segregation of networks | organisational | ▢ Organisational | – | – | Network segmentation is infrastructure and cannot be set up through endpoint/identity policy. |
 | [**A.8.23** Web filtering](#a823-web-filtering) | technical | ● Covered (phase 1) | 3 | 5 | Define categories and exceptions (Defender Web Content Filtering in the Defender portal). |
@@ -608,6 +608,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`AND - U - Corporate AI Restricted`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
 - [`MAC - D - Apple Intelligence Restricted`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Restricted.en.md) (phase 2)
+- [`WIN - D - Bluetooth Allowed Services`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) (phase 2)
 - [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.en.md) (phase 2)
 - [`WIN - D - Removable Storage`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) (phase 2)
 - [`WIN - U - File Sharing Restrictions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2)
@@ -702,6 +703,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Windows Firewall Rules`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1)
 - [`WIN - D - Wireless and Peripherals`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1)
 - [`WIN - U - Compliance Firewall`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- [`WIN - D - Bluetooth Allowed Services`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) (phase 2)
 - [`WIN - D - Logon Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
 - [`WIN - D - Network Authentication Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
@@ -947,11 +949,12 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - Microsoft Office Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1)
 - [`WIN - U - Microsoft Store`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1)
 
-**Prepared — pilot, waiting or dedicated group (37)**
+**Prepared — pilot, waiting or dedicated group (38)**
 
 - [`MAC - D - Restrictions Hardening`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
 - [`MAC - D - Software Updates`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Software_Updates.en.md) (phase 2)
 - [`MAC - U - Compliance OS Version`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
+- [`WIN - D - Bluetooth Allowed Services`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) (phase 2)
 - [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) (phase 2)
 - [`WIN - D - Google Chrome Extensions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Extensions.en.md) (phase 2)
 - [`WIN - D - Google Chrome Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Google_Chrome_Security.en.md) (phase 2)
@@ -1267,7 +1270,7 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technical | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technical | ○ No technical measure in the baseline | — |
 | **4.7** Manage Default Accounts on Enterprise Assets and Software | IG1 | technical | ● Covered (phase 1) | `MAC - D - Accounts and Login`, `WIN - D - Local Security Policies`, `WIN - D - Windows LAPS`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technical | ● Covered (phase 1) | `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration`, `WIN - D - Windows Sandbox` and 12 more |
+| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technical | ● Covered (phase 1) | `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration`, `WIN - D - Windows Sandbox` and 13 more |
 | **4.9** Configure Trusted DNS Servers on Enterprise Assets | IG2 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **4.10** Enforce Automatic Device Lockout on Portable End-User Devices | IG2 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Account Lockout`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `IOS - D - Passcode` |
 | **4.11** Enforce Remote Wipe Capability on Portable End-User Devices | IG2 | technical | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection` |
@@ -1476,7 +1479,7 @@ is organisational by definition: no policy implements it, this baseline is at mo
 | **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Covered (phase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Covered (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` and 6 more |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ No technical measure in the baseline | — |
-| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` and 12 more |
+| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` and 13 more |
 | **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Covered (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` and 14 more |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Covered (phase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Covered (phase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
@@ -1485,7 +1488,7 @@ is organisational by definition: no policy implements it, this baseline is at mo
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ No technical measure in the baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Covered (phase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` and 2 more |
 | **PR.PS-05** | Installation and execution of unauthorized software are prevented | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Microsoft Edge Extensions`, `WIN - D - Attack Surface Reduction`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Microsoft Store` and 11 more |
-| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - D - Wireless and Peripherals`, `WIN - D - Network Authentication Hardening` and 4 more |
+| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - D - Wireless and Peripherals`, `WIN - D - Bluetooth Allowed Services` and 5 more |
 | **PR.IR-03** | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations | ● Covered (phase 1) | `WIN - D - Business Continuity`, `MAC - D - Wifi Guest`, `WIN - D - Wifi Guest` |
 | **PR.IR-04** | Adequate resource capacity to ensure availability is maintained | ● Covered (phase 1) | `WIN - D - Delivery Optimisation`, `WIN - D - Endpoint Analytics`, `WIN - D - Storage Sense` |
 
@@ -1607,7 +1610,7 @@ Ready, but only does something once the prerequisite is met. Decision: who takes
 | [`WIN - D - Windows Event Forwarding`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) | Does nothing without a Windows Event Collector with source-initiated subscriptions that is reachable from the devices (VPN, Always On VPN or internal network). Anyone who centralises logs via Defender for Endpoint, Microsoft Sentinel or the Azure Monitor Agent does not need this policy. | A.8.15, A.8.16 |
 | [`WIN - U - Compliance Defender for Endpoint Risk`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) | Awaiting the Microsoft Defender for Endpoint connector in Intune (Endpoint security → Microsoft Defender for Endpoint → 'Connect Windows devices … to Defender for Endpoint' on) and a Defender for Endpoint P1/P2 or Business licence. Without the connector, every device reports 'not compliant' or 'not available' on this check. | A.5.15, A.8.7, A.8.16 |
 
-### D. Pilot — phase 2 (41)
+### D. Pilot — phase 2 (42)
 
 Noticeable to users or may break something. Decision: accept the consequences after the pilot and move to phase 1.
 Until that decision, the control the policy implements is not covered.
@@ -1628,6 +1631,7 @@ Until that decision, the control the policy implements is not covered.
 | [`WIN - D - Access Control`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) | Users must type their full name instead of clicking it, and they see a banner. First adjust the banner text to your own organisation's name. | A.5.15, A.5.17, A.8.5 |
 | [`WIN - D - Account Lockout`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) | The machine threshold puts a device into BitLocker recovery after ten failed attempts. That is recoverable (the key is stored in Entra ID) but generates a helpdesk ticket; check in the pilot how often it happens. | A.5.15, A.5.17, A.8.5 |
 | [`WIN - D - Administrator Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) | Changes how an administrator works: no more permanently elevated rights, but a confirmation per action. Scripts and tools that silently rely on administrator rights will notice. Windows 11 24H2 and later; on older builds it does nothing. | A.8.2 |
+| [`WIN - D - Bluetooth Allowed Services`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) | An allowlist turns off everything that is not on it, and which Bluetooth devices are in use you only know once you look. In the pilot, test at least a mouse, a keyboard, a headset (classic and LE Audio), calling via Phone Link with an iPhone and an Android phone, and a passkey sign-in with the QR code. Only takes effect after a restart. | A.8.12, A.8.20 |
 | [`WIN - D - Cryptography`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) | An internal system that only speaks TLS 1.0/1.1 becomes unreachable. That is intended, but it has to be known. | A.8.24 |
 | [`WIN - D - Device Guard and Credential Guard`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Guard_and_Credential_Guard.en.md) | Requires a restart, and memory integrity (HVCI) does not load drivers that were not built for it — think of old VPN, printer and dock drivers. Check in the pilot that everything still starts. | A.5.17, A.8.1, A.8.7 |
 | [`WIN - D - Disable NTLM`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Disable_NTLM.en.md) | Refuses all NTLM, inbound and outbound. Whatever cannot use Kerberos breaks: applications that connect by IP address, devices outside the domain, and shares for which the device gets no Kerberos ticket — an Entra-joined device opening a share on Entra Domain Services falls back to NTLM. Before the pilot, read Microsoft-Windows-NTLM/Operational on a few Windows 11 24H2 devices (4020/4021 outbound, 4022/4023 inbound): that logging is enabled there by default and shows what would break. | A.8.5 |
@@ -1862,7 +1866,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.8.9** Configuration management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 18 policies in phase 1, 7 prepared. Organisational: This repo is the recorded configuration; reviewing changes (PR) and following up drift in the tenant remains a process. | (b) (e) (g) (i) |
 | **A.8.10** Information deletion | yes | baseline security; confirm with the risk analysis | Organisational: Retention and deletion policy; selective wipe and wipe are technical tools. | — |
 | **A.8.11** Data masking | yes | baseline security; confirm with the risk analysis | Technically prepared: 1 policy in pilot, waiting or dedicated group. Organisational: Policy on when data is masked or pseudonymised — largely at application level. | — |
-| **A.8.12** Data leakage prevention | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 12 prepared. Organisational: DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. | (c) (d) (e) (h) (i) |
+| **A.8.12** Data leakage prevention | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 13 prepared. Organisational: DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. | (c) (d) (e) (h) (i) |
 | **A.8.13** Information backup | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1. Organisational: Backup policy for M365 data and periodic restore tests; OneDrive synchronisation is not a full backup. | (c) |
 | **A.8.14** Redundancy of information processing facilities | yes | baseline security; confirm with the risk analysis | Organisational: Redundancy of services and infrastructure — outside the endpoint/identity domain. | — |
 | **A.8.15** Logging | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 6 policies in phase 1, 2 prepared. Organisational: Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. | (b) (e) |
@@ -1870,7 +1874,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.8.17** Clock synchronization | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 1 prepared. Organisational: Define an approved time source. | (b) (e) (i) |
 | **A.8.18** Use of privileged utility programs | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 3 prepared. Organisational: Register of permitted administration and remote support tools and who may use them. | (i) |
 | **A.8.19** Installation of software on operational systems | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 10 policies in phase 1, 9 prepared. Organisational: Process for approving and offering software (Company Portal catalogue). | (e) (f) (g) (h) (i) |
-| **A.8.20** Networks security | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 12 prepared. Organisational: Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. | (b) (c) (e) (f) (h) (i) (j) |
+| **A.8.20** Networks security | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 13 prepared. Organisational: Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. | (b) (c) (e) (f) (h) (i) (j) |
 | **A.8.21** Security of network services | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 5 prepared. Organisational: Define and monitor requirements for network services and providers. | (c) (e) (h) |
 | **A.8.22** Segregation of networks | yes | baseline security; confirm with the risk analysis | Organisational: Network segmentation is infrastructure and cannot be set up through endpoint/identity policy. | — |
 | **A.8.23** Web filtering | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 4 prepared. Organisational: Define categories and exceptions (Defender Web Content Filtering in the Defender portal). | (d) (e) (g) (i) (j) |
@@ -1890,7 +1894,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 
 | | Count |
 |---|---:|
-| Intune policies with controls | 200 of 200 |
+| Intune policies with controls | 201 of 201 |
 | Labels outside the vocabulary | 0 |
 | Labels with a deviating spelling (still counted) | 0 |
 
