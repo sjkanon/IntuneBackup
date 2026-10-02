@@ -119,8 +119,9 @@ there again, the editor wants a real address instead of the token.
 - **Presets off.** A Standard or Strict preset takes precedence over these policies — and CIPP
   still reports *compliant*. The script turns the preset rules off; you can turn them back on in
   Defender.
-- **VIPs** from the Entra group `SEC-VIP` go into the anti-phishing policy (impersonation, max.
-  350). The group is the source: whoever leaves it also leaves the list. CIPP does not compare that
+- **VIPs, only when the customer names them.** By default a tenant has none. With
+  `-VipGroupName` the members of that Entra group go into the anti-phishing policy
+  (impersonation, max. 350). The group is the source: whoever leaves it also leaves the list. CIPP does not compare that
   list, so it does not overwrite it either. Run the script again when the group changes.
 
 Exceptions per tenant — a different address, an extension a customer needs — are made in CIPP on

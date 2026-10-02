@@ -120,8 +120,9 @@ je dat veld daar opnieuw, dan wil de editor een echt adres in plaats van het tok
 
 - **Presets uit.** Een Standard- of Strict-preset gaat vóór deze policies — en CIPP rapporteert
   dan nog steeds *compliant*. Het script zet de preset-regels uit; aanzetten kan weer in Defender.
-- **VIP's** uit de Entra-groep `SEC-VIP` komen in de anti-phishingpolicy (impersonatie, max. 350).
-  De groep is de bron: wie eruit gaat, gaat ook uit de lijst. CIPP vergelijkt die lijst niet en
+- **VIP's, alleen als de klant ze aanwijst.** Standaard heeft een tenant er geen. Met
+  `-VipGroupName` komen de leden van die Entra-groep in de anti-phishingpolicy (impersonatie,
+  max. 350). De groep is de bron: wie eruit gaat, gaat ook uit de lijst. CIPP vergelijkt die lijst niet en
   overschrijft hem dus ook niet. Draai het script opnieuw als de groep verandert.
 
 Uitzonderingen per tenant — een ander adres, een extensie die een klant nodig heeft — maak je in

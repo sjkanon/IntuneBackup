@@ -127,8 +127,9 @@ au lieu du token.
 - **Presets désactivés.** Un preset Standard ou Strict passe avant ces policies — et CIPP indique
   toujours *compliant*. Le script désactive les règles des presets ; on peut les réactiver dans
   Defender.
-- **Les VIP** du groupe Entra `SEC-VIP` vont dans la policy anti-hameçonnage (usurpation
-  d'identité, max. 350). Le groupe est la source : qui le quitte quitte aussi la liste. CIPP ne
+- **Les VIP, seulement si le client les désigne.** Par défaut un tenant n'en a pas. Avec
+  `-VipGroupName`, les membres de ce groupe Entra vont dans la policy anti-hameçonnage
+  (usurpation d'identité, max. 350). Le groupe est la source : qui le quitte quitte aussi la liste. CIPP ne
   compare pas cette liste et ne l'écrase donc pas. Relancez le script quand le groupe change.
 
 Les exceptions par tenant — une autre adresse, une extension dont un client a besoin — se font

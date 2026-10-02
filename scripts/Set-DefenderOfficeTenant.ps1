@@ -2,7 +2,8 @@
 <#
 .SYNOPSIS
 Does the two tenant steps of the Defender for Office 365 baseline that CIPP has no standard for:
-turns off the Standard/Strict preset security policies and fills the VIP list for impersonation.
+turns off the Standard/Strict preset security policies and, only when asked, fills the VIP list
+for impersonation.
 
 .DESCRIPTION
 BaselineTemplate/Defender-Office365.json creates custom policies through CIPP standards. Two
@@ -12,7 +13,8 @@ things around it cannot be done by a CIPP standard, so this script does them:
    over every custom policy, so the CIPP policies silently stop applying while CIPP still reports
    them as compliant. This disables the preset rules (EOP and Defender for Office 365 parts); the
    presets themselves stay, so you can turn them back on in the Defender portal.
-2. VIPs in the anti-phishing policy. The members of an Entra group (default SEC-VIP) become
+2. VIPs in the anti-phishing policy — only with -VipGroupName; by default a tenant has no VIPs and
+   this step is skipped. The members of that Entra group become
    TargetedUsersToProtect on the CIPP anti-phishing policy: mail that impersonates them goes to
    quarantine. CIPP does not compare that list, so its remediation does not wipe it. The list is
    replaced by the group membership, so the group is the source; Microsoft allows at most 350.
@@ -21,8 +23,8 @@ Connects to Exchange Online and Microsoft Graph itself when there is no connecti
 first with -WhatIf.
 
 .PARAMETER VipGroupName
-Display name of the Entra group with the VIPs. Default SEC-VIP. Skipped with a warning when the
-group does not exist.
+Display name of the Entra group with the VIPs. Without it the VIP list is left alone. Stops with
+an error when the group does not exist.
 
 .PARAMETER PolicyName
 Name of the anti-phishing policy from the baseline. When it is not found, the names CIPP adopts
@@ -30,9 +32,6 @@ instead are tried: 'CIPP Default Anti-Phishing Policy' and 'Default Anti-Phishin
 
 .PARAMETER SkipPresets
 Leaves the preset security policies alone.
-
-.PARAMETER SkipVip
-Leaves the VIP list alone.
 
 .EXAMPLE
 ./Set-DefenderOfficeTenant.ps1 -WhatIf
@@ -42,10 +41,9 @@ Leaves the VIP list alone.
 #>
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
 param(
-    [string]$VipGroupName = 'SEC-VIP',
+    [string]$VipGroupName,
     [string]$PolicyName = 'CXNM - Standard - Anti-Phishing',
-    [switch]$SkipPresets,
-    [switch]$SkipVip
+    [switch]$SkipPresets
 )
 
 $ErrorActionPreference = 'Stop'
@@ -78,7 +76,7 @@ if (-not $SkipPresets) {
     }
 }
 
-if (-not $SkipVip) {
+if ($VipGroupName) {
     $candidates = @($PolicyName, 'CIPP Default Anti-Phishing Policy', 'Default Anti-Phishing Policy') | Select-Object -Unique
     $policy = $null
     foreach ($candidate in $candidates) {
@@ -95,7 +93,7 @@ if (-not $SkipVip) {
     $filter = [uri]::EscapeDataString("displayName eq '$($VipGroupName -replace "'", "''")'")
     $groups = @((Invoke-MgGraphRequest -Method GET -Uri "https://graph.microsoft.com/v1.0/groups?`$filter=$filter&`$select=id,displayName").value)
     if ($groups.Count -eq 0) {
-        Write-Warning "Group '$VipGroupName' does not exist; VIP list left alone."
+        throw "Group '$VipGroupName' does not exist."
     } elseif ($groups.Count -gt 1) {
         throw "Group name '$VipGroupName' is not unique ($($groups.Count) groups)."
     } else {
