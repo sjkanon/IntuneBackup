@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Internet Explorer Legacy",
-    "description": "Hardening of the Internet Explorer engine, which still runs under Edge's IE mode and within old applications. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security.",
+    "description": "Hardening of the Internet Explorer engine, which still runs under Edge's IE mode and within old applications. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security.\nOIBID:52D56BB4-789A-41BA-8AF6-60F41A718661",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

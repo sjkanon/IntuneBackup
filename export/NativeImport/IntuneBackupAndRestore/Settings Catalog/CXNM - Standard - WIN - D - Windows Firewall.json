@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Windows Firewall",
-    "description": "Turns on Windows Firewall for the domain, private and public profiles and defines the default behaviour for inbound and outbound traffic. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration.",
+    "description": "Turns on Windows Firewall for the domain, private and public profiles and defines the default behaviour for inbound and outbound traffic. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Firewall Configuration.\nOIBID:E65452FD-DC67-445F-974C-B69F26B751F9",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

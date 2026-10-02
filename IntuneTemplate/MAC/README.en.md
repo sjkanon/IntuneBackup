@@ -12,6 +12,19 @@ All policies are named `CXNM - Standard - MAC - <D|U> - <Item>`; the tables belo
 | `DeviceConfigurations/` | 3 |
 | `CompliancePolicies/` | 4 |
 
+## Other components
+
+Not a CIPP policy type, so not in the tables below and not in a CIPP package. How each component is deployed is in its README.
+
+| Folder | What |
+|---|---|
+| [`ComplianceScripts/`](ComplianceScripts/README.en.md) | Custom compliance: Defender for Endpoint |
+| [`EndpointSecurity/`](EndpointSecurity/README.en.md) | Defender for Endpoint onboarding on macOS |
+| [`Enrollment/ade-profile/`](Enrollment/ade-profile/README.en.md) | macOS ADE enrollment profiles |
+| [`Enrollment/apple-business/`](Enrollment/apple-business/README.en.md) | Apple Business checklist |
+| [`Enrollment/enrollment-restriction/`](Enrollment/enrollment-restriction/README.en.md) | Enrollment restriction: no personal Macs |
+| [`PlatformScripts/`](PlatformScripts/README.en.md) | macOS shell scripts |
+
 ## Device-scoped (D) — 29
 
 Assign to device groups.

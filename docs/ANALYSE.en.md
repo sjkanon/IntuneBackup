@@ -472,7 +472,7 @@ In addition:
   Android Device Health (minimum patch level), iOS App Protection (widget sync off), macOS Software
   Updates (Enforce Latest after 30 days, beta off), Firewall and Gatekeeper (XProtect upload after prompt),
   Edge Security on macOS (no SSL error override).
-- **[`extras/`](../extras/README.en.md)**: what is not a CIPP type — enrolment restrictions, app configuration,
+- **Other components per platform** (under *Other components* in each platform README of [`IntuneTemplate/`](../IntuneTemplate/README.en.md)): what is not a CIPP type — enrolment restrictions, app configuration,
   assignment filters, App Control for Business, DNS over HTTPS for Windows, remediations for
   BitLocker/LAPS escrow, Escrow Buddy, Apple Business checklists.
 - **Compliance framework**: every policy has `controls` (iso, nis2, cis, nistcsf) from the vocabulary in
@@ -498,14 +498,14 @@ In addition:
 ## What was deliberately not done
 
 - **App Control for Business as a template**: the `settingInstanceTemplateId` cannot be verified generically;
-  it is in `extras/windows/app-control/` with a script that fetches the ids from your own tenant.
+  it is in `IntuneTemplate/WIN/EndpointSecurity/` with a script that fetches the ids from your own tenant.
 - **Defender for Endpoint onboarding on macOS**: requires the tenant-specific onboarding XML; route in
-  `extras/macos/defender-onboarding/`.
+  `IntuneTemplate/MAC/EndpointSecurity/`.
 - **Requiring SMB encryption and enforcing Kerberos armoring**: break things without an inventory.
 - **External storage read-only on macOS** is in phase 5: macOS then does not mount an ordinary USB disk
   at all, so reading is gone too.
 - **iOS Enterprise enrolment profile as a Catalog template**: template ids cannot be verified; as a
-  Graph body in `extras/ios/enrollment/`.
+  Graph body in `IntuneTemplate/IOS/Enrollment/`.
 
 ## Open items
 
@@ -530,4 +530,4 @@ In addition:
 5. **CA**: check whether CIPP sends `insiderRiskLevels` along (otherwise `1190` blocks everyone); decision
    on `3010` to 4 hours (CIS).
 6. **Not tested on real devices**: the new macOS, iOS and Android policies and the scripts in
-   `extras/`. First one pilot device per platform.
+   `IntuneTemplate/`. First one pilot device per platform.

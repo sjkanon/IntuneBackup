@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Store",
-    "description": "The user side of the Store restrictions. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration.",
+    "description": "The user side of the Store restrictions. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - U - Configuration.\nOIBID:2A4518B8-64B5-43C4-AC03-18CE627F1105",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

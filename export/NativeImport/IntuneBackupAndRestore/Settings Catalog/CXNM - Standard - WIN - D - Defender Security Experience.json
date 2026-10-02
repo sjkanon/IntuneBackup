@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Defender Security Experience",
-    "description": "Determines what the user sees in the Windows Security app and may turn off themselves. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience.",
+    "description": "Determines what the user sees in the Windows Security app and may turn off themselves. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - Security Experience.\nOIBID:1BDB3565-26E1-4820-B79F-6AFED73C5A67",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

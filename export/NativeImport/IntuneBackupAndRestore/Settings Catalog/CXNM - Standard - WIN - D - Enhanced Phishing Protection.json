@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Enhanced Phishing Protection",
-    "description": "Warns as soon as a user types their work password on a phishing site, reuses it in an app or saves it in a text file. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection.",
+    "description": "Warns as soon as a user types their work password on a phishing site, reuses it in an app or saves it in a text file. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Enhanced Phishing Protection.\nOIBID:485E5D84-C87C-459D-A2FB-0D060A082BE7",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

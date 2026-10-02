@@ -13,6 +13,15 @@ All policies are named `CXNM - Standard - IOS - <D|U> - <Item>`; the tables belo
 | `AppProtection/` | 1 |
 | `CompliancePolicies/` | 3 |
 
+## Other components
+
+Not a CIPP policy type, so not in the tables below and not in a CIPP package. How each component is deployed is in its README.
+
+| Folder | What |
+|---|---|
+| [`AppConfiguration/`](AppConfiguration/README.en.md) | iOS/iPadOS app configuration |
+| [`Enrollment/`](Enrollment/README.en.md) | iOS/iPadOS enrollment: ADE profile, groups and Apple Business |
+
 ## Device-scoped (D) — 10
 
 Assign to device groups.

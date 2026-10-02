@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Edge Security",
-    "description": "Edge's security settings: SmartScreen, download control, certificate behaviour and which sites may load insecure content. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security.",
+    "description": "Edge's security settings: SmartScreen, download control, certificate behaviour and which sites may load insecure content. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Security.\nOIBID:91BC2795-9140-4B71-AAA6-7D6EB000742F",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

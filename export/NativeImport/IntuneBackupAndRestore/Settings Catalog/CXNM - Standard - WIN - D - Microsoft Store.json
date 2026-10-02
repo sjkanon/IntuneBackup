@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Store",
-    "description": "Restricts the Microsoft Store, so that users cannot install arbitrary apps. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration.",
+    "description": "Restricts the Microsoft Store, so that users cannot install arbitrary apps. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Store - D - Configuration.\nOIBID:D239DFC3-E20A-48C9-A906-09C0AF624CB7",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

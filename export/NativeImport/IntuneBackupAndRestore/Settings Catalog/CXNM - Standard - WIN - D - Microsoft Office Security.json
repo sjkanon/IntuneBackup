@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Office Security",
-    "description": "Office macro security: blocks macros in files from the internet, restricts ActiveX and old file formats. The centrepiece of this baseline against phishing via attachments. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security.",
+    "description": "Office macro security: blocks macros in files from the internet, restricts ActiveX and old file formats. The centrepiece of this baseline against phishing via attachments. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Security.\nOIBID:A182DB08-2F64-4535-8A7E-C0277D88152B",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

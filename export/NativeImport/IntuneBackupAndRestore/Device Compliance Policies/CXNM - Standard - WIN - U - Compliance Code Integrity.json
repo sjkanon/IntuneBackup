@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Checks whether code integrity is on, so that Windows only loads signed drivers and system files. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity.",
+    "description": "Checks whether code integrity is on, so that Windows only loads signed drivers and system files. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Health - U - Code Integrity.\nOIBID:6712002B-CB62-408B-AC11-BF410B3AD77F",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "CXNM - Standard - WIN - U - Compliance Code Integrity",

@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Office Updates",
-    "description": "Which update channel Office is on and how quickly updates are installed. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates.",
+    "description": "Which update channel Office is on and how quickly updates are installed. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - D - Updates.\nOIBID:B42FB11C-AF28-476E-AB4E-BF563AC80975",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

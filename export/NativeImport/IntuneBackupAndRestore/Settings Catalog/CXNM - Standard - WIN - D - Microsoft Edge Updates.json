@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Edge Updates",
-    "description": "How and when Edge updates itself, and that a user cannot postpone it. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates.",
+    "description": "How and when Edge updates itself, and that a user cannot postpone it. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - D - Updates.\nOIBID:87556342-57CC-4055-AFC1-D803183A9655",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

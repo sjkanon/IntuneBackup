@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft OneDrive",
-    "description": "The user side of OneDrive: which screens and notifications the user sees. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration.",
+    "description": "The user side of OneDrive: which screens and notifications the user sees. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - U - Configuration.\nOIBID:5CD97975-5495-4DA4-A402-89817D130CF4",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

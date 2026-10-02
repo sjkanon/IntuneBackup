@@ -49,10 +49,9 @@ Les flèches pleines écrivent ; les pointillés ne font que lire.
 
 | Dossier | Contenu | Créé par | Repris par |
 |---|---|---|---|
-| [`IntuneTemplate/`](../IntuneTemplate/README.fr.md) | Les stratégies, par plateforme et type de stratégie, plus les fichiers `_` qui les pilotent | main + scripts d'import | tous les scripts, CIPP |
+| [`IntuneTemplate/`](../IntuneTemplate/README.fr.md) | Par plateforme, les stratégies (par type de stratégie) et les autres éléments (inscription, endpoint security, scripts, remédiations, applications, configuration d'applications, filtres), plus les fichiers `_` qui pilotent les stratégies | main + scripts d'import | stratégies : tous les scripts, CIPP · autres éléments : déployer selon leur README ; `MAC/Enrollment/ade-profile/` et `MAC/PlatformScripts/` accompagnent l'export comme sidecar |
 | [`export/NativeImport/`](../export/README.fr.md) | Format de restauration, avec affectations | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.fr.md) | La baseline CIPP : packages par stage | `generate-baseline-template.js` | CIPP (import manuel) |
-| [`extras/`](../extras/README.fr.md) | Tout ce qui n'est pas un type de stratégie CIPP, par plateforme : profils et restrictions d'inscription, configuration d'applications, filtres, App Control, remédiations, scripts shell et de plateforme, scripts de conformité, applications Win32 | main | personne automatiquement — déployer selon le README ; `extras/macos/enrollment/` et `extras/macos/shell-scripts/` accompagnent l'export comme sidecar |
 | `docs/` | Documentation : vue d'ensemble, référentiel de conformité, analyse, plan et cette structure | main + `generate-docs.js`, `generate-compliance.js` | lecteurs |
 | [`scripts/`](../scripts/README.fr.md) | Le pipeline : import, contrôle, génération, scripts de tenant | main | workflow GitHub |
 | `local/` | Copies de déploiement avec secrets renseignés et rapports de tenant | main | **pas dans git** (`.gitignore`) |
@@ -72,9 +71,13 @@ IntuneTemplate/
   _ca.json            quelles stratégies CA s'appuient sur une stratégie (copie)
   _i18n/              traductions anglaises et françaises des textes des données
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 ```
 
 À côté de chaque template `.json` se trouve un `.md` généré qui liste chaque paramètre qu'il définit.
@@ -151,7 +154,7 @@ package — puis les étapes 3 à 6. Tous les scripts Node du pipeline partagent
   restauration se trouve sous `export/NativeImport/`. Sans ce mot, CIPP fait de chaque stratégie un
   second template.
 - **Tout autre `.json` devient une ligne de template sans nom.** Cela vaut pour les fichiers `_` de
-  `IntuneTemplate/` (y compris `_i18n/*.json`), tout ce qui se trouve sous `extras/` — profils ADE,
+  `IntuneTemplate/` (y compris `_i18n/*.json`), les autres éléments de `IntuneTemplate/<PLATFORME>/` — profils ADE,
   corps Graph et la partie JSON du contrôle de conformité — et, avec la synchronisation automatique,
   aussi `BaselineTemplate/Baseline.json`. Cette ligne ne fait rien et peut être supprimée dans CIPP.
 

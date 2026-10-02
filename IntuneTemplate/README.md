@@ -37,6 +37,11 @@ De map volgt uit de bestandsnaam (platform) en het CIPP-`Type` (policytype) en d
 geen informatie die niet ook in het bestand staat. `check-scope.js` controleert dat elk
 bestand op zijn plek staat.
 
+Naast die policytype-mappen heeft elk platform mappen voor wat geen CIPP-policytype is, ingedeeld
+zoals de menu's van de Intune-portal: `Enrollment/`, `EndpointSecurity/`, `PlatformScripts/`,
+`Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` en `AssignmentFilters/`. De
+platform-README somt ze op onder *Overige onderdelen*; de pijplijn leest ze niet.
+
 ## De `_`-bestanden
 
 | Bestand | Wat het vastlegt | Gelezen door |

@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Edge Profiles and Sync",
-    "description": "Determines which account users sign in to Edge with and what is synchronised, so that work data does not flow to a personal profile. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync.",
+    "description": "Determines which account users sign in to Edge with and what is synchronised, so that work data does not flow to a personal profile. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Profiles, Sign-In and Sync.\nOIBID:187DF539-E00E-42B3-BF6A-C86ADC0183C2",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

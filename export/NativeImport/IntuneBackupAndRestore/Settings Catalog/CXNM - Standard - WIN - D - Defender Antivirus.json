@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Defender Antivirus",
-    "description": "Core configuration of Defender Antivirus: real-time protection, cloud protection, scan schedule, and what happens on a detection. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration.",
+    "description": "Core configuration of Defender Antivirus: real-time protection, cloud protection, scan schedule, and what happens on a detection. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus - D - AV Configuration.\nOIBID:2064828D-FB90-4A27-B4F9-3EE30F5A4DA2",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

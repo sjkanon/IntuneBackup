@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Defender Update Ring 2 UAT",
-    "description": "Second ring for Defender updates: runs behind the pilot and ahead of production. Baseline assignment: none by default — belongs on SEC-Update-Ring2. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT.",
+    "description": "Second ring for Defender updates: runs behind the pilot and ahead of production. Baseline assignment: none by default — belongs on SEC-Update-Ring2. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 2 - UAT.\nOIBID:A75B86A1-0C58-4B81-AA31-EAF5EFA9CE26",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

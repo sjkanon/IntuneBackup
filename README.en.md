@@ -56,18 +56,19 @@ the SSO plug-ins — has a **Conditional Access** section in its README: which C
 and what breaks there if you change it. The link is maintained in `docs/policies.json` of the
 CA-Policies repo; a copy is kept here in `IntuneTemplate/_ca.json`.
 
-**[`extras/`](extras/README.en.md)** contains what belongs in a complete baseline but is none of the five
-CIPP policy types — per platform, with deployment instructions: enrolment profiles and
-restrictions, app configuration, assignment filters, App Control for Business, remediations,
-shell and platform scripts, a custom compliance check and a Win32 app. Among them the
-macOS ADE enrolment profiles ([`extras/macos/enrollment/`](extras/macos/enrollment/README.en.md)),
-the macOS shell scripts ([`extras/macos/shell-scripts/`](extras/macos/shell-scripts/README.en.md)),
-the Windows platform scripts ([`extras/windows/platform-scripts/`](extras/windows/platform-scripts/README.en.md)),
-the compliance check for Defender on macOS ([`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.en.md))
-and the Win32 app that removes the preinstalled McAfee
-([`extras/windows/win32-apps/remove-mcafee/`](extras/windows/win32-apps/remove-mcafee/README.en.md)).
-`export-intunebackup.js` copies the ADE profiles and the macOS shell scripts into the export as
-sidecars; CIPP, `check-scope.js` and `Set-BaselineAssignment.ps1` do nothing with `extras/`.
+**Everything for a platform sits together.** Next to the CIPP templates (`SettingsCatalog/`,
+`AdministrativeTemplates/`, `DeviceConfigurations/`, `CompliancePolicies/`, `AppProtection/`),
+`IntuneTemplate/<PLATFORM>/` also holds the components that are not a CIPP policy type, in folders
+that follow the menus of the Intune portal: `Enrollment/` (Autopilot, ADE profiles, restrictions),
+`EndpointSecurity/` (App Control, Defender onboarding), `PlatformScripts/`, `Remediations/`,
+`ComplianceScripts/`, `Apps/`, `AppConfiguration/` and `AssignmentFilters/`. If a component has
+several separate topics, each gets a subfolder. Each platform's README
+([Windows](IntuneTemplate/WIN/README.en.md), [macOS](IntuneTemplate/MAC/README.en.md),
+[iOS/iPadOS](IntuneTemplate/IOS/README.en.md), [Android](IntuneTemplate/AND/README.en.md)) lists them
+under *Other components*; every folder has its own README with deployment instructions. The pipeline
+only reads the `Baseline_*.json` templates. `export-intunebackup.js` copies the ADE profiles and the
+macOS shell scripts into the export as sidecars; CIPP, `check-scope.js` and
+`Set-BaselineAssignment.ps1` do nothing with the other components.
 
 Each folder has a README with the details: [`IntuneTemplate/`](IntuneTemplate/README.en.md) (with
 a table per platform), [`scripts/`](scripts/README.en.md) and [`export/`](export/README.en.md).
@@ -94,7 +95,7 @@ of the rest does nothing. Set them before you start assigning.
 | **Defender for Endpoint connector** | Intune → Endpoint Security → Microsoft Defender for Endpoint | Needed for onboarding via `WIN - D - Defender EDR Policy` and for a check on the risk score from Defender. That check is deliberately not in the baseline — OpenIntuneBaseline v4.0 does not have it either; `WIN - U - Compliance Defender Real Time Protection` and `Defender Security Intelligence` check what is *on* the device and work without the connector. If you do want to take the risk score into account, enable the connector first: without it the score never arrives and the check silently returns no verdict. |
 
 On macOS the Defender side is a third case: that check does not exist as a setting and requires a
-script — see [`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.en.md).
+script — see [`IntuneTemplate/MAC/ComplianceScripts/`](IntuneTemplate/MAC/ComplianceScripts/README.en.md).
 
 Next to each template is a markdown file with **every setting that policy sets** — for example
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md).
@@ -137,13 +138,16 @@ IntuneTemplate/        the source: the policies in CIPP template format
   _ca.json            which CA policies rely on a policy (copy from the CA-Policies repo)
   _i18n/              English and French translations of the texts in the data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 BaselineTemplate/      the CIPP baseline (generated)
-AppTemplate/           CIPP application templates (generated from extras/)
+AppTemplate/           CIPP application templates (generated from IntuneTemplate/)
 export/NativeImport/   restore export for IntuneBackupAndRestore (generated)
-extras/                what is not a CIPP policy type, per platform (android, ios, macos, windows)
 docs/                  overview, compliance, analysis, plan and structure
 scripts/               the pipeline and the tenant scripts
 ```
@@ -368,8 +372,9 @@ Community Repos → Import it *is* recognised as a baseline. See
 What remains are the files that are `.json` but not a policy:
 
 - the `_` files in `IntuneTemplate/`, including the translations in `_i18n/`;
-- everything under `extras/`: ADE profiles, Graph bodies for restrictions, app configuration and
-  filters, App Control and the JSON part of the compliance check;
+- the files in the other components (`Enrollment/`, `AppConfiguration/` etc.): ADE profiles, Graph
+  bodies for restrictions, app configuration and filters, App Control and the JSON part of the
+  compliance check;
 - with the automatic sync, also `BaselineTemplate/Baseline.json`.
 
 CIPP makes one row out of them without a name and without a type (they collapse onto each other because the

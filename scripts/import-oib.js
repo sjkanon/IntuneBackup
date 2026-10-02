@@ -78,6 +78,36 @@ function stripODataAnnotations(node) {
   return out;
 }
 
+/** Het tracking-ID dat OIB sinds Windows v4.0 in de omschrijving zet, of null. */
+function oibIdOf(source) {
+  const m = /OIBID:([0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12})/i.exec((source && source.description) || "");
+  return m ? m[1].toUpperCase() : null;
+}
+
+/**
+ * OIB-bestanden die in het manifest nergens voorkomen, niet als `source` en niet onder
+ * `excluded`. Zonder deze lijst valt een nieuwe policy in een OIB-release pas op als iemand de
+ * changelog naast de mapinhoud legt. Een `excluded`-pad dat op `/` eindigt dekt de hele map.
+ */
+function unreferencedSourceFiles(sourceRoot, manifest) {
+  const refs = [...manifest.policies.map((p) => p.source), ...(manifest.excluded || []).map((e) => e.source)].filter(Boolean);
+  const covered = (rel) => refs.some((r) => rel === r || (r.endsWith("/") && rel.startsWith(r)));
+  const out = [];
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.name.startsWith(".")) continue;
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (/\.(json|ps1|sh|xml|mobileconfig)$/i.test(e.name)) {
+        const rel = path.relative(sourceRoot, full).split(path.sep).join("/");
+        if (!covered(rel)) out.push(rel);
+      }
+    }
+  };
+  walk(sourceRoot);
+  return out.sort();
+}
+
 function omit(obj, keys) {
   const out = {};
   for (const [k, v] of Object.entries(obj)) if (!keys.includes(k)) out[k] = v;
@@ -414,6 +444,7 @@ function main() {
   // eerste bestand geschreven wordt.
   const loaded = [];
   const oibSettingIds = new Set();
+  const oibIdChanges = [];
   for (const entry of manifest.policies) {
     let source = null;
     if (entry.source) {
@@ -428,6 +459,15 @@ function main() {
       const dropped = new Set(entry.dropSettings || []);
       const kept = (source.settings || []).filter((s) => !dropped.has(s.settingInstance && s.settingInstance.settingDefinitionId));
       for (const id of collectSettingIds(kept)) oibSettingIds.add(id);
+      // OIB geeft een policy bij elke nieuwe versie een nieuw ID; het manifest volgt de bron.
+      const oibId = oibIdOf(source);
+      if (oibId && entry.oibId !== oibId) {
+        oibIdChanges.push(`${entry.target}: ${entry.oibId || "(geen)"} -> ${oibId}`);
+        entry.oibId = oibId;
+      } else if (!oibId && entry.oibId) {
+        oibIdChanges.push(`${entry.target}: ${entry.oibId} -> (geen; de bron heeft er geen meer)`);
+        delete entry.oibId;
+      }
     }
     loaded.push({ entry, source });
   }
@@ -555,8 +595,20 @@ function main() {
     console.log("\nBewust afgeweken van OIB (overrides uit het manifest):");
     for (const o of overridden) console.log("  " + o);
   }
+  if (oibIdChanges.length > 0) {
+    // Het ID komt in de omschrijving, dus de templates hierboven zijn al met het nieuwe ID
+    // geschreven; het manifest moet mee, anders zet set-packages.js het oude terug.
+    if (!dryRun) fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2) + "\n");
+    console.log(`\nOIBID bijgewerkt in het manifest${dryRun ? " (--dry-run: niet weggeschreven)" : ""}:`);
+    for (const c of oibIdChanges) console.log("  " + c);
+  }
   if (manifest.excluded && manifest.excluded.length > 0) {
     console.log(`\n${manifest.excluded.length} OIB-policy(s) bewust niet overgenomen — zie "excluded" in het manifest.`);
+  }
+  const unreferenced = unreferencedSourceFiles(sourceRoot, manifest);
+  if (unreferenced.length > 0) {
+    console.log(`\nLET OP: ${unreferenced.length} bestand(en) in de OIB-checkout staan niet in het manifest — neem ze op onder "policies" of leg onder "excluded" uit waarom niet:`);
+    for (const u of unreferenced) console.log("  " + u);
   }
   console.log("\nDaarna: node scripts/set-packages.js && node scripts/check-scope.js && node scripts/export-intunebackup.js && node scripts/generate-docs.js");
 }

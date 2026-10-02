@@ -1,0 +1,869 @@
+**Nederlands** · [English](README.en.md) · [Français](README.fr.md)
+
+# macOS shell-scripts
+
+Intune-shellscripts (`deviceShellScripts`) zijn geen van de vijf CIPP-policytypes. Een shellscript
+hangt onder `deviceManagement/deviceShellScripts`, `Set-CIPPIntunePolicy` heeft er geen
+`TemplateType` voor, en `Start-IntuneRestoreConfig` zet het niet terug. `export-intunebackup.js`
+kopieert elke `.sh` uit deze map wel als sidecar naar `export/.../macOS Shell Scripts/macos/`,
+zodat de scripts bij een herinrichting niet vergeten worden; CIPP, `check-scope.js` en
+`Set-BaselineAssignment.ps1` doen er niets mee. Aanmaken en toewijzen gaat met de hand.
+
+| Bestand | Wat het doet | Scope |
+|---|---|---|
+| `configure-dock.sh` | Richt de Dock één keer per gebruiker in en laat 'm daarna met rust | Gebruiker |
+| `mount-azure-files.sh` | Zet een LaunchAgent klaar die de Azure Files-share mount in de sessie van de gebruiker | Apparaat |
+| `nudge-screen-recording.sh` | Vraagt de gebruiker schermopname aan te zetten voor de remote-supporttools (standaard NinjaOne en TeamViewer), en opent het paneel | Gebruiker |
+| `escrow-buddy.sh` | Installeert Escrow Buddy (vaste versie, handtekening gecontroleerd) en vraagt één keer een nieuwe FileVault-herstelsleutel aan | Apparaat |
+
+## configure-dock.sh
+
+Zet de bedrijfsapps in de Dock en Apple's standaardset eruit — Safari, Mail, Agenda,
+Contacten, Notities, Herinneringen, Berichten, FaceTime, Foto's, Muziek, TV, Podcasts,
+Kaarten, Nieuws, App Store en Freeform. Die worden niet stuk voor stuk verwijderd: het script
+vervangt de héle `persistent-apps`-lijst, zodat het niet uit de pas loopt met wat Apple in een
+volgende macOS-versie standaard in de Dock zet.
+
+Van links naar rechts: Outlook, Teams, Edge, Word, Excel, PowerPoint, Windows App, OneDrive,
+Bedrijfsportal, Systeeminstellingen. Finder en Prullenbak staan er niet in — die beheert macOS
+zelf en zijn niet te verplaatsen.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **Yes** | zonder dit schrijft `defaults` naar de Dock van root en ziet de gebruiker niets |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 hour** | |
+| Max number of retries | 3 | |
+
+Toewijzen aan een **gebruikersgroep** (All Users), niet aan apparaten: de Dock is per
+gebruiker, en op een gedeelde Mac hoort elke gebruiker zijn eigen inrichting te krijgen.
+
+### "Elk uur" en "eenmalig" spreken elkaar niet tegen
+
+Zodra de Dock staat schrijft het script een markering in
+`~/Library/Application Support/Baseline/dock-configured` en stopt elke volgende run direct.
+Het herhalen is er alleen voor de eerste keer: bij een nieuwe Mac draait dit script vrijwel
+altijd vóórdat Intune de M365-apps heeft uitgerold. Zou je "Not configured" kiezen (één run,
+nooit meer), dan houdt zo'n apparaat permanent een halve Dock.
+
+Zolang er apps ontbreken raakt het script de Dock niet aan en probeert het het volgende uur
+opnieuw. Na 30 vergeefse pogingen — ruim een dag — richt het de Dock in met wat er wél staat
+en noteert het in `dock.log` welke apps ontbraken. Wachten op een app die niet komt (niet
+toegewezen, installatie mislukt) levert anders een Dock op die nooit goed komt te staan.
+
+### Daarna is de Dock van de gebruiker
+
+Wie er iets bij wil zetten of uit wil halen mag dat. Dat is een keuze, geen tekortkoming: de
+alternatieven zijn een custom `.mobileconfig` met `static-only` (Dock volledig vast, gebruiker
+kan niets meer) of niets doen.
+
+Wil je 'm alsnog vastzetten, dan is dit script het verkeerde middel — dat wordt een
+Device-configuratie met een `com.apple.dock`-payload.
+
+### Opnieuw laten draaien
+
+Verwijder de markering; de eerstvolgende run richt de Dock opnieuw in:
+
+```bash
+rm -f ~/Library/Application\ Support/Baseline/dock-configured \
+      ~/Library/Application\ Support/Baseline/dock-attempts
+```
+
+### Waarom geen Settings Catalog
+
+De Settings Catalog hééft Dock-instellingen, maar die zijn bij méér dan één app stuk: Intune
+formatteert de lijst verkeerd en de payload komt niet op het apparaat aan. Zie
+[Microsoft Q&A 1164432](https://learn.microsoft.com/en-us/answers/questions/1164432/macos-settings-catalog-user-experience-dock-persis)
+— nog open, en in 2026 nog steeds gemeld. Met één app werkt het wel, dus wie het probeert
+krijgt makkelijk de indruk dat het goed zit.
+
+### Regeleindes
+
+`.gitattributes` dwingt LF af voor `*.sh`. Deze repo wordt op Windows onderhouden met
+`core.autocrlf=true`; zonder die regel krijgt dit script bij checkout CRLF en faalt het op de
+Mac met `bad interpreter: /bin/bash^M`. Controleer dat na een upload met `file` of `cat -A` —
+Intune slikt het script gewoon en de fout blijkt pas op het apparaat.
+
+## mount-azure-files.sh
+
+Mount een Azure Files-share in `/Volumes` met het Kerberos-ticket dat Platform SSO
+uitgeeft, zodat de gebruiker geen wachtwoord hoeft in te vullen en de share in de
+Finder-zijbalk staat. Het macOS-equivalent van een drive mapping, en de tegenhanger van
+[`Mount-AzureFilesDrive.ps1`](../../WIN/PlatformScripts/README.md) op Windows.
+
+### Waarom een script en geen configuratieprofiel
+
+Er is geen drive-mapping-payload. Alle 18.329 `settingDefinitionId`'s van de settings catalog
+zijn nagezocht op iets dat een netwerkschijf koppelt; dat bestaat niet, op geen van beide
+platformen. Apple heeft `com.apple.finder_showmountedserversondesktop` — of een al gemounte
+share op het bureaublad staat — en verder niets. Mounten is een handeling en geen instelling.
+
+### De Azure-kant: een tweede storage account met Entra Kerberos
+
+Geldt voor **beide** platformen — `Mount-AzureFilesDrive.ps1` op Windows heeft precies dezelfde
+voorwaarden. De beperking van één identity source geldt per storage account en niet per tenant,
+dus een tweede account naast het bestaande lost het op zonder te raken wat al op het eerste
+account draait (bijvoorbeeld een AVD-omgeving op Entra Domain Services).
+
+Een **nieuw** account is bovendien makkelijker dan een bestaand: de `CIFS/` → `cifs/`-correctie
+op de identifier URI is alleen nodig bij shares die er al waren.
+
+1. **Maak het storage account** in dezelfde regio als de gebruikers, met een file share erin.
+2. **Zet Entra Kerberos aan.** In de portal via *Data storage* → *File shares* →
+   *Identity-based access* → *Microsoft Entra Kerberos* → *Set up*, of:
+
+   ```powershell
+   Set-AzStorageAccount -ResourceGroupName "<rg>" -Name "<account>" `
+       -EnableAzureActiveDirectoryKerberosForFile $true
+   ```
+
+   Hiermee registreert Azure vanzelf een app `[Storage Account] <account>.file.core.windows.net`.
+3. **Geef admin consent** op die app: Entra ID → App-registraties → Alle toepassingen → de app
+   met de naam van het storage account → *API-machtigingen* → *Verleen beheerderstoestemming*.
+   Zonder deze stap staat de app er wel en gebeurt er niets.
+4. **Zet cloud-only groepsondersteuning aan.** Verplicht zodra je cloud-only identiteiten
+   gebruikt, en makkelijk te missen: een Kerberos-ticket draagt hoogstens 1.010 groeps-SID's, en
+   zonder de juiste `Tags` in het app-manifest mislukt de authenticatie. Zie
+   [Group SID limit in Entra Kerberos](https://learn.microsoft.com/en-us/entra/identity/authentication/kerberos#group-sid-limit-in-entra-kerberos-preview).
+5. **Sluit de app uit van MFA.** Entra Kerberos kan niet met MFA overweg. Staat er een
+   Conditional Access-beleid op alle apps, dan hoort deze in de uitsluitingslijst — zoek op
+   `[Storage Account] <account>.file.core.windows.net`. Vergeet je dit, dan is het symptoom
+   `System error 1327` bij `net use`.
+6. **Ken share-level permissions toe** aan dezelfde gebruikersgroep waaraan je het script
+   toewijst. Daarna bepalen de NTFS-rechten in de share de rest.
+7. **Vul de accountnaam in** in `IntuneTemplate/MAC/PlatformScripts/mount-azure-files.sh` en
+   `IntuneTemplate/WIN/PlatformScripts/Mount-AzureFilesDrive.ps1`, en zet deze policy van fase 3 naar
+   fase 1.
+
+Aan de clientkant: het apparaat moet Entra joined of Entra hybrid joined zijn. Windows werkt
+daarna meteen — Entra Kerberos is daar algemeen beschikbaar. Voor **macOS** blijft de toegang
+tot Azure Files via het Platform SSO-ticket een limited preview waarvoor Microsoft de tenant
+moet aanzetten (azurefiles@microsoft.com); die mail kun je los van dit alles alvast versturen,
+want dat is de traagste schakel.
+
+Dit profiel hoeft voor een ander storage account **niet** te wijzigen: `Hosts` staat op
+`.windows.net` en dekt daarmee elk account in Azure.
+
+### Wat anderen doen, en wat ze daarvoor opgeven
+
+Er is geen mooie oplossing voor dit probleem; er zijn drie oplossingen die elk iets anders
+inleveren. Dat is nuttig om te weten vóór je aan deze constructie gaat sleutelen.
+
+| Aanpak | Wie | Wat het kost |
+|---|---|---|
+| **Snelkoppeling in de Dock**, geen mount | [Oktay Sari](https://allthingscloud.blog/revamping-network-drive-mappings-on-macos-with-intune/) (MVP) — `defaults write com.apple.dock persistent-others` met een `smb://`-URL | Lost de authenticatie niet op. Klikken levert een aanmeldvenster tenzij Kerberos er los onder ligt. |
+| **Storage account key in het script** | [Llewellyn Hughes](https://www.llewellynhughes.co.uk/post/azure-map-drive-mac/) — `mount_smbfs -d 777 -f 777 //account:KEY@…` | De sleutel staat in platte tekst in het script en geeft toegang tot het hele storage account. Geen identiteit per gebruiker, geen rechten per persoon. |
+| **Kerberos, met wachtwoord als terugval** | [42Loris/macOS_DriveMapping](https://github.com/42Loris/macOS_DriveMapping) — `mount_smbfs -N`, en anders een sleutelhanger-helper | Niets aan de beveiligingskant, maar het vraagt een werkende Kerberos-bron. Vraagt bovendien een Developer ID-certificaat voor de helper. |
+
+Deze baseline doet de derde. Omdat de Kerberos-kant vastloopt zodra het storage account al een
+andere identity source heeft (AD DS of Entra Domain Services) en je die niet zomaar omzet, is de
+tweede er als **terugval** bij gezet — zie hieronder.
+
+### De storage account key als terugval
+
+`STORAGE_KEY` bovenin het script. Leeg laten betekent alleen Kerberos; staat er een sleutel,
+dan probeert het script eerst een ticket en valt daarna terug op de sleutel. De sleutel gaat
+percent-gecodeerd de URL in, dus je plakt hem zoals Azure hem geeft.
+
+Wat je hiermee inlevert, en dat is meer dan het lijkt:
+
+- **De sleutel opent het hele storage account**, niet deze ene share. Draait er op hetzelfde
+  account ook iets anders, zoals een AVD-omgeving, dan valt die data er dus ook onder.
+- **Geen identiteit per gebruiker.** Iedereen die mount is dezelfde "gebruiker". Rechten per
+  persoon en herleidbaarheid in de logs bestaan niet, en de share-level permissions in Azure
+  doen niets meer.
+- **Iedereen die het script kan lezen heeft de sleutel** — in Intune, en op het toestel.
+
+Daarom staat er in dit bestand een lege placeholder en niet de sleutel zelf. **Vul hem nooit in
+in de repo.** De kopie die je naar Intune uploadt draagt de echte waarde; wat in git staat blijft
+leeg. Een sleutel die één keer in git heeft gestaan staat er voorgoed in, ook na een commit die
+hem weghaalt, en dan is roulering de enige uitweg — met alles eraan vast.
+
+Rouleer de sleutel sowieso zodra de Kerberos-route werkt, en ook eerder als hij ergens is
+langsgekomen waar hij niet hoort: Azure-portal → het storage account → *Toegangssleutels* →
+*Sleutel roteren*. Gebruik key2 voor de uitrol en houd key1 achter de hand, dan kun je rouleren
+zonder alles tegelijk te breken.
+
+De sleutel staat kortstondig in de procestabel omdat `mount_smbfs` hem als argument krijgt. Dat
+is niet mooi, maar niet de zwakste schakel: dezelfde sleutel staat sowieso in het script op elk
+toestel. Het alternatief is de sleutelhanger, en die vraagt op macOS een toestemmingsdialoog
+tenzij hetzelfde ondertekende programma hem schrijft én leest — precies de reden dat 42Loris
+daar een eigen Swift-helper met Developer ID-certificaat voor bouwt.
+
+### Waarom er een LaunchAgent bij zit
+
+Een mount hoort in de **grafische sessie van de gebruiker**, en het proces dat de Intune-agent
+start zit daar niet in. Dat is de verklaring voor het beeld waar we lang op vastliepen: met de
+hand mounten lukte wél, en via Intune gebeurde er niets.
+
+Daarom mount het Intune-script zelf niets meer. De taakverdeling:
+
+| | doet wat | draait als |
+|---|---|---|
+| Intune-script | zet de helper en de LaunchAgent klaar in `/Library` | **root** |
+| LaunchAgent | mount, bij login en bij netwerkwijziging | de ingelogde gebruiker |
+
+Een LaunchAgent in `/Library/LaunchAgents/` laadt macOS **automatisch voor elke gebruiker bij
+elke login**. Dat scheelt het gedoe met `launchctl bootstrap` vanuit een sessie waar je niet in
+zit, en het werkt meteen voor de volgende persoon op dat toestel. Voor wie er nú achter zit
+laadt het installatiescript de agent er alsnog bij, zodat je niet hoeft uit te loggen.
+
+Ook een mount overleeft geen uitloggen, en een Intune-script dat elk uur draait zou de share
+pas een uur ná het inloggen terugzetten — precies het moment waarop iemand hem nodig heeft.
+
+Die agent heeft **drie** aanleidingen, en alle drie zijn nodig:
+
+| | wanneer |
+|---|---|
+| `RunAtLoad` | bij het inloggen, en bij het laden vanuit het installatiescript |
+| `WatchPaths` | zodra het netwerk wijzigt — wifi-wissel, VPN erbij, uit de slaap komen |
+| `StartInterval` | elke vijf minuten, als vangnet |
+
+Dat laatste liet ik eerst weg omdat pollen lelijk is naast `WatchPaths`. Dat was fout: een
+SMB-mount raakt ook los **zonder** dat er iets aan het netwerk verandert — na slaapstand, of als
+de server de verbinding laat vallen. Dan vuurt `WatchPaths` niet en blijft de share weg tot de
+volgende login. Precies wat er bij het testen gebeurde: gemount om 08:41, acht minuten later weg,
+en niets dat hem terugzette.
+
+Vijf minuten kost niets. Staat de share er nog, dan stopt het script meteen, en met `QUIET`
+schrijft het daar niets over in de log. `ThrottleInterval` van tien seconden houdt de agent
+rustig als er kort achter elkaar meerdere aanleidingen zijn.
+
+Het Intune-script **genereert** de helper in `/Library/Scripts/Baseline/`: het schrijft de
+instellingen van bovenin het bestand erin (met `printf %q`, zodat een sleutel met spaties of
+quotes heel blijft) en plakt de mountlogica er letterlijk achteraan. Eén plek voor de
+instellingen, en de agent kan niet uit de pas lopen met wat Intune uitrolt.
+
+Eerst kopieerde het script zichzélf met `cp "$0"`. Dat ging mis: bij de Intune-agent wijst
+`$0` niet naar de scripttekst, dus belandde er een **binair bestand** in `/Library/Scripts` en
+stierf de LaunchAgent met `exit 126 — cannot execute binary file`. Genereren maakt geen enkele
+aanname over hoe het bestand wordt aangeroepen, en er zit nu een `bash -n` overheen vóór de
+helper in gebruik gaat.
+
+### Meer dan één share, of meer dan één groep
+
+Bovenin het script staan twee velden die samen bepalen wat deze uitrol doet:
+
+```bash
+SET_NAAM="group-a"
+SHARES=(
+  "share-a"
+)
+```
+
+**Meerdere shares voor dezelfde groep?** Zet ze onder elkaar in `SHARES`. Eén helper, één
+LaunchAgent, één log.
+
+**Verschillende groepen, verschillende shares?** Rol dit bestand dan **twee keer uit** met een
+andere `SET_NAAM`, en wijs elke uitrol aan zijn eigen groep toe. `SET_NAAM` maakt de helper,
+het LaunchAgent-label en de log uniek:
+
+| `SET_NAAM` | helper | label |
+|---|---|---|
+| `group-a` | `/Library/Scripts/Baseline/mount-azure-files-group-a.sh` | `…baseline.mount-azure-files-group-a` |
+| `group-b` | `/Library/Scripts/Baseline/mount-azure-files-group-b.sh` | `…baseline.mount-azure-files-group-b` |
+
+Zonder dat onderscheid overschrijven twee uitrollen elkaars helper en vechten ze om hetzelfde
+label — de laatste die draait wint, en de andere groep raakt zijn schijf kwijt zonder dat iemand
+ziet waarom.
+
+Wat je **niet** moet doen is het script kopiëren en de kopie aanpassen. Dan moet elke fix twee
+keer, en dat gaat een keer mis.
+
+#### Wat een groepstoewijzing wél en niet regelt
+
+Met de **sleutel-terugval** bepaalt de toewijzing alleen wie de share gemount *krijgt* — niet wie
+erbij *kan*. Die sleutel opent het hele storage account, dus iemand met een Mac uit de ene groep
+kan met de hand net zo goed de share van de andere groep mounten.
+
+Echte scheiding per groep krijg je pas met **Kerberos**: dan geldt de share-level permission in
+Azure, en levert de KDC domweg geen ticket voor een share waar je niet bij mag. Zolang de sleutel
+in het spel is, is de groepsindeling een gemak en geen grens.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **No** | het script installeert alleen, en schrijft naar `/Library` — dat mag alleen root |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 hour** | houdt de helper en de LaunchAgent bij |
+| Max number of retries | 3 | |
+
+Toewijzen aan een **apparaatgroep**. De LaunchAgent die het script neerzet werkt daarna voor
+iedere gebruiker van dat toestel; een gebruikersgroep zou alleen de eerste persoon bedienen.
+
+Wie er bij de share mág blijft een eigenschap van de gebruiker — dat regelen de share-level
+permissions in Azure. Behalve bij de sleutel-terugval: die kent geen identiteit per gebruiker,
+dus dan bepaalt de toewijzing wél wie erbij kan.
+
+### Wat er buiten dit script moet staan
+
+[`Baseline_MAC_D_Azure_Files_Cloud_Kerberos`](../SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md)
+moet zijn uitgerold — zonder dat profiel is er geen ticket voor het
+`KERBEROS.MICROSOFTONLINE.COM`-realm en vraagt de mount alsnog om een wachtwoord. Dat profiel
+staat vandaag in **fase 3**: toegang tot Azure Files via het Platform SSO-ticket is een
+limited preview waarvoor Microsoft je moet aanzetten, en het vraagt macOS Tahoe 26.5. Zolang
+die voorwaarden er niet zijn, mount dit script niets en zegt de log waarom.
+
+De tenantkant (Entra Kerberos op het storage account, admin consent, MFA uitgesloten voor de
+Entra-app, share-level permissions, en de `CIFS/` → `cifs/`-correctie op de identifier URI van
+bestaande shares) staat in de note bij dat profiel.
+
+### `server rejected the connection: Authentication error`
+
+Poort 445 open, maar de mount wordt geweigerd. Dan is het netwerk in orde en ligt het bij
+Kerberos. Drie oorzaken, in de volgorde waarin je ze uitsluit.
+
+**1. Het ticket staat niet in de standaardcache.** `mount_smbfs` gebruikt via GSSAPI de
+*default* credential cache. Platform SSO zet het cloud-TGT in een cache met een eigen naam, en
+staat die niet als standaard, dan vindt `mount_smbfs` hem niet en weigert de server.
+
+```bash
+klist -l
+```
+
+De **`*`** vooraan een regel markeert de standaardcache. Staat die bij het
+`@KERBEROS.MICROSOFTONLINE.COM`-ticket en is het niet verlopen, dan is dit niet de oorzaak —
+ga door naar 2. Staat hij ergens anders, dan is het te testen met
+`kswitch -p <principal>` gevolgd door de mount.
+
+**2. De identifier URI staat op `CIFS/` in hoofdletters.** Bij een share die al bestond vóór
+Entra Kerberos werd aangezet, registreert Azure de app met `CIFS/<account>.file.core.windows.net`.
+macOS mount uitsluitend op `cifs/` in kleine letters en krijgt anders geen servicetoegang. Te
+zien in Entra ID → App-registraties → Alle toepassingen → het storage account → Manifest.
+Corrigeren gaat met [`updateappmanifestazurefiles.ps1`](https://github.com/Azure-Samples/azure-files-samples/blob/master/update-app-manifest/updateappmanifestazurefiles.ps1)
+uit azure-files-samples.
+
+**3. De autorisatie erachter.** Admin consent op de service principal van het storage account,
+MFA uitgesloten voor die Entra-app, en een share-level permission voor deze gebruiker op deze
+share. Ontbreekt er één, dan komt er wél een ticket maar weigert de server het alsnog.
+
+**Het onderscheid tussen 2 en 3 in één test.** Vraag de KDC rechtstreeks om het
+servicecertificaat, twee keer, en let op het verschil in hoofdletters:
+
+```bash
+kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM ; echo "klein: $?"
+kgetcred CIFS/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM ; echo "groot: $?"
+```
+
+Kerberos-principals zijn hoofdlettergevoelig, en dat is precies waar dit misgaat.
+
+| Uitkomst | Wat het betekent |
+|---|---|
+| klein mislukt, groot lukt | **Oorzaak 2.** De SPN staat als `CIFS/` geregistreerd en macOS vraagt om `cifs/`. Corrigeer de identifier URI. |
+| allebei mislukt met **AADSTS700016** | Er is in deze tenant geen app voor dit storage account. Zie hieronder — dit is de meest voorkomende oorzaak. |
+| klein lukt, mount mislukt alsnog | **Oorzaak 3.** Het ticket komt er wel; de server weigert de autorisatie. Kijk naar consent, de MFA-uitzondering en de share-level permission. |
+
+#### AADSTS700016 — de app bestaat niet
+
+```
+kgetcred: krb5_get_creds: Error from KDC: AADSTS700016: Application with identifier 'cifs'
+was not found in the directory '<tenant-id>'. This can happen if the application has not been
+installed by the administrator of the tenant or consented to by any user in the tenant.
+```
+
+Komt deze bij **beide** schrijfwijzen, dan is er niets om hoofdletters van te corrigeren: de
+KDC kent überhaupt geen toepassing voor deze fileservice. Aanzetten van Entra Kerberos maakt
+die app-registratie (`[Storage Account] <account>.file.core.windows.net`) automatisch aan;
+zolang die er niet is, valt er niets uit te geven.
+
+**Kijk eerst naar de identity source van het storage account**, want dat is de meest
+voorkomende oorzaak. Azure-portal → het storage account → *Data storage* → *File shares* →
+*Identity-based access*. Staan **Microsoft Entra Kerberos** en **AD DS** daar grijs met
+*"Another access method is already configured"*, dan is er al een andere bron gekozen — bijvoorbeeld
+Microsoft Entra Domain Services. Microsoft is daar stellig over:
+
+> Your Azure storage account can't authenticate with both Microsoft Entra ID and a second
+> method like AD DS or Microsoft Entra Domain Services. If you already chose another identity
+> source for your storage account, you must disable it before enabling Microsoft Entra
+> Kerberos.
+
+Eén identity source per storage account, en dat is een keuze die verder reikt dan de Macs: al
+het bestaande verkeer naar die shares hangt eraan. Omzetten gaat volgens
+[Change the identity source for Azure file shares](https://learn.microsoft.com/en-us/azure/storage/files/change-identity-source)
+en is geen instelling die je even omklapt.
+
+**Waarom Entra DS niet alsnog werkt met dit profiel.** Kerberos tegen een Entra DS-share loopt
+via de domeincontrollers van dat beheerde domein, met het domein zelf als realm — niet via de
+cloud-KDC op `KERBEROS.MICROSOFTONLINE.COM`. Platform SSO geeft maar twee tickets uit:
+`tgt_cloud` voor Entra Kerberos, en `tgt_ad` voor een on-premises AD via Cloud Kerberos Trust.
+Entra DS is geen van beide — het is een beheerd domein dat *uit* Entra ID synchroniseert en
+niet meedoet aan Cloud Kerberos Trust. Er komt dus nooit een TGT voor dat realm.
+
+Wie tóch bij Entra DS wil blijven, heeft op de Mac een klassieke Kerberos SSO-opstelling nodig:
+realm en `Hosts` van het beheerde domein, netwerkzicht op de domeincontrollers in de VNet (dus
+VPN of ExpressRoute) en een gebruiker die zijn wachtwoord intypt. Dat werkt, maar het is een
+andere oplossing dan deze — de aanmeldloze mount is er dan niet bij.
+
+**Entra ID en Entra Domain Services zijn niet hetzelfde**, en die naamsverwarring is hier de
+kern. Entra ID is de clouddirectory waar Intune, Platform SSO en Conditional Access op draaien;
+die spreekt OAuth2 en OIDC en heeft geen klassieke Kerberos. Entra DS is een **beheerd
+AD-domein op VM's in je eigen VNet**, met LDAP, NTLM en gewone Kerberos, dat in één richting
+uit Entra ID synchroniseert. Dezelfde gebruikers, een andere directory, een ander realm, eigen
+domeincontrollers op privé-adressen. Dat je gebruikers en apparaten "in Azure AD" zitten zegt
+dus niets over of ze bij Entra DS kunnen.
+
+Dat geldt niet alleen voor Macs. Microsoft stelt bij Entra DS als voorwaarde:
+
+> To access an Azure file share by using Microsoft Entra credentials from a VM, your VM must be
+> domain-joined to Microsoft Entra Domain Services. […] Non-domain-joined VMs can access Azure
+> file shares using Microsoft Entra Domain Services authentication only if the VM has
+> unimpeded network connectivity to the domain controllers […] Usually this connectivity
+> requires either site-to-site or point-to-site VPN.
+
+#### Waarom het met een domain-joined toestel wél werkt
+
+Er zijn drie Kerberos-werelden in het spel, en het misverstand zit in de aanname dat ze op
+elkaar aansluiten.
+
+| | Wie is de KDC | Wat is het storage account daar |
+|---|---|---|
+| **Klassiek AD** (on-prem AD DS of Entra DS) | echte domeincontrollers | een account in dát domein, met de SPN `cifs/<naam>.file.core.windows.net` |
+| **Entra Kerberos** | Entra ID zelf, via een KDC-proxy over HTTPS, realm `KERBEROS.MICROSOFTONLINE.COM` | een app-registratie met identifier `cifs/<naam>.file.core.windows.net` |
+
+Een **domain-joined** toestel werkt in de eerste wereld: het is lid van dat domein, vindt de
+domeincontrollers, haalt daar zijn TGT en vraagt bij diezelfde controller het `cifs/`-bewijs.
+Die kent het, want gebruiker en storage account staan in dezelfde directory. Dát het toestel
+óók Entra-joined is, doet daar niets aan mee — het is de domeinlidmaatschap die het werk doet.
+
+Een **Entra-joined toestel onder Intune** heeft een ticket uit de tweede wereld, en het storage
+account vertrouwt de eerste. Ander realm, andere KDC, en geen vertrouwensrelatie ertussen.
+Vandaar `AADSTS700016`: je vraagt de cloud-KDC naar een dienst waar hij nooit van gehoord heeft.
+
+En de voor de hand liggende tegenwerping — Entra ID kán toch on-premises tickets uitgeven, dat
+is `tgt_ad` — klopt, maar alleen voor een échte on-premises AD DS, waar je met
+`Set-AzureADKerberosServer` een vertrouwensobject in dat domein zet. Op een beheerd domein kan
+dat niet; Microsoft daarover, op de vraag of Cloud Kerberos Trust met Entra DS kan:
+
+> No, that wouldnt work, the trust is with Azure AD, not the Azure AD DS managed domain.
+
+En zelfs áls het kon: Cloud Kerberos Trust haalt de domeincontroller weg bij het **aanmelden**,
+niet bij het benaderen van een bron. Voor het `cifs/`-bewijs moet je alsnog bij een
+domeincontroller zijn. De VPN-eis blijft dus hoe dan ook staan.
+
+Een Entra-joined laptop die door Intune wordt beheerd is niet domain-joined en heeft vanaf
+internet geen zicht op die domeincontrollers. Met Entra DS als identity source bedient een
+storage account dus in de praktijk alleen VM's in of aan die VNet — geen enkele laptop uit de
+vloot, Windows noch macOS. macOS staat in de ondersteunde clients van die pagina trouwens
+helemaal niet genoemd.
+
+Staat er wél Entra Kerberos aan en komt deze fout tóch, dan zijn er nog twee mogelijkheden. De
+**admin consent** op de nieuwe service principal kan ontbreken — Entra ID → App-registraties →
+Alle toepassingen → de app met de naam van het storage account → *API-machtigingen* →
+*Verleen beheerderstoestemming*. Of het storage account hoort bij een **andere directory** dan
+die waarop de Mac is aangemeld; de foutmelding noemt het tenant-id waarin gezocht is, en Entra
+Kerberos werkt niet over tenants heen.
+
+Zolang deze fout er staat heeft het geen zin om aan het profiel, de `Hosts`-lijst of het script
+te sleutelen. Die kant is aantoonbaar in orde: er is een geldig TGT in de standaardcache, poort
+445 is open, en de KDC antwoordt keurig — met de mededeling dat er niets te geven valt.
+
+Kent de Mac `kgetcred` niet, dan kun je hetzelfde na een mislukte mount aflezen met
+`klist | grep -i cifs`: staat er een `cifs/`-regel, dan gaf de KDC het ticket (3); staat er
+niets, dan kwam het daar niet eens toe (2).
+
+### Het sleuteltje in de menubalk is geen diagnose
+
+Het menubalkicoon van de Kerberos-extensie kan "Not signed in" of "Network not available"
+melden terwijl alles werkt. Microsoft schrijft daarover:
+
+> Users don't need to interact with the menu bar extra for Kerberos SSO to work. SSO
+> functionality operates correctly even if the menu bar extra reports "Not signed in". You can
+> instruct users to ignore the menu bar extra.
+
+Dat is bij deze opstelling ook logisch. Met `usePlatformSSOTGT` op true haalt de extensie
+**geen eigen ticket** op — ze gebruikt het TGT dat Platform SSO al heeft geïmporteerd. De
+extensie legt dus zelf nooit een verbinding met een KDC, en wat het icoontje over die
+verbinding meldt zegt daarom niets over of het werkt.
+
+De enige bron die wél telt is:
+
+```bash
+app-sso platform -s
+```
+
+Onder `kerberosStatus` hoort een regel met `"realm": "KERBEROS.MICROSOFTONLINE.COM"`,
+`"ticketKeyPath": "tgt_cloud"` en `"importSuccessful": true`. Staat die er, dan is de
+Platform SSO-kant klaar en ligt een mislukte mount aan de Azure-kant.
+
+**Voordat je in het profiel gaat zoeken**, controleer wel of het token is vervangen — dat is een
+echte valkuil, alleen niet degene die dit icoontje aanwijst. In het template staat de KDC-URL
+als `kkdcp://login.microsoftonline.com/%OrganizationId%/kerberos`, en CIPP vult dat bij uitrol
+in. Rol je uit met IntuneBackupAndRestore of via een directe JSON-import, dan gebeurt dat niet:
+
+```bash
+sudo profiles show -output /tmp/profielen.plist
+grep -A3 preferredKDCs /tmp/profielen.plist
+```
+
+Daar hoort een GUID te staan, niet `%OrganizationId%`.
+
+### Share en submap zijn niet hetzelfde
+
+`smb://<account>.file.core.windows.net/<share>/<submap>` staat in het script als
+`STORAGE_ACCOUNT` plus een regel in `SHARES`: `<share>` is de **share**, `<submap>` een **map
+daarin**. SMB kent maar één sharelaag, en dat onderscheid is niet cosmetisch — de mount en de
+share-level permissions in Azure hangen aan `<share>`, de submap is alleen het punt waar je
+binnenkomt. Wie alleen bij één submap mag hoort dat via de rechten op die map te krijgen, niet
+door hier een andere waarde in te vullen.
+
+Staat er alleen `<share>` in `SHARES`, zonder submap, dan mount de hele share.
+
+De controle op "staat hij al?" kijkt daarom naar de **share** en niet naar de submap of het
+mountpad: NetFS bepaalt zelf of het de mount op `/Volumes/<submap>` of op `/Volumes/<share>` zet,
+en als /Volumes die naam al kent hangt macOS er een cijfer achter. Een strengere controle zou
+zijn eigen mount niet herkennen en elke ronde opnieuw mounten.
+
+### Zichtbaar in Finder
+
+De share landt in `/Volumes` en verschijnt in de Finder-zijbalk onder **Locaties**, met een
+uitwerpknop — hetzelfde als wanneer je hem via *Ga → Verbind met server* had gekoppeld.
+
+Wat daarvoor telt is **waar** de share landt, niet welk commando hem mountte. Alles wat in
+`/Volumes` staat zet Finder in de zijbalk; een mount in een map in de thuismap ziet Finder niet
+als server en verschijnt nergens.
+
+Het script gebruikt `mount_smbfs -N`, en uitdrukkelijk **niet** `osascript -e 'mount volume'`:
+
+| | `mount_smbfs -N` | `mount volume` (NetFS) |
+|---|---|---|
+| Mountpunt in `/Volumes` | maakt hij zelf aan, ook als gewone gebruiker | maakt NetFS aan |
+| Kerberos | gebruikt het TGT dat er is | idem |
+| Als het ticket niet wordt geaccepteerd | mount mislukt, met een foutmelding | **zet een aanmeldvenster op het scherm en wacht** |
+
+Die laatste regel is het hele verschil. Uit een LaunchAgent beantwoordt niemand die dialoog:
+het script blijft staan tot de Intune-agent het na 60 minuten afbreekt en "Failed" meldt,
+zonder één regel uitvoer. Dat is precies wat hier gebeurde. `-N` vraagt per definitie niets.
+
+Dezelfde afweging maakt [`42Loris/macOS_DriveMapping`](https://github.com/42Loris/macOS_DriveMapping),
+met in het script de opmerking dat `osascript` bij een URL zonder inloggegevens die
+"continue"-dialoog uitlokt.
+
+#### Als /Volumes niet lukt
+
+`mount_smbfs` maakt zijn eigen mountpunt in `/Volumes` aan, maar niet altijd: ligt daar nog een
+map van een eerdere poging die van `root` is, dan geeft élke volgende mount
+**`Operation not permitted`**. Dat is iets anders dan `Authentication error` — het gaat dan niet
+over de sleutel of het ticket maar over het mountpunt, en wie dat verwart zoekt dagen in de
+verkeerde hoek.
+
+Het script ruimt zo'n leeg restant zelf op en wijkt anders uit naar `~/<share>`. Die terugval
+werkt altijd, maar levert geen regel onder *Locaties* op; de log zegt het wanneer het gebeurt.
+Handmatig opruimen kan met `sudo rmdir /Volumes/<naam>`.
+
+#### Favorieten kan niet, Locaties wel
+
+De share landt in `/Volumes` en verschijnt daarmee vanzelf in de Finder-zijbalk onder
+**Locaties**, met een uitwerpknop. Dat is de zijbalk.
+
+De **Favorieten** bovenin die zijbalk zijn iets anders, en die kan een script op macOS 26 niet
+vullen. `sfltool` — Apple's eigen gereedschap — kent alleen:
+
+```
+csinfo | dumpbtm | archive | clear | resetbtm | resetlist | list | list-info
+```
+
+Er is geen `add-item`. Oudere bronnen noemen dat commando wel; deze macOS accepteert het niet en
+schrijft alleen zijn usage naar de log. Het script controleert nu eerst of het subcommando
+bestaat en slaat het anders stil over — want een logregel die "In de Finder-favorieten gezet"
+meldt terwijl er niets gebeurde is erger dan geen regel.
+
+Wil je tóch een vaste favoriet, dan is [`mysides`](https://github.com/mosen/mysides) het enige
+werkende gereedschap: een binary van derden die je zelf moet uitrollen en ondertekenen. Het
+verschil dat je ervoor koopt: Locaties verdwijnt bij uitwerpen, een favoriet blijft staan.
+
+### Geen ticket, geen poging
+
+Zonder Kerberos-ticket mount het script niet. Dat is bewust: NetFS zet bij een mislukte
+Kerberos-mount een aanmeldvenster op het scherm, en dat elke vijf minuten uit een
+achtergrondagent is erger dan een ontbrekende share. Het script controleert `klist` op een
+ticket voor `KERBEROS.MICROSOFTONLINE.COM` en noteert in de log waarom het niets deed.
+
+De controle kijkt met `klist -l` **en** met een kale `klist`, want die twee zien niet
+hetzelfde. Platform SSO zet het cloud-TGT in een cache met een eigen naam en een kale `klist`
+toont alleen de standaardcache. Wat er echt is, zie je het betrouwbaarst bij Microsoft zelf:
+
+```bash
+app-sso platform -s
+```
+
+Onder `kerberosStatus` hoort een regel te staan met `"realm": "KERBEROS.MICROSOFTONLINE.COM"`,
+`"ticketKeyPath": "tgt_cloud"` en `"importSuccessful": true`. Staat die er, dan is de
+Platform SSO-kant in orde en ligt een mislukte mount aan de Azure-kant.
+
+Handmatig testen, mét dialoog, kan met `--force`:
+
+```bash
+~/Library/Application\ Support/Baseline/mount-azure-files.sh --force
+```
+
+### Als Intune "Failed" meldt
+
+Het script eindigt in een Intune-run **altijd** met exit 0, ook als er niets te mounten viel.
+Dat is bewust: zolang de Azure Files-preview niet aanstaat heeft geen enkele Mac een ticket,
+en dan zou elk toestel permanent rood staan voor iets dat volgens plan verloopt. Wat er wél
+gebeurde schrijft het script naar stdout, en die uitvoer bewaart Intune bij het apparaat.
+
+"Failed" betekent dus dat het script niet zélf tot het einde is gekomen. Drie oorzaken, in
+volgorde van waarschijnlijkheid:
+
+1. **De mount liep vast op een aanmeldvenster.** Heeft de Mac wel een Kerberos-ticket maar
+   accepteert de share het niet, dan valt NetFS terug op een dialoog en wacht tot iemand het
+   invult. Uit een LaunchAgent gebeurt dat nooit; het script blijft hangen en de Intune-agent
+   breekt het af. Sinds de timeout van 60 seconden gebeurt dat niet meer — het script noteert
+   dan `hung and was aborted after 60s` en gaat verder.
+2. **Er staat een oudere versie in Intune.** De placeholdercontrole is het enige andere pad
+   dat exit 1 geeft. In de log staat dan letterlijk `is still set to the placeholder`.
+3. **Het script is nooit begonnen.** Regeleindes of een BOM uit een Windows-editor maken van
+   de eerste regel `#!/bin/bash^M` en dan start er niets. Zie *Regeleindes* hierboven.
+
+Het onderscheid tussen 2 en 3 zie je aan de log: staat er een `Started as …`-regel, dan heeft
+het script gedraaid en zit de fout in de logica; is er geen logbestand, dan is het nooit
+begonnen.
+
+### "Failed" blijft staan, ook als het al lang goed gaat
+
+Drie dingen uit
+[Microsoft's documentatie over shellscripts](https://learn.microsoft.com/en-us/intune/intune-service/apps/macos-shell-scripts)
+die verklaren waarom de portal een verkeerd beeld kan geven, en die je moet kennen vóór je een
+nieuwe versie uploadt:
+
+- **De agent haalt scripts elke 8 uur op**, en dat staat los van de MDM-sync. Een nieuwe versie
+  is dus niet meteen op het toestel. Forceren kan de gebruiker zelf: Bedrijfsportal openen, het
+  apparaat kiezen, **Check settings**.
+- **De status wordt alleen gemeld als hij verandert.** Blijft hij hetzelfde, dan werkt Intune
+  alleen de tijdstempel bij — elke 7 dagen. Een oude "Failed" kan er dus nog staan terwijl er
+  intussen niets meer misgaat.
+- **Een gefaald script wordt niet opnieuw gedraaid** tenzij *Max number of times to retry* is
+  ingesteld. Staat dat op *Not configured*, dan is één mislukking definitief tot je het script
+  wijzigt of het toestel herstart.
+
+Nuttig om te weten bij oorzaak 1 hierboven: de agent breekt een script pas na **60 minuten**
+af. Een mount die op een aanmeldvenster wacht haalt die grens dus makkelijk.
+
+```bash
+cat ~/Library/Logs/Baseline/mount-azure-files.log
+```
+
+En zonder de Mac aan te raken: **Devices → Scripts and remediations → Platform scripts →**
+het script **→ Device status →** kies het toestel **→ Collect logs**, met paden gescheiden door
+een puntkomma en zónder spaties ertussen:
+
+```
+/Users/<gebruiker>/Library/Logs/Baseline/mount-azure-files.log;/Users/<gebruiker>/Library/Logs/Baseline/screen-recording.log
+```
+
+Dáárom staan deze logs in `~/Library/Logs/Baseline/` en niet naast de markeringen in
+`Application Support`: die mapnaam heeft een spatie en is daarmee niet op te halen. De agent
+van Intune levert zijn eigen logs altijd mee, uit `/Library/Logs/Microsoft/Intune/` en
+`~/Library/Logs/Microsoft/Intune/`.
+
+### Opnieuw laten draaien
+
+```bash
+launchctl bootout gui/$(id -u)/com.baseline.mount-azure-files-<SET_NAAM>
+sudo rm -f /Library/LaunchAgents/com.baseline.mount-azure-files-<SET_NAAM>.plist
+```
+
+De eerstvolgende run van het Intune-script zet beide terug. De log staat in
+`~/Library/Logs/Baseline/mount-azure-files.log`.
+
+## nudge-screen-recording.sh
+
+Vraagt de gebruiker om schermopname aan te zetten voor de apps waarmee de helpdesk meekijkt,
+en opent daarbij meteen het juiste paneel. Stopt zodra het geregeld is.
+
+### Waarom dit niet met een policy kan
+
+Schermopname is de enige maatregel in deze baseline die een MDM niet kan afdwingen, en dat is
+geen tekortkoming van de baseline maar een besluit van Apple. Uit Apple's eigen schema voor de
+PPPC-payload ([`apple/device-management`](https://github.com/apple/device-management/blob/main/mdm/profiles/com.apple.TCC.configuration-profile-policy.yaml),
+bij de key `ScreenCapture`):
+
+> Access to the contents can't be given in a profile; it can only be denied.
+
+Dezelfde formulering staat bij `Camera`, `Microphone` en `ListenEvent`. De waarde
+`AllowStandardUserToSetSystemService` bestaat volgens datzelfde schema **alleen** voor
+`ListenEvent` en `ScreenCapture` — Apple heeft die gemaakt omdát deze twee niet te verlenen
+zijn.
+
+Dat de Intune-settings catalog bij `Authorization` ook `Allow` aanbiedt, betekent niets: die
+lijst is generiek over alle 24 TCC-diensten. Zet je hem hier op `Allow`, dan accepteert Intune
+het profiel en negeert macOS de waarde.
+
+[`Baseline_MAC_D_Screen_Recording`](../DeviceConfigurations/Baseline_MAC_D_Screen_Recording.md)
+haalt dus het maximum: een **standaardgebruiker** mag de schakelaar zelf omzetten, zonder
+beheerderswachtwoord. Zonder dat profiel kan een niet-admin het sinds Big Sur helemaal niet.
+De klik blijft van de gebruiker; dit script zorgt dat hij hem ook doet.
+
+### Vijf schakelaars, niet één
+
+Het profiel dekt standaard vijf bundles, van NinjaOne en TeamViewer. Gebruikt de organisatie
+andere tools, vervang ze dan in het profiel én in `BUNDLES` in het script:
+
+```
+com.ninjarmm.ncstreamer
+com.teamviewer.TeamViewer
+com.teamviewer.TeamViewerHost
+com.teamviewer.Desktop
+com.teamviewer.TeamViewerQS
+```
+
+Alleen geïnstalleerde apps verschijnen in het paneel, en elke app is een eigen vinkje. Het
+script vraagt daarom alleen naar wat er op dít toestel staat — anders zou het blijven vragen om
+een schakelaar die er niet is.
+
+### Hoe het weet of het al goed staat
+
+Het probeert de TCC-database van de gebruiker te lezen
+(`~/Library/Application Support/com.apple.TCC/TCC.db`, kolom `auth_value`, of `allowed` op
+oudere versies). Lukt dat, dan weet het script het zeker en vraagt het niets.
+
+Die database is beschermd: zonder Volledige Schijftoegang mag niemand hem lezen. Lukt het niet,
+dan is dat geen fout — dan wordt het aan de gebruiker gevraagd, met een knop **Staat al aan**
+die het script laat stoppen. Beter één keer te veel vragen dan een rechtenstatus verzinnen.
+
+### In de taal van de gebruiker
+
+De dialoog volgt de taalvoorkeur van de ingelogde gebruiker (de eerste taal in
+`AppleLanguages`, anders `AppleLocale`): Nederlands, Frans, en in alle andere gevallen Engels.
+De knoppen heten dan **Later** / **Staat al aan** / **Open instellingen**, **Plus tard** /
+**Déjà activé** / **Ouvrir les réglages** of **Later** / **Already on** / **Open Settings**.
+`ORG_NAAM` bovenin het script is standaard leeg; dan staat er "de IT-afdeling", "le service
+informatique" of "the IT department". Vul je een naam in, dan komt die in elke taal zo in de
+tekst. De log is altijd Engels.
+
+### Het houdt een keer op
+
+Na 96 pogingen — bij een run per uur is dat vier dagen — vraagt het niets meer en noteert het
+in de log wat er nog ontbreekt. Langer doorvragen verandert een herinnering in een ergernis, en
+dan klikt iemand hem weg zonder te lezen. Wat er dan nog mist hoort in een gesprek, niet in een
+dialoog.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **Yes** | het gaat om de rechten van déze gebruiker, en een dialoog uit root ziet niemand |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 hour** | |
+| Max number of retries | 3 | |
+
+Toewijzen aan een **gebruikersgroep**. Geen apparaatgroep: op een gedeelde Mac heeft elke
+gebruiker zijn eigen TCC-database en dus zijn eigen klik.
+
+### Opnieuw laten vragen
+
+```bash
+rm -f ~/Library/Application\ Support/Baseline/screen-recording-ok \
+      ~/Library/Application\ Support/Baseline/screen-recording-pogingen
+```
+
+De log staat in `~/Library/Logs/Baseline/screen-recording.log`.
+
+## escrow-buddy.sh
+
+FileVault-herstelsleutel alsnog in Intune krijgen voor een Mac die al versleuteld was.
+
+### Het gat
+
+[`MAC - D - FileVault`](../SettingsCatalog/Baseline_MAC_D_FileVault.md)
+bewaart de herstelsleutel in Intune, maar macOS escrowt alleen een sleutel die wordt
+**aangemaakt** terwijl het escrow-profiel (`com.apple.security.FDERecoveryKeyEscrow`) op de Mac
+staat. Drie situaties vallen daardoor buiten de boot:
+
+- de gebruiker had FileVault zelf al aangezet voordat de Mac werd ingeschreven;
+- een Mac is via Company Portal ingeschreven nadat hij al versleuteld was;
+- het profiel kwam pas binnen nadat Setup Assistant de schijf al had versleuteld.
+
+Intune toont dan bij het apparaat geen herstelsleutel, en de rotatie uit de FileVault-policy
+(`recoverykeyrotationinmonths`) werkt alleen op een sleutel die Intune al kent. Een vergeten
+wachtwoord betekent in die situatie een verloren schijf.
+
+### Hoe het werkt
+
+[Escrow Buddy](https://github.com/macadmins/escrow-buddy) (Apache 2.0, Mac Admins Open Source,
+oorspronkelijk Netflix) is een authorization plugin. Het pakket zet het mechanisme
+`Escrow Buddy:Invoke,privileged` in `system.login.console`, vlak voor `loginwindow:done`. Staat
+`GenerateNewKey` in `/Library/Preferences/com.netflix.Escrow-Buddy.plist` op true, dan maakt de
+plugin bij de eerstvolgende aanmelding van een FileVault-gebruiker met het ingetypte wachtwoord
+een nieuwe persoonlijke herstelsleutel aan. macOS stuurt die via het escrow-profiel naar Intune.
+De gebruiker merkt niets; er verschijnt geen dialoog.
+
+Het script:
+
+1. stopt als FileVault uit staat (dan regelt de FileVault-policy versleuteling én escrow);
+2. stopt als het al eerder een sleutel heeft aangevraagd (markering in
+   `/Library/Application Support/Baseline/escrow-buddy-requested`);
+3. wacht als het escrow-profiel er nog niet staat — een nieuwe sleutel zonder escrow maakt
+   het erger, want de oude persoonlijke sleutel is dan ook weg;
+4. downloadt Escrow Buddy **1.0.0** van de GitHub-release en installeert alleen als het pakket
+   door Apple is genotariseerd (`spctl --assess --type install`) én is ondertekend met
+   *Developer ID Installer* van team **T4SK8ZXCXG** (Mac Admins Open Source — de identiteit uit
+   `.github/workflows/build_main.yml` van het project). Een andere ondertekenaar: niet
+   installeren, ondertekening in de log;
+5. controleert dat het mechanisme echt in de authorization database staat;
+6. zet `GenerateNewKey`.
+
+Log: `/Library/Logs/Baseline/escrow-buddy.log`.
+
+Het kan geen kwaad dat het script ook draait op een Mac waarvan Intune de sleutel wél al had:
+de sleutel wordt dan één keer vervangen en opnieuw ge-escrowd, precies wat de rotatie in de
+FileVault-policy ook doet. Daarom is er geen poging om vanaf de Mac te raden of Intune een
+sleutel heeft — dat kan de Mac niet zien.
+
+### Instellingen in Intune
+
+Devices → macOS → Shell scripts → Add.
+
+| Instelling | Waarde | Waarom |
+|---|---|---|
+| Run script as signed-in user | **No** | installeren en `authorizationdb` wijzigen vraagt root |
+| Hide script notifications | Yes | |
+| Script frequency | **Every 1 day** | het script wacht op het escrow-profiel; na de markering doet het niets meer |
+| Max number of retries | 3 | |
+
+Toewijzen aan dezelfde **apparaatgroep** als `MAC - D - FileVault`, en pas nadat die policy op de
+Mac staat. Fase: gelijk aan FileVault (pilot eerst).
+
+### Controleren
+
+- Op de Mac, na aanmelden: `sudo profiles show -type configuration | grep -i escrow` toont het
+  profiel, en de log eindigt met "GenerateNewKey set". Na de volgende aanmelding staat
+  `GenerateNewKey` weer op false (`defaults read /Library/Preferences/com.netflix.Escrow-Buddy.plist`).
+- In Intune: Devices → het apparaat → **Recovery keys** toont een sleutel.
+
+### Nieuwe versie
+
+`EB_VERSION` bijwerken, en vóór het uitrollen op één Mac nagaan dat
+`pkgutil --check-signature` nog steeds `Developer ID Installer: Mac Admins Open Source (T4SK8ZXCXG)`
+toont. Verandert de ondertekenaar, dan stopt het script bewust — pas `EB_TEAM_ID` alleen aan na
+controle bij het project.
+
+**Open punt:** release 1.0.0 dateert van juni 2023, de ondertekening van die release is niet
+vanaf deze werkplek op een Mac geverifieerd. Het script faalt veilig als de team-id niet klopt;
+controleer dat op de eerste pilot-Mac in de log.
+
+### Verwijderen
+
+```bash
+sudo "/Library/Security/SecurityAgentPlugins/Escrow Buddy.bundle/Contents/Resources/AuthDBTeardown.sh"
+sudo rm -rf "/Library/Security/SecurityAgentPlugins/Escrow Buddy.bundle"
+sudo pkgutil --forget com.netflix.Escrow-Buddy
+```
+
+Dat is wat `scripts/uninstall.sh` van het project ook doet. Laat de plugin niet staan op een Mac
+die uit beheer gaat: een mechanisme in `system.login.console` waarvan de bundle ontbreekt
+blokkeert het aanmelden.
+
+### Regeleindes
+
+LF, zoals alle `*.sh` in deze repo (`.gitattributes`).

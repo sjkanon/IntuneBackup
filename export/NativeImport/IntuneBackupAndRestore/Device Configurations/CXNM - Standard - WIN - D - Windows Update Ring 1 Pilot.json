@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "First update ring: gets Windows updates immediately, so that problems become visible on a small group. Baseline assignment: none by default — belongs on SEC-Update-Ring1. Source: OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot.",
+    "description": "First update ring: gets Windows updates immediately, so that problems become visible on a small group. Baseline assignment: none by default — belongs on SEC-Update-Ring1. Source: OpenIntuneBaseline Windows v4.0 — WUfB - Ring 1 - Pilot.\nOIBID:F7739B87-82DE-4997-BA25-2561C252EF12",
     "displayName": "CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot",
     "deliveryOptimizationMode": "userDefined",
     "prereleaseFeatures": "userDefined",

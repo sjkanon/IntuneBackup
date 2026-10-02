@@ -15,6 +15,8 @@ Lets Windows determine the time zone automatically, so that logs and certificate
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | File | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 
+> Syncs the clock over NTP and lets users change the time zone, but does not turn on *Set time zone automatically*: the settings catalog has no setting for it. The OIB platform script Enable-AutoTimezone.ps1 in IntuneTemplate/WIN/PlatformScripts/ does that; assign it to all devices together with this policy.
+
 ## Standards
 
 | Framework | Controls |

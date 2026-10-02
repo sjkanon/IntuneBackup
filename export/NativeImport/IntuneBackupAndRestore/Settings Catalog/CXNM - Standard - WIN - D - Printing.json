@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Printing",
-    "description": "Hardening against PrintNightmare: restricts Point and Print and the installation of printer drivers by users. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Printing.",
+    "description": "Hardening against PrintNightmare: restricts Point and Print and the installation of printer drivers by users. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Printing.\nOIBID:1968C406-B707-4382-AC9E-2FC4EE084EB4",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

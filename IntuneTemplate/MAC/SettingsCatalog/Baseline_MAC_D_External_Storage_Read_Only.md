@@ -15,7 +15,7 @@ Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-s
 | Bron | Apple declaratief beheer, com.apple.configuration.diskmanagement.settings (apple/device-management: macOS 15.0, alleen supervised); settingDefinitionId's en opties geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_MAC_D_External_Storage_Read_Only.json`](Baseline_MAC_D_External_Storage_Read_Only.json) |
 
-> Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (extras/macos/defender-onboarding) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een organisatie hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*.
+> Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (IntuneTemplate/MAC/EndpointSecurity) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een organisatie hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*.
 
 ## Normen
 

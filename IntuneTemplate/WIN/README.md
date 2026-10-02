@@ -13,6 +13,22 @@ Alle policies heten `CXNM - Standard - WIN - <D|U> - <Item>`; de tabellen hieron
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
+## Overige onderdelen
+
+Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakket. Hoe elk onderdeel uitrolt, staat in zijn README.
+
+| Map | Wat |
+|---|---|
+| [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.md) | Verwijder voorgeïnstalleerde McAfee |
+| [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.md) | Winget-AutoUpdate |
+| [`EndpointSecurity/`](EndpointSecurity/README.md) | App Control for Business (WDAC) — generiek startpunt |
+| [`Enrollment/`](Enrollment/README.md) | Windows Autopilot: klassiek en device preparation |
+| [`PlatformScripts/`](PlatformScripts/README.md) | Windows-platformscripts |
+| [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.md) | DNS over HTTPS voor Windows |
+| [`Remediations/escrow-check/`](Remediations/escrow-check/README.md) | Escrow-controle: BitLocker-herstelsleutel en LAPS-wachtwoord in Entra ID |
+| [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
+| [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
+
 ## Device-scoped (D) — 102
 
 Toewijzen aan apparaatgroepen.

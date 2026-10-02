@@ -1,0 +1,20 @@
+{
+  "@odata.type": "#microsoft.graph.windows10EnrollmentCompletionPageConfiguration",
+  "displayName": "CXNM - Standard - WIN - Autopilot Enrollment Status Page",
+  "description": "Enrollment Status Page for Windows Autopilot (classic). Blocks the desktop until device apps and policies are applied, installs quality updates during OOBE, no desktop on failure.",
+  "priority": 1,
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "showInstallationProgress": true,
+  "trackInstallProgressForAutopilotOnly": true,
+  "installProgressTimeoutInMinutes": 90,
+  "installQualityUpdates": true,
+  "blockDeviceSetupRetryByUser": false,
+  "allowDeviceResetOnInstallFailure": true,
+  "allowDeviceUseOnInstallFailure": false,
+  "allowLogCollectionOnInstallFailure": true,
+  "disableUserStatusTrackingAfterFirstUser": true,
+  "selectedMobileAppIds": [],
+  "customErrorMessage": "Setup could not be completed. Contact the IT service desk. / De installatie is niet voltooid. Neem contact op met de IT-servicedesk. / L'installation n'a pas abouti. Contactez le service desk informatique."
+}

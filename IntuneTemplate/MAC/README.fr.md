@@ -12,6 +12,19 @@ Toutes les policies s'appellent `CXNM - Standard - MAC - <D|U> - <Item>` ; les t
 | `DeviceConfigurations/` | 3 |
 | `CompliancePolicies/` | 4 |
 
+## Autres éléments
+
+Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un package CIPP. Le mode de déploiement de chaque élément figure dans son README.
+
+| Dossier | Quoi |
+|---|---|
+| [`ComplianceScripts/`](ComplianceScripts/README.fr.md) | Conformité personnalisée : Defender for Endpoint |
+| [`EndpointSecurity/`](EndpointSecurity/README.fr.md) | Intégration de Defender for Endpoint sur macOS |
+| [`Enrollment/ade-profile/`](Enrollment/ade-profile/README.fr.md) | Profils d'inscription ADE macOS |
+| [`Enrollment/apple-business/`](Enrollment/apple-business/README.fr.md) | Checklist Apple Business |
+| [`Enrollment/enrollment-restriction/`](Enrollment/enrollment-restriction/README.fr.md) | Restriction d'inscription : pas de Mac personnels |
+| [`PlatformScripts/`](PlatformScripts/README.fr.md) | Scripts shell macOS |
+
 ## Device-scoped (D) — 29
 
 Affecter à des groupes d'appareils.

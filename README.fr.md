@@ -56,18 +56,19 @@ les plug-ins SSO — a dans son README une section **Conditional Access** : quel
 sur elle et ce qui casse là-bas si vous la modifiez. Le lien est maintenu dans `docs/policies.json` du
 dépôt CA-Policies ; une copie est conservée ici dans `IntuneTemplate/_ca.json`.
 
-**[`extras/`](extras/README.fr.md)** contient ce qui fait partie d'une baseline complète sans relever d'aucun des cinq
-types de stratégie CIPP — par plateforme, avec des instructions de déploiement : profils et
-restrictions d'inscription, configuration d'applications, filtres d'affectation, App Control for Business,
-remédiations, scripts shell et de plateforme, un contrôle de conformité personnalisé et une application Win32.
-Entre autres les profils d'inscription ADE macOS ([`extras/macos/enrollment/`](extras/macos/enrollment/README.fr.md)),
-les scripts shell macOS ([`extras/macos/shell-scripts/`](extras/macos/shell-scripts/README.fr.md)),
-les scripts de plateforme Windows ([`extras/windows/platform-scripts/`](extras/windows/platform-scripts/README.fr.md)),
-le contrôle de conformité pour Defender sur macOS ([`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.fr.md))
-et l'application Win32 qui supprime le McAfee préinstallé
-([`extras/windows/win32-apps/remove-mcafee/`](extras/windows/win32-apps/remove-mcafee/README.fr.md)).
-`export-intunebackup.js` copie les profils ADE et les scripts shell macOS dans l'export en tant que
-fichiers annexes (sidecar) ; CIPP, `check-scope.js` et `Set-BaselineAssignment.ps1` ne font rien de `extras/`.
+**Tout ce qui concerne une plateforme est regroupé.** À côté des modèles CIPP (`SettingsCatalog/`,
+`AdministrativeTemplates/`, `DeviceConfigurations/`, `CompliancePolicies/`, `AppProtection/`),
+`IntuneTemplate/<PLATFORME>/` contient aussi les éléments qui ne sont pas un type de stratégie CIPP,
+dans des dossiers qui suivent les menus du portail Intune : `Enrollment/` (Autopilot, profils ADE,
+restrictions), `EndpointSecurity/` (App Control, intégration Defender), `PlatformScripts/`,
+`Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` et `AssignmentFilters/`. Si un
+élément comporte plusieurs sujets distincts, chacun a son sous-dossier. Le README de chaque plateforme
+([Windows](IntuneTemplate/WIN/README.fr.md), [macOS](IntuneTemplate/MAC/README.fr.md),
+[iOS/iPadOS](IntuneTemplate/IOS/README.fr.md), [Android](IntuneTemplate/AND/README.fr.md)) les liste
+sous *Autres éléments* ; chaque dossier a son propre README avec les instructions de déploiement. Le
+pipeline ne lit que les modèles `Baseline_*.json`. `export-intunebackup.js` copie les profils ADE et
+les scripts shell macOS dans l'export en tant que fichiers annexes (sidecar) ; CIPP, `check-scope.js`
+et `Set-BaselineAssignment.ps1` ne font rien des autres éléments.
 
 Chaque dossier possède un README avec les détails : [`IntuneTemplate/`](IntuneTemplate/README.fr.md) (avec
 un tableau par plateforme), [`scripts/`](scripts/README.fr.md) et [`export/`](export/README.fr.md).
@@ -94,7 +95,7 @@ partie du reste ne fait rien. Définissez-les avant de commencer les affectation
 | **Connecteur Defender for Endpoint** | Intune → Endpoint Security → Microsoft Defender for Endpoint | Nécessaire pour l'intégration via `WIN - D - Defender EDR Policy` et pour un contrôle du score de risque de Defender. Ce contrôle ne figure volontairement pas dans la baseline — OpenIntuneBaseline v4.0 ne l'a pas non plus ; `WIN - U - Compliance Defender Real Time Protection` et `Defender Security Intelligence` contrôlent ce qui se trouve *sur* l'appareil et fonctionnent sans connecteur. Si vous voulez malgré tout prendre en compte le score de risque, activez d'abord le connecteur : sans lui, le score n'arrive jamais et le contrôle reste muet, sans verdict. |
 
 Sur macOS, le volet Defender est un troisième cas : ce contrôle n'existe pas en tant que paramètre et nécessite un
-script — voir [`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.fr.md).
+script — voir [`IntuneTemplate/MAC/ComplianceScripts/`](IntuneTemplate/MAC/ComplianceScripts/README.fr.md).
 
 À côté de chaque modèle se trouve un fichier markdown listant **chaque paramètre que cette stratégie définit** — par exemple
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.fr.md).
@@ -137,13 +138,16 @@ IntuneTemplate/        la source : les stratégies au format de modèle CIPP
   _ca.json            quelles stratégies CA s'appuient sur une stratégie (copie du dépôt CA-Policies)
   _i18n/              traductions anglaises et françaises des textes issus des données
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 BaselineTemplate/      la baseline CIPP (générée)
-AppTemplate/           templates d'application CIPP (générés depuis extras/)
+AppTemplate/           templates d'application CIPP (générés depuis IntuneTemplate/)
 export/NativeImport/   export de restauration pour IntuneBackupAndRestore (généré)
-extras/                ce qui n'est pas un type de stratégie CIPP, par plateforme (android, ios, macos, windows)
 docs/                  vue d'ensemble, conformité, analyse, plan et structure
 scripts/               le pipeline et les scripts de tenant
 ```
@@ -368,8 +372,9 @@ Community Repos → Import, il *est* reconnu comme baseline. Voir
 Ce qui reste, ce sont les fichiers qui sont bien des `.json` mais pas des stratégies :
 
 - les fichiers `_` de `IntuneTemplate/`, y compris les traductions dans `_i18n/` ;
-- tout ce qui se trouve sous `extras/` : profils ADE, corps Graph pour les restrictions, la configuration
-  d'applications et les filtres, App Control et la partie JSON du contrôle de conformité ;
+- les fichiers des autres éléments (`Enrollment/`, `AppConfiguration/` etc.) : profils ADE, corps
+  Graph pour les restrictions, la configuration d'applications et les filtres, App Control et la
+  partie JSON du contrôle de conformité ;
 - avec la synchronisation automatique, aussi `BaselineTemplate/Baseline.json`.
 
 CIPP en fait une seule ligne sans nom et sans type (ils se confondent parce que la

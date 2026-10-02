@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": true,
     "defenderVersion": null,
-    "description": "Checks whether Microsoft Defender is on and real-time protection is active. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Real-Time Protection.",
+    "description": "Checks whether Microsoft Defender is on and real-time protection is active. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Defender - U - Real-Time Protection.\nOIBID:B5611BB2-5671-47CA-BE8C-C9FF1969B2F9",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "CXNM - Standard - WIN - U - Compliance Defender Real Time Protection",

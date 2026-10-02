@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generates `AppTemplate/*.json`: CIPP application templates for the Win32 apps in
- * `extras/windows/win32-apps/` that CIPP can deploy without an uploaded installer.
+ * `IntuneTemplate/WIN/Apps/` that CIPP can deploy without an uploaded installer.
  *
  * CIPP cannot template a Win32 app with its own `.intunewin` — it has no way to upload a
  * customer's package. What it can do is a *custom application* (`win32ScriptApp`): it uploads
@@ -30,7 +30,7 @@ const crypto = require("crypto");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(REPO_ROOT, "AppTemplate");
-const WAU_DIR = path.join(REPO_ROOT, "extras", "windows", "win32-apps", "winget-autoupdate");
+const WAU_DIR = path.join(REPO_ROOT, "IntuneTemplate", "WIN", "Apps", "winget-autoupdate");
 
 /** Same form as in import-oib.js: a UUIDv5-shaped GUID, stable per name. */
 function stableGuid(name) {
@@ -89,7 +89,7 @@ function wauTemplate() {
   const appName = "CXNM - Standard - WIN - D - Winget-AutoUpdate";
   const config = {
     applicationName: appName,
-    description: `Winget-AutoUpdate ${version} (Romanitho, MIT): updates every app winget knows, daily, as SYSTEM and per user. The install script downloads the pinned WAU.msi and checks its SHA-256. Source: IntuneBackup extras/windows/win32-apps/winget-autoupdate.`,
+    description: `Winget-AutoUpdate ${version} (Romanitho, MIT): updates every app winget knows, daily, as SYSTEM and per user. The install script downloads the pinned WAU.msi and checks its SHA-256. Source: IntuneBackup IntuneTemplate/WIN/Apps/winget-autoupdate.`,
     publisher: "Romanitho",
     installScript: install,
     uninstallScript: uninstall,

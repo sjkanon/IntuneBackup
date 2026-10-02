@@ -13,6 +13,15 @@ Toutes les policies s'appellent `CXNM - Standard - IOS - <D|U> - <Item>` ; les t
 | `AppProtection/` | 1 |
 | `CompliancePolicies/` | 3 |
 
+## Autres éléments
+
+Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un package CIPP. Le mode de déploiement de chaque élément figure dans son README.
+
+| Dossier | Quoi |
+|---|---|
+| [`AppConfiguration/`](AppConfiguration/README.fr.md) | Configuration des applications iOS/iPadOS |
+| [`Enrollment/`](Enrollment/README.fr.md) | Inscription iOS/iPadOS : profil ADE, groupes et Apple Business |
+
 ## Device-scoped (D) — 10
 
 Affecter à des groupes d'appareils.

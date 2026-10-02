@@ -204,13 +204,18 @@ function deployOptionsForPackage(pkg) {
  * voor elke beheerder, niet alleen de Nederlandstalige. `doel` en `bron` blijven Nederlands in
  * het manifest; de Engelse tekst komt uit IntuneTemplate/_i18n/en.json, net als in de
  * documentatie. `translator` is een lib/i18n.js-Translator voor "en".
+ *
+ * `oibId` komt als laatste regel `OIBID:<uuid>`, precies zoals OpenIntuneBaseline hem zelf in
+ * de omschrijving zet (Scripts/Update-OIBManifest.ps1): zo vindt hun tooling en hun
+ * PolicyManifest.json de policy terug, ook onder onze naam.
  */
 function composeDescription(entry, assignment, translator) {
   const parts = [];
   if (entry.doel) parts.push(translator.d(entry.doel));
   parts.push(`Baseline assignment: ${assignmentText(assignment, entry)}.`);
   if (entry.bron) parts.push(`Source: ${translator.d(entry.bron)}.`);
-  return parts.join(" ");
+  const text = parts.join(" ");
+  return entry.oibId ? `${text}\nOIBID:${entry.oibId}` : text;
 }
 
 function assignmentText(assignment, entry) {

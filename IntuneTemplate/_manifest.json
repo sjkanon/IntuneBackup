@@ -11,6 +11,11 @@
     "              in de tenant naast de policy — de enige plek waar een beheerder kan zien",
     "              waarom een policy bestaat.",
     "bron          waar de inhoud vandaan komt, in mensentaal.",
+    "oibId         het tracking-ID dat OpenIntuneBaseline sinds Windows v4.0 in elke policy zet",
+    "              (WINDOWS/PolicyManifest.json). Komt als laatste regel `OIBID:<uuid>` in de",
+    "              omschrijving in de tenant, in OIB's eigen vorm, zodat je een policy terugvindt in",
+    "              OIB's manifest en changelog. import-oib.js leest hem uit de bron en werkt hem bij;",
+    "              OIB geeft een policy bij elke nieuwe versie een nieuw ID. Niet met de hand zetten.",
     "herkomst      welk importscript deze policy bijwerkt:",
     "                oib          scripts/import-oib.js, gestuurd door 'source'",
     "                intuneadmin  scripts/import-intuneadmin.js, gestuurd door 'intuneadmin'",
@@ -82,9 +87,9 @@
       "windows": "v4.0",
       "macos": "v1.0",
       "byod": "ongenummerd",
-      "retrievedAt": "2026-09-14",
-      "checkout": "git -c core.longpaths=true clone --branch windows-v4.0 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source && git -C .oib-source checkout f247604",
-      "let_op": "Windows v4.0 was bij deze import nog niet uitgebracht: overgenomen van branch windows-v4.0 op commit f247604 (9 september 2026), de CHANGELOG noemt als datum nog 2026-09-xx. Haal de import opnieuw door zodra de tag windows-v4.0 er is en kijk de diff na."
+      "retrievedAt": "2026-10-02",
+      "checkout": "git -c core.longpaths=true clone --depth 1 --branch windows-v4.0 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source",
+      "let_op": "Windows v4.0 is uitgebracht op 30 september 2026 (tag windows-v4.0, commit 1cc71a9). De eerdere import kwam van commit f247604 op de toen nog niet uitgebrachte branch; het verschil is op 2 oktober 2026 nagelopen en overgenomen."
     },
     "intuneadmin": {
       "repo": "https://github.com/IntuneAdmin/IntuneBaselines",
@@ -110,6 +115,26 @@
     {
       "source": "WINDOWS365/",
       "reason": "Windows 365 Cloud PC's horen in een eigen set; de policies zijn los te importeren voor een organisatie die ze gebruikt."
+    },
+    {
+      "source": "WINDOWS/Scripts/",
+      "reason": "Platformscripts zijn geen CIPP-policytype. Ze staan in IntuneTemplate/WIN/PlatformScripts/ (Enable-AutoTimezone.ps1, Trigger-PostOOBEUpdates.ps1), met de instellingen voor Intune in de README daar."
+    },
+    {
+      "source": "WINDOWS/PolicyManifest.json",
+      "reason": "Geen policy maar OIB's lijst van tracking-ID's. Wat daarvan nodig is staat per policy als oibId in dit manifest; import-oib.js leest het ID uit de policy zelf."
+    },
+    {
+      "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Updates - D - Update Configuration - v1.0.json",
+      "reason": "Vervangen door de declaratieve variant (DDM) in Baseline_MAC_D_Software_Updates, een eigen policy. Die vervangt de com.apple.SoftwareUpdate-instellingen uit deze policy, behalve twee sleutels zonder DDM-tegenhanger, die hij zelf meeneemt."
+    },
+    {
+      "source": "MACOS/NativeImport/",
+      "reason": "Dezelfde macOS-policies als in MACOS/IntuneManagement/, maar in het formaat van de importfunctie van de Intune-portal. De importer leest de IntuneManagement-variant."
+    },
+    {
+      "source": "Scripts/",
+      "reason": "Hulpscripts voor het onderhoud van de OIB-repo zelf (Update-OIBManifest.ps1), niet voor een tenant."
     }
   ],
   "policies": [
@@ -516,7 +541,7 @@
       "bron": "Intune-compliance voor Android device administrator (`securityBlockDeviceAdministratorManagedDevices`); aanbeveling uit UniFy Android Enterprise Baseline v1.5.1, gids 9 (Enrollment Restrictions)",
       "herkomst": "eigen",
       "fase": 3,
-      "faseWaarom": "Doet alleen iets op een tenant waar nog device administrator-toestellen staan of waar die inschrijving niet is geblokkeerd. Zie extras/android/enrollment-restrictions voor het dichtzetten van die inschrijving; deze policy ruimt op wat er al staat.",
+      "faseWaarom": "Doet alleen iets op een tenant waar nog device administrator-toestellen staan of waar die inschrijving niet is geblokkeerd. Zie IntuneTemplate/AND/Enrollments voor het dichtzetten van die inschrijving; deze policy ruimt op wat er al staat.",
       "controls": {
         "iso": [
           "A.8.1 Eindpuntapparatuur van gebruikers",
@@ -565,7 +590,7 @@
       },
       "bewijs": "Defender for Endpoint op Android detecteert schadelijke apps, phishing en onveilige netwerken en geeft het toestel een risicoscore. Deze policy maakt die score een toegangsvoorwaarde: boven *laag* is het toestel niet-compliant en houdt Conditional Access het tegen tot de dreiging is opgelost. Dat is automatische inperking van een incident, en de enige Android-maatregel in de baseline die actief naar malware kijkt. Niveau *laag* is wat het Microsoft Android Enterprise security configuration framework op niveau 2 noemt en wat UniFy aanhoudt; IntuneAdmin gebruikt *medium*.",
       "universeel": "Elk toestel met persoonlijk werkprofiel, in een tenant met Defender for Endpoint-licentie. Defender kijkt op een persoonlijk toestel alleen naar het werkprofiel; wat privé is, ziet hij niet.",
-      "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in extras/android/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
+      "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in IntuneTemplate/AND/Enrollment/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
       "metadataOnly": true
     },
     {
@@ -595,7 +620,7 @@
       },
       "bewijs": "Defender for Endpoint op Android detecteert schadelijke apps, phishing en onveilige netwerken en geeft het toestel een risicoscore. Deze policy maakt die score een toegangsvoorwaarde: boven *laag* is het toestel niet-compliant en houdt Conditional Access het tegen tot de dreiging is opgelost. Dat is automatische inperking van een incident, en de enige Android-maatregel in de baseline die actief naar malware kijkt. Niveau *laag* is wat het Microsoft Android Enterprise security configuration framework op niveau 2 noemt en wat UniFy aanhoudt; IntuneAdmin gebruikt *medium*.",
       "universeel": "Elk fully managed en corporate-owned work profile-toestel met een gebruiker, in een tenant met Defender for Endpoint-licentie. Dedicated toestellen vallen buiten deze gebruikerstoewijzing; wie Defender daar ook uitrolt, wijst hem aanvullend aan de dedicated apparaatgroep toe.",
-      "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in extras/android/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
+      "note": "Drie voorwaarden, anders is elk toestel niet-compliant of meet hij niets: (1) een licentie voor Defender for Endpoint (P1/P2, Business, of Microsoft 365 E5/Business Premium); (2) de Defender–Intune-connector aan, met *Connect Android devices to Microsoft Defender for Endpoint* op On; (3) de app Microsoft Defender (`com.microsoft.scmx`) als Managed Google Play-app verplicht uitgerold, bij voorkeur met de app-configuratie in IntuneTemplate/AND/Enrollment/app-configuration zodat de onboarding zonder handelingen van de gebruiker gebeurt. Bewust een aparte policy en niet in Device Health: zo kun je hem pas toewijzen als de connector staat, en blijft een ontbrekende licentie beperkt tot deze ene toets. Er is geen overlap: de Device Health-policies laten `deviceThreatProtectionEnabled` op false, wat in compliance \"niet vereist\" betekent — geen conflict. Wie een andere Mobile Threat Defense-partner gebruikt, zet `deviceThreatProtectionRequiredSecurityLevel` in plaats van `advancedThreatProtectionRequiredSecurityLevel`.",
       "metadataOnly": true
     },
     {
@@ -606,7 +631,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Dedicated toestellen hebben geen gebruiker; een gebruikerstoewijzing bereikt ze niet. Hoort op een apparaatgroep met alleen dedicated toestellen.",
-      "faseGroep": "SEC-Android-Dedicated (dynamische apparaatgroep op het enrollmentProfileName van de dedicated inschrijfprofielen, of een toewijzing met filter — zie extras/android/assignment-filters)",
+      "faseGroep": "SEC-Android-Dedicated (dynamische apparaatgroep op het enrollmentProfileName van de dedicated inschrijfprofielen, of een toewijzing met filter — zie IntuneTemplate/AND/AssignmentFilters)",
       "controls": {
         "iso": [
           "A.8.1 Eindpuntapparatuur van gebruikers",
@@ -808,7 +833,7 @@
       },
       "bewijs": "Microsoft documenteert de plug-in als dé manier om single sign-on en apparaatgebaseerde Conditional Access op iOS te laten werken, ook voor apps die geen MSAL gebruiken en voor Safari: bij een aanmelding op een Entra-URL geeft de plug-in het apparaatcertificaat mee, zodat 'vereis een compliant apparaat' ook in de browser werkt. Minder wachtwoordprompts betekent minder gelegenheid om een nagemaakt aanmeldscherm te laten invullen. De CIS Apple iOS/iPadOS 26 Benchmark-set van UniFy rolt hem uit als voorwaarde voor Conditional Access.",
       "universeel": "Elk ingeschreven iPhone en iPad, bedrijfs- én persoonlijk ingeschreven: Microsoft noemt de plug-in ondersteund bij device- en user enrollment. Doet niets op toestellen zonder inschrijving; daar blijft App Protection de bescherming.",
-      "note": "Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met CXNM - Standard - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie extras/ios/README.md.",
+      "note": "Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met CXNM - Standard - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie IntuneTemplate/IOS/Enrollment/README.md.",
       "metadataOnly": true
     },
     {
@@ -879,7 +904,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Vrijwel alle instellingen vragen een supervised toestel (ADE); op een persoonlijk toestel zijn ze ongepast of doen ze niets. Na toewijzing kan de gebruiker het toestel niet meer zelf wissen — terugzetten gaat via Intune.",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in extras/ios/README.md)",
+      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.9 Configuratiebeheer",
@@ -1006,7 +1031,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen voor bedrijfstoestellen, en de tekst moet per organisatie worden ingevuld vóór toewijzing (placeholder VERLOREN-TOESTEL-TEKST-INVULLEN).",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in extras/ios/README.md)",
+      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein",
@@ -1051,7 +1076,7 @@
       },
       "bewijs": "Defender for Endpoint op iOS detecteert phishing, onveilige netwerken, jailbreaks en kwetsbare iOS-versies en vat dat samen in één risicoscore. Via deze policy wordt die score een toegangsvoorwaarde: Conditional Access die een compliant apparaat eist, weigert een toestel met een actieve dreiging. Microsoft Learn (Configure Defender for Endpoint on iOS features) beschrijft precies deze keten van risicoscore via compliance naar Conditional Access.",
       "universeel": "Elk ingeschreven toestel van een gebruiker met een Defender for Endpoint-licentie. Medium is een grens die ook voor persoonlijke toestellen werkt: kleine bevindingen blokkeren niet, een actieve dreiging wel.",
-      "note": "Bewust één policy met Medium in plaats van UniFy's Low voor bedrijfstoestellen: Low maakt een toestel al bij een laag risico niet-compliant, en dat vraagt eerst ervaring met hoe vaak dat voorkomt. Een eigen policy naast Compliance Device Health, zodat een tenant zonder MDE-licentie Device Health gewoon kan blijven gebruiken; compliance-policies worden los geëvalueerd en conflicteren niet. Blokkeeractie na 24 uur, gelijk aan de andere iOS-compliancepolicies. Het veld advancedThreatProtectionRequiredSecurityLevel staat niet in pl4nty DCv1 voor iOS maar wel in Graph beta iosCompliancePolicy en in beide bronexports. Onboarding: CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised en … Unsupervised; app-configuratie in extras/ios/app-configuration.",
+      "note": "Bewust één policy met Medium in plaats van UniFy's Low voor bedrijfstoestellen: Low maakt een toestel al bij een laag risico niet-compliant, en dat vraagt eerst ervaring met hoe vaak dat voorkomt. Een eigen policy naast Compliance Device Health, zodat een tenant zonder MDE-licentie Device Health gewoon kan blijven gebruiken; compliance-policies worden los geëvalueerd en conflicteren niet. Blokkeeractie na 24 uur, gelijk aan de andere iOS-compliancepolicies. Het veld advancedThreatProtectionRequiredSecurityLevel staat niet in pl4nty DCv1 voor iOS maar wel in Graph beta iosCompliancePolicy en in beide bronexports. Onboarding: CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised en … Unsupervised; app-configuratie in IntuneTemplate/IOS/AppConfiguration.",
       "metadataOnly": true
     },
     {
@@ -1062,7 +1087,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen supervised toestellen; niet-supervised toestellen krijgen de VPN-variant. Vraagt daarnaast een Defender for Endpoint-licentie, de connector en de Defender-app als vereiste (VPP-)app.",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in extras/ios/README.md)",
+      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -1093,7 +1118,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen niet-supervised (persoonlijk ingeschreven) toestellen; supervised toestellen krijgen het content filter. Vraagt daarnaast een Defender for Endpoint-licentie, de connector en de Defender-app.",
-      "faseGroep": "SEC-iOS-BYOD (dynamische apparaatgroep: ingeschreven iPhone/iPad met deviceOwnership Personal, dus niet supervised — regel in extras/ios/README.md)",
+      "faseGroep": "SEC-iOS-BYOD (dynamische apparaatgroep: ingeschreven iPhone/iPad met deviceOwnership Personal, dus niet supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -1205,7 +1230,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als lokale beheerder.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
+      "note": "Alternatief voor CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met IntuneTemplate/MAC/Enrollment/ade-profile/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het standaard-inschrijfprofiel; ze verschillen in precies één instelling. Vergrendelde inschrijving is achteraf alleen met een wipe terug te draaien.",
@@ -1235,7 +1260,7 @@
       "doel": "Doorloopt Setup Assistant voor een bedrijfs-Mac met user affinity en vergrendelde inschrijving, en maakt het aangemelde account aan als standaardgebruiker; beheer loopt via het verborgen servicedeskaccount.",
       "bron": "eigen baseline — OpenIntuneBaseline heeft geen inschrijfprofiel",
       "metadataOnly": true,
-      "note": "Alternatief voor CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met extras/macos/enrollment/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
+      "note": "Alternatief voor CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity, geen aanvulling: de twee profielen verschillen in precies één instelling — wordt het aangemelde account beheerder of standaardgebruiker. Allebei op All Devices zou een conflict opleveren, dus ze staan bewust zonder toewijzing en horen op een eigen groep. Ze overlappen bovendien met IntuneTemplate/MAC/Enrollment/ade-profile/macOS-Corporate-ADE-Baseline.json, dat hetzelfde inschrijfprofiel via depMacOSEnrollmentProfile uitrolt en daar hetzelfde beheerdersaccount (mlapsadmin) gebruikt — kies één van de twee routes. Het beheerdersaccount heet mlapsadmin en de afdeling in Setup Assistant IT Servicedesk; het telefoonnummer staat op SERVICEDESK-TELEFOON-INVULLEN en hoort per organisatie ingevuld te worden vóór het profiel aan een token hangt — de gebruiker ziet het tijdens de inrichting.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alternatief van het beheerders-inschrijfprofiel; ze verschillen in precies één instelling.",
@@ -1515,7 +1540,7 @@
       "displayName": "CXNM - Standard - MAC - D - Azure Files Cloud Kerberos",
       "doel": "Geeft de Mac een Kerberos-ticket voor het Entra Cloud Kerberos-realm, zodat een SMB-share op Azure Files opent zonder dat de gebruiker opnieuw inlogt.",
       "bron": "Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), en de Entra-handleiding voor Kerberos SSO in Platform SSO; settingDefinitionId's geverifieerd tegen de settings catalog-definities",
-      "note": "Hoort bij CXNM - Standard - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Een storage account dat al een andere identity source heeft valt af.** Gebruikt het account Microsoft Entra Domain Services dan staan Entra Kerberos en AD DS in het portaal grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in extras/macos/shell-scripts/README.md.\n\n**Wat er nodig is om dit uit te rollen.** Een storage account met Entra Kerberos als identity source. Staat het bestaande account op iets anders en kan dat niet om, dan is er een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `extras/macos/shell-scripts/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — deze baseline gaat uit van cloud-only apparaten. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
+      "note": "Hoort bij CXNM - Standard - MAC - D - Platform SSO en doet zonder die policy niets: het Cloud-TGT wordt door Platform SSO uitgegeven, dit profiel vertelt de Kerberos-extensie van Apple alleen wélk realm erbij hoort en dat hij dat TGT mag gebruiken (`usePlatformSSOTGT`). `performKerberosOnly` houdt de extensie weg van wachtwoordverloop-checks, wachtwoordsynchronisatie en het thuismappad — die horen bij Platform SSO, niet hier.\n\nEen tweede policy naast Platform SSO en geen uitbreiding ervan: de settings catalog kent voor `com.apple.extensiblesso` twee losse vormen, de Platform SSO-vorm (`com.apple.extensiblesso_com.apple.extensiblesso`) en de Kerberos-vorm die deze policy gebruikt (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Elke Kerberos-realm is één zo'n vorm, met een eigen `Realm` en eigen `Hosts`. Op de Mac worden die profielen naast elkaar geïnstalleerd en voegt macOS de payloads samen; check-scope.js meldt die overlap bij Apple daarom bewust niet als conflict.\n\nHet tenant-id staat als `%OrganizationId%` in de `preferredKDCs`-URL, dezelfde constructie als in de OneDrive-KFM- en Teams-policies: CIPP vervangt dat token bij uitrol door de customerId van de tenant (zie Get-CIPPTextReplacement in CIPP-API); `%tenantid%` doet hetzelfde. Rol je met IntuneBackupAndRestore uit in plaats van met CIPP, dan gebeurt die vervanging niet en moet je het id met de hand invullen.\n\nAan de tenantkant moeten er vier dingen staan vóór dit profiel iets oplevert: Entra Kerberos aan op het storage account, admin consent op de service principal die daarbij hoort, MFA uit voor de Entra-app van dat storage account, en share-level permissions op de share zelf. Bestaat de file share al, dan staat de identifier URI van die app-registratie als `CIFS/<account>.file.core.windows.net` — met hoofdletters. macOS mount alleen op `cifs/` in kleine letters; Microsoft levert daar `updateappmanifestazurefiles.ps1` voor in azure-files-samples. Nieuwe shares hebben dat probleem niet.\n\n**Een storage account dat al een andere identity source heeft valt af.** Gebruikt het account Microsoft Entra Domain Services dan staan Entra Kerberos en AD DS in het portaal grijs met \"Another access method is already configured\". Een storage account kan er maar één hebben. Op een Mac met een geldig cloud-TGT geeft `kgetcred cifs/<account>.file.core.windows.net@KERBEROS.MICROSOFTONLINE.COM` dan AADSTS700016 — er is geen app-registratie voor de fileservice, dus valt er niets uit te geven. Entra DS is ook geen alternatieve weg naar hetzelfde doel: Platform SSO geeft alleen `tgt_cloud` (Entra Kerberos) en `tgt_ad` (on-premises AD via Cloud Kerberos Trust) uit, en Entra DS is geen van beide. Omzetten van de identity source raakt al het bestaande verkeer naar die shares, inclusief de rechten die op bestand- en mapniveau met Entra DS-identiteiten zijn gezet; zie \"Change the identity source for Azure file shares\" bij Microsoft. De volledige diagnose staat in IntuneTemplate/MAC/PlatformScripts/README.md.\n\n**Wat er nodig is om dit uit te rollen.** Een storage account met Entra Kerberos als identity source. Staat het bestaande account op iets anders en kan dat niet om, dan is er een **tweede storage account** nodig met Entra Kerberos als identity source — die twee kunnen naast elkaar bestaan, de beperking geldt per account en niet per tenant. Dit profiel hoeft daar niet voor te wijzigen: `Hosts` dekt met `.windows.net` elk storage account, en alleen het mountscript in `IntuneTemplate/MAC/PlatformScripts/` noemt een accountnaam. Weegt dat niet op tegen de moeite, dan is de eerlijke conclusie dat SMB hier het verkeerde vervoermiddel is en de data in SharePoint hoort, met `automountteamsites` uit de settings catalog — dat werkt op beide platformen zonder Kerberos en zonder VPN.\n\nDe on-premises AD-kant zou een tweede policy van deze vorm zijn, met het eigen realm en de eigen domeinnaam in `Hosts`. Die zit hier niet in — deze baseline gaat uit van cloud-only apparaten. Komt die er wel, dan hoort het on-prem-profiel eerst te worden uitgerold en dit daarna, in die volgorde. De TGT-toewijzing zelf is te sturen met `custom_tgt_setting` in de extension data van de Platform SSO-policy (Company Portal 2508+); de standaardwaarde 0 wijst zowel het on-prem- als het cloud-TGT toe, en daarom hoeft die policy voor dit profiel niet te wijzigen.\n\nMicrosoft schrijft bij Platform SSO-profielen \"toewijzen aan gebruikers, niet aan apparaten\". Deze baseline houdt macOS-profielen op apparaatgroepen, gelijk aan de bestaande Platform SSO-policy. Zolang de policy in fase 3 staat is dat geen praktisch verschil: hij wordt aangemaakt en niet toegewezen.\n\nControleren na uitrol: `app-sso platform -s` in Terminal moet een ticket tonen met `ticketKeyPath` = `tgt_cloud`, en `nc -vz <account>.file.core.windows.net 445` moet open zijn. Dat de menubalk-extra van de Kerberos-extensie \"Not signed in\" meldt is normaal en betekent niet dat het niet werkt.",
       "herkomst": "eigen",
       "fase": 3,
       "faseWaarom": "Wacht tot er een storage account met Entra Kerberos als identity source is. Een account dat al op Microsoft Entra Domain Services of AD DS staat kan dat niet tegelijk hebben, en omzetten raakt alles wat al op dat account draait. Op een Mac met een geldig cloud-TGT levert zo'n account AADSTS700016 op — de KDC kent geen toepassing voor die fileservice. Het profiel zelf is af en account-onafhankelijk: `Hosts` staat op `.windows.net` en dekt dus elk storage account. Zodra er één is met Entra Kerberos kan dit naar fase 1, met als tweede voorwaarde dat Microsoft de tenant voor de macOS-preview aanzet (azurefiles@microsoft.com).",
@@ -2066,7 +2091,7 @@
       },
       "bewijs": "Zonder Recovery Lock kan iedereen met fysieke toegang de Mac in recoveryOS wissen en opnieuw installeren, of de opstartbeveiliging verlagen zodat een ander systeem of een kernelextensie laadt. FileVault beschermt de data, niet het apparaat en niet de beveiligingsinstellingen van de opstartketen. Microsoft: Recovery Lock 'helps protect your macOS devices against unauthorized reinstallation and wiping', Intune genereert per Mac een sterk willekeurig wachtwoord en bewaart het. Apple beschrijft het mechanisme in Platform Deployment, 'Startup security in macOS'. Een uniek wachtwoord per apparaat, geroteerd, is precies wat CIS Controls 5.2 vraagt.",
       "universeel": "Macs met Apple silicon, macOS 11.5 of later, ingeschreven en supervised (ADE). Microsoft: 'Recovery Lock isn't available for macOS devices with Intel chips' — een Intel-Mac of een niet-supervised Mac negeert de policy; geen schade, wel geen bescherming. Voor Intel-Macs is het firmwarewachtwoord de tegenhanger, en dat zit niet in deze policy.",
-      "note": "Rotatie op 6 maanden (optie _5), gelijk aan de rotatie van de FileVault-herstelsleutel in CXNM - Standard - MAC - D - FileVault; intune-my-macs roteert maandelijks, wat vooral servicedeskverkeer oplevert zonder dat het risico daalt — het wachtwoord wordt alleen gebruikt wie het opvraagt. Wachtwoord bekijken: Devices → apparaat → Passwords and keys → Recovery Lock Password. Dat vraagt de Intune-rechten 'Remote tasks/View macOS recovery lock password' (en voor rotatie 'Rotate macOS recovery lock password'); beperk wie die heeft, bij voorkeur via PIM. Na gebruik: device action 'Rotate recovery lock passcode'. Uitschrijven uit Intune wist het wachtwoord van de Mac; de toewijzing weghalen laat Intune het proberen te wissen. Een Mac die de organisatie verlaat dus eerst uitschrijven, dan vrijgeven in Apple Business (zie extras/macos/apple-business)."
+      "note": "Rotatie op 6 maanden (optie _5), gelijk aan de rotatie van de FileVault-herstelsleutel in CXNM - Standard - MAC - D - FileVault; intune-my-macs roteert maandelijks, wat vooral servicedeskverkeer oplevert zonder dat het risico daalt — het wachtwoord wordt alleen gebruikt wie het opvraagt. Wachtwoord bekijken: Devices → apparaat → Passwords and keys → Recovery Lock Password. Dat vraagt de Intune-rechten 'Remote tasks/View macOS recovery lock password' (en voor rotatie 'Rotate macOS recovery lock password'); beperk wie die heeft, bij voorkeur via PIM. Na gebruik: device action 'Rotate recovery lock passcode'. Uitschrijven uit Intune wist het wachtwoord van de Mac; de toewijzing weghalen laat Intune het proberen te wissen. Een Mac die de organisatie verlaat dus eerst uitschrijven, dan vrijgeven in Apple Business (zie IntuneTemplate/MAC/Enrollment/apple-business)."
     },
     {
       "target": "Baseline_MAC_D_Login_Window",
@@ -2152,7 +2177,7 @@
       },
       "bewijs": "Een USB-stick of externe schijf is de eenvoudigste weg om bedrijfsgegevens buiten elke logging om mee te nemen, en een bekende route voor malware naar binnen (A.7.10, A.8.12). CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 heeft hier geen instelling voor: 5.3.2 eist alleen dat externe APFS/HFS-volumes versleuteld zijn, en dat is geen MDM-instelling. Deze declaratie is de enige ingebouwde macOS-maatregel die externe opslag weert zonder extra software.",
       "universeel": "Supervised Macs (ADE) met macOS 15 of later; oudere of niet-supervised Macs negeren de declaratie. Netwerkopslag (NetworkStorage) is bewust niet gezet: dat zou SMB-shares en Azure Files breken.",
-      "note": "Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (extras/macos/defender-onboarding) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een organisatie hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*."
+      "note": "Wie de Windows-lijn wil — lezen mag, schrijven niet — heeft op macOS Microsoft Defender for Endpoint Device Control nodig (removable media-beleid met alleen leesrechten). Dat vraagt een aangemelde Defender-agent (IntuneTemplate/MAC/EndpointSecurity) en een apart JSON-beleid, en zit niet in deze ronde. Ook een externe Time Machine-schijf wordt met deze policy niet meer gekoppeld; back-up hoort in deze baseline via OneDrive (KFM) te lopen. Kiest een organisatie hiervoor, rol dan eerst uit op een pilotgroep en behandel het daarna als fase 2. Geen overlap: geen ander template zet diskmanagement_*."
     },
     {
       "target": "Baseline_WIN_D_Access_Control",
@@ -2210,6 +2235,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Administrator Protection - v3.7.json",
+      "oibId": "E100EBFD-8D2E-40AC-A9A3-48DBF6764144",
       "target": "Baseline_WIN_D_Administrator_Protection",
       "displayName": "CXNM - Standard - WIN - D - Administrator Protection",
       "doel": "Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.",
@@ -2260,6 +2286,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Attack Surface Reduction - D - ASR Rules (L2) - v3.7.json",
+      "oibId": "86EB0653-DD3D-4CBA-BB51-1FFDC3E1F39C",
       "target": "Baseline_WIN_D_Attack_Surface_Reduction",
       "displayName": "CXNM - Standard - WIN - D - Attack Surface Reduction",
       "doel": "Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: macro's die processen starten, uitvoerbare inhoud uit e-mail en USB, misbruik van Office- en scriptmotoren, en het uitlezen van inloggegevens uit LSASS.",
@@ -2286,6 +2313,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Audit and Event Logging - v4.0.json",
+      "oibId": "34F6F97C-09AA-446B-9664-1DC87BA5C91A",
       "target": "Baseline_WIN_D_Audit_and_Event_Logging",
       "displayName": "CXNM - Standard - WIN - D - Audit and Event Logging",
       "doel": "Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf.",
@@ -2340,6 +2368,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Automatic Restart Sign-On - v3.8.json",
+      "oibId": "445BF199-4BB1-49B3-AB70-FFE4B243AEDC",
       "target": "Baseline_WIN_D_Automatic_Restart_Sign_On",
       "displayName": "CXNM - Standard - WIN - D - Automatic Restart Sign-On",
       "doel": "Meldt de gebruiker na een herstart voor updates automatisch en vergrendeld weer aan, zodat opstartprogramma's draaien zonder dat het apparaat onbeheerd ontgrendeld staat.",
@@ -2363,6 +2392,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Encryption - D - BitLocker (OS Disk) - v3.7.json",
+      "oibId": "C53F0DA8-45D9-4E38-AB62-D3C359ED91F6",
       "target": "Baseline_WIN_D_BitLocker",
       "displayName": "CXNM - Standard - WIN - D - BitLocker",
       "doel": "Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard.",
@@ -2416,6 +2446,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0.json",
+      "oibId": "457CAD52-5B2E-4AC6-9451-6D56C05DC4CB",
       "target": "Baseline_WIN_D_Cloud_Optimized_Content",
       "displayName": "CXNM - Standard - WIN - D - Cloud Optimized Content",
       "doel": "Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight.",
@@ -2437,6 +2468,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Config Refresh - v3.2.json",
+      "oibId": "C933DA2A-916F-46D4-B2C8-52459180108B",
       "target": "Baseline_WIN_D_Config_Refresh",
       "displayName": "CXNM - Standard - WIN - D - Config Refresh",
       "doel": "Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt.",
@@ -2508,6 +2540,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Defender Antivirus - D - Additional Configuration - v4.0.json",
+      "oibId": "04F7642A-4399-465D-9253-C04BF23C6BE2",
       "target": "Baseline_WIN_D_Defender_Additional_Configuration",
       "displayName": "CXNM - Standard - WIN - D - Defender Additional Configuration",
       "doel": "Defender-instellingen die niet in het Endpoint Security-template passen en daarom een losse policy vereisen.",
@@ -2534,6 +2567,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - AV Configuration - v4.0.json",
+      "oibId": "2064828D-FB90-4A27-B4F9-3EE30F5A4DA2",
       "target": "Baseline_WIN_D_Defender_Antivirus",
       "displayName": "CXNM - Standard - WIN - D - Defender Antivirus",
       "doel": "Kernconfiguratie van Defender Antivirus: realtimebeveiliging, cloudbescherming, scanschema, en wat er gebeurt bij een detectie.",
@@ -2714,6 +2748,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus - D - Security Experience - v4.0.json",
+      "oibId": "1BDB3565-26E1-4820-B79F-6AFED73C5A67",
       "target": "Baseline_WIN_D_Defender_Security_Experience",
       "displayName": "CXNM - Standard - WIN - D - Defender Security Experience",
       "doel": "Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten.",
@@ -2737,6 +2772,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus Updates - Ring 1 - Pilot - v3.4.json",
+      "oibId": "C1B1A707-F50C-461A-A811-E8D47FED076C",
       "target": "Baseline_WIN_D_Defender_Update_Ring_1_Pilot",
       "displayName": "CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot",
       "doel": "Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je een slechte update opmerkt vóór de rest van de organisatie 'm krijgt.",
@@ -2765,6 +2801,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus Updates - Ring 2 - UAT - v3.4.json",
+      "oibId": "A75B86A1-0C58-4B81-AA31-EAF5EFA9CE26",
       "target": "Baseline_WIN_D_Defender_Update_Ring_2_UAT",
       "displayName": "CXNM - Standard - WIN - D - Defender Update Ring 2 UAT",
       "doel": "Tweede ring voor Defender-updates: loopt achter op de pilot en voor op productie.",
@@ -2792,6 +2829,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Defender Antivirus Updates - Ring 3 - Production - v3.4.json",
+      "oibId": "F597C79E-DBDB-4419-AA69-3617716658E4",
       "target": "Baseline_WIN_D_Defender_Update_Ring_3_Production",
       "displayName": "CXNM - Standard - WIN - D - Defender Update Ring 3 Production",
       "doel": "Productiering voor Defender-updates: krijgt definities en engineversies pas nadat ring 1 en 2 ze zonder problemen hebben gedraaid.",
@@ -2817,6 +2855,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Update for Business - D - Delivery Optimisation - v3.0.json",
+      "oibId": "743720B0-DDC7-4C5A-A50A-DE89476AEF10",
       "target": "Baseline_WIN_D_Delivery_Optimisation",
       "displayName": "CXNM - Standard - WIN - D - Delivery Optimisation",
       "doel": "Laat apparaten updates onderling uitwisselen in plaats van ze allemaal apart van internet te halen, en begrenst hoeveel bandbreedte dat mag kosten.",
@@ -2836,6 +2875,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Device Guard, Credential Guard and HVCI - v3.7.json",
+      "oibId": "71492EE0-EC96-4314-9F00-591F85E95422",
       "target": "Baseline_WIN_D_Device_Guard_and_Credential_Guard",
       "displayName": "CXNM - Standard - WIN - D - Device Guard and Credential Guard",
       "doel": "Zet virtualisatie-gebaseerde beveiliging, Credential Guard en geheugenintegriteit aan, zodat inloggegevens in een afgeschermd deel van het geheugen staan. Vraagt een herstart en kan oude stuurprogramma's blokkeren.",
@@ -2865,6 +2905,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Power and Device Lock - v4.0.json",
+      "oibId": "D4027112-4CF4-4E56-82CD-0FC97D43580F",
       "target": "Baseline_WIN_D_Device_Lock",
       "displayName": "CXNM - Standard - WIN - D - Device Lock",
       "doel": "Bepaalt wanneer het scherm vergrendelt en welke eisen aan de toegangscode gelden, plus het gedrag bij dichtklappen en stroom.",
@@ -2892,6 +2933,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Network Security - D - Disable NTLM - v3.8.json",
+      "oibId": "78A64AF6-87DC-4A95-94F8-E967508ADEE7",
       "target": "Baseline_WIN_D_Disable_NTLM",
       "displayName": "CXNM - Standard - WIN - D - Disable NTLM",
       "doel": "Zet de verouderde NTLM-authenticatie uit ten gunste van Kerberos. Breekt oude on-prem toepassingen en apparaten die geen Kerberos spreken — eerst testen.",
@@ -2916,6 +2958,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/DeviceConfiguration/Win - OIB - TP - Health Monitoring - D - Endpoint Analytics - v3.4.json",
+      "oibId": "8DB1261D-2474-43C4-A753-61124D7875B6",
       "target": "Baseline_WIN_D_Endpoint_Analytics",
       "displayName": "CXNM - Standard - WIN - D - Endpoint Analytics",
       "doel": "Stuurt opstart- en prestatiegegevens naar Endpoint Analytics, zodat trage apparaten zichtbaar worden vóór gebruikers erover bellen.",
@@ -2936,6 +2979,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Enhanced Phishing Protection - v3.0.json",
+      "oibId": "485E5D84-C87C-459D-A2FB-0D060A082BE7",
       "target": "Baseline_WIN_D_Enhanced_Phishing_Protection",
       "displayName": "CXNM - Standard - WIN - D - Enhanced Phishing Protection",
       "doel": "Waarschuwt zodra een gebruiker zijn werkwachtwoord intypt op een phishingsite, hergebruikt in een app of opslaat in een tekstbestand.",
@@ -2990,6 +3034,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Apps - D - In-Box App Removal - v4.0.json",
+      "oibId": "C1738F5B-43FF-4ED9-83AC-8B0AAB92EF98",
       "target": "Baseline_WIN_D_In_Box_App_Removal",
       "displayName": "CXNM - Standard - WIN - D - In-Box App Removal",
       "doel": "Verwijdert de consumenten-apps die standaard in Windows zitten en op een werkapparaat niets te zoeken hebben.",
@@ -3014,6 +3059,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Internet Explorer (Legacy) - D - Security - v4.0.json",
+      "oibId": "52D56BB4-789A-41BA-8AF6-60F41A718661",
       "target": "Baseline_WIN_D_Internet_Explorer_Legacy",
       "displayName": "CXNM - Standard - WIN - D - Internet Explorer Legacy",
       "doel": "Hardening van de Internet Explorer-engine, die nog steeds draait onder de IE-modus van Edge en binnen oude toepassingen.",
@@ -3096,6 +3142,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Local Group Membership - D - Local Administrators - v3.7.json",
+      "oibId": "05B9A828-DB19-4769-B112-62EA1F5367D6",
       "target": "Baseline_WIN_D_Local_Administrators",
       "displayName": "CXNM - Standard - WIN - D - Local Administrators",
       "doel": "Bepaalt wie er lid is van de lokale groep Administrators, zodat LAPS een beheerde groep beheert in plaats van wat er toevallig op het apparaat staat.",
@@ -3129,6 +3176,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Local Security Policies - v4.0.json",
+      "oibId": "4C58ABE2-8804-41BD-82D0-3E966AB57731",
       "target": "Baseline_WIN_D_Local_Security_Policies",
       "displayName": "CXNM - Standard - WIN - D - Local Security Policies",
       "doel": "De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit.",
@@ -3159,6 +3207,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Location and Privacy - v3.2.json",
+      "oibId": "A450DCA4-BEF7-4DEF-934E-FF50BF0A5244",
       "target": "Baseline_WIN_D_Location_and_Privacy",
       "displayName": "CXNM - Standard - WIN - D - Location and Privacy",
       "doel": "Bepaalt welke privacygevoelige gegevens apps mogen opvragen, zoals locatie en spraak.",
@@ -3206,6 +3255,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Login and Lock Screen - v3.8.json",
+      "oibId": "072636D1-DF50-4E93-957A-3427F85261EA",
       "target": "Baseline_WIN_D_Login_and_Lock_Screen",
       "displayName": "CXNM - Standard - WIN - D - Login and Lock Screen",
       "doel": "Bepaalt wat er op het aanmeld- en vergrendelscherm zichtbaar en mogelijk is, zoals de laatst aangemelde gebruiker en camera-toegang.",
@@ -3265,6 +3315,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Accounts - D - Configuration - v3.2.json",
+      "oibId": "7AFCF2FB-6037-49E5-A22F-5E14676EFF69",
       "target": "Baseline_WIN_D_Microsoft_Accounts",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Accounts",
       "doel": "Bepaalt of persoonlijke Microsoft-accounts op een werkapparaat gebruikt en toegevoegd mogen worden.",
@@ -3310,6 +3361,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Security - v4.0.json",
+      "oibId": "91BC2795-9140-4B71-AAA6-7D6EB000742F",
       "target": "Baseline_WIN_D_Microsoft_Edge_Security",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Edge Security",
       "doel": "De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaatgedrag en welke sites onbeveiligde inhoud mogen laden.",
@@ -3340,6 +3392,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - D - Updates - v4.0.json",
+      "oibId": "87556342-57CC-4055-AFC1-D803183A9655",
       "target": "Baseline_WIN_D_Microsoft_Edge_Updates",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Edge Updates",
       "doel": "Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen.",
@@ -3369,6 +3422,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - D - Security - v3.6.json",
+      "oibId": "A182DB08-2F64-4535-8A7E-C0277D88152B",
       "target": "Baseline_WIN_D_Microsoft_Office_Security",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Office Security",
       "doel": "De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, beperkt ActiveX en oude bestandsformaten. Het zwaartepunt van deze baseline voor phishing via bijlagen.",
@@ -3396,6 +3450,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - D - Updates - v3.0.json",
+      "oibId": "B42FB11C-AF28-476E-AB4E-BF563AC80975",
       "target": "Baseline_WIN_D_Microsoft_Office_Updates",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Office Updates",
       "doel": "Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd.",
@@ -3420,6 +3475,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft OneDrive - D - Configuration - v3.2.json",
+      "oibId": "6EF9DFEA-74B4-485D-AAD2-237F7E2EBAB2",
       "target": "Baseline_WIN_D_Microsoft_OneDrive",
       "displayName": "CXNM - Standard - WIN - D - Microsoft OneDrive",
       "doel": "Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat.",
@@ -3445,6 +3501,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Store - D - Configuration - v3.8.json",
+      "oibId": "D239DFC3-E20A-48C9-A906-09C0AF624CB7",
       "target": "Baseline_WIN_D_Microsoft_Store",
       "displayName": "CXNM - Standard - WIN - D - Microsoft Store",
       "doel": "Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren.",
@@ -3469,6 +3526,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Credential Management - D - Passwordless - v3.3.json",
+      "oibId": "AC354D32-C6B3-41C2-A2E9-68F89F2EFC98",
       "target": "Baseline_WIN_D_Passwordless",
       "displayName": "CXNM - Standard - WIN - D - Passwordless",
       "doel": "Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of een beveiligingssleutel gebruiken in plaats van hun wachtwoord in te typen.",
@@ -3519,6 +3577,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Printing - v3.7.json",
+      "oibId": "1968C406-B707-4382-AC9E-2FC4EE084EB4",
       "target": "Baseline_WIN_D_Printing",
       "displayName": "CXNM - Standard - WIN - D - Printing",
       "doel": "Hardening tegen PrintNightmare: beperkt Point and Print en het installeren van printerdrivers door gebruikers.",
@@ -3631,6 +3690,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Remote Desktop Services and RPC - v3.0.json",
+      "oibId": "A61CE19F-4615-42AB-ABE7-BDCD76D2B203",
       "target": "Baseline_WIN_D_Remote_Desktop_and_RPC",
       "displayName": "CXNM - Standard - WIN - D - Remote Desktop and RPC",
       "doel": "Beperkt Remote Desktop en externe procedure-aanroepen, twee ingangen die bij een inbraak vaak voor zijwaartse beweging worden gebruikt.",
@@ -3684,6 +3744,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Script File Associations - v4.0.json",
+      "oibId": "887CEFEC-6882-49E0-A237-91F8D02B2CAB",
       "target": "Baseline_WIN_D_Script_File_Associations",
       "displayName": "CXNM - Standard - WIN - D - Script File Associations",
       "doel": "Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert.",
@@ -3709,6 +3770,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Security Hardening - v4.0.json",
+      "oibId": "D35FD54A-F74F-4F61-969F-6E96D3986B41",
       "target": "Baseline_WIN_D_Security_Hardening",
       "displayName": "CXNM - Standard - WIN - D - Security Hardening",
       "doel": "Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen.",
@@ -3741,6 +3803,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Settings Sync - v3.7.json",
+      "oibId": "604FD048-CA7D-4918-AA55-66A4878E0F52",
       "target": "Baseline_WIN_D_Settings_Sync",
       "displayName": "CXNM - Standard - WIN - D - Settings Sync",
       "doel": "Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden.",
@@ -3817,9 +3880,11 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Timezone - v3.4.json",
+      "oibId": "44731D7C-3531-4DFF-9099-C5E06CF325CD",
       "target": "Baseline_WIN_D_Timezone",
       "displayName": "CXNM - Standard - WIN - D - Timezone",
       "doel": "Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan.",
+      "note": "Zet de klok gelijk via NTP en laat gebruikers de tijdzone wijzigen, maar zet *Tijdzone automatisch instellen* niet aan: daar heeft de settings catalog geen instelling voor. Dat doet het OIB-platformscript Enable-AutoTimezone.ps1 in IntuneTemplate/WIN/PlatformScripts/; wijs dat samen met deze policy toe aan alle apparaten.",
       "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone",
       "herkomst": "oib",
       "fase": 1,
@@ -3840,6 +3905,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Update for Business - D - Reports and Telemetry - v3.0.json",
+      "oibId": "EDECD0D7-7955-40ED-8A42-07D5FB876EF2",
       "target": "Baseline_WIN_D_Update_Reports_and_Telemetry",
       "displayName": "CXNM - Standard - WIN - D - Update Reports and Telemetry",
       "doel": "Stuurt de diagnostische gegevens die Windows Update for Business Reports nodig heeft om te laten zien welke apparaten achterlopen.",
@@ -3862,6 +3928,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - User Rights - v3.7.json",
+      "oibId": "CAEC2C9B-5FA1-4DC8-9A1D-6A30DC97220D",
       "target": "Baseline_WIN_D_User_Rights",
       "displayName": "CXNM - Standard - WIN - D - User Rights",
       "doel": "Legt vast wie welke rechten op het apparaat heeft: aanmelden als service, back-ups maken, het apparaat afsluiten, stuurprogramma's laden.",
@@ -4076,6 +4143,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - D - Feature Configuration - v4.0.json",
+      "oibId": "3EA33AE4-1F7A-43CD-A82E-EE319470F857",
       "target": "Baseline_WIN_D_Windows_Feature_Configuration",
       "displayName": "CXNM - Standard - WIN - D - Windows Feature Configuration",
       "doel": "Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu.",
@@ -4099,6 +4167,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Firewall - D - Firewall Configuration - v3.1.json",
+      "oibId": "E65452FD-DC67-445F-974C-B69F26B751F9",
       "target": "Baseline_WIN_D_Windows_Firewall",
       "displayName": "CXNM - Standard - WIN - D - Windows Firewall",
       "doel": "Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast.",
@@ -4151,6 +4220,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Firewall - D - Security Rules - v3.8.json",
+      "oibId": "51D760CF-928A-4D4E-B743-CA44AB35FE34",
       "target": "Baseline_WIN_D_Windows_Firewall_Rules",
       "displayName": "CXNM - Standard - WIN - D - Windows Firewall Rules",
       "doel": "Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe).",
@@ -4175,6 +4245,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows Hello for Business - D - Cloud Kerberos Trust - v3.5.json",
+      "oibId": "7796AA16-85E9-4596-A927-3F3E945E5AA3",
       "target": "Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust",
       "displayName": "CXNM - Standard - WIN - D - Windows Hello Cloud Kerberos Trust",
       "doel": "Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID.",
@@ -4306,6 +4377,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Hello for Business - D - WHfB Configuration - v3.2.json",
+      "oibId": "58F56858-93F4-4008-A7C0-8A046ED890F9",
       "target": "Baseline_WIN_D_Windows_Hello_for_Business",
       "displayName": "CXNM - Standard - WIN - D - Windows Hello for Business",
       "doel": "Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning.",
@@ -4359,6 +4431,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows LAPS - D - LAPS Configuration - v4.0.json",
+      "oibId": "9E4838C2-960E-47B9-B21F-2AFF6550F285",
       "target": "Baseline_WIN_D_Windows_LAPS",
       "displayName": "CXNM - Standard - WIN - D - Windows LAPS",
       "doel": "Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat.",
@@ -4386,6 +4459,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Windows Package Manager - v3.5.json",
+      "oibId": "F4EEBE99-960A-47EC-841E-3BF030726B97",
       "target": "Baseline_WIN_D_Windows_Package_Manager",
       "displayName": "CXNM - Standard - WIN - D - Windows Package Manager",
       "doel": "Beperkt winget, zodat gebruikers geen software van willekeurige bronnen kunnen installeren.",
@@ -4409,6 +4483,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Windows Sandbox - v3.4.json",
+      "oibId": "30A97E84-21B4-4A67-8D5C-C6E5922892B5",
       "target": "Baseline_WIN_D_Windows_Sandbox",
       "displayName": "CXNM - Standard - WIN - D - Windows Sandbox",
       "doel": "Beperkt Windows Sandbox, dat anders een wegwerp-Windows opent met toegang tot het netwerk en het klembord van de host.",
@@ -4433,6 +4508,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Windows Subsystem for Linux - v3.2.json",
+      "oibId": "9D2B10AC-20BD-4639-B9DE-7B19053C2D9D",
       "target": "Baseline_WIN_D_Windows_Subsystem_for_Linux",
       "displayName": "CXNM - Standard - WIN - D - Windows Subsystem for Linux",
       "doel": "Beperkt het Windows-subsysteem voor Linux, dat anders een volledige tweede omgeving naast Windows opent waar de meeste beveiligingscontroles niet gelden.",
@@ -4457,6 +4533,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/UpdatePolicies/Win - OIB - WUfB - Ring 1 - Pilot - v3.0.json",
+      "oibId": "F7739B87-82DE-4997-BA25-2561C252EF12",
       "target": "Baseline_WIN_D_Windows_Update_Ring_1_Pilot",
       "displayName": "CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot",
       "doel": "Eerste updatering: krijgt Windows-updates meteen, zodat problemen zichtbaar worden op een kleine groep.",
@@ -4485,6 +4562,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/UpdatePolicies/Win - OIB - WUfB - Ring 2 - UAT - v3.0.json",
+      "oibId": "367E46C3-EB05-4D0D-9F97-E839A5CE6696",
       "target": "Baseline_WIN_D_Windows_Update_Ring_2_UAT",
       "displayName": "CXNM - Standard - WIN - D - Windows Update Ring 2 UAT",
       "doel": "Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.",
@@ -4708,6 +4786,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Antispyware - v4.0.json",
+      "oibId": "81E11A62-EDDE-489E-BD48-C6A5E17DF66E",
       "target": "Baseline_WIN_U_Compliance_Antispyware",
       "displayName": "CXNM - Standard - WIN - U - Compliance Antispyware",
       "doel": "Toetst of er een actieve antispywareoplossing in Windows-beveiliging geregistreerd staat.",
@@ -4737,6 +4816,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Antivirus - v4.0.json",
+      "oibId": "18361BF2-BD88-47F1-9808-CE306E09D390",
       "target": "Baseline_WIN_U_Compliance_Antivirus",
       "displayName": "CXNM - Standard - WIN - U - Compliance Antivirus",
       "doel": "Toetst of er een actieve antivirusoplossing in Windows-beveiliging geregistreerd staat.",
@@ -4766,6 +4846,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - BitLocker - v4.0.json",
+      "oibId": "6DC752AA-1266-4FBD-BCDE-42384B5881EA",
       "target": "Baseline_WIN_U_Compliance_BitLocker",
       "displayName": "CXNM - Standard - WIN - U - Compliance BitLocker",
       "doel": "Toetst of de systeemschijf met BitLocker versleuteld is. Twaalf uur respijt, omdat het versleutelen na de inschrijving even duurt.",
@@ -4796,6 +4877,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - Code Integrity - v4.0.json",
+      "oibId": "6712002B-CB62-408B-AC11-BF410B3AD77F",
       "target": "Baseline_WIN_U_Compliance_Code_Integrity",
       "displayName": "CXNM - Standard - WIN - U - Compliance Code Integrity",
       "doel": "Toetst of code-integriteit aanstaat, zodat Windows alleen ondertekende stuurprogramma's en systeembestanden laadt.",
@@ -4825,6 +4907,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Defender - U - Real-Time Protection - v4.0.json",
+      "oibId": "B5611BB2-5671-47CA-BE8C-C9FF1969B2F9",
       "target": "Baseline_WIN_U_Compliance_Defender_Real_Time_Protection",
       "displayName": "CXNM - Standard - WIN - U - Compliance Defender Real Time Protection",
       "doel": "Toetst of Microsoft Defender aanstaat en de realtimebeveiliging actief is.",
@@ -4853,6 +4936,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Defender - U - Security Intelligence - v4.0.json",
+      "oibId": "C122A7C4-50B1-4D4B-A7CD-E7121AE1C24B",
       "target": "Baseline_WIN_U_Compliance_Defender_Security_Intelligence",
       "displayName": "CXNM - Standard - WIN - U - Compliance Defender Security Intelligence",
       "doel": "Toetst of Microsoft Defender aanstaat en de beveiligingsinformatie actueel is.",
@@ -4900,6 +4984,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - Firewall - v4.0.json",
+      "oibId": "1DD43C82-E1A1-45A7-91C0-094CB38F7328",
       "target": "Baseline_WIN_U_Compliance_Firewall",
       "displayName": "CXNM - Standard - WIN - U - Compliance Firewall",
       "doel": "Toetst of Windows Firewall actief is.",
@@ -4929,6 +5014,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Health - U - SecureBoot - v4.0.json",
+      "oibId": "16C96944-0F4D-4531-8405-186E04ECD709",
       "target": "Baseline_WIN_U_Compliance_Secure_Boot",
       "displayName": "CXNM - Standard - WIN - U - Compliance Secure Boot",
       "doel": "Toetst of het apparaat met Secure Boot opstart, zodat een bootkit niet vóór Windows kan laden.",
@@ -4958,6 +5044,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/CompliancePolicies/Win - OIB - CP - Device Security - U - TPM - v4.0.json",
+      "oibId": "24BFFF77-81DC-4867-A8F8-BA8249CAE404",
       "target": "Baseline_WIN_U_Compliance_TPM",
       "displayName": "CXNM - Standard - WIN - U - Compliance TPM",
       "doel": "Toetst of het apparaat een TPM heeft. Zonder TPM geen BitLocker met hardwarebescherming, geen Windows Hello for Business en geen Credential Guard.",
@@ -5027,6 +5114,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Windows User Experience - U - Copilot - v3.8.json",
+      "oibId": "B13B47BA-3BDB-477E-A054-C4952D079972",
       "target": "Baseline_WIN_U_Copilot",
       "displayName": "CXNM - Standard - WIN - U - Copilot",
       "doel": "Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.",
@@ -5049,6 +5137,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Extensions - v3.1.json",
+      "oibId": "3B1399B4-FC9A-4523-820F-769416D72543",
       "target": "Baseline_WIN_U_Microsoft_Edge_Extensions",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Edge Extensions",
       "doel": "Bepaalt welke Edge-extensies gebruikers mogen installeren, en welke verplicht zijn.",
@@ -5072,6 +5161,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Password Management - v3.0.json",
+      "oibId": "EFCDF5AC-B50C-4A4C-A38F-976FFFBBEB8D",
       "target": "Baseline_WIN_U_Microsoft_Edge_Password_Management",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Edge Password Management",
       "doel": "Bepaalt of Edge wachtwoorden mag opslaan en tonen, zodat werkwachtwoorden niet in een browserprofiel belanden.",
@@ -5095,6 +5185,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Profiles, Sign-In and Sync - v4.0.json",
+      "oibId": "187DF539-E00E-42B3-BF6A-C86ADC0183C2",
       "target": "Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Edge Profiles and Sync",
       "doel": "Bepaalt met welk account gebruikers zich in Edge aanmelden en wat er gesynchroniseerd wordt, zodat werkgegevens niet naar een privéprofiel lopen.",
@@ -5116,6 +5207,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - User Experience - v4.0.json",
+      "oibId": "FD09768A-A622-4A0D-A944-2D9CFABC4B8E",
       "target": "Baseline_WIN_U_Microsoft_Edge_User_Experience",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Edge User Experience",
       "doel": "De dagelijkse Edge-ervaring: startpagina, zoeksuggesties, meldingen en welke functies zichtbaar zijn.",
@@ -5139,6 +5231,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Edge - U - Management - v4.0.json",
+      "oibId": "88EEB6C0-A110-4473-BF63-79FB1649CD8B",
       "target": "Baseline_WIN_U_Microsoft_Edge_Management",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Edge Management",
       "doel": "Staat de Edge Management Service toe op beheerde apparaten en laat het beleid dat daar wordt ingesteld vóór lokaal en MDM-beleid gaan, zodat Intune en die dienst elkaar niet tegenwerken.",
@@ -5162,6 +5255,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - U - Config and Experience - v3.6.json",
+      "oibId": "2993C83D-2B5C-4258-BB6E-9392B45EB401",
       "target": "Baseline_WIN_U_Microsoft_Office_Experience",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Office Experience",
       "doel": "De Office-ervaring per gebruiker: eerste-keer-schermen, aangesloten diensten en welke functies zichtbaar zijn.",
@@ -5181,6 +5275,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Office - U - Security - v4.0.json",
+      "oibId": "B549DFD9-5049-4813-A2FB-C860D00290BA",
       "target": "Baseline_WIN_U_Microsoft_Office_Security",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Office Security",
       "doel": "De gebruikerskant van de Office-beveiliging: macrogedrag, vertrouwde locaties en beveiligde weergave.",
@@ -5206,6 +5301,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft OneDrive - U - Configuration - v3.8.json",
+      "oibId": "5CD97975-5495-4DA4-A402-89817D130CF4",
       "target": "Baseline_WIN_U_Microsoft_OneDrive",
       "displayName": "CXNM - Standard - WIN - U - Microsoft OneDrive",
       "doel": "De gebruikerskant van OneDrive: welke schermen en meldingen de gebruiker ziet.",
@@ -5308,6 +5404,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Microsoft Store - U - Configuration - v3.3.json",
+      "oibId": "2A4518B8-64B5-43C4-AC03-18CE627F1105",
       "target": "Baseline_WIN_U_Microsoft_Store",
       "displayName": "CXNM - Standard - WIN - U - Microsoft Store",
       "doel": "De gebruikerskant van de Store-beperkingen.",
@@ -5360,6 +5457,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Encryption - U - Personal Data Encryption - v3.4.json",
+      "oibId": "981FA7C5-6F4F-4338-9802-F9985B6EC3DD",
       "target": "Baseline_WIN_U_Personal_Data_Encryption",
       "displayName": "CXNM - Standard - WIN - U - Personal Data Encryption",
       "doel": "Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft.",
@@ -5411,6 +5509,7 @@
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - U - Windows Spotlight and Org Messages - v3.0.json",
+      "oibId": "457CAD52-5B2E-4AC6-9451-6D56C05DC4CB",
       "target": "Baseline_WIN_U_Windows_Spotlight",
       "displayName": "CXNM - Standard - WIN - U - Windows Spotlight",
       "doel": "Zet Windows Spotlight, tips en consumentgerichte suggesties uit, zodat er geen advertenties en aanbevolen apps op een werkapparaat verschijnen.",
@@ -5549,7 +5648,7 @@
       "bron": "CIS v4 Windows 11 L1 (MSS WarningLevel, IntuneAdmin CISv4-profiel) en de Microsoft-aanbeveling voor PowerShell-logging ('PowerShell ♥ the Blue Team') — waarden geverifieerd tegen de settings catalog-definities",
       "herkomst": "eigen",
       "fase": 2,
-      "faseWaarom": "Module-logging voor alle modules (*) levert veel gebeurtenis 4103 op in Microsoft-Windows-PowerShell/Operational. Eerst op de pilotgroep kijken wat dat met de logomvang en een eventuele SIEM-ingest doet; zie extras/windows/remediations/event-log-sizes voor de logboekgrootte.",
+      "faseWaarom": "Module-logging voor alle modules (*) levert veel gebeurtenis 4103 op in Microsoft-Windows-PowerShell/Operational. Eerst op de pilotgroep kijken wat dat met de logomvang en een eventuele SIEM-ingest doet; zie IntuneTemplate/WIN/Remediations/event-log-sizes voor de logboekgrootte.",
       "controls": {
         "iso": [
           "A.8.15 Logging",
@@ -5570,7 +5669,7 @@
       },
       "bewijs": "Scriptblok-logging (Security Hardening) laat zien welke code is geladen, transcriptie (Logging) de sessie; module-logging legt vast welke cmdlets met welke parameters in de pijplijn zijn uitgevoerd, ook wanneer de code versluierd was of uit een module kwam. Samen is dat de set die Microsoft en de NSA-publicatie 'Keep PowerShell' aanraden voor incidentonderzoek. De WarningLevel-waarschuwing (gebeurtenis 523) is CIS L1 18.4.x: met 'overschrijven indien nodig' in Audit and Event Logging verdwijnen oude beveiligingsgebeurtenissen stil; deze drempel maakt dat zichtbaar vóór het gebeurt.",
       "universeel": "Elk Windows-apparaat. Ontbreekt een SIEM, dan blijft het lokaal nog steeds de eerste bron bij onderzoek; met Defender for Endpoint gaan PowerShell-gebeurtenissen daarnaast via AMSI al naar de cloud.",
-      "note": "Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in extras/windows/remediations/event-log-sizes.",
+      "note": "Geen overlap: `turnonpowershellscriptblocklogging` (Security Hardening) en `enabletranscripting` (Logging) zijn andere ids. De grootte van het PowerShell/Operational-logboek is niet via de settings catalog in te stellen — daarvoor staat een remediation in IntuneTemplate/WIN/Remediations/event-log-sizes.",
       "metadataOnly": true
     },
     {
@@ -5628,7 +5727,7 @@
         ]
       },
       "bewijs": "DNS in platte tekst laat op elk openbaar wifi-netwerk zien welke sites iemand bezoekt en is te manipuleren. In automatische modus 'upgradet' Edge alleen naar DoH als de al ingestelde DNS-server (van DHCP of VPN) op Microsofts lijst van bekende DoH-aanbieders staat; interne resolvers blijven gewoon via klassieke DNS werken. Dat maakt het de verdedigbare generieke waarde: versleuteling waar het kan, geen breuk waar het niet kan.",
-      "universeel": "Elk Windows-apparaat met Edge. Werkt onafhankelijk van de DoH-instelling van Windows zelf (zie extras/windows/remediations/dns-over-https).",
+      "universeel": "Elk Windows-apparaat met Edge. Werkt onafhankelijk van de DoH-instelling van Windows zelf (zie IntuneTemplate/WIN/Remediations/dns-over-https).",
       "note": "**Alternatief van CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure** — beide zetten `dnsoverhttpsmode` op een andere waarde; wijs er één toe. Defender Network Protection (fase 1, Defender Antivirus) inspecteert verkeer van Edge via SmartScreen en blijft dus werken; voor browsers van derden steunt Network Protection op DNS/TLS-inspectie, en Microsoft adviseert daar DoH en QUIC in die browser uit te zetten — dat valt buiten deze Edge-policy.",
       "metadataOnly": true
     },
@@ -5694,7 +5793,7 @@
       },
       "bewijs": "Chrome negeert alles wat de Edge-policies afdwingen; zonder eigen policy ligt elke maatregel uit Microsoft Edge Security één klik verderop in een andere browser. Met remote debugging uit en application-bound encryption aan kan een infostealer de cookies van Chrome niet meer via de DevTools-poort of DPAPI uitlezen — de gangbare route om sessietokens te stelen en MFA te omzeilen. DoH en QUIC uit, omdat Defender Network Protection verkeer van browsers van derden alleen via DNS en TLS kan inspecteren en Microsoft adviseert beide in die browser uit te zetten.",
       "universeel": "Elk Windows-apparaat. Zonder Chrome schrijft de policy alleen registerwaarden en doet hij niets.",
-      "note": "Safe Browsing op standaard (1) en niet op enhanced (2): enhanced stuurt elke bezochte URL naar Google. Downloadrestrictie 4 is 'kwaadaardige downloads blokkeren', dezelfde waarde als in Edge. De wachtwoordmanager gaat uit omdat Edge de beheerde wachtwoordmanager is; Chrome slaat geen nieuwe wachtwoorden meer op, al opgeslagen wachtwoorden blijven volgens Google werken. Extensies staan in een eigen policy (Google Chrome Extensions), net als bij Edge; BlockExternalExtensions staat wél hier, omdat het alleen extensies raakt die andere software via het register installeert. ApplicationBoundEncryptionEnabled staat in de catalogus in de namespace chromeintunev141, de rest op chromeintunev1. Firefox heeft geen settings catalog-definities: zie extras/windows/remediations/firefox-policies.",
+      "note": "Safe Browsing op standaard (1) en niet op enhanced (2): enhanced stuurt elke bezochte URL naar Google. Downloadrestrictie 4 is 'kwaadaardige downloads blokkeren', dezelfde waarde als in Edge. De wachtwoordmanager gaat uit omdat Edge de beheerde wachtwoordmanager is; Chrome slaat geen nieuwe wachtwoorden meer op, al opgeslagen wachtwoorden blijven volgens Google werken. Extensies staan in een eigen policy (Google Chrome Extensions), net als bij Edge; BlockExternalExtensions staat wél hier, omdat het alleen extensies raakt die andere software via het register installeert. ApplicationBoundEncryptionEnabled staat in de catalogus in de namespace chromeintunev141, de rest op chromeintunev1. Firefox heeft geen settings catalog-definities: zie IntuneTemplate/WIN/Remediations/firefox-policies.",
       "metadataOnly": true
     },
     {

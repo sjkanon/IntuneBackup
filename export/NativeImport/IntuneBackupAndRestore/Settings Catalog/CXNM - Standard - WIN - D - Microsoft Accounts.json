@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft Accounts",
-    "description": "Determines whether personal Microsoft accounts may be used and added on a work device. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration.",
+    "description": "Determines whether personal Microsoft accounts may be used and added on a work device. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Accounts - D - Configuration.\nOIBID:7AFCF2FB-6037-49E5-A22F-5E14676EFF69",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

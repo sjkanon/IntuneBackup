@@ -15,6 +15,8 @@ Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten ni
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | Bestand | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 
+> Zet de klok gelijk via NTP en laat gebruikers de tijdzone wijzigen, maar zet *Tijdzone automatisch instellen* niet aan: daar heeft de settings catalog geen instelling voor. Dat doet het OIB-platformscript Enable-AutoTimezone.ps1 in IntuneTemplate/WIN/PlatformScripts/; wijs dat samen met deze policy toe aan alle apparaten.
+
 ## Normen
 
 | Kader | Controls |

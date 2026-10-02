@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Windows Sandbox",
-    "description": "Restricts Windows Sandbox, which otherwise opens a disposable Windows with access to the network and the host's clipboard. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox.",
+    "description": "Restricts Windows Sandbox, which otherwise opens a disposable Windows with access to the network and the host's clipboard. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Sandbox.\nOIBID:30A97E84-21B4-4A67-8D5C-C6E5922892B5",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

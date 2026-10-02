@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Audit and Event Logging",
-    "description": "Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging.",
+    "description": "Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Audit and Event Logging.\nOIBID:34F6F97C-09AA-446B-9664-1DC87BA5C91A",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

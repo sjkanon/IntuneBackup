@@ -13,6 +13,22 @@ All policies are named `CXNM - Standard - WIN - <D|U> - <Item>`; the tables belo
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
+## Other components
+
+Not a CIPP policy type, so not in the tables below and not in a CIPP package. How each component is deployed is in its README.
+
+| Folder | What |
+|---|---|
+| [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.en.md) | Remove preinstalled McAfee |
+| [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.en.md) | Winget-AutoUpdate |
+| [`EndpointSecurity/`](EndpointSecurity/README.en.md) | App Control for Business (WDAC) — generic starting point |
+| [`Enrollment/`](Enrollment/README.en.md) | Windows Autopilot: classic and device preparation |
+| [`PlatformScripts/`](PlatformScripts/README.en.md) | Windows platform scripts |
+| [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.en.md) | DNS over HTTPS for Windows |
+| [`Remediations/escrow-check/`](Remediations/escrow-check/README.en.md) | Escrow check: BitLocker recovery key and LAPS password in Entra ID |
+| [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
+| [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
+
 ## Device-scoped (D) — 102
 
 Assign to device groups.

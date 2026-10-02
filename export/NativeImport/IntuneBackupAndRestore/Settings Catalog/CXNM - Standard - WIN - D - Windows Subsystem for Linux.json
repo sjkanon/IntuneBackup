@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Windows Subsystem for Linux",
-    "description": "Restricts the Windows Subsystem for Linux, which otherwise opens a complete second environment alongside Windows where most security controls do not apply. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux.",
+    "description": "Restricts the Windows Subsystem for Linux, which otherwise opens a complete second environment alongside Windows where most security controls do not apply. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Windows Subsystem for Linux.\nOIBID:9D2B10AC-20BD-4639-B9DE-7B19053C2D9D",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

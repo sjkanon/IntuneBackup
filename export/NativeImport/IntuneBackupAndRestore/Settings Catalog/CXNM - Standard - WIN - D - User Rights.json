@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - User Rights",
-    "description": "Defines who has which rights on the device: log on as a service, make backups, shut down the device, load drivers. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights.",
+    "description": "Defines who has which rights on the device: log on as a service, make backups, shut down the device, load drivers. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - User Rights.\nOIBID:CAEC2C9B-5FA1-4DC8-9A1D-6A30DC97220D",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

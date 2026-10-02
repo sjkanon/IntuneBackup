@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Windows LAPS",
-    "description": "Automatically rotates the password of the local administrator account and stores it in Entra ID, so that no shared administrator password circulates any more. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration.",
+    "description": "Automatically rotates the password of the local administrator account and stores it in Entra ID, so that no shared administrator password circulates any more. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows LAPS - D - LAPS Configuration.\nOIBID:9E4838C2-960E-47B9-B21F-2AFF6550F285",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

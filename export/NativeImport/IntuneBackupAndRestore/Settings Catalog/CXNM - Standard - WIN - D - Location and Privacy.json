@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Location and Privacy",
-    "description": "Determines which privacy-sensitive data apps may request, such as location and speech. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy.",
+    "description": "Determines which privacy-sensitive data apps may request, such as location and speech. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Location and Privacy.\nOIBID:A450DCA4-BEF7-4DEF-934E-FF50BF0A5244",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

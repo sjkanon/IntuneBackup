@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Edge Management",
-    "description": "Allows the Edge Management Service on managed devices and lets the policy configured there take precedence over local and MDM policy, so that Intune and that service do not work against each other. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management.",
+    "description": "Allows the Edge Management Service on managed devices and lets the policy configured there take precedence over local and MDM policy, so that Intune and that service do not work against each other. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Management.\nOIBID:88EEB6C0-A110-4473-BF63-79FB1649CD8B",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

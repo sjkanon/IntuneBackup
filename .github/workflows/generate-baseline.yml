@@ -1,6 +1,6 @@
 # Regenerates everything derived from IntuneTemplate/ — the restore export, the CIPP baseline and
 # the documentation — on every push to main that changes that folder, a script that produces
-# the output, or a sidecar source in extras/macos/, and opens a PR for it: never a silent commit
+# the output, or a sidecar source in IntuneTemplate/MAC/, and opens a PR for it: never a silent commit
 # on main. A generated file that nobody reviews is exactly the kind of unseen change that causes
 # baseline drift.
 #
@@ -20,9 +20,9 @@ on:
       - "scripts/check-scope.js"
       - "scripts/set-packages.js"
       - "scripts/generate-baseline-template.js"
-      - "extras/macos/enrollment/**"
-      - "extras/macos/shell-scripts/**"
-      - "extras/windows/win32-apps/**"
+      - "IntuneTemplate/MAC/Enrollment/ade-profile/**"
+      - "IntuneTemplate/MAC/PlatformScripts/**"
+      - "IntuneTemplate/WIN/Apps/**"
       - "scripts/generate-app-templates.js"
       - "scripts/lib/**"
       - ".github/workflows/generate-baseline.yml"
@@ -93,7 +93,7 @@ jobs:
             change in `IntuneTemplate/`. Review the diff before you merge.
             `export/NativeImport/IntuneBackupAndRestore/` is the baseline in the restore
             format of the IntuneBackupAndRestore module, with the macOS enrolment profiles and shell
-            scripts from `extras/macos/` as sidecars; `BaselineTemplate/Baseline.json` is the
+            scripts from `IntuneTemplate/MAC/` as sidecars; `BaselineTemplate/Baseline.json` is the
             CIPP baseline with its stages and packages. `docs/COMPLIANCE.md` is the accountability to
             ISO 27001, NIS2, CIS and NIST CSF: with a changed phase or mapping, check whether a
             control changes status. Every generated document also exists in English and French

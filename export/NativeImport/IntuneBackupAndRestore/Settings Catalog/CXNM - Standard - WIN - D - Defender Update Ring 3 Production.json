@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Defender Update Ring 3 Production",
-    "description": "Production ring for Defender updates: only gets definitions and engine versions after rings 1 and 2 have run them without problems. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production.",
+    "description": "Production ring for Defender updates: only gets definitions and engine versions after rings 1 and 2 have run them without problems. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 3 - Production.\nOIBID:F597C79E-DBDB-4419-AA69-3617716658E4",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

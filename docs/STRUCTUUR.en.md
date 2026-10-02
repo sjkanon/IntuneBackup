@@ -49,10 +49,9 @@ Solid arrows write; dotted lines only read.
 
 | Folder | What it contains | Created by | Picked up by |
 |---|---|---|---|
-| [`IntuneTemplate/`](../IntuneTemplate/README.en.md) | The policies, per platform and policy type, plus the `_` files that drive them | hand + import scripts | all scripts, CIPP |
+| [`IntuneTemplate/`](../IntuneTemplate/README.en.md) | Per platform the policies (per policy type) and the other components (enrollment, endpoint security, scripts, remediations, apps, app configuration, filters), plus the `_` files that drive the policies | hand + import scripts | policies: all scripts, CIPP · other components: deploy as described in their README; `MAC/Enrollment/ade-profile/` and `MAC/PlatformScripts/` travel with the export as a sidecar |
 | [`export/NativeImport/`](../export/README.en.md) | Restore format, with assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.en.md) | The CIPP baseline: packages per stage | `generate-baseline-template.js` | CIPP (manual import) |
-| [`extras/`](../extras/README.en.md) | Everything that is not a CIPP policy type, per platform: enrollment profiles and restrictions, app configuration, filters, App Control, remediations, shell and platform scripts, compliance scripts, Win32 apps | hand | nobody automatically — deploy as described in the README; `extras/macos/enrollment/` and `extras/macos/shell-scripts/` travel with the export as a sidecar |
 | `docs/` | Documentation: overview, compliance framework, analysis, plan and this structure | hand + `generate-docs.js`, `generate-compliance.js` | readers |
 | [`scripts/`](../scripts/README.en.md) | The pipeline: import, checks, generation, tenant scripts | hand | GitHub workflow |
 | `local/` | Deployment copies with filled-in secrets and tenant reports | hand | **not in git** (`.gitignore`) |
@@ -72,9 +71,13 @@ IntuneTemplate/
   _ca.json            which CA policies rely on a policy (copy)
   _i18n/              English and French translations of the text in the data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 ```
 
 Next to every `.json` template sits a generated `.md` listing every setting it applies.
@@ -151,7 +154,7 @@ Details: [scripts/README.en.md](../scripts/README.en.md).
 - **`NativeImport` in a path excludes it from the sync.** That is why the restore export lives under
   `export/NativeImport/`. Without that word CIPP turns every policy into a second template.
 - **Every other `.json` becomes one nameless template row.** That applies to the `_` files in
-  `IntuneTemplate/` (including `_i18n/*.json`), everything under `extras/` — ADE profiles, Graph bodies and
+  `IntuneTemplate/` (including `_i18n/*.json`), the other components in `IntuneTemplate/<PLATFORM>/` — ADE profiles, Graph bodies and
   the JSON part of the compliance check — and, with the automatic sync, also
   `BaselineTemplate/Baseline.json`. That row does nothing and can be deleted in CIPP.
 

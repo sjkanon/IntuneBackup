@@ -7,7 +7,7 @@ CIPP-**applicatietemplates**: Win32-apps die CIPP zelf in een tenant zet, zonder
 
 | Bestand | App | Bron |
 |---|---|---|
-| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`extras/windows/win32-apps/winget-autoupdate/`](../extras/windows/win32-apps/winget-autoupdate/README.md) |
+| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
 
 ## Hoe het werkt
 
@@ -18,7 +18,7 @@ hashcontrole. Het template bevat alleen scripts.
 
 Elk bestand is een CIPP-tabelrij (`PartitionKey: AppTemplate`) en wordt gegenereerd door
 [`scripts/generate-app-templates.js`](../scripts/generate-app-templates.js) uit de scripts in
-`extras/`. Wijzigen doe je daar, niet hier.
+[`IntuneTemplate/WIN/Apps/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md). Wijzigen doe je daar, niet hier.
 
 ## Uitrollen
 

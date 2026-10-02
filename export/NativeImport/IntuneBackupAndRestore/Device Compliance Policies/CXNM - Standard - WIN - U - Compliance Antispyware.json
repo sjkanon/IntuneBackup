@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Checks whether an active antispyware solution is registered in Windows Security. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antispyware.",
+    "description": "Checks whether an active antispyware solution is registered in Windows Security. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Antispyware.\nOIBID:81E11A62-EDDE-489E-BD48-C6A5E17DF66E",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "CXNM - Standard - WIN - U - Compliance Antispyware",

@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Office Experience",
-    "description": "The per-user Office experience: first-run screens, connected services and which features are visible. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience.",
+    "description": "The per-user Office experience: first-run screens, connected services and which features are visible. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Config and Experience.\nOIBID:2993C83D-2B5C-4258-BB6E-9392B45EB401",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

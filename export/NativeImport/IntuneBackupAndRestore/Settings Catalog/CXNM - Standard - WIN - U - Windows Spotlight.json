@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Windows Spotlight",
-    "description": "Turns off Windows Spotlight, tips and consumer-oriented suggestions, so that no advertisements or recommended apps appear on a work device. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user part).",
+    "description": "Turns off Windows Spotlight, tips and consumer-oriented suggestions, so that no advertisements or recommended apps appear on a work device. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Windows Spotlight and Org Messages (user part).\nOIBID:457CAD52-5B2E-4AC6-9451-6D56C05DC4CB",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -49,10 +49,9 @@ Doorgetrokken pijlen schrijven; stippellijnen lezen alleen.
 
 | Map | Wat erin staat | Gemaakt door | Opgepikt door |
 |---|---|---|---|
-| [`IntuneTemplate/`](../IntuneTemplate/README.md) | De policies, per platform en policytype, plus de `_`-bestanden die ze sturen | hand + import-scripts | alle scripts, CIPP |
+| [`IntuneTemplate/`](../IntuneTemplate/README.md) | Per platform de policies (per policytype) en de overige onderdelen (inschrijving, endpoint security, scripts, remediations, apps, app-configuratie, filters), plus de `_`-bestanden die de policies sturen | hand + import-scripts | policies: alle scripts, CIPP · overige onderdelen: uitrollen volgens hun README; `MAC/Enrollment/ade-profile/` en `MAC/PlatformScripts/` gaan als sidecar mee in de export |
 | [`export/NativeImport/`](../export/README.md) | Restore-formaat, met assignments | `export-intunebackup.js` | IntuneBackupAndRestore |
 | [`BaselineTemplate/`](../BaselineTemplate/README.md) | De CIPP-baseline: pakketten per stage | `generate-baseline-template.js` | CIPP (handmatige import) |
-| [`extras/`](../extras/README.md) | Alles wat geen CIPP-policytype is, per platform: inschrijvingsprofielen en -restricties, app-configuratie, filters, App Control, remediations, shell- en platformscripts, compliance-scripts, Win32-apps | hand | niemand automatisch — uitrollen volgens README; `extras/macos/enrollment/` en `extras/macos/shell-scripts/` gaan als sidecar mee in de export |
 | `docs/` | Documentatie: overzicht, normenkader (compliance), analyse, plan en deze structuur | hand + `generate-docs.js`, `generate-compliance.js` | lezers |
 | [`scripts/`](../scripts/README.md) | De pijplijn: import, controle, generatie, tenantscripts | hand | GitHub-workflow |
 | `local/` | Uitrolkopieën met ingevulde geheimen en tenantrapporten | hand | **niet in git** (`.gitignore`) |
@@ -72,9 +71,13 @@ IntuneTemplate/
   _ca.json            welke CA-policies op een policy leunen (kopie)
   _i18n/              Engelse en Franse vertalingen van de teksten uit de data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 ```
 
 Naast elk `.json`-template staat een gegenereerde `.md` met élke instelling die hij zet.
@@ -150,7 +153,7 @@ Details: [scripts/README.md](../scripts/README.md).
 - **`NativeImport` in een pad sluit het uit van de sync.** Daarom staat de restore-export onder
   `export/NativeImport/`. Zonder dat woord maakt CIPP van elke policy een tweede template.
 - **Elk ander `.json` wordt één naamloze templaterij.** Dat geldt voor de `_`-bestanden in
-  `IntuneTemplate/` (ook `_i18n/*.json`), alles onder `extras/` — ADE-profielen, Graph-bodies en
+  `IntuneTemplate/` (ook `_i18n/*.json`), de overige onderdelen in `IntuneTemplate/<PLATFORM>/` — ADE-profielen, Graph-bodies en
   het JSON-deel van de compliance-check — en bij de automatische sync ook
   `BaselineTemplate/Baseline.json`. Die rij doet niets en mag in CIPP weg.
 

@@ -37,6 +37,11 @@ The folder follows from the file name (platform) and the CIPP `Type` (policy typ
 no information that is not also in the file. `check-scope.js` checks that every
 file is in its place.
 
+Next to those policy type folders, each platform has folders for what is not a CIPP policy type,
+organised like the menus of the Intune portal: `Enrollment/`, `EndpointSecurity/`, `PlatformScripts/`,
+`Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` and `AssignmentFilters/`. The
+platform README lists them under *Other components*; the pipeline does not read them.
+
 ## The `_` files
 
 | File | What it records | Read by |

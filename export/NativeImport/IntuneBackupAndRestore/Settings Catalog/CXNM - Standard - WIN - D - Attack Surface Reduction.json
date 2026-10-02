@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Attack Surface Reduction",
-    "description": "Blocks the attack techniques from Defender's Attack Surface Reduction rules: macros that launch processes, executable content from email and USB, abuse of Office and script engines, and credential theft from LSASS. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2).",
+    "description": "Blocks the attack techniques from Defender's Attack Surface Reduction rules: macros that launch processes, executable content from email and USB, abuse of Office and script engines, and credential theft from LSASS. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Attack Surface Reduction - D - ASR Rules (L2).\nOIBID:86EB0653-DD3D-4CBA-BB51-1FFDC3E1F39C",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

@@ -15,6 +15,8 @@ Laisse Windows déterminer automatiquement le fuseau horaire, afin que les journ
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone |
 | Fichier | [`Baseline_WIN_D_Timezone.json`](Baseline_WIN_D_Timezone.json) |
 
+> Synchronise l'horloge via NTP et permet aux utilisateurs de changer de fuseau horaire, mais n'active pas *Définir le fuseau horaire automatiquement* : le settings catalog n'a pas de paramètre pour cela. C'est le script de plateforme OIB Enable-AutoTimezone.ps1 dans IntuneTemplate/WIN/PlatformScripts/ qui s'en charge ; attribuez-le à tous les appareils avec cette stratégie.
+
 ## Normes
 
 | Référentiel | Mesures |

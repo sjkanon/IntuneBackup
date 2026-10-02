@@ -37,6 +37,11 @@ Le dossier découle du nom de fichier (plateforme) et du `Type` CIPP (type de po
 aucune information qui ne figure pas déjà dans le fichier. `check-scope.js` vérifie que chaque
 fichier est à sa place.
 
+À côté de ces dossiers par type de policy, chaque plateforme a des dossiers pour ce qui n'est pas un
+type de policy CIPP, organisés comme les menus du portail Intune : `Enrollment/`, `EndpointSecurity/`,
+`PlatformScripts/`, `Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` et
+`AssignmentFilters/`. Le README de la plateforme les liste sous *Autres éléments* ; le pipeline ne les lit pas.
+
 ## Les fichiers `_`
 
 | Fichier | Ce qu'il consigne | Lu par |

@@ -473,7 +473,7 @@ En outre :
   Android Device Health (niveau de correctif minimal), iOS App Protection (synchronisation des widgets désactivée), macOS Software
   Updates (Enforce Latest après 30 jours, bêta désactivée), Firewall and Gatekeeper (envoi XProtect après demande),
   Edge Security sur macOS (pas de contournement des erreurs SSL).
-- **[`extras/`](../extras/README.fr.md)** : ce qui n'est pas un type CIPP — restrictions d'inscription, configuration d'applications,
+- **Autres éléments par plateforme** (sous *Autres éléments* dans chaque README de plateforme de [`IntuneTemplate/`](../IntuneTemplate/README.fr.md)) : ce qui n'est pas un type CIPP — restrictions d'inscription, configuration d'applications,
   filtres d'affectation, App Control for Business, DNS over HTTPS pour Windows, remédiations pour
   l'escrow BitLocker/LAPS, Escrow Buddy, listes de contrôle Apple Business.
 - **Référentiel de conformité** : chaque stratégie a des `controls` (iso, nis2, cis, nistcsf) issus du vocabulaire de
@@ -499,14 +499,14 @@ En outre :
 ## Ce qui n'a délibérément pas été fait
 
 - **App Control for Business comme modèle** : le `settingInstanceTemplateId` ne peut pas être vérifié de façon générique ;
-  il se trouve dans `extras/windows/app-control/` avec un script qui récupère les id depuis votre propre tenant.
+  il se trouve dans `IntuneTemplate/WIN/EndpointSecurity/` avec un script qui récupère les id depuis votre propre tenant.
 - **Intégration Defender for Endpoint sur macOS** : exige le XML d'intégration propre au tenant ; procédure dans
-  `extras/macos/defender-onboarding/`.
+  `IntuneTemplate/MAC/EndpointSecurity/`.
 - **Exiger le chiffrement SMB et imposer le Kerberos armoring** : cassent des choses sans inventaire.
 - **Stockage externe en lecture seule sur macOS** est en phase 5 : macOS ne monte alors plus du tout un disque USB ordinaire,
   la lecture disparaît donc aussi.
 - **Profil d'inscription iOS Enterprise comme modèle Catalog** : id de modèle impossibles à vérifier ; sous forme de
-  corps Graph dans `extras/ios/enrollment/`.
+  corps Graph dans `IntuneTemplate/IOS/Enrollment/`.
 
 ## Points ouverts
 
@@ -531,4 +531,4 @@ En outre :
 5. **CA** : vérifier si CIPP transmet `insiderRiskLevels` (sinon `1190` bloque tout le monde) ; décision
    sur `3010` à 4 heures (CIS).
 6. **Non testé sur de vrais appareils** : les nouvelles stratégies macOS, iOS et Android et les scripts dans
-   `extras/`. D'abord un appareil pilote par plateforme.
+   `IntuneTemplate/`. D'abord un appareil pilote par plateforme.

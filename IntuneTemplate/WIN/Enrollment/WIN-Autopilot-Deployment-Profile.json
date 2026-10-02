@@ -1,0 +1,19 @@
+{
+  "@odata.type": "#microsoft.graph.azureADWindowsAutopilotDeploymentProfile",
+  "displayName": "CXNM Standard WIN Autopilot User Driven",
+  "description": "Windows Autopilot (classic): user-driven, Microsoft Entra join, standard user, pre-provisioning allowed. Pair with the Enrollment Status Page in the same folder.",
+  "deviceType": "windowsPc",
+  "deviceNameTemplate": "",
+  "locale": "os-default",
+  "preprovisioningAllowed": true,
+  "hardwareHashExtractionEnabled": false,
+  "roleScopeTagIds": [],
+  "outOfBoxExperienceSetting": {
+    "deviceUsageType": "singleUser",
+    "userType": "standard",
+    "escapeLinkHidden": true,
+    "privacySettingsHidden": true,
+    "eulaHidden": true,
+    "keyboardSelectionPageSkipped": false
+  }
+}

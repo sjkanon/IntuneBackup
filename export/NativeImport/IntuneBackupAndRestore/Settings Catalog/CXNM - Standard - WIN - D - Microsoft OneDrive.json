@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Microsoft OneDrive",
-    "description": "Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration.",
+    "description": "Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft OneDrive - D - Configuration.\nOIBID:6EF9DFEA-74B4-485D-AAD2-237F7E2EBAB2",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

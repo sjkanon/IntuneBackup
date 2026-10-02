@@ -15,7 +15,7 @@ Avertit dans le journal Système dès que le journal Sécurité est plein à 90 
 | Source | CIS v4 Windows 11 L1 (MSS WarningLevel, profil CISv4 d'IntuneAdmin) et la recommandation Microsoft pour la journalisation PowerShell ('PowerShell ♥ the Blue Team') — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Security_Log_Monitoring.json`](Baseline_WIN_D_Security_Log_Monitoring.json) |
 
-> Aucun chevauchement : `turnonpowershellscriptblocklogging` (Security Hardening) et `enabletranscripting` (Logging) sont des ids différents. La taille du journal PowerShell/Operational ne peut pas être définie via le settings catalog — une remediation est prévue pour cela dans extras/windows/remediations/event-log-sizes.
+> Aucun chevauchement : `turnonpowershellscriptblocklogging` (Security Hardening) et `enabletranscripting` (Logging) sont des ids différents. La taille du journal PowerShell/Operational ne peut pas être définie via le settings catalog — une remediation est prévue pour cela dans IntuneTemplate/WIN/Remediations/event-log-sizes.
 
 ## Normes
 

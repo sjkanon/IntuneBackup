@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Office Security",
-    "description": "The user side of Office security: macro behaviour, trusted locations and Protected View. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security.",
+    "description": "The user side of Office security: macro behaviour, trusted locations and Protected View. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Office - U - Security.\nOIBID:B549DFD9-5049-4813-A2FB-C860D00290BA",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

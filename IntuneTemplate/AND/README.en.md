@@ -13,6 +13,16 @@ All policies are named `CXNM - Standard - AND - <D|U> - <Item>`; the tables belo
 | `AppProtection/` | 1 |
 | `SettingsCatalog/` | 3 |
 
+## Other components
+
+Not a CIPP policy type, so not in the tables below and not in a CIPP package. How each component is deployed is in its README.
+
+| Folder | What |
+|---|---|
+| [`AppConfiguration/`](AppConfiguration/README.en.md) | App configuration for Android (enrolled devices) |
+| [`AssignmentFilters/`](AssignmentFilters/README.en.md) | Assignment filters for Android Enterprise |
+| [`Enrollment/`](Enrollment/README.en.md) | Android enrollment restrictions |
+
 ## Device-scoped (D) — 2
 
 Assign to device groups.

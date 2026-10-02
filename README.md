@@ -56,18 +56,19 @@ de SSO-plug-ins — staat in zijn README een sectie **Conditional Access**: welk
 leunen en wat er daar misgaat als je hem wijzigt. De koppeling wordt bijgehouden in
 `docs/policies.json` van de CA-Policies-repo; hier staat een kopie in `IntuneTemplate/_ca.json`.
 
-**[`extras/`](extras/README.md)** bevat wat bij een complete baseline hoort maar geen van de vijf
-CIPP-policytypes is — per platform, met uitrolinstructies: inschrijvingsprofielen en
--restricties, app-configuratie, toewijzingsfilters, App Control for Business, remediations,
-shell- en platformscripts, een aangepaste compliance-check en een Win32-app. Onder andere de
-macOS ADE-enrollmentprofielen ([`extras/macos/enrollment/`](extras/macos/enrollment/README.md)),
-de macOS-shellscripts ([`extras/macos/shell-scripts/`](extras/macos/shell-scripts/README.md)),
-de Windows-platformscripts ([`extras/windows/platform-scripts/`](extras/windows/platform-scripts/README.md)),
-de compliance-check voor Defender op macOS ([`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.md))
-en de Win32-app die de voorgeïnstalleerde McAfee verwijdert
-([`extras/windows/win32-apps/remove-mcafee/`](extras/windows/win32-apps/remove-mcafee/README.md)).
-De ADE-profielen en de macOS-shellscripts kopieert `export-intunebackup.js` als sidecar mee in de
-export; CIPP, `check-scope.js` en `Set-BaselineAssignment.ps1` doen niets met `extras/`.
+**Per platform staat alles bij elkaar.** In `IntuneTemplate/<PLATFORM>/` staan naast de
+CIPP-templates (`SettingsCatalog/`, `AdministrativeTemplates/`, `DeviceConfigurations/`,
+`CompliancePolicies/`, `AppProtection/`) ook de onderdelen die geen CIPP-policytype zijn, in mappen
+die de menu's van de Intune-portal volgen: `Enrollment/` (Autopilot, ADE-profielen, restricties),
+`EndpointSecurity/` (App Control, Defender-onboarding), `PlatformScripts/`, `Remediations/`,
+`ComplianceScripts/`, `Apps/`, `AppConfiguration/` en `AssignmentFilters/`. Heeft een onderdeel
+meer losse onderwerpen, dan krijgt elk een submap. De README van elk platform
+([Windows](IntuneTemplate/WIN/README.md), [macOS](IntuneTemplate/MAC/README.md),
+[iOS/iPadOS](IntuneTemplate/IOS/README.md), [Android](IntuneTemplate/AND/README.md)) somt ze op onder
+*Overige onderdelen*; elke map heeft een eigen README met uitrolinstructie. De pijplijn leest alleen
+de `Baseline_*.json`-templates. De ADE-profielen en de macOS-shellscripts kopieert
+`export-intunebackup.js` als sidecar mee in de export; CIPP, `check-scope.js` en
+`Set-BaselineAssignment.ps1` doen niets met de overige onderdelen.
 
 Per map staat er een README met de details: [`IntuneTemplate/`](IntuneTemplate/README.md) (met
 een tabel per platform), [`scripts/`](scripts/README.md) en [`export/`](export/README.md).
@@ -95,7 +96,7 @@ deel van de rest niets. Zet ze vóór je gaat toewijzen.
 | **Defender for Endpoint-connector** | Intune → Endpoint Security → Microsoft Defender for Endpoint | Nodig voor de onboarding via `WIN - D - Defender EDR Policy` en voor een toets op de risicoscore uit Defender. Die toets zit bewust niet in de baseline — ook OpenIntuneBaseline v4.0 heeft hem niet; `WIN - U - Compliance Defender Real Time Protection` en `Defender Security Intelligence` toetsen wat er óp het apparaat staat en werken zonder connector. Wil je de risicoscore toch meewegen, zet dan eerst de connector aan: zonder komt de score nooit binnen en is de toets stil zonder oordeel. |
 
 Op macOS is de Defender-kant een derde geval: die toets bestaat niet als instelling en vraagt een
-script — zie [`extras/macos/compliance-scripts/`](extras/macos/compliance-scripts/README.md).
+script — zie [`IntuneTemplate/MAC/ComplianceScripts/`](IntuneTemplate/MAC/ComplianceScripts/README.md).
 
 Naast elk template staat een markdown met **élke instelling die die policy zet** — bijvoorbeeld
 [Windows Hello for Business](IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md).
@@ -138,13 +139,16 @@ IntuneTemplate/        de bron: de policies in CIPP-templateformaat
   _ca.json            welke CA-policies op een policy leunen (kopie uit de CA-Policies-repo)
   _i18n/              Engelse en Franse vertalingen van de teksten uit de data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
+        Enrollment/  AppConfiguration/  AssignmentFilters/
 BaselineTemplate/      de CIPP-baseline (gegenereerd)
-AppTemplate/           CIPP-applicatietemplates (gegenereerd uit extras/)
+AppTemplate/           CIPP-applicatietemplates (gegenereerd uit IntuneTemplate/)
 export/NativeImport/   restore-export voor IntuneBackupAndRestore (gegenereerd)
-extras/                wat geen CIPP-policytype is, per platform (android, ios, macos, windows)
 docs/                  overzicht, compliance, analyse, plan en structuur
 scripts/               de pijplijn en de tenantscripts
 ```
@@ -369,8 +373,9 @@ Community Repos → Import wordt hij wél als baseline herkend. Zie
 Wat overblijft zijn de bestanden die wél `.json` zijn maar geen policy:
 
 - de `_`-bestanden in `IntuneTemplate/`, inclusief de vertalingen in `_i18n/`;
-- alles onder `extras/`: ADE-profielen, Graph-bodies voor restricties, app-configuratie en
-  filters, App Control en het JSON-deel van de compliance-check;
+- de bestanden in de overige onderdelen (`Enrollment/`, `AppConfiguration/` enz.): ADE-profielen,
+  Graph-bodies voor restricties, app-configuratie en filters, App Control en het JSON-deel van de
+  compliance-check;
 - bij de automatische sync ook `BaselineTemplate/Baseline.json`.
 
 CIPP maakt daar één rij van zonder naam en zonder type (ze vallen op elkaar terug omdat de

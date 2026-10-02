@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Edge Extensions",
-    "description": "Determines which Edge extensions users may install, and which are mandatory. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions.",
+    "description": "Determines which Edge extensions users may install, and which are mandatory. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - Extensions.\nOIBID:3B1399B4-FC9A-4523-820F-769416D72543",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -472,7 +472,7 @@ Daarnaast:
   Android Device Health (minimaal patchniveau), iOS App Protection (widget-sync uit), macOS Software
   Updates (Enforce Latest na 30 dagen, beta uit), Firewall and Gatekeeper (XProtect-upload na vraag),
   Edge Security op macOS (geen SSL-foutoverride).
-- **[`extras/`](../extras/README.md)**: wat geen CIPP-type is — inschrijvingsrestricties, app-configuratie,
+- **Overige onderdelen per platform** (onder *Overige onderdelen* in elke platform-README van [`IntuneTemplate/`](../IntuneTemplate/README.md)): wat geen CIPP-type is — inschrijvingsrestricties, app-configuratie,
   toewijzingsfilters, App Control for Business, DNS over HTTPS voor Windows, remediations voor
   BitLocker-/LAPS-escrow, Escrow Buddy, Apple Business-checklists.
 - **Normenkader**: elke policy heeft `controls` (iso, nis2, cis, nistcsf) uit de vocabulaire in
@@ -498,14 +498,14 @@ Daarnaast:
 ## Wat bewust niet is gedaan
 
 - **App Control for Business als template**: de `settingInstanceTemplateId` is niet generiek te verifiëren;
-  staat in `extras/windows/app-control/` met een script dat de id's uit de eigen tenant haalt.
+  staat in `IntuneTemplate/WIN/EndpointSecurity/` met een script dat de id's uit de eigen tenant haalt.
 - **Defender for Endpoint-onboarding op macOS**: vraagt het tenant-specifieke onboarding-XML; route in
-  `extras/macos/defender-onboarding/`.
+  `IntuneTemplate/MAC/EndpointSecurity/`.
 - **SMB-encryptie vereisen en Kerberos-armoring afdwingen**: breken zonder inventarisatie.
 - **Externe opslag alleen-lezen op macOS** staat in fase 5: macOS mount een gewone USB-schijf dan
   helemaal niet, dus ook lezen is weg.
 - **iOS Enterprise-inschrijfprofiel als Catalog-template**: template-id's niet te verifiëren; als
-  Graph-body in `extras/ios/enrollment/`.
+  Graph-body in `IntuneTemplate/IOS/Enrollment/`.
 
 ## Open punten
 
@@ -530,4 +530,4 @@ Daarnaast:
 5. **CA**: controleren of CIPP `insiderRiskLevels` meestuurt (anders blokkeert `1190` iedereen); besluit
    over `3010` naar 4 uur (CIS).
 6. **Niet op echte toestellen getest**: de nieuwe macOS-, iOS- en Android-policies en de scripts in
-   `extras/`. Eerst een pilottoestel per platform.
+   `IntuneTemplate/`. Eerst een pilottoestel per platform.

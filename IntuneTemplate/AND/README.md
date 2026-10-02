@@ -13,6 +13,16 @@ Alle policies heten `CXNM - Standard - AND - <D|U> - <Item>`; de tabellen hieron
 | `AppProtection/` | 1 |
 | `SettingsCatalog/` | 3 |
 
+## Overige onderdelen
+
+Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakket. Hoe elk onderdeel uitrolt, staat in zijn README.
+
+| Map | Wat |
+|---|---|
+| [`AppConfiguration/`](AppConfiguration/README.md) | App-configuratie voor Android (ingeschreven toestellen) |
+| [`AssignmentFilters/`](AssignmentFilters/README.md) | Toewijzingsfilters voor Android Enterprise |
+| [`Enrollment/`](Enrollment/README.md) | Android-inschrijvingsrestricties |
+
 ## Device-scoped (D) — 2
 
 Toewijzen aan apparaatgroepen.

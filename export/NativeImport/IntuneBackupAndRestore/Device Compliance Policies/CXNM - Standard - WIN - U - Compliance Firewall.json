@@ -29,7 +29,7 @@
     "configurationManagerComplianceRequired": false,
     "defenderEnabled": false,
     "defenderVersion": null,
-    "description": "Checks whether Windows Firewall is active. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Firewall.",
+    "description": "Checks whether Windows Firewall is active. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — CP - Device Security - U - Firewall.\nOIBID:1DD43C82-E1A1-45A7-91C0-094CB38F7328",
     "deviceCompliancePolicyScript": null,
     "deviceThreatProtectionEnabled": false,
     "displayName": "CXNM - Standard - WIN - U - Compliance Firewall",

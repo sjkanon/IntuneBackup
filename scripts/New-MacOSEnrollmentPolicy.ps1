@@ -5,8 +5,8 @@ Creates a macOS ADE enrollment profile from a JSON file, or exports existing
 profiles to JSON.
 
 .DESCRIPTION
-ADE enrollment profiles (depMacOSEnrollmentProfile) hang under an ABM token and fall
-outside IntuneTemplate/ — see extras/macos/enrollment/README.md for the why. This script is the
+ADE enrollment profiles (depMacOSEnrollmentProfile) hang under an ABM token and are
+not a CIPP policy type — see IntuneTemplate/MAC/Enrollment/ade-profile/README.md for the why. This script is the
 only route from a JSON in this repo to the tenant.
 
 Beta endpoint: v1.0 does not know depMacOSEnrollmentProfile.
@@ -25,10 +25,10 @@ Path to the JSON file with the profile definition.
 Fetches all profiles under the token and writes them as JSON to -OutDir.
 
 .PARAMETER OutDir
-Target folder for -Export. Default extras/macos/enrollment.
+Target folder for -Export. Default IntuneTemplate/MAC/Enrollment/ade-profile.
 
 .EXAMPLE
-.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\extras\macos\enrollment\macOS-Corporate-ADE-Baseline.json -WhatIf
+.\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Path .\IntuneTemplate\MAC\Enrollment\ade-profile\macOS-Corporate-ADE-Baseline.json -WhatIf
 
 .EXAMPLE
 .\New-MacOSEnrollmentPolicy.ps1 -TokenName ADE-TOKEN-NAAM -Export
@@ -45,7 +45,7 @@ param(
     [switch]$Export,
 
     [Parameter(ParameterSetName = 'Export')]
-    [string]$OutDir = (Join-Path $PSScriptRoot '..\extras\macos\enrollment')
+    [string]$OutDir = (Join-Path $PSScriptRoot '..\IntuneTemplate\MAC\enrollment')
 )
 
 $ErrorActionPreference = 'Stop'

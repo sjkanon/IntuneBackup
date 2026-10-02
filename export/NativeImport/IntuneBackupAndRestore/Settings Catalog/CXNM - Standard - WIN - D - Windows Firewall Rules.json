@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Windows Firewall Rules",
-    "description": "Blocks outbound traffic from built-in Windows programs that malware uses to disguise traffic (calc.exe, notepad.exe, mshta.exe). Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules.",
+    "description": "Blocks outbound traffic from built-in Windows programs that malware uses to disguise traffic (calc.exe, notepad.exe, mshta.exe). Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Windows Firewall - D - Security Rules.\nOIBID:51D760CF-928A-4D4E-B743-CA44AB35FE34",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

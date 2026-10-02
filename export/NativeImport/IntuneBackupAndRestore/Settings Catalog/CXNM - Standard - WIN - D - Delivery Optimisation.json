@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Delivery Optimisation",
-    "description": "Lets devices exchange updates among themselves instead of each downloading them separately from the internet, and caps how much bandwidth that may use. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation.",
+    "description": "Lets devices exchange updates among themselves instead of each downloading them separately from the internet, and caps how much bandwidth that may use. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Delivery Optimisation.\nOIBID:743720B0-DDC7-4C5A-A50A-DE89476AEF10",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

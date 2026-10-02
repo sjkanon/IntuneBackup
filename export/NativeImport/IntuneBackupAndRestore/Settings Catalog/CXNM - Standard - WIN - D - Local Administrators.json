@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Local Administrators",
-    "description": "Determines who is a member of the local Administrators group, so that LAPS manages a controlled group instead of whatever happens to be on the device. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators.",
+    "description": "Determines who is a member of the local Administrators group, so that LAPS manages a controlled group instead of whatever happens to be on the device. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Local Group Membership - D - Local Administrators.\nOIBID:05B9A828-DB19-4769-B112-62EA1F5367D6",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

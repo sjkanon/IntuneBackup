@@ -13,6 +13,22 @@ Toutes les policies s'appellent `CXNM - Standard - WIN - <D|U> - <Item>` ; les t
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
+## Autres éléments
+
+Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un package CIPP. Le mode de déploiement de chaque élément figure dans son README.
+
+| Dossier | Quoi |
+|---|---|
+| [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.fr.md) | Supprimer McAfee préinstallé |
+| [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.fr.md) | Winget-AutoUpdate |
+| [`EndpointSecurity/`](EndpointSecurity/README.fr.md) | App Control for Business (WDAC) — point de départ générique |
+| [`Enrollment/`](Enrollment/README.fr.md) | Windows Autopilot : classique et device preparation |
+| [`PlatformScripts/`](PlatformScripts/README.fr.md) | Scripts de plateforme Windows |
+| [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.fr.md) | DNS over HTTPS pour Windows |
+| [`Remediations/escrow-check/`](Remediations/escrow-check/README.fr.md) | Contrôle de l'escrow : clé de récupération BitLocker et mot de passe LAPS dans Entra ID |
+| [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
+| [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
+
 ## Device-scoped (D) — 102
 
 Affecter à des groupes d'appareils.

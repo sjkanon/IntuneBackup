@@ -7,7 +7,7 @@ tenant, sans que personne n'ait à téléverser un `.intunewin`.
 
 | Fichier | Application | Source |
 |---|---|---|
-| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`extras/windows/win32-apps/winget-autoupdate/`](../extras/windows/win32-apps/winget-autoupdate/README.fr.md) |
+| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
 
 ## Fonctionnement
 
@@ -19,7 +19,7 @@ ne contient que des scripts.
 
 Chaque fichier est une ligne de table CIPP (`PartitionKey: AppTemplate`) générée par
 [`scripts/generate-app-templates.js`](../scripts/generate-app-templates.js) à partir des scripts de
-`extras/`. Les modifications se font là, pas ici.
+[`IntuneTemplate/WIN/Apps/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md). Les modifications se font là, pas ici.
 
 ## Déploiement
 

@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Microsoft Edge User Experience",
-    "description": "The everyday Edge experience: start page, search suggestions, notifications and which features are visible. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience.",
+    "description": "The everyday Edge experience: start page, search suggestions, notifications and which features are visible. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience.\nOIBID:FD09768A-A622-4A0D-A944-2D9CFABC4B8E",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -2,7 +2,7 @@
 
 # Apple ADE Enrollment Profiles
 
-**Generated** from `extras/macos/enrollment/` — do not edit by hand.
+**Generated** from `IntuneTemplate/MAC/Enrollment/ade-profile/` — do not edit by hand.
 
 `Start-IntuneRestoreConfig` skips this folder: IntuneBackupAndRestore has no restore
 function for Apple ADE enrolment profiles, and CIPP does not know them either. They travel
@@ -19,4 +19,4 @@ Remove `-WhatIf` once it is correct. Assigning remains manual work in the portal
 program tokens → token → Devices), and that is deliberate: a profile on the wrong
 serial numbers produces Macs that cannot be reverted without a wipe.
 
-See `extras/macos/enrollment/README.en.md` in the repo for what the profile contains and why.
+See `IntuneTemplate/MAC/Enrollment/ade-profile/README.en.md` in the repo for what the profile contains and why.

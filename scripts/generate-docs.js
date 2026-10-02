@@ -503,6 +503,24 @@ function platformReadme(platform, templates, ctx) {
     "",
   ];
 
+  const components = componentRows(platform);
+  if (components.length > 0) {
+    lines.push(
+      V.t({ nl: "## Overige onderdelen", en: "## Other components", fr: "## Autres éléments" }),
+      "",
+      V.t({
+        nl: "Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakket. Hoe elk onderdeel uitrolt, staat in zijn README.",
+        en: "Not a CIPP policy type, so not in the tables below and not in a CIPP package. How each component is deployed is in its README.",
+        fr: "Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un package CIPP. Le mode de déploiement de chaque élément figure dans son README.",
+      }),
+      "",
+      V.t({ nl: "| Map | Wat |", en: "| Folder | What |", fr: "| Dossier | Quoi |" }),
+      "|---|---|",
+      ...components,
+      ""
+    );
+  }
+
   for (const [scope, list] of Object.entries(byScope)) {
     if (list.length === 0) continue;
     const heading = scope === "D" ? "Device-scoped (D)" : "User-scoped (U)";
@@ -536,6 +554,38 @@ function platformReadme(platform, templates, ctx) {
     ""
   );
   return lines.join("\n");
+}
+
+/**
+ * De mappen naast de CIPP-templates: inschrijving, scripts, apps, app-configuratie. Die
+ * onderdelen zijn geen CIPP-policytype en rollen anders uit, maar horen wel bij het platform.
+ * Elke map (of submap, bij meer onderwerpen in één onderdeel) heeft een eigen README; de
+ * titel daarvan is de omschrijving hier, zodat deze tabel niet met de hand hoeft te worden
+ * bijgehouden.
+ */
+function componentRows(platform) {
+  const categories = new Set(Object.values(TYPE_TO_CATEGORY));
+  const dir = path.join(TEMPLATE_DIR, platform);
+  const suffix = V.lang === "nl" ? "" : `.${V.lang}`;
+  const title = (readmeDir) => {
+    const file = [path.join(readmeDir, `README${suffix}.md`), path.join(readmeDir, "README.md")].find((f) => fs.existsSync(f));
+    if (!file) return null;
+    const h1 = fs.readFileSync(file, "utf8").split(/\r?\n/).find((l) => l.startsWith("# "));
+    return h1 ? h1.slice(2).trim() : "";
+  };
+  const rows = [];
+  const areas = fs.readdirSync(dir, { withFileTypes: true }).filter((e) => e.isDirectory() && !categories.has(e.name)).map((e) => e.name).sort();
+  for (const area of areas) {
+    const areaDir = path.join(dir, area);
+    const own = title(areaDir);
+    if (own !== null) rows.push(`| [\`${area}/\`](${V.link(`${area}/README.md`)}) | ${own} |`);
+    const subs = fs.readdirSync(areaDir, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name).sort();
+    for (const sub of subs) {
+      const t = title(path.join(areaDir, sub));
+      if (t !== null) rows.push(`| [\`${area}/${sub}/\`](${V.link(`${area}/${sub}/README.md`)}) | ${t} |`);
+    }
+  }
+  return rows;
 }
 
 /** De toewijzingstekst uit lib/templates.js; alleen de Nederlandse delen ervan vertalen. */
@@ -609,6 +659,27 @@ function overviewReadme(templates, ctx) {
         "Le dossier découle du nom de fichier (plateforme) et du `Type` CIPP (type de policy) ; il ne porte donc",
         "aucune information qui ne figure pas déjà dans le fichier. `check-scope.js` vérifie que chaque",
         "fichier est à sa place.",
+      ],
+    }),
+    "",
+    ...V.t({
+      nl: [
+        "Naast die policytype-mappen heeft elk platform mappen voor wat geen CIPP-policytype is, ingedeeld",
+        "zoals de menu's van de Intune-portal: `Enrollment/`, `EndpointSecurity/`, `PlatformScripts/`,",
+        "`Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` en `AssignmentFilters/`. De",
+        "platform-README somt ze op onder *Overige onderdelen*; de pijplijn leest ze niet.",
+      ],
+      en: [
+        "Next to those policy type folders, each platform has folders for what is not a CIPP policy type,",
+        "organised like the menus of the Intune portal: `Enrollment/`, `EndpointSecurity/`, `PlatformScripts/`,",
+        "`Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` and `AssignmentFilters/`. The",
+        "platform README lists them under *Other components*; the pipeline does not read them.",
+      ],
+      fr: [
+        "À côté de ces dossiers par type de policy, chaque plateforme a des dossiers pour ce qui n'est pas un",
+        "type de policy CIPP, organisés comme les menus du portail Intune : `Enrollment/`, `EndpointSecurity/`,",
+        "`PlatformScripts/`, `Remediations/`, `ComplianceScripts/`, `Apps/`, `AppConfiguration/` et",
+        "`AssignmentFilters/`. Le README de la plateforme les liste sous *Autres éléments* ; le pipeline ne les lit pas.",
       ],
     }),
     "",

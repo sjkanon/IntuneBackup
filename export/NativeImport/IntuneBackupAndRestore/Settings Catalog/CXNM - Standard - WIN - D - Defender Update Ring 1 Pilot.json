@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot",
-    "description": "Fetches new Defender definitions and engine versions first, so that you notice a bad update before the rest of the organisation gets it. Baseline assignment: none by default — belongs on SEC-Update-Ring1. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot.",
+    "description": "Fetches new Defender definitions and engine versions first, so that you notice a bad update before the rest of the organisation gets it. Baseline assignment: none by default — belongs on SEC-Update-Ring1. Source: OpenIntuneBaseline Windows v4.0 — ES - Defender Antivirus Updates - Ring 1 - Pilot.\nOIBID:C1B1A707-F50C-461A-A811-E8D47FED076C",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

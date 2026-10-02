@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Update Reports and Telemetry",
-    "description": "Sends the diagnostic data that Windows Update for Business Reports needs to show which devices are lagging behind. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Reports and Telemetry.",
+    "description": "Sends the diagnostic data that Windows Update for Business Reports needs to show which devices are lagging behind. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Windows Update for Business - D - Reports and Telemetry.\nOIBID:EDECD0D7-7955-40ED-8A42-07D5FB876EF2",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

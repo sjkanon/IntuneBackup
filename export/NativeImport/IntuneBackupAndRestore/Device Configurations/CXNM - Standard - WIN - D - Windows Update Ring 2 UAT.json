@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Second update ring: gets Windows updates after the pilot and before production. Baseline assignment: none by default — belongs on SEC-Update-Ring2. Source: OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT.",
+    "description": "Second update ring: gets Windows updates after the pilot and before production. Baseline assignment: none by default — belongs on SEC-Update-Ring2. Source: OpenIntuneBaseline Windows v4.0 — WUfB - Ring 2 - UAT.\nOIBID:367E46C3-EB05-4D0D-9F97-E839A5CE6696",
     "displayName": "CXNM - Standard - WIN - D - Windows Update Ring 2 UAT",
     "deliveryOptimizationMode": "userDefined",
     "prereleaseFeatures": "userDefined",

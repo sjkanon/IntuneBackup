@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - U - Personal Data Encryption",
-    "description": "Encrypts the user's personal folders with a key tied to their Windows Hello sign-in, so that the data stays encrypted even on a device that is switched on. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption.",
+    "description": "Encrypts the user's personal folders with a key tied to their Windows Hello sign-in, so that the data stays encrypted even on a device that is switched on. Baseline assignment: all users. Source: OpenIntuneBaseline Windows v4.0 — ES - Encryption - U - Personal Data Encryption.\nOIBID:981FA7C5-6F4F-4338-9802-F9985B6EC3DD",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

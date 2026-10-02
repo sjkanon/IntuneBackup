@@ -19,8 +19,8 @@
  * unassigned.
  *
  * Next to the policies, the export carries two sidecar folders the module does not know:
- * the macOS ADE enrolment profiles (extras/macos/enrollment/) and the macOS shell scripts
- * (extras/macos/shell-scripts/). See SIDECARS below.
+ * the macOS ADE enrolment profiles (IntuneTemplate/MAC/Enrollment/ade-profile/) and the macOS shell scripts
+ * (IntuneTemplate/MAC/PlatformScripts/). See SIDECARS below.
  *
  * Usage: node scripts/export-intunebackup.js [target-dir]
  *   default target-dir: export/NativeImport/IntuneBackupAndRestore/
@@ -181,15 +181,15 @@ function exportTemplates({ templates, outDir, assignments }) {
  * ADE-profiel uit Apple Business synct, faalt in de enrollment. De README die hier per map bij
  * wordt geschreven zegt hoe ze er wél in gaan.
  *
- * extras/macos/enrollment/ en extras/macos/shell-scripts/ blijven de bron; dit zijn kopieën
+ * IntuneTemplate/MAC/Enrollment/ade-profile/ en IntuneTemplate/MAC/PlatformScripts/ blijven de bron; dit zijn kopieën
  * die bij elke run opnieuw worden geschreven, net als de rest van de export. `platform` is de
  * submap in de export (macos/), zodat de exportpaden niet afhangen van waar de bron in de repo
- * staat. De bron is bewust de macOS-map en niet heel extras/: extras/ios/enrollment/ bevat een
+ * staat. De bron is bewust de macOS-map en niet heel IntuneTemplate/: IntuneTemplate/IOS/Enrollment/ bevat een
  * iOS-profiel met een ander Graph-type, dat New-MacOSEnrollmentPolicy.ps1 niet aanmaakt.
  */
 const SIDECARS = [
   {
-    sourceDir: "extras/macos/enrollment",
+    sourceDir: "IntuneTemplate/MAC/Enrollment/ade-profile",
     platform: "macos",
     folder: "Apple ADE Enrollment Profiles",
     extensions: [".json"],
@@ -208,7 +208,7 @@ const SIDECARS = [
         "program tokens → token → Devices), en dat is bewust: een profiel op de verkeerde",
         "serienummers levert Macs op die zonder wipe niet terug te draaien zijn.",
         "",
-        "Zie `extras/macos/enrollment/README.md` in de repo voor wat er in het profiel staat en waarom.",
+        "Zie `IntuneTemplate/MAC/Enrollment/ade-profile/README.md` in de repo voor wat er in het profiel staat en waarom.",
       ],
       en: (files, folder) => [
         "`Start-IntuneRestoreConfig` skips this folder: IntuneBackupAndRestore has no restore",
@@ -224,7 +224,7 @@ const SIDECARS = [
         "program tokens → token → Devices), and that is deliberate: a profile on the wrong",
         "serial numbers produces Macs that cannot be reverted without a wipe.",
         "",
-        "See `extras/macos/enrollment/README.en.md` in the repo for what the profile contains and why.",
+        "See `IntuneTemplate/MAC/Enrollment/ade-profile/README.en.md` in the repo for what the profile contains and why.",
       ],
       fr: (files, folder) => [
         "`Start-IntuneRestoreConfig` ignore ce dossier : IntuneBackupAndRestore n'a pas de fonction",
@@ -240,12 +240,12 @@ const SIDECARS = [
         "(Enrollment program tokens → token → Devices), et c'est voulu : un profil sur les mauvais",
         "numéros de série donne des Mac qu'on ne peut pas rétablir sans effacement.",
         "",
-        "Voir `extras/macos/enrollment/README.fr.md` dans le dépôt pour le contenu du profil et sa raison d'être.",
+        "Voir `IntuneTemplate/MAC/Enrollment/ade-profile/README.fr.md` dans le dépôt pour le contenu du profil et sa raison d'être.",
       ],
     },
   },
   {
-    sourceDir: "extras/macos/shell-scripts",
+    sourceDir: "IntuneTemplate/MAC/PlatformScripts",
     platform: "macos",
     folder: "macOS Shell Scripts",
     extensions: [".sh"],
@@ -257,7 +257,7 @@ const SIDECARS = [
         "",
         "Aanmaken gaat met de hand: **Devices → macOS → Shell scripts → Add**. De instellingen",
         "per script (uitvoeren als aangemelde gebruiker, frequentie, toewijzing) staan in",
-        "`extras/macos/shell-scripts/README.md` in de repo — die waarden zijn geen detail: een dockscript",
+        "`IntuneTemplate/MAC/PlatformScripts/README.md` in de repo — die waarden zijn geen detail: een dockscript",
         "dat als root draait schrijft naar de verkeerde Dock en de gebruiker ziet niets.",
       ],
       en: () => [
@@ -267,7 +267,7 @@ const SIDECARS = [
         "",
         "Creating them is manual: **Devices → macOS → Shell scripts → Add**. The settings",
         "per script (run as signed-in user, frequency, assignment) are in",
-        "`extras/macos/shell-scripts/README.en.md` in the repo — those values are not a detail: a Dock script",
+        "`IntuneTemplate/MAC/PlatformScripts/README.en.md` in the repo — those values are not a detail: a Dock script",
         "that runs as root writes to the wrong Dock and the user sees nothing.",
       ],
       fr: () => [
@@ -277,7 +277,7 @@ const SIDECARS = [
         "",
         "La création se fait à la main : **Devices → macOS → Shell scripts → Add**. Les paramètres",
         "de chaque script (exécution en tant qu'utilisateur connecté, fréquence, affectation) figurent dans",
-        "`extras/macos/shell-scripts/README.fr.md` dans le dépôt — ces valeurs ne sont pas un détail : un script",
+        "`IntuneTemplate/MAC/PlatformScripts/README.fr.md` dans le dépôt — ces valeurs ne sont pas un détail : un script",
         "de Dock exécuté en root écrit dans le mauvais Dock et l'utilisateur ne voit rien.",
       ],
     },

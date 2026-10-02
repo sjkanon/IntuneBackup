@@ -1,6 +1,6 @@
 {
     "name": "CXNM - Standard - WIN - D - Security Hardening",
-    "description": "Collection of individual hardening settings: outdated SMB and NTLM variants, AutoPlay, PowerShell logging and shielding of system components. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening.",
+    "description": "Collection of individual hardening settings: outdated SMB and NTLM variants, AutoPlay, PowerShell logging and shielding of system components. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Security Hardening.\nOIBID:D35FD54A-F74F-4F61-969F-6E96D3986B41",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
