@@ -17,7 +17,8 @@ De baseline regelt updates voor Windows (update rings), Defender, Edge, Office e
 daarbuiten — 7-Zip, Notepad++, Adobe Reader, VLC, Zoom — wordt door geen enkele policy
 bijgewerkt: een Intune-policy kan winget configureren, niet laten draaien. WAU is een geplande
 taak die `winget upgrade` uitvoert, als SYSTEM voor machine-installaties en als gebruiker voor
-apps in het gebruikersprofiel. Een applicatie is geen CIPP-template, dus dit staat in `extras/`.
+apps in het gebruikersprofiel. De scripts staan hier in `extras/`; CIPP krijgt ze als
+applicatietemplate in [`AppTemplate/`](../../../../AppTemplate/README.md).
 
 Het alternatief is **Intune Enterprise App Management** (Intune Suite of losse add-on): een door
 Microsoft beheerde catalogus met automatische updates en rapportage in Intune. Wie die licentie
@@ -72,6 +73,29 @@ mogen: `Adobe.Acrobat*`). Een lijst die via groepsbeleid onder
   start geblokkeerd zouden worden.
 
 ## Uitrol
+
+### Via CIPP
+
+[`AppTemplate/Winget-AutoUpdate.json`](../../../../AppTemplate/Winget-AutoUpdate.json) is een CIPP-applicatietemplate van het
+type *Custom Application* (Win32-script-app). CIPP uploadt daarvoor zijn eigen kleine
+placeholderpakket en draait [`Install-WAU.ps1`](Install-WAU.ps1) als installatieprogramma: dat
+haalt de vastgepinde `WAU.msi` van GitHub, controleert de SHA-256, schrijft `excluded_apps.txt`
+ernaast en installeert met dezelfde MSI-properties als hieronder. Verwijderen doet
+[`Uninstall-WAU.ps1`](Uninstall-WAU.ps1), detectie [`Detect-WAU.ps1`](Detect-WAU.ps1). Geen
+`.intunewin` te bouwen.
+
+1. CIPP → **Tools → Community Repos** → deze repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
+2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy**:
+   kies de tenants en als toewijzing de groep `SEC-Baseline-Pilot` (het template wijst zelf
+   niets toe). Of zet het in een baseline met de standard *Deploy Intune Application Template*.
+
+Het apparaat moet `github.com` kunnen bereiken; de MSI-log staat in `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
+
+Het template wordt gegenereerd uit de scripts: `node scripts/generate-app-templates.js`. Dat
+weigert als versie, hash of productcode in de scripts afwijken van `New-WAUPackage.ps1`, of de
+lijst in `Install-WAU.ps1` van `excluded_apps.txt` — beide routes installeren hetzelfde.
+
+### Met de hand
 
 1. Bouw het pakket — download, hashcontrole en `.intunewin`:
 

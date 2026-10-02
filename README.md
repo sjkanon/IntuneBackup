@@ -142,7 +142,7 @@ IntuneTemplate/        de bron: de policies in CIPP-templateformaat
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
 BaselineTemplate/      de CIPP-baseline (gegenereerd)
-StandardsTemplateV2/   CIPP-standards voor tenantinstellingen
+AppTemplate/           CIPP-applicatietemplates (gegenereerd uit extras/)
 export/NativeImport/   restore-export voor IntuneBackupAndRestore (gegenereerd)
 extras/                wat geen CIPP-policytype is, per platform (android, ios, macos, windows)
 docs/                  overzicht, compliance, analyse, plan en structuur
@@ -225,6 +225,7 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 |---|---|---|
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | CIPP-baseline (stages en pakketten) | `BaselineTemplate/Baseline.json` | `node scripts/generate-baseline-template.js` |
+| CIPP-applicatietemplates (Win32-script-apps) | `AppTemplate/*.json` | `node scripts/generate-app-templates.js` |
 | CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` rechtstreeks | |
 
 **Bij een wijziging in `IntuneTemplate/`:** `.github/workflows/generate-baseline.yml`

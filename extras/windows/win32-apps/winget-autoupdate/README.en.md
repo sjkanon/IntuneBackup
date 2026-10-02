@@ -17,7 +17,8 @@ The baseline handles updates for Windows (update rings), Defender, Edge, Office 
 Everything else — 7-Zip, Notepad++, Adobe Reader, VLC, Zoom — is updated by no policy at all:
 an Intune policy can configure winget, not run it. WAU is a scheduled task that runs
 `winget upgrade`, as SYSTEM for machine installs and as the user for apps in the user profile.
-An application is not a CIPP template, so this lives in `extras/`.
+The scripts live here in `extras/`; CIPP gets them as an application template in
+[`AppTemplate/`](../../../../AppTemplate/README.en.md).
 
 The alternative is **Intune Enterprise App Management** (Intune Suite or standalone add-on): a
 Microsoft-managed catalogue with automatic updates and reporting in Intune. Whoever has that
@@ -70,6 +71,28 @@ allowed: `Adobe.Acrobat*`). A list set through group policy under
   would be blocked.
 
 ## Deployment
+
+### Through CIPP
+
+[`AppTemplate/Winget-AutoUpdate.json`](../../../../AppTemplate/Winget-AutoUpdate.json) is a CIPP application template of the
+type *Custom Application* (Win32 script app). CIPP uploads its own small placeholder package for
+it and runs [`Install-WAU.ps1`](Install-WAU.ps1) as the installer: that fetches the pinned
+`WAU.msi` from GitHub, checks the SHA-256, writes `excluded_apps.txt` next to it and installs
+with the same MSI properties as below. Removal is [`Uninstall-WAU.ps1`](Uninstall-WAU.ps1),
+detection [`Detect-WAU.ps1`](Detect-WAU.ps1). No `.intunewin` to build.
+
+1. CIPP → **Tools → Community Repos** → this repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
+2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy**:
+   pick the tenants and, as assignment, the group `SEC-Baseline-Pilot` (the template itself
+   assigns nothing). Or put it in a baseline with the standard *Deploy Intune Application Template*.
+
+The device must be able to reach `github.com`; the MSI log is in `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
+
+The template is generated from the scripts: `node scripts/generate-app-templates.js`. It refuses
+when version, hash or product code in the scripts differ from `New-WAUPackage.ps1`, or the list in
+`Install-WAU.ps1` from `excluded_apps.txt` — both routes install the same thing.
+
+### By hand
 
 1. Build the package — download, hash check and `.intunewin`:
 

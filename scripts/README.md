@@ -36,6 +36,7 @@ flowchart TD
 | [`check-osversion.js`](check-osversion.js) | controle | Rapporteert hoe ver de OS-ondergrenzen achterlopen op n-1 per platform, met endoflife.date als bron. **Exitcode altijd 0** — een verouderde ondergrens is een besluit dat wacht, geen fout; zou dit CI laten falen, dan verhoogt iemand het getal om de build groen te krijgen. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **uit** de bron | Schrijft de mapstructuur die IntuneBackupAndRestore verwacht — `IntuneTemplate/` met de assignments van fase 1 — en kopieert de macOS ADE-profielen en shellscripts uit `extras/macos/` als sidecar mee. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **uit** de bron | Schrijft `BaselineTemplate/Baseline.json`: de CIPP-baseline met zijn stages en pakketten. `--check` faalt als hij achterloopt. |
+| [`generate-app-templates.js`](generate-app-templates.js) | **uit** `extras/` | Schrijft `AppTemplate/*.json`: CIPP-applicatietemplates (Win32-script-apps) uit de scripts in `extras/windows/win32-apps/`. Weigert als vastgepinde versie, hash of uitsluitingslijst afwijken van het handmatige pakket. `--check` faalt als ze achterlopen. |
 | [`generate-docs.js`](generate-docs.js) | **uit** de bron | Genereert `docs/OVERZICHT.md`, de README's in `IntuneTemplate/` en per policy een markdown met élke instelling die hij zet, en de Conditional Access-policies die erop leunen (uit `../CA-Policies/docs/policies.json`, of zonder die repo uit de kopie `IntuneTemplate/_ca.json`). `--check` faalt als ze achterlopen. |
 | [`generate-compliance.js`](generate-compliance.js) | **uit** de bron | Schrijft `docs/COMPLIANCE.md`: per ISO 27001-, NIS2-, CIS- en NIST CSF-item welke policies hem invullen, uit `controls` in `_manifest.json` en de vocabulaire in `_controls.json`. `--strict` faalt op een onbekend of afwijkend label, `--check` als het document achterloopt. Met `--ca` telt ook de Conditional Access-kant mee — zie hieronder. |
 
@@ -80,6 +81,7 @@ node scripts/set-packages.js       # eerst: het CIPP-pakket per template bijwerk
 node scripts/check-scope.js        # dan: faalt bij scope-, map-, pakket- of conflictproblemen
 node scripts/export-intunebackup.js
 node scripts/generate-baseline-template.js
+node scripts/generate-app-templates.js
 node scripts/generate-docs.js
 node scripts/generate-compliance.js --strict --no-ca   # laatst
 ```

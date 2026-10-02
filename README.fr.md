@@ -141,7 +141,7 @@ IntuneTemplate/        la source : les stratégies au format de modèle CIPP
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
   AND/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
 BaselineTemplate/      la baseline CIPP (générée)
-StandardsTemplateV2/   standards CIPP pour les paramètres du tenant
+AppTemplate/           templates d'application CIPP (générés depuis extras/)
 export/NativeImport/   export de restauration pour IntuneBackupAndRestore (généré)
 extras/                ce qui n'est pas un type de stratégie CIPP, par plateforme (android, ios, macos, windows)
 docs/                  vue d'ensemble, conformité, analyse, plan et structure
@@ -224,6 +224,7 @@ S'exécute comme première étape de `.github/workflows/generate-baseline.yml` e
 |---|---|---|
 | Format de restauration pour IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | Baseline CIPP (stages et paquets) | `BaselineTemplate/Baseline.json` | `node scripts/generate-baseline-template.js` |
+| Templates d'application CIPP (apps Win32 par script) | `AppTemplate/*.json` | `node scripts/generate-app-templates.js` |
 | CIPP | *aucune conversion* — CIPP lit `IntuneTemplate/` directement | |
 
 **En cas de modification dans `IntuneTemplate/` :** `.github/workflows/generate-baseline.yml`

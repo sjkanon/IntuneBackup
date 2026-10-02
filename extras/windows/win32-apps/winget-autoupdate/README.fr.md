@@ -17,8 +17,8 @@ La baseline gère les mises à jour de Windows (anneaux de mise à jour), Defend
 Chrome. Tout le reste — 7-Zip, Notepad++, Adobe Reader, VLC, Zoom — n'est mis à jour par aucune
 stratégie : une stratégie Intune peut configurer winget, pas l'exécuter. WAU est une tâche
 planifiée qui exécute `winget upgrade`, en tant que SYSTEM pour les installations machine et en
-tant qu'utilisateur pour les applications du profil utilisateur. Une application n'est pas un
-template CIPP, d'où sa place dans `extras/`.
+tant qu'utilisateur pour les applications du profil utilisateur. Les scripts se trouvent ici dans
+`extras/` ; CIPP les reçoit comme template d'application dans [`AppTemplate/`](../../../../AppTemplate/README.fr.md).
 
 L'alternative est **Intune Enterprise App Management** (Intune Suite ou module complémentaire) : un
 catalogue géré par Microsoft avec mises à jour automatiques et rapports dans Intune. Qui dispose
@@ -73,6 +73,29 @@ sous `HKLM\SOFTWARE\Policies\Romanitho\Winget-AutoUpdate\BlackList` prime sur ce
   CodeIntegrity si WAU ou les installateurs qu'il lance seraient bloqués.
 
 ## Déploiement
+
+### Via CIPP
+
+[`AppTemplate/Winget-AutoUpdate.json`](../../../../AppTemplate/Winget-AutoUpdate.json) est un template d'application CIPP de
+type *Custom Application* (application Win32 par script). CIPP téléverse pour cela son propre petit
+paquet de substitution et exécute [`Install-WAU.ps1`](Install-WAU.ps1) comme programme
+d'installation : celui-ci télécharge le `WAU.msi` épinglé depuis GitHub, vérifie le SHA-256, écrit
+`excluded_apps.txt` à côté et installe avec les mêmes propriétés MSI que ci-dessous. La
+désinstallation passe par [`Uninstall-WAU.ps1`](Uninstall-WAU.ps1), la détection par
+[`Detect-WAU.ps1`](Detect-WAU.ps1). Aucun `.intunewin` à construire.
+
+1. CIPP → **Tools → Community Repos** → ce dépôt → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
+2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy** :
+   choisissez les tenants et, comme affectation, le groupe `SEC-Baseline-Pilot` (le template
+   n'affecte rien lui-même). Ou ajoutez-le à une baseline avec le standard *Deploy Intune Application Template*.
+
+L'appareil doit pouvoir joindre `github.com` ; le journal MSI se trouve dans `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
+
+Le template est généré à partir des scripts : `node scripts/generate-app-templates.js`. Il refuse
+si la version, le hash ou le code produit des scripts diffèrent de `New-WAUPackage.ps1`, ou la liste
+de `Install-WAU.ps1` de `excluded_apps.txt` — les deux voies installent la même chose.
+
+### À la main
 
 1. Construisez le paquet — téléchargement, contrôle du hash et `.intunewin` :
 

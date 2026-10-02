@@ -36,6 +36,7 @@ flowchart TD
 | [`check-osversion.js`](check-osversion.js) | check | Reports how far the OS minimums lag behind n-1 per platform, using endoflife.date as the source. **Exit code always 0** — an outdated minimum is a decision waiting to be made, not an error; if this made CI fail, someone would bump the number just to get the build green. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **out of** the source | Writes the folder structure IntuneBackupAndRestore expects — `IntuneTemplate/` with the phase 1 assignments — and copies the macOS ADE profiles and shell scripts from `extras/macos/` along as a sidecar. |
 | [`generate-baseline-template.js`](generate-baseline-template.js) | **out of** the source | Writes `BaselineTemplate/Baseline.json`: the CIPP baseline with its stages and packages. `--check` fails if it is out of date. |
+| [`generate-app-templates.js`](generate-app-templates.js) | **out of** `extras/` | Writes `AppTemplate/*.json`: CIPP application templates (Win32 script apps) from the scripts in `extras/windows/win32-apps/`. Refuses when the pinned version, hash or exclusion list differ from the manual package. `--check` fails if they are out of date. |
 | [`generate-docs.js`](generate-docs.js) | **out of** the source | Generates `docs/OVERZICHT.md`, the READMEs in `IntuneTemplate/` and, per policy, a markdown file with every setting it applies, and the Conditional Access policies that rely on it (from `../CA-Policies/docs/policies.json`, or without that repo from the copy `IntuneTemplate/_ca.json`). `--check` fails if they are out of date. |
 | [`generate-compliance.js`](generate-compliance.js) | **out of** the source | Writes `docs/COMPLIANCE.md`: for each ISO 27001, NIS2, CIS and NIST CSF item, which policies cover it, from `controls` in `_manifest.json` and the vocabulary in `_controls.json`. `--strict` fails on an unknown or deviating label, `--check` if the document is out of date. With `--ca` the Conditional Access side is counted too — see below. |
 
@@ -80,6 +81,7 @@ node scripts/set-packages.js       # first: update the CIPP package per template
 node scripts/check-scope.js        # then: fails on scope, folder, package or conflict problems
 node scripts/export-intunebackup.js
 node scripts/generate-baseline-template.js
+node scripts/generate-app-templates.js
 node scripts/generate-docs.js
 node scripts/generate-compliance.js --strict --no-ca   # last
 ```

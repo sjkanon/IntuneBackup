@@ -22,6 +22,8 @@ on:
       - "scripts/generate-baseline-template.js"
       - "extras/macos/enrollment/**"
       - "extras/macos/shell-scripts/**"
+      - "extras/windows/win32-apps/**"
+      - "scripts/generate-app-templates.js"
       - "scripts/lib/**"
       - ".github/workflows/generate-baseline.yml"
   workflow_dispatch:
@@ -50,6 +52,11 @@ jobs:
       # tenant, derived from `doel`, the assignment and the source. Run set-packages.js locally.
       - name: Check that Package and Description in every template are up to date
         run: node scripts/set-packages.js --check
+      # The CIPP application templates carry the install scripts verbatim, and the script refuses
+      # when the pinned version, hash or exclusion list differ from the manual package. Blocking
+      # for the same reason: what runs as SYSTEM on every device should be a reviewed change.
+      - name: Check that the CIPP application templates in AppTemplate/ are up to date
+        run: node scripts/generate-app-templates.js --check
 
       - name: Generate the restore export
         run: node scripts/export-intunebackup.js
