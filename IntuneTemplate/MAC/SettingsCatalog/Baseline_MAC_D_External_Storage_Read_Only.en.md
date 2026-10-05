@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_External_Storage_Read_Only.md) · **English** · [Français](Baseline_MAC_D_External_Storage_Read_Only.fr.md)
 
-# CXNM - Standard - MAC - D - External Storage Read Only
+# [Baseline] - MAC - D - External Storage Read Only
 
 Lets macOS mount only external storage that is itself read-only. Ordinary USB sticks and external drives — which are read-write — are not mounted at all.
 

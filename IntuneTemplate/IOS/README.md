@@ -4,7 +4,7 @@
 
 # iOS/iPadOS — 14 policies
 
-Alle policies heten `CXNM - Standard - IOS - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
+Alle policies heten `[Baseline] - IOS - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|

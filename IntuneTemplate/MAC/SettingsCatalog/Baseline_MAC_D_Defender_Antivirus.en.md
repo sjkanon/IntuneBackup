@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Defender_Antivirus.md) · **English** · [Français](Baseline_MAC_D_Defender_Antivirus.fr.md)
 
-# CXNM - Standard - MAC - D - Defender Antivirus
+# [Baseline] - MAC - D - Defender Antivirus
 
 Real-time protection, cloud protection and scan behaviour of Defender on macOS.
 

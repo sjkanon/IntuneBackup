@@ -36,10 +36,12 @@ const ALERT_MAIL = "%SecurityAlertMail%";
  * schijfimages en SVG — de vormen waarin phishing nu binnenkomt. Een greep uit de CIS
  * 2.1.11-lijst; Office-bestanden en archieven (zip, rar, 7z) bewust niet, die zijn te gewoon.
  */
+const { PREFIX } = require("./organisation");
+
 const EXTRA_FILE_TYPES = ["cpl", "hlp", "inf", "ins", "isp", "js", "jse", "one", "onepkg", "ps1", "psm1", "svg", "vhd", "vhdx", "xlam"];
 
 const DEFENDER_BASELINE = {
-  templateName: "CXNM - Standard - Defender for Office 365",
+  templateName: PREFIX + "Defender for Office 365",
   description:
     "Email and collaboration protection as CIPP standards: Safe Links, Safe Attachments, " +
     "anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user " +
@@ -53,7 +55,7 @@ const DEFENDER_BASELINE = {
     {
       standard: "SafeLinksPolicy",
       variables: {
-        name: "CXNM - Standard - Safe Links",
+        name: PREFIX + "Safe Links",
         AllowClickThrough: false,
         DisableUrlRewrite: false,
         EnableOrganizationBranding: false,
@@ -63,7 +65,7 @@ const DEFENDER_BASELINE = {
     {
       standard: "SafeAttachmentPolicy",
       variables: {
-        name: "CXNM - Standard - Safe Attachments",
+        name: PREFIX + "Safe Attachments",
         SafeAttachmentAction: "Block",
         // Strict: AdminOnly. Met melding ziet de gebruiker dat er iets is tegengehouden en kan hij
         // vrijgave aanvragen — zelf vrijgeven kan bij malware nooit — en het verzoek komt via
@@ -78,7 +80,7 @@ const DEFENDER_BASELINE = {
     {
       standard: "AntiPhishPolicy",
       variables: {
-        name: "CXNM - Standard - Anti-Phishing",
+        name: PREFIX + "Anti-Phishing",
         // Strict zegt 4; 3 (Standard, ook ORCA en CIS) scheelt veel valse positieven.
         PhishThresholdLevel: "3",
         EnableFirstContactSafetyTips: true,
@@ -99,7 +101,7 @@ const DEFENDER_BASELINE = {
     {
       standard: "SpamFilterPolicy",
       variables: {
-        name: "CXNM - Standard - Anti-Spam",
+        name: PREFIX + "Anti-Spam",
         // Strict: spam in quarantaine mét melding, zodat de gebruiker hem in de digest ziet en zelf vrijgeeft.
         SpamAction: "Quarantine",
         SpamQuarantineTag: NOTIFY,
@@ -132,7 +134,7 @@ const DEFENDER_BASELINE = {
     {
       standard: "MalwareFilterPolicy",
       variables: {
-        name: "CXNM - Standard - Anti-Malware",
+        name: PREFIX + "Anti-Malware",
         FileTypeAction: "Reject",
         OptionalFileTypes: EXTRA_FILE_TYPES.join(","),
         QuarantineTag: ADMIN_ONLY,

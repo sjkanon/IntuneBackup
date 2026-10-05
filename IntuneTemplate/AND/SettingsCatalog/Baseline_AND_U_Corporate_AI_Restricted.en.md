@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Corporate_AI_Restricted.md) · **English** · [Français](Baseline_AND_U_Corporate_AI_Restricted.fr.md)
 
-# CXNM - Standard - AND - U - Corporate AI Restricted
+# [Baseline] - AND - U - Corporate AI Restricted
 
 Prevents screen content from being sent to an assistant app (such as Gemini or Circle to Search) on fully managed and corporate-owned Android devices, and prevents apps from exposing functions to AI agents.
 

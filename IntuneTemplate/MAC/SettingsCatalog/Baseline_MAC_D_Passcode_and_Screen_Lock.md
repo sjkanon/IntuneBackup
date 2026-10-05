@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) · [Français](Baseline_MAC_D_Passcode_and_Screen_Lock.fr.md)
 
-# CXNM - Standard - MAC - D - Passcode and Screen Lock
+# [Baseline] - MAC - D - Passcode and Screen Lock
 
 Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-policy al eist: minimaal acht tekens, geen eenvoudig wachtwoord, vergrendelen na vijftien minuten.
 
@@ -12,10 +12,10 @@ Stelt op de Mac het wachtwoord en de schermvergrendeling in die de compliance-po
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de macOS settings catalog — waarden één op één overgenomen uit CXNM - Standard - MAC - U - Compliance Password en geverifieerd tegen de settings catalog-definities (minLength max 16, maxInactivity max 15). |
+| Bron | Apple Passcode-payload (com.apple.mobiledevice.passwordpolicy) in de macOS settings catalog — waarden één op één overgenomen uit [Baseline] - MAC - U - Compliance Password en geverifieerd tegen de settings catalog-definities (minLength max 16, maxInactivity max 15). |
 | Bestand | [`Baseline_MAC_D_Passcode_and_Screen_Lock.json`](Baseline_MAC_D_Passcode_and_Screen_Lock.json) |
 
-> maxInactivity kan in de settings catalog niet hoger dan 15 minuten — dat is toevallig exact de waarde die de compliance-policy vraagt. maxFailedAttempts is bewust weggelaten: op macOS leidt dat tot een oplopende wachttijd en uiteindelijk een blokkade die alleen met de FileVault-herstelsleutel te openen is, en dat is een aparte afweging. Deze policy zet géén com.apple.applicationaccess- of com.apple.screensaver-instelling en botst dus niet met MAC - D - Restrictions. Microsoft voert de klassieke Passcode-payload sinds Apple OS 27 als deprecated op, met de declaratieve passcode-configuratie (passcode_*, macOS 13 en hoger) als opvolger. Of RequireComplexPasscode daar hetzelfde betekent als geen eenvoudige code is onzeker, want de Intune-catalogus en Apple's schema spreken elkaar tegen; de afweging staat bij CXNM - Standard - IOS - D - Passcode. Let op: gebruikers met een korter of eenvoudiger wachtwoord moeten het bij de eerstvolgende aanmelding wijzigen. Sinds september 2026 zet CXNM - Standard - MAC - D - Screensaver de com.apple.screensaver-sleutels: wachtwoord vragen 5 seconden na het starten van de schermbeveiliging en de schermbeveiliging na 900 seconden, ook in het inlogvenster. Dat zijn dezelfde 15 minuten als maxInactivity hier, met andere settingDefinitionId's — geen conflict, en samen pas een Mac die na 15 minuten écht een wachtwoord vraagt.
+> maxInactivity kan in de settings catalog niet hoger dan 15 minuten — dat is toevallig exact de waarde die de compliance-policy vraagt. maxFailedAttempts is bewust weggelaten: op macOS leidt dat tot een oplopende wachttijd en uiteindelijk een blokkade die alleen met de FileVault-herstelsleutel te openen is, en dat is een aparte afweging. Deze policy zet géén com.apple.applicationaccess- of com.apple.screensaver-instelling en botst dus niet met MAC - D - Restrictions. Microsoft voert de klassieke Passcode-payload sinds Apple OS 27 als deprecated op, met de declaratieve passcode-configuratie (passcode_*, macOS 13 en hoger) als opvolger. Of RequireComplexPasscode daar hetzelfde betekent als geen eenvoudige code is onzeker, want de Intune-catalogus en Apple's schema spreken elkaar tegen; de afweging staat bij [Baseline] - IOS - D - Passcode. Let op: gebruikers met een korter of eenvoudiger wachtwoord moeten het bij de eerstvolgende aanmelding wijzigen. Sinds september 2026 zet [Baseline] - MAC - D - Screensaver de com.apple.screensaver-sleutels: wachtwoord vragen 5 seconden na het starten van de schermbeveiliging en de schermbeveiliging na 900 seconden, ook in het inlogvenster. Dat zijn dezelfde 15 minuten als maxInactivity hier, met andere settingDefinitionId's — geen conflict, en samen pas een Mac die na 15 minuten écht een wachtwoord vraagt.
 
 ## Normen
 

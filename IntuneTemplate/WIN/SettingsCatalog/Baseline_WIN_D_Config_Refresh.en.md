@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Config_Refresh.md) · **English** · [Français](Baseline_WIN_D_Config_Refresh.fr.md)
 
-# CXNM - Standard - WIN - D - Config Refresh
+# [Baseline] - WIN - D - Config Refresh
 
 Periodically resets locally changed settings to what Intune prescribes, so that manual tampering on a device is undone automatically.
 

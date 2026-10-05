@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Google_Chrome_Security.en.md) · [Français](Baseline_WIN_D_Google_Chrome_Security.fr.md)
 
-# CXNM - Standard - WIN - D - Google Chrome Security
+# [Baseline] - WIN - D - Google Chrome Security
 
 Legt de beveiliging van Google Chrome vast op het niveau van Edge: Safe Browsing aan en niet te omzeilen, kwaadaardige downloads geblokkeerd, certificaatfouten niet weg te klikken, en geen bedrijfsgegevens naar een persoonlijk Google-account.
 

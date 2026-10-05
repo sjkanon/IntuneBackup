@@ -24,10 +24,10 @@ appears anyway, that is the symptom — see the README next to this file.
 
 Requirements outside the scope of this script:
   - Kerberos/CloudKerberosTicketRetrievalEnabled = 1. Already in the baseline, via
-    CXNM - Standard - WIN - D - Windows Hello Cloud Kerberos Trust, on all devices.
+    [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, on all devices.
   - The device is Entra joined or Entra hybrid joined.
   - The WinHttpAutoProxySvc and iphlpsvc services are running. The baseline does not disable
-    them — the only services CXNM - Standard - WIN - D - Security Hardening disables are the four
+    them — the only services [Baseline] - WIN - D - Security Hardening disables are the four
     Xbox services.
   - Entra Kerberos enabled on the storage account, admin consent granted, MFA excluded for the
     storage account's Entra app, and share-level permissions on the same group this script is

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Settings_Sync.md) · [English](Baseline_WIN_D_Settings_Sync.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Settings Sync
+# [Baseline] - WIN - D - Settings Sync
 
 Détermine quels paramètres Windows sont synchronisés entre appareils.
 

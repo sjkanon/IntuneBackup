@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_AND_U_Work_Profile_Restrictions.en.md) · [Français](Baseline_AND_U_Work_Profile_Restrictions.fr.md)
 
-# CXNM - Standard - AND - U - Work Profile Restrictions
+# [Baseline] - AND - U - Work Profile Restrictions
 
 Zet op een toestel met persoonlijk werkprofiel een eigen werkprofielcode (zes cijfers, gemiddelde complexiteit, vergrendelt na vijftien minuten, wist na tien pogingen alleen het werkprofiel), blokkeert kopiëren, delen en schermafdrukken van werk naar privé, en zet Play Protect aan.
 

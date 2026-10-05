@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Google_Chrome_Security.md) · [English](Baseline_WIN_D_Google_Chrome_Security.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Google Chrome Security
+# [Baseline] - WIN - D - Google Chrome Security
 
 Verrouille la sécurité de Google Chrome au niveau d'Edge : Safe Browsing activé et impossible à contourner, téléchargements malveillants bloqués, erreurs de certificat impossibles à ignorer, et aucune donnée d'entreprise vers un compte Google personnel.
 

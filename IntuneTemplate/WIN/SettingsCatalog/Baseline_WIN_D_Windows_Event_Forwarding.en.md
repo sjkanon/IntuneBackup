@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Event_Forwarding.md) · **English** · [Français](Baseline_WIN_D_Windows_Event_Forwarding.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Event Forwarding
+# [Baseline] - WIN - D - Windows Event Forwarding
 
 Forwards Windows events to a central Windows Event Collector, so that logs are kept out of reach of an attacker on the device.
 

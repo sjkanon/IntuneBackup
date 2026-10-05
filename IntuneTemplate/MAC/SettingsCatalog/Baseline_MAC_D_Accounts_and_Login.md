@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Accounts_and_Login.en.md) · [Français](Baseline_MAC_D_Accounts_and_Login.fr.md)
 
-# CXNM - Standard - MAC - D - Accounts and Login
+# [Baseline] - MAC - D - Accounts and Login
 
 Bepaalt wat er bij het aanmelden zichtbaar is en welke accounts een Mac mag hebben.
 

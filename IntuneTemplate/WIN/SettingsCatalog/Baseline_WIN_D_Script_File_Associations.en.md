@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Script_File_Associations.md) · **English** · [Français](Baseline_WIN_D_Script_File_Associations.fr.md)
 
-# CXNM - Standard - WIN - D - Script File Associations
+# [Baseline] - WIN - D - Script File Associations
 
 Makes .js, .vbs and .hta files open in Notepad instead of the script host, so that double-clicking such an attachment executes nothing.
 

@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
-  "displayName": "CXNM - Standard - IOS - Microsoft Defender - Managed Apps",
+  "displayName": "[Baseline] - IOS - Microsoft Defender - Managed Apps",
   "description": "Microsoft Defender for Endpoint without enrolment (MAM): network protection on, signing out in the app disabled.",
   "roleScopeTagIds": [
     "0"

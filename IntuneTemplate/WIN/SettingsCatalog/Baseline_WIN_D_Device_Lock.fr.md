@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Device_Lock.md) · [English](Baseline_WIN_D_Device_Lock.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Device Lock
+# [Baseline] - WIN - D - Device Lock
 
 Détermine quand l'écran se verrouille et quelles exigences s'appliquent au code d'accès, ainsi que le comportement à la fermeture du capot et pour l'alimentation.
 

@@ -85,7 +85,7 @@ désinstallation passe par [`Uninstall-WAU.ps1`](Uninstall-WAU.ps1), la détecti
 [`Detect-WAU.ps1`](Detect-WAU.ps1). Aucun `.intunewin` à construire.
 
 1. CIPP → **Tools → Community Repos** → ce dépôt → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
-2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy** :
+2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy** :
    choisissez les tenants et, comme affectation, le groupe `SEC-Baseline-Pilot` (le template
    n'affecte rien lui-même). Ou ajoutez-le à une baseline avec le standard *Deploy Intune Application Template*.
 
@@ -107,7 +107,7 @@ de `Install-WAU.ps1` de `excluded_apps.txt` — les deux voies installent la mê
 
 | Champ | Valeur |
 |---|---|
-| Nom | `CXNM - Standard - WIN - D - Winget-AutoUpdate` |
+| Nom | `[Baseline] - WIN - D - Winget-AutoUpdate` |
 | Commande d'installation | `msiexec /i WAU.msi /qn RUN_WAU=NO USERCONTEXT=1 UPDATESATLOGON=1 UPDATESINTERVAL=Daily UPDATESATTIME=11:00:00 UPDATESATTIMEDELAY=02:00 NOTIFICATIONLEVEL=SuccessOnly DONOTRUNONMETERED=1 DISABLEWAUAUTOUPDATE=1` |
 | Commande de désinstallation | `msiexec /x {FB0EB14E-95AC-45D7-A951-432316FFCBD4} /qn` (v2.12.0 ; le script indique le code d'une autre version) |
 | Comportement d'installation | Système |

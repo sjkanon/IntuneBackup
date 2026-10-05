@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_LAPS.en.md) · [Français](Baseline_WIN_D_Windows_LAPS.fr.md)
 
-# CXNM - Standard - WIN - D - Windows LAPS
+# [Baseline] - WIN - D - Windows LAPS
 
 Roteert automatisch het wachtwoord van het lokale beheerdersaccount en bewaart het in Entra ID, zodat er geen gedeeld beheerderswachtwoord meer rondgaat.
 

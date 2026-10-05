@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_Search_Engine.fr.md)
 
-# CXNM - Standard - WIN - D - Microsoft Edge Search Engine
+# [Baseline] - WIN - D - Microsoft Edge Search Engine
 
 Zet Google als standaardzoekmachine in Edge. Een organisatiekeuze, geen beveiligingsinstelling.
 

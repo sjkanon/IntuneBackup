@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Audit_Policy_Enforcement.md) · [English](Baseline_WIN_D_Audit_Policy_Enforcement.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Audit Policy Enforcement
+# [Baseline] - WIN - D - Audit Policy Enforcement
 
 Donne la priorité aux paramètres d'audit avancés sur les anciens paramètres par catégorie, afin que la policy d'audit de la baseline détermine réellement ce qui est journalisé.
 

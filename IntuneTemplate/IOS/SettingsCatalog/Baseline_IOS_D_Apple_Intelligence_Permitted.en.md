@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Apple_Intelligence_Permitted.md) · **English** · [Français](Baseline_IOS_D_Apple_Intelligence_Permitted.fr.md)
 
-# CXNM - Standard - IOS - D - Apple Intelligence Permitted
+# [Baseline] - IOS - D - Apple Intelligence Permitted
 
 Explicitly allows the generative Apple Intelligence features and the integration with external AI services on enrolled iPhones and iPads.
 
@@ -12,10 +12,10 @@ Explicitly allows the generative Apple Intelligence features and the integration
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | Counterpart of CXNM - Standard - IOS - D - Apple Intelligence Restricted; the same declarative keys at the Apple default value, recorded explicitly |
+| Source | Counterpart of [Baseline] - IOS - D - Apple Intelligence Restricted; the same declarative keys at the Apple default value, recorded explicitly |
 | File | [`Baseline_IOS_D_Apple_Intelligence_Permitted.json`](Baseline_IOS_D_Apple_Intelligence_Permitted.json) |
 
-> **Alternative to CXNM - Standard - IOS - D - Apple Intelligence Restricted.** Before choosing this one, take into account that the ChatGPT integration (externalintelligencesettings_enabled) sends data to an external party; anyone who only wants to allow the on-device features sets externalintelligencesettings_enabled to false in this policy. The per-workspace restriction (allowedworkspaceids) is deliberately not included: it requires a tenant or workspace ID.
+> **Alternative to [Baseline] - IOS - D - Apple Intelligence Restricted.** Before choosing this one, take into account that the ChatGPT integration (externalintelligencesettings_enabled) sends data to an external party; anyone who only wants to allow the on-device features sets externalintelligencesettings_enabled to false in this policy. The per-workspace restriction (allowedworkspaceids) is deliberately not included: it requires a tenant or workspace ID.
 
 ## Standards
 

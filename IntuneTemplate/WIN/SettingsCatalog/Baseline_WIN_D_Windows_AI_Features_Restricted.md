@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_AI_Features_Restricted.en.md) · [Français](Baseline_WIN_D_Windows_AI_Features_Restricted.fr.md)
 
-# CXNM - Standard - WIN - D - Windows AI Features Restricted
+# [Baseline] - WIN - D - Windows AI Features Restricted
 
 Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocreator, Image Creator, Generative Fill en de Settings Agent.
 
@@ -15,7 +15,7 @@ Zet de generatieve AI-functies in Paint en in de Windows-instellingen uit: Cocre
 | Bron | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, maar met de waarde omgedraaid: die set zet de functies juist aan |
 | Bestand | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 
-> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar. Recall en Click To Do staan al uit via CXNM - Standard - WIN - D - Windows AI Restricted. **Alternatief van CXNM - Standard - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
+> Dit gaat alleen over de AI-functies in Windows en Paint. Microsoft Copilot zelf blijft bereikbaar. Recall en Click To Do staan al uit via [Baseline] - WIN - D - Windows AI Restricted. **Alternatief van [Baseline] - WIN - D - Windows AI Features Permitted** — die zet dezelfde vier instellingen op de andere waarde. Allebei toewijzen levert een Conflict op, en dan doet géén van beide iets.
 
 ## Normen
 

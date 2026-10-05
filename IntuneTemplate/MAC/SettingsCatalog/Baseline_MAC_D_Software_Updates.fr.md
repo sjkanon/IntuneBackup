@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Software_Updates.md) · [English](Baseline_MAC_D_Software_Updates.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - Software Updates
+# [Baseline] - MAC - D - Software Updates
 
 Comment et quand macOS télécharge et installe ses propres mises à jour.
 

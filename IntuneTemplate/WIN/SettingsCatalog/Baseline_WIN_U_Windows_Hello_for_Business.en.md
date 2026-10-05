@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_Hello_for_Business.md) · **English** · [Français](Baseline_WIN_U_Windows_Hello_for_Business.fr.md)
 
-# CXNM - Standard - WIN - U - Windows Hello for Business
+# [Baseline] - WIN - U - Windows Hello for Business
 
 Windows Hello for Business per user instead of per device: the same requirements as the device policy — TPM required, PIN of at least six characters, PIN recovery on — but bound to the user. Intended for users with their own device; shared devices should be excluded here with a device filter.
 
@@ -29,13 +29,13 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2055 - GRANT - Phishing Resistant MFA for Admins](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins.en.md) | disabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
-| [2120 - GRANT - Phishing Resistant MFA for All Users](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users.en.md) | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
-| [2125 - GRANT - Phishing Resistant MFA for Rollout Groups](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups.en.md) | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+| 2055 - GRANT - Phishing Resistant MFA for Admins | disabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+| 2120 - GRANT - Phishing Resistant MFA for All Users | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
+| 2125 - GRANT - Phishing Resistant MFA for Rollout Groups | enabled | Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there. |
 
 ## Settings — 5
 

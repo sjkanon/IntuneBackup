@@ -4,7 +4,7 @@
 
 # iOS/iPadOS — 14 policies
 
-All policies are named `CXNM - Standard - IOS - <D|U> - <Item>`; the tables below show the `<Item>` part.
+All policies are named `[Baseline] - IOS - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|

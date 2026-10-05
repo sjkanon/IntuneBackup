@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Firewall.md) · [English](Baseline_WIN_D_Windows_Firewall.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows Firewall
+# [Baseline] - WIN - D - Windows Firewall
 
 Active le Pare-feu Windows pour les profils domaine, privé et public et définit le comportement par défaut pour le trafic entrant et sortant.
 

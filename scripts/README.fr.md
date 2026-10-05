@@ -32,6 +32,7 @@ flowchart TD
 | [`import-oib.js`](import-oib.js) | **vers** la source | Convertit les stratégies OpenIntuneBaseline en templates CIPP, piloté par `_manifest.json`. Conserve les GUID et nos propres paramètres qu'OIB ne connaît pas. Idempotent. |
 | [`import-intunebackup.js`](import-intunebackup.js) | **vers** la source | Reconvertit une sauvegarde de tenant en templates. Par défaut, ajoute uniquement ; `--overwrite` pour remplacer. |
 | [`set-packages.js`](set-packages.js) | **dans** la source | Définit `Package` dans chaque template — le package CIPP dans lequel la stratégie est déployée — déduit de la phase dans `_manifest.json` et de la cible dans `_assignments.json` — ainsi que la description en anglais affichée à côté de la stratégie dans le tenant (`doel` + affectation + source, traduits via `_i18n/en.json`). À exécuter après chaque modification de ces fichiers. |
+| [`set-organisation.js`](set-organisation.js) | **dans** la source | Convertit le préfixe et l'URL CA de `_organisation.json` dans tous les fichiers et noms de fichiers, et place les anciens noms dans `_renames.json`. Voir [Un préfixe propre](#un-préfixe-propre). |
 | [`check-scope.js`](check-scope.js) | contrôle | Périmètre, convention de nommage, organisation des dossiers, paramètres en conflit, le package CIPP et la table de migration. Bloquant en CI. |
 | [`check-osversion.js`](check-osversion.js) | contrôle | Indique de combien les versions minimales d'OS sont en retard sur n-1 par plateforme, avec endoflife.date comme source. **Code de sortie toujours 0** — un minimum obsolète est une décision en attente, pas une erreur ; si cela faisait échouer la CI, quelqu'un augmenterait le chiffre juste pour rendre le build vert. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **depuis** la source | Écrit l'arborescence attendue par IntuneBackupAndRestore — `IntuneTemplate/` avec les affectations de la phase 1 — et y copie en sidecar les profils ADE macOS et les scripts shell de `IntuneTemplate/MAC/`. |
@@ -121,11 +122,36 @@ reste dans ce fichier jusqu'à ce que quelqu'un le supprime ; il ne fait rien.
 Les documents rédigés à la main — les README, `ANALYSE.md`, `PLAN.md`, `STRUCTUUR.md` — sont
 traduits à la main : une modification de `X.md` doit figurer dans le même commit dans `X.en.md` et `X.fr.md`.
 
+## Un préfixe propre
+
+Ce qui varie d'une organisation à l'autre se trouve dans `IntuneTemplate/_organisation.json` : le
+préfixe de chaque stratégie, package CIPP et baseline (`prefix`), et l'endroit où lire le dépôt
+CA-Policies (`caRepoUrl` ; sans URL, les stratégies ne citent que les noms CA, sans lien). Aucun
+script ne nomme le préfixe littéralement ; ils le lisent via `lib/organisation.js`.
+
+Le préfixe figure aussi dans les données et la sortie — chaque `displayName`, `_assignments.json`,
+les noms des fichiers d'export, la documentation — donc le changer passe par `set-organisation.js`,
+qui convertit tout en une fois puis lance le pipeline :
+
+```bash
+node scripts/set-organisation.js --prefix "Contoso - " --dry-run
+node scripts/set-organisation.js --prefix "Contoso - " --ca-url https://github.com/<org>/<repo>/blob/main/
+```
+
+Les anciens noms vont dans `previousNames` de `_renames.json`. Lancez ensuite
+`Rename-BaselinePolicy.ps1` par tenant, sinon CIPP place les stratégies sous le nouveau nom à côté
+des anciennes. Cela ne couvre pas ce qui n'est pas une stratégie Intune : les stratégies Defender
+(Safe Links etc.), le profil Autopilot et les app templates reçoivent un nouvel exemplaire dans le
+tenant ; supprimez l'ancien.
+
 ## Mise en miroir vers un second clone
 
 `sync-mirror.js` ne fait pas partie du pipeline ci-dessus : il ne lit pas `IntuneTemplate/` et ne
 partage donc pas non plus `lib/templates.js`. Il aligne les fichiers d'un second clone sur ce qui est
-dans git ici et en fait un commit ordinaire là-bas.
+dans git ici et en fait un commit ordinaire là-bas. Si ce clone a son propre `_organisation.json`,
+il le garde : après la copie, `set-organisation.js` y est lancé, de sorte que le miroir reçoit le
+contenu d'ici avec son propre préfixe et sa propre URL CA. La première fois, passez-les avec
+`--prefix` et `--ca-url`.
 
 ```bash
 node scripts/sync-mirror.js <dossiercible> --dry-run   # d'abord voir ce qui changerait

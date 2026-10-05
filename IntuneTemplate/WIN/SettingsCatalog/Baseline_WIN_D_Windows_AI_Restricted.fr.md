@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Restricted.md) · [English](Baseline_WIN_D_Windows_AI_Restricted.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows AI Restricted
+# [Baseline] - WIN - D - Windows AI Restricted
 
 Désactive Recall et Click To Do : Windows ne fait alors aucune capture de ce qui se passe à l'écran et ne les analyse pas non plus.
 
@@ -15,7 +15,7 @@ Désactive Recall et Click To Do : Windows ne fait alors aucune capture de ce qu
 | Source | baseline propre — comparaison avec IntuneAdmin/IntuneBaselines, août 2026 |
 | Fichier | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 
-> **Alternative à CXNM - Standard - WIN - D - Windows AI Permitted.** Celle-ci définit les trois mêmes paramètres sur la valeur opposée ; affecter les deux provoque un Conflict, après quoi Intune n'en applique aucune. C'est la variante que la baseline déploie par défaut.
+> **Alternative à [Baseline] - WIN - D - Windows AI Permitted.** Celle-ci définit les trois mêmes paramètres sur la valeur opposée ; affecter les deux provoque un Conflict, après quoi Intune n'en applique aucune. C'est la variante que la baseline déploie par défaut.
 
 ## Normes
 

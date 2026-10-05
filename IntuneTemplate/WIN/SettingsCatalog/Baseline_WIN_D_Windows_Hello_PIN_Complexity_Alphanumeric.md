@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) · [Français](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Hello PIN Complexity Alphanumeric
+# [Baseline] - WIN - D - Windows Hello PIN Complexity Alphanumeric
 
 Eist een alfanumerieke Windows Hello-PIN: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken.
 

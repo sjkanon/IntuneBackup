@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.windows10EnrollmentCompletionPageConfiguration",
-  "displayName": "CXNM - Standard - WIN - Autopilot Enrollment Status Page",
+  "displayName": "[Baseline] - WIN - Autopilot Enrollment Status Page",
   "description": "Enrollment Status Page for Windows Autopilot (classic). Blocks the desktop until device apps and policies are applied, installs quality updates during OOBE, no desktop on failure.",
   "priority": 1,
   "roleScopeTagIds": [

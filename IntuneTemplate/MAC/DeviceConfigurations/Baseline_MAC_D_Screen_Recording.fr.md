@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Screen_Recording.md) · [English](Baseline_MAC_D_Screen_Recording.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - Screen Recording
+# [Baseline] - MAC - D - Screen Recording
 
 Uniquement pour les organisations qui utilisent NinjaOne ou TeamViewer. Définit l'enregistrement de l'écran pour NinjaOne Remote et TeamViewer sur AllowStandardUserToSetSystemService : un utilisateur sans droits d'administrateur peut cocher la case lui-même, sans mot de passe administrateur. L'activation reste un clic manuel — macOS ne permet pas à un MDM d'accorder l'enregistrement de l'écran.
 
@@ -15,7 +15,7 @@ Uniquement pour les organisations qui utilisent NinjaOne ou TeamViewer. Définit
 | Source | baseline propre — Apple n'autorise pas l'enregistrement d'écran dans la forme settings catalog de PPPC |
 | Fichier | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 
-> Apple ne permet pas d'accorder l'enregistrement d'écran avec "Allow" — un MDM peut seulement le refuser ou, comme ici, laisser l'utilisateur l'activer lui-même sans mot de passe administrateur. Le premier clic reste donc manuel, tout comme la reconfirmation périodique sur les versions récentes de macOS. Un profil personnalisé et non le settings catalog, parce que le mobileconfig porte la valeur littérale du schéma d'Apple plutôt qu'un enum Intune qui peut se décaler à chaque mise à jour des définitions. Les mêmes cinq bundles et les mêmes code requirements que les entrées Accessibilité de CXNM - Standard - MAC - D - Privacy Preferences ; ces deux profils ne se touchent pas car ils définissent des services TCC différents.
+> Apple ne permet pas d'accorder l'enregistrement d'écran avec "Allow" — un MDM peut seulement le refuser ou, comme ici, laisser l'utilisateur l'activer lui-même sans mot de passe administrateur. Le premier clic reste donc manuel, tout comme la reconfirmation périodique sur les versions récentes de macOS. Un profil personnalisé et non le settings catalog, parce que le mobileconfig porte la valeur littérale du schéma d'Apple plutôt qu'un enum Intune qui peut se décaler à chaque mise à jour des définitions. Les mêmes cinq bundles et les mêmes code requirements que les entrées Accessibilité de [Baseline] - MAC - D - Privacy Preferences ; ces deux profils ne se touchent pas car ils définissent des services TCC différents.
 
 ## Normes
 

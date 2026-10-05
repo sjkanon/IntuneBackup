@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Screen_Recording.en.md) · [Français](Baseline_MAC_D_Screen_Recording.fr.md)
 
-# CXNM - Standard - MAC - D - Screen Recording
+# [Baseline] - MAC - D - Screen Recording
 
 Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname voor NinjaOne Remote en TeamViewer op AllowStandardUserToSetSystemService: een gebruiker zonder beheerdersrechten kan het vinkje zelf aanzetten, zonder beheerderswachtwoord. Aanzetten blijft een handmatige klik — macOS staat een MDM niet toe schermopname te verlenen.
 
@@ -15,7 +15,7 @@ Alleen voor organisaties die NinjaOne of TeamViewer gebruiken. Zet schermopname 
 | Bron | eigen baseline — Apple staat schermopname niet toe in de settings catalog-vorm van PPPC |
 | Bestand | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 
-> Apple laat schermopname niet met "Allow" verlenen — een MDM kan het alleen weigeren of, zoals hier, de gebruiker het zelf laten aanzetten zonder beheerderswachtwoord. De eerste klik blijft dus handmatig, net als de periodieke herbevestiging op recente macOS-versies. Custom profile en geen settings catalog, omdat de mobileconfig de letterlijke waarde uit Apple's schema draagt in plaats van een Intune-enum die per definitie-update kan verschuiven. Dezelfde vijf bundles en dezelfde code requirements als de Toegankelijkheid-entries in CXNM - Standard - MAC - D - Privacy Preferences; die twee profielen raken elkaar niet omdat ze verschillende TCC-services zetten.
+> Apple laat schermopname niet met "Allow" verlenen — een MDM kan het alleen weigeren of, zoals hier, de gebruiker het zelf laten aanzetten zonder beheerderswachtwoord. De eerste klik blijft dus handmatig, net als de periodieke herbevestiging op recente macOS-versies. Custom profile en geen settings catalog, omdat de mobileconfig de letterlijke waarde uit Apple's schema draagt in plaats van een Intune-enum die per definitie-update kan verschuiven. Dezelfde vijf bundles en dezelfde code requirements als de Toegankelijkheid-entries in [Baseline] - MAC - D - Privacy Preferences; die twee profielen raken elkaar niet omdat ze verschillende TCC-services zetten.
 
 ## Normen
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Google_Chrome_Updates.en.md) · [Français](Baseline_WIN_D_Google_Chrome_Updates.fr.md)
 
-# CXNM - Standard - WIN - D - Google Chrome Updates
+# [Baseline] - WIN - D - Google Chrome Updates
 
 Zorgt dat een Chrome-update binnen drie dagen actief wordt: herstartmelding verplicht, gedwongen herstart buiten werktijd, en versneld bij een sterk verouderde versie.
 

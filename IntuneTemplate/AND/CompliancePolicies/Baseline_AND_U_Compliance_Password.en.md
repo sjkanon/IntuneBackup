@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Password.md) · **English** · [Français](Baseline_AND_U_Compliance_Password.fr.md)
 
-# CXNM - Standard - AND - U - Compliance Password
+# [Baseline] - AND - U - Compliance Password
 
 Checks whether an Android device with a personal work profile has a screen lock of medium complexity, whether the work profile additionally requires its own code of at least six digits (numeric complex, medium complexity) that locks after fifteen minutes, and whether storage is encrypted.
 
@@ -15,7 +15,7 @@ Checks whether an Android device with a personal work profile has a screen lock 
 | Source | OpenIntuneBaseline convention for compliance; values aligned with the six-character PIN requirement in the existing App Protection policy and with the Android requirement in IntuneAdmin. |
 | File | [`Baseline_AND_U_Compliance_Password.json`](Baseline_AND_U_Compliance_Password.json) |
 
-> **Correction September 2026.** Until now the text said that the organisation places no requirements on the personal side; the policy already required a device lock at the time (`passwordRequired`, `requiredPasswordComplexity: medium`). The requirement stays and the text has been corrected: it only requires that there is a lock of medium complexity, not which code, and the organisation does not see that code. Anyone who finds this unacceptable for personal devices must also reconsider the App Protection requirement on device complexity — otherwise App Protection blocks the apps anyway. Deliberately no `passwordExpirationDays` (NIST SP 800-63B advises against mandatory rotation) and no blocking of a shared lock for device and work profile (`blockUnifiedPasswordForWorkProfile`, UniFy W-11): two codes on a personal device mainly generates support requests, and the device code is already checked here. Fifteen minutes is aligned with iOS, macOS and Windows. The settings themselves are set by CXNM - Standard - AND - U - Work Profile Restrictions; this policy checks them.
+> **Correction September 2026.** Until now the text said that the organisation places no requirements on the personal side; the policy already required a device lock at the time (`passwordRequired`, `requiredPasswordComplexity: medium`). The requirement stays and the text has been corrected: it only requires that there is a lock of medium complexity, not which code, and the organisation does not see that code. Anyone who finds this unacceptable for personal devices must also reconsider the App Protection requirement on device complexity — otherwise App Protection blocks the apps anyway. Deliberately no `passwordExpirationDays` (NIST SP 800-63B advises against mandatory rotation) and no blocking of a shared lock for device and work profile (`blockUnifiedPasswordForWorkProfile`, UniFy W-11): two codes on a personal device mainly generates support requests, and the device code is already checked here. Fifteen minutes is aligned with iOS, macOS and Windows. The settings themselves are set by [Baseline] - AND - U - Work Profile Restrictions; this policy checks them.
 
 ## Standards
 
@@ -30,16 +30,16 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.en.md) | disabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.en.md) | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.en.md) | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.en.md) | enabled | The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant. |
-| [3020 - SESSION - BYOD Persistence](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3020__SESSION__BYOD_Persistence.en.md) | report-only | Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it. |
-| [3040 - SESSION - Block File Downloads On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices.en.md) | disabled | Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2150 - GRANT - Cloud PC Mobile Access | enabled | The other way: a compliant device. Helps determine whether an iPhone or Android device counts as compliant. |
+| 3020 - SESSION - BYOD Persistence | report-only | Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it. |
+| 3040 - SESSION - Block File Downloads On Unmanaged Devices | disabled | Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads. |
 
 ## Properties — 37
 

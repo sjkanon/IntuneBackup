@@ -16,15 +16,15 @@ wanneer een tenant doorschuift.
 `IntuneTemplate/` levert de policies, maar in CIPP staan templates er alleen: uitrollen doet
 een baseline. Dat scherm met de hand invullen is dertien keer dezelfde standard toevoegen en
 dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 70 policies (het pakket
-`CXNM - Standard - Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
+`[Baseline] - Baseline-Devices`) op het verkeerde publiek. Dit bestand komt daarom uit dezelfde bron als de rest van de repo: het manifest.
 
 ## Wat erin staat
 
 | Stage | Pakketten | Doorschuiven naar deze stage |
 |---:|---|---|
-| 1 · Nu | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` en de acht groepspakketten `CXNM - Standard - Baseline-SEC-*` | — stage 1 geldt altijd |
-| 2 · Pilot | `CXNM - Standard - Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
-| 3 · Wacht op voorwaarde | `CXNM - Standard - Baseline-Wacht` | `manual` — iemand zet 'm door |
+| 1 · Nu | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` en de acht groepspakketten `[Baseline] - Baseline-SEC-*` | — stage 1 geldt altijd |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
+| 3 · Wacht op voorwaarde | `[Baseline] - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Welke policies in welk pakket zitten staat in de
 [`IntuneTemplate`-README](../IntuneTemplate/README.md#cipp-pakketten).
@@ -75,13 +75,13 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
   in `scripts/lib/templates.js` en `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — en
   draai de pijplijn opnieuw. De groep alleen in CIPP wijzigen kan ook, maar een her-import van
   dit bestand zet de standaardnaam terug.
-- **De ADE-profielen koppelen.** `CXNM - Standard - Baseline-ADE-token` wordt bewust niet toegewezen: een
+- **De ADE-profielen koppelen.** `[Baseline] - Baseline-ADE-token` wordt bewust niet toegewezen: een
   macOS-inschrijfprofiel hangt aan een ADE-token, niet aan een Entra-groep, en je kiest er per
   token één van de twee.
 
 ## Defender-Office365.json — e-mailbeveiliging
 
-Een tweede, losse baseline (`CXNM - Standard - Defender for Office 365`): Safe Links, Safe
+Een tweede, losse baseline (`[Baseline] - Defender for Office 365`): Safe Links, Safe
 Attachments, anti-phishing, anti-spam en anti-malware, Defender voor SharePoint/OneDrive/Teams, en
 de quarantainemelding aan gebruikers **elke 4 uur** — het kortste wat Exchange toestaat. Los van
 `Baseline.json` omdat hij Defender for Office 365 Plan 1 vraagt (Business Premium heeft het) en
@@ -142,7 +142,7 @@ Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: pas
 
 ## Windows-Updates.json — patchen
 
-Een derde, losse baseline (`CXNM - Standard - Windows Updates`) voor alles wat een
+Een derde, losse baseline (`[Baseline] - Windows Updates`) voor alles wat een
 Windows-apparaat bijwerkt: Windows zelf, Edge, Microsoft 365 Apps en de overige apps via winget.
 Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — ook een tenant die
 (nog) niet de hele Intune-baseline krijgt. De indeling staat in
@@ -150,10 +150,10 @@ Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — o
 
 | Stage | Standard | Toewijzing | Wat het doet |
 |---:|---|---|---|
-| 1 · Nu | `CXNM - Standard - Updates-Ring3` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
-| 1 · Nu | `CXNM - Standard - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
-| 1 · Nu | `CXNM - Standard - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
-| 1 · Nu | `CXNM - Standard - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) en Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) |
+| 1 · Nu | `[Baseline] - Updates-Ring3` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
+| 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
+| 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
+| 1 · Nu | `[Baseline] - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) en Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | alle apparaten (Required) | Winget-AutoUpdate: werkt dagelijks elke app bij die winget kent, behalve de [uitsluitingslijst](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
 
 Stage 2 begint als alles uit stage 1 compliant is **en** er twee weken voorbij zijn — dezelfde

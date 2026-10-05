@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Data_Minimisation.md) · [English](Baseline_WIN_D_Data_Minimisation.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Data Minimisation
+# [Baseline] - WIN - D - Data Minimisation
 
 Limite ce qui est inclus dans les données de diagnostic : pas de fichiers journaux supplémentaires ni de vidages mémoire vers Microsoft.
 

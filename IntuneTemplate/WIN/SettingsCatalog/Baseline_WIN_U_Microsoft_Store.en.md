@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Store.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Store.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Store
+# [Baseline] - WIN - U - Microsoft Store
 
 The user side of the Store restrictions.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Passcode.md) · **English** · [Français](Baseline_IOS_D_Passcode.fr.md)
 
-# CXNM - Standard - IOS - D - Passcode
+# [Baseline] - IOS - D - Passcode
 
 Sets the passcode on enrolled iPhones and iPads that the compliance policy checks: at least six characters, no simple code, lock immediately, auto-lock after at most five minutes, and wipe only after ten failed attempts.
 
@@ -12,10 +12,10 @@ Sets the passcode on enrolled iPhones and iPads that the compliance policy check
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the iOS settings catalog, the same payload as UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; values aligned with CXNM - Standard - IOS - U - Compliance Password, inactivity according to CIS Apple iOS/iPadOS 26 Benchmark |
+| Source | Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the iOS settings catalog, the same payload as UniFy iOS/iPadOS Baseline v1.2 — SC - Device Security - BYOD/Corporate; values aligned with [Baseline] - IOS - U - Compliance Password, inactivity according to CIS Apple iOS/iPadOS 26 Benchmark |
 | File | [`Baseline_IOS_D_Passcode.json`](Baseline_IOS_D_Passcode.json) |
 
-> Choice of the classic payload and not the declarative passcode configuration (passcode_*). Both apply to iOS and neither requires supervision, but two sources contradict each other on 'no simple code'. The Intune catalog says for RequireComplexPasscode that the code must also contain a character other than digits and letters, which makes a six-digit numeric code impossible; Apple's own schema only says that the code may not contain repeated or ascending or descending characters (such as 123 or CBA), exactly what allowSimple=false did, and places the requirement for a special character under a different key: MinimumComplexCharacters. Which of the two describes the behaviour has not been tested here, so the classic payload stays. It is, however, an open question and not an end point, because Microsoft lists the classic Passcode payload as deprecated since Apple OS 27. The payload here is the same as in CXNM - Standard - MAC - D - Passcode and Screen Lock and in both UniFy sets. Five minutes of inactivity is stricter than the fifteen minutes that Compliance Password checks; a device with this policy is therefore always compliant. Deliberately no maxpinageindays (NIST SP 800-63B: no rotation without cause) and no pinhistory. UniFy Corporate sets 1 minute and 5 attempts; a wipe after five attempts conflicts with the norm rule of this baseline.
+> Choice of the classic payload and not the declarative passcode configuration (passcode_*). Both apply to iOS and neither requires supervision, but two sources contradict each other on 'no simple code'. The Intune catalog says for RequireComplexPasscode that the code must also contain a character other than digits and letters, which makes a six-digit numeric code impossible; Apple's own schema only says that the code may not contain repeated or ascending or descending characters (such as 123 or CBA), exactly what allowSimple=false did, and places the requirement for a special character under a different key: MinimumComplexCharacters. Which of the two describes the behaviour has not been tested here, so the classic payload stays. It is, however, an open question and not an end point, because Microsoft lists the classic Passcode payload as deprecated since Apple OS 27. The payload here is the same as in [Baseline] - MAC - D - Passcode and Screen Lock and in both UniFy sets. Five minutes of inactivity is stricter than the fifteen minutes that Compliance Password checks; a device with this policy is therefore always compliant. Deliberately no maxpinageindays (NIST SP 800-63B: no rotation without cause) and no pinhistory. UniFy Corporate sets 1 minute and 5 attempts; a wipe after five attempts conflicts with the norm rule of this baseline.
 
 ## Standards
 

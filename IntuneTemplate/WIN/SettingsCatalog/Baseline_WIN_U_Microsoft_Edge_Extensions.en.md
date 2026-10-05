@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Edge_Extensions.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Edge_Extensions.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Edge Extensions
+# [Baseline] - WIN - U - Microsoft Edge Extensions
 
 Determines which Edge extensions users may install, and which are mandatory.
 

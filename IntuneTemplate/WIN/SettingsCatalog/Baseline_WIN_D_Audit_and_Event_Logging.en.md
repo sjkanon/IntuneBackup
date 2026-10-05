@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Audit_and_Event_Logging.md) · **English** · [Français](Baseline_WIN_D_Audit_and_Event_Logging.fr.md)
 
-# CXNM - Standard - WIN - D - Audit and Event Logging
+# [Baseline] - WIN - D - Audit and Event Logging
 
 Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation.
 

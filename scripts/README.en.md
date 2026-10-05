@@ -32,6 +32,7 @@ flowchart TD
 | [`import-oib.js`](import-oib.js) | **into** the source | Converts OpenIntuneBaseline policies into CIPP templates, driven by `_manifest.json`. Keeps GUIDs and our own settings that OIB does not have. Idempotent. |
 | [`import-intunebackup.js`](import-intunebackup.js) | **into** the source | Converts a tenant backup back into templates. Only adds by default; `--overwrite` to replace. |
 | [`set-packages.js`](set-packages.js) | **within** the source | Sets `Package` in every template — the CIPP package the policy is deployed in — derived from the phase in `_manifest.json` and the target in `_assignments.json` — and the English description shown next to the policy in the tenant (`doel` + assignment + source, translated via `_i18n/en.json`). Run after every change to those files. |
+| [`set-organisation.js`](set-organisation.js) | **within** the source | Converts the prefix and CA URL from `_organisation.json` in every file and file name, and puts the old names in `_renames.json`. See [Your own prefix](#your-own-prefix). |
 | [`check-scope.js`](check-scope.js) | check | Scope, naming convention, folder layout, conflicting settings, the CIPP package and the migration table. Blocking in CI. |
 | [`check-osversion.js`](check-osversion.js) | check | Reports how far the OS minimums lag behind n-1 per platform, using endoflife.date as the source. **Exit code always 0** — an outdated minimum is a decision waiting to be made, not an error; if this made CI fail, someone would bump the number just to get the build green. |
 | [`export-intunebackup.js`](export-intunebackup.js) | **out of** the source | Writes the folder structure IntuneBackupAndRestore expects — `IntuneTemplate/` with the phase 1 assignments — and copies the macOS ADE profiles and shell scripts from `IntuneTemplate/MAC/` along as a sidecar. |
@@ -119,11 +120,35 @@ stays in that file until someone cleans it up; it does nothing.
 The handwritten documents — the READMEs, `ANALYSE.md`, `PLAN.md`, `STRUCTUUR.md` — are translated
 by hand: a change in `X.md` belongs in `X.en.md` and `X.fr.md` in the same commit.
 
+## Your own prefix
+
+What differs per organisation is in `IntuneTemplate/_organisation.json`: the prefix of every
+policy, CIPP package and baseline (`prefix`), and where the CA-Policies repo can be read
+(`caRepoUrl`; without a URL the policies only list the CA names, without a link). No script names
+the prefix literally; they read it through `lib/organisation.js`.
+
+The prefix is also in the data and the output — every `displayName`, `_assignments.json`, the
+export file names, the docs — so changing it goes through `set-organisation.js`, which converts
+everything in one go and then runs the pipeline:
+
+```bash
+node scripts/set-organisation.js --prefix "Contoso - " --dry-run
+node scripts/set-organisation.js --prefix "Contoso - " --ca-url https://github.com/<org>/<repo>/blob/main/
+```
+
+The old names go into `previousNames` in `_renames.json`. Then run `Rename-BaselinePolicy.ps1` per
+tenant, otherwise CIPP puts the policies under the new name next to the old ones. That does not
+cover what is not an Intune policy: the Defender policies (Safe Links etc.), the Autopilot profile
+and the app templates get a new copy in the tenant; clean up the old one.
+
 ## Mirroring to a second clone
 
 `sync-mirror.js` is not part of the pipeline above: it does not read `IntuneTemplate/` and so does
 not share `lib/templates.js` either. It makes the files in a second clone match what is in git
-here and turns that into one ordinary commit there.
+here and turns that into one ordinary commit there. If that clone has its own
+`_organisation.json`, it keeps it: after copying, `set-organisation.js` runs there, so the mirror
+gets the content from here with its own prefix and CA URL. The first time, pass those with
+`--prefix` and `--ca-url`.
 
 ```bash
 node scripts/sync-mirror.js <targetfolder> --dry-run   # first see what would change

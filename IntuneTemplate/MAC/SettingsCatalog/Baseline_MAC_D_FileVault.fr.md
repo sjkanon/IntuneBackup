@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_FileVault.md) · [English](Baseline_MAC_D_FileVault.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - FileVault
+# [Baseline] - MAC - D - FileVault
 
 Chiffre le disque du Mac et stocke la clé de récupération dans Intune. L'équivalent macOS de BitLocker.
 

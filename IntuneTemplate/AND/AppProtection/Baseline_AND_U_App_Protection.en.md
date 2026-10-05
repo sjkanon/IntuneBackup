@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_App_Protection.md) · **English** · [Français](Baseline_AND_U_App_Protection.fr.md)
 
-# CXNM - Standard - AND - U - App Protection
+# [Baseline] - AND - U - App Protection
 
 Protects corporate data within the Microsoft apps on a personal Android phone: separate PIN, encryption, no copying to personal apps, and remote wipe of only the work data.
 
@@ -30,12 +30,12 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2070 - GRANT - Mobile Device Access Requirements](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements.en.md) | disabled | The app protection policy that `compliantApplication` asks for. Without an assigned policy no app qualifies and access on iOS and Android is closed. |
-| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.en.md) | enabled | One of the two ways to meet this policy: the app is covered by an app protection policy. Without an assigned policy only a compliant device is left. |
+| 2070 - GRANT - Mobile Device Access Requirements | disabled | The app protection policy that `compliantApplication` asks for. Without an assigned policy no app qualifies and access on iOS and Android is closed. |
+| 2150 - GRANT - Cloud PC Mobile Access | enabled | One of the two ways to meet this policy: the app is covered by an app protection policy. Without an assigned policy only a compliant device is left. |
 
 ## Properties — 86
 

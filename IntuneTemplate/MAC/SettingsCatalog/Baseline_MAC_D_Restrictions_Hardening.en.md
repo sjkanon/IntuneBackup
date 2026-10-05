@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Restrictions_Hardening.md) · **English** · [Français](Baseline_MAC_D_Restrictions_Hardening.fr.md)
 
-# CXNM - Standard - MAC - D - Restrictions Hardening
+# [Baseline] - MAC - D - Restrictions Hardening
 
 Supplements the macOS restrictions with five measures that OpenIntuneBaseline macOS v1.0 does not set: no manually installed configuration profiles or certificates, no Gatekeeper bypass via the Finder, no diagnostic data to Apple, no internet results in Spotlight and no content caching.
 
@@ -15,7 +15,7 @@ Supplements the macOS restrictions with five measures that OpenIntuneBaseline ma
 | Source | OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions and D - Gatekeeper (same values); CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.6.3.1 (diagnostic data) |
 | File | [`Baseline_MAC_D_Restrictions_Hardening.json`](Baseline_MAC_D_Restrictions_Hardening.json) |
 
-> A separate policy and not an extension of CXNM - Standard - MAC - D - Restrictions or Firewall and Gatekeeper, because those come from OpenIntuneBaseline v1.0: extra ids there do survive an import, but a separate policy makes visible which choice is our own and can get its own phase. None of the five ids is in any other template. com.apple.applicationaccess is therefore delivered in two profiles; macOS combines restriction payloads and the strictest value wins — no conflict, and check-scope.js deliberately does not report it on Apple. If OpenIntuneBaseline macOS v2.0 is imported, OIB itself sets these five in Restrictions and Gatekeeper; remove them here then, otherwise they are set twice. enablexprotectmalwareupload (Gatekeeper may offer to send a blocked malware file to Apple) is not here but an override in Firewall and Gatekeeper, because OIB v1.0 already sets that setting. Deliberately not adopted from OIB v2.0 beta Restrictions: allowFindMyDevice, allowTimeMachineBackup=false, allowPasswordAutoFill=false and the other choices the earlier analysis already rejected.
+> A separate policy and not an extension of [Baseline] - MAC - D - Restrictions or Firewall and Gatekeeper, because those come from OpenIntuneBaseline v1.0: extra ids there do survive an import, but a separate policy makes visible which choice is our own and can get its own phase. None of the five ids is in any other template. com.apple.applicationaccess is therefore delivered in two profiles; macOS combines restriction payloads and the strictest value wins — no conflict, and check-scope.js deliberately does not report it on Apple. If OpenIntuneBaseline macOS v2.0 is imported, OIB itself sets these five in Restrictions and Gatekeeper; remove them here then, otherwise they are set twice. enablexprotectmalwareupload (Gatekeeper may offer to send a blocked malware file to Apple) is not here but an override in Firewall and Gatekeeper, because OIB v1.0 already sets that setting. Deliberately not adopted from OIB v2.0 beta Restrictions: allowFindMyDevice, allowTimeMachineBackup=false, allowPasswordAutoFill=false and the other choices the earlier analysis already rejected.
 
 ## Standards
 

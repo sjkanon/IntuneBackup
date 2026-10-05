@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Wireless_Shared_Devices.en.md) · [Français](Baseline_WIN_D_Wireless_Shared_Devices.fr.md)
 
-# CXNM - Standard - WIN - D - Wireless Shared Devices
+# [Baseline] - WIN - D - Wireless Shared Devices
 
 Laat op gedeelde apparaten alleen de netwerken toe die via Intune zijn uitgerold. Zelf toegevoegde wifi-netwerken worden verwijderd en er kunnen er geen bij.
 

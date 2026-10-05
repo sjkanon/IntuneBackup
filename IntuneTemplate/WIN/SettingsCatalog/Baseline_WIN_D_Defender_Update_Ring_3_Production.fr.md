@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Update_Ring_3_Production.md) · [English](Baseline_WIN_D_Defender_Update_Ring_3_Production.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Defender Update Ring 3 Production
+# [Baseline] - WIN - D - Defender Update Ring 3 Production
 
 Anneau de production pour les mises à jour Defender : ne reçoit les définitions et versions de moteur qu'après que les anneaux 1 et 2 les ont exécutées sans problème.
 

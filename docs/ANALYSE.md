@@ -330,7 +330,7 @@ met een placeholder.
 
 | # | Stap | |
 |---:|---|---|
-| 1 | ~~BASELINE2 op een pilotgroep~~ | gedaan: die policies staan nu in `IntuneTemplate/` in fase 2 en rollen via `CXNM - Standard - Baseline-Pilot` naar `SEC-Baseline-Pilot` — `Kernel DMA Protection` en `Logon Hardening` inbegrepen |
+| 1 | ~~BASELINE2 op een pilotgroep~~ | gedaan: die policies staan nu in `IntuneTemplate/` in fase 2 en rollen via `[Baseline] - Baseline-Pilot` naar `SEC-Baseline-Pilot` — `Kernel DMA Protection` en `Logon Hardening` inbegrepen |
 | 2 | ~~Besluit over de drie MAM-instellingen~~ | gedaan: de verscherping zit in de baseline-policies zelf (`Baseline_IOS_U_App_Protection`, `Baseline_AND_U_App_Protection`) |
 | 3 | ~~Controleer de ISMP-koppeling in `_manifest.json`~~ | vervallen: de koppeling aan de ISMS-documenten van één organisatie is in september 2026 uit het manifest gehaald, zodat de baseline generiek is. ISO 27001, NIS2 en Part-IS staan er nog |
 | 4 | ~~Bevalt een policy?~~ | gedaan: alle sets zijn samengevoegd in `IntuneTemplate/` onder de `Baseline_`-naam; de toewijzing volgt uit `fase` |

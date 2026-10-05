@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Account_Lockout.md) · **English** · [Français](Baseline_WIN_D_Account_Lockout.fr.md)
 
-# CXNM - Standard - WIN - D - Account Lockout
+# [Baseline] - WIN - D - Account Lockout
 
 Locks an account for 15 minutes after ten failed sign-in attempts, including that of the built-in administrator, and puts the device into BitLocker recovery after ten failed attempts.
 

@@ -9,7 +9,7 @@
 
 ## Waarom
 
-`CXNM - Standard - WIN - D - Audit and Event Logging` zet de grootte van Application, Security en
+`[Baseline] - WIN - D - Audit and Event Logging` zet de grootte van Application, Security en
 System. De drie operationele kanalen waar incidentonderzoek het meest op leunt, hebben geen CSP
 voor hun maximale grootte en staan standaard op 15 MB of kleiner:
 
@@ -29,7 +29,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 
 | Veld | Waarde |
 |---|---|
-| Naam | `CXNM - Standard - WIN - D - Event Log Sizes` |
+| Naam | `[Baseline] - WIN - D - Event Log Sizes` |
 | Detectiescript | `Detect-EventLogSizes.ps1` |
 | Herstelscript | `Remediate-EventLogSizes.ps1` |
 | Uitvoeren met aanmeldingsreferenties | Nee (SYSTEM) |

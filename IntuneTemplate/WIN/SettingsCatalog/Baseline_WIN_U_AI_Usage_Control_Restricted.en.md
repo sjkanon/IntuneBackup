@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_AI_Usage_Control_Restricted.md) · **English** · [Français](Baseline_WIN_U_AI_Usage_Control_Restricted.fr.md)
 
-# CXNM - Standard - WIN - U - AI Usage Control Restricted
+# [Baseline] - WIN - U - AI Usage Control Restricted
 
 Blocks in Edge the AI services that the policy has not approved. Microsoft Copilot explicitly remains reachable.
 
@@ -15,7 +15,7 @@ Blocks in Edge the AI services that the policy has not approved. Microsoft Copil
 | Source | ISO/IEC 27001:2022 A.5.10, A.5.19 and A.8.1, NIS2 art. 21(2)(d) — mechanism from the existing Edge policy |
 | File | [`Baseline_WIN_U_AI_Usage_Control_Restricted.json`](Baseline_WIN_U_AI_Usage_Control_Restricted.json) |
 
-> For an AI policy that prohibits all AI tools except Microsoft Copilot, Copilot Pro and GitHub Copilot for developers; without this policy nothing stops a user. NOTE when deploying: CXNM - Standard - WIN - U - Microsoft Edge User Experience sets the same block list. Two assigned policies with a different list cause a conflict, after which Intune applies neither. So copy this list into that policy, or remove it there — do not assign both. The three rules from OpenIntuneBaseline v4.0 are already included here — the Store website, the ms-windows-store:// protocol and javascript:// (against ClickFix) — so this list is complete. A URL block list is moreover friction, not a boundary: it does not work on a phone or on a personal device. The more robust variant is the Generative AI category in Defender Web Content Filtering; that lives in the Defender portal, not in this repo. **Alternative to CXNM - Standard - WIN - U - AI Usage Control Permitted**, which sets the same block list without the AI services. Assigning both results in a Conflict, and then nothing is blocked — not even the Store rules.
+> For an AI policy that prohibits all AI tools except Microsoft Copilot, Copilot Pro and GitHub Copilot for developers; without this policy nothing stops a user. NOTE when deploying: [Baseline] - WIN - U - Microsoft Edge User Experience sets the same block list. Two assigned policies with a different list cause a conflict, after which Intune applies neither. So copy this list into that policy, or remove it there — do not assign both. The three rules from OpenIntuneBaseline v4.0 are already included here — the Store website, the ms-windows-store:// protocol and javascript:// (against ClickFix) — so this list is complete. A URL block list is moreover friction, not a boundary: it does not work on a phone or on a personal device. The more robust variant is the Generative AI category in Defender Web Content Filtering; that lives in the Defender portal, not in this repo. **Alternative to [Baseline] - WIN - U - AI Usage Control Permitted**, which sets the same block list without the AI services. Assigning both results in a Conflict, and then nothing is blocked — not even the Store rules.
 
 ## Standards
 

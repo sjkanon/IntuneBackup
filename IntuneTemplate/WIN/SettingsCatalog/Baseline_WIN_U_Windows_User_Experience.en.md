@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_User_Experience.md) · **English** · [Français](Baseline_WIN_U_Windows_User_Experience.fr.md)
 
-# CXNM - Standard - WIN - U - Windows User Experience
+# [Baseline] - WIN - U - Windows User Experience
 
 Turns off notifications on the lock screen and AutoComplete in Internet Explorer.
 

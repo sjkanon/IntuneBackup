@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Storage_Sense.md) · [English](Baseline_WIN_D_Storage_Sense.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Storage Sense
+# [Baseline] - WIN - D - Storage Sense
 
 Nettoie automatiquement les fichiers temporaires, la Corbeille et les anciens téléchargements dès que le disque menace d'être plein, et repasse en ligne uniquement les fichiers OneDrive mis en cache localement.
 

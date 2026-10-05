@@ -43,6 +43,7 @@ const fs = require("fs");
 const path = require("path");
 const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/templates");
 const { DEFENDER_BASELINE } = require("./lib/defender-office");
+const { PREFIX } = require("./lib/organisation");
 const { UPDATES_PREFIX, UPDATE_PACKAGES, UPDATES_BASELINE, WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
@@ -55,9 +56,9 @@ const DEFENDER_OUT_PATH = path.join(OUT_DIR, "Defender-Office365.json");
 const UPDATES_OUT_PATH = path.join(OUT_DIR, "Windows-Updates.json");
 const APP_TEMPLATE_DIR = path.join(REPO_ROOT, "AppTemplate");
 
-const TEMPLATE_NAME = "CXNM - Standard - Baseline";
+const TEMPLATE_NAME = PREFIX + "Baseline";
 
-/** `CXNM - Standard - Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
+/** `[Baseline] - Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
 function instanceSuffix(pkg) {
   const prefix = pkg.startsWith(UPDATES_PREFIX) ? UPDATES_PREFIX : PACKAGE_PREFIX;
   return pkg.slice(prefix.length).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

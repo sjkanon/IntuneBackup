@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_U_Compliance_OS_Version.md) · **English** · [Français](Baseline_MAC_U_Compliance_OS_Version.fr.md)
 
-# CXNM - Standard - MAC - U - Compliance OS Version
+# [Baseline] - MAC - U - Compliance OS Version
 
 Checks whether the Mac runs macOS 14 or later — the version required by the baseline's declarative update policy.
 
@@ -30,16 +30,16 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.en.md) | disabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.en.md) | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.en.md) | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
-| [2160 - GRANT - Agent Users Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device.en.md) | report-only | Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only. |
-| [3020 - SESSION - BYOD Persistence](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3020__SESSION__BYOD_Persistence.en.md) | report-only | Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it. |
-| [3040 - SESSION - Block File Downloads On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices.en.md) | disabled | Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Helps determine whether a device is compliant. If a device fails it, the device becomes non-compliant and the compliant-device requirement in Conditional Access stops it. |
+| 2160 - GRANT - Agent Users Compliant Device | report-only | Determines whether the endpoint an agent user works from is compliant. If it fails, this policy stops the agent user once it leaves report-only. |
+| 3020 - SESSION - BYOD Persistence | report-only | Determines which device counts as compliant and therefore falls outside this session limit. A managed device that becomes non-compliant falls under it. |
+| 3040 - SESSION - Block File Downloads On Unmanaged Devices | disabled | Determines which device counts as compliant and may therefore download. A managed device that becomes non-compliant only gets the browser without downloads. |
 
 ## Properties — 27
 

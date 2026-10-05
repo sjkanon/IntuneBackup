@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Local_Security_Policies.en.md) · [Français](Baseline_WIN_D_Local_Security_Policies.fr.md)
 
-# CXNM - Standard - WIN - D - Local Security Policies
+# [Baseline] - WIN - D - Local Security Policies
 
 De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthenticatieniveau, het gedrag van gebruikersaccountbeheer en het vergrendelen na inactiviteit.
 
@@ -15,7 +15,7 @@ De lokale beveiligingsopties van Windows: anonieme toegang, het netwerkauthentic
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Local Security Policies |
 | Bestand | [`Baseline_WIN_D_Local_Security_Policies.json`](Baseline_WIN_D_Local_Security_Policies.json) |
 
-> Sinds OIB v4.0 is dit de voormalige 24H2+-variant: de basisvariant is vervallen omdat Windows 11 23H2 op 10 november 2026 geen updates meer krijgt. Inhoudelijk verschilt die variant op één punt: het ingebouwde Administrator-account gaat uit (enableadministratoraccountstatus). Dat raakt LAPS niet — CXNM - Standard - WIN - D - Windows LAPS beheert een eigen account (automaticaccountmanagementtarget = nieuw account), niet het ingebouwde. machineinactivitylimit_v2 stond hier als eigen aanvulling, maar OIB zet hem sinds v4.0 in Power and Device Lock — hij staat nu dus in CXNM - Standard - WIN - D - Device Lock en niet meer hier, anders zou dezelfde instelling uit twee policies komen. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat CXNM - Standard - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).
+> Sinds OIB v4.0 is dit de voormalige 24H2+-variant: de basisvariant is vervallen omdat Windows 11 23H2 op 10 november 2026 geen updates meer krijgt. Inhoudelijk verschilt die variant op één punt: het ingebouwde Administrator-account gaat uit (enableadministratoraccountstatus). Dat raakt LAPS niet — [Baseline] - WIN - D - Windows LAPS beheert een eigen account (automaticaccountmanagementtarget = nieuw account), niet het ingebouwde. machineinactivitylimit_v2 stond hier als eigen aanvulling, maar OIB zet hem sinds v4.0 in Power and Device Lock — hij staat nu dus in [Baseline] - WIN - D - Device Lock en niet meer hier, anders zou dezelfde instelling uit twee policies komen. Eigen aanvulling sinds september 2026: networksecurity_restrictntlm_auditincomingntlmtraffic op 'alle accounts' (CIS L1). Die logt inkomend NTLM dat [Baseline] - WIN - D - Disable NTLM zou weigeren, zonder iets te weigeren — de voorbereiding op die pilot. De uitgaande tegenhanger staat er bewust niet in: de audit-waarde daarvan is dezelfde instelling als 'deny all' in Disable NTLM, en op de pilotapparaten levert dat een Conflict op waarna Intune géén van beide toepast. Uitgaand NTLM is op Windows 11 24H2 ook zonder policy te zien, in Microsoft-Windows-NTLM/Operational (4020/4021).
 
 ## Normen
 

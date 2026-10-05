@@ -4,9 +4,10 @@
 Brings the policy names in a tenant in line with the current convention, according to IntuneTemplate/_renames.json.
 
 .DESCRIPTION
-The baseline has been renamed three times: first to "[Baseline] - D/U - Item", then to
-"[Baseline] - PLATFORM - D/U - Item", then to "CXNM - Standard - PLATFORM - D/U - Item". In a
-tenant a policy may therefore still sit under one of three old names. This script looks them up and renames them.
+The baseline has been renamed several times: first to "D/U - Item" behind the prefix "[Baseline]",
+then with the platform added ("PLATFORM - D/U - Item"), and every change of the prefix in
+IntuneTemplate/_organisation.json (scripts/set-organisation.js) adds one more. In a tenant a policy
+may therefore still sit under any of its previousNames. This script looks them up and renames them.
 
 Renaming rather than redeploying: a PATCH leaves the policy id, the assignments and the
 assignment history intact. Start-IntuneRestoreConfig creates policies by name and would put a

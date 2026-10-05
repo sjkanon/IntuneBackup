@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Google_Chrome_Updates.md) · **English** · [Français](Baseline_WIN_D_Google_Chrome_Updates.fr.md)
 
-# CXNM - Standard - WIN - D - Google Chrome Updates
+# [Baseline] - WIN - D - Google Chrome Updates
 
 Makes sure a Chrome update takes effect within three days: relaunch notification required, forced relaunch outside working hours, and sooner when the version is badly out of date.
 

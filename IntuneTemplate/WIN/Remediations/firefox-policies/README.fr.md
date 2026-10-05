@@ -63,7 +63,7 @@ Centre d'administration Intune → **Devices → Scripts and remediations → Cr
 
 | Champ | Valeur |
 |---|---|
-| Nom | `CXNM - Standard - WIN - D - Mozilla Firefox Policies` |
+| Nom | `[Baseline] - WIN - D - Mozilla Firefox Policies` |
 | Script de détection | `Detect-FirefoxPolicies.ps1` |
 | Script de correction | `Remediate-FirefoxPolicies.ps1` — `$Policies` et `$BlockExtensions` identiques au script de détection |
 | Exécuter avec les informations d'identification de l'utilisateur | Non (SYSTEM) |

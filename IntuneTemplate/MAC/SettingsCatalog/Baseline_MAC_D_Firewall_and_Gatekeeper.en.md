@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Firewall_and_Gatekeeper.md) · **English** · [Français](Baseline_MAC_D_Firewall_and_Gatekeeper.fr.md)
 
-# CXNM - Standard - MAC - D - Firewall and Gatekeeper
+# [Baseline] - MAC - D - Firewall and Gatekeeper
 
 Turns on the macOS firewall and lets Gatekeeper allow only software signed by an identified developer.
 
@@ -15,7 +15,7 @@ Turns on the macOS firewall and lets Gatekeeper allow only software signed by an
 | Source | OpenIntuneBaseline macOS v1.0 — Firewall - D - Gatekeeper |
 | File | [`Baseline_MAC_D_Firewall_and_Gatekeeper.json`](Baseline_MAC_D_Firewall_and_Gatekeeper.json) |
 
-> Firewall and stealth mode on (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper on with App Store and identified developers (2.6.5). 'Block all incoming connections' is deliberately off — that breaks AirPlay receiving and screen sharing; since September 2026 the compliance policy no longer requires it either. Since September 2026 Gatekeeper may offer to send a blocked malware file to Apple (enablexprotectmalwareupload, override). Blocking the Finder bypass (com.apple.systempolicy.managed DisableOverride) is not here but in CXNM - Standard - MAC - D - Restrictions Hardening: it is a different payload that OIB v1.0 does not provide, and an override cannot add a new payload group.
+> Firewall and stealth mode on (CIS Apple macOS 26 L1 2.2.1, 2.2.2), Gatekeeper on with App Store and identified developers (2.6.5). 'Block all incoming connections' is deliberately off — that breaks AirPlay receiving and screen sharing; since September 2026 the compliance policy no longer requires it either. Since September 2026 Gatekeeper may offer to send a blocked malware file to Apple (enablexprotectmalwareupload, override). Blocking the Finder bypass (com.apple.systempolicy.managed DisableOverride) is not here but in [Baseline] - MAC - D - Restrictions Hardening: it is a different payload that OIB v1.0 does not provide, and an override cannot add a new payload group.
 
 ## Standards
 

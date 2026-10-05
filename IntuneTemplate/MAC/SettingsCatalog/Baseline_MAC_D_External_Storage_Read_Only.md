@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_External_Storage_Read_Only.en.md) · [Français](Baseline_MAC_D_External_Storage_Read_Only.fr.md)
 
-# CXNM - Standard - MAC - D - External Storage Read Only
+# [Baseline] - MAC - D - External Storage Read Only
 
 Laat macOS alleen externe opslag koppelen die zelf alleen-lezen is. Gewone USB-sticks en externe schijven — die lees-schrijf zijn — worden helemaal niet gekoppeld.
 

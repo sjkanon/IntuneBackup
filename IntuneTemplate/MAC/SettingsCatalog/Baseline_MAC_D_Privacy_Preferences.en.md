@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Privacy_Preferences.md) · **English** · [Français](Baseline_MAC_D_Privacy_Preferences.fr.md)
 
-# CXNM - Standard - MAC - D - Privacy Preferences
+# [Baseline] - MAC - D - Privacy Preferences
 
 Only for organisations that use NinjaOne or TeamViewer. Fixes the privacy permissions (PPPC) of the management tools: NinjaOne Remote and TeamViewer get Accessibility so that remote control works, and the three NinjaOne components get Full Disk Access — without the user having to approve it, and without them being able to revoke it.
 
@@ -15,7 +15,7 @@ Only for organisations that use NinjaOne or TeamViewer. Fixes the privacy permis
 | Source | own baseline — OpenIntuneBaseline has no PPPC policy |
 | File | [`Baseline_MAC_D_Privacy_Preferences.json`](Baseline_MAC_D_Privacy_Preferences.json) |
 
-> Screen recording is not here but in CXNM - Standard - MAC - D - Screen Recording: macOS does not allow an MDM to grant it, so that is a custom profile with AllowStandardUserToSetSystemService instead of a settings catalog entry. Full Disk Access for OneDrive is not here either: CXNM - Standard - MAC - D - Microsoft OneDrive already does that.
+> Screen recording is not here but in [Baseline] - MAC - D - Screen Recording: macOS does not allow an MDM to grant it, so that is a custom profile with AllowStandardUserToSetSystemService instead of a settings catalog entry. Full Disk Access for OneDrive is not here either: [Baseline] - MAC - D - Microsoft OneDrive already does that.
 
 ## Standards
 

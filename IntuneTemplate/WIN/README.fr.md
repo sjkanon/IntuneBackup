@@ -4,7 +4,7 @@
 
 # Windows — 136 policies
 
-Toutes les policies s'appellent `CXNM - Standard - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
+Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
@@ -55,7 +55,7 @@ Affecter à des groupes d'appareils.
 | [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.fr.md) | Place en audit les mêmes règles Attack Surface Reduction que la policy ASR bloquante : Defender journalise ce qu'il bloquerait, mais ne bloque rien. Destiné à mesurer l'impact d'une règle avant de la passer en blocage. | Settings Catalog | 19 | — |
 | [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.fr.md) | Configuration de base de Defender Antivirus telle que CIPP la fournit : protection en temps réel, protection cloud, planification des analyses et ce qui se passe lors d'une détection. | Settings Catalog | 19 | — |
 | [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.fr.md) | Connecte l'appareil à Defender for Endpoint via le connecteur Defender au lieu d'un paquet d'onboarding fixe. De ce fait, le modèle ne contient aucun jeton propre au tenant et fonctionne aussi dans un autre tenant après une restauration, à condition que le connecteur Defender for Endpoint y soit activé. | Settings Catalog | 2 | All Devices |
-| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.fr.md) | Connecte l'appareil à Defender for Endpoint via le connecteur Defender ; même onboarding que CXNM - Standard - WIN - D - Defender EDR Policy, plus une fréquence explicite de rapport de télémétrie (normale). | Settings Catalog | 3 | — |
+| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.fr.md) | Connecte l'appareil à Defender for Endpoint via le connecteur Defender ; même onboarding que [Baseline] - WIN - D - Defender EDR Policy, plus une fréquence explicite de rapport de télémétrie (normale). | Settings Catalog | 3 | — |
 | [**Defender Ransomware Protection**](SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.fr.md) | Empêche un appareil infecté de chiffrer des fichiers sur d'autres machines via le réseau. | Settings Catalog | 2 | All Devices |
 | [**Defender Security Experience**](SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.fr.md) | Détermine ce que l'utilisateur voit dans l'application Sécurité Windows et ce qu'il peut désactiver lui-même. | Settings Catalog | 4 | All Devices |
 | [**Defender Update Ring 1 Pilot**](SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.fr.md) | Récupère en premier les nouvelles définitions et versions de moteur Defender, afin de repérer une mauvaise mise à jour avant que le reste de l'organisation ne la reçoive. | Settings Catalog | 3 | — |

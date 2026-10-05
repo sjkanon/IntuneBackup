@@ -2,9 +2,9 @@
 
 [Nederlands](Baseline_WIN_D_Defender_for_Endpoint_EDR.md) · **English** · [Français](Baseline_WIN_D_Defender_for_Endpoint_EDR.fr.md)
 
-# CXNM - Standard - WIN - D - Defender for Endpoint EDR
+# [Baseline] - WIN - D - Defender for Endpoint EDR
 
-Connects the device to Defender for Endpoint via the Defender connector; same onboarding as CXNM - Standard - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal).
+Connects the device to Defender for Endpoint via the Defender connector; same onboarding as [Baseline] - WIN - D - Defender EDR Policy, plus an explicit telemetry reporting frequency (normal).
 
 | | |
 |---|---|

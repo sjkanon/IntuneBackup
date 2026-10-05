@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Google_Chrome_Extensions.md) · **English** · [Français](Baseline_WIN_D_Google_Chrome_Extensions.fr.md)
 
-# CXNM - Standard - WIN - D - Google Chrome Extensions
+# [Baseline] - WIN - D - Google Chrome Extensions
 
 Blocks extensions in Google Chrome, as Microsoft Edge Extensions does in Edge.
 

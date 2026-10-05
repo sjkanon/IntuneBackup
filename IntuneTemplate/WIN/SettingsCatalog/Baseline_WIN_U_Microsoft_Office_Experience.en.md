@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Office_Experience.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Office_Experience.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Office Experience
+# [Baseline] - WIN - U - Microsoft Office Experience
 
 The per-user Office experience: first-run screens, connected services and which features are visible.
 

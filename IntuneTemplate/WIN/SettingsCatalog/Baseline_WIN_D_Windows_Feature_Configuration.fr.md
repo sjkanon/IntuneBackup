@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Feature_Configuration.md) · [English](Baseline_WIN_D_Windows_Feature_Configuration.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows Feature Configuration
+# [Baseline] - WIN - D - Windows Feature Configuration
 
 Désactive les fonctionnalités Windows susceptibles de faire sortir des données de l'entreprise ou de générer du bruit, comme la recherche web depuis le menu Démarrer.
 

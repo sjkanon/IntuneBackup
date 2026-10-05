@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Office_Updates.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Office_Updates.fr.md)
 
-# CXNM - Standard - WIN - D - Microsoft Office Updates
+# [Baseline] - WIN - D - Microsoft Office Updates
 
 Which update channel Office is on and how quickly updates are installed.
 
@@ -30,11 +30,11 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2110 - GRANT - Token Protection](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2110__GRANT__Token_Protection.en.md) | enabled | Token protection only works in client versions that support bound tokens. An Office app or OneDrive sync client on too old a version is blocked by this policy; this Intune policy keeps those clients current. |
+| 2110 - GRANT - Token Protection | enabled | Token protection only works in client versions that support bound tokens. An Office app or OneDrive sync client on too old a version is blocked by this policy; this Intune policy keeps those clients current. |
 
 ## Settings — 6
 

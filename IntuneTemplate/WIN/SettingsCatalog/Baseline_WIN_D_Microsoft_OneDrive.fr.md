@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_OneDrive.md) · [English](Baseline_WIN_D_Microsoft_OneDrive.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Microsoft OneDrive
+# [Baseline] - WIN - D - Microsoft OneDrive
 
 Connecte automatiquement le client OneDrive avec le compte professionnel et déplace Bureau, Documents et Images vers OneDrive, afin que rien ne soit stocké uniquement en local.
 
@@ -30,11 +30,11 @@ Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan o
 
 ## Conditional Access
 
-Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+Ces stratégies Conditional Access du dépôt CA-Policies s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
 
 | Stratégie CA | State | Ce que cette policy fait pour elle |
 |---|---|---|
-| [2110 - GRANT - Token Protection](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2110__GRANT__Token_Protection.fr.md) | enabled | La token protection ne fonctionne que dans les versions de client qui prennent en charge les jetons liés. Une app Office ou un client de synchronisation OneDrive trop ancien est bloqué par cette stratégie ; cette stratégie Intune maintient ces clients à jour. |
+| 2110 - GRANT - Token Protection | enabled | La token protection ne fonctionne que dans les versions de client qui prennent en charge les jetons liés. Une app Office ou un client de synchronisation OneDrive trop ancien est bloqué par cette stratégie ; cette stratégie Intune maintient ces clients à jour. |
 
 ## Paramètres — 19
 

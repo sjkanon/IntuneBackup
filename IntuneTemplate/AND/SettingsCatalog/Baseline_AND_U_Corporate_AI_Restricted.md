@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_AND_U_Corporate_AI_Restricted.en.md) · [Français](Baseline_AND_U_Corporate_AI_Restricted.fr.md)
 
-# CXNM - Standard - AND - U - Corporate AI Restricted
+# [Baseline] - AND - U - Corporate AI Restricted
 
 Voorkomt op fully managed en corporate-owned Android-toestellen dat scherminhoud naar een assistent-app gaat (zoals Gemini of Circle to Search) en dat apps functies aan AI-agenten aanbieden.
 

@@ -85,7 +85,7 @@ ernaast en installeert met dezelfde MSI-properties als hieronder. Verwijderen do
 `.intunewin` te bouwen.
 
 1. CIPP → **Tools → Community Repos** → deze repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
-2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy**:
+2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy**:
    kies de tenants en als toewijzing de groep `SEC-Baseline-Pilot` (het template wijst zelf
    niets toe). Of zet het in een baseline met de standard *Deploy Intune Application Template*.
 
@@ -107,7 +107,7 @@ lijst in `Install-WAU.ps1` van `excluded_apps.txt` — beide routes installeren 
 
 | Veld | Waarde |
 |---|---|
-| Naam | `CXNM - Standard - WIN - D - Winget-AutoUpdate` |
+| Naam | `[Baseline] - WIN - D - Winget-AutoUpdate` |
 | Installatieopdracht | `msiexec /i WAU.msi /qn RUN_WAU=NO USERCONTEXT=1 UPDATESATLOGON=1 UPDATESINTERVAL=Daily UPDATESATTIME=11:00:00 UPDATESATTIMEDELAY=02:00 NOTIFICATIONLEVEL=SuccessOnly DONOTRUNONMETERED=1 DISABLEWAUAUTOUPDATE=1` |
 | Verwijderopdracht | `msiexec /x {FB0EB14E-95AC-45D7-A951-432316FFCBD4} /qn` (v2.12.0; het script geeft de code voor een andere versie) |
 | Installatiegedrag | Systeem |

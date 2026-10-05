@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Personal_Data_Encryption.en.md) · [Français](Baseline_WIN_U_Personal_Data_Encryption.fr.md)
 
-# CXNM - Standard - WIN - U - Personal Data Encryption
+# [Baseline] - WIN - U - Personal Data Encryption
 
 Versleutelt de persoonlijke mappen van de gebruiker met een sleutel die aan hun Windows Hello-aanmelding hangt, zodat de data ook op een aanstaand apparaat versleuteld blijft.
 

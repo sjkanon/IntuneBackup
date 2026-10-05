@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_BitLocker.en.md) · [Français](Baseline_WIN_D_BitLocker.fr.md)
 
-# CXNM - Standard - WIN - D - BitLocker
+# [Baseline] - WIN - D - BitLocker
 
 Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard.
 

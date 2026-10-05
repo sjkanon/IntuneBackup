@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) · [Français](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric
+# [Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric
 
 Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken.
 
@@ -30,11 +30,11 @@ Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.
 
 ## Conditional Access
 
-Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
 
 | CA-policy | State | Wat deze policy ervoor doet |
 |---|---|---|
-| [2190 - GRANT - Windows Hello Passkeys](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys.md) | report-only | Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet. |
+| 2190 - GRANT - Windows Hello Passkeys | report-only | Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet. |
 
 ## Instellingen — 5
 

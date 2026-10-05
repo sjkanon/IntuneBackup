@@ -1,6 +1,6 @@
 {
   "TemplateType": "BaselineTemplate",
-  "templateName": "CXNM - Standard - Defender for Office 365",
+  "templateName": "[Baseline] - Defender for Office 365",
   "description": "Email and collaboration protection as CIPP standards: Safe Links, Safe Attachments, anti-phishing, anti-spam, anti-malware, Defender for SharePoint/OneDrive/Teams and user quarantine notifications every four hours. Custom policies at Microsoft Strict level, so CIPP can detect and repair drift. Do not assign the Standard/Strict preset policies in the same tenant: they take precedence (scripts/Set-DefenderOfficeTenant.ps1 turns them off). Needs the CIPP custom variable %SecurityAlertMail% for the admin alerts. Assign the tenants before you run it.",
   "assignedTenants": [
     {
@@ -32,7 +32,7 @@
           "standard": "SafeLinksPolicy",
           "instance": "SafeLinksPolicy",
           "variables": {
-            "name": "CXNM - Standard - Safe Links",
+            "name": "[Baseline] - Safe Links",
             "AllowClickThrough": false,
             "DisableUrlRewrite": false,
             "EnableOrganizationBranding": false,
@@ -46,7 +46,7 @@
           "standard": "SafeAttachmentPolicy",
           "instance": "SafeAttachmentPolicy",
           "variables": {
-            "name": "CXNM - Standard - Safe Attachments",
+            "name": "[Baseline] - Safe Attachments",
             "SafeAttachmentAction": "Block",
             "QuarantineTag": "DefaultFullAccessWithNotificationPolicy",
             "Redirect": false,
@@ -70,7 +70,7 @@
           "standard": "AntiPhishPolicy",
           "instance": "AntiPhishPolicy",
           "variables": {
-            "name": "CXNM - Standard - Anti-Phishing",
+            "name": "[Baseline] - Anti-Phishing",
             "PhishThresholdLevel": "3",
             "EnableFirstContactSafetyTips": true,
             "EnableSimilarUsersSafetyTips": true,
@@ -93,7 +93,7 @@
           "standard": "SpamFilterPolicy",
           "instance": "SpamFilterPolicy",
           "variables": {
-            "name": "CXNM - Standard - Anti-Spam",
+            "name": "[Baseline] - Anti-Spam",
             "SpamAction": "Quarantine",
             "SpamQuarantineTag": "DefaultFullAccessWithNotificationPolicy",
             "HighConfidenceSpamAction": "Quarantine",
@@ -127,7 +127,7 @@
           "standard": "MalwareFilterPolicy",
           "instance": "MalwareFilterPolicy",
           "variables": {
-            "name": "CXNM - Standard - Anti-Malware",
+            "name": "[Baseline] - Anti-Malware",
             "FileTypeAction": "Reject",
             "OptionalFileTypes": "cpl,hlp,inf,ins,isp,js,jse,one,onepkg,ps1,psm1,svg,vhd,vhdx,xlam",
             "QuarantineTag": "AdminOnlyAccessPolicy",

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Data_Protection.en.md) · [Français](Baseline_IOS_D_Data_Protection.fr.md)
 
-# CXNM - Standard - IOS - D - Data Protection
+# [Baseline] - IOS - D - Data Protection
 
 Houdt bedrijfsgegevens op elk ingeschreven toestel gescheiden van privé-apps: documenten uit beheerde apps openen niet in onbeheerde apps, AirDrop telt als onbeheerd, beheerde apps synchroniseren niet naar iCloud, privé-apps lezen geen werkcontacten en lokale back-ups zijn versleuteld.
 
@@ -15,7 +15,7 @@ Houdt bedrijfsgegevens op elk ingeschreven toestel gescheiden van privé-apps: d
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — SC - Data Protection - BYOD/Corporate en SC - iCloud & Storage - BYOD/Corporate (CIS Apple iOS/iPadOS 26 Benchmark v1.0.0); samengevoegd tot één policy voor alle ingeschreven toestellen, omdat elke sleutel ook zonder supervisie en bij user enrollment werkt |
 | Bestand | [`Baseline_IOS_D_Data_Protection.json`](Baseline_IOS_D_Data_Protection.json) |
 
-> De opdracht noemde een aparte 'Data Protection BYOD'. Het is één policy geworden: dezelfde sleutels met dezelfde waarden in een BYOD- én een Corporate-variant zou dubbel onderhoud zijn, en CXNM - Standard - IOS - D - Restrictions Corporate bevat alleen wat supervisie vraagt. Contacten: allowunmanagedtoreadmanagedcontacts=false (privé-apps lezen geen werkcontacten, gelijk aan de Apple-standaard maar expliciet), maar allowmanagedtowriteunmanagedcontacts=**true** — met open-in-scheiding aan kan Outlook anders geen contacten naar de Contacten-app schrijven en ziet de gebruiker bij een inkomend gesprek geen naam; dezelfde reden waarom contactSyncBlocked in App Protection bewust uit staat. allowopenfromunmanagedtomanaged en requiremanagedpasteboard bewust niet: foto's uit de privébibliotheek blijven deelbaar met werkapps (zie ANALYSE.md). Niet overgenomen uit UniFy BYOD: allowscreenshot=false (schermafdrukken op het héle privétoestel uit; App Protection blokkeert ze al binnen de beheerde apps), allowcloudprivaterelay=false en forceairplayoutgoingrequestspairingpassword (privacy/gemak, geen gegevensscheiding).
+> De opdracht noemde een aparte 'Data Protection BYOD'. Het is één policy geworden: dezelfde sleutels met dezelfde waarden in een BYOD- én een Corporate-variant zou dubbel onderhoud zijn, en [Baseline] - IOS - D - Restrictions Corporate bevat alleen wat supervisie vraagt. Contacten: allowunmanagedtoreadmanagedcontacts=false (privé-apps lezen geen werkcontacten, gelijk aan de Apple-standaard maar expliciet), maar allowmanagedtowriteunmanagedcontacts=**true** — met open-in-scheiding aan kan Outlook anders geen contacten naar de Contacten-app schrijven en ziet de gebruiker bij een inkomend gesprek geen naam; dezelfde reden waarom contactSyncBlocked in App Protection bewust uit staat. allowopenfromunmanagedtomanaged en requiremanagedpasteboard bewust niet: foto's uit de privébibliotheek blijven deelbaar met werkapps (zie ANALYSE.md). Niet overgenomen uit UniFy BYOD: allowscreenshot=false (schermafdrukken op het héle privétoestel uit; App Protection blokkeert ze al binnen de beheerde apps), allowcloudprivaterelay=false en forceairplayoutgoingrequestspairingpassword (privacy/gemak, geen gegevensscheiding).
 
 ## Normen
 

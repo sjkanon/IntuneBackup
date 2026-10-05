@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Administrator_Protection.md) · [English](Baseline_WIN_D_Administrator_Protection.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Administrator Protection
+# [Baseline] - WIN - D - Administrator Protection
 
 Fait travailler les administrateurs sans droits élevés par défaut et leur fait demander l'autorisation pour chaque action. Windows 11 24H2 et versions ultérieures.
 

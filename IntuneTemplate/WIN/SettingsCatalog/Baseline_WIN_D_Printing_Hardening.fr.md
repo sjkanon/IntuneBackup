@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Printing_Hardening.md) · [English](Baseline_WIN_D_Printing_Hardening.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Printing Hardening
+# [Baseline] - WIN - D - Printing Hardening
 
 Active Windows Protected Print, interdit aux utilisateurs standard d'installer des pilotes d'imprimante pour une imprimante partagée et ferme l'impression via HTTP.
 
@@ -15,7 +15,7 @@ Active Windows Protected Print, interdit aux utilisateurs standard d'installer d
 | Source | CIS v4 Windows 11 L1 et la Microsoft Security Baseline — paramètres repris d'IntuneAdmin, valeurs vérifiées par rapport aux définitions du settings catalog. |
 | Fichier | [`Baseline_WIN_D_Printing_Hardening.json`](Baseline_WIN_D_Printing_Hardening.json) |
 
-> Windows Protected Print requiert Windows 11 24H2 ou ultérieur et abandonne les imprimantes qui n'ont pas de pilote Mopria — en pratique, les imprimantes réseau plus anciennes et les imprimantes d'étiquettes. Inventoriez le parc d'imprimantes avant d'affecter largement ; sur une flotte sans imprimantes propres, c'est sans coût. Les deux autres paramètres sont sûrs sans condition. Chevauchement vérifié (septembre 2026) : `printers_configurewindowsprotectedprint` ne figure que dans cette policy ; CXNM - Standard - WIN - D - Printing définit vingt autres ids d'imprimante (Point and Print, RPC, RedirectionGuard, installation de pilotes réservée aux administrateurs) et n'entre pas en conflit. ANALYSE.md cite encore Protected Print comme « volontairement non repris » — ce n'est plus exact : il est ici, en phase 2.
+> Windows Protected Print requiert Windows 11 24H2 ou ultérieur et abandonne les imprimantes qui n'ont pas de pilote Mopria — en pratique, les imprimantes réseau plus anciennes et les imprimantes d'étiquettes. Inventoriez le parc d'imprimantes avant d'affecter largement ; sur une flotte sans imprimantes propres, c'est sans coût. Les deux autres paramètres sont sûrs sans condition. Chevauchement vérifié (septembre 2026) : `printers_configurewindowsprotectedprint` ne figure que dans cette policy ; [Baseline] - WIN - D - Printing définit vingt autres ids d'imprimante (Point and Print, RPC, RedirectionGuard, installation de pilotes réservée aux administrateurs) et n'entre pas en conflit. ANALYSE.md cite encore Protected Print comme « volontairement non repris » — ce n'est plus exact : il est ici, en phase 2.
 
 ## Normes
 

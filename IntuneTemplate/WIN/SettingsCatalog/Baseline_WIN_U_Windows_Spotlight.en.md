@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_Spotlight.md) · **English** · [Français](Baseline_WIN_U_Windows_Spotlight.fr.md)
 
-# CXNM - Standard - WIN - U - Windows Spotlight
+# [Baseline] - WIN - U - Windows Spotlight
 
 Turns off Windows Spotlight, tips and consumer-oriented suggestions, so that no advertisements or recommended apps appear on a work device.
 

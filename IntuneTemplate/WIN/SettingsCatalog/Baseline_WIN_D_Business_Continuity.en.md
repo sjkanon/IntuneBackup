@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Business_Continuity.md) · **English** · [Français](Baseline_WIN_D_Business_Continuity.fr.md)
 
-# CXNM - Standard - WIN - D - Business Continuity
+# [Baseline] - WIN - D - Business Continuity
 
 Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician.
 

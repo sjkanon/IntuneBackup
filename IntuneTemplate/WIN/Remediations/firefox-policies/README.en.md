@@ -63,7 +63,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 
 | Field | Value |
 |---|---|
-| Name | `CXNM - Standard - WIN - D - Mozilla Firefox Policies` |
+| Name | `[Baseline] - WIN - D - Mozilla Firefox Policies` |
 | Detection script | `Detect-FirefoxPolicies.ps1` |
 | Remediation script | `Remediate-FirefoxPolicies.ps1` — `$Policies` and `$BlockExtensions` identical to the detection script |
 | Run using logged-on credentials | No (SYSTEM) |

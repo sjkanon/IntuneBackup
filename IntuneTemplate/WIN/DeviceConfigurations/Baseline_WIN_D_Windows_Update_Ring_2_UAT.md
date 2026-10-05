@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) · [Français](Baseline_WIN_D_Windows_Update_Ring_2_UAT.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Update Ring 2 UAT
+# [Baseline] - WIN - D - Windows Update Ring 2 UAT
 
 Tweede updatering: krijgt Windows-updates na de pilot en vóór productie.
 

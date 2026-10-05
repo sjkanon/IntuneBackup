@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Office_Security.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Office_Security.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Office Security
+# [Baseline] - WIN - U - Microsoft Office Security
 
 The user side of Office security: macro behaviour, trusted locations and Protected View.
 

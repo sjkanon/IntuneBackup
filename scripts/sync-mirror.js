@@ -17,11 +17,17 @@
  * to be clean — but a mirror of uncommitted changes is a mirror of something that can still
  * change here, so it warns about that.
  *
+ * The target keeps its own organisation: if its IntuneTemplate/_organisation.json has a different
+ * prefix or CA URL than here, set-organisation.js runs there after copying, so the mirror gets the
+ * content from here under its own names. `--prefix` and `--ca-url` set (or change) that the first
+ * time; after that it is in the target's own _organisation.json.
+ *
  * Usage:
  *   node scripts/sync-mirror.js <target-dir>              # copy and commit
  *   node scripts/sync-mirror.js <target-dir> --dry-run    # only show what would happen
  *   node scripts/sync-mirror.js <target-dir> --push       # and push the target clone
  *   node scripts/sync-mirror.js <target-dir> --message "…"
+ *   node scripts/sync-mirror.js <target-dir> --prefix "Contoso - " --ca-url https://…/blob/main/
  */
 
 const fs = require("fs");
@@ -29,6 +35,7 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
+const ORGANISATION_REL = "IntuneTemplate/_organisation.json";
 
 function git(cwd, args) {
   return execFileSync("git", ["-C", cwd, ...args], {
@@ -43,12 +50,15 @@ function trackedFiles(repo) {
 }
 
 function parseArgs(argv) {
-  const opts = { target: null, dryRun: false, push: false, message: null };
+  const opts = { target: null, dryRun: false, push: false, message: null, prefix: undefined, caUrl: undefined };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "--dry-run") opts.dryRun = true;
     else if (arg === "--push") opts.push = true;
     else if (arg === "--message") opts.message = argv[++i];
+    else if (arg === "--prefix") opts.prefix = argv[++i];
+    else if (arg === "--ca-url") opts.caUrl = argv[++i];
+    else if (arg === "--no-ca-url") opts.caUrl = null;
     else if (arg.startsWith("--")) {
       console.error(`Onbekende optie: ${arg}`);
       process.exit(2);
@@ -83,6 +93,27 @@ const dirty = git(REPO_ROOT, ["status", "--porcelain"]).trim();
 if (dirty) {
   console.warn("Let op: de werkmap hier is niet schoon. De spiegel krijgt de huidige bestanden,");
   console.warn("ook wat nog niet gecommit is.\n");
+}
+
+/** prefix en caRepoUrl van een clone, of null als die nog geen _organisation.json heeft. */
+function organisationOf(root) {
+  const file = path.join(root, ORGANISATION_REL);
+  if (!fs.existsSync(file)) return null;
+  const org = JSON.parse(fs.readFileSync(file, "utf8"));
+  return { prefix: org.prefix, caRepoUrl: org.caRepoUrl || null };
+}
+
+// Vóór het kopiëren lezen: daarna staat er de versie van hier.
+const sourceOrg = organisationOf(REPO_ROOT);
+const targetOrg = organisationOf(targetRoot) || sourceOrg;
+const wantedOrg = {
+  prefix: opts.prefix ?? targetOrg.prefix,
+  caRepoUrl: opts.caUrl === undefined ? targetOrg.caRepoUrl : opts.caUrl,
+};
+const convert = wantedOrg.prefix !== sourceOrg.prefix || wantedOrg.caRepoUrl !== sourceOrg.caRepoUrl;
+if (convert) {
+  console.log(`De spiegel houdt voorvoegsel "${wantedOrg.prefix}" en CA-URL ${wantedOrg.caRepoUrl || "(geen)"};`);
+  console.log("de lijst hieronder is vóór die omzetting, dus ruimer dan wat er uiteindelijk verandert.\n");
 }
 
 const source = trackedFiles(REPO_ROOT);
@@ -137,6 +168,16 @@ if (opts.dryRun) {
 if (total === 0) {
   console.log("De spiegel liep al gelijk.");
   process.exit(0);
+}
+
+if (convert) {
+  const args = [path.join(targetRoot, "scripts", "set-organisation.js"), "--prefix", wantedOrg.prefix];
+  if (wantedOrg.caRepoUrl) args.push("--ca-url", wantedOrg.caRepoUrl);
+  else args.push("--no-ca-url");
+  console.log("\nOmzetten naar de organisatie van de spiegel (set-organisation.js daar):");
+  execFileSync(process.execPath, args, { cwd: targetRoot, stdio: ["ignore", "ignore", "inherit"] });
+  const left = git(targetRoot, ["status", "--porcelain"]).trim();
+  console.log(left ? `${left.split("\n").length} wijziging(en) over na de omzetting.` : "Na de omzetting is er niets meer anders.");
 }
 
 const head = git(REPO_ROOT, ["rev-parse", "--short", "HEAD"]).trim();

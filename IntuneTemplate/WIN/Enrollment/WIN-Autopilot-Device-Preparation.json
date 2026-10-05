@@ -1,5 +1,5 @@
 {
-  "name": "CXNM - Standard - WIN - Autopilot Device Preparation",
+  "name": "[Baseline] - WIN - Autopilot Device Preparation",
   "description": "Windows Autopilot device preparation (v2): user-driven, Microsoft Entra join, standard user. No desktop on failure. The device group is set separately (setEnrollmentTimeDeviceMembershipTarget) - see README.",
   "platforms": "windows10",
   "technologies": "enrollment",

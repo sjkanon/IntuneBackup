@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Recall_Boundaries.md) · [English](Baseline_WIN_D_Windows_AI_Recall_Boundaries.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows AI Recall Boundaries
+# [Baseline] - WIN - D - Windows AI Recall Boundaries
 
 Encadre Recall lorsqu'il est autorisé : pas d'instantanés des portails d'administration ni du coffre-fort de mots de passe, conservation de 30 jours au plus, 10 Go au plus, et les utilisateurs ne peuvent pas exporter leurs données Recall.
 

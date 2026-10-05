@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) · [Français](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.fr.md)
 
-# CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure
+# [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure
 
 Dwingt in Edge DNS over HTTPS af zonder terugval: elk DNS-verzoek gaat versleuteld naar de opgegeven DoH-resolver, en zonder die resolver lost Edge niets op.
 
@@ -15,7 +15,7 @@ Dwingt in Edge DNS over HTTPS af zonder terugval: elk DNS-verzoek gaat versleute
 | Bron | Microsoft Edge-beleid DnsOverHttpsMode en DnsOverHttpsTemplates (Edge 83+) — waarden geverifieerd tegen de settings catalog-definities |
 | Bestand | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 
-> Vul `DOH-RESOLVER-INVULLEN` met de host van de resolver; meerdere templates scheiden met een spatie. **Alternatief van CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — wijs er één toe. Captive portals (hotel-wifi) kunnen niet meer laden tot de gebruiker verbonden is; test dat vooraf.
+> Vul `DOH-RESOLVER-INVULLEN` met de host van de resolver; meerdere templates scheiden met een spatie. **Alternatief van [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — wijs er één toe. Captive portals (hotel-wifi) kunnen niet meer laden tot de gebruiker verbonden is; test dat vooraf.
 
 ## Normen
 

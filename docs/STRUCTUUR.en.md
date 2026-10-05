@@ -102,10 +102,10 @@ agree.
 
 | Phase | Meaning | Policies | CIPP package | CIPP stage |
 |---:|---|---:|---|---:|
-| 1 | Deploy now | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | Pilot first | 41 | `CXNM - Standard - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
-| 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `CXNM - Standard - Baseline-Wacht`, not assigned | 3 |
-| 4 | Dedicated group (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<group>` | 1 |
+| 1 | Deploy now | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
+| 2 | Pilot first | 41 | `[Baseline] - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
+| 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `[Baseline] - Baseline-Wacht`, not assigned | 3 |
+| 4 | Dedicated group (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<group>` | 1 |
 | 5 | Do not deploy — alternative to another policy | 15 | none | – |
 
 Moving on to stage 2 happens once everything from stage 1 is compliant **and** two weeks have
@@ -141,7 +141,7 @@ Details: [scripts/README.en.md](../scripts/README.en.md).
 | [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) | source → repo | `import-oib.js` on a local clone | Windows v4.0 taken from a branch at commit `f247604`; re-import once the tag exists |
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | source → repo | `import-intuneadmin.js` | JSONs in UTF-16LE |
 | CA-Policies repo (cloned next to this one as `../CA-Policies`) | repo ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git holds the `--no-ca` version; CI cannot see the other repo |
-| CA-Policies repo | repo ← CA, per policy | `generate-docs.js` reads `docs/policies.json` and writes at each Intune policy the CA policies that rely on it; the CA READMEs link back | CI reads the copy `_ca.json`; links go to the mirrors on GitHub (ConXioN-ITCE) |
+| CA-Policies repo | repo ← CA, per policy | `generate-docs.js` reads `docs/policies.json` and writes at each Intune policy the CA policies that rely on it; the CA READMEs link back | CI reads the copy `_ca.json`; links go to `caRepoUrl` from `_organisation.json`; without a URL only the names |
 | CIPP | repo → CIPP | template repository sync on this repo | `BaselineTemplate/Baseline.json` only comes along via Tools → Community Repos → Import |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | repo → tenant | `Start-IntuneRestoreConfig` and `…Assignments` with `-RestoreById $false` | restore App Protection assignments separately |
 | Microsoft Graph | repo → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | `-WhatIf` first |
@@ -169,7 +169,7 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 
 ## Conventions
 
-- **Naming:** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in the tenant,
+- **Naming:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in the tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` as a file. Without the `Baseline_` prefix a file
   silently drops out of every pipeline.
 - **D or U:** for Windows Settings Catalog it follows from the `settingDefinitionId` (`user_` = U).

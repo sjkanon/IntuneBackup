@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Subsystem_for_Linux.md) · **English** · [Français](Baseline_WIN_D_Windows_Subsystem_for_Linux.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Subsystem for Linux
+# [Baseline] - WIN - D - Windows Subsystem for Linux
 
 Restricts the Windows Subsystem for Linux, which otherwise opens a complete second environment alongside Windows where most security controls do not apply.
 

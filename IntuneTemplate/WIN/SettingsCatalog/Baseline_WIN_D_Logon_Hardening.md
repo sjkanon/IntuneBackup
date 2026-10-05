@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Logon_Hardening.en.md) · [Français](Baseline_WIN_D_Logon_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Logon Hardening
+# [Baseline] - WIN - D - Logon Hardening
 
 Vereist CTRL+ALT+DEL vóór het aanmelden en haalt de netwerkkeuze van het vergrendelscherm weg.
 

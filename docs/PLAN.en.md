@@ -35,7 +35,7 @@ up to date in one go, instead of being renamed twice in a row.
 `scripts/import-oib.js`; see [README.en.md](../README.en.md) for the layout, the naming and how to
 pull in a new OIB version.
 
-**Steps 1 and 2** (earlier): device/user split, renaming to `[Baseline] - D/U - Item`,
+**Steps 1 and 2** (earlier): device/user split, renaming to `D/U - Item` behind the then prefix `[Baseline]`,
 `check-scope.js` as a blocking CI step.
 
 **Step 4 — compliance.** There were none. Without a compliance policy, "require a compliant
@@ -60,7 +60,7 @@ into Internet Explorer Legacy (204), Security Hardening (41), Printing (13), Rem
 RPC (9) and some smaller ones. The 15 settings with no OIB counterpart are in
 `WIN - D - Legacy Hardening`, kept separate so an OIB upgrade neither drags them along nor throws them away.
 
-**Platform axis.** All policies are now named `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` and
+**Platform axis.** All policies are now named `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` and
 live in `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 policies) and BYOD app protection
 for iOS and Android (2) are new.
 

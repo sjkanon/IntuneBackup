@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Windows_Spotlight.md) · [English](Baseline_WIN_U_Windows_Spotlight.en.md) · **Français**
 
-# CXNM - Standard - WIN - U - Windows Spotlight
+# [Baseline] - WIN - U - Windows Spotlight
 
 Désactive Windows Spotlight, les astuces et les suggestions orientées grand public, afin qu'aucune publicité ni application recommandée n'apparaisse sur un appareil professionnel.
 

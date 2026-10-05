@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Apple_Intelligence_Restricted.md) · **English** · [Français](Baseline_IOS_D_Apple_Intelligence_Restricted.fr.md)
 
-# CXNM - Standard - IOS - D - Apple Intelligence Restricted
+# [Baseline] - IOS - D - Apple Intelligence Restricted
 
 Turns off the generative Apple Intelligence features on enrolled iPhones and iPads — Writing Tools, Genmoji, Image Playground, Image Wand, personalised handwriting, summaries in Mail, Notes, Safari and Visual Intelligence — as well as the integration with external AI services such as ChatGPT.
 
@@ -15,7 +15,7 @@ Turns off the generative Apple Intelligence features on enrolled iPhones and iPa
 | Source | Declarative configurations com.apple.configuration.intelligence.settings and external-intelligence.settings in the iOS settings catalog; selection from UniFy iOS/iPadOS Baseline v1.2 — SC - Apple Intelligence & Siri - Corporate and IntuneAdmin — Disable Apple Intelligence, with Writing Tools off where UniFy allows it. The com.apple.applicationaccess variants that IntuneAdmin uses are marked as Deprecated in the catalog |
 | File | [`Baseline_IOS_D_Apple_Intelligence_Restricted.json`](Baseline_IOS_D_Apple_Intelligence_Restricted.json) |
 
-> **Alternative to CXNM - Standard - IOS - D - Apple Intelligence Permitted** — which sets the same keys to true; assigning both results in a Conflict, after which neither does anything. Siri itself stays on; only Siri on the lock screen is turned off via Restrictions Corporate. Deliberately not: allowappleintelligencereport=false (that report is precisely the transparency about what went to Private Cloud Compute) and forceondeviceonlydictation/-translation (not a generative feature). For devices without enrolment, App Protection has the iOS 26 fields writingToolsConfigurationState and genmojiConfigurationState; they are deliberately not in the phase 1 policy, because this is an organisational decision and App Protection is only one policy for everyone — see RAPPORT.
+> **Alternative to [Baseline] - IOS - D - Apple Intelligence Permitted** — which sets the same keys to true; assigning both results in a Conflict, after which neither does anything. Siri itself stays on; only Siri on the lock screen is turned off via Restrictions Corporate. Deliberately not: allowappleintelligencereport=false (that report is precisely the transparency about what went to Private Cloud Compute) and forceondeviceonlydictation/-translation (not a generative feature). For devices without enrolment, App Protection has the iOS 26 fields writingToolsConfigurationState and genmojiConfigurationState; they are deliberately not in the phase 1 policy, because this is an organisational decision and App Protection is only one policy for everyone — see RAPPORT.
 
 ## Standards
 

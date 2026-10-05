@@ -21,6 +21,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { readTemplates, relativePathFor, packageFor } = require("./lib/templates");
+const { PREFIX, DISPLAY_NAME_RE } = require("./lib/organisation");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -45,7 +46,7 @@ const FOLDER_TO_TYPE = {
 const TENANT_FIELDS = ["id", "createdDateTime", "lastModifiedDateTime", "version", "supportsScopeTags", "@odata.context", "isAssigned", "deployedAppCount"];
 
 /**
- * Bestandsnaam uit de policynaam: "CXNM - Standard - WIN - D - In-Box App Removal" wordt
+ * Bestandsnaam uit de policynaam: "[Baseline] - WIN - D - In-Box App Removal" wordt
  * "Baseline_WIN_D_In_Box_App_Removal". Leestekens worden underscores (niet weggehaald),
  * zodat "Sign-On" leesbaar "Sign_On" wordt in plaats van "SignOn".
  *
@@ -55,7 +56,7 @@ const TENANT_FIELDS = ["id", "createdDateTime", "lastModifiedDateTime", "version
  * afleiding zou daar een tweede bestand naast zetten.
  */
 function deriveBaseName(displayName) {
-  const m = displayName.match(/^CXNM - Standard - (WIN|MAC|IOS|AND) - ([DU]) - (.+)$/);
+  const m = displayName.match(DISPLAY_NAME_RE);
   if (!m) return null;
   const item = m[3]
     .replace(/[^A-Za-z0-9]+/g, "_")
@@ -213,7 +214,7 @@ function main() {
       const existing = existingByName.get(displayName);
       const baseName = existing ? existing.baseName : deriveBaseName(displayName);
       if (!baseName) {
-        failed.push(`${displayName} [${folder}]: naam volgt niet "CXNM - Standard - PLATFORM - D/U - Item", dus is niet in te delen`);
+        failed.push(`${displayName} [${folder}]: naam volgt niet "${PREFIX}PLATFORM - D/U - Item", dus is niet in te delen`);
         continue;
       }
       const relPath = relativePathFor(baseName, type);

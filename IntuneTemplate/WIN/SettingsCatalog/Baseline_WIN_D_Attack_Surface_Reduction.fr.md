@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Attack_Surface_Reduction.md) · [English](Baseline_WIN_D_Attack_Surface_Reduction.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Attack Surface Reduction
+# [Baseline] - WIN - D - Attack Surface Reduction
 
 Bloque les techniques d'attaque visées par les règles Attack Surface Reduction de Defender : macros qui lancent des processus, contenu exécutable provenant des e-mails et de l'USB, abus des moteurs Office et de script, et vol d'identifiants depuis LSASS.
 

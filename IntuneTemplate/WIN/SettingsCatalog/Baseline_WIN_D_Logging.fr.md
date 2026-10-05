@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Logging.md) · [English](Baseline_WIN_D_Logging.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Logging
+# [Baseline] - WIN - D - Logging
 
 Enregistre une transcription de chaque session PowerShell, afin de pouvoir voir a posteriori ce qu'un administrateur a réellement exécuté.
 
@@ -15,7 +15,7 @@ Enregistre une transcription de chaque session PowerShell, afin de pouvoir voir 
 | Source | ISO/IEC 27001:2022 A.8.15 et A.8.16, NIS2 art. 21(2)(b) — paramètres issus de CIS v4 Windows 11 L2 |
 | Fichier | [`Baseline_WIN_D_Logging.json`](Baseline_WIN_D_Logging.json) |
 
-> La journalisation des blocs de script était déjà activée dans CXNM - Standard - WIN - D - Security Hardening ; elle a été volontairement omise ici pour éviter un conflit. Ce qui manquait, c'est la transcription : la journalisation des blocs de script montre quel code a été chargé, la transcription montre la session elle-même avec les entrées, les sorties et les horodatages. Les politiques de journalisation exigent généralement cette dernière. Une réserve : les transcriptions sont enregistrées par défaut dans le profil de l'utilisateur, où ce même utilisateur peut les supprimer. Si les journaux doivent rester hors de portée de l'utilisateur, renseignez outputdirectory avec un partage central dès qu'il en existe un.
+> La journalisation des blocs de script était déjà activée dans [Baseline] - WIN - D - Security Hardening ; elle a été volontairement omise ici pour éviter un conflit. Ce qui manquait, c'est la transcription : la journalisation des blocs de script montre quel code a été chargé, la transcription montre la session elle-même avec les entrées, les sorties et les horodatages. Les politiques de journalisation exigent généralement cette dernière. Une réserve : les transcriptions sont enregistrées par défaut dans le profil de l'utilisateur, où ce même utilisateur peut les supprimer. Si les journaux doivent rester hors de portée de l'utilisateur, renseignez outputdirectory avec un partage central dès qu'il en existe un.
 
 ## Normes
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Corporate_Device_Security.md) · [English](Baseline_AND_U_Corporate_Device_Security.en.md) · **Français**
 
-# CXNM - Standard - AND - U - Corporate Device Security
+# [Baseline] - AND - U - Corporate Device Security
 
 Durcit les appareils Android fully managed et corporate-owned : code à six chiffres (numérique complexe) qui efface l'appareil après dix tentatives, saisie du code une fois par jour au lieu de la seule biométrie, écran allumé quinze minutes au plus, Play Protect et mises à jour automatiques des applications activés, pas de transfert de fichiers via USB ni stockage externe, pas de 2G, pas d'heure manuelle, pas de Private Space et pas de partage du professionnel vers le personnel.
 

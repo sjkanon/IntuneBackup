@@ -10,8 +10,8 @@ raakt nooit een persoonlijk werkprofiel) — maar ze zijn nodig op drie plekken:
 | Bestand | Regel | Gebruik |
 |---|---|---|
 | `AND-Personal-Work-Profile.json` | `device.deviceOwnership -eq "Personal"` | optioneel: werkprofielpolicies alleen op persoonlijke toestellen |
-| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | `CXNM - Standard - AND - D - System Updates` toewijzen aan *alle apparaten* met dit filter |
-| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `CXNM - Standard - AND - D - Compliance Dedicated Device Health`, als je geen aparte apparaatgroep maakt |
+| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | `[Baseline] - AND - D - System Updates` toewijzen aan *alle apparaten* met dit filter |
+| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `[Baseline] - AND - D - Compliance Dedicated Device Health`, als je geen aparte apparaatgroep maakt |
 
 Voor het dedicated filter: vul de naam van het dedicated inschrijfprofiel in. Zijn er meerdere
 (kiosk en gedeeld), voeg ze samen met `-or`, bijvoorbeeld

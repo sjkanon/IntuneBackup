@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) · [English](Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows Hello Cloud Kerberos Trust
+# [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust
 
 Permet à Windows Hello de fonctionner avec un Active Directory on-prem sans certificats, via un ticket Kerberos émis par Entra ID.
 

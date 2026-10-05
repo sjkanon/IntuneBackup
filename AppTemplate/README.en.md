@@ -7,7 +7,7 @@ having to upload an `.intunewin`.
 
 | File | App | Source |
 |---|---|---|
-| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.en.md) |
+| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `[Baseline] - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.en.md) |
 | [`Winget-AutoUpdate-AllDevices.json`](Winget-AutoUpdate-AllDevices.json) | the same app, assigned to all devices — for the baseline [`Windows-Updates.json`](../BaselineTemplate/README.en.md#windows-updatesjson--patching) | same |
 
 ## How it works

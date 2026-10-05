@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.md) · [English](Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) · **Français**
 
-# CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Default
+# [Baseline] - WIN - U - Microsoft Outlook Cached Mode Default
 
 Active uniquement le mode Exchange mis en cache et laisse le reste à la valeur par défaut d'Outlook — les dossiers partagés sont donc eux aussi mis en cache.
 

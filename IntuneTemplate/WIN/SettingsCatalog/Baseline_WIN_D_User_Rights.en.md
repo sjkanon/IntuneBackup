@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_User_Rights.md) · **English** · [Français](Baseline_WIN_D_User_Rights.fr.md)
 
-# CXNM - Standard - WIN - D - User Rights
+# [Baseline] - WIN - D - User Rights
 
 Defines who has which rights on the device: log on as a service, make backups, shut down the device, load drivers.
 

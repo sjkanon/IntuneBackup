@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.iosMobileAppConfiguration",
-  "displayName": "CXNM - Standard - IOS - Edge - Managed Devices",
+  "displayName": "[Baseline] - IOS - Edge - Managed Devices",
   "description": "Microsoft Edge on enrolled devices: work account only, Defender SmartScreen on, certificate errors cannot be ignored.",
   "roleScopeTagIds": [
     "0"

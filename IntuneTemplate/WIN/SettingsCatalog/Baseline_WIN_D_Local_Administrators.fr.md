@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Local_Administrators.md) · [English](Baseline_WIN_D_Local_Administrators.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Local Administrators
+# [Baseline] - WIN - D - Local Administrators
 
 Détermine qui est membre du groupe local Administrators, afin que LAPS gère un groupe maîtrisé plutôt que ce qui se trouve par hasard sur l'appareil.
 

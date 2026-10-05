@@ -15,6 +15,7 @@
 const fs = require("fs");
 const path = require("path");
 const { UPDATE_PACKAGES, UPDATE_PACKAGE_BY_TARGET } = require("./windows-updates");
+const { PREFIX } = require("./organisation");
 
 const PLATFORMS = {
   WIN: { label: "Windows", expectedPlatforms: ["windows10", "windows10X"] },
@@ -121,7 +122,7 @@ function readTemplates(templateDir) {
  * waarde (`Where-Object { $_.Package }`), dus die policies verschijnen in geen enkel pakket.
  * Los kiezen kan nog steeds — dat is de bedoeling, ze bestaan als alternatief.
  */
-const PACKAGE_PREFIX = "CXNM - Standard - Baseline-";
+const PACKAGE_PREFIX = PREFIX + "Baseline-";
 
 /** Toewijzingsdoel in _assignments.json -> package. Alleen fase 1 komt hier langs. */
 const PACKAGE_BY_TARGET = {

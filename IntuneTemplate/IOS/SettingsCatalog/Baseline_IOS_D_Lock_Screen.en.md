@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Lock_Screen.md) · **English** · [Français](Baseline_IOS_D_Lock_Screen.fr.md)
 
-# CXNM - Standard - IOS - D - Lock Screen
+# [Baseline] - IOS - D - Lock Screen
 
 Shows a message for the finder on the lock screen of a corporate iPhone or iPad, so that a lost device can be returned to the organisation.
 
@@ -12,7 +12,7 @@ Shows a message for the finder on the lock screen of a corporate iPhone or iPad,
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | Apple Shared Device Configuration payload (com.apple.shareddeviceconfiguration) in the iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate and IntuneAdmin — Lock Screen Message. The lock screen restrictions from the same UniFy policy are in CXNM - Standard - IOS - D - Restrictions Corporate |
+| Source | Apple Shared Device Configuration payload (com.apple.shareddeviceconfiguration) in the iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate and IntuneAdmin — Lock Screen Message. The lock screen restrictions from the same UniFy policy are in [Baseline] - IOS - D - Restrictions Corporate |
 | File | [`Baseline_IOS_D_Lock_Screen.json`](Baseline_IOS_D_Lock_Screen.json) |
 
 > **Fill in VERLOREN-TOESTEL-TEKST-INVULLEN** before assignment, for example 'Found this? Call the service desk: <number>' — no personal name, that is information for a thief. The repo has no CIPP token for organisation name or phone number (%OrganizationId% is a GUID), hence the placeholder. Asset tag (assettaginformation) deliberately not set: UniFy uses {{DEVICENAME}} there, and I could not verify whether Intune replaces that token in this payload.

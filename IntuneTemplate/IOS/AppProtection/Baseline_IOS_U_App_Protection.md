@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_U_App_Protection.en.md) · [Français](Baseline_IOS_U_App_Protection.fr.md)
 
-# CXNM - Standard - IOS - U - App Protection
+# [Baseline] - IOS - U - App Protection
 
 Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt.
 
@@ -15,7 +15,7 @@ Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iP
 | Bron | OpenIntuneBaseline BYOD — iOS App Protection |
 | Bestand | [`Baseline_IOS_U_App_Protection.json`](Baseline_IOS_U_App_Protection.json) |
 
-> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een organisatiebesluit (zie CXNM - Standard - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.
+> MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een organisatiebesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.
 
 ## Normen
 
@@ -30,12 +30,12 @@ Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.
 
 ## Conditional Access
 
-Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
 
 | CA-policy | State | Wat deze policy ervoor doet |
 |---|---|---|
-| [2070 - GRANT - Mobile Device Access Requirements](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements.md) | disabled | De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht. |
-| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.md) | enabled | Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over. |
+| 2070 - GRANT - Mobile Device Access Requirements | disabled | De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht. |
+| 2150 - GRANT - Cloud PC Mobile Access | enabled | Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over. |
 
 ## Eigenschappen — 68
 

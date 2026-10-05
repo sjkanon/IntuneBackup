@@ -74,23 +74,23 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 
 | `Package` | Affecter dans CIPP à | Stage | Policies |
 |---|---|---:|---:|
-| `CXNM - Standard - Baseline-Devices` | Assign to all devices | 1 | 67 |
-| `CXNM - Standard - Baseline-Users` | Assign to all users | 1 | 32 |
-| `CXNM - Standard - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 42 |
-| `CXNM - Standard - Baseline-Wacht` | Do not assign | 3 | 26 |
-| `CXNM - Standard - Baseline-ADE-token` | Do not assign (à lier à un jeton ADE dans Intune) | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
-| `CXNM - Standard - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
-| `CXNM - Standard - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
-| `CXNM - Standard - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
-| `CXNM - Standard - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `CXNM - Standard - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
-| `CXNM - Standard - Updates-Ring3` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2 | 1 | 1 |
-| `CXNM - Standard - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `CXNM - Standard - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
-| `CXNM - Standard - Updates-Devices` | Assign to all devices | 1 | 2 |
+| `[Baseline] - Baseline-Devices` | Assign to all devices | 1 | 67 |
+| `[Baseline] - Baseline-Users` | Assign to all users | 1 | 32 |
+| `[Baseline] - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 42 |
+| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
+| `[Baseline] - Baseline-ADE-token` | Do not assign (à lier à un jeton ADE dans Intune) | 1 | 2 |
+| `[Baseline] - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
+| `[Baseline] - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
+| `[Baseline] - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
+| `[Baseline] - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
+| `[Baseline] - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
+| `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
+| `[Baseline] - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Updates-Ring3` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Updates-Devices` | Assign to all devices | 1 | 2 |
 | *(vide)* | non déployé | – | 15 |
 
 La colonne stage est le stage dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),

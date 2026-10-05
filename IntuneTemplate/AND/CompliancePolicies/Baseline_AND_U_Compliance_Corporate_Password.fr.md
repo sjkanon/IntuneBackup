@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_U_Compliance_Corporate_Password.md) · [English](Baseline_AND_U_Compliance_Corporate_Password.en.md) · **Français**
 
-# CXNM - Standard - AND - U - Compliance Corporate Password
+# [Baseline] - AND - U - Compliance Corporate Password
 
 Vérifie si un appareil Android fully managed ou corporate-owned dispose d'un code numérique complexe d'au moins six chiffres, se verrouille après quinze minutes, ne réutilise pas les cinq derniers codes et est chiffré.
 
@@ -15,7 +15,7 @@ Vérifie si un appareil Android fully managed ou corporate-owned dispose d'un co
 | Source | UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed et Corp-Work-Profile - v1.5 (partie mot de passe) ; sans expiration après 365 jours, délai de verrouillage de 15 au lieu de 5 minutes |
 | Fichier | [`Baseline_AND_U_Compliance_Corporate_Password.json`](Baseline_AND_U_Compliance_Corporate_Password.json) |
 
-> Volontairement pas de `passwordExpirationDays` (UniFy : 365) : NIST SP 800-63B déconseille la rotation obligatoire. Quinze minutes au lieu des cinq d'UniFy, comme pour iOS, macOS, Windows et le profil professionnel ; CIS indique ≤ 2 minutes, et UniFy s'en écarte également volontairement. Les paramètres eux-mêmes sont définis par CXNM - Standard - AND - U - Corporate Device Security ; sans cette policy, l'utilisateur n'est pas invité à choisir un code conforme à ces exigences.
+> Volontairement pas de `passwordExpirationDays` (UniFy : 365) : NIST SP 800-63B déconseille la rotation obligatoire. Quinze minutes au lieu des cinq d'UniFy, comme pour iOS, macOS, Windows et le profil professionnel ; CIS indique ≤ 2 minutes, et UniFy s'en écarte également volontairement. Les paramètres eux-mêmes sont définis par [Baseline] - AND - U - Corporate Device Security ; sans cette policy, l'utilisateur n'est pas invité à choisir un code conforme à ces exigences.
 
 ## Normes
 
@@ -30,16 +30,16 @@ Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan o
 
 ## Conditional Access
 
-Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+Ces stratégies Conditional Access du dépôt CA-Policies s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
 
 | Stratégie CA | State | Ce que cette policy fait pour elle |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.fr.md) | disabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.fr.md) | enabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.fr.md) | enabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
-| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.fr.md) | enabled | L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme. |
-| [3020 - SESSION - BYOD Persistence](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3020__SESSION__BYOD_Persistence.fr.md) | report-only | Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis. |
-| [3040 - SESSION - Block File Downloads On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices.fr.md) | disabled | Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Contribue à déterminer si un appareil est conforme. Si un appareil n'y satisfait pas, il devient non conforme et l'exigence d'appareil conforme de Conditional Access le bloque. |
+| 2150 - GRANT - Cloud PC Mobile Access | enabled | L'autre façon : un appareil conforme. Contribue à déterminer si un iPhone ou un appareil Android est considéré comme conforme. |
+| 3020 - SESSION - BYOD Persistence | report-only | Détermine quel appareil est considéré comme conforme et échappe donc à cette limite de session. Un appareil géré qui devient non conforme y est soumis. |
+| 3040 - SESSION - Block File Downloads On Unmanaged Devices | disabled | Détermine quel appareil est considéré comme conforme et peut donc télécharger. Un appareil géré qui devient non conforme n'a plus que le navigateur sans téléchargement. |
 
 ## Propriétés — 28
 

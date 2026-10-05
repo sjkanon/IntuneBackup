@@ -39,12 +39,12 @@ de catalog en staat als template-paar in `IntuneTemplate/WIN/SettingsCatalog/`
 
 ## Samenspel met Defender Network Protection
 
-Network Protection (aan in `CXNM - Standard - WIN - D - Defender Antivirus`) blokkeert kwaadaardige
+Network Protection (aan in `[Baseline] - WIN - D - Defender Antivirus`) blokkeert kwaadaardige
 domeinen door DNS- en TLS-verkeer op het apparaat te inspecteren. DoH van **Windows zelf** loopt
 via de DNS-client van het besturingssysteem en blijft zichtbaar voor Defender. DoH **binnen een
 browser van derden** (Chrome, Firefox) omzeilt de DNS-client; Microsoft adviseert in de
 Network Protection-documentatie om in die browsers DoH en QUIC uit te zetten. Edge valt daar niet
-onder, omdat Edge SmartScreen gebruikt. In Chrome zet `CXNM - Standard - WIN - D - Google Chrome Security` ze uit, in Firefox
+onder, omdat Edge SmartScreen gebruikt. In Chrome zet `[Baseline] - WIN - D - Google Chrome Security` ze uit, in Firefox
 [`firefox-policies/`](../firefox-policies/README.md). Controleer het na uitrol met een testdomein van
 `smartscreentestratings2.net` in Chrome.
 
@@ -54,7 +54,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 
 | Veld | Waarde |
 |---|---|
-| Naam | `CXNM - Standard - WIN - D - DNS over HTTPS Allow` (of `… Require`) |
+| Naam | `[Baseline] - WIN - D - DNS over HTTPS Allow` (of `… Require`) |
 | Detectiescript | `Detect-DoHPolicy.ps1`; pas `$Expected` bovenaan aan naar 2 (Allow) of 3 (Require) |
 | Herstelscript | `Remediate-DoHPolicy.ps1` met `$Mode = 'Allow'` of `'Require'` bovenaan |
 | Uitvoeren met aanmeldingsreferenties | Nee (SYSTEM) |

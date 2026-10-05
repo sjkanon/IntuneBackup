@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.md) · **English** · [Français](Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Hello PIN Complexity Alphanumeric
+# [Baseline] - WIN - D - Windows Hello PIN Complexity Alphanumeric
 
 Requires an alphanumeric Windows Hello PIN: at least one digit, one lowercase letter, one uppercase letter and one special character.
 

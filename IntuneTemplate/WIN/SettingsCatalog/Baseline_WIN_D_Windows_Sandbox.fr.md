@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Sandbox.md) · [English](Baseline_WIN_D_Windows_Sandbox.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Windows Sandbox
+# [Baseline] - WIN - D - Windows Sandbox
 
 Restreint Windows Sandbox, qui ouvre sinon un Windows jetable ayant accès au réseau et au presse-papiers de l'hôte.
 

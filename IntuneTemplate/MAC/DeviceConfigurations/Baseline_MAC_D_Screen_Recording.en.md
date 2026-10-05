@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Screen_Recording.md) · **English** · [Français](Baseline_MAC_D_Screen_Recording.fr.md)
 
-# CXNM - Standard - MAC - D - Screen Recording
+# [Baseline] - MAC - D - Screen Recording
 
 Only for organisations that use NinjaOne or TeamViewer. Sets screen recording for NinjaOne Remote and TeamViewer to AllowStandardUserToSetSystemService: a user without administrator rights can tick the box themselves, without an administrator password. Enabling it remains a manual click — macOS does not allow an MDM to grant screen recording.
 
@@ -15,7 +15,7 @@ Only for organisations that use NinjaOne or TeamViewer. Sets screen recording fo
 | Source | own baseline — Apple does not allow screen recording in the settings catalog form of PPPC |
 | File | [`Baseline_MAC_D_Screen_Recording.json`](Baseline_MAC_D_Screen_Recording.json) |
 
-> Apple does not let screen recording be granted with "Allow" — an MDM can only deny it or, as here, let the user turn it on themselves without an administrator password. The first click therefore remains manual, as does the periodic reconfirmation on recent macOS versions. A custom profile and not the settings catalog, because the mobileconfig carries the literal value from Apple's schema rather than an Intune enum that can shift with a definition update. The same five bundles and the same code requirements as the Accessibility entries in CXNM - Standard - MAC - D - Privacy Preferences; those two profiles do not touch each other because they set different TCC services.
+> Apple does not let screen recording be granted with "Allow" — an MDM can only deny it or, as here, let the user turn it on themselves without an administrator password. The first click therefore remains manual, as does the periodic reconfirmation on recent macOS versions. A custom profile and not the settings catalog, because the mobileconfig carries the literal value from Apple's schema rather than an Intune enum that can shift with a definition update. The same five bundles and the same code requirements as the Accessibility entries in [Baseline] - MAC - D - Privacy Preferences; those two profiles do not touch each other because they set different TCC services.
 
 ## Standards
 

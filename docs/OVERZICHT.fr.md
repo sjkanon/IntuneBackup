@@ -127,7 +127,7 @@ l'étape 4 avant l'étape 3 produit deux policies qui se contredisent.
 
 ## D'abord en pilote
 
-Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `CXNM - Standard - Baseline-Pilot` vers
+Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `[Baseline] - Baseline-Pilot` vers
 `SEC-Baseline-Pilot`, et à tout le monde seulement lorsqu'elles passent en phase 1 — une PR, car cela
 change à qui elles sont déployées. La raison pour chaque policy est le `faseWaarom` du manifeste.
 

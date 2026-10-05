@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Additional_Configuration.md) · **English** · [Français](Baseline_WIN_D_Defender_Additional_Configuration.fr.md)
 
-# CXNM - Standard - WIN - D - Defender Additional Configuration
+# [Baseline] - WIN - D - Defender Additional Configuration
 
 Defender settings that do not fit in the Endpoint Security template and therefore require a separate policy.
 

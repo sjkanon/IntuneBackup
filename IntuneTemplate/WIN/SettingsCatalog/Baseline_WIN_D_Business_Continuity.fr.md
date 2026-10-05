@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Business_Continuity.md) · [English](Baseline_WIN_D_Business_Continuity.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Business Continuity
+# [Baseline] - WIN - D - Business Continuity
 
 Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-même un paquet de récupération depuis le cloud au lieu d'attendre un technicien.
 

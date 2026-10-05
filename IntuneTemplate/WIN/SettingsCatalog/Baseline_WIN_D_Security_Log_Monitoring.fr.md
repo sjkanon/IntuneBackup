@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Security_Log_Monitoring.md) · [English](Baseline_WIN_D_Security_Log_Monitoring.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Security Log Monitoring
+# [Baseline] - WIN - D - Security Log Monitoring
 
 Avertit dans le journal Système dès que le journal Sécurité est plein à 90 % et journalise l'exécution du pipeline de tous les modules PowerShell, afin que lors d'un incident le journal n'ait pas été écrasé à l'insu de tous et que l'activité PowerShell soit entièrement traçable.
 

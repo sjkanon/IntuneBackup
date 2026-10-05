@@ -70,7 +70,7 @@ Additionally for device preparation:
 
 | Property | Value | Why |
 |---|---|---|
-| `displayName` | `CXNM Standard WIN Autopilot User Driven` | **No hyphens.** Intune only accepts letters, digits, spaces and `: " ? . @ $ & _ [ ] { } \| \` in a profile name. A hyphen gets a bare 500 with no reason. That is why this name departs from the `CXNM - Standard - …` convention. |
+| `displayName` | `[Baseline] WIN Autopilot User Driven` | **No hyphens.** Intune only accepts letters, digits, spaces and `: " ? . @ $ & _ [ ] { } \| \` in a profile name. A hyphen gets a bare 500 with no reason. That is why this name departs from the `[Baseline] - …` convention. |
 | `outOfBoxExperienceSetting.deviceUsageType` | `singleUser` | user-driven; `shared` is self-deploying and belongs in a separate kiosk profile |
 | `outOfBoxExperienceSetting.userType` | `standard` | the user does not become a local admin; admin work goes through LAPS |
 | `preprovisioningAllowed` | `true` | a partner or the service desk can pre-provision devices (Windows key 5× in OOBE). Does nothing if nobody uses it. |
@@ -172,7 +172,7 @@ After enrollment the policy name is in `enrollmentProfileName`. Use it for a dyn
 everything that came in through device preparation:
 
 ```
-(device.enrollmentProfileName -eq "CXNM - Standard - WIN - Autopilot Device Preparation")
+(device.enrollmentProfileName -eq "[Baseline] - WIN - Autopilot Device Preparation")
 ```
 
 If you rename the policy, update this rule.
@@ -213,7 +213,7 @@ they match the files here:
 
 | Standard | Setting | Value | Note |
 |---|---|---|---|
-| **Enable Autopilot Profile** | Profile Display Name | `CXNM Standard WIN Autopilot User Driven` | no hyphens; CIPP checks this |
+| **Enable Autopilot Profile** | Profile Display Name | `[Baseline] WIN Autopilot User Driven` | no hyphens; CIPP checks this |
 | | Convert all targeted devices to Autopilot | **off** | **on** by default |
 | | Enable Self-deploying Mode | **off** | **on** by default; on means a kiosk profile with no user |
 | | Allow White Glove OOBE | on | |
@@ -223,7 +223,7 @@ they match the files here:
 | **Enrollment Status Page settings** | Timeout · Install Windows quality updates | `90` · on | |
 | | Show progress · Log collection · Only show during OOBE · Block device usage · Allow reset | on | |
 | | Allow device use on failure | off | |
-| **Deploy Device Prep Profile** | Profile Display Name | `CXNM - Standard - WIN - Autopilot Device Preparation` | |
+| **Deploy Device Prep Profile** | Profile Display Name | `[Baseline] - WIN - Autopilot Device Preparation` | |
 | | Deployment Type · Join Type · Account Type | Single user · Microsoft Entra join · Standard user | *Shared* and *hybrid* do not exist in the definition |
 | | Timeout · Allow skip · Allow diagnostics | `90` · off · on | |
 | | Device Security Group Name · Create new group | the group name · on | CIPP creates it with the Intune Provisioning Client as owner |

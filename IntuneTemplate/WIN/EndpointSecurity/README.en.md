@@ -41,8 +41,8 @@ use the v2 ids. Do not add it alongside this one.
 
 | File | What |
 |---|---|
-| `AppControl_BuiltIn_Audit.graph.json` | `POST /beta/deviceManagement/configurationPolicies` — Windows components + Store apps trusted, ISG (good reputation) and managed installer trusted, **audit mode**. Name `CXNM - Standard - WIN - D - App Control Audit`. |
-| `AppControl_BuiltIn_Enforce.graph.json` | Same body, **enforce**. Name `CXNM - Standard - WIN - D - App Control Enforced`. Never together with the audit policy on the same device. |
+| `AppControl_BuiltIn_Audit.graph.json` | `POST /beta/deviceManagement/configurationPolicies` — Windows components + Store apps trusted, ISG (good reputation) and managed installer trusted, **audit mode**. Name `[Baseline] - WIN - D - App Control Audit`. |
+| `AppControl_BuiltIn_Enforce.graph.json` | Same body, **enforce**. Name `[Baseline] - WIN - D - App Control Enforced`. Never together with the audit policy on the same device. |
 | `Set-AppControlTemplateIds.ps1` | Fetches the `settingInstanceTemplateId` (and `settingValueTemplateId`) from `GET /beta/deviceManagement/configurationPolicyTemplates('d3849ba8-bf95-467c-9640-aa2334eae9e3_1')/settingTemplates`, fills them into both bodies and optionally creates the policies (`-Create`, no assignment). |
 | `hunting-queries.kql` | Advanced Hunting queries for the audit phase and for monitoring after enforcement. |
 

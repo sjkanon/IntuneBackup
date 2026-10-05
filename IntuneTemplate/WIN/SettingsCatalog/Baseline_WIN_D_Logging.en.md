@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Logging.md) · **English** · [Français](Baseline_WIN_D_Logging.fr.md)
 
-# CXNM - Standard - WIN - D - Logging
+# [Baseline] - WIN - D - Logging
 
 Writes a transcript of every PowerShell session, so that afterwards you can see what an administrator actually ran.
 
@@ -15,7 +15,7 @@ Writes a transcript of every PowerShell session, so that afterwards you can see 
 | Source | ISO/IEC 27001:2022 A.8.15 and A.8.16, NIS2 art. 21(2)(b) — settings from CIS v4 Windows 11 L2 |
 | File | [`Baseline_WIN_D_Logging.json`](Baseline_WIN_D_Logging.json) |
 
-> Script block logging was already on in CXNM - Standard - WIN - D - Security Hardening; it has been deliberately left out here to avoid a conflict. What was missing is transcription: script block logging shows which code was loaded, the transcript shows the session itself with input, output and timestamps. Logging policy usually asks for the latter. One caveat: transcripts end up in the user's profile by default, where that same user can delete them. If logs must stay out of the user's reach, fill outputdirectory with a central share as soon as there is one.
+> Script block logging was already on in [Baseline] - WIN - D - Security Hardening; it has been deliberately left out here to avoid a conflict. What was missing is transcription: script block logging shows which code was loaded, the transcript shows the session itself with input, output and timestamps. Logging policy usually asks for the latter. One caveat: transcripts end up in the user's profile by default, where that same user can delete them. If logs must stay out of the user's reach, fill outputdirectory with a central share as soon as there is one.
 
 ## Standards
 

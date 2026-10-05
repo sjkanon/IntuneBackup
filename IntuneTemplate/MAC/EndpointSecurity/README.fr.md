@@ -18,7 +18,7 @@ signal EDR n'arrive dans le portail Defender et le contrôle de conformité de
 
 ## Est-ce faisable de façon générique, comme sur Windows ? Non.
 
-Sur Windows, `CXNM - Standard - WIN - D - Defender for Endpoint EDR` définit le paramètre
+Sur Windows, `[Baseline] - WIN - D - Defender for Endpoint EDR` définit le paramètre
 `device_vendor_msft_windowsadvancedthreatprotection_onboarding_fromconnector` : Intune récupère lui-même le
 package d'intégration via le connecteur Defender, donc le modèle ne contient rien de propre au tenant.
 
@@ -51,7 +51,7 @@ Microsoft Defender for Endpoint → *Connect macOS devices … to Microsoft Defe
    macOS, Connectivity type *Streamlined*, Deployment method *Mobile Device Management / Microsoft
    Intune* → Download. Dans le zip : `intune/WindowsDefenderATPOnboarding.xml`.
 4. **Profil.** Devices → macOS → Configuration → Create → Templates → **Custom**. Nom
-   `CXNM - Standard - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
+   `[Baseline] - MAC - D - Defender for Endpoint Onboarding`, deployment channel *Device channel*,
    fichier `WindowsDefenderATPOnboarding.xml`. Affecter au même groupe.
 5. **Vérifier.** Sur le Mac : `mdatp health --field licensed` → `true`, et
    `mdatp health --field org_id` affiche le tenant. L'appareil apparaît dans le portail en

@@ -1,0 +1,14 @@
+{
+  "_comment": [
+    "Wat per organisatie verschilt, op één plek. Alle scripts lezen dit via scripts/lib/organisation.js.",
+    "",
+    "prefix    - voorvoegsel van elke policy, elk CIPP-pakket en elke baseline: <prefix>WIN - D - Item.",
+    "            Niet met de hand wijzigen: scripts/set-organisation.js zet het om in álle bestanden",
+    "            en zet de oude namen in _renames.json, zodat Rename-BaselinePolicy.ps1 de",
+    "            tenant-policies hernoemt in plaats van dat CIPP dubbelen aanmaakt.",
+    "caRepoUrl - waar de CA-Policies-repo te lezen is (eindigt op /blob/main/), of null. Met een URL",
+    "            linken de policy-docs naar de CA-policies; zonder staan alleen de namen er."
+  ],
+  "prefix": "[Baseline] - ",
+  "caRepoUrl": null
+}

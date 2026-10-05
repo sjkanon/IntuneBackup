@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Edge_Password_Management.md) · [English](Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) · **Français**
 
-# CXNM - Standard - WIN - U - Microsoft Edge Password Management
+# [Baseline] - WIN - U - Microsoft Edge Password Management
 
 Détermine si Edge peut enregistrer et afficher des mots de passe, afin que les mots de passe professionnels ne se retrouvent pas dans un profil de navigateur.
 

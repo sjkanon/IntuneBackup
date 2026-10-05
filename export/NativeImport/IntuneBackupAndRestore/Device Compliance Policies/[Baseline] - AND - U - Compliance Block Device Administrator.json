@@ -1,0 +1,23 @@
+{
+    "@odata.type": "#microsoft.graph.androidCompliancePolicy",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "securityBlockDeviceAdministratorManagedDevices": true,
+    "scheduledActionsForRule": [
+        {
+            "ruleName": "PasswordRequired",
+            "scheduledActionConfigurations": [
+                {
+                    "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                    "gracePeriodHours": 24,
+                    "actionType": "block",
+                    "notificationTemplateId": "00000000-0000-0000-0000-000000000000",
+                    "notificationMessageCCList": []
+                }
+            ]
+        }
+    ],
+    "displayName": "[Baseline] - AND - U - Compliance Block Device Administrator",
+    "description": "Marks every Android device still managed with the legacy device administrator as non-compliant, so that it has to move to Android Enterprise. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Intune compliance for Android device administrator (`securityBlockDeviceAdministratorManagedDevices`); recommendation from UniFy Android Enterprise Baseline v1.5.1, guide 9 (Enrollment Restrictions)."
+}

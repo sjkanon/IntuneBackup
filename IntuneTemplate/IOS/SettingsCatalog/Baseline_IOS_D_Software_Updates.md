@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Software_Updates.en.md) · [Français](Baseline_IOS_D_Software_Updates.fr.md)
 
-# CXNM - Standard - IOS - D - Software Updates
+# [Baseline] - IOS - D - Software Updates
 
 Dwingt op ingeschreven iPhones en iPads de nieuwste iOS-versie af uiterlijk 14 dagen na uitgave (installatie om 02:00), zet automatisch downloaden en installeren van OS- en beveiligingsupdates vast aan, en laat de gebruiker beveiligingsverbeteringen niet terugdraaien.
 

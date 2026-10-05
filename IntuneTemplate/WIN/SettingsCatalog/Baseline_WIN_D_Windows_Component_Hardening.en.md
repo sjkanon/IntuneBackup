@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Component_Hardening.md) · **English** · [Français](Baseline_WIN_D_Windows_Component_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Component Hardening
+# [Baseline] - WIN - D - Windows Component Hardening
 
 Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP server, no continuing on another device, no enumeration of local users, protected mode for the shell protocol, no WinRT access from hosted content and no upgrade offer via the Store.
 
@@ -15,7 +15,7 @@ Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP 
 | Source | CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) — instance structures adopted from IntuneAdmin, values verified against the settings catalog definitions; 'Enumerate local users' deliberately deviates from the IntuneAdmin value |
 | File | [`Baseline_WIN_D_Windows_Component_Hardening.json`](Baseline_WIN_D_Windows_Component_Hardening.json) |
 
-> **Deliberate deviation from the source:** IntuneAdmin sets 'Enumerate local users on domain-joined computers' to `_1` (Enabled), CIS L1 18.9.28.x requires Disabled; here `_0`. Three of these profiles (NTP server, Store upgrade offer, WinRT hosted content) may be L2 in the CIS benchmark itself; they are included because IntuneAdmin delivers them as L1 and they do not affect any workstation functionality. Overlap checked: `hideexclusionsfromlocaladmins` is in Defender Additional Configuration (different id), hiding connected users in Logon Hardening (different id). Hiding Defender exclusions from regular users (CIS) is deliberately not included here: OpenIntuneBaseline v4.0 dropped that setting because 'Hide Exclusions From Local Admins' in CXNM - Standard - WIN - D - Defender Additional Configuration already covers it.
+> **Deliberate deviation from the source:** IntuneAdmin sets 'Enumerate local users on domain-joined computers' to `_1` (Enabled), CIS L1 18.9.28.x requires Disabled; here `_0`. Three of these profiles (NTP server, Store upgrade offer, WinRT hosted content) may be L2 in the CIS benchmark itself; they are included because IntuneAdmin delivers them as L1 and they do not affect any workstation functionality. Overlap checked: `hideexclusionsfromlocaladmins` is in Defender Additional Configuration (different id), hiding connected users in Logon Hardening (different id). Hiding Defender exclusions from regular users (CIS) is deliberately not included here: OpenIntuneBaseline v4.0 dropped that setting because 'Hide Exclusions From Local Admins' in [Baseline] - WIN - D - Defender Additional Configuration already covers it.
 
 ## Standards
 

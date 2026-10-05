@@ -173,9 +173,14 @@ Vijf policytypes, onderscheiden door `.Type` in het template:
 ## Naamgeving
 
 ```
-CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>      policynaam in de tenant
+[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>      policynaam in de tenant
 Baseline_<WIN|MAC|IOS|AND>_<D|U>_<Item>.json              bestandsnaam
 ```
+
+`[Baseline] - ` is het voorvoegsel uit [`IntuneTemplate/_organisation.json`](IntuneTemplate/_organisation.json);
+het staat ook voor elk CIPP-pakket en elke baseline. Een eigen voorvoegsel zet je met
+`node scripts/set-organisation.js --prefix "Contoso - "`, niet met de hand: zie
+[scripts/README.md](scripts/README.md#een-eigen-voorvoegsel).
 
 De prefix `Baseline_` blijft verplicht: `export-intunebackup.js`, `generate-docs.js` en
 `Set-BaselineAssignment.ps1` filteren er alle drie op. Een bestand dat die prefix verliest
@@ -346,9 +351,9 @@ De stages die erin zitten:
 
 | Stage | Pakketten | Doorschuiven naar déze stage |
 |---:|---|---|
-| 1 · Nu | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` en de acht groepspakketten `CXNM - Standard - Baseline-SEC-*` (fase 4, één per groep) | — stage 1 geldt altijd |
-| 2 · Pilot | `CXNM - Standard - Baseline-Pilot` | `success` (alles uit stage 1 is compliant) **en** `time` van twee weken |
-| 3 · Wacht op voorwaarde | `CXNM - Standard - Baseline-Wacht` | `manual` — iemand zet 'm door |
+| 1 · Nu | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` en de acht groepspakketten `[Baseline] - Baseline-SEC-*` (fase 4, één per groep) | — stage 1 geldt altijd |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot` | `success` (alles uit stage 1 is compliant) **en** `time` van twee weken |
+| 3 · Wacht op voorwaarde | `[Baseline] - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Latere stages stapelen op stage 1, en de conditie hoort bij de stage die een tenant
 **binnengaat**, niet bij de stage die hij verlaat. CIPP kent er vijf: `time`, `variable`,
@@ -467,8 +472,8 @@ waarde zetten leveren in Intune een Conflict op, waarna de instelling door géé
 toegepast. `check-scope.js` bewaakt dat.
 
 ```powershell
-.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name 'CXNM - Standard - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
 ```
 
 De WHfB-variant voor gedeelde apparaten is de enige die je náást zijn tegenhanger kunt
@@ -484,7 +489,7 @@ startpunt, geen kant-en-klare productieconfiguratie.
 Dat is fase 2, en de lijst staat — met per policy het waarom — in
 [OVERZICHT.md](docs/OVERZICHT.md#eerst-in-een-pilot). Hij wordt gegenereerd uit `faseWaarom` in het
 manifest. Tot september 2026 stond hier een eigen lijst, en die liep uit de pas: negen van de
-policies erop stonden in fase 1 en rolden via `CXNM - Standard - Baseline-Devices` gewoon naar alle apparaten.
+policies erop stonden in fase 1 en rolden via `[Baseline] - Baseline-Devices` gewoon naar alle apparaten.
 Windows Hello for Business gaat daarbij als paar de pilot in, device én user — de een in de
 pilot en de ander op iedereen maakt de pilot zinloos.
 

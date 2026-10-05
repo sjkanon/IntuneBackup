@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Internet_Explorer_Legacy.md) · [English](Baseline_WIN_D_Internet_Explorer_Legacy.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Internet Explorer Legacy
+# [Baseline] - WIN - D - Internet Explorer Legacy
 
 Durcissement du moteur Internet Explorer, qui fonctionne encore sous le mode IE d'Edge et au sein d'anciennes applications.
 
@@ -15,7 +15,7 @@ Durcissement du moteur Internet Explorer, qui fonctionne encore sous le mode IE 
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security |
 | Fichier | [`Baseline_WIN_D_Internet_Explorer_Legacy.json`](Baseline_WIN_D_Internet_Explorer_Legacy.json) |
 
-> Le seul paramètre utilisateur a été omis : il figure déjà dans CXNM - Standard - WIN - U - Windows User Experience, et deux policies qui définissent le même paramètre produisent un conflit. Reprend 204 paramètres de l'ancien bloc Administrative Templates.
+> Le seul paramètre utilisateur a été omis : il figure déjà dans [Baseline] - WIN - U - Windows User Experience, et deux policies qui définissent le même paramètre produisent un conflit. Reprend 204 paramètres de l'ancien bloc Administrative Templates.
 
 ## Normes
 

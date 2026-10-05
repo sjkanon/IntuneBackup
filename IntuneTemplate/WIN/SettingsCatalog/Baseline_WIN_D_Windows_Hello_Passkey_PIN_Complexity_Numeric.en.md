@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.md) · **English** · [Français](Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Numeric
+# [Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric
 
 Explicitly sets the numeric PIN for the Windows Hello for Business passkey: digits required, letters and special characters blocked.
 
@@ -30,11 +30,11 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2190 - GRANT - Windows Hello Passkeys](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys.en.md) | report-only | Sets the PIN of the Windows Hello passkey that this CA policy requires. Stricter than users are used to, and registering only succeeds once the PIN meets the requirement. |
+| 2190 - GRANT - Windows Hello Passkeys | report-only | Sets the PIN of the Windows Hello passkey that this CA policy requires. Stricter than users are used to, and registering only succeeds once the PIN meets the requirement. |
 
 ## Settings — 5
 

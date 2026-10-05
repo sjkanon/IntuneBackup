@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Legacy_Hardening.md) · **English** · [Français](Baseline_WIN_D_Legacy_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Legacy Hardening
+# [Baseline] - WIN - D - Legacy Hardening
 
 The hardening settings from the old Administrative Templates policy for which OpenIntuneBaseline has no counterpart: hardened UNC paths, WDigest, blocking of device classes, multicast DNS and registry policy processing.
 

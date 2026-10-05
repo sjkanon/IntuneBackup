@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Firewall.md) · **English** · [Français](Baseline_WIN_D_Windows_Firewall.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Firewall
+# [Baseline] - WIN - D - Windows Firewall
 
 Turns on Windows Firewall for the domain, private and public profiles and defines the default behaviour for inbound and outbound traffic.
 

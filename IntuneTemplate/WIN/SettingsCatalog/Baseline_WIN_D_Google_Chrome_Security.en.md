@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Google_Chrome_Security.md) · **English** · [Français](Baseline_WIN_D_Google_Chrome_Security.fr.md)
 
-# CXNM - Standard - WIN - D - Google Chrome Security
+# [Baseline] - WIN - D - Google Chrome Security
 
 Locks down Google Chrome security to the same level as Edge: Safe Browsing on and impossible to bypass, malicious downloads blocked, certificate errors cannot be clicked through, and no company data to a personal Google account.
 

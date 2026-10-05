@@ -35,7 +35,7 @@ L'étape 3 vient volontairement après le reste : le dépôt est maintenant comp
 `scripts/import-oib.js` ; voir [README.fr.md](../README.fr.md) pour l'organisation, le nommage et la
 façon d'intégrer une nouvelle version d'OIB.
 
-**Étapes 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `[Baseline] - D/U - Item`,
+**Étapes 1 et 2** (auparavant) : séparation appareil/utilisateur, renommage en `D/U - Item` derrière le préfixe d'alors `[Baseline]`,
 `check-scope.js` comme étape bloquante de la CI.
 
 **Étape 4 — conformité.** Il n'y en avait aucune. Sans stratégie de conformité, « exiger un appareil
@@ -62,7 +62,7 @@ RPC (9) et quelques plus petits. Les 15 paramètres sans équivalent OIB se trou
 `WIN - D - Legacy Hardening`, tenus à part pour qu'une mise à niveau d'OIB ne les entraîne ni ne
 les supprime.
 
-**Axe plateforme.** Toutes les stratégies s'appellent désormais `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>`
+**Axe plateforme.** Toutes les stratégies s'appellent désormais `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>`
 et se trouvent dans `IntuneTemplate/<PLATFORM>/<POLICYTYPE>/`. macOS (20 stratégies) et la protection
 d'applications BYOD pour iOS et Android (2) sont nouveaux.
 

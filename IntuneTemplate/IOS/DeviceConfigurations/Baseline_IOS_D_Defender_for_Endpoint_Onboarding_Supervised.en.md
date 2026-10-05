@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.md) · **English** · [Français](Baseline_IOS_D_Defender_for_Endpoint_Onboarding_Supervised.fr.md)
 
-# CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised
+# [Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised
 
 Onboards Microsoft Defender for Endpoint without user action on supervised corporate devices with a content filter profile, so that web protection works without a local VPN.
 

@@ -76,7 +76,7 @@ Extra voor device preparation:
 
 | Property | Waarde | Waarom |
 |---|---|---|
-| `displayName` | `CXNM Standard WIN Autopilot User Driven` | **Geen koppeltekens.** Intune accepteert in een profielnaam alleen letters, cijfers, spaties en `: " ? . @ $ & _ [ ] { } \| \`. Bij een koppelteken antwoordt de service met een kale 500 zonder reden. Daarom wijkt deze naam af van de `CXNM - Standard - …`-conventie. |
+| `displayName` | `[Baseline] WIN Autopilot User Driven` | **Geen koppeltekens.** Intune accepteert in een profielnaam alleen letters, cijfers, spaties en `: " ? . @ $ & _ [ ] { } \| \`. Bij een koppelteken antwoordt de service met een kale 500 zonder reden. Daarom wijkt deze naam af van de `[Baseline] - …`-conventie. |
 | `outOfBoxExperienceSetting.deviceUsageType` | `singleUser` | user-driven; `shared` is self-deploying en hoort in een apart kioskprofiel |
 | `outOfBoxExperienceSetting.userType` | `standard` | de gebruiker wordt geen lokale admin; adminwerk loopt via LAPS |
 | `preprovisioningAllowed` | `true` | een partner of de servicedesk kan apparaten vooraf inrichten (Windows-toets 5× in OOBE). Doet niets als niemand het gebruikt. |
@@ -178,7 +178,7 @@ Na de inschrijving staat de policynaam in `enrollmentProfileName`. Daarmee maak 
 groep voor alles wat via device preparation binnenkwam:
 
 ```
-(device.enrollmentProfileName -eq "CXNM - Standard - WIN - Autopilot Device Preparation")
+(device.enrollmentProfileName -eq "[Baseline] - WIN - Autopilot Device Preparation")
 ```
 
 Hernoem je de policy, pas dan deze regel aan.
@@ -221,7 +221,7 @@ waarden komen ze overeen met de bestanden hier:
 
 | Standard | Instelling | Waarde | Let op |
 |---|---|---|---|
-| **Enable Autopilot Profile** | Profile Display Name | `CXNM Standard WIN Autopilot User Driven` | zonder koppeltekens; CIPP controleert dat |
+| **Enable Autopilot Profile** | Profile Display Name | `[Baseline] WIN Autopilot User Driven` | zonder koppeltekens; CIPP controleert dat |
 | | Convert all targeted devices to Autopilot | **uit** | standaard **aan** |
 | | Enable Self-deploying Mode | **uit** | standaard **aan**; aan betekent een kioskprofiel zonder gebruiker |
 | | Allow White Glove OOBE | aan | |
@@ -231,7 +231,7 @@ waarden komen ze overeen met de bestanden hier:
 | **Enrollment Status Page settings** | Timeout · Install Windows quality updates | `90` · aan | |
 | | Show progress · Log collection · Only show during OOBE · Block device usage · Allow reset | aan | |
 | | Allow device use on failure | uit | |
-| **Deploy Device Prep Profile** | Profile Display Name | `CXNM - Standard - WIN - Autopilot Device Preparation` | |
+| **Deploy Device Prep Profile** | Profile Display Name | `[Baseline] - WIN - Autopilot Device Preparation` | |
 | | Deployment Type · Join Type · Account Type | Single user · Microsoft Entra join · Standard user | *Shared* en *hybrid* bestaan niet in de definitie |
 | | Timeout · Allow skip · Allow diagnostics | `90` · uit · aan | |
 | | Device Security Group Name · Create new group | de groepsnaam · aan | CIPP maakt hem met de Intune Provisioning Client als eigenaar |

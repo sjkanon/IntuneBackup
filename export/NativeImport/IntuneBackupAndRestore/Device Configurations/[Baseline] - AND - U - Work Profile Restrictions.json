@@ -1,0 +1,23 @@
+{
+    "@odata.type": "#microsoft.graph.androidWorkProfileGeneralDeviceConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "passwordBlockTrustAgents": true,
+    "requiredPasswordComplexity": "medium",
+    "securityRequireVerifyApps": true,
+    "workProfileRequirePassword": true,
+    "workProfilePasswordRequiredType": "numericComplex",
+    "workProfilePasswordMinimumLength": 6,
+    "workProfileRequiredPasswordComplexity": "medium",
+    "workProfilePasswordMinutesOfInactivityBeforeScreenTimeout": 15,
+    "workProfilePasswordPreviousPasswordBlockCount": 5,
+    "workProfilePasswordSignInFailureCountBeforeFactoryReset": 10,
+    "workProfilePasswordBlockTrustAgents": true,
+    "workProfileDataSharingType": "allowPersonalToWork",
+    "workProfileBlockCrossProfileCopyPaste": true,
+    "workProfileBlockScreenCapture": true,
+    "workProfileDefaultAppPermissionPolicy": "prompt",
+    "displayName": "[Baseline] - AND - U - Work Profile Restrictions",
+    "description": "On a device with a personal work profile, sets a separate work profile code (six digits, medium complexity, locks after fifteen minutes, wipes only the work profile after ten attempts), blocks copying, sharing and screenshots from work to personal, and turns on Play Protect. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - DC - DR - USR - Personal-Work-Profile - v1.5; without password expiry, contact and caller ID blocks, account block and blocking of unknown sources on the personal side; lock time 15 instead of 5 minutes, the same as Compliance Password."
+}

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.md) · [English](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity
+# [Baseline] - MAC - D - Enrollment Profile Administrator User Affinity
 
 Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisateur et inscription verrouillée, et crée le compte connecté en tant qu'administrateur local.
 
@@ -15,7 +15,7 @@ Déroule l'Assistant réglages pour un Mac d'entreprise avec affinité utilisate
 | Source | baseline propre — OpenIntuneBaseline n'a pas de profil d'inscription |
 | Fichier | [`Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json`](Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.json) |
 
-> Alternative à CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec IntuneTemplate/MAC/Enrollment/ade-profile/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mlapsadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mlapsadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
+> Alternative à [Baseline] - MAC - D - Enrollment Profile Standard User Affinity, pas un complément : les deux profils diffèrent par un seul paramètre — le compte connecté devient-il administrateur ou utilisateur standard. Les deux sur All Devices provoqueraient un conflit, ils sont donc volontairement laissés sans affectation et doivent aller sur un groupe dédié. Ils se chevauchent en outre avec IntuneTemplate/MAC/Enrollment/ade-profile/macOS-Corporate-ADE-Baseline.json, qui déploie le même profil d'inscription via depMacOSEnrollmentProfile et y utilise le même compte administrateur (mlapsadmin) — choisissez l'une des deux voies. Le compte administrateur s'appelle mlapsadmin et le service dans Setup Assistant IT Servicedesk ; le numéro de téléphone est SERVICEDESK-TELEFOON-INVULLEN et doit être renseigné par organisation avant que le profil soit lié à un jeton — l'utilisateur le voit pendant la configuration.
 
 ## Normes
 
@@ -30,11 +30,11 @@ Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan o
 
 ## Conditional Access
 
-Ces stratégies Conditional Access du [dépôt CA-Policies](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
+Ces stratégies Conditional Access du dépôt CA-Policies s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.
 
 | Stratégie CA | State | Ce que cette policy fait pour elle |
 |---|---|---|
-| [2170 - GRANT - MFA for Intune Enrollment](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment.fr.md) | enabled | Setup Assistant avec authentification moderne se connecte à Microsoft Intune Enrollment ; cette stratégie CA y demande donc la MFA. Si l'utilisateur n'a pas de méthode MFA fonctionnelle à ce moment, l'inscription est bloquée. |
+| 2170 - GRANT - MFA for Intune Enrollment | enabled | Setup Assistant avec authentification moderne se connecte à Microsoft Intune Enrollment ; cette stratégie CA y demande donc la MFA. Si l'utilisateur n'a pas de méthode MFA fonctionnelle à ce moment, l'inscription est bloquée. |
 
 ## Paramètres — 40
 

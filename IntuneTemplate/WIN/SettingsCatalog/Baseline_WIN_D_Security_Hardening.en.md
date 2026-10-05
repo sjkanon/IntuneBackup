@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Security_Hardening.md) · **English** · [Français](Baseline_WIN_D_Security_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Security Hardening
+# [Baseline] - WIN - D - Security Hardening
 
 Collection of individual hardening settings: outdated SMB and NTLM variants, AutoPlay, PowerShell logging and shielding of system components.
 

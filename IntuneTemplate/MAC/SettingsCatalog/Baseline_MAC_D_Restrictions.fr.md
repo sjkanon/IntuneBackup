@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Restrictions.md) · [English](Baseline_MAC_D_Restrictions.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - Restrictions
+# [Baseline] - MAC - D - Restrictions
 
 Restreint les fonctionnalités macOS par lesquelles les données de l'entreprise peuvent quitter l'appareil.
 
@@ -15,7 +15,7 @@ Restreint les fonctionnalités macOS par lesquelles les données de l'entreprise
 | Source | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | Fichier | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 
-> Désactive Siri avec allowAssistant. Depuis macOS 26.4, Apple marque cette clé comme dépréciée, au profit de la configuration déclarative com.apple.configuration.siri.settings (dans Intune : sirisettings_sirisettings avec sirisettings_enabled). Elle est conservée pour l'instant pour la même raison que dans CXNM - Standard - MAC - D - Apple Intelligence Restricted : cette configuration DDM n'existe qu'à partir de macOS 26.4 et uniquement sur des Mac supervisés, alors que ce payload fonctionne aussi sur macOS 14 et 15 et sur un Mac que l'utilisateur a inscrit lui-même. CXNM - Standard - IOS - D - Restrictions Corporate utilise déjà sirisettings (allowwhilelocked), car sur iOS l'ancienne restriction s'appliquait différemment. Basculer dès que le parc est en 26.4 ou plus et inscrit via ADE.
+> Désactive Siri avec allowAssistant. Depuis macOS 26.4, Apple marque cette clé comme dépréciée, au profit de la configuration déclarative com.apple.configuration.siri.settings (dans Intune : sirisettings_sirisettings avec sirisettings_enabled). Elle est conservée pour l'instant pour la même raison que dans [Baseline] - MAC - D - Apple Intelligence Restricted : cette configuration DDM n'existe qu'à partir de macOS 26.4 et uniquement sur des Mac supervisés, alors que ce payload fonctionne aussi sur macOS 14 et 15 et sur un Mac que l'utilisateur a inscrit lui-même. [Baseline] - IOS - D - Restrictions Corporate utilise déjà sirisettings (allowwhilelocked), car sur iOS l'ancienne restriction s'appliquait différemment. Basculer dès que le parc est en 26.4 ou plus et inscrit via ADE.
 
 ## Normes
 

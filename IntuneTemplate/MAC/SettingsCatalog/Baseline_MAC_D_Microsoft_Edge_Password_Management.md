@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) · [Français](Baseline_MAC_D_Microsoft_Edge_Password_Management.fr.md)
 
-# CXNM - Standard - MAC - D - Microsoft Edge Password Management
+# [Baseline] - MAC - D - Microsoft Edge Password Management
 
 Bepaalt of Edge op de Mac wachtwoorden mag opslaan en tonen.
 

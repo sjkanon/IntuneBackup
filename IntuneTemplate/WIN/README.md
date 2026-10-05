@@ -4,7 +4,7 @@
 
 # Windows — 136 policies
 
-Alle policies heten `CXNM - Standard - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
+Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
@@ -55,7 +55,7 @@ Toewijzen aan apparaatgroepen.
 | [**Defender ASR Policy Audit Mode**](SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.md) | Zet dezelfde Attack Surface Reduction-regels als de blokkerende ASR-policy op audit: Defender logt wat het zou tegenhouden, maar houdt niets tegen. Bedoeld om de impact van een regel te meten voordat je 'm laat blokkeren. | Settings Catalog | 19 | — |
 | [**Defender AV Policy**](SettingsCatalog/Baseline_WIN_D_Defender_AV_Policy.md) | Kernconfiguratie van Defender Antivirus zoals CIPP die uitlevert: realtimebeveiliging, cloudbescherming, scanschema en wat er gebeurt bij een detectie. | Settings Catalog | 19 | — |
 | [**Defender EDR Policy**](SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector in plaats van via een vast onboarding-pakket. Daardoor bevat het template geen tenant-specifiek token en werkt het na een restore ook in een andere tenant, mits daar de Defender-for-Endpoint-connector aanstaat. | Settings Catalog | 2 | All Devices |
-| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector; zelfde onboarding als CXNM - Standard - WIN - D - Defender EDR Policy, plus een expliciete telemetriefrequentie (normaal). | Settings Catalog | 3 | — |
+| [**Defender for Endpoint EDR**](SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.md) | Koppelt het apparaat aan Defender for Endpoint via de Defender-connector; zelfde onboarding als [Baseline] - WIN - D - Defender EDR Policy, plus een expliciete telemetriefrequentie (normaal). | Settings Catalog | 3 | — |
 | [**Defender Ransomware Protection**](SettingsCatalog/Baseline_WIN_D_Defender_Ransomware_Protection.md) | Blokkeert dat een besmet apparaat bestanden op ándere machines over het netwerk versleutelt. | Settings Catalog | 2 | All Devices |
 | [**Defender Security Experience**](SettingsCatalog/Baseline_WIN_D_Defender_Security_Experience.md) | Bepaalt wat de gebruiker in de Windows-beveiligingsapp ziet en zelf mag uitzetten. | Settings Catalog | 4 | All Devices |
 | [**Defender Update Ring 1 Pilot**](SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.md) | Haalt nieuwe Defender-definities en engineversies als eerste binnen, zodat je een slechte update opmerkt vóór de rest van de organisatie 'm krijgt. | Settings Catalog | 3 | — |

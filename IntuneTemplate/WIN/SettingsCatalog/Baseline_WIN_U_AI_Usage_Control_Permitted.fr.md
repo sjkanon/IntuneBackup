@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_AI_Usage_Control_Permitted.md) · [English](Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) · **Français**
 
-# CXNM - Standard - WIN - U - AI Usage Control Permitted
+# [Baseline] - WIN - U - AI Usage Control Permitted
 
 Maintient la liste de blocage Edge pour le site web du Store, mais en exclut explicitement les services d'IA.
 
@@ -15,7 +15,7 @@ Maintient la liste de blocage Edge pour le site web du Store, mais en exclut exp
 | Source | Pendant de la variante Restricted : la même liste de blocage sans les domaines d'IA |
 | Fichier | [`Baseline_WIN_U_AI_Usage_Control_Permitted.json`](Baseline_WIN_U_AI_Usage_Control_Permitted.json) |
 
-> **Alternative à CXNM - Standard - WIN - U - AI Usage Control Restricted.** Une liste de blocage d'URL est de toute façon une friction, pas une frontière : elle ne fonctionne ni sur un téléphone ni sur un appareil personnel. Qui veut réellement encadrer l'usage de l'IA le fait avec la catégorie Generative AI de Defender Web Content Filtering — elle se trouve dans le portail Defender, pas dans ce dépôt.
+> **Alternative à [Baseline] - WIN - U - AI Usage Control Restricted.** Une liste de blocage d'URL est de toute façon une friction, pas une frontière : elle ne fonctionne ni sur un téléphone ni sur un appareil personnel. Qui veut réellement encadrer l'usage de l'IA le fait avec la catégorie Generative AI de Defender Web Content Filtering — elle se trouve dans le portail Defender, pas dans ce dépôt.
 
 ## Normes
 

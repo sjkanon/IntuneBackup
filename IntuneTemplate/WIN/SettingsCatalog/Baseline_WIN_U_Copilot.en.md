@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Copilot.md) · **English** · [Français](Baseline_WIN_U_Copilot.fr.md)
 
-# CXNM - Standard - WIN - U - Copilot
+# [Baseline] - WIN - U - Copilot
 
 Determines whether Copilot in Windows is available to the user.
 

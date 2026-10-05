@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Google_Chrome_Updates.md) · [English](Baseline_WIN_D_Google_Chrome_Updates.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Google Chrome Updates
+# [Baseline] - WIN - D - Google Chrome Updates
 
 Garantit qu'une mise à jour de Chrome prend effet sous trois jours : notification de redémarrage obligatoire, redémarrage forcé en dehors des heures de travail, et plus rapide lorsque la version est très en retard.
 

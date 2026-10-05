@@ -9,7 +9,7 @@
 
 ## Pourquoi
 
-`CXNM - Standard - WIN - D - Audit and Event Logging` définit la taille des journaux Application, Security et
+`[Baseline] - WIN - D - Audit and Event Logging` définit la taille des journaux Application, Security et
 System. Les trois canaux opérationnels sur lesquels l'investigation d'incidents s'appuie le plus n'ont pas de CSP
 pour leur taille maximale et sont par défaut à 15 Mo ou moins :
 
@@ -29,7 +29,7 @@ Intune admin center → **Devices → Scripts and remediations → Create** :
 
 | Champ | Valeur |
 |---|---|
-| Nom | `CXNM - Standard - WIN - D - Event Log Sizes` |
+| Nom | `[Baseline] - WIN - D - Event Log Sizes` |
 | Script de détection | `Detect-EventLogSizes.ps1` |
 | Script de remédiation | `Remediate-EventLogSizes.ps1` |
 | Exécuter avec les informations d'identification de l'utilisateur connecté | Non (SYSTEM) |

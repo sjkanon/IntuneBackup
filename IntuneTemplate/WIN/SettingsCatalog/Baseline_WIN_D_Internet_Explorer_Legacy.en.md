@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Internet_Explorer_Legacy.md) · **English** · [Français](Baseline_WIN_D_Internet_Explorer_Legacy.fr.md)
 
-# CXNM - Standard - WIN - D - Internet Explorer Legacy
+# [Baseline] - WIN - D - Internet Explorer Legacy
 
 Hardening of the Internet Explorer engine, which still runs under Edge's IE mode and within old applications.
 
@@ -15,7 +15,7 @@ Hardening of the Internet Explorer engine, which still runs under Edge's IE mode
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Internet Explorer (Legacy) - D - Security |
 | File | [`Baseline_WIN_D_Internet_Explorer_Legacy.json`](Baseline_WIN_D_Internet_Explorer_Legacy.json) |
 
-> The only user setting has been left out: it is already in CXNM - Standard - WIN - U - Windows User Experience, and two policies setting the same setting produce a conflict. Takes over 204 settings from the old Administrative Templates block.
+> The only user setting has been left out: it is already in [Baseline] - WIN - U - Windows User Experience, and two policies setting the same setting produce a conflict. Takes over 204 settings from the old Administrative Templates block.
 
 ## Standards
 

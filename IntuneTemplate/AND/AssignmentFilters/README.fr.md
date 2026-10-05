@@ -10,8 +10,8 @@ ne touche jamais un profil professionnel personnel) — mais ils sont nécessair
 | Fichier | Règle | Utilisation |
 |---|---|---|
 | `AND-Personal-Work-Profile.json` | `device.deviceOwnership -eq "Personal"` | facultatif : stratégies de profil professionnel uniquement sur les appareils personnels |
-| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | affecter `CXNM - Standard - AND - D - System Updates` à *tous les appareils* avec ce filtre |
-| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `CXNM - Standard - AND - D - Compliance Dedicated Device Health`, si vous ne créez pas de groupe d'appareils distinct |
+| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | affecter `[Baseline] - AND - D - System Updates` à *tous les appareils* avec ce filtre |
+| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `[Baseline] - AND - D - Compliance Dedicated Device Health`, si vous ne créez pas de groupe d'appareils distinct |
 
 Pour le filtre dedicated : renseignez le nom du profil d'inscription dedicated. S'il y en a plusieurs
 (kiosque et partagé), combinez-les avec `-or`, par exemple

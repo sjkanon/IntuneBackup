@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_AND_U_Corporate_Data_Protection.en.md) · [Français](Baseline_AND_U_Corporate_Data_Protection.fr.md)
 
-# CXNM - Standard - AND - U - Corporate Data Protection
+# [Baseline] - AND - U - Corporate Data Protection
 
 Blokkeert op fully managed en corporate-owned Android-toestellen schermafdrukken, delen van bestanden via Bluetooth en het terugzetten naar fabrieksinstellingen door de gebruiker.
 

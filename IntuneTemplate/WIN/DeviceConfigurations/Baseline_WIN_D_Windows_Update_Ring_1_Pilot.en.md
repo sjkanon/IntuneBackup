@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.md) · **English** · [Français](Baseline_WIN_D_Windows_Update_Ring_1_Pilot.fr.md)
 
-# CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot
+# [Baseline] - WIN - D - Windows Update Ring 1 Pilot
 
 First update ring: gets Windows updates immediately, so that problems become visible on a small group.
 

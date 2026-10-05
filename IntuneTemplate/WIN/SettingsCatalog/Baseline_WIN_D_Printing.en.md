@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Printing.md) · **English** · [Français](Baseline_WIN_D_Printing.fr.md)
 
-# CXNM - Standard - WIN - D - Printing
+# [Baseline] - WIN - D - Printing
 
 Hardening against PrintNightmare: restricts Point and Print and the installation of printer drivers by users.
 

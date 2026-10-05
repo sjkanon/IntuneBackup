@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Microsoft_Edge_Security.md) · [English](Baseline_MAC_D_Microsoft_Edge_Security.en.md) · **Français**
 
-# CXNM - Standard - MAC - D - Microsoft Edge Security
+# [Baseline] - MAC - D - Microsoft Edge Security
 
 Les paramètres de sécurité d'Edge sur macOS : SmartScreen, contrôle des téléchargements et comportement des certificats.
 
@@ -15,7 +15,7 @@ Les paramètres de sécurité d'Edge sur macOS : SmartScreen, contrôle des tél
 | Source | OpenIntuneBaseline macOS v1.0 — Microsoft Edge - D - Security |
 | Fichier | [`Baseline_MAC_D_Microsoft_Edge_Security.json`](Baseline_MAC_D_Microsoft_Edge_Security.json) |
 
-> Depuis septembre 2026, cette policy définit deux paramètres qu'OpenIntuneBaseline macOS v1.0 ne contient pas : SSLErrorOverrideAllowed=false (un utilisateur ne peut plus passer outre une erreur de certificat — l'interception classique d'une connexion) et MicrosoftEdgeInsiderPromotionEnabled=false. Les deux sont identiques à CXNM - Standard - WIN - D - Microsoft Edge Security et à OIB macOS v2.0 beta. Ils ne figurent pas dans la source OIB v1.0 et sont conservés comme paramètres propres lors d'un nouvel import (carry, voir l'en-tête de import-oib.js). Attention aux sites internes avec un certificat auto-signé : ils ne peuvent plus être ouverts dans Edge tant que le certificat n'est pas correct. DownloadRestrictions reste volontairement à 1 (Block dangerous downloads). OIB v2.0 beta et la policy Windows définissent 4 (Block malicious downloads), ce qui bloque moins : 1 arrête tout téléchargement accompagné d'un avertissement SmartScreen, 4 uniquement les téléchargements que SmartScreen identifie comme malware connu.
+> Depuis septembre 2026, cette policy définit deux paramètres qu'OpenIntuneBaseline macOS v1.0 ne contient pas : SSLErrorOverrideAllowed=false (un utilisateur ne peut plus passer outre une erreur de certificat — l'interception classique d'une connexion) et MicrosoftEdgeInsiderPromotionEnabled=false. Les deux sont identiques à [Baseline] - WIN - D - Microsoft Edge Security et à OIB macOS v2.0 beta. Ils ne figurent pas dans la source OIB v1.0 et sont conservés comme paramètres propres lors d'un nouvel import (carry, voir l'en-tête de import-oib.js). Attention aux sites internes avec un certificat auto-signé : ils ne peuvent plus être ouverts dans Edge tant que le certificat n'est pas correct. DownloadRestrictions reste volontairement à 1 (Block dangerous downloads). OIB v2.0 beta et la policy Windows définissent 4 (Block malicious downloads), ce qui bloque moins : 1 arrête tout téléchargement accompagné d'un avertissement SmartScreen, 4 uniquement les téléchargements que SmartScreen identifie comme malware connu.
 
 ## Normes
 

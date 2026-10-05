@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Microsoft_OneDrive.en.md) · [Français](Baseline_MAC_D_Microsoft_OneDrive.fr.md)
 
-# CXNM - Standard - MAC - D - Microsoft OneDrive
+# [Baseline] - MAC - D - Microsoft OneDrive
 
 Meldt de OneDrive-client op de Mac automatisch aan met het werkaccount en geeft 'm de toegangsrechten die macOS eist.
 

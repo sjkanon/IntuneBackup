@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_Security.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Edge_Security.fr.md)
 
-# CXNM - Standard - WIN - D - Microsoft Edge Security
+# [Baseline] - WIN - D - Microsoft Edge Security
 
 Edge's security settings: SmartScreen, download control, certificate behaviour and which sites may load insecure content.
 

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Administrator_Protection.en.md) · [Français](Baseline_WIN_D_Administrator_Protection.fr.md)
 
-# CXNM - Standard - WIN - D - Administrator Protection
+# [Baseline] - WIN - D - Administrator Protection
 
 Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.
 

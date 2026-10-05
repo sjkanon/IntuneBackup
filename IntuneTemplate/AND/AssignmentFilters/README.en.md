@@ -10,8 +10,8 @@ never touches a personal work profile) — but they are needed in three places:
 | File | Rule | Use |
 |---|---|---|
 | `AND-Personal-Work-Profile.json` | `device.deviceOwnership -eq "Personal"` | optional: work profile policies only on personal devices |
-| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | assign `CXNM - Standard - AND - D - System Updates` to *all devices* with this filter |
-| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `CXNM - Standard - AND - D - Compliance Dedicated Device Health`, if you do not create a separate device group |
+| `AND-Corporate.json` | `device.deviceOwnership -eq "Corporate"` | assign `[Baseline] - AND - D - System Updates` to *all devices* with this filter |
+| `AND-Dedicated.json` | `device.enrollmentProfileName -eq "DEDICATED-INSCHRIJFPROFIEL-INVULLEN"` | `[Baseline] - AND - D - Compliance Dedicated Device Health`, if you do not create a separate device group |
 
 For the dedicated filter: fill in the name of the dedicated enrollment profile. If there are several
 (kiosk and shared), combine them with `-or`, for example

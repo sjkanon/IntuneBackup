@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Windows_User_Experience.en.md) · [Français](Baseline_WIN_U_Windows_User_Experience.fr.md)
 
-# CXNM - Standard - WIN - U - Windows User Experience
+# [Baseline] - WIN - U - Windows User Experience
 
 Zet meldingen op het vergrendelscherm en automatisch aanvullen in Internet Explorer uit.
 

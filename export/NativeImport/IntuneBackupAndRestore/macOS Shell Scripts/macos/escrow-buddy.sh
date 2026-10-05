@@ -6,7 +6,7 @@
 #
 # Why this script exists:
 #
-#   CXNM - Standard - MAC - D - FileVault turns on FileVault and stores the recovery key in
+#   [Baseline] - MAC - D - FileVault turns on FileVault and stores the recovery key in
 #   Intune — but only for a Mac that already had the escrow profile
 #   (com.apple.security.FDERecoveryKeyEscrow) at the moment of encryption. A Mac that the user
 #   had already encrypted themselves, or that was encrypted by Setup Assistant before
@@ -79,7 +79,7 @@ if [[ -f "$MARKER" ]]; then
 fi
 
 # Without the escrow profile a new key is created but stored nowhere — then the situation is
-# worse than before. Wait until CXNM - Standard - MAC - D - FileVault is in place.
+# worse than before. Wait until [Baseline] - MAC - D - FileVault is in place.
 if ! /usr/bin/profiles show -output stdout-xml 2>/dev/null | grep -q "com.apple.security.FDERecoveryKeyEscrow"; then
   log "The escrow profile (FDERecoveryKeyEscrow) is not on this Mac yet; trying again on the next run."
   exit 1

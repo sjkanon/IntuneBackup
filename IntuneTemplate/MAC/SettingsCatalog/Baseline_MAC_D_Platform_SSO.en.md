@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Platform_SSO.md) · **English** · [Français](Baseline_MAC_D_Platform_SSO.fr.md)
 
-# CXNM - Standard - MAC - D - Platform SSO
+# [Baseline] - MAC - D - Platform SSO
 
 Ties sign-in on the Mac to Entra ID via the Microsoft SSO plug-in, so that the Mac password and the work account coincide.
 
@@ -30,13 +30,13 @@ What this means per standard and what is needed organisationally alongside it: [
 
 ## Conditional Access
 
-These Conditional Access policies from the [CA-Policies repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) rely on this policy. Before you change or remove it, check what that does there.
+These Conditional Access policies from the CA-Policies repo rely on this policy. Before you change or remove it, check what that does there.
 
 | CA policy | State | What this policy does for it |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.en.md) | disabled | Turns on the Microsoft Enterprise SSO plug-in, which passes the device identity along with an Entra sign-in. Without the plug-in a compliant device cannot be recognised as compliant in apps that do not use MSAL. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.en.md) | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.en.md) | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Turns on the Microsoft Enterprise SSO plug-in, which passes the device identity along with an Entra sign-in. Without the plug-in a compliant device cannot be recognised as compliant in apps that do not use MSAL. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device. |
 
 ## Settings — 28
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_EDR_Policy.md) · [English](Baseline_WIN_D_Defender_EDR_Policy.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Defender EDR Policy
+# [Baseline] - WIN - D - Defender EDR Policy
 
 Connecte l'appareil à Defender for Endpoint via le connecteur Defender au lieu d'un paquet d'onboarding fixe. De ce fait, le modèle ne contient aucun jeton propre au tenant et fonctionne aussi dans un autre tenant après une restauration, à condition que le connecteur Defender for Endpoint y soit activé.
 
@@ -15,7 +15,7 @@ Connecte l'appareil à Defender for Endpoint via le connecteur Defender au lieu 
 | Source | Template standard CIPP |
 | Fichier | [`Baseline_WIN_D_Defender_EDR_Policy.json`](Baseline_WIN_D_Defender_EDR_Policy.json) |
 
-> Provient de CIPP, pas d'OIB. Utilisable entre tenants : onboarding_fromconnector est défini sur le placeholder "Microsoft ATP connector enabled" au lieu d'un GUID de tenant fixe. Depuis septembre 2026, c'est la variante déployée ; CXNM - Standard - WIN - D - Defender for Endpoint EDR est en phase 5 comme variante en double. Nécessite que le connecteur Defender for Endpoint soit activé dans Intune.
+> Provient de CIPP, pas d'OIB. Utilisable entre tenants : onboarding_fromconnector est défini sur le placeholder "Microsoft ATP connector enabled" au lieu d'un GUID de tenant fixe. Depuis septembre 2026, c'est la variante déployée ; [Baseline] - WIN - D - Defender for Endpoint EDR est en phase 5 comme variante en double. Nécessite que le connecteur Defender for Endpoint soit activé dans Intune.
 
 ## Normes
 

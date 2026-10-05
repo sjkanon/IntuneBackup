@@ -13,66 +13,67 @@
     "  retire  - gaat helemaal weg; de instellingen zitten voortaan in 'replacedBy'.",
     "",
     "previousNames staat in volgorde: eerst de oorspronkelijke naam, daarna de tussenstap uit",
-    "PLAN.md stap 2, dan \"[Baseline] - PLATFORM - D/U - Item\" van vóór het CXNM-voorvoegsel.",
+    "PLAN.md stap 2, dan de naam met platform, en daarna bij elke wissel van het voorvoegsel",
+    "(scripts/set-organisation.js) de naam van daarvoor.",
     "Een policy kan onder elk van die namen in een tenant staan."
   ],
   "policies": [
     {
-      "previousNames": ["[Baseline] ASR Default rules", "[Baseline] - D - Attack Surface Reduction", "[Baseline] - WIN - D - Attack Surface Reduction"],
-      "target": "CXNM - Standard - WIN - D - Attack Surface Reduction",
+      "previousNames": ["[Baseline] ASR Default rules", "[Baseline] - D - Attack Surface Reduction", "CXNM - Standard - WIN - D - Attack Surface Reduction"],
+      "target": "[Baseline] - WIN - D - Attack Surface Reduction",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Administrative Templates", "[Baseline] - D - Administrative Templates", "[Baseline] - WIN - D - Legacy Hardening"],
-      "target": "CXNM - Standard - WIN - D - Legacy Hardening",
+      "previousNames": ["[Baseline] Administrative Templates", "[Baseline] - D - Administrative Templates", "CXNM - Standard - WIN - D - Legacy Hardening"],
+      "target": "[Baseline] - WIN - D - Legacy Hardening",
       "action": "rename",
       "reason": "Van 300 instellingen naar 15. De rest is thematisch ondergebracht in de OIB-policies hieronder; wat overblijft heeft geen OIB-tegenhanger.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Internet Explorer Legacy",
-        "CXNM - Standard - WIN - D - Security Hardening",
-        "CXNM - Standard - WIN - D - Printing",
-        "CXNM - Standard - WIN - D - Remote Desktop and RPC",
-        "CXNM - Standard - WIN - D - Audit and Event Logging"
+        "[Baseline] - WIN - D - Internet Explorer Legacy",
+        "[Baseline] - WIN - D - Security Hardening",
+        "[Baseline] - WIN - D - Printing",
+        "[Baseline] - WIN - D - Remote Desktop and RPC",
+        "[Baseline] - WIN - D - Audit and Event Logging"
       ]
     },
     {
-      "previousNames": ["[Baseline] Auditing", "[Baseline] - D - Audit and Event Logging", "[Baseline] - WIN - D - Audit and Event Logging"],
-      "target": "CXNM - Standard - WIN - D - Audit and Event Logging",
+      "previousNames": ["[Baseline] Auditing", "[Baseline] - D - Audit and Event Logging", "CXNM - Standard - WIN - D - Audit and Event Logging"],
+      "target": "[Baseline] - WIN - D - Audit and Event Logging",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Automatic configuration of Outlook", "[Baseline] - U - Microsoft Outlook", "[Baseline] - WIN - U - Microsoft Outlook"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Outlook",
+      "previousNames": ["[Baseline] Automatic configuration of Outlook", "[Baseline] - U - Microsoft Outlook", "CXNM - Standard - WIN - U - Microsoft Outlook"],
+      "target": "[Baseline] - WIN - U - Microsoft Outlook",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Bitlocker", "[Baseline] - D - BitLocker", "[Baseline] - WIN - D - BitLocker"],
-      "target": "CXNM - Standard - WIN - D - BitLocker",
+      "previousNames": ["[Baseline] Bitlocker", "[Baseline] - D - BitLocker", "CXNM - Standard - WIN - D - BitLocker"],
+      "target": "[Baseline] - WIN - D - BitLocker",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Default AV Policy", "[Baseline] - D - Defender Antivirus", "[Baseline] - WIN - D - Defender Antivirus"],
-      "target": "CXNM - Standard - WIN - D - Defender Antivirus",
+      "previousNames": ["[Baseline] Default AV Policy", "[Baseline] - D - Defender Antivirus", "CXNM - Standard - WIN - D - Defender Antivirus"],
+      "target": "[Baseline] - WIN - D - Defender Antivirus",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Device Lock", "[Baseline] - D - Device Lock", "[Baseline] - WIN - D - Device Lock"],
-      "target": "CXNM - Standard - WIN - D - Device Lock",
+      "previousNames": ["[Baseline] Device Lock", "[Baseline] - D - Device Lock", "CXNM - Standard - WIN - D - Device Lock"],
+      "target": "[Baseline] - WIN - D - Device Lock",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] EDR Configuration", "[Baseline] - D - Defender for Endpoint EDR", "[Baseline] - WIN - D - Defender for Endpoint EDR"],
-      "target": "CXNM - Standard - WIN - D - Defender for Endpoint EDR",
+      "previousNames": ["[Baseline] EDR Configuration", "[Baseline] - D - Defender for Endpoint EDR", "CXNM - Standard - WIN - D - Defender for Endpoint EDR"],
+      "target": "[Baseline] - WIN - D - Defender for Endpoint EDR",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Edge Standard search engine - Google", "[Baseline] - D - Microsoft Edge Search Engine", "[Baseline] - WIN - D - Microsoft Edge Search Engine"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Edge Search Engine",
+      "previousNames": ["[Baseline] Edge Standard search engine - Google", "[Baseline] - D - Microsoft Edge Search Engine", "CXNM - Standard - WIN - D - Microsoft Edge Search Engine"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge Search Engine",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Firewall", "[Baseline] - D - Windows Firewall"],
-      "target": "CXNM - Standard - WIN - D - Windows Firewall",
+      "previousNames": ["[Baseline] Firewall", "[Baseline] - D - Windows Firewall", "CXNM - Standard - WIN - D - Windows Firewall"],
+      "target": "[Baseline] - WIN - D - Windows Firewall",
       "action": "replace",
       "reason": "Was een gewone Settings Catalog-policy, is nu een Endpoint Security-template (endpointSecurityFirewall). De templateReference van een bestaande policy is niet te wijzigen."
     },
@@ -82,33 +83,33 @@
       "action": "retire",
       "reason": "De enige instelling zit in Security Hardening.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Security Hardening"
+        "[Baseline] - WIN - D - Security Hardening"
       ]
     },
     {
-      "previousNames": ["[Baseline] Local Policies Security Options", "[Baseline] - D - Local Security Policies", "[Baseline] - WIN - D - Local Security Policies"],
-      "target": "CXNM - Standard - WIN - D - Local Security Policies",
+      "previousNames": ["[Baseline] Local Policies Security Options", "[Baseline] - D - Local Security Policies", "CXNM - Standard - WIN - D - Local Security Policies"],
+      "target": "[Baseline] - WIN - D - Local Security Policies",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Microsoft App Store", "[Baseline] - D - Microsoft Store", "[Baseline] - WIN - D - Microsoft Store"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Store",
+      "previousNames": ["[Baseline] Microsoft App Store", "[Baseline] - D - Microsoft Store", "CXNM - Standard - WIN - D - Microsoft Store"],
+      "target": "[Baseline] - WIN - D - Microsoft Store",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Microsoft Edge", "[Baseline] - D - Microsoft Edge Security", "[Baseline] - WIN - D - Microsoft Edge Security"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Edge Security",
+      "previousNames": ["[Baseline] Microsoft Edge", "[Baseline] - D - Microsoft Edge Security", "CXNM - Standard - WIN - D - Microsoft Edge Security"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Office Updates", "[Baseline] - D - Microsoft Office Updates"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Office Updates",
+      "previousNames": ["[Baseline] Office Updates", "[Baseline] - D - Microsoft Office Updates", "CXNM - Standard - WIN - D - Microsoft Office Updates"],
+      "target": "[Baseline] - WIN - D - Microsoft Office Updates",
       "action": "replace",
       "reason": "Was ADMX (groupPolicyConfigurations, beta-only endpoint), is nu Settings Catalog. Ander Graph-endpoint, dus de oude policy moet weg — anders zetten twee policies dezelfde registerwaarden."
     },
     {
-      "previousNames": ["[Baseline] Privacy", "[Baseline] - D - Location and Privacy", "[Baseline] - WIN - D - Location and Privacy"],
-      "target": "CXNM - Standard - WIN - D - Location and Privacy",
+      "previousNames": ["[Baseline] Privacy", "[Baseline] - D - Location and Privacy", "CXNM - Standard - WIN - D - Location and Privacy"],
+      "target": "[Baseline] - WIN - D - Location and Privacy",
       "action": "rename"
     },
     {
@@ -117,16 +118,16 @@
       "action": "retire",
       "reason": "De enige instelling zit in Windows Feature Configuration.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Windows Feature Configuration"
+        "[Baseline] - WIN - D - Windows Feature Configuration"
       ]
     },
     {
-      "previousNames": ["[Baseline] Smartscreen", "[Baseline] - D - SmartScreen", "[Baseline] - WIN - D - Enhanced Phishing Protection"],
-      "target": "CXNM - Standard - WIN - D - Enhanced Phishing Protection",
+      "previousNames": ["[Baseline] Smartscreen", "[Baseline] - D - SmartScreen", "CXNM - Standard - WIN - D - Enhanced Phishing Protection"],
+      "target": "[Baseline] - WIN - D - Enhanced Phishing Protection",
       "action": "rename",
       "reason": "Vier van de zes instellingen staan in Enhanced Phishing Protection, de twee shell-SmartScreen-instellingen in Security Hardening.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Security Hardening"
+        "[Baseline] - WIN - D - Security Hardening"
       ]
     },
     {
@@ -135,17 +136,17 @@
       "action": "retire",
       "reason": "Alle vier instellingen zitten in Security Hardening.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Security Hardening"
+        "[Baseline] - WIN - D - Security Hardening"
       ]
     },
     {
-      "previousNames": ["[Baseline] User Rights", "[Baseline] - D - User Rights", "[Baseline] - WIN - D - User Rights"],
-      "target": "CXNM - Standard - WIN - D - User Rights",
+      "previousNames": ["[Baseline] User Rights", "[Baseline] - D - User Rights", "CXNM - Standard - WIN - D - User Rights"],
+      "target": "[Baseline] - WIN - D - User Rights",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] Windows LAPS Policy", "[Baseline] - D - Windows LAPS", "[Baseline] - WIN - D - Windows LAPS"],
-      "target": "CXNM - Standard - WIN - D - Windows LAPS",
+      "previousNames": ["[Baseline] Windows LAPS Policy", "[Baseline] - D - Windows LAPS", "CXNM - Standard - WIN - D - Windows LAPS"],
+      "target": "[Baseline] - WIN - D - Windows LAPS",
       "action": "rename"
     },
     {
@@ -154,27 +155,27 @@
       "action": "retire",
       "reason": "Alle zes instellingen zitten in de OneDrive-policy.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Microsoft OneDrive"
+        "[Baseline] - WIN - D - Microsoft OneDrive"
       ]
     },
     {
-      "previousNames": ["[Baseline] Onedrive Silent Login", "[Baseline] - D - Microsoft OneDrive", "[Baseline] - WIN - D - Microsoft OneDrive"],
-      "target": "CXNM - Standard - WIN - D - Microsoft OneDrive",
+      "previousNames": ["[Baseline] Onedrive Silent Login", "[Baseline] - D - Microsoft OneDrive", "CXNM - Standard - WIN - D - Microsoft OneDrive"],
+      "target": "[Baseline] - WIN - D - Microsoft OneDrive",
       "action": "rename"
     },
     {
-      "previousNames": ["Windows 11 Update", "[Baseline] - D - Windows Update Ring 3 Production", "[Baseline] - WIN - D - Windows Update Ring 3 Production"],
-      "target": "CXNM - Standard - WIN - D - Windows Update Ring 3 Production",
+      "previousNames": ["Windows 11 Update", "[Baseline] - D - Windows Update Ring 3 Production", "CXNM - Standard - WIN - D - Windows Update Ring 3 Production"],
+      "target": "[Baseline] - WIN - D - Windows Update Ring 3 Production",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - U - Windows User Experience", "[Baseline] - WIN - U - Windows User Experience"],
-      "target": "CXNM - Standard - WIN - U - Windows User Experience",
+      "previousNames": ["[Baseline] - U - Windows User Experience", "CXNM - Standard - WIN - U - Windows User Experience"],
+      "target": "[Baseline] - WIN - U - Windows User Experience",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - U - Microsoft OneDrive", "[Baseline] - WIN - U - Microsoft OneDrive"],
-      "target": "CXNM - Standard - WIN - U - Microsoft OneDrive",
+      "previousNames": ["[Baseline] - U - Microsoft OneDrive", "CXNM - Standard - WIN - U - Microsoft OneDrive"],
+      "target": "[Baseline] - WIN - U - Microsoft OneDrive",
       "action": "rename"
     },
     {
@@ -183,9 +184,9 @@
       "action": "retire",
       "reason": "OpenIntuneBaseline v4.0 splitst compliance in één toets per policy, zodat respijt en uitzonderingen per toets te regelen zijn.",
       "replacedBy": [
-        "CXNM - Standard - WIN - U - Compliance BitLocker",
-        "CXNM - Standard - WIN - U - Compliance Secure Boot",
-        "CXNM - Standard - WIN - U - Compliance Code Integrity"
+        "[Baseline] - WIN - U - Compliance BitLocker",
+        "[Baseline] - WIN - U - Compliance Secure Boot",
+        "[Baseline] - WIN - U - Compliance Code Integrity"
       ]
     },
     {
@@ -194,10 +195,10 @@
       "action": "retire",
       "reason": "Zelfde splitsing als Device Health (OpenIntuneBaseline v4.0).",
       "replacedBy": [
-        "CXNM - Standard - WIN - U - Compliance TPM",
-        "CXNM - Standard - WIN - U - Compliance Firewall",
-        "CXNM - Standard - WIN - U - Compliance Antivirus",
-        "CXNM - Standard - WIN - U - Compliance Antispyware"
+        "[Baseline] - WIN - U - Compliance TPM",
+        "[Baseline] - WIN - U - Compliance Firewall",
+        "[Baseline] - WIN - U - Compliance Antivirus",
+        "[Baseline] - WIN - U - Compliance Antispyware"
       ]
     },
     {
@@ -206,8 +207,8 @@
       "action": "retire",
       "reason": "Zelfde splitsing (OpenIntuneBaseline v4.0). Toetste ondanks de naam geen risicoscore uit Defender for Endpoint, maar of Defender aanstaat, realtimebeveiliging actief is en de definities actueel zijn — precies wat de twee opvolgers doen.",
       "replacedBy": [
-        "CXNM - Standard - WIN - U - Compliance Defender Security Intelligence",
-        "CXNM - Standard - WIN - U - Compliance Defender Real Time Protection"
+        "[Baseline] - WIN - U - Compliance Defender Security Intelligence",
+        "[Baseline] - WIN - U - Compliance Defender Real Time Protection"
       ]
     },
     {
@@ -216,892 +217,892 @@
       "action": "retire",
       "reason": "Vervallen in OpenIntuneBaseline v4.0. De wachtwoordeisen in een Windows-compliancepolicy lopen via de DeviceLock-CSP en de EAS-engine: ze worden afgedwongen in plaats van alleen getoetst, raken alleen lokale accounts, en wachtwoordbeleid komt voor Entra-accounts uit Entra zelf. De enige nuttige instelling — vergrendelen na inactiviteit — staat nu in Device Lock.",
       "replacedBy": [
-        "CXNM - Standard - WIN - D - Device Lock"
+        "[Baseline] - WIN - D - Device Lock"
       ]
     },
     {
-      "previousNames": ["[Baseline] - AND - D - Compliance Dedicated Device Health"],
-      "target": "CXNM - Standard - AND - D - Compliance Dedicated Device Health",
+      "previousNames": ["CXNM - Standard - AND - D - Compliance Dedicated Device Health"],
+      "target": "[Baseline] - AND - D - Compliance Dedicated Device Health",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - D - System Updates"],
-      "target": "CXNM - Standard - AND - D - System Updates",
+      "previousNames": ["CXNM - Standard - AND - D - System Updates"],
+      "target": "[Baseline] - AND - D - System Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - App Protection"],
-      "target": "CXNM - Standard - AND - U - App Protection",
+      "previousNames": ["CXNM - Standard - AND - U - App Protection"],
+      "target": "[Baseline] - AND - U - App Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Block Device Administrator"],
-      "target": "CXNM - Standard - AND - U - Compliance Block Device Administrator",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Block Device Administrator"],
+      "target": "[Baseline] - AND - U - Compliance Block Device Administrator",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Corporate Defender for Endpoint"],
-      "target": "CXNM - Standard - AND - U - Compliance Corporate Defender for Endpoint",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Corporate Defender for Endpoint"],
+      "target": "[Baseline] - AND - U - Compliance Corporate Defender for Endpoint",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Corporate Device Health"],
-      "target": "CXNM - Standard - AND - U - Compliance Corporate Device Health",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Corporate Device Health"],
+      "target": "[Baseline] - AND - U - Compliance Corporate Device Health",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Corporate Password"],
-      "target": "CXNM - Standard - AND - U - Compliance Corporate Password",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Corporate Password"],
+      "target": "[Baseline] - AND - U - Compliance Corporate Password",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Defender for Endpoint"],
-      "target": "CXNM - Standard - AND - U - Compliance Defender for Endpoint",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Defender for Endpoint"],
+      "target": "[Baseline] - AND - U - Compliance Defender for Endpoint",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Device Health"],
-      "target": "CXNM - Standard - AND - U - Compliance Device Health",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Device Health"],
+      "target": "[Baseline] - AND - U - Compliance Device Health",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Compliance Password"],
-      "target": "CXNM - Standard - AND - U - Compliance Password",
+      "previousNames": ["CXNM - Standard - AND - U - Compliance Password"],
+      "target": "[Baseline] - AND - U - Compliance Password",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Corporate AI Restricted"],
-      "target": "CXNM - Standard - AND - U - Corporate AI Restricted",
+      "previousNames": ["CXNM - Standard - AND - U - Corporate AI Restricted"],
+      "target": "[Baseline] - AND - U - Corporate AI Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Corporate Data Protection"],
-      "target": "CXNM - Standard - AND - U - Corporate Data Protection",
+      "previousNames": ["CXNM - Standard - AND - U - Corporate Data Protection"],
+      "target": "[Baseline] - AND - U - Corporate Data Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Corporate Device Security"],
-      "target": "CXNM - Standard - AND - U - Corporate Device Security",
+      "previousNames": ["CXNM - Standard - AND - U - Corporate Device Security"],
+      "target": "[Baseline] - AND - U - Corporate Device Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - AND - U - Work Profile Restrictions"],
-      "target": "CXNM - Standard - AND - U - Work Profile Restrictions",
+      "previousNames": ["CXNM - Standard - AND - U - Work Profile Restrictions"],
+      "target": "[Baseline] - AND - U - Work Profile Restrictions",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Apple Intelligence Permitted"],
-      "target": "CXNM - Standard - IOS - D - Apple Intelligence Permitted",
+      "previousNames": ["CXNM - Standard - IOS - D - Apple Intelligence Permitted"],
+      "target": "[Baseline] - IOS - D - Apple Intelligence Permitted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Apple Intelligence Restricted"],
-      "target": "CXNM - Standard - IOS - D - Apple Intelligence Restricted",
+      "previousNames": ["CXNM - Standard - IOS - D - Apple Intelligence Restricted"],
+      "target": "[Baseline] - IOS - D - Apple Intelligence Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Data Protection"],
-      "target": "CXNM - Standard - IOS - D - Data Protection",
+      "previousNames": ["CXNM - Standard - IOS - D - Data Protection"],
+      "target": "[Baseline] - IOS - D - Data Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised"],
-      "target": "CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised",
+      "previousNames": ["CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised"],
+      "target": "[Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Defender for Endpoint Onboarding Unsupervised"],
-      "target": "CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Unsupervised",
+      "previousNames": ["CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Unsupervised"],
+      "target": "[Baseline] - IOS - D - Defender for Endpoint Onboarding Unsupervised",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Enterprise SSO"],
-      "target": "CXNM - Standard - IOS - D - Enterprise SSO",
+      "previousNames": ["CXNM - Standard - IOS - D - Enterprise SSO"],
+      "target": "[Baseline] - IOS - D - Enterprise SSO",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Lock Screen"],
-      "target": "CXNM - Standard - IOS - D - Lock Screen",
+      "previousNames": ["CXNM - Standard - IOS - D - Lock Screen"],
+      "target": "[Baseline] - IOS - D - Lock Screen",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Passcode"],
-      "target": "CXNM - Standard - IOS - D - Passcode",
+      "previousNames": ["CXNM - Standard - IOS - D - Passcode"],
+      "target": "[Baseline] - IOS - D - Passcode",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Restrictions Corporate"],
-      "target": "CXNM - Standard - IOS - D - Restrictions Corporate",
+      "previousNames": ["CXNM - Standard - IOS - D - Restrictions Corporate"],
+      "target": "[Baseline] - IOS - D - Restrictions Corporate",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - D - Software Updates"],
-      "target": "CXNM - Standard - IOS - D - Software Updates",
+      "previousNames": ["CXNM - Standard - IOS - D - Software Updates"],
+      "target": "[Baseline] - IOS - D - Software Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - U - App Protection"],
-      "target": "CXNM - Standard - IOS - U - App Protection",
+      "previousNames": ["CXNM - Standard - IOS - U - App Protection"],
+      "target": "[Baseline] - IOS - U - App Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - U - Compliance Defender for Endpoint"],
-      "target": "CXNM - Standard - IOS - U - Compliance Defender for Endpoint",
+      "previousNames": ["CXNM - Standard - IOS - U - Compliance Defender for Endpoint"],
+      "target": "[Baseline] - IOS - U - Compliance Defender for Endpoint",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - U - Compliance Device Health"],
-      "target": "CXNM - Standard - IOS - U - Compliance Device Health",
+      "previousNames": ["CXNM - Standard - IOS - U - Compliance Device Health"],
+      "target": "[Baseline] - IOS - U - Compliance Device Health",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - IOS - U - Compliance Password"],
-      "target": "CXNM - Standard - IOS - U - Compliance Password",
+      "previousNames": ["CXNM - Standard - IOS - U - Compliance Password"],
+      "target": "[Baseline] - IOS - U - Compliance Password",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Accounts and Login"],
-      "target": "CXNM - Standard - MAC - D - Accounts and Login",
+      "previousNames": ["CXNM - Standard - MAC - D - Accounts and Login"],
+      "target": "[Baseline] - MAC - D - Accounts and Login",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Apple Intelligence Permitted"],
-      "target": "CXNM - Standard - MAC - D - Apple Intelligence Permitted",
+      "previousNames": ["CXNM - Standard - MAC - D - Apple Intelligence Permitted"],
+      "target": "[Baseline] - MAC - D - Apple Intelligence Permitted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Apple Intelligence Restricted"],
-      "target": "CXNM - Standard - MAC - D - Apple Intelligence Restricted",
+      "previousNames": ["CXNM - Standard - MAC - D - Apple Intelligence Restricted"],
+      "target": "[Baseline] - MAC - D - Apple Intelligence Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Azure Files Cloud Kerberos"],
-      "target": "CXNM - Standard - MAC - D - Azure Files Cloud Kerberos",
+      "previousNames": ["CXNM - Standard - MAC - D - Azure Files Cloud Kerberos"],
+      "target": "[Baseline] - MAC - D - Azure Files Cloud Kerberos",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Defender Antivirus"],
-      "target": "CXNM - Standard - MAC - D - Defender Antivirus",
+      "previousNames": ["CXNM - Standard - MAC - D - Defender Antivirus"],
+      "target": "[Baseline] - MAC - D - Defender Antivirus",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Defender for Endpoint"],
-      "target": "CXNM - Standard - MAC - D - Defender for Endpoint",
+      "previousNames": ["CXNM - Standard - MAC - D - Defender for Endpoint"],
+      "target": "[Baseline] - MAC - D - Defender for Endpoint",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Enrollment Profile Administrator User Affinity"],
-      "target": "CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity",
+      "previousNames": ["CXNM - Standard - MAC - D - Enrollment Profile Administrator User Affinity"],
+      "target": "[Baseline] - MAC - D - Enrollment Profile Administrator User Affinity",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Enrollment Profile Standard User Affinity"],
-      "target": "CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity",
+      "previousNames": ["CXNM - Standard - MAC - D - Enrollment Profile Standard User Affinity"],
+      "target": "[Baseline] - MAC - D - Enrollment Profile Standard User Affinity",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - External Storage Read Only"],
-      "target": "CXNM - Standard - MAC - D - External Storage Read Only",
+      "previousNames": ["CXNM - Standard - MAC - D - External Storage Read Only"],
+      "target": "[Baseline] - MAC - D - External Storage Read Only",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - FileVault"],
-      "target": "CXNM - Standard - MAC - D - FileVault",
+      "previousNames": ["CXNM - Standard - MAC - D - FileVault"],
+      "target": "[Baseline] - MAC - D - FileVault",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Firewall and Gatekeeper"],
-      "target": "CXNM - Standard - MAC - D - Firewall and Gatekeeper",
+      "previousNames": ["CXNM - Standard - MAC - D - Firewall and Gatekeeper"],
+      "target": "[Baseline] - MAC - D - Firewall and Gatekeeper",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Login Window"],
-      "target": "CXNM - Standard - MAC - D - Login Window",
+      "previousNames": ["CXNM - Standard - MAC - D - Login Window"],
+      "target": "[Baseline] - MAC - D - Login Window",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Microsoft AutoUpdate"],
-      "target": "CXNM - Standard - MAC - D - Microsoft AutoUpdate",
+      "previousNames": ["CXNM - Standard - MAC - D - Microsoft AutoUpdate"],
+      "target": "[Baseline] - MAC - D - Microsoft AutoUpdate",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Microsoft Edge Password Management"],
-      "target": "CXNM - Standard - MAC - D - Microsoft Edge Password Management",
+      "previousNames": ["CXNM - Standard - MAC - D - Microsoft Edge Password Management"],
+      "target": "[Baseline] - MAC - D - Microsoft Edge Password Management",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Microsoft Edge Security"],
-      "target": "CXNM - Standard - MAC - D - Microsoft Edge Security",
+      "previousNames": ["CXNM - Standard - MAC - D - Microsoft Edge Security"],
+      "target": "[Baseline] - MAC - D - Microsoft Edge Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Microsoft Office"],
-      "target": "CXNM - Standard - MAC - D - Microsoft Office",
+      "previousNames": ["CXNM - Standard - MAC - D - Microsoft Office"],
+      "target": "[Baseline] - MAC - D - Microsoft Office",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Microsoft OneDrive"],
-      "target": "CXNM - Standard - MAC - D - Microsoft OneDrive",
+      "previousNames": ["CXNM - Standard - MAC - D - Microsoft OneDrive"],
+      "target": "[Baseline] - MAC - D - Microsoft OneDrive",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Passcode and Screen Lock"],
-      "target": "CXNM - Standard - MAC - D - Passcode and Screen Lock",
+      "previousNames": ["CXNM - Standard - MAC - D - Passcode and Screen Lock"],
+      "target": "[Baseline] - MAC - D - Passcode and Screen Lock",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Platform SSO"],
-      "target": "CXNM - Standard - MAC - D - Platform SSO",
+      "previousNames": ["CXNM - Standard - MAC - D - Platform SSO"],
+      "target": "[Baseline] - MAC - D - Platform SSO",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Privacy Preferences"],
-      "target": "CXNM - Standard - MAC - D - Privacy Preferences",
+      "previousNames": ["CXNM - Standard - MAC - D - Privacy Preferences"],
+      "target": "[Baseline] - MAC - D - Privacy Preferences",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Recovery Lock"],
-      "target": "CXNM - Standard - MAC - D - Recovery Lock",
+      "previousNames": ["CXNM - Standard - MAC - D - Recovery Lock"],
+      "target": "[Baseline] - MAC - D - Recovery Lock",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Restrictions"],
-      "target": "CXNM - Standard - MAC - D - Restrictions",
+      "previousNames": ["CXNM - Standard - MAC - D - Restrictions"],
+      "target": "[Baseline] - MAC - D - Restrictions",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Restrictions Hardening"],
-      "target": "CXNM - Standard - MAC - D - Restrictions Hardening",
+      "previousNames": ["CXNM - Standard - MAC - D - Restrictions Hardening"],
+      "target": "[Baseline] - MAC - D - Restrictions Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Screen Recording"],
-      "target": "CXNM - Standard - MAC - D - Screen Recording",
+      "previousNames": ["CXNM - Standard - MAC - D - Screen Recording"],
+      "target": "[Baseline] - MAC - D - Screen Recording",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Screensaver"],
-      "target": "CXNM - Standard - MAC - D - Screensaver",
+      "previousNames": ["CXNM - Standard - MAC - D - Screensaver"],
+      "target": "[Baseline] - MAC - D - Screensaver",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Software Updates"],
-      "target": "CXNM - Standard - MAC - D - Software Updates",
+      "previousNames": ["CXNM - Standard - MAC - D - Software Updates"],
+      "target": "[Baseline] - MAC - D - Software Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Time Server"],
-      "target": "CXNM - Standard - MAC - D - Time Server",
+      "previousNames": ["CXNM - Standard - MAC - D - Time Server"],
+      "target": "[Baseline] - MAC - D - Time Server",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Wifi Corporate"],
-      "target": "CXNM - Standard - MAC - D - Wifi Corporate",
+      "previousNames": ["CXNM - Standard - MAC - D - Wifi Corporate"],
+      "target": "[Baseline] - MAC - D - Wifi Corporate",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - D - Wifi Guest"],
-      "target": "CXNM - Standard - MAC - D - Wifi Guest",
+      "previousNames": ["CXNM - Standard - MAC - D - Wifi Guest"],
+      "target": "[Baseline] - MAC - D - Wifi Guest",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Compliance Device Health"],
-      "target": "CXNM - Standard - MAC - U - Compliance Device Health",
+      "previousNames": ["CXNM - Standard - MAC - U - Compliance Device Health"],
+      "target": "[Baseline] - MAC - U - Compliance Device Health",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Compliance Device Security"],
-      "target": "CXNM - Standard - MAC - U - Compliance Device Security",
+      "previousNames": ["CXNM - Standard - MAC - U - Compliance Device Security"],
+      "target": "[Baseline] - MAC - U - Compliance Device Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Compliance OS Version"],
-      "target": "CXNM - Standard - MAC - U - Compliance OS Version",
+      "previousNames": ["CXNM - Standard - MAC - U - Compliance OS Version"],
+      "target": "[Baseline] - MAC - U - Compliance OS Version",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Compliance Password"],
-      "target": "CXNM - Standard - MAC - U - Compliance Password",
+      "previousNames": ["CXNM - Standard - MAC - U - Compliance Password"],
+      "target": "[Baseline] - MAC - U - Compliance Password",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Microsoft Edge Extensions"],
-      "target": "CXNM - Standard - MAC - U - Microsoft Edge Extensions",
+      "previousNames": ["CXNM - Standard - MAC - U - Microsoft Edge Extensions"],
+      "target": "[Baseline] - MAC - U - Microsoft Edge Extensions",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Microsoft Edge Profiles and Sync"],
-      "target": "CXNM - Standard - MAC - U - Microsoft Edge Profiles and Sync",
+      "previousNames": ["CXNM - Standard - MAC - U - Microsoft Edge Profiles and Sync"],
+      "target": "[Baseline] - MAC - U - Microsoft Edge Profiles and Sync",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Microsoft Edge Updates"],
-      "target": "CXNM - Standard - MAC - U - Microsoft Edge Updates",
+      "previousNames": ["CXNM - Standard - MAC - U - Microsoft Edge Updates"],
+      "target": "[Baseline] - MAC - U - Microsoft Edge Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - MAC - U - Microsoft OneDrive KFM"],
-      "target": "CXNM - Standard - MAC - U - Microsoft OneDrive KFM",
+      "previousNames": ["CXNM - Standard - MAC - U - Microsoft OneDrive KFM"],
+      "target": "[Baseline] - MAC - U - Microsoft OneDrive KFM",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - AI Tooling"],
-      "target": "CXNM - Standard - WIN - D - AI Tooling",
+      "previousNames": ["CXNM - Standard - WIN - D - AI Tooling"],
+      "target": "[Baseline] - WIN - D - AI Tooling",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Access Control"],
-      "target": "CXNM - Standard - WIN - D - Access Control",
+      "previousNames": ["CXNM - Standard - WIN - D - Access Control"],
+      "target": "[Baseline] - WIN - D - Access Control",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Account Lockout"],
-      "target": "CXNM - Standard - WIN - D - Account Lockout",
+      "previousNames": ["CXNM - Standard - WIN - D - Account Lockout"],
+      "target": "[Baseline] - WIN - D - Account Lockout",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Administrator Protection"],
-      "target": "CXNM - Standard - WIN - D - Administrator Protection",
+      "previousNames": ["CXNM - Standard - WIN - D - Administrator Protection"],
+      "target": "[Baseline] - WIN - D - Administrator Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Audit Policy Enforcement"],
-      "target": "CXNM - Standard - WIN - D - Audit Policy Enforcement",
+      "previousNames": ["CXNM - Standard - WIN - D - Audit Policy Enforcement"],
+      "target": "[Baseline] - WIN - D - Audit Policy Enforcement",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Automatic Restart Sign-On"],
-      "target": "CXNM - Standard - WIN - D - Automatic Restart Sign-On",
+      "previousNames": ["CXNM - Standard - WIN - D - Automatic Restart Sign-On"],
+      "target": "[Baseline] - WIN - D - Automatic Restart Sign-On",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Business Continuity"],
-      "target": "CXNM - Standard - WIN - D - Business Continuity",
+      "previousNames": ["CXNM - Standard - WIN - D - Business Continuity"],
+      "target": "[Baseline] - WIN - D - Business Continuity",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Cloud Optimized Content"],
-      "target": "CXNM - Standard - WIN - D - Cloud Optimized Content",
+      "previousNames": ["CXNM - Standard - WIN - D - Cloud Optimized Content"],
+      "target": "[Baseline] - WIN - D - Cloud Optimized Content",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Config Refresh"],
-      "target": "CXNM - Standard - WIN - D - Config Refresh",
+      "previousNames": ["CXNM - Standard - WIN - D - Config Refresh"],
+      "target": "[Baseline] - WIN - D - Config Refresh",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Cryptography"],
-      "target": "CXNM - Standard - WIN - D - Cryptography",
+      "previousNames": ["CXNM - Standard - WIN - D - Cryptography"],
+      "target": "[Baseline] - WIN - D - Cryptography",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Data Minimisation"],
-      "target": "CXNM - Standard - WIN - D - Data Minimisation",
+      "previousNames": ["CXNM - Standard - WIN - D - Data Minimisation"],
+      "target": "[Baseline] - WIN - D - Data Minimisation",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender ASR Policy Audit Mode"],
-      "target": "CXNM - Standard - WIN - D - Defender ASR Policy Audit Mode",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender ASR Policy Audit Mode"],
+      "target": "[Baseline] - WIN - D - Defender ASR Policy Audit Mode",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender AV Policy"],
-      "target": "CXNM - Standard - WIN - D - Defender AV Policy",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender AV Policy"],
+      "target": "[Baseline] - WIN - D - Defender AV Policy",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Additional Configuration"],
-      "target": "CXNM - Standard - WIN - D - Defender Additional Configuration",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Additional Configuration"],
+      "target": "[Baseline] - WIN - D - Defender Additional Configuration",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender EDR Policy"],
-      "target": "CXNM - Standard - WIN - D - Defender EDR Policy",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender EDR Policy"],
+      "target": "[Baseline] - WIN - D - Defender EDR Policy",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Ransomware Protection"],
-      "target": "CXNM - Standard - WIN - D - Defender Ransomware Protection",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Ransomware Protection"],
+      "target": "[Baseline] - WIN - D - Defender Ransomware Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Security Experience"],
-      "target": "CXNM - Standard - WIN - D - Defender Security Experience",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Security Experience"],
+      "target": "[Baseline] - WIN - D - Defender Security Experience",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Update Ring 1 Pilot"],
-      "target": "CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot"],
+      "target": "[Baseline] - WIN - D - Defender Update Ring 1 Pilot",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Update Ring 2 UAT"],
-      "target": "CXNM - Standard - WIN - D - Defender Update Ring 2 UAT",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Update Ring 2 UAT"],
+      "target": "[Baseline] - WIN - D - Defender Update Ring 2 UAT",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Defender Update Ring 3 Production"],
-      "target": "CXNM - Standard - WIN - D - Defender Update Ring 3 Production",
+      "previousNames": ["CXNM - Standard - WIN - D - Defender Update Ring 3 Production"],
+      "target": "[Baseline] - WIN - D - Defender Update Ring 3 Production",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Delivery Optimisation"],
-      "target": "CXNM - Standard - WIN - D - Delivery Optimisation",
+      "previousNames": ["CXNM - Standard - WIN - D - Delivery Optimisation"],
+      "target": "[Baseline] - WIN - D - Delivery Optimisation",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Device Guard and Credential Guard"],
-      "target": "CXNM - Standard - WIN - D - Device Guard and Credential Guard",
+      "previousNames": ["CXNM - Standard - WIN - D - Device Guard and Credential Guard"],
+      "target": "[Baseline] - WIN - D - Device Guard and Credential Guard",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Disable NTLM"],
-      "target": "CXNM - Standard - WIN - D - Disable NTLM",
+      "previousNames": ["CXNM - Standard - WIN - D - Disable NTLM"],
+      "target": "[Baseline] - WIN - D - Disable NTLM",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Endpoint Analytics"],
-      "target": "CXNM - Standard - WIN - D - Endpoint Analytics",
+      "previousNames": ["CXNM - Standard - WIN - D - Endpoint Analytics"],
+      "target": "[Baseline] - WIN - D - Endpoint Analytics",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Enrollment Hardening"],
-      "target": "CXNM - Standard - WIN - D - Enrollment Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Enrollment Hardening"],
+      "target": "[Baseline] - WIN - D - Enrollment Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - In-Box App Removal"],
-      "target": "CXNM - Standard - WIN - D - In-Box App Removal",
+      "previousNames": ["CXNM - Standard - WIN - D - In-Box App Removal"],
+      "target": "[Baseline] - WIN - D - In-Box App Removal",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Internet Explorer Legacy"],
-      "target": "CXNM - Standard - WIN - D - Internet Explorer Legacy",
+      "previousNames": ["CXNM - Standard - WIN - D - Internet Explorer Legacy"],
+      "target": "[Baseline] - WIN - D - Internet Explorer Legacy",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Kernel DMA Protection"],
-      "target": "CXNM - Standard - WIN - D - Kernel DMA Protection",
+      "previousNames": ["CXNM - Standard - WIN - D - Kernel DMA Protection"],
+      "target": "[Baseline] - WIN - D - Kernel DMA Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Local Administrators"],
-      "target": "CXNM - Standard - WIN - D - Local Administrators",
+      "previousNames": ["CXNM - Standard - WIN - D - Local Administrators"],
+      "target": "[Baseline] - WIN - D - Local Administrators",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Logging"],
-      "target": "CXNM - Standard - WIN - D - Logging",
+      "previousNames": ["CXNM - Standard - WIN - D - Logging"],
+      "target": "[Baseline] - WIN - D - Logging",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Login and Lock Screen"],
-      "target": "CXNM - Standard - WIN - D - Login and Lock Screen",
+      "previousNames": ["CXNM - Standard - WIN - D - Login and Lock Screen"],
+      "target": "[Baseline] - WIN - D - Login and Lock Screen",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Logon Hardening"],
-      "target": "CXNM - Standard - WIN - D - Logon Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Logon Hardening"],
+      "target": "[Baseline] - WIN - D - Logon Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Accounts"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Accounts",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Accounts"],
+      "target": "[Baseline] - WIN - D - Microsoft Accounts",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Edge Updates"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Edge Updates",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Edge Updates"],
+      "target": "[Baseline] - WIN - D - Microsoft Edge Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Office Security"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Office Security",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Office Security"],
+      "target": "[Baseline] - WIN - D - Microsoft Office Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Microsoft Office Updates"],
-      "target": "CXNM - Standard - WIN - D - Microsoft Office Updates",
+      "previousNames": ["CXNM - Standard - WIN - D - Microsoft Office Updates"],
+      "target": "[Baseline] - WIN - D - Microsoft Office Updates",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Network Authentication Hardening"],
-      "target": "CXNM - Standard - WIN - D - Network Authentication Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Network Authentication Hardening"],
+      "target": "[Baseline] - WIN - D - Network Authentication Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Passwordless"],
-      "target": "CXNM - Standard - WIN - D - Passwordless",
+      "previousNames": ["CXNM - Standard - WIN - D - Passwordless"],
+      "target": "[Baseline] - WIN - D - Passwordless",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Power Management"],
-      "target": "CXNM - Standard - WIN - D - Power Management",
+      "previousNames": ["CXNM - Standard - WIN - D - Power Management"],
+      "target": "[Baseline] - WIN - D - Power Management",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Printing"],
-      "target": "CXNM - Standard - WIN - D - Printing",
+      "previousNames": ["CXNM - Standard - WIN - D - Printing"],
+      "target": "[Baseline] - WIN - D - Printing",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Printing Hardening"],
-      "target": "CXNM - Standard - WIN - D - Printing Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Printing Hardening"],
+      "target": "[Baseline] - WIN - D - Printing Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Privacy and Telemetry"],
-      "target": "CXNM - Standard - WIN - D - Privacy and Telemetry",
+      "previousNames": ["CXNM - Standard - WIN - D - Privacy and Telemetry"],
+      "target": "[Baseline] - WIN - D - Privacy and Telemetry",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Remote Access Hardening"],
-      "target": "CXNM - Standard - WIN - D - Remote Access Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Remote Access Hardening"],
+      "target": "[Baseline] - WIN - D - Remote Access Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Remote Desktop and RPC"],
-      "target": "CXNM - Standard - WIN - D - Remote Desktop and RPC",
+      "previousNames": ["CXNM - Standard - WIN - D - Remote Desktop and RPC"],
+      "target": "[Baseline] - WIN - D - Remote Desktop and RPC",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Removable Storage"],
-      "target": "CXNM - Standard - WIN - D - Removable Storage",
+      "previousNames": ["CXNM - Standard - WIN - D - Removable Storage"],
+      "target": "[Baseline] - WIN - D - Removable Storage",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Script File Associations"],
-      "target": "CXNM - Standard - WIN - D - Script File Associations",
+      "previousNames": ["CXNM - Standard - WIN - D - Script File Associations"],
+      "target": "[Baseline] - WIN - D - Script File Associations",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Security Hardening"],
-      "target": "CXNM - Standard - WIN - D - Security Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Security Hardening"],
+      "target": "[Baseline] - WIN - D - Security Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Security Log Monitoring"],
-      "target": "CXNM - Standard - WIN - D - Security Log Monitoring",
+      "previousNames": ["CXNM - Standard - WIN - D - Security Log Monitoring"],
+      "target": "[Baseline] - WIN - D - Security Log Monitoring",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Settings Sync"],
-      "target": "CXNM - Standard - WIN - D - Settings Sync",
+      "previousNames": ["CXNM - Standard - WIN - D - Settings Sync"],
+      "target": "[Baseline] - WIN - D - Settings Sync",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Storage Sense"],
-      "target": "CXNM - Standard - WIN - D - Storage Sense",
+      "previousNames": ["CXNM - Standard - WIN - D - Storage Sense"],
+      "target": "[Baseline] - WIN - D - Storage Sense",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Threat Protection"],
-      "target": "CXNM - Standard - WIN - D - Threat Protection",
+      "previousNames": ["CXNM - Standard - WIN - D - Threat Protection"],
+      "target": "[Baseline] - WIN - D - Threat Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Timezone"],
-      "target": "CXNM - Standard - WIN - D - Timezone",
+      "previousNames": ["CXNM - Standard - WIN - D - Timezone"],
+      "target": "[Baseline] - WIN - D - Timezone",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Update Reports and Telemetry"],
-      "target": "CXNM - Standard - WIN - D - Update Reports and Telemetry",
+      "previousNames": ["CXNM - Standard - WIN - D - Update Reports and Telemetry"],
+      "target": "[Baseline] - WIN - D - Update Reports and Telemetry",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Wifi Corporate"],
-      "target": "CXNM - Standard - WIN - D - Wifi Corporate",
+      "previousNames": ["CXNM - Standard - WIN - D - Wifi Corporate"],
+      "target": "[Baseline] - WIN - D - Wifi Corporate",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Wifi Guest"],
-      "target": "CXNM - Standard - WIN - D - Wifi Guest",
+      "previousNames": ["CXNM - Standard - WIN - D - Wifi Guest"],
+      "target": "[Baseline] - WIN - D - Wifi Guest",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows AI Features Permitted"],
-      "target": "CXNM - Standard - WIN - D - Windows AI Features Permitted",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows AI Features Permitted"],
+      "target": "[Baseline] - WIN - D - Windows AI Features Permitted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows AI Features Restricted"],
-      "target": "CXNM - Standard - WIN - D - Windows AI Features Restricted",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows AI Features Restricted"],
+      "target": "[Baseline] - WIN - D - Windows AI Features Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows AI Permitted"],
-      "target": "CXNM - Standard - WIN - D - Windows AI Permitted",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows AI Permitted"],
+      "target": "[Baseline] - WIN - D - Windows AI Permitted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows AI Recall Boundaries"],
-      "target": "CXNM - Standard - WIN - D - Windows AI Recall Boundaries",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows AI Recall Boundaries"],
+      "target": "[Baseline] - WIN - D - Windows AI Recall Boundaries",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows AI Restricted"],
-      "target": "CXNM - Standard - WIN - D - Windows AI Restricted",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows AI Restricted"],
+      "target": "[Baseline] - WIN - D - Windows AI Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Component Hardening"],
-      "target": "CXNM - Standard - WIN - D - Windows Component Hardening",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Component Hardening"],
+      "target": "[Baseline] - WIN - D - Windows Component Hardening",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Event Forwarding"],
-      "target": "CXNM - Standard - WIN - D - Windows Event Forwarding",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Event Forwarding"],
+      "target": "[Baseline] - WIN - D - Windows Event Forwarding",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Feature Configuration"],
-      "target": "CXNM - Standard - WIN - D - Windows Feature Configuration",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Feature Configuration"],
+      "target": "[Baseline] - WIN - D - Windows Feature Configuration",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Firewall"],
-      "target": "CXNM - Standard - WIN - D - Windows Firewall",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Firewall"],
+      "target": "[Baseline] - WIN - D - Windows Firewall",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Firewall Rules"],
-      "target": "CXNM - Standard - WIN - D - Windows Firewall Rules",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Firewall Rules"],
+      "target": "[Baseline] - WIN - D - Windows Firewall Rules",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello Cloud Kerberos Trust",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello Cloud Kerberos Trust"],
+      "target": "[Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello PIN Complexity Alphanumeric"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello PIN Complexity Alphanumeric",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello PIN Complexity Alphanumeric"],
+      "target": "[Baseline] - WIN - D - Windows Hello PIN Complexity Alphanumeric",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello PIN Complexity Numeric"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello PIN Complexity Numeric",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello PIN Complexity Numeric"],
+      "target": "[Baseline] - WIN - D - Windows Hello PIN Complexity Numeric",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric"],
+      "target": "[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Numeric",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello Passkey PIN Complexity Numeric"],
+      "target": "[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Numeric",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello for Business"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello for Business",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello for Business"],
+      "target": "[Baseline] - WIN - D - Windows Hello for Business",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Hello for Business Multi User"],
-      "target": "CXNM - Standard - WIN - D - Windows Hello for Business Multi User",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Hello for Business Multi User"],
+      "target": "[Baseline] - WIN - D - Windows Hello for Business Multi User",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Package Manager"],
-      "target": "CXNM - Standard - WIN - D - Windows Package Manager",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Package Manager"],
+      "target": "[Baseline] - WIN - D - Windows Package Manager",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Sandbox"],
-      "target": "CXNM - Standard - WIN - D - Windows Sandbox",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Sandbox"],
+      "target": "[Baseline] - WIN - D - Windows Sandbox",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Subsystem for Linux"],
-      "target": "CXNM - Standard - WIN - D - Windows Subsystem for Linux",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Subsystem for Linux"],
+      "target": "[Baseline] - WIN - D - Windows Subsystem for Linux",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Update Ring 1 Pilot"],
-      "target": "CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Update Ring 1 Pilot"],
+      "target": "[Baseline] - WIN - D - Windows Update Ring 1 Pilot",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Windows Update Ring 2 UAT"],
-      "target": "CXNM - Standard - WIN - D - Windows Update Ring 2 UAT",
+      "previousNames": ["CXNM - Standard - WIN - D - Windows Update Ring 2 UAT"],
+      "target": "[Baseline] - WIN - D - Windows Update Ring 2 UAT",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Wireless Shared Devices"],
-      "target": "CXNM - Standard - WIN - D - Wireless Shared Devices",
+      "previousNames": ["CXNM - Standard - WIN - D - Wireless Shared Devices"],
+      "target": "[Baseline] - WIN - D - Wireless Shared Devices",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - D - Wireless and Peripherals"],
-      "target": "CXNM - Standard - WIN - D - Wireless and Peripherals",
+      "previousNames": ["CXNM - Standard - WIN - D - Wireless and Peripherals"],
+      "target": "[Baseline] - WIN - D - Wireless and Peripherals",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - AI Usage Control Permitted"],
-      "target": "CXNM - Standard - WIN - U - AI Usage Control Permitted",
+      "previousNames": ["CXNM - Standard - WIN - U - AI Usage Control Permitted"],
+      "target": "[Baseline] - WIN - U - AI Usage Control Permitted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - AI Usage Control Restricted"],
-      "target": "CXNM - Standard - WIN - U - AI Usage Control Restricted",
+      "previousNames": ["CXNM - Standard - WIN - U - AI Usage Control Restricted"],
+      "target": "[Baseline] - WIN - U - AI Usage Control Restricted",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Attachment Scanning"],
-      "target": "CXNM - Standard - WIN - U - Attachment Scanning",
+      "previousNames": ["CXNM - Standard - WIN - U - Attachment Scanning"],
+      "target": "[Baseline] - WIN - U - Attachment Scanning",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Antispyware"],
-      "target": "CXNM - Standard - WIN - U - Compliance Antispyware",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Antispyware"],
+      "target": "[Baseline] - WIN - U - Compliance Antispyware",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Antivirus"],
-      "target": "CXNM - Standard - WIN - U - Compliance Antivirus",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Antivirus"],
+      "target": "[Baseline] - WIN - U - Compliance Antivirus",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance BitLocker"],
-      "target": "CXNM - Standard - WIN - U - Compliance BitLocker",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance BitLocker"],
+      "target": "[Baseline] - WIN - U - Compliance BitLocker",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Code Integrity"],
-      "target": "CXNM - Standard - WIN - U - Compliance Code Integrity",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Code Integrity"],
+      "target": "[Baseline] - WIN - U - Compliance Code Integrity",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Defender Real Time Protection"],
-      "target": "CXNM - Standard - WIN - U - Compliance Defender Real Time Protection",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Defender Real Time Protection"],
+      "target": "[Baseline] - WIN - U - Compliance Defender Real Time Protection",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Defender Security Intelligence"],
-      "target": "CXNM - Standard - WIN - U - Compliance Defender Security Intelligence",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Defender Security Intelligence"],
+      "target": "[Baseline] - WIN - U - Compliance Defender Security Intelligence",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Defender for Endpoint Risk"],
-      "target": "CXNM - Standard - WIN - U - Compliance Defender for Endpoint Risk",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Defender for Endpoint Risk"],
+      "target": "[Baseline] - WIN - U - Compliance Defender for Endpoint Risk",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Firewall"],
-      "target": "CXNM - Standard - WIN - U - Compliance Firewall",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Firewall"],
+      "target": "[Baseline] - WIN - U - Compliance Firewall",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance OS Version"],
-      "target": "CXNM - Standard - WIN - U - Compliance OS Version",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance OS Version"],
+      "target": "[Baseline] - WIN - U - Compliance OS Version",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance Secure Boot"],
-      "target": "CXNM - Standard - WIN - U - Compliance Secure Boot",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance Secure Boot"],
+      "target": "[Baseline] - WIN - U - Compliance Secure Boot",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Compliance TPM"],
-      "target": "CXNM - Standard - WIN - U - Compliance TPM",
+      "previousNames": ["CXNM - Standard - WIN - U - Compliance TPM"],
+      "target": "[Baseline] - WIN - U - Compliance TPM",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Copilot"],
-      "target": "CXNM - Standard - WIN - U - Copilot",
+      "previousNames": ["CXNM - Standard - WIN - U - Copilot"],
+      "target": "[Baseline] - WIN - U - Copilot",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - File Sharing Restrictions"],
-      "target": "CXNM - Standard - WIN - U - File Sharing Restrictions",
+      "previousNames": ["CXNM - Standard - WIN - U - File Sharing Restrictions"],
+      "target": "[Baseline] - WIN - U - File Sharing Restrictions",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Edge Extensions"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Edge Extensions",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Edge Extensions"],
+      "target": "[Baseline] - WIN - U - Microsoft Edge Extensions",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Edge Management"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Edge Management",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Edge Management"],
+      "target": "[Baseline] - WIN - U - Microsoft Edge Management",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Edge Password Management"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Edge Password Management",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Edge Password Management"],
+      "target": "[Baseline] - WIN - U - Microsoft Edge Password Management",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Edge Profiles and Sync"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Edge Profiles and Sync",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Edge Profiles and Sync"],
+      "target": "[Baseline] - WIN - U - Microsoft Edge Profiles and Sync",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Edge User Experience"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Edge User Experience",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Edge User Experience"],
+      "target": "[Baseline] - WIN - U - Microsoft Edge User Experience",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Office Experience"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Office Experience",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Office Experience"],
+      "target": "[Baseline] - WIN - U - Microsoft Office Experience",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Office Security"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Office Security",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Office Security"],
+      "target": "[Baseline] - WIN - U - Microsoft Office Security",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Outlook Cached Mode Default"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Default",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Default"],
+      "target": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Default",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Managed",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Managed"],
+      "target": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Managed",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Outlook Cached Mode Off"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Off",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Outlook Cached Mode Off"],
+      "target": "[Baseline] - WIN - U - Microsoft Outlook Cached Mode Off",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Store"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Store",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Store"],
+      "target": "[Baseline] - WIN - U - Microsoft Store",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Microsoft Teams"],
-      "target": "CXNM - Standard - WIN - U - Microsoft Teams",
+      "previousNames": ["CXNM - Standard - WIN - U - Microsoft Teams"],
+      "target": "[Baseline] - WIN - U - Microsoft Teams",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Personal Data Encryption"],
-      "target": "CXNM - Standard - WIN - U - Personal Data Encryption",
+      "previousNames": ["CXNM - Standard - WIN - U - Personal Data Encryption"],
+      "target": "[Baseline] - WIN - U - Personal Data Encryption",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Windows Hello for Business"],
-      "target": "CXNM - Standard - WIN - U - Windows Hello for Business",
+      "previousNames": ["CXNM - Standard - WIN - U - Windows Hello for Business"],
+      "target": "[Baseline] - WIN - U - Windows Hello for Business",
       "action": "rename"
     },
     {
-      "previousNames": ["[Baseline] - WIN - U - Windows Spotlight"],
-      "target": "CXNM - Standard - WIN - U - Windows Spotlight",
+      "previousNames": ["CXNM - Standard - WIN - U - Windows Spotlight"],
+      "target": "[Baseline] - WIN - U - Windows Spotlight",
       "action": "rename"
     }
   ]

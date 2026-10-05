@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Login_and_Lock_Screen.md) · **English** · [Français](Baseline_WIN_D_Login_and_Lock_Screen.fr.md)
 
-# CXNM - Standard - WIN - D - Login and Lock Screen
+# [Baseline] - WIN - D - Login and Lock Screen
 
 Determines what is visible and possible on the sign-in and lock screen, such as the last signed-in user and camera access.
 

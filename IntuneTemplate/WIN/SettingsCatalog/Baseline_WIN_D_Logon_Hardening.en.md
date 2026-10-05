@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Logon_Hardening.md) · **English** · [Français](Baseline_WIN_D_Logon_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Logon Hardening
+# [Baseline] - WIN - D - Logon Hardening
 
 Requires CTRL+ALT+DEL before sign-in and removes the network selection from the lock screen.
 

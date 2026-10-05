@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.md) · [English](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure
+# [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure
 
 Impose DNS over HTTPS dans Edge sans repli : chaque requête DNS part chiffrée vers le résolveur DoH indiqué, et sans ce résolveur Edge ne résout rien.
 
@@ -15,7 +15,7 @@ Impose DNS over HTTPS dans Edge sans repli : chaque requête DNS part chiffrée 
 | Source | Policy Microsoft Edge DnsOverHttpsMode et DnsOverHttpsTemplates (Edge 83+) — valeurs vérifiées par rapport aux définitions du settings catalog |
 | Fichier | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 
-> Remplacez `DOH-RESOLVER-INVULLEN` par l'hôte du résolveur ; séparez plusieurs templates par une espace. **Alternative à CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — affectez-en une seule. Les portails captifs (Wi-Fi d'hôtel) ne peuvent plus se charger tant que l'utilisateur n'est pas connecté ; testez-le au préalable.
+> Remplacez `DOH-RESOLVER-INVULLEN` par l'hôte du résolveur ; séparez plusieurs templates par une espace. **Alternative à [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — affectez-en une seule. Les portails captifs (Wi-Fi d'hôtel) ne peuvent plus se charger tant que l'utilisateur n'est pas connecté ; testez-le au préalable.
 
 ## Normes
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_AI_Usage_Control_Permitted.md) · **English** · [Français](Baseline_WIN_U_AI_Usage_Control_Permitted.fr.md)
 
-# CXNM - Standard - WIN - U - AI Usage Control Permitted
+# [Baseline] - WIN - U - AI Usage Control Permitted
 
 Maintains the Edge block list for the Store website, but explicitly leaves the AI services out of it.
 
@@ -15,7 +15,7 @@ Maintains the Edge block list for the Store website, but explicitly leaves the A
 | Source | Counterpart of the Restricted variant: the same block list without the AI domains |
 | File | [`Baseline_WIN_U_AI_Usage_Control_Permitted.json`](Baseline_WIN_U_AI_Usage_Control_Permitted.json) |
 
-> **Alternative to CXNM - Standard - WIN - U - AI Usage Control Restricted.** A URL block list is friction rather than a boundary anyway: it does not work on a phone or on a personal device. Anyone who really wants to steer AI usage does so with the Generative AI category in Defender Web Content Filtering — that lives in the Defender portal, not in this repo.
+> **Alternative to [Baseline] - WIN - U - AI Usage Control Restricted.** A URL block list is friction rather than a boundary anyway: it does not work on a phone or on a personal device. Anyone who really wants to steer AI usage does so with the Generative AI category in Defender Web Content Filtering — that lives in the Defender portal, not in this repo.
 
 ## Standards
 

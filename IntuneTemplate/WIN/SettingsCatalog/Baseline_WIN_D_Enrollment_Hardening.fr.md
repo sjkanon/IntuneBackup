@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Enrollment_Hardening.md) · [English](Baseline_WIN_D_Enrollment_Hardening.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Enrollment Hardening
+# [Baseline] - WIN - D - Enrollment Hardening
 
 Exige une connexion réseau lors de la première installation, afin qu'un appareil ne puisse pas contourner l'inscription et échapper à la gestion.
 

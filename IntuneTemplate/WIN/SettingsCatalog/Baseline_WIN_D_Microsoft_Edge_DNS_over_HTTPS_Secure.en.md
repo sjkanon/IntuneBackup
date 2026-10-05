@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.md) · **English** · [Français](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.fr.md)
 
-# CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Secure
+# [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Secure
 
 Enforces DNS over HTTPS in Edge without fallback: every DNS request goes encrypted to the specified DoH resolver, and without that resolver Edge resolves nothing.
 
@@ -15,7 +15,7 @@ Enforces DNS over HTTPS in Edge without fallback: every DNS request goes encrypt
 | Source | Microsoft Edge policy DnsOverHttpsMode and DnsOverHttpsTemplates (Edge 83+) — values verified against the settings catalog definitions |
 | File | [`Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json`](Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.json) |
 
-> Fill `DOH-RESOLVER-INVULLEN` with the resolver's host; separate multiple templates with a space. **Alternative to CXNM - Standard - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — assign one of them. Captive portals (hotel Wi-Fi) can no longer load until the user is connected; test that beforehand.
+> Fill `DOH-RESOLVER-INVULLEN` with the resolver's host; separate multiple templates with a space. **Alternative to [Baseline] - WIN - D - Microsoft Edge DNS over HTTPS Automatic** — assign one of them. Captive portals (hotel Wi-Fi) can no longer load until the user is connected; test that beforehand.
 
 ## Standards
 

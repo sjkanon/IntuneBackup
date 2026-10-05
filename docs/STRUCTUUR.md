@@ -101,10 +101,10 @@ naar het CIPP-pakket; `check-scope.js` bewaakt dat fase, toewijzing en pakket kl
 
 | Fase | Betekenis | Policies | CIPP-pakket | CIPP-stage |
 |---:|---|---:|---|---:|
-| 1 | Nu uitrollen | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | Eerst pilot | 41 | `CXNM - Standard - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
-| 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `CXNM - Standard - Baseline-Wacht`, niet toegewezen | 3 |
-| 4 | Eigen groep (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groep>` | 1 |
+| 1 | Nu uitrollen | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
+| 2 | Eerst pilot | 41 | `[Baseline] - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
+| 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `[Baseline] - Baseline-Wacht`, niet toegewezen | 3 |
+| 4 | Eigen groep (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<groep>` | 1 |
 | 5 | Niet uitrollen — alternatief voor een andere policy | 15 | geen | – |
 
 Doorschuiven naar stage 2 gebeurt als alles uit stage 1 compliant is **en** er twee weken voorbij
@@ -140,7 +140,7 @@ Details: [scripts/README.md](../scripts/README.md).
 | [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) | bron → repo | `import-oib.js` op een lokale clone | Windows v4.0 overgenomen van branch op commit `f247604`; opnieuw importeren zodra de tag er is |
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | bron → repo | `import-intuneadmin.js` | JSON's in UTF-16LE |
 | CA-Policies-repo (naast deze gekloond als `../CA-Policies`) | repo ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git bevat de `--no-ca`-versie; CI ziet de andere repo niet |
-| CA-Policies-repo | repo ← CA, per policy | `generate-docs.js` leest `docs/policies.json` en schrijft bij elke Intune-policy de CA-policies die erop leunen; de CA-README's linken terug | CI leest de kopie `_ca.json`; links gaan naar de spiegels op GitHub (ConXioN-ITCE) |
+| CA-Policies-repo | repo ← CA, per policy | `generate-docs.js` leest `docs/policies.json` en schrijft bij elke Intune-policy de CA-policies die erop leunen; de CA-README's linken terug | CI leest de kopie `_ca.json`; links gaan naar `caRepoUrl` uit `_organisation.json`; zonder URL alleen de namen |
 | CIPP | repo → CIPP | template-repository-sync op deze repo | `BaselineTemplate/Baseline.json` komt alleen mee via Tools → Community Repos → Import |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | repo → tenant | `Start-IntuneRestoreConfig` en `…Assignments` met `-RestoreById $false` | App Protection-assignments apart terugzetten |
 | Microsoft Graph | repo → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | eerst `-WhatIf` |
@@ -168,7 +168,7 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 
 ## Afspraken
 
-- **Naamgeving:** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in de tenant,
+- **Naamgeving:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in de tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` als bestand. Zonder `Baseline_`-prefix verdwijnt een
   bestand stil uit alle pijplijnen.
 - **D of U:** bij Windows Settings Catalog volgt het uit de `settingDefinitionId` (`user_` = U).

@@ -4,7 +4,7 @@
 
 # macOS — 37 policies
 
-Toutes les policies s'appellent `CXNM - Standard - MAC - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
+Toutes les policies s'appellent `[Baseline] - MAC - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|

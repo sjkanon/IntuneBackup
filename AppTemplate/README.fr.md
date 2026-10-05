@@ -7,7 +7,7 @@ tenant, sans que personne n'ait à téléverser un `.intunewin`.
 
 | Fichier | Application | Source |
 |---|---|---|
-| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `CXNM - Standard - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
+| [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `[Baseline] - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
 | [`Winget-AutoUpdate-AllDevices.json`](Winget-AutoUpdate-AllDevices.json) | la même application, affectée à tous les appareils — pour la baseline [`Windows-Updates.json`](../BaselineTemplate/README.fr.md#windows-updatesjson--correctifs) | idem |
 
 ## Fonctionnement

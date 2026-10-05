@@ -1,0 +1,17 @@
+{
+    "@odata.type": "#microsoft.graph.windowsWifiConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "Deploys the guest network as a second profile to every Windows laptop, so that a device stays online when the corporate network is unreachable and automatically falls back to the corporate network once it is up again. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: Own baseline — Intune Wi-Fi profile (windowsWifiConfiguration), WPA2-Personal. ISO/IEC 27001:2022 A.8.20 and A.8.21, NIS2 art. 21(2)(c) and (e)..",
+    "displayName": "[Baseline] - WIN - D - Wifi Guest",
+    "ssid": "<SSID-GUEST>",
+    "networkName": "<SSID-GUEST>",
+    "wifiSecurityType": "wpa2Personal",
+    "preSharedKey": "<PSK-GUEST>",
+    "connectAutomatically": true,
+    "connectToPreferredNetwork": true,
+    "connectWhenNetworkNameIsHidden": false,
+    "meteredConnectionLimit": "unrestricted",
+    "proxySetting": "none"
+}

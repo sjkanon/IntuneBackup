@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Apple_Intelligence_Permitted.md) · **English** · [Français](Baseline_MAC_D_Apple_Intelligence_Permitted.fr.md)
 
-# CXNM - Standard - MAC - D - Apple Intelligence Permitted
+# [Baseline] - MAC - D - Apple Intelligence Permitted
 
 Explicitly allows the same Apple Intelligence features: Writing Tools, summaries in Mail, Notes and Safari, Genmoji, Image Playground, the external AI integration and dictation via Apple's servers.
 
@@ -12,10 +12,10 @@ Explicitly allows the same Apple Intelligence features: Writing Tools, summaries
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | Own baseline — mirror image of CXNM - Standard - MAC - D - Apple Intelligence Restricted; ids from OpenIntuneBaseline macOS v2.0 beta and CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe) |
+| Source | Own baseline — mirror image of [Baseline] - MAC - D - Apple Intelligence Restricted; ids from OpenIntuneBaseline macOS v2.0 beta and CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 (mSCP branch tahoe) |
 | File | [`Baseline_MAC_D_Apple_Intelligence_Permitted.json`](Baseline_MAC_D_Apple_Intelligence_Permitted.json) |
 
-> **Alternative to CXNM - Standard - MAC - D - Apple Intelligence Restricted.** That one sets the same twelve settings to the opposite value; assigning both results in a Conflict, after which Intune applies neither. forceOnDeviceOnlyDictation is false here: dictation may go through Apple's servers. Restricting the ChatGPT integration to the organisation's own business workspace is possible with allowedExternalIntelligenceWorkspaceIDs; organisation-specific, so not included. Siri stays off via CXNM - Standard - MAC - D - Restrictions (allowAssistant); anyone who wants the external integration via Siri must also reconsider that decision. That key has been deprecated since macOS 26.4 in favour of DDM sirisettings_enabled; why it stays is explained in the note on Restrictions.
+> **Alternative to [Baseline] - MAC - D - Apple Intelligence Restricted.** That one sets the same twelve settings to the opposite value; assigning both results in a Conflict, after which Intune applies neither. forceOnDeviceOnlyDictation is false here: dictation may go through Apple's servers. Restricting the ChatGPT integration to the organisation's own business workspace is possible with allowedExternalIntelligenceWorkspaceIDs; organisation-specific, so not included. Siri stays off via [Baseline] - MAC - D - Restrictions (allowAssistant); anyone who wants the external integration via Siri must also reconsider that decision. That key has been deprecated since macOS 26.4 in favour of DDM sirisettings_enabled; why it stays is explained in the note on Restrictions.
 
 ## Standards
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_File_Sharing_Restrictions.md) · **English** · [Français](Baseline_WIN_U_File_Sharing_Restrictions.fr.md)
 
-# CXNM - Standard - WIN - U - File Sharing Restrictions
+# [Baseline] - WIN - U - File Sharing Restrictions
 
 Prevents a user from sharing files from their own profile with other users or the network via 'Share' in File Explorer.
 

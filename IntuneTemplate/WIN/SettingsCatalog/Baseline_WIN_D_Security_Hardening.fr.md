@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Security_Hardening.md) · [English](Baseline_WIN_D_Security_Hardening.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Security Hardening
+# [Baseline] - WIN - D - Security Hardening
 
 Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolètes, exécution automatique, journalisation PowerShell et protection des composants système.
 

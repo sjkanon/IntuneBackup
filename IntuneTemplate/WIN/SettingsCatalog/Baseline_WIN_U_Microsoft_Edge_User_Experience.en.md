@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Edge_User_Experience.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Edge_User_Experience.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Edge User Experience
+# [Baseline] - WIN - U - Microsoft Edge User Experience
 
 The everyday Edge experience: start page, search suggestions, notifications and which features are visible.
 
@@ -15,7 +15,7 @@ The everyday Edge experience: start page, search suggestions, notifications and 
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Microsoft Edge - U - User Experience |
 | File | [`Baseline_WIN_U_Microsoft_Edge_User_Experience.json`](Baseline_WIN_U_Microsoft_Edge_User_Experience.json) |
 
-> The URL block list from OpenIntuneBaseline is deliberately not here but in CXNM - Standard - WIN - U - AI Usage Control Restricted/Permitted (see overgenomenVan there); dropSettings keeps it out on import, otherwise two policies set the same list differently.
+> The URL block list from OpenIntuneBaseline is deliberately not here but in [Baseline] - WIN - U - AI Usage Control Restricted/Permitted (see overgenomenVan there); dropSettings keeps it out on import, otherwise two policies set the same list differently.
 
 ## Standards
 

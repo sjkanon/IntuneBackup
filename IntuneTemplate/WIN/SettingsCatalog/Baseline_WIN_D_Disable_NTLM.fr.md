@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Disable_NTLM.md) · [English](Baseline_WIN_D_Disable_NTLM.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Disable NTLM
+# [Baseline] - WIN - D - Disable NTLM
 
 Désactive l'authentification NTLM obsolète au profit de Kerberos. Casse les anciennes applications on-prem et les appareils qui ne parlent pas Kerberos — tester d'abord.
 
@@ -15,7 +15,7 @@ Désactive l'authentification NTLM obsolète au profit de Kerberos. Casse les an
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Network Security - D - Disable NTLM |
 | Fichier | [`Baseline_WIN_D_Disable_NTLM.json`](Baseline_WIN_D_Disable_NTLM.json) |
 
-> NTLMv1 et LM ont déjà disparu sur chaque appareil : lanmanagerauthenticationlevel 5 figure aussi dans CXNM - Standard - WIN - D - Local Security Policies, en phase 1. Cette policy fait le reste — refuser totalement NTLM. Microsoft ne désactive NTLM par défaut qu'à partir de la prochaine version majeure de Windows et les versions existantes continuent de le prendre en charge, il n'y a donc pas d'urgence ; auditez d'abord. Local Security Policies journalise le NTLM entrant que cette policy refuserait (auditincomingntlmtraffic) ; le sortant est visible sur 24H2 sans policy.
+> NTLMv1 et LM ont déjà disparu sur chaque appareil : lanmanagerauthenticationlevel 5 figure aussi dans [Baseline] - WIN - D - Local Security Policies, en phase 1. Cette policy fait le reste — refuser totalement NTLM. Microsoft ne désactive NTLM par défaut qu'à partir de la prochaine version majeure de Windows et les versions existantes continuent de le prendre en charge, il n'y a donc pas d'urgence ; auditez d'abord. Local Security Policies journalise le NTLM entrant que cette policy refuserait (auditincomingntlmtraffic) ; le sortant est visible sur 24H2 sans policy.
 
 ## Normes
 

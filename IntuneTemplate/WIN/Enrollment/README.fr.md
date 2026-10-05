@@ -77,7 +77,7 @@ En plus pour device preparation :
 
 | Propriété | Valeur | Pourquoi |
 |---|---|---|
-| `displayName` | `CXNM Standard WIN Autopilot User Driven` | **Pas de tirets.** Intune n'accepte dans un nom de profil que des lettres, des chiffres, des espaces et `: " ? . @ $ & _ [ ] { } \| \`. Un tiret provoque une erreur 500 brute, sans motif. C'est pourquoi ce nom s'écarte de la convention `CXNM - Standard - …`. |
+| `displayName` | `[Baseline] WIN Autopilot User Driven` | **Pas de tirets.** Intune n'accepte dans un nom de profil que des lettres, des chiffres, des espaces et `: " ? . @ $ & _ [ ] { } \| \`. Un tiret provoque une erreur 500 brute, sans motif. C'est pourquoi ce nom s'écarte de la convention `[Baseline] - …`. |
 | `outOfBoxExperienceSetting.deviceUsageType` | `singleUser` | piloté par l'utilisateur ; `shared` correspond à l'auto-déploiement et relève d'un profil kiosque distinct |
 | `outOfBoxExperienceSetting.userType` | `standard` | l'utilisateur ne devient pas administrateur local ; le travail d'administration passe par LAPS |
 | `preprovisioningAllowed` | `true` | un partenaire ou le service desk peut pré-provisionner les appareils (touche Windows 5× dans l'OOBE). Sans effet si personne ne l'utilise. |
@@ -183,7 +183,7 @@ Après l'inscription, le nom de la stratégie figure dans `enrollmentProfileName
 un groupe dynamique de tout ce qui est arrivé par device preparation :
 
 ```
-(device.enrollmentProfileName -eq "CXNM - Standard - WIN - Autopilot Device Preparation")
+(device.enrollmentProfileName -eq "[Baseline] - WIN - Autopilot Device Preparation")
 ```
 
 Si vous renommez la stratégie, adaptez cette règle.
@@ -225,7 +225,7 @@ valeurs, ils correspondent aux fichiers d'ici :
 
 | Standard | Paramètre | Valeur | Attention |
 |---|---|---|---|
-| **Enable Autopilot Profile** | Profile Display Name | `CXNM Standard WIN Autopilot User Driven` | sans tirets ; CIPP le vérifie |
+| **Enable Autopilot Profile** | Profile Display Name | `[Baseline] WIN Autopilot User Driven` | sans tirets ; CIPP le vérifie |
 | | Convert all targeted devices to Autopilot | **désactivé** | **activé** par défaut |
 | | Enable Self-deploying Mode | **désactivé** | **activé** par défaut ; activé signifie un profil kiosque sans utilisateur |
 | | Allow White Glove OOBE | activé | |
@@ -235,7 +235,7 @@ valeurs, ils correspondent aux fichiers d'ici :
 | **Enrollment Status Page settings** | Timeout · Install Windows quality updates | `90` · activé | |
 | | Show progress · Log collection · Only show during OOBE · Block device usage · Allow reset | activé | |
 | | Allow device use on failure | désactivé | |
-| **Deploy Device Prep Profile** | Profile Display Name | `CXNM - Standard - WIN - Autopilot Device Preparation` | |
+| **Deploy Device Prep Profile** | Profile Display Name | `[Baseline] - WIN - Autopilot Device Preparation` | |
 | | Deployment Type · Join Type · Account Type | Single user · Microsoft Entra join · Standard user | *Shared* et *hybrid* n'existent pas dans la définition |
 | | Timeout · Allow skip · Allow diagnostics | `90` · désactivé · activé | |
 | | Device Security Group Name · Create new group | le nom du groupe · activé | CIPP le crée avec l'Intune Provisioning Client comme propriétaire |

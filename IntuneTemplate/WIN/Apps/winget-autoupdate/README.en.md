@@ -82,7 +82,7 @@ with the same MSI properties as below. Removal is [`Uninstall-WAU.ps1`](Uninstal
 detection [`Detect-WAU.ps1`](Detect-WAU.ps1). No `.intunewin` to build.
 
 1. CIPP → **Tools → Community Repos** → this repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
-2. **Applications → Application Templates** → `CXNM - Standard - Winget-AutoUpdate` → **Deploy**:
+2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy**:
    pick the tenants and, as assignment, the group `SEC-Baseline-Pilot` (the template itself
    assigns nothing). Or put it in a baseline with the standard *Deploy Intune Application Template*.
 
@@ -104,7 +104,7 @@ when version, hash or product code in the scripts differ from `New-WAUPackage.ps
 
 | Field | Value |
 |---|---|
-| Name | `CXNM - Standard - WIN - D - Winget-AutoUpdate` |
+| Name | `[Baseline] - WIN - D - Winget-AutoUpdate` |
 | Install command | `msiexec /i WAU.msi /qn RUN_WAU=NO USERCONTEXT=1 UPDATESATLOGON=1 UPDATESINTERVAL=Daily UPDATESATTIME=11:00:00 UPDATESATTIMEDELAY=02:00 NOTIFICATIONLEVEL=SuccessOnly DONOTRUNONMETERED=1 DISABLEWAUAUTOUPDATE=1` |
 | Uninstall command | `msiexec /x {FB0EB14E-95AC-45D7-A951-432316FFCBD4} /qn` (v2.12.0; the script prints the code for another version) |
 | Install behaviour | System |

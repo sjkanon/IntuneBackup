@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Kernel_DMA_Protection.md) · [English](Baseline_WIN_D_Kernel_DMA_Protection.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Kernel DMA Protection
+# [Baseline] - WIN - D - Kernel DMA Protection
 
 Bloque les périphériques qui peuvent lire directement la mémoire et ne prennent pas en charge le remappage DMA.
 

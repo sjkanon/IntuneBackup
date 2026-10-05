@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_Security_Hardening.en.md) · [Français](Baseline_WIN_D_Security_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Security Hardening
+# [Baseline] - WIN - D - Security Hardening
 
 Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen.
 

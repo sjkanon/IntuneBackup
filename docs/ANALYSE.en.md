@@ -330,7 +330,7 @@ with a placeholder.
 
 | # | Step | |
 |---:|---|---|
-| 1 | ~~BASELINE2 on a pilot group~~ | done: those policies are now in `IntuneTemplate/` in phase 2 and roll out via `CXNM - Standard - Baseline-Pilot` to `SEC-Baseline-Pilot` — `Kernel DMA Protection` and `Logon Hardening` included |
+| 1 | ~~BASELINE2 on a pilot group~~ | done: those policies are now in `IntuneTemplate/` in phase 2 and roll out via `[Baseline] - Baseline-Pilot` to `SEC-Baseline-Pilot` — `Kernel DMA Protection` and `Logon Hardening` included |
 | 2 | ~~Decision on the three MAM settings~~ | done: the tightening is in the baseline policies themselves (`Baseline_IOS_U_App_Protection`, `Baseline_AND_U_App_Protection`) |
 | 3 | ~~Check the ISMP mapping in `_manifest.json`~~ | dropped: the mapping to one organisation's ISMS documents was removed from the manifest in September 2026, so the baseline is generic. ISO 27001, NIS2 and Part-IS are still there |
 | 4 | ~~Happy with a policy?~~ | done: all sets have been merged into `IntuneTemplate/` under the `Baseline_` name; the assignment follows from `fase` |

@@ -330,7 +330,7 @@ avec un espace réservé.
 
 | # | Étape | |
 |---:|---|---|
-| 1 | ~~BASELINE2 sur un groupe pilote~~ | fait : ces stratégies sont désormais dans `IntuneTemplate/` en phase 2 et sont déployées via `CXNM - Standard - Baseline-Pilot` vers `SEC-Baseline-Pilot` — `Kernel DMA Protection` et `Logon Hardening` compris |
+| 1 | ~~BASELINE2 sur un groupe pilote~~ | fait : ces stratégies sont désormais dans `IntuneTemplate/` en phase 2 et sont déployées via `[Baseline] - Baseline-Pilot` vers `SEC-Baseline-Pilot` — `Kernel DMA Protection` et `Logon Hardening` compris |
 | 2 | ~~Décision sur les trois paramètres MAM~~ | fait : le durcissement se trouve dans les stratégies de baseline elles-mêmes (`Baseline_IOS_U_App_Protection`, `Baseline_AND_U_App_Protection`) |
 | 3 | ~~Vérifier le rattachement ISMP dans `_manifest.json`~~ | caduc : le rattachement aux documents ISMS d'une seule organisation a été retiré du manifeste en septembre 2026, afin que la baseline soit générique. ISO 27001, NIS2 et Part-IS y figurent toujours |
 | 4 | ~~Une stratégie donne satisfaction ?~~ | fait : tous les ensembles ont été fusionnés dans `IntuneTemplate/` sous le nom `Baseline_` ; l'affectation découle de `fase` |

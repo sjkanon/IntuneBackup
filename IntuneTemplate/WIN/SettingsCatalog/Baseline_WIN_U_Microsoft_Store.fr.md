@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Store.md) · [English](Baseline_WIN_U_Microsoft_Store.en.md) · **Français**
 
-# CXNM - Standard - WIN - U - Microsoft Store
+# [Baseline] - WIN - U - Microsoft Store
 
 Le volet utilisateur des restrictions du Store.
 

@@ -101,10 +101,10 @@ la traduit en package CIPP ; `check-scope.js` vérifie que phase, affectation et
 
 | Phase | Signification | Stratégies | Package CIPP | Stage CIPP |
 |---:|---|---:|---|---:|
-| 1 | Déployer immédiatement | 102 | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` | 1 |
-| 2 | D'abord en pilote | 41 | `CXNM - Standard - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
-| 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `CXNM - Standard - Baseline-Wacht`, non affecté | 3 |
-| 4 | Groupe dédié (`faseGroep`) | 16 | `CXNM - Standard - Baseline-SEC-<groupe>` | 1 |
+| 1 | Déployer immédiatement | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
+| 2 | D'abord en pilote | 41 | `[Baseline] - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
+| 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `[Baseline] - Baseline-Wacht`, non affecté | 3 |
+| 4 | Groupe dédié (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<groupe>` | 1 |
 | 5 | Ne pas déployer — alternative à une autre stratégie | 15 | aucun | – |
 
 Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deux semaines se sont
@@ -140,7 +140,7 @@ package — puis les étapes 3 à 6. Tous les scripts Node du pipeline partagent
 | [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) | source → dépôt | `import-oib.js` sur un clone local | Windows v4.0 repris d'une branche au commit `f247604` ; réimporter dès que le tag existe |
 | [IntuneAdmin/IntuneBaselines](https://github.com/IntuneAdmin/IntuneBaselines) | source → dépôt | `import-intuneadmin.js` | JSON en UTF-16LE |
 | Dépôt CA-Policies (cloné à côté de celui-ci sous `../CA-Policies`) | dépôt ← CA | `generate-compliance.js --ca ../CA-Policies/controls/ca-controls.json` | Git contient la version `--no-ca` ; la CI ne voit pas l'autre dépôt |
-| Dépôt CA-Policies | dépôt ← CA, par stratégie | `generate-docs.js` lit `docs/policies.json` et indique sur chaque stratégie Intune les stratégies CA qui s'y appuient ; les README CA renvoient ici | La CI lit la copie `_ca.json` ; les liens pointent vers les miroirs sur GitHub (ConXioN-ITCE) |
+| Dépôt CA-Policies | dépôt ← CA, par stratégie | `generate-docs.js` lit `docs/policies.json` et indique sur chaque stratégie Intune les stratégies CA qui s'y appuient ; les README CA renvoient ici | La CI lit la copie `_ca.json` ; les liens pointent vers `caRepoUrl` de `_organisation.json` ; sans URL, seulement les noms |
 | CIPP | dépôt → CIPP | synchronisation du dépôt de templates sur ce dépôt | `BaselineTemplate/Baseline.json` n'est repris que via Tools → Community Repos → Import |
 | [IntuneBackupAndRestore](https://github.com/jseerden/IntuneBackupAndRestore) | dépôt → tenant | `Start-IntuneRestoreConfig` et `…Assignments` avec `-RestoreById $false` | restaurer séparément les affectations App Protection |
 | Microsoft Graph | dépôt → tenant | `Set-BaselineAssignment.ps1`, `Rename-BaselinePolicy.ps1` | d'abord `-WhatIf` |
@@ -169,7 +169,7 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 
 ## Conventions
 
-- **Nommage :** `CXNM - Standard - <WIN|MAC|IOS|AND> - <D|U> - <Item>` dans le tenant,
+- **Nommage :** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` dans le tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` comme fichier. Sans le préfixe `Baseline_`, un fichier
   disparaît silencieusement de tous les pipelines.
 - **D ou U :** pour le Settings Catalog Windows, cela découle du `settingDefinitionId` (`user_` = U).

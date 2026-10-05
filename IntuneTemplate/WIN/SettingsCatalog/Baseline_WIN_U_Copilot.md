@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Copilot.en.md) · [Français](Baseline_WIN_U_Copilot.fr.md)
 
-# CXNM - Standard - WIN - U - Copilot
+# [Baseline] - WIN - U - Copilot
 
 Bepaalt of Copilot in Windows beschikbaar is voor de gebruiker.
 

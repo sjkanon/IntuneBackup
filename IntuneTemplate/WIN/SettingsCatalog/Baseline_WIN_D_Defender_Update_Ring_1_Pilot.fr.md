@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.md) · [English](Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Defender Update Ring 1 Pilot
+# [Baseline] - WIN - D - Defender Update Ring 1 Pilot
 
 Récupère en premier les nouvelles définitions et versions de moteur Defender, afin de repérer une mauvaise mise à jour avant que le reste de l'organisation ne la reçoive.
 

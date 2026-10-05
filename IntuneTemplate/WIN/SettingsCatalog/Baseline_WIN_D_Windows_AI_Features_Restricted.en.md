@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Features_Restricted.md) · **English** · [Français](Baseline_WIN_D_Windows_AI_Features_Restricted.fr.md)
 
-# CXNM - Standard - WIN - D - Windows AI Features Restricted
+# [Baseline] - WIN - D - Windows AI Features Restricted
 
 Turns off the generative AI features in Paint and in Windows Settings: Cocreator, Image Creator, Generative Fill and the Settings Agent.
 
@@ -15,7 +15,7 @@ Turns off the generative AI features in Paint and in Windows Settings: Cocreator
 | Source | IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Windows AI, but with the value inverted: that set actually turns the features on |
 | File | [`Baseline_WIN_D_Windows_AI_Features_Restricted.json`](Baseline_WIN_D_Windows_AI_Features_Restricted.json) |
 
-> This only concerns the AI features in Windows and Paint. Microsoft Copilot itself remains accessible. Recall and Click To Do are already off via CXNM - Standard - WIN - D - Windows AI Restricted. **Alternative to CXNM - Standard - WIN - D - Windows AI Features Permitted** — that policy sets the same four settings to the opposite value. Assigning both results in a Conflict, and then neither does anything.
+> This only concerns the AI features in Windows and Paint. Microsoft Copilot itself remains accessible. Recall and Click To Do are already off via [Baseline] - WIN - D - Windows AI Restricted. **Alternative to [Baseline] - WIN - D - Windows AI Features Permitted** — that policy sets the same four settings to the opposite value. Assigning both results in a Conflict, and then neither does anything.
 
 ## Standards
 

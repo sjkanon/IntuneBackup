@@ -34,7 +34,8 @@ const crypto = require("crypto");
 const REPO_ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(REPO_ROOT, "AppTemplate");
 const WAU_DIR = path.join(REPO_ROOT, "IntuneTemplate", "WIN", "Apps", "winget-autoupdate");
-const { WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
+const { WAU_TEMPLATE_FILE, UPDATES_BASELINE } = require("./lib/windows-updates");
+const { PREFIX } = require("./lib/organisation");
 
 /** Same form as in import-oib.js: a UUIDv5-shaped GUID, stable per name. */
 function stableGuid(name) {
@@ -94,7 +95,7 @@ function wauTemplate({ file, displayName, assignTo, description }) {
   }
 
   const version = pinned(install, "Version", "Install-WAU.ps1");
-  const appName = "CXNM - Standard - WIN - D - Winget-AutoUpdate";
+  const appName = PREFIX + "WIN - D - Winget-AutoUpdate";
   const config = {
     applicationName: appName,
     description: `Winget-AutoUpdate ${version} (Romanitho, MIT): updates every app winget knows, daily, as SYSTEM and per user. The install script downloads the pinned WAU.msi and checks its SHA-256. Source: IntuneBackup IntuneTemplate/WIN/Apps/winget-autoupdate.`,
@@ -129,15 +130,15 @@ function main() {
   const templates = [
     wauTemplate({
       file: "Winget-AutoUpdate.json",
-      displayName: "CXNM - Standard - Winget-AutoUpdate",
+      displayName: PREFIX + "Winget-AutoUpdate",
       assignTo: "On",
       description: "Phase 2: deploy to the pilot group first, then all Windows devices.",
     }),
     wauTemplate({
       file: WAU_TEMPLATE_FILE,
-      displayName: "CXNM - Standard - Winget-AutoUpdate - All Devices",
+      displayName: PREFIX + "Winget-AutoUpdate - All Devices",
       assignTo: "AllDevices",
-      description: "Assigned to all devices (required); deployed by the baseline CXNM - Standard - Windows Updates.",
+      description: `Assigned to all devices (required); deployed by the baseline ${UPDATES_BASELINE.templateName}.`,
     }),
   ];
   for (const { file, row } of templates) {

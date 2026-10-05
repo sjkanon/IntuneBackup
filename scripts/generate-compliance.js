@@ -37,6 +37,7 @@ const fs = require("fs");
 const path = require("path");
 const { PLATFORMS, TYPE_TO_CATEGORY, readTemplates, parseBaseName } = require("./lib/templates");
 const { LANGS, variantPath, languageBar, Translator, reportMissing } = require("./lib/i18n");
+const { stripPrefix } = require("./lib/organisation");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -97,7 +98,7 @@ const faseWord = () => V.t({ nl: "fase", en: "phase", fr: "phase" });
 
 const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const escapePipes = (text) => String(text ?? "").replace(/\|/g, "\\|").replace(/\n+/g, " ");
-const shortName = (displayName) => displayName.replace(/^CXNM - Standard - /, "");
+const shortName = stripPrefix;
 const byNumber = (a, b) => a.localeCompare(b, "en", { numeric: true });
 
 /** GitHub-anker van een kop, zodat de matrix naar de details kan linken. */
@@ -1195,7 +1196,7 @@ function main() {
     }
     // De CA-kant alleen als de CA-repo ernaast staat — ook met --no-ca, want dit gaat over de
     // namen, niet over wat er in COMPLIANCE.md komt. Zo bleven de GLOBAL__-namen na de hernoeming
-    // naar CXNM__STANDARD__ ongemerkt staan.
+    // naar het nieuwe voorvoegsel ongemerkt staan.
     const caTemplates = path.resolve(path.dirname(opts.caControls), "..", "CATemplate");
     if (fs.existsSync(caTemplates)) {
       for (const lic of licenties.licenties) {

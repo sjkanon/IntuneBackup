@@ -27,7 +27,8 @@ Display name of the Entra group with the VIPs. Without it the VIP list is left a
 an error when the group does not exist.
 
 .PARAMETER PolicyName
-Name of the anti-phishing policy from the baseline. When it is not found, the names CIPP adopts
+Name of the anti-phishing policy from the baseline. Default: "<prefix>Anti-Phishing", with the
+prefix from IntuneTemplate/_organisation.json. When it is not found, the names CIPP adopts
 instead are tried: 'CIPP Default Anti-Phishing Policy' and 'Default Anti-Phishing Policy'.
 
 .PARAMETER SkipPresets
@@ -42,11 +43,17 @@ Leaves the preset security policies alone.
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
 param(
     [string]$VipGroupName,
-    [string]$PolicyName = 'CXNM - Standard - Anti-Phishing',
+    [string]$PolicyName,
     [switch]$SkipPresets
 )
 
 $ErrorActionPreference = 'Stop'
+
+if (-not $PolicyName) {
+    $organisationPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate/_organisation.json'
+    if (-not (Test-Path $organisationPath)) { throw "_organisation.json not found at $organisationPath — pass -PolicyName to run without the repo." }
+    $PolicyName = (Get-Content -LiteralPath $organisationPath -Raw | ConvertFrom-Json).prefix + 'Anti-Phishing'
+}
 $MaxVips = 350
 
 if (-not (Get-ConnectionInformation | Where-Object { $_.State -eq 'Connected' })) {

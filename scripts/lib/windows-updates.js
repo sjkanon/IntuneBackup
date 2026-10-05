@@ -22,7 +22,9 @@
  * stage 2 so it starts two weeks after the update rings are compliant.
  */
 
-const UPDATES_PREFIX = "CXNM - Standard - Updates-";
+const { PREFIX } = require("./organisation");
+
+const UPDATES_PREFIX = PREFIX + "Updates-";
 
 const RING_GROUPS = ["SEC-Update-Ring1", "SEC-Update-Ring2"];
 
@@ -50,7 +52,7 @@ const UPDATE_PACKAGE_BY_TARGET = {
 const WAU_TEMPLATE_FILE = "Winget-AutoUpdate-AllDevices.json";
 
 const UPDATES_BASELINE = {
-  templateName: "CXNM - Standard - Windows Updates",
+  templateName: PREFIX + "Windows Updates",
   description:
     "Patching for Windows devices: Windows Update rings (Ring 3 on all devices except the ring " +
     "groups SEC-Update-Ring1 and SEC-Update-Ring2), Microsoft Edge and Microsoft 365 Apps update " +

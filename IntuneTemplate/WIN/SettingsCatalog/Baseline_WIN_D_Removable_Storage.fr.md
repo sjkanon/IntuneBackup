@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Removable_Storage.md) · [English](Baseline_WIN_D_Removable_Storage.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Removable Storage
+# [Baseline] - WIN - D - Removable Storage
 
 Bloque l'écriture sur le stockage amovible : clés USB et disques externes, ainsi que téléphones et appareils photo qui se présentent comme périphérique WPD. La lecture reste possible.
 

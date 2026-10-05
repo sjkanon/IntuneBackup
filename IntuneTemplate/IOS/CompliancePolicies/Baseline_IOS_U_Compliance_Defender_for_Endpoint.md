@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_U_Compliance_Defender_for_Endpoint.en.md) · [Français](Baseline_IOS_U_Compliance_Defender_for_Endpoint.fr.md)
 
-# CXNM - Standard - IOS - U - Compliance Defender for Endpoint
+# [Baseline] - IOS - U - Compliance Defender for Endpoint
 
 Merkt een iPhone of iPad als niet-compliant zodra Microsoft Defender for Endpoint het machinerisico hoger dan Medium inschat.
 
@@ -15,7 +15,7 @@ Merkt een iPhone of iPad als niet-compliant zodra Microsoft Defender for Endpoin
 | Bron | IntuneAdmin — Apple iOS Compliance/Baseline - iOSiPadOS - Microsoft Defender for Endpoint en UniFy iOS/iPadOS Baseline v1.2 — CP - Compliance - MDE - BYOD Devices (beide Medium); UniFy Corporate eist Low |
 | Bestand | [`Baseline_IOS_U_Compliance_Defender_for_Endpoint.json`](Baseline_IOS_U_Compliance_Defender_for_Endpoint.json) |
 
-> Bewust één policy met Medium in plaats van UniFy's Low voor bedrijfstoestellen: Low maakt een toestel al bij een laag risico niet-compliant, en dat vraagt eerst ervaring met hoe vaak dat voorkomt. Een eigen policy naast Compliance Device Health, zodat een tenant zonder MDE-licentie Device Health gewoon kan blijven gebruiken; compliance-policies worden los geëvalueerd en conflicteren niet. Blokkeeractie na 24 uur, gelijk aan de andere iOS-compliancepolicies. Het veld advancedThreatProtectionRequiredSecurityLevel staat niet in pl4nty DCv1 voor iOS maar wel in Graph beta iosCompliancePolicy en in beide bronexports. Onboarding: CXNM - Standard - IOS - D - Defender for Endpoint Onboarding Supervised en … Unsupervised; app-configuratie in IntuneTemplate/IOS/AppConfiguration.
+> Bewust één policy met Medium in plaats van UniFy's Low voor bedrijfstoestellen: Low maakt een toestel al bij een laag risico niet-compliant, en dat vraagt eerst ervaring met hoe vaak dat voorkomt. Een eigen policy naast Compliance Device Health, zodat een tenant zonder MDE-licentie Device Health gewoon kan blijven gebruiken; compliance-policies worden los geëvalueerd en conflicteren niet. Blokkeeractie na 24 uur, gelijk aan de andere iOS-compliancepolicies. Het veld advancedThreatProtectionRequiredSecurityLevel staat niet in pl4nty DCv1 voor iOS maar wel in Graph beta iosCompliancePolicy en in beide bronexports. Onboarding: [Baseline] - IOS - D - Defender for Endpoint Onboarding Supervised en … Unsupervised; app-configuratie in IntuneTemplate/IOS/AppConfiguration.
 
 ## Normen
 
@@ -30,16 +30,16 @@ Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.
 
 ## Conditional Access
 
-Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
 
 | CA-policy | State | Wat deze policy ervoor doet |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.md) | disabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.md) | enabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.md) | enabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
-| [2150 - GRANT - Cloud PC Mobile Access](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access.md) | enabled | De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt. |
-| [3020 - SESSION - BYOD Persistence](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3020__SESSION__BYOD_Persistence.md) | report-only | Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder. |
-| [3040 - SESSION - Block File Downloads On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices.md) | disabled | Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen. |
+| 2150 - GRANT - Cloud PC Mobile Access | enabled | De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt. |
+| 3020 - SESSION - BYOD Persistence | report-only | Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder. |
+| 3040 - SESSION - Block File Downloads On Unmanaged Devices | disabled | Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads. |
 
 ## Eigenschappen — 25
 

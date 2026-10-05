@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_BitLocker.md) · **English** · [Français](Baseline_WIN_D_BitLocker.fr.md)
 
-# CXNM - Standard - WIN - D - BitLocker
+# [Baseline] - WIN - D - BitLocker
 
 Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID.
 

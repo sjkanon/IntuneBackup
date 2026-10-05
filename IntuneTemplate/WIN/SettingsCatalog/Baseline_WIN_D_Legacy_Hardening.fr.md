@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Legacy_Hardening.md) · [English](Baseline_WIN_D_Legacy_Hardening.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Legacy Hardening
+# [Baseline] - WIN - D - Legacy Hardening
 
 Les paramètres de durcissement de l'ancienne policy Administrative Templates pour lesquels OpenIntuneBaseline n'a pas d'équivalent : chemins UNC renforcés, WDigest, blocage de classes de périphériques, DNS multicast et traitement de la stratégie de registre.
 

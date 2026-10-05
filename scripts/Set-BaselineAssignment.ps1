@@ -8,7 +8,7 @@ Looks up in the tenant the policies that are in IntuneTemplate/ — across all f
 types (Settings Catalog, Administrative Templates/ADMX, classic Device Configurations,
 compliance policies and App Protection/MAM) — and sets an assignment on them in one go.
 
-By default the policy list comes from IntuneTemplate/, not from a name filter on "CXNM - Standard".
+By default the policy list comes from IntuneTemplate/, not from a name filter on the prefix.
 That is deliberate: a policy that does not (yet) carry the prefix would be silently
 skipped. With -Name you can supply your own list.
 
@@ -42,7 +42,7 @@ Explicit policy names instead of the list from IntuneTemplate/.
 
 .PARAMETER Scope
 Limits the policy list to device-scoped ('D') or user-scoped ('U') policies, based on the
-"CXNM - Standard - PLATFORM - D/U - Item" naming convention. Default 'Both': the list then stays
+"<prefix>PLATFORM - D/U - Item" naming convention. Default 'Both': the list then stays
 unfiltered, including policies that do not (yet) follow that convention. Also works on -Name.
 
 .PARAMETER Platform
@@ -56,6 +56,10 @@ Replaces existing assignments instead of adding to them.
 Takes all templates from IntuneTemplate/, regardless of their phase. Only for a test tenant: a
 phase 5 policy next to its counterpart produces a Conflict, after which Intune applies the
 disputed setting through neither of them.
+
+.PARAMETER Prefix
+Prefix of every baseline policy name. Default: "prefix" in IntuneTemplate/_organisation.json. Only
+needed with -Name outside the repo.
 
 .PARAMETER FilterId
 Object id of an assignment filter to put on the assignment.
@@ -105,6 +109,8 @@ param(
 
     [string[]]$Name,
 
+    [string]$Prefix,
+
     [ValidateSet('D', 'U', 'Both')]
     [string]$Scope = 'Both',
 
@@ -125,6 +131,14 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+
+if (-not $Prefix) {
+    $organisationPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'IntuneTemplate/_organisation.json'
+    if (-not (Test-Path $organisationPath)) { throw "_organisation.json not found at $organisationPath — pass -Prefix to run without the repo." }
+    $Prefix = (Get-Content -LiteralPath $organisationPath -Raw | ConvertFrom-Json).prefix
+}
+# The prefix may contain regex characters (square brackets, for one), so it only goes into a pattern escaped.
+$prefixPattern = '^' + [regex]::Escape($Prefix)
 
 # Settings Catalog uses 'name', the rest 'displayName' — otherwise the match finds nothing.
 #
@@ -271,21 +285,21 @@ if ($Name) {
 if ($wanted.Count -eq 0) { throw 'No policy names to assign.' }
 
 # Scope filter: device policies belong on devices, user policies on users. The script reads
-# the scope from the name ("CXNM - Standard - WIN - D - Item"), because that is the only thing both the
+# the scope from the name ("<prefix>WIN - D - Item"), because that is the only thing both the
 # repo and the tenant know — a policy id says nothing about it. Policies that do not yet follow
 # the convention therefore fall outside every scope filter; that is deliberately visible instead
 # of silent, otherwise after a half-finished migration you would no longer assign half the baseline.
 if ($Scope -ne 'Both' -or $Platform -ne 'All') {
     $before = $wanted
-    $notConvention = @($before | Where-Object { $_ -notmatch '^CXNM - Standard - (WIN|MAC|IOS|AND) - [DU] - ' })
+    $notConvention = @($before | Where-Object { $_ -notmatch "$prefixPattern(WIN|MAC|IOS|AND) - [DU] - " })
     if ($notConvention.Count -gt 0) {
-        Write-Warning "$($notConvention.Count) policy/policies do not follow the 'CXNM - Standard - PLATFORM - D/U - Item' convention and fall outside every filter:"
+        Write-Warning "$($notConvention.Count) policy/policies do not follow the '$($Prefix)PLATFORM - D/U - Item' convention and fall outside every filter:"
         $notConvention | ForEach-Object { Write-Warning "  $_" }
     }
 
     $platformPattern = if ($Platform -eq 'All') { '(WIN|MAC|IOS|AND)' } else { $Platform }
     $scopePattern = if ($Scope -eq 'Both') { '[DU]' } else { $Scope }
-    $wanted = @($before | Where-Object { $_ -match "^CXNM - Standard - $platformPattern - $scopePattern - " })
+    $wanted = @($before | Where-Object { $_ -match "$prefixPattern$platformPattern - $scopePattern - " })
 
     if ($wanted.Count -eq 0) {
         throw "No policies found for platform '$Platform' and scope '$Scope'. Run without a filter to assign everything."

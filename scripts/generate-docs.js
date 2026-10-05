@@ -32,6 +32,7 @@ const fs = require("fs");
 const path = require("path");
 const { PLATFORMS, TYPE_TO_CATEGORY, readTemplates, parseBaseName, flattenSettings, packagePlan } = require("./lib/templates");
 const { LANGS, variantPath, languageBar, Translator, reportMissing } = require("./lib/i18n");
+const { PREFIX, CA_REPO_URL, stripPrefix } = require("./lib/organisation");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -47,8 +48,12 @@ const CONTROLS_PATH = path.join(TEMPLATE_DIR, "_controls.json");
  */
 const CA_SNAPSHOT_PATH = path.join(TEMPLATE_DIR, "_ca.json");
 const CA_SIBLINGS = ["CA-Policies", "CA-policies", "CIPP-Templates-ConditionalAccess"].map((d) => path.resolve(REPO_ROOT, "..", d));
-/** Links naar de CA-kant gaan naar de gedeelde mirror: een relatief pad naar ../CA-Policies werkt op GitHub niet. */
-const CA_URL = "https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/";
+/**
+ * Links naar de CA-kant gaan naar caRepoUrl uit _organisation.json: een relatief pad naar
+ * ../CA-Policies werkt op GitHub niet. Zonder URL staan alleen de namen er.
+ */
+const CA_URL = CA_REPO_URL;
+const caRepoLink = (label) => (CA_URL ? `[${label}](${CA_URL.replace(/blob\/main\/$/, "")})` : label);
 
 const TYPE_LABEL = {
   Catalog: "Settings Catalog",
@@ -291,17 +296,18 @@ function caSection(baseName, ctx) {
     "## Conditional Access",
     "",
     V.t({
-      nl: `Deze Conditional Access-policies uit de [CA-Policies-repo](${CA_URL.replace(/blob\/main\/$/, "")}) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.`,
-      en: `These Conditional Access policies from the [CA-Policies repo](${CA_URL.replace(/blob\/main\/$/, "")}) rely on this policy. Before you change or remove it, check what that does there.`,
-      fr: `Ces stratégies Conditional Access du [dépôt CA-Policies](${CA_URL.replace(/blob\/main\/$/, "")}) s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.`,
+      nl: `Deze Conditional Access-policies uit de ${caRepoLink("CA-Policies-repo")} leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.`,
+      en: `These Conditional Access policies from the ${caRepoLink("CA-Policies repo")} rely on this policy. Before you change or remove it, check what that does there.`,
+      fr: `Ces stratégies Conditional Access du ${caRepoLink("dépôt CA-Policies")} s'appuient sur cette policy. Avant de la modifier ou de la supprimer, vérifiez l'effet là-bas.`,
     }),
     "",
     V.t({ nl: "| CA-policy | State | Wat deze policy ervoor doet |", en: "| CA policy | State | What this policy does for it |", fr: "| Stratégie CA | State | Ce que cette policy fait pour elle |" }),
     "|---|---|---|",
     ...links.map((l) => {
       const doc = V.link(`${l.ca}.md`);
-      const label = l.displayName.replace(/^CXNM - STANDARD - /, "");
-      return `| [${escapePipes(label)}](${CA_URL}CATemplate/${doc}) | ${CA_STATE[l.state] || l.state} | ${escapePipes(l.waarom[V.lang] || l.waarom.nl)} |`;
+      // De CA-repo heeft een eigen voorvoegsel; alles vóór het nummer is daar ruis.
+      const label = escapePipes(l.displayName.replace(/^.*? - (?=\d{4} - )/, ""));
+      return `| ${CA_URL ? `[${label}](${CA_URL}CATemplate/${doc})` : label} | ${CA_STATE[l.state] || l.state} | ${escapePipes(l.waarom[V.lang] || l.waarom.nl)} |`;
     }),
     "",
   ];
@@ -492,9 +498,9 @@ function platformReadme(platform, templates, ctx) {
     `# ${label} — ${policies(templates.length)}`,
     "",
     V.t({
-      nl: `Alle policies heten \`CXNM - Standard - ${platform} - <D|U> - <Item>\`; de tabellen hieronder laten het \`<Item>\`-deel zien.`,
-      en: `All policies are named \`CXNM - Standard - ${platform} - <D|U> - <Item>\`; the tables below show the \`<Item>\` part.`,
-      fr: `Toutes les policies s'appellent \`CXNM - Standard - ${platform} - <D|U> - <Item>\` ; les tableaux ci-dessous montrent la partie \`<Item>\`.`,
+      nl: `Alle policies heten \`${PREFIX}${platform} - <D|U> - <Item>\`; de tabellen hieronder laten het \`<Item>\`-deel zien.`,
+      en: `All policies are named \`${PREFIX}${platform} - <D|U> - <Item>\`; the tables below show the \`<Item>\` part.`,
+      fr: `Toutes les policies s'appellent \`${PREFIX}${platform} - <D|U> - <Item>\` ; les tableaux ci-dessous montrent la partie \`<Item>\`.`,
     }),
     "",
     V.t({ nl: "| Map | Aantal |", en: "| Folder | Count |", fr: "| Dossier | Nombre |" }),
@@ -851,7 +857,7 @@ function overviewDocument(templates, ctx) {
   const unassigned = templates.filter((t) => !ctx.assignments[t.displayName]);
   // De pilottabel komt uit `fase` en `faseWaarom`. Tot september 2026 stond hij hier als vaste
   // tekst, en die liep uit de pas: negen van de tien policies erin stonden in fase 1 en rolden
-  // via CXNM - Standard - Baseline-Devices gewoon naar alle apparaten.
+  // via het pakket Baseline-Devices gewoon naar alle apparaten.
   const faseOf = (t) => (ctx.manifestByTarget.get(t.baseName) || {}).fase;
   const byFase = (n) => templates.filter((t) => faseOf(t) === n).length;
   const platformRank = (t) => platforms.indexOf(parseBaseName(t.baseName).platform);
@@ -1039,7 +1045,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## Eerst in een pilot",
         "",
-        "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `CXNM - Standard - Baseline-Pilot` uit naar",
+        "Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `" + PREFIX + "Baseline-Pilot` uit naar",
         "`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat",
         "verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.",
         "",
@@ -1122,7 +1128,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## Pilot first",
         "",
-        "Phase 2 in `_manifest.json`. These policies are deployed via the package `CXNM - Standard - Baseline-Pilot` to",
+        "Phase 2 in `_manifest.json`. These policies are deployed via the package `" + PREFIX + "Baseline-Pilot` to",
         "`SEC-Baseline-Pilot`, and only to everyone once they move to phase 1 — a PR, because that",
         "changes who they are deployed to. The reason per policy is the `faseWaarom` from the manifest.",
         "",
@@ -1205,7 +1211,7 @@ function overviewDocument(templates, ctx) {
         "",
         "## D'abord en pilote",
         "",
-        "Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `CXNM - Standard - Baseline-Pilot` vers",
+        "Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `" + PREFIX + "Baseline-Pilot` vers",
         "`SEC-Baseline-Pilot`, et à tout le monde seulement lorsqu'elles passent en phase 1 — une PR, car cela",
         "change à qui elles sont déployées. La raison pour chaque policy est le `faseWaarom` du manifeste.",
         "",
@@ -1213,7 +1219,7 @@ function overviewDocument(templates, ctx) {
       ],
     }),
     "|---|---|",
-    ...pilot.map((p) => `| \`${p.displayName.replace(/^CXNM - Standard - /, "")}\` | ${escapePipes(V.d(p.faseWaarom))} |`),
+    ...pilot.map((p) => `| \`${stripPrefix(p.displayName)}\` | ${escapePipes(V.d(p.faseWaarom))} |`),
     "",
     ...V.t({
       nl: [

@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_MAC_D_Restrictions.en.md) · [Français](Baseline_MAC_D_Restrictions.fr.md)
 
-# CXNM - Standard - MAC - D - Restrictions
+# [Baseline] - MAC - D - Restrictions
 
 Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.
 
@@ -15,7 +15,7 @@ Beperkt de macOS-functies waarmee bedrijfsdata het apparaat kan verlaten.
 | Bron | OpenIntuneBaseline macOS v1.0 — Device Security - D - Restrictions |
 | Bestand | [`Baseline_MAC_D_Restrictions.json`](Baseline_MAC_D_Restrictions.json) |
 
-> Zet Siri uit met allowAssistant. Apple markeert die sleutel sinds macOS 26.4 als deprecated, ten gunste van de declaratieve configuratie com.apple.configuration.siri.settings (in Intune: sirisettings_sirisettings met sirisettings_enabled). Hij blijft voorlopig staan om dezelfde reden als bij CXNM - Standard - MAC - D - Apple Intelligence Restricted: die DDM-configuratie bestaat pas vanaf macOS 26.4 en alleen op supervised Macs, terwijl deze payload het ook doet op macOS 14 en 15 en op een Mac die de gebruiker zelf heeft ingeschreven. CXNM - Standard - IOS - D - Restrictions Corporate gebruikt sirisettings al wel (allowwhilelocked), want op iOS gold de oude beperking anders. Overstappen zodra de vloot op 26.4 of hoger zit en via ADE is ingeschreven.
+> Zet Siri uit met allowAssistant. Apple markeert die sleutel sinds macOS 26.4 als deprecated, ten gunste van de declaratieve configuratie com.apple.configuration.siri.settings (in Intune: sirisettings_sirisettings met sirisettings_enabled). Hij blijft voorlopig staan om dezelfde reden als bij [Baseline] - MAC - D - Apple Intelligence Restricted: die DDM-configuratie bestaat pas vanaf macOS 26.4 en alleen op supervised Macs, terwijl deze payload het ook doet op macOS 14 en 15 en op een Mac die de gebruiker zelf heeft ingeschreven. [Baseline] - IOS - D - Restrictions Corporate gebruikt sirisettings al wel (allowwhilelocked), want op iOS gold de oude beperking anders. Overstappen zodra de vloot op 26.4 of hoger zit en via ADE is ingeschreven.
 
 ## Normen
 

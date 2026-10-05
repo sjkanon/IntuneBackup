@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Personal_Data_Encryption.md) · **English** · [Français](Baseline_WIN_U_Personal_Data_Encryption.fr.md)
 
-# CXNM - Standard - WIN - U - Personal Data Encryption
+# [Baseline] - WIN - U - Personal Data Encryption
 
 Encrypts the user's personal folders with a key tied to their Windows Hello sign-in, so that the data stays encrypted even on a device that is switched on.
 

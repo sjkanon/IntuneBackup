@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Printing.md) · [English](Baseline_WIN_D_Printing.en.md) · **Français**
 
-# CXNM - Standard - WIN - D - Printing
+# [Baseline] - WIN - D - Printing
 
 Durcissement contre PrintNightmare : restreint Point and Print et l'installation de pilotes d'imprimante par les utilisateurs.
 

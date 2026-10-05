@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Printing_Hardening.md) · **English** · [Français](Baseline_WIN_D_Printing_Hardening.fr.md)
 
-# CXNM - Standard - WIN - D - Printing Hardening
+# [Baseline] - WIN - D - Printing Hardening
 
 Turns on Windows Protected Print, prohibits standard users from installing printer drivers for a shared printer, and shuts off printing over HTTP.
 
@@ -15,7 +15,7 @@ Turns on Windows Protected Print, prohibits standard users from installing print
 | Source | CIS v4 Windows 11 L1 and the Microsoft Security Baseline — settings taken from IntuneAdmin, values verified against the settings catalog definitions. |
 | File | [`Baseline_WIN_D_Printing_Hardening.json`](Baseline_WIN_D_Printing_Hardening.json) |
 
-> Windows Protected Print requires Windows 11 24H2 or later and drops printers that do not have a Mopria driver — in practice those are older network printers and label printers. Inventory the printer fleet before you assign this broadly; on a fleet without its own printers it is free. The other two settings are unconditionally safe. Overlap checked (September 2026): `printers_configurewindowsprotectedprint` is only in this policy; CXNM - Standard - WIN - D - Printing sets twenty other printer ids (Point and Print, RPC, RedirectionGuard, driver installation by administrators only) and does not clash. ANALYSE.md still lists Protected Print as 'deliberately not adopted' — that is no longer correct: it is here, in phase 2.
+> Windows Protected Print requires Windows 11 24H2 or later and drops printers that do not have a Mopria driver — in practice those are older network printers and label printers. Inventory the printer fleet before you assign this broadly; on a fleet without its own printers it is free. The other two settings are unconditionally safe. Overlap checked (September 2026): `printers_configurewindowsprotectedprint` is only in this policy; [Baseline] - WIN - D - Printing sets twenty other printer ids (Point and Print, RPC, RedirectionGuard, driver installation by administrators only) and does not clash. ANALYSE.md still lists Protected Print as 'deliberately not adopted' — that is no longer correct: it is here, in phase 2.
 
 ## Standards
 

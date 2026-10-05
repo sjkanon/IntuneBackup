@@ -1,0 +1,44 @@
+{
+    "@odata.type": "#microsoft.graph.androidDeviceOwnerCompliancePolicy",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "securityBlockJailbrokenDevices": true,
+    "securityRequireSafetyNetAttestationBasicIntegrity": true,
+    "securityRequireSafetyNetAttestationCertifiedDevice": true,
+    "osMinimumVersion": "16.0",
+    "osMaximumVersion": null,
+    "minAndroidSecurityPatchLevel": "2026-03-01",
+    "passwordRequired": false,
+    "passwordMinimumLength": null,
+    "passwordMinimumLetterCharacters": null,
+    "passwordMinimumLowerCaseCharacters": null,
+    "passwordMinimumNonLetterCharacters": null,
+    "passwordMinimumNumericCharacters": null,
+    "passwordMinimumSymbolCharacters": null,
+    "passwordMinimumUpperCaseCharacters": null,
+    "passwordRequiredType": "deviceDefault",
+    "passwordMinutesOfInactivityBeforeLock": null,
+    "passwordExpirationDays": null,
+    "passwordPreviousPasswordCountToBlock": null,
+    "storageRequireEncryption": false,
+    "securityRequireIntuneAppIntegrity": true,
+    "requireNoPendingSystemUpdates": null,
+    "securityRequiredAndroidSafetyNetEvaluationType": "hardwareBacked",
+    "scheduledActionsForRule": [
+        {
+            "ruleName": "PasswordRequired",
+            "scheduledActionConfigurations": [
+                {
+                    "@odata.type": "#microsoft.graph.deviceComplianceActionItem",
+                    "gracePeriodHours": 24,
+                    "actionType": "block",
+                    "notificationTemplateId": "00000000-0000-0000-0000-000000000000",
+                    "notificationMessageCCList": []
+                }
+            ]
+        }
+    ],
+    "displayName": "[Baseline] - AND - U - Compliance Corporate Device Health",
+    "description": "Marks a fully managed or corporate-owned Android device as non-compliant when it is rooted, Play Integrity does not pass with hardware backing, the Intune app has been tampered with, it runs below Android 16 or the latest security patch is older than the minimum. Baseline assignment: none yet — waits for a prerequisite, see the phase reason. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Fully-Managed and Corp-Work-Profile - v1.5 (health part), compared with IntuneAdmin Baseline - Android Enterprise - Device Health; OS minimum raised from 13.0 to n-1 (16.0) and patch level added."
+}

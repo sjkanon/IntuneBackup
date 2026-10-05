@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Windows_AI_Restricted.md) · **English** · [Français](Baseline_WIN_D_Windows_AI_Restricted.fr.md)
 
-# CXNM - Standard - WIN - D - Windows AI Restricted
+# [Baseline] - WIN - D - Windows AI Restricted
 
 Turns off Recall and Click To Do: Windows then takes no screen captures of what happens on the screen and does not analyse them either.
 
@@ -15,7 +15,7 @@ Turns off Recall and Click To Do: Windows then takes no screen captures of what 
 | Source | own baseline — comparison with IntuneAdmin/IntuneBaselines, August 2026 |
 | File | [`Baseline_WIN_D_Windows_AI_Restricted.json`](Baseline_WIN_D_Windows_AI_Restricted.json) |
 
-> **Alternative to CXNM - Standard - WIN - D - Windows AI Permitted.** That policy sets the same three settings to the opposite value; assigning both results in a Conflict, after which Intune applies neither. This is the variant the baseline deploys by default.
+> **Alternative to [Baseline] - WIN - D - Windows AI Permitted.** That policy sets the same three settings to the opposite value; assigning both results in a Conflict, after which Intune applies neither. This is the variant the baseline deploys by default.
 
 ## Standards
 

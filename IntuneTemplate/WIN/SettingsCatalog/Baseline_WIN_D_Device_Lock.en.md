@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_D_Device_Lock.md) · **English** · [Français](Baseline_WIN_D_Device_Lock.fr.md)
 
-# CXNM - Standard - WIN - D - Device Lock
+# [Baseline] - WIN - D - Device Lock
 
 Determines when the screen locks and which requirements apply to the passcode, plus the behaviour on closing the lid and power.
 

@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_WIN_U_Microsoft_Teams.md) · **English** · [Français](Baseline_WIN_U_Microsoft_Teams.fr.md)
 
-# CXNM - Standard - WIN - U - Microsoft Teams
+# [Baseline] - WIN - U - Microsoft Teams
 
 Limits sign-in in Teams to the organisation's own tenant and prevents Teams from starting itself immediately after installation.
 

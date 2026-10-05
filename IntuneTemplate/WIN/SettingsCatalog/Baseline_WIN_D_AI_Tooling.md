@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_D_AI_Tooling.en.md) · [Français](Baseline_WIN_D_AI_Tooling.fr.md)
 
-# CXNM - Standard - WIN - D - AI Tooling
+# [Baseline] - WIN - D - AI Tooling
 
 Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke licentie blijft werken.
 

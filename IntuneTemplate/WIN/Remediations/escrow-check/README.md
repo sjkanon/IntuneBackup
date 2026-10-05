@@ -9,8 +9,8 @@
 
 ## Waarom
 
-`CXNM - Standard - WIN - D - BitLocker` eist dat de herstelsleutel naar Entra ID gaat en
-`CXNM - Standard - WIN - D - Windows LAPS` dat het beheerderswachtwoord daar staat. Beide policies
+`[Baseline] - WIN - D - BitLocker` eist dat de herstelsleutel naar Entra ID gaat en
+`[Baseline] - WIN - D - Windows LAPS` dat het beheerderswachtwoord daar staat. Beide policies
 rapporteren **Geslaagd** zodra de instelling is gezet — niet of de sleutel of het wachtwoord
 ook daadwerkelijk is aangekomen. De compliance-toets `Compliance BitLocker` kijkt alleen of de
 schijf versleuteld is. Een apparaat dat versleuteld is zonder bruikbare herstelsleutel in Entra
@@ -30,7 +30,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**, per
 
 | Veld | Waarde |
 |---|---|
-| Naam | `CXNM - Standard - WIN - D - BitLocker Escrow Check` / `CXNM - Standard - WIN - D - LAPS Escrow Check` |
+| Naam | `[Baseline] - WIN - D - BitLocker Escrow Check` / `[Baseline] - WIN - D - LAPS Escrow Check` |
 | Uitvoeren met aanmeldingsreferenties | Nee (SYSTEM) |
 | 64-bits PowerShell | Ja |
 | Schema | Dagelijks |

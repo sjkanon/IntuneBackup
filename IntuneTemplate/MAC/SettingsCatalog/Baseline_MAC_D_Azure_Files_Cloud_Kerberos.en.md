@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.md) · **English** · [Français](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.fr.md)
 
-# CXNM - Standard - MAC - D - Azure Files Cloud Kerberos
+# [Baseline] - MAC - D - Azure Files Cloud Kerberos
 
 Gives the Mac a Kerberos ticket for the Entra Cloud Kerberos realm, so that an SMB share on Azure Files opens without the user signing in again.
 
@@ -15,7 +15,7 @@ Gives the Mac a Kerberos ticket for the Entra Cloud Kerberos realm, so that an S
 | Source | Microsoft Learn — Enable Microsoft Entra Kerberos authentication for Azure Files on macOS with Platform SSO (preview), and the Entra guide for Kerberos SSO in Platform SSO; settingDefinitionIds verified against the settings catalog definitions |
 | File | [`Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json`](Baseline_MAC_D_Azure_Files_Cloud_Kerberos.json) |
 
-> Belongs with CXNM - Standard - MAC - D - Platform SSO and does nothing without that policy: the cloud TGT is issued by Platform SSO; this profile only tells Apple's Kerberos extension which realm goes with it and that it may use that TGT (`usePlatformSSOTGT`). `performKerberosOnly` keeps the extension away from password expiry checks, password synchronisation and the home directory path — those belong to Platform SSO, not here.
+> Belongs with [Baseline] - MAC - D - Platform SSO and does nothing without that policy: the cloud TGT is issued by Platform SSO; this profile only tells Apple's Kerberos extension which realm goes with it and that it may use that TGT (`usePlatformSSOTGT`). `performKerberosOnly` keeps the extension away from password expiry checks, password synchronisation and the home directory path — those belong to Platform SSO, not here.
 >
 > A second policy alongside Platform SSO and not an extension of it: the settings catalog has two separate forms for `com.apple.extensiblesso`, the Platform SSO form (`com.apple.extensiblesso_com.apple.extensiblesso`) and the Kerberos form this policy uses (`com.apple.extensiblesso_com.apple.extensiblesso-kerberos_kerberos`). Each Kerberos realm is one such form, with its own `Realm` and its own `Hosts`. On the Mac those profiles are installed side by side and macOS merges the payloads; check-scope.js therefore deliberately does not report that overlap on Apple as a conflict.
 >

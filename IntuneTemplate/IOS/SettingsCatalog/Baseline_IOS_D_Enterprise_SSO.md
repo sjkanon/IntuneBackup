@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_IOS_D_Enterprise_SSO.en.md) · [Français](Baseline_IOS_D_Enterprise_SSO.fr.md)
 
-# CXNM - Standard - IOS - D - Enterprise SSO
+# [Baseline] - IOS - D - Enterprise SSO
 
 Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat beheerde apps en Safari één Entra-aanmelding delen en het apparaat zich bij Conditional Access kan bewijzen.
 
@@ -15,7 +15,7 @@ Zet de Microsoft Enterprise SSO-plug-in van Microsoft Authenticator aan, zodat b
 | Bron | UniFy iOS/iPadOS Baseline v1.2 — SC - DEV - Microsoft Enterprise SSO - All Devices; URL-lijst en sleutels gelijkgetrokken met Microsoft Learn (Microsoft Enterprise SSO plug-in for Apple devices) |
 | Bestand | [`Baseline_IOS_D_Enterprise_SSO.json`](Baseline_IOS_D_Enterprise_SSO.json) |
 
-> Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met CXNM - Standard - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie IntuneTemplate/IOS/Enrollment/README.md.
+> Sleutels: Enable_SSO_On_All_ManagedApps=1 (alleen MDM-beheerde apps), AppPrefixAllowList com.microsoft.,com.apple., browser_sso_interaction_enabled=1, disable_explicit_app_prompt=1 en device_registration={{DEVICEREGISTRATION}} (Just-in-Time-registratie, door Microsoft voor iOS met Intune gedocumenteerd). De URL-lijst is de volledige Microsoft-lijst inclusief soevereine clouds; UniFy mist login.chinacloudapi.cn. Geen overlap met [Baseline] - MAC - D - Platform SSO: ander platform, andere extensie-ID. Een proxy met TLS-inspectie moet app-site-association.cdn-apple.com en app-site-association.networking.apple uitzonderen, anders faalt de plug-in met wisselende fouten. Rol Microsoft Authenticator uit als vereiste app (VPP op bedrijfstoestellen) — zie IntuneTemplate/IOS/Enrollment/README.md.
 
 ## Normen
 
@@ -30,13 +30,13 @@ Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.
 
 ## Conditional Access
 
-Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
 
 | CA-policy | State | Wat deze policy ervoor doet |
 |---|---|---|
-| [2060 - GRANT - Mobile Apps and Desktop Clients](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients.md) | disabled | Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden. |
-| [2090 - GRANT - Browser Access On Unmanaged Devices](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices.md) | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
-| [2130 - GRANT - Admins Compliant Device](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device.md) | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
+| 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden. |
+| 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
+| 2130 - GRANT - Admins Compliant Device | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
 
 ## Instellingen — 21
 

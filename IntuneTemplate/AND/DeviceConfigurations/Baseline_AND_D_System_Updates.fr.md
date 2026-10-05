@@ -2,7 +2,7 @@
 
 [Nederlands](Baseline_AND_D_System_Updates.md) · [English](Baseline_AND_D_System_Updates.en.md) · **Français**
 
-# CXNM - Standard - AND - D - System Updates
+# [Baseline] - AND - D - System Updates
 
 Installe automatiquement les mises à jour système Android sur les appareils de l'organisation dans une fenêtre de maintenance entre 00:00 et 06:00.
 

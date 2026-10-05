@@ -1,6 +1,6 @@
 {
   "TemplateType": "BaselineTemplate",
-  "templateName": "CXNM - Standard - Windows Updates",
+  "templateName": "[Baseline] - Windows Updates",
   "description": "Patching for Windows devices: Windows Update rings (Ring 3 on all devices except the ring groups SEC-Update-Ring1 and SEC-Update-Ring2), Microsoft Edge and Microsoft 365 Apps update policies, and Winget-AutoUpdate for every other app winget knows, two weeks after the rings are compliant. Package membership follows the repo. Assign the tenants before you run it.",
   "assignedTenants": [
     {
@@ -22,7 +22,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#ring3",
           "variables": {
-            "intuneTemplatePackage": "CXNM - Standard - Updates-Ring3",
+            "intuneTemplatePackage": "[Baseline] - Updates-Ring3",
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "SEC-Update-Ring1,SEC-Update-Ring2",
@@ -39,7 +39,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-update-ring1",
           "variables": {
-            "intuneTemplatePackage": "CXNM - Standard - Updates-SEC-Update-Ring1",
+            "intuneTemplatePackage": "[Baseline] - Updates-SEC-Update-Ring1",
             "assignTo": "customGroup",
             "customGroup": "SEC-Update-Ring1",
             "excludeGroup": "",
@@ -56,7 +56,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-update-ring2",
           "variables": {
-            "intuneTemplatePackage": "CXNM - Standard - Updates-SEC-Update-Ring2",
+            "intuneTemplatePackage": "[Baseline] - Updates-SEC-Update-Ring2",
             "assignTo": "customGroup",
             "customGroup": "SEC-Update-Ring2",
             "excludeGroup": "",
@@ -73,7 +73,7 @@
           "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#devices",
           "variables": {
-            "intuneTemplatePackage": "CXNM - Standard - Updates-Devices",
+            "intuneTemplatePackage": "[Baseline] - Updates-Devices",
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "",
@@ -108,8 +108,8 @@
           "variables": {
             "templateIds": [
               {
-                "label": "CXNM - Standard - Winget-AutoUpdate - All Devices",
-                "value": "ed2d0ba5-67ed-5a7c-9589-4bff927f3ee3"
+                "label": "[Baseline] - Winget-AutoUpdate - All Devices",
+                "value": "7b0a760c-ec39-5d16-9e1f-5215d77fd1d5"
               }
             ]
           },
@@ -123,7 +123,7 @@
   "referencedTemplates": [
     {
       "path": "AppTemplate/Winget-AutoUpdate-AllDevices.json",
-      "displayName": "CXNM - Standard - Winget-AutoUpdate - All Devices",
+      "displayName": "[Baseline] - Winget-AutoUpdate - All Devices",
       "partition": "AppTemplate"
     }
   ]

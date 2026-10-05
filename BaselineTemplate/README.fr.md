@@ -16,16 +16,16 @@ et quand un tenant passe à l'étape suivante.
 `IntuneTemplate/` fournit les stratégies, mais dans CIPP les templates ne font que s'y trouver :
 c'est une baseline qui déploie. Remplir cet écran à la main, c'est ajouter treize fois le même
 standard et choisir treize fois la bonne cible d'affectation — un seul faux clic place jusqu'à 70
-stratégies (le paquet `CXNM - Standard - Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
+stratégies (le paquet `[Baseline] - Baseline-Devices`) sur le mauvais public. Ce fichier provient donc de la même source que le reste du
 dépôt : le manifeste.
 
 ## Contenu
 
 | Étape | Paquets | Passage à cette étape |
 |---:|---|---|
-| 1 · Immédiat | `CXNM - Standard - Baseline-Devices`, `CXNM - Standard - Baseline-Users`, `CXNM - Standard - Baseline-ADE-token` et les huit paquets de groupe `CXNM - Standard - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
-| 2 · Pilote | `CXNM - Standard - Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
-| 3 · En attente d'un prérequis | `CXNM - Standard - Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
+| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` et les huit paquets de groupe `[Baseline] - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
+| 2 · Pilote | `[Baseline] - Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
+| 3 · En attente d'un prérequis | `[Baseline] - Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
 
 Les stratégies contenues dans chaque paquet sont listées dans le
 [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp).
@@ -79,13 +79,13 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
   dans `scripts/lib/templates.js` et `$PilotGroup` dans `scripts/Set-BaselineAssignment.ps1` — et
   relancez le pipeline. Modifier le groupe uniquement dans CIPP fonctionne aussi, mais une
   réimportation de ce fichier remet le nom par défaut.
-- **Lier les profils ADE.** `CXNM - Standard - Baseline-ADE-token` n'est volontairement pas affecté : un profil
+- **Lier les profils ADE.** `[Baseline] - Baseline-ADE-token` n'est volontairement pas affecté : un profil
   d'inscription macOS dépend d'un jeton ADE, pas d'un groupe Entra, et vous choisissez l'un des
   deux par jeton.
 
 ## Defender-Office365.json — protection de la messagerie
 
-Une deuxième baseline, distincte (`CXNM - Standard - Defender for Office 365`) : Safe Links, Safe
+Une deuxième baseline, distincte (`[Baseline] - Defender for Office 365`) : Safe Links, Safe
 Attachments, anti-hameçonnage, anti-spam et anti-malware, Defender pour SharePoint/OneDrive/Teams,
 et la notification de quarantaine aux utilisateurs **toutes les 4 heures** — le plus court
 qu'Exchange permette. Séparée de `Baseline.json` car elle exige Defender for Office 365 Plan 1
@@ -149,7 +149,7 @@ L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : mod
 
 ## Windows-Updates.json — correctifs
 
-Une troisième baseline, distincte (`CXNM - Standard - Windows Updates`), pour tout ce qui met à
+Une troisième baseline, distincte (`[Baseline] - Windows Updates`), pour tout ce qui met à
 jour un appareil Windows : Windows lui-même, Edge, Microsoft 365 Apps et les autres applications
 via winget. Séparée de `Baseline.json` parce que tout tenant a besoin des correctifs — y compris
 un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition se trouve dans
@@ -157,10 +157,10 @@ un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition 
 
 | Étape | Standard | Affectation | Ce qu'il fait |
 |---:|---|---|---|
-| 1 · Immédiat | `CXNM - Standard - Updates-Ring3` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
-| 1 · Immédiat | `CXNM - Standard - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
-| 1 · Immédiat | `CXNM - Standard - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
-| 1 · Immédiat | `CXNM - Standard - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) et Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) |
+| 1 · Immédiat | `[Baseline] - Updates-Ring3` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
+| 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
+| 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
+| 1 · Immédiat | `[Baseline] - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) et Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | tous les appareils (Required) | Winget-AutoUpdate : met à jour chaque jour toute application connue de winget, sauf la [liste d'exclusion](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
 
 L'étape 2 commence lorsque tout ce qui relève de l'étape 1 est conforme **et** que deux semaines

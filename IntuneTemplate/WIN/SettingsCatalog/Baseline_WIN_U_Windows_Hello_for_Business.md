@@ -2,7 +2,7 @@
 
 **Nederlands** · [English](Baseline_WIN_U_Windows_Hello_for_Business.en.md) · [Français](Baseline_WIN_U_Windows_Hello_for_Business.fr.md)
 
-# CXNM - Standard - WIN - U - Windows Hello for Business
+# [Baseline] - WIN - U - Windows Hello for Business
 
 Windows Hello for Business per gebruiker in plaats van per apparaat: dezelfde eisen als de apparaatpolicy — TPM verplicht, PIN van minimaal zes tekens, PIN-herstel aan — maar dan gebonden aan de gebruiker. Bedoeld voor gebruikers met een eigen apparaat; gedeelde apparaten horen hier met een apparaatfilter buiten te vallen.
 
@@ -29,13 +29,13 @@ Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.
 
 ## Conditional Access
 
-Deze Conditional Access-policies uit de [CA-Policies-repo](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/) leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
+Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. Wijzig of verwijder je hem, kijk dan eerst wat dat daar doet.
 
 | CA-policy | State | Wat deze policy ervoor doet |
 |---|---|---|
-| [2055 - GRANT - Phishing Resistant MFA for Admins](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins.md) | disabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
-| [2120 - GRANT - Phishing Resistant MFA for All Users](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users.md) | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
-| [2125 - GRANT - Phishing Resistant MFA for Rollout Groups](https://github.com/ConXioN-ITCE/CIPP-Templates-ConditionalAccess/blob/main/CATemplate/CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups.md) | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| 2055 - GRANT - Phishing Resistant MFA for Admins | disabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| 2120 - GRANT - Phishing Resistant MFA for All Users | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| 2125 - GRANT - Phishing Resistant MFA for Rollout Groups | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
 
 ## Instellingen — 5
 
