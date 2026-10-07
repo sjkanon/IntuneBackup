@@ -3,7 +3,7 @@
 # DlpCompliancePolicyTemplate/
 
 **Templates DLP** CIPP : la prévention des pertes de données Microsoft Purview pour Exchange,
-SharePoint et OneDrive. Déployés par la baseline [`Purview-DLP.json`](../BaselineTemplate/README.fr.md#purview-dlpjson--fuites-de-données).
+SharePoint et OneDrive. Déployés par les baselines [`Purview-DLP.json`](../BaselineTemplate/README.fr.md#purview-dlpjson--fuites-de-données).
 
 | Fichier | Stratégie | Stage |
 |---|---|---|
@@ -13,6 +13,8 @@ SharePoint et OneDrive. Déployés par la baseline [`Purview-DLP.json`](../Basel
 | [`DLP_Personal_Data_NL_Block.json`](DLP_Personal_Data_NL_Block.json) | `[Baseline] - DLP - Personal Data NL - Block` | 2 · Blokkeren |
 | [`DLP_Personal_Data_BE_Block.json`](DLP_Personal_Data_BE_Block.json) | `[Baseline] - DLP - Personal Data BE - Block` | 2 · Blokkeren |
 | [`DLP_Financial_Block.json`](DLP_Financial_Block.json) | `[Baseline] - DLP - Financial - Block` | 2 · Blokkeren |
+| [`DLP_Aviation_Travel_Documents_Notify.json`](DLP_Aviation_Travel_Documents_Notify.json) | `[Baseline] - DLP - Aviation - Travel Documents - Notify` | 1 · Melden (Aviation) |
+| [`DLP_Aviation_Documents_Notify.json`](DLP_Aviation_Documents_Notify.json) | `[Baseline] - DLP - Aviation - Documents - Notify` | 1 · Melden (Aviation) |
 
 Chaque fichier est une ligne de table CIPP (`PartitionKey: DlpCompliancePolicyTemplate`), générée
 par [`scripts/generate-dlp-templates.js`](../scripts/generate-dlp-templates.js) à partir de
@@ -61,6 +63,30 @@ par [`scripts/generate-dlp-templates.js`](../scripts/generate-dlp-templates.js) 
 
 Introuvable : un dépôt public, d'un MVP ou d'un autre, qui déploie la DLP avec des types
 néerlandais ou belges. La structure vient de Microsoft, les seuils sont justifiés ci-dessus.
+
+## Aviation
+
+Les deux templates `Aviation` appartiennent à la baseline distincte
+[`Purview-DLP-Aviation.json`](../BaselineTemplate/README.fr.md#purview-dlp-aviationjson--aviation)
+et ne font que notifier.
+
+| Type d'informations sensibles / condition | Confiance | Seuil |
+|---|---|---|
+| Numéros de passeport NL, BE, German, France, Spain, Italy, Portugal, U.S. / U.K. | Medium | 10+ par type |
+| Nom de fichier : security, export control, medical (trois listes) | — | 1 |
+| International Classification of Diseases (ICD-10-CM) | High | 3+ |
+
+- **10+ passeports par type.** Une règle DLP compte par type : 10 passeports néerlandais la
+  déclenchent, 5 néerlandais et 5 allemands non. Les manifestes sont dominés par une ou deux
+  nationalités, et une liste d'équipage de six personnes envoyée à un hôtel doit rester
+  silencieuse. Medium est le niveau recommandé de chacun de ces types (numéro plus un mot-clé
+  comme *passport*).
+- **Nom de fichier, une liste par règle.** Des conditions de types différents dans une même
+  règle sont combinées en ET, chaque liste est donc une règle distincte.
+  `DocumentNameMatchesWords` cherche des mots entiers : *ITAR* ne se déclenche pas au milieu
+  d'un autre mot.
+- **ICD-10-CM est en anglais.** Il repère les rapports AME et les dossiers médicaux en anglais ;
+  ceux en néerlandais et en français passent par la règle sur le nom de fichier.
 
 ## Déploiement séparé
 

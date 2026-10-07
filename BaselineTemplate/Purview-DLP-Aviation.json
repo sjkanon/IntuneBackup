@@ -1,0 +1,62 @@
+{
+  "TemplateType": "BaselineTemplate",
+  "templateName": "[Baseline] - Purview DLP Aviation",
+  "description": "Extra data loss prevention for aviation tenants (operators, flight schools, maintenance), next to Purview DLP: crew lists and passenger manifests (10+ passports), aviation security programmes, export-controlled technical data, crew medicals and medical records shared outside the organisation. Notify only: it tips the user and alerts the admins, it never blocks. Assign the tenants before you run it.",
+  "assignedTenants": [
+    {
+      "label": "Exported Template",
+      "value": "Exported Template",
+      "type": "Tenant"
+    }
+  ],
+  "excludedTenants": [],
+  "alertEmails": "",
+  "alertWebhookUrl": "",
+  "stages": [
+    {
+      "name": "Melden",
+      "logic": "and",
+      "conditions": [],
+      "standards": [
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#aviation-travel-documents",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Aviation - Travel Documents - Notify",
+              "value": "cf959d08-c3f7-527d-a54a-ef592706567b"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#aviation-documents",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Aviation - Documents - Notify",
+              "value": "32a35fcc-a486-5f4d-a842-569d73bc4ddc"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    }
+  ],
+  "referencedTemplates": [
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Aviation_Travel_Documents_Notify.json",
+      "displayName": "[Baseline] - DLP - Aviation - Travel Documents - Notify",
+      "partition": "DlpCompliancePolicyTemplate"
+    },
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Aviation_Documents_Notify.json",
+      "displayName": "[Baseline] - DLP - Aviation - Documents - Notify",
+      "partition": "DlpCompliancePolicyTemplate"
+    }
+  ]
+}

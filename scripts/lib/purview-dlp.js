@@ -2,7 +2,7 @@
  * The Purview DLP baseline: data loss prevention for Exchange, SharePoint and OneDrive as CIPP
  * DLP policy templates. Read by `generate-dlp-templates.js`, which writes the templates to
  * `DlpCompliancePolicyTemplate/`, and by `generate-baseline-template.js`, which writes
- * `BaselineTemplate/Purview-DLP.json`.
+ * `BaselineTemplate/Purview-DLP.json` and, for aviation tenants, `Purview-DLP-Aviation.json`.
  *
  * Sources, combined:
  * - Microsoft's built-in templates (https://learn.microsoft.com/en-us/purview/dlp-policy-templates-include):
@@ -192,7 +192,7 @@ function blockPolicy(key) {
   };
 }
 
-const DLP_POLICIES = [
+const GENERAL_POLICIES = [
   notifyPolicy("personal"),
   notifyPolicy("personalBe"),
   notifyPolicy("financial"),
@@ -201,22 +201,175 @@ const DLP_POLICIES = [
   blockPolicy("financial"),
 ];
 
-const DLP_BASELINE = {
-  templateName: PREFIX + "Purview DLP",
-  description:
-    "Data loss prevention for Exchange, SharePoint and OneDrive (Business Premium): Dutch personal " +
-    "identifiers (BSN, passport, driver's license, tax number), Belgian personal identifiers (national " +
-    "number, passport, driver's license), payment cards and IBANs in bulk, " +
-    "shared outside the organisation. Stage 1 notifies users and reports bulk to the admins; stage 2 " +
-    "blocks bulk without override and is manual: move a tenant only after reviewing its DLP alerts. " +
-    "Assign the tenants before you run it.",
-  stages: [
-    { name: "Melden", logic: "and", conditions: [] },
-    // Handmatig: blokkeren zonder override hoort pas na iemand die de meldingen van stage 1 heeft gezien.
-    { name: "Blokkeren", logic: "and", conditions: [{ type: "manual" }] },
+/**
+ * Aviation: a separate baseline for tenants of airlines, charter and business aviation operators,
+ * flight schools and maintenance organisations. Notify only, on purpose: in aviation, sending
+ * crew lists to handling agents and hotels, medicals to the authority and security programmes to
+ * auditors is daily work, so a hard block without override would stop the operation. What this
+ * adds is visibility: the admin sees in Purview → DLP → Alerts what leaves, and the user gets a
+ * nudge to use the proper channel (the DCS/APIS feed, the authority's portal) instead of mail.
+ *
+ * What CIPP can carry decides what is possible: built-in SITs and the file name, extension and
+ * property conditions (Get-CIPPDlpComplianceFieldList). Words in the body need a custom SIT, and
+ * CIPP does not deploy those — so security programmes, export-controlled data and medicals are
+ * recognised by their file name, which is how operators name them anyway ("AVSEC programme",
+ * "Medical certificate Class 1"). Conditions of different kinds in one rule are ANDed, so every
+ * file-name list is its own rule. DocumentNameMatchesWords matches whole words, so short terms
+ * such as "ITAR" do not hit inside other words.
+ *
+ * Tips are in English: that is the working language of aviation, at Dutch, Belgian and French
+ * operators alike.
+ */
+
+/** Passports of the nationalities that dominate NL/BE crew lists and passenger manifests. */
+const AVIATION_PASSPORTS = [
+  SIT.passport,
+  SIT.bePassport,
+  { name: "German Passport Number", id: "2e3da144-d42b-47ed-b123-fbf78604e52c", confidencelevel: "Medium" },
+  { name: "France Passport Number", id: "3008b884-8c8c-4cd8-a289-99f34fc7ff5d", confidencelevel: "Medium" },
+  { name: "Spain Passport Number", id: "d17a57de-9fa5-4e9f-85d3-85c26d89686e", confidencelevel: "Medium" },
+  { name: "Italy Passport Number", id: "39811019-4750-445f-b26d-4c0e6c431544", confidencelevel: "Medium" },
+  { name: "Portugal Passport Number", id: "080a52fd-a7bc-431e-b54d-51f08f59db11", confidencelevel: "Medium" },
+  { name: "U.S. / U.K. Passport Number", id: "178ec42a-18b4-47cc-85c7-d62c92fd67f8", confidencelevel: "Medium" },
+];
+
+/** ICD-10-CM: High means a diagnosis term *and* its code within 300 characters — a medical record. */
+const ICD10 = { name: "International Classification of Diseases (ICD-10-CM)", id: "3356946c-6bb7-449b-b253-6ffa419c0ce7", confidencelevel: "High" };
+
+/** File-name word lists (max 50 per rule, 128 characters each). */
+const AVIATION_FILE_NAMES = {
+  security: [
+    "AVSEC", "aviation security", "security programme", "security program", "airport security programme",
+    "air carrier security programme", "beveiligingsprogramma", "programme de sûreté", "programme sûreté",
+    "threat assessment", "dreigingsanalyse", "known consignor", "regulated agent", "account consignor",
+    "security manual", "sûreté aérienne",
+  ],
+  exportControl: [
+    "ITAR", "EAR99", "export controlled", "export-controlled", "export control", "dual use", "dual-use",
+    "exportcontrole", "contrôle des exportations",
+  ],
+  medical: [
+    "medical certificate", "aeromedical", "aero medical", "AME report", "class 1 medical", "class 2 medical",
+    "LAPL medical", "Part-MED", "medisch certificaat", "medische keuring", "certificat médical",
+    "certificat medical", "examen médical",
   ],
 };
 
+const AVIATION_PREFIX = `${DLP_PREFIX}Aviation - `;
+
+/** Every aviation rule: only what leaves the organisation, tip for the user, incident and alert for the admin. */
+const aviationRule = (name, extra) => ({
+  ...ruleBase(name),
+  ...extra,
+  GenerateIncidentReport: ["SiteAdmin"],
+  IncidentReportContent: ["All"],
+  GenerateAlert: ["SiteAdmin"],
+  ReportSeverityLevel: "Medium",
+});
+
+const MEDICAL_TIP =
+  "This looks like crew medical data and is going outside the organisation. Medical data is special " +
+  "category personal data: share it only with the AME or the authority. The admin is notified.";
+
+const AVIATION_POLICIES = [
+  {
+    key: "aviation-travel-documents",
+    stage: 1,
+    file: "DLP_Aviation_Travel_Documents_Notify.json",
+    policy: {
+      name: `${AVIATION_PREFIX}Travel Documents - Notify`,
+      comments:
+        "Notifies and reports when 10+ passport numbers of one nationality leave the organisation: a crew " +
+        "list or passenger manifest. Blocks nothing. Purview DLP Aviation baseline.",
+      Mode: "Enable",
+      ...LOCATIONS,
+      RuleParams: [
+        aviationRule(`${AVIATION_PREFIX}Travel Documents - manifest`, {
+          // Per type: 10 Dutch passports hit, 5 Dutch plus 5 German do not. Manifests are dominated by
+          // one or two nationalities, and a crew list of six to a hotel should stay quiet.
+          ContentContainsSensitiveInformation: AVIATION_PASSPORTS.map((sit) => match([sit, 10, -1])),
+          NotifyPolicyTipCustomText:
+            "This contains many passport numbers (a crew list or passenger manifest) and is going outside the " +
+            "organisation. Use the handling or APIS channel where you can. The admin is notified.",
+        }),
+      ],
+    },
+  },
+  {
+    key: "aviation-documents",
+    stage: 1,
+    file: "DLP_Aviation_Documents_Notify.json",
+    policy: {
+      name: `${AVIATION_PREFIX}Documents - Notify`,
+      comments:
+        "Notifies and reports when aviation security programmes, export-controlled technical data (ITAR/EAR), " +
+        "crew medicals or medical records leave the organisation. Recognised by file name, medical records by " +
+        "ICD-10 diagnoses. Blocks nothing. Purview DLP Aviation baseline.",
+      Mode: "Enable",
+      ...LOCATIONS,
+      RuleParams: [
+        aviationRule(`${AVIATION_PREFIX}Documents - security`, {
+          DocumentNameMatchesWords: AVIATION_FILE_NAMES.security,
+          NotifyPolicyTipCustomText:
+            "This looks like an aviation security document and is going outside the organisation. Security " +
+            "programmes are need-to-know: check the recipient first. The admin is notified.",
+        }),
+        aviationRule(`${AVIATION_PREFIX}Documents - export control`, {
+          DocumentNameMatchesWords: AVIATION_FILE_NAMES.exportControl,
+          NotifyPolicyTipCustomText:
+            "This looks like export-controlled technical data (ITAR/EAR/dual-use) and is going outside the " +
+            "organisation. Check that the recipient is authorised. The admin is notified.",
+        }),
+        aviationRule(`${AVIATION_PREFIX}Documents - medical`, {
+          DocumentNameMatchesWords: AVIATION_FILE_NAMES.medical,
+          NotifyPolicyTipCustomText: MEDICAL_TIP,
+        }),
+        aviationRule(`${AVIATION_PREFIX}Documents - diagnoses`, {
+          // ICD-10-CM is an English dictionary: it catches English AME reports and medical records,
+          // hardly Dutch or French ones. Those come in through the file-name rule above.
+          ContentContainsSensitiveInformation: [match([ICD10, 3, -1])],
+          NotifyPolicyTipCustomText: MEDICAL_TIP,
+        }),
+      ],
+    },
+  },
+];
+
+/** Every template, for generate-dlp-templates.js. */
+const DLP_POLICIES = [...GENERAL_POLICIES, ...AVIATION_POLICIES];
+
+/** One baseline file per entry, for generate-baseline-template.js. */
+const DLP_BASELINES = [
+  {
+    file: "Purview-DLP.json",
+    templateName: PREFIX + "Purview DLP",
+    description:
+      "Data loss prevention for Exchange, SharePoint and OneDrive (Business Premium): Dutch personal " +
+      "identifiers (BSN, passport, driver's license, tax number), Belgian personal identifiers (national " +
+      "number, passport, driver's license), payment cards and IBANs in bulk, " +
+      "shared outside the organisation. Stage 1 notifies users and reports bulk to the admins; stage 2 " +
+      "blocks bulk without override and is manual: move a tenant only after reviewing its DLP alerts. " +
+      "Assign the tenants before you run it.",
+    stages: [
+      { name: "Melden", logic: "and", conditions: [] },
+      // Handmatig: blokkeren zonder override hoort pas na iemand die de meldingen van stage 1 heeft gezien.
+      { name: "Blokkeren", logic: "and", conditions: [{ type: "manual" }] },
+    ],
+    policies: GENERAL_POLICIES,
+  },
+  {
+    file: "Purview-DLP-Aviation.json",
+    templateName: PREFIX + "Purview DLP Aviation",
+    description:
+      "Extra data loss prevention for aviation tenants (operators, flight schools, maintenance), next to " +
+      "Purview DLP: crew lists and passenger manifests (10+ passports), aviation security programmes, " +
+      "export-controlled technical data, crew medicals and medical records shared outside the organisation. " +
+      "Notify only: it tips the user and alerts the admins, it never blocks. Assign the tenants before you run it.",
+    stages: [{ name: "Melden", logic: "and", conditions: [] }],
+    policies: AVIATION_POLICIES,
+  },
+];
+
 const DLP_TEMPLATE_DIR = "DlpCompliancePolicyTemplate";
 
-module.exports = { SIT, DLP_POLICIES, DLP_BASELINE, DLP_TEMPLATE_DIR };
+module.exports = { SIT, DLP_POLICIES, DLP_BASELINES, DLP_TEMPLATE_DIR };

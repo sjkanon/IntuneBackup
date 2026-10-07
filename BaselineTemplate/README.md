@@ -7,7 +7,7 @@ wanneer een tenant doorschuift.
 
 | | |
 |---|---|
-| Bestanden | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (patchen) en [`Purview-DLP.json`](Purview-DLP.json) (gegevenslekken) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Bestanden | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (patchen), [`Purview-DLP.json`](Purview-DLP.json) (gegevenslekken) en [`Purview-DLP-Aviation.json`](Purview-DLP-Aviation.json) (luchtvaart) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Herkend aan | `TemplateType: "BaselineTemplate"` én de mapnaam `BaselineTemplate/` |
 | Naam in CIPP | `Baseline` |
 
@@ -228,6 +228,41 @@ wat `Get-DlpComplianceRule` teruggeeft, en Purview vult daar velden bij die een 
 geschreven template niet heeft. Blijft een tenant op *drift* staan terwijl er niets veranderd is,
 maak dan in CIPP (Security → Compliance → DLP) van de uitgerolde policy een template, en zet de
 verschillen in `purview-dlp.js`.
+
+## Purview-DLP-Aviation.json — luchtvaart
+
+Een vijfde, losse baseline (`[Baseline] - Purview DLP Aviation`) voor tenants in de luchtvaart:
+operators, charter en business aviation, vliegscholen en onderhoudsbedrijven. Komt bovenop
+`Purview-DLP.json`, niet in de plaats ervan. Eén stage, en die **meldt alleen**.
+
+| Policy | Regel | Wat het herkent |
+|---|---|---|
+| `[Baseline] - DLP - Aviation - Travel Documents - Notify` | manifest | 10+ paspoortnummers van één nationaliteit (NL, BE, DE, FR, ES, IT, PT, US/UK): een crewlijst of passagiersmanifest |
+| `[Baseline] - DLP - Aviation - Documents - Notify` | security | bestandsnaam met *AVSEC*, *security programme*, *beveiligingsprogramma*, *programme de sûreté*, *known consignor* … |
+| | export control | bestandsnaam met *ITAR*, *EAR99*, *export controlled*, *dual-use* … |
+| | medical | bestandsnaam met *medical certificate*, *aeromedical*, *Part-MED*, *medisch certificaat*, *certificat médical* … |
+| | diagnoses | 3+ ICD-10-diagnoses (term én code): een medisch dossier |
+
+Alles op "naar buiten" (`NotInOrganization`): policytip voor de gebruiker, incidentrapport en
+melding naar de beheerder.
+
+**Waarom niet blokkeren.** In de luchtvaart is het dagelijks werk: een crewlijst naar de
+handling agent en het hotel, een medical naar de autoriteit, het securityprogramma naar de
+auditor. Een harde blokkade zonder override legt de operatie stil. Wat dit toevoegt is zicht:
+de beheerder ziet wat er naar buiten gaat, de gebruiker krijgt een duwtje richting het juiste
+kanaal.
+
+**Waarom op bestandsnaam.** CIPP rolt alleen ingebouwde gevoelige-informatietypen uit, plus
+voorwaarden op bestandsnaam, extensie en documenteigenschap. Woorden in de tekst zelf vragen een
+eigen SIT, en die kan CIPP niet uitrollen. Operators noemen hun documenten gelukkig wel zo.
+
+**Let op met stage 2 van `Purview-DLP.json`.** `Personal Data NL - Block` en `Personal Data BE -
+Block` blokkeren 10+ Nederlandse of Belgische paspoortnummers naar buiten — precies een
+manifest. Een luchtvaarttenant laat je daar in stage 1, of je zorgt eerst voor een ander kanaal
+voor manifesten.
+
+Tips zijn in het Engels: de werktaal van de luchtvaart, ook bij Nederlandse, Belgische en Franse
+operators.
 
 ## Bijwerken
 

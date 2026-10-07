@@ -7,7 +7,7 @@ et quand un tenant passe à l'étape suivante.
 
 | | |
 |---|---|
-| Fichiers | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (correctifs) et [`Purview-DLP.json`](Purview-DLP.json) (fuites de données) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Fichiers | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (correctifs), [`Purview-DLP.json`](Purview-DLP.json) (fuites de données) et [`Purview-DLP-Aviation.json`](Purview-DLP-Aviation.json) (aviation) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Reconnu à | `TemplateType: "BaselineTemplate"` et au nom de dossier `BaselineTemplate/` |
 | Nom dans CIPP | `Baseline` |
 
@@ -244,6 +244,42 @@ avec ce que renvoie `Get-DlpComplianceRule`, et Purview y ajoute des champs qu'u
 la main n'a pas. Si un tenant reste en *drift* alors que rien n'a changé, créez dans CIPP
 (Security → Compliance → DLP) un template à partir de la stratégie déployée et reportez les
 différences dans `purview-dlp.js`.
+
+## Purview-DLP-Aviation.json — aviation
+
+Une cinquième baseline, distincte (`[Baseline] - Purview DLP Aviation`), pour les tenants de
+l'aviation : opérateurs, charter et aviation d'affaires, écoles de pilotage et organismes de
+maintenance. Elle s'ajoute à `Purview-DLP.json`, elle ne la remplace pas. Un seul stage, qui
+**ne fait que notifier**.
+
+| Stratégie | Règle | Ce qu'elle reconnaît |
+|---|---|---|
+| `[Baseline] - DLP - Aviation - Travel Documents - Notify` | manifest | 10+ numéros de passeport d'une même nationalité (NL, BE, DE, FR, ES, IT, PT, US/UK) : une liste d'équipage ou un manifeste passagers |
+| `[Baseline] - DLP - Aviation - Documents - Notify` | security | nom de fichier contenant *AVSEC*, *security programme*, *beveiligingsprogramma*, *programme de sûreté*, *known consignor* … |
+| | export control | nom de fichier contenant *ITAR*, *EAR99*, *export controlled*, *dual-use* … |
+| | medical | nom de fichier contenant *medical certificate*, *aeromedical*, *Part-MED*, *medisch certificaat*, *certificat médical* … |
+| | diagnoses | 3+ diagnostics CIM-10 (terme et code) : un dossier médical |
+
+Tout porte sur « vers l'extérieur » (`NotInOrganization`) : un conseil de stratégie pour
+l'utilisateur, un rapport d'incident et une alerte à l'administrateur.
+
+**Pourquoi ne pas bloquer.** Dans l'aviation, c'est le travail quotidien : une liste d'équipage
+à l'agent de handling et à l'hôtel, un certificat médical à l'autorité, le programme de sûreté à
+l'auditeur. Un blocage sans contournement arrêterait l'exploitation. Ce que cela apporte, c'est
+de la visibilité : l'administrateur voit ce qui sort, l'utilisateur est orienté vers le bon canal.
+
+**Pourquoi par nom de fichier.** CIPP ne déploie que les types d'informations sensibles intégrés,
+plus des conditions sur le nom de fichier, l'extension et les propriétés du document. Des mots
+dans le texte exigent un SIT personnalisé, que CIPP ne peut pas déployer. Les opérateurs nomment
+heureusement leurs documents ainsi.
+
+**Attention au stage 2 de `Purview-DLP.json`.** `Personal Data NL - Block` et `Personal Data BE -
+Block` bloquent 10+ numéros de passeport néerlandais ou belges envoyés à l'extérieur — exactement
+un manifeste. Laissez un tenant aviation au stage 1, ou prévoyez d'abord un autre canal pour les
+manifestes.
+
+Les conseils sont en anglais : la langue de travail de l'aviation, chez les opérateurs
+néerlandais, belges et français aussi.
 
 ## Mise à jour
 
