@@ -8,8 +8,8 @@
   "koppelingen": {
     "Baseline_AND_D_Compliance_Dedicated_Device_Health": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -18,8 +18,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -28,8 +28,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -38,8 +38,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -48,8 +48,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -58,8 +58,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -70,8 +70,8 @@
     ],
     "Baseline_AND_U_App_Protection": [
       {
-        "ca": "CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements",
-        "displayName": "CXNM - STANDARD - 2070 - GRANT - Mobile Device Access Requirements",
+        "ca": "CA__2070__GRANT__Mobile_Device_Access_Requirements",
+        "displayName": "CA - 2070 - GRANT - Mobile Device Access Requirements",
         "state": "disabled",
         "waarom": {
           "nl": "De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht.",
@@ -80,8 +80,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over.",
@@ -92,8 +92,8 @@
     ],
     "Baseline_AND_U_Compliance_Block_Device_Administrator": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -102,8 +102,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -112,8 +112,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -122,8 +122,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -132,8 +132,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -142,8 +142,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -154,8 +154,8 @@
     ],
     "Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -164,8 +164,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -174,8 +174,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -184,8 +184,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -194,8 +194,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -204,8 +204,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -216,8 +216,8 @@
     ],
     "Baseline_AND_U_Compliance_Corporate_Device_Health": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -226,8 +226,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -236,8 +236,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -246,8 +246,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -256,8 +256,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -266,8 +266,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -278,8 +278,8 @@
     ],
     "Baseline_AND_U_Compliance_Corporate_Password": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -288,8 +288,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -298,8 +298,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -308,8 +308,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -318,8 +318,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -328,8 +328,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -340,8 +340,8 @@
     ],
     "Baseline_AND_U_Compliance_Defender_for_Endpoint": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -350,8 +350,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -360,8 +360,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -370,8 +370,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -380,8 +380,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -390,8 +390,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -402,8 +402,8 @@
     ],
     "Baseline_AND_U_Compliance_Device_Health": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -412,8 +412,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -422,8 +422,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -432,8 +432,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -442,8 +442,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -452,8 +452,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -464,8 +464,8 @@
     ],
     "Baseline_AND_U_Compliance_Password": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -474,8 +474,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -484,8 +484,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -494,8 +494,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -504,8 +504,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -514,8 +514,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -526,8 +526,8 @@
     ],
     "Baseline_IOS_D_Enterprise_SSO": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden.",
@@ -536,8 +536,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -546,8 +546,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -558,8 +558,8 @@
     ],
     "Baseline_IOS_U_App_Protection": [
       {
-        "ca": "CXNM__STANDARD__2070__GRANT__Mobile_Device_Access_Requirements",
-        "displayName": "CXNM - STANDARD - 2070 - GRANT - Mobile Device Access Requirements",
+        "ca": "CA__2070__GRANT__Mobile_Device_Access_Requirements",
+        "displayName": "CA - 2070 - GRANT - Mobile Device Access Requirements",
         "state": "disabled",
         "waarom": {
           "nl": "De app protection policy waar `compliantApplication` naar vraagt. Zonder toegewezen policy voldoet geen enkele app en is de toegang op iOS en Android dicht.",
@@ -568,8 +568,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "Eén van de twee manieren om aan deze policy te voldoen: de app valt onder een app protection policy. Zonder toegewezen policy blijft alleen een compliant toestel over.",
@@ -580,8 +580,8 @@
     ],
     "Baseline_IOS_U_Compliance_Defender_for_Endpoint": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -590,8 +590,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -600,8 +600,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -610,8 +610,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -620,8 +620,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -630,8 +630,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -642,8 +642,8 @@
     ],
     "Baseline_IOS_U_Compliance_Device_Health": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -652,8 +652,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -662,8 +662,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -672,8 +672,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -682,8 +682,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -692,8 +692,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -704,8 +704,8 @@
     ],
     "Baseline_IOS_U_Compliance_Password": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -714,8 +714,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -724,8 +724,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -734,8 +734,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2150__GRANT__Cloud_PC_Mobile_Access",
-        "displayName": "CXNM - STANDARD - 2150 - GRANT - Cloud PC Mobile Access",
+        "ca": "CA__2150__GRANT__Cloud_PC_Mobile_Access",
+        "displayName": "CA - 2150 - GRANT - Cloud PC Mobile Access",
         "state": "enabled",
         "waarom": {
           "nl": "De andere manier: een compliant toestel. Bepaalt mee of een iPhone of Android-toestel als compliant telt.",
@@ -744,8 +744,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -754,8 +754,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -766,8 +766,8 @@
     ],
     "Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity": [
       {
-        "ca": "CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment",
-        "displayName": "CXNM - STANDARD - 2170 - GRANT - MFA for Intune Enrollment",
+        "ca": "CA__2170__GRANT__MFA_For_Intune_Enrollment",
+        "displayName": "CA - 2170 - GRANT - MFA for Intune Enrollment",
         "state": "enabled",
         "waarom": {
           "nl": "Setup Assistant met moderne authenticatie meldt aan bij Microsoft Intune Enrollment, dus deze CA-policy vraagt daar MFA. Heeft de gebruiker op dat moment geen werkend MFA-middel, dan loopt de inschrijving vast.",
@@ -778,8 +778,8 @@
     ],
     "Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity": [
       {
-        "ca": "CXNM__STANDARD__2170__GRANT__MFA_For_Intune_Enrollment",
-        "displayName": "CXNM - STANDARD - 2170 - GRANT - MFA for Intune Enrollment",
+        "ca": "CA__2170__GRANT__MFA_For_Intune_Enrollment",
+        "displayName": "CA - 2170 - GRANT - MFA for Intune Enrollment",
         "state": "enabled",
         "waarom": {
           "nl": "Setup Assistant met moderne authenticatie meldt aan bij Microsoft Intune Enrollment, dus deze CA-policy vraagt daar MFA. Heeft de gebruiker op dat moment geen werkend MFA-middel, dan loopt de inschrijving vast.",
@@ -790,8 +790,8 @@
     ],
     "Baseline_MAC_D_Platform_SSO": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden.",
@@ -800,8 +800,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -810,8 +810,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -822,8 +822,8 @@
     ],
     "Baseline_MAC_U_Compliance_Device_Health": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -832,8 +832,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -842,8 +842,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -852,8 +852,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -862,8 +862,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -872,8 +872,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -884,8 +884,8 @@
     ],
     "Baseline_MAC_U_Compliance_Device_Security": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -894,8 +894,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -904,8 +904,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -914,8 +914,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -924,8 +924,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -934,8 +934,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -946,8 +946,8 @@
     ],
     "Baseline_MAC_U_Compliance_OS_Version": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -956,8 +956,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -966,8 +966,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -976,8 +976,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -986,8 +986,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -996,8 +996,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1008,8 +1008,8 @@
     ],
     "Baseline_MAC_U_Compliance_Password": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1018,8 +1018,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1028,8 +1028,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1038,8 +1038,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1048,8 +1048,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1058,8 +1058,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1070,8 +1070,8 @@
     ],
     "Baseline_WIN_D_Microsoft_Office_Updates": [
       {
-        "ca": "CXNM__STANDARD__2110__GRANT__Token_Protection",
-        "displayName": "CXNM - STANDARD - 2110 - GRANT - Token Protection",
+        "ca": "CA__2110__GRANT__Token_Protection",
+        "displayName": "CA - 2110 - GRANT - Token Protection",
         "state": "enabled",
         "waarom": {
           "nl": "Token protection werkt alleen in client-versies die gebonden tokens ondersteunen. Een Office-app of OneDrive-sync-client op een te oude versie wordt door deze policy geblokkeerd; deze Intune-policy houdt die clients bij.",
@@ -1082,8 +1082,8 @@
     ],
     "Baseline_WIN_D_Microsoft_OneDrive": [
       {
-        "ca": "CXNM__STANDARD__2110__GRANT__Token_Protection",
-        "displayName": "CXNM - STANDARD - 2110 - GRANT - Token Protection",
+        "ca": "CA__2110__GRANT__Token_Protection",
+        "displayName": "CA - 2110 - GRANT - Token Protection",
         "state": "enabled",
         "waarom": {
           "nl": "Token protection werkt alleen in client-versies die gebonden tokens ondersteunen. Een Office-app of OneDrive-sync-client op een te oude versie wordt door deze policy geblokkeerd; deze Intune-policy houdt die clients bij.",
@@ -1094,8 +1094,8 @@
     ],
     "Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric": [
       {
-        "ca": "CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys",
-        "displayName": "CXNM - STANDARD - 2190 - GRANT - Windows Hello Passkeys",
+        "ca": "CA__2190__GRANT__Windows_Hello_Passkeys",
+        "displayName": "CA - 2190 - GRANT - Windows Hello Passkeys",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet.",
@@ -1106,8 +1106,8 @@
     ],
     "Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric": [
       {
-        "ca": "CXNM__STANDARD__2190__GRANT__Windows_Hello_Passkeys",
-        "displayName": "CXNM - STANDARD - 2190 - GRANT - Windows Hello Passkeys",
+        "ca": "CA__2190__GRANT__Windows_Hello_Passkeys",
+        "displayName": "CA - 2190 - GRANT - Windows Hello Passkeys",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt de PIN van de Windows Hello-passkey die deze CA-policy eist. Strenger dan de gebruiker gewend is, en registreren gaat pas als de PIN aan de eis voldoet.",
@@ -1118,8 +1118,8 @@
     ],
     "Baseline_WIN_D_Windows_Hello_for_Business": [
       {
-        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
-        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "ca": "CA__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CA - 2055 - GRANT - Phishing Resistant MFA for Admins",
         "state": "disabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1128,8 +1128,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
-        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "ca": "CA__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CA - 2120 - GRANT - Phishing Resistant MFA for All Users",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1138,8 +1138,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
-        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "ca": "CA__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1150,8 +1150,8 @@
     ],
     "Baseline_WIN_D_Windows_Hello_for_Business_Multi_User": [
       {
-        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
-        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "ca": "CA__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CA - 2055 - GRANT - Phishing Resistant MFA for Admins",
         "state": "disabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1160,8 +1160,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
-        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "ca": "CA__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CA - 2120 - GRANT - Phishing Resistant MFA for All Users",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1170,8 +1170,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
-        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "ca": "CA__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1182,8 +1182,8 @@
     ],
     "Baseline_WIN_U_Compliance_Antispyware": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1192,8 +1192,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1202,8 +1202,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1212,8 +1212,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1222,8 +1222,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1232,8 +1232,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1244,8 +1244,8 @@
     ],
     "Baseline_WIN_U_Compliance_Antivirus": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1254,8 +1254,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1264,8 +1264,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1274,8 +1274,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1284,8 +1284,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1294,8 +1294,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1306,8 +1306,8 @@
     ],
     "Baseline_WIN_U_Compliance_BitLocker": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1316,8 +1316,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1326,8 +1326,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1336,8 +1336,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1346,8 +1346,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1356,8 +1356,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1368,8 +1368,8 @@
     ],
     "Baseline_WIN_U_Compliance_Code_Integrity": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1378,8 +1378,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1388,8 +1388,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1398,8 +1398,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1408,8 +1408,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1418,8 +1418,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1430,8 +1430,8 @@
     ],
     "Baseline_WIN_U_Compliance_Defender_Real_Time_Protection": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1440,8 +1440,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1450,8 +1450,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1460,8 +1460,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1470,8 +1470,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1480,8 +1480,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1492,8 +1492,8 @@
     ],
     "Baseline_WIN_U_Compliance_Defender_Security_Intelligence": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1502,8 +1502,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1512,8 +1512,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1522,8 +1522,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1532,8 +1532,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1542,8 +1542,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1554,8 +1554,8 @@
     ],
     "Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1564,8 +1564,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1574,8 +1574,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1584,8 +1584,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1594,8 +1594,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1604,8 +1604,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1616,8 +1616,8 @@
     ],
     "Baseline_WIN_U_Compliance_Firewall": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1626,8 +1626,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1636,8 +1636,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1646,8 +1646,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1656,8 +1656,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1666,8 +1666,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1678,8 +1678,8 @@
     ],
     "Baseline_WIN_U_Compliance_OS_Version": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1688,8 +1688,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1698,8 +1698,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1708,8 +1708,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1718,8 +1718,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1728,8 +1728,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1740,8 +1740,8 @@
     ],
     "Baseline_WIN_U_Compliance_Secure_Boot": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1750,8 +1750,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1760,8 +1760,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1770,8 +1770,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1780,8 +1780,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1790,8 +1790,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1802,8 +1802,8 @@
     ],
     "Baseline_WIN_U_Compliance_TPM": [
       {
-        "ca": "CXNM__STANDARD__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
-        "displayName": "CXNM - STANDARD - 2060 - GRANT - Mobile Apps and Desktop Clients",
+        "ca": "CA__2060__GRANT__Mobile_Apps_and_Desktop_Clients",
+        "displayName": "CA - 2060 - GRANT - Mobile Apps and Desktop Clients",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1812,8 +1812,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1822,8 +1822,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Bepaalt mee of een apparaat compliant is. Voldoet een apparaat hier niet aan, dan wordt het niet-compliant en houdt de compliant-eis van Conditional Access het tegen.",
@@ -1832,8 +1832,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device",
+        "ca": "CA__2160__GRANT__Agent_Users_Compliant_Device",
+        "displayName": "CA - 2160 - GRANT - Agent Users Compliant Device",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt of het endpoint waarvandaan een agent-user werkt compliant is. Voldoet het daar niet aan, dan houdt deze policy de agent-user tegen zodra hij uit report-only gaat.",
@@ -1842,8 +1842,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3020__SESSION__BYOD_Persistence",
-        "displayName": "CXNM - STANDARD - 3020 - SESSION - BYOD Persistence",
+        "ca": "CA__3020__SESSION__BYOD_Persistence",
+        "displayName": "CA - 3020 - SESSION - BYOD Persistence",
         "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus búiten deze sessiebegrenzing valt. Een beheerd apparaat dat niet-compliant wordt, valt eronder.",
@@ -1852,8 +1852,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
+        "ca": "CA__3040__SESSION__Block_File_Downloads_On_Unmanaged_Devices",
+        "displayName": "CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices",
         "state": "disabled",
         "waarom": {
           "nl": "Bepaalt welk apparaat als compliant telt en dus mag downloaden. Een beheerd apparaat dat niet-compliant wordt, krijgt alleen nog de browser zonder downloads.",
@@ -1864,8 +1864,8 @@
     ],
     "Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync": [
       {
-        "ca": "CXNM__STANDARD__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
-        "displayName": "CXNM - STANDARD - 2090 - GRANT - Browser Access On Unmanaged Devices",
+        "ca": "CA__2090__GRANT__Browser_Access_On_Unmanaged_Devices",
+        "displayName": "CA - 2090 - GRANT - Browser Access On Unmanaged Devices",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -1874,8 +1874,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2130__GRANT__Admins_Compliant_Device",
-        "displayName": "CXNM - STANDARD - 2130 - GRANT - Admins Compliant Device",
+        "ca": "CA__2130__GRANT__Admins_Compliant_Device",
+        "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
         "waarom": {
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
@@ -1886,8 +1886,8 @@
     ],
     "Baseline_WIN_U_Windows_Hello_for_Business": [
       {
-        "ca": "CXNM__STANDARD__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
-        "displayName": "CXNM - STANDARD - 2055 - GRANT - Phishing Resistant MFA for Admins",
+        "ca": "CA__2055__GRANT__Phishing_Resistant_MFA_for_Admins",
+        "displayName": "CA - 2055 - GRANT - Phishing Resistant MFA for Admins",
         "state": "disabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1896,8 +1896,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
-        "displayName": "CXNM - STANDARD - 2120 - GRANT - Phishing Resistant MFA for All Users",
+        "ca": "CA__2120__GRANT__Phishing_Resistant_MFA_for_All_Users",
+        "displayName": "CA - 2120 - GRANT - Phishing Resistant MFA for All Users",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
@@ -1906,8 +1906,8 @@
         }
       },
       {
-        "ca": "CXNM__STANDARD__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
-        "displayName": "CXNM - STANDARD - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
+        "ca": "CA__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
+        "displayName": "CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
         "state": "enabled",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
