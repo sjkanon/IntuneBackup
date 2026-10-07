@@ -7,7 +7,7 @@ wanneer een tenant doorschuift.
 
 | | |
 |---|---|
-| Bestanden | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail) en [`Windows-Updates.json`](Windows-Updates.json) (patchen) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Bestanden | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (patchen) en [`Purview-DLP.json`](Purview-DLP.json) (gegevenslekken) — gegenereerd door [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Herkend aan | `TemplateType: "BaselineTemplate"` én de mapnaam `BaselineTemplate/` |
 | Naam in CIPP | `Baseline` |
 
@@ -186,6 +186,46 @@ mag), anders kan CIPP ze niet toewijzen en ook niet uitsluiten. Licentie: alleen
 Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: een andere indeling in
 `windows-updates.js`, de instellingen zelf in de policies in `IntuneTemplate/WIN/`; draai daarna
 `node scripts/set-packages.js` en het script hieronder.
+
+## Purview-DLP.json — gegevenslekken
+
+Een vierde, losse baseline (`[Baseline] - Purview DLP`): Data Loss Prevention voor Exchange,
+SharePoint en OneDrive, als CIPP-DLP-templates uit
+[`DlpCompliancePolicyTemplate/`](../DlpCompliancePolicyTemplate/README.md). De keuzes staan in
+[`scripts/lib/purview-dlp.js`](../scripts/lib/purview-dlp.js).
+
+| Stage | Policy | Wat het doet |
+|---:|---|---|
+| 1 · Melden | `[Baseline] - DLP - Personal Data NL - Notify` | BSN, paspoort-, rijbewijs- of fiscaal nummer naar buiten: policytip voor de gebruiker; in bulk (BSN 5+, de rest 10+) ook een incidentrapport en een melding naar de beheerder |
+| 1 · Melden | `[Baseline] - DLP - Financial - Notify` | creditcard- of debitcardnummer naar buiten: policytip; in bulk (kaarten 10+, IBAN 20+) ook rapport en melding |
+| 2 · Blokkeren | `[Baseline] - DLP - Personal Data NL - Block` | dezelfde bulkdrempel: **blokkeert**, zonder override |
+| 2 · Blokkeren | `[Baseline] - DLP - Financial - Block` | idem voor kaarten en IBAN's |
+
+"Naar buiten" is steeds `AccessScope NotInOrganization`: mail aan externe ontvangers en bestanden
+die met externen gedeeld zijn. Intern mailen of delen raakt geen enkele regel.
+
+**Stage 2 is handmatig, en dat is de simulatie.** De meldingen uit stage 1 hebben exact dezelfde
+drempels als de blokkades in stage 2: wat in Purview → DLP → Alerts staat, is precies wat
+stage 2 tegenhoudt. Kijk die lijst door (salarisexport naar de accountant? Dan eerst een andere
+route) en zet de tenant pas daarna door. Stages stapelen, dus in stage 2 blijven de
+Notify-policies gewoon meldingen geven.
+
+**Geen override.** Het deploypad van CIPP kent `NotifyAllowOverride` niet, dus "toch versturen
+met een reden" kan niet. Daarom blokkeert stage 2 alleen bulk.
+
+**Licentie:** Business Premium is genoeg. Teams-chat-DLP en Endpoint DLP (USB, printen) vragen
+E5 of de Purview-add-on en zitten er bewust niet in. De ingebouwde *Default Office 365 DLP policy*
+(creditcards 1–9) mag blijven staan; uitzetten voorkomt dubbele tips.
+
+**Vóór de eerste run:** de CIPP-app heeft Security & Compliance-rechten nodig (dezelfde als voor
+de andere Purview-standards). Meldingen gaan naar `SiteAdmin`; CIPP vervangt geen
+`%variabelen%` in DLP-templates, dus een eigen meldadres stel je per tenant in Purview in.
+
+**Na de eerste uitrol: één keer terugschrijven.** CIPP vergelijkt een template veld voor veld met
+wat `Get-DlpComplianceRule` teruggeeft, en Purview vult daar velden bij die een met de hand
+geschreven template niet heeft. Blijft een tenant op *drift* staan terwijl er niets veranderd is,
+maak dan in CIPP (Security → Compliance → DLP) van de uitgerolde policy een template, en zet de
+verschillen in `purview-dlp.js`.
 
 ## Bijwerken
 

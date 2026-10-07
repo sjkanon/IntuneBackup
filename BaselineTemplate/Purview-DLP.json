@@ -1,0 +1,109 @@
+{
+  "TemplateType": "BaselineTemplate",
+  "templateName": "[Baseline] - Purview DLP",
+  "description": "Data loss prevention for Exchange, SharePoint and OneDrive (Business Premium): Dutch personal identifiers (BSN, passport, driver's license, tax number), payment cards and IBANs in bulk, shared outside the organisation. Stage 1 notifies users and reports bulk to the admins; stage 2 blocks bulk without override and is manual: move a tenant only after reviewing its DLP alerts. Assign the tenants before you run it.",
+  "assignedTenants": [
+    {
+      "label": "Exported Template",
+      "value": "Exported Template",
+      "type": "Tenant"
+    }
+  ],
+  "excludedTenants": [],
+  "alertEmails": "",
+  "alertWebhookUrl": "",
+  "stages": [
+    {
+      "name": "Melden",
+      "logic": "and",
+      "conditions": [],
+      "standards": [
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#personal-notify",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Personal Data NL - Notify",
+              "value": "dc2bd058-c296-50c4-a691-dbf865e76a98"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#financial-notify",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Financial - Notify",
+              "value": "e93a5236-aa56-5297-a724-d36d1be365cd"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    },
+    {
+      "name": "Blokkeren",
+      "logic": "and",
+      "conditions": [
+        {
+          "type": "manual"
+        }
+      ],
+      "standards": [
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#personal-block",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Personal Data NL - Block",
+              "value": "2db1dd87-18b2-52b2-a0a1-6d97154066b4"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "DlpCompliancePolicyTemplate",
+          "instance": "DlpCompliancePolicyTemplate#financial-block",
+          "variables": {
+            "dlpCompliancePolicyTemplate": {
+              "label": "[Baseline] - DLP - Financial - Block",
+              "value": "88e95957-804a-5be9-9650-87835357d41e"
+            }
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        }
+      ]
+    }
+  ],
+  "referencedTemplates": [
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Personal_Data_NL_Notify.json",
+      "displayName": "[Baseline] - DLP - Personal Data NL - Notify",
+      "partition": "DlpCompliancePolicyTemplate"
+    },
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Financial_Notify.json",
+      "displayName": "[Baseline] - DLP - Financial - Notify",
+      "partition": "DlpCompliancePolicyTemplate"
+    },
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Personal_Data_NL_Block.json",
+      "displayName": "[Baseline] - DLP - Personal Data NL - Block",
+      "partition": "DlpCompliancePolicyTemplate"
+    },
+    {
+      "path": "DlpCompliancePolicyTemplate/DLP_Financial_Block.json",
+      "displayName": "[Baseline] - DLP - Financial - Block",
+      "partition": "DlpCompliancePolicyTemplate"
+    }
+  ]
+}

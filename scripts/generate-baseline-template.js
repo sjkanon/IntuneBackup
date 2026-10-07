@@ -6,7 +6,9 @@
  * - `Defender-Office365.json`: email protection (Safe Links, Safe Attachments, anti-spam,
  *   quarantine notifications) as Exchange/Defender standards, from `lib/defender-office.js`;
  * - `Windows-Updates.json`: Windows Update rings, Edge and Microsoft 365 Apps updates as their
- *   own packages, plus Winget-AutoUpdate as an application template, from `lib/windows-updates.js`.
+ *   own packages, plus Winget-AutoUpdate as an application template, from `lib/windows-updates.js`;
+ * - `Purview-DLP.json`: data loss prevention for Exchange, SharePoint and OneDrive as DLP policy
+ *   templates, notify first and block later, from `lib/purview-dlp.js`.
  *
  * `IntuneTemplate/` supplies the policies, but in CIPP templates just sit there — deploying is
  * done by a **baseline**: a set of *standards* spread over stages that tenants move through.
@@ -45,6 +47,7 @@ const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/template
 const { DEFENDER_BASELINE } = require("./lib/defender-office");
 const { PREFIX } = require("./lib/organisation");
 const { UPDATES_PREFIX, UPDATE_PACKAGES, UPDATES_BASELINE, WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
+const { DLP_POLICIES, DLP_BASELINE, DLP_TEMPLATE_DIR } = require("./lib/purview-dlp");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -54,6 +57,7 @@ const OUT_DIR = path.join(REPO_ROOT, "BaselineTemplate");
 const OUT_PATH = path.join(OUT_DIR, "Baseline.json");
 const DEFENDER_OUT_PATH = path.join(OUT_DIR, "Defender-Office365.json");
 const UPDATES_OUT_PATH = path.join(OUT_DIR, "Windows-Updates.json");
+const DLP_OUT_PATH = path.join(OUT_DIR, "Purview-DLP.json");
 const APP_TEMPLATE_DIR = path.join(REPO_ROOT, "AppTemplate");
 
 const TEMPLATE_NAME = PREFIX + "Baseline";
@@ -203,6 +207,50 @@ function buildUpdates(manifest, assignments) {
   };
 }
 
+/**
+ * De DLP-baseline: stage 1 de Notify-policies, stage 2 (handmatig) de Block-policies. De
+ * templates staan in `referencedTemplates`, zodat de import-knop ze uit deze repo meeneemt vóór
+ * de baseline zelf — anders verwijzen de instances naar GUID's die in CIPP nog niet bestaan.
+ * Eén instance per template, met de sleutel uit lib/purview-dlp.js achter de `#`: CIPP hangt
+ * de resultaten en per-tenant uitzonderingen aan die sleutel, dus hij volgt niet de volgorde.
+ */
+function buildDlp() {
+  const templates = DLP_POLICIES.map((p) => {
+    const file = path.join(REPO_ROOT, DLP_TEMPLATE_DIR, p.file);
+    if (!fs.existsSync(file)) throw new Error(`${DLP_TEMPLATE_DIR}/${p.file} ontbreekt. Draai eerst: node scripts/generate-dlp-templates.js`);
+    const row = JSON.parse(fs.readFileSync(file, "utf8"));
+    return { ...p, guid: row.GUID, name: JSON.parse(row.JSON).name };
+  });
+
+  return {
+    TemplateType: "BaselineTemplate",
+    templateName: DLP_BASELINE.templateName,
+    description: DLP_BASELINE.description,
+    assignedTenants: [{ label: "Exported Template", value: "Exported Template", type: "Tenant" }],
+    excludedTenants: [],
+    alertEmails: "",
+    alertWebhookUrl: "",
+    stages: DLP_BASELINE.stages.map((stage, i) => ({
+      ...stage,
+      standards: templates
+        .filter((t) => t.stage === i + 1)
+        .map((t) => ({
+          standard: "DlpCompliancePolicyTemplate",
+          instance: `DlpCompliancePolicyTemplate#${t.key}`,
+          variables: { dlpCompliancePolicyTemplate: { label: t.name, value: t.guid } },
+          remediateEnabled: true,
+          alertEnabled: true,
+          alertOnRemediate: false,
+        })),
+    })),
+    referencedTemplates: templates.map((t) => ({
+      path: `${DLP_TEMPLATE_DIR}/${t.file}`,
+      displayName: t.name,
+      partition: "DlpCompliancePolicyTemplate",
+    })),
+  };
+}
+
 /** Schrijft `content` naar `outPath`, of meldt alleen dat hij achterloopt. Geeft false bij een achterstand in --check. */
 function writeOrCheck(outPath, content, checkOnly) {
   const rel = path.relative(REPO_ROOT, outPath).split(path.sep).join("/");
@@ -250,12 +298,19 @@ function main() {
   const defender = buildDefender();
   console.log(`  ${defender.templateName}`);
   for (const s of defender.stages[0].standards) console.log(`    ${s.standard}`);
+  const dlp = buildDlp();
+  console.log(`  ${dlp.templateName}`);
+  for (const stage of dlp.stages) {
+    console.log(`    ${stage.name}`);
+    for (const s of stage.standards) console.log(`      ${s.variables.dlpCompliancePolicyTemplate.label}`);
+  }
   console.log("");
 
   const ok = [
     writeOrCheck(OUT_PATH, content, checkOnly),
     writeOrCheck(DEFENDER_OUT_PATH, JSON.stringify(defender, null, 2) + "\n", checkOnly),
     writeOrCheck(UPDATES_OUT_PATH, JSON.stringify(updates, null, 2) + "\n", checkOnly),
+    writeOrCheck(DLP_OUT_PATH, JSON.stringify(dlp, null, 2) + "\n", checkOnly),
   ];
   if (ok.includes(false)) process.exit(1);
 }

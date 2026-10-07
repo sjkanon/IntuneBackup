@@ -24,6 +24,7 @@ on:
       - "IntuneTemplate/MAC/PlatformScripts/**"
       - "IntuneTemplate/WIN/Apps/**"
       - "scripts/generate-app-templates.js"
+      - "scripts/generate-dlp-templates.js"
       - "scripts/lib/**"
       - ".github/workflows/generate-baseline.yml"
   workflow_dispatch:
@@ -57,6 +58,9 @@ jobs:
       # for the same reason: what runs as SYSTEM on every device should be a reviewed change.
       - name: Check that the CIPP application templates in AppTemplate/ are up to date
         run: node scripts/generate-app-templates.js --check
+      # The DLP templates decide what gets blocked in a tenant; same reasoning as above.
+      - name: Check that the CIPP DLP templates in DlpCompliancePolicyTemplate/ are up to date
+        run: node scripts/generate-dlp-templates.js --check
 
       - name: Generate the restore export
         run: node scripts/export-intunebackup.js

@@ -235,6 +235,7 @@ Draait als eerste stap in `.github/workflows/generate-baseline.yml` en is blokke
 | Restore-formaat voor IntuneBackupAndRestore | `export/NativeImport/IntuneBackupAndRestore/` | `node scripts/export-intunebackup.js` |
 | CIPP-baseline (stages en pakketten) | `BaselineTemplate/Baseline.json` | `node scripts/generate-baseline-template.js` |
 | CIPP-applicatietemplates (Win32-script-apps) | `AppTemplate/*.json` | `node scripts/generate-app-templates.js` |
+| CIPP-DLP-templates (Purview) | `DlpCompliancePolicyTemplate/*.json` | `node scripts/generate-dlp-templates.js` |
 | CIPP | *geen conversie* — CIPP leest `IntuneTemplate/` rechtstreeks | |
 
 **Bij een wijziging in `IntuneTemplate/`:** `.github/workflows/generate-baseline.yml`

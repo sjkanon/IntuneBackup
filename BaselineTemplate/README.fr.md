@@ -7,7 +7,7 @@ et quand un tenant passe à l'étape suivante.
 
 | | |
 |---|---|
-| Fichiers | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail) et [`Windows-Updates.json`](Windows-Updates.json) (correctifs) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
+| Fichiers | [`Baseline.json`](Baseline.json) (Intune), [`Defender-Office365.json`](Defender-Office365.json) (e-mail), [`Windows-Updates.json`](Windows-Updates.json) (correctifs) et [`Purview-DLP.json`](Purview-DLP.json) (fuites de données) — générés par [`scripts/generate-baseline-template.js`](../scripts/generate-baseline-template.js) |
 | Reconnu à | `TemplateType: "BaselineTemplate"` et au nom de dossier `BaselineTemplate/` |
 | Nom dans CIPP | `Baseline` |
 
@@ -198,6 +198,50 @@ uniquement.
 L'import se fait comme pour `Baseline.json` : avec le bouton. Mise à jour : une autre répartition
 dans `windows-updates.js`, les paramètres eux-mêmes dans les stratégies de `IntuneTemplate/WIN/` ;
 lancez ensuite `node scripts/set-packages.js` et le script ci-dessous.
+
+## Purview-DLP.json — fuites de données
+
+Une quatrième baseline, distincte (`[Baseline] - Purview DLP`) : la prévention des pertes de
+données (DLP) pour Exchange, SharePoint et OneDrive, sous forme de templates DLP CIPP issus de
+[`DlpCompliancePolicyTemplate/`](../DlpCompliancePolicyTemplate/README.fr.md). Les choix sont dans
+[`scripts/lib/purview-dlp.js`](../scripts/lib/purview-dlp.js).
+
+| Stage | Stratégie | Ce qu'elle fait |
+|---:|---|---|
+| 1 · Melden | `[Baseline] - DLP - Personal Data NL - Notify` | BSN, numéro de passeport, de permis de conduire ou fiscal néerlandais envoyé à l'extérieur : conseil de stratégie pour l'utilisateur ; en masse (BSN 5+, le reste 10+) aussi un rapport d'incident et une alerte à l'administrateur |
+| 1 · Melden | `[Baseline] - DLP - Financial - Notify` | numéro de carte de crédit ou de débit envoyé à l'extérieur : conseil de stratégie ; en masse (cartes 10+, IBAN 20+) aussi rapport et alerte |
+| 2 · Blokkeren | `[Baseline] - DLP - Personal Data NL - Block` | le même seuil de masse : **bloque**, sans contournement |
+| 2 · Blokkeren | `[Baseline] - DLP - Financial - Block` | idem pour les cartes et les IBAN |
+
+« À l'extérieur » signifie toujours `AccessScope NotInOrganization` : un e-mail à des destinataires
+externes et des fichiers partagés avec des externes. Un e-mail ou un partage interne ne déclenche
+aucune règle.
+
+**Le stage 2 est manuel, et c'est la simulation.** Les alertes du stage 1 ont exactement les mêmes
+seuils que les blocages du stage 2 : ce qui figure dans Purview → DLP → Alerts est exactement ce
+que le stage 2 arrêtera. Parcourez cette liste (un export de paie vers le comptable ? Trouvez
+d'abord un autre canal) et ne faites avancer le tenant qu'ensuite. Les stages s'empilent : au
+stage 2, les stratégies Notify continuent d'alerter.
+
+**Pas de contournement.** Le chemin de déploiement de CIPP ne connaît pas `NotifyAllowOverride` :
+« envoyer quand même avec une justification » est impossible. C'est pourquoi le stage 2 ne bloque
+que les envois en masse.
+
+**Licence :** Business Premium suffit. La DLP des conversations Teams et la DLP des points de
+terminaison (USB, impression) demandent E5 ou le module complémentaire Purview et sont
+volontairement exclues. La *Default Office 365 DLP policy* intégrée (cartes de crédit 1–9) peut
+rester ; la désactiver évite les conseils en double.
+
+**Avant la première exécution :** l'application CIPP a besoin des droits Security & Compliance
+(les mêmes que pour les autres standards Purview). Les alertes vont à `SiteAdmin` ; CIPP ne
+remplace pas les `%variables%` dans les templates DLP, configurez donc votre propre adresse par
+tenant dans Purview.
+
+**Après le premier déploiement : réécrire une fois.** CIPP compare un template champ par champ
+avec ce que renvoie `Get-DlpComplianceRule`, et Purview y ajoute des champs qu'un template écrit à
+la main n'a pas. Si un tenant reste en *drift* alors que rien n'a changé, créez dans CIPP
+(Security → Compliance → DLP) un template à partir de la stratégie déployée et reportez les
+différences dans `purview-dlp.js`.
 
 ## Mise à jour
 

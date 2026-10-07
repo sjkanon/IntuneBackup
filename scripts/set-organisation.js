@@ -204,6 +204,7 @@ function main() {
   // Een nieuw proces per stap: de scripts lezen _organisation.json bij het laden.
   const steps = [
     ["generate-app-templates.js"],
+    ["generate-dlp-templates.js"],
     ["generate-baseline-template.js"],
     ["export-intunebackup.js"],
     ["generate-docs.js"],
