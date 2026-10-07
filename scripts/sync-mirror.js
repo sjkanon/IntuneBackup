@@ -200,6 +200,8 @@ if (convert) {
   const args = [path.join(targetRoot, "scripts", "set-organisation.js"), "--prefix", wantedOrg.prefix];
   if (wantedOrg.caRepoUrl) args.push("--ca-url", wantedOrg.caRepoUrl);
   else args.push("--no-ca-url");
+  // Wat alleen daar staat, heeft het voorvoegsel van daar al; set-organisation zou daarop weigeren.
+  for (const rel of foreign) args.push("--leave", rel);
   console.log("\nOmzetten naar de organisatie van de spiegel (set-organisation.js daar):");
   execFileSync(process.execPath, args, { cwd: targetRoot, stdio: ["ignore", "ignore", "inherit"] });
   const left = git(targetRoot, ["status", "--porcelain"]).trim();

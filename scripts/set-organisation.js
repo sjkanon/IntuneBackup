@@ -22,7 +22,8 @@
  * refuses then and shows where it is.
  *
  * sync-mirror.js runs this in a mirror whose own _organisation.json differs, so the mirror keeps
- * its own prefix while getting the content from here.
+ * its own prefix while getting the content from here. It passes `--leave` for files that only exist
+ * in the mirror (a colleague's CIPP "Save"): those already carry the mirror's prefix and stay as is.
  *
  * Usage:
  *   node scripts/set-organisation.js --prefix "Contoso - "
@@ -30,6 +31,7 @@
  *   node scripts/set-organisation.js --no-ca-url
  *   node scripts/set-organisation.js ... --dry-run        # only show what would change
  *   node scripts/set-organisation.js ... --no-generate    # skip step 4
+ *   node scripts/set-organisation.js ... --leave <path>   # leave this file alone (repeatable)
  */
 
 const fs = require("fs");
@@ -45,7 +47,7 @@ const ORGANISATION_REL = path.relative(REPO_ROOT, ORGANISATION_PATH).split(path.
 const FORBIDDEN = /["\\/:*?<>|]/;
 
 function parseArgs(argv) {
-  const opts = { prefix: undefined, caUrl: undefined, dryRun: false, generate: true };
+  const opts = { prefix: undefined, caUrl: undefined, dryRun: false, generate: true, leave: new Set() };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "--prefix") opts.prefix = argv[++i];
@@ -53,6 +55,7 @@ function parseArgs(argv) {
     else if (arg === "--no-ca-url") opts.caUrl = null;
     else if (arg === "--dry-run") opts.dryRun = true;
     else if (arg === "--no-generate") opts.generate = false;
+    else if (arg === "--leave") opts.leave.add(argv[++i]);
     else {
       console.error(`Onbekende optie: ${arg}`);
       process.exit(2);
@@ -138,7 +141,7 @@ function main() {
     return;
   }
 
-  const files = repoFiles().filter((rel) => rel !== ORGANISATION_REL);
+  const files = repoFiles().filter((rel) => rel !== ORGANISATION_REL && !opts.leave.has(rel));
   const edits = [];
   const moves = [];
 
