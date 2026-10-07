@@ -197,8 +197,10 @@ SharePoint and OneDrive, as CIPP DLP templates from
 | Stage | Policy | What it does |
 |---:|---|---|
 | 1 · Melden | `[Baseline] - DLP - Personal Data NL - Notify` | BSN, passport, driver's license or tax number going outside: policy tip for the user; in bulk (BSN 5+, the rest 10+) also an incident report and an alert to the admin |
+| 1 · Melden | `[Baseline] - DLP - Personal Data BE - Notify` | Belgian national number, passport or driver's license number going outside: the same (national number 5+, the rest 10+), with a bilingual tip (nl/fr) |
 | 1 · Melden | `[Baseline] - DLP - Financial - Notify` | credit or debit card number going outside: policy tip; in bulk (cards 10+, IBAN 20+) also report and alert |
 | 2 · Blokkeren | `[Baseline] - DLP - Personal Data NL - Block` | the same bulk threshold: **blocks**, without override |
+| 2 · Blokkeren | `[Baseline] - DLP - Personal Data BE - Block` | the same for the Belgian numbers |
 | 2 · Blokkeren | `[Baseline] - DLP - Financial - Block` | the same for cards and IBANs |
 
 "Outside" is always `AccessScope NotInOrganization`: mail to external recipients and files shared

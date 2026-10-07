@@ -197,8 +197,10 @@ SharePoint en OneDrive, als CIPP-DLP-templates uit
 | Stage | Policy | Wat het doet |
 |---:|---|---|
 | 1 · Melden | `[Baseline] - DLP - Personal Data NL - Notify` | BSN, paspoort-, rijbewijs- of fiscaal nummer naar buiten: policytip voor de gebruiker; in bulk (BSN 5+, de rest 10+) ook een incidentrapport en een melding naar de beheerder |
+| 1 · Melden | `[Baseline] - DLP - Personal Data BE - Notify` | rijksregisternummer, Belgisch paspoort- of rijbewijsnummer naar buiten: idem (rijksregisternummer 5+, de rest 10+), met een tweetalige tip (nl/fr) |
 | 1 · Melden | `[Baseline] - DLP - Financial - Notify` | creditcard- of debitcardnummer naar buiten: policytip; in bulk (kaarten 10+, IBAN 20+) ook rapport en melding |
 | 2 · Blokkeren | `[Baseline] - DLP - Personal Data NL - Block` | dezelfde bulkdrempel: **blokkeert**, zonder override |
+| 2 · Blokkeren | `[Baseline] - DLP - Personal Data BE - Block` | idem voor de Belgische nummers |
 | 2 · Blokkeren | `[Baseline] - DLP - Financial - Block` | idem voor kaarten en IBAN's |
 
 "Naar buiten" is steeds `AccessScope NotInOrganization`: mail aan externe ontvangers en bestanden

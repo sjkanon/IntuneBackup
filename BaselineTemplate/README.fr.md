@@ -209,8 +209,10 @@ données (DLP) pour Exchange, SharePoint et OneDrive, sous forme de templates DL
 | Stage | Stratégie | Ce qu'elle fait |
 |---:|---|---|
 | 1 · Melden | `[Baseline] - DLP - Personal Data NL - Notify` | BSN, numéro de passeport, de permis de conduire ou fiscal néerlandais envoyé à l'extérieur : conseil de stratégie pour l'utilisateur ; en masse (BSN 5+, le reste 10+) aussi un rapport d'incident et une alerte à l'administrateur |
+| 1 · Melden | `[Baseline] - DLP - Personal Data BE - Notify` | numéro de registre national, numéro de passeport ou de permis de conduire belge envoyé à l'extérieur : idem (numéro national 5+, le reste 10+), avec un conseil bilingue (nl/fr) |
 | 1 · Melden | `[Baseline] - DLP - Financial - Notify` | numéro de carte de crédit ou de débit envoyé à l'extérieur : conseil de stratégie ; en masse (cartes 10+, IBAN 20+) aussi rapport et alerte |
 | 2 · Blokkeren | `[Baseline] - DLP - Personal Data NL - Block` | le même seuil de masse : **bloque**, sans contournement |
+| 2 · Blokkeren | `[Baseline] - DLP - Personal Data BE - Block` | idem pour les numéros belges |
 | 2 · Blokkeren | `[Baseline] - DLP - Financial - Block` | idem pour les cartes et les IBAN |
 
 « À l'extérieur » signifie toujours `AccessScope NotInOrganization` : un e-mail à des destinataires

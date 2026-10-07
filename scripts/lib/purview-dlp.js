@@ -8,8 +8,8 @@
  * - Microsoft's built-in templates (https://learn.microsoft.com/en-us/purview/dlp-policy-templates-include):
  *   every financial/PII template has a low-volume rule (1-9 matches, notify) and a high-volume rule
  *   (10+, block and incident report), both on "shared with people outside my organization". There
- *   is no Netherlands template; the Dutch SITs only occur in "GDPR Enhanced", which also pulls in
- *   27 EU address types and trainable classifiers — far too noisy for a small tenant.
+ *   is no Netherlands or Belgium template; their SITs only occur in "GDPR Enhanced", which also
+ *   pulls in 27 EU address types and trainable classifiers — far too noisy for a small tenant.
  * - Microsoft's "Default Office 365 DLP policy" (credit cards 1-9 shared externally, tip only)
  *   and the rollout order in https://learn.microsoft.com/en-us/purview/dlp-create-deploy-policy:
  *   see what fires before anything blocks.
@@ -39,10 +39,13 @@
  *    Alerts always appear in Purview → DLP → Alerts; per-tenant mail is set there.
  * 5. **Confidence per SIT, from its definition.** BSN only ever matches at High (checksum plus a
  *    keyword such as "bsn" or "burgerservicenummer"); the Dutch passport and driver's license
- *    numbers top out at Medium, so High would never fire for them. IBAN is High on the checksum
+ *    numbers top out at Medium, so High would never fire for them. All three Belgian types top out at
+ *    Medium too (the national number needs its checksum plus a keyword for that; checksum alone is
+ *    Low, which is too loose for a number that is also a valid date plus digits). Microsoft's
+ *    keyword list has "identiteitskaart" and "numéro national" but not "rijksregisternummer". IBAN is High on the checksum
  *    alone — every invoice carries one — so it is left out of the low rule and only counts in
- *    bulk (a salary or SEPA export). The VAT number is left out entirely: it is on every invoice
- *    by law.
+ *    bulk (a salary or SEPA export). The VAT number (and the Belgian enterprise number) is left out
+ *    entirely: it is on every invoice by law.
  *
  * Rule names are unique tenant-wide and at most 64 characters; the generator checks the length.
  */
@@ -60,6 +63,9 @@ const SIT = {
   passport: { name: "Netherlands Passport Number", id: "61786727-bafd-45f6-94d9-888d815e228e", confidencelevel: "Medium" },
   driversLicense: { name: "Netherlands Driver's License Number", id: "6247fbea-ab80-4be5-8233-308b7c031401", confidencelevel: "Medium" },
   tin: { name: "Netherlands Tax Identification Number", id: "01f42a64-eba7-4892-a67b-398237e4ade2", confidencelevel: "High" },
+  beNationalNumber: { name: "Belgium National Number", id: "fb969c9e-0fd1-4b18-8091-a2123c5e6a54", confidencelevel: "Medium" },
+  bePassport: { name: "Belgium Passport Number", id: "d7b1315b-21ca-4774-a32a-596010ff78fd", confidencelevel: "Medium" },
+  beDriversLicense: { name: "Belgium Driver's License Number", id: "d89fd329-9324-433c-b687-2c37bd5166f3", confidencelevel: "Medium" },
   creditCard: { name: "Credit Card Number", id: "50842eb7-edc8-4019-85dd-5a5c1f2bb085", confidencelevel: "High" },
   euDebitCard: { name: "EU Debit Card Number", id: "0e9b3178-9678-47dd-a509-37222ca96b42", confidencelevel: "High" },
   iban: { name: "International Banking Account Number (IBAN)", id: "e7dc4711-11b7-4cb0-b88b-2c394a771f0e", confidencelevel: "High" },
@@ -70,7 +76,9 @@ const match = ([sit, min, max]) => ({ ...sit, mincount: String(min), maxcount: S
 
 /**
  * Per category: which SITs from which count are "a few" (notify) and "bulk" (report, later block).
- * BSN counts as bulk from 5: it is the identifier the Dutch DPA treats most strictly.
+ * BSN counts as bulk from 5: it is the identifier the Dutch DPA treats most strictly. The Belgian
+ * national number (rijksregisternummer) gets the same: it is also the tax and social security
+ * number, so it is the one that opens everything.
  */
 const CATEGORIES = {
   personal: {
@@ -82,6 +90,18 @@ const CATEGORIES = {
       few: "Dit bevat persoonsgegevens (bijvoorbeeld een BSN of paspoortnummer) en gaat naar iemand buiten de organisatie. Is dat echt nodig?",
       bulk: "Dit bevat veel persoonsgegevens (BSN, paspoort, rijbewijs of fiscaal nummer) en gaat naar buiten de organisatie. De beheerder krijgt hiervan een melding.",
       block: "Geblokkeerd: dit bevat veel persoonsgegevens (BSN, paspoort, rijbewijs of fiscaal nummer) en mag niet buiten de organisatie worden gedeeld. Neem contact op met de beheerder.",
+    },
+  },
+  personalBe: {
+    name: "Personal Data BE",
+    what: "Belgian national numbers (rijksregisternummer), passport and driver's license numbers",
+    few: [[SIT.beNationalNumber, 1, 4], [SIT.bePassport, 1, 9], [SIT.beDriversLicense, 1, 9]],
+    bulk: [[SIT.beNationalNumber, 5, -1], [SIT.bePassport, 10, -1], [SIT.beDriversLicense, 10, -1]],
+    // Tweetalig: in Belgische tenants zitten Nederlandstalige en Franstalige gebruikers.
+    tip: {
+      few: "Persoonsgegevens (rijksregisternummer, paspoort) naar buiten de organisatie: is dat nodig? / Données personnelles (numéro national, passeport) vers l'extérieur : est-ce nécessaire ?",
+      bulk: "Veel persoonsgegevens naar buiten de organisatie; de beheerder wordt verwittigd. / Beaucoup de données personnelles vers l'extérieur ; l'administrateur est averti.",
+      block: "Geblokkeerd: veel persoonsgegevens mogen niet buiten de organisatie. Contacteer de beheerder. / Bloqué : beaucoup de données personnelles ne peuvent pas sortir. Contactez l'administrateur.",
     },
   },
   financial: {
@@ -172,13 +192,21 @@ function blockPolicy(key) {
   };
 }
 
-const DLP_POLICIES = [notifyPolicy("personal"), notifyPolicy("financial"), blockPolicy("personal"), blockPolicy("financial")];
+const DLP_POLICIES = [
+  notifyPolicy("personal"),
+  notifyPolicy("personalBe"),
+  notifyPolicy("financial"),
+  blockPolicy("personal"),
+  blockPolicy("personalBe"),
+  blockPolicy("financial"),
+];
 
 const DLP_BASELINE = {
   templateName: PREFIX + "Purview DLP",
   description:
     "Data loss prevention for Exchange, SharePoint and OneDrive (Business Premium): Dutch personal " +
-    "identifiers (BSN, passport, driver's license, tax number), payment cards and IBANs in bulk, " +
+    "identifiers (BSN, passport, driver's license, tax number), Belgian personal identifiers (national " +
+    "number, passport, driver's license), payment cards and IBANs in bulk, " +
     "shared outside the organisation. Stage 1 notifies users and reports bulk to the admins; stage 2 " +
     "blocks bulk without override and is manual: move a tenant only after reviewing its DLP alerts. " +
     "Assign the tenants before you run it.",
