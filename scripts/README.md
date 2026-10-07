@@ -161,7 +161,8 @@ Wat meegaat is `git ls-files`, niet wat er op de schijf ligt — daarmee blijft 
 spiegel, en dat is precies de reden om het niet met een kopieeropdracht te doen: één uitrolkopie
 mét geheimen die naar een tweede remote lekt krijg je daar nooit meer uit. Verwijderd is
 verwijderd, maar alleen voor bestanden die aan de andere kant in git staan; wat daar lokaal is
-aangemaakt blijft met rust.
+aangemaakt blijft met rust. Ook wat iemand daar zelf heeft gecommit (geen spiegelcommit) en hier
+nooit in git stond — een CIPP-"Save" van een collega — blijft staan; de uitvoer toont dat met `=`.
 
 De doelclone houdt zijn eigen geschiedenis. Geen `push --force`, dus de commits, workflowruns en
 branches aan die kant blijven staan — en dat is ook waarom het een script is en geen remote: een

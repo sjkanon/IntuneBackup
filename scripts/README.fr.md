@@ -164,7 +164,9 @@ Ce qui est repris, c'est `git ls-files`, pas ce qui se trouve sur le disque — 
 hors du miroir, et c'est précisément la raison de ne pas le faire avec une commande de copie : une
 seule copie de déploiement contenant des secrets qui fuit vers un second remote ne peut plus jamais
 en être retirée. Supprimé veut dire supprimé, mais uniquement pour les fichiers qui sont dans git de
-l'autre côté ; ce qui y a été créé localement n'est pas touché.
+l'autre côté ; ce qui y a été créé localement n'est pas touché. Ce que quelqu'un y a commité lui-même (pas dans un
+commit de miroir) et qui n'a jamais été dans git ici — un « Save » CIPP d'un collègue — reste aussi ;
+la sortie le signale par `=`.
 
 Le clone cible conserve son propre historique. Pas de `push --force`, donc les commits, les exécutions
 de workflow et les branches de ce côté restent en place — et c'est aussi pourquoi c'est un script et

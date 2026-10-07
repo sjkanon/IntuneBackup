@@ -11,7 +11,9 @@
  * keeps out. That is the whole point: `local/` contains deployment copies *with* secrets, and
  * a mirror that copies from disk instead of from the index would carry those to a second
  * remote. Files that are *gone* here are removed there too — but only if they are in git on
- * the other side; whatever was created locally there is left alone.
+ * the other side; whatever was created locally there is left alone. Files that someone committed
+ * on the other side (not in a mirror commit) and that never existed here — a colleague's CIPP
+ * "Save", say — are kept and listed with `=`; remove those there by hand if they should go.
  *
  * The target clone is not pushed without `--push`, and the source working tree does not have
  * to be clean — but a mirror of uncommitted changes is a mirror of something that can still
@@ -138,7 +140,30 @@ for (const rel of source) {
   }
 }
 
-const removed = target.filter((rel) => !sourceSet.has(rel));
+/**
+ * Bestanden die de doelclone zelf heeft toegevoegd: het laatste toevoegen gebeurde niet in een
+ * spiegelcommit, en hier heeft het pad nooit in git gestaan. Dat is werk van daar — een CIPP-"Save"
+ * van een collega — en dat haalt de spiegel niet weg. Wat hier ooit bestond en hier verdwenen is,
+ * gaat daar wel weg, ook als iemand het daar ooit met de hand toevoegde.
+ */
+function foreignFiles(candidates) {
+  if (!candidates.length) return new Set();
+  const everHere = new Set(git(REPO_ROOT, ["log", "--all", "--format=", "--name-only", "-z"]).split(/[\0\n]/).filter(Boolean));
+  const addedBy = new Map();
+  let subject = null;
+  // Nieuwste eerst: de eerste keer dat een pad langskomt, is de laatste keer dat het werd toegevoegd.
+  for (const line of git(targetRoot, ["log", "--diff-filter=A", "--format=%x01%s", "--name-only"]).split("\n")) {
+    if (line.startsWith("\x01")) subject = line.slice(1);
+    else if (line && !addedBy.has(line)) addedBy.set(line, subject);
+  }
+  return new Set(
+    candidates.filter((rel) => !everHere.has(rel) && addedBy.has(rel) && !addedBy.get(rel).startsWith("Spiegel van ")),
+  );
+}
+
+const missingHere = target.filter((rel) => !sourceSet.has(rel));
+const foreign = foreignFiles(missingHere);
+const removed = missingHere.filter((rel) => !foreign.has(rel));
 for (const rel of removed) {
   const victim = path.join(targetRoot, rel);
   if (opts.dryRun || !fs.existsSync(victim)) continue;
@@ -154,6 +179,7 @@ for (const rel of removed) {
 for (const rel of added) console.log(`+ ${rel}`);
 for (const rel of changed) console.log(`~ ${rel}`);
 for (const rel of removed) console.log(`- ${rel}`);
+for (const rel of foreign) console.log(`= ${rel}  (alleen daar, door iemand daar toegevoegd: blijft staan)`);
 
 const total = added.length + changed.length + removed.length;
 console.log(

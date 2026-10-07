@@ -161,7 +161,8 @@ What goes along is `git ls-files`, not what is on disk — that keeps `local/` o
 mirror, and that is exactly the reason not to do this with a copy command: a single deployment copy
 with secrets that leaks to a second remote can never be removed from there. Deleted is
 deleted, but only for files that are in git on the other side; anything created locally there
-is left alone.
+is left alone. So is anything someone committed there themselves (not in a mirror commit) that was
+never in git here — a colleague's CIPP "Save"; the output lists those with `=`.
 
 The target clone keeps its own history. No `push --force`, so the commits, workflow runs and
 branches on that side stay — and that is also why it is a script and not a remote: a
