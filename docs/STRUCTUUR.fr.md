@@ -71,7 +71,7 @@ IntuneTemplate/
   _ca.json            quelles stratégies CA s'appuient sur une stratégie (copie)
   _i18n/              traductions anglaises et françaises des textes des données
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
-        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/  AssignmentFilters/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
         Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
@@ -190,3 +190,4 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 | [COMPLIANCE.fr.md](COMPLIANCE.fr.md) | RSSI ou auditeur |
 | [ANALYSE.fr.md](ANALYSE.fr.md) | Pourquoi certaines choses sont ou ne sont pas dans la baseline |
 | [PLAN.fr.md](PLAN.fr.md) | Ce qui reste ouvert, notamment la migration du tenant |
+| [AVD.fr.md](AVD.fr.md) | Quelles stratégies Windows ont aussi leur place sur les hôtes de session AVD, et le plan de déploiement |

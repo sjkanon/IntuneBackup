@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# IntuneTemplate — 203 policies
+# IntuneTemplate — 207 policies
 
 The source of this repo: the agreed Intune policies in CIPP template format. Everything
 in `export/` and `BaselineTemplate/` is derived from it and generated.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.en.md) | 120 | 1 | 6 | 11 | – | **138** |
+| [Windows](WIN/README.en.md) | 124 | 1 | 6 | 11 | – | **142** |
 | [macOS](MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **161** | **1** | **13** | **26** | **2** | **203** |
+| **Total** | **165** | **1** | **13** | **26** | **2** | **207** |
 
 ## Layout
 
@@ -80,6 +80,7 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (link to an ADE token in Intune) | 1 | 2 |
 | `[Baseline] - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
+| `[Baseline] - Baseline-SEC-AVD-Session-Hosts` | Custom group: SEC-AVD-Session-Hosts | 1 | 4 |
 | `[Baseline] - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
 | `[Baseline] - Baseline-SEC-Cloud-PC` | Custom group: SEC-Cloud-PC | 1 | 1 |
 | `[Baseline] - Baseline-SEC-Cloud-PC-External` | Custom group: SEC-Cloud-PC-External | 1 | 1 |
@@ -105,7 +106,7 @@ they exist as an alternative to a policy that is deployed.
 
 ## Per platform
 
-- [Windows](WIN/README.en.md) — 138 policies
+- [Windows](WIN/README.en.md) — 142 policies
 - [macOS](MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](IOS/README.en.md) — 14 policies
 - [Android](AND/README.en.md) — 14 policies

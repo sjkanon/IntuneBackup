@@ -1,0 +1,148 @@
+{
+    "name": "[Baseline] - WIN - D - AVD Defender FSLogix Exclusions",
+    "description": "Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. Baseline assignment: none by default — belongs on SEC-AVD-Session-Hosts. Source: Microsoft Learn — Prerequisites for FSLogix, Configure Antivirus file and folder exclusions (consulted on 9 October 2026).",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 2,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_defender_excludedpaths",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%TEMP%\\*\\*.VHD"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%TEMP%\\*\\*.VHDX"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%Windir%\\TEMP\\*\\*.VHD"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%Windir%\\TEMP\\*\\*.VHDX"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramData%\\FSLogix\\Cache\\*"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramData%\\FSLogix\\Proxy\\*"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramData%\\FSLogix"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "C:\\Users\\*\\AppData\\Local\\FSLogix"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps\\frxdrv.sys"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps\\frxdrvvt.sys"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps\\frxccd.sys"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.lock"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.meta"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.metadata"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.lock"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.meta"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.metadata"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "1",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingCollectionInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_defender_excludedprocesses",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingCollectionValue": [
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps\\frxsvc.exe"
+                    },
+                    {
+                        "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
+                        "settingValueTemplateReference": null,
+                        "value": "%ProgramFiles%\\FSLogix\\Apps\\frxccds.exe"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -8,11 +8,11 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
 overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-203 policies over vier platformen:
+207 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 120 | 1 | 6 | 11 | – | **138** |
+| [Windows](IntuneTemplate/WIN/README.md) | 124 | 1 | 6 | 11 | – | **142** |
 | [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>203 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>207 policies<br/><i>de bron</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
 
@@ -40,6 +40,9 @@ en wat er in de tenant nog moet gebeuren.
 
 **[STRUCTUUR.md](docs/STRUCTUUR.md)** is de plattegrond: welke map wat bevat, welk script wat leest en
 schrijft, en aan welke systemen de repo vastzit.
+
+**[AVD.md](docs/AVD.md)** zegt per Windows-policy of hij ook op de Azure Virtual Desktop-sessiehosts
+hoort, met het toewijzingsfilter dat het onderscheid maakt en het uitrolplan voor AVD.
 
 **[COMPLIANCE.md](docs/COMPLIANCE.md)** is de verantwoording voor een CISO of auditor: per ISO/IEC 27001:2022
 Annex A-control, per NIS2-maatregel (art. 21 lid 2), per CIS Controls v8.1-safeguard en per NIST CSF
@@ -317,7 +320,7 @@ profiles, update-ring 3 en Windows 365) — met reden, in `"excluded"` in het ma
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 203
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 207
 templates in CIPP onder Tenant Administration → Templates.
 
 ### Uitrollen via een CIPP-baseline
@@ -366,7 +369,7 @@ Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRes
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 306 JSON-bestanden óók importeren — dezelfde 203 policies plus hun 102 assignments en het
+CIPP die 310 JSON-bestanden óók importeren — dezelfde 207 policies plus hun 102 assignments en het
 meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** template van maakt
 met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
