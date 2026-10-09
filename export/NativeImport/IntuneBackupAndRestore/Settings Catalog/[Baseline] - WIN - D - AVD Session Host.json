@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Session Host",
-    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and turns Storage Sense off so that Windows cleans up nothing in profiles that FSLogix has attached. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the classification in INTUNE-BASELINE.md of the AVD test environment (Storage Sense not on session hosts) and the Remote Desktop Services session limits in the Settings Catalog.",
+    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up daily inside the attached profile: OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the Remote Desktop Services session limits and the Storage Sense settings from the Settings Catalog, with values for FSLogix profile containers.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 3,
+    "settingCount": 8,
     "settings": [
         {
             "id": "0",
@@ -75,8 +75,74 @@
                 "choiceSettingValue": {
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_storage_allowstoragesenseglobal_0",
+                    "value": "device_vendor_msft_policy_config_storage_allowstoragesenseglobal_1",
                     "children": []
+                }
+            }
+        },
+        {
+            "id": "3",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup_1",
+                    "children": []
+                }
+            }
+        },
+        {
+            "id": "4",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesenseglobalcadence",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 1
+                }
+            }
+        },
+        {
+            "id": "5",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesensecloudcontentdehydrationthreshold",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 7
+                }
+            }
+        },
+        {
+            "id": "6",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesenserecyclebincleanupthreshold",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 14
+                }
+            }
+        },
+        {
+            "id": "7",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationSimpleSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_storage_configstoragesensedownloadscleanupthreshold",
+                "settingInstanceTemplateReference": null,
+                "simpleSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": 30
                 }
             }
         }

@@ -264,6 +264,11 @@ Zie [AVD.md](AVD.md) voor de indeling per policy, de FSLogix-aanpak en het uitro
 - **Sync forceren op een multi-session-host**: `deviceenroller.exe /o <enrollment-ID> /c /b`
   (het enrollment-ID staat onder `HKLM\SOFTWARE\Microsoft\Enrollments`). De geplande taak
   *PushLaunch* bestaat daar niet.
+- **Profielen klein houden.** `AVD Session Host` zet Storage Sense dagelijks aan binnen de container
+  (OneDrive na 7 dagen online-only, prullenbak 14, Downloads 30), en FSLogix comprimeert de container
+  bij elke afmelding (`VHD Compact Disk`). Geen wekelijkse FSLShrink meer; alleen als noodmiddel voor
+  containers die al groot zijn, eenmalig en met de hosts in drain mode. Zie
+  [AVD.md](AVD.md#profielen-klein-houden-storage-sense-en-compactie).
 - **FSLogix: Intune én het hostscript.** Het hostscript `configure-fslogix.ps1` zet de waarden bij
   de deploy, zodat de eerste aanmelding goed gaat voordat Intune de host bereikt; de Intune-policy
   houdt ze daarna vast. Beide schrijven dezelfde registerwaarden.

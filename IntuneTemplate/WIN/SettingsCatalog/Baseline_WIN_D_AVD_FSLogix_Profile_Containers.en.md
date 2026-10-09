@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - AVD FSLogix Profile Containers
 
-Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile.
+Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile, and at sign-out FSLogix compacts the container so that freed-up space goes back to the share.
 
 | | |
 |---|---|
@@ -15,7 +15,7 @@ Turns on FSLogix profile containers on the AVD session hosts: each user's profil
 | Source | Own — the FSLogix values from configure-fslogix.ps1 in the AVD test environment, with the definitions of the FSLogix ADMX in the Settings Catalog; the Kerberos ticket as in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust |
 | File | [`Baseline_WIN_D_AVD_FSLogix_Profile_Containers.json`](Baseline_WIN_D_AVD_FSLogix_Profile_Containers.json) |
 
-> The storage account is in the path as the CIPP variable %FSLogixStorageAccount%: set it per tenant in CIPP (Settings → Custom Variables) to the name of the storage account, before the first run. Without the variable %FSLogixStorageAccount% stays in the path literally, and with PreventLoginWithFailure nobody can sign in to the host any more. Whoever deploys with IntuneBackupAndRestore fills in the name by hand (in local/). **Not verified with certainty, therefore left out:** VolumeType (VHDX is the default since FSLogix 2210, 2.9.8361) and RoamIdentity (the required value 0 is the default; Intune does not support token roaming). Check the definitions in the settings picker before you add them. **Not in the Settings Catalog**, and therefore in the host script configure-fslogix.ps1 in the AVD repo: LoadCredKeyFromProfile = 1 under HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount (needed for Entra Kerberos with FSLogix) and the local administrator in the local group FSLogix Profile Exclude List, so that a break-glass sign-in always works. The script already sets the same FSLogix values at deployment, so the first sign-in works before Intune has reached the host; this policy then keeps them central and protected against drift. Both write to HKLM\SOFTWARE\FSLogix\Profiles, so nothing clashes. CloudKerberosTicketRetrievalEnabled is also in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, with the same value; that policy does not belong on AVD (docs/AVD.md). Exclude the storage account app from MFA in Conditional Access, otherwise the Kerberos ticket fails.
+> The storage account is in the path as the CIPP variable %FSLogixStorageAccount%: set it per tenant in CIPP (Settings → Custom Variables) to the name of the storage account, before the first run. Without the variable %FSLogixStorageAccount% stays in the path literally, and with PreventLoginWithFailure nobody can sign in to the host any more. Whoever deploys with IntuneBackupAndRestore fills in the name by hand (in local/). VHD Compact Disk is explicitly enabled, even though it has been the default since FSLogix 2210: that way it does not depend on the version on the host (now 3.26), and according to the description, setting a value back to Not configured has no effect once it has been set. It compacts at sign-out what Storage Sense in [Baseline] - WIN - D - AVD Session Host has cleaned up. **Not verified with certainty, therefore left out:** VolumeType (VHDX is the default since FSLogix 2210, 2.9.8361) and RoamIdentity (the required value 0 is the default; Intune does not support token roaming). Check the definitions in the settings picker before you add them. **Not in the Settings Catalog**, and therefore in the host script configure-fslogix.ps1 in the AVD repo: LoadCredKeyFromProfile = 1 under HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount (needed for Entra Kerberos with FSLogix) and the local administrator in the local group FSLogix Profile Exclude List, so that a break-glass sign-in always works. The script already sets the same FSLogix values at deployment, so the first sign-in works before Intune has reached the host; this policy then keeps them central and protected against drift. Both write to HKLM\SOFTWARE\FSLogix\Profiles, so nothing clashes. CloudKerberosTicketRetrievalEnabled is also in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, with the same value; that policy does not belong on AVD (docs/AVD.md). Exclude the storage account app from MFA in Conditional Access, otherwise the Kerberos ticket fails.
 
 ## Standards
 
@@ -28,7 +28,7 @@ Turns on FSLogix profile containers on the AVD session hosts: each user's profil
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
-## Settings — 11
+## Settings — 12
 
 Indented rows are child settings: they only apply when their parent
 setting has the value shown.
@@ -46,6 +46,7 @@ setting has the value shown.
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilespreventloginwithfailure` | 1 |
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilespreventloginwithtempprofile` | 1 |
 | `device_vendor_msft_policy_config_kerberos_cloudkerberosticketretrievalenabled` | 1 |
+| `device_vendor_msft_policy_config_fslogixv1~policy~fslogix_vhdcompactdisk` | 1 |
 
 ---
 

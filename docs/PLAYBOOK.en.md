@@ -263,6 +263,11 @@ plan. In short:
 - **Force a sync on a multi-session host**: `deviceenroller.exe /o <enrollment-ID> /c /b` (the
   enrollment ID is under `HKLM\SOFTWARE\Microsoft\Enrollments`). The scheduled task *PushLaunch*
   does not exist there.
+- **Keeping profiles small.** `AVD Session Host` turns Storage Sense on daily inside the container
+  (OneDrive online-only after 7 days, recycle bin 14, Downloads 30), and FSLogix compacts the
+  container at every sign-out (`VHD Compact Disk`). No more weekly FSLShrink; only as an emergency
+  measure for containers that are already large, once and with the hosts in drain mode. See
+  [AVD.en.md](AVD.en.md#keeping-profiles-small-storage-sense-and-compaction).
 - **FSLogix: Intune and the host script.** The host script `configure-fslogix.ps1` sets the values
   at deployment, so the first sign-in works before Intune reaches the host; the Intune policy keeps
   them in place afterwards. Both write the same registry values.

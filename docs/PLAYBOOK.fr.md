@@ -275,6 +275,11 @@ déploiement. En bref :
 - **Forcer une synchronisation sur un hôte multisession** : `deviceenroller.exe /o <enrollment-ID> /c /b`
   (l'ID d'inscription se trouve sous `HKLM\SOFTWARE\Microsoft\Enrollments`). La tâche planifiée
   *PushLaunch* n'y existe pas.
+- **Garder les profils petits.** `AVD Session Host` active Storage Sense chaque jour dans le
+  conteneur (OneDrive en ligne uniquement après 7 jours, corbeille 14, Téléchargements 30), et FSLogix
+  compacte le conteneur à chaque déconnexion (`VHD Compact Disk`). Plus de FSLShrink hebdomadaire ;
+  seulement en dernier recours pour des conteneurs déjà volumineux, une seule fois et avec les hôtes en
+  mode drain. Voir [AVD.fr.md](AVD.fr.md#garder-les-profils-petits--storage-sense-et-compaction).
 - **FSLogix : Intune et le script d'hôte.** Le script d'hôte `configure-fslogix.ps1` définit les
   valeurs au déploiement, pour que la première connexion fonctionne avant qu'Intune n'atteigne
   l'hôte ; la stratégie Intune les maintient ensuite. Les deux écrivent les mêmes valeurs de registre.

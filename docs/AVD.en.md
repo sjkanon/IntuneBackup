@@ -37,7 +37,7 @@ New in this repo for AVD:
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.en.md) — FSLogix and the Kerberos ticket for Azure Files;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.en.md) — the physical version without the password prompt;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.en.md) — the Defender exclusions Microsoft prescribes for FSLogix;
-- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) — two-hour session limits and Storage Sense off.
+- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) — two-hour session limits and Storage Sense with values of its own inside the container.
 
 All four are in **phase 1** with class `avd`, in the package `[Baseline] - Baseline-Devices-AVD`
 (all devices, include filter `WIN - AVD Multi-session`). The storage account in the two FSLogix
@@ -103,15 +103,14 @@ on the session host after all.
 
 `check-scope.js` compares, per setting, what lands on the same device: **alle + fysiek** on a
 physical PC and **alle + avd** on a session host, over phase 1 and 2. Between `fysiek` and `avd`
-the same setting may have a different value — that is exactly the point (Storage Sense on for a
-laptop, off for a session host). Today: no conflicts; three settings are set twice with the same
+the same setting may have a different value — that is exactly the point (Storage Sense when space
+is low on a laptop, daily with shorter thresholds on a session host). Today: no conflicts; three settings are set twice with the same
 value (NTLM in Disable NTLM and Local Security Policies, two Outlook settings in Office Experience
 and Outlook Cached Mode Managed). The check does not compare phase 4 (own group); that overlap is
 listed below by hand:
 
 | Setting | AVD policy | Other policy | Handled by |
 |---|---|---|---|
-| `storage_allowstoragesenseglobal` | AVD Session Host (0) | Storage Sense (1) | Storage Sense is `fysiek`; check-scope guards it |
 | `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 hours) | Cloud PC External Access (15 min, phase 4) | **open point**, see below — only on a host pool for external users |
 | `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | different classes; same value |
 | eight settings of Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | different classes |
@@ -247,7 +246,7 @@ Class `fysiek`: in phase 1 and 2 the include filter `WIN - Physical`, so not on 
 | [D - Passwordless](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) | 1 | Hides the password field; without SSO nobody can sign in to the host. |
 | [D - Power Management](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) | 1 | Hardware a VM does not have; redirection is already off through Cloud PC Session Security. |
 | [D - Removable Storage](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) | 2 | Hardware a VM does not have; redirection is already off through Cloud PC Session Security. |
-| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) | 1 | Cleans up inside mounted FSLogix profiles; AVD Session Host turns Storage Sense off (different value: hence `fysiek`). |
+| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) | 1 | When space is low, 30 days — does not work on a session host, where C: never fills up. AVD Session Host turns Storage Sense on there with values of its own (daily, 7/14/30 days). |
 | [D - Timezone](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) | 1 | Automatic time zone clashes with time zone redirection (`ts_time_zone`) from Cloud PC Session Security. |
 | [D - Wifi Corporate](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.en.md) | 3 | Device configuration template: not supported on multi-session, and a VM has no Wi-Fi. |
 | [D - Wifi Guest](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.en.md) | 3 | Device configuration template: not supported on multi-session, and a VM has no Wi-Fi. |
@@ -329,6 +328,29 @@ verified with certainty: `VolumeType = VHDX` (the default since FSLogix 2210) an
 (the required value 0 is the default; Intune does not support token roaming). Both set the Kerberos
 ticket (`CloudKerberosTicketRetrievalEnabled`); the storage account app must be excluded from MFA in
 Conditional Access.
+
+## Keeping profiles small: Storage Sense and compaction
+
+Two settings work together to keep the FSLogix containers as small as possible:
+
+- **Storage Sense cleans up inside the attached container.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md)
+  turns it on with values of its own: daily (cadence 1), OneDrive files online-only after 7 days (no
+  data loss, the biggest gain), temporary files, the recycle bin after 14 days and Downloads after 30
+  days (real deletion, hence not shorter). Cadence 0 — *when disk space is low* — does not work
+  here: a session host's C: drive never fills up, and Storage Sense looks at that drive, not at the
+  container. The physical `Storage Sense` policy (cadence 0, 30 days) stays `fysiek`; the two never
+  meet on one device.
+- **FSLogix compacts the container at sign-out** (`VHD Compact Disk`, explicitly enabled in
+  [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.en.md),
+  even though it has been the default since FSLogix 2210). What Storage Sense freed up goes back to
+  the share. With Azure Files Premium Microsoft bills the provisioned size, so the gain is not in the
+  bill but in faster sign-ins and less chance of a full container.
+
+**No more weekly `Invoke-FslShrinkDisk` or FSLShrink.** The built-in compaction does the same at
+every sign-out, without a separate VM with rights on the share and without the risk of a script
+touching an attached container. The session limits (sign-out after two hours disconnected) make sure
+sign-outs actually happen. FSLShrink remains only an emergency measure for containers that are already
+large: once, outside office hours, with the hosts in drain mode.
 
 ## Rollout plan
 

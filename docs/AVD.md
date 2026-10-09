@@ -36,7 +36,7 @@ Nieuw in deze repo voor AVD:
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) — FSLogix en het Kerberos-ticket voor Azure Files;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) — de fysieke versie zonder wachtwoordprompt;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) — de Defender-uitsluitingen die Microsoft voor FSLogix voorschrijft;
-- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) — sessielimieten van twee uur en Storage Sense uit.
+- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) — sessielimieten van twee uur en Storage Sense met eigen waarden in de container.
 
 Alle vier staan in **fase 1** met doelgroep `avd`, in het pakket `[Baseline] - Baseline-Devices-AVD`
 (alle apparaten, include-filter `WIN - AVD Multi-session`). Het opslagaccount in de twee
@@ -102,15 +102,14 @@ sessiehost niet alsnog gelden.
 
 `check-scope.js` vergelijkt per instelling wat op hetzelfde apparaat landt: **alle + fysiek** op een
 fysieke pc en **alle + avd** op een sessiehost, over fase 1 en 2. Tussen `fysiek` en `avd` mag
-dezelfde instelling een andere waarde hebben — dat is juist het doel (Storage Sense aan op een
-laptop, uit op een sessiehost). Vandaag: geen conflicten; drie instellingen worden dubbel gezet met
+dezelfde instelling een andere waarde hebben — dat is juist het doel (Storage Sense bij weinig
+ruimte op een laptop, dagelijks met kortere termijnen op een sessiehost). Vandaag: geen conflicten; drie instellingen worden dubbel gezet met
 dezelfde waarde (NTLM in Disable NTLM en Local Security Policies, twee Outlook-instellingen in
 Office Experience en Outlook Cached Mode Managed). Fase 4 (eigen groep) vergelijkt de check niet;
 die overlap staat hieronder met de hand:
 
 | Instelling | AVD-policy | Andere policy | Afgehandeld door |
 |---|---|---|---|
-| `storage_allowstoragesenseglobal` | AVD Session Host (0) | Storage Sense (1) | Storage Sense is `fysiek`; check-scope bewaakt het |
 | `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 uur) | Cloud PC External Access (15 min, fase 4) | **open punt**, zie onderaan — alleen op een hostpool voor externen |
 | `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | verschillende klassen; zelfde waarde |
 | acht instellingen van Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | verschillende klassen |
@@ -246,7 +245,7 @@ Doelgroep `fysiek`: in fase 1 en 2 het include-filter `WIN - Physical`, dus niet
 | [D - Passwordless](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.md) | 1 | Verbergt het wachtwoordveld; zonder SSO kan dan niemand meer aanmelden op de host. |
 | [D - Power Management](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.md) | 1 | Hardware die een VM niet heeft; redirectie staat al uit via Cloud PC Session Security. |
 | [D - Removable Storage](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.md) | 2 | Hardware die een VM niet heeft; redirectie staat al uit via Cloud PC Session Security. |
-| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | 1 | Ruimt op in gekoppelde FSLogix-profielen; AVD Session Host zet Storage Sense uit (andere waarde: daarom `fysiek`). |
+| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | 1 | Bij weinig ruimte, 30 dagen — werkt niet op een sessiehost, waar C: nooit volloopt. AVD Session Host zet Storage Sense daar met eigen waarden aan (dagelijks, 7/14/30 dagen). |
 | [D - Timezone](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.md) | 1 | Automatische tijdzone botst met de tijdzone-redirectie (`ts_time_zone`) uit Cloud PC Session Security. |
 | [D - Wifi Corporate](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.md) | 3 | Device configuration-template: niet ondersteund op multi-session, en een VM heeft geen wifi. |
 | [D - Wifi Guest](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.md) | 3 | Device configuration-template: niet ondersteund op multi-session, en een VM heeft geen wifi. |
@@ -328,6 +327,30 @@ zekerheid is geverifieerd: `VolumeType = VHDX` (sinds FSLogix 2210 de standaard)
 (de vereiste waarde 0 is de standaard; Intune ondersteunt geen token-roaming). Het Kerberos-ticket
 (`CloudKerberosTicketRetrievalEnabled`) zetten beide; de app van het opslagaccount moet in
 Conditional Access van MFA zijn uitgesloten.
+
+## Profielen klein houden: Storage Sense en compactie
+
+Twee instellingen werken samen om de FSLogix-containers zo klein mogelijk te houden:
+
+- **Storage Sense ruimt binnen de gekoppelde container op.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md)
+  zet het aan met eigen waarden: dagelijks (cadence 1), OneDrive-bestanden na 7 dagen alleen online
+  (geen dataverlies, de grootste winst), tijdelijke bestanden, de prullenbak na 14 dagen en Downloads
+  na 30 dagen (echte verwijdering, daarom niet korter). Cadence 0 — *bij weinig schijfruimte* —
+  werkt hier niet: de C:-schijf van een sessiehost loopt nooit vol, en Storage Sense kijkt naar die
+  schijf, niet naar de container. De fysieke `Storage Sense`-policy (cadence 0, 30 dagen) blijft
+  `fysiek`; de twee komen nooit op één apparaat.
+- **FSLogix comprimeert de container bij afmelden** (`VHD Compact Disk`, in
+  [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md)
+  expliciet aan, al is het sinds FSLogix 2210 de standaard). Wat Storage Sense heeft vrijgemaakt,
+  gaat zo terug naar het share. Bij Azure Files Premium rekent Microsoft op de provisioned grootte,
+  dus de winst zit niet in de rekening maar in snellere aanmeldingen en minder kans op een volle
+  container.
+
+**Geen wekelijkse `Invoke-FslShrinkDisk` of FSLShrink meer.** De ingebouwde compactie doet hetzelfde
+bij elke afmelding, zonder aparte VM met rechten op het share en zonder het risico dat een script een
+gekoppelde container raakt. De sessielimieten (afmelden na twee uur verbroken) zorgen dat er ook echt
+wordt afgemeld. FSLShrink blijft alleen een noodmiddel voor containers die al groot zijn: eenmalig,
+buiten kantooruren, met de hosts in drain mode.
 
 ## Uitrolplan
 
