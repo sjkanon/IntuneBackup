@@ -173,7 +173,7 @@ Physique et AVD, inchangée et sans filtre.
 | [D - Microsoft OneDrive](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.fr.md) | 1 | Known Folder Move et Files On-Demand fonctionnent avec FSLogix. |
 | [D - Microsoft Store](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.fr.md) | 1 |  |
 | [D - Network Authentication Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.fr.md) | 2 |  |
-| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md) | 1 | Active *Limits print driver installation to Administrators* : les pilotes d'imprimante doivent être dans l'image de référence. |
+| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md) | 1 | Active *Limits print driver installation to Administrators* : les pilotes d'imprimante sont installés sur l'hôte de session après le déploiement (même pilote que sur le serveur d'impression). |
 | [D - Printing Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.fr.md) | 2 |  |
 | [D - Privacy and Telemetry](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.fr.md) | 1 |  |
 | [D - Remote Access Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.fr.md) | 2 |  |
@@ -302,7 +302,7 @@ sous les noms actuels.
   empêche les utilisateurs d'installer eux-mêmes un pilote d'imprimante. Dans l'ensemble actuel,
   c'est `restrictdriverinstallationtoadministrators` dans [`WIN - D - Printing`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md),
   qui reste *Commune* : c'est une mesure de sécurité contre les attaques de type PrintNightmare.
-  Conséquence pour AVD : **les pilotes d'imprimante doivent être dans l'image de référence.**
+  Conséquence pour AVD : **les pilotes d'imprimante sont installés sur chaque hôte de session après le déploiement** (AVD-Test : `printerDrivers`, étape `sessionhost-printers`), avec exactement le même pilote que sur le serveur d'impression distinct.
 - **`promptforpassworduponconnection`** figurait dans l'ancien `[Baseline] Administrative Templates`.
   Dans l'ensemble actuel, il est dans `Remote Desktop and RPC`, et lors de la scission il passe à la
   variante AVD — qui ne le définit justement *pas*. Avec l'invite, l'hôte de session demande un mot

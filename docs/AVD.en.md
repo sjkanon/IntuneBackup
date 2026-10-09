@@ -170,7 +170,7 @@ Physical and AVD, unchanged and without a filter.
 | [D - Microsoft OneDrive](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) | 1 | Known Folder Move and Files On-Demand work together with FSLogix. |
 | [D - Microsoft Store](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) | 1 |  |
 | [D - Network Authentication Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) | 2 |  |
-| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) | 1 | Sets *Limits print driver installation to Administrators*: printer drivers belong in the golden image. |
+| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md) | 1 | Sets *Limits print driver installation to Administrators*: printer drivers are installed on the session host after deployment (same driver as on the print server). |
 | [D - Printing Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) | 2 |  |
 | [D - Privacy and Telemetry](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.en.md) | 1 |  |
 | [D - Remote Access Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.en.md) | 2 |  |
@@ -298,7 +298,7 @@ The test ran with the old `[Baseline] X` set in the test tenant, from before the
   prevents users from installing a printer driver themselves. In the current set that is
   `restrictdriverinstallationtoadministrators` in [`WIN - D - Printing`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.en.md),
   and it stays *Shared*: it is a security measure against PrintNightmare-style attacks.
-  Consequence for AVD: **the printer drivers belong in the golden image.**
+  Consequence for AVD: **the printer drivers are installed on every session host after deployment** (AVD-Test: `printerDrivers`, step `sessionhost-printers`), with exactly the same driver as on the separate print server.
 - **`promptforpassworduponconnection`** was in the old `[Baseline] Administrative Templates`. In
   the current set it is in `Remote Desktop and RPC`, and with the split it moves to the AVD variant —
   which deliberately does *not* set it. With the prompt the session host asks for a password on every

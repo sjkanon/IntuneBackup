@@ -169,7 +169,7 @@ Fysiek en AVD, ongewijzigd en zonder filter.
 | [D - Microsoft OneDrive](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) | 1 | Known Folder Move en Files On-Demand werken samen met FSLogix. |
 | [D - Microsoft Store](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.md) | 1 |  |
 | [D - Network Authentication Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) | 2 |  |
-| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.md) | 1 | Zet *Limits print driver installation to Administrators*: printerdrivers horen in de golden image. |
+| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.md) | 1 | Zet *Limits print driver installation to Administrators*: printerdrivers komen na de uitrol op de sessiehost (zelfde driver als op de printserver). |
 | [D - Printing Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.md) | 2 |  |
 | [D - Privacy and Telemetry](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.md) | 1 |  |
 | [D - Remote Access Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.md) | 2 |  |
@@ -297,7 +297,7 @@ De test liep met de oude `[Baseline] X`-set in de testtenant, van vóór de opsp
   blokkeert dat gebruikers zelf een printerdriver installeren. In de huidige set is dat
   `restrictdriverinstallationtoadministrators` in [`WIN - D - Printing`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.md),
   en die blijft *Gezamenlijk*: het is een beveiligingsmaatregel tegen PrintNightmare-achtige
-  aanvallen. Gevolg voor AVD: **de printerdrivers horen in de golden image.**
+  aanvallen. Gevolg voor AVD: **de printerdrivers komen na de uitrol op elke sessiehost** (AVD-Test: `printerDrivers`, stap `sessionhost-printers`), met exact dezelfde driver als op de aparte printserver.
 - **`promptforpassworduponconnection`** stond in de oude `[Baseline] Administrative Templates`. In
   de huidige set zit hij in `Remote Desktop and RPC`, en bij de splitsing gaat hij naar de
   AVD-variant — die hem juist níet zet. Met de prompt vraagt de sessiehost bij elke verbinding om
