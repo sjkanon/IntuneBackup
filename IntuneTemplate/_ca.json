@@ -1146,6 +1146,16 @@
           "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
           "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
         }
+      },
+      {
+        "ca": "CA__2155__GRANT__Virtual_Desktop_Phishing_Resistant_MFA",
+        "displayName": "CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
       }
     ],
     "Baseline_WIN_D_Windows_Hello_for_Business_Multi_User": [
@@ -1173,6 +1183,16 @@
         "ca": "CA__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
         "displayName": "CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
         "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CA__2155__GRANT__Virtual_Desktop_Phishing_Resistant_MFA",
+        "displayName": "CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA",
+        "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
           "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
@@ -1909,6 +1929,16 @@
         "ca": "CA__2125__GRANT__Phishing_Resistant_MFA_for_Rollout_Groups",
         "displayName": "CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups",
         "state": "enabled",
+        "waarom": {
+          "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
+          "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",
+          "fr": "Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité."
+        }
+      },
+      {
+        "ca": "CA__2155__GRANT__Virtual_Desktop_Phishing_Resistant_MFA",
+        "displayName": "CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA",
+        "state": "enabledForReportingButNotEnforced",
         "waarom": {
           "nl": "Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over.",
           "en": "Sets up Windows Hello for Business: on Windows the usual way to meet phishing-resistant MFA. Without WHfB only a separate passkey or security key is left there.",

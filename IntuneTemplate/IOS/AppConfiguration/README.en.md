@@ -2,7 +2,7 @@
 
 # iOS/iPadOS app configuration
 
-Six Graph bodies, two per app. App configuration is not a CIPP type and therefore lives here.
+Six Graph bodies, two per app, and two for Windows App (at the bottom). App configuration is not a CIPP type and therefore lives here.
 
 | File | Graph type | Endpoint (beta) | For |
 |---|---|---|---|
@@ -75,3 +75,42 @@ device is a privacy decision; on supervised devices it is not needed) and
 The schemas have been verified against Graph beta (`iosMobileAppConfiguration` as exported
 by UniFy v1.2; `targetedManagedAppConfiguration.customSettings` on Microsoft Learn), not
 tested against a tenant.
+
+## Windows App (Azure Virtual Desktop and Windows 365)
+
+Two Graph bodies for Windows App, also on a device without enrollment:
+
+| File | Graph type | What it does |
+|---|---|---|
+| `windows-app-app-protection.json` | `iosManagedAppProtection` | PIN, no clipboard between the virtual desktop and local apps, `screenCaptureConfigurationState` = `blocked`, `allowedOutboundDataTransferDestinations` = `none`, at least Windows App 11.2.4, no third-party keyboards, jailbroken or rooted devices blocked |
+| `windows-app-managed-apps.json` | `targetedManagedAppConfiguration` | `redirectclipboard` = `0` and `drivestoredirect` = `0`: no clipboard and no files from the phone into the session |
+
+**Why.** Conditional Access `2150` only lets Windows App on iOS and Android in with an app
+protection policy or a compliant device. A policy on *all Microsoft apps* does not count for that:
+Microsoft has Windows App selected explicitly. Without this policy an unmanaged phone therefore
+never gets in. In addition, a Cloud PC or session host with screen capture protection
+(`[Baseline] - WIN - D - Cloud PC Session Security`) refuses the connection if Windows App does not
+block screen capture; that is only possible from the version mentioned. The app configuration is a
+second layer next to the session host settings; the most restrictive of the two wins, and Microsoft
+states explicitly that it does not replace them.
+
+**Why not a CIPP template.** CIPP removes the `apps` list from an app protection template before
+it creates the policy. A policy meant only for Windows App therefore cannot go through CIPP; it is
+here as a Graph body.
+
+**Deploying.**
+
+```http
+POST https://graph.microsoft.com/beta/deviceAppManagement/iosManagedAppProtections
+<contents of windows-app-app-protection.json>
+
+POST https://graph.microsoft.com/beta/deviceAppManagement/iosManagedAppProtections/{id}/targetApps
+{ "apps": [ { "mobileAppIdentifier": { "@odata.type": "#microsoft.graph.iosMobileAppIdentifier", "bundleId": "com.microsoft.rdc.ios" } } ] }
+```
+
+For `windows-app-managed-apps.json` the same via `targetedManagedAppConfigurations`. Assign both to the users of Azure
+Virtual Desktop or Windows 365. On an enrolled iPhone, Windows App must be in Intune as a store app; since release 2409 Intune sends the MAM keys itself.
+
+**Not tested in a tenant.** After assigning, check in the portal that Windows App is not also
+covered by `[Baseline] - IOS - U - App Protection`: two app protection policies on the same app
+for the same user produce a conflict.

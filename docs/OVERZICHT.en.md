@@ -4,34 +4,34 @@
 
 # Intune baseline — overview
 
-201 policies across 4 platforms, with
+203 policies across 4 platforms, with
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) as the source.
 This is the summary; the details are in the [main README](../README.en.md) and per folder.
 
 | | Count |
 |---|---:|
-| Policies | 201 |
-| Without assignment (deliberately) | 99 |
+| Policies | 203 |
+| Without assignment (deliberately) | 101 |
 | Deployed in the tenant | 0 |
 
 ## What is in it
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.en.md) | 118 | 1 | 6 | 11 | – | **136** |
+| [Windows](../IntuneTemplate/WIN/README.en.md) | 120 | 1 | 6 | 11 | – | **138** |
 | [macOS](../IntuneTemplate/MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Each platform has a table with **every policy, what it does and where it lands**:
-- [Windows](../IntuneTemplate/WIN/README.en.md) — 136 policies
+- [Windows](../IntuneTemplate/WIN/README.en.md) — 138 policies
 - [macOS](../IntuneTemplate/MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.en.md) — 14 policies
 
 ## Compliance framework
 
-201 of the 201 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+203 of the 203 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 31 of the 93 Annex A controls.
 Per control and per NIS2 point what the baseline enforces, how it is verified and what the organisation
 has to arrange itself: [COMPLIANCE.en.md](COMPLIANCE.en.md).
@@ -176,8 +176,8 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is an organisational decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for an organisation that allows these assistants. |
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
-99 are without assignment: the 42 above, 26 awaiting a prerequisite,
-16 for a dedicated group and 15 that are not deployed. The last two are an
+101 are without assignment: the 42 above, 26 awaiting a prerequisite,
+18 for a dedicated group and 15 that are not deployed. The last two are an
 *alternative* to a policy that is assigned, not an addition to it: update rings
 1 and 2 for Windows and Defender set the same settings as ring 3 with different values, the
 three CIPP standard templates for Defender do the same as their OIB counterpart, the

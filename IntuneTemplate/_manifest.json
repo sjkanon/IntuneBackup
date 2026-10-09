@@ -114,7 +114,7 @@
     },
     {
       "source": "WINDOWS365/",
-      "reason": "Windows 365 Cloud PC's horen in een eigen set; de policies zijn los te importeren voor een organisatie die ze gebruikt."
+      "reason": "Niet als OIB-import: de Connectivity Settings en Resource Redirection overlappen voor vier instellingen met [Baseline] - WIN - D - Remote Desktop and RPC, die op elk toestel staat. De overige instellingen staan in Baseline_WIN_D_Cloud_PC_Session_Security, een eigen policy. De OIB-compliancepolicy (Secure Boot en Code Integrity) is overbodig naast de losse WIN - U - Compliance-policies; wat een Cloud PC wél nodig heeft is een uitzondering op BitLocker, zie de note bij Session Security."
     },
     {
       "source": "WINDOWS/Scripts/",
@@ -5881,6 +5881,70 @@
       "universeel": "Elk Windows-apparaat dat onboarded is in Defender for Endpoint. De grens: apparaten zonder MDE-licentie of zonder connector.",
       "note": "Geen dubbele velden: alle negen bestaande WIN-compliancepolicies zetten `deviceThreatProtectionEnabled` op false (niet vereist) en het risiconiveau op `unavailable`. 'Gemiddeld' betekent: laag en gemiddeld zijn toegestaan, hoog niet — de waarde uit IntuneAdmin en de Microsoft-aanbeveling om fout-positieven op 'laag' niet tot blokkades te laten leiden. Respijt 0 uur, zoals de andere Defender-toetsen: het doel is juist onmiddellijk handelen. Zet in CA wel een uitzonderingsproces klaar (bijv. tijdelijk uitsluiten na onderzoek), anders zit een gebruiker vast tot het incident in Defender is opgelost. Nieuwere compliancevelden (kernel-DMA, geheugenintegriteit, VBS, firmwarebescherming) staan niet in DCv1 en zijn daarom niet toegevoegd.",
       "metadataOnly": true
+    },
+    {
+      "target": "Baseline_WIN_D_Cloud_PC_Session_Security",
+      "displayName": "[Baseline] - WIN - D - Cloud PC Session Security",
+      "doel": "Beveiligt de sessie op een Windows 365 Cloud PC of Azure Virtual Desktop-sessiehost: niets kopiëren van de virtuele werkplek naar het lokale toestel, geen COM-, LPT- of USB-apparaten doorsturen, de sessie verbreken bij vergrendelen, schermopname vanaf het lokale toestel blokkeren en een watermerk met het verbindings-ID over het bureaublad.",
+      "bron": "OpenIntuneBaseline Windows 365 v1.0 — Device Security - D - Connectivity Settings en Resource Redirection, zonder de vier instellingen die [Baseline] - WIN - D - Remote Desktop and RPC al zet; IntuneAdmin — Baseline - AVD - Enable screen capture protection en Enable watermarking",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Alleen voor Cloud PC's en sessiehosts. Op een gewone laptop doen de instellingen niets: ze gelden voor binnenkomende Remote Desktop-sessies.",
+      "faseGroep": "SEC-Cloud-PC (dynamische apparaatgroep met de Windows 365 Cloud PC's en de Azure Virtual Desktop-sessiehosts: (device.deviceModel -startsWith \"Cloud PC\") -or (device.deviceModel -eq \"Virtual Machine\"); een AVD-hostpool met eigen namen kan ook op device.displayName -startsWith)",
+      "controls": {
+        "iso": [
+          "A.6.7 Werken op afstand",
+          "A.8.1 Eindpuntapparatuur van gebruikers",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 13.5 Manage Access Control for Remote Assets",
+          "CIS Controls v8.1 3.3 Configure Data Access Control Lists"
+        ],
+        "nistcsf": [
+          "PR.AA-05",
+          "PR.DS-01",
+          "PR.DS-02"
+        ]
+      },
+      "bewijs": "Een virtuele werkplek is pas een grens als er niets over die grens heen lekt. Microsoft raadt in de beveiligingsaanbevelingen voor Azure Virtual Desktop en de richtlijnen voor Windows 365 aan redirectie te beperken, het klembord in één richting te begrenzen en screen capture protection te combineren met een watermerk: de eerste houdt een schermafdruk vanaf het lokale toestel tegen, het tweede maakt een foto van het scherm herleidbaar naar de verbinding.",
+      "universeel": "Alleen Cloud PC's en sessiehosts. Een gewoon Windows-toestel ontvangt geen Remote Desktop-sessies van gebruikers en heeft er niets aan.",
+      "note": "Vul aan wat [Baseline] - WIN - D - Remote Desktop and RPC al op elk toestel zet (wachtwoordprompt bij verbinden, secure RPC, encryptieniveau Hoog, geen schijfredirectie); die vier staan hier bewust niet nog eens in. Klembord van server naar client staat uit (OIB); van client naar server blijft toegestaan. Screen capture protection op 'client' en niet op 'client and server' zoals IntuneAdmin: data blijft daarmee al in de virtuele werkplek, en het knipprogramma in de sessie zelf blijft werken voor een melding aan de servicedesk. Gevolg: wie het bureaublad in een Teams-vergadering vanaf het lokale toestel deelt ziet zwart — deel vanuit Teams in de sessie zelf. Windows App op iOS en Android verbindt alleen nog als een app protection policy op Windows App schermopname blokkeert (zie IOS/AppConfiguration en AND/AppConfiguration). Het watermerk werkt op een volledig bureaublad, niet op RemoteApp. BitLocker hoort niet op een Cloud PC: sluit SEC-Cloud-PC uit bij [Baseline] - WIN - D - BitLocker en [Baseline] - WIN - U - Compliance BitLocker, of wijs die toe met een filter op deviceModel."
+    },
+    {
+      "target": "Baseline_WIN_D_Cloud_PC_External_Access",
+      "displayName": "[Baseline] - WIN - D - Cloud PC External Access",
+      "doel": "Sluit op sessiehosts en Cloud PC's voor persoonlijke toestellen en externen het klembord, printers en camera af, en verbreekt een sessie na 15 minuten zonder activiteit en meldt hem 15 minuten later af: wat op de virtuele werkplek staat blijft daar.",
+      "bron": "IntuneAdmin — Baseline - Win365 - Do not allow Clipboard redirection, Do not allow client printer redirection en Do not allow video capture redirection; CIS Microsoft Intune for Windows 11 v4 L2 — Set time limit for active but idle Remote Desktop Services sessions (15 minuten) en Set time limit for disconnected sessions (15 minuten in plaats van 1)",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Alleen voor de virtuele werkplek waarop onbeheerde toestellen en derden werken. Voor eigen medewerkers op een beheerd toestel is geen klembord en geen printer een onnodige beperking.",
+      "faseGroep": "SEC-Cloud-PC-External (apparaatgroep met alleen de sessiehosts of Cloud PC's waarop persoonlijke toestellen, aannemers of andere organisaties werken — in AVD een eigen hostpool, bij Windows 365 een eigen provisioningbeleid met een eigen naamvoorvoegsel)",
+      "controls": {
+        "iso": [
+          "A.6.7 Werken op afstand",
+          "A.8.12 Voorkomen van datalekken",
+          "A.5.15 Toegangsbeveiliging"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 13.5 Manage Access Control for Remote Assets",
+          "CIS Controls v8.1 4.3 Configure Automatic Session Locking on Enterprise Assets"
+        ],
+        "nistcsf": [
+          "PR.AA-05",
+          "PR.DS-01",
+          "PR.DS-02"
+        ]
+      },
+      "bewijs": "Wie toegang van onbeheerde toestellen alleen via een virtuele werkplek toestaat, belooft dat er geen bedrijfsdata op dat toestel terechtkomt. Microsoft raadt voor derden en BYOD aan klembord, schijven, printers en USB op de hostpool of sessiehost af te sluiten, omdat instellingen op het toestel zelf geen vervanging zijn. De tijdslimieten volgen CIS L2: een verlaten sessie op een onbekend toestel blijft niet open staan.",
+      "universeel": "Alleen de sessiehosts of Cloud PC's voor persoonlijke toestellen en derden — in AVD een aparte hostpool. Microsoft raadt af gebruikers van verschillende organisaties op één multi-session host te zetten.",
+      "note": "Hoort samen met [Baseline] - WIN - D - Cloud PC Session Security op dezelfde hosts: deze policy zet geen enkele instelling die daar ook in staat. Zet dezelfde beperkingen ook in de RDP-eigenschappen van de hostpool (redirectclipboard:i:0, redirectprinters:i:0, camerastoredirect:s:, drivestoredirect:s:, usbdevicestoredirect:s:); de strengste instelling wint. De sessie wordt na 15 minuten zonder activiteit verbroken en 15 minuten daarna afgemeld; niet-opgeslagen werk is dan weg. Audio en microfoon blijven werken voor Teams."
     }
   ]
 }

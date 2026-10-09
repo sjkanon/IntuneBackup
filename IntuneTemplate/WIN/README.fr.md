@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 136 policies
+# Windows — 138 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 118 |
+| `SettingsCatalog/` | 120 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -29,7 +29,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 102
+## Device-scoped (D) — 104
 
 Affecter à des groupes d'appareils.
 
@@ -47,6 +47,8 @@ Affecter à des groupes d'appareils.
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.fr.md) | N'autorise en Bluetooth que les souris, claviers, casques, téléphones via Phone Link et passkeys, et bloque le transfert de fichiers, le partage de connexion et les connexions série. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.fr.md) | Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-même un paquet de récupération depuis le cloud au lieu d'attendre un technicien. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.fr.md) | Désactive les recommandations de contenu pilotées par le cloud de Windows — la partie appareil de la même policy OIB que Windows Spotlight. | Settings Catalog | 1 | All Devices |
+| [**Cloud PC External Access**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | Sur les hôtes de session et les Cloud PC destinés aux appareils personnels et aux externes, coupe le presse-papiers, les imprimantes et la caméra, déconnecte une session après 15 minutes d'inactivité et la ferme 15 minutes plus tard : ce qui se trouve sur le poste de travail virtuel y reste. | Settings Catalog | 7 | — |
+| [**Cloud PC Session Security**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | Sécurise la session sur un Cloud PC Windows 365 ou un hôte de session Azure Virtual Desktop : rien n'est copié du poste de travail virtuel vers l'appareil local, aucun périphérique COM, LPT ou USB n'est redirigé, la session est déconnectée au verrouillage, la capture d'écran depuis l'appareil local est bloquée et un filigrane avec l'ID de connexion couvre le bureau. | Settings Catalog | 19 | — |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.fr.md) | Rétablit périodiquement les paramètres modifiés localement à ce qu'Intune prescrit, afin que les bricolages manuels sur un appareil soient annulés automatiquement. | Settings Catalog | 2 | All Devices |
 | [**Cryptography**](SettingsCatalog/Baseline_WIN_D_Cryptography.fr.md) | Impose que Microsoft Edge n'établisse pas de connexions en dessous de TLS 1.2, même si un serveur le propose. | Settings Catalog | 2 | — |
 | [**Data Minimisation**](SettingsCatalog/Baseline_WIN_D_Data_Minimisation.fr.md) | Limite ce qui est inclus dans les données de diagnostic : pas de fichiers journaux supplémentaires ni de vidages mémoire vers Microsoft. | Settings Catalog | 2 | All Devices |

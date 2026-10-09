@@ -105,6 +105,40 @@
         },
         {
           "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-cloud-pc",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Cloud-PC",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Cloud-PC",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sec-cloud-pc-external",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Cloud-PC-External",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Cloud-PC-External",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#sec-ios-byod",
           "variables": {
             "intuneTemplatePackage": "[Baseline] - Baseline-SEC-iOS-BYOD",

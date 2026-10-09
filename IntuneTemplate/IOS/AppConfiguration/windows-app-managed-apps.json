@@ -1,0 +1,20 @@
+{
+  "@odata.type": "#microsoft.graph.targetedManagedAppConfiguration",
+  "displayName": "[Baseline] - IOS - Windows App - Managed Apps",
+  "description": "Windows App on every iOS device (also without enrolment): no clipboard and no files from the phone into the virtual desktop. A second layer next to the session host settings; the most restrictive of the two wins.",
+  "roleScopeTagIds": [
+    "0"
+  ],
+  "targetedAppManagementLevels": "unspecified",
+  "appGroupType": "selectedPublicApps",
+  "customSettings": [
+    {
+      "name": "redirectclipboard",
+      "value": "0"
+    },
+    {
+      "name": "drivestoredirect",
+      "value": "0"
+    }
+  ]
+}
