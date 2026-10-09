@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - AVD Session Host
 
-Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up daily inside the attached profile: OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days.
+Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up inside the attached profile (daily through the cadence in the image): OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days.
 
 | | |
 |---|---|
@@ -15,7 +15,7 @@ Signs out a disconnected session on the AVD session hosts after two hours, disco
 | Source | Own — the Remote Desktop Services session limits and the Storage Sense settings from the Settings Catalog, with values for FSLogix profile containers |
 | File | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 
-> Why cadence 1 (daily) and not 0 (when disk space is low): the C: drive of a session host never fills up, and 'low disk space' looks at that drive and not at the container — with 0 Storage Sense therefore never runs on AVD. Downloads only after thirty days, because that is real deletion; OneDrive dehydration after seven days, because the file stays online. No weekly Invoke-FslShrinkDisk or FSLShrink needed any more: the built-in compaction at sign-out (FSLogix 2210 and later) does the same at every sign-out, without a separate VM with rights on the share and without the risk of a script touching an attached container; the session limits above make sure sign-outs actually happen. FSLShrink only as an emergency measure for containers that are already large: once, outside office hours, with the hosts in drain mode. Time zone redirection (ts_time_zone) is deliberately not in here: [Baseline] - WIN - D - Cloud PC Session Security already sets it on the session hosts (group SEC-Cloud-PC). **Overlap with [Baseline] - WIN - D - Cloud PC External Access:** it sets the same two session limits to 15 minutes. On a host pool for external users both policies land and clash (Conflict: then neither limit applies); in the package model this policy cannot be excluded there on its own — see the open points in docs/AVD.md. The values are in milliseconds: 7200000 is two hours.
+> **The cadence is not in this policy.** configstoragesenseglobalcadence has no windowsMultiSession in applicability.windowsSkus in its Settings Catalog definition, so Intune does not deliver it to a multi-session host (the other five Storage Sense settings it does; verified on the host). Without a cadence Storage Sense only runs when free space on C: is low, and on a session host that never happens — Storage Sense would then never run. The AVD image therefore sets ConfigStorageSenseGlobalCadence = 1 (daily) under HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense (run-vdot.ps1 in the AVD repo). Downloads only after thirty days, because that is real deletion; OneDrive dehydration after seven days, because the file stays online. No weekly Invoke-FslShrinkDisk or FSLShrink needed any more: the built-in compaction at sign-out (FSLogix 2210 and later) does the same at every sign-out, without a separate VM with rights on the share and without the risk of a script touching an attached container; the session limits above make sure sign-outs actually happen. FSLShrink only as an emergency measure for containers that are already large: once, outside office hours, with the hosts in drain mode. Time zone redirection (ts_time_zone) is deliberately not in here: [Baseline] - WIN - D - Cloud PC Session Security already sets it on the session hosts (group SEC-Cloud-PC). **Overlap with [Baseline] - WIN - D - Cloud PC External Access:** it sets the same two session limits to 15 minutes. On a host pool for external users both policies land and clash (Conflict: then neither limit applies); in the package model this policy cannot be excluded there on its own — see the open points in docs/AVD.md. The values are in milliseconds: 7200000 is two hours.
 
 ## Standards
 
@@ -28,7 +28,7 @@ Signs out a disconnected session on the AVD session hosts after two hours, disco
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
-## Settings — 10
+## Settings — 9
 
 Indented rows are child settings: they only apply when their parent
 setting has the value shown.
@@ -41,7 +41,6 @@ setting has the value shown.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_terminalserver_ts_sessions_disconnected_timeout_2_ts_sessions_enddisconnected` | 7200000 |
 | `device_vendor_msft_policy_config_storage_allowstoragesenseglobal` | 1 |
 | `device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup` | 1 |
-| `device_vendor_msft_policy_config_storage_configstoragesenseglobalcadence` | 1 |
 | `device_vendor_msft_policy_config_storage_configstoragesensecloudcontentdehydrationthreshold` | 7 |
 | `device_vendor_msft_policy_config_storage_configstoragesenserecyclebincleanupthreshold` | 14 |
 | `device_vendor_msft_policy_config_storage_configstoragesensedownloadscleanupthreshold` | 30 |

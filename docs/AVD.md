@@ -56,6 +56,12 @@ FSLogix-policies is de CIPP-variabele `%FSLogixStorageAccount%`, die je per tena
 - **Update rings** werken niet. Updates komen met de maandelijkse image-rebuild.
 - **Apps** alleen in systeemcontext en als *Required*.
 - **Geen** Autopilot, ESP, wissen, vergrendelen op afstand of rotatie van de BitLocker-sleutel.
+- **Valkuil: VDOT schakelt pushmeldingen uit.** `-Optimizations All` van de Virtual Desktop
+  Optimization Tool zet `NoCloudApplicationNotification = 1` (*Turn off notifications network
+  usage*). Dan bereikt een Intune-push de host niet — event 404 *Cloud notifications have been turned
+  off* op `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN` — en komen nieuwe policies pas bij
+  de geplande sync. De AVD-image draait die waarde na VDOT terug en zet `dmwappushservice` op
+  automatisch.
 
 ## Hoe de filters werken
 
@@ -333,11 +339,16 @@ Conditional Access van MFA zijn uitgesloten.
 Twee instellingen werken samen om de FSLogix-containers zo klein mogelijk te houden:
 
 - **Storage Sense ruimt binnen de gekoppelde container op.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md)
-  zet het aan met eigen waarden: dagelijks (cadence 1), OneDrive-bestanden na 7 dagen alleen online
-  (geen dataverlies, de grootste winst), tijdelijke bestanden, de prullenbak na 14 dagen en Downloads
-  na 30 dagen (echte verwijdering, daarom niet korter). Cadence 0 — *bij weinig schijfruimte* —
-  werkt hier niet: de C:-schijf van een sessiehost loopt nooit vol, en Storage Sense kijkt naar die
-  schijf, niet naar de container. De fysieke `Storage Sense`-policy (cadence 0, 30 dagen) blijft
+  zet het aan met eigen waarden: OneDrive-bestanden na 7 dagen alleen online (geen dataverlies, de
+  grootste winst), tijdelijke bestanden, de prullenbak na 14 dagen en Downloads na 30 dagen (echte
+  verwijdering, daarom niet korter). **De cadence (dagelijks) zet de AVD-image, niet Intune:**
+  `configstoragesenseglobalcadence` heeft in zijn Settings Catalog-definitie geen
+  `windowsMultiSession` in `applicability.windowsSkus`, dus Intune levert hem niet aan een
+  multi-session-host (de andere vijf instellingen wel; op de host geverifieerd). De image zet
+  `HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseGlobalCadence = 1`
+  (`run-vdot.ps1` in de AVD-repo). Zonder cadence draait Storage Sense alleen bij weinig vrije ruimte
+  op C:, en die loopt op een sessiehost nooit vol — Storage Sense kijkt naar die schijf, niet naar de
+  container. De fysieke `Storage Sense`-policy (cadence 0, 30 dagen) blijft
   `fysiek`; de twee komen nooit op één apparaat.
 - **FSLogix comprimeert de container bij afmelden** (`VHD Compact Disk`, in
   [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md)

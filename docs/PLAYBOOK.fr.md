@@ -275,7 +275,15 @@ déploiement. En bref :
 - **Forcer une synchronisation sur un hôte multisession** : `deviceenroller.exe /o <enrollment-ID> /c /b`
   (l'ID d'inscription se trouve sous `HKLM\SOFTWARE\Microsoft\Enrollments`). La tâche planifiée
   *PushLaunch* n'y existe pas.
-- **Garder les profils petits.** `AVD Session Host` active Storage Sense chaque jour dans le
+- **VDOT et notifications push.** `-Optimizations All` définit `NoCloudApplicationNotification = 1` ;
+  un push Intune n'atteint alors plus l'hôte (événement 404 *Cloud notifications have been turned
+  off* sur `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN`) et les nouvelles stratégies
+  n'arrivent qu'à la synchronisation planifiée. L'image AVD rétablit cela après VDOT et met
+  `dmwappushservice` en automatique.
+- **La cadence Storage Sense est dans l'image.** Intune ne fournit pas `configstoragesenseglobalcadence`
+  au multisession (pas de `windowsMultiSession` dans la définition) ; l'image définit
+  `ConfigStorageSenseGlobalCadence = 1`. Sans elle, Storage Sense ne s'exécute jamais sur un hôte de session.
+- **Garder les profils petits.** `AVD Session Host` active Storage Sense (chaque jour via l'image) dans le
   conteneur (OneDrive en ligne uniquement après 7 jours, corbeille 14, Téléchargements 30), et FSLogix
   compacte le conteneur à chaque déconnexion (`VHD Compact Disk`). Plus de FSLShrink hebdomadaire ;
   seulement en dernier recours pour des conteneurs déjà volumineux, une seule fois et avec les hôtes en
@@ -308,4 +316,5 @@ déploiement. En bref :
 | Le filtre ne correspond pas à ce qui est attendu | règle ou propriété d'appareil différente de ce qui est supposé (modèle, SKU) | *Preview devices* sur le filtre ; par appareil l'onglet *Filter evaluation*. |
 | Un filtre ou un groupe ajouté à la main disparaît | `verifyAssignments` de CIPP gère l'affectation du paquet et la rétablit | C'est voulu : modifiez le paquet dans le dépôt (classe, phase) plutôt que le tenant. |
 | L'hôte de session ne se signale pas à Intune | pas de PushLaunch en multisession | `deviceenroller.exe /o <enrollment-ID> /c /b` sur l'hôte. |
+| Les nouvelles stratégies mettent des heures à arriver sur un hôte de session | VDOT a désactivé les notifications cloud (`NoCloudApplicationNotification = 1`, événement 404 sur `…/Push/PFN`) | Rétablir la valeur dans l'image, `dmwappushservice` en automatique. |
 | Personne ne peut se connecter à un hôte AVD | `%FSLogixStorageAccount%` non remplacé, partage injoignable ou ticket Kerberos en échec | Vérifier la variable dans CIPP ; `klist`, `frx list-redirects` ; l'application du compte de stockage exclue de la MFA. |

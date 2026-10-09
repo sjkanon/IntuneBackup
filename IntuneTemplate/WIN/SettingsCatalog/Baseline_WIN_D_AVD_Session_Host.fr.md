@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - AVD Session Host
 
-Ferme sur les hôtes de session AVD une session déconnectée après deux heures, déconnecte une session inactive depuis deux heures, et laisse Storage Sense nettoyer chaque jour dans le profil monté : fichiers OneDrive en ligne uniquement après sept jours, fichiers temporaires, la corbeille après quatorze et les Téléchargements après trente jours.
+Ferme sur les hôtes de session AVD une session déconnectée après deux heures, déconnecte une session inactive depuis deux heures, et laisse Storage Sense nettoyer dans le profil monté (chaque jour via la cadence dans l'image) : fichiers OneDrive en ligne uniquement après sept jours, fichiers temporaires, la corbeille après quatorze et les Téléchargements après trente jours.
 
 | | |
 |---|---|
@@ -15,7 +15,7 @@ Ferme sur les hôtes de session AVD une session déconnectée après deux heures
 | Source | Propre — les limites de session des services Bureau à distance et les paramètres Storage Sense du Settings Catalog, avec des valeurs pour les conteneurs de profils FSLogix |
 | Fichier | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 
-> Pourquoi une cadence 1 (quotidienne) et non 0 (en cas d'espace disque faible) : le lecteur C: d'un hôte de session ne se remplit jamais, et « espace faible » regarde ce lecteur et non le conteneur — avec 0, Storage Sense ne s'exécute donc jamais sur AVD. Les Téléchargements seulement après trente jours, car c'est une vraie suppression ; la déshydratation OneDrive après sept jours, car le fichier reste en ligne. Plus besoin d'Invoke-FslShrinkDisk ni de FSLShrink chaque semaine : la compaction intégrée à la déconnexion (FSLogix 2210 et ultérieur) fait la même chose à chaque déconnexion, sans VM séparée avec des droits sur le partage et sans risque qu'un script touche un conteneur monté ; les limites de session ci-dessus garantissent que les déconnexions ont bien lieu. FSLShrink uniquement en dernier recours pour des conteneurs déjà volumineux : une seule fois, hors heures de bureau, avec les hôtes en mode drain. La redirection du fuseau horaire (ts_time_zone) n'y figure volontairement pas : [Baseline] - WIN - D - Cloud PC Session Security la définit déjà sur les hôtes de session (groupe SEC-Cloud-PC). **Chevauchement avec [Baseline] - WIN - D - Cloud PC External Access :** elle fixe les deux mêmes limites de session à 15 minutes. Sur un pool d'hôtes pour externes, les deux stratégies arrivent et entrent en conflit (Conflict : aucune des deux limites ne s'applique) ; dans le modèle par paquets, cette stratégie ne peut pas y être exclue seule — voir les points ouverts dans docs/AVD.md. Les valeurs sont en millisecondes : 7200000 correspond à deux heures.
+> **La cadence ne figure pas dans cette stratégie.** configstoragesenseglobalcadence n'a pas windowsMultiSession dans applicability.windowsSkus de sa définition Settings Catalog : Intune ne la fournit donc pas à un hôte multisession (les cinq autres paramètres Storage Sense, si ; vérifié sur l'hôte). Sans cadence, Storage Sense ne s'exécute que lorsque l'espace libre sur C: est faible, ce qui n'arrive jamais sur un hôte de session — Storage Sense ne s'exécuterait alors jamais. L'image AVD définit donc ConfigStorageSenseGlobalCadence = 1 (quotidien) sous HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense (run-vdot.ps1 dans le dépôt AVD). Les Téléchargements seulement après trente jours, car c'est une vraie suppression ; la déshydratation OneDrive après sept jours, car le fichier reste en ligne. Plus besoin d'Invoke-FslShrinkDisk ni de FSLShrink chaque semaine : la compaction intégrée à la déconnexion (FSLogix 2210 et ultérieur) fait la même chose à chaque déconnexion, sans VM séparée avec des droits sur le partage et sans risque qu'un script touche un conteneur monté ; les limites de session ci-dessus garantissent que les déconnexions ont bien lieu. FSLShrink uniquement en dernier recours pour des conteneurs déjà volumineux : une seule fois, hors heures de bureau, avec les hôtes en mode drain. La redirection du fuseau horaire (ts_time_zone) n'y figure volontairement pas : [Baseline] - WIN - D - Cloud PC Session Security la définit déjà sur les hôtes de session (groupe SEC-Cloud-PC). **Chevauchement avec [Baseline] - WIN - D - Cloud PC External Access :** elle fixe les deux mêmes limites de session à 15 minutes. Sur un pool d'hôtes pour externes, les deux stratégies arrivent et entrent en conflit (Conflict : aucune des deux limites ne s'applique) ; dans le modèle par paquets, cette stratégie ne peut pas y être exclue seule — voir les points ouverts dans docs/AVD.md. Les valeurs sont en millisecondes : 7200000 correspond à deux heures.
 
 ## Normes
 
@@ -28,7 +28,7 @@ Ferme sur les hôtes de session AVD une session déconnectée après deux heures
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
-## Paramètres — 10
+## Paramètres — 9
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le
 paramètre parent a la valeur indiquée.
@@ -41,7 +41,6 @@ paramètre parent a la valeur indiquée.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_terminalserver_ts_sessions_disconnected_timeout_2_ts_sessions_enddisconnected` | 7200000 |
 | `device_vendor_msft_policy_config_storage_allowstoragesenseglobal` | 1 |
 | `device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup` | 1 |
-| `device_vendor_msft_policy_config_storage_configstoragesenseglobalcadence` | 1 |
 | `device_vendor_msft_policy_config_storage_configstoragesensecloudcontentdehydrationthreshold` | 7 |
 | `device_vendor_msft_policy_config_storage_configstoragesenserecyclebincleanupthreshold` | 14 |
 | `device_vendor_msft_policy_config_storage_configstoragesensedownloadscleanupthreshold` | 30 |

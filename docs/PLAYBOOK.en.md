@@ -263,7 +263,14 @@ plan. In short:
 - **Force a sync on a multi-session host**: `deviceenroller.exe /o <enrollment-ID> /c /b` (the
   enrollment ID is under `HKLM\SOFTWARE\Microsoft\Enrollments`). The scheduled task *PushLaunch*
   does not exist there.
-- **Keeping profiles small.** `AVD Session Host` turns Storage Sense on daily inside the container
+- **VDOT and push notifications.** `-Optimizations All` sets `NoCloudApplicationNotification = 1`;
+  an Intune push then does not reach the host (event 404 *Cloud notifications have been turned off*
+  on `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN`) and new policies only arrive at the
+  scheduled sync. The AVD image reverts that after VDOT and sets `dmwappushservice` to automatic.
+- **Storage Sense cadence is in the image.** Intune does not deliver `configstoragesenseglobalcadence`
+  to multi-session (no `windowsMultiSession` in the definition); the image sets
+  `ConfigStorageSenseGlobalCadence = 1`. Without it Storage Sense never runs on a session host.
+- **Keeping profiles small.** `AVD Session Host` turns Storage Sense on inside the container (daily through the image)
   (OneDrive online-only after 7 days, recycle bin 14, Downloads 30), and FSLogix compacts the
   container at every sign-out (`VHD Compact Disk`). No more weekly FSLShrink; only as an emergency
   measure for containers that are already large, once and with the hosts in drain mode. See
@@ -296,4 +303,5 @@ plan. In short:
 | Filter does not match what you expect | rule or device property other than assumed (model, SKU) | *Preview devices* on the filter; per device the *Filter evaluation* tab. |
 | A hand-set filter or extra group disappears | CIPP `verifyAssignments` manages the package's assignment and puts it back | That is intended: change the package in the repo (class, phase) instead of the tenant. |
 | Session host does not check in with Intune | no PushLaunch on multi-session | `deviceenroller.exe /o <enrollment-ID> /c /b` on the host. |
+| New policies take hours to reach a session host | VDOT turned cloud notifications off (`NoCloudApplicationNotification = 1`, event 404 on `…/Push/PFN`) | Revert the value in the image, `dmwappushservice` to automatic. |
 | Nobody can sign in to an AVD host | `%FSLogixStorageAccount%` not replaced, share unreachable or Kerberos ticket failing | Check the variable in CIPP; `klist`, `frx list-redirects`; the storage account app excluded from MFA. |

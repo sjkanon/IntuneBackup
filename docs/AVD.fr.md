@@ -60,6 +60,12 @@ stratégies FSLogix est la variable CIPP `%FSLogixStorageAccount%`, à définir 
   mensuelle de l'image.
 - **Applications** uniquement en contexte système et en *Required*.
 - **Pas** d'Autopilot, d'ESP, d'effacement, de verrouillage à distance ni de rotation de la clé BitLocker.
+- **Piège : VDOT désactive les notifications push.** `-Optimizations All` du Virtual Desktop
+  Optimization Tool définit `NoCloudApplicationNotification = 1` (*Turn off notifications network
+  usage*). Un push Intune n'atteint alors plus l'hôte — événement 404 *Cloud notifications have been
+  turned off* sur `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN` — et les nouvelles
+  stratégies n'arrivent qu'à la synchronisation planifiée. L'image AVD rétablit cette valeur après
+  VDOT et met `dmwappushservice` en automatique.
 
 ## Fonctionnement des filtres
 
@@ -338,11 +344,16 @@ l'application du compte de stockage doit être exclue de la MFA dans l'accès co
 Deux paramètres travaillent ensemble pour garder les conteneurs FSLogix aussi petits que possible :
 
 - **Storage Sense nettoie à l'intérieur du conteneur monté.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md)
-  l'active avec ses propres valeurs : chaque jour (cadence 1), fichiers OneDrive en ligne uniquement
-  après 7 jours (sans perte de données, le gain le plus important), fichiers temporaires, la corbeille
-  après 14 jours et les Téléchargements après 30 jours (vraie suppression, donc pas plus court). La
-  cadence 0 — *quand l'espace disque est faible* — ne fonctionne pas ici : le lecteur C: d'un hôte de
-  session ne se remplit jamais, et Storage Sense regarde ce lecteur, pas le conteneur. La stratégie
+  l'active avec ses propres valeurs : fichiers OneDrive en ligne uniquement après 7 jours (sans perte
+  de données, le gain le plus important), fichiers temporaires, la corbeille après 14 jours et les
+  Téléchargements après 30 jours (vraie suppression, donc pas plus court). **La cadence (quotidienne)
+  est définie par l'image AVD, pas par Intune :** `configstoragesenseglobalcadence` n'a pas
+  `windowsMultiSession` dans `applicability.windowsSkus` de sa définition Settings Catalog, Intune ne
+  la fournit donc pas à un hôte multisession (les cinq autres paramètres, si ; vérifié sur l'hôte).
+  L'image définit `HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseGlobalCadence = 1`
+  (`run-vdot.ps1` dans le dépôt AVD). Sans cadence, Storage Sense ne s'exécute que lorsque l'espace
+  libre sur C: est faible, ce qui n'arrive jamais sur un hôte de session — Storage Sense regarde ce
+  lecteur, pas le conteneur. La stratégie
   physique `Storage Sense` (cadence 0, 30 jours) reste `fysiek` ; les deux ne se retrouvent jamais sur
   un même appareil.
 - **FSLogix compacte le conteneur à la déconnexion** (`VHD Compact Disk`, explicitement activé dans

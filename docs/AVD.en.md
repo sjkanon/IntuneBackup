@@ -57,6 +57,12 @@ policies is the CIPP variable `%FSLogixStorageAccount%`, which you set per tenan
 - **Update rings** do not work. Updates come with the monthly image rebuild.
 - **Apps** only in system context and as *Required*.
 - **No** Autopilot, ESP, wipe, remote lock or BitLocker key rotation.
+- **Pitfall: VDOT turns push notifications off.** `-Optimizations All` of the Virtual Desktop
+  Optimization Tool sets `NoCloudApplicationNotification = 1` (*Turn off notifications network
+  usage*). An Intune push then does not reach the host — event 404 *Cloud notifications have been
+  turned off* on `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN` — and new policies only
+  arrive at the scheduled sync. The AVD image reverts that value after VDOT and sets
+  `dmwappushservice` to automatic.
 
 ## How the filters work
 
@@ -334,10 +340,15 @@ Conditional Access.
 Two settings work together to keep the FSLogix containers as small as possible:
 
 - **Storage Sense cleans up inside the attached container.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md)
-  turns it on with values of its own: daily (cadence 1), OneDrive files online-only after 7 days (no
-  data loss, the biggest gain), temporary files, the recycle bin after 14 days and Downloads after 30
-  days (real deletion, hence not shorter). Cadence 0 — *when disk space is low* — does not work
-  here: a session host's C: drive never fills up, and Storage Sense looks at that drive, not at the
+  turns it on with values of its own: OneDrive files online-only after 7 days (no data loss, the
+  biggest gain), temporary files, the recycle bin after 14 days and Downloads after 30 days (real
+  deletion, hence not shorter). **The cadence (daily) is set by the AVD image, not by Intune:**
+  `configstoragesenseglobalcadence` has no `windowsMultiSession` in `applicability.windowsSkus` in its
+  Settings Catalog definition, so Intune does not deliver it to a multi-session host (the other five
+  settings it does; verified on the host). The image sets
+  `HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseGlobalCadence = 1`
+  (`run-vdot.ps1` in the AVD repo). Without a cadence Storage Sense only runs when free space on C: is
+  low, and on a session host that never happens — Storage Sense looks at that drive, not at the
   container. The physical `Storage Sense` policy (cadence 0, 30 days) stays `fysiek`; the two never
   meet on one device.
 - **FSLogix compacts the container at sign-out** (`VHD Compact Disk`, explicitly enabled in

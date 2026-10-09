@@ -264,7 +264,14 @@ Zie [AVD.md](AVD.md) voor de indeling per policy, de FSLogix-aanpak en het uitro
 - **Sync forceren op een multi-session-host**: `deviceenroller.exe /o <enrollment-ID> /c /b`
   (het enrollment-ID staat onder `HKLM\SOFTWARE\Microsoft\Enrollments`). De geplande taak
   *PushLaunch* bestaat daar niet.
-- **Profielen klein houden.** `AVD Session Host` zet Storage Sense dagelijks aan binnen de container
+- **VDOT en pushmeldingen.** `-Optimizations All` zet `NoCloudApplicationNotification = 1`; dan
+  bereikt een Intune-push de host niet (event 404 *Cloud notifications have been turned off* op
+  `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN`) en komen nieuwe policies pas bij de
+  geplande sync. De AVD-image draait dat na VDOT terug en zet `dmwappushservice` op automatisch.
+- **Storage Sense-cadence staat in de image.** Intune levert `configstoragesenseglobalcadence` niet
+  aan multi-session (geen `windowsMultiSession` in de definitie); de image zet
+  `ConfigStorageSenseGlobalCadence = 1`. Zonder draait Storage Sense op een sessiehost nooit.
+- **Profielen klein houden.** `AVD Session Host` zet Storage Sense aan binnen de container (dagelijks via de image)
   (OneDrive na 7 dagen online-only, prullenbak 14, Downloads 30), en FSLogix comprimeert de container
   bij elke afmelding (`VHD Compact Disk`). Geen wekelijkse FSLShrink meer; alleen als noodmiddel voor
   containers die al groot zijn, eenmalig en met de hosts in drain mode. Zie
@@ -297,4 +304,5 @@ Zie [AVD.md](AVD.md) voor de indeling per policy, de FSLogix-aanpak en het uitro
 | Filter matcht niet wat je verwacht | regel of apparaateigenschap anders dan gedacht (model, SKU) | *Preview devices* op het filter; per apparaat het tabblad *Filter evaluation*. |
 | Een met de hand gezet filter of extra groep verdwijnt | CIPP `verifyAssignments` beheert de toewijzing van het pakket en zet hem terug | Dat is de bedoeling: wijzig het pakket in de repo (doelgroep, fase) in plaats van de tenant. |
 | Sessiehost meldt zich niet bij Intune | geen PushLaunch op multi-session | `deviceenroller.exe /o <enrollment-ID> /c /b` op de host. |
+| Nieuwe policies komen pas na uren op een sessiehost | VDOT heeft cloudmeldingen uitgezet (`NoCloudApplicationNotification = 1`, event 404 op `…/Push/PFN`) | Waarde terugdraaien in de image, `dmwappushservice` op automatisch. |
 | Niemand kan aanmelden op een AVD-host | `%FSLogixStorageAccount%` niet vervangen, share onbereikbaar of Kerberos-ticket mislukt | Variabele in CIPP controleren; `klist`, `frx list-redirects`; de app van het opslagaccount uitgesloten van MFA. |
