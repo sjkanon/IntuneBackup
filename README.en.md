@@ -8,11 +8,11 @@ largely from [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntun
 (Windows v4.0, macOS v1.0, BYOD), supplemented with what this baseline covers on top of that. Windows v4.0 was
 adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#round-oib-windows-v40-14-september-2026).
 
-201 policies across four platforms:
+203 policies across four platforms:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.en.md) | 118 | 1 | 6 | 11 | – | **136** |
+| [Windows](IntuneTemplate/WIN/README.en.md) | 120 | 1 | 6 | 11 | – | **138** |
 | [macOS](IntuneTemplate/MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#ro
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>201 policies<br/><i>the source</i>"]
+  T["<b>IntuneTemplate/</b><br/>203 policies<br/><i>the source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune tenant")]
 
@@ -316,7 +316,7 @@ profiles, update ring 3 and Windows 365) — with the reason, in `"excluded"` in
 ## Restoring into a tenant
 
 **Via CIPP:** point the template repository at this repository. All five `.Type` values
-correspond to a `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. After the sync the 201
+correspond to a `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. After the sync the 203
 templates are in CIPP under Tenant Administration → Templates.
 
 ### Deploying via a CIPP baseline
@@ -365,7 +365,7 @@ Note where the restore export lives: `export/**NativeImport**/IntuneBackupAndRes
 word in the path is not a description but an exclusion. CIPP fetches the file list with
 `git/trees?recursive=1` and ignores exactly two things: files that do not end in `.json`,
 and paths containing `NativeImport`. There is no subfolder setting. Without that word
-CIPP would *also* import those 304 JSON files — the same 201 policies plus their 102 assignments and the
+CIPP would *also* import those 306 JSON files — the same 203 policies plus their 102 assignments and the
 ADE profile that came along, but without a `RowKey`, from which CIPP would then make a **second** template
 with the same name and its own GUID.
 OpenIntuneBaseline uses the same folder for the same reason.

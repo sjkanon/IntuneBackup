@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 136 policies
+# Windows — 138 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 118 |
+| `SettingsCatalog/` | 120 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -29,7 +29,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 102
+## Device-scoped (D) — 104
 
 Assign to device groups.
 
@@ -47,6 +47,8 @@ Assign to device groups.
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) | Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) | Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.en.md) | Turns off Windows' cloud-driven content recommendations — the device part of the same OIB policy as Windows Spotlight. | Settings Catalog | 1 | All Devices |
+| [**Cloud PC External Access**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) | On session hosts and Cloud PCs for personal devices and external users, shuts off the clipboard, printers and camera, disconnects a session after 15 minutes without activity and signs it out 15 minutes later: what is on the virtual desktop stays there. | Settings Catalog | 7 | — |
+| [**Cloud PC Session Security**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) | Secures the session on a Windows 365 Cloud PC or Azure Virtual Desktop session host: nothing copied from the virtual desktop to the local device, no COM, LPT or USB devices redirected, the session disconnected on lock, screen capture from the local device blocked and a watermark with the connection ID across the desktop. | Settings Catalog | 19 | — |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.en.md) | Periodically resets locally changed settings to what Intune prescribes, so that manual tampering on a device is undone automatically. | Settings Catalog | 2 | All Devices |
 | [**Cryptography**](SettingsCatalog/Baseline_WIN_D_Cryptography.en.md) | Enforces that Microsoft Edge does not set up connections below TLS 1.2, even if a server offers it. | Settings Catalog | 2 | — |
 | [**Data Minimisation**](SettingsCatalog/Baseline_WIN_D_Data_Minimisation.en.md) | Limits what goes into the diagnostic data: no additional log files and no memory dumps to Microsoft. | Settings Catalog | 2 | All Devices |

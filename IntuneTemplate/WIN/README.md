@@ -2,13 +2,13 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 136 policies
+# Windows — 138 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 118 |
+| `SettingsCatalog/` | 120 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -29,7 +29,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 102
+## Device-scoped (D) — 104
 
 Toewijzen aan apparaatgroepen.
 
@@ -47,6 +47,8 @@ Toewijzen aan apparaatgroepen.
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.md) | Staat over Bluetooth alleen muizen, toetsenborden, headsets, telefoons via Phone Link en passkeys toe, en sluit bestandsoverdracht, tethering en seriële verbindingen af. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.md) | Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten. | Settings Catalog | 4 | All Devices |
 | [**Cloud Optimized Content**](SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.md) | Zet de cloudgestuurde inhoudsaanbevelingen van Windows uit — het apparaatdeel van dezelfde OIB-policy als Windows Spotlight. | Settings Catalog | 1 | All Devices |
+| [**Cloud PC External Access**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | Sluit op sessiehosts en Cloud PC's voor persoonlijke toestellen en externen het klembord, printers en camera af, en verbreekt een sessie na 15 minuten zonder activiteit en meldt hem 15 minuten later af: wat op de virtuele werkplek staat blijft daar. | Settings Catalog | 7 | — |
+| [**Cloud PC Session Security**](SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.md) | Beveiligt de sessie op een Windows 365 Cloud PC of Azure Virtual Desktop-sessiehost: niets kopiëren van de virtuele werkplek naar het lokale toestel, geen COM-, LPT- of USB-apparaten doorsturen, de sessie verbreken bij vergrendelen, schermopname vanaf het lokale toestel blokkeren en een watermerk met het verbindings-ID over het bureaublad. | Settings Catalog | 19 | — |
 | [**Config Refresh**](SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) | Zet lokaal gewijzigde instellingen periodiek terug naar wat Intune voorschrijft, zodat handmatig geknoei op een apparaat vanzelf ongedaan wordt gemaakt. | Settings Catalog | 2 | All Devices |
 | [**Cryptography**](SettingsCatalog/Baseline_WIN_D_Cryptography.md) | Dwingt af dat Microsoft Edge geen verbindingen onder TLS 1.2 opzet, ook niet als een server dat aanbiedt. | Settings Catalog | 2 | — |
 | [**Data Minimisation**](SettingsCatalog/Baseline_WIN_D_Data_Minimisation.md) | Beperkt wat er in de diagnostische gegevens meegaat: geen aanvullende logbestanden en geen geheugendumps naar Microsoft. | Settings Catalog | 2 | All Devices |

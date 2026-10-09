@@ -36,7 +36,7 @@ et le statut par appareil de chaque policy citée ci-dessous.
 
 ## Résumé
 
-### Policies par phase — 201 policies Intune
+### Policies par phase — 203 policies Intune
 
 Seule la phase 1 est affectée à tous les appareils ou utilisateurs et compte comme imposée. Le reste
 n'est volontairement pas encore déployé ; la raison pour chaque policy figure dans [Choix de l'organisation et risques résiduels](#choix-de-lorganisation-et-risques-résiduels).
@@ -46,9 +46,9 @@ n'est volontairement pas encore déployé ; la raison pour chaque policy figure 
 | 1 — Immédiat | 81 | 19 | 1 | 1 | **102** |
 | 2 — Pilote | 31 | 9 | – | 2 | **42** |
 | 3 — En attente d'un prérequis | 5 | 3 | 8 | 10 | **26** |
-| 4 — Groupe dédié | 7 | 4 | 4 | 1 | **16** |
+| 4 — Groupe dédié | 9 | 4 | 4 | 1 | **18** |
 | 5 — Ne pas déployer | 12 | 2 | 1 | – | **15** |
-| **Total** | **136** | **37** | **14** | **14** | **201** |
+| **Total** | **138** | **37** | **14** | **14** | **203** |
 
 Affectées selon `_assignments.json` : 102 (doit être égal à la phase 1 : 102).
 
@@ -60,9 +60,9 @@ Colonnes : si, selon le vocabulaire, la mesure peut être mise en œuvre par une
 | Status | Technique (10) | Partiel (37) | Organisationnel (46) | Total |
 |---|---:|---:|---:|---:|
 | ● Couvert (phase 1) | 10 | 21 | 0 | **31** |
-| ◐ Seulement pilote, en attente ou groupe dédié | 0 | 3 | 1 | **4** |
+| ◐ Seulement pilote, en attente ou groupe dédié | 0 | 4 | 1 | **5** |
 | ▢ Organisationnel | 0 | 0 | 45 | **45** |
-| ○ Aucune mesure technique dans la baseline | 0 | 13 | 0 | **13** |
+| ○ Aucune mesure technique dans la baseline | 0 | 12 | 0 | **12** |
 
 ### NIS2 art. 21(2)
 
@@ -78,7 +78,7 @@ Nombre de policies qui mettent en œuvre le point sur le plan technique. Aucun p
 | [(f)](#art-212f-évaluation-de-lefficacité) évaluation de l'efficacité | 13 | s.o. | 2 |
 | [(g)](#art-212g-pratiques-de-base-en-matière-de-cyberhygiène-et-formation-à-la-cybersécurité) pratiques de base en matière de cyberhygiène et formation à la cybersécurité | 1 | s.o. | 2 |
 | [(h)](#art-212h-cryptographie-et-chiffrement) cryptographie et chiffrement | 8 | s.o. | 7 |
-| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 22 | s.o. | 38 |
+| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 22 | s.o. | 40 |
 | [(j)](#art-212j-authentification-à-plusieurs-facteurs-et-communications-sécurisées) authentification à plusieurs facteurs et communications sécurisées | 3 | s.o. | 7 |
 
 ### CIS Controls v8.1 et NIST CSF 2.0
@@ -117,7 +117,7 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | **A.5.12** Classification des informations | organisationnel | ▢ Organisationnel | – | – | Définir un schéma de classification ; les étiquettes techniques (Purview) sont hors du périmètre de cette baseline. |
 | **A.5.13** Marquage des informations | organisationnel | ▢ Organisationnel | – | – | Procédure et outils de marquage (étiquettes de confidentialité Purview) — hors du périmètre de cette baseline. |
 | [**A.5.14** Transfert des informations](#a514-transfert-des-informations) | partiel | ● Couvert (phase 1) | 1 | 1 | Règles de transfert d'informations avec des tiers (messagerie, liens de partage, comptes invités) ; la technique restreint les canaux sur l'appareil. |
-| [**A.5.15** Contrôle d'accès](#a515-contrôle-daccès) | technique | ● Couvert (phase 1) | 3 | 9 | Établir une politique d'accès (qui peut accéder à quoi, dans quelles conditions) ; Conditional Access et les policies d'appareil l'appliquent. |
+| [**A.5.15** Contrôle d'accès](#a515-contrôle-daccès) | technique | ● Couvert (phase 1) | 3 | 10 | Établir une politique d'accès (qui peut accéder à quoi, dans quelles conditions) ; Conditional Access et les policies d'appareil l'appliquent. |
 | [**A.5.16** Gestion des identités](#a516-gestion-des-identités) | partiel | ● Couvert (phase 1) | 2 | – | Relier le cycle de vie des identités (arrivées, mobilités, départs) aux RH ; enregistrer les comptes partagés et de service. |
 | [**A.5.17** Informations d'authentification](#a517-informations-dauthentification) | technique | ● Couvert (phase 1) | 12 | 19 | Former les utilisateurs à la gestion des mots de passe, codes PIN et codes de récupération ; processus de délivrance des codes d'accès temporaires. |
 | **A.5.18** Droits d'accès | partiel | ○ Aucune mesure technique dans la baseline | – | – | Attribution, revue périodique (access reviews) et révocation des droits ; CA applique des conditions mais ne revoit pas les droits. |
@@ -151,7 +151,7 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | **A.6.4** Processus disciplinaire | organisationnel | ▢ Organisationnel | – | – | Procédure formelle en cas de violation de la politique. |
 | **A.6.5** Responsabilités après la fin ou le changement d'un emploi | partiel | ○ Aucune mesure technique dans la baseline | – | – | Processus de départ : révoquer les accès, restituer l'appareil ou l'effacer de manière sélective, confidentialité après le départ. |
 | **A.6.6** Accords de confidentialité ou de non-divulgation | organisationnel | ▢ Organisationnel | – | – | Rédiger des accords de confidentialité et les faire signer. |
-| **A.6.7** Travail à distance | partiel | ○ Aucune mesure technique dans la baseline | – | – | Politique de télétravail (lieu, écrans, réseaux) ; la technique protège l'appareil et l'accès. |
+| [**A.6.7** Travail à distance](#a67-travail-à-distance) | partiel | ◐ Seulement pilote, en attente ou groupe dédié | – | 2 | Politique de télétravail (lieu, écrans, réseaux) ; la technique protège l'appareil et l'accès. |
 | **A.6.8** Déclaration des événements liés à la sécurité de l'information | organisationnel | ▢ Organisationnel | – | – | Mettre en place un canal de signalement pour les collaborateurs et le faire connaître. |
 
 ### 7 Mesures physiques
@@ -177,7 +177,7 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 
 | Mesure | Réalisable | Statut | Phase 1 | Autres | Ce qui reste nécessaire sur le plan organisationnel |
 |---|---|---|---:|---:|---|
-| [**A.8.1** Terminaux finaux des utilisateurs](#a81-terminaux-finaux-des-utilisateurs) | technique | ● Couvert (phase 1) | 19 | 34 | Politique relative aux appareils professionnels et personnels (BYOD), enregistrement et règles d'utilisation. |
+| [**A.8.1** Terminaux finaux des utilisateurs](#a81-terminaux-finaux-des-utilisateurs) | technique | ● Couvert (phase 1) | 19 | 35 | Politique relative aux appareils professionnels et personnels (BYOD), enregistrement et règles d'utilisation. |
 | [**A.8.2** Droits d'accès privilégiés](#a82-droits-daccès-privilégiés) | technique | ● Couvert (phase 1) | 6 | 3 | Processus d'attribution et de revue périodique des droits d'administration (PIM, access reviews). |
 | [**A.8.3** Restriction d'accès à l'information](#a83-restriction-daccès-à-linformation) | partiel | ● Couvert (phase 1) | 1 | 1 | Matrice d'autorisations et droits sur les données (SharePoint/Teams) — en grande partie hors de cette baseline. |
 | **A.8.4** Accès aux codes source | organisationnel | ▢ Organisationnel | – | – | Uniquement en cas de développement logiciel interne : gérer l'accès aux dépôts et aux outils de développement. |
@@ -188,7 +188,7 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | [**A.8.9** Gestion de la configuration](#a89-gestion-de-la-configuration) | partiel | ● Couvert (phase 1) | 18 | 10 | Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. |
 | **A.8.10** Suppression des informations | partiel | ○ Aucune mesure technique dans la baseline | – | – | Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. |
 | [**A.8.11** Masquage des données](#a811-masquage-des-données) | partiel | ◐ Seulement pilote, en attente ou groupe dédié | – | 1 | Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. |
-| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 13 | 15 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
+| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 13 | 17 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
 | [**A.8.13** Sauvegarde des informations](#a813-sauvegarde-des-informations) | partiel | ● Couvert (phase 1) | 3 | – | Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. |
 | **A.8.14** Redondance des moyens de traitement de l'information | organisationnel | ▢ Organisationnel | – | – | Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. |
 | [**A.8.15** Journalisation](#a815-journalisation) | partiel | ● Couvert (phase 1) | 6 | 2 | Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. |
@@ -258,6 +258,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`IOS - U - Compliance Defender for Endpoint`](../IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Defender_for_Endpoint.fr.md) (phase 3)
 - [`IOS - U - Compliance Device Health`](../IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Device_Health.fr.md) (phase 3)
 - [`WIN - U - Compliance Defender for Endpoint Risk`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md) (phase 3)
+- [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) (phase 4)
 
 #### A.5.16 Gestion des identités
 
@@ -333,6 +334,11 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`MAC - D - Apple Intelligence Permitted`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.fr.md) (phase 5)
 - [`WIN - D - Windows AI Features Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.fr.md) (phase 5)
 - [`WIN - D - Windows AI Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.fr.md) (phase 5)
+
+#### A.6.7 Travail à distance
+
+- [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) (phase 4)
+- [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) (phase 4)
 
 #### A.7.7 Bureau propre et écran vide
 
@@ -413,6 +419,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`IOS - D - Restrictions Corporate`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.fr.md) (phase 4)
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.fr.md) (phase 4)
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.fr.md) (phase 4)
+- [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) (phase 4)
 - [`WIN - D - Wireless Shared Devices`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.fr.md) (phase 4)
 - [`MAC - D - Apple Intelligence Permitted`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.fr.md) (phase 5)
 - [`WIN - D - Windows AI Features Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.fr.md) (phase 5)
@@ -618,6 +625,8 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`IOS - D - Apple Intelligence Restricted`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.fr.md) (phase 3)
 - [`IOS - D - Data Protection`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.fr.md) (phase 3)
 - [`WIN - D - Windows AI Recall Boundaries`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Recall_Boundaries.fr.md) (phase 3)
+- [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) (phase 4)
+- [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) (phase 4)
 - [`IOS - D - Apple Intelligence Permitted`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.fr.md) (phase 5)
 - [`MAC - D - External Storage Read Only`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.fr.md) (phase 5)
 
@@ -1129,7 +1138,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.fr.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.fr.md) (phase 1)
 
-**Préparé — pilote, en attente ou groupe dédié (38)**
+**Préparé — pilote, en attente ou groupe dédié (40)**
 
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.fr.md) (phase 2)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.fr.md) (phase 2)
@@ -1168,6 +1177,8 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`IOS - D - Restrictions Corporate`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.fr.md) (phase 4)
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.fr.md) (phase 4)
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.fr.md) (phase 4)
+- [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) (phase 4)
+- [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) (phase 4)
 - [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.fr.md) (phase 4)
 
 **Alternative, non déployée (1)**: `MAC - D - External Storage Read Only`
@@ -1246,7 +1257,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 |---|---|---|---|---|
 | **3.1** Establish and Maintain a Data Management Process | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **3.2** Establish and Maintain a Data Inventory | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
-| **3.3** Configure Data Access Control Lists | IG1 | technique | ● Couvert (phase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `MAC - D - External Storage Read Only` |
+| **3.3** Configure Data Access Control Lists | IG1 | technique | ● Couvert (phase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `WIN - D - Cloud PC Session Security`, `MAC - D - External Storage Read Only` |
 | **3.4** Enforce Data Retention | IG1 | technique | ◐ Seulement pilote, en attente ou groupe dédié | `WIN - D - Windows AI Recall Boundaries` |
 | **3.5** Securely Dispose of Data | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **3.6** Encrypt Data on End-User Devices | IG1 | technique | ● Couvert (phase 1) | `AND - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - U - Compliance BitLocker`, `WIN - U - Personal Data Encryption`, `MAC - D - FileVault` et 3 de plus |
@@ -1265,7 +1276,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 |---|---|---|---|---|
 | **4.1** Establish and Maintain a Secure Configuration Process | IG1 | organisationnel | ● Couvert (phase 1) | `WIN - D - Config Refresh`, `WIN - D - Internet Explorer Legacy`, `WIN - D - Legacy Hardening`, `WIN - D - Local Security Policies`, `WIN - D - Login and Lock Screen`, `WIN - D - Microsoft Edge Security` et 25 de plus |
 | **4.2** Establish and Maintain a Secure Configuration Process for Network Infrastructure | IG1 | organisationnel | ▢ Organisationnel | — |
-| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technique | ● Couvert (phase 1) | `MAC - U - Compliance Password`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `MAC - D - Passcode and Screen Lock`, `MAC - D - Screensaver`, `AND - U - Compliance Corporate Password` et 5 de plus |
+| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technique | ● Couvert (phase 1) | `MAC - U - Compliance Password`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `MAC - D - Passcode and Screen Lock`, `MAC - D - Screensaver`, `AND - U - Compliance Corporate Password` et 6 de plus |
 | **4.4** Implement and Manage a Firewall on Servers | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
@@ -1384,7 +1395,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 | **13.2** Deploy a Host-Based Intrusion Detection Solution | IG2 | technique | ● Couvert (phase 1) | `MAC - D - Defender for Endpoint`, `WIN - D - Defender EDR Policy`, `WIN - D - Defender for Endpoint EDR` |
 | **13.3** Deploy a Network Intrusion Detection Solution | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **13.4** Perform Traffic Filtering Between Network Segments | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
-| **13.5** Manage Access Control for Remote Assets | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
+| **13.5** Manage Access Control for Remote Assets | IG2 | technique | ◐ Seulement pilote, en attente ou groupe dédié | `WIN - D - Cloud PC External Access`, `WIN - D - Cloud PC Session Security` |
 | **13.6** Collect Network Traffic Flow Logs | IG2 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **13.7** Deploy a Host-Based Intrusion Prevention Solution | IG3 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **13.8** Deploy a Network Intrusion Prevention Solution | IG3 | technique | ○ Aucune mesure technique dans la baseline | — |
@@ -1477,10 +1488,10 @@ est organisationnel par définition : aucune policy ne le met en œuvre, cette b
 | **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ Aucune mesure technique dans la baseline | — |
 | **PR.AA-03** | Users, services, and hardware are authenticated | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - Device Lock` et 25 de plus |
 | **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Couvert (phase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
-| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Couvert (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` et 6 de plus |
+| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Couvert (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock`, `WIN - D - Administrator Protection` et 8 de plus |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Aucune mesure technique dans la baseline | — |
-| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` et 13 de plus |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` et 14 de plus |
+| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` et 15 de plus |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry`, `WIN - D - Remote Desktop and RPC` et 16 de plus |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Couvert (phase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
 | **PR.PS-01** | Configuration management practices are established and applied | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - Cloud Optimized Content` et 54 de plus |
@@ -1554,7 +1565,7 @@ variantes en même temps produit un Conflit dans Intune, après quoi aucune des 
 | [`WIN - U - Microsoft Outlook Cached Mode Default`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.fr.md) | Alternative à la variante Managed, pour une organisation qui souhaite bien mettre en cache les boîtes aux lettres partagées. Affectez-en une, jamais deux — elles définissent le même paramètre et produisent ensemble un Conflict. | A.8.9 |
 | [`WIN - U - Microsoft Outlook Cached Mode Off`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.fr.md) | Alternative à la variante Managed, pour les appareils partagés sans profil conservé. Affectez-en une, jamais deux — elles définissent le même paramètre avec une valeur différente et produisent ensemble un Conflict, après quoi aucune des deux n'est appliquée. | A.8.1, A.8.9 |
 
-### B. Groupe dédié — phase 4 (16)
+### B. Groupe dédié — phase 4 (18)
 
 Va sur un groupe spécifique. Décision : ce groupe existe-t-il, qui en fait partie et qui gère l'appartenance.
 
@@ -1569,6 +1580,8 @@ Va sur un groupe spécifique. Décision : ce groupe existe-t-il, qui en fait par
 | [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.fr.md) | **Jeton ADE (choisissez l'un des deux profils par jeton — un profil d'inscription macOS est lié à un jeton ADE, pas à un groupe Entra)** — Alternative au profil d'inscription administrateur ; ils diffèrent d'exactement un paramètre. | A.5.9, A.8.1, A.8.2 |
 | [`MAC - D - Privacy Preferences`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Privacy_Preferences.fr.md) | **SEC-Remote-Support-macOS (Mac sur lesquels tourne NinjaOne ou TeamViewer)** — Concerne deux outils d'assistance à distance précis, NinjaOne et TeamViewer, et pas toutes les organisations. L'affecter à un Mac sans ces outils n'a aucun effet ; l'affecter là où se trouve une autre installation de TeamViewer donne bel et bien des droits à celle-ci sans que personne n'approuve quoi que ce soit. Si l'organisation utilise d'autres outils, remplacez les bundle IDs et les code requirements au lieu d'affecter cette policy. | A.8.18 |
 | [`MAC - D - Screen Recording`](../IntuneTemplate/MAC/DeviceConfigurations/Baseline_MAC_D_Screen_Recording.fr.md) | **SEC-Remote-Support-macOS (Mac sur lesquels tourne NinjaOne ou TeamViewer)** — Concerne deux outils d'assistance à distance précis, NinjaOne et TeamViewer, et pas toutes les organisations. L'affecter à un Mac sans ces outils n'a aucun effet ; l'affecter là où se trouve une autre installation de TeamViewer donne bel et bien des droits à celle-ci sans que personne n'approuve quoi que ce soit. Si l'organisation utilise d'autres outils, remplacez les bundle IDs et les code requirements au lieu d'affecter cette policy. | A.8.18 |
+| [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | **SEC-Cloud-PC-External (groupe d'appareils contenant uniquement les hôtes de session ou Cloud PC utilisés par des appareils personnels, des sous-traitants ou d'autres organisations — dans AVD un pool d'hôtes distinct, dans Windows 365 une stratégie d'approvisionnement distincte avec son propre préfixe de nom)** — Uniquement pour le poste de travail virtuel utilisé par des appareils non gérés et des tiers. Pour le personnel interne sur un appareil géré, l'absence de presse-papiers et d'imprimante est une restriction inutile. | A.5.15, A.6.7, A.8.12 |
+| [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | **SEC-Cloud-PC (groupe d'appareils dynamique avec les Cloud PC Windows 365 et les hôtes de session Azure Virtual Desktop : (device.deviceModel -startsWith "Cloud PC") -or (device.deviceModel -eq "Virtual Machine") ; un pool d'hôtes AVD avec ses propres noms peut aussi utiliser device.displayName -startsWith)** — Uniquement pour les Cloud PC et les hôtes de session. Sur un ordinateur portable ordinaire, les paramètres ne font rien : ils s'appliquent aux sessions Bureau à distance entrantes. | A.6.7, A.8.1, A.8.12 |
 | [`WIN - D - Defender ASR Policy Audit Mode`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.fr.md) | **SEC-Baseline-Pilot** — Groupe pilote, et ce sans la policy ASR bloquante — les mêmes seize règles en audit au lieu de block. | A.8.7, A.8.16 |
 | [`WIN - D - Defender Update Ring 1 Pilot`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.fr.md) | **SEC-Update-Ring1** — Groupe pilote pour les mises à jour Defender. | A.8.7, A.8.8, A.8.32 |
 | [`WIN - D - Defender Update Ring 2 UAT`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.fr.md) | **SEC-Update-Ring2** — Groupe UAT pour les mises à jour Defender. | A.8.7, A.8.8, A.8.32 |
@@ -1679,7 +1692,7 @@ Acceptez le risque explicitement, traitez-le en dehors de cette baseline, ou pas
 | **A.5.33** Protection des enregistrements | partiel | `WIN - D - Windows AI Recall Boundaries` |
 | **A.5.36** Conformité aux politiques, règles et normes de sécurité de l'information | partiel | — |
 | **A.6.5** Responsabilités après la fin ou le changement d'un emploi | partiel | — |
-| **A.6.7** Travail à distance | partiel | — |
+| **A.6.7** Travail à distance | partiel | `WIN - D - Cloud PC External Access`, `WIN - D - Cloud PC Session Security` |
 | **A.7.14** Élimination ou recyclage sécurisé(e) du matériel | partiel | — |
 | **A.8.10** Suppression des informations | partiel | — |
 | **A.8.11** Masquage des données | partiel | `WIN - D - Windows AI Recall Boundaries` |
@@ -1810,7 +1823,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.5.12** Classification des informations | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Définir un schéma de classification ; les étiquettes techniques (Purview) sont hors du périmètre de cette baseline. | — |
 | **A.5.13** Marquage des informations | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Procédure et outils de marquage (étiquettes de confidentialité Purview) — hors du périmètre de cette baseline. | — |
 | **A.5.14** Transfert des informations | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 1 policy en phase 1, 1 préparée(s). Organisationnel : Règles de transfert d'informations avec des tiers (messagerie, liens de partage, comptes invités) ; la technique restreint les canaux sur l'appareil. | (i) |
-| **A.5.15** Contrôle d'accès | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1, 9 préparée(s). Organisationnel : Établir une politique d'accès (qui peut accéder à quoi, dans quelles conditions) ; Conditional Access et les policies d'appareil l'appliquent. | (b) (e) (i) |
+| **A.5.15** Contrôle d'accès | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1, 10 préparée(s). Organisationnel : Établir une politique d'accès (qui peut accéder à quoi, dans quelles conditions) ; Conditional Access et les policies d'appareil l'appliquent. | (b) (e) (i) |
 | **A.5.16** Gestion des identités | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 2 policies en phase 1. Organisationnel : Relier le cycle de vie des identités (arrivées, mobilités, départs) aux RH ; enregistrer les comptes partagés et de service. | (i) |
 | **A.5.17** Informations d'authentification | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 12 policies en phase 1, 16 préparée(s). Organisationnel : Former les utilisateurs à la gestion des mots de passe, codes PIN et codes de récupération ; processus de délivrance des codes d'accès temporaires. | (c) (e) (f) (g) (h) (i) (j) |
 | **A.5.18** Droits d'accès | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Attribution, revue périodique (access reviews) et révocation des droits ; CA applique des conditions mais ne revoit pas les droits. | — |
@@ -1839,7 +1852,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.6.4** Processus disciplinaire | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Procédure formelle en cas de violation de la politique. | — |
 | **A.6.5** Responsabilités après la fin ou le changement d'un emploi | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Processus de départ : révoquer les accès, restituer l'appareil ou l'effacer de manière sélective, confidentialité après le départ. | — |
 | **A.6.6** Accords de confidentialité ou de non-divulgation | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Rédiger des accords de confidentialité et les faire signer. | — |
-| **A.6.7** Travail à distance | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Politique de télétravail (lieu, écrans, réseaux) ; la technique protège l'appareil et l'accès. | — |
+| **A.6.7** Travail à distance | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Préparé techniquement : 2 policies en pilote, en attente ou groupe dédié. Organisationnel : Politique de télétravail (lieu, écrans, réseaux) ; la technique protège l'appareil et l'accès. | (i) |
 | **A.6.8** Déclaration des événements liés à la sécurité de l'information | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Mettre en place un canal de signalement pour les collaborateurs et le faire connaître. | — |
 | **A.7.1** Périmètres de sécurité physique | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Hors du domaine endpoint/identité : définir les zones physiques. | — |
 | **A.7.2** Les entrées physiques | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Hors du domaine endpoint/identité : contrôle d'accès aux bâtiments et aux locaux. | — |
@@ -1855,7 +1868,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.7.12** Sécurité du câblage | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Hors du domaine endpoint/identité. | — |
 | **A.7.13** Maintenance du matériel | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Maintenance et réparation par des personnes autorisées, avec des accords sur les données présentes sur l'appareil. | — |
 | **A.7.14** Élimination ou recyclage sécurisé(e) du matériel | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Procédure de mise au rebut et de réutilisation (wipe/Autopilot Reset, certificat de destruction). | — |
-| **A.8.1** Terminaux finaux des utilisateurs | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 19 policies en phase 1, 29 préparée(s). Organisationnel : Politique relative aux appareils professionnels et personnels (BYOD), enregistrement et règles d'utilisation. | (d) (e) (f) (h) (i) |
+| **A.8.1** Terminaux finaux des utilisateurs | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 19 policies en phase 1, 30 préparée(s). Organisationnel : Politique relative aux appareils professionnels et personnels (BYOD), enregistrement et règles d'utilisation. | (d) (e) (f) (h) (i) |
 | **A.8.2** Droits d'accès privilégiés | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 6 policies en phase 1, 3 préparée(s). Organisationnel : Processus d'attribution et de revue périodique des droits d'administration (PIM, access reviews). | (e) (i) |
 | **A.8.3** Restriction d'accès à l'information | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 1 policy en phase 1, 1 préparée(s). Organisationnel : Matrice d'autorisations et droits sur les données (SharePoint/Teams) — en grande partie hors de cette baseline. | (h) (i) |
 | **A.8.4** Accès aux codes source | selon le cas | applicable uniquement en cas de développement interne de logiciels ou de scripts | Organisationnel : Uniquement en cas de développement logiciel interne : gérer l'accès aux dépôts et aux outils de développement. | — |
@@ -1866,7 +1879,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.8.9** Gestion de la configuration | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 18 policies en phase 1, 7 préparée(s). Organisationnel : Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. | (b) (e) (g) (i) |
 | **A.8.10** Suppression des informations | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. | — |
 | **A.8.11** Masquage des données | oui | sécurité de base ; à confirmer par l'analyse des risques | Préparé techniquement : 1 policy en pilote, en attente ou groupe dédié. Organisationnel : Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. | — |
-| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 13 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
+| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 15 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
 | **A.8.13** Sauvegarde des informations | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1. Organisationnel : Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. | (c) |
 | **A.8.14** Redondance des moyens de traitement de l'information | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. | — |
 | **A.8.15** Journalisation | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 6 policies en phase 1, 2 préparée(s). Organisationnel : Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. | (b) (e) |
@@ -1894,7 +1907,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 
 | | Nombre |
 |---|---:|
-| Policies Intune avec mesures | 201 sur 201 |
+| Policies Intune avec mesures | 203 sur 203 |
 | Libellés hors vocabulaire | 0 |
 | Libellés avec une graphie divergente (comptés quand même) | 0 |
 

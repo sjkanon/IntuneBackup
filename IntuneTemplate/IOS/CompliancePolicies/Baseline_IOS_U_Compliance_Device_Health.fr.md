@@ -15,7 +15,7 @@ Marque comme non conforme un iPhone ou iPad qui a été jailbreaké.
 | Source | Convention OpenIntuneBaseline pour la conformité, contenu comparé avec IntuneAdmin (Baseline - iOSiPadOS - Device Health) et UniFy-Endpoint iOS BYOD. |
 | Fichier | [`Baseline_IOS_U_Compliance_Device_Health.json`](Baseline_IOS_U_Compliance_Device_Health.json) |
 
-> Action de blocage après un délai de grâce de 24 heures, afin que l'utilisateur reçoive d'abord une notification. Ne l'affectez que lorsque des appareils iOS sont réellement inscrits ; sur un tenant sans inscriptions, elle ne produit qu'un rapport vide. Depuis septembre 2026, cette policy exige aussi une version minimale de l'OS (16.0). Cette valeur vieillit : exécutez `node scripts/check-osversion.js` pour voir de combien elle est en retard sur la version n-1 d'endoflife.date. Ce rapport ne bloque rien et ne doit pas le faire — relever la valeur est une décision et donc une PR. Ce plancher est un objectif d'actualité (voir `ondergrens`) et peut donc évoluer, mais pas sans vérifier combien d'appareils se trouvent en dessous.
+> Action de blocage après un délai de grâce de 24 heures, afin que l'utilisateur reçoive d'abord une notification. Ne l'affectez que lorsque des appareils iOS sont réellement inscrits ; sur un tenant sans inscriptions, elle ne produit qu'un rapport vide. Depuis septembre 2026, cette policy exige aussi une version minimale de l'OS ; depuis octobre 2026, c'est 18.0, car Intune lui-même (Portail d'entreprise et app protection) demande iOS 18 ou ultérieur — un appareil en dessous ne peut de toute façon plus s'inscrire. Cette valeur vieillit : exécutez `node scripts/check-osversion.js` pour voir de combien elle est en retard sur la version n-1 d'endoflife.date. Ce rapport ne bloque rien et ne doit pas le faire — relever la valeur est une décision et donc une PR. Ce plancher est un objectif d'actualité (voir `ondergrens`) et peut donc évoluer, mais pas sans vérifier combien d'appareils se trouvent en dessous.
 
 ## Normes
 
@@ -56,7 +56,7 @@ Une policy de conformité n'a pas de settingDefinitionId mais des propriétés f
 | `passcodePreviousPasscodeBlockCount` | — |
 | `passcodeMinimumCharacterSetCount` | — |
 | `passcodeRequiredType` | deviceDefault |
-| `osMinimumVersion` | 16.0 |
+| `osMinimumVersion` | 18.0 |
 | `osMaximumVersion` | — |
 | `osMinimumBuildVersion` | — |
 | `osMaximumBuildVersion` | — |

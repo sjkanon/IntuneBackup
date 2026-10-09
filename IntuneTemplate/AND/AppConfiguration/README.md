@@ -64,3 +64,44 @@ voorbeeld van de body die ze gebruikt. Een ongeverifieerde body importeert in he
 niet en in het slechtste geval stil zonder effect. Richt die policy tot dan met de hand in:
 Apps → App-configuratie → Toevoegen → *Managed apps*, dezelfde twee account-sleutels, gericht op
 Outlook en Edge.
+
+Uitzondering: Windows App, hieronder. Daarvoor documenteert Microsoft de sleutels en de waarden zelf.
+
+## Windows App (Azure Virtual Desktop en Windows 365)
+
+Twee Graph-bodies voor Windows App, ook op een toestel zonder inschrijving:
+
+| Bestand | Graph-type | Wat het doet |
+|---|---|---|
+| `AND-Windows-App-App-Protection.json` | `androidManagedAppProtection` | PIN, geen klembord tussen de virtuele werkplek en lokale apps, `screenCaptureBlocked` = `true`, minimaal Windows App 11.0.0.94, Play Integrity hardwarematig, gejailbreakte of geroote toestellen geblokkeerd |
+| `AND-Windows-App-Managed-Apps.json` | `targetedManagedAppConfiguration` | `redirectclipboard` = `0` en `drivestoredirect` = `0`: geen klembord en geen bestanden van de telefoon naar de sessie |
+
+**Waarom.** Conditional Access `2150` laat Windows App op iOS en Android alleen toe met een app
+protection policy of een compliant toestel. Een policy op *alle Microsoft-apps* telt daarvoor niet:
+Microsoft laat Windows App expliciet kiezen. Zonder deze policy komt een onbeheerde telefoon dus
+nooit binnen. Daarnaast weigert een Cloud PC of sessiehost met screen capture protection
+(`[Baseline] - WIN - D - Cloud PC Session Security`) de verbinding als Windows App schermopname
+niet blokkeert; dat kan pas vanaf de genoemde versie. De app-configuratie is een tweede laag naast
+de instellingen op de sessiehost; de strengste van de twee wint, en Microsoft zegt uitdrukkelijk
+dat hij die niet vervangt.
+
+**Waarom geen CIPP-template.** CIPP haalt bij een app protection-template de lijst `apps` weg
+voordat hij de policy aanmaakt. Een policy die alleen voor Windows App bedoeld is, kan daarom niet
+via CIPP; hij staat hier als Graph-body.
+
+**Uitrollen.**
+
+```http
+POST https://graph.microsoft.com/beta/deviceAppManagement/androidManagedAppProtections
+<inhoud van AND-Windows-App-App-Protection.json>
+
+POST https://graph.microsoft.com/beta/deviceAppManagement/androidManagedAppProtections/{id}/targetApps
+{ "apps": [ { "mobileAppIdentifier": { "@odata.type": "#microsoft.graph.androidMobileAppIdentifier", "packageId": "com.microsoft.rdc.androidx" } } ] }
+```
+
+Voor `AND-Windows-App-Managed-Apps.json` hetzelfde via `targetedManagedAppConfigurations`. Wijs beide toe aan de gebruikers van
+Azure Virtual Desktop of Windows 365. Company Portal moet in hetzelfde profiel staan als Windows App.
+
+**Niet getest in een tenant.** Controleer na het toewijzen in de portal of Windows App niet ook
+onder `[Baseline] - AND - U - App Protection` valt: twee app protection policies op dezelfde app
+voor dezelfde gebruiker leveren een conflict op.

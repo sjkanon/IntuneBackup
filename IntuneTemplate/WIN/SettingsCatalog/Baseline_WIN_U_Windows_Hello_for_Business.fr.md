@@ -36,6 +36,7 @@ Ces stratégies Conditional Access du dépôt CA-Policies s'appuient sur cette p
 | 2055 - GRANT - Phishing Resistant MFA for Admins | disabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
 | 2120 - GRANT - Phishing Resistant MFA for All Users | enabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
 | 2125 - GRANT - Phishing Resistant MFA for Rollout Groups | enabled | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
+| 2155 - GRANT - Virtual Desktop Phishing Resistant MFA | report-only | Configure Windows Hello for Business : sous Windows, la manière habituelle de satisfaire à une MFA résistante au phishing. Sans WHfB, il ne reste qu'une passkey séparée ou une clé de sécurité. |
 
 ## Paramètres — 5
 

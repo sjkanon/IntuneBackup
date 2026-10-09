@@ -15,7 +15,7 @@ Marks an iPhone or iPad that has been jailbroken as non-compliant.
 | Source | OpenIntuneBaseline convention for compliance, content compared with IntuneAdmin (Baseline - iOSiPadOS - Device Health) and UniFy-Endpoint iOS BYOD. |
 | File | [`Baseline_IOS_U_Compliance_Device_Health.json`](Baseline_IOS_U_Compliance_Device_Health.json) |
 
-> Block action after a 24-hour grace period, so that a user first gets a notification. Only assign it once iOS devices are actually being enrolled; on a tenant without enrollments it produces an empty report and nothing else. Since September 2026 this policy also requires a minimum OS version (16.0). That value goes stale: run `node scripts/check-osversion.js` to see how far behind it is on the n-1 version from endoflife.date. That report blocks nothing and should not — raising it is a decision and therefore a PR. This floor is a currency target (see `ondergrens`) and may therefore move along, but not without checking how many devices fall below it.
+> Block action after a 24-hour grace period, so that a user first gets a notification. Only assign it once iOS devices are actually being enrolled; on a tenant without enrollments it produces an empty report and nothing else. Since September 2026 this policy also requires a minimum OS version; since October 2026 that is 18.0, because Intune itself (Company Portal and app protection) asks for iOS 18 or later — a device below that cannot enrol anyway. That value goes stale: run `node scripts/check-osversion.js` to see how far behind it is on the n-1 version from endoflife.date. That report blocks nothing and should not — raising it is a decision and therefore a PR. This floor is a currency target (see `ondergrens`) and may therefore move along, but not without checking how many devices fall below it.
 
 ## Standards
 
@@ -56,7 +56,7 @@ A compliance policy has no settingDefinitionIds but fixed properties. `scheduled
 | `passcodePreviousPasscodeBlockCount` | — |
 | `passcodeMinimumCharacterSetCount` | — |
 | `passcodeRequiredType` | deviceDefault |
-| `osMinimumVersion` | 16.0 |
+| `osMinimumVersion` | 18.0 |
 | `osMaximumVersion` | — |
 | `osMinimumBuildVersion` | — |
 | `osMaximumBuildVersion` | — |

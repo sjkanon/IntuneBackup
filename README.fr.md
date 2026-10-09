@@ -8,11 +8,11 @@ en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/Ope
 (Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
 repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
-201 stratégies sur quatre plateformes :
+203 stratégies sur quatre plateformes :
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.fr.md) | 118 | 1 | 6 | 11 | – | **136** |
+| [Windows](IntuneTemplate/WIN/README.fr.md) | 120 | 1 | 6 | 11 | – | **138** |
 | [macOS](IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.m
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>201 stratégies<br/><i>la source</i>"]
+  T["<b>IntuneTemplate/</b><br/>203 stratégies<br/><i>la source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Tenant Intune")]
 
@@ -316,7 +316,7 @@ update profiles, l'anneau de mise à jour 3 et Windows 365) — avec leur raison
 ## Restaurer dans un tenant
 
 **Via CIPP :** faites pointer le dépôt de modèles vers ce dépôt. Les cinq valeurs de `.Type`
-correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 201
+correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 203
 modèles figurent dans CIPP sous Tenant Administration → Templates.
 
 ### Déployer via une baseline CIPP
@@ -365,7 +365,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 304 fichiers JSON — les mêmes 201 stratégies plus leurs 102 affectations et le
+CIPP importerait *aussi* ces 306 fichiers JSON — les mêmes 203 stratégies plus leurs 102 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.

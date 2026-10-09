@@ -2,7 +2,7 @@
 
 # Configuration des applications iOS/iPadOS
 
-Six corps Graph, deux par application. La configuration des applications n'est pas un type CIPP et se trouve donc ici.
+Six corps Graph, deux par application, et deux pour Windows App (en bas). La configuration des applications n'est pas un type CIPP et se trouve donc ici.
 
 | Fichier | Type Graph | Endpoint (beta) | Pour |
 |---|---|---|---|
@@ -75,3 +75,42 @@ personnel est une décision de confidentialité ; sur les appareils supervisés,
 Les schémas ont été vérifiés par rapport à Graph beta (`iosMobileAppConfiguration` tel qu'exporté
 par UniFy v1.2 ; `targetedManagedAppConfiguration.customSettings` sur Microsoft Learn), pas
 testés sur un tenant.
+
+## Windows App (Azure Virtual Desktop et Windows 365)
+
+Deux corps Graph pour Windows App, y compris sur un appareil non inscrit :
+
+| Fichier | Type Graph | Ce qu'il fait |
+|---|---|---|
+| `windows-app-app-protection.json` | `iosManagedAppProtection` | PIN, pas de presse-papiers entre le poste de travail virtuel et les apps locales, `screenCaptureConfigurationState` = `blocked`, `allowedOutboundDataTransferDestinations` = `none`, au moins Windows App 11.2.4, pas de claviers tiers, appareils jailbreakés ou rootés bloqués |
+| `windows-app-managed-apps.json` | `targetedManagedAppConfiguration` | `redirectclipboard` = `0` et `drivestoredirect` = `0` : ni presse-papiers ni fichiers du téléphone vers la session |
+
+**Pourquoi.** L'accès conditionnel `2150` n'admet Windows App sur iOS et Android qu'avec une app
+protection policy ou un appareil conforme. Une stratégie sur *toutes les apps Microsoft* ne compte
+pas : Microsoft fait sélectionner Windows App explicitement. Sans cette stratégie, un téléphone non
+géré n'entre donc jamais. En outre, un Cloud PC ou un hôte de session avec screen capture protection
+(`[Baseline] - WIN - D - Cloud PC Session Security`) refuse la connexion si Windows App ne bloque pas
+la capture d'écran ; cela n'est possible qu'à partir de la version indiquée. La configuration de
+l'app est une seconde couche à côté des paramètres de l'hôte de session ; le plus restrictif des
+deux l'emporte, et Microsoft précise qu'elle ne les remplace pas.
+
+**Pourquoi pas un template CIPP.** CIPP retire la liste `apps` d'un template d'app protection
+avant de créer la stratégie. Une stratégie destinée uniquement à Windows App ne peut donc pas passer
+par CIPP ; elle figure ici comme corps Graph.
+
+**Déploiement.**
+
+```http
+POST https://graph.microsoft.com/beta/deviceAppManagement/iosManagedAppProtections
+<contenu de windows-app-app-protection.json>
+
+POST https://graph.microsoft.com/beta/deviceAppManagement/iosManagedAppProtections/{id}/targetApps
+{ "apps": [ { "mobileAppIdentifier": { "@odata.type": "#microsoft.graph.iosMobileAppIdentifier", "bundleId": "com.microsoft.rdc.ios" } } ] }
+```
+
+Pour `windows-app-managed-apps.json`, de même via `targetedManagedAppConfigurations`. Affectez les deux aux utilisateurs
+d'Azure Virtual Desktop ou de Windows 365. Sur un iPhone inscrit, Windows App doit figurer dans Intune comme app du store ; depuis la version 2409, Intune transmet lui-même les clés MAM.
+
+**Non testé dans un tenant.** Après l'affectation, vérifiez dans le portail que Windows App n'est
+pas aussi couverte par `[Baseline] - IOS - U - App Protection` : deux app protection policies sur
+la même app pour le même utilisateur produisent un conflit.

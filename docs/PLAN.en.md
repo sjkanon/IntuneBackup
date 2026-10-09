@@ -158,7 +158,7 @@ between the two layers — start there.
   recorded as an exception, not as an open finding.
 - **Driver update profiles** — IntuneBackupAndRestore 4.0.1 does not support them. Via CIPP it
   would be possible, but then the two restore routes diverge.
-- **Windows 365** — OIB has policies for it; Cloud PCs belong in a set of their own.
+- **Windows 365 as an OIB import** — since October 2026 the separate set is here: `Baseline_WIN_D_Cloud_PC_Session_Security` and `Baseline_WIN_D_Cloud_PC_External_Access` (phase 4), with what OIB's W365 policies do minus the four settings `Remote Desktop and RPC` already sets, plus screen capture protection and a watermark. Windows App on iOS and Android is a Graph body in `IOS/` and `AND/AppConfiguration/`.
 - Deviations from CIS that OIB makes with justification (built-in Administrator enabled for LAPS,
   UAC prompt behaviour for the helpdesk) — adopted including the justification, see
   `OIBvsCIS-Rationale.csv` in OIB.

@@ -36,6 +36,7 @@ Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. 
 | 2055 - GRANT - Phishing Resistant MFA for Admins | disabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
 | 2120 - GRANT - Phishing Resistant MFA for All Users | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
 | 2125 - GRANT - Phishing Resistant MFA for Rollout Groups | enabled | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
+| 2155 - GRANT - Virtual Desktop Phishing Resistant MFA | report-only | Richt Windows Hello for Business in: op Windows de gewone manier om aan phishing-resistente MFA te voldoen. Zonder WHfB blijft daar alleen een losse passkey of beveiligingssleutel over. |
 
 ## Instellingen — 6
 
