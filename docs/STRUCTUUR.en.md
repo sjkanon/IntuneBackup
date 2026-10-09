@@ -71,7 +71,7 @@ IntuneTemplate/
   _ca.json            which CA policies rely on a policy (copy)
   _i18n/              English and French translations of the text in the data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
-        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/  AssignmentFilters/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
         Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
@@ -190,3 +190,4 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 | [COMPLIANCE.en.md](COMPLIANCE.en.md) | CISO or auditor |
 | [ANALYSE.en.md](ANALYSE.en.md) | Why things are or are not in the baseline |
 | [PLAN.en.md](PLAN.en.md) | What is still open, including the tenant migration |
+| [AVD.en.md](AVD.en.md) | Which Windows policies also belong on the AVD session hosts, and the rollout plan |

@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 138 policies
+# Windows — 142 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 120 |
+| `SettingsCatalog/` | 124 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -21,6 +21,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 |---|---|
 | [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.en.md) | Remove preinstalled McAfee |
 | [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.en.md) | Winget-AutoUpdate |
+| [`AssignmentFilters/`](AssignmentFilters/README.en.md) | Assignment filters for Windows |
 | [`EndpointSecurity/`](EndpointSecurity/README.en.md) | App Control for Business (WDAC) — generic starting point |
 | [`Enrollment/`](Enrollment/README.en.md) | Windows Autopilot: classic and device preparation |
 | [`PlatformScripts/`](PlatformScripts/README.en.md) | Windows platform scripts |
@@ -29,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 104
+## Device-scoped (D) — 108
 
 Assign to device groups.
 
@@ -43,6 +44,10 @@ Assign to device groups.
 | [**Audit and Event Logging**](SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) | Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation. | Settings Catalog | 40 | All Devices |
 | [**Audit Policy Enforcement**](SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) | Makes the advanced audit settings take precedence over the old category settings, so that the baseline's audit policy actually determines what is logged. | Settings Catalog | 2 | All Devices |
 | [**Automatic Restart Sign On**](SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.en.md) | After a restart for updates, automatically signs the user back in, locked, so that startup programs run without the device sitting unlocked and unattended. | Settings Catalog | 3 | All Devices |
+| [**AVD Defender FSLogix Exclusions**](SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.en.md) | Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. | Settings Catalog | 2 | — |
+| [**AVD FSLogix Profile Containers**](SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.en.md) | Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile. | Settings Catalog | 11 | — |
+| [**AVD Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.en.md) | Restricts Remote Desktop and remote procedure calls on the AVD session hosts as [Baseline] - WIN - D - Remote Desktop and RPC does on physical devices, but without the password prompt on every connection, which breaks single sign-on with Entra ID. | Settings Catalog | 11 | — |
+| [**AVD Session Host**](SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) | Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and turns Storage Sense off so that Windows cleans up nothing in profiles that FSLogix has attached. | Settings Catalog | 5 | — |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) | Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID. | Settings Catalog | 36 | All Devices |
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) | Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) | Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. | Settings Catalog | 4 | All Devices |

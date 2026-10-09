@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 138 policies
+# Windows — 142 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 120 |
+| `SettingsCatalog/` | 124 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -21,6 +21,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 |---|---|
 | [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.fr.md) | Supprimer McAfee préinstallé |
 | [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.fr.md) | Winget-AutoUpdate |
+| [`AssignmentFilters/`](AssignmentFilters/README.fr.md) | Filtres d'affectation pour Windows |
 | [`EndpointSecurity/`](EndpointSecurity/README.fr.md) | App Control for Business (WDAC) — point de départ générique |
 | [`Enrollment/`](Enrollment/README.fr.md) | Windows Autopilot : classique et device preparation |
 | [`PlatformScripts/`](PlatformScripts/README.fr.md) | Scripts de plateforme Windows |
@@ -29,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 104
+## Device-scoped (D) — 108
 
 Affecter à des groupes d'appareils.
 
@@ -43,6 +44,10 @@ Affecter à des groupes d'appareils.
 | [**Audit and Event Logging**](SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.fr.md) | Définit quels événements Windows enregistre et quelle est la taille des journaux — la base de toute investigation a posteriori. | Settings Catalog | 40 | All Devices |
 | [**Audit Policy Enforcement**](SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.fr.md) | Donne la priorité aux paramètres d'audit avancés sur les anciens paramètres par catégorie, afin que la policy d'audit de la baseline détermine réellement ce qui est journalisé. | Settings Catalog | 2 | All Devices |
 | [**Automatic Restart Sign On**](SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md) | Après un redémarrage pour mises à jour, reconnecte automatiquement l'utilisateur en session verrouillée, afin que les programmes de démarrage s'exécutent sans que l'appareil reste déverrouillé sans surveillance. | Settings Catalog | 3 | All Devices |
+| [**AVD Defender FSLogix Exclusions**](SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) | Exclut de l'analyse Defender, sur les hôtes de session AVD, les conteneurs FSLogix sur le partage, les fichiers VHD(X) temporaires, les dossiers et pilotes FSLogix et les deux services FSLogix, comme Microsoft le prescrit pour FSLogix. | Settings Catalog | 2 | — |
+| [**AVD FSLogix Profile Containers**](SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | Active les conteneurs de profil FSLogix sur les hôtes de session AVD : le profil de chaque utilisateur est un VHDX dynamique de 30 Go maximum sur Azure Files, l'hôte obtient pour cela un ticket Kerberos auprès d'Entra ID, et une connexion sans conteneur échoue plutôt que de continuer avec un profil temporaire. | Settings Catalog | 11 | — |
+| [**AVD Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | Restreint le Bureau à distance et les appels de procédure distante sur les hôtes de session AVD comme [Baseline] - WIN - D - Remote Desktop and RPC le fait sur les appareils physiques, mais sans l'invite de mot de passe à chaque connexion, qui casse l'authentification unique avec Entra ID. | Settings Catalog | 11 | — |
+| [**AVD Session Host**](SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | Déconnecte définitivement une session interrompue sur les hôtes de session AVD après deux heures, interrompt une session inactive depuis deux heures, et désactive Storage Sense afin que Windows ne nettoie rien dans les profils attachés par FSLogix. | Settings Catalog | 5 | — |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.fr.md) | Chiffre le disque du système d'exploitation et, via les paramètres personnalisés conservés, également les disques fixes et amovibles. Les clés de récupération sont stockées dans Entra ID. | Settings Catalog | 36 | All Devices |
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.fr.md) | N'autorise en Bluetooth que les souris, claviers, casques, téléphones via Phone Link et passkeys, et bloque le transfert de fichiers, le partage de connexion et les connexions série. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.fr.md) | Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-même un paquet de récupération depuis le cloud au lieu d'attendre un technicien. | Settings Catalog | 4 | All Devices |

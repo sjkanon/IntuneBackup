@@ -71,7 +71,7 @@ IntuneTemplate/
   _ca.json            welke CA-policies op een policy leunen (kopie)
   _i18n/              Engelse en Franse vertalingen van de teksten uit de data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
-        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/
+        Enrollment/  EndpointSecurity/  PlatformScripts/  Remediations/  Apps/  AssignmentFilters/
   MAC/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/
         Enrollment/  EndpointSecurity/  PlatformScripts/  ComplianceScripts/
   IOS/  SettingsCatalog/  DeviceConfigurations/  CompliancePolicies/  AppProtection/
@@ -189,3 +189,4 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 | [COMPLIANCE.md](COMPLIANCE.md) | CISO of auditor |
 | [ANALYSE.md](ANALYSE.md) | Waarom wat wel en niet in de baseline zit |
 | [PLAN.md](PLAN.md) | Wat nog open staat, o.a. de tenant-migratie |
+| [AVD.md](AVD.md) | Welke Windows-policies ook op de AVD-sessiehosts horen, en het uitrolplan |
