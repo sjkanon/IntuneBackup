@@ -47,7 +47,7 @@ State at the time of writing, counted from the manifest; the current, generated 
 |---|---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | all devices | — | 1 | 53 |
 | `[Baseline] - Baseline-Devices-Physical` | all devices | `WIN - Physical` | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | all devices | `WIN - AVD Multi-session` | 1 | 4 |
+| `[Baseline] - Baseline-Devices-AVD` | all devices | `WIN - AVD Multi-session` | 1 | 5 |
 | `[Baseline] - Baseline-Users` | all users | — | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | all users | `WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | do not assign (ADE token) | — | 1 | 2 |
@@ -61,7 +61,7 @@ State at the time of writing, counted from the manifest; the current, generated 
 | `[Baseline] - Updates-Devices-Physical` | all devices | `WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(no package — phase 5)* | — | — | — | 15 |
 
-207 in total. The `Baseline-` packages are in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
+208 in total. The `Baseline-` packages are in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 the `Updates-` packages in [`Windows-Updates.json`](../BaselineTemplate/README.en.md#windows-updatesjson--patching).
 A class package sits in the same stage as its counterpart. The CIPP standard holds the filter as a
 **name** (`assignmentFilter`, `assignmentFilterType: include`); CIPP looks it up per tenant.
@@ -250,6 +250,45 @@ Bitlocker, Device Lock, Windows Hello For Business, `Windows 11 Update` and Offi
 4. **Without CIPP**: `Set-BaselineAssignment.ps1 -AllDevices -Replace -WhatIf` and
    `-AllUsers -Replace -WhatIf`. `-Replace` replaces *all* assignments of a policy — groups and
    exclusions too; without `-Replace` the old assignment without filter stays and the script warns.
+   To migrate per class, for example AVD first, use
+   [`Deploy-BaselinePolicies.ps1`](#without-cipp-deploy-baselinepoliciesps1).
+
+## Without CIPP: Deploy-BaselinePolicies.ps1
+
+For a tenant without CIPP, or to do one class first while the rest stays as it is.
+[`scripts/Deploy-BaselinePolicies.ps1`](../scripts/Deploy-BaselinePolicies.ps1) creates the
+Settings Catalog and compliance policies from the repo through Graph, compares an existing policy
+with the same name and only updates it on a difference, and assigns. ADMX and Device
+Configurations are skipped (with a message); they go through CIPP or the portal.
+
+**Example: the full baseline on AVD only first**, laptops untouched, no Conditional Access:
+
+```powershell
+Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId <tenant-id>
+.\scripts\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
+    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -Variables @{ FSLogixStorageAccount = '<storage-account>' } `
+    -ExcludeLegacyFromFilter -TenantId <tenant-id> -WhatIf
+```
+
+- **Every assignment gets the include filter**: so the `alle` policies also land on the session
+  hosts only. Device policies go to all devices, `U` policies to all users and the compliance
+  policies to all devices — user-targeted compliance does not work on multi-session.
+- **`-ExcludeLegacyFromFilter`** puts the same filter as *exclude* on the old policies outside the
+  repo (`[Baseline] X`), so the session host does not get the old and the new set at once (a
+  Conflict, after which neither applies). The existing assignment stays; if a policy already has
+  another filter, the script refuses it. An old policy that does not start with the prefix
+  (e.g. `Windows 11 Update`) is reported as a warning; include it with `-LegacyName`.
+- **Order**: the script first creates the new policies and then excludes the old ones; between
+  those two steps a host can briefly see both. Run it outside office hours.
+- **Variables**: you pass `%FSLogixStorageAccount%`; `%OrganizationId%` (OneDrive, Teams) and the
+  other built-in CIPP variables are derived from `GET /organization`. If one is missing, that policy
+  is skipped instead of putting a literal `%…%` in the tenant.
+- **Do not rename afterwards.** On this route the old and the new policies exist side by side;
+  `Rename-BaselinePolicy.ps1` then reports *BOTH PRESENT* and does nothing. The old set goes away
+  once the laptops have the new one too: then remove the assignment and delete.
+- **Idempotent**: a second run without a change in the repo reports *ongewijzigd* (unchanged) and
+  *al toegewezen* (already assigned). After a change in the repo, run the same command again.
 
 ## AVD specifics
 
