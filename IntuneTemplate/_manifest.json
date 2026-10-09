@@ -4227,7 +4227,7 @@
       "displayName": "[Baseline] - WIN - D - Windows Feature Configuration",
       "doel": "Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu.",
       "bron": "OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration",
-      "note": "Neemt de oude Windows Search-policy (023) over.",
+      "note": "Neemt de oude Windows Search-policy (023) over. Zoeken in cloudbronnen (allowcloudsearch, in OpenIntuneBaseline toegestaan) is hier weggehaald: [Baseline] - WIN - D - AVD Start and Search zet hem op de sessiehosts uit, en twee policies met een andere waarde op hetzelfde apparaat geven een Conflict. Op een fysiek toestel staat hij daarmee op de Windows-standaard (toegestaan, de gebruiker kan hem uitzetten).",
       "herkomst": "oib",
       "fase": 1,
       "doelgroep": "alle",
@@ -4243,7 +4243,10 @@
         "nistcsf": [
           "PR.PS-01"
         ]
-      }
+      },
+      "dropSettings": [
+        "device_vendor_msft_policy_config_search_allowcloudsearch"
+      ]
     },
     {
       "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - ES - Windows Firewall - D - Firewall Configuration - v3.1.json",
@@ -6210,6 +6213,41 @@
       "bewijs": "Op een pooled host houdt een verbroken sessie die nooit wordt afgemeld de FSLogix-container vergrendeld en geheugen bezet; verbindt de gebruiker opnieuw en komt hij op een andere host, dan is zijn container daar niet te koppelen. Twee uur geeft ruimte voor een weggevallen verbinding of een pauze en ruimt daarna op — en pas bij afmelden comprimeert FSLogix de container. Storage Sense ruimt binnen het gekoppelde profiel op: OneDrive-bestanden worden online-only (geen dataverlies, de grootste winst), tijdelijke bestanden en de prullenbak gaan weg. Wat vrijkomt, geeft de FSLogix-compactie bij afmelding terug aan het share (VHD Compact Disk in AVD FSLogix Profile Containers). Kleinere containers betekenen snellere aanmeldingen en minder kans op een volle container; bij Azure Files Premium rekent Microsoft op de provisioned grootte, dus de besparing zit in snelheid en ruimte, niet in de rekening.",
       "universeel": "Alleen AVD-sessiehosts met Windows 11 Enterprise multi-session. Op een fysiek toestel zet [Baseline] - WIN - D - Storage Sense dezelfde instellingen met andere waarden (cadence 0, 30 dagen); die heeft doelgroep fysiek en deze avd, dus ze komen nooit samen op één apparaat.",
       "note": "**De cadence staat niet in deze policy.** configstoragesenseglobalcadence heeft in zijn Settings Catalog-definitie geen windowsMultiSession in applicability.windowsSkus, dus Intune levert hem niet aan een multi-session-host (de andere vijf Storage Sense-instellingen wel; op de host geverifieerd). Zonder cadence draait Storage Sense alleen bij weinig vrije ruimte op C:, en die loopt op een sessiehost nooit vol — Storage Sense zou dan nooit draaien. De AVD-image zet daarom ConfigStorageSenseGlobalCadence = 1 (dagelijks) onder HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense (run-vdot.ps1 in de AVD-repo). Downloads pas na dertig dagen, omdat dat echte verwijdering is; OneDrive-dehydratie na zeven dagen, omdat het bestand online blijft. Geen wekelijkse Invoke-FslShrinkDisk of FSLShrink meer nodig: de ingebouwde compactie bij afmelding (FSLogix 2210 en later) doet hetzelfde bij elke afmelding, zonder aparte VM met rechten op het share en zonder risico dat een script een gekoppelde container raakt; de sessielimieten hierboven zorgen dat er ook echt wordt afgemeld. FSLShrink alleen nog als noodmiddel voor containers die al groot zijn: eenmalig, buiten kantooruren, met de hosts in drain mode. Tijdzone-redirectie (ts_time_zone) staat hier bewust niet in: [Baseline] - WIN - D - Cloud PC Session Security zet hem al op de sessiehosts (groep SEC-Cloud-PC). **Overlap met [Baseline] - WIN - D - Cloud PC External Access:** die zet dezelfde twee sessielimieten op 15 minuten. Op een hostpool voor externen landen beide policies en botsen ze (Conflict: dan geldt geen van beide limieten); in het pakketmodel is deze policy daar niet los uit te sluiten — zie de open punten in docs/AVD.md. De waarden staan in milliseconden: 7200000 is twee uur."
+    },
+    {
+      "target": "Baseline_WIN_D_AVD_Start_and_Search",
+      "displayName": "[Baseline] - WIN - D - AVD Start and Search",
+      "doel": "Laat Start en Zoeken op de AVD-sessiehosts niets meer uit de cloud of het web ophalen bij het openen: geen zoeken in cloudbronnen (OneDrive, SharePoint), geen zoekhighlights en geen lijst met recent toegevoegde apps.",
+      "bron": "Eigen — de Search- en Start-instellingen uit de Settings Catalog (Policy CSP), alle drie met windowsMultiSession in de applicability",
+      "herkomst": "eigen",
+      "fase": 1,
+      "doelgroep": "avd",
+      "controls": {
+        "iso": [
+          "A.8.9 Configuratiebeheer",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(e) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.8 Uninstall or Disable Unnecessary Services on Enterprise Assets and Software"
+        ],
+        "nistcsf": [
+          "PR.PS-01",
+          "PR.DS-02"
+        ]
+      },
+      "bewijs": "In de AVD-testomgeving reageerde het startmenu traag terwijl de host niets tekortkwam (CPU 6 %, 11 van 16 GB vrij, Premium SSD, updates van september 2026 met de XAML-herstelling uit KB5072911): de vertraging zit in wat Start en Zoeken bij het openen online ophalen, per sessie en per gebruiker tegelijk. Zoekhighlights en zoeken in cloudbronnen halen bij elk openen inhoud van Microsoft-diensten op; de lijst met recent toegevoegde apps wordt per profiel opgebouwd en is op een gedeelde host met apps uit de image zinloos. Minder uitgaand verkeer naar zoekdiensten betekent ook minder bedrijfsinformatie in zoekopdrachten buiten de tenant.",
+      "universeel": "Alleen AVD-sessiehosts met Windows 11 Enterprise multi-session, waar tientallen gebruikers tegelijk Start openen. Op een fysiek toestel blijft het bij de Windows-standaard.",
+      "note": "Webresultaten in Zoeken (donotusewebresults) staan hier niet in: [Baseline] - WIN - D - Windows Feature Configuration (doelgroep alle) zet die al uit op elk Windows-apparaat — optie 0, *Not allowed*, de dubbele ontkenning van Do Not Use Web Results. Zoeken in cloudbronnen (allowcloudsearch) komt hier wel uit die policy: daar is hij weggehaald, anders zou hij op de sessiehost botsen. De Start-instelling HideRecommendedSection (de hele Aanbevolen-sectie verbergen) bestaat in de Settings Catalog van de testtenant niet; alleen HideRecentlyAddedApps is via Intune te zetten. Zoekhighlights (allowsearchhighlights) is een gewone integer, 0 = uit.",
+      "overgenomenVan": [
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_search_allowcloudsearch",
+          "policy": "[Baseline] - WIN - D - Windows Feature Configuration",
+          "reason": "Daar stond hij op toegestaan voor elk Windows-apparaat; op de sessiehost moet hij uit, en twee policies met een andere waarde op één apparaat geven een Conflict. Op fysieke toestellen geldt nu de Windows-standaard (toegestaan)."
+        }
+      ]
     }
   ]
 }

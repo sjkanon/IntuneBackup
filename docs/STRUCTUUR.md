@@ -125,6 +125,7 @@ zijn. Stage 3 zet iemand met de hand door.
 | 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | OS-ondergrenzen, endoflife.date | alleen een rapport |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | toewijzingen in de tenant |
+| – | `Deploy-BaselinePolicies.ps1` | `IntuneTemplate/`, `_manifest.json`, `_assignments.json` | policies en toewijzingen in de tenant, zonder CIPP |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policynamen in de tenant |
 
 Lokaal draai je stap 1 t/m 6 in deze volgorde. [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)

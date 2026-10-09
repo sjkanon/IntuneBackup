@@ -2,18 +2,18 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# IntuneTemplate — 207 policies
+# IntuneTemplate — 208 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `export/` en `BaselineTemplate/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 124 | 1 | 6 | 11 | – | **142** |
+| [Windows](WIN/README.md) | 125 | 1 | 6 | 11 | – | **143** |
 | [macOS](MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Totaal** | **165** | **1** | **13** | **26** | **2** | **207** |
+| **Totaal** | **166** | **1** | **13** | **26** | **2** | **208** |
 
 ## Indeling
 
@@ -76,7 +76,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 |---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | Assign to all devices | 1 | 53 |
 | `[Baseline] - Baseline-Devices-Physical` | Assign to all devices, filter WIN - Physical (include) | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter WIN - AVD Multi-session (include) | 1 | 4 |
+| `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter WIN - AVD Multi-session (include) | 1 | 5 |
 | `[Baseline] - Baseline-Users` | Assign to all users | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | Assign to all users, filter WIN - Physical (include) | 1 | 1 |
 | `[Baseline] - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 29 |
@@ -110,7 +110,7 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 142 policies
+- [Windows](WIN/README.md) — 143 policies
 - [macOS](MAC/README.md) — 37 policies
 - [iOS/iPadOS](IOS/README.md) — 14 policies
 - [Android](AND/README.md) — 14 policies

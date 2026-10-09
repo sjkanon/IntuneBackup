@@ -47,7 +47,7 @@ Stand bij het schrijven, nageteld uit het manifest; de actuele, gegenereerde tab
 |---|---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | alle apparaten | — | 1 | 53 |
 | `[Baseline] - Baseline-Devices-Physical` | alle apparaten | `WIN - Physical` | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | alle apparaten | `WIN - AVD Multi-session` | 1 | 4 |
+| `[Baseline] - Baseline-Devices-AVD` | alle apparaten | `WIN - AVD Multi-session` | 1 | 5 |
 | `[Baseline] - Baseline-Users` | alle gebruikers | — | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | alle gebruikers | `WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | niet toewijzen (ADE-token) | — | 1 | 2 |
@@ -61,7 +61,7 @@ Stand bij het schrijven, nageteld uit het manifest; de actuele, gegenereerde tab
 | `[Baseline] - Updates-Devices-Physical` | alle apparaten | `WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(geen pakket — fase 5)* | — | — | — | 15 |
 
-Samen 207. De `Baseline-`pakketten staan in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
+Samen 208. De `Baseline-`pakketten staan in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 de `Updates-`pakketten in [`Windows-Updates.json`](../BaselineTemplate/README.md#windows-updatesjson--patchen).
 Een klassepakket staat in dezelfde stage als zijn tegenhanger. In de CIPP-standard staat het filter
 als **naam** (`assignmentFilter`, `assignmentFilterType: include`); CIPP zoekt het per tenant op.
@@ -251,7 +251,45 @@ en Office Updates.
 4. **Zonder CIPP**: `Set-BaselineAssignment.ps1 -AllDevices -Replace -WhatIf` en
    `-AllUsers -Replace -WhatIf`. `-Replace` vervangt álle toewijzingen van een policy — ook
    groepen en uitsluitingen; zonder `-Replace` blijft de oude toewijzing zonder filter staan en
-   waarschuwt het script.
+   waarschuwt het script. Wil je per klasse migreren, bijvoorbeeld eerst AVD, gebruik dan
+   [`Deploy-BaselinePolicies.ps1`](#zonder-cipp-deploy-baselinepoliciesps1).
+
+## Zonder CIPP: Deploy-BaselinePolicies.ps1
+
+Voor een tenant zonder CIPP, of om één klasse eerst te doen terwijl de rest blijft zoals hij is.
+[`scripts/Deploy-BaselinePolicies.ps1`](../scripts/Deploy-BaselinePolicies.ps1) maakt de
+Settings Catalog- en compliancepolicies uit de repo aan via Graph, vergelijkt een bestaande policy
+met dezelfde naam en werkt hem alleen bij een verschil bij, en wijst toe. ADMX en Device
+Configurations slaat het over (met melding); die gaan via CIPP of de portal.
+
+**Voorbeeld: de volledige baseline eerst alleen op AVD**, laptops ongemoeid, geen Conditional Access:
+
+```powershell
+Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId <tenant-id>
+.\scripts\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
+    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -Variables @{ FSLogixStorageAccount = '<opslagaccount>' } `
+    -ExcludeLegacyFromFilter -TenantId <tenant-id> -WhatIf
+```
+
+- **Elke toewijzing krijgt het include-filter**: ook de `alle`-policies landen dus alleen op de
+  sessiehosts. Device-policies gaan naar alle apparaten, `U`-policies naar alle gebruikers en de
+  compliancepolicies naar alle apparaten — op multi-session werkt gebruikersgerichte compliance niet.
+- **`-ExcludeLegacyFromFilter`** zet hetzelfde filter als *exclude* op de oude policies buiten de
+  repo (`[Baseline] X`), zodat de sessiehost niet tegelijk de oude en de nieuwe set krijgt (een
+  Conflict, waarna geen van beide geldt). De bestaande toewijzing blijft; heeft een policy al een
+  ander filter, dan weigert het script hem. Een oude policy die niet met het voorvoegsel begint
+  (bijv. `Windows 11 Update`) noemt het als waarschuwing; neem hem mee met `-LegacyName`.
+- **Volgorde**: het script maakt eerst de nieuwe policies en sluit daarna de oude uit; tussen die
+  twee stappen kan een host kort beide zien. Draai het buiten kantooruren.
+- **Variabelen**: `%FSLogixStorageAccount%` geef je mee; `%OrganizationId%` (OneDrive, Teams) en de
+  andere ingebouwde CIPP-variabelen leidt het script af uit `GET /organization`. Ontbreekt er een,
+  dan slaat het die policy over in plaats van een letterlijk `%…%` in de tenant te zetten.
+- **Niet hernoemen achteraf.** Op deze route bestaan de oude en de nieuwe policies naast elkaar;
+  `Rename-BaselinePolicy.ps1` meldt dan *BOTH PRESENT* en doet niets. De oude set verdwijnt pas als
+  ook de laptops de nieuwe hebben: dan toewijzing weg en verwijderen.
+- **Idempotent**: een tweede run zonder wijziging in de repo meldt *ongewijzigd* en *al
+  toegewezen*. Na een wijziging in de repo dezelfde opdracht opnieuw draaien.
 
 ## AVD-specifiek
 

@@ -125,6 +125,7 @@ Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deu
 | 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | versions minimales d'OS, endoflife.date | un rapport uniquement |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | affectations dans le tenant |
+| – | `Deploy-BaselinePolicies.ps1` | `IntuneTemplate/`, `_manifest.json`, `_assignments.json` | stratégies et affectations dans le tenant, sans CIPP |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | noms des stratégies dans le tenant |
 
 En local, on exécute les étapes 1 à 6 dans cet ordre. [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)

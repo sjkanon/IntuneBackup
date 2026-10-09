@@ -126,6 +126,7 @@ passed. Stage 3 is advanced by hand.
 | 6 | `generate-compliance.js` | `_manifest.json`, `_controls.json`, `_licenties.json` | `docs/COMPLIANCE.md` |
 | – | `check-osversion.js` | OS minimums, endoflife.date | a report only |
 | – | `Set-BaselineAssignment.ps1` | `_manifest.json`, `_assignments.json` | assignments in the tenant |
+| – | `Deploy-BaselinePolicies.ps1` | `IntuneTemplate/`, `_manifest.json`, `_assignments.json` | policies and assignments in the tenant, without CIPP |
 | – | `Rename-BaselinePolicy.ps1` | `_renames.json` | policy names in the tenant |
 
 Locally you run steps 1 to 6 in this order. [`.github/workflows/generate-baseline.yml`](../.github/workflows/generate-baseline.yml)

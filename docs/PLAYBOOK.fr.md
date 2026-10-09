@@ -49,7 +49,7 @@ dans le [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp
 |---|---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | tous les appareils | — | 1 | 53 |
 | `[Baseline] - Baseline-Devices-Physical` | tous les appareils | `WIN - Physical` | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | tous les appareils | `WIN - AVD Multi-session` | 1 | 4 |
+| `[Baseline] - Baseline-Devices-AVD` | tous les appareils | `WIN - AVD Multi-session` | 1 | 5 |
 | `[Baseline] - Baseline-Users` | tous les utilisateurs | — | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | tous les utilisateurs | `WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | ne pas affecter (jeton ADE) | — | 1 | 2 |
@@ -63,7 +63,7 @@ dans le [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp
 | `[Baseline] - Updates-Devices-Physical` | tous les appareils | `WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(aucun paquet — phase 5)* | — | — | — | 15 |
 
-207 au total. Les paquets `Baseline-` sont dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
+208 au total. Les paquets `Baseline-` sont dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 les paquets `Updates-` dans [`Windows-Updates.json`](../BaselineTemplate/README.fr.md#windows-updatesjson--correctifs).
 Un paquet de classe est dans la même étape que son équivalent. Le standard CIPP contient le filtre
 sous forme de **nom** (`assignmentFilter`, `assignmentFilterType: include`) ; CIPP le recherche
@@ -260,7 +260,46 @@ Exemple : le tenant de test `kanon` a les anciennes stratégies `[Baseline] X` (
 4. **Sans CIPP** : `Set-BaselineAssignment.ps1 -AllDevices -Replace -WhatIf` et
    `-AllUsers -Replace -WhatIf`. `-Replace` remplace *toutes* les affectations d'une stratégie —
    groupes et exclusions compris ; sans `-Replace`, l'ancienne affectation sans filtre reste et le
-   script avertit.
+   script avertit. Pour migrer par classe, par exemple AVD d'abord, utilisez
+   [`Deploy-BaselinePolicies.ps1`](#sans-cipp-deploy-baselinepoliciesps1).
+
+## Sans CIPP : Deploy-BaselinePolicies.ps1
+
+Pour un tenant sans CIPP, ou pour traiter d'abord une seule classe pendant que le reste ne change pas.
+[`scripts/Deploy-BaselinePolicies.ps1`](../scripts/Deploy-BaselinePolicies.ps1) crée les
+stratégies Settings Catalog et de conformité du dépôt via Graph, compare une stratégie existante
+du même nom et ne la met à jour qu'en cas de différence, puis affecte. ADMX et Device
+Configurations sont ignorés (avec un message) ; ils passent par CIPP ou le portail.
+
+**Exemple : d'abord toute la baseline uniquement sur AVD**, ordinateurs portables inchangés, sans accès conditionnel :
+
+```powershell
+Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId <tenant-id>
+.\scripts\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
+    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -Variables @{ FSLogixStorageAccount = '<compte-de-stockage>' } `
+    -ExcludeLegacyFromFilter -TenantId <tenant-id> -WhatIf
+```
+
+- **Chaque affectation reçoit le filtre d'inclusion** : les stratégies `alle` n'arrivent donc elles
+  aussi que sur les hôtes de session. Les stratégies d'appareil vont à tous les appareils, les
+  stratégies `U` à tous les utilisateurs et les stratégies de conformité à tous les appareils — la
+  conformité ciblant l'utilisateur ne fonctionne pas en multisession.
+- **`-ExcludeLegacyFromFilter`** pose le même filtre en *exclusion* sur les anciennes stratégies
+  hors dépôt (`[Baseline] X`), pour que l'hôte de session ne reçoive pas l'ancien et le nouvel
+  ensemble à la fois (un Conflict, après quoi aucun ne s'applique). L'affectation existante reste ;
+  si une stratégie a déjà un autre filtre, le script la refuse. Une ancienne stratégie qui ne
+  commence pas par le préfixe (p. ex. `Windows 11 Update`) est signalée ; ajoutez-la avec `-LegacyName`.
+- **Ordre** : le script crée d'abord les nouvelles stratégies puis exclut les anciennes ; entre ces
+  deux étapes, un hôte peut brièvement voir les deux. Exécutez-le en dehors des heures de bureau.
+- **Variables** : vous passez `%FSLogixStorageAccount%` ; `%OrganizationId%` (OneDrive, Teams) et les
+  autres variables CIPP intégrées sont déduites de `GET /organization`. S'il en manque une, la
+  stratégie est ignorée plutôt que de placer un `%…%` littéral dans le tenant.
+- **Ne pas renommer ensuite.** Sur cette voie, anciennes et nouvelles stratégies coexistent ;
+  `Rename-BaselinePolicy.ps1` signale alors *BOTH PRESENT* et ne fait rien. L'ancien ensemble
+  disparaît quand les ordinateurs portables ont aussi le nouveau : retirer l'affectation, puis supprimer.
+- **Idempotent** : une deuxième exécution sans changement dans le dépôt signale *ongewijzigd*
+  (inchangé) et *al toegewezen* (déjà affecté). Après un changement dans le dépôt, relancez la même commande.
 
 ## Spécificités AVD
 

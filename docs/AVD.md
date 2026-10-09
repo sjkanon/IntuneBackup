@@ -10,7 +10,7 @@ met **Windows 11 Enterprise multi-session**, **Entra-joined en ingeschreven in I
 De indeling volgt `infra/INTUNE-BASELINE.md` (secties 2 tot 4) in de AVD-testrepo, getoetst aan
 [Intune voor AVD multi-session](https://learn.microsoft.com/en-us/intune/solutions/azure-virtual-desktop-multi-session),
 en de bevindingen uit de testtenant van 9 oktober 2026. De lijst hieronder is opgebouwd uit de
-werkelijke policynamen in `IntuneTemplate/WIN` (142 policies). Dit document is handwerk: komt er
+werkelijke policynamen in `IntuneTemplate/WIN` (143 policies). Dit document is handwerk: komt er
 een Windows-policy bij, zet hem dan ook hier in een van de vier groepen én geef hem de bijbehorende
 `doelgroep` in `_manifest.json` — `check-scope.js` weigert een Windows-policy zonder.
 
@@ -24,7 +24,7 @@ de apparaatklasse waarop hij hoort. Drie klassen, twee filters, alleen **include
 | **Gezamenlijk** — fysiek en AVD, ongewijzigd | `alle` | 95 | zoals ze staan, zonder filter |
 | **Alleen fysiek** — niet op de sessiehosts | `fysiek` | 40 | **include**-filter `WIN - Physical` |
 | **AVD-variant** — fysiek en AVD elk een eigen versie | `fysiek` (de fysieke versie) | 1 | fysieke versie include `WIN - Physical`, AVD-versie include `WIN - AVD Multi-session` |
-| **Alleen AVD** — de nieuwe policies en de Cloud PC-set | `avd` | 6 | **include**-filter `WIN - AVD Multi-session` (Cloud PC-set: eigen groep) |
+| **Alleen AVD** — de nieuwe policies en de Cloud PC-set | `avd` | 7 | **include**-filter `WIN - AVD Multi-session` (Cloud PC-set: eigen groep) |
 
 In fase 1 en 2 maakt de pijplijn er eigen CIPP-pakketten van: `[Baseline] - Baseline-Devices-Physical`,
 `-Users-Physical`, `-Pilot-Physical` en `-Devices-AVD`, met het filter in de standard. Hoe je dat in
@@ -36,9 +36,10 @@ Nieuw in deze repo voor AVD:
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) — FSLogix en het Kerberos-ticket voor Azure Files;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) — de fysieke versie zonder wachtwoordprompt;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) — de Defender-uitsluitingen die Microsoft voor FSLogix voorschrijft;
-- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) — sessielimieten van twee uur en Storage Sense met eigen waarden in de container.
+- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) — sessielimieten van twee uur en Storage Sense met eigen waarden in de container;
+- [`AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) — Start en Zoeken halen bij het openen niets meer uit de cloud of het web: geen zoeken in cloudbronnen, geen zoekhighlights, geen recent toegevoegde apps. Tegen een traag startmenu in de sessie terwijl de host niets tekortkomt.
 
-Alle vier staan in **fase 1** met doelgroep `avd`, in het pakket `[Baseline] - Baseline-Devices-AVD`
+Alle vijf staan in **fase 1** met doelgroep `avd`, in het pakket `[Baseline] - Baseline-Devices-AVD`
 (alle apparaten, include-filter `WIN - AVD Multi-session`). Het opslagaccount in de twee
 FSLogix-policies is de CIPP-variabele `%FSLogixStorageAccount%`, die je per tenant zet.
 
@@ -278,7 +279,7 @@ Doelgroep `fysiek`: in fase 1 en 2 het include-filter `WIN - Physical`, dus niet
 |---|---:|---|
 | [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.md) | 1 | `promptforpassworduponconnection` breekt Entra-SSO en passkeys. Fysiek: doelgroep `fysiek` (include `WIN - Physical`); AVD: [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) met doelgroep `avd`. |
 
-### Alleen AVD — 6
+### Alleen AVD — 7
 
 | Policy | Fase | Opmerking |
 |---|---:|---|
@@ -286,6 +287,7 @@ Doelgroep `fysiek`: in fase 1 en 2 het include-filter `WIN - Physical`, dus niet
 | [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
 | [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
 | [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
+| [D - AVD Start and Search](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) | 1 | Nieuw. Doelgroep `avd`. Neemt `allowcloudsearch` over van Windows Feature Configuration (daar weggehaald); webresultaten staan al uit via die policy. `HideRecommendedSection` bestaat niet in de Settings Catalog. |
 | [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | 4 | Bestaand, alleen op een hostpool voor externen (SEC-Cloud-PC-External). Botst daar met de sessielimieten van AVD Session Host — zie de open punten. |
 | [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.md) | 4 | Bestaand, via de groep SEC-Cloud-PC (ook Windows 365). Zet ook de tijdzone-redirectie. |
 
