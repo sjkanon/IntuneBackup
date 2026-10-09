@@ -325,7 +325,7 @@ FSLogix est configuré à deux endroits, volontairement :
 
 Les deux écrivent les mêmes valeurs de registre sous `HKLM\SOFTWARE\FSLogix\Profiles` (Enabled,
 VHDLocations, SizeInMBs, IsDynamic, FlipFlopProfileDirectoryName, DeleteLocalProfileWhenVHDShouldApply,
-PreventLoginWithFailure, PreventLoginWithTempProfile), rien n'entre donc en conflit. Uniquement dans
+PreventLoginWithFailure, PreventLoginWithTempProfile, VolumeType, RoamIdentity), rien n'entre donc en conflit. Uniquement dans
 le script, parce que le Settings Catalog ne les connaît pas :
 
 - `LoadCredKeyFromProfile = 1` sous `HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount` — nécessaire pour
@@ -333,10 +333,14 @@ le script, parce que le Settings Catalog ne les connaît pas :
 - l'administrateur local dans le groupe local `FSLogix Profile Exclude List`, afin qu'une connexion
   break-glass fonctionne toujours, même quand le partage est inaccessible.
 
-Deux paramètres ne sont définis que par le script, car leur définition dans le Settings Catalog n'a
-pas été vérifiée avec certitude : `VolumeType = VHDX` (la valeur par défaut depuis FSLogix 2210) et
-`RoamIdentity` (la valeur requise 0 est la valeur par défaut ; Intune ne prend pas en charge
-l'itinérance des jetons). Les deux définissent le ticket Kerberos (`CloudKerberosTicketRetrievalEnabled`) ;
+**VolumeType doit être explicitement VHDX.** La valeur par défaut de FSLogix est **VHD**, pas VHDX :
+la définition dans le tenant indique *Default is VHD … the same as Not Configured*. Un hôte qui ne
+reçoit que la stratégie Intune, sans le script, créerait alors un nouveau `.VHD` à côté du `.VHDX`
+existant, et le profil de l'utilisateur semble avoir disparu. C'est pourquoi la stratégie définit
+`VolumeType = VHDX` (un choix ADMX avec la liste déroulante *VHD/VHDX* comme enfant). Comme pour
+`VHD Compact Disk`, remettre *Enabled* sur *Not Configured* n'a aucun effet pour ce paramètre ADMX :
+pour changer, définissez explicitement l'autre valeur. `RoamIdentity` est désactivé (*Disabled*) :
+Intune ne prend pas en charge l'itinérance des jetons. Les deux définissent le ticket Kerberos (`CloudKerberosTicketRetrievalEnabled`) ;
 l'application du compte de stockage doit être exclue de la MFA dans l'accès conditionnel.
 
 ## Garder les profils petits : Storage Sense et compaction
@@ -426,6 +430,4 @@ Ensuite les autres pools d'hôtes ; les hôtes Entra DS passent en mode drain et
 - **Windows 365.** Les Cloud PC ne relèvent d'aucun des deux filtres et ne reçoivent donc plus non
   plus le `Remote Desktop and RPC` physique. Vérifiez qu'ils reçoivent l'ensemble commun et
   l'ensemble Cloud PC dont ils ont besoin.
-- Rechercher **VolumeType et RoamIdentity** dans le sélecteur de paramètres du tenant et, si la
-  définition est correcte, les ajouter à `AVD FSLogix Profile Containers`.
 - **Device Guard and Credential Guard** peut devenir *Commune* dès que tous les pools d'hôtes ont Trusted Launch.
