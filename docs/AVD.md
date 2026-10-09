@@ -320,7 +320,7 @@ FSLogix wordt op twee plekken ingesteld, met opzet:
 
 Beide schrijven dezelfde registerwaarden onder `HKLM\SOFTWARE\FSLogix\Profiles` (Enabled,
 VHDLocations, SizeInMBs, IsDynamic, FlipFlopProfileDirectoryName, DeleteLocalProfileWhenVHDShouldApply,
-PreventLoginWithFailure, PreventLoginWithTempProfile), dus er botst niets. Wat alleen in het script
+PreventLoginWithFailure, PreventLoginWithTempProfile, VolumeType, RoamIdentity), dus er botst niets. Wat alleen in het script
 staat, omdat de Settings Catalog het niet kent:
 
 - `LoadCredKeyFromProfile = 1` onder `HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount` — nodig voor
@@ -328,9 +328,13 @@ staat, omdat de Settings Catalog het niet kent:
 - de lokale beheerder in de lokale groep `FSLogix Profile Exclude List`, zodat een
   breakglass-aanmelding altijd werkt, ook als het share onbereikbaar is.
 
-Twee instellingen zet alleen het script, omdat hun definitie in de Settings Catalog niet met
-zekerheid is geverifieerd: `VolumeType = VHDX` (sinds FSLogix 2210 de standaard) en `RoamIdentity`
-(de vereiste waarde 0 is de standaard; Intune ondersteunt geen token-roaming). Het Kerberos-ticket
+**VolumeType moet expliciet VHDX zijn.** De FSLogix-standaard is **VHD**, niet VHDX: de definitie in
+de tenant zegt *Default is VHD … the same as Not Configured*. Een host die alleen de Intune-policy
+krijgt, zonder het script, zou dan een nieuwe `.VHD` naast de bestaande `.VHDX` maken, en het profiel
+van de gebruiker lijkt weg. Daarom zet de policy `VolumeType = VHDX` (een ADMX-keuze met de
+dropdown *VHD/VHDX* als kind). Net als bij `VHD Compact Disk` heeft *Enabled* terugzetten naar *Not
+Configured* bij deze ADMX-instelling geen effect: wie wil wisselen, zet de andere waarde expliciet.
+`RoamIdentity` staat uit (*Disabled*): Intune ondersteunt geen token-roaming. Het Kerberos-ticket
 (`CloudKerberosTicketRetrievalEnabled`) zetten beide; de app van het opslagaccount moet in
 Conditional Access van MFA zijn uitgesloten.
 
@@ -418,6 +422,4 @@ blijft alleen voor de applicatieservers).
 - **Windows 365.** Cloud PC's vallen onder geen van beide filters en krijgen dus ook de fysieke
   `Remote Desktop and RPC` niet meer. Controleer of ze de gezamenlijke set én de Cloud PC-set
   krijgen die ze nodig hebben.
-- **VolumeType en RoamIdentity** in de settings picker van de tenant opzoeken en, als de definitie
-  klopt, aan `AVD FSLogix Profile Containers` toevoegen.
 - **Device Guard and Credential Guard** kan *Gezamenlijk* worden zodra alle hostpools Trusted Launch hebben.
