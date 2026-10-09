@@ -15,7 +15,7 @@ Turns off Windows features that can move business data outside or create noise, 
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration |
 | File | [`Baseline_WIN_D_Windows_Feature_Configuration.json`](Baseline_WIN_D_Windows_Feature_Configuration.json) |
 
-> Takes over the old Windows Search policy (023).
+> Takes over the old Windows Search policy (023). Searching cloud sources (allowcloudsearch, allowed in OpenIntuneBaseline) was removed here: [Baseline] - WIN - D - AVD Start and Search turns it off on the session hosts, and two policies with a different value on the same device produce a Conflict. On a physical device it is therefore at the Windows default (allowed, the user can turn it off).
 
 ## Standards
 
@@ -27,7 +27,7 @@ Turns off Windows features that can move business data outside or create noise, 
 
 What this means per standard and what is needed organisationally alongside it: [COMPLIANCE.en.md](../../../docs/COMPLIANCE.en.md).
 
-## Settings — 10
+## Settings — 9
 
 Indented rows are child settings: they only apply when their parent
 setting has the value shown.
@@ -39,7 +39,6 @@ setting has the value shown.
 | `device_vendor_msft_policy_config_experience_configurechaticon` | 3 |
 | `device_vendor_msft_policy_config_experience_disableshareapppromotions` | 1 |
 | `device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard` | 0 |
-| `device_vendor_msft_policy_config_search_allowcloudsearch` | 1 |
 | `device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems` | 0 |
 | `device_vendor_msft_policy_config_search_disableremovabledriveindexing` | 1 |
 | `device_vendor_msft_policy_config_search_donotusewebresults` | 0 |

@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 142 policies
+# Windows — 143 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 124 |
+| `SettingsCatalog/` | 125 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 108
+## Device-scoped (D) — 109
 
 Assign to device groups.
 
@@ -48,6 +48,7 @@ Assign to device groups.
 | [**AVD FSLogix Profile Containers**](SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.en.md) | Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile, and at sign-out FSLogix compacts the container so that freed-up space goes back to the share. | Settings Catalog | 15 | All Devices |
 | [**AVD Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.en.md) | Restricts Remote Desktop and remote procedure calls on the AVD session hosts as [Baseline] - WIN - D - Remote Desktop and RPC does on physical devices, but without the password prompt on every connection, which breaks single sign-on with Entra ID. | Settings Catalog | 11 | All Devices |
 | [**AVD Session Host**](SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) | Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up inside the attached profile (daily through the cadence in the image): OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days. | Settings Catalog | 9 | All Devices |
+| [**AVD Start and Search**](SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.en.md) | Stops Start and Search on the AVD session hosts from fetching anything from the cloud or the web when they open: no search of cloud sources (OneDrive, SharePoint), no search highlights and no list of recently added apps. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.en.md) | Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID. | Settings Catalog | 36 | All Devices |
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) | Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.en.md) | Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. | Settings Catalog | 4 | All Devices |
@@ -125,7 +126,7 @@ Assign to device groups.
 | [**Windows AI Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) | Turns off Recall and Click To Do: Windows then takes no screen captures of what happens on the screen and does not analyse them either. | Settings Catalog | 3 | All Devices |
 | [**Windows Component Hardening**](SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.en.md) | Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP server, no continuing on another device, no enumeration of local users, protected mode for the shell protocol, no WinRT access from hosted content and no upgrade offer via the Store. | Settings Catalog | 9 | — |
 | [**Windows Event Forwarding**](SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) | Forwards Windows events to a central Windows Event Collector, so that logs are kept out of reach of an attacker on the device. | Settings Catalog | 2 | — |
-| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) | Turns off Windows features that can move business data outside or create noise, such as web search from the Start menu. | Settings Catalog | 10 | All Devices |
+| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.en.md) | Turns off Windows features that can move business data outside or create noise, such as web search from the Start menu. | Settings Catalog | 9 | All Devices |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) | Blocks outbound traffic from built-in Windows programs that malware uses to disguise traffic (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) | Turns on Windows Firewall for the domain, private and public profiles and defines the default behaviour for inbound and outbound traffic. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) | Lets Windows Hello work against an on-prem Active Directory without certificates, via a Kerberos ticket from Entra ID. | Settings Catalog | 2 | All Devices |

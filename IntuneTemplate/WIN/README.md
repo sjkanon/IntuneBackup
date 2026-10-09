@@ -2,13 +2,13 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 142 policies
+# Windows — 143 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 124 |
+| `SettingsCatalog/` | 125 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 108
+## Device-scoped (D) — 109
 
 Toewijzen aan apparaatgroepen.
 
@@ -48,6 +48,7 @@ Toewijzen aan apparaatgroepen.
 | [**AVD FSLogix Profile Containers**](SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) | Zet FSLogix-profielcontainers aan op de AVD-sessiehosts: het profiel van elke gebruiker staat als dynamische VHDX van maximaal 30 GB op Azure Files, de host haalt daarvoor een Kerberos-ticket bij Entra ID, en een aanmelding zonder container mislukt liever dan dat ze met een tijdelijk profiel doorgaat, en bij afmelden comprimeert FSLogix de container zodat vrijgekomen ruimte terug naar het share gaat. | Settings Catalog | 15 | All Devices |
 | [**AVD Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) | Beperkt Remote Desktop en externe procedure-aanroepen op de AVD-sessiehosts zoals [Baseline] - WIN - D - Remote Desktop and RPC dat op fysieke toestellen doet, maar zonder de wachtwoordprompt bij elke verbinding, die eenmalige aanmelding met Entra ID breekt. | Settings Catalog | 11 | All Devices |
 | [**AVD Session Host**](SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) | Meldt op de AVD-sessiehosts een verbroken sessie na twee uur af, verbreekt een sessie die twee uur niets doet, en laat Storage Sense opruimen in het gekoppelde profiel (dagelijks via de cadence in de image): OneDrive-bestanden na zeven dagen alleen online, tijdelijke bestanden, de prullenbak na veertien en Downloads na dertig dagen. | Settings Catalog | 9 | All Devices |
+| [**AVD Start and Search**](SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) | Laat Start en Zoeken op de AVD-sessiehosts niets meer uit de cloud of het web ophalen bij het openen: geen zoeken in cloudbronnen (OneDrive, SharePoint), geen zoekhighlights en geen lijst met recent toegevoegde apps. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.md) | Versleutelt de OS-schijf en, via de behouden eigen instellingen, ook vaste en verwisselbare schijven. Herstelsleutels worden in Entra ID bewaard. | Settings Catalog | 36 | All Devices |
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.md) | Staat over Bluetooth alleen muizen, toetsenborden, headsets, telefoons via Phone Link en passkeys toe, en sluit bestandsoverdracht, tethering en seriële verbindingen af. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.md) | Zet Quick Machine Recovery aan: een apparaat dat niet meer opstart, haalt zelf een herstelpakket op uit de cloud in plaats van op een monteur te wachten. | Settings Catalog | 4 | All Devices |
@@ -125,7 +126,7 @@ Toewijzen aan apparaatgroepen.
 | [**Windows AI Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.md) | Zet Recall en Click To Do uit: Windows maakt dan geen schermopnames van wat er op het scherm gebeurt en analyseert die ook niet. | Settings Catalog | 3 | All Devices |
 | [**Windows Component Hardening**](SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.md) | Zet zeven kleine CIS-gaten dicht in Windows-onderdelen: geen automatische aanmelding, geen NTP-server, geen doorwerken op een ander apparaat, geen opsomming van lokale gebruikers, beschermde modus voor het shellprotocol, geen WinRT-toegang vanuit gehoste inhoud en geen upgrade-aanbod via de Store. | Settings Catalog | 9 | — |
 | [**Windows Event Forwarding**](SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.md) | Stuurt Windows-gebeurtenissen door naar een centrale Windows Event Collector, zodat logboeken buiten bereik van een aanvaller op het apparaat worden bewaard. | Settings Catalog | 2 | — |
-| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 10 | All Devices |
+| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.md) | Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opleveren, zoals zoeken op internet vanuit het startmenu. | Settings Catalog | 9 | All Devices |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.md) | Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) | Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID. | Settings Catalog | 2 | All Devices |

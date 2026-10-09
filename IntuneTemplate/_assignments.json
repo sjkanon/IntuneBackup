@@ -228,6 +228,16 @@
       "filterDisplayName": "WIN - AVD Multi-session"
     }
   ],
+  "[Baseline] - WIN - D - AVD Start and Search": [
+    {
+      "target": {
+        "deviceAndAppManagementAssignmentFilterId": null,
+        "deviceAndAppManagementAssignmentFilterType": "include",
+        "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
+      },
+      "filterDisplayName": "WIN - AVD Multi-session"
+    }
+  ],
   "[Baseline] - WIN - D - Attack Surface Reduction": [
     {
       "target": {

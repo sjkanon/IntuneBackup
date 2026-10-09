@@ -12,7 +12,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "settingCount": 10,
+    "settingCount": 9,
     "settings": [
         {
             "id": "0",
@@ -92,20 +92,6 @@
                     "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
                     "children": [],
                     "settingValueTemplateReference": null,
-                    "value": "device_vendor_msft_policy_config_search_allowcloudsearch_1"
-                },
-                "settingDefinitionId": "device_vendor_msft_policy_config_search_allowcloudsearch",
-                "settingInstanceTemplateReference": null
-            }
-        },
-        {
-            "id": "6",
-            "settingInstance": {
-                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
-                "choiceSettingValue": {
-                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
-                    "children": [],
-                    "settingValueTemplateReference": null,
                     "value": "device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems_0"
                 },
                 "settingDefinitionId": "device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems",
@@ -113,7 +99,7 @@
             }
         },
         {
-            "id": "7",
+            "id": "6",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "choiceSettingValue": {
@@ -127,7 +113,7 @@
             }
         },
         {
-            "id": "8",
+            "id": "7",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "choiceSettingValue": {
@@ -141,7 +127,7 @@
             }
         },
         {
-            "id": "9",
+            "id": "8",
             "settingInstance": {
                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
                 "choiceSettingValue": {

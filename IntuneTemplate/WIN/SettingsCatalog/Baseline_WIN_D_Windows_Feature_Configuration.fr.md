@@ -15,7 +15,7 @@ Désactive les fonctionnalités Windows susceptibles de faire sortir des donnée
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration |
 | Fichier | [`Baseline_WIN_D_Windows_Feature_Configuration.json`](Baseline_WIN_D_Windows_Feature_Configuration.json) |
 
-> Reprend l'ancienne policy Windows Search (023).
+> Reprend l'ancienne stratégie Windows Search (023). La recherche dans les sources cloud (allowcloudsearch, autorisée dans OpenIntuneBaseline) a été retirée ici : [Baseline] - WIN - D - AVD Start and Search la désactive sur les hôtes de session, et deux stratégies avec une valeur différente sur le même appareil produisent un Conflict. Sur un appareil physique, elle reste donc à la valeur par défaut de Windows (autorisée, l'utilisateur peut la désactiver).
 
 ## Normes
 
@@ -27,7 +27,7 @@ Désactive les fonctionnalités Windows susceptibles de faire sortir des donnée
 
 Ce que cela signifie pour chaque norme et ce qui reste nécessaire sur le plan organisationnel : [COMPLIANCE.fr.md](../../../docs/COMPLIANCE.fr.md).
 
-## Paramètres — 10
+## Paramètres — 9
 
 Les lignes en retrait sont des paramètres enfants : ils ne s'appliquent que si le
 paramètre parent a la valeur indiquée.
@@ -39,7 +39,6 @@ paramètre parent a la valeur indiquée.
 | `device_vendor_msft_policy_config_experience_configurechaticon` | 3 |
 | `device_vendor_msft_policy_config_experience_disableshareapppromotions` | 1 |
 | `device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard` | 0 |
-| `device_vendor_msft_policy_config_search_allowcloudsearch` | 1 |
 | `device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems` | 0 |
 | `device_vendor_msft_policy_config_search_disableremovabledriveindexing` | 1 |
 | `device_vendor_msft_policy_config_search_donotusewebresults` | 0 |

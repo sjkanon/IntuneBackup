@@ -15,7 +15,7 @@ Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opl
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Windows User Experience - D - Feature Configuration |
 | Bestand | [`Baseline_WIN_D_Windows_Feature_Configuration.json`](Baseline_WIN_D_Windows_Feature_Configuration.json) |
 
-> Neemt de oude Windows Search-policy (023) over.
+> Neemt de oude Windows Search-policy (023) over. Zoeken in cloudbronnen (allowcloudsearch, in OpenIntuneBaseline toegestaan) is hier weggehaald: [Baseline] - WIN - D - AVD Start and Search zet hem op de sessiehosts uit, en twee policies met een andere waarde op hetzelfde apparaat geven een Conflict. Op een fysiek toestel staat hij daarmee op de Windows-standaard (toegestaan, de gebruiker kan hem uitzetten).
 
 ## Normen
 
@@ -27,7 +27,7 @@ Zet Windows-functies uit die bedrijfsdata naar buiten kunnen brengen of ruis opl
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
-## Instellingen — 10
+## Instellingen — 9
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -39,7 +39,6 @@ instelling op de getoonde waarde staat.
 | `device_vendor_msft_policy_config_experience_configurechaticon` | 3 |
 | `device_vendor_msft_policy_config_experience_disableshareapppromotions` | 1 |
 | `device_vendor_msft_policy_config_privacy_allowcrossdeviceclipboard` | 0 |
-| `device_vendor_msft_policy_config_search_allowcloudsearch` | 1 |
 | `device_vendor_msft_policy_config_search_allowindexingencryptedstoresoritems` | 0 |
 | `device_vendor_msft_policy_config_search_disableremovabledriveindexing` | 1 |
 | `device_vendor_msft_policy_config_search_donotusewebresults` | 0 |

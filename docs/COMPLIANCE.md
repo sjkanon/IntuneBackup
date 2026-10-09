@@ -36,21 +36,21 @@ toewijzing en de status per apparaat van elke policy die hieronder genoemd wordt
 
 ## Samenvatting
 
-### Policies per fase — 207 Intune-policies
+### Policies per fase — 208 Intune-policies
 
 Alleen fase 1 is op alle apparaten of gebruikers toegewezen en telt als afgedwongen. De rest is
 bewust nog niet uitgerold; waarom staat per policy in [Organisatiekeuzes en restrisico's](#organisatiekeuzes-en-restrisicos).
 
 | Fase | Windows | macOS | iOS/iPadOS | Android | Totaal |
 |---|---:|---:|---:|---:|---:|
-| 1 — Nu | 85 | 19 | 1 | 1 | **106** |
+| 1 — Nu | 86 | 19 | 1 | 1 | **107** |
 | 2 — Pilot | 31 | 9 | – | 2 | **42** |
 | 3 — Wacht op voorwaarde | 5 | 3 | 8 | 10 | **26** |
 | 4 — Eigen groep | 9 | 4 | 4 | 1 | **18** |
 | 5 — Niet uitrollen | 12 | 2 | 1 | – | **15** |
-| **Totaal** | **142** | **37** | **14** | **14** | **207** |
+| **Totaal** | **143** | **37** | **14** | **14** | **208** |
 
-Toegewezen volgens `_assignments.json`: 106 (hoort gelijk te zijn aan fase 1: 106).
+Toegewezen volgens `_assignments.json`: 107 (hoort gelijk te zijn aan fase 1: 107).
 
 
 ### ISO/IEC 27001:2022 Annex A — 93 controls
@@ -74,7 +74,7 @@ Aantal policies dat het punt technisch invult. Geen enkel punt is met techniek a
 | [(b)](#art-212b-incidentbehandeling) incidentbehandeling | 8 | n.v.t. | 6 |
 | [(c)](#art-212c-bedrijfscontinuiteit-en-crisisbeheer) bedrijfscontinuiteit en crisisbeheer | 7 | n.v.t. | 2 |
 | [(d)](#art-212d-beveiliging-van-de-toeleveringsketen) beveiliging van de toeleveringsketen | 2 | n.v.t. | 5 |
-| [(e)](#art-212e-beveiliging-bij-verwerving-ontwikkeling-en-onderhoud-incl-kwetsbaarheden) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden | 51 | n.v.t. | 38 |
+| [(e)](#art-212e-beveiliging-bij-verwerving-ontwikkeling-en-onderhoud-incl-kwetsbaarheden) beveiliging bij verwerving, ontwikkeling en onderhoud, incl. kwetsbaarheden | 52 | n.v.t. | 38 |
 | [(f)](#art-212f-beoordeling-van-de-doeltreffendheid) beoordeling van de doeltreffendheid | 13 | n.v.t. | 2 |
 | [(g)](#art-212g-basispraktijken-cyberhygiene-en-training) basispraktijken cyberhygiene en training | 1 | n.v.t. | 2 |
 | [(h)](#art-212h-cryptografie-en-versleuteling) cryptografie en versleuteling | 9 | n.v.t. | 7 |
@@ -185,10 +185,10 @@ control met endpoint- of identitybeleid in te vullen is; **Status** zegt wat dez
 | [**A.8.6** Capaciteitsbeheer](#a86-capaciteitsbeheer) | deels | ● Afgedekt (fase 1) | 4 | – | Capaciteitsplanning voor netwerk, licenties en opslag. |
 | [**A.8.7** Bescherming tegen malware](#a87-bescherming-tegen-malware) | technisch | ● Afgedekt (fase 1) | 27 | 19 | Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). |
 | [**A.8.8** Beheer van technische kwetsbaarheden](#a88-beheer-van-technische-kwetsbaarheden) | deels | ● Afgedekt (fase 1) | 12 | 13 | Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. |
-| [**A.8.9** Configuratiebeheer](#a89-configuratiebeheer) | deels | ● Afgedekt (fase 1) | 20 | 10 | Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. |
+| [**A.8.9** Configuratiebeheer](#a89-configuratiebeheer) | deels | ● Afgedekt (fase 1) | 21 | 10 | Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. |
 | **A.8.10** Wissen van informatie | deels | ○ Geen technische maatregel in de baseline | – | – | Bewaar- en verwijderbeleid; selectief wissen en wipe zijn technische hulpmiddelen. |
 | [**A.8.11** Maskeren van gegevens](#a811-maskeren-van-gegevens) | deels | ◐ Alleen pilot, wacht of eigen groep | – | 1 | Beleid wanneer gegevens gemaskeerd of gepseudonimiseerd worden — grotendeels applicatieniveau. |
-| [**A.8.12** Voorkomen van gegevenslekken (data leakage prevention)](#a812-voorkomen-van-gegevenslekken-data-leakage-prevention) | deels | ● Afgedekt (fase 1) | 13 | 17 | DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. |
+| [**A.8.12** Voorkomen van gegevenslekken (data leakage prevention)](#a812-voorkomen-van-gegevenslekken-data-leakage-prevention) | deels | ● Afgedekt (fase 1) | 14 | 17 | DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. |
 | [**A.8.13** Back-up van informatie](#a813-back-up-van-informatie) | deels | ● Afgedekt (fase 1) | 3 | – | Back-upbeleid voor M365-data en periodieke hersteltests; OneDrive-synchronisatie is geen volledige back-up. |
 | **A.8.14** Redundantie van informatieverwerkende faciliteiten | organisatorisch | ▢ Organisatorisch | – | – | Redundantie van diensten en infrastructuur — buiten het endpoint-/identitydomein. |
 | [**A.8.15** Logging](#a815-logging) | deels | ● Afgedekt (fase 1) | 6 | 2 | Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. |
@@ -575,6 +575,7 @@ Alle policies per control, met hun fase. Fase 5 is een alternatief dat niet uitr
 - [`MAC - D - Microsoft OneDrive`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.md) (fase 1)
 - [`WIN - D - AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) (fase 1)
 - [`WIN - D - AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) (fase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) (fase 1)
 - [`WIN - D - Cloud Optimized Content`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.md) (fase 1)
 - [`WIN - D - Config Refresh`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) (fase 1)
 - [`WIN - D - Internet Explorer Legacy`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.md) (fase 1)
@@ -614,6 +615,7 @@ Alle policies per control, met hun fase. Fase 5 is een alternatief dat niet uitr
 - [`MAC - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.md) (fase 1)
 - [`MAC - U - Microsoft OneDrive KFM`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.md) (fase 1)
 - [`WIN - D - AI Tooling`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.md) (fase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) (fase 1)
 - [`WIN - D - Microsoft Accounts`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.md) (fase 1)
 - [`WIN - D - Microsoft OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) (fase 1)
 - [`WIN - D - Privacy and Telemetry`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.md) (fase 1)
@@ -919,7 +921,7 @@ van het technische deel, geen vervanging van die afweging.
 
 **Technische invulling.** Het zwaartepunt van de baseline: configuratiebeheer, patchbeheer (update-ringen), hardening, malwarebescherming, netwerkbeveiliging op het apparaat en OS-ondergrenzen.
 
-**Intune, fase 1 (51)**
+**Intune, fase 1 (52)**
 
 - [`MAC - D - Defender Antivirus`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.md) (fase 1)
 - [`MAC - D - Defender for Endpoint`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.md) (fase 1)
@@ -934,6 +936,7 @@ van het technische deel, geen vervanging van die afweging.
 - [`WIN - D - Automatic Restart Sign-On`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.md) (fase 1)
 - [`WIN - D - AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) (fase 1)
 - [`WIN - D - AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) (fase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) (fase 1)
 - [`WIN - D - Config Refresh`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.md) (fase 1)
 - [`WIN - D - Defender Additional Configuration`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.md) (fase 1)
 - [`WIN - D - Defender Antivirus`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.md) (fase 1)
@@ -1299,7 +1302,7 @@ Benchmark-verwijzingen (CIS Microsoft Windows 11, Apple macOS, iOS, Android) sta
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technisch | ○ Geen technische maatregel in de baseline | — |
 | **4.7** Manage Default Accounts on Enterprise Assets and Software | IG1 | technisch | ● Afgedekt (fase 1) | `MAC - D - Accounts and Login`, `WIN - D - Local Security Policies`, `WIN - D - Windows LAPS`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration`, `WIN - D - Windows Sandbox` en 13 meer |
+| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technisch | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `WIN - D - AVD Start and Search`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration` en 14 meer |
 | **4.9** Configure Trusted DNS Servers on Enterprise Assets | IG2 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **4.10** Enforce Automatic Device Lockout on Portable End-User Devices | IG2 | technisch | ◐ Alleen pilot, wacht of eigen groep | `WIN - D - Account Lockout`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `IOS - D - Passcode` |
 | **4.11** Enforce Remote Wipe Capability on Portable End-User Devices | IG2 | technisch | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection` |
@@ -1509,10 +1512,10 @@ is per definitie organisatorisch: geen policy vult het in, deze baseline is hoog
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Afgedekt (fase 1) | `WIN - D - AVD Session Host`, `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock` en 9 meer |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Geen technische maatregel in de baseline | — |
 | **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Afgedekt (fase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` en 15 meer |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry` en 17 meer |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Afgedekt (fase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - AVD Start and Search`, `WIN - D - Data Minimisation` en 18 meer |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Afgedekt (fase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Afgedekt (fase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
-| **PR.PS-01** | Configuration management practices are established and applied | ● Afgedekt (fase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - AVD Defender FSLogix Exclusions` en 56 meer |
+| **PR.PS-01** | Configuration management practices are established and applied | ● Afgedekt (fase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - AVD Defender FSLogix Exclusions` en 57 meer |
 | **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Afgedekt (fase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates` en 17 meer |
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ Geen technische maatregel in de baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Afgedekt (fase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` en 2 meer |
@@ -1893,10 +1896,10 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 | **A.8.6** Capaciteitsbeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 4 policies in fase 1. Organisatorisch: Capaciteitsplanning voor netwerk, licenties en opslag. | (c) (i) |
 | **A.8.7** Bescherming tegen malware | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 27 policies in fase 1, 17 voorbereid. Organisatorisch: Gebruikersbewustzijn en opvolging van detecties (de norm noemt beide expliciet). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Beheer van technische kwetsbaarheden | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 12 policies in fase 1, 13 voorbereid. Organisatorisch: Kwetsbaarhedenproces: bronnen volgen, risico beoordelen, termijnen voor herstel, uitzonderingen registreren. | (e) (f) (h) (i) |
-| **A.8.9** Configuratiebeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 20 policies in fase 1, 7 voorbereid. Organisatorisch: Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. | (b) (c) (e) (g) (i) (j) |
+| **A.8.9** Configuratiebeheer | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 21 policies in fase 1, 7 voorbereid. Organisatorisch: Deze repo is de vastgelegde configuratie; wijzigingen reviewen (PR) en afwijkingen in de tenant opvolgen blijft een proces. | (b) (c) (e) (g) (i) (j) |
 | **A.8.10** Wissen van informatie | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Bewaar- en verwijderbeleid; selectief wissen en wipe zijn technische hulpmiddelen. | — |
 | **A.8.11** Maskeren van gegevens | ja | basisbeveiliging; bevestigen met de risicoanalyse | Technisch voorbereid: 1 policy in pilot, wacht of eigen groep. Organisatorisch: Beleid wanneer gegevens gemaskeerd of gepseudonimiseerd worden — grotendeels applicatieniveau. | — |
-| **A.8.12** Voorkomen van gegevenslekken (data leakage prevention) | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 13 policies in fase 1, 15 voorbereid. Organisatorisch: DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. | (c) (d) (e) (h) (i) |
+| **A.8.12** Voorkomen van gegevenslekken (data leakage prevention) | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 14 policies in fase 1, 15 voorbereid. Organisatorisch: DLP-beleid en classificatie; Purview DLP valt buiten deze baseline, apparaat- en app-beperkingen dragen bij. | (c) (d) (e) (h) (i) |
 | **A.8.13** Back-up van informatie | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 3 policies in fase 1. Organisatorisch: Back-upbeleid voor M365-data en periodieke hersteltests; OneDrive-synchronisatie is geen volledige back-up. | (c) |
 | **A.8.14** Redundantie van informatieverwerkende faciliteiten | ja | basisbeveiliging; bevestigen met de risicoanalyse | Organisatorisch: Redundantie van diensten en infrastructuur — buiten het endpoint-/identitydomein. | — |
 | **A.8.15** Logging | ja | basisbeveiliging en invulling van NIS2 art. 21(2); bevestigen met de risicoanalyse | Technisch: 6 policies in fase 1, 2 voorbereid. Organisatorisch: Logbestanden centraal verzamelen, beschermen, bewaren en analyseren (SIEM/Defender XDR); de baseline regelt alleen wat het apparaat logt. | (b) (e) |
@@ -1924,7 +1927,7 @@ uitkomst. Kolom *NIS2* noemt de punten die de policies bij deze control raken.
 
 | | Aantal |
 |---|---:|
-| Intune-policies met controls | 207 van 207 |
+| Intune-policies met controls | 208 van 208 |
 | Labels buiten de vocabulaire | 0 |
 | Labels met een afwijkende schrijfwijze (wel meegeteld) | 0 |
 

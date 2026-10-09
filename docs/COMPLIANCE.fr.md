@@ -36,21 +36,21 @@ et le statut par appareil de chaque policy citée ci-dessous.
 
 ## Résumé
 
-### Policies par phase — 207 policies Intune
+### Policies par phase — 208 policies Intune
 
 Seule la phase 1 est affectée à tous les appareils ou utilisateurs et compte comme imposée. Le reste
 n'est volontairement pas encore déployé ; la raison pour chaque policy figure dans [Choix de l'organisation et risques résiduels](#choix-de-lorganisation-et-risques-résiduels).
 
 | Phase | Windows | macOS | iOS/iPadOS | Android | Total |
 |---|---:|---:|---:|---:|---:|
-| 1 — Immédiat | 85 | 19 | 1 | 1 | **106** |
+| 1 — Immédiat | 86 | 19 | 1 | 1 | **107** |
 | 2 — Pilote | 31 | 9 | – | 2 | **42** |
 | 3 — En attente d'un prérequis | 5 | 3 | 8 | 10 | **26** |
 | 4 — Groupe dédié | 9 | 4 | 4 | 1 | **18** |
 | 5 — Ne pas déployer | 12 | 2 | 1 | – | **15** |
-| **Total** | **142** | **37** | **14** | **14** | **207** |
+| **Total** | **143** | **37** | **14** | **14** | **208** |
 
-Affectées selon `_assignments.json` : 106 (doit être égal à la phase 1 : 106).
+Affectées selon `_assignments.json` : 107 (doit être égal à la phase 1 : 107).
 
 
 ### ISO/IEC 27001:2022 Annexe A — 93 mesures
@@ -74,7 +74,7 @@ Nombre de policies qui mettent en œuvre le point sur le plan technique. Aucun p
 | [(b)](#art-212b-gestion-des-incidents) gestion des incidents | 8 | s.o. | 6 |
 | [(c)](#art-212c-continuité-des-activités-et-gestion-des-crises) continuité des activités et gestion des crises | 7 | s.o. | 2 |
 | [(d)](#art-212d-sécurité-de-la-chaîne-dapprovisionnement) sécurité de la chaîne d'approvisionnement | 2 | s.o. | 5 |
-| [(e)](#art-212e-sécurité-de-lacquisition-du-développement-et-de-la-maintenance-des-réseaux-et-des-systèmes-dinformation-y-compris-le-traitement-des-vulnérabilités) sécurité de l'acquisition, du développement et de la maintenance des réseaux et des systèmes d'information, y compris le traitement des vulnérabilités | 51 | s.o. | 38 |
+| [(e)](#art-212e-sécurité-de-lacquisition-du-développement-et-de-la-maintenance-des-réseaux-et-des-systèmes-dinformation-y-compris-le-traitement-des-vulnérabilités) sécurité de l'acquisition, du développement et de la maintenance des réseaux et des systèmes d'information, y compris le traitement des vulnérabilités | 52 | s.o. | 38 |
 | [(f)](#art-212f-évaluation-de-lefficacité) évaluation de l'efficacité | 13 | s.o. | 2 |
 | [(g)](#art-212g-pratiques-de-base-en-matière-de-cyberhygiène-et-formation-à-la-cybersécurité) pratiques de base en matière de cyberhygiène et formation à la cybersécurité | 1 | s.o. | 2 |
 | [(h)](#art-212h-cryptographie-et-chiffrement) cryptographie et chiffrement | 9 | s.o. | 7 |
@@ -185,10 +185,10 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | [**A.8.6** Dimensionnement](#a86-dimensionnement) | partiel | ● Couvert (phase 1) | 4 | – | Planification des capacités pour le réseau, les licences et le stockage. |
 | [**A.8.7** Protection contre les programmes malveillants](#a87-protection-contre-les-programmes-malveillants) | technique | ● Couvert (phase 1) | 27 | 19 | Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). |
 | [**A.8.8** Gestion des vulnérabilités techniques](#a88-gestion-des-vulnérabilités-techniques) | partiel | ● Couvert (phase 1) | 12 | 13 | Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. |
-| [**A.8.9** Gestion de la configuration](#a89-gestion-de-la-configuration) | partiel | ● Couvert (phase 1) | 20 | 10 | Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. |
+| [**A.8.9** Gestion de la configuration](#a89-gestion-de-la-configuration) | partiel | ● Couvert (phase 1) | 21 | 10 | Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. |
 | **A.8.10** Suppression des informations | partiel | ○ Aucune mesure technique dans la baseline | – | – | Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. |
 | [**A.8.11** Masquage des données](#a811-masquage-des-données) | partiel | ◐ Seulement pilote, en attente ou groupe dédié | – | 1 | Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. |
-| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 13 | 17 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
+| [**A.8.12** Prévention de la fuite de données](#a812-prévention-de-la-fuite-de-données) | partiel | ● Couvert (phase 1) | 14 | 17 | Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. |
 | [**A.8.13** Sauvegarde des informations](#a813-sauvegarde-des-informations) | partiel | ● Couvert (phase 1) | 3 | – | Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. |
 | **A.8.14** Redondance des moyens de traitement de l'information | organisationnel | ▢ Organisationnel | – | – | Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. |
 | [**A.8.15** Journalisation](#a815-journalisation) | partiel | ● Couvert (phase 1) | 6 | 2 | Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. |
@@ -575,6 +575,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`MAC - D - Microsoft OneDrive`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_OneDrive.fr.md) (phase 1)
 - [`WIN - D - AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) (phase 1)
 - [`WIN - D - AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) (phase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) (phase 1)
 - [`WIN - D - Cloud Optimized Content`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_Optimized_Content.fr.md) (phase 1)
 - [`WIN - D - Config Refresh`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.fr.md) (phase 1)
 - [`WIN - D - Internet Explorer Legacy`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Internet_Explorer_Legacy.fr.md) (phase 1)
@@ -614,6 +615,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`MAC - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_Edge_Profiles_and_Sync.fr.md) (phase 1)
 - [`MAC - U - Microsoft OneDrive KFM`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_U_Microsoft_OneDrive_KFM.fr.md) (phase 1)
 - [`WIN - D - AI Tooling`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.fr.md) (phase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) (phase 1)
 - [`WIN - D - Microsoft Accounts`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.fr.md) (phase 1)
 - [`WIN - D - Microsoft OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.fr.md) (phase 1)
 - [`WIN - D - Privacy and Telemetry`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.fr.md) (phase 1)
@@ -919,7 +921,7 @@ de la partie technique, pas un substitut à cette appréciation.
 
 **Mise en œuvre technique.** Le cœur de la baseline : gestion de la configuration, gestion des correctifs (anneaux de mise à jour), durcissement, protection contre les logiciels malveillants, sécurité réseau sur l'appareil et versions minimales de l'OS.
 
-**Intune, phase 1 (51)**
+**Intune, phase 1 (52)**
 
 - [`MAC - D - Defender Antivirus`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_Antivirus.fr.md) (phase 1)
 - [`MAC - D - Defender for Endpoint`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.fr.md) (phase 1)
@@ -934,6 +936,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - D - Automatic Restart Sign-On`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Automatic_Restart_Sign_On.fr.md) (phase 1)
 - [`WIN - D - AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) (phase 1)
 - [`WIN - D - AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) (phase 1)
+- [`WIN - D - AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) (phase 1)
 - [`WIN - D - Config Refresh`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Config_Refresh.fr.md) (phase 1)
 - [`WIN - D - Defender Additional Configuration`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Additional_Configuration.fr.md) (phase 1)
 - [`WIN - D - Defender Antivirus`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Antivirus.fr.md) (phase 1)
@@ -1299,7 +1302,7 @@ Les références aux benchmarks (CIS Microsoft Windows 11, Apple macOS, iOS, And
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technique | ○ Aucune mesure technique dans la baseline | — |
 | **4.7** Manage Default Accounts on Enterprise Assets and Software | IG1 | technique | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `WIN - D - Local Security Policies`, `WIN - D - Windows LAPS`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technique | ● Couvert (phase 1) | `MAC - D - Restrictions`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration`, `WIN - D - Windows Sandbox` et 13 de plus |
+| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technique | ● Couvert (phase 1) | `MAC - D - Restrictions`, `WIN - D - AVD Start and Search`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration` et 14 de plus |
 | **4.9** Configure Trusted DNS Servers on Enterprise Assets | IG2 | technique | ◐ Seulement pilote, en attente ou groupe dédié | `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **4.10** Enforce Automatic Device Lockout on Portable End-User Devices | IG2 | technique | ◐ Seulement pilote, en attente ou groupe dédié | `WIN - D - Account Lockout`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `IOS - D - Passcode` |
 | **4.11** Enforce Remote Wipe Capability on Portable End-User Devices | IG2 | technique | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection` |
@@ -1509,10 +1512,10 @@ est organisationnel par définition : aucune policy ne le met en œuvre, cette b
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Couvert (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock` et 9 de plus |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ Aucune mesure technique dans la baseline | — |
 | **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` et 15 de plus |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Data Minimisation`, `WIN - D - Privacy and Telemetry` et 17 de plus |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Couvert (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - AVD Start and Search`, `WIN - D - Data Minimisation` et 18 de plus |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Couvert (phase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Couvert (phase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync` |
-| **PR.PS-01** | Configuration management practices are established and applied | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - AVD Defender FSLogix Exclusions` et 56 de plus |
+| **PR.PS-01** | Configuration management practices are established and applied | ● Couvert (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - AVD Defender FSLogix Exclusions` et 57 de plus |
 | **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Couvert (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates` et 17 de plus |
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ Aucune mesure technique dans la baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Couvert (phase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` et 2 de plus |
@@ -1893,10 +1896,10 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.8.6** Dimensionnement | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 4 policies en phase 1. Organisationnel : Planification des capacités pour le réseau, les licences et le stockage. | (c) (i) |
 | **A.8.7** Protection contre les programmes malveillants | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 27 policies en phase 1, 17 préparée(s). Organisationnel : Sensibilisation des utilisateurs et suivi des détections (la norme cite explicitement les deux). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Gestion des vulnérabilités techniques | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 12 policies en phase 1, 13 préparée(s). Organisationnel : Processus de gestion des vulnérabilités : suivre les sources, évaluer le risque, fixer des délais de correction, enregistrer les exceptions. | (e) (f) (h) (i) |
-| **A.8.9** Gestion de la configuration | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 20 policies en phase 1, 7 préparée(s). Organisationnel : Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. | (b) (c) (e) (g) (i) (j) |
+| **A.8.9** Gestion de la configuration | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 21 policies en phase 1, 7 préparée(s). Organisationnel : Ce dépôt est la configuration de référence ; la revue des modifications (PR) et le suivi des écarts dans le tenant restent un processus. | (b) (c) (e) (g) (i) (j) |
 | **A.8.10** Suppression des informations | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Politique de conservation et de suppression ; l'effacement sélectif et le wipe sont des outils techniques. | — |
 | **A.8.11** Masquage des données | oui | sécurité de base ; à confirmer par l'analyse des risques | Préparé techniquement : 1 policy en pilote, en attente ou groupe dédié. Organisationnel : Politique définissant quand les données sont masquées ou pseudonymisées — principalement au niveau applicatif. | — |
-| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 13 policies en phase 1, 15 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
+| **A.8.12** Prévention de la fuite de données | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 14 policies en phase 1, 15 préparée(s). Organisationnel : Politique DLP et classification ; Purview DLP est hors de cette baseline, les restrictions d'appareil et d'application y contribuent. | (c) (d) (e) (h) (i) |
 | **A.8.13** Sauvegarde des informations | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1. Organisationnel : Politique de sauvegarde des données M365 et tests de restauration périodiques ; la synchronisation OneDrive n'est pas une sauvegarde complète. | (c) |
 | **A.8.14** Redondance des moyens de traitement de l'information | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Redondance des services et de l'infrastructure — hors du domaine endpoint/identité. | — |
 | **A.8.15** Journalisation | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 6 policies en phase 1, 2 préparée(s). Organisationnel : Collecter, protéger, conserver et analyser les journaux de manière centralisée (SIEM/Defender XDR) ; la baseline ne règle que ce que l'appareil journalise. | (b) (e) |
@@ -1924,7 +1927,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 
 | | Nombre |
 |---|---:|
-| Policies Intune avec mesures | 207 sur 207 |
+| Policies Intune avec mesures | 208 sur 208 |
 | Libellés hors vocabulaire | 0 |
 | Libellés avec une graphie divergente (comptés quand même) | 0 |
 

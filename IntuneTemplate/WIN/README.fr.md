@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 142 policies
+# Windows — 143 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 124 |
+| `SettingsCatalog/` | 125 |
 | `DeviceConfigurations/` | 6 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 108
+## Device-scoped (D) — 109
 
 Affecter à des groupes d'appareils.
 
@@ -48,6 +48,7 @@ Affecter à des groupes d'appareils.
 | [**AVD FSLogix Profile Containers**](SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | Active les conteneurs de profil FSLogix sur les hôtes de session AVD : le profil de chaque utilisateur est un VHDX dynamique de 30 Go maximum sur Azure Files, l'hôte obtient pour cela un ticket Kerberos auprès d'Entra ID, et une connexion sans conteneur échoue plutôt que de continuer avec un profil temporaire, et à la déconnexion FSLogix compacte le conteneur pour que l'espace libéré retourne au partage. | Settings Catalog | 15 | All Devices |
 | [**AVD Remote Desktop and RPC**](SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | Restreint le Bureau à distance et les appels de procédure distante sur les hôtes de session AVD comme [Baseline] - WIN - D - Remote Desktop and RPC le fait sur les appareils physiques, mais sans l'invite de mot de passe à chaque connexion, qui casse l'authentification unique avec Entra ID. | Settings Catalog | 11 | All Devices |
 | [**AVD Session Host**](SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | Ferme sur les hôtes de session AVD une session déconnectée après deux heures, déconnecte une session inactive depuis deux heures, et laisse Storage Sense nettoyer dans le profil monté (chaque jour via la cadence dans l'image) : fichiers OneDrive en ligne uniquement après sept jours, fichiers temporaires, la corbeille après quatorze et les Téléchargements après trente jours. | Settings Catalog | 9 | All Devices |
+| [**AVD Start and Search**](SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) | Empêche Démarrer et Rechercher, sur les hôtes de session AVD, de récupérer quoi que ce soit dans le cloud ou sur le web à l'ouverture : pas de recherche dans les sources cloud (OneDrive, SharePoint), pas de points forts de la recherche et pas de liste des applications récemment ajoutées. | Settings Catalog | 3 | All Devices |
 | [**BitLocker**](SettingsCatalog/Baseline_WIN_D_BitLocker.fr.md) | Chiffre le disque du système d'exploitation et, via les paramètres personnalisés conservés, également les disques fixes et amovibles. Les clés de récupération sont stockées dans Entra ID. | Settings Catalog | 36 | All Devices |
 | [**Bluetooth Allowed Services**](SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.fr.md) | N'autorise en Bluetooth que les souris, claviers, casques, téléphones via Phone Link et passkeys, et bloque le transfert de fichiers, le partage de connexion et les connexions série. | Settings Catalog | 1 | — |
 | [**Business Continuity**](SettingsCatalog/Baseline_WIN_D_Business_Continuity.fr.md) | Active Quick Machine Recovery : un appareil qui ne démarre plus récupère lui-même un paquet de récupération depuis le cloud au lieu d'attendre un technicien. | Settings Catalog | 4 | All Devices |
@@ -125,7 +126,7 @@ Affecter à des groupes d'appareils.
 | [**Windows AI Restricted**](SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.fr.md) | Désactive Recall et Click To Do : Windows ne fait alors aucune capture de ce qui se passe à l'écran et ne les analyse pas non plus. | Settings Catalog | 3 | All Devices |
 | [**Windows Component Hardening**](SettingsCatalog/Baseline_WIN_D_Windows_Component_Hardening.fr.md) | Comble sept petites lacunes CIS dans des composants Windows : pas de connexion automatique, pas de serveur NTP, pas de poursuite sur un autre appareil, pas d'énumération des utilisateurs locaux, mode protégé pour le protocole shell, pas d'accès WinRT depuis du contenu hébergé et pas d'offre de mise à niveau via le Store. | Settings Catalog | 9 | — |
 | [**Windows Event Forwarding**](SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.fr.md) | Transfère les événements Windows vers un Windows Event Collector central, afin que les journaux soient conservés hors de portée d'un attaquant présent sur l'appareil. | Settings Catalog | 2 | — |
-| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.fr.md) | Désactive les fonctionnalités Windows susceptibles de faire sortir des données de l'entreprise ou de générer du bruit, comme la recherche web depuis le menu Démarrer. | Settings Catalog | 10 | All Devices |
+| [**Windows Feature Configuration**](SettingsCatalog/Baseline_WIN_D_Windows_Feature_Configuration.fr.md) | Désactive les fonctionnalités Windows susceptibles de faire sortir des données de l'entreprise ou de générer du bruit, comme la recherche web depuis le menu Démarrer. | Settings Catalog | 9 | All Devices |
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.fr.md) | Bloque le trafic sortant des programmes Windows intégrés que les malwares utilisent pour camoufler leur trafic (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.fr.md) | Active le Pare-feu Windows pour les profils domaine, privé et public et définit le comportement par défaut pour le trafic entrant et sortant. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.fr.md) | Permet à Windows Hello de fonctionner avec un Active Directory on-prem sans certificats, via un ticket Kerberos émis par Entra ID. | Settings Catalog | 2 | All Devices |
