@@ -2,7 +2,7 @@
 /**
  * Guards the layout of IntuneTemplate/ (see PLAN.md).
  *
- * Seven things must be right:
+ * Eight things must be right:
  *  1. A policy never contains both device- and user-scoped settings. A mixed policy cannot be
  *     assigned unambiguously, and when troubleshooting you cannot tell whether a setting does
  *     not arrive because the device or because the user is out of scope.
@@ -10,8 +10,10 @@
  *     Item) carry the same platform and the same scope.
  *  3. That declared scope matches what is actually in the settings.
  *  4. The file is in the folder that belongs to its platform and Type.
- *  5. No two assigned policies set the same settingDefinitionId — in Intune that produces a
- *     *Conflict*, after which the setting is applied by *neither* of them.
+ *  5. No two policies that land on the same device set the same settingDefinitionId to a
+ *     different value — in Intune that produces a *Conflict*, after which the setting is applied
+ *     by *neither* of them. "The same device" means per device class: `alle` + `fysiek` on a
+ *     physical PC, `alle` + `avd` on an AVD session host, over phase 1 and 2 (see findOverlaps).
  *  6. The `Package` field matches the fase and the assignment. That field determines in which
  *     CIPP package a policy is deployed and to which target; if it lags behind, the policy is
  *     deployed to the wrong audience or not at all.
@@ -19,6 +21,8 @@
  *     IntuneTemplate/_controls.json. COMPLIANCE.md counts per control which policies fulfil it:
  *     a policy without controls silently drops out there, and a label with its own spelling
  *     counts as a different control.
+ *  8. Every Windows policy has a valid `doelgroep` (alle | fysiek | avd), no other policy has
+ *     one, and the filter in _assignments.json matches it.
  *
  * The scope follows from the settingDefinitionId, not from the subject: everything that starts
  * with `user_` is user-scoped, the rest is device-scoped. Watch out for the third form that
@@ -39,7 +43,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { PLATFORMS, readTemplates, relativePathFor, parseBaseName, collectSettingIds, flattenSettings, packageFor, versionFloors } = require("./lib/templates");
+const { DOELGROEPEN, classFilterFor, PLATFORMS, readTemplates, relativePathFor, parseBaseName, collectSettingIds, flattenSettings, packageFor, versionFloors } = require("./lib/templates");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const TEMPLATE_DIR = path.join(REPO_ROOT, "IntuneTemplate");
@@ -140,10 +144,19 @@ function analyse(template) {
 
 /**
  * Twee policies die dezelfde instelling zetten zijn alleen een probleem als ze allebei
- * ergens landen én een andere waarde zetten. Drie afwegingen:
+ * op hetzelfde apparaat landen én een andere waarde zetten. Vier afwegingen:
  *
- * - Een policy zonder assignment (de pilot-ringen) doet niets en telt dus niet mee, anders
- *   zou de check klagen over precies de constructie die bedoeld is.
+ * - **Per apparaatklasse.** Een Windows-policy heeft een `doelgroep`: `alle`, `fysiek` of `avd`
+ *   (zie DOELGROEPEN in lib/templates.js). Op een fysieke pc landen `alle` + `fysiek`, op een
+ *   AVD-sessiehost `alle` + `avd`. Binnen die twee sets mag niets botsen; tússen `fysiek` en
+ *   `avd` juist wel — dat is het doel van de klassen (Storage Sense aan op een laptop, uit op een
+ *   sessiehost). Windows 365 en persoonlijke AVD-hosts krijgen alleen `alle`, een deelverzameling
+ *   van beide sets, en worden dus vanzelf mee gecontroleerd.
+ * - **Fase 1 en 2.** Dat is wat de baseline zelf op elk apparaat van de klasse zet: fase 1 op
+ *   iedereen, fase 2 op de pilotgroep, waar fase 1 ook landt. Fase 3 wacht, fase 4 staat op een
+ *   eigen groep en fase 5 rolt niet uit; die vergelijkt deze check niet (zie docs/AVD.md voor de
+ *   bekende overlap van de AVD-policies met de Cloud PC-set in fase 4). De update-ringen
+ *   (RING_RE) zetten bewust dezelfde instellingen met andere waarden voor andere groepen.
  * - Vergelijken gebeurt op uitgeklapte instelling + waarde, niet op settingDefinitionId.
  *   Dezelfde waarde uit twee policies is geen conflict maar dubbelop: Intune past 'm
  *   gewoon toe. Verschillende waarden zijn wél een conflict — dan wordt de instelling door
@@ -151,26 +164,41 @@ function analyse(template) {
  * - Alleen voor Windows. macOS-policies leveren elk een eigen configuratieprofiel; dat
  *   meerdere profielen dezelfde payload (PPPC, system extensions, service management)
  *   gebruiken is bij Apple normaal en wordt samengevoegd, niet als conflict behandeld.
- *   Die overlap wordt daarom alleen gemeld.
+ *   Die overlap wordt daarom alleen gemeld, voor de toegewezen (fase 1) policies.
  */
-function findOverlaps(results, assignments) {
-  const windows = new Map();
+const CONFLICT_FASES = new Set([1, 2]);
+
+/** De klassen waarvan we per klasse de landende set vergelijken; `alle` zit in beide. */
+const DEVICE_CLASSES = Object.keys(DOELGROEPEN).filter((d) => DOELGROEPEN[d]);
+
+function findOverlaps(results, assignments, manifestByTarget) {
+  const perClass = new Map(DEVICE_CLASSES.map((k) => [k, new Map()]));
   const otherPlatforms = new Map();
 
   for (const r of results) {
     if (r.type !== "Catalog" || !r.parsed) continue;
-    if (!assignments[r.displayName] || assignments[r.displayName].length === 0) continue;
     if (RING_RE.test(r.baseName)) continue;
 
     if (r.parsed.platform === "WIN") {
-      for (const s of flattenSettings(r.raw.settings).settings) {
-        const key = s.settingDefinitionId;
-        if (!windows.has(key)) windows.set(key, new Map());
-        const perPolicy = windows.get(key);
-        if (!perPolicy.has(r.displayName)) perPolicy.set(r.displayName, new Set());
-        perPolicy.get(r.displayName).add(JSON.stringify(s.expectedValue));
+      const entry = manifestByTarget.get(r.baseName);
+      if (!entry || !CONFLICT_FASES.has(entry.fase)) continue;
+      // Zonder (geldige) doelgroep telt hij als `alle`: dan landt hij overal, en een
+      // ontbrekende doelgroep meldt checkManifestCoverage al.
+      const doelgroep = DOELGROEPEN[entry.doelgroep] ? entry.doelgroep : "alle";
+      const flat = flattenSettings(r.raw.settings).settings;
+      for (const klasse of DEVICE_CLASSES) {
+        if (doelgroep !== "alle" && doelgroep !== klasse) continue;
+        const windows = perClass.get(klasse);
+        for (const s of flat) {
+          const key = s.settingDefinitionId;
+          if (!windows.has(key)) windows.set(key, new Map());
+          const perPolicy = windows.get(key);
+          if (!perPolicy.has(r.displayName)) perPolicy.set(r.displayName, new Set());
+          perPolicy.get(r.displayName).add(JSON.stringify(s.expectedValue));
+        }
       }
     } else {
+      if (!assignments[r.displayName] || assignments[r.displayName].length === 0) continue;
       // Alleen de top-level payload: de kinderen zijn collectie-items en horen per policy
       // te verschillen.
       for (const s of r.raw.settings || []) {
@@ -181,16 +209,26 @@ function findOverlaps(results, assignments) {
     }
   }
 
+  // Per instelling + set policies één regel, met de klassen waarin hij voorkomt: een overlap
+  // tussen twee `alle`-policies staat anders twee keer in de uitvoer.
+  const merged = new Map();
+  for (const [klasse, windows] of perClass) {
+    for (const [id, perPolicy] of windows) {
+      // Binnen één policy mag dezelfde instelling meermaals voorkomen met andere waarden: dat
+      // is een collectie (firewallregels, hardened UNC paths), geen tegenspraak. Alleen tussen
+      // policies is het er een.
+      if (perPolicy.size < 2) continue;
+      const hits = [...perPolicy.entries()].map(([name, values]) => ({ name, value: [...values].sort().join(", ") }));
+      const key = id + "|" + hits.map((h) => h.name).sort().join("|");
+      if (!merged.has(key)) merged.set(key, { id, hits, klassen: [] });
+      merged.get(key).klassen.push(klasse);
+    }
+  }
   const conflicts = [];
   const duplicates = [];
-  for (const [id, perPolicy] of windows) {
-    // Binnen één policy mag dezelfde instelling meermaals voorkomen met andere waarden: dat
-    // is een collectie (firewallregels, hardened UNC paths), geen tegenspraak. Alleen tussen
-    // policies is het er een.
-    if (perPolicy.size < 2) continue;
-    const hits = [...perPolicy.entries()].map(([name, values]) => ({ name, value: [...values].sort().join(", ") }));
-    const distinct = new Set(hits.map((h) => h.value));
-    (distinct.size > 1 ? conflicts : duplicates).push({ id, hits });
+  for (const m of merged.values()) {
+    const distinct = new Set(m.hits.map((h) => h.value));
+    (distinct.size > 1 ? conflicts : duplicates).push(m);
   }
   const shared = [...otherPlatforms.entries()]
     .filter(([, hits]) => hits.length > 1)
@@ -260,6 +298,34 @@ function checkManifestCoverage(templates, assignments) {
     // een uitzondering zonder reden is over een half jaar niet meer te wegen.
     if (fase !== 1 && !entry.faseWaarom) problems.push(`_manifest.json: ${t.baseName} staat in fase ${fase} zonder "faseWaarom"`);
     if (fase === 4 && !entry.faseGroep) problems.push(`_manifest.json: ${t.baseName} staat in fase 4 zonder "faseGroep" — op welke groep hoort hij dan?`);
+
+    // De apparaatklasse. Verplicht op elke Windows-policy — ook buiten fase 1 en 2, waar hij
+    // het pakket niet bepaalt: docs/AVD.md en de conflictcontrole gaan uit van een indeling
+    // van álle Windows-policies, en een policy die later naar fase 1 schuift moet zijn klasse
+    // dan al hebben. Op andere platforms verboden: een filter met platform windows10AndLater
+    // is daar niet te kiezen.
+    const isWin = t.baseName.startsWith("Baseline_WIN_");
+    if (isWin && !(entry.doelgroep in DOELGROEPEN)) {
+      problems.push(`_manifest.json: ${t.baseName} heeft ${entry.doelgroep === undefined ? "geen \"doelgroep\"" : `doelgroep "${entry.doelgroep}"`} — verwacht ${Object.keys(DOELGROEPEN).join(", ")} (zie docs/AVD.md)`);
+    }
+    if (!isWin && entry.doelgroep !== undefined) {
+      problems.push(`_manifest.json: ${t.baseName} heeft doelgroep "${entry.doelgroep}", maar alleen Windows-policies hebben een apparaatklasse`);
+    }
+    // In _assignments.json staat het filter van een fase-1-policy op naam (filterDisplayName);
+    // het id is per tenant. Dat moet kloppen met de doelgroep, anders zetten de export en
+    // Set-BaselineAssignment.ps1 iets anders dan het CIPP-pakket.
+    const klasse = classFilterFor(entry);
+    for (const a of assignments[t.displayName] || []) {
+      const type = (a.target || {}).deviceAndAppManagementAssignmentFilterType;
+      const wantName = klasse ? klasse.filter : undefined;
+      const wantType = klasse ? "include" : "none";
+      if (a.filterDisplayName !== wantName || type !== wantType) {
+        problems.push(`_assignments.json: ${t.displayName} heeft filter ${a.filterDisplayName ? `"${a.filterDisplayName}"` : "geen"} (${type}), hoort ${wantName ? `"${wantName}" (include)` : "geen (none)"} te hebben volgens doelgroep ${entry.doelgroep ?? "–"}`);
+      }
+      if ((a.target || {}).deviceAndAppManagementAssignmentFilterId) {
+        problems.push(`_assignments.json: ${t.displayName} heeft een filter-id — dat is per tenant; zet alleen filterDisplayName`);
+      }
+    }
 
     const assigned = (assignments[t.displayName] || []).length > 0;
     if (fase === 1 && !assigned) problems.push(`${t.displayName}: fase 1, maar geen regel in _assignments.json — wordt dus niet uitgerold`);
@@ -452,7 +518,10 @@ function main() {
   console.log(line({ ok: "", naam: "POLICY", type: "TYPE", scope: "SCOPE", settings: "SETTINGS" }));
   for (const row of rows) console.log(line(row));
 
-  const { conflicts, duplicates, shared } = findOverlaps(results, assignments);
+  const manifestByTarget = fs.existsSync(MANIFEST_PATH)
+    ? new Map((JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8")).policies || []).map((p) => [p.target, p]))
+    : new Map();
+  const { conflicts, duplicates, shared } = findOverlaps(results, assignments, manifestByTarget);
   const failing = results.filter((r) => r.problems.length > 0);
   const renameProblems = [...checkRenames(templates), ...checkManifestCoverage(templates, assignments), ...checkOndergrens(templates), ...checkControls(templates)];
 
@@ -476,8 +545,8 @@ function main() {
   }
 
   if (duplicates.length > 0) {
-    console.log(`\n${duplicates.length} Windows-instelling(en) staan in meer dan één toegewezen policy, met dezelfde waarde:\n`);
-    for (const d of duplicates) console.log(`  ${d.id}\n      ${d.hits.map((h) => h.name).join("\n      ")}`);
+    console.log(`\n${duplicates.length} Windows-instelling(en) staan in meer dan één policy die op hetzelfde apparaat landt, met dezelfde waarde:\n`);
+    for (const d of duplicates) console.log(`  ${d.id}  [${d.klassen.join(", ")}]\n      ${d.hits.map((h) => h.name).join("\n      ")}`);
     console.log("\nGeen conflict — Intune past de waarde gewoon toe — maar wel dubbel onderhoud: bij een wijziging moeten beide mee.");
   }
 
@@ -488,8 +557,8 @@ function main() {
   }
 
   if (conflicts.length > 0) {
-    console.log(`\n${conflicts.length} Windows-instelling(en) worden door meer dan één toegewezen policy op een ANDERE waarde gezet:\n`);
-    for (const c of conflicts.slice(0, 40)) console.log(`  ${c.id}\n      ${c.hits.map((h) => `${h.name} => ${h.value}`).join("\n      ")}`);
+    console.log(`\n${conflicts.length} Windows-instelling(en) worden op hetzelfde apparaat door meer dan één policy op een ANDERE waarde gezet:\n`);
+    for (const c of conflicts.slice(0, 40)) console.log(`  ${c.id}  [${c.klassen.join(", ")}]\n      ${c.hits.map((h) => `${h.name} => ${h.value}`).join("\n      ")}`);
     if (conflicts.length > 40) console.log(`  ... en nog ${conflicts.length - 40}`);
     console.log("\nIn Intune levert dat een Conflict op: de instelling wordt dan door géén van beide policies toegepast.");
   }

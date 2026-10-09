@@ -4,18 +4,18 @@
 
 # [Baseline] - WIN - D - AVD Session Host
 
-Meldt op de AVD-sessiehosts een verbroken sessie na twee uur af, verbreekt een sessie die twee uur niets doet, en zet Storage Sense uit zodat Windows niets opruimt in profielen die FSLogix gekoppeld heeft.
+Meldt op de AVD-sessiehosts een verbroken sessie na twee uur af, verbreekt een sessie die twee uur niets doet, en laat Storage Sense opruimen in het gekoppelde profiel (dagelijks via de cadence in de image): OneDrive-bestanden na zeven dagen alleen online, tijdelijke bestanden, de prullenbak na veertien en Downloads na dertig dagen.
 
 | | |
 |---|---|
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | — |
-| Bron | Eigen — de indeling in INTUNE-BASELINE.md van de AVD-testomgeving (Storage Sense niet op sessiehosts) en de sessielimieten van Remote Desktop Services in de Settings Catalog |
+| Toewijzing | All Devices |
+| Bron | Eigen — de sessielimieten van Remote Desktop Services en de Storage Sense-instellingen uit de Settings Catalog, met waarden voor FSLogix-profielcontainers |
 | Bestand | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 
-> Tijdzone-redirectie (ts_time_zone) staat hier bewust niet in: [Baseline] - WIN - D - Cloud PC Session Security zet hem al op de sessiehosts (groep SEC-Cloud-PC). **Overlap met [Baseline] - WIN - D - Cloud PC External Access:** die zet dezelfde twee sessielimieten op 15 minuten. Op een hostpool voor externen zouden beide policies landen en botsen (Conflict: dan geldt geen van beide limieten). Sluit de groep SEC-Cloud-PC-External daarom uit bij deze policy; Storage Sense staat op die hosts dan op de Windows-standaard. De waarden staan in milliseconden: 7200000 is twee uur.
+> **De cadence staat niet in deze policy.** configstoragesenseglobalcadence heeft in zijn Settings Catalog-definitie geen windowsMultiSession in applicability.windowsSkus, dus Intune levert hem niet aan een multi-session-host (de andere vijf Storage Sense-instellingen wel; op de host geverifieerd). Zonder cadence draait Storage Sense alleen bij weinig vrije ruimte op C:, en die loopt op een sessiehost nooit vol — Storage Sense zou dan nooit draaien. De AVD-image zet daarom ConfigStorageSenseGlobalCadence = 1 (dagelijks) onder HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense (run-vdot.ps1 in de AVD-repo). Downloads pas na dertig dagen, omdat dat echte verwijdering is; OneDrive-dehydratie na zeven dagen, omdat het bestand online blijft. Geen wekelijkse Invoke-FslShrinkDisk of FSLShrink meer nodig: de ingebouwde compactie bij afmelding (FSLogix 2210 en later) doet hetzelfde bij elke afmelding, zonder aparte VM met rechten op het share en zonder risico dat een script een gekoppelde container raakt; de sessielimieten hierboven zorgen dat er ook echt wordt afgemeld. FSLShrink alleen nog als noodmiddel voor containers die al groot zijn: eenmalig, buiten kantooruren, met de hosts in drain mode. Tijdzone-redirectie (ts_time_zone) staat hier bewust niet in: [Baseline] - WIN - D - Cloud PC Session Security zet hem al op de sessiehosts (groep SEC-Cloud-PC). **Overlap met [Baseline] - WIN - D - Cloud PC External Access:** die zet dezelfde twee sessielimieten op 15 minuten. Op een hostpool voor externen landen beide policies en botsen ze (Conflict: dan geldt geen van beide limieten); in het pakketmodel is deze policy daar niet los uit te sluiten — zie de open punten in docs/AVD.md. De waarden staan in milliseconden: 7200000 is twee uur.
 
 ## Normen
 
@@ -28,7 +28,7 @@ Meldt op de AVD-sessiehosts een verbroken sessie na twee uur af, verbreekt een s
 
 Wat dit per norm betekent en wat er organisatorisch naast nodig is: [COMPLIANCE.md](../../../docs/COMPLIANCE.md).
 
-## Instellingen — 5
+## Instellingen — 9
 
 Ingesprongen regels zijn kindinstellingen: die gelden alleen als hun bovenliggende
 instelling op de getoonde waarde staat.
@@ -39,7 +39,11 @@ instelling op de getoonde waarde staat.
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_terminalserver_ts_sessions_idle_limit_2_ts_sessions_idlelimittext` | 7200000 |
 | `device_vendor_msft_policy_config_admx_terminalserver_ts_sessions_disconnected_timeout_2` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_admx_terminalserver_ts_sessions_disconnected_timeout_2_ts_sessions_enddisconnected` | 7200000 |
-| `device_vendor_msft_policy_config_storage_allowstoragesenseglobal` | 0 |
+| `device_vendor_msft_policy_config_storage_allowstoragesenseglobal` | 1 |
+| `device_vendor_msft_policy_config_storage_allowstoragesensetemporaryfilescleanup` | 1 |
+| `device_vendor_msft_policy_config_storage_configstoragesensecloudcontentdehydrationthreshold` | 7 |
+| `device_vendor_msft_policy_config_storage_configstoragesenserecyclebincleanupthreshold` | 14 |
+| `device_vendor_msft_policy_config_storage_configstoragesensedownloadscleanupthreshold` | 30 |
 
 ---
 

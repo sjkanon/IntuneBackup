@@ -22,12 +22,18 @@ picking the right assignment target thirteen times — one misclick puts up to 7
 
 | Stage | Packages | Moving on to this stage |
 |---:|---|---|
-| 1 · Now | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` and the eight group packages `[Baseline] - Baseline-SEC-*` | — stage 1 always applies |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
+| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SEC-*` | — stage 1 always applies |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
 | 3 · Awaiting prerequisite | `[Baseline] - Baseline-Wacht` | `manual` — someone moves it on |
 
 Which policies are in which package is listed in the
 [`IntuneTemplate` README](../IntuneTemplate/README.en.md#cipp-packages).
+
+**Device classes.** The packages with `-Physical` and `-AVD` have the same assignment as their
+counterpart without suffix, plus an include filter in the standard (`assignmentFilter`):
+`WIN - Physical` or `WIN - AVD Multi-session`. CIPP looks that filter up by name per tenant; if it
+does not exist, CIPP assigns **without** a filter and only logs a warning. So create the filters
+before the first run — see [docs/PLAYBOOK.en.md](../docs/PLAYBOOK.en.md).
 
 Stage 1 always applies and later stages stack on top of it. The condition belongs to the stage
 you **enter**, not the stage you leave. Phase 3 waits for something CIPP cannot measure — a
@@ -65,6 +71,9 @@ filters that word out too, and then the file can no longer be found with the but
 ## What you do yourself afterwards
 
 - **Assign tenants.** Without that the baseline runs nowhere.
+- **Create the filters.** `WIN - Physical` and `WIN - AVD Multi-session` from
+  [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.en.md), before
+  the first run.
 - **Make sure the groups exist.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
   `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` and
   `SEC-Remote-Support-macOS` must exist in the tenant; CIPP looks them up by name (wildcards allowed).
@@ -149,10 +158,11 @@ tenant that does not (yet) get the full Intune baseline. The layout lives in
 
 | Stage | Standard | Assignment | What it does |
 |---:|---|---|---|
-| 1 · Now | `[Baseline] - Updates-Ring3` | all devices, **except** `SEC-Update-Ring1` and `SEC-Update-Ring2` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
+| 1 · Now | `[Baseline] - Updates-Ring3-Physical` | all devices, **except** `SEC-Update-Ring1` and `SEC-Update-Ring2`, filter `WIN - Physical` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
 | 1 · Now | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates right away |
 | 1 · Now | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: quality updates after three days |
-| 1 · Now | `[Baseline] - Updates-Devices` | all devices | Edge Updates (restart required, outside working hours) and Microsoft Office Updates (automatic updates, cannot be turned off) |
+| 1 · Now | `[Baseline] - Updates-Devices` | all devices | Edge Updates (restart required, outside working hours) |
+| 1 · Now | `[Baseline] - Updates-Devices-Physical` | all devices, filter `WIN - Physical` | Microsoft Office Updates (automatic updates, cannot be turned off) — on an AVD host updates come with the image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | all devices (Required) | Winget-AutoUpdate: updates every app winget knows daily, except the [exclusion list](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.en.md) |
 
 Stage 2 starts once everything in stage 1 is compliant **and** two weeks have passed — the same

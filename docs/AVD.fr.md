@@ -12,26 +12,36 @@ La répartition suit `infra/INTUNE-BASELINE.md` (sections 2 à 4) du dépôt de 
 rapport à [Intune pour AVD multisession](https://learn.microsoft.com/en-us/intune/solutions/azure-virtual-desktop-multi-session),
 et les constats du tenant de test du 9 octobre 2026. La liste ci-dessous est construite à partir des
 noms réels des stratégies dans `IntuneTemplate/WIN` (142 stratégies). Ce document est maintenu à
-la main : quand une stratégie Windows est ajoutée, placez-la aussi ici dans l'un des quatre groupes.
+la main : quand une stratégie Windows est ajoutée, placez-la aussi ici dans l'un des quatre groupes, et donnez-lui le `doelgroep` correspondant dans
+`_manifest.json` — `check-scope.js` refuse une stratégie Windows sans.
 
 ## En bref
 
-| Groupe | Stratégies | Affectation sur AVD |
-|---|---:|---|
-| **Commune** — physique et AVD, inchangée | 95 | telles quelles, sans filtre |
-| **Physique uniquement** — pas sur les hôtes de session | 40 | affectation actuelle + filtre d'**exclusion** `WIN - AVD Multi-session` |
-| **Variante AVD** — physique et AVD ont chacun leur version | 1 | version physique en exclusion, version AVD en inclusion |
-| **AVD uniquement** — les nouvelles stratégies et l'ensemble Cloud PC | 6 | filtre d'**inclusion** `WIN - AVD Multi-session` (ensemble Cloud PC : groupe propre) |
+Chaque stratégie Windows a un `doelgroep` (classe cible) dans [`_manifest.json`](../IntuneTemplate/_manifest.json) :
+la classe d'appareils à laquelle elle est destinée. Trois classes, deux filtres, uniquement en **inclusion** :
+
+| Groupe dans ce document | `doelgroep` | Stratégies | Affectation |
+|---|---|---:|---|
+| **Commune** — physique et AVD, inchangée | `alle` | 95 | telles quelles, sans filtre |
+| **Physique uniquement** — pas sur les hôtes de session | `fysiek` | 40 | filtre d'**inclusion** `WIN - Physical` |
+| **Variante AVD** — physique et AVD ont chacun leur version | `fysiek` (la version physique) | 1 | version physique inclusion `WIN - Physical`, version AVD inclusion `WIN - AVD Multi-session` |
+| **AVD uniquement** — les nouvelles stratégies et l'ensemble Cloud PC | `avd` | 6 | filtre d'**inclusion** `WIN - AVD Multi-session` (ensemble Cloud PC : groupe propre) |
+
+En phases 1 et 2, le pipeline en fait des paquets CIPP distincts : `[Baseline] - Baseline-Devices-Physical`,
+`-Users-Physical`, `-Pilot-Physical` et `-Devices-AVD`, avec le filtre dans le standard. Le
+déploiement dans un tenant client est décrit dans le guide [PLAYBOOK.fr.md](PLAYBOOK.fr.md).
 
 Nouveau dans ce dépôt pour AVD :
 
-- le filtre d'affectation [`WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md) ;
+- les filtres d'affectation [`WIN - Physical` et `WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md) ;
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) — FSLogix et le ticket Kerberos pour Azure Files ;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) — la version physique sans invite de mot de passe ;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) — les exclusions Defender que Microsoft prescrit pour FSLogix ;
-- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) — limites de session de deux heures et Storage Sense désactivé.
+- [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) — limites de session de deux heures et Storage Sense avec ses propres valeurs dans le conteneur.
 
-Les quatre sont en phase 4 avec le `faseGroep` **SEC-AVD-Session-Hosts**, comme l'ensemble Cloud PC.
+Les quatre sont en **phase 1** avec la classe `avd`, dans le paquet `[Baseline] - Baseline-Devices-AVD`
+(tous les appareils, filtre d'inclusion `WIN - AVD Multi-session`). Le compte de stockage des deux
+stratégies FSLogix est la variable CIPP `%FSLogixStorageAccount%`, à définir par tenant.
 
 ## Ce qu'Intune fait et ne fait pas en multisession
 
@@ -50,53 +60,70 @@ Les quatre sont en phase 4 avec le `faseGroep` **SEC-AVD-Session-Hosts**, comme 
   mensuelle de l'image.
 - **Applications** uniquement en contexte système et en *Required*.
 - **Pas** d'Autopilot, d'ESP, d'effacement, de verrouillage à distance ni de rotation de la clé BitLocker.
+- **Piège : VDOT désactive les notifications push.** `-Optimizations All` du Virtual Desktop
+  Optimization Tool définit `NoCloudApplicationNotification = 1` (*Turn off notifications network
+  usage*). Un push Intune n'atteint alors plus l'hôte — événement 404 *Cloud notifications have been
+  turned off* sur `./Vendor/MSFT/DMClient/Provider/MS DM Server/Push/PFN` — et les nouvelles
+  stratégies n'arrivent qu'à la synchronisation planifiée. L'image AVD rétablit cette valeur après
+  VDOT et met `dmwappushservice` en automatique.
 
-## Fonctionnement du filtre
+## Fonctionnement des filtres
 
 [`WIN-AVD-Multi-Session.json`](../IntuneTemplate/WIN/AssignmentFilters/WIN-AVD-Multi-Session.json)
 a la règle `(device.operatingSystemSKU -eq "ServerRdsh")` : la SKU de Windows Enterprise
-multisession. Dans le tenant de test, elle correspond exactement à l'hôte de session AVD et à aucun PC
-physique. Un Cloud PC Windows 365 est mono-session et n'en relève pas.
+multisession. [`WIN-Physical.json`](../IntuneTemplate/WIN/AssignmentFilters/WIN-Physical.json) est
+`(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")`.
+Dans le tenant de test, le premier correspond exactement à l'hôte de session AVD, le second aux
+quatre PC physiques et QEMU, pas à l'hôte de session.
 
-Un filtre accompagne toujours une affectation — à tous les appareils, tous les utilisateurs ou un
-groupe — et indique quels appareils y participent ou non :
+**Ce qui ne relève d'aucun des deux :** les Cloud PC Windows 365 et les hôtes AVD personnels
+(mono-session, modèle `Virtual Machine`). Ils ne reçoivent que les stratégies communes — donc pas
+de BitLocker, de Windows Hello ni de `Remote Desktop and RPC` physique avec l'invite de mot de
+passe — plus l'ensemble Cloud PC par leur propre groupe. C'est voulu : les stratégies physiques
+supposent du matériel (TPM, disque, Wi-Fi, batterie) et les stratégies AVD le multisession avec FSLogix.
 
-- **Inclusion** sur les stratégies AVD : seuls les hôtes de session les reçoivent, même si un appareil
-  physique se retrouve par erreur dans le groupe. CIPP affecte le package
-  `[Baseline] - Baseline-SEC-AVD-Session-Hosts` au groupe SEC-AVD-Session-Hosts ; définissez le filtre
-  d'inclusion dans le standard CIPP de ce package. Sans CIPP, cela fonctionne aussi sans groupe :
-  tous les appareils avec le filtre d'inclusion.
-- **Exclusion** sur les stratégies réservées aux appareils physiques : l'affectation reste telle
-  quelle (tous les appareils, tous les utilisateurs ou un groupe), le filtre en retire les hôtes de session.
-- Les **affectations ciblant les utilisateurs** sont la raison d'un filtre plutôt que d'un groupe.
-  `WIN - U - Windows Hello for Business`, `WIN - U - Personal Data Encryption` et les variantes Outlook
-  vont aux utilisateurs. Exclure un *groupe d'appareils* n'y fait rien : l'affectation regarde
-  l'utilisateur, pas l'appareil. Un filtre, lui, est évalué sur l'appareil auquel l'utilisateur se
-  connecte — le même utilisateur reçoit Windows Hello sur son portable et pas dans la session AVD.
-- **Variante AVD :** la version physique reçoit l'exclusion, la version AVD l'inclusion. Jamais les
-  deux sur le même hôte : deux stratégies définiraient alors les mêmes paramètres et l'invite de mot
-  de passe de la version physique s'appliquerait malgré tout.
+Un filtre accompagne toujours une affectation — à tous les appareils, à tous les utilisateurs ou à
+un groupe — et indique quels appareils y participent. Pourquoi des filtres et pas des groupes :
 
-`check-scope.js` ne vérifie les conflits qu'entre stratégies de phase 1. Les stratégies AVD (phase 4)
-n'en relèvent pas ; le chevauchement a donc été vérifié à la main :
+- **Affectations ciblant les utilisateurs.** `WIN - U - Windows Hello for Business`,
+  `WIN - U - Personal Data Encryption` et les variantes Outlook vont aux utilisateurs. Exclure un
+  *groupe d'appareils* n'y fait rien : l'affectation regarde l'utilisateur. Un filtre est, lui,
+  évalué sur l'appareil auquel l'utilisateur se connecte — le même utilisateur reçoit Windows Hello
+  sur son portable et pas dans la session AVD.
+- **Pas d'attente.** Un filtre est évalué au check-in ; un nouvel hôte de session ou portable n'a
+  pas à attendre qu'un groupe dynamique l'ait intégré.
+- **Un filtre par paquet CIPP.** Un paquet CIPP a une affectation et un filtre pour tous ses
+  membres. Chaque classe a donc son propre paquet, et le filtre est toujours en **inclusion** : les
+  stratégies communes sont dans un paquet *sans* filtre, les physiques dans un paquet avec
+  `WIN - Physical`, les stratégies AVD dans un paquet avec `WIN - AVD Multi-session`.
+
+**Plus de filtres d'exclusion.** L'ancien modèle mettait un filtre d'exclusion
+`WIN - AVD Multi-session` sur les stratégies réservées au physique. CIPP ne pouvait pas le faire
+par stratégie : elles étaient dans `Baseline-Devices`, `-Users` et `-Pilot` avec les communes, et
+une exclusion sur un tel paquet retirait aussi les communes des hôtes de session. Un paquet par
+classe règle cela, et avec l'inclusion plutôt que l'exclusion, un Cloud PC ou un hôte personnel ne
+peut plus recevoir par erreur une stratégie physique.
+
+**Variante AVD :** le `Remote Desktop and RPC` physique a la classe `fysiek`, la version AVD `avd`.
+Elles ne se retrouvent jamais sur un même hôte, l'invite de mot de passe de la version physique ne
+peut donc pas s'appliquer malgré tout sur l'hôte de session.
+
+### Contrôle des conflits par classe
+
+`check-scope.js` compare, par paramètre, ce qui arrive sur un même appareil : **alle + fysiek** sur
+un PC physique et **alle + avd** sur un hôte de session, sur les phases 1 et 2. Entre `fysiek` et
+`avd`, un même paramètre peut avoir une valeur différente — c'est précisément le but (Storage Sense
+quand l'espace est faible sur un portable, chaque jour avec des délais plus courts sur un hôte de session). Aujourd'hui : aucun conflit ; trois
+paramètres sont définis deux fois avec la même valeur (NTLM dans Disable NTLM et Local Security
+Policies, deux paramètres Outlook dans Office Experience et Outlook Cached Mode Managed). Le
+contrôle ne compare pas la phase 4 (groupe propre) ; ce chevauchement est listé ci-dessous à la main :
 
 | Paramètre | Stratégie AVD | Autre stratégie | Traité par |
 |---|---|---|---|
-| `storage_allowstoragesenseglobal` | AVD Session Host (0) | Storage Sense (1) | Storage Sense est *Physique uniquement* |
-| `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 heures) | Cloud PC External Access (15 min) | exclure SEC-Cloud-PC-External sur AVD Session Host |
-| `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | même valeur ; Cloud Kerberos Trust est en outre *Physique uniquement* |
-| huit paramètres de Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | mêmes valeurs ; la physique est *Variante AVD* (exclusion) |
+| `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 heures) | Cloud PC External Access (15 min, phase 4) | **point ouvert**, voir plus bas — uniquement sur un pool d'hôtes pour externes |
+| `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | classes différentes ; même valeur |
+| huit paramètres de Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | classes différentes |
 | `ts_time_zone` | — | Cloud PC Session Security | non repris dans AVD Session Host |
-
-### CIPP et le filtre d'exclusion
-
-Un package CIPP a une seule affectation et un seul filtre pour tous ses membres. Les stratégies
-*Physique uniquement* se trouvent dans `Baseline-Devices`, `Baseline-Users` et `Baseline-Pilot` avec
-des stratégies communes ; un filtre d'exclusion sur un tel package retirerait aussi les stratégies
-communes des hôtes de session. Tant que le pipeline n'a pas de package distinct pour les stratégies
-physiques, définissez le filtre d'exclusion par stratégie dans Intune (portail ou
-`Set-BaselineAssignment.ps1`, voir le plan de déploiement) et vérifiez après une exécution de CIPP
-qu'il est toujours là. C'est un point ouvert, voir plus bas.
 
 ## Répartition par stratégie
 
@@ -146,7 +173,7 @@ Physique et AVD, inchangée et sans filtre.
 | [D - Microsoft OneDrive](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.fr.md) | 1 | Known Folder Move et Files On-Demand fonctionnent avec FSLogix. |
 | [D - Microsoft Store](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.fr.md) | 1 |  |
 | [D - Network Authentication Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.fr.md) | 2 |  |
-| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md) | 1 | Active *Limits print driver installation to Administrators* : les pilotes d'imprimante doivent être dans l'image de référence. |
+| [D - Printing](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md) | 1 | Active *Limits print driver installation to Administrators* : les pilotes d'imprimante sont installés sur l'hôte de session après le déploiement (même pilote que sur le serveur d'impression). |
 | [D - Printing Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing_Hardening.fr.md) | 2 |  |
 | [D - Privacy and Telemetry](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Privacy_and_Telemetry.fr.md) | 1 |  |
 | [D - Remote Access Hardening](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Access_Hardening.fr.md) | 2 |  |
@@ -204,7 +231,7 @@ Physique et AVD, inchangée et sans filtre.
 
 ### Physique uniquement — 40
 
-À exclure sur AVD avec le filtre d'exclusion `WIN - AVD Multi-session`.
+Classe `fysiek` : en phases 1 et 2 le filtre d'inclusion `WIN - Physical`, donc pas sur un hôte de session, un Cloud PC Windows 365 ni un hôte AVD personnel.
 
 | Stratégie | Phase | Pourquoi pas sur AVD |
 |---|---:|---|
@@ -228,7 +255,7 @@ Physique et AVD, inchangée et sans filtre.
 | [D - Passwordless](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.fr.md) | 1 | Masque le champ du mot de passe ; sans SSO, plus personne ne peut se connecter à l'hôte. |
 | [D - Power Management](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.fr.md) | 1 | Matériel qu'une VM n'a pas ; la redirection est déjà désactivée par Cloud PC Session Security. |
 | [D - Removable Storage](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.fr.md) | 2 | Matériel qu'une VM n'a pas ; la redirection est déjà désactivée par Cloud PC Session Security. |
-| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.fr.md) | 1 | Nettoie dans les profils FSLogix montés ; AVD Session Host désactive Storage Sense (autre valeur, donc exclure). |
+| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.fr.md) | 1 | Quand l'espace est faible, 30 jours — ne fonctionne pas sur un hôte de session, où C: ne se remplit jamais. AVD Session Host y active Storage Sense avec ses propres valeurs (quotidien, 7/14/30 jours). |
 | [D - Timezone](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.fr.md) | 1 | Le fuseau horaire automatique entre en conflit avec la redirection du fuseau horaire (`ts_time_zone`) de Cloud PC Session Security. |
 | [D - Wifi Corporate](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.fr.md) | 3 | Modèle de configuration d'appareil : non pris en charge en multisession, et une VM n'a pas de Wi-Fi. |
 | [D - Wifi Guest](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.fr.md) | 3 | Modèle de configuration d'appareil : non pris en charge en multisession, et une VM n'a pas de Wi-Fi. |
@@ -253,17 +280,17 @@ Physique et AVD, inchangée et sans filtre.
 
 | Stratégie | Phase | Remarque |
 |---|---:|---|
-| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.fr.md) | 1 | `promptforpassworduponconnection` casse le SSO Entra et les passkeys. Physique : filtre d'exclusion ; AVD : [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) avec filtre d'inclusion. |
+| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.fr.md) | 1 | `promptforpassworduponconnection` casse le SSO Entra et les passkeys. Physique : classe `fysiek` (inclusion `WIN - Physical`) ; AVD : [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) avec la classe `avd`. |
 
 ### AVD uniquement — 6
 
 | Stratégie | Phase | Remarque |
 |---|---:|---|
-| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) | 4 | Nouveau. Filtre d'inclusion WIN - AVD Multi-session. |
-| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | 4 | Nouveau. Filtre d'inclusion WIN - AVD Multi-session. |
-| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | 4 | Nouveau. Filtre d'inclusion WIN - AVD Multi-session. |
-| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | 4 | Nouveau. Filtre d'inclusion WIN - AVD Multi-session. |
-| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | 4 | Existant, uniquement sur un pool d'hôtes pour externes (SEC-Cloud-PC-External). Y entre en conflit avec les limites de session d'AVD Session Host : excluez SEC-Cloud-PC-External sur AVD Session Host. |
+| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
+| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
+| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
+| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
+| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | 4 | Existant, uniquement sur un pool d'hôtes pour externes (SEC-Cloud-PC-External). Y entre en conflit avec les limites de session d'AVD Session Host — voir les points ouverts. |
 | [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | 4 | Existant, via le groupe SEC-Cloud-PC (aussi Windows 365). Active aussi la redirection du fuseau horaire. |
 
 ## Constats du tenant de test (9 octobre 2026)
@@ -275,7 +302,7 @@ sous les noms actuels.
   empêche les utilisateurs d'installer eux-mêmes un pilote d'imprimante. Dans l'ensemble actuel,
   c'est `restrictdriverinstallationtoadministrators` dans [`WIN - D - Printing`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Printing.fr.md),
   qui reste *Commune* : c'est une mesure de sécurité contre les attaques de type PrintNightmare.
-  Conséquence pour AVD : **les pilotes d'imprimante doivent être dans l'image de référence.**
+  Conséquence pour AVD : **les pilotes d'imprimante sont installés sur chaque hôte de session après le déploiement** (AVD-Test : `printerDrivers`, étape `sessionhost-printers`), avec exactement le même pilote que sur le serveur d'impression distinct.
 - **`promptforpassworduponconnection`** figurait dans l'ancien `[Baseline] Administrative Templates`.
   Dans l'ensemble actuel, il est dans `Remote Desktop and RPC`, et lors de la scission il passe à la
   variante AVD — qui ne le définit justement *pas*. Avec l'invite, l'hôte de session demande un mot
@@ -312,48 +339,93 @@ pas été vérifiée avec certitude : `VolumeType = VHDX` (la valeur par défaut
 l'itinérance des jetons). Les deux définissent le ticket Kerberos (`CloudKerberosTicketRetrievalEnabled`) ;
 l'application du compte de stockage doit être exclue de la MFA dans l'accès conditionnel.
 
+## Garder les profils petits : Storage Sense et compaction
+
+Deux paramètres travaillent ensemble pour garder les conteneurs FSLogix aussi petits que possible :
+
+- **Storage Sense nettoie à l'intérieur du conteneur monté.** [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md)
+  l'active avec ses propres valeurs : fichiers OneDrive en ligne uniquement après 7 jours (sans perte
+  de données, le gain le plus important), fichiers temporaires, la corbeille après 14 jours et les
+  Téléchargements après 30 jours (vraie suppression, donc pas plus court). **La cadence (quotidienne)
+  est définie par l'image AVD, pas par Intune :** `configstoragesenseglobalcadence` n'a pas
+  `windowsMultiSession` dans `applicability.windowsSkus` de sa définition Settings Catalog, Intune ne
+  la fournit donc pas à un hôte multisession (les cinq autres paramètres, si ; vérifié sur l'hôte).
+  L'image définit `HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseGlobalCadence = 1`
+  (`run-vdot.ps1` dans le dépôt AVD). Sans cadence, Storage Sense ne s'exécute que lorsque l'espace
+  libre sur C: est faible, ce qui n'arrive jamais sur un hôte de session — Storage Sense regarde ce
+  lecteur, pas le conteneur. La stratégie
+  physique `Storage Sense` (cadence 0, 30 jours) reste `fysiek` ; les deux ne se retrouvent jamais sur
+  un même appareil.
+- **FSLogix compacte le conteneur à la déconnexion** (`VHD Compact Disk`, explicitement activé dans
+  [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md),
+  bien que ce soit la valeur par défaut depuis FSLogix 2210). Ce que Storage Sense a libéré retourne
+  ainsi au partage. Avec Azure Files Premium, Microsoft facture la taille provisionnée : le gain n'est
+  donc pas sur la facture mais dans des connexions plus rapides et moins de risque de conteneur plein.
+
+**Plus d'`Invoke-FslShrinkDisk` ni de FSLShrink hebdomadaire.** La compaction intégrée fait la même
+chose à chaque déconnexion, sans VM séparée avec des droits sur le partage et sans risque qu'un script
+touche un conteneur monté. Les limites de session (déconnexion après deux heures en état déconnecté)
+garantissent que les déconnexions ont bien lieu. FSLShrink ne reste qu'un dernier recours pour des
+conteneurs déjà volumineux : une seule fois, hors heures de bureau, avec les hôtes en mode drain.
+
 ## Plan de déploiement
 
-1. **Créer le filtre.** `WIN-AVD-Multi-Session.json` avec un `POST` vers
-   `deviceManagement/assignmentFilters`, ou dans le portail. Vérifiez avec *Preview devices* que seuls
-   les hôtes de session correspondent.
-2. **Groupe SEC-AVD-Session-Hosts** comme groupe d'appareils dynamique, par exemple
-   `(device.displayName -startsWith "<hostpoolprefix>-sh")`. CIPP y affecte le package AVD, et la
-   conformité en a besoin (étape 5).
-3. **Affecter les stratégies AVD avec inclusion.** Renseignez d'abord `OPSLAGACCOUNT-INVULLEN` (dans
-   `local/`, pas dans git). Ensuite le package `[Baseline] - Baseline-SEC-AVD-Session-Hosts` dans CIPP
-   avec le filtre d'inclusion dans le standard, ou dans le portail : tous les appareils (ou
-   SEC-AVD-Session-Hosts) avec le filtre d'inclusion. Sur un pool d'hôtes pour externes : exclure
-   SEC-Cloud-PC-External sur `AVD Session Host`.
-4. **Exclusion sur les stratégies physiques uniquement**, plus la `Remote Desktop and RPC` physique.
-   Dans le portail par stratégie, ou avec `Set-BaselineAssignment.ps1 -Name <liste> -AllDevices -FilterId <id> -FilterType exclude -Replace`
-   (et `-AllUsers` pour les stratégies U). Attention : `-Replace` remplace *toutes* les affectations de
-   la stratégie — une stratégie avec un groupe ou des exclusions (anneau de mise à jour 3, les
-   stratégies `SEC-Shared-Devices`) se règle dans le portail. Exécutez d'abord avec `-WhatIf`.
-5. **Conformité sur l'appareil.** Affectez les stratégies de conformité que le multisession prend en
-   charge — Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection, Defender
-   Security Intelligence, Firewall et OS Version — *aussi* à SEC-AVD-Session-Hosts.
-6. **Pool d'hôtes pilote.** Un pool d'hôtes avec jonction Entra, inscription Intune et Trusted Launch.
-   Par hôte dans Intune : chaque stratégie *Succeeded* ou *Not applicable*, aucun *Conflict*. Connexion
-   avec une passkey sans invite de mot de passe, le conteneur FSLogix s'attache (`frx list-redirects`,
-   le ticket Kerberos avec `klist`), impression avec un pilote de l'image.
-7. **Vérifier la conformité.** Les hôtes sont conformes dans Intune et dans Entra ID, et les journaux
-   de connexion de la CA 2060 (report-only) indiquent *réussirait* pour les sessions depuis les hôtes.
-8. **CA 2060 en application.** Uniquement quand l'étape 7 est correcte ; sinon Outlook, Teams et les
-   autres applications de bureau ne fonctionnent plus dans la session.
+Le guide complet, y compris la classe physique et la migration depuis un ancien ensemble, figure
+dans [PLAYBOOK.fr.md](PLAYBOOK.fr.md). Pour AVD en bref :
 
-Ensuite les autres pools d'hôtes ; les hôtes Entra DS passent en mode drain et sont supprimés (Entra DS
-reste uniquement pour les serveurs d'applications).
+1. **Créer les filtres.** `WIN - Physical` et `WIN - AVD Multi-session` depuis
+   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md),
+   par un `POST` sur `deviceManagement/assignmentFilters`, dans le portail ou avec
+   `Set-BaselineAssignment.ps1 -CreateFilters`. Vérifiez avec *Preview devices*. Avant la première
+   exécution CIPP : si le filtre n'existe pas, CIPP affecte sans filtre.
+2. **Variable CIPP `FSLogixStorageAccount`** par tenant (Settings → Custom Variables) : le nom du
+   compte de stockage, sans `.file.core.windows.net`. Sans cette variable, `%FSLogixStorageAccount%`
+   reste tel quel dans le chemin et, avec `PreventLoginWithFailure`, plus personne ne peut se
+   connecter à l'hôte.
+3. **Groupe SEC-AVD-Session-Hosts** comme groupe d'appareils dynamique, par exemple
+   `(device.displayName -startsWith "<hostpoolprefix>-sh")`. Pas pour les paquets de la baseline
+   (ils utilisent le filtre), mais pour l'affectation de conformité aux appareils (étape 5), le
+   paramètre RDP SSO *target device groups* du pool d'hôtes et les rapports.
+4. **Baseline dans CIPP.** L'étape 1 déploie `[Baseline] - Baseline-Devices-AVD` (tous les
+   appareils, inclusion `WIN - AVD Multi-session`) à côté des paquets communs. Les stratégies
+   réservées au physique passent par les paquets `-Physical` et n'atteignent donc pas l'hôte.
+5. **Conformité sur l'appareil.** Affectez les stratégies de conformité prises en charge en
+   multisession — Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection,
+   Defender Security Intelligence, Firewall et OS Version — *aussi* à SEC-AVD-Session-Hosts.
+   Attention au point ouvert ci-dessous : le `verifyAssignments` de CIPP voit cette affectation
+   supplémentaire comme un écart.
+6. **Pool d'hôtes pilote.** Un pool d'hôtes avec jonction Entra, inscription Intune et Trusted
+   Launch. Par hôte dans Intune : chaque stratégie *Succeeded* ou *Not applicable*, aucun *Conflict*.
+   Connexion avec une passkey sans invite de mot de passe, le conteneur FSLogix se monte
+   (`frx list-redirects`, le ticket Kerberos avec `klist`), impression avec un pilote de l'image.
+   Forcer une synchronisation sur l'hôte : `deviceenroller.exe /o <enrollment-ID> /c /b` — la tâche
+   PushLaunch n'existe pas en multisession.
+7. **Vérifier la conformité.** Les hôtes sont conformes dans Intune et dans Entra ID, et les
+   journaux de connexion de la CA 2060 (report-only) montrent *aurait réussi* pour les sessions
+   depuis les hôtes.
+8. **CA 2060 en mode appliqué.** Seulement quand l'étape 7 est correcte ; sinon Outlook, Teams et
+   les autres applications de bureau ne fonctionnent plus dans la session.
+
+Ensuite les autres pools d'hôtes ; les hôtes Entra DS passent en mode drain et sont supprimés
+(Entra DS ne reste que pour les serveurs d'applications).
 
 ## Points ouverts
 
-- **Package CIPP pour les stratégies physiques.** Tant que `Baseline-Devices`, `-Users` et `-Pilot`
-  mélangent stratégies communes et physiques, CIPP ne peut pas définir le filtre d'exclusion par
-  stratégie. Un package propre (par exemple une phase ou un indicateur dans le manifeste que
-  `set-packages.js` traduit en package avec `assignmentFilter`) règle cela.
-- **Windows 365.** Les Cloud PC ne relèvent pas du filtre et gardent la `Remote Desktop and RPC`
-  physique avec l'invite de mot de passe. Vérifiez si le SSO y fonctionne ; sinon, SEC-Cloud-PC doit
-  recevoir le même traitement.
-- **VolumeType et RoamIdentity** : les rechercher dans le sélecteur de paramètres du tenant et, si la
+- **Pool d'hôtes pour externes.** Sur un hôte de SEC-Cloud-PC-External arrivent à la fois
+  `AVD Session Host` (phase 1, `avd`) et `Cloud PC External Access` (phase 4), avec des limites de
+  session différentes : un Conflict, après quoi aucune des deux limites ne s'applique. Dans le
+  modèle par paquets, `AVD Session Host` ne peut pas être exclue seule — un groupe d'exclusion sur
+  `Baseline-Devices-AVD` retirerait aussi FSLogix de ces hôtes. Ne concerne qu'un tenant doté d'un
+  tel pool ; une solution consiste à placer les limites de session dans une stratégie à part.
+- **Conformité sur l'appareil et `verifyAssignments`.** CIPP gère l'affectation de `Baseline-Users`
+  (tous les utilisateurs) et voit une affectation supplémentaire aux appareils de
+  SEC-AVD-Session-Hosts comme un écart que la remédiation retire (`Compare-CIPPIntuneAssignments` :
+  les groupes d'inclusion supplémentaires comptent dès que le standard gère l'affectation). Tant que
+  le pipeline ne place pas les stratégies de conformité dans un paquet à part : vérifiez après
+  chaque exécution CIPP que l'affectation aux appareils est toujours là.
+- **Windows 365.** Les Cloud PC ne relèvent d'aucun des deux filtres et ne reçoivent donc plus non
+  plus le `Remote Desktop and RPC` physique. Vérifiez qu'ils reçoivent l'ensemble commun et
+  l'ensemble Cloud PC dont ils ont besoin.
+- Rechercher **VolumeType et RoamIdentity** dans le sélecteur de paramètres du tenant et, si la
   définition est correcte, les ajouter à `AVD FSLogix Profile Containers`.
 - **Device Guard and Credential Guard** peut devenir *Commune* dès que tous les pools d'hôtes ont Trusted Launch.

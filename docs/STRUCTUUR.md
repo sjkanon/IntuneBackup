@@ -86,8 +86,8 @@ Naast elk `.json`-template staat een gegenereerde `.md` met élke instelling die
 
 | Bestand | Bepaalt | Gelezen door |
 |---|---|---|
-| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `controls`, `overrides` op de bron, uitgesloten bronpolicies | alle Node-scripts behalve `export-intunebackup.js` en `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
-| `_assignments.json` | Naar wie een fase-1-policy gaat (alle apparaten, alle gebruikers) | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, de generatiescripts, `Set-BaselineAssignment.ps1` |
+| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `doelgroep` (Windows: `alle`, `fysiek`, `avd`), `controls`, `overrides` op de bron, uitgesloten bronpolicies | alle Node-scripts behalve `export-intunebackup.js` en `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
+| `_assignments.json` | Naar wie een fase-1-policy gaat (alle apparaten, alle gebruikers), met het toewijzingsfilter op naam (`filterDisplayName`) bij `fysiek` en `avd` | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, de generatiescripts, `Set-BaselineAssignment.ps1` |
 | `_controls.json` | Welke normlabels bestaan en wat ze betekenen | `generate-compliance.js`, `generate-docs.js`, `check-scope.js` |
 | `_licenties.json` | Welke lege controls met een SKU op te lossen zijn in plaats van met een proces | `generate-compliance.js` |
 | `_ca.json` | Per policy de CA-policies die erop leunen, en waarom — kopie uit `docs/policies.json` van de CA-Policies-repo | `generate-docs.js` |
@@ -101,10 +101,10 @@ naar het CIPP-pakket; `check-scope.js` bewaakt dat fase, toewijzing en pakket kl
 
 | Fase | Betekenis | Policies | CIPP-pakket | CIPP-stage |
 |---:|---|---:|---|---:|
-| 1 | Nu uitrollen | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
-| 2 | Eerst pilot | 41 | `[Baseline] - Baseline-Pilot` → groep `SEC-Baseline-Pilot` | 2 |
+| 1 | Nu uitrollen | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token`; per klasse ook `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
+| 2 | Eerst pilot | 42 | `[Baseline] - Baseline-Pilot` → groep `SEC-Baseline-Pilot`; `-Pilot-Physical` met filter | 2 |
 | 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `[Baseline] - Baseline-Wacht`, niet toegewezen | 3 |
-| 4 | Eigen groep (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<groep>` | 1 |
+| 4 | Eigen groep (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<groep>` | 1 |
 | 5 | Niet uitrollen — alternatief voor een andere policy | 15 | geen | – |
 
 Doorschuiven naar stage 2 gebeurt als alles uit stage 1 compliant is **en** er twee weken voorbij
@@ -170,7 +170,8 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 
 - **Naamgeving:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in de tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` als bestand. Zonder `Baseline_`-prefix verdwijnt een
-  bestand stil uit alle pijplijnen.
+  bestand stil uit alle pijplijnen. Pakketten, filters, groepen en CIPP-variabelen: zie
+  [PLAYBOOK.md](PLAYBOOK.md#naamgeving).
 - **D of U:** bij Windows Settings Catalog volgt het uit de `settingDefinitionId` (`user_` = U).
   Elders is het een keuze over het toewijzingsdoel.
 - **GUID's blijven gelijk** bij elke import; anders maakt CIPP een tweede template.
@@ -190,3 +191,4 @@ Zet deze twee vóór het toewijzen, anders doet een deel van de baseline niets:
 | [ANALYSE.md](ANALYSE.md) | Waarom wat wel en niet in de baseline zit |
 | [PLAN.md](PLAN.md) | Wat nog open staat, o.a. de tenant-migratie |
 | [AVD.md](AVD.md) | Welke Windows-policies ook op de AVD-sessiehosts horen, en het uitrolplan |
+| [PLAYBOOK.md](PLAYBOOK.md) | Draaiboek: de baseline via CIPP per apparaatklasse uitrollen, migratie, naamgeving |

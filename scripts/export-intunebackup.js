@@ -22,7 +22,18 @@
  * the macOS ADE enrolment profiles (IntuneTemplate/MAC/Enrollment/ade-profile/) and the macOS shell scripts
  * (IntuneTemplate/MAC/PlatformScripts/). See SIDECARS below.
  *
- * Usage: node scripts/export-intunebackup.js [target-dir]
+ * Assignment filters. A Windows policy for one device class (`doelgroep` fysiek or avd) carries
+ * its filter in _assignments.json *by name* (`filterDisplayName`), because a filter id exists
+ * only in one tenant. The module restores `target` verbatim (Invoke-IntuneRestore*Assignment:
+ * `@{ target = $assignment.target }`), so it cannot resolve a name: a filter id from another
+ * tenant makes the POST fail, and dropping the filter would put physical-only policies on the AVD
+ * session hosts. So, by default, those assignments are left out of the export — the policies are
+ * restored unassigned and listed at the end — and `Set-BaselineAssignment.ps1` assigns them with
+ * the filter looked up by name. With `--filter-ids <file>` (a JSON object filter name -> id for
+ * ONE tenant, e.g. in local/) the export does write them, with that tenant's ids; write that
+ * export to local/, never into git.
+ *
+ * Usage: node scripts/export-intunebackup.js [target-dir] [--filter-ids <file>]
  *   default target-dir: export/NativeImport/IntuneBackupAndRestore/
  *
  * That `NativeImport` in the path is not a description but an exclusion. CIPP scans a
@@ -112,7 +123,24 @@ function appProtectionAssignmentFile(guid, displayName, assignment) {
  * Schrijft de templates weg in de mappen van de module. Geeft terug wat er is geschreven,
  * zodat main() het kan samenvatten.
  */
-function exportTemplates({ templates, outDir, assignments }) {
+/**
+ * De assignments van één policy zoals de module ze kan terugzetten: `filterDisplayName` eruit,
+ * en een filter op naam vervangen door het id uit `filterIds`. `null` als een filter nodig is
+ * dat niet op te lossen is — dan gaat de hele policy ongetoewezen mee, nooit zonder filter.
+ */
+function resolveAssignment(assignment, filterIds) {
+  const out = [];
+  for (const a of assignment) {
+    const { filterDisplayName, ...rest } = a;
+    if (!filterDisplayName) { out.push(rest); continue; }
+    const id = filterIds && filterIds[filterDisplayName];
+    if (!id) return null;
+    out.push({ ...rest, target: { ...rest.target, deviceAndAppManagementAssignmentFilterId: id } });
+  }
+  return out;
+}
+
+function exportTemplates({ templates, outDir, assignments, filterIds }) {
 
   // Volledig herschrijven: een template dat uit de bronmap verdwijnt moet ook uit de export
   // verdwijnen, anders rolt een restore later een policy uit die niet meer bestaat.
@@ -121,6 +149,7 @@ function exportTemplates({ templates, outDir, assignments }) {
   const written = [];
   const skipped = [];
   const withoutAssignment = [];
+  const needsFilter = [];
 
   for (const { baseName, inner, raw } of templates) {
     const folder = TYPE_TO_FOLDER[inner.Type];
@@ -135,7 +164,9 @@ function exportTemplates({ templates, outDir, assignments }) {
     fs.mkdirSync(path.join(outDir, folder), { recursive: true });
     fs.writeFileSync(path.join(outDir, folder, name), JSON.stringify(body, null, 4) + "\n");
 
-    const assignment = assignments[inner.Displayname];
+    const declared = assignments[inner.Displayname];
+    const assignment = declared && declared.length > 0 ? resolveAssignment(declared, filterIds) : null;
+    if (declared && declared.length > 0 && !assignment) needsFilter.push(`${inner.Displayname} (${[...new Set(declared.map((a) => a.filterDisplayName).filter(Boolean))].join(", ")})`);
     if (assignment && assignment.length > 0) {
       fs.mkdirSync(path.join(outDir, folder, "Assignments"), { recursive: true });
       const file =
@@ -143,7 +174,7 @@ function exportTemplates({ templates, outDir, assignments }) {
           ? appProtectionAssignmentFile(inner.GUID, inner.Displayname, assignment)
           : { name, body: assignment };
       fs.writeFileSync(path.join(outDir, folder, "Assignments", file.name), JSON.stringify(file.body, null, 4) + "\n");
-    } else {
+    } else if (!(declared && declared.length > 0)) {
       withoutAssignment.push(inner.Displayname);
     }
     written.push(`${folder}/${name}`);
@@ -162,7 +193,7 @@ function exportTemplates({ templates, outDir, assignments }) {
     for (const s of skipped) console.log(`  ${s}`);
   }
 
-  return { written, perFolder, withoutAssignment };
+  return { written, perFolder, withoutAssignment, needsFilter };
 }
 
 /**
@@ -325,7 +356,21 @@ function exportSidecar(outDir, { sourceDir, platform, folder, extensions, how })
 }
 
 function main() {
-  const outDir = process.argv[2] ? path.resolve(process.argv[2]) : DEFAULT_OUT;
+  const args = process.argv.slice(2);
+  const fi = args.indexOf("--filter-ids");
+  const filterIdsFile = fi >= 0 ? args[fi + 1] : null;
+  if (fi >= 0 && !filterIdsFile) {
+    console.error("--filter-ids vraagt een bestand: { \"WIN - Physical\": \"<id>\", ... }");
+    process.exit(1);
+  }
+  const positional = args.filter((a, i) => !a.startsWith("--") && (fi < 0 || i !== fi + 1));
+  const outDir = positional[0] ? path.resolve(positional[0]) : DEFAULT_OUT;
+  const filterIds = filterIdsFile ? JSON.parse(fs.readFileSync(filterIdsFile, "utf8")) : null;
+  if (filterIds && path.resolve(outDir).startsWith(path.resolve(REPO_ROOT, "export"))) {
+    // Filter-id's zijn van één tenant; in git horen ze niet, net als de ingevulde geheimen.
+    console.error("--filter-ids schrijft tenant-id's: kies een doelmap buiten export/, bijvoorbeeld local/<tenant>/export.");
+    process.exit(1);
+  }
 
   if (!fs.existsSync(TEMPLATE_DIR)) {
     console.error(`IntuneTemplate/ niet gevonden op ${TEMPLATE_DIR}`);
@@ -351,7 +396,7 @@ function main() {
     process.exit(1);
   }
 
-  const baseline = exportTemplates({ templates, outDir, assignments });
+  const baseline = exportTemplates({ templates, outDir, assignments, filterIds });
 
   const sidecars = SIDECARS.map((s) => ({ ...s, files: exportSidecar(outDir, s) })).filter((s) => s.files.length > 0);
   for (const s of sidecars) {
@@ -362,6 +407,15 @@ function main() {
   if (baseline.withoutAssignment.length > 0) {
     console.log(`\n${baseline.withoutAssignment.length} baseline-policy/policies zonder assignment in ${path.relative(REPO_ROOT, ASSIGNMENTS_PATH)} — die worden zonder toewijzing teruggezet:`);
     for (const n of baseline.withoutAssignment) console.log(`  ${n}`);
+  }
+
+  if (baseline.needsFilter.length > 0) {
+    console.log(`\n${baseline.needsFilter.length} policy/policies horen een toewijzingsfilter te krijgen dat de module niet op naam kan opzoeken — die worden zonder toewijzing teruggezet:`);
+    for (const n of baseline.needsFilter) console.log(`  ${n}`);
+    console.log("Wijs ze na de restore toe met het filter (op naam opgezocht, -CreateFilters maakt ze zo nodig aan):");
+    console.log("  .\\scripts\\Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters -WhatIf");
+    console.log("  .\\scripts\\Set-BaselineAssignment.ps1 -AllUsers   -Doelgroep fysiek,avd -WhatIf");
+    console.log("Of exporteer voor één tenant met --filter-ids <bestand> naar een map buiten git.");
   }
 
   console.log("\nTerugzetten (module IntuneBackupAndRestore 4.x):");

@@ -79,7 +79,7 @@ function main() {
 
   console.log("Pakketindeling (bron: fase in _manifest.json + doel in _assignments.json)\n");
   for (const p of packagePlan(manifest, assignments)) {
-    console.log(`  ${(p.pakket || "(geen package)").padEnd(30)}${String(p.leden.length).padStart(3)}  ${p.toewijzing}`);
+    console.log(`  ${(p.pakket || "(geen package)").padEnd(42)}${String(p.leden.length).padStart(3)}  ${p.toewijzing}`);
   }
 
   if (changed.length > 0) {

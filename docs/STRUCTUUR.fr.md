@@ -86,8 +86,8 @@ IntuneTemplate/
 
 | Fichier | Détermine | Lu par |
 |---|---|---|
-| `_manifest.json` | Par stratégie : `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `controls`, `overrides` sur la source, stratégies sources exclues | tous les scripts Node sauf `export-intunebackup.js` et `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
-| `_assignments.json` | À qui va une stratégie de phase 1 (tous les appareils, tous les utilisateurs) | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, les scripts de génération, `Set-BaselineAssignment.ps1` |
+| `_manifest.json` | Par stratégie : `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `doelgroep` (Windows : `alle`, `fysiek`, `avd`), `controls`, `overrides` sur la source, stratégies sources exclues | tous les scripts Node sauf `export-intunebackup.js` et `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
+| `_assignments.json` | À qui va une stratégie de phase 1 (tous les appareils, tous les utilisateurs), avec le filtre d'affectation par son nom (`filterDisplayName`) pour `fysiek` et `avd` | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, les scripts de génération, `Set-BaselineAssignment.ps1` |
 | `_controls.json` | Quels libellés de normes existent et ce qu'ils signifient | `generate-compliance.js`, `generate-docs.js`, `check-scope.js` |
 | `_licenties.json` | Quelles mesures vides peuvent être résolues par un SKU plutôt que par un processus | `generate-compliance.js` |
 | `_ca.json` | Par stratégie les stratégies CA qui s'appuient sur elle, et pourquoi — copie de `docs/policies.json` du dépôt CA-Policies | `generate-docs.js` |
@@ -101,10 +101,10 @@ la traduit en package CIPP ; `check-scope.js` vérifie que phase, affectation et
 
 | Phase | Signification | Stratégies | Package CIPP | Stage CIPP |
 |---:|---|---:|---|---:|
-| 1 | Déployer immédiatement | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
-| 2 | D'abord en pilote | 41 | `[Baseline] - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` | 2 |
+| 1 | Déployer immédiatement | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` ; par classe aussi `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
+| 2 | D'abord en pilote | 42 | `[Baseline] - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` ; `-Pilot-Physical` avec filtre | 2 |
 | 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `[Baseline] - Baseline-Wacht`, non affecté | 3 |
-| 4 | Groupe dédié (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<groupe>` | 1 |
+| 4 | Groupe dédié (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<groupe>` | 1 |
 | 5 | Ne pas déployer — alternative à une autre stratégie | 15 | aucun | – |
 
 Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deux semaines se sont
@@ -171,7 +171,8 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 
 - **Nommage :** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` dans le tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` comme fichier. Sans le préfixe `Baseline_`, un fichier
-  disparaît silencieusement de tous les pipelines.
+  disparaît silencieusement de tous les pipelines. Paquets, filtres, groupes et variables CIPP :
+  voir [PLAYBOOK.fr.md](PLAYBOOK.fr.md#nommage).
 - **D ou U :** pour le Settings Catalog Windows, cela découle du `settingDefinitionId` (`user_` = U).
   Ailleurs, c'est un choix portant sur la cible d'affectation.
 - **Les GUID restent identiques** à chaque import ; sinon CIPP crée un second template.
@@ -191,3 +192,4 @@ Définissez ces deux paramètres avant l'affectation, sinon une partie de la bas
 | [ANALYSE.fr.md](ANALYSE.fr.md) | Pourquoi certaines choses sont ou ne sont pas dans la baseline |
 | [PLAN.fr.md](PLAN.fr.md) | Ce qui reste ouvert, notamment la migration du tenant |
 | [AVD.fr.md](AVD.fr.md) | Quelles stratégies Windows ont aussi leur place sur les hôtes de session AVD, et le plan de déploiement |
+| [PLAYBOOK.fr.md](PLAYBOOK.fr.md) | Guide : déployer la baseline via CIPP par classe d'appareils, migration, nommage |

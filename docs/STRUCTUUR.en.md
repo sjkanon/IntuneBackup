@@ -86,8 +86,8 @@ Next to every `.json` template sits a generated `.md` listing every setting it a
 
 | File | Determines | Read by |
 |---|---|---|
-| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `controls`, `overrides` on the source, excluded source policies | all Node scripts except `export-intunebackup.js` and `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
-| `_assignments.json` | Who a phase 1 policy goes to (all devices, all users) | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, the generation scripts, `Set-BaselineAssignment.ps1` |
+| `_manifest.json` | Per policy: `doel`, `herkomst` (oib · intuneadmin · eigen), `fase` + `faseWaarom`, `doelgroep` (Windows: `alle`, `fysiek`, `avd`), `controls`, `overrides` on the source, excluded source policies | all Node scripts except `export-intunebackup.js` and `sync-mirror.js`, `Set-BaselineAssignment.ps1` |
+| `_assignments.json` | Who a phase 1 policy goes to (all devices, all users), with the assignment filter by name (`filterDisplayName`) for `fysiek` and `avd` | `set-packages.js`, `check-scope.js`, `export-intunebackup.js`, the generation scripts, `Set-BaselineAssignment.ps1` |
 | `_controls.json` | Which standard labels exist and what they mean | `generate-compliance.js`, `generate-docs.js`, `check-scope.js` |
 | `_licenties.json` | Which empty controls can be solved with a SKU rather than a process | `generate-compliance.js` |
 | `_ca.json` | Per policy the CA policies that rely on it, and why — copy from `docs/policies.json` of the CA-Policies repo | `generate-docs.js` |
@@ -102,10 +102,10 @@ agree.
 
 | Phase | Meaning | Policies | CIPP package | CIPP stage |
 |---:|---|---:|---|---:|
-| 1 | Deploy now | 102 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` | 1 |
-| 2 | Pilot first | 41 | `[Baseline] - Baseline-Pilot` → group `SEC-Baseline-Pilot` | 2 |
+| 1 | Deploy now | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token`; per class also `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
+| 2 | Pilot first | 42 | `[Baseline] - Baseline-Pilot` → group `SEC-Baseline-Pilot`; `-Pilot-Physical` with filter | 2 |
 | 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `[Baseline] - Baseline-Wacht`, not assigned | 3 |
-| 4 | Dedicated group (`faseGroep`) | 16 | `[Baseline] - Baseline-SEC-<group>` | 1 |
+| 4 | Dedicated group (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<group>` | 1 |
 | 5 | Do not deploy — alternative to another policy | 15 | none | – |
 
 Moving on to stage 2 happens once everything from stage 1 is compliant **and** two weeks have
@@ -171,7 +171,8 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 
 - **Naming:** `[Baseline] - <WIN|MAC|IOS|AND> - <D|U> - <Item>` in the tenant,
   `Baseline_<PLATFORM>_<D|U>_<Item>.json` as a file. Without the `Baseline_` prefix a file
-  silently drops out of every pipeline.
+  silently drops out of every pipeline. Packages, filters, groups and CIPP variables: see
+  [PLAYBOOK.en.md](PLAYBOOK.en.md#naming).
 - **D or U:** for Windows Settings Catalog it follows from the `settingDefinitionId` (`user_` = U).
   Elsewhere it is a choice about the assignment target.
 - **GUIDs stay the same** on every import; otherwise CIPP creates a second template.
@@ -191,3 +192,4 @@ Set these two before assigning, otherwise part of the baseline does nothing:
 | [ANALYSE.en.md](ANALYSE.en.md) | Why things are or are not in the baseline |
 | [PLAN.en.md](PLAN.en.md) | What is still open, including the tenant migration |
 | [AVD.en.md](AVD.en.md) | Which Windows policies also belong on the AVD session hosts, and the rollout plan |
+| [PLAYBOOK.en.md](PLAYBOOK.en.md) | Runbook: deploying the baseline through CIPP per device class, migration, naming |

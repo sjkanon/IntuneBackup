@@ -11,11 +11,11 @@ Restricts Remote Desktop and remote procedure calls on the AVD session hosts as 
 | Platform | Windows |
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
-| Assignment | — |
+| Assignment | All Devices |
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC, without Prompt for password upon connection |
 | File | [`Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json) |
 
-> Never assign both to the same host: the physical variant turns the password prompt on and it then applies anyway. Exclude filter on the physical one, include filter on this one. This is a copy with eight of the nine settings: if OIB changes the physical variant, carry the change over here by hand (origin own, no import script touches it). Windows 365 Cloud PCs do not fall under the filter (not multi-session) and keep the physical variant.
+> Never assign both to the same host: the physical variant turns the password prompt on and it then applies anyway. Hence class fysiek (include filter WIN - Physical) on the physical one and class avd (include filter WIN - AVD Multi-session) on this one. This is a copy with eight of the nine settings: if OIB changes the physical variant, carry the change over here by hand (origin own, no import script touches it). Windows 365 Cloud PCs and personal AVD hosts fall under neither filter and therefore get neither variant.
 
 ## Standards
 

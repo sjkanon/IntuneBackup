@@ -18,6 +18,15 @@ _assignments.json, -GroupName 'SEC-Baseline-Pilot' takes phase 2, and -GroupName
 `faseGroep` takes that group's phase 4 policies. This script never assigns phase 3 and 5 on
 its own. An exclusion (-Exclude) does go on all policies: it only takes something away.
 
+Device classes. Every Windows policy has a `doelgroep` in _manifest.json: alle (physical PCs
+and AVD session hosts, no filter), fysiek (include filter 'WIN - Physical') or avd (include
+filter 'WIN - AVD Multi-session'). In phase 1 and 2 the script puts that filter on the assignment
+itself, looked up by NAME in the tenant — a filter id only exists in one tenant. The same rule as
+the CIPP packages (<package>-Physical, <package>-AVD), see DOELGROEPEN in scripts/lib/templates.js.
+-CreateFilters creates a missing filter from IntuneTemplate/WIN/AssignmentFilters/*.json; without
+it a missing filter stops the script before anything is assigned. -Doelgroep limits the run to
+one or more classes. An explicit -FilterId overrides the class filter for every policy.
+
 Assignments are ADDED to by default, not replaced. Graph's /assign endpoint always overwrites
 the complete list, so this script first reads the existing assignments and POSTs the merged
 set. With -Replace you throw the existing ones away instead.
@@ -61,8 +70,17 @@ disputed setting through neither of them.
 Prefix of every baseline policy name. Default: "prefix" in IntuneTemplate/_organisation.json. Only
 needed with -Name outside the repo.
 
+.PARAMETER Doelgroep
+Limits the policy list to these device classes: 'alle', 'fysiek', 'avd' (one or more).
+Policies without a class (macOS, iOS, Android) count as 'alle'.
+
+.PARAMETER CreateFilters
+Creates the class filters that do not exist in the tenant yet, from
+IntuneTemplate/WIN/AssignmentFilters/*.json. Honours -WhatIf.
+
 .PARAMETER FilterId
-Object id of an assignment filter to put on the assignment.
+Object id of an assignment filter to put on the assignment of EVERY policy in the run, instead
+of the class filter from the manifest.
 
 .PARAMETER FilterType
 'include' or 'exclude' — required together with -FilterId.
@@ -86,6 +104,13 @@ The day-to-day operation: device policies to devices, user policies to users.
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -Platform MAC -Scope D -AllDevices -WhatIf
 Only the macOS device policies, as a dry run first.
+
+.EXAMPLE
+.\Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters -WhatIf
+.\Set-BaselineAssignment.ps1 -AllUsers -Doelgroep fysiek -WhatIf
+Only the phase 1 policies for one device class, each with its include filter ('WIN - Physical' or
+'WIN - AVD Multi-session'), creating the filters first if the tenant does not have them. This is
+what a restore with IntuneBackupAndRestore leaves to do: it cannot resolve a filter by name.
 #>
 # ConfirmImpact deliberately at Medium: with High PowerShell asks for confirmation per policy and
 # with nearly a hundred policies you click yourself silly. Run -WhatIf first; that is the dry run here.
@@ -122,6 +147,11 @@ param(
     [switch]$IgnoreFase,
 
     [string]$FilterId,
+
+    [ValidateSet('alle', 'fysiek', 'avd')]
+    [string[]]$Doelgroep,
+
+    [switch]$CreateFilters,
 
     [ValidateSet('include', 'exclude')]
     [string]$FilterType,
@@ -207,10 +237,39 @@ if ($null -eq (Get-MgContext)) {
     Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All', 'Group.Read.All' | Out-Null
 }
 
+# --- device classes -----------------------------------------------------------------
+# Same table as DOELGROEPEN in scripts/lib/templates.js: class -> filter displayName. Only phase 1
+# and 2 get the filter; phase 4 has its own group, phase 3 and 5 are not assigned.
+$ClassFilters = @{ fysiek = 'WIN - Physical'; avd = 'WIN - AVD Multi-session' }
+$FilterFases = @(1, 2)
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$manifestPath = Join-Path $repoRoot 'IntuneTemplate/_manifest.json'
+$manifestByName = @{}
+if (Test-Path $manifestPath) {
+    foreach ($p in (Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json).policies) { $manifestByName[$p.displayName] = $p }
+}
+
+function Get-PolicyClass {
+    <# The device class of a policy: its doelgroep, or 'alle' for a policy without one. #>
+    param([string]$PolicyName)
+    $entry = $manifestByName[$PolicyName]
+    if ($entry -and $entry.doelgroep) { return [string]$entry.doelgroep }
+    return 'alle'
+}
+
+function Get-ClassFilterName {
+    <# The filter displayName this policy gets in phase 1 and 2, or $null. #>
+    param([string]$PolicyName)
+    $entry = $manifestByName[$PolicyName]
+    if (-not $entry -or $FilterFases -notcontains [int]$entry.fase) { return $null }
+    return $ClassFilters[[string]$entry.doelgroep]
+}
+
 $resolvedGroupId = $GroupId
 if ($GroupName) {
     $escaped = $GroupName.Replace("'", "''")
-    $groups = Get-GraphCollection -Uri "v1.0/groups?`$filter=displayName eq '$escaped'&`$select=id,displayName"
+    # @(): one group comes back as a single hashtable, whose .Count is its number of keys.
+    $groups = @(Get-GraphCollection -Uri "v1.0/groups?`$filter=displayName eq '$escaped'&`$select=id,displayName")
     if ($groups.Count -eq 0) { throw "No group found with displayName '$GroupName'." }
     if ($groups.Count -gt 1) { throw "$($groups.Count) groups are named '$GroupName' — use -GroupId to point at the right one." }
     $resolvedGroupId = $groups[0].id
@@ -256,7 +315,7 @@ if ($Name) {
             param([string]$TargetType)
             $assigned.PSObject.Properties |
                 Where-Object { @($_.Value.target.'@odata.type') -contains "#microsoft.graph.$TargetType" } |
-                ForEach-Object Name
+                ForEach-Object { $_.Name }  # not "ForEach-Object Name": that form honours -WhatIf and returns nothing
         }
 
         $wanted = @(switch ($PSCmdlet.ParameterSetName) {
@@ -268,7 +327,7 @@ if ($Name) {
                         ($_.fase -eq 2 -and $GroupName -eq $PilotGroup) -or
                         ($_.fase -eq 4 -and (($_.faseGroep -split ' \(')[0].Trim()) -eq $GroupName)
                     } |
-                    ForEach-Object displayName
+                    ForEach-Object { $_.displayName }
             }
             'GroupId' {
                 throw "With only -GroupId there is no telling which phase belongs to that group. Use -GroupName, specify the policies with -Name, or take everything with -IgnoreFase."
@@ -306,7 +365,68 @@ if ($Scope -ne 'Both' -or $Platform -ne 'All') {
     }
 }
 
+if ($Doelgroep) {
+    $wanted = @($wanted | Where-Object { $Doelgroep -contains (Get-PolicyClass $_) })
+    if ($wanted.Count -eq 0) { throw "No policies in device class(es) $($Doelgroep -join ', ') for this target." }
+    Write-Host "Device class filter: $($Doelgroep -join ', ')" -ForegroundColor Cyan
+}
+
+# --- assignment filters per policy --------------------------------------------------
+# Looked up by displayName, never from the repo: the id differs per tenant. An exclusion never
+# gets a filter (Graph does not allow one on exclusionGroupAssignmentTarget).
+$filterNameByPolicy = @{}
+if (-not $FilterId -and -not $Exclude) {
+    foreach ($policyName in $wanted) {
+        # Not $name: PowerShell variables ignore case, and that is the [string[]] parameter -Name.
+        $classFilter = Get-ClassFilterName $policyName
+        if ($classFilter) { $filterNameByPolicy[$policyName] = $classFilter }
+    }
+}
+$filterIdByName = @{}
+$neededFilters = @($filterNameByPolicy.Values | Sort-Object -Unique)
+if ($neededFilters.Count -gt 0) {
+    foreach ($f in Get-GraphCollection -Uri "$ApiVersion/deviceManagement/assignmentFilters?`$select=id,displayName") {
+        if ($neededFilters -contains $f.displayName) {
+            if ($filterIdByName.ContainsKey($f.displayName)) { throw "Assignment filter '$($f.displayName)' exists more than once in the tenant — remove the duplicate first." }
+            $filterIdByName[$f.displayName] = $f.id
+        }
+    }
+    $missingFilters = @($neededFilters | Where-Object { -not $filterIdByName.ContainsKey($_) })
+    if ($missingFilters.Count -gt 0 -and -not $CreateFilters) {
+        throw "Assignment filter(s) not found in the tenant: $($missingFilters -join ', '). Create them first (IntuneTemplate/WIN/AssignmentFilters/) or run with -CreateFilters."
+    }
+    foreach ($missingName in $missingFilters) {
+        $bodyFile = Get-ChildItem -Path (Join-Path $repoRoot 'IntuneTemplate/WIN/AssignmentFilters') -Filter '*.json' -File |
+            Where-Object { (Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json).displayName -eq $missingName } |
+            Select-Object -First 1
+        if (-not $bodyFile) { throw "No filter body with displayName '$missingName' in IntuneTemplate/WIN/AssignmentFilters/." }
+        if ($PSCmdlet.ShouldProcess($missingName, 'create assignment filter')) {
+            $created = Invoke-MgGraphRequest -Method POST -Uri "$ApiVersion/deviceManagement/assignmentFilters" -Body (Get-Content -LiteralPath $bodyFile.FullName -Raw) -ContentType 'application/json'
+            $filterIdByName[$missingName] = $created.id
+            Write-Host "Assignment filter '$missingName' created -> $($created.id). Check it with Preview devices." -ForegroundColor Yellow
+        } else {
+            # WhatIf: there is no id yet; the rest of the dry run shows what would be assigned.
+            $filterIdByName[$missingName] = "<new: $missingName>"
+        }
+    }
+    foreach ($n in $neededFilters) { Write-Host "Filter '$n' -> $($filterIdByName[$n])" -ForegroundColor Cyan }
+}
+
+function Get-PolicyTarget {
+    <# The target for one policy: the run's target, plus the class filter of this policy. #>
+    param([string]$PolicyName)
+    $t = @{}
+    foreach ($k in $target.Keys) { $t[$k] = $target[$k] }
+    $classFilter = $filterNameByPolicy[$PolicyName]
+    if ($classFilter) {
+        $t['deviceAndAppManagementAssignmentFilterId'] = $filterIdByName[$classFilter]
+        $t['deviceAndAppManagementAssignmentFilterType'] = 'include'
+    }
+    return $t
+}
+
 Write-Host "$($wanted.Count) policies from the baseline, target: $($target.'@odata.type')$(if ($resolvedGroupId) { " ($resolvedGroupId)" })" -ForegroundColor Cyan
+if ($filterNameByPolicy.Count -gt 0) { Write-Host "$($filterNameByPolicy.Count) of them get a class filter (include)" -ForegroundColor Cyan }
 if ($Scope -ne 'Both') { Write-Host "Scope filter: $Scope" -ForegroundColor Cyan }
 if ($Platform -ne 'All') { Write-Host "Platform filter: $Platform" -ForegroundColor Cyan }
 Write-Host ("Mode: {0}" -f $(if ($Replace) { 'REPLACE existing assignments' } else { 'add to existing assignments' })) -ForegroundColor Cyan
@@ -357,24 +477,31 @@ $results = foreach ($policyName in $wanted) {
     $seen = [System.Collections.Generic.HashSet[string]]::new()
     foreach ($t in $existing) { if ($seen.Add((Get-TargetKey $t))) { [void]$targets.Add($t) } }
 
-    $isNew = $seen.Add((Get-TargetKey $target))
+    $policyTarget = Get-PolicyTarget $policyName
+    $isNew = $seen.Add((Get-TargetKey $policyTarget))
     if (-not $isNew) {
-        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'already assigned'; Assignments = $targets.Count }
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'already assigned'; Filter = $filterNameByPolicy[$policyName]; Assignments = $targets.Count }
         continue
     }
-    [void]$targets.Add($target)
+    # Same target with another (or no) filter: both would stay, and the one without filter still
+    # puts the policy on every device. That is the migration case — say so instead of guessing.
+    $sameTarget = @($existing | Where-Object { $_.'@odata.type' -eq $policyTarget.'@odata.type' -and $_.groupId -eq $policyTarget.groupId })
+    if ($sameTarget.Count -gt 0) {
+        Write-Warning "'$policyName' already has $($policyTarget.'@odata.type') with another filter ($(@($sameTarget | ForEach-Object { $_.deviceAndAppManagementAssignmentFilterType }) -join ', ')); that one stays. Use -Replace to swap it."
+    }
+    [void]$targets.Add($policyTarget)
 
     $body = @{ assignments = @($targets | ForEach-Object { @{ target = $_ } }) } | ConvertTo-Json -Depth 10
     if ($PSCmdlet.ShouldProcess($policyName, "set assignment ($($targets.Count) target(s))")) {
         try {
             Invoke-MgGraphRequest -Method POST -Uri "$uri/assign" -Body $body | Out-Null
-            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = $(if ($Replace) { 'replaced' } else { 'added' }); Assignments = $targets.Count }
+            [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = $(if ($Replace) { 'replaced' } else { 'added' }); Filter = $filterNameByPolicy[$policyName]; Assignments = $targets.Count }
         } catch {
             Write-Error "$policyName - assignment failed: $_" -ErrorAction Continue
             [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'FAILED'; Assignments = 0 }
         }
     } else {
-        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'skipped (WhatIf)'; Assignments = $targets.Count }
+        [pscustomobject]@{ Policy = $policyName; Type = $policy.Label; Action = 'skipped (WhatIf)'; Filter = $filterNameByPolicy[$policyName]; Assignments = $targets.Count }
     }
 }
 

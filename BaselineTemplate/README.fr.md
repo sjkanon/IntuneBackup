@@ -23,12 +23,18 @@ dépôt : le manifeste.
 
 | Étape | Paquets | Passage à cette étape |
 |---:|---|---|
-| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` et les huit paquets de groupe `[Baseline] - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
-| 2 · Pilote | `[Baseline] - Baseline-Pilot` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
+| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` et les paquets de groupe `[Baseline] - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
+| 2 · Pilote | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
 | 3 · En attente d'un prérequis | `[Baseline] - Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
 
 Les stratégies contenues dans chaque paquet sont listées dans le
 [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp).
+
+**Classes d'appareils.** Les paquets en `-Physical` et `-AVD` ont la même affectation que leur
+équivalent sans suffixe, plus un filtre d'inclusion dans le standard (`assignmentFilter`) :
+`WIN - Physical` ou `WIN - AVD Multi-session`. CIPP recherche ce filtre par son nom dans chaque
+tenant ; s'il n'existe pas, CIPP affecte **sans** filtre et ne consigne qu'un avertissement. Créez
+donc les filtres avant la première exécution — voir [docs/PLAYBOOK.fr.md](../docs/PLAYBOOK.fr.md).
 
 L'étape 1 s'applique toujours et les étapes suivantes s'y superposent. La condition appartient à
 l'étape dans laquelle vous **entrez**, pas à celle que vous quittez. La phase 3 attend quelque
@@ -70,6 +76,9 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
 ## Ce que vous faites ensuite vous-même
 
 - **Affecter des tenants.** Sans cela, la baseline ne s'exécute nulle part.
+- **Créer les filtres.** `WIN - Physical` et `WIN - AVD Multi-session` depuis
+  [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md), avant
+  la première exécution.
 - **Veiller à ce que les groupes existent.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`,
   `SEC-Update-Ring2`, `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`,
   `SEC-iOS-Corporate` et `SEC-Remote-Support-macOS` doivent exister dans le tenant ; CIPP les
@@ -157,10 +166,11 @@ un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition 
 
 | Étape | Standard | Affectation | Ce qu'il fait |
 |---:|---|---|---|
-| 1 · Immédiat | `[Baseline] - Updates-Ring3` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
+| 1 · Immédiat | `[Baseline] - Updates-Ring3-Physical` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2`, filtre `WIN - Physical` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
 | 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
 | 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
-| 1 · Immédiat | `[Baseline] - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) et Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) |
+| 1 · Immédiat | `[Baseline] - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) |
+| 1 · Immédiat | `[Baseline] - Updates-Devices-Physical` | tous les appareils, filtre `WIN - Physical` | Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) — sur un hôte AVD, les mises à jour arrivent avec l'image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | tous les appareils (Required) | Winget-AutoUpdate : met à jour chaque jour toute application connue de winget, sauf la [liste d'exclusion](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
 
 L'étape 2 commence lorsque tout ce qui relève de l'étape 1 est conforme **et** que deux semaines

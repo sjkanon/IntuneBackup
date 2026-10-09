@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Remote Desktop and RPC",
-    "description": "Restricts Remote Desktop and remote procedure calls on the AVD session hosts as [Baseline] - WIN - D - Remote Desktop and RPC does on physical devices, but without the password prompt on every connection, which breaks single sign-on with Entra ID. Baseline assignment: none by default — belongs on SEC-AVD-Session-Hosts. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC, without Prompt for password upon connection.",
+    "description": "Restricts Remote Desktop and remote procedure calls on the AVD session hosts as [Baseline] - WIN - D - Remote Desktop and RPC does on physical devices, but without the password prompt on every connection, which breaks single sign-on with Entra ID. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC, without Prompt for password upon connection.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

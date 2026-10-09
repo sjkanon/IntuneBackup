@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Wireless and Peripherals",
-    "description": "Makes the device invisible over Bluetooth and shuts off Windows Connect Now, so that wireless settings cannot be transferred from one device to another outside management. Already paired devices keep working. Baseline assignment: all devices. Source: ISO/IEC 27001:2022 A.8.20 and A.7.9, NIS2 art. 21(2)(e) — settings from the IntuneAdmin Endpoint Security set.",
+    "description": "Makes the device invisible over Bluetooth and shuts off Windows Connect Now, so that wireless settings cannot be transferred from one device to another outside management. Already paired devices keep working. Baseline assignment: all devices (assignment filter WIN - Physical). Source: ISO/IEC 27001:2022 A.8.20 and A.7.9, NIS2 art. 21(2)(e) — settings from the IntuneAdmin Endpoint Security set.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

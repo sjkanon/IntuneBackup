@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric",
-    "description": "Requires an alphanumeric PIN for the Windows Hello for Business passkey: at least one digit, one lowercase letter, one uppercase letter and one special character. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Own choice, PassportForWork CSP — Policies/PINComplexity.",
+    "description": "Requires an alphanumeric PIN for the Windows Hello for Business passkey: at least one digit, one lowercase letter, one uppercase letter and one special character. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first (assignment filter WIN - Physical). Source: Own choice, PassportForWork CSP — Policies/PINComplexity.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

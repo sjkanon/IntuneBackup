@@ -11,7 +11,7 @@ This is the summary; the details are in the [main README](../README.en.md) and p
 | | Count |
 |---|---:|
 | Policies | 207 |
-| Without assignment (deliberately) | 105 |
+| Without assignment (deliberately) | 101 |
 | Deployed in the tenant | 0 |
 
 ## What is in it
@@ -32,7 +32,7 @@ Each platform has a table with **every policy, what it does and where it lands**
 ## Compliance framework
 
 207 of the 207 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
-CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 31 of the 93 Annex A controls.
+CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 32 of the 93 Annex A controls.
 Per control and per NIS2 point what the baseline enforces, how it is verified and what the organisation
 has to arrange itself: [COMPLIANCE.en.md](COMPLIANCE.en.md).
 
@@ -176,8 +176,8 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is an organisational decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for an organisation that allows these assistants. |
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
-105 are without assignment: the 42 above, 26 awaiting a prerequisite,
-22 for a dedicated group and 15 that are not deployed. The last two are an
+101 are without assignment: the 42 above, 26 awaiting a prerequisite,
+18 for a dedicated group and 15 that are not deployed. The last two are an
 *alternative* to a policy that is assigned, not an addition to it: update rings
 1 and 2 for Windows and Defender set the same settings as ring 3 with different values, the
 three CIPP standard templates for Defender do the same as their OIB counterpart, the

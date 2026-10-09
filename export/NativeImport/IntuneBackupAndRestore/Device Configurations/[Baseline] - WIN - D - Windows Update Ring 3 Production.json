@@ -22,7 +22,7 @@
     "automaticUpdateMode": "autoInstallAndRebootAtScheduledTime",
     "scheduleRestartWarningInHours": null,
     "autoRestartNotificationDismissal": "notConfigured",
-    "description": "Production ring for Windows updates: installs daily at 13:00 with a deferral period of two days. Baseline assignment: all devices. Source: own baseline — tenant-specific installation windows.",
+    "description": "Production ring for Windows updates: installs daily at 13:00 with a deferral period of two days. Baseline assignment: all devices (assignment filter WIN - Physical). Source: own baseline — tenant-specific installation windows.",
     "userPauseAccess": "disabled",
     "deadlineForFeatureUpdatesInDays": 2,
     "updateWeeks": "everyWeek",

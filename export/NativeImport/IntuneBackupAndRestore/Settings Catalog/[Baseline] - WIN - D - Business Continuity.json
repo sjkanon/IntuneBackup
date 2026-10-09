@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Business Continuity",
-    "description": "Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. Baseline assignment: all devices. Source: ISO/IEC 27001:2022 A.5.29, A.5.30 and A.8.14, NIS2 art. 21(2)(c) — settings from IntuneAdmin's Modern Workplace set.",
+    "description": "Turns on Quick Machine Recovery: a device that no longer boots fetches a recovery package from the cloud itself instead of waiting for a technician. Baseline assignment: all devices (assignment filter WIN - Physical). Source: ISO/IEC 27001:2022 A.5.29, A.5.30 and A.8.14, NIS2 art. 21(2)(c) — settings from IntuneAdmin's Modern Workplace set.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Device Lock",
-    "description": "Determines when the screen locks and which requirements apply to the passcode, plus the behaviour on closing the lid and power. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock.\nOIBID:D4027112-4CF4-4E56-82CD-0FC97D43580F",
+    "description": "Determines when the screen locks and which requirements apply to the passcode, plus the behaviour on closing the lid and power. Baseline assignment: all devices (assignment filter WIN - Physical). Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - U - Power and Device Lock.\nOIBID:D4027112-4CF4-4E56-82CD-0FC97D43580F",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

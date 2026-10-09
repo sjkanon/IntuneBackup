@@ -22,12 +22,18 @@ dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 70 poli
 
 | Stage | Pakketten | Doorschuiven naar deze stage |
 |---:|---|---|
-| 1 · Nu | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` en de acht groepspakketten `[Baseline] - Baseline-SEC-*` | — stage 1 geldt altijd |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
+| 1 · Nu | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` en de groepspakketten `[Baseline] - Baseline-SEC-*` | — stage 1 geldt altijd |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
 | 3 · Wacht op voorwaarde | `[Baseline] - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Welke policies in welk pakket zitten staat in de
 [`IntuneTemplate`-README](../IntuneTemplate/README.md#cipp-pakketten).
+
+**Apparaatklassen.** De pakketten met `-Physical` en `-AVD` hebben dezelfde toewijzing als hun
+tegenhanger zonder achtervoegsel, plus een include-filter in de standard (`assignmentFilter`):
+`WIN - Physical` of `WIN - AVD Multi-session`. CIPP zoekt dat filter per tenant op naam op; bestaat
+het niet, dan wijst CIPP toe **zonder** filter en logt alleen een waarschuwing. Maak de filters dus
+vóór de eerste run aan — zie [docs/PLAYBOOK.md](../docs/PLAYBOOK.md).
 
 Stage 1 geldt altijd en latere stages stapelen erbovenop. De conditie hoort bij de stage die
 je **binnengaat**, niet bij de stage die je verlaat. Fase 3 wacht op iets dat CIPP niet kan
@@ -67,6 +73,9 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
 ## Wat je erna zelf doet
 
 - **Tenants toewijzen.** Zonder dat draait de baseline nergens.
+- **De filters aanmaken.** `WIN - Physical` en `WIN - AVD Multi-session` uit
+  [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.md), vóór
+  de eerste run.
 - **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
   `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` en
   `SEC-Remote-Support-macOS` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
@@ -150,10 +159,11 @@ Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — o
 
 | Stage | Standard | Toewijzing | Wat het doet |
 |---:|---|---|---|
-| 1 · Nu | `[Baseline] - Updates-Ring3` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
+| 1 · Nu | `[Baseline] - Updates-Ring3-Physical` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2`, filter `WIN - Physical` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
 | 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
 | 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
-| 1 · Nu | `[Baseline] - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) en Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) |
+| 1 · Nu | `[Baseline] - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) |
+| 1 · Nu | `[Baseline] - Updates-Devices-Physical` | alle apparaten, filter `WIN - Physical` | Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) — op een AVD-host komen updates met de image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | alle apparaten (Required) | Winget-AutoUpdate: werkt dagelijks elke app bij die winget kent, behalve de [uitsluitingslijst](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
 
 Stage 2 begint als alles uit stage 1 compliant is **en** er twee weken voorbij zijn — dezelfde

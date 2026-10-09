@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Timezone",
-    "description": "Lets Windows determine the time zone automatically, so that logs and certificates are not on the wrong time. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone.\nOIBID:44731D7C-3531-4DFF-9099-C5E06CF325CD",
+    "description": "Lets Windows determine the time zone automatically, so that logs and certificates are not on the wrong time. Baseline assignment: all devices (assignment filter WIN - Physical). Source: OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Timezone.\nOIBID:44731D7C-3531-4DFF-9099-C5E06CF325CD",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

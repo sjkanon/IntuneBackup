@@ -1,0 +1,12 @@
+{
+  "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
+  "displayName": "WIN - Physical",
+  "description": "Physical Windows devices (laptops, workstations): not Windows Enterprise multi-session, not a Hyper-V/Azure virtual machine, not a Windows 365 Cloud PC.",
+  "platform": "windows10AndLater",
+  "rule": "(device.operatingSystemSKU -ne \"ServerRdsh\") and (device.model -ne \"Virtual Machine\") and (device.model -notContains \"Cloud PC\")",
+  "roleScopeTags": [
+    "0"
+  ],
+  "assignmentFilterManagementType": "devices",
+  "payloads": []
+}

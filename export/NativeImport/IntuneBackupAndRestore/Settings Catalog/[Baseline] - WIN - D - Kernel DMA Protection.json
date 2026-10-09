@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Kernel DMA Protection",
-    "description": "Blocks peripherals that can read directly from memory and do not support DMA remapping. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — value verified against Policy CSP DmaGuard/DeviceEnumerationPolicy..",
+    "description": "Blocks peripherals that can read directly from memory and do not support DMA remapping. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first (assignment filter WIN - Physical). Source: Microsoft Security Baseline (Windows 365 / Endpoint Security) via IntuneAdmin — value verified against Policy CSP DmaGuard/DeviceEnumerationPolicy..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

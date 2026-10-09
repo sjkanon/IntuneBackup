@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - BitLocker",
-    "description": "Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID. Baseline assignment: all devices. Source: OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk).\nOIBID:C53F0DA8-45D9-4E38-AB62-D3C359ED91F6",
+    "description": "Encrypts the OS drive and, via the retained custom settings, also fixed and removable drives. Recovery keys are stored in Entra ID. Baseline assignment: all devices (assignment filter WIN - Physical). Source: OpenIntuneBaseline Windows v4.0 — ES - Encryption - D - BitLocker (OS Disk).\nOIBID:C53F0DA8-45D9-4E38-AB62-D3C359ED91F6",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

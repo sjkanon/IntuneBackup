@@ -20,13 +20,13 @@
       "standards": [
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#ring3",
+          "instance": "IntuneTemplatePackage#ring3-physical",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Updates-Ring3",
+            "intuneTemplatePackage": "[Baseline] - Updates-Ring3-Physical",
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "SEC-Update-Ring1,SEC-Update-Ring2",
-            "assignmentFilter": "",
+            "assignmentFilter": "WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -78,6 +78,23 @@
             "customGroup": "",
             "excludeGroup": "",
             "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#devices-physical",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Updates-Devices-Physical",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
