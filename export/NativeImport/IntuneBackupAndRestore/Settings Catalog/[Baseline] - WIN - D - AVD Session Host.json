@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Session Host",
-    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and turns Storage Sense off so that Windows cleans up nothing in profiles that FSLogix has attached. Baseline assignment: none by default — belongs on SEC-AVD-Session-Hosts. Source: Own — the classification in INTUNE-BASELINE.md of the AVD test environment (Storage Sense not on session hosts) and the Remote Desktop Services session limits in the Settings Catalog.",
+    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and turns Storage Sense off so that Windows cleans up nothing in profiles that FSLogix has attached. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the classification in INTUNE-BASELINE.md of the AVD test environment (Storage Sense not on session hosts) and the Remote Desktop Services session limits in the Settings Catalog.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

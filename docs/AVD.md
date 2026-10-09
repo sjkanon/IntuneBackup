@@ -11,26 +11,36 @@ De indeling volgt `infra/INTUNE-BASELINE.md` (secties 2 tot 4) in de AVD-testrep
 [Intune voor AVD multi-session](https://learn.microsoft.com/en-us/intune/solutions/azure-virtual-desktop-multi-session),
 en de bevindingen uit de testtenant van 9 oktober 2026. De lijst hieronder is opgebouwd uit de
 werkelijke policynamen in `IntuneTemplate/WIN` (142 policies). Dit document is handwerk: komt er
-een Windows-policy bij, zet hem dan ook hier in een van de vier groepen.
+een Windows-policy bij, zet hem dan ook hier in een van de vier groepen én geef hem de bijbehorende
+`doelgroep` in `_manifest.json` — `check-scope.js` weigert een Windows-policy zonder.
 
 ## In het kort
 
-| Groep | Policies | Toewijzing op AVD |
-|---|---:|---|
-| **Gezamenlijk** — fysiek en AVD, ongewijzigd | 95 | zoals ze nu staan, zonder filter |
-| **Alleen fysiek** — niet op de sessiehosts | 40 | huidige toewijzing + **exclude**-filter `WIN - AVD Multi-session` |
-| **AVD-variant** — fysiek en AVD elk een eigen versie | 1 | fysieke versie exclude, AVD-versie include |
-| **Alleen AVD** — de nieuwe policies en de Cloud PC-set | 6 | **include**-filter `WIN - AVD Multi-session` (Cloud PC-set: eigen groep) |
+Elke Windows-policy heeft in [`_manifest.json`](../IntuneTemplate/_manifest.json) een `doelgroep`:
+de apparaatklasse waarop hij hoort. Drie klassen, twee filters, alleen **include**:
+
+| Groep in dit document | `doelgroep` | Policies | Toewijzing |
+|---|---|---:|---|
+| **Gezamenlijk** — fysiek en AVD, ongewijzigd | `alle` | 95 | zoals ze staan, zonder filter |
+| **Alleen fysiek** — niet op de sessiehosts | `fysiek` | 40 | **include**-filter `WIN - Physical` |
+| **AVD-variant** — fysiek en AVD elk een eigen versie | `fysiek` (de fysieke versie) | 1 | fysieke versie include `WIN - Physical`, AVD-versie include `WIN - AVD Multi-session` |
+| **Alleen AVD** — de nieuwe policies en de Cloud PC-set | `avd` | 6 | **include**-filter `WIN - AVD Multi-session` (Cloud PC-set: eigen groep) |
+
+In fase 1 en 2 maakt de pijplijn er eigen CIPP-pakketten van: `[Baseline] - Baseline-Devices-Physical`,
+`-Users-Physical`, `-Pilot-Physical` en `-Devices-AVD`, met het filter in de standard. Hoe je dat in
+een klanttenant uitrolt staat in het draaiboek [PLAYBOOK.md](PLAYBOOK.md).
 
 Nieuw in deze repo voor AVD:
 
-- het toewijzingsfilter [`WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.md);
+- de toewijzingsfilters [`WIN - Physical` en `WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.md);
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) — FSLogix en het Kerberos-ticket voor Azure Files;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) — de fysieke versie zonder wachtwoordprompt;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) — de Defender-uitsluitingen die Microsoft voor FSLogix voorschrijft;
 - [`AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) — sessielimieten van twee uur en Storage Sense uit.
 
-Alle vier staan in fase 4 met `faseGroep` **SEC-AVD-Session-Hosts**, zoals de Cloud PC-set.
+Alle vier staan in **fase 1** met doelgroep `avd`, in het pakket `[Baseline] - Baseline-Devices-AVD`
+(alle apparaten, include-filter `WIN - AVD Multi-session`). Het opslagaccount in de twee
+FSLogix-policies is de CIPP-variabele `%FSLogixStorageAccount%`, die je per tenant zet.
 
 ## Wat Intune op multi-session wel en niet doet
 
@@ -47,51 +57,64 @@ Alle vier staan in fase 4 met `faseGroep` **SEC-AVD-Session-Hosts**, zoals de Cl
 - **Apps** alleen in systeemcontext en als *Required*.
 - **Geen** Autopilot, ESP, wissen, vergrendelen op afstand of rotatie van de BitLocker-sleutel.
 
-## Hoe het filter werkt
+## Hoe de filters werken
 
 [`WIN-AVD-Multi-Session.json`](../IntuneTemplate/WIN/AssignmentFilters/WIN-AVD-Multi-Session.json)
 heeft de regel `(device.operatingSystemSKU -eq "ServerRdsh")`: de SKU van Windows Enterprise
-multi-session. In de testtenant matcht het precies de AVD-sessiehost en geen enkele fysieke pc.
-Een Windows 365 Cloud PC is single-session en valt er niet onder.
+multi-session. [`WIN-Physical.json`](../IntuneTemplate/WIN/AssignmentFilters/WIN-Physical.json) is
+`(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")`.
+In de testtenant matcht het eerste precies de AVD-sessiehost, het tweede de vier fysieke en
+QEMU-pc's en niet de sessiehost.
+
+**Wat onder geen van beide valt:** Windows 365 Cloud PC's en persoonlijke AVD-hosts (single-session,
+model `Virtual Machine`). Die krijgen alleen de gezamenlijke policies — dus ook geen BitLocker,
+Windows Hello of de fysieke `Remote Desktop and RPC` met de wachtwoordprompt — plus de Cloud PC-set
+via hun eigen groep. Dat is bewust: de fysieke policies gaan uit van hardware (TPM, schijf, wifi,
+batterij) en de AVD-policies van multi-session met FSLogix.
 
 Een filter staat altijd naast een toewijzing — aan alle apparaten, alle gebruikers of een groep —
-en zegt welke apparaten daarvan mee- of niet meedoen:
+en zegt welke apparaten daarvan meedoen. Waarom filters en geen groepen:
 
-- **Include** op de AVD-policies: alleen sessiehosts krijgen ze, ook als er per ongeluk een fysiek
-  toestel in de groep belandt. CIPP wijst het pakket `[Baseline] - Baseline-SEC-AVD-Session-Hosts`
-  toe aan de groep SEC-AVD-Session-Hosts; zet het include-filter in de CIPP-standard van dat pakket.
-  Zonder CIPP kan het ook zonder groep: alle apparaten met het include-filter.
-- **Exclude** op de policies die alleen op fysieke toestellen horen: de toewijzing blijft zoals ze
-  is (alle apparaten, alle gebruikers of een groep), het filter haalt de sessiehosts eruit.
-- **Gebruikersgerichte toewijzingen** zijn de reden voor een filter in plaats van een groep.
-  `WIN - U - Windows Hello for Business`, `WIN - U - Personal Data Encryption` en de Outlook-varianten
-  gaan naar gebruikers. Een uitsluiting van een *apparaatgroep* doet daar niets: de toewijzing
-  kijkt naar de gebruiker, niet naar het apparaat. Een filter wordt wél op het apparaat getoetst
-  waar de gebruiker zich aanmeldt — dezelfde gebruiker krijgt Windows Hello op zijn laptop en niet
-  in de AVD-sessie.
-- **AVD-variant:** de fysieke versie krijgt exclude, de AVD-versie include. Nooit beide op dezelfde
-  host: dan zetten twee policies dezelfde instellingen en geldt de wachtwoordprompt van de fysieke
-  versie alsnog.
+- **Gebruikersgerichte toewijzingen.** `WIN - U - Windows Hello for Business`,
+  `WIN - U - Personal Data Encryption` en de Outlook-varianten gaan naar gebruikers. Een uitsluiting
+  van een *apparaatgroep* doet daar niets: de toewijzing kijkt naar de gebruiker. Een filter wordt
+  wél op het apparaat getoetst waar de gebruiker zich aanmeldt — dezelfde gebruiker krijgt Windows
+  Hello op zijn laptop en niet in de AVD-sessie.
+- **Geen wachttijd.** Een filter wordt bij de check-in getoetst; een nieuwe sessiehost of laptop
+  hoeft niet te wachten tot een dynamische groep hem heeft opgenomen.
+- **Eén filter per CIPP-pakket.** Een CIPP-pakket heeft één toewijzing en één filter voor al zijn
+  leden. Daarom krijgt elke klasse een eigen pakket, en is het filter altijd **include**: de
+  gezamenlijke policies zitten in een pakket zónder filter, de fysieke in een pakket met
+  `WIN - Physical`, de AVD-policies in een pakket met `WIN - AVD Multi-session`.
 
-`check-scope.js` controleert conflicten alleen tussen policies in fase 1. De AVD-policies (fase 4)
-vallen daarbuiten; de overlap is daarom met de hand nagelopen:
+**Geen exclude-filters meer.** Het vorige model zette op de alleen-fysieke policies een
+exclude-filter `WIN - AVD Multi-session`. Dat kon CIPP niet per policy: die policies zaten in
+`Baseline-Devices`, `-Users` en `-Pilot` samen met de gezamenlijke, en een exclude op zo'n pakket
+haalde ook de gezamenlijke van de sessiehosts. Met een eigen pakket per klasse is dat opgelost, en
+met include in plaats van exclude kan een Cloud PC of een persoonlijke host niet meer per ongeluk
+een fysieke policy krijgen.
+
+**AVD-variant:** de fysieke `Remote Desktop and RPC` heeft doelgroep `fysiek`, de AVD-versie
+`avd`. Ze komen nooit samen op één host, dus de wachtwoordprompt van de fysieke versie kan op de
+sessiehost niet alsnog gelden.
+
+### Conflictcontrole per klasse
+
+`check-scope.js` vergelijkt per instelling wat op hetzelfde apparaat landt: **alle + fysiek** op een
+fysieke pc en **alle + avd** op een sessiehost, over fase 1 en 2. Tussen `fysiek` en `avd` mag
+dezelfde instelling een andere waarde hebben — dat is juist het doel (Storage Sense aan op een
+laptop, uit op een sessiehost). Vandaag: geen conflicten; drie instellingen worden dubbel gezet met
+dezelfde waarde (NTLM in Disable NTLM en Local Security Policies, twee Outlook-instellingen in
+Office Experience en Outlook Cached Mode Managed). Fase 4 (eigen groep) vergelijkt de check niet;
+die overlap staat hieronder met de hand:
 
 | Instelling | AVD-policy | Andere policy | Afgehandeld door |
 |---|---|---|---|
-| `storage_allowstoragesenseglobal` | AVD Session Host (0) | Storage Sense (1) | Storage Sense is *Alleen fysiek* |
-| `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 uur) | Cloud PC External Access (15 min) | SEC-Cloud-PC-External uitsluiten bij AVD Session Host |
-| `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | zelfde waarde; Cloud Kerberos Trust is bovendien *Alleen fysiek* |
-| acht instellingen van Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | zelfde waarden; de fysieke is *AVD-variant* (exclude) |
+| `storage_allowstoragesenseglobal` | AVD Session Host (0) | Storage Sense (1) | Storage Sense is `fysiek`; check-scope bewaakt het |
+| `ts_sessions_idle_limit_2`, `ts_sessions_disconnected_timeout_2` | AVD Session Host (2 uur) | Cloud PC External Access (15 min, fase 4) | **open punt**, zie onderaan — alleen op een hostpool voor externen |
+| `kerberos_cloudkerberosticketretrievalenabled` | AVD FSLogix Profile Containers (1) | Windows Hello Cloud Kerberos Trust (1) | verschillende klassen; zelfde waarde |
+| acht instellingen van Remote Desktop and RPC | AVD Remote Desktop and RPC | Remote Desktop and RPC | verschillende klassen |
 | `ts_time_zone` | — | Cloud PC Session Security | niet opgenomen in AVD Session Host |
-
-### CIPP en het exclude-filter
-
-Een CIPP-pakket heeft één toewijzing en één filter voor al zijn leden. De policies die *Alleen
-fysiek* zijn, zitten in `Baseline-Devices`, `Baseline-Users` en `Baseline-Pilot` samen met
-gezamenlijke policies; een exclude-filter op zo'n pakket zou ook de gezamenlijke policies van de
-sessiehosts halen. Tot de pijplijn een apart pakket voor de fysieke policies kent, zet je het
-exclude-filter per policy in Intune (portal of `Set-BaselineAssignment.ps1`, zie het uitrolplan) en
-controleer je na een CIPP-run dat het er nog staat. Dat is een open punt, zie onderaan.
 
 ## Indeling per policy
 
@@ -199,7 +222,7 @@ Fysiek en AVD, ongewijzigd en zonder filter.
 
 ### Alleen fysiek — 40
 
-Op AVD uitsluiten met het exclude-filter `WIN - AVD Multi-session`.
+Doelgroep `fysiek`: in fase 1 en 2 het include-filter `WIN - Physical`, dus niet op een sessiehost, een Windows 365 Cloud PC of een persoonlijke AVD-host.
 
 | Policy | Fase | Waarom niet op AVD |
 |---|---:|---|
@@ -223,7 +246,7 @@ Op AVD uitsluiten met het exclude-filter `WIN - AVD Multi-session`.
 | [D - Passwordless](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.md) | 1 | Verbergt het wachtwoordveld; zonder SSO kan dan niemand meer aanmelden op de host. |
 | [D - Power Management](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.md) | 1 | Hardware die een VM niet heeft; redirectie staat al uit via Cloud PC Session Security. |
 | [D - Removable Storage](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Removable_Storage.md) | 2 | Hardware die een VM niet heeft; redirectie staat al uit via Cloud PC Session Security. |
-| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | 1 | Ruimt op in gekoppelde FSLogix-profielen; AVD Session Host zet Storage Sense uit (andere waarde, dus uitsluiten). |
+| [D - Storage Sense](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | 1 | Ruimt op in gekoppelde FSLogix-profielen; AVD Session Host zet Storage Sense uit (andere waarde: daarom `fysiek`). |
 | [D - Timezone](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.md) | 1 | Automatische tijdzone botst met de tijdzone-redirectie (`ts_time_zone`) uit Cloud PC Session Security. |
 | [D - Wifi Corporate](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Corporate.md) | 3 | Device configuration-template: niet ondersteund op multi-session, en een VM heeft geen wifi. |
 | [D - Wifi Guest](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.md) | 3 | Device configuration-template: niet ondersteund op multi-session, en een VM heeft geen wifi. |
@@ -248,17 +271,17 @@ Op AVD uitsluiten met het exclude-filter `WIN - AVD Multi-session`.
 
 | Policy | Fase | Opmerking |
 |---|---:|---|
-| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.md) | 1 | `promptforpassworduponconnection` breekt Entra-SSO en passkeys. Fysiek: exclude-filter; AVD: [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) met include-filter. |
+| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.md) | 1 | `promptforpassworduponconnection` breekt Entra-SSO en passkeys. Fysiek: doelgroep `fysiek` (include `WIN - Physical`); AVD: [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) met doelgroep `avd`. |
 
 ### Alleen AVD — 6
 
 | Policy | Fase | Opmerking |
 |---|---:|---|
-| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) | 4 | Nieuw. Include-filter WIN - AVD Multi-session. |
-| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) | 4 | Nieuw. Include-filter WIN - AVD Multi-session. |
-| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) | 4 | Nieuw. Include-filter WIN - AVD Multi-session. |
-| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) | 4 | Nieuw. Include-filter WIN - AVD Multi-session. |
-| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | 4 | Bestaand, alleen op een hostpool voor externen (SEC-Cloud-PC-External). Botst daar met de sessielimieten van AVD Session Host: sluit SEC-Cloud-PC-External uit bij AVD Session Host. |
+| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
+| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
+| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
+| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `WIN - AVD Multi-session`. |
+| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | 4 | Bestaand, alleen op een hostpool voor externen (SEC-Cloud-PC-External). Botst daar met de sessielimieten van AVD Session Host — zie de open punten. |
 | [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.md) | 4 | Bestaand, via de groep SEC-Cloud-PC (ook Windows 365). Zet ook de tijdzone-redirectie. |
 
 ## Bevindingen uit de testtenant (9 oktober 2026)
@@ -308,28 +331,34 @@ Conditional Access van MFA zijn uitgesloten.
 
 ## Uitrolplan
 
-1. **Filter aanmaken.** `WIN-AVD-Multi-Session.json` met een `POST` naar
-   `deviceManagement/assignmentFilters`, of in de portal. Controleer met *Preview devices* dat
-   alleen de sessiehosts matchen.
-2. **Groep SEC-AVD-Session-Hosts** als dynamische apparaatgroep, bijvoorbeeld
-   `(device.displayName -startsWith "<hostpoolprefix>-sh")`. CIPP wijst daar het AVD-pakket aan
-   toe, en de compliance heeft hem nodig (stap 5).
-3. **AVD-policies toewijzen met include.** Vul eerst `OPSLAGACCOUNT-INVULLEN` in (in `local/`, niet in
-   git). Daarna het pakket `[Baseline] - Baseline-SEC-AVD-Session-Hosts` in CIPP met het include-filter
-   in de standard, of in de portal: alle apparaten (of SEC-AVD-Session-Hosts) met include-filter.
-   Op een hostpool voor externen: SEC-Cloud-PC-External uitsluiten bij `AVD Session Host`.
-4. **Exclude op de policies die alleen fysiek zijn**, plus de fysieke `Remote Desktop and RPC`.
-   In de portal per policy, of met `Set-BaselineAssignment.ps1 -Name <lijst> -AllDevices -FilterId <id> -FilterType exclude -Replace`
-   (en `-AllUsers` voor de U-policies). Let op: `-Replace` vervangt álle toewijzingen van de policy —
-   een policy met een groep of uitsluitingen (update ring 3, de `SEC-Shared-Devices`-policies) zet je
-   in de portal. Draai eerst met `-WhatIf`.
+Het volledige draaiboek, ook voor de fysieke klasse en de migratie van een oude set, staat in
+[PLAYBOOK.md](PLAYBOOK.md). Voor AVD in het kort:
+
+1. **Filters aanmaken.** `WIN - Physical` en `WIN - AVD Multi-session` uit
+   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.md), met
+   een `POST` naar `deviceManagement/assignmentFilters`, in de portal of met
+   `Set-BaselineAssignment.ps1 -CreateFilters`. Controleer met *Preview devices*. Vóór de eerste
+   CIPP-run: bestaat het filter niet, dan wijst CIPP toe zónder filter.
+2. **CIPP-variabele `FSLogixStorageAccount`** per tenant (Settings → Custom Variables): de naam van
+   het opslagaccount, zonder `.file.core.windows.net`. Zonder die variabele staat
+   `%FSLogixStorageAccount%` letterlijk in het pad en kan met `PreventLoginWithFailure` niemand meer
+   op de host aanmelden.
+3. **Groep SEC-AVD-Session-Hosts** als dynamische apparaatgroep, bijvoorbeeld
+   `(device.displayName -startsWith "<hostpoolprefix>-sh")`. Niet voor de baseline-pakketten (die
+   gebruiken het filter), wel voor de compliance-apparaattoewijzing (stap 5), de RDP-SSO-instelling
+   *target device groups* op de hostpool en rapportage.
+4. **Baseline in CIPP.** Stage 1 rolt `[Baseline] - Baseline-Devices-AVD` uit (alle apparaten,
+   include `WIN - AVD Multi-session`) naast de gezamenlijke pakketten. De alleen-fysieke policies
+   gaan via de `-Physical`-pakketten en komen dus niet op de host.
 5. **Compliance op het apparaat.** Wijs de compliancepolicies die multi-session ondersteunt —
    Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection, Defender Security
-   Intelligence, Firewall en OS Version — óók toe aan SEC-AVD-Session-Hosts.
+   Intelligence, Firewall en OS Version — óók toe aan SEC-AVD-Session-Hosts. Let op het open punt
+   hieronder: CIPP's `verifyAssignments` ziet die extra toewijzing als afwijking.
 6. **Pilot-hostpool.** Eén hostpool met Entra join, Intune-inschrijving en Trusted Launch. Per host
    in Intune: elke policy *Succeeded* of *Not applicable*, geen *Conflict*. Aanmelden met een passkey
    zonder wachtwoordprompt, de FSLogix-container koppelt (`frx list-redirects`, het
-   Kerberos-ticket met `klist`), printen met een driver uit de image.
+   Kerberos-ticket met `klist`), printen met een driver uit de image. Sync forceren op de host:
+   `deviceenroller.exe /o <enrollment-ID> /c /b` — de PushLaunch-taak bestaat op multi-session niet.
 7. **Compliance controleren.** De hosts staan in Intune en in Entra ID als compliant, en de
    aanmeldlogboeken van CA 2060 (report-only) tonen voor sessies vanaf de hosts *zou slagen*.
 8. **CA 2060 naar enforce.** Pas als stap 7 klopt; anders werken Outlook, Teams en de andere
@@ -340,13 +369,21 @@ blijft alleen voor de applicatieservers).
 
 ## Open punten
 
-- **CIPP-pakket voor de fysieke policies.** Zolang `Baseline-Devices`, `-Users` en `-Pilot` gezamenlijke
-  en fysieke policies mengen, kan CIPP het exclude-filter niet per policy zetten. Een eigen pakket
-  (bijvoorbeeld een fase of vlag in het manifest die `set-packages.js` naar een pakket met
-  `assignmentFilter` vertaalt) lost dat op.
-- **Windows 365.** Cloud PC's vallen niet onder het filter en houden de fysieke `Remote Desktop and RPC`
-  met de wachtwoordprompt. Controleer of SSO daar werkt; zo niet, dan hoort SEC-Cloud-PC dezelfde
-  behandeling te krijgen.
+- **Hostpool voor externen.** Op een host in SEC-Cloud-PC-External landen `AVD Session Host`
+  (fase 1, `avd`) en `Cloud PC External Access` (fase 4) allebei, met andere sessielimieten: een
+  Conflict, waarna geen van beide limieten geldt. In het pakketmodel is `AVD Session Host` niet los
+  uit te sluiten — een exclude-groep op `Baseline-Devices-AVD` zou ook FSLogix van die hosts halen.
+  Alleen relevant in een tenant met zo'n hostpool; een oplossing is de sessielimieten in een eigen
+  policy onderbrengen.
+- **Compliance op het apparaat en `verifyAssignments`.** CIPP beheert de toewijzing van
+  `Baseline-Users` (alle gebruikers) en ziet een extra apparaattoewijzing aan SEC-AVD-Session-Hosts
+  als afwijking die remediëring weer weghaalt (`Compare-CIPPIntuneAssignments`: extra
+  include-groepen tellen mee zodra de standard de toewijzing beheert). Tot de pijplijn de
+  compliancepolicies in een eigen pakket zet: controleer na elke CIPP-run dat de apparaattoewijzing
+  er nog staat.
+- **Windows 365.** Cloud PC's vallen onder geen van beide filters en krijgen dus ook de fysieke
+  `Remote Desktop and RPC` niet meer. Controleer of ze de gezamenlijke set én de Cloud PC-set
+  krijgen die ze nodig hebben.
 - **VolumeType en RoamIdentity** in de settings picker van de tenant opzoeken en, als de definitie
   klopt, aan `AVD FSLogix Profile Containers` toevoegen.
 - **Device Guard and Credential Guard** kan *Gezamenlijk* worden zodra alle hostpools Trusted Launch hebben.

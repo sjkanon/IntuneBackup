@@ -37,6 +37,40 @@
         },
         {
           "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#devices-physical",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Devices-Physical",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "WIN - Physical",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#devices-avd",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Devices-AVD",
+            "assignTo": "AllDevices",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "WIN - AVD Multi-session",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
           "instance": "IntuneTemplatePackage#users",
           "variables": {
             "intuneTemplatePackage": "[Baseline] - Baseline-Users",
@@ -44,6 +78,23 @@
             "customGroup": "",
             "excludeGroup": "",
             "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#users-physical",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Users-Physical",
+            "assignTo": "allLicensedUsers",
+            "customGroup": "",
+            "excludeGroup": "",
+            "assignmentFilter": "WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -76,23 +127,6 @@
             "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Android-Dedicated",
             "assignTo": "customGroup",
             "customGroup": "SEC-Android-Dedicated",
-            "excludeGroup": "",
-            "assignmentFilter": "",
-            "assignmentFilterType": "include",
-            "verifyAssignments": true,
-            "levenshteinDistance": 0
-          },
-          "remediateEnabled": true,
-          "alertEnabled": true,
-          "alertOnRemediate": false
-        },
-        {
-          "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-avd-session-hosts",
-          "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-AVD-Session-Hosts",
-            "assignTo": "customGroup",
-            "customGroup": "SEC-AVD-Session-Hosts",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -281,6 +315,23 @@
             "customGroup": "SEC-Baseline-Pilot",
             "excludeGroup": "",
             "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#pilot-physical",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Physical",
+            "assignTo": "customGroup",
+            "customGroup": "SEC-Baseline-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0

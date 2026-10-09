@@ -11,11 +11,11 @@ Turns on FSLogix profile containers on the AVD session hosts: each user's profil
 | Platform | Windows |
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
-| Assignment | — |
+| Assignment | All Devices |
 | Source | Own — the FSLogix values from configure-fslogix.ps1 in the AVD test environment, with the definitions of the FSLogix ADMX in the Settings Catalog; the Kerberos ticket as in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust |
 | File | [`Baseline_WIN_D_AVD_FSLogix_Profile_Containers.json`](Baseline_WIN_D_AVD_FSLogix_Profile_Containers.json) |
 
-> Fill in the UNC name of the storage account (OPSLAGACCOUNT-INVULLEN). **Not verified with certainty, therefore left out:** VolumeType (VHDX is the default since FSLogix 2210, 2.9.8361) and RoamIdentity (the required value 0 is the default; Intune does not support token roaming). Check the definitions in the settings picker before you add them. **Not in the Settings Catalog**, and therefore in the host script configure-fslogix.ps1 in the AVD repo: LoadCredKeyFromProfile = 1 under HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount (needed for Entra Kerberos with FSLogix) and the local administrator in the local group FSLogix Profile Exclude List, so that a break-glass sign-in always works. The script already sets the same FSLogix values at deployment, so the first sign-in works before Intune has reached the host; this policy then keeps them central and protected against drift. Both write to HKLM\SOFTWARE\FSLogix\Profiles, so nothing clashes. CloudKerberosTicketRetrievalEnabled is also in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, with the same value; that policy does not belong on AVD (docs/AVD.md). Exclude the storage account app from MFA in Conditional Access, otherwise the Kerberos ticket fails.
+> The storage account is in the path as the CIPP variable %FSLogixStorageAccount%: set it per tenant in CIPP (Settings → Custom Variables) to the name of the storage account, before the first run. Without the variable %FSLogixStorageAccount% stays in the path literally, and with PreventLoginWithFailure nobody can sign in to the host any more. Whoever deploys with IntuneBackupAndRestore fills in the name by hand (in local/). **Not verified with certainty, therefore left out:** VolumeType (VHDX is the default since FSLogix 2210, 2.9.8361) and RoamIdentity (the required value 0 is the default; Intune does not support token roaming). Check the definitions in the settings picker before you add them. **Not in the Settings Catalog**, and therefore in the host script configure-fslogix.ps1 in the AVD repo: LoadCredKeyFromProfile = 1 under HKLM\SOFTWARE\Policies\Microsoft\AzureADAccount (needed for Entra Kerberos with FSLogix) and the local administrator in the local group FSLogix Profile Exclude List, so that a break-glass sign-in always works. The script already sets the same FSLogix values at deployment, so the first sign-in works before Intune has reached the host; this policy then keeps them central and protected against drift. Both write to HKLM\SOFTWARE\FSLogix\Profiles, so nothing clashes. CloudKerberosTicketRetrievalEnabled is also in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust, with the same value; that policy does not belong on AVD (docs/AVD.md). Exclude the storage account app from MFA in Conditional Access, otherwise the Kerberos ticket fails.
 
 ## Standards
 
@@ -37,7 +37,7 @@ setting has the value shown.
 |---|---|
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilesenabled` | 1 |
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilesvhdlocations` | 1 |
-| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilesvhdlocations_profilesvhdlocations` | \\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\profiles |
+| &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilesvhdlocations_profilesvhdlocations` | \\%FSLogixStorageAccount%.file.core.windows.net\profiles |
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilesisdynamicvhd` | 1 |
 | `device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilessizeinmbs` | 1 |
 | &nbsp;&nbsp;&nbsp;&nbsp;`device_vendor_msft_policy_config_fslogixv1~policy~fslogix~profiles_profilessizeinmbs_profilessizeinmbs` | 30000 |

@@ -44,6 +44,10 @@ writes what, and which systems the repo is tied to.
 **[AVD.md](docs/AVD.en.md)** states per Windows policy whether it also belongs on the Azure Virtual Desktop
 session hosts, with the assignment filter that makes the distinction and the rollout plan for AVD.
 
+**[PLAYBOOK.md](docs/PLAYBOOK.en.md)** is the runbook for engineers: deploying the baseline through
+CIPP in a customer tenant with the three device classes (shared, physical, AVD) and their filters,
+migrating from an old set, checks and troubleshooting, and the naming convention.
+
 **[COMPLIANCE.md](docs/COMPLIANCE.en.md)** is the accountability document for a CISO or auditor: per ISO/IEC 27001:2022
 Annex A control, per NIS2 measure (art. 21(2)), per CIS Controls v8.1 safeguard and per NIST CSF
 2.0 subcategory, which policies implement it technically, in which phase — and what
@@ -111,16 +115,21 @@ under the `Baseline_` prefix. What the separate folders did is now done by the `
 
 | Phase | What it means | Count |
 |---:|---|---:|
-| 1 | **Now** — deploy as soon as the baseline is in the tenant. No noticeable effects, or effects that need no preparation. | 102 |
+| 1 | **Now** — deploy as soon as the baseline is in the tenant. No noticeable effects, or effects that need no preparation. | 106 |
 | 2 | **Pilot** — on a pilot group first. Changes something a user notices, or may break something you want to see first. | 42 |
 | 3 | **Awaiting prerequisite** — ready, but does nothing today. The iOS and Android compliance policies are waiting for the first enrollment. | 26 |
-| 4 | **Dedicated group** — belongs on a specific group, not on all devices. `faseGroep` says which. | 16 |
+| 4 | **Dedicated group** — belongs on a specific group, not on all devices. `faseGroep` says which. | 18 |
 | 5 | **Do not deploy** — alternative to a policy that *is* deployed. Assigning it causes a Conflict. | 15 |
 
 Only phase 1 is in `_assignments.json`. `check-scope.js` ensures the two do not drift
 apart: a phase 1 policy without an assignment is silently not deployed, and a
 phase 5 policy *with* an assignment causes a Conflict, after which the disputed setting is applied by neither
 policy. Every policy above phase 1 has a mandatory `faseWaarom`.
+
+Every Windows policy also has a **`doelgroep`** (target class): `alle`, `fysiek` or `avd`. In phase 1
+and 2 a `fysiek` or `avd` policy gets an include filter (`WIN - Physical`, `WIN - AVD Multi-session`)
+and a package of its own; `_assignments.json` holds that filter by name (`filterDisplayName`). See
+[PLAYBOOK.en.md](docs/PLAYBOOK.en.md) and [AVD.en.md](docs/AVD.en.md).
 
 The phase also determines a policy's **CIPP package** — the `Package` field in the template,
 which CIPP uses to group its baselines. See [deploying via a CIPP baseline](#deploying-via-a-cipp-baseline).
@@ -354,8 +363,8 @@ The stages it contains:
 
 | Stage | Packages | Moving on to *this* stage |
 |---:|---|---|
-| 1 · Now | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` and the eight group packages `[Baseline] - Baseline-SEC-*` (phase 4, one per group) | — stage 1 always applies |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
+| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SEC-*` (phase 4, one per group) | — stage 1 always applies |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
 | 3 · Awaiting prerequisite | `[Baseline] - Baseline-Wacht` | `manual` — someone moves it on |
 
 Later stages stack on stage 1, and the condition belongs to the stage a tenant
@@ -368,7 +377,7 @@ Note where the restore export lives: `export/**NativeImport**/IntuneBackupAndRes
 word in the path is not a description but an exclusion. CIPP fetches the file list with
 `git/trees?recursive=1` and ignores exactly two things: files that do not end in `.json`,
 and paths containing `NativeImport`. There is no subfolder setting. Without that word
-CIPP would *also* import those 310 JSON files — the same 207 policies plus their 102 assignments and the
+CIPP would *also* import those 293 JSON files — the same 207 policies plus their 85 assignments and the
 ADE profile that came along, but without a `RowKey`, from which CIPP would then make a **second** template
 with the same name and its own GUID.
 OpenIntuneBaseline uses the same folder for the same reason.
@@ -410,6 +419,10 @@ without an assignment — and then they protect nothing.
 
 Only phase 1 has an assignment in the export. Everything else comes back unassigned and you
 assign it afterwards according to its phase — see [Assigning in a tenant](#assigning-in-a-tenant).
+The 21 phase 1 policies with an assignment filter (`fysiek`, `avd`) also come back unassigned: the
+module restores `target` verbatim and cannot look a filter up by name, and a filter id is per
+tenant. Assign them afterwards with `Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters`
+(and `-AllUsers`), or export for one tenant with `--filter-ids <file>` to a folder outside git.
 
 The exporter writes the app protection assignments in the form the module expects:
 file name `<guid> - <policynaam>.json` (the module reads the name as everything after the first
@@ -459,7 +472,10 @@ assigning is only possible via the platform-specific collection (`iosManagedAppP
 Assignments are **added to**, not replaced. Graph's `/assign` always overwrites the
 entire list, so the script first reads the existing assignments and POSTs the
 merged set; a target that is already present does not create a duplicate. With `-Replace` you
-do discard the existing ones. Optionally `-FilterId` + `-FilterType` for an assignment filter.
+do discard the existing ones. A `fysiek` or `avd` policy in phase 1 or 2 gets its include filter
+automatically, looked up by name in the tenant; `-CreateFilters` creates a missing filter from
+`IntuneTemplate/WIN/AssignmentFilters/`, `-Doelgroep alle|fysiek|avd` limits the run to a class. An
+explicit `-FilterId` + `-FilterType` applies to every policy in the run.
 
 Policies that are not in the tenant are reported, not created — deploy them first via
 CIPP or `Start-IntuneRestoreConfig`.

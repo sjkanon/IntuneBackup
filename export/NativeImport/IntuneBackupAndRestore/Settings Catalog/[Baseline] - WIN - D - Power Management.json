@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Power Management",
-    "description": "Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen. Baseline assignment: all devices. Source: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; values verified against the settings catalog definitions (1 = Sleep).",
+    "description": "Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen. Baseline assignment: all devices (assignment filter WIN - Physical). Source: IntuneAdmin/IntuneBaselines — Modern Workplace, Baseline - Windows Power Settings; values verified against the settings catalog definitions (1 = Sleep).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

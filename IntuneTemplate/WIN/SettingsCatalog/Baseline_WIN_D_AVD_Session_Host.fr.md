@@ -11,7 +11,7 @@ Déconnecte définitivement une session interrompue sur les hôtes de session AV
 | Platform | Windows |
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
-| Affectation | — |
+| Affectation | All Devices |
 | Source | Propre — la répartition dans INTUNE-BASELINE.md de l'environnement de test AVD (Storage Sense pas sur les hôtes de session) et les limites de session des Services Bureau à distance dans le Settings Catalog |
 | Fichier | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 

@@ -124,6 +124,51 @@ function readTemplates(templateDir) {
  */
 const PACKAGE_PREFIX = PREFIX + "Baseline-";
 
+/**
+ * De apparaatklasse (`doelgroep` in _manifest.json) van een Windows-policy, en wat die in een
+ * pakket betekent. Drie klassen:
+ *
+ * - `alle`: fysieke pc's én AVD-sessiehosts (en Windows 365, persoonlijke AVD-hosts) — geen filter;
+ * - `fysiek`: laptops en workstations — include-filter `WIN - Physical`;
+ * - `avd`: Azure Virtual Desktop multi-session-sessiehosts — include-filter `WIN - AVD Multi-session`.
+ *
+ * Een CIPP-pakket heeft één toewijzing en één filter voor al zijn leden, dus een klasse met een
+ * filter is een eigen pakket: `<pakket>-Physical` en `<pakket>-AVD` naast het pakket zonder
+ * achtervoegsel. Alleen in fase 1 en 2: daar staat het doel op alle apparaten, alle gebruikers of
+ * de pilotgroep, en zonder filter zou een alleen-fysieke policy ook op de sessiehosts landen.
+ * Fase 3 wordt niet toegewezen, fase 4 heeft een eigen groep die zelf al de klasse afbakent,
+ * fase 5 rolt niet uit. Daar is `doelgroep` informatie, geen pakket.
+ *
+ * Alleen Windows: een filter met `platform: windows10AndLater` is op een macOS-, iOS- of
+ * Android-policy niet te kiezen. De filterbodies staan in IntuneTemplate/WIN/AssignmentFilters/.
+ */
+const DOELGROEPEN = {
+  alle: null,
+  fysiek: { suffix: "-Physical", filter: "WIN - Physical", file: "WIN-Physical.json" },
+  avd: { suffix: "-AVD", filter: "WIN - AVD Multi-session", file: "WIN-AVD-Multi-Session.json" },
+};
+
+/** De fases waarin de doelgroep het pakket en het filter bepaalt. */
+const FILTER_FASES = new Set([1, 2]);
+
+/**
+ * `{ doelgroep, suffix, filter }` als deze policy een filter krijgt, anders `null` — ook bij een
+ * ontbrekende of onbekende doelgroep; check-scope.js meldt die.
+ */
+function classFilterFor(entry) {
+  if (!entry || !FILTER_FASES.has(entry.fase)) return null;
+  const klasse = DOELGROEPEN[entry.doelgroep];
+  return klasse ? { doelgroep: entry.doelgroep, ...klasse } : null;
+}
+
+/** `[Baseline] - Baseline-Devices-Physical` -> { base: "[Baseline] - Baseline-Devices", klasse: { … } }. */
+function splitClassSuffix(pkg) {
+  for (const [doelgroep, klasse] of Object.entries(DOELGROEPEN)) {
+    if (klasse && pkg && pkg.endsWith(klasse.suffix)) return { base: pkg.slice(0, -klasse.suffix.length), klasse: { doelgroep, ...klasse } };
+  }
+  return { base: pkg, klasse: null };
+}
+
 /** Toewijzingsdoel in _assignments.json -> package. Alleen fase 1 komt hier langs. */
 const PACKAGE_BY_TARGET = {
   allDevicesAssignmentTarget: PACKAGE_PREFIX + "Devices",
@@ -160,6 +205,14 @@ function assignmentTargets(assignment) {
  * melden in plaats van hier een gok te doen.
  */
 function packageFor(entry, assignment) {
+  const base = basePackageFor(entry, assignment);
+  if (!base) return base;
+  const klasse = classFilterFor(entry);
+  return klasse ? base + klasse.suffix : base;
+}
+
+/** Het pakket zonder klasse-achtervoegsel: de indeling van vóór de apparaatklassen. */
+function basePackageFor(entry, assignment) {
   if (!entry || entry.fase === undefined) return null;
   // De update-policies horen in hun eigen baseline, zie lib/windows-updates.js.
   if (UPDATE_PACKAGE_BY_TARGET[entry.target]) return UPDATE_PACKAGE_BY_TARGET[entry.target];
@@ -186,6 +239,14 @@ function packageFor(entry, assignment) {
 const PILOT_GROUP = "SEC-Baseline-Pilot";
 
 function deployOptionsForPackage(pkg) {
+  if (!pkg) return null;
+  const { base, klasse } = splitClassSuffix(pkg);
+  const opties = baseDeployOptions(base);
+  if (!opties) return null;
+  return { excludeGroup: "", ...opties, assignmentFilter: klasse ? klasse.filter : "", assignmentFilterType: "include" };
+}
+
+function baseDeployOptions(pkg) {
   if (!pkg) return null;
   if (UPDATE_PACKAGES[pkg]) return UPDATE_PACKAGES[pkg];
   if (pkg === PACKAGE_PREFIX + "Devices") return { assignTo: "AllDevices", customGroup: "" };
@@ -224,6 +285,12 @@ function composeDescription(entry, assignment, translator) {
 }
 
 function assignmentText(assignment, entry) {
+  const klasse = classFilterFor(entry);
+  const text = baseAssignmentText(assignment, entry);
+  return klasse ? `${text} (assignment filter ${klasse.filter})` : text;
+}
+
+function baseAssignmentText(assignment, entry) {
   const targets = assignmentTargets(assignment);
   if (targets.length === 0) {
     if (entry.fase === 2) return `none by default — pilot group ${PILOT_GROUP} first`;
@@ -241,6 +308,11 @@ function assignmentText(assignment, entry) {
 function assignmentForPackage(pkg) {
   const opties = deployOptionsForPackage(pkg);
   if (!opties) return "wordt niet uitgerold";
+  const text = baseAssignmentForPackage(splitClassSuffix(pkg).base, opties);
+  return opties.assignmentFilter ? `${text}, filter ${opties.assignmentFilter} (include)` : text;
+}
+
+function baseAssignmentForPackage(pkg, opties) {
   if (opties.assignTo === "AllDevices") return opties.excludeGroup ? `Assign to all devices, exclude ${opties.excludeGroup.split(",").join(", ")}` : "Assign to all devices";
   if (opties.assignTo === "allLicensedUsers") return "Assign to all users";
   if (opties.assignTo === "customGroup") return `Custom group: ${opties.customGroup}`;
@@ -268,6 +340,8 @@ const BASELINE_STAGES = [
 /** In welke stage dit pakket hoort (1-based), of `null` als het niet uitrolt. */
 function stageForPackage(pkg) {
   if (!pkg) return null;
+  // Een klassepakket staat in dezelfde stage als zijn tegenhanger zonder filter.
+  pkg = splitClassSuffix(pkg).base;
   // Stage 1 van Windows-Updates.json; Winget-AutoUpdate in stage 2 is geen pakket.
   if (UPDATE_PACKAGES[pkg]) return 1;
   if (pkg === PACKAGE_PREFIX + "Pilot") return 2;
@@ -288,7 +362,12 @@ function packagePlan(manifest, assignments) {
     if (!plan.has(pkg)) plan.set(pkg, { pakket: pkg, toewijzing: assignmentForPackage(pkg), opties: deployOptionsForPackage(pkg), stage: stageForPackage(pkg), leden: [] });
     plan.get(pkg).leden.push(entry);
   }
-  const rank = (pkg) => {
+  const klasseRank = (pkg) => {
+    const { klasse } = splitClassSuffix(pkg);
+    return klasse ? Object.keys(DOELGROEPEN).indexOf(klasse.doelgroep) : 0;
+  };
+  const rank = (full) => {
+    const pkg = splitClassSuffix(full).base;
     const order = [PACKAGE_PREFIX + "Devices", PACKAGE_PREFIX + "Users", PACKAGE_PREFIX + "Pilot", PACKAGE_PREFIX + "Wacht"];
     const i = order.indexOf(pkg);
     if (i >= 0) return i;
@@ -297,7 +376,7 @@ function packagePlan(manifest, assignments) {
     if (u >= 0) return order.length + 1 + u;
     return pkg === "" ? order.length + 1 + Object.keys(UPDATE_PACKAGES).length : order.length;
   };
-  return [...plan.values()].sort((a, b) => rank(a.pakket) - rank(b.pakket) || a.pakket.localeCompare(b.pakket));
+  return [...plan.values()].sort((a, b) => rank(a.pakket) - rank(b.pakket) || splitClassSuffix(a.pakket).base.localeCompare(splitClassSuffix(b.pakket).base) || klasseRank(a.pakket) - klasseRank(b.pakket));
 }
 
 /** Verzamelt elke settingDefinitionId in een willekeurige boom. */
@@ -443,4 +522,4 @@ function versionFloors(raw) {
   return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
 }
 
-module.exports = { PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };
+module.exports = { DOELGROEPEN, FILTER_FASES, classFilterFor, splitClassSuffix, basePackageFor, PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

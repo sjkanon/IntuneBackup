@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD FSLogix Profile Containers",
-    "description": "Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile. Baseline assignment: none by default — belongs on SEC-AVD-Session-Hosts. Source: Own — the FSLogix values from configure-fslogix.ps1 in the AVD test environment, with the definitions of the FSLogix ADMX in the Settings Catalog; the Kerberos ticket as in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust.",
+    "description": "Turns on FSLogix profile containers on the AVD session hosts: each user's profile is a dynamic VHDX of at most 30 GB on Azure Files, the host obtains a Kerberos ticket from Entra ID for it, and a sign-in without a container fails rather than continuing with a temporary profile. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the FSLogix values from configure-fslogix.ps1 in the AVD test environment, with the definitions of the FSLogix ADMX in the Settings Catalog; the Kerberos ticket as in [Baseline] - WIN - D - Windows Hello Cloud Kerberos Trust.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -46,7 +46,7 @@
                             "simpleSettingValue": {
                                 "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                                 "settingValueTemplateReference": null,
-                                "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles"
+                                "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles"
                             }
                         }
                     ]

@@ -11,11 +11,11 @@ Beperkt Remote Desktop en externe procedure-aanroepen op de AVD-sessiehosts zoal
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | — |
+| Toewijzing | All Devices |
 | Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC, zonder Prompt for password upon connection |
 | Bestand | [`Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json) |
 
-> Wijs nooit beide toe aan dezelfde host: de fysieke variant zet de wachtwoordprompt aan en die geldt dan alsnog. Exclude-filter op de fysieke, include-filter op deze. Dit is een kopie met acht van de negen instellingen: wijzigt OIB de fysieke variant, neem de wijziging hier met de hand over (herkomst eigen, geen importscript raakt hem). Windows 365 Cloud PC's vallen niet onder het filter (geen multi-session) en houden de fysieke variant.
+> Wijs nooit beide toe aan dezelfde host: de fysieke variant zet de wachtwoordprompt aan en die geldt dan alsnog. Daarom doelgroep fysiek (include-filter WIN - Physical) op de fysieke en doelgroep avd (include-filter WIN - AVD Multi-session) op deze. Dit is een kopie met acht van de negen instellingen: wijzigt OIB de fysieke variant, neem de wijziging hier met de hand over (herkomst eigen, geen importscript raakt hem). Windows 365 Cloud PC's en persoonlijke AVD-hosts vallen onder geen van beide filters en krijgen dus geen van beide varianten.
 
 ## Normen
 

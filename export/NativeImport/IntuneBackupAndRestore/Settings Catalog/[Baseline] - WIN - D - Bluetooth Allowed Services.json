@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Bluetooth Allowed Services",
-    "description": "Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Bluetooth CSP ServicesAllowedList (Microsoft Learn, ServicesAllowedList usage guide) and the Bluetooth SIG Assigned Numbers — id and shape verified against DCv2/Settings in pl4nty/intune-change-tracking.",
+    "description": "Allows only mice, keyboards, headsets, phones via Phone Link and passkeys over Bluetooth, and shuts off file transfer, tethering and serial connections. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first (assignment filter WIN - Physical). Source: Bluetooth CSP ServicesAllowedList (Microsoft Learn, ServicesAllowedList usage guide) and the Bluetooth SIG Assigned Numbers — id and shape verified against DCv2/Settings in pl4nty/intune-change-tracking.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

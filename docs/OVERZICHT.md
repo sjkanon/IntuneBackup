@@ -11,7 +11,7 @@ Dit is de samenvatting; de details staan in de [hoofd-README](../README.md) en p
 | | Aantal |
 |---|---:|
 | Policies | 207 |
-| Zonder toewijzing (bewust) | 105 |
+| Zonder toewijzing (bewust) | 101 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
@@ -32,7 +32,7 @@ Per platform staat er een tabel met **elke policy, wat hij doet en waar hij land
 ## Normenkader
 
 207 van de 207 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
-CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 31 van de 93 Annex A-controls.
+CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 32 van de 93 Annex A-controls.
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
 
@@ -176,8 +176,8 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `AND - U - Corporate AI Restricted` | Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een organisatiebesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een organisatie die deze assistenten toestaat. |
 | `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
-Zonder toewijzing staan er 105: de 42 hierboven, 26 die op een voorwaarde
-wachten, 22 voor een eigen groep en 15 die niet uitrollen. Die laatste twee zijn een
+Zonder toewijzing staan er 101: de 42 hierboven, 26 die op een voorwaarde
+wachten, 18 voor een eigen groep en 15 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

@@ -11,9 +11,9 @@ la main.
 
 | Source | Export | Stratégies | Affectations |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 200 | 102, issues de `_assignments.json` (phase 1) |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 207 | 85, issues de `_assignments.json` (phase 1, sans les 21 dotées d'un filtre d'affectation) |
 
-303 fichiers JSON au total : 200 stratégies, 102 fichiers d'affectation et le profil ADE macOS
+293 fichiers JSON au total : 207 stratégies, 85 fichiers d'affectation et le profil ADE macOS
 qui les accompagne. CIPP n'a pas besoin de ce dossier ; il lit `IntuneTemplate/` directement.
 
 ## Pourquoi `NativeImport` figure dans le chemin
@@ -23,7 +23,7 @@ Parce que c'est la seule exclusion que connaît CIPP. Un dépôt de templates es
 `.json`, et le chemin ne doit pas contenir `NativeImport`. Un paramètre du type « ne regarder que
 dans ce sous-dossier » n'existe pas.
 
-Sans ce mot, CIPP importerait donc aussi ces 303 fichiers. Ils contiennent les mêmes 200
+Sans ce mot, CIPP importerait donc aussi ces 293 fichiers. Ils contiennent les mêmes 207
 stratégies (plus leurs affectations et le profil ADE), mais sous forme Graph sans `RowKey` — et
 CIPP se rabat alors sur une déduction du type de stratégie à partir du contenu et en crée un
 **second** template, avec le même nom et son propre GUID. Deux templates portant le même nom,
@@ -67,7 +67,7 @@ un script dédié — voir ci-dessous.
 
 | Dossier | Contenu | Restauration |
 |---|---:|---|
-| `Settings Catalog/` | 158 stratégies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 165 stratégies | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 26 stratégies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
 | `Device Configurations/` | 13 stratégies | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 stratégies | `Invoke-IntuneRestoreAppProtectionPolicy` |
@@ -86,11 +86,33 @@ une. Deux formes, toutes deux telles que le module les écrit lui-même :
 
 ## Stratégies sans affectation
 
-Seule la phase 1 a une affectation. Les 96 stratégies des phases 2 à 5 sont restaurées sans
+Seule la phase 1 a une affectation. Les 101 stratégies des phases 2 à 5 sont restaurées sans
 affectation, volontairement — voir `fase` dans [`_manifest.json`](../IntuneTemplate/_manifest.json).
 Affectez-les après la restauration selon leur phase : le pilote sur `SEC-Baseline-Pilot`, la
 phase 4 sur le groupe de `faseGroep`, la phase 3 une fois la condition remplie, la phase 5 pas
 du tout. `node scripts/export-intunebackup.js` les liste toutes à chaque exécution.
+
+## Stratégies avec filtre d'affectation
+
+Les 21 stratégies Windows de phase 1 dont le `doelgroep` est `fysiek` ou `avd` doivent recevoir un
+filtre d'inclusion (`WIN - Physical`, `WIN - AVD Multi-session`). `_assignments.json` désigne ce
+filtre par son nom, car un id de filtre n'existe que dans un tenant. Le module n'en fait rien : il
+restaure `target` tel quel (`@{ target = $assignment.target }`) et ne recherche aucun filtre. Un id
+d'un autre tenant fait échouer le `POST` ; omettre le filtre placerait les stratégies réservées au
+physique sur les hôtes de session AVD. Elles figurent donc dans cet export **sans affectation**.
+Après la restauration :
+
+```powershell
+.\scripts\Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters -WhatIf
+.\scripts\Set-BaselineAssignment.ps1 -AllUsers   -Doelgroep fysiek -WhatIf
+```
+
+Le script recherche le filtre par son nom et, avec `-CreateFilters`, le crée depuis
+`IntuneTemplate/WIN/AssignmentFilters/`. Pour un export complet destiné à un seul tenant :
+`node scripts/export-intunebackup.js local/<tenant>/export --filter-ids local/<tenant>/filters.json`,
+avec `{ "WIN - Physical": "<id>", "WIN - AVD Multi-session": "<id>" }` — jamais dans `export/`, car
+les id appartiennent à ce tenant. Les stratégies de phase 2 dotées d'une classe reçoivent leur
+filtre de la même façon avec `-GroupName 'SEC-Baseline-Pilot'`.
 
 Voir le [README principal](../README.fr.md#restaurer-dans-un-tenant) pour le contexte complet et
 [OVERZICHT.fr.md](../docs/OVERZICHT.fr.md#dabord-en-pilote) pour les stratégies qui vont d'abord

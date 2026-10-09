@@ -44,6 +44,11 @@ et ce qui reste à faire dans le tenant.
 **[AVD.md](docs/AVD.fr.md)** indique pour chaque stratégie Windows si elle a aussi sa place sur les hôtes de session
 Azure Virtual Desktop, avec le filtre d'affectation qui fait la distinction et le plan de déploiement pour AVD.
 
+**[PLAYBOOK.md](docs/PLAYBOOK.fr.md)** est le guide de déploiement pour les ingénieurs : déployer la
+baseline via CIPP dans un tenant client avec les trois classes d'appareils (commune, physique, AVD)
+et leurs filtres, la migration depuis un ancien ensemble, les contrôles et le dépannage, et la
+convention de nommage.
+
 **[COMPLIANCE.md](docs/COMPLIANCE.fr.md)** est la justification destinée à un RSSI ou à un auditeur : pour chaque mesure
 de l'annexe A de l'ISO/IEC 27001:2022, chaque mesure NIS2 (art. 21, par. 2), chaque safeguard CIS Controls v8.1 et chaque
 sous-catégorie NIST CSF 2.0, quelles stratégies la mettent en œuvre techniquement, dans quelle phase — et ce qui
@@ -111,16 +116,21 @@ sous le préfixe `Baseline_`. Ce que faisaient les dossiers séparés, c'est mai
 
 | Phase | Signification | Nombre |
 |---:|---|---:|
-| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 102 |
+| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 106 |
 | 2 | **Pilote** — d'abord sur un groupe pilote. Modifie quelque chose que l'utilisateur remarque, ou peut casser quelque chose que vous voulez voir d'abord. | 42 |
 | 3 | **En attente d'un prérequis** — prête, mais ne fait rien aujourd'hui. Les stratégies de conformité iOS et Android attendent la première inscription. | 26 |
-| 4 | **Groupe dédié** — destinée à un groupe spécifique, pas à tous les appareils. `faseGroep` indique lequel. | 16 |
+| 4 | **Groupe dédié** — destinée à un groupe spécifique, pas à tous les appareils. `faseGroep` indique lequel. | 18 |
 | 5 | **Ne pas déployer** — alternative à une stratégie qui, elle, *est* déployée. L'affecter provoque un Conflict. | 15 |
 
 Seule la phase 1 figure dans `_assignments.json`. `check-scope.js` veille à ce que les deux ne
 divergent pas : une stratégie de phase 1 sans affectation n'est silencieusement pas déployée, et une
 stratégie de phase 5 *avec* affectation provoque un Conflict, après quoi le paramètre contesté n'est appliqué par aucune
 des deux stratégies. Toute stratégie au-delà de la phase 1 a un `faseWaarom` obligatoire.
+
+Chaque stratégie Windows a en outre un **`doelgroep`** (classe cible) : `alle`, `fysiek` ou `avd`.
+En phases 1 et 2, une stratégie `fysiek` ou `avd` reçoit un filtre d'inclusion (`WIN - Physical`,
+`WIN - AVD Multi-session`) et son propre paquet ; `_assignments.json` contient ce filtre par son
+nom (`filterDisplayName`). Voir [PLAYBOOK.fr.md](docs/PLAYBOOK.fr.md) et [AVD.fr.md](docs/AVD.fr.md).
 
 La phase détermine aussi le **paquet CIPP** d'une stratégie — le champ `Package` du modèle,
 sur lequel CIPP regroupe ses baselines. Voir [déployer via une baseline CIPP](#déployer-via-une-baseline-cipp).
@@ -354,8 +364,8 @@ Les stages qu'elle contient :
 
 | Stage | Paquets | Passage à *ce* stage |
 |---:|---|---|
-| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` et les huit paquets de groupe `[Baseline] - Baseline-SEC-*` (phase 4, un par groupe) | — le stage 1 s'applique toujours |
-| 2 · Pilote | `[Baseline] - Baseline-Pilot` | `success` (tout le stage 1 est conforme) **et** `time` de deux semaines |
+| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` et les paquets de groupe `[Baseline] - Baseline-SEC-*` (phase 4, un par groupe) | — le stage 1 s'applique toujours |
+| 2 · Pilote | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | `success` (tout le stage 1 est conforme) **et** `time` de deux semaines |
 | 3 · En attente d'un prérequis | `[Baseline] - Baseline-Wacht` | `manual` — quelqu'un le fait avancer |
 
 Les stages suivants s'empilent sur le stage 1, et la condition appartient au stage dans lequel un tenant
@@ -368,7 +378,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 310 fichiers JSON — les mêmes 207 stratégies plus leurs 102 affectations et le
+CIPP importerait *aussi* ces 293 fichiers JSON — les mêmes 207 stratégies plus leurs 85 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.
@@ -410,6 +420,11 @@ sans affectation — et elles ne protègent alors rien.
 
 Seule la phase 1 a une affectation dans l'export. Tout le reste revient sans affectation et
 s'affecte ensuite selon sa phase — voir [Affecter dans un tenant](#affecter-dans-un-tenant).
+Les 21 stratégies de phase 1 dotées d'un filtre d'affectation (`fysiek`, `avd`) reviennent aussi
+sans affectation : le module restaure `target` tel quel et ne peut pas rechercher un filtre par son
+nom, et un id de filtre est propre au tenant. Affectez-les ensuite avec
+`Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters` (et `-AllUsers`), ou
+exportez pour un seul tenant avec `--filter-ids <fichier>` vers un dossier hors de git.
 
 L'exporteur écrit les affectations d'app protection sous la forme attendue par le module :
 nom de fichier `<guid> - <policynaam>.json` (le module lit comme nom tout ce qui suit le premier
@@ -459,7 +474,11 @@ l'affectation n'est possible que via la collection propre à la plateforme (`ios
 Les affectations sont **complétées**, pas remplacées. Le `/assign` de Graph écrase toujours la
 liste complète, donc le script lit d'abord les affectations existantes et envoie (POST) la
 fusion ; une cible déjà présente ne crée pas de doublon. Avec `-Replace`, vous
-supprimez au contraire les existantes. En option, `-FilterId` + `-FilterType` pour un filtre d'affectation.
+supprimez au contraire les existantes. Une stratégie `fysiek` ou `avd` en phase 1 ou 2 reçoit
+automatiquement son filtre d'inclusion, recherché par son nom dans le tenant ; `-CreateFilters`
+crée un filtre manquant depuis `IntuneTemplate/WIN/AssignmentFilters/`, `-Doelgroep alle|fysiek|avd`
+limite l'exécution à une classe. Un `-FilterId` + `-FilterType` explicite s'applique à toutes les
+stratégies de l'exécution.
 
 Les stratégies absentes du tenant sont signalées, pas créées — déployez-les d'abord via
 CIPP ou `Start-IntuneRestoreConfig`.

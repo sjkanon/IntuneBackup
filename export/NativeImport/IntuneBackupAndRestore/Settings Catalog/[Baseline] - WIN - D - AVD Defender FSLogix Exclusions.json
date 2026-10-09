@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Defender FSLogix Exclusions",
-    "description": "Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. Baseline assignment: none by default — belongs on SEC-AVD-Session-Hosts. Source: Microsoft Learn — Prerequisites for FSLogix, Configure Antivirus file and folder exclusions (consulted on 9 October 2026).",
+    "description": "Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Microsoft Learn — Prerequisites for FSLogix, Configure Antivirus file and folder exclusions (consulted on 9 October 2026).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
@@ -84,42 +84,42 @@
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHD"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.lock"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHD.lock"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.meta"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHD.meta"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHD.metadata"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHD.metadata"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHDX"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.lock"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHDX.lock"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.meta"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHDX.meta"
                     },
                     {
                         "@odata.type": "#microsoft.graph.deviceManagementConfigurationStringSettingValue",
                         "settingValueTemplateReference": null,
-                        "value": "\\\\OPSLAGACCOUNT-INVULLEN.file.core.windows.net\\profiles\\*\\*.VHDX.metadata"
+                        "value": "\\\\%FSLogixStorageAccount%.file.core.windows.net\\profiles\\*\\*.VHDX.metadata"
                     }
                 ]
             }

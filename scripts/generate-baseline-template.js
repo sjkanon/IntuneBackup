@@ -44,7 +44,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan } = require("./lib/templates");
+const { BASELINE_STAGES, PACKAGE_PREFIX, packagePlan, splitClassSuffix } = require("./lib/templates");
 const { DEFENDER_BASELINE } = require("./lib/defender-office");
 const { PREFIX } = require("./lib/organisation");
 const { UPDATES_PREFIX, UPDATE_PACKAGES, UPDATES_BASELINE, WAU_TEMPLATE_FILE } = require("./lib/windows-updates");
@@ -81,8 +81,11 @@ function standardFor(entry) {
       assignTo: entry.opties.assignTo,
       customGroup: entry.opties.customGroup,
       excludeGroup: entry.opties.excludeGroup || "",
-      assignmentFilter: "",
-      assignmentFilterType: "include",
+      // De naam van het filter, niet het id: CIPP zoekt hem per tenant op displayName op
+      // (Set-CIPPAssignedPolicy, `-like`). Bestaat hij in de tenant niet, dan wijst CIPP toe
+      // zónder filter en logt alleen een waarschuwing — maak de filters dus vóór stage 1 aan.
+      assignmentFilter: entry.opties.assignmentFilter || "",
+      assignmentFilterType: entry.opties.assignmentFilterType || "include",
       verifyAssignments: entry.opties.assignTo !== "On",
       levenshteinDistance: 0,
     },
@@ -169,8 +172,10 @@ function buildDefender() {
  * stage 2 naar een GUID die in CIPP nog niet bestaat.
  */
 function buildUpdates(manifest, assignments) {
-  const plan = packagePlan(manifest, assignments).filter((p) => UPDATE_PACKAGES[p.pakket]);
-  const missing = Object.keys(UPDATE_PACKAGES).filter((pkg) => !plan.some((p) => p.pakket === pkg));
+  // Een update-pakket kan net als de Baseline-pakketten een klasse-achtervoegsel hebben
+  // (Updates-Ring3-Physical): Windows Update-ringen en Office-updates horen niet op AVD.
+  const plan = packagePlan(manifest, assignments).filter((p) => UPDATE_PACKAGES[splitClassSuffix(p.pakket).base]);
+  const missing = Object.keys(UPDATE_PACKAGES).filter((pkg) => !plan.some((p) => splitClassSuffix(p.pakket).base === pkg));
   if (missing.length > 0) throw new Error(`update-pakket(ten) zonder policies: ${missing.join(", ")}`);
 
   const appFile = path.join(APP_TEMPLATE_DIR, WAU_TEMPLATE_FILE);
@@ -282,7 +287,8 @@ function main() {
     console.log(`  ${stage.name}`);
     for (const s of stage.standards) {
       const target = s.variables.customGroup || s.variables.assignTo;
-      console.log(`    ${s.variables.intuneTemplatePackage.padEnd(30)}${target}`);
+      const filter = s.variables.assignmentFilter ? ` + filter ${s.variables.assignmentFilter}` : "";
+      console.log(`    ${s.variables.intuneTemplatePackage.padEnd(44)} ${target}${filter}`);
     }
   }
   const updates = buildUpdates(manifest, assignments);
@@ -292,7 +298,7 @@ function main() {
     for (const s of stage.standards) {
       const v = s.variables;
       const label = v.intuneTemplatePackage || v.templateIds.map((t) => t.label).join(", ");
-      const target = v.intuneTemplatePackage ? `${v.customGroup || v.assignTo}${v.excludeGroup ? ` (zonder ${v.excludeGroup})` : ""}` : "";
+      const target = v.intuneTemplatePackage ? `${v.customGroup || v.assignTo}${v.excludeGroup ? ` (zonder ${v.excludeGroup})` : ""}${v.assignmentFilter ? ` + filter ${v.assignmentFilter}` : ""}` : "";
       console.log(`      ${label.padEnd(44)}${target}`);
     }
   }

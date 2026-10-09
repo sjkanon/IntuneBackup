@@ -11,9 +11,9 @@ README is handwerk.
 
 | Bron | Export | Policies | Assignments |
 |---|---|---:|---|
-| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 200 | 102, uit `_assignments.json` (fase 1) |
+| `IntuneTemplate/` | `NativeImport/IntuneBackupAndRestore/` | 207 | 85, uit `_assignments.json` (fase 1, zonder de 21 met toewijzingsfilter) |
 
-In totaal 303 JSON-bestanden: 200 policies, 102 assignment-bestanden en het meegereisde
+In totaal 293 JSON-bestanden: 207 policies, 85 assignment-bestanden en het meegereisde
 macOS ADE-profiel. CIPP heeft deze map niet nodig; die leest `IntuneTemplate/` rechtstreeks.
 
 ## Waarom `NativeImport` in het pad staat
@@ -23,7 +23,7 @@ Omdat CIPP dat woord als enige uitsluiting kent. Een template-repository wordt g
 `.json` eindigen, en het pad mag `NativeImport` niet bevatten. Een instelling voor "kijk
 alleen in deze submap" bestaat niet.
 
-Zonder dat woord importeert CIPP deze 303 bestanden dus ook. Ze bevatten dezelfde 200 policies
+Zonder dat woord importeert CIPP deze 293 bestanden dus ook. Ze bevatten dezelfde 207 policies
 (plus hun assignments en het ADE-profiel), maar in Graph-vorm zonder `RowKey` — en dan valt
 CIPP terug op het raden van het policytype uit de inhoud en maakt er een **tweede** template
 van, met dezelfde naam en een eigen GUID. Twee templates met dezelfde naam is precies het geval
@@ -67,7 +67,7 @@ in — zie hieronder.
 
 | Map | Inhoud | Terugzetten |
 |---|---:|---|
-| `Settings Catalog/` | 158 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
+| `Settings Catalog/` | 165 policies | `Invoke-IntuneRestoreConfigurationPolicy` |
 | `Device Compliance Policies/` | 26 policies | `Invoke-IntuneRestoreDeviceCompliancePolicy` |
 | `Device Configurations/` | 13 policies | `Invoke-IntuneRestoreDeviceConfiguration` |
 | `App Protection Policies/` | 2 policies | `Invoke-IntuneRestoreAppProtectionPolicy` |
@@ -85,11 +85,32 @@ allebei zoals de module ze zelf wegschrijft:
 
 ## Policies zonder assignment
 
-Alleen fase 1 heeft een assignment. De 96 policies in fase 2 tot en met 5 komen met opzet
+Alleen fase 1 heeft een assignment. De 101 policies in fase 2 tot en met 5 komen met opzet
 ongetoewezen terug — zie `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json). Wijs
 ze na de restore toe volgens hun fase: de pilot op `SEC-Baseline-Pilot`, fase 4 op de groep uit
 `faseGroep`, fase 3 zodra de voorwaarde er is, fase 5 niet. `node scripts/export-intunebackup.js`
 noemt bij elke run de volledige lijst.
+
+## Policies met een toewijzingsfilter
+
+De 21 Windows-policies in fase 1 met `doelgroep` `fysiek` of `avd` horen een include-filter te
+krijgen (`WIN - Physical`, `WIN - AVD Multi-session`). `_assignments.json` noemt dat filter op naam,
+want een filter-id bestaat maar in één tenant. De module kan daar niets mee: hij zet `target`
+letterlijk terug (`@{ target = $assignment.target }`) en zoekt geen filter op. Een id uit een andere
+tenant laat de `POST` falen; het filter weglaten zou de alleen-fysieke policies op de
+AVD-sessiehosts zetten. Daarom staan ze **zonder assignment** in deze export. Na de restore:
+
+```powershell
+.\scripts\Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters -WhatIf
+.\scripts\Set-BaselineAssignment.ps1 -AllUsers   -Doelgroep fysiek -WhatIf
+```
+
+Het script zoekt het filter op naam op en maakt het met `-CreateFilters` aan uit
+`IntuneTemplate/WIN/AssignmentFilters/`. Wie voor één tenant een complete export wil:
+`node scripts/export-intunebackup.js local/<tenant>/export --filter-ids local/<tenant>/filters.json`,
+met `{ "WIN - Physical": "<id>", "WIN - AVD Multi-session": "<id>" }` — nooit in `export/`, want de
+id's zijn van die tenant. Fase-2-policies met een klasse krijgen hun filter bij
+`-GroupName 'SEC-Baseline-Pilot'` op dezelfde manier.
 
 Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en
 [OVERZICHT.md](../docs/OVERZICHT.md#eerst-in-een-pilot) voor de policies die eerst in een pilot

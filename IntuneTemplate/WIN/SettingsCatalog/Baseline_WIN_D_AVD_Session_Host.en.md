@@ -11,7 +11,7 @@ Signs out a disconnected session on the AVD session hosts after two hours, disco
 | Platform | Windows |
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
-| Assignment | — |
+| Assignment | All Devices |
 | Source | Own — the classification in INTUNE-BASELINE.md of the AVD test environment (Storage Sense not on session hosts) and the Remote Desktop Services session limits in the Settings Catalog |
 | File | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 

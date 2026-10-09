@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Windows Hello for Business",
-    "description": "Windows Hello for Business per user instead of per device: the same requirements as the device policy — TPM required, PIN of at least six characters, PIN recovery on — but bound to the user. Intended for users with their own device; shared devices should be excluded here with a device filter. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, converted to user scope.",
+    "description": "Windows Hello for Business per user instead of per device: the same requirements as the device policy — TPM required, PIN of at least six characters, PIN recovery on — but bound to the user. Intended for users with their own device; shared devices should be excluded here with a device filter. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first (assignment filter WIN - Physical). Source: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, converted to user scope.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

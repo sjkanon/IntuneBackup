@@ -11,7 +11,7 @@ Meldt op de AVD-sessiehosts een verbroken sessie na twee uur af, verbreekt een s
 | Platform | Windows |
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
-| Toewijzing | — |
+| Toewijzing | All Devices |
 | Bron | Eigen — de indeling in INTUNE-BASELINE.md van de AVD-testomgeving (Storage Sense niet op sessiehosts) en de sessielimieten van Remote Desktop Services in de Settings Catalog |
 | Bestand | [`Baseline_WIN_D_AVD_Session_Host.json`](Baseline_WIN_D_AVD_Session_Host.json) |
 

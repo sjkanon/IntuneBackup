@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Google Chrome Updates",
-    "description": "Makes sure a Chrome update takes effect within three days: relaunch notification required, forced relaunch outside working hours, and sooner when the version is badly out of date. Baseline assignment: all devices. Source: Google Chrome policy in the settings catalog (chromeintunev1, chromeintunev141) — values chosen to match the Edge counterpart in this baseline; ids, options and ranges verified against DCv2/Settings in pl4nty/intune-change-tracking.",
+    "description": "Makes sure a Chrome update takes effect within three days: relaunch notification required, forced relaunch outside working hours, and sooner when the version is badly out of date. Baseline assignment: all devices (assignment filter WIN - Physical). Source: Google Chrome policy in the settings catalog (chromeintunev1, chromeintunev141) — values chosen to match the Edge counterpart in this baseline; ids, options and ranges verified against DCv2/Settings in pl4nty/intune-change-tracking.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {
