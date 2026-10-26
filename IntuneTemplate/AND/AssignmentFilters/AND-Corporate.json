@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
-  "displayName": "AND - Corporate",
+  "displayName": "[Baseline] - AND - Corporate",
   "description": "Organisation-owned Android Enterprise devices: fully managed, corporate-owned work profile and dedicated.",
   "platform": "androidForWork",
   "rule": "(device.deviceOwnership -eq \"Corporate\")",

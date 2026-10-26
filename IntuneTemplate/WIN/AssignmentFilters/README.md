@@ -9,8 +9,8 @@ Virtual Desktop-sessiehosts met Windows 11 Enterprise multi-session.
 
 | Bestand | Filter | Regel | Klasse (`doelgroep`) |
 |---|---|---|---|
-| `WIN-Physical.json` | `WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** — laptops en workstations |
-| `WIN-AVD-Multi-Session.json` | `WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — multi-session-sessiehosts |
+| `WIN-Physical.json` | `[Baseline] - WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** — laptops en workstations |
+| `WIN-AVD-Multi-Session.json` | `[Baseline] - WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — multi-session-sessiehosts |
 
 Beide worden alleen als **include** gebruikt. De derde klasse, **alle**, heeft geen filter: die
 policies gaan naar elk Windows-apparaat. Welke policy in welke klasse zit staat als `doelgroep` in
@@ -19,8 +19,8 @@ policies gaan naar elk Windows-apparaat. Welke policy in welke klasse zit staat 
 
 In de testtenant gevalideerd (`validateFilter` en *Preview devices*):
 
-- `WIN - Physical` matcht de vier fysieke en QEMU-pc's en niet de AVD-sessiehost;
-- `WIN - AVD Multi-session` matcht precies de AVD-sessiehost en geen enkele fysieke pc.
+- `[Baseline] - WIN - Physical` matcht de vier fysieke en QEMU-pc's en niet de AVD-sessiehost;
+- `[Baseline] - WIN - AVD Multi-session` matcht precies de AVD-sessiehost en geen enkele fysieke pc.
 
 **Wat onder geen van beide valt:** een Windows 365 Cloud PC (model `Cloud PC …`, single-session)
 en een persoonlijke AVD-host (model `Virtual Machine`, single-session). Die krijgen alleen de

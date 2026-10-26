@@ -147,14 +147,27 @@ des anciennes. Cela ne couvre pas ce qui n'est pas une stratégie Intune : les s
 (Safe Links etc.), le profil Autopilot et les app templates reçoivent un nouvel exemplaire dans le
 tenant ; supprimez l'ancien.
 
+Les stratégies CA ont leur propre préfixe (`caPrefix`), car le dépôt CA d'une organisation les nomme à
+sa manière : `CA - 1090 - BLOCK - …` dans CA-Policies, `Contoso - 1090 - …` ailleurs, et
+avec `__` dans un nom de fichier (`CA__1090__BLOCK__…`). Ils figurent dans `_licenties.json` et
+`_ca.json`. `set-organisation.js --ca-prefix "Contoso - "` les convertit et reconnaît un nom CA au
+numéro à quatre chiffres qui suit le préfixe. Un changement du préfixe des stratégies ne les touche
+pas, même quand les deux préfixes sont le même texte.
+
 ## Mise en miroir vers un second clone
 
 `sync-mirror.js` ne fait pas partie du pipeline ci-dessus : il ne lit pas `IntuneTemplate/` et ne
 partage donc pas non plus `lib/templates.js`. Il aligne les fichiers d'un second clone sur ce qui est
 dans git ici et en fait un commit ordinaire là-bas. Si ce clone a son propre `_organisation.json`,
 il le garde : après la copie, `set-organisation.js` y est lancé, de sorte que le miroir reçoit le
-contenu d'ici avec son propre préfixe et sa propre URL CA. La première fois, passez-les avec
-`--prefix` et `--ca-url`.
+contenu d'ici avec son propre préfixe, son propre préfixe CA et sa propre URL CA. La première fois,
+passez-les avec `--prefix`, `--ca-prefix` et `--ca-url`.
+
+Ce qui n'appartient qu'au miroir — ses propres documents clients, ses propres workflows, un
+`CLAUDE.md` qui renvoie à un autre règlement — se met dans `.mirror-keep` là-bas : un chemin par
+ligne, `/` à la fin pour un dossier, `*` comme joker, `#` pour un commentaire. La mise en miroir ne
+supprime ni n'écrase jamais ces chemins, même si un fichier du même nom existe ici. Même format que
+dans CA-Policies.
 
 ```bash
 node scripts/sync-mirror.js <dossiercible> --dry-run   # d'abord voir ce qui changerait

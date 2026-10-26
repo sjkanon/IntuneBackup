@@ -31,7 +31,7 @@ Which policies are in which package is listed in the
 
 **Device classes.** The packages with `-Physical` and `-AVD` have the same assignment as their
 counterpart without suffix, plus an include filter in the standard (`assignmentFilter`):
-`WIN - Physical` or `WIN - AVD Multi-session`. CIPP looks that filter up by name per tenant; if it
+`[Baseline] - WIN - Physical` or `[Baseline] - WIN - AVD Multi-session`. CIPP looks that filter up by name per tenant; if it
 does not exist, CIPP assigns **without** a filter and only logs a warning. So create the filters
 before the first run — see [docs/PLAYBOOK.en.md](../docs/PLAYBOOK.en.md).
 
@@ -71,7 +71,7 @@ filters that word out too, and then the file can no longer be found with the but
 ## What you do yourself afterwards
 
 - **Assign tenants.** Without that the baseline runs nowhere.
-- **Create the filters.** `WIN - Physical` and `WIN - AVD Multi-session` from
+- **Create the filters.** `[Baseline] - WIN - Physical` and `[Baseline] - WIN - AVD Multi-session` from
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.en.md), before
   the first run.
 - **Make sure the groups exist.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
@@ -158,11 +158,11 @@ tenant that does not (yet) get the full Intune baseline. The layout lives in
 
 | Stage | Standard | Assignment | What it does |
 |---:|---|---|---|
-| 1 · Now | `[Baseline] - Updates-Ring3-Physical` | all devices, **except** `SEC-Update-Ring1` and `SEC-Update-Ring2`, filter `WIN - Physical` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
+| 1 · Now | `[Baseline] - Updates-Ring3-Physical` | all devices, **except** `SEC-Update-Ring1` and `SEC-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
 | 1 · Now | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates right away |
 | 1 · Now | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: quality updates after three days |
 | 1 · Now | `[Baseline] - Updates-Devices` | all devices | Edge Updates (restart required, outside working hours) |
-| 1 · Now | `[Baseline] - Updates-Devices-Physical` | all devices, filter `WIN - Physical` | Microsoft Office Updates (automatic updates, cannot be turned off) — on an AVD host updates come with the image |
+| 1 · Now | `[Baseline] - Updates-Devices-Physical` | all devices, filter `[Baseline] - WIN - Physical` | Microsoft Office Updates (automatic updates, cannot be turned off) — on an AVD host updates come with the image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | all devices (Required) | Winget-AutoUpdate: updates every app winget knows daily, except the [exclusion list](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.en.md) |
 
 Stage 2 starts once everything in stage 1 is compliant **and** two weeks have passed — the same

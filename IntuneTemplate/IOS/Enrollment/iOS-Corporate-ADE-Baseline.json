@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.depIOSEnrollmentProfile",
-  "displayName": "iOS Corporate ADE Baseline",
+  "displayName": "[Baseline] - IOS - D - Corporate ADE Baseline",
   "description": "Baseline enrolment profile for corporate iPhones and iPads via Automated Device Enrollment: user affinity with modern authentication, supervised, locked enrolment, await configuration.",
   "isDefault": true,
   "requiresUserAuthentication": true,

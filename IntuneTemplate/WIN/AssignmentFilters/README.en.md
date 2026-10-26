@@ -9,8 +9,8 @@ Desktop session hosts running Windows 11 Enterprise multi-session.
 
 | File | Filter | Rule | Class (`doelgroep`) |
 |---|---|---|---|
-| `WIN-Physical.json` | `WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** (physical) — laptops and workstations |
-| `WIN-AVD-Multi-Session.json` | `WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — multi-session session hosts |
+| `WIN-Physical.json` | `[Baseline] - WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** (physical) — laptops and workstations |
+| `WIN-AVD-Multi-Session.json` | `[Baseline] - WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — multi-session session hosts |
 
 Both are only used as **include**. The third class, **alle** (all), has no filter: those
 policies go to every Windows device. Which policy is in which class is the `doelgroep` in
@@ -19,8 +19,8 @@ policies go to every Windows device. Which policy is in which class is the `doel
 
 Validated in the test tenant (`validateFilter` and *Preview devices*):
 
-- `WIN - Physical` matches the four physical and QEMU PCs and not the AVD session host;
-- `WIN - AVD Multi-session` matches exactly the AVD session host and no physical PC.
+- `[Baseline] - WIN - Physical` matches the four physical and QEMU PCs and not the AVD session host;
+- `[Baseline] - WIN - AVD Multi-session` matches exactly the AVD session host and no physical PC.
 
 **What falls under neither:** a Windows 365 Cloud PC (model `Cloud PC …`, single-session) and a
 personal AVD host (model `Virtual Machine`, single-session). They only get the policies of class

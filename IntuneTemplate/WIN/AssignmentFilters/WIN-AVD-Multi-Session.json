@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
-  "displayName": "WIN - AVD Multi-session",
+  "displayName": "[Baseline] - WIN - AVD Multi-session",
   "description": "Azure Virtual Desktop session hosts running Windows 11 Enterprise multi-session.",
   "platform": "windows10AndLater",
   "rule": "(device.operatingSystemSKU -eq \"ServerRdsh\")",

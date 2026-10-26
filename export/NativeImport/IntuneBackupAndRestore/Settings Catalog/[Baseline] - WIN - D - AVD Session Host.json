@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Session Host",
-    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up inside the attached profile (daily through the cadence in the image): OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the Remote Desktop Services session limits and the Storage Sense settings from the Settings Catalog, with values for FSLogix profile containers.",
+    "description": "Signs out a disconnected session on the AVD session hosts after two hours, disconnects a session that has been idle for two hours, and lets Storage Sense clean up inside the attached profile (daily through the cadence in the image): OneDrive files online-only after seven days, temporary files, the recycle bin after fourteen and Downloads after thirty days. Baseline assignment: all devices (assignment filter [Baseline] - WIN - AVD Multi-session). Source: Own — the Remote Desktop Services session limits and the Storage Sense settings from the Settings Catalog, with values for FSLogix profile containers.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

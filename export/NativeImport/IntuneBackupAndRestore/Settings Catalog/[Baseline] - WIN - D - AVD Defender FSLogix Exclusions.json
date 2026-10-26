@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Defender FSLogix Exclusions",
-    "description": "Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Microsoft Learn — Prerequisites for FSLogix, Configure Antivirus file and folder exclusions (consulted on 9 October 2026).",
+    "description": "Excludes on the AVD session hosts the FSLogix containers on the share, the temporary VHD(X) files, the FSLogix folders and drivers and the two FSLogix services from the Defender scan, as Microsoft prescribes for FSLogix. Baseline assignment: all devices (assignment filter [Baseline] - WIN - AVD Multi-session). Source: Microsoft Learn — Prerequisites for FSLogix, Configure Antivirus file and folder exclusions (consulted on 9 October 2026).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

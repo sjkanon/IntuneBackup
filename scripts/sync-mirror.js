@@ -15,14 +15,21 @@
  * on the other side (not in a mirror commit) and that never existed here — a colleague's CIPP
  * "Save", say — are kept and listed with `=`; remove those there by hand if they should go.
  *
+ * Files that belong to the mirror only (its own documents, workflows, a CLAUDE.md that points to
+ * its own rulebook) are listed in `.mirror-keep` in the target: one path per line, a trailing `/` for
+ * a whole directory, `*` as a wildcard, `#` for comments. Those are never removed or overwritten
+ * there, also when a file with the same name exists here. The list itself is kept too. Same format
+ * as in the CA-Policies repo.
+ *
  * The target clone is not pushed without `--push`, and the source working tree does not have
  * to be clean — but a mirror of uncommitted changes is a mirror of something that can still
  * change here, so it warns about that.
  *
  * The target keeps its own organisation: if its IntuneTemplate/_organisation.json has a different
- * prefix or CA URL than here, set-organisation.js runs there after copying, so the mirror gets the
- * content from here under its own names. `--prefix` and `--ca-url` set (or change) that the first
- * time; after that it is in the target's own _organisation.json.
+ * prefix, CA prefix or CA URL than here, set-organisation.js runs there after copying, so the mirror
+ * gets the content from here under its own names. `--prefix`, `--ca-prefix` and `--ca-url` set (or
+ * change) that the first time; after that it is in the target's own _organisation.json. A target
+ * without a CA prefix of its own takes the one from here, so its CA names stay as they are here.
  *
  * Usage:
  *   node scripts/sync-mirror.js <target-dir>              # copy and commit
@@ -30,6 +37,7 @@
  *   node scripts/sync-mirror.js <target-dir> --push       # and push the target clone
  *   node scripts/sync-mirror.js <target-dir> --message "…"
  *   node scripts/sync-mirror.js <target-dir> --prefix "Contoso - " --ca-url https://…/blob/main/
+ *   node scripts/sync-mirror.js <target-dir> --ca-prefix "Contoso - "
  */
 
 const fs = require("fs");
@@ -51,14 +59,30 @@ function trackedFiles(repo) {
   return git(repo, ["ls-files", "-z"]).split("\0").filter(Boolean);
 }
 
+/** Of een pad volgens `.mirror-keep` in die clone alleen daar hoort. */
+function mirrorKeep(root) {
+  const file = path.join(root, ".mirror-keep");
+  const rules = [/^\.mirror-keep$/];
+  if (fs.existsSync(file)) {
+    for (const line of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
+      const p = line.replace(/#.*/, "").trim();
+      if (!p) continue;
+      const re = p.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^/]*");
+      rules.push(new RegExp("^" + re + (p.endsWith("/") ? "" : "$")));
+    }
+  }
+  return (rel) => rules.some((r) => r.test(rel));
+}
+
 function parseArgs(argv) {
-  const opts = { target: null, dryRun: false, push: false, message: null, prefix: undefined, caUrl: undefined };
+  const opts = { target: null, dryRun: false, push: false, message: null, prefix: undefined, caPrefix: undefined, caUrl: undefined };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "--dry-run") opts.dryRun = true;
     else if (arg === "--push") opts.push = true;
     else if (arg === "--message") opts.message = argv[++i];
     else if (arg === "--prefix") opts.prefix = argv[++i];
+    else if (arg === "--ca-prefix") opts.caPrefix = argv[++i];
     else if (arg === "--ca-url") opts.caUrl = argv[++i];
     else if (arg === "--no-ca-url") opts.caUrl = null;
     else if (arg.startsWith("--")) {
@@ -97,12 +121,12 @@ if (dirty) {
   console.warn("ook wat nog niet gecommit is.\n");
 }
 
-/** prefix en caRepoUrl van een clone, of null als die nog geen _organisation.json heeft. */
+/** prefix, caPrefix en caRepoUrl van een clone, of null als die nog geen _organisation.json heeft. */
 function organisationOf(root) {
   const file = path.join(root, ORGANISATION_REL);
   if (!fs.existsSync(file)) return null;
   const org = JSON.parse(fs.readFileSync(file, "utf8"));
-  return { prefix: org.prefix, caRepoUrl: org.caRepoUrl || null };
+  return { prefix: org.prefix, caPrefix: org.caPrefix || null, caRepoUrl: org.caRepoUrl || null };
 }
 
 // Vóór het kopiëren lezen: daarna staat er de versie van hier.
@@ -110,11 +134,13 @@ const sourceOrg = organisationOf(REPO_ROOT);
 const targetOrg = organisationOf(targetRoot) || sourceOrg;
 const wantedOrg = {
   prefix: opts.prefix ?? targetOrg.prefix,
+  caPrefix: opts.caPrefix ?? targetOrg.caPrefix ?? sourceOrg.caPrefix,
   caRepoUrl: opts.caUrl === undefined ? targetOrg.caRepoUrl : opts.caUrl,
 };
-const convert = wantedOrg.prefix !== sourceOrg.prefix || wantedOrg.caRepoUrl !== sourceOrg.caRepoUrl;
+const convert =
+  wantedOrg.prefix !== sourceOrg.prefix || wantedOrg.caPrefix !== sourceOrg.caPrefix || wantedOrg.caRepoUrl !== sourceOrg.caRepoUrl;
 if (convert) {
-  console.log(`De spiegel houdt voorvoegsel "${wantedOrg.prefix}" en CA-URL ${wantedOrg.caRepoUrl || "(geen)"};`);
+  console.log(`De spiegel houdt voorvoegsel "${wantedOrg.prefix}", CA-voorvoegsel "${wantedOrg.caPrefix || "(geen)"}" en CA-URL ${wantedOrg.caRepoUrl || "(geen)"};`);
   console.log("de lijst hieronder is vóór die omzetting, dus ruimer dan wat er uiteindelijk verandert.\n");
 }
 
@@ -122,9 +148,14 @@ const source = trackedFiles(REPO_ROOT);
 const sourceSet = new Set(source);
 const target = trackedFiles(targetRoot);
 
+// Wat alleen in de spiegel hoort (.mirror-keep daar) blijft staan: niet weghalen en niet overschrijven,
+// ook als hier een bestand met dezelfde naam is (bv. een CLAUDE.md met een eigen regelboek).
+const keep = mirrorKeep(targetRoot);
+
 const added = [];
 const changed = [];
 for (const rel of source) {
+  if (keep(rel)) continue;
   const from = path.join(REPO_ROOT, rel);
   const to = path.join(targetRoot, rel);
   if (!fs.existsSync(to)) {
@@ -161,7 +192,8 @@ function foreignFiles(candidates) {
   );
 }
 
-const missingHere = target.filter((rel) => !sourceSet.has(rel));
+const kept = target.filter((rel) => keep(rel));
+const missingHere = target.filter((rel) => !sourceSet.has(rel) && !keep(rel));
 const foreign = foreignFiles(missingHere);
 const removed = missingHere.filter((rel) => !foreign.has(rel));
 for (const rel of removed) {
@@ -180,6 +212,7 @@ for (const rel of added) console.log(`+ ${rel}`);
 for (const rel of changed) console.log(`~ ${rel}`);
 for (const rel of removed) console.log(`- ${rel}`);
 for (const rel of foreign) console.log(`= ${rel}  (alleen daar, door iemand daar toegevoegd: blijft staan)`);
+if (kept.length) console.log(`${kept.length} bestand(en) alleen in de spiegel blijven staan (.mirror-keep).`);
 
 const total = added.length + changed.length + removed.length;
 console.log(
@@ -198,10 +231,11 @@ if (total === 0) {
 
 if (convert) {
   const args = [path.join(targetRoot, "scripts", "set-organisation.js"), "--prefix", wantedOrg.prefix];
+  if (wantedOrg.caPrefix) args.push("--ca-prefix", wantedOrg.caPrefix);
   if (wantedOrg.caRepoUrl) args.push("--ca-url", wantedOrg.caRepoUrl);
   else args.push("--no-ca-url");
   // Wat alleen daar staat, heeft het voorvoegsel van daar al; set-organisation zou daarop weigeren.
-  for (const rel of foreign) args.push("--leave", rel);
+  for (const rel of [...foreign, ...kept]) args.push("--leave", rel);
   console.log("\nOmzetten naar de organisatie van de spiegel (set-organisation.js daar):");
   execFileSync(process.execPath, args, { cwd: targetRoot, stdio: ["ignore", "ignore", "inherit"] });
   const left = git(targetRoot, ["status", "--porcelain"]).trim();

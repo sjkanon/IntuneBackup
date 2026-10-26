@@ -97,7 +97,7 @@ Twee fase 4-groepen in het manifest. Maak ze als dynamische apparaatgroep in Ent
 Een ADE-toestel wordt door Intune als *Company* gemarkeerd. Controleer vóór toewijzing of er
 geen handmatig als *Company* gemarkeerde, niet-supervised toestellen zijn: die zouden de
 supervised-only policies krijgen (die iOS dan negeert) en géén Defender-VPN. Wie strakker wil,
-gebruikt voor `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "iOS Corporate ADE Baseline"`.
+gebruikt voor `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
 
 ## Apple Business (voorheen Apple Business Manager)
 

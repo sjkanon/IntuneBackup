@@ -171,7 +171,7 @@ policies (not the enrollment profile itself — that goes per serial number unde
 
 ```
 (device.deviceOSType -eq "MacMMP") and
-(device.enrollmentProfileName -eq "macOS Corporate ADE Baseline")
+(device.enrollmentProfileName -eq "[Baseline] - MAC - D - Corporate ADE Baseline")
 ```
 
 Assignment remains manual work in the portal: **Enrollment program tokens → token → Devices →

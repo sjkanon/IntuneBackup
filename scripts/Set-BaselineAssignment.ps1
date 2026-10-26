@@ -19,8 +19,8 @@ _assignments.json, -GroupName 'SEC-Baseline-Pilot' takes phase 2, and -GroupName
 its own. An exclusion (-Exclude) does go on all policies: it only takes something away.
 
 Device classes. Every Windows policy has a `doelgroep` in _manifest.json: alle (physical PCs
-and AVD session hosts, no filter), fysiek (include filter 'WIN - Physical') or avd (include
-filter 'WIN - AVD Multi-session'). In phase 1 and 2 the script puts that filter on the assignment
+and AVD session hosts, no filter), fysiek (include filter '<prefix>WIN - Physical') or avd (include
+filter '<prefix>WIN - AVD Multi-session'). In phase 1 and 2 the script puts that filter on the assignment
 itself, looked up by NAME in the tenant — a filter id only exists in one tenant. The same rule as
 the CIPP packages (<package>-Physical, <package>-AVD), see DOELGROEPEN in scripts/lib/templates.js.
 -CreateFilters creates a missing filter from IntuneTemplate/WIN/AssignmentFilters/*.json; without
@@ -108,8 +108,8 @@ Only the macOS device policies, as a dry run first.
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -AllDevices -Doelgroep fysiek,avd -CreateFilters -WhatIf
 .\Set-BaselineAssignment.ps1 -AllUsers -Doelgroep fysiek -WhatIf
-Only the phase 1 policies for one device class, each with its include filter ('WIN - Physical' or
-'WIN - AVD Multi-session'), creating the filters first if the tenant does not have them. This is
+Only the phase 1 policies for one device class, each with its include filter ('<prefix>WIN - Physical' or
+'<prefix>WIN - AVD Multi-session'), creating the filters first if the tenant does not have them. This is
 what a restore with IntuneBackupAndRestore leaves to do: it cannot resolve a filter by name.
 #>
 # ConfirmImpact deliberately at Medium: with High PowerShell asks for confirmation per policy and
@@ -240,7 +240,7 @@ if ($null -eq (Get-MgContext)) {
 # --- device classes -----------------------------------------------------------------
 # Same table as DOELGROEPEN in scripts/lib/templates.js: class -> filter displayName. Only phase 1
 # and 2 get the filter; phase 4 has its own group, phase 3 and 5 are not assigned.
-$ClassFilters = @{ fysiek = 'WIN - Physical'; avd = 'WIN - AVD Multi-session' }
+$ClassFilters = @{ fysiek = "${Prefix}WIN - Physical"; avd = "${Prefix}WIN - AVD Multi-session" }
 $FilterFases = @(1, 2)
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $manifestPath = Join-Path $repoRoot 'IntuneTemplate/_manifest.json'

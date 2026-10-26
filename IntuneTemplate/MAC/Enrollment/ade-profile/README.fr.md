@@ -174,7 +174,7 @@ de série sous le token) :
 
 ```
 (device.deviceOSType -eq "MacMMP") and
-(device.enrollmentProfileName -eq "macOS Corporate ADE Baseline")
+(device.enrollmentProfileName -eq "[Baseline] - MAC - D - Corporate ADE Baseline")
 ```
 
 L'affectation reste un travail manuel dans le portail : **Enrollment program tokens → token → Devices →

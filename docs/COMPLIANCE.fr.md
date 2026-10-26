@@ -1755,7 +1755,7 @@ Conditional Access basé sur le risque figure comme « P1: No » dans le propre 
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (4) | `CXNM - STANDARD - 1090 - BLOCK - HighRisk SignIns`, `CXNM - STANDARD - 1100 - BLOCK - HighRisk Users`, `CXNM - STANDARD - 2010 - GRANT - MediumRisk Signins`, `CXNM - STANDARD - 2020 - GRANT - MediumRisk Users` |
+| Conditional Access (4) | `CA - 1090 - BLOCK - HighRisk SignIns`, `CA - 1100 - BLOCK - HighRisk Users`, `CA - 2010 - GRANT - MediumRisk Signins`, `CA - 2020 - GRANT - MediumRisk Users` |
 
 **Sans nouvelle policy, mais avec couverture :** Privileged Identity Management : rôles just-in-time plutôt que permanents, avec approbation et piste d'audit. A.5.3 figure désormais explicitement dans COMPLIANCE.md comme « Mettre en place le RBAC Entra/Intune et PIM — hors de cette baseline ».
 
@@ -1769,7 +1769,7 @@ La stratégie CA 3060 fait passer les sessions de navigateur par MDCA comme cont
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (1) | `CXNM - STANDARD - 3060 - SESSION - Defender for Cloud Apps` |
+| Conditional Access (1) | `CA - 3060 - SESSION - Defender for Cloud Apps` |
 
 ### Microsoft Defender Suite for Business Premium
 
@@ -1805,7 +1805,7 @@ La détection des risques sur les identités de charge de travail est un SKU dis
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (1) | `CXNM - STANDARD - 1140 - BLOCK - Managed Identities At Risk` |
+| Conditional Access (1) | `CA - 1140 - BLOCK - Managed Identities At Risk` |
 
 ### Microsoft Entra Agent ID
 
@@ -1815,7 +1815,7 @@ Les cinq templates d'agent nécessitent des identités d'agent. Ce n'est pas une
 
 | Côté | Policies |
 |---|---|
-| Conditional Access (5) | `CXNM - STANDARD - 1150 - BLOCK - Risky Agent Identities`, `CXNM - STANDARD - 1160 - BLOCK - Agent Identities To Agent Resources`, `CXNM - STANDARD - 1170 - BLOCK - Risky Agent Users`, `CXNM - STANDARD - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device` |
+| Conditional Access (5) | `CA - 1150 - BLOCK - Risky Agent Identities`, `CA - 1160 - BLOCK - Agent Identities To Agent Resources`, `CA - 1170 - BLOCK - Risky Agent Users`, `CA - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CA - 2160 - GRANT - Agent Users Compliant Device` |
 
 ### Ce pour quoi il n'est pas nécessaire de payer
 

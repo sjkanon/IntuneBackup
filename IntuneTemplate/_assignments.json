@@ -195,7 +195,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - AVD Multi-session"
+      "filterDisplayName": "[Baseline] - WIN - AVD Multi-session"
     }
   ],
   "[Baseline] - WIN - D - AVD FSLogix Profile Containers": [
@@ -205,7 +205,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - AVD Multi-session"
+      "filterDisplayName": "[Baseline] - WIN - AVD Multi-session"
     }
   ],
   "[Baseline] - WIN - D - AVD Remote Desktop and RPC": [
@@ -215,7 +215,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - AVD Multi-session"
+      "filterDisplayName": "[Baseline] - WIN - AVD Multi-session"
     }
   ],
   "[Baseline] - WIN - D - AVD Session Host": [
@@ -225,7 +225,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - AVD Multi-session"
+      "filterDisplayName": "[Baseline] - WIN - AVD Multi-session"
     }
   ],
   "[Baseline] - WIN - D - AVD Start and Search": [
@@ -235,7 +235,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - AVD Multi-session"
+      "filterDisplayName": "[Baseline] - WIN - AVD Multi-session"
     }
   ],
   "[Baseline] - WIN - D - Attack Surface Reduction": [
@@ -272,7 +272,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - BitLocker": [
@@ -282,7 +282,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Business Continuity": [
@@ -292,7 +292,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Cloud Optimized Content": [
@@ -383,7 +383,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Device Lock": [
@@ -393,7 +393,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Endpoint Analytics": [
@@ -403,7 +403,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Enhanced Phishing Protection": [
@@ -512,7 +512,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Microsoft Office Security": [
@@ -531,7 +531,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Microsoft OneDrive": [
@@ -559,7 +559,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Power Management": [
@@ -569,7 +569,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Printing": [
@@ -597,7 +597,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Security Hardening": [
@@ -625,7 +625,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Threat Protection": [
@@ -644,7 +644,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Update Reports and Telemetry": [
@@ -708,7 +708,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Windows LAPS": [
@@ -754,7 +754,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - D - Wireless and Peripherals": [
@@ -764,7 +764,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allDevicesAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - U - Attachment Scanning": [
@@ -954,7 +954,7 @@
         "deviceAndAppManagementAssignmentFilterType": "include",
         "@odata.type": "#microsoft.graph.allLicensedUsersAssignmentTarget"
       },
-      "filterDisplayName": "WIN - Physical"
+      "filterDisplayName": "[Baseline] - WIN - Physical"
     }
   ],
   "[Baseline] - WIN - U - Windows Spotlight": [

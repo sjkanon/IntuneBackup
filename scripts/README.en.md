@@ -144,14 +144,26 @@ tenant, otherwise CIPP puts the policies under the new name next to the old ones
 cover what is not an Intune policy: the Defender policies (Safe Links etc.), the Autopilot profile
 and the app templates get a new copy in the tenant; clean up the old one.
 
+The CA policies have a prefix of their own (`caPrefix`), because an organisation's CA repo names them
+its own way: `CA - 1090 - BLOCK - …` in CA-Policies, `Contoso - 1090 - …` elsewhere, and
+with `__` in a file name (`CA__1090__BLOCK__…`). They are in `_licenties.json` and `_ca.json`.
+`set-organisation.js --ca-prefix "Contoso - "` converts them, recognising a CA name by the four-digit
+number after the prefix. A change of the policy prefix leaves them alone, also when the two prefixes
+are the same text.
+
 ## Mirroring to a second clone
 
 `sync-mirror.js` is not part of the pipeline above: it does not read `IntuneTemplate/` and so does
 not share `lib/templates.js` either. It makes the files in a second clone match what is in git
 here and turns that into one ordinary commit there. If that clone has its own
 `_organisation.json`, it keeps it: after copying, `set-organisation.js` runs there, so the mirror
-gets the content from here with its own prefix and CA URL. The first time, pass those with
-`--prefix` and `--ca-url`.
+gets the content from here with its own prefix, CA prefix and CA URL. The first time, pass those
+with `--prefix`, `--ca-prefix` and `--ca-url`.
+
+What belongs to the mirror only — its own customer documents, its own workflows, a `CLAUDE.md` that
+points to another rulebook — goes into `.mirror-keep` there: one path per line, a trailing `/` for a
+directory, `*` as a wildcard, `#` for comments. Mirroring never removes or overwrites those paths,
+also when a file with the same name exists here. Same format as in CA-Policies.
 
 ```bash
 node scripts/sync-mirror.js <targetfolder> --dry-run   # first see what would change

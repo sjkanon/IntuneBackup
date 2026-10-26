@@ -15,7 +15,7 @@ Restreint le Bureau à distance et les appels de procédure distante sur les hô
 | Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Remote Desktop Services and RPC, sans Prompt for password upon connection |
 | Fichier | [`Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json`](Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.json) |
 
-> N'affectez jamais les deux au même hôte : la variante physique active l'invite de mot de passe, qui s'applique alors malgré tout. D'où la classe fysiek (filtre d'inclusion WIN - Physical) sur la physique et la classe avd (filtre d'inclusion WIN - AVD Multi-session) sur celle-ci. C'est une copie avec huit des neuf paramètres : si OIB modifie la variante physique, reportez la modification ici à la main (origine propre, aucun script d'import n'y touche). Les Cloud PC Windows 365 et les hôtes AVD personnels ne relèvent d'aucun des deux filtres et ne reçoivent donc aucune des deux variantes.
+> N'affectez jamais les deux au même hôte : la variante physique active l'invite de mot de passe, qui s'applique alors malgré tout. D'où la classe fysiek (filtre d'inclusion [Baseline] - WIN - Physical) sur la physique et la classe avd (filtre d'inclusion [Baseline] - WIN - AVD Multi-session) sur celle-ci. C'est une copie avec huit des neuf paramètres : si OIB modifie la variante physique, reportez la modification ici à la main (origine propre, aucun script d'import n'y touche). Les Cloud PC Windows 365 et les hôtes AVD personnels ne relèvent d'aucun des deux filtres et ne reçoivent donc aucune des deux variantes.
 
 ## Normes
 

@@ -6,9 +6,13 @@
     "            Niet met de hand wijzigen: scripts/set-organisation.js zet het om in álle bestanden",
     "            en zet de oude namen in _renames.json, zodat Rename-BaselinePolicy.ps1 de",
     "            tenant-policies hernoemt in plaats van dat CIPP dubbelen aanmaakt.",
+    "caPrefix  - voorvoegsel van de CA-policies zoals de CA-repo ze noemt: <caPrefix>1090 - BLOCK - …,",
+    "            in een bestandsnaam <caPrefix met __>1090__BLOCK__…. Ook via set-organisation.js:",
+    "            die herkent een CA-naam aan het nummer van vier cijfers erachter.",
     "caRepoUrl - waar de CA-Policies-repo te lezen is (eindigt op /blob/main/), of null. Met een URL",
     "            linken de policy-docs naar de CA-policies; zonder staan alleen de namen er."
   ],
   "prefix": "[Baseline] - ",
+  "caPrefix": "CA - ",
   "caRepoUrl": null
 }

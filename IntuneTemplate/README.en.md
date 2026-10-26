@@ -75,12 +75,12 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `Package` | Assign in CIPP to | Stage | Policies |
 |---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | Assign to all devices | 1 | 53 |
-| `[Baseline] - Baseline-Devices-Physical` | Assign to all devices, filter WIN - Physical (include) | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter WIN - AVD Multi-session (include) | 1 | 5 |
+| `[Baseline] - Baseline-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 14 |
+| `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter [Baseline] - WIN - AVD Multi-session (include) | 1 | 5 |
 | `[Baseline] - Baseline-Users` | Assign to all users | 1 | 31 |
-| `[Baseline] - Baseline-Users-Physical` | Assign to all users, filter WIN - Physical (include) | 1 | 1 |
+| `[Baseline] - Baseline-Users-Physical` | Assign to all users, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
 | `[Baseline] - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | Custom group: SEC-Baseline-Pilot, filter WIN - Physical (include) | 2 | 13 |
+| `[Baseline] - Baseline-Pilot-Physical` | Custom group: SEC-Baseline-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 13 |
 | `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (link to an ADE token in Intune) | 1 | 2 |
 | `[Baseline] - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
@@ -95,11 +95,11 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
-| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2, filter WIN - Physical (include) | 1 | 1 |
+| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Updates-Devices` | Assign to all devices | 1 | 1 |
-| `[Baseline] - Updates-Devices-Physical` | Assign to all devices, filter WIN - Physical (include) | 1 | 1 |
+| `[Baseline] - Updates-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
 | *(empty)* | not deployed | – | 15 |
 
 The stage column is the stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
