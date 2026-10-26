@@ -1755,7 +1755,7 @@ Risk-based Conditional Access staat in Microsofts eigen licentietabel op 'P1: No
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (4) | `CXNM - STANDARD - 1090 - BLOCK - HighRisk SignIns`, `CXNM - STANDARD - 1100 - BLOCK - HighRisk Users`, `CXNM - STANDARD - 2010 - GRANT - MediumRisk Signins`, `CXNM - STANDARD - 2020 - GRANT - MediumRisk Users` |
+| Conditional Access (4) | `CA - 1090 - BLOCK - HighRisk SignIns`, `CA - 1100 - BLOCK - HighRisk Users`, `CA - 2010 - GRANT - MediumRisk Signins`, `CA - 2020 - GRANT - MediumRisk Users` |
 
 **Zonder nieuwe policy, wel dekking:** Privileged Identity Management: rollen just-in-time in plaats van permanent, met goedkeuring en een auditspoor. A.5.3 staat in COMPLIANCE.md nu expliciet als 'Entra/Intune-RBAC en PIM inrichten — valt buiten deze baseline'.
 
@@ -1769,7 +1769,7 @@ CA-policy 3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die l
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (1) | `CXNM - STANDARD - 3060 - SESSION - Defender for Cloud Apps` |
+| Conditional Access (1) | `CA - 3060 - SESSION - Defender for Cloud Apps` |
 
 ### Microsoft Defender Suite for Business Premium
 
@@ -1805,7 +1805,7 @@ Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij 
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (1) | `CXNM - STANDARD - 1140 - BLOCK - Managed Identities At Risk` |
+| Conditional Access (1) | `CA - 1140 - BLOCK - Managed Identities At Risk` |
 
 ### Microsoft Entra Agent ID
 
@@ -1815,7 +1815,7 @@ De vijf agent-templates vragen agent-identiteiten. Dit is geen aankoopbeslissing
 
 | Kant | Policies |
 |---|---|
-| Conditional Access (5) | `CXNM - STANDARD - 1150 - BLOCK - Risky Agent Identities`, `CXNM - STANDARD - 1160 - BLOCK - Agent Identities To Agent Resources`, `CXNM - STANDARD - 1170 - BLOCK - Risky Agent Users`, `CXNM - STANDARD - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CXNM - STANDARD - 2160 - GRANT - Agent Users Compliant Device` |
+| Conditional Access (5) | `CA - 1150 - BLOCK - Risky Agent Identities`, `CA - 1160 - BLOCK - Agent Identities To Agent Resources`, `CA - 1170 - BLOCK - Risky Agent Users`, `CA - 1180 - BLOCK - Agent Users Outside Compliant Network`, `CA - 2160 - GRANT - Agent Users Compliant Device` |
 
 ### Waar je niet voor hoeft te betalen
 

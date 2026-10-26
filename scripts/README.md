@@ -144,14 +144,26 @@ De oude namen komen in `previousNames` in `_renames.json`. Draai daarna per tena
 geldt niet voor wat geen Intune-policy is: de Defender-policies (Safe Links e.d.), het
 Autopilot-profiel en de app-templates krijgen in de tenant een nieuw exemplaar; ruim het oude op.
 
+De CA-policies hebben een eigen voorvoegsel (`caPrefix`), want de CA-repo van een organisatie noemt
+ze op zijn eigen manier: `CA - 1090 - BLOCK - …` in CA-Policies, `CXNM - STANDARD - 1090 - …` in de
+spiegel daarvan, en in een bestandsnaam met `__` (`CA__1090__BLOCK__…`). Ze staan in
+`_licenties.json` en `_ca.json`. `set-organisation.js --ca-prefix "Contoso - "` zet ze om, en herkent
+een CA-naam aan het nummer van vier cijfers achter het voorvoegsel. Bij een wissel van het
+policy-voorvoegsel blijven ze buiten schot, ook als de twee voorvoegsels dezelfde tekst zijn.
+
 ## Spiegelen naar een tweede clone
 
 `sync-mirror.js` hoort niet bij de pijplijn hierboven: hij leest `IntuneTemplate/` niet en deelt
 `lib/templates.js` dus ook niet. Hij zet de bestanden in een tweede clone gelijk aan wat hier in
 git staat en maakt daar één gewone commit van. Heeft die clone een eigen `_organisation.json`, dan
 houdt hij die: na het kopiëren draait `set-organisation.js` daar, zodat de spiegel de inhoud van hier
-krijgt met zijn eigen voorvoegsel en CA-URL. De eerste keer geef je die mee met `--prefix` en
-`--ca-url`.
+krijgt met zijn eigen voorvoegsel, CA-voorvoegsel en CA-URL. De eerste keer geef je die mee met
+`--prefix`, `--ca-prefix` en `--ca-url`.
+
+Wat alleen in de spiegel hoort — eigen klantdocumenten, eigen workflows, een `CLAUDE.md` die naar een
+ander regelboek verwijst — zet je daar in `.mirror-keep`: één pad per regel, `/` achteraan voor een
+map, `*` als jokerteken, `#` voor commentaar. Die paden haalt de spiegeling nooit weg en overschrijft
+hij nooit, ook niet als hier een bestand met dezelfde naam staat. Hetzelfde formaat als in CA-Policies.
 
 ```bash
 node scripts/sync-mirror.js <doelmap> --dry-run   # eerst kijken wat er zou verschuiven

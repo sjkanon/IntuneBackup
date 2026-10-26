@@ -46,10 +46,10 @@
       "ontgrendelt": {
         "intune": [],
         "ca": [
-          "CXNM__STANDARD__1090__BLOCK__HighRisk_SignIns",
-          "CXNM__STANDARD__1100__BLOCK__HighRisk_Users",
-          "CXNM__STANDARD__2010__GRANT__MediumRisk_Signins",
-          "CXNM__STANDARD__2020__GRANT__MediumRisk_Users"
+          "CA__1090__BLOCK__HighRisk_SignIns",
+          "CA__1100__BLOCK__HighRisk_Users",
+          "CA__2010__GRANT__MediumRisk_Signins",
+          "CA__2020__GRANT__MediumRisk_Users"
         ]
       },
       "extraControls": {
@@ -67,7 +67,7 @@
       "waarom": "CA-policy 3060 routeert browsersessies via MDCA als sessiecontrole. Zonder die licentie is de sessiecontrole niet te kiezen in de policy.",
       "ontgrendelt": {
         "intune": [],
-        "ca": ["CXNM__STANDARD__3060__SESSION__Defender_for_Cloud_Apps"]
+        "ca": ["CA__3060__SESSION__Defender_for_Cloud_Apps"]
       }
     },
 
@@ -128,7 +128,7 @@
       "waarom": "Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij de Defender Suite: P2 dekt gebruikersrisico, niet workload-risico.",
       "ontgrendelt": {
         "intune": [],
-        "ca": ["CXNM__STANDARD__1140__BLOCK__Managed_Identities_At_Risk"]
+        "ca": ["CA__1140__BLOCK__Managed_Identities_At_Risk"]
       }
     },
 
@@ -140,11 +140,11 @@
       "ontgrendelt": {
         "intune": [],
         "ca": [
-          "CXNM__STANDARD__1150__BLOCK__Risky_Agent_Identities",
-          "CXNM__STANDARD__1160__BLOCK__Agent_Identities_To_Agent_Resources",
-          "CXNM__STANDARD__1170__BLOCK__Risky_Agent_Users",
-          "CXNM__STANDARD__1180__BLOCK__Agent_Users_Outside_Compliant_Network",
-          "CXNM__STANDARD__2160__GRANT__Agent_Users_Compliant_Device"
+          "CA__1150__BLOCK__Risky_Agent_Identities",
+          "CA__1160__BLOCK__Agent_Identities_To_Agent_Resources",
+          "CA__1170__BLOCK__Risky_Agent_Users",
+          "CA__1180__BLOCK__Agent_Users_Outside_Compliant_Network",
+          "CA__2160__GRANT__Agent_Users_Compliant_Device"
         ]
       }
     }

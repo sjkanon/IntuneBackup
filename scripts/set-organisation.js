@@ -17,7 +17,15 @@
  *  4. Regenerates what is derived from the name rather than copied from it: the GUID of the CIPP
  *     app templates (stable per name), the baseline that refers to it, the export and the docs.
  *
- * The new prefix must not be in the repo yet (outside _renames.json): text that already has it
+ * The names of the Conditional Access policies have a prefix of their own (`caPrefix`), because the
+ * CA repo of an organisation names them its own way: `CA - 1090 - BLOCK - …` in one, `Contoso - 1090
+ * - BLOCK - …` in another, and `CA__1090__BLOCK__…` in a template file name. A CA name is recognised
+ * by its prefix followed by a four-digit number. Before the policy prefix is replaced, those names
+ * are masked, so the two prefixes never touch each other — also when they are the same text, as in
+ * a mirror where policies and CA templates both carry the organisation's name. `caPrefix` is
+ * rewritten only if it was set before; setting it for the first time only records it.
+ *
+ * Neither new prefix may be in the repo yet (outside _renames.json): text that already has it
  * cannot be told apart from text that gets it, and the next switch would take it along. The script
  * refuses then and shows where it is.
  *
@@ -27,6 +35,7 @@
  *
  * Usage:
  *   node scripts/set-organisation.js --prefix "Contoso - "
+ *   node scripts/set-organisation.js --ca-prefix "Contoso - "
  *   node scripts/set-organisation.js --ca-url https://github.com/<org>/<repo>/blob/main/
  *   node scripts/set-organisation.js --no-ca-url
  *   node scripts/set-organisation.js ... --dry-run        # only show what would change
@@ -37,7 +46,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
-const { ORGANISATION_PATH, readOrganisation, escapeRegExp } = require("./lib/organisation");
+const { ORGANISATION_PATH, readOrganisation, escapeRegExp, caNamePatterns } = require("./lib/organisation");
 
 const REPO_ROOT = path.resolve(__dirname, "..");
 const RENAMES_REL = "IntuneTemplate/_renames.json";
@@ -47,10 +56,11 @@ const ORGANISATION_REL = path.relative(REPO_ROOT, ORGANISATION_PATH).split(path.
 const FORBIDDEN = /["\\/:*?<>|]/;
 
 function parseArgs(argv) {
-  const opts = { prefix: undefined, caUrl: undefined, dryRun: false, generate: true, leave: new Set() };
+  const opts = { prefix: undefined, caPrefix: undefined, caUrl: undefined, dryRun: false, generate: true, leave: new Set() };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "--prefix") opts.prefix = argv[++i];
+    else if (arg === "--ca-prefix") opts.caPrefix = argv[++i];
     else if (arg === "--ca-url") opts.caUrl = argv[++i];
     else if (arg === "--no-ca-url") opts.caUrl = null;
     else if (arg === "--dry-run") opts.dryRun = true;
@@ -61,13 +71,13 @@ function parseArgs(argv) {
       process.exit(2);
     }
   }
-  if (opts.prefix === undefined && opts.caUrl === undefined) {
-    console.error('Gebruik: node scripts/set-organisation.js [--prefix "<tekst> - "] [--ca-url <url> | --no-ca-url] [--dry-run] [--no-generate]');
+  if (opts.prefix === undefined && opts.caPrefix === undefined && opts.caUrl === undefined) {
+    console.error('Gebruik: node scripts/set-organisation.js [--prefix "<tekst> - "] [--ca-prefix "<tekst> - "] [--ca-url <url> | --no-ca-url] [--dry-run] [--no-generate]');
     process.exit(2);
   }
-  if (opts.prefix !== undefined) {
-    if (!opts.prefix || !opts.prefix.endsWith(" - ") || FORBIDDEN.test(opts.prefix)) {
-      console.error(`Ongeldig voorvoegsel ${JSON.stringify(opts.prefix)}: het eindigt op " - " en bevat geen " \\ / : * ? < > |.`);
+  for (const [option, value] of [["--prefix", opts.prefix], ["--ca-prefix", opts.caPrefix]]) {
+    if (value !== undefined && (!value || !value.endsWith(" - ") || FORBIDDEN.test(value))) {
+      console.error(`Ongeldig voorvoegsel bij ${option} ${JSON.stringify(value)}: het eindigt op " - " en bevat geen " \\ / : * ? < > |.`);
       process.exit(2);
     }
   }
@@ -103,6 +113,20 @@ function containsPrefix(text, prefix) {
   return text.includes(prefix) || new RegExp(`${escapeRegExp(compact(prefix))}(WIN|MAC|IOS|AND) `).test(text);
 }
 
+/** Vervangt elke CA-naam door een merkteken, zodat het policy-voorvoegsel er niet aan komt. */
+function maskCaNames(text, caPrefix) {
+  if (!caPrefix) return text;
+  return caNamePatterns(caPrefix).reduce((t, { re }, i) => t.replace(re, `\u0001${i}\u0001`), text);
+}
+
+/** Zet de merktekens terug, met het CA-voorvoegsel dat er na de wissel hoort. */
+function unmaskCaNames(text, caPrefix) {
+  if (!caPrefix) return text;
+  return caNamePatterns(caPrefix).reduce((t, { form }, i) => t.split(`\u0001${i}\u0001`).join(form(caPrefix)), text);
+}
+
+const containsCaNames = (text, caPrefix) => caNamePatterns(caPrefix).some(({ re }) => text.search(re) >= 0);
+
 /** previousNames + target per policy, als tekst — zo blijft de opmaak van _renames.json staan. */
 const RENAME_ENTRY_RE = /"previousNames": \[(.*?)\],(\s*)"target": (null|"(?:[^"\\]|\\.)*")/g;
 
@@ -133,10 +157,14 @@ function main() {
   const current = readOrganisation();
   const next = {
     prefix: opts.prefix ?? current.prefix,
+    caPrefix: opts.caPrefix ?? current.caPrefix,
     caRepoUrl: opts.caUrl === undefined ? current.caRepoUrl : opts.caUrl,
   };
   const prefixChanges = next.prefix !== current.prefix;
-  if (!prefixChanges && next.caRepoUrl === current.caRepoUrl) {
+  const caPrefixChanges = next.caPrefix !== current.caPrefix;
+  // Zonder vorig CA-voorvoegsel is niet te zien welke namen CA-namen zijn: dan alleen vastleggen.
+  const caRewrite = caPrefixChanges && current.caPrefix !== null;
+  if (!prefixChanges && !caPrefixChanges && next.caRepoUrl === current.caRepoUrl) {
     console.log("Er verandert niets.");
     return;
   }
@@ -145,20 +173,26 @@ function main() {
   const edits = [];
   const moves = [];
 
-  if (prefixChanges) {
+  if (prefixChanges || caRewrite) {
     const from = current.prefix;
     const to = next.prefix;
+    const caTo = caRewrite ? next.caPrefix : current.caPrefix;
 
-    // Staat het nieuwe voorvoegsel er al, dan is na de wissel niet meer te zien wat van wie was.
-    const clashes = [];
+    // Staat een nieuw voorvoegsel er al, dan is na de wissel niet meer te zien wat van wie was.
+    const clashes = { [to]: [], [caTo]: [] };
     for (const rel of files) {
       if (rel === RENAMES_REL) continue;
       const buf = fs.readFileSync(path.join(REPO_ROOT, rel));
-      if (rel.includes(to) || (isText(buf) && containsPrefix(buf.toString("utf8"), to))) clashes.push(rel);
+      const text = isText(buf) ? buf.toString("utf8") : null;
+      if (prefixChanges && (rel.includes(to) || (text !== null && containsPrefix(maskCaNames(text, current.caPrefix), to)))) clashes[to].push(rel);
+      if (caRewrite && text !== null && containsCaNames(text, caTo)) clashes[caTo].push(rel);
     }
-    if (clashes.length > 0) {
-      console.error(`"${to}" staat al in ${clashes.length} bestand(en); haal het daar eerst weg:`);
-      for (const rel of clashes.slice(0, 20)) console.error(`  ${rel}`);
+    const found = Object.entries(clashes).filter(([, rels]) => rels.length > 0);
+    if (found.length > 0) {
+      for (const [prefix, rels] of found) {
+        console.error(`"${prefix}" staat al in ${rels.length} bestand(en); haal het daar eerst weg:`);
+        for (const rel of rels.slice(0, 20)) console.error(`  ${rel}`);
+      }
       process.exit(1);
     }
 
@@ -166,21 +200,28 @@ function main() {
       const buf = fs.readFileSync(path.join(REPO_ROOT, rel));
       if (isText(buf)) {
         const text = buf.toString("utf8");
-        if (rel === RENAMES_REL) {
-          const result = rewriteRenames(text, from, to);
-          if (result.text !== text) edits.push({ rel, text: result.text, note: `${result.renamed} policies` });
-        } else if (containsPrefix(text, from)) {
-          edits.push({ rel, text: replacePrefix(text, from, to) });
+        let out = maskCaNames(text, current.caPrefix);
+        let note;
+        if (prefixChanges && rel === RENAMES_REL) {
+          const result = rewriteRenames(out, from, to);
+          out = result.text;
+          note = `${result.renamed} policies`;
+        } else if (prefixChanges && containsPrefix(out, from)) {
+          out = replacePrefix(out, from, to);
         }
+        out = unmaskCaNames(out, caTo);
+        if (out !== text) edits.push({ rel, text: out, note });
       }
-      if (rel.includes(from)) moves.push({ from: rel, to: rel.split(from).join(to) });
+      if (prefixChanges && rel.includes(from)) moves.push({ from: rel, to: rel.split(from).join(to) });
     }
   }
 
   for (const e of edits) console.log(`~ ${e.rel}${e.note ? ` (${e.note})` : ""}`);
   for (const m of moves) console.log(`> ${m.from}\n    -> ${m.to}`);
   console.log(`~ ${ORGANISATION_REL}`);
-  if (prefixChanges) console.log(`\nVoorvoegsel "${current.prefix}" -> "${next.prefix}": ${edits.length} bestanden aangepast, ${moves.length} hernoemd.`);
+  if (prefixChanges || caRewrite) console.log(`\n${edits.length} bestanden aangepast, ${moves.length} hernoemd.`);
+  if (prefixChanges) console.log(`Voorvoegsel "${current.prefix}" -> "${next.prefix}"`);
+  if (caPrefixChanges) console.log(`CA-voorvoegsel ${current.caPrefix ? `"${current.caPrefix}"` : "(geen)"} -> "${next.caPrefix}"${caRewrite ? "" : " (alleen vastgelegd)"}`);
   if (next.caRepoUrl !== current.caRepoUrl) console.log(`CA-repo: ${current.caRepoUrl || "(geen)"} -> ${next.caRepoUrl || "(geen)"}`);
 
   if (opts.dryRun) {
@@ -197,6 +238,7 @@ function main() {
 
   const org = JSON.parse(fs.readFileSync(ORGANISATION_PATH, "utf8"));
   org.prefix = next.prefix;
+  org.caPrefix = next.caPrefix;
   org.caRepoUrl = next.caRepoUrl;
   fs.writeFileSync(ORGANISATION_PATH, JSON.stringify(org, null, 2) + "\n");
 
