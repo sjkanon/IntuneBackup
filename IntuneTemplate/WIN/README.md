@@ -2,14 +2,14 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 143 policies
+# Windows — 145 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
 | `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 6 |
+| `DeviceConfigurations/` | 8 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 109
+## Device-scoped (D) — 111
 
 Toewijzen aan apparaatgroepen.
 
@@ -112,6 +112,8 @@ Toewijzen aan apparaatgroepen.
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.md) | Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen. | Settings Catalog | 97 | All Devices |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.md) | Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is en logt de pijplijnuitvoering van alle PowerShell-modules, zodat het logboek bij een incident niet ongemerkt is overschreven en PowerShell-activiteit volledig herleidbaar is. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) | Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. | Settings Catalog | 4 | All Devices |
+| [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.md) | Shared PC mode zoals [Baseline] - WIN - D - Shared PC, maar met daarnaast een gastaccount: op het aanmeldscherm staat een knop Gast waarmee iemand zonder account een tijdelijke lokale sessie start. | Device config | — | — |
+| [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.md) | Zet gedeelde Windows-pc's in Shared PC mode met alleen Entra-accounts: profielen van gebruikers die 30 dagen niet zijn aangemeld of bij minder dan 25% vrije schijfruimte worden opgeruimd, er is geen lokale opslag buiten het profiel en onderhoud draait om 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra de schijf vol dreigt te raken, en maakt lokaal gecachte OneDrive-bestanden weer online-only. | Settings Catalog | 6 | All Devices |
 | [**Threat Protection**](SettingsCatalog/Baseline_WIN_D_Threat_Protection.md) | Haalt de lokale ontsnappingsroutes uit de malwarebescherming weg: gebruikers kunnen Exploit Protection niet overrulen, de cloudrapportage niet lokaal uitzetten, en DLL-kaping wordt moeilijker. | Settings Catalog | 2 | All Devices |
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.md) | Laat Windows de tijdzone automatisch bepalen, zodat logboeken en certificaten niet op een verkeerde tijd staan. | Settings Catalog | 10 | All Devices |

@@ -77,7 +77,7 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.md), vóór
   de eerste run.
 - **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
-  `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` en
+  `SEC-Shared-Devices`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` en
   `SEC-Remote-Support-macOS` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
   Het zijn standaardnamen. Heet een groep anders, pas dan `faseGroep` in
   [`_manifest.json`](../IntuneTemplate/_manifest.json) aan — voor de pilotgroep ook `PILOT_GROUP`

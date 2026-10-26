@@ -8,11 +8,11 @@ en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/Ope
 (Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
 repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
-208 stratégies sur quatre plateformes :
+210 stratégies sur quatre plateformes :
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.fr.md) | 125 | 1 | 6 | 11 | – | **143** |
+| [Windows](IntuneTemplate/WIN/README.fr.md) | 125 | 1 | 8 | 11 | – | **145** |
 | [macOS](IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.m
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>208 stratégies<br/><i>la source</i>"]
+  T["<b>IntuneTemplate/</b><br/>210 stratégies<br/><i>la source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Tenant Intune")]
 
@@ -116,10 +116,10 @@ sous le préfixe `Baseline_`. Ce que faisaient les dossiers séparés, c'est mai
 
 | Phase | Signification | Nombre |
 |---:|---|---:|
-| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 106 |
+| 1 | **Immédiat** — déployer dès que la baseline est dans le tenant. Aucun effet perceptible, ou des effets qui ne demandent aucune préparation. | 107 |
 | 2 | **Pilote** — d'abord sur un groupe pilote. Modifie quelque chose que l'utilisateur remarque, ou peut casser quelque chose que vous voulez voir d'abord. | 42 |
 | 3 | **En attente d'un prérequis** — prête, mais ne fait rien aujourd'hui. Les stratégies de conformité iOS et Android attendent la première inscription. | 26 |
-| 4 | **Groupe dédié** — destinée à un groupe spécifique, pas à tous les appareils. `faseGroep` indique lequel. | 18 |
+| 4 | **Groupe dédié** — destinée à un groupe spécifique, pas à tous les appareils. `faseGroep` indique lequel. | 20 |
 | 5 | **Ne pas déployer** — alternative à une stratégie qui, elle, *est* déployée. L'affecter provoque un Conflict. | 15 |
 
 Seule la phase 1 figure dans `_assignments.json`. `check-scope.js` veille à ce que les deux ne
@@ -329,7 +329,7 @@ update profiles, l'anneau de mise à jour 3 et Windows 365) — avec leur raison
 ## Restaurer dans un tenant
 
 **Via CIPP :** faites pointer le dépôt de modèles vers ce dépôt. Les cinq valeurs de `.Type`
-correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 208
+correspondent toutes à un `TemplateType` du `Set-CIPPIntunePolicy` de CIPP. Après la synchronisation, les 210
 modèles figurent dans CIPP sous Tenant Administration → Templates.
 
 ### Déployer via une baseline CIPP
@@ -378,7 +378,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 294 fichiers JSON — les mêmes 208 stratégies plus leurs 85 affectations et le
+CIPP importerait *aussi* ces 296 fichiers JSON — les mêmes 210 stratégies plus leurs 85 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.
@@ -501,6 +501,13 @@ des deux. `check-scope.js` y veille.
 La variante WHfB pour appareils partagés est la seule que l'on peut affecter *à côté* de son pendant :
 les quatre paramètres qui se recoupent y ont la même valeur, il n'y a donc rien qui puisse
 entrer en conflit — elle ajoute seulement `DisablePostLogonProvisioning`.
+
+Le mode PC partagé existe en deux variantes qu'il ne faut **jamais** affecter côte à côte :
+*Shared PC* (uniquement des comptes Entra) sur `SG-D-UEM-WIN-SharedPC` et *Shared PC Domain and
+Guest* (comptes Entra plus un bouton Invité) sur `SG-D-UEM-WIN-SharedPC-Guest`. Les deux règlent
+les mêmes paramètres sur une valeur différente : deux sur un même appareil, c'est un Conflit. Un
+appareil partagé est dans `SEC-Shared-Devices` et dans exactement un de ces deux groupes.
+OpenIntuneBaseline ne couvre pas les appareils partagés ; ces deux stratégies sont propres.
 
 ### Ce qu'il faut d'abord mettre en pilote
 

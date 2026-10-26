@@ -4795,6 +4795,69 @@
       "faseGroep": "SEC-Shared-Devices"
     },
     {
+      "target": "Baseline_WIN_D_Shared_PC",
+      "displayName": "[Baseline] - WIN - D - Shared PC",
+      "doelgroep": "fysiek",
+      "doel": "Zet gedeelde Windows-pc's in Shared PC mode met alleen Entra-accounts: profielen van gebruikers die 30 dagen niet zijn aangemeld of bij minder dan 25% vrije schijfruimte worden opgeruimd, er is geen lokale opslag buiten het profiel en onderhoud draait om 02:00.",
+      "controls": {
+        "iso": [
+          "A.5.15 Toegangsbeveiliging",
+          "A.5.16 Identiteitsbeheer",
+          "A.8.1 Eindpuntapparatuur van gebruikers",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 5.6 Centralize Account Management"
+        ],
+        "nistcsf": [
+          "PR.AA-01",
+          "PR.DS-01",
+          "PR.PS-01"
+        ]
+      },
+      "bron": "Eigen baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP). OpenIntuneBaseline dekt gedeelde apparaten bewust niet (WINDOWS/README.md).",
+      "bewijs": "Op een gedeeld apparaat blijft zonder opruimen elk profiel staan dat er ooit op is aangemaakt, met de gecachte bestanden, browsergegevens en tokens van iedereen die er ooit heeft gewerkt. Shared PC mode ruimt die profielen op en houdt alleen Entra-accounts toe, zodat elke aanmelding aan één persoon te koppelen is en onder Conditional Access valt. Geen lokale opslag buiten het profiel betekent dat een bestand niet op C:\\ achterblijft voor de volgende gebruiker; werkbestanden horen in OneDrive.",
+      "universeel": "Nee. Alleen voor apparaten waar meerdere mensen op werken: balie, werkplaats, vergaderruimte, flexplek. Op een laptop van één gebruiker ruimt hij na 30 dagen afwezigheid diens profiel op. Wijs per apparaat óf deze policy óf [Baseline] - WIN - D - Shared PC Domain and Guest toe, nooit allebei.",
+      "note": "Eigen groep SG-D-UEM-WIN-SharedPC (vast), naast SEC-Shared-Devices: een gedeeld apparaat staat in SEC-Shared-Devices (WHfB Multi User, Wireless Shared Devices) én in precies één van SG-D-UEM-WIN-SharedPC of SG-D-UEM-WIN-SharedPC-Guest. Twee Shared PC-policies op één apparaat leveren in Intune een Conflict op, en dan doet geen van beide iets. Shared PC mode raakt alleen nieuwe aanmeldingen: profielen die er al stonden voordat de policy landde, ruimt het accountbeheer niet altijd op — begin bij voorkeur met een schoon apparaat (Autopilot reset). Het profiel van een gebruiker verdwijnt na 30 dagen inactiviteit of zodra de vrije ruimte onder 25% zakt; boven 50% vrije ruimte blijven profielen staan. Daarom hoort OneDrive met Known Folder Move op deze apparaten aan te staan, anders verdwijnen bestanden mee. `disableEduPolicies` staat op true: de onderwijsinstellingen van Shared PC (o.a. geen Store-apps, geen Cortana) horen hier niet thuis. Combineer met [Baseline] - WIN - D - Windows Hello for Business Multi User, zodat niet elke nieuwe gebruiker bij de eerste aanmelding door de PIN-inrichting moet.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker ruimt dit na 30 dagen afwezigheid het profiel op.",
+      "faseGroep": "SG-D-UEM-WIN-SharedPC (vast: gedeelde Windows-pc's met alleen Entra-accounts; een apparaat staat hierin óf in SG-D-UEM-WIN-SharedPC-Guest, nooit in allebei)"
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_PC_Domain_Guest",
+      "displayName": "[Baseline] - WIN - D - Shared PC Domain and Guest",
+      "doelgroep": "fysiek",
+      "doel": "Shared PC mode zoals [Baseline] - WIN - D - Shared PC, maar met daarnaast een gastaccount: op het aanmeldscherm staat een knop Gast waarmee iemand zonder account een tijdelijke lokale sessie start.",
+      "controls": {
+        "iso": [
+          "A.5.15 Toegangsbeveiliging",
+          "A.8.1 Eindpuntapparatuur van gebruikers",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-01",
+          "PR.DS-01",
+          "PR.PS-01"
+        ]
+      },
+      "bron": "Eigen baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP), variant van [Baseline] - WIN - D - Shared PC met allowedAccounts guest,domain.",
+      "bewijs": "Een gast die op een bedrijfs-pc moet werken — een bezoeker, een leverancier, een stagiair zonder account — krijgt anders een gedeeld bedrijfsaccount of het account van een collega, en dan is geen enkele aanmelding meer aan een persoon te koppelen. Het gastaccount van Shared PC is lokaal, heeft geen Entra-identiteit en dus geen toegang tot iets van de organisatie, en wordt na afmelden verwijderd, zodat de volgende gast niets terugvindt. Dat houdt bedrijfsaccounts persoonsgebonden.",
+      "universeel": "Nee. Alleen voor gedeelde apparaten waar ook mensen zonder account op moeten: een bezoekers-pc, een pc in een wachtruimte of showroom. Wijs per apparaat óf deze policy óf [Baseline] - WIN - D - Shared PC toe, nooit allebei.",
+      "note": "Eigen groep SG-D-UEM-WIN-SharedPC-Guest (vast); zie de toelichting bij [Baseline] - WIN - D - Shared PC voor de indeling in groepen — een apparaat staat in precies één van de twee Shared PC-groepen. Een gast heeft geen Entra-identiteit: Conditional Access, MFA en Intune-compliance gelden niet voor hem, en hij kan niet bij Teams, SharePoint of mail van de organisatie. Daarmee is dit een apparaat voor internet en openbare diensten, niet voor werk. Wat een gast wél kan, is alles wat het apparaat zelf toelaat: zet geen gevoelige gedeelde mappen of printers open die zonder aanmelding bereikbaar zijn. Let op de samenloop met [Baseline] - WIN - D - User Rights: die weigert lokaal aanmelden voor de ingebouwde groep Gasten (*S-1-5-32-546). Microsoft documenteert niet in welke lokale groep het Shared PC-gastaccount landt; test in de pilot of de knop Gast werkt. Werkt hij niet, dan is dat recht de oorzaak en hoort er een tenantspecifieke kopie van User Rights zonder die SID op SEC-Shared-PC-Guest. Ook [Baseline] - WIN - D - Local Security Policies zet het ingebouwde Guest-account uit; dat is een ander account dan de Shared PC-gast en blijft gewoon uit.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten met gasttoegang. Test op het eerste apparaat of de knop Gast werkt naast de User Rights-policy die lokaal aanmelden voor Gasten weigert, en dat de gastsessie na afmelden verdwijnt.",
+      "faseGroep": "SG-D-UEM-WIN-SharedPC-Guest (vast: gedeelde Windows-pc's met gasttoegang; een apparaat staat hierin óf in SG-D-UEM-WIN-SharedPC, nooit in allebei)"
+    },
+    {
       "target": "Baseline_WIN_U_AI_Usage_Control_Permitted",
       "displayName": "[Baseline] - WIN - U - AI Usage Control Permitted",
       "doel": "Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten.",

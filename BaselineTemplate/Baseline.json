@@ -289,6 +289,40 @@
           "remediateEnabled": true,
           "alertEnabled": true,
           "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-sharedpc",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC",
+            "assignTo": "customGroup",
+            "customGroup": "SG-D-UEM-WIN-SharedPC",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-sharedpc-guest",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest",
+            "assignTo": "customGroup",
+            "customGroup": "SG-D-UEM-WIN-SharedPC-Guest",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
         }
       ]
     },

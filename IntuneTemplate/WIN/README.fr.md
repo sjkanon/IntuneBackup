@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 143 policies
+# Windows — 145 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
 | `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 6 |
+| `DeviceConfigurations/` | 8 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 109
+## Device-scoped (D) — 111
 
 Affecter à des groupes d'appareils.
 
@@ -112,6 +112,8 @@ Affecter à des groupes d'appareils.
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.fr.md) | Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolètes, exécution automatique, journalisation PowerShell et protection des composants système. | Settings Catalog | 97 | All Devices |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.fr.md) | Avertit dans le journal Système dès que le journal Sécurité est plein à 90 % et journalise l'exécution du pipeline de tous les modules PowerShell, afin que lors d'un incident le journal n'ait pas été écrasé à l'insu de tous et que l'activité PowerShell soit entièrement traçable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.fr.md) | Détermine quels paramètres Windows sont synchronisés entre appareils. | Settings Catalog | 4 | All Devices |
+| [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.fr.md) | Mode PC partagé comme [Baseline] - WIN - D - Shared PC, mais avec en plus un compte invité : l'écran de connexion affiche un bouton Invité permettant à une personne sans compte de démarrer une session locale temporaire. | Device config | — | — |
+| [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.fr.md) | Place les PC Windows partagés en mode PC partagé avec uniquement des comptes Entra : les profils des utilisateurs qui ne se sont pas connectés depuis 30 jours, ou lorsque l'espace disque libre passe sous 25 %, sont supprimés, il n'y a pas de stockage local en dehors du profil et la maintenance s'exécute à 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.fr.md) | Nettoie automatiquement les fichiers temporaires, la Corbeille et les anciens téléchargements dès que le disque menace d'être plein, et repasse en ligne uniquement les fichiers OneDrive mis en cache localement. | Settings Catalog | 6 | All Devices |
 | [**Threat Protection**](SettingsCatalog/Baseline_WIN_D_Threat_Protection.fr.md) | Supprime les échappatoires locales de la protection anti-malware : les utilisateurs ne peuvent pas passer outre Exploit Protection ni désactiver localement le signalement cloud, et le détournement de DLL devient plus difficile. | Settings Catalog | 2 | All Devices |
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.fr.md) | Laisse Windows déterminer automatiquement le fuseau horaire, afin que les journaux et les certificats ne soient pas à une heure erronée. | Settings Catalog | 10 | All Devices |
