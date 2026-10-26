@@ -145,7 +145,7 @@ cover what is not an Intune policy: the Defender policies (Safe Links etc.), the
 and the app templates get a new copy in the tenant; clean up the old one.
 
 The CA policies have a prefix of their own (`caPrefix`), because an organisation's CA repo names them
-its own way: `CA - 1090 - BLOCK - …` in CA-Policies, `CXNM - STANDARD - 1090 - …` in its mirror, and
+its own way: `CA - 1090 - BLOCK - …` in CA-Policies, `Contoso - 1090 - …` elsewhere, and
 with `__` in a file name (`CA__1090__BLOCK__…`). They are in `_licenties.json` and `_ca.json`.
 `set-organisation.js --ca-prefix "Contoso - "` converts them, recognising a CA name by the four-digit
 number after the prefix. A change of the policy prefix leaves them alone, also when the two prefixes

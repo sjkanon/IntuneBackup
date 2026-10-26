@@ -179,19 +179,20 @@ function main() {
     const caTo = caRewrite ? next.caPrefix : current.caPrefix;
 
     // Staat een nieuw voorvoegsel er al, dan is na de wissel niet meer te zien wat van wie was.
-    const clashes = { [to]: [], [caTo]: [] };
+    // Per voorvoegsel een Set: zijn ze dezelfde tekst, dan noemt de melding elk bestand één keer.
+    const clashes = new Map();
+    const clash = (prefix, rel) => clashes.set(prefix, (clashes.get(prefix) || new Set()).add(rel));
     for (const rel of files) {
       if (rel === RENAMES_REL) continue;
       const buf = fs.readFileSync(path.join(REPO_ROOT, rel));
       const text = isText(buf) ? buf.toString("utf8") : null;
-      if (prefixChanges && (rel.includes(to) || (text !== null && containsPrefix(maskCaNames(text, current.caPrefix), to)))) clashes[to].push(rel);
-      if (caRewrite && text !== null && containsCaNames(text, caTo)) clashes[caTo].push(rel);
+      if (prefixChanges && (rel.includes(to) || (text !== null && containsPrefix(maskCaNames(text, current.caPrefix), to)))) clash(to, rel);
+      if (caRewrite && text !== null && containsCaNames(text, caTo)) clash(caTo, rel);
     }
-    const found = Object.entries(clashes).filter(([, rels]) => rels.length > 0);
-    if (found.length > 0) {
-      for (const [prefix, rels] of found) {
-        console.error(`"${prefix}" staat al in ${rels.length} bestand(en); haal het daar eerst weg:`);
-        for (const rel of rels.slice(0, 20)) console.error(`  ${rel}`);
+    if (clashes.size > 0) {
+      for (const [prefix, rels] of clashes) {
+        console.error(`"${prefix}" staat al in ${rels.size} bestand(en); haal het daar eerst weg:`);
+        for (const rel of [...rels].slice(0, 20)) console.error(`  ${rel}`);
       }
       process.exit(1);
     }

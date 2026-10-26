@@ -23,7 +23,7 @@ function readOrganisation(file = ORGANISATION_PATH) {
 const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
- * "CA - " -> "CA__", "CXNM - STANDARD - " -> "CXNM__STANDARD__": de vorm in de bestandsnaam van een
+ * "CA - " -> "CA__", "Contoso - Std - " -> "Contoso__Std__": de vorm in de bestandsnaam van een
  * CA-template. Dezelfde regel als filePrefixOf in de CA-Policies-repo, die de bestanden zo noemt.
  */
 const caFileForm = (caPrefix) =>

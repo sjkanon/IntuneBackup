@@ -145,8 +145,8 @@ geldt niet voor wat geen Intune-policy is: de Defender-policies (Safe Links e.d.
 Autopilot-profiel en de app-templates krijgen in de tenant een nieuw exemplaar; ruim het oude op.
 
 De CA-policies hebben een eigen voorvoegsel (`caPrefix`), want de CA-repo van een organisatie noemt
-ze op zijn eigen manier: `CA - 1090 - BLOCK - …` in CA-Policies, `CXNM - STANDARD - 1090 - …` in de
-spiegel daarvan, en in een bestandsnaam met `__` (`CA__1090__BLOCK__…`). Ze staan in
+ze op zijn eigen manier: `CA - 1090 - BLOCK - …` in CA-Policies, `Contoso - 1090 - …` bij een
+andere organisatie, en in een bestandsnaam met `__` (`CA__1090__BLOCK__…`). Ze staan in
 `_licenties.json` en `_ca.json`. `set-organisation.js --ca-prefix "Contoso - "` zet ze om, en herkent
 een CA-naam aan het nummer van vier cijfers achter het voorvoegsel. Bij een wissel van het
 policy-voorvoegsel blijven ze buiten schot, ook als de twee voorvoegsels dezelfde tekst zijn.

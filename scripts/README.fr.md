@@ -148,7 +148,7 @@ des anciennes. Cela ne couvre pas ce qui n'est pas une stratégie Intune : les s
 tenant ; supprimez l'ancien.
 
 Les stratégies CA ont leur propre préfixe (`caPrefix`), car le dépôt CA d'une organisation les nomme à
-sa manière : `CA - 1090 - BLOCK - …` dans CA-Policies, `CXNM - STANDARD - 1090 - …` dans son miroir, et
+sa manière : `CA - 1090 - BLOCK - …` dans CA-Policies, `Contoso - 1090 - …` ailleurs, et
 avec `__` dans un nom de fichier (`CA__1090__BLOCK__…`). Ils figurent dans `_licenties.json` et
 `_ca.json`. `set-organisation.js --ca-prefix "Contoso - "` les convertit et reconnaît un nom CA au
 numéro à quatre chiffres qui suit le préfixe. Un changement du préfixe des stratégies ne les touche
