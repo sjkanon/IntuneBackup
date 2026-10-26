@@ -8,10 +8,10 @@ généré, quels systèmes le lisent et comment il arrive dans un tenant. Pour l
 
 ## En bref
 
-- **Une seule source :** `IntuneTemplate/` — 200 stratégies au format de template CIPP, réparties
-  entre Windows (135), macOS (37), iOS/iPadOS (14) et Android (14).
+- **Une seule source :** `IntuneTemplate/` — 210 stratégies au format de template CIPP, réparties
+  entre Windows (145), macOS (37), iOS/iPadOS (14) et Android (14).
 - **Trois sources en entrée :** OpenIntuneBaseline (94 stratégies), IntuneAdmin/IntuneBaselines (22)
-  et travail propre (84).
+  et travail propre (94).
 - **Deux dérivés en sortie :** un export de restauration pour IntuneBackupAndRestore et la baseline
   CIPP. CIPP lit lui-même les templates directement.
 - **Deux voies vers le tenant :** CIPP ou le module PowerShell IntuneBackupAndRestore. L'affectation
@@ -27,7 +27,7 @@ flowchart LR
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Sauvegarde du tenant<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 
-  T["<b>IntuneTemplate/</b><br/>200 stratégies · _manifest.json"]
+  T["<b>IntuneTemplate/</b><br/>210 stratégies · _manifest.json"]
 
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]

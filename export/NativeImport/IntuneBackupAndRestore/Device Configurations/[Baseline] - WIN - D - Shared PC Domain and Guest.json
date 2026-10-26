@@ -1,0 +1,24 @@
+{
+    "@odata.type": "#microsoft.graph.sharedPCConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "Shared PC mode like [Baseline] - WIN - D - Shared PC, but with a guest account as well: the sign-in screen shows a Guest button with which someone without an account starts a temporary local session. Baseline assignment: none by default — belongs on SG-D-UEM-WIN-SharedPC-Guest. Source: Own baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP), variant of [Baseline] - WIN - D - Shared PC with allowedAccounts guest,domain..",
+    "displayName": "[Baseline] - WIN - D - Shared PC Domain and Guest",
+    "enabled": true,
+    "allowedAccounts": "guest,domain",
+    "allowLocalStorage": false,
+    "disableAccountManager": false,
+    "disableEduPolicies": true,
+    "disablePowerPolicies": false,
+    "disableSignInOnResume": false,
+    "idleTimeBeforeSleepInSeconds": 3600,
+    "maintenanceStartTime": "02:00:00.0000000",
+    "accountManagerPolicy": {
+        "@odata.type": "#microsoft.graph.sharedPCAccountManagerPolicy",
+        "accountDeletionPolicy": "diskSpaceThresholdOrInactiveThreshold",
+        "cacheAccountsAboveDiskFreePercentage": 50,
+        "inactiveThresholdDays": 30,
+        "removeAccountsBelowDiskFreePercentage": 25
+    }
+}

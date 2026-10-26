@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# IntuneTemplate — 208 policies
+# IntuneTemplate — 210 policies
 
 The source of this repo: the agreed Intune policies in CIPP template format. Everything
 in `export/` and `BaselineTemplate/` is derived from it and generated.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.en.md) | 125 | 1 | 6 | 11 | – | **143** |
+| [Windows](WIN/README.en.md) | 125 | 1 | 8 | 11 | – | **145** |
 | [macOS](MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **166** | **1** | **13** | **26** | **2** | **208** |
+| **Total** | **166** | **1** | **15** | **26** | **2** | **210** |
 
 ## Layout
 
@@ -93,6 +93,8 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
 | `[Baseline] - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
 | `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
 | `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2, filter WIN - Physical (include) | 1 | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
@@ -110,7 +112,7 @@ they exist as an alternative to a policy that is deployed.
 
 ## Per platform
 
-- [Windows](WIN/README.en.md) — 143 policies
+- [Windows](WIN/README.en.md) — 145 policies
 - [macOS](MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](IOS/README.en.md) — 14 policies
 - [Android](AND/README.en.md) — 14 policies

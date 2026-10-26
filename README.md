@@ -8,11 +8,11 @@ grotendeels uit [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIn
 (Windows v4.0, macOS v1.0, BYOD), aangevuld met wat deze baseline extra dekt. Windows v4.0 is
 overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#ronde-oib-windows-v40-14-september-2026).
 
-208 policies over vier platformen:
+210 policies over vier platformen:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | totaal |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.md) | 125 | 1 | 6 | 11 | – | **143** |
+| [Windows](IntuneTemplate/WIN/README.md) | 125 | 1 | 8 | 11 | – | **145** |
 | [macOS](IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ overgenomen vóór de officiële release — zie [`ANALYSE.md`](docs/ANALYSE.md#
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>208 policies<br/><i>de bron</i>"]
+  T["<b>IntuneTemplate/</b><br/>210 policies<br/><i>de bron</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune-tenant")]
 
@@ -116,10 +116,10 @@ onder de `Baseline_`-prefix. Wat de aparte mappen deden, doet nu het veld `fase`
 
 | Fase | Wat het betekent | Aantal |
 |---:|---|---:|
-| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 106 |
+| 1 | **Nu** — uitrollen zodra de baseline in de tenant staat. Geen merkbare gevolgen, of gevolgen die geen voorbereiding vragen. | 107 |
 | 2 | **Pilot** — eerst op een pilotgroep. Verandert iets dat een gebruiker merkt, of kan iets breken dat je eerst wilt zien. | 42 |
 | 3 | **Wacht op voorwaarde** — klaar, maar doet vandaag niets. De iOS- en Android-compliancepolicies wachten op de eerste inschrijving. | 26 |
-| 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 18 |
+| 4 | **Eigen groep** — hoort op een specifieke groep, niet op alle apparaten. `faseGroep` zegt welke. | 20 |
 | 5 | **Niet uitrollen** — alternatief voor een policy die wél wordt uitgerold. Toewijzen levert een Conflict op. | 15 |
 
 Alleen fase 1 staat in `_assignments.json`. `check-scope.js` bewaakt dat die twee niet uit
@@ -329,7 +329,7 @@ profiles, update-ring 3 en Windows 365) — met reden, in `"excluded"` in het ma
 ## Terugzetten in een tenant
 
 **Via CIPP:** wijs de template-repository aan op deze repository. Alle vijf de `.Type`-waarden
-komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 208
+komen overeen met een `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. Na de sync staan de 210
 templates in CIPP onder Tenant Administration → Templates.
 
 ### Uitrollen via een CIPP-baseline
@@ -378,7 +378,7 @@ Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRes
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
 `git/trees?recursive=1` en negeert precies twee dingen: bestanden die niet op `.json` eindigen,
 en paden waarin `NativeImport` voorkomt. Er is geen submap-instelling. Zonder dat woord zou
-CIPP die 294 JSON-bestanden óók importeren — dezelfde 208 policies plus hun 85 assignments en het
+CIPP die 296 JSON-bestanden óók importeren — dezelfde 210 policies plus hun 85 assignments en het
 meegereisde ADE-profiel, maar zonder `RowKey`, waar CIPP dan een **tweede** template van maakt
 met dezelfde naam en een eigen GUID.
 OpenIntuneBaseline gebruikt dezelfde map om dezelfde reden.
@@ -499,6 +499,13 @@ toegepast. `check-scope.js` bewaakt dat.
 De WHfB-variant voor gedeelde apparaten is de enige die je náást zijn tegenhanger kunt
 toewijzen: de vier overlappende instellingen staan daar op dezelfde waarde, dus er valt niets
 te botsen — hij voegt alleen `DisablePostLogonProvisioning` toe.
+
+Shared PC mode is er in twee varianten die je juist **nooit** naast elkaar toewijst:
+*Shared PC* (alleen Entra-accounts) op `SG-D-UEM-WIN-SharedPC` en *Shared PC Domain and Guest*
+(Entra-accounts én een knop Gast) op `SG-D-UEM-WIN-SharedPC-Guest`. Beide zetten dezelfde
+instellingen op een andere waarde, dus twee op één apparaat is een Conflict. Een gedeeld apparaat
+staat in `SEC-Shared-Devices` en in precies één van die twee groepen. OpenIntuneBaseline dekt
+gedeelde apparaten niet; deze twee zijn eigen policies.
 
 ### Wat je eerst in een pilot zet
 

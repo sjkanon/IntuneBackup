@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 143 policies
+# Windows — 145 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
 | `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 6 |
+| `DeviceConfigurations/` | 8 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 109
+## Device-scoped (D) — 111
 
 Assign to device groups.
 
@@ -112,6 +112,8 @@ Assign to device groups.
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) | Collection of individual hardening settings: outdated SMB and NTLM variants, AutoPlay, PowerShell logging and shielding of system components. | Settings Catalog | 97 | All Devices |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) | Warns in the System log as soon as the Security log is 90% full and logs pipeline execution of all PowerShell modules, so that during an incident the log has not been overwritten unnoticed and PowerShell activity is fully traceable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) | Determines which Windows settings are synchronised between devices. | Settings Catalog | 4 | All Devices |
+| [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) | Shared PC mode like [Baseline] - WIN - D - Shared PC, but with a guest account as well: the sign-in screen shows a Guest button with which someone without an account starts a temporary local session. | Device config | — | — |
+| [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) | Puts shared Windows PCs in Shared PC mode with Entra accounts only: profiles of users who have not signed in for 30 days, or when free disk space drops below 25%, are removed, there is no local storage outside the profile and maintenance runs at 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) | Automatically cleans up temporary files, the Recycle Bin and old downloads as soon as the disk threatens to fill up, and makes locally cached OneDrive files online-only again. | Settings Catalog | 6 | All Devices |
 | [**Threat Protection**](SettingsCatalog/Baseline_WIN_D_Threat_Protection.en.md) | Removes the local escape routes from malware protection: users cannot override Exploit Protection or turn off cloud reporting locally, and DLL hijacking becomes harder. | Settings Catalog | 2 | All Devices |
 | [**Timezone**](SettingsCatalog/Baseline_WIN_D_Timezone.en.md) | Lets Windows determine the time zone automatically, so that logs and certificates are not on the wrong time. | Settings Catalog | 10 | All Devices |

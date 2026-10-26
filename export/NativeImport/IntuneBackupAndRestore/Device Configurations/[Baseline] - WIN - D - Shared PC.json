@@ -1,0 +1,24 @@
+{
+    "@odata.type": "#microsoft.graph.sharedPCConfiguration",
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "description": "Puts shared Windows PCs in Shared PC mode with Entra accounts only: profiles of users who have not signed in for 30 days, or when free disk space drops below 25%, are removed, there is no local storage outside the profile and maintenance runs at 02:00. Baseline assignment: none by default — belongs on SG-D-UEM-WIN-SharedPC. Source: Own baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP). OpenIntuneBaseline deliberately does not cover shared devices (WINDOWS/README.md)..",
+    "displayName": "[Baseline] - WIN - D - Shared PC",
+    "enabled": true,
+    "allowedAccounts": "domain",
+    "allowLocalStorage": false,
+    "disableAccountManager": false,
+    "disableEduPolicies": true,
+    "disablePowerPolicies": false,
+    "disableSignInOnResume": false,
+    "idleTimeBeforeSleepInSeconds": 3600,
+    "maintenanceStartTime": "02:00:00.0000000",
+    "accountManagerPolicy": {
+        "@odata.type": "#microsoft.graph.sharedPCAccountManagerPolicy",
+        "accountDeletionPolicy": "diskSpaceThresholdOrInactiveThreshold",
+        "cacheAccountsAboveDiskFreePercentage": 50,
+        "inactiveThresholdDays": 30,
+        "removeAccountsBelowDiskFreePercentage": 25
+    }
+}

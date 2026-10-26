@@ -80,7 +80,7 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md), avant
   la première exécution.
 - **Veiller à ce que les groupes existent.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`,
-  `SEC-Update-Ring2`, `SEC-Shared-Devices`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`,
+  `SEC-Update-Ring2`, `SEC-Shared-Devices`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`,
   `SEC-iOS-Corporate` et `SEC-Remote-Support-macOS` doivent exister dans le tenant ; CIPP les
   recherche par nom (les caractères génériques sont autorisés). Ce sont des noms par défaut. Si un
   groupe s'appelle autrement, modifiez `faseGroep` dans
