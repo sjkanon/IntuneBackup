@@ -9,8 +9,8 @@ physiques et les hôtes de session Azure Virtual Desktop sous Windows 11 Enterpr
 
 | Fichier | Filtre | Règle | Classe (`doelgroep`) |
 |---|---|---|---|
-| `WIN-Physical.json` | `WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** (physique) — portables et postes de travail |
-| `WIN-AVD-Multi-Session.json` | `WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — hôtes de session multisession |
+| `WIN-Physical.json` | `[Baseline] - WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` | **fysiek** (physique) — portables et postes de travail |
+| `WIN-AVD-Multi-Session.json` | `[Baseline] - WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` | **avd** — hôtes de session multisession |
 
 Les deux ne servent qu'en **inclusion**. La troisième classe, **alle** (tous), n'a pas de filtre :
 ces stratégies vont à chaque appareil Windows. La classe de chaque stratégie est le `doelgroep`
@@ -20,8 +20,8 @@ dans [`_manifest.json`](../../_manifest.json), et par stratégie avec la raison 
 
 Validés dans le tenant de test (`validateFilter` et *Preview devices*) :
 
-- `WIN - Physical` correspond aux quatre PC physiques et QEMU, pas à l'hôte de session AVD ;
-- `WIN - AVD Multi-session` correspond exactement à l'hôte de session AVD et à aucun PC physique.
+- `[Baseline] - WIN - Physical` correspond aux quatre PC physiques et QEMU, pas à l'hôte de session AVD ;
+- `[Baseline] - WIN - AVD Multi-session` correspond exactement à l'hôte de session AVD et à aucun PC physique.
 
 **Ce qui ne relève d'aucun des deux :** un Cloud PC Windows 365 (modèle `Cloud PC …`, mono-session)
 et un hôte AVD personnel (modèle `Virtual Machine`, mono-session). Ils ne reçoivent que les

@@ -26,7 +26,7 @@
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "SEC-Update-Ring1,SEC-Update-Ring2",
-            "assignmentFilter": "WIN - Physical",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -94,7 +94,7 @@
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "",
-            "assignmentFilter": "WIN - Physical",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0

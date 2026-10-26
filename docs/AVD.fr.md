@@ -23,9 +23,9 @@ la classe d'appareils à laquelle elle est destinée. Trois classes, deux filtre
 | Groupe dans ce document | `doelgroep` | Stratégies | Affectation |
 |---|---|---:|---|
 | **Commune** — physique et AVD, inchangée | `alle` | 95 | telles quelles, sans filtre |
-| **Physique uniquement** — pas sur les hôtes de session | `fysiek` | 40 | filtre d'**inclusion** `WIN - Physical` |
-| **Variante AVD** — physique et AVD ont chacun leur version | `fysiek` (la version physique) | 1 | version physique inclusion `WIN - Physical`, version AVD inclusion `WIN - AVD Multi-session` |
-| **AVD uniquement** — les nouvelles stratégies et l'ensemble Cloud PC | `avd` | 7 | filtre d'**inclusion** `WIN - AVD Multi-session` (ensemble Cloud PC : groupe propre) |
+| **Physique uniquement** — pas sur les hôtes de session | `fysiek` | 40 | filtre d'**inclusion** `[Baseline] - WIN - Physical` |
+| **Variante AVD** — physique et AVD ont chacun leur version | `fysiek` (la version physique) | 1 | version physique inclusion `[Baseline] - WIN - Physical`, version AVD inclusion `[Baseline] - WIN - AVD Multi-session` |
+| **AVD uniquement** — les nouvelles stratégies et l'ensemble Cloud PC | `avd` | 7 | filtre d'**inclusion** `[Baseline] - WIN - AVD Multi-session` (ensemble Cloud PC : groupe propre) |
 
 En phases 1 et 2, le pipeline en fait des paquets CIPP distincts : `[Baseline] - Baseline-Devices-Physical`,
 `-Users-Physical`, `-Pilot-Physical` et `-Devices-AVD`, avec le filtre dans le standard. Le
@@ -33,7 +33,7 @@ déploiement dans un tenant client est décrit dans le guide [PLAYBOOK.fr.md](PL
 
 Nouveau dans ce dépôt pour AVD :
 
-- les filtres d'affectation [`WIN - Physical` et `WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md) ;
+- les filtres d'affectation [`[Baseline] - WIN - Physical` et `[Baseline] - WIN - AVD Multi-session`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md) ;
 - [`AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) — FSLogix et le ticket Kerberos pour Azure Files ;
 - [`AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) — la version physique sans invite de mot de passe ;
 - [`AVD Defender FSLogix Exclusions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) — les exclusions Defender que Microsoft prescrit pour FSLogix ;
@@ -41,7 +41,7 @@ Nouveau dans ce dépôt pour AVD :
 - [`AVD Start and Search`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) — Démarrer et Rechercher ne récupèrent plus rien dans le cloud ou sur le web à l'ouverture : pas de recherche dans les sources cloud, pas de points forts de la recherche, pas d'applications récemment ajoutées. Contre un menu Démarrer lent dans la session alors que l'hôte ne manque de rien.
 
 Les cinq sont en **phase 1** avec la classe `avd`, dans le paquet `[Baseline] - Baseline-Devices-AVD`
-(tous les appareils, filtre d'inclusion `WIN - AVD Multi-session`). Le compte de stockage des deux
+(tous les appareils, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`). Le compte de stockage des deux
 stratégies FSLogix est la variable CIPP `%FSLogixStorageAccount%`, à définir par tenant.
 
 ## Ce qu'Intune fait et ne fait pas en multisession
@@ -96,10 +96,10 @@ un groupe — et indique quels appareils y participent. Pourquoi des filtres et 
 - **Un filtre par paquet CIPP.** Un paquet CIPP a une affectation et un filtre pour tous ses
   membres. Chaque classe a donc son propre paquet, et le filtre est toujours en **inclusion** : les
   stratégies communes sont dans un paquet *sans* filtre, les physiques dans un paquet avec
-  `WIN - Physical`, les stratégies AVD dans un paquet avec `WIN - AVD Multi-session`.
+  `[Baseline] - WIN - Physical`, les stratégies AVD dans un paquet avec `[Baseline] - WIN - AVD Multi-session`.
 
 **Plus de filtres d'exclusion.** L'ancien modèle mettait un filtre d'exclusion
-`WIN - AVD Multi-session` sur les stratégies réservées au physique. CIPP ne pouvait pas le faire
+`[Baseline] - WIN - AVD Multi-session` sur les stratégies réservées au physique. CIPP ne pouvait pas le faire
 par stratégie : elles étaient dans `Baseline-Devices`, `-Users` et `-Pilot` avec les communes, et
 une exclusion sur un tel paquet retirait aussi les communes des hôtes de session. Un paquet par
 classe règle cela, et avec l'inclusion plutôt que l'exclusion, un Cloud PC ou un hôte personnel ne
@@ -232,7 +232,7 @@ Physique et AVD, inchangée et sans filtre.
 
 ### Physique uniquement — 40
 
-Classe `fysiek` : en phases 1 et 2 le filtre d'inclusion `WIN - Physical`, donc pas sur un hôte de session, un Cloud PC Windows 365 ni un hôte AVD personnel.
+Classe `fysiek` : en phases 1 et 2 le filtre d'inclusion `[Baseline] - WIN - Physical`, donc pas sur un hôte de session, un Cloud PC Windows 365 ni un hôte AVD personnel.
 
 | Stratégie | Phase | Pourquoi pas sur AVD |
 |---|---:|---|
@@ -281,16 +281,16 @@ Classe `fysiek` : en phases 1 et 2 le filtre d'inclusion `WIN - Physical`, donc 
 
 | Stratégie | Phase | Remarque |
 |---|---:|---|
-| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.fr.md) | 1 | `promptforpassworduponconnection` casse le SSO Entra et les passkeys. Physique : classe `fysiek` (inclusion `WIN - Physical`) ; AVD : [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) avec la classe `avd`. |
+| [D - Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.fr.md) | 1 | `promptforpassworduponconnection` casse le SSO Entra et les passkeys. Physique : classe `fysiek` (inclusion `[Baseline] - WIN - Physical`) ; AVD : [AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) avec la classe `avd`. |
 
 ### AVD uniquement — 7
 
 | Stratégie | Phase | Remarque |
 |---|---:|---|
-| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
-| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
-| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
-| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `WIN - AVD Multi-session`. |
+| [D - AVD Defender FSLogix Exclusions](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
+| [D - AVD FSLogix Profile Containers](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
+| [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
+| [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Start and Search](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) | 1 | Nouveau. Classe `avd`. Reprend `allowcloudsearch` de Windows Feature Configuration (retiré là-bas) ; les résultats web y sont déjà désactivés. `HideRecommendedSection` n'existe pas dans le Settings Catalog. |
 | [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | 4 | Existant, uniquement sur un pool d'hôtes pour externes (SEC-Cloud-PC-External). Y entre en conflit avec les limites de session d'AVD Session Host — voir les points ouverts. |
 | [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | 4 | Existant, via le groupe SEC-Cloud-PC (aussi Windows 365). Active aussi la redirection du fuseau horaire. |
@@ -379,7 +379,7 @@ conteneurs déjà volumineux : une seule fois, hors heures de bureau, avec les h
 Le guide complet, y compris la classe physique et la migration depuis un ancien ensemble, figure
 dans [PLAYBOOK.fr.md](PLAYBOOK.fr.md). Pour AVD en bref :
 
-1. **Créer les filtres.** `WIN - Physical` et `WIN - AVD Multi-session` depuis
+1. **Créer les filtres.** `[Baseline] - WIN - Physical` et `[Baseline] - WIN - AVD Multi-session` depuis
    [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md),
    par un `POST` sur `deviceManagement/assignmentFilters`, dans le portail ou avec
    `Set-BaselineAssignment.ps1 -CreateFilters`. Vérifiez avec *Preview devices*. Avant la première
@@ -393,7 +393,7 @@ dans [PLAYBOOK.fr.md](PLAYBOOK.fr.md). Pour AVD en bref :
    (ils utilisent le filtre), mais pour l'affectation de conformité aux appareils (étape 5), le
    paramètre RDP SSO *target device groups* du pool d'hôtes et les rapports.
 4. **Baseline dans CIPP.** L'étape 1 déploie `[Baseline] - Baseline-Devices-AVD` (tous les
-   appareils, inclusion `WIN - AVD Multi-session`) à côté des paquets communs. Les stratégies
+   appareils, inclusion `[Baseline] - WIN - AVD Multi-session`) à côté des paquets communs. Les stratégies
    réservées au physique passent par les paquets `-Physical` et n'atteignent donc pas l'hôte.
 5. **Conformité sur l'appareil.** Affectez les stratégies de conformité prises en charge en
    multisession — Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection,

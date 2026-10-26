@@ -19,13 +19,13 @@ est pas sélectionnable.
 | Classe (`doelgroep`) | Quoi | Filtre (inclusion) | Règle |
 |---|---|---|---|
 | `alle` (commune) | PC physiques et hôtes de session AVD, et tout ce qui ne relève d'aucun des deux filtres | aucun | — |
-| `fysiek` (physique) | portables et postes de travail | `WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` |
-| `avd` | hôtes de session AVD sous Windows 11 Enterprise multisession | `WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` |
+| `fysiek` (physique) | portables et postes de travail | `[Baseline] - WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` |
+| `avd` | hôtes de session AVD sous Windows 11 Enterprise multisession | `[Baseline] - WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` |
 
 Les corps se trouvent dans [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md).
 Les deux ont été validés dans le tenant de test avec `validateFilter` et *Preview devices* :
-`WIN - Physical` correspond aux quatre PC physiques et QEMU et pas à l'hôte AVD,
-`WIN - AVD Multi-session` exactement à l'hôte AVD.
+`[Baseline] - WIN - Physical` correspond aux quatre PC physiques et QEMU et pas à l'hôte AVD,
+`[Baseline] - WIN - AVD Multi-session` exactement à l'hôte AVD.
 
 **Les Cloud PC Windows 365 et les hôtes AVD personnels** (mono-session, modèle `Cloud PC …` ou
 `Virtual Machine`) ne relèvent d'**aucun** des deux filtres. Ils ne reçoivent que la classe `alle`,
@@ -48,19 +48,19 @@ dans le [README d'`IntuneTemplate`](../IntuneTemplate/README.fr.md#packages-cipp
 | Paquet | Affectation | Filtre | Étape | Stratégies |
 |---|---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | tous les appareils | — | 1 | 53 |
-| `[Baseline] - Baseline-Devices-Physical` | tous les appareils | `WIN - Physical` | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | tous les appareils | `WIN - AVD Multi-session` | 1 | 5 |
+| `[Baseline] - Baseline-Devices-Physical` | tous les appareils | `[Baseline] - WIN - Physical` | 1 | 14 |
+| `[Baseline] - Baseline-Devices-AVD` | tous les appareils | `[Baseline] - WIN - AVD Multi-session` | 1 | 5 |
 | `[Baseline] - Baseline-Users` | tous les utilisateurs | — | 1 | 31 |
-| `[Baseline] - Baseline-Users-Physical` | tous les utilisateurs | `WIN - Physical` | 1 | 1 |
+| `[Baseline] - Baseline-Users-Physical` | tous les utilisateurs | `[Baseline] - WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | ne pas affecter (jeton ADE) | — | 1 | 2 |
 | `[Baseline] - Baseline-SEC-<groupe>` (dix paquets) | le groupe de `faseGroep` | — | 1 | 14 |
 | `[Baseline] - Baseline-Pilot` | groupe `SEC-Baseline-Pilot` | — | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | groupe `SEC-Baseline-Pilot` | `WIN - Physical` | 2 | 13 |
+| `[Baseline] - Baseline-Pilot-Physical` | groupe `SEC-Baseline-Pilot` | `[Baseline] - WIN - Physical` | 2 | 13 |
 | `[Baseline] - Baseline-Wacht` | ne pas affecter | — | 3 | 26 |
-| `[Baseline] - Updates-Ring3-Physical` | tous les appareils sauf `SEC-Update-Ring1/2` | `WIN - Physical` | 1 (Windows-Updates) | 1 |
+| `[Baseline] - Updates-Ring3-Physical` | tous les appareils sauf `SEC-Update-Ring1/2` | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring1`, `-Ring2` | le groupe d'anneau | — | 1 (Windows-Updates) | 2 |
 | `[Baseline] - Updates-Devices` | tous les appareils | — | 1 (Windows-Updates) | 1 |
-| `[Baseline] - Updates-Devices-Physical` | tous les appareils | `WIN - Physical` | 1 (Windows-Updates) | 1 |
+| `[Baseline] - Updates-Devices-Physical` | tous les appareils | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(aucun paquet — phase 5)* | — | — | — | 15 |
 
 208 au total. Les paquets `Baseline-` sont dans [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
@@ -98,7 +98,7 @@ dans chaque tenant.
   jour avec leurs propres groupes.
 
 **Groupe et filtre** se combinent : `[Baseline] - Baseline-Pilot-Physical` va au groupe
-`SEC-Baseline-Pilot` avec inclusion `WIN - Physical`. Si un hôte de session est dans le groupe
+`SEC-Baseline-Pilot` avec inclusion `[Baseline] - WIN - Physical`. Si un hôte de session est dans le groupe
 pilote, il reçoit les stratégies pilotes communes (`Baseline-Pilot`) mais pas les physiques.
 
 ## Nommage
@@ -120,7 +120,7 @@ champs du manifeste (`doel`, `fase`, `faseGroep`, `doelgroep`) et leurs valeurs 
 | Suffixe de classe | `-Physical`, `-AVD` — toujours en dernier | `[Baseline] - Baseline-Pilot-Physical` |
 | Paquet de groupe | `<prefix>Baseline-<nom du groupe>` | `[Baseline] - Baseline-SEC-Cloud-PC` |
 | Baseline CIPP | `<prefix><Sujet>` | `[Baseline] - Windows Updates` |
-| Filtre d'affectation | `<PLATFORM> - <Nom>`, **sans** préfixe | `WIN - Physical`, `AND - Corporate` |
+| Filtre d'affectation | `<PLATFORM> - <Nom>`, **sans** préfixe | `[Baseline] - WIN - Physical`, `[Baseline] - AND - Corporate` |
 | Fichier de filtre | `<PLATFORM>-<Nom avec ->.json` dans `<PLATFORM>/AssignmentFilters/` | `WIN-Physical.json` |
 | Groupe Entra | `SEC-<But-en-mots>` avec traits d'union | `SEC-Baseline-Pilot`, `SEC-AVD-Session-Hosts` |
 | Custom variable CIPP | PascalCase, entre `%` dans le template | `%SecurityAlertMail%`, `%FSLogixStorageAccount%` |
@@ -137,7 +137,7 @@ en même temps.
 - `[Baseline] - Baseline-Wacht` est le seul mot néerlandais dans un nom de paquet ; les étapes CIPP
   ont aussi des noms néerlandais (`Nu`, `Pilot`, `Wacht op voorwaarde`, et `Melden`/`Blokkeren` pour la DLP).
 - Le fichier de filtre `WIN-AVD-Multi-Session.json` a un S majuscule, le nom du filtre
-  `WIN - AVD Multi-session` non. Pour les filtres Android, fichier et nom correspondent exactement.
+  `[Baseline] - WIN - AVD Multi-session` non. Pour les filtres Android, fichier et nom correspondent exactement.
 - `[Baseline] - Baseline-SEC-Baseline-Pilot` (phase 4, une stratégie) et `[Baseline] - Baseline-Pilot`
   (phase 2) vont au même groupe : deux paquets pour une cible.
 - Les noms de groupes écrivent la plateforme selon la marque (`SEC-iOS-BYOD`,
@@ -177,8 +177,8 @@ avec Graph : `POST https://graph.microsoft.com/beta/deviceManagement/assignmentF
 contenu du fichier. Ou dans le portail : Administration du locataire → Filtres → Créer → Appareils
 gérés → Windows 10 et ultérieur.
 
-Vérifiez ensuite chaque filtre avec **Preview devices** : `WIN - Physical` montre les portables et
-postes de travail, aucun hôte de session ni Cloud PC ; `WIN - AVD Multi-session` uniquement les
+Vérifiez ensuite chaque filtre avec **Preview devices** : `[Baseline] - WIN - Physical` montre les portables et
+postes de travail, aucun hôte de session ni Cloud PC ; `[Baseline] - WIN - AVD Multi-session` uniquement les
 hôtes de session.
 
 ### 2. Custom variable CIPP (uniquement avec AVD)
@@ -238,7 +238,7 @@ quand le prérequis est là ; par stratégie, le prérequis figure dans `faseWaa
 
 Exemple : le tenant de test `kanon` a les anciennes stratégies `[Baseline] X` (p. ex.
 `[Baseline] Bitlocker`) sur *Tous les appareils* sans filtre, avec des filtres d'exclusion
-`WIN - AVD Multi-session` posés à la main sur Bitlocker, Device Lock, Windows Hello For Business,
+`[Baseline] - WIN - AVD Multi-session` posés à la main sur Bitlocker, Device Lock, Windows Hello For Business,
 `Windows 11 Update` et Office Updates.
 
 1. **Renommer plutôt que mettre à côté.** `.\scripts\Rename-BaselinePolicy.ps1 -WhatIf`, puis sans.
@@ -251,7 +251,7 @@ Exemple : le tenant de test `kanon` a les anciennes stratégies `[Baseline] X` (
 2. **Créer les filtres** (étape 1) et **affecter la baseline** (étape 4). CIPP retrouve les
    stratégies renommées par leur nom, aligne le contenu et remplace l'affectation par celle du
    paquet : `verifyAssignments` gère l'affectation, donc l'ancienne *Tous les appareils sans
-   filtre* devient *Tous les appareils avec inclusion `WIN - Physical`*.
+   filtre* devient *Tous les appareils avec inclusion `[Baseline] - WIN - Physical`*.
 3. **Nettoyer les filtres d'exclusion posés à la main.** Sur les stratégies renommées, ils
    disparaissent d'eux-mêmes à l'étape 2 (CIPP remplace l'affectation). Sur les anciennes
    stratégies non renommées (`replace`, `retire`, ou absentes de `_renames.json`), ils sont
@@ -276,7 +276,7 @@ Configurations sont ignorés (avec un message) ; ils passent par CIPP ou le port
 ```powershell
 Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId <tenant-id>
 .\scripts\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
-    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -FilterName '[Baseline] - WIN - AVD Multi-session' -FilterType include `
     -Variables @{ FSLogixStorageAccount = '<compte-de-stockage>' } `
     -ExcludeLegacyFromFilter -TenantId <tenant-id> -WhatIf
 ```
@@ -335,7 +335,7 @@ déploiement. En bref :
 
 ## Liste de contrôle
 
-- [ ] Les filtres `WIN - Physical` et `WIN - AVD Multi-session` existent, nom exact, *Preview* correct.
+- [ ] Les filtres `[Baseline] - WIN - Physical` et `[Baseline] - WIN - AVD Multi-session` existent, nom exact, *Preview* correct.
 - [ ] Avec AVD : custom variable `FSLogixStorageAccount` définie pour ce tenant.
 - [ ] Les groupes `SEC-Baseline-Pilot` et les groupes `faseGroep` utilisés existent ; avec AVD aussi `SEC-AVD-Session-Hosts`.
 - [ ] Paramètres du tenant : non conforme sans stratégie, connecteur Defender activé.

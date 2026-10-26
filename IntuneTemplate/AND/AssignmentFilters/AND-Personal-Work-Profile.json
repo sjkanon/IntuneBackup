@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
-  "displayName": "AND - Personal Work Profile",
+  "displayName": "[Baseline] - AND - Personal Work Profile",
   "description": "Personally owned Android Enterprise devices (work profile, BYOD).",
   "platform": "androidForWork",
   "rule": "(device.deviceOwnership -eq \"Personal\")",

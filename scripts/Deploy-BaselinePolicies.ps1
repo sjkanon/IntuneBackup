@@ -92,13 +92,13 @@ Verwachte tenant-ID. Wijkt de verbonden tenant af, dan stopt het script vóór e
 
 .EXAMPLE
 .\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
-    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -FilterName '<prefix>WIN - AVD Multi-session' -FilterType include `
     -Variables @{ FSLogixStorageAccount = 'stfslogix01' } -ExcludeLegacyFromFilter -WhatIf
 De volledige baseline alleen op de AVD-sessiehosts, de oude set daar uitgesloten. Eerst als plan.
 
 .EXAMPLE
 .\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep fysiek -Fase 1 -WhatIf
-De fysieke klasse, elk met zijn include-filter 'WIN - Physical' uit _assignments.json.
+De fysieke klasse, elk met zijn include-filter '<prefix>WIN - Physical' uit _assignments.json.
 #>
 # ConfirmImpact Medium: met High vraagt PowerShell per policy om bevestiging. -WhatIf is de proefrun.
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]

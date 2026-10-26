@@ -1,6 +1,6 @@
 {
   "@odata.type": "#microsoft.graph.deviceAndAppManagementAssignmentFilter",
-  "displayName": "AND - Dedicated",
+  "displayName": "[Baseline] - AND - Dedicated",
   "description": "Dedicated Android devices (kiosk, shared), recognised by their enrolment profile.",
   "platform": "androidForWork",
   "rule": "(device.enrollmentProfileName -eq \"DEDICATED-INSCHRIJFPROFIEL-INVULLEN\")",

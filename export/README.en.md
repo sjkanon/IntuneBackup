@@ -94,7 +94,7 @@ group from `faseGroep`, phase 3 once the prerequisite is in place, phase 5 not a
 ## Policies with an assignment filter
 
 The 21 Windows policies in phase 1 with `doelgroep` `fysiek` or `avd` should get an include filter
-(`WIN - Physical`, `WIN - AVD Multi-session`). `_assignments.json` names that filter by name,
+(`[Baseline] - WIN - Physical`, `[Baseline] - WIN - AVD Multi-session`). `_assignments.json` names that filter by name,
 because a filter id only exists in one tenant. The module cannot use that: it restores `target`
 verbatim (`@{ target = $assignment.target }`) and looks up no filter. An id from another tenant
 makes the `POST` fail; leaving the filter out would put the physical-only policies on the AVD

@@ -128,8 +128,8 @@ stratégie de phase 5 *avec* affectation provoque un Conflict, après quoi le pa
 des deux stratégies. Toute stratégie au-delà de la phase 1 a un `faseWaarom` obligatoire.
 
 Chaque stratégie Windows a en outre un **`doelgroep`** (classe cible) : `alle`, `fysiek` ou `avd`.
-En phases 1 et 2, une stratégie `fysiek` ou `avd` reçoit un filtre d'inclusion (`WIN - Physical`,
-`WIN - AVD Multi-session`) et son propre paquet ; `_assignments.json` contient ce filtre par son
+En phases 1 et 2, une stratégie `fysiek` ou `avd` reçoit un filtre d'inclusion (`[Baseline] - WIN - Physical`,
+`[Baseline] - WIN - AVD Multi-session`) et son propre paquet ; `_assignments.json` contient ce filtre par son
 nom (`filterDisplayName`). Voir [PLAYBOOK.fr.md](docs/PLAYBOOK.fr.md) et [AVD.fr.md](docs/AVD.fr.md).
 
 La phase détermine aussi le **paquet CIPP** d'une stratégie — le champ `Package` du modèle,

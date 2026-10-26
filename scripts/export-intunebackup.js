@@ -360,7 +360,7 @@ function main() {
   const fi = args.indexOf("--filter-ids");
   const filterIdsFile = fi >= 0 ? args[fi + 1] : null;
   if (fi >= 0 && !filterIdsFile) {
-    console.error("--filter-ids vraagt een bestand: { \"WIN - Physical\": \"<id>\", ... }");
+    console.error("--filter-ids vraagt een bestand: { \"<prefix>WIN - Physical\": \"<id>\", ... }");
     process.exit(1);
   }
   const positional = args.filter((a, i) => !a.startsWith("--") && (fi < 0 || i !== fi + 1));

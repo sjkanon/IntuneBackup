@@ -127,7 +127,7 @@ phase 5 policy *with* an assignment causes a Conflict, after which the disputed 
 policy. Every policy above phase 1 has a mandatory `faseWaarom`.
 
 Every Windows policy also has a **`doelgroep`** (target class): `alle`, `fysiek` or `avd`. In phase 1
-and 2 a `fysiek` or `avd` policy gets an include filter (`WIN - Physical`, `WIN - AVD Multi-session`)
+and 2 a `fysiek` or `avd` policy gets an include filter (`[Baseline] - WIN - Physical`, `[Baseline] - WIN - AVD Multi-session`)
 and a package of its own; `_assignments.json` holds that filter by name (`filterDisplayName`). See
 [PLAYBOOK.en.md](docs/PLAYBOOK.en.md) and [AVD.en.md](docs/AVD.en.md).
 

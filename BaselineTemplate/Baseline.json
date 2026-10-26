@@ -43,7 +43,7 @@
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "",
-            "assignmentFilter": "WIN - Physical",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -60,7 +60,7 @@
             "assignTo": "AllDevices",
             "customGroup": "",
             "excludeGroup": "",
-            "assignmentFilter": "WIN - AVD Multi-session",
+            "assignmentFilter": "[Baseline] - WIN - AVD Multi-session",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -94,7 +94,7 @@
             "assignTo": "allLicensedUsers",
             "customGroup": "",
             "excludeGroup": "",
-            "assignmentFilter": "WIN - Physical",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0
@@ -365,7 +365,7 @@
             "assignTo": "customGroup",
             "customGroup": "SEC-Baseline-Pilot",
             "excludeGroup": "",
-            "assignmentFilter": "WIN - Physical",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
             "levenshteinDistance": 0

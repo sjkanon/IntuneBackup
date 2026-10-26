@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - AVD Start and Search",
-    "description": "Stops Start and Search on the AVD session hosts from fetching anything from the cloud or the web when they open: no search of cloud sources (OneDrive, SharePoint), no search highlights and no list of recently added apps. Baseline assignment: all devices (assignment filter WIN - AVD Multi-session). Source: Own — the Search and Start settings from the Settings Catalog (Policy CSP), all three with windowsMultiSession in their applicability.",
+    "description": "Stops Start and Search on the AVD session hosts from fetching anything from the cloud or the web when they open: no search of cloud sources (OneDrive, SharePoint), no search highlights and no list of recently added apps. Baseline assignment: all devices (assignment filter [Baseline] - WIN - AVD Multi-session). Source: Own — the Search and Start settings from the Settings Catalog (Policy CSP), all three with windowsMultiSession in their applicability.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

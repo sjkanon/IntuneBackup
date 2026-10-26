@@ -129,8 +129,8 @@ const PACKAGE_PREFIX = PREFIX + "Baseline-";
  * pakket betekent. Drie klassen:
  *
  * - `alle`: fysieke pc's én AVD-sessiehosts (en Windows 365, persoonlijke AVD-hosts) — geen filter;
- * - `fysiek`: laptops en workstations — include-filter `WIN - Physical`;
- * - `avd`: Azure Virtual Desktop multi-session-sessiehosts — include-filter `WIN - AVD Multi-session`.
+ * - `fysiek`: laptops en workstations — include-filter `<prefix>WIN - Physical`;
+ * - `avd`: Azure Virtual Desktop multi-session-sessiehosts — include-filter `<prefix>WIN - AVD Multi-session`.
  *
  * Een CIPP-pakket heeft één toewijzing en één filter voor al zijn leden, dus een klasse met een
  * filter is een eigen pakket: `<pakket>-Physical` en `<pakket>-AVD` naast het pakket zonder
@@ -144,8 +144,8 @@ const PACKAGE_PREFIX = PREFIX + "Baseline-";
  */
 const DOELGROEPEN = {
   alle: null,
-  fysiek: { suffix: "-Physical", filter: "WIN - Physical", file: "WIN-Physical.json" },
-  avd: { suffix: "-AVD", filter: "WIN - AVD Multi-session", file: "WIN-AVD-Multi-Session.json" },
+  fysiek: { suffix: "-Physical", filter: PREFIX + "WIN - Physical", file: "WIN-Physical.json" },
+  avd: { suffix: "-AVD", filter: PREFIX + "WIN - AVD Multi-session", file: "WIN-AVD-Multi-Session.json" },
 };
 
 /** De fases waarin de doelgroep het pakket en het filter bepaalt. */

@@ -128,7 +128,7 @@ fase-5-policy mét toewijzing levert een Conflict op waarna de betwiste instelli
 beide policies wordt toegepast. Elke policy boven fase 1 heeft een verplichte `faseWaarom`.
 
 Elke Windows-policy heeft daarnaast een **`doelgroep`**: `alle`, `fysiek` of `avd`. In fase 1 en 2
-krijgt een `fysiek`- of `avd`-policy een include-filter (`WIN - Physical`, `WIN - AVD Multi-session`)
+krijgt een `fysiek`- of `avd`-policy een include-filter (`[Baseline] - WIN - Physical`, `[Baseline] - WIN - AVD Multi-session`)
 en een eigen pakket; in `_assignments.json` staat dat filter op naam (`filterDisplayName`). Zie
 [PLAYBOOK.md](docs/PLAYBOOK.md) en [AVD.md](docs/AVD.md).
 

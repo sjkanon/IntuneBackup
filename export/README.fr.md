@@ -95,7 +95,7 @@ du tout. `node scripts/export-intunebackup.js` les liste toutes à chaque exécu
 ## Stratégies avec filtre d'affectation
 
 Les 21 stratégies Windows de phase 1 dont le `doelgroep` est `fysiek` ou `avd` doivent recevoir un
-filtre d'inclusion (`WIN - Physical`, `WIN - AVD Multi-session`). `_assignments.json` désigne ce
+filtre d'inclusion (`[Baseline] - WIN - Physical`, `[Baseline] - WIN - AVD Multi-session`). `_assignments.json` désigne ce
 filtre par son nom, car un id de filtre n'existe que dans un tenant. Le module n'en fait rien : il
 restaure `target` tel quel (`@{ target = $assignment.target }`) et ne recherche aucun filtre. Un id
 d'un autre tenant fait échouer le `POST` ; omettre le filtre placerait les stratégies réservées au

@@ -97,7 +97,7 @@ Two phase 4 groups in the manifest. Create them as dynamic device groups in Entr
 Intune marks an ADE device as *Company*. Before assigning, check that there are no
 non-supervised devices manually marked as *Company*: they would receive the
 supervised-only policies (which iOS then ignores) and no Defender VPN. If you want it tighter,
-use `device.enrollmentProfileName -eq "iOS Corporate ADE Baseline"` for `SEC-iOS-Corporate`.
+use `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"` for `SEC-iOS-Corporate`.
 
 ## Apple Business (formerly Apple Business Manager)
 

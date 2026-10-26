@@ -24,8 +24,8 @@
     "faseWaarom    waarom hij niet in fase 1 zit. Verplicht bij fase 2 en hoger.",
     "faseGroep     de groep waar hij hoort, bij fase 4.",
     "doelgroep     alleen Windows: op welke apparaatklasse de policy hoort — alle (fysiek én AVD, geen",
-    "              filter), fysiek (include-filter WIN - Physical) of avd (include-filter",
-    "              WIN - AVD Multi-session). In fase 1 en 2 bepaalt hij het CIPP-pakket",
+    "              filter), fysiek (include-filter [Baseline] - WIN - Physical) of avd (include-filter",
+    "              [Baseline] - WIN - AVD Multi-session). In fase 1 en 2 bepaalt hij het CIPP-pakket",
     "              (<pakket>-Physical, <pakket>-AVD) en het filter in _assignments.json. De indeling",
     "              per policy en de reden staan in docs/AVD.md; check-scope.js vergelijkt conflicten",
     "              per klasse (alle + fysiek, alle + avd).",
@@ -6216,8 +6216,8 @@
         ]
       },
       "bewijs": "Dezelfde maatregelen als de fysieke variant: geen opgeslagen wachtwoorden, geen schijfredirectie, NLA met de TLS-beveiligingslaag, versleuteling Hoog en geauthenticeerde RPC. De wachtwoordprompt (promptforpassworduponconnection) laat de sessiehost bij elke verbinding opnieuw om een wachtwoord vragen, ook als de gebruiker al met Entra-SSO en een passkey of Windows Hello is aangemeld. Dat breekt phishing-resistente MFA richting de sessie (CA 2120 en 2155): de gebruiker valt terug op een wachtwoord, precies wat de baseline wil vermijden.",
-      "universeel": "Alleen AVD-sessiehosts. Op fysieke toestellen staat [Baseline] - WIN - D - Remote Desktop and RPC, met de wachtwoordprompt; die heeft doelgroep fysiek en dus het include-filter WIN - Physical, zodat hij nooit op een sessiehost landt.",
-      "note": "Wijs nooit beide toe aan dezelfde host: de fysieke variant zet de wachtwoordprompt aan en die geldt dan alsnog. Daarom doelgroep fysiek (include-filter WIN - Physical) op de fysieke en doelgroep avd (include-filter WIN - AVD Multi-session) op deze. Dit is een kopie met acht van de negen instellingen: wijzigt OIB de fysieke variant, neem de wijziging hier met de hand over (herkomst eigen, geen importscript raakt hem). Windows 365 Cloud PC's en persoonlijke AVD-hosts vallen onder geen van beide filters en krijgen dus geen van beide varianten."
+      "universeel": "Alleen AVD-sessiehosts. Op fysieke toestellen staat [Baseline] - WIN - D - Remote Desktop and RPC, met de wachtwoordprompt; die heeft doelgroep fysiek en dus het include-filter [Baseline] - WIN - Physical, zodat hij nooit op een sessiehost landt.",
+      "note": "Wijs nooit beide toe aan dezelfde host: de fysieke variant zet de wachtwoordprompt aan en die geldt dan alsnog. Daarom doelgroep fysiek (include-filter [Baseline] - WIN - Physical) op de fysieke en doelgroep avd (include-filter [Baseline] - WIN - AVD Multi-session) op deze. Dit is een kopie met acht van de negen instellingen: wijzigt OIB de fysieke variant, neem de wijziging hier met de hand over (herkomst eigen, geen importscript raakt hem). Windows 365 Cloud PC's en persoonlijke AVD-hosts vallen onder geen van beide filters en krijgen dus geen van beide varianten."
     },
     {
       "target": "Baseline_WIN_D_AVD_Defender_FSLogix_Exclusions",

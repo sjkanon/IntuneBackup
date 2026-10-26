@@ -31,7 +31,7 @@ Welke policies in welk pakket zitten staat in de
 
 **Apparaatklassen.** De pakketten met `-Physical` en `-AVD` hebben dezelfde toewijzing als hun
 tegenhanger zonder achtervoegsel, plus een include-filter in de standard (`assignmentFilter`):
-`WIN - Physical` of `WIN - AVD Multi-session`. CIPP zoekt dat filter per tenant op naam op; bestaat
+`[Baseline] - WIN - Physical` of `[Baseline] - WIN - AVD Multi-session`. CIPP zoekt dat filter per tenant op naam op; bestaat
 het niet, dan wijst CIPP toe **zonder** filter en logt alleen een waarschuwing. Maak de filters dus
 vóór de eerste run aan — zie [docs/PLAYBOOK.md](../docs/PLAYBOOK.md).
 
@@ -73,7 +73,7 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
 ## Wat je erna zelf doet
 
 - **Tenants toewijzen.** Zonder dat draait de baseline nergens.
-- **De filters aanmaken.** `WIN - Physical` en `WIN - AVD Multi-session` uit
+- **De filters aanmaken.** `[Baseline] - WIN - Physical` en `[Baseline] - WIN - AVD Multi-session` uit
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.md), vóór
   de eerste run.
 - **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
@@ -159,11 +159,11 @@ Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — o
 
 | Stage | Standard | Toewijzing | Wat het doet |
 |---:|---|---|---|
-| 1 · Nu | `[Baseline] - Updates-Ring3-Physical` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2`, filter `WIN - Physical` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
+| 1 · Nu | `[Baseline] - Updates-Ring3-Physical` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
 | 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
 | 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
 | 1 · Nu | `[Baseline] - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) |
-| 1 · Nu | `[Baseline] - Updates-Devices-Physical` | alle apparaten, filter `WIN - Physical` | Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) — op een AVD-host komen updates met de image |
+| 1 · Nu | `[Baseline] - Updates-Devices-Physical` | alle apparaten, filter `[Baseline] - WIN - Physical` | Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) — op een AVD-host komen updates met de image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | alle apparaten (Required) | Winget-AutoUpdate: werkt dagelijks elke app bij die winget kent, behalve de [uitsluitingslijst](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
 
 Stage 2 begint als alles uit stage 1 compliant is **en** er twee weken voorbij zijn — dezelfde

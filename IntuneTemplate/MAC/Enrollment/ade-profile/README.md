@@ -171,7 +171,7 @@ policies (niet van het enrollmentprofiel zelf — dat gaat per serienummer onder
 
 ```
 (device.deviceOSType -eq "MacMMP") and
-(device.enrollmentProfileName -eq "macOS Corporate ADE Baseline")
+(device.enrollmentProfileName -eq "[Baseline] - MAC - D - Corporate ADE Baseline")
 ```
 
 Toewijzen blijft handwerk in de portal: **Enrollment program tokens → token → Devices →

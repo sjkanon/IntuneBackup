@@ -94,7 +94,7 @@ noemt bij elke run de volledige lijst.
 ## Policies met een toewijzingsfilter
 
 De 21 Windows-policies in fase 1 met `doelgroep` `fysiek` of `avd` horen een include-filter te
-krijgen (`WIN - Physical`, `WIN - AVD Multi-session`). `_assignments.json` noemt dat filter op naam,
+krijgen (`[Baseline] - WIN - Physical`, `[Baseline] - WIN - AVD Multi-session`). `_assignments.json` noemt dat filter op naam,
 want een filter-id bestaat maar in één tenant. De module kan daar niets mee: hij zet `target`
 letterlijk terug (`@{ target = $assignment.target }`) en zoekt geen filter op. Een id uit een andere
 tenant laat de `POST` falen; het filter weglaten zou de alleen-fysieke policies op de

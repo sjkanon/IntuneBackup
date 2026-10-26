@@ -19,12 +19,12 @@ selected there.
 | Class (`doelgroep`) | What | Filter (include) | Rule |
 |---|---|---|---|
 | `alle` (shared) | physical PCs and AVD session hosts, and everything that falls under neither filter | none | — |
-| `fysiek` (physical) | laptops and workstations | `WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` |
-| `avd` | AVD session hosts running Windows 11 Enterprise multi-session | `WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` |
+| `fysiek` (physical) | laptops and workstations | `[Baseline] - WIN - Physical` | `(device.operatingSystemSKU -ne "ServerRdsh") and (device.model -ne "Virtual Machine") and (device.model -notContains "Cloud PC")` |
+| `avd` | AVD session hosts running Windows 11 Enterprise multi-session | `[Baseline] - WIN - AVD Multi-session` | `(device.operatingSystemSKU -eq "ServerRdsh")` |
 
 The bodies are in [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.en.md).
-Both were validated in the test tenant with `validateFilter` and *Preview devices*: `WIN - Physical`
-matches the four physical and QEMU PCs and not the AVD host, `WIN - AVD Multi-session` exactly the AVD host.
+Both were validated in the test tenant with `validateFilter` and *Preview devices*: `[Baseline] - WIN - Physical`
+matches the four physical and QEMU PCs and not the AVD host, `[Baseline] - WIN - AVD Multi-session` exactly the AVD host.
 
 **Windows 365 Cloud PCs and personal AVD hosts** (single-session, model `Cloud PC …` or
 `Virtual Machine`) fall under **neither** filter. They only get class `alle`, plus the Cloud PC set
@@ -46,19 +46,19 @@ State at the time of writing, counted from the manifest; the current, generated 
 | Package | Assignment | Filter | Stage | Policies |
 |---|---|---|---:|---:|
 | `[Baseline] - Baseline-Devices` | all devices | — | 1 | 53 |
-| `[Baseline] - Baseline-Devices-Physical` | all devices | `WIN - Physical` | 1 | 14 |
-| `[Baseline] - Baseline-Devices-AVD` | all devices | `WIN - AVD Multi-session` | 1 | 5 |
+| `[Baseline] - Baseline-Devices-Physical` | all devices | `[Baseline] - WIN - Physical` | 1 | 14 |
+| `[Baseline] - Baseline-Devices-AVD` | all devices | `[Baseline] - WIN - AVD Multi-session` | 1 | 5 |
 | `[Baseline] - Baseline-Users` | all users | — | 1 | 31 |
-| `[Baseline] - Baseline-Users-Physical` | all users | `WIN - Physical` | 1 | 1 |
+| `[Baseline] - Baseline-Users-Physical` | all users | `[Baseline] - WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | do not assign (ADE token) | — | 1 | 2 |
 | `[Baseline] - Baseline-SEC-<group>` (ten packages) | the group from `faseGroep` | — | 1 | 14 |
 | `[Baseline] - Baseline-Pilot` | group `SEC-Baseline-Pilot` | — | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | group `SEC-Baseline-Pilot` | `WIN - Physical` | 2 | 13 |
+| `[Baseline] - Baseline-Pilot-Physical` | group `SEC-Baseline-Pilot` | `[Baseline] - WIN - Physical` | 2 | 13 |
 | `[Baseline] - Baseline-Wacht` | do not assign | — | 3 | 26 |
-| `[Baseline] - Updates-Ring3-Physical` | all devices except `SEC-Update-Ring1/2` | `WIN - Physical` | 1 (Windows-Updates) | 1 |
+| `[Baseline] - Updates-Ring3-Physical` | all devices except `SEC-Update-Ring1/2` | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
 | `[Baseline] - Updates-SEC-Update-Ring1`, `-Ring2` | the ring group | — | 1 (Windows-Updates) | 2 |
 | `[Baseline] - Updates-Devices` | all devices | — | 1 (Windows-Updates) | 1 |
-| `[Baseline] - Updates-Devices-Physical` | all devices | `WIN - Physical` | 1 (Windows-Updates) | 1 |
+| `[Baseline] - Updates-Devices-Physical` | all devices | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(no package — phase 5)* | — | — | — | 15 |
 
 208 in total. The `Baseline-` packages are in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
@@ -94,7 +94,7 @@ A class package sits in the same stage as its counterpart. The CIPP standard hol
   their own groups.
 
 **Group and filter** can be combined: `[Baseline] - Baseline-Pilot-Physical` goes to the group
-`SEC-Baseline-Pilot` with include `WIN - Physical`. If a session host is in the pilot group, it gets
+`SEC-Baseline-Pilot` with include `[Baseline] - WIN - Physical`. If a session host is in the pilot group, it gets
 the shared pilot policies (`Baseline-Pilot`) but not the physical ones.
 
 ## Naming
@@ -115,7 +115,7 @@ Policy, package, filter and group names are English; manifest fields (`doel`, `f
 | Class suffix | `-Physical`, `-AVD` — always last | `[Baseline] - Baseline-Pilot-Physical` |
 | Group package | `<prefix>Baseline-<group name>` | `[Baseline] - Baseline-SEC-Cloud-PC` |
 | CIPP baseline | `<prefix><Subject>` | `[Baseline] - Windows Updates` |
-| Assignment filter | `<PLATFORM> - <Name>`, **without** prefix | `WIN - Physical`, `AND - Corporate` |
+| Assignment filter | `<PLATFORM> - <Name>`, **without** prefix | `[Baseline] - WIN - Physical`, `[Baseline] - AND - Corporate` |
 | Filter file | `<PLATFORM>-<Name with ->.json` in `<PLATFORM>/AssignmentFilters/` | `WIN-Physical.json` |
 | Entra group | `SEC-<Purpose-in-words>` with hyphens | `SEC-Baseline-Pilot`, `SEC-AVD-Session-Hosts` |
 | CIPP custom variable | PascalCase, between `%` in the template | `%SecurityAlertMail%`, `%FSLogixStorageAccount%` |
@@ -132,7 +132,7 @@ at the same time.
 - `[Baseline] - Baseline-Wacht` is the only Dutch word in a package name; the CIPP stages also have
   Dutch names (`Nu`, `Pilot`, `Wacht op voorwaarde`, and `Melden`/`Blokkeren` for DLP).
 - The filter file `WIN-AVD-Multi-Session.json` has a capital S, the filter name
-  `WIN - AVD Multi-session` does not. For the Android filters file and name match exactly.
+  `[Baseline] - WIN - AVD Multi-session` does not. For the Android filters file and name match exactly.
 - `[Baseline] - Baseline-SEC-Baseline-Pilot` (phase 4, one policy) and `[Baseline] - Baseline-Pilot`
   (phase 2) go to the same group: two packages for one target.
 - Group names spell the platform the brand way (`SEC-iOS-BYOD`, `SEC-Remote-Support-macOS`),
@@ -171,8 +171,8 @@ it would assign; you can stop after creating and leave assigning to CIPP. Or wit
 `POST https://graph.microsoft.com/beta/deviceManagement/assignmentFilters` with the contents of the
 file. Or in the portal: Tenant administration → Filters → Create → Managed devices → Windows 10 and later.
 
-Then check every filter with **Preview devices**: `WIN - Physical` shows the laptops and
-workstations and no session host or Cloud PC; `WIN - AVD Multi-session` only the session hosts.
+Then check every filter with **Preview devices**: `[Baseline] - WIN - Physical` shows the laptops and
+workstations and no session host or Cloud PC; `[Baseline] - WIN - AVD Multi-session` only the session hosts.
 
 ### 2. CIPP custom variable (only with AVD)
 
@@ -230,7 +230,7 @@ policy the prerequisite is in `faseWaarom` and in
 ## Migrating from an old set
 
 Example: the test tenant `kanon` has the old `[Baseline] X` policies (e.g. `[Baseline] Bitlocker`)
-on *All devices* without a filter, with hand-set exclude filters `WIN - AVD Multi-session` on
+on *All devices* without a filter, with hand-set exclude filters `[Baseline] - WIN - AVD Multi-session` on
 Bitlocker, Device Lock, Windows Hello For Business, `Windows 11 Update` and Office Updates.
 
 1. **Rename instead of putting next to it.** `.\scripts\Rename-BaselinePolicy.ps1 -WhatIf`, then
@@ -242,7 +242,7 @@ Bitlocker, Device Lock, Windows Hello For Business, `Windows 11 Update` and Offi
 2. **Create the filters** (step 1) and **assign the baseline** (step 4). CIPP finds the renamed
    policies by name, aligns the content and replaces the assignment with the package's:
    `verifyAssignments` manages the assignment, so the old *All devices without filter* becomes
-   *All devices with include `WIN - Physical`*.
+   *All devices with include `[Baseline] - WIN - Physical`*.
 3. **Clean up the hand-set exclude filters.** On the renamed policies they disappear in step 2 by
    themselves (CIPP replaces the assignment). On old policies that were not renamed (`replace`,
    `retire`, or not in `_renames.json`) they are still there: unassign those policies, and delete
@@ -266,7 +266,7 @@ Configurations are skipped (with a message); they go through CIPP or the portal.
 ```powershell
 Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId <tenant-id>
 .\scripts\Deploy-BaselinePolicies.ps1 -Platform WIN -Doelgroep alle,avd -Fase 1 `
-    -FilterName 'WIN - AVD Multi-session' -FilterType include `
+    -FilterName '[Baseline] - WIN - AVD Multi-session' -FilterType include `
     -Variables @{ FSLogixStorageAccount = '<storage-account>' } `
     -ExcludeLegacyFromFilter -TenantId <tenant-id> -WhatIf
 ```
@@ -322,7 +322,7 @@ plan. In short:
 
 ## Checklist
 
-- [ ] Filters `WIN - Physical` and `WIN - AVD Multi-session` exist, name exact, *Preview* right.
+- [ ] Filters `[Baseline] - WIN - Physical` and `[Baseline] - WIN - AVD Multi-session` exist, name exact, *Preview* right.
 - [ ] With AVD: custom variable `FSLogixStorageAccount` set for this tenant.
 - [ ] Groups `SEC-Baseline-Pilot` and the `faseGroep` groups in use exist; with AVD also `SEC-AVD-Session-Hosts`.
 - [ ] Tenant settings: not compliant without a policy, Defender connector on.

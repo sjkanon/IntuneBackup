@@ -97,7 +97,7 @@ Deux groupes de phase 4 dans le manifeste. Créez-les comme groupes d'appareils 
 Intune marque un appareil ADE comme *Company*. Avant l'affectation, vérifiez qu'il n'existe
 aucun appareil non supervisé marqué manuellement comme *Company* : il recevrait les
 stratégies réservées aux appareils supervisés (qu'iOS ignore alors) et pas de VPN Defender. Pour être plus strict,
-utilisez pour `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "iOS Corporate ADE Baseline"`.
+utilisez pour `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
 
 ## Apple Business (anciennement Apple Business Manager)
 
