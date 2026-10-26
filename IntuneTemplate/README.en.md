@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# IntuneTemplate — 210 policies
+# IntuneTemplate — 212 policies
 
 The source of this repo: the agreed Intune policies in CIPP template format. Everything
 in `export/` and `BaselineTemplate/` is derived from it and generated.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.en.md) | 125 | 1 | 8 | 11 | – | **145** |
+| [Windows](WIN/README.en.md) | 126 | 1 | 9 | 11 | – | **147** |
 | [macOS](MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **166** | **1** | **15** | **26** | **2** | **210** |
+| **Total** | **167** | **1** | **16** | **26** | **2** | **212** |
 
 ## Layout
 
@@ -90,7 +90,7 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
 | `[Baseline] - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
 | `[Baseline] - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
-| `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 2 |
+| `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 3 |
 | `[Baseline] - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
 | `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
@@ -100,7 +100,7 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Updates-Devices` | Assign to all devices | 1 | 1 |
 | `[Baseline] - Updates-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| *(empty)* | not deployed | – | 15 |
+| *(empty)* | not deployed | – | 16 |
 
 The stage column is the stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 the CIPP baseline that deploys these packages. The `Updates-` packages are deployed by a baseline of
@@ -112,7 +112,7 @@ they exist as an alternative to a policy that is deployed.
 
 ## Per platform
 
-- [Windows](WIN/README.en.md) — 145 policies
+- [Windows](WIN/README.en.md) — 147 policies
 - [macOS](MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](IOS/README.en.md) — 14 policies
 - [Android](AND/README.en.md) — 14 policies

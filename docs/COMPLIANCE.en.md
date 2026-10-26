@@ -36,7 +36,7 @@ assignment and the per-device status of every policy named below.
 
 ## Summary
 
-### Policies per phase — 210 Intune policies
+### Policies per phase — 212 Intune policies
 
 Only phase 1 is assigned to all devices or users and counts as enforced. The rest is
 deliberately not deployed yet; the reason per policy is in [Organisational decisions and residual risks](#organisational-decisions-and-residual-risks).
@@ -46,9 +46,9 @@ deliberately not deployed yet; the reason per policy is in [Organisational decis
 | 1 — Now | 86 | 19 | 1 | 1 | **107** |
 | 2 — Pilot | 31 | 9 | – | 2 | **42** |
 | 3 — Awaiting prerequisite | 5 | 3 | 8 | 10 | **26** |
-| 4 — Dedicated group | 11 | 4 | 4 | 1 | **20** |
-| 5 — Do not deploy | 12 | 2 | 1 | – | **15** |
-| **Total** | **145** | **37** | **14** | **14** | **210** |
+| 4 — Dedicated group | 12 | 4 | 4 | 1 | **21** |
+| 5 — Do not deploy | 13 | 2 | 1 | – | **16** |
+| **Total** | **147** | **37** | **14** | **14** | **212** |
 
 Assigned according to `_assignments.json`: 107 (should equal phase 1: 107).
 
@@ -119,7 +119,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.5.14** Information transfer](#a514-information-transfer) | partial | ● Covered (phase 1) | 1 | 1 | Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. |
 | [**A.5.15** Access control](#a515-access-control) | technical | ● Covered (phase 1) | 3 | 12 | Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. |
 | [**A.5.16** Identity management](#a516-identity-management) | partial | ● Covered (phase 1) | 2 | 1 | Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. |
-| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 12 | 19 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
+| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 12 | 21 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
 | **A.5.18** Access rights | partial | ○ No technical measure in the baseline | – | – | Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. |
 | [**A.5.19** Information security in supplier relationships](#a519-information-security-in-supplier-relationships) | organisational | ◐ Pilot, waiting or dedicated group only | – | 2 | Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. |
 | **A.5.20** Addressing information security within supplier agreements | organisational | ▢ Organisational | – | – | Include security requirements, data processing agreements and audit rights in contracts. |
@@ -181,7 +181,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.8.2** Privileged access rights](#a82-privileged-access-rights) | technical | ● Covered (phase 1) | 6 | 3 | Process for granting and periodically reviewing administrative rights (PIM, access reviews). |
 | [**A.8.3** Information access restriction](#a83-information-access-restriction) | partial | ● Covered (phase 1) | 1 | 1 | Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. |
 | **A.8.4** Access to source code | organisational | ▢ Organisational | – | – | Only with in-house software development: manage access to repositories and development tools. |
-| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 12 | 23 | Establish an authentication policy (which methods, exceptions, break-glass). |
+| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 12 | 25 | Establish an authentication policy (which methods, exceptions, break-glass). |
 | [**A.8.6** Capacity management](#a86-capacity-management) | partial | ● Covered (phase 1) | 4 | – | Capacity planning for network, licences and storage. |
 | [**A.8.7** Protection against malware](#a87-protection-against-malware) | technical | ● Covered (phase 1) | 27 | 19 | User awareness and follow-up of detections (the standard names both explicitly). |
 | [**A.8.8** Management of technical vulnerabilities](#a88-management-of-technical-vulnerabilities) | partial | ● Covered (phase 1) | 12 | 13 | Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. |
@@ -297,7 +297,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`IOS - D - Enterprise SSO`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
 - [`IOS - D - Passcode`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
 - [`IOS - U - Compliance Password`](../IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
-- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 5)
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5)
@@ -485,7 +487,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`IOS - D - Passcode`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Passcode.en.md) (phase 3)
 - [`IOS - U - Compliance Password`](../IntuneTemplate/IOS/CompliancePolicies/Baseline_IOS_U_Compliance_Password.en.md) (phase 3)
 - [`MAC - D - Azure Files Cloud Kerberos`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Azure_Files_Cloud_Kerberos.en.md) (phase 3)
-- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 5)
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5)
@@ -1208,9 +1212,9 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) (phase 4)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) (phase 4)
-- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
 
-**Alternative, not deployed (1)**: `MAC - D - External Storage Read Only`
+**Alternative, not deployed (2)**: `MAC - D - External Storage Read Only`, `WIN - D - Windows Hello for Business Multi User`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1242,9 +1246,9 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) (phase 2)
 - [`WIN - U - Windows Hello for Business`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_Hello_for_Business.en.md) (phase 2)
 - [`IOS - D - Enterprise SSO`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Enterprise_SSO.en.md) (phase 3)
-- [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 4)
+- [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
 
-**Alternative, not deployed (4)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
+**Alternative, not deployed (5)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello for Business Multi User`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1514,9 +1518,9 @@ is organisational by definition: no policy implements it, this baseline is at mo
 
 | Subcategory | Description | Status | Policies |
 |---|---|---|---|
-| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Covered (phase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` and 11 more |
+| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Covered (phase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` and 12 more |
 | **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ No technical measure in the baseline | — |
-| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - AVD FSLogix Profile Containers` and 26 more |
+| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - AVD FSLogix Profile Containers` and 28 more |
 | **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Covered (phase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Covered (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock` and 9 more |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ No technical measure in the baseline | — |
@@ -1572,7 +1576,7 @@ What needs a management decision before the baseline is complete. Every row come
 in the manifest; a decision here is a change of the phase in a PR, so that the decision and the
 deployment can be found in one place.
 
-### A. Choose a variant — phase 5, do not deploy (15)
+### A. Choose a variant — phase 5, do not deploy (16)
 
 Alternatives to a policy that is deployed, or organisational decisions without a technically correct answer. Assigning two
 variants at the same time produces a Conflict in Intune, after which neither is applied.
@@ -1588,6 +1592,7 @@ variants at the same time produces a Conflict in Intune, after which neither is 
 | [`WIN - D - Microsoft Edge Search Engine`](../IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) | An organisational decision, not a security setting: which search engine is the default does not belong in a generic baseline. Only assign it if the organisation has decided so. | A.8.9 |
 | [`WIN - D - Windows AI Features Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) | Alternative to the Restricted variant, for an organisation that permits generative AI in the workplace. Assign one of them, never both. Related: `WIN - D - Windows AI Features Restricted`, `WIN - D - Windows AI Restricted`, `WIN - U - AI Usage Control Restricted`. | A.5.10, A.5.34, A.8.1 |
 | [`WIN - D - Windows AI Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) | Alternative to the Restricted variant, for an organisation that permits Recall and Click To Do. Assign one of them, never both. Related: `WIN - D - Windows AI Restricted`. | A.5.10, A.5.34, A.8.1 |
+| [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) | Alternative to [Baseline] - WIN - D - Windows Hello for Business Disabled, for an organisation that does want Windows Hello for Business on shared devices. Both on the same device is a Conflict. Related: `WIN - D - Windows Hello for Business`, `WIN - D - Windows Hello for Business Disabled`. | A.5.17, A.8.5 |
 | [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) | Alternative to the alphanumeric variant, for an organisation that does not want to bear the helpdesk cost of a complex PIN. There are four PIN complexity policies and only one may ever be assigned: `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` / `Numeric` (the passkey-named set) and `WIN - D - Windows Hello PIN Complexity Alphanumeric` / `Numeric` (the generic, older set). Two assigned policies that set the same setting to a different value produce a Conflict in Intune, after which neither is applied. | A.5.17, A.8.5 |
 | [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) | Generically named predecessor of `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`, which took over the deployment because its name says what it is about. Identical in content — the same four settings at the same values — so there is no reason to assign it. There are four PIN complexity policies and only one may ever be assigned: `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` / `Numeric` (the passkey-named set) and `WIN - D - Windows Hello PIN Complexity Alphanumeric` / `Numeric` (the generic, older set). Two assigned policies that set the same setting to a different value produce a Conflict in Intune, after which neither is applied. | A.5.17, A.8.5 |
 | [`WIN - D - Windows Hello PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) | Generically named predecessor of `WIN - D - Windows Hello Passkey PIN Complexity Numeric`. Alternative to the alphanumeric variant, for an organisation that does not want to bear the helpdesk cost of a complex PIN. There are four PIN complexity policies and only one may ever be assigned: `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric` / `Numeric` (the passkey-named set) and `WIN - D - Windows Hello PIN Complexity Alphanumeric` / `Numeric` (the generic, older set). Two assigned policies that set the same setting to a different value produce a Conflict in Intune, after which neither is applied. | A.5.17, A.8.5 |
@@ -1595,7 +1600,7 @@ variants at the same time produces a Conflict in Intune, after which neither is 
 | [`WIN - U - Microsoft Outlook Cached Mode Default`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) | Alternative to the Managed variant, for an organisation that does want shared mailboxes cached. Assign one, never two — they set the same setting and together produce a Conflict. | A.8.9 |
 | [`WIN - U - Microsoft Outlook Cached Mode Off`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) | Alternative to the Managed variant, for shared devices without a retained profile. Assign one, never two — they set the same setting to a different value and together produce a Conflict, after which neither is applied. | A.8.1, A.8.9 |
 
-### B. Dedicated group — phase 4 (20)
+### B. Dedicated group — phase 4 (21)
 
 Belongs on a specific group. Decision: does that group exist, who is in it, and who manages the membership.
 
@@ -1615,9 +1620,10 @@ Belongs on a specific group. Decision: does that group exist, who is in it, and 
 | [`WIN - D - Defender ASR Policy Audit Mode`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) | **SEC-Baseline-Pilot** — Pilot group, and then without the blocking ASR policy — the same sixteen rules in audit instead of block. | A.8.7, A.8.16 |
 | [`WIN - D - Defender Update Ring 1 Pilot`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) | **SEC-Update-Ring1** — Pilot group for Defender updates. | A.8.7, A.8.8, A.8.32 |
 | [`WIN - D - Defender Update Ring 2 UAT`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) | **SEC-Update-Ring2** — UAT group for Defender updates. | A.8.7, A.8.8, A.8.32 |
+| [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) | **SEC-Shared-Devices** — Shared devices, together with the policy that turns Windows Hello for Business off. Not needed on a laptop of one's own. | A.5.17, A.8.5 |
 | [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) | **SG-D-UEM-WIN-SharedPC (assigned: shared Windows PCs with Entra accounts only; a device is in this group or in SG-D-UEM-WIN-SharedPC-Guest, never in both)** — Shared devices. On a single-user laptop this removes the profile after 30 days of absence. | A.5.15, A.5.16, A.8.1, A.8.12 |
 | [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) | **SG-D-UEM-WIN-SharedPC-Guest (assigned: shared Windows PCs with guest access; a device is in this group or in SG-D-UEM-WIN-SharedPC, never in both)** — Shared devices with guest access. Test on the first device that the Guest button works alongside the User Rights policy that denies local sign-in to Guests, and that the guest session disappears after sign-out. | A.5.15, A.8.1, A.8.12 |
-| [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) | **SEC-Shared-Devices** — Shared devices. The only one you can assign alongside its counterpart: the four overlapping settings are set to the same value. | A.5.17, A.8.5 |
+| [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) | **SEC-Shared-Devices** — Shared devices. On a single-user laptop this turns Windows Hello for Business off. | A.5.17, A.8.5 |
 | [`WIN - D - Windows Update Ring 1 Pilot`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_1_Pilot.en.md) | **SEC-Update-Ring1** — Pilot group for Windows updates. | A.8.8, A.8.32 |
 | [`WIN - D - Windows Update Ring 2 UAT`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) | **SEC-Update-Ring2** — UAT group for Windows updates. | A.8.8, A.8.32 |
 | [`WIN - D - Wireless Shared Devices`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) | **SEC-Shared-Devices** — Shared devices. On a single-user laptop this makes working from home and in hotels impossible. | A.8.1, A.8.20 |
@@ -1856,7 +1862,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.5.14** Information transfer | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. | (i) |
 | **A.5.15** Access control | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 12 prepared. Organisational: Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. | (b) (e) (i) |
 | **A.5.16** Identity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 1 prepared. Organisational: Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. | (i) |
-| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 16 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (c) (e) (f) (g) (h) (i) (j) |
+| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 17 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (c) (e) (f) (g) (h) (i) (j) |
 | **A.5.18** Access rights | yes | baseline security; confirm with the risk analysis | Organisational: Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. | — |
 | **A.5.19** Information security in supplier relationships | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technically prepared: 1 policy in pilot, waiting or dedicated group. Organisational: Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. | (d) |
 | **A.5.20** Addressing information security within supplier agreements | yes | baseline security; confirm with the risk analysis | Organisational: Include security requirements, data processing agreements and audit rights in contracts. | — |
@@ -1903,7 +1909,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.8.2** Privileged access rights | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 6 policies in phase 1, 3 prepared. Organisational: Process for granting and periodically reviewing administrative rights (PIM, access reviews). | (e) (i) |
 | **A.8.3** Information access restriction | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. | (h) (i) |
 | **A.8.4** Access to source code | depends | only applicable with in-house software or script development | Organisational: Only with in-house software development: manage access to repositories and development tools. | — |
-| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 20 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (c) (e) (f) (g) (h) (i) (j) |
+| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 21 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (c) (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Capacity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 4 policies in phase 1. Organisational: Capacity planning for network, licences and storage. | (c) (i) |
 | **A.8.7** Protection against malware | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 27 policies in phase 1, 17 prepared. Organisational: User awareness and follow-up of detections (the standard names both explicitly). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Management of technical vulnerabilities | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 13 prepared. Organisational: Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. | (e) (f) (h) (i) |
@@ -1938,7 +1944,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 
 | | Count |
 |---|---:|
-| Intune policies with controls | 210 of 210 |
+| Intune policies with controls | 212 of 212 |
 | Labels outside the vocabulary | 0 |
 | Labels with a deviating spelling (still counted) | 0 |
 

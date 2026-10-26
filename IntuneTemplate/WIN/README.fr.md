@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 145 policies
+# Windows — 147 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 8 |
+| `SettingsCatalog/` | 126 |
+| `DeviceConfigurations/` | 9 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 111
+## Device-scoped (D) — 113
 
 Affecter à des groupes d'appareils.
 
@@ -110,6 +110,7 @@ Affecter à des groupes d'appareils.
 | [**Removable Storage**](SettingsCatalog/Baseline_WIN_D_Removable_Storage.fr.md) | Bloque l'écriture sur le stockage amovible : clés USB et disques externes, ainsi que téléphones et appareils photo qui se présentent comme périphérique WPD. La lecture reste possible. | Settings Catalog | 2 | — |
 | [**Script File Associations**](SettingsCatalog/Baseline_WIN_D_Script_File_Associations.fr.md) | Fait ouvrir les fichiers .js, .vbs et .hta dans le Bloc-notes au lieu de l'hôte de script, afin qu'un double-clic sur une telle pièce jointe n'exécute rien. | Settings Catalog | 1 | — |
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.fr.md) | Ensemble de paramètres de durcissement divers : variantes SMB et NTLM obsolètes, exécution automatique, journalisation PowerShell et protection des composants système. | Settings Catalog | 97 | All Devices |
+| [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.fr.md) | Permet aux utilisateurs de se connecter sur les appareils partagés avec une clé de sécurité FIDO2 ou un badge NFC, sans mot de passe et sans configurer Windows Hello for Business sur l'appareil. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.fr.md) | Avertit dans le journal Système dès que le journal Sécurité est plein à 90 % et journalise l'exécution du pipeline de tous les modules PowerShell, afin que lors d'un incident le journal n'ait pas été écrasé à l'insu de tous et que l'activité PowerShell soit entièrement traçable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.fr.md) | Détermine quels paramètres Windows sont synchronisés entre appareils. | Settings Catalog | 4 | All Devices |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.fr.md) | Mode PC partagé comme [Baseline] - WIN - D - Shared PC, mais avec en plus un compte invité : l'écran de connexion affiche un bouton Invité permettant à une personne sans compte de démarrer une session locale temporaire. | Device config | — | — |
@@ -132,6 +133,7 @@ Affecter à des groupes d'appareils.
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.fr.md) | Bloque le trafic sortant des programmes Windows intégrés que les malwares utilisent pour camoufler leur trafic (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.fr.md) | Active le Pare-feu Windows pour les profils domaine, privé et public et définit le comportement par défaut pour le trafic entrant et sortant. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.fr.md) | Permet à Windows Hello de fonctionner avec un Active Directory on-prem sans certificats, via un ticket Kerberos émis par Entra ID. | Settings Catalog | 2 | All Devices |
+| [**Windows Hello for Business Disabled**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.fr.md) | Désactive Windows Hello for Business sur les appareils partagés : pas de code PIN ni de biométrie par utilisateur et par appareil. Les utilisateurs se connectent avec une clé de sécurité FIDO2 ou via la connexion web. | Settings Catalog | 1 | — |
 | [**Windows Hello for Business Multi User**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.fr.md) | Windows Hello for Business pour les appareils partagés sur lesquels plusieurs utilisateurs se connectent. Mêmes exigences que la policy appareil ordinaire, mais sans configuration immédiatement après la connexion : sur un appareil partagé, chaque utilisateur serait sinon guidé dans la configuration du PIN à sa première connexion. | Settings Catalog | 5 | — |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.fr.md) | Permet aux utilisateurs de se connecter avec un PIN ou la biométrie au lieu d'un mot de passe. Exige un TPM, un PIN d'au moins six caractères et l'anti-usurpation pour la reconnaissance faciale. | Settings Catalog | 6 | — |
 | [**Windows Hello Passkey PIN Complexity Alphanumeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.fr.md) | Exige un PIN alphanumérique pour la passkey Windows Hello for Business : au moins un chiffre, une minuscule, une majuscule et un caractère spécial. | Settings Catalog | 4 | — |

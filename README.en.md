@@ -8,11 +8,11 @@ largely from [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntun
 (Windows v4.0, macOS v1.0, BYOD), supplemented with what this baseline covers on top of that. Windows v4.0 was
 adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#round-oib-windows-v40-14-september-2026).
 
-210 policies across four platforms:
+212 policies across four platforms:
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.en.md) | 125 | 1 | 8 | 11 | – | **145** |
+| [Windows](IntuneTemplate/WIN/README.en.md) | 126 | 1 | 9 | 11 | – | **147** |
 | [macOS](IntuneTemplate/MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#ro
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>210 policies<br/><i>the source</i>"]
+  T["<b>IntuneTemplate/</b><br/>212 policies<br/><i>the source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune tenant")]
 
@@ -118,8 +118,8 @@ under the `Baseline_` prefix. What the separate folders did is now done by the `
 | 1 | **Now** — deploy as soon as the baseline is in the tenant. No noticeable effects, or effects that need no preparation. | 107 |
 | 2 | **Pilot** — on a pilot group first. Changes something a user notices, or may break something you want to see first. | 42 |
 | 3 | **Awaiting prerequisite** — ready, but does nothing today. The iOS and Android compliance policies are waiting for the first enrollment. | 26 |
-| 4 | **Dedicated group** — belongs on a specific group, not on all devices. `faseGroep` says which. | 20 |
-| 5 | **Do not deploy** — alternative to a policy that *is* deployed. Assigning it causes a Conflict. | 15 |
+| 4 | **Dedicated group** — belongs on a specific group, not on all devices. `faseGroep` says which. | 21 |
+| 5 | **Do not deploy** — alternative to a policy that *is* deployed. Assigning it causes a Conflict. | 16 |
 
 Only phase 1 is in `_assignments.json`. `check-scope.js` ensures the two do not drift
 apart: a phase 1 policy without an assignment is silently not deployed, and a
@@ -328,7 +328,7 @@ profiles, update ring 3 and Windows 365) — with the reason, in `"excluded"` in
 ## Restoring into a tenant
 
 **Via CIPP:** point the template repository at this repository. All five `.Type` values
-correspond to a `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. After the sync the 210
+correspond to a `TemplateType` in CIPP's `Set-CIPPIntunePolicy`. After the sync the 212
 templates are in CIPP under Tenant Administration → Templates.
 
 ### Deploying via a CIPP baseline
@@ -377,7 +377,7 @@ Note where the restore export lives: `export/**NativeImport**/IntuneBackupAndRes
 word in the path is not a description but an exclusion. CIPP fetches the file list with
 `git/trees?recursive=1` and ignores exactly two things: files that do not end in `.json`,
 and paths containing `NativeImport`. There is no subfolder setting. Without that word
-CIPP would *also* import those 296 JSON files — the same 210 policies plus their 85 assignments and the
+CIPP would *also* import those 298 JSON files — the same 212 policies plus their 85 assignments and the
 ADE profile that came along, but without a `RowKey`, from which CIPP would then make a **second** template
 with the same name and its own GUID.
 OpenIntuneBaseline uses the same folder for the same reason.
@@ -492,12 +492,14 @@ value cause a Conflict in Intune, after which the setting is applied by neither.
 
 ```powershell
 .\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Multi User' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Disabled' -GroupName 'SEC-Shared-Devices'
 ```
 
-The WHfB variant for shared devices is the only one you can assign *alongside* its counterpart:
-the four overlapping settings have the same value there, so there is nothing to
-collide — it only adds `DisablePostLogonProvisioning`.
+On shared devices Windows Hello for Business is off (*Windows Hello for Business Disabled*)
+and a user signs in with a FIDO2 key or badge (*Security Key Sign-in*), both on
+`SEC-Shared-Devices`. WHfB is a key per user per device and does not fit there. *Windows Hello
+for Business Multi User* is the alternative (phase 5) for those who do want it there; next to
+*Disabled* that is a Conflict.
 
 Shared PC mode comes in two variants that you must **never** assign side by side:
 *Shared PC* (Entra accounts only) on `SG-D-UEM-WIN-SharedPC` and *Shared PC Domain and Guest*

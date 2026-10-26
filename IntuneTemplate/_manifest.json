@@ -4501,10 +4501,9 @@
       "metadataOnly": true,
       "note": "Bewust zonder toewijzing: hoort op een groep met gedeelde apparaten. Geen Endpoint Security-template maar een gewone Settings Catalog-policy, omdat DisablePostLogonProvisioning niet in het Account Protection-template zit. De vier overlappende instellingen staan op dezelfde waarde als in de apparaatpolicy, dus naast elkaar op hetzelfde apparaat levert dat geen conflict op — deze policy voegt alleen DisablePostLogonProvisioning toe.",
       "herkomst": "eigen",
-      "fase": 4,
+      "fase": 5,
       "doelgroep": "fysiek",
-      "faseWaarom": "Gedeelde apparaten. De enige die je náást zijn tegenhanger kunt toewijzen: de vier overlappende instellingen staan op dezelfde waarde.",
-      "faseGroep": "SEC-Shared-Devices",
+      "faseWaarom": "Alternatief voor [Baseline] - WIN - D - Windows Hello for Business Disabled, voor een organisatie die op gedeelde apparaten wél Windows Hello for Business wil. Allebei op hetzelfde apparaat is een Conflict.",
       "controls": {
         "iso": [
           "A.5.17 Authenticatie-informatie",
@@ -4821,7 +4820,7 @@
       "bron": "Eigen baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP). OpenIntuneBaseline dekt gedeelde apparaten bewust niet (WINDOWS/README.md).",
       "bewijs": "Op een gedeeld apparaat blijft zonder opruimen elk profiel staan dat er ooit op is aangemaakt, met de gecachte bestanden, browsergegevens en tokens van iedereen die er ooit heeft gewerkt. Shared PC mode ruimt die profielen op en houdt alleen Entra-accounts toe, zodat elke aanmelding aan één persoon te koppelen is en onder Conditional Access valt. Geen lokale opslag buiten het profiel betekent dat een bestand niet op C:\\ achterblijft voor de volgende gebruiker; werkbestanden horen in OneDrive.",
       "universeel": "Nee. Alleen voor apparaten waar meerdere mensen op werken: balie, werkplaats, vergaderruimte, flexplek. Op een laptop van één gebruiker ruimt hij na 30 dagen afwezigheid diens profiel op. Wijs per apparaat óf deze policy óf [Baseline] - WIN - D - Shared PC Domain and Guest toe, nooit allebei.",
-      "note": "Eigen groep SG-D-UEM-WIN-SharedPC (vast), naast SEC-Shared-Devices: een gedeeld apparaat staat in SEC-Shared-Devices (WHfB Multi User, Wireless Shared Devices) én in precies één van SG-D-UEM-WIN-SharedPC of SG-D-UEM-WIN-SharedPC-Guest. Twee Shared PC-policies op één apparaat leveren in Intune een Conflict op, en dan doet geen van beide iets. Shared PC mode raakt alleen nieuwe aanmeldingen: profielen die er al stonden voordat de policy landde, ruimt het accountbeheer niet altijd op — begin bij voorkeur met een schoon apparaat (Autopilot reset). Het profiel van een gebruiker verdwijnt na 30 dagen inactiviteit of zodra de vrije ruimte onder 25% zakt; boven 50% vrije ruimte blijven profielen staan. Daarom hoort OneDrive met Known Folder Move op deze apparaten aan te staan, anders verdwijnen bestanden mee. `disableEduPolicies` staat op true: de onderwijsinstellingen van Shared PC (o.a. geen Store-apps, geen Cortana) horen hier niet thuis. Combineer met [Baseline] - WIN - D - Windows Hello for Business Multi User, zodat niet elke nieuwe gebruiker bij de eerste aanmelding door de PIN-inrichting moet.",
+      "note": "Eigen groep SG-D-UEM-WIN-SharedPC (vast), naast SEC-Shared-Devices: een gedeeld apparaat staat in SEC-Shared-Devices (WHfB Multi User, Wireless Shared Devices) én in precies één van SG-D-UEM-WIN-SharedPC of SG-D-UEM-WIN-SharedPC-Guest. Twee Shared PC-policies op één apparaat leveren in Intune een Conflict op, en dan doet geen van beide iets. Shared PC mode raakt alleen nieuwe aanmeldingen: profielen die er al stonden voordat de policy landde, ruimt het accountbeheer niet altijd op — begin bij voorkeur met een schoon apparaat (Autopilot reset). Het profiel van een gebruiker verdwijnt na 30 dagen inactiviteit of zodra de vrije ruimte onder 25% zakt; boven 50% vrije ruimte blijven profielen staan. Daarom hoort OneDrive met Known Folder Move op deze apparaten aan te staan, anders verdwijnen bestanden mee. `disableEduPolicies` staat op true: de onderwijsinstellingen van Shared PC (o.a. geen Store-apps, geen Cortana) horen hier niet thuis. Combineer met [Baseline] - WIN - D - Windows Hello for Business Disabled en [Baseline] - WIN - D - Security Key Sign-in: op een gedeeld apparaat geen WHfB per gebruiker, wel aanmelden met een sleutel.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker ruimt dit na 30 dagen afwezigheid het profiel op.",
@@ -4856,6 +4855,61 @@
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten met gasttoegang. Test op het eerste apparaat of de knop Gast werkt naast de User Rights-policy die lokaal aanmelden voor Gasten weigert, en dat de gastsessie na afmelden verdwijnt.",
       "faseGroep": "SG-D-UEM-WIN-SharedPC-Guest (vast: gedeelde Windows-pc's met gasttoegang; een apparaat staat hierin óf in SG-D-UEM-WIN-SharedPC, nooit in allebei)"
+    },
+    {
+      "target": "Baseline_WIN_D_Windows_Hello_for_Business_Disabled",
+      "displayName": "[Baseline] - WIN - D - Windows Hello for Business Disabled",
+      "doelgroep": "fysiek",
+      "doel": "Zet Windows Hello for Business uit op gedeelde apparaten: geen PIN of biometrie per gebruiker per toestel. Gebruikers melden zich aan met een FIDO2-beveiligingssleutel of via web sign-in.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-01",
+          "PR.AA-03"
+        ]
+      },
+      "bron": "Eigen baseline — PassportForWork CSP, UsePassportForWork = false. Microsoft raadt voor gedeelde apparaten FIDO2-beveiligingssleutels aan in plaats van Windows Hello for Business.",
+      "bewijs": "Windows Hello for Business is een sleutel per gebruiker per toestel. Op een gedeeld apparaat betekent dat bij elke nieuwe gebruiker een inrichting, een sleutel in de TPM die blijft staan als de gebruiker allang weg is, en een PIN die alleen op dat ene toestel werkt. Een beveiligingssleutel of badge gaat met de gebruiker mee en is net zo phishing-resistent.",
+      "universeel": "Nee. Alleen voor gedeelde apparaten. Op een laptop van één gebruiker is Windows Hello for Business juist de gewone manier om zonder wachtwoord aan te melden.",
+      "note": "Hoort op SEC-Shared-Devices, samen met [Baseline] - WIN - D - Security Key Sign-in: zonder die tweede policy hebben gebruikers op het toestel alleen nog web sign-in. Niet naast [Baseline] - WIN - D - Windows Hello for Business Multi User of [Baseline] - WIN - D - Windows Hello for Business op hetzelfde apparaat: dezelfde instelling met een andere waarde is een Conflict. Die laatste staat in fase 2 op de pilotgroep; zet geen gedeelde apparaten in SEC-Baseline-Pilot, en sluit SEC-Shared-Devices uit zodra hij naar fase 1 gaat. [Baseline] - WIN - U - Windows Hello for Business zet WHfB per gebruiker aan; welke van de twee wint als een gebruiker met die policy zich op een gedeeld apparaat aanmeldt, test je in de pilot. [Baseline] - WIN - D - Passwordless zet de PIN als standaard aanmeldoptie; zonder WHfB kiest de gebruiker de eerste keer zelf de sleutel of web sign-in onder Aanmeldopties.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker zet dit Windows Hello for Business uit.",
+      "faseGroep": "SEC-Shared-Devices"
+    },
+    {
+      "target": "Baseline_WIN_D_Security_Key_Sign_in",
+      "displayName": "[Baseline] - WIN - D - Security Key Sign-in",
+      "doelgroep": "fysiek",
+      "doel": "Laat gebruikers zich op gedeelde apparaten aanmelden met een FIDO2-beveiligingssleutel of NFC-badge, zonder wachtwoord en zonder Windows Hello for Business op het toestel in te richten.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-03"
+        ]
+      },
+      "bron": "Eigen baseline — OMA-URI ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin = 1, zoals in IntuneAdmin/IntuneBaselines (Baseline - Enables FIDO Security Keys to be used during Windows Sign In).",
+      "bewijs": "Een FIDO2-sleutel is phishing-resistent en gaat met de gebruiker mee van toestel naar toestel. Daarmee voldoet een aanmelding op een gedeeld apparaat aan dezelfde eis als Windows Hello for Business op een eigen laptop, zonder dat er per toestel iets ingericht hoeft te worden.",
+      "universeel": "Nee. Hij hoort bij gedeelde apparaten, samen met [Baseline] - WIN - D - Windows Hello for Business Disabled. Op een eigen laptop is hij niet nodig: daar is Windows Hello for Business de methode.",
+      "note": "Hoort op SEC-Shared-Devices. De gebruiker heeft een passkey nodig op een FIDO2-sleutel of badge, geregistreerd in Entra; zet de authenticatiemethode Passkey (FIDO2) daarvoor aan in de Entra-policy voor authenticatiemethoden. Een custom profiel (OMA-URI) in plaats van Settings Catalog, omdat de Settings Catalog-ID niet in een bron is na te gaan; het is dezelfde instelling als in IntuneAdmin. Werkt zonder Windows Hello for Business op het toestel: test op het eerste apparaat dat de optie Beveiligingssleutel op het aanmeldscherm staat naast [Baseline] - WIN - D - Windows Hello for Business Disabled.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten, samen met de policy die Windows Hello for Business uitzet. Op een eigen laptop niet nodig.",
+      "faseGroep": "SEC-Shared-Devices"
     },
     {
       "target": "Baseline_WIN_U_AI_Usage_Control_Permitted",

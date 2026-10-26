@@ -2,14 +2,14 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 145 policies
+# Windows — 147 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 8 |
+| `SettingsCatalog/` | 126 |
+| `DeviceConfigurations/` | 9 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 111
+## Device-scoped (D) — 113
 
 Toewijzen aan apparaatgroepen.
 
@@ -110,6 +110,7 @@ Toewijzen aan apparaatgroepen.
 | [**Removable Storage**](SettingsCatalog/Baseline_WIN_D_Removable_Storage.md) | Blokkeert schrijven naar verwisselbare opslag: USB-sticks en externe schijven, en telefoons en camera's die zich als WPD-apparaat aanmelden. Lezen blijft mogelijk. | Settings Catalog | 2 | — |
 | [**Script File Associations**](SettingsCatalog/Baseline_WIN_D_Script_File_Associations.md) | Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert. | Settings Catalog | 1 | — |
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.md) | Verzameling losse hardeningsinstellingen: verouderde SMB- en NTLM-varianten, automatisch afspelen, PowerShell-logging en het afschermen van systeemonderdelen. | Settings Catalog | 97 | All Devices |
+| [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.md) | Laat gebruikers zich op gedeelde apparaten aanmelden met een FIDO2-beveiligingssleutel of NFC-badge, zonder wachtwoord en zonder Windows Hello for Business op het toestel in te richten. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.md) | Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is en logt de pijplijnuitvoering van alle PowerShell-modules, zodat het logboek bij een incident niet ongemerkt is overschreven en PowerShell-activiteit volledig herleidbaar is. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) | Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. | Settings Catalog | 4 | All Devices |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.md) | Shared PC mode zoals [Baseline] - WIN - D - Shared PC, maar met daarnaast een gastaccount: op het aanmeldscherm staat een knop Gast waarmee iemand zonder account een tijdelijke lokale sessie start. | Device config | — | — |
@@ -132,6 +133,7 @@ Toewijzen aan apparaatgroepen.
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.md) | Blokkeert uitgaand verkeer van ingebouwde Windows-programma's die malware gebruikt om verkeer te camoufleren (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.md) | Zet de Windows Firewall aan voor het domein-, privé- en openbare profiel en legt het standaardgedrag voor in- en uitgaand verkeer vast. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.md) | Laat Windows Hello werken tegen een on-prem Active Directory zonder certificaten, via een Kerberos-ticket uit Entra ID. | Settings Catalog | 2 | All Devices |
+| [**Windows Hello for Business Disabled**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.md) | Zet Windows Hello for Business uit op gedeelde apparaten: geen PIN of biometrie per gebruiker per toestel. Gebruikers melden zich aan met een FIDO2-beveiligingssleutel of via web sign-in. | Settings Catalog | 1 | — |
 | [**Windows Hello for Business Multi User**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.md) | Windows Hello for Business voor gedeelde apparaten waar meerdere gebruikers op inloggen. Zelfde eisen als de gewone apparaatpolicy, maar zonder inrichting direct na het aanmelden: op een gedeeld apparaat zou elke gebruiker anders bij de eerste aanmelding door de PIN-inrichting worden geleid. | Settings Catalog | 5 | — |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.md) | Laat gebruikers aanmelden met een PIN of biometrie in plaats van een wachtwoord. Vereist een TPM, een PIN van minimaal zes tekens en anti-spoofing bij gezichtsherkenning. | Settings Catalog | 6 | — |
 | [**Windows Hello Passkey PIN Complexity Alphanumeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.md) | Eist een alfanumerieke PIN voor de Windows Hello for Business-passkey: minstens een cijfer, een kleine letter, een hoofdletter en een leesteken. | Settings Catalog | 4 | — |
