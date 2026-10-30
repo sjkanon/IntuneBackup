@@ -8,11 +8,11 @@ en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/Ope
 (Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
 repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
-212 stratégies sur quatre plateformes :
+213 stratégies sur quatre plateformes :
 
 | | Settings Catalog | ADMX | Device config | Compliance | App Protection | total |
 |---|---|---|---|---|---|---|
-| [Windows](IntuneTemplate/WIN/README.fr.md) | 126 | 1 | 9 | 11 | – | **147** |
+| [Windows](IntuneTemplate/WIN/README.fr.md) | 126 | 1 | 10 | 11 | – | **148** |
 | [macOS](IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS](IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
@@ -20,7 +20,7 @@ repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.m
 ```mermaid
 flowchart LR
   OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
-  T["<b>IntuneTemplate/</b><br/>212 stratégies<br/><i>la source</i>"]
+  T["<b>IntuneTemplate/</b><br/>213 stratégies<br/><i>la source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Tenant Intune")]
 
@@ -378,7 +378,7 @@ Notez où se trouve l'export de restauration : `export/**NativeImport**/IntuneBa
 mot dans le chemin n'est pas une description mais une exclusion. CIPP récupère la liste des fichiers avec
 `git/trees?recursive=1` et ignore exactement deux choses : les fichiers qui ne se terminent pas par `.json`,
 et les chemins contenant `NativeImport`. Il n'existe pas de paramètre de sous-dossier. Sans ce mot,
-CIPP importerait *aussi* ces 298 fichiers JSON — les mêmes 212 stratégies plus leurs 85 affectations et le
+CIPP importerait *aussi* ces 300 fichiers JSON — les mêmes 213 stratégies plus leurs 86 affectations et le
 profil ADE embarqué, mais sans `RowKey`, dont CIPP ferait alors un **second** modèle
 portant le même nom et son propre GUID.
 OpenIntuneBaseline utilise le même dossier pour la même raison.

@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 147 policies
+# Windows — 148 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
 | `SettingsCatalog/` | 126 |
-| `DeviceConfigurations/` | 9 |
+| `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 113
+## Device-scoped (D) — 114
 
 Assign to device groups.
 
@@ -100,6 +100,7 @@ Assign to device groups.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) | Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) | Restricts the Microsoft Store, so that users cannot install arbitrary apps. | Settings Catalog | 7 | All Devices |
 | [**Network Authentication Hardening**](SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) | Makes network authentication less susceptible to abuse: the system account uses the computer identity for NTLM, PKU2U with online identities is closed, LDAP traffic requests signing, the Kerberos client supports armoring and NetBIOS names are no longer resolved via broadcast. | Settings Catalog | 6 | — |
+| [**Passkey Access**](DeviceConfigurations/Baseline_WIN_D_Passkey_Access.en.md) | Gives apps on Windows access to passkeys, so that signing in with a passkey works in apps and in a remote session (Windows App, Azure Virtual Desktop) without the user having to turn on the privacy setting themselves. | Device config | — | All Devices |
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) | Hides the password field at sign-in, so that users use Windows Hello or a security key instead of typing their password. | Settings Catalog | 4 | All Devices |
 | [**Power Management**](SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) | Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen. | Settings Catalog | 6 | All Devices |
 | [**Printing Hardening**](SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) | Turns on Windows Protected Print, prohibits standard users from installing printer drivers for a shared printer, and shuts off printing over HTTP. | Settings Catalog | 3 | — |

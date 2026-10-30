@@ -4912,6 +4912,31 @@
       "faseGroep": "SEC-Shared-Devices"
     },
     {
+      "target": "Baseline_WIN_D_Passkey_Access",
+      "displayName": "[Baseline] - WIN - D - Passkey Access",
+      "doelgroep": "alle",
+      "doel": "Geeft apps op Windows toegang tot passkeys, zodat aanmelden met een passkey werkt in apps en in een externe sessie (Windows App, Azure Virtual Desktop) zonder dat de gebruiker de privacy-instelling zelf moet aanzetten.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-03"
+        ]
+      },
+      "bron": "Eigen baseline — OMA-URI ./Device/Vendor/MSFT/Policy/Config/Privacy/LetAppsAccessPasskeys = 1 (Force allow), Policy CSP Privacy.",
+      "bewijs": "Sinds Windows 11 24H2 vraagt Windows toestemming voordat een app passkeys mag gebruiken, en staat Passkey-toegang onder Privacy en beveiliging soms uit. Dan weigert de eigen pc de passkey-aanvraag die een AVD-sessie doorstuurt meteen (WebAuthN event 1052, 0x8001011B Access is denied) en lukt de phishing-resistente aanmelding niet. Met Force allow kan de gebruiker die toegang niet uitzetten en hoeft de servicedesk hem niet per pc aan te zetten.",
+      "universeel": "Ja. Elk Windows-apparaat waarop een gebruiker zich met een passkey aanmeldt, ook de sessiehosts. Het geeft apps alleen toegang tot de passkey-aanvraag; de passkey zelf blijft achter de Windows Hello- of telefoonbevestiging.",
+      "note": "Custom profiel (OMA-URI): de instelling staat nog niet in de Settings Catalog. Microsoft documenteert hem voor Windows Insider Preview; kent een build hem niet, dan meldt Intune een fout voor deze instelling en verandert er niets. Force allow zet ook de lijst per app vast; wie één app toch wil weigeren, gebruikt LetAppsAccessPasskeys_ForceDenyTheseApps.",
+      "herkomst": "eigen",
+      "fase": 1
+    },
+    {
       "target": "Baseline_WIN_U_AI_Usage_Control_Permitted",
       "displayName": "[Baseline] - WIN - U - AI Usage Control Permitted",
       "doel": "Houdt de Edge-blokkeerlijst voor de Store-website in stand, maar laat de AI-diensten er uitdrukkelijk buiten.",

@@ -4,13 +4,13 @@
 
 # Intune-baseline — overzicht
 
-212 policies over 4 platformen, met
+213 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](../README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 212 |
+| Policies | 213 |
 | Zonder toewijzing (bewust) | 105 |
 | Uitgerold in de tenant | 0 |
 
@@ -18,20 +18,20 @@ Dit is de samenvatting; de details staan in de [hoofd-README](../README.md) en p
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.md) | 126 | 1 | 9 | 11 | – | **147** |
+| [Windows](../IntuneTemplate/WIN/README.md) | 126 | 1 | 10 | 11 | – | **148** |
 | [macOS](../IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](../IntuneTemplate/WIN/README.md) — 147 policies
+- [Windows](../IntuneTemplate/WIN/README.md) — 148 policies
 - [macOS](../IntuneTemplate/MAC/README.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.md) — 14 policies
 
 ## Normenkader
 
-212 van de 212 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+213 van de 213 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 32 van de 93 Annex A-controls.
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).

@@ -36,21 +36,21 @@ assignment and the per-device status of every policy named below.
 
 ## Summary
 
-### Policies per phase — 212 Intune policies
+### Policies per phase — 213 Intune policies
 
 Only phase 1 is assigned to all devices or users and counts as enforced. The rest is
 deliberately not deployed yet; the reason per policy is in [Organisational decisions and residual risks](#organisational-decisions-and-residual-risks).
 
 | Phase | Windows | macOS | iOS/iPadOS | Android | Total |
 |---|---:|---:|---:|---:|---:|
-| 1 — Now | 86 | 19 | 1 | 1 | **107** |
+| 1 — Now | 87 | 19 | 1 | 1 | **108** |
 | 2 — Pilot | 31 | 9 | – | 2 | **42** |
 | 3 — Awaiting prerequisite | 5 | 3 | 8 | 10 | **26** |
 | 4 — Dedicated group | 12 | 4 | 4 | 1 | **21** |
 | 5 — Do not deploy | 13 | 2 | 1 | – | **16** |
-| **Total** | **147** | **37** | **14** | **14** | **212** |
+| **Total** | **148** | **37** | **14** | **14** | **213** |
 
-Assigned according to `_assignments.json`: 107 (should equal phase 1: 107).
+Assigned according to `_assignments.json`: 108 (should equal phase 1: 108).
 
 
 ### ISO/IEC 27001:2022 Annex A — 93 controls
@@ -79,7 +79,7 @@ Number of policies that implement the point technically. No point is done with t
 | [(g)](#art-212g-basic-cyber-hygiene-practices-and-cybersecurity-training) basic cyber hygiene practices and cybersecurity training | 1 | n/a | 2 |
 | [(h)](#art-212h-cryptography-and-encryption) cryptography and encryption | 9 | n/a | 7 |
 | [(i)](#art-212i-human-resources-security-access-control-policies-and-asset-management) human resources security, access control policies and asset management | 23 | n/a | 42 |
-| [(j)](#art-212j-multi-factor-authentication-and-secured-communications) multi-factor authentication and secured communications | 4 | n/a | 7 |
+| [(j)](#art-212j-multi-factor-authentication-and-secured-communications) multi-factor authentication and secured communications | 5 | n/a | 7 |
 
 ### CIS Controls v8.1 and NIST CSF 2.0
 
@@ -119,7 +119,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.5.14** Information transfer](#a514-information-transfer) | partial | ● Covered (phase 1) | 1 | 1 | Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. |
 | [**A.5.15** Access control](#a515-access-control) | technical | ● Covered (phase 1) | 3 | 12 | Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. |
 | [**A.5.16** Identity management](#a516-identity-management) | partial | ● Covered (phase 1) | 2 | 1 | Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. |
-| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 12 | 21 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
+| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 13 | 21 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
 | **A.5.18** Access rights | partial | ○ No technical measure in the baseline | – | – | Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. |
 | [**A.5.19** Information security in supplier relationships](#a519-information-security-in-supplier-relationships) | organisational | ◐ Pilot, waiting or dedicated group only | – | 2 | Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. |
 | **A.5.20** Addressing information security within supplier agreements | organisational | ▢ Organisational | – | – | Include security requirements, data processing agreements and audit rights in contracts. |
@@ -181,7 +181,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | [**A.8.2** Privileged access rights](#a82-privileged-access-rights) | technical | ● Covered (phase 1) | 6 | 3 | Process for granting and periodically reviewing administrative rights (PIM, access reviews). |
 | [**A.8.3** Information access restriction](#a83-information-access-restriction) | partial | ● Covered (phase 1) | 1 | 1 | Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. |
 | **A.8.4** Access to source code | organisational | ▢ Organisational | – | – | Only with in-house software development: manage access to repositories and development tools. |
-| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 12 | 25 | Establish an authentication policy (which methods, exceptions, break-glass). |
+| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 13 | 25 | Establish an authentication policy (which methods, exceptions, break-glass). |
 | [**A.8.6** Capacity management](#a86-capacity-management) | partial | ● Covered (phase 1) | 4 | – | Capacity planning for network, licences and storage. |
 | [**A.8.7** Protection against malware](#a87-protection-against-malware) | technical | ● Covered (phase 1) | 27 | 19 | User awareness and follow-up of detections (the standard names both explicitly). |
 | [**A.8.8** Management of technical vulnerabilities](#a88-management-of-technical-vulnerabilities) | partial | ● Covered (phase 1) | 12 | 13 | Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. |
@@ -277,6 +277,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Enhanced Phishing Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
 - [`WIN - D - Legacy Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Legacy_Hardening.en.md) (phase 1)
 - [`WIN - D - Login and Lock Screen`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1)
+- [`WIN - D - Passkey Access`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Passkey_Access.en.md) (phase 1)
 - [`WIN - D - Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
 - [`WIN - D - Settings Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1)
 - [`WIN - D - Windows LAPS`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1)
@@ -465,6 +466,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - AVD Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.en.md) (phase 1)
 - [`WIN - D - Device Lock`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
 - [`WIN - D - Local Security Policies`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
+- [`WIN - D - Passkey Access`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Passkey_Access.en.md) (phase 1)
 - [`WIN - D - Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
 - [`WIN - D - Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
@@ -1231,10 +1233,11 @@ of the technical part, not a replacement for that assessment.
 
 **Technical implementation.** Intune provides the strong authentication methods (Windows Hello for Business, passwordless sign-in); enforcing MFA happens in Conditional Access.
 
-**Intune, phase 1 (4)**
+**Intune, phase 1 (5)**
 
 - [`MAC - D - Microsoft Edge Security`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
 - [`WIN - D - AVD FSLogix Profile Containers`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_FSLogix_Profile_Containers.en.md) (phase 1)
+- [`WIN - D - Passkey Access`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Passkey_Access.en.md) (phase 1)
 - [`WIN - D - Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
 
@@ -1520,7 +1523,7 @@ is organisational by definition: no policy implements it, this baseline is at mo
 |---|---|---|---|
 | **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Covered (phase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` and 12 more |
 | **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ No technical measure in the baseline | — |
-| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - AVD FSLogix Profile Containers` and 28 more |
+| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - AVD FSLogix Profile Containers` and 29 more |
 | **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Covered (phase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
 | **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Covered (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock` and 9 more |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ No technical measure in the baseline | — |
@@ -1862,7 +1865,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.5.14** Information transfer | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. | (i) |
 | **A.5.15** Access control | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 12 prepared. Organisational: Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. | (b) (e) (i) |
 | **A.5.16** Identity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 1 prepared. Organisational: Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. | (i) |
-| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 17 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (c) (e) (f) (g) (h) (i) (j) |
+| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 17 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (c) (e) (f) (g) (h) (i) (j) |
 | **A.5.18** Access rights | yes | baseline security; confirm with the risk analysis | Organisational: Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. | — |
 | **A.5.19** Information security in supplier relationships | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technically prepared: 1 policy in pilot, waiting or dedicated group. Organisational: Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. | (d) |
 | **A.5.20** Addressing information security within supplier agreements | yes | baseline security; confirm with the risk analysis | Organisational: Include security requirements, data processing agreements and audit rights in contracts. | — |
@@ -1909,7 +1912,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.8.2** Privileged access rights | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 6 policies in phase 1, 3 prepared. Organisational: Process for granting and periodically reviewing administrative rights (PIM, access reviews). | (e) (i) |
 | **A.8.3** Information access restriction | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. | (h) (i) |
 | **A.8.4** Access to source code | depends | only applicable with in-house software or script development | Organisational: Only with in-house software development: manage access to repositories and development tools. | — |
-| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 21 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (c) (e) (f) (g) (h) (i) (j) |
+| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 21 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (c) (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Capacity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 4 policies in phase 1. Organisational: Capacity planning for network, licences and storage. | (c) (i) |
 | **A.8.7** Protection against malware | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 27 policies in phase 1, 17 prepared. Organisational: User awareness and follow-up of detections (the standard names both explicitly). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Management of technical vulnerabilities | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 13 prepared. Organisational: Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. | (e) (f) (h) (i) |
@@ -1944,7 +1947,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 
 | | Count |
 |---|---:|
-| Intune policies with controls | 212 of 212 |
+| Intune policies with controls | 213 of 213 |
 | Labels outside the vocabulary | 0 |
 | Labels with a deviating spelling (still counted) | 0 |
 

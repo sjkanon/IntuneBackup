@@ -2,14 +2,14 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 147 policies
+# Windows — 148 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
 | `SettingsCatalog/` | 126 |
-| `DeviceConfigurations/` | 9 |
+| `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 113
+## Device-scoped (D) — 114
 
 Toewijzen aan apparaatgroepen.
 
@@ -100,6 +100,7 @@ Toewijzen aan apparaatgroepen.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) | Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.md) | Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren. | Settings Catalog | 7 | All Devices |
 | [**Network Authentication Hardening**](SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.md) | Maakt netwerkauthenticatie minder vatbaar voor misbruik: het systeemaccount gebruikt de computeridentiteit voor NTLM, PKU2U met online identiteiten gaat dicht, LDAP-verkeer vraagt ondertekening, de Kerberos-client ondersteunt armoring en NetBIOS-namen worden niet meer via broadcast opgelost. | Settings Catalog | 6 | — |
+| [**Passkey Access**](DeviceConfigurations/Baseline_WIN_D_Passkey_Access.md) | Geeft apps op Windows toegang tot passkeys, zodat aanmelden met een passkey werkt in apps en in een externe sessie (Windows App, Azure Virtual Desktop) zonder dat de gebruiker de privacy-instelling zelf moet aanzetten. | Device config | — | All Devices |
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.md) | Verbergt het wachtwoordveld bij het aanmelden, zodat gebruikers Windows Hello of een beveiligingssleutel gebruiken in plaats van hun wachtwoord in te typen. | Settings Catalog | 4 | All Devices |
 | [**Power Management**](SettingsCatalog/Baseline_WIN_D_Power_Management.md) | Laat het dichtklappen van de klep en de aan/uit-knop het apparaat in slaapstand zetten, zodat de bestaande eis om een wachtwoord te vragen bij ontwaken ook echt tot een vergrendeld scherm leidt. | Settings Catalog | 6 | All Devices |
 | [**Printing Hardening**](SettingsCatalog/Baseline_WIN_D_Printing_Hardening.md) | Zet Windows Protected Print aan, verbiedt gewone gebruikers het installeren van printerdrivers bij een gedeelde printer, en sluit printen over HTTP af. | Settings Catalog | 3 | — |

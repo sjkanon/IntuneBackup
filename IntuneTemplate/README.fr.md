@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# IntuneTemplate — 212 policies
+# IntuneTemplate — 213 policies
 
 La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui
 se trouve dans `export/` et `BaselineTemplate/` en est dérivé et généré.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.fr.md) | 126 | 1 | 9 | 11 | – | **147** |
+| [Windows](WIN/README.fr.md) | 126 | 1 | 10 | 11 | – | **148** |
 | [macOS](MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **167** | **1** | **16** | **26** | **2** | **212** |
+| **Total** | **167** | **1** | **17** | **26** | **2** | **213** |
 
 ## Organisation
 
@@ -74,7 +74,7 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 
 | `Package` | Affecter dans CIPP à | Stage | Policies |
 |---|---|---:|---:|
-| `[Baseline] - Baseline-Devices` | Assign to all devices | 1 | 53 |
+| `[Baseline] - Baseline-Devices` | Assign to all devices | 1 | 54 |
 | `[Baseline] - Baseline-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 14 |
 | `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter [Baseline] - WIN - AVD Multi-session (include) | 1 | 5 |
 | `[Baseline] - Baseline-Users` | Assign to all users | 1 | 31 |
@@ -112,7 +112,7 @@ elles existent comme alternative à une policy qui, elle, est déployée.
 
 ## Par plateforme
 
-- [Windows](WIN/README.fr.md) — 147 policies
+- [Windows](WIN/README.fr.md) — 148 policies
 - [macOS](MAC/README.fr.md) — 37 policies
 - [iOS/iPadOS](IOS/README.fr.md) — 14 policies
 - [Android](AND/README.fr.md) — 14 policies

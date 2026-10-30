@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 147 policies
+# Windows — 148 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
 | `SettingsCatalog/` | 126 |
-| `DeviceConfigurations/` | 9 |
+| `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 113
+## Device-scoped (D) — 114
 
 Affecter à des groupes d'appareils.
 
@@ -100,6 +100,7 @@ Affecter à des groupes d'appareils.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.fr.md) | Connecte automatiquement le client OneDrive avec le compte professionnel et déplace Bureau, Documents et Images vers OneDrive, afin que rien ne soit stocké uniquement en local. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.fr.md) | Restreint le Microsoft Store, afin que les utilisateurs ne puissent pas installer n'importe quelle application. | Settings Catalog | 7 | All Devices |
 | [**Network Authentication Hardening**](SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.fr.md) | Rend l'authentification réseau moins vulnérable aux abus : le compte système utilise l'identité de l'ordinateur pour NTLM, PKU2U avec des identités en ligne est fermé, le trafic LDAP demande la signature, le client Kerberos prend en charge l'armoring et les noms NetBIOS ne sont plus résolus par diffusion. | Settings Catalog | 6 | — |
+| [**Passkey Access**](DeviceConfigurations/Baseline_WIN_D_Passkey_Access.fr.md) | Donne aux applications sous Windows l'accès aux passkeys, pour que la connexion avec une passkey fonctionne dans les applications et dans une session distante (Windows App, Azure Virtual Desktop) sans que l'utilisateur doive activer lui-même le paramètre de confidentialité. | Device config | — | All Devices |
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.fr.md) | Masque le champ du mot de passe à la connexion, afin que les utilisateurs utilisent Windows Hello ou une clé de sécurité au lieu de saisir leur mot de passe. | Settings Catalog | 4 | All Devices |
 | [**Power Management**](SettingsCatalog/Baseline_WIN_D_Power_Management.fr.md) | Fait en sorte que la fermeture du capot et le bouton d'alimentation mettent l'appareil en veille, afin que l'exigence existante de demander un mot de passe au réveil aboutisse réellement à un écran verrouillé. | Settings Catalog | 6 | All Devices |
 | [**Printing Hardening**](SettingsCatalog/Baseline_WIN_D_Printing_Hardening.fr.md) | Active Windows Protected Print, interdit aux utilisateurs standard d'installer des pilotes d'imprimante pour une imprimante partagée et ferme l'impression via HTTP. | Settings Catalog | 3 | — |

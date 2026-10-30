@@ -8,10 +8,10 @@ gegenereerd, welke systemen het lezen en hoe het in een tenant belandt. Voor het
 
 ## In het kort
 
-- **Eén bron:** `IntuneTemplate/` — 212 policies in CIPP-templateformaat, over Windows (147),
+- **Eén bron:** `IntuneTemplate/` — 213 policies in CIPP-templateformaat, over Windows (148),
   macOS (37), iOS/iPadOS (14) en Android (14).
 - **Drie bronnen erin:** OpenIntuneBaseline (94 policies), IntuneAdmin/IntuneBaselines (22) en
-  eigen werk (96).
+  eigen werk (97).
 - **Twee afgeleiden eruit:** een restore-export voor IntuneBackupAndRestore en de CIPP-baseline.
   CIPP leest de templates zelf rechtstreeks.
 - **Twee wegen naar de tenant:** CIPP of de PowerShell-module IntuneBackupAndRestore. Toewijzen
@@ -27,7 +27,7 @@ flowchart LR
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Tenant-backup<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 
-  T["<b>IntuneTemplate/</b><br/>212 policies · _manifest.json"]
+  T["<b>IntuneTemplate/</b><br/>213 policies · _manifest.json"]
 
   T -->|export-intunebackup.js| EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   T -->|generate-baseline-template.js| BT["BaselineTemplate/<br/>Baseline.json"]
