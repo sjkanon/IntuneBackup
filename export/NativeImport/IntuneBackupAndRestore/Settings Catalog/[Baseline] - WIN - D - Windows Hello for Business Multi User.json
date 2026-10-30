@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello for Business Multi User",
-    "description": "Windows Hello for Business for shared devices that several users sign in to. Same requirements as the regular device policy, but without setup immediately after sign-in: on a shared device every user would otherwise be guided through PIN setup at their first sign-in. Baseline assignment: none by default — belongs on SEC-Shared-Devices. Source: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, supplemented with DisablePostLogonProvisioning.",
+    "description": "Windows Hello for Business for shared devices that several users sign in to. Same requirements as the regular device policy, but without setup immediately after sign-in: on a shared device every user would otherwise be guided through PIN setup at their first sign-in. Baseline assignment: none — an alternative that is not deployed. Source: OpenIntuneBaseline Windows v3.8 — ES - Windows Hello for Business - D - WHfB Configuration, supplemented with DisablePostLogonProvisioning.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

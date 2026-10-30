@@ -2,14 +2,14 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 145 policies
+# Windows — 148 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 125 |
-| `DeviceConfigurations/` | 8 |
+| `SettingsCatalog/` | 126 |
+| `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
 
@@ -30,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 111
+## Device-scoped (D) — 114
 
 Assign to device groups.
 
@@ -100,6 +100,7 @@ Assign to device groups.
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) | Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) | Restricts the Microsoft Store, so that users cannot install arbitrary apps. | Settings Catalog | 7 | All Devices |
 | [**Network Authentication Hardening**](SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) | Makes network authentication less susceptible to abuse: the system account uses the computer identity for NTLM, PKU2U with online identities is closed, LDAP traffic requests signing, the Kerberos client supports armoring and NetBIOS names are no longer resolved via broadcast. | Settings Catalog | 6 | — |
+| [**Passkey Access**](DeviceConfigurations/Baseline_WIN_D_Passkey_Access.en.md) | Gives apps on Windows access to passkeys, so that signing in with a passkey works in apps and in a remote session (Windows App, Azure Virtual Desktop) without the user having to turn on the privacy setting themselves. | Device config | — | All Devices |
 | [**Passwordless**](SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) | Hides the password field at sign-in, so that users use Windows Hello or a security key instead of typing their password. | Settings Catalog | 4 | All Devices |
 | [**Power Management**](SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) | Makes closing the lid and the power button put the device to sleep, so that the existing requirement to ask for a password on wake actually leads to a locked screen. | Settings Catalog | 6 | All Devices |
 | [**Printing Hardening**](SettingsCatalog/Baseline_WIN_D_Printing_Hardening.en.md) | Turns on Windows Protected Print, prohibits standard users from installing printer drivers for a shared printer, and shuts off printing over HTTP. | Settings Catalog | 3 | — |
@@ -110,6 +111,7 @@ Assign to device groups.
 | [**Removable Storage**](SettingsCatalog/Baseline_WIN_D_Removable_Storage.en.md) | Blocks writing to removable storage: USB sticks and external drives, and phones and cameras that present themselves as a WPD device. Reading remains possible. | Settings Catalog | 2 | — |
 | [**Script File Associations**](SettingsCatalog/Baseline_WIN_D_Script_File_Associations.en.md) | Makes .js, .vbs and .hta files open in Notepad instead of the script host, so that double-clicking such an attachment executes nothing. | Settings Catalog | 1 | — |
 | [**Security Hardening**](SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) | Collection of individual hardening settings: outdated SMB and NTLM variants, AutoPlay, PowerShell logging and shielding of system components. | Settings Catalog | 97 | All Devices |
+| [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) | Lets users sign in on shared devices with a FIDO2 security key or NFC badge, without a password and without setting up Windows Hello for Business on the device. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) | Warns in the System log as soon as the Security log is 90% full and logs pipeline execution of all PowerShell modules, so that during an incident the log has not been overwritten unnoticed and PowerShell activity is fully traceable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) | Determines which Windows settings are synchronised between devices. | Settings Catalog | 4 | All Devices |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) | Shared PC mode like [Baseline] - WIN - D - Shared PC, but with a guest account as well: the sign-in screen shows a Guest button with which someone without an account starts a temporary local session. | Device config | — | — |
@@ -132,6 +134,7 @@ Assign to device groups.
 | [**Windows Firewall Rules**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) | Blocks outbound traffic from built-in Windows programs that malware uses to disguise traffic (calc.exe, notepad.exe, mshta.exe). | Settings Catalog | 48 | All Devices |
 | [**Windows Firewall**](SettingsCatalog/Baseline_WIN_D_Windows_Firewall.en.md) | Turns on Windows Firewall for the domain, private and public profiles and defines the default behaviour for inbound and outbound traffic. | Settings Catalog | 35 | All Devices |
 | [**Windows Hello Cloud Kerberos Trust**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) | Lets Windows Hello work against an on-prem Active Directory without certificates, via a Kerberos ticket from Entra ID. | Settings Catalog | 2 | All Devices |
+| [**Windows Hello for Business Disabled**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) | Turns Windows Hello for Business off on shared devices: no PIN or biometrics per user per device. Users sign in with a FIDO2 security key or through web sign-in. | Settings Catalog | 1 | — |
 | [**Windows Hello for Business Multi User**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) | Windows Hello for Business for shared devices that several users sign in to. Same requirements as the regular device policy, but without setup immediately after sign-in: on a shared device every user would otherwise be guided through PIN setup at their first sign-in. | Settings Catalog | 5 | — |
 | [**Windows Hello for Business**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) | Lets users sign in with a PIN or biometrics instead of a password. Requires a TPM, a PIN of at least six characters and anti-spoofing for facial recognition. | Settings Catalog | 6 | — |
 | [**Windows Hello Passkey PIN Complexity Alphanumeric**](SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Alphanumeric.en.md) | Requires an alphanumeric PIN for the Windows Hello for Business passkey: at least one digit, one lowercase letter, one uppercase letter and one special character. | Settings Catalog | 4 | — |
