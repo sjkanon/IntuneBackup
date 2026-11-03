@@ -46,8 +46,8 @@ n'est volontairement pas encore déployé ; la raison pour chaque policy figure 
 | 1 — Immédiat | 87 | 19 | 1 | 1 | **108** |
 | 2 — Pilote | 31 | 9 | – | 2 | **42** |
 | 3 — En attente d'un prérequis | 6 | 3 | 8 | 10 | **27** |
-| 4 — Groupe dédié | 16 | 4 | 4 | 1 | **25** |
-| 5 — Ne pas déployer | 13 | 2 | 1 | – | **16** |
+| 4 — Groupe dédié | 15 | 4 | 4 | 1 | **24** |
+| 5 — Ne pas déployer | 14 | 2 | 1 | – | **17** |
 | **Total** | **153** | **37** | **14** | **14** | **218** |
 
 Affectées selon `_assignments.json` : 108 (doit être égal à la phase 1 : 108).
@@ -60,8 +60,8 @@ Colonnes : si, selon le vocabulaire, la mesure peut être mise en œuvre par une
 | Status | Technique (10) | Partiel (37) | Organisationnel (46) | Total |
 |---|---:|---:|---:|---:|
 | ● Couvert (phase 1) | 10 | 22 | 0 | **32** |
-| ◐ Seulement pilote, en attente ou groupe dédié | 0 | 3 | 2 | **5** |
-| ▢ Organisationnel | 0 | 0 | 44 | **44** |
+| ◐ Seulement pilote, en attente ou groupe dédié | 0 | 3 | 1 | **4** |
+| ▢ Organisationnel | 0 | 0 | 45 | **45** |
 | ○ Aucune mesure technique dans la baseline | 0 | 12 | 0 | **12** |
 
 ### NIS2 art. 21(2)
@@ -78,7 +78,7 @@ Nombre de policies qui mettent en œuvre le point sur le plan technique. Aucun p
 | [(f)](#art-212f-évaluation-de-lefficacité) évaluation de l'efficacité | 13 | s.o. | 2 |
 | [(g)](#art-212g-pratiques-de-base-en-matière-de-cyberhygiène-et-formation-à-la-cybersécurité) pratiques de base en matière de cyberhygiène et formation à la cybersécurité | 1 | s.o. | 2 |
 | [(h)](#art-212h-cryptographie-et-chiffrement) cryptographie et chiffrement | 9 | s.o. | 7 |
-| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 23 | s.o. | 44 |
+| [(i)](#art-212i-sécurité-des-ressources-humaines-politiques-de-contrôle-daccès-et-gestion-des-actifs) sécurité des ressources humaines, politiques de contrôle d'accès et gestion des actifs | 23 | s.o. | 43 |
 | [(j)](#art-212j-authentification-à-plusieurs-facteurs-et-communications-sécurisées) authentification à plusieurs facteurs et communications sécurisées | 5 | s.o. | 8 |
 
 ### CIS Controls v8.1 et NIST CSF 2.0
@@ -134,7 +134,7 @@ mesure peut être mise en œuvre par une politique de terminal ou d'identité ; 
 | [**A.5.29** Sécurité de l'information durant une perturbation](#a529-sécurité-de-linformation-durant-une-perturbation) | partiel | ● Couvert (phase 1) | 2 | – | Planifier le niveau de sécurité en situation de crise (procédures d'urgence, comptes break-glass). |
 | [**A.5.30** Préparation des TIC pour la continuité d'activité](#a530-préparation-des-tic-pour-la-continuité-dactivité) | partiel | ● Couvert (phase 1) | 3 | – | BIA, objectifs de reprise (RTO/RPO) et tests de continuité périodiques. |
 | **A.5.31** Exigences légales, statutaires, réglementaires et contractuelles | organisationnel | ▢ Organisationnel | – | – | Tenir un registre des lois et réglementations applicables (NIS2/loi sur la cybersécurité, RGPD). |
-| [**A.5.32** Droits de propriété intellectuelle](#a532-droits-de-propriété-intellectuelle) | organisationnel | ◐ Seulement pilote, en attente ou groupe dédié | – | 1 | Gestion des licences et règles d'utilisation des logiciels et des contenus. |
+| [**A.5.32** Droits de propriété intellectuelle](#a532-droits-de-propriété-intellectuelle) | organisationnel | ▢ Organisationnel | – | 1 | Gestion des licences et règles d'utilisation des logiciels et des contenus. |
 | [**A.5.33** Protection des enregistrements](#a533-protection-des-enregistrements) | partiel | ◐ Seulement pilote, en attente ou groupe dédié | – | 1 | Définir les durées de conservation et la protection des enregistrements (politique de rétention, conservation des journaux). |
 | [**A.5.34** Protection de la vie privée et des DCP](#a534-protection-de-la-vie-privée-et-des-dcp) | partiel | ● Couvert (phase 1) | 4 | 10 | Responsabilité RGPD : registre des traitements, AIPD pour la télémétrie, la surveillance et les fonctions d'IA, concertation avec le DPO et le comité social et économique. |
 | **A.5.35** Révision indépendante de la sécurité de l'information | organisationnel | ▢ Organisationnel | – | – | Audit interne ou revue externe à intervalles planifiés. |
@@ -324,7 +324,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 
 #### A.5.32 Droits de propriété intellectuelle
 
-- [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) (phase 4)
+- [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) (phase 5)
 
 #### A.5.33 Protection des enregistrements
 
@@ -731,7 +731,7 @@ Toutes les policies par mesure, avec leur phase. La phase 5 est une alternative 
 - [`WIN - U - Compliance OS Version`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.fr.md) (phase 2)
 - [`AND - U - Compliance Device Health`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Device_Health.fr.md) (phase 3)
 - [`IOS - D - Restrictions Corporate`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.fr.md) (phase 4)
-- [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) (phase 4)
+- [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) (phase 5)
 
 #### A.8.20 Sécurité des réseaux
 
@@ -1185,7 +1185,7 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`WIN - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.fr.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.fr.md) (phase 1)
 
-**Préparé — pilote, en attente ou groupe dédié (44)**
+**Préparé — pilote, en attente ou groupe dédié (43)**
 
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.fr.md) (phase 2)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.fr.md) (phase 2)
@@ -1226,13 +1226,12 @@ de la partie technique, pas un substitut à cette appréciation.
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.fr.md) (phase 4)
 - [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) (phase 4)
 - [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) (phase 4)
-- [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) (phase 4)
 - [`WIN - D - Shared Devices Start and Taskbar`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.fr.md) (phase 4)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.fr.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.fr.md) (phase 4)
 - [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.fr.md) (phase 4)
 
-**Alternative, non déployée (2)**: `MAC - D - External Storage Read Only`, `WIN - D - Windows Hello for Business Multi User`
+**Alternative, non déployée (3)**: `MAC - D - External Storage Read Only`, `WIN - D - Microsoft Office Shared Computer Activation`, `WIN - D - Windows Hello for Business Multi User`
 
 **Preuve.** Les rapports Intune : l'affectation et le statut par appareil des policies ci-dessus.
 
@@ -1596,7 +1595,7 @@ Ce qui requiert une décision de la direction avant que la baseline soit complè
 dans le manifeste ; une décision ici est un changement de phase dans une PR, afin que la décision et le
 déploiement se retrouvent au même endroit.
 
-### A. Choisir une variante — phase 5, ne pas déployer (16)
+### A. Choisir une variante — phase 5, ne pas déployer (17)
 
 Alternatives à une policy qui, elle, est déployée, ou choix de l'organisation sans réponse techniquement juste. Affecter deux
 variantes en même temps produit un Conflit dans Intune, après quoi aucune des deux n'est appliquée.
@@ -1610,6 +1609,7 @@ variantes en même temps produit un Conflit dans Intune, après quoi aucune des 
 | [`WIN - D - Defender for Endpoint EDR`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.fr.md) | Double de [Baseline] - WIN - D - Defender EDR Policy, qui est déployée : affecter les deux place deux policies EDR sur le même appareil. Jusqu'en septembre 2026, ce template portait le jeton d'onboarding chiffré du tenant d'où il avait été exporté ; il a été remplacé par la valeur du connecteur, de sorte que le dépôt ne contient plus de valeur propre à un tenant. Lien: `WIN - D - Defender EDR Policy`. | A.8.7, A.8.16 |
 | [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.fr.md) | Alternative à la variante Automatic, uniquement pour une organisation disposant de son propre résolveur DoH ou d'un résolveur sous contrat (par exemple un service de filtrage DNS) capable de résoudre les noms internes. Nécessite une URL de résolveur propre au tenant. Lien: `WIN - D - Microsoft Edge DNS over HTTPS Automatic`. | A.8.20, A.8.24 |
 | [`WIN - D - Microsoft Edge Search Engine`](../IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.fr.md) | Un choix de l'organisation, pas un paramètre de sécurité : le moteur de recherche par défaut n'a pas sa place dans une baseline générique. Ne l'affectez que si l'organisation l'a décidé. | A.8.9 |
+| [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) | Les appareils partagés n'ont pas Office par défaut : les utilisateurs travaillent dans Edge, avec Office sur le web. À affecter à SG-D-UEM-WIN-Shared uniquement chez un client qui y installe malgré tout les Microsoft 365 Apps. Lien: `WIN - D - Shared PC`, `WIN - D - Shared PC Domain and Guest`. | A.5.32, A.8.19 |
 | [`WIN - D - Windows AI Features Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.fr.md) | Alternative à la variante Restricted, pour une organisation qui autorise l'IA générative sur le poste de travail. Affectez-en une, jamais les deux. Lien: `WIN - D - Windows AI Features Restricted`, `WIN - D - Windows AI Restricted`, `WIN - U - AI Usage Control Restricted`. | A.5.10, A.5.34, A.8.1 |
 | [`WIN - D - Windows AI Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.fr.md) | Alternative à la variante Restricted, pour une organisation qui autorise Recall et Click To Do. Affectez-en une, jamais les deux. Lien: `WIN - D - Windows AI Restricted`. | A.5.10, A.5.34, A.8.1 |
 | [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.fr.md) | Alternative à [Baseline] - WIN - D - Windows Hello for Business Disabled, pour une organisation qui veut bien Windows Hello for Business sur les appareils partagés. Les deux sur le même appareil, c'est un Conflit. Lien: `WIN - D - Windows Hello for Business`, `WIN - D - Windows Hello for Business Disabled`. | A.5.17, A.8.5 |
@@ -1620,7 +1620,7 @@ variantes en même temps produit un Conflit dans Intune, après quoi aucune des 
 | [`WIN - U - Microsoft Outlook Cached Mode Default`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.fr.md) | Alternative à la variante Managed, pour une organisation qui souhaite bien mettre en cache les boîtes aux lettres partagées. Affectez-en une, jamais deux — elles définissent le même paramètre et produisent ensemble un Conflict. | A.8.9 |
 | [`WIN - U - Microsoft Outlook Cached Mode Off`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.fr.md) | Alternative à la variante Managed, pour les appareils partagés sans profil conservé. Affectez-en une, jamais deux — elles définissent le même paramètre avec une valeur différente et produisent ensemble un Conflict, après quoi aucune des deux n'est appliquée. | A.8.1, A.8.9 |
 
-### B. Groupe dédié — phase 4 (25)
+### B. Groupe dédié — phase 4 (24)
 
 Va sur un groupe spécifique. Décision : ce groupe existe-t-il, qui en fait partie et qui gère l'appartenance.
 
@@ -1640,7 +1640,6 @@ Va sur un groupe spécifique. Décision : ce groupe existe-t-il, qui en fait par
 | [`WIN - D - Defender ASR Policy Audit Mode`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.fr.md) | **SG-D-UEM-Pilot** — Groupe pilote, et ce sans la policy ASR bloquante — les mêmes seize règles en audit au lieu de block. | A.8.7, A.8.16 |
 | [`WIN - D - Defender Update Ring 1 Pilot`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.fr.md) | **SG-D-UEM-WIN-Update-Ring1** — Groupe pilote pour les mises à jour Defender. | A.8.7, A.8.8, A.8.32 |
 | [`WIN - D - Defender Update Ring 2 UAT`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.fr.md) | **SG-D-UEM-WIN-Update-Ring2** — Groupe UAT pour les mises à jour Defender. | A.8.7, A.8.8, A.8.32 |
-| [`WIN - D - Microsoft Office Shared Computer Activation`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.fr.md) | **SG-D-UEM-WIN-Shared** — Appareils partagés, avec les stratégies PC partagé. Inutile sur un ordinateur portable personnel. | A.5.32, A.8.19 |
 | [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.fr.md) | **SG-D-UEM-WIN-Shared** — Appareils partagés, avec la stratégie qui désactive Windows Hello for Business. Inutile sur un portable personnel. | A.5.17, A.8.5 |
 | [`WIN - D - Shared Devices OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.fr.md) | **SG-D-UEM-WIN-Shared** — Appareils partagés, avec les stratégies PC partagé. | A.8.12, A.8.13 |
 | [`WIN - D - Shared Devices Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.fr.md) | **SG-D-UEM-WIN-Shared** — Appareils partagés, avec la stratégie qui désactive Windows Hello for Business. | A.5.17, A.8.5 |
@@ -1902,7 +1901,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.5.29** Sécurité de l'information durant une perturbation | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 2 policies en phase 1. Organisationnel : Planifier le niveau de sécurité en situation de crise (procédures d'urgence, comptes break-glass). | (c) (e) |
 | **A.5.30** Préparation des TIC pour la continuité d'activité | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 3 policies en phase 1. Organisationnel : BIA, objectifs de reprise (RTO/RPO) et tests de continuité périodiques. | (c) (j) |
 | **A.5.31** Exigences légales, statutaires, réglementaires et contractuelles | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Tenir un registre des lois et réglementations applicables (NIS2/loi sur la cybersécurité, RGPD). | — |
-| **A.5.32** Droits de propriété intellectuelle | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Préparé techniquement : 1 policy en pilote, en attente ou groupe dédié. Organisationnel : Gestion des licences et règles d'utilisation des logiciels et des contenus. | (i) |
+| **A.5.32** Droits de propriété intellectuelle | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Organisationnel : Gestion des licences et règles d'utilisation des logiciels et des contenus. | (i) |
 | **A.5.33** Protection des enregistrements | oui | sécurité de base ; à confirmer par l'analyse des risques | Préparé techniquement : 1 policy en pilote, en attente ou groupe dédié. Organisationnel : Définir les durées de conservation et la protection des enregistrements (politique de rétention, conservation des journaux). | — |
 | **A.5.34** Protection de la vie privée et des DCP | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 4 policies en phase 1, 6 préparée(s). Organisationnel : Responsabilité RGPD : registre des traitements, AIPD pour la télémétrie, la surveillance et les fonctions d'IA, concertation avec le DPO et le comité social et économique. | (d) (e) (g) |
 | **A.5.35** Révision indépendante de la sécurité de l'information | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : Audit interne ou revue externe à intervalles planifiés. | — |
@@ -1948,7 +1947,7 @@ résultat. La colonne *NIS2* indique les points que touchent les policies liées
 | **A.8.16** Activités de surveillance | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 4 policies en phase 1, 7 préparée(s). Organisationnel : Suivi des alertes 24 h/24 et 7 j/7 ou pendant les heures de bureau, avec des critères d'escalade. | (b) (e) (i) |
 | **A.8.17** Synchronisation des horloges | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 2 policies en phase 1, 1 préparée(s). Organisationnel : Définir une source de temps approuvée. | (b) (e) (i) |
 | **A.8.18** Utilisation de programmes utilitaires à privilèges | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 1 policy en phase 1, 3 préparée(s). Organisationnel : Registre des outils d'administration et d'assistance à distance autorisés et des personnes habilitées à les utiliser. | (i) |
-| **A.8.19** Installation de logiciels sur des systèmes opérationnels | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 10 policies en phase 1, 10 préparée(s). Organisationnel : Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). | (e) (f) (g) (h) (i) |
+| **A.8.19** Installation de logiciels sur des systèmes opérationnels | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 10 policies en phase 1, 9 préparée(s). Organisationnel : Processus d'approbation et de mise à disposition des logiciels (catalogue Company Portal). | (e) (f) (g) (h) (i) |
 | **A.8.20** Sécurité des réseaux | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 14 policies en phase 1, 13 préparée(s). Organisationnel : L'infrastructure réseau (pare-feu, Wi-Fi, VPN) est en grande partie hors de cette baseline. | (b) (c) (e) (f) (h) (i) (j) |
 | **A.8.21** Sécurité des services réseau | oui | sécurité de base et mise en œuvre de NIS2 art. 21(2) ; à confirmer par l'analyse des risques | Technique : 2 policies en phase 1, 5 préparée(s). Organisationnel : Définir et surveiller les exigences relatives aux services et fournisseurs réseau. | (c) (e) (h) |
 | **A.8.22** Cloisonnement des réseaux | oui | sécurité de base ; à confirmer par l'analyse des risques | Organisationnel : La segmentation réseau relève de l'infrastructure et ne peut pas être mise en place via des policies endpoint/identité. | — |

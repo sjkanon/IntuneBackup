@@ -177,7 +177,7 @@ change à qui elles sont déployées. La raison pour chaque policy est le `faseW
 | `AND - U - Corporate Data Protection` | Les utilisateurs le remarquent immédiatement : pas de captures d'écran, pas de fichiers via Bluetooth, et un appareil fully managed ne peut plus être réinitialisé par l'utilisateur — l'IT doit l'effacer. D'abord sur un groupe pilote ; sans inscription fully managed ou corporate-owned work profile, il ne fait rien. |
 
 110 sont sans affectation : les 42 ci-dessus, 27 en attente d'un prérequis,
-25 pour un groupe dédié et 16 qui ne sont pas déployées. Ces deux dernières catégories sont une
+24 pour un groupe dédié et 17 qui ne sont pas déployées. Ces deux dernières catégories sont une
 *alternative* à une policy affectée, pas un complément : les anneaux de mise à jour
 1 et 2 pour Windows et Defender définissent les mêmes paramètres que l'anneau 3 avec d'autres valeurs, les
 trois templates standard CIPP pour Defender font la même chose que leur équivalent OIB, la

@@ -177,7 +177,7 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
 Zonder toewijzing staan er 110: de 42 hierboven, 27 die op een voorwaarde
-wachten, 25 voor een eigen groep en 16 die niet uitrollen. Die laatste twee zijn een
+wachten, 24 voor een eigen groep en 17 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

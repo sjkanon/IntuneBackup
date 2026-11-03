@@ -177,7 +177,7 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
 110 are without assignment: the 42 above, 27 awaiting a prerequisite,
-25 for a dedicated group and 16 that are not deployed. The last two are an
+24 for a dedicated group and 17 that are not deployed. The last two are an
 *alternative* to a policy that is assigned, not an addition to it: update rings
 1 and 2 for Windows and Defender set the same settings as ring 3 with different values, the
 three CIPP standard templates for Defender do the same as their OIB counterpart, the
