@@ -40,6 +40,7 @@ français.
 | [`Install-OfficeWeb.ps1`](Install-OfficeWeb.ps1) | place le script dans `%ProgramFiles%\OfficeWebOpen`, enregistre les ProgId `OfficeWeb.Word`, `OfficeWeb.Excel` et `OfficeWeb.PowerPoint` et construit la liste des noms à l'avance |
 | [`Detect-OfficeWeb.ps1`](Detect-OfficeWeb.ps1) | règle de détection : version, script et association présents |
 | [`Uninstall-OfficeWeb.ps1`](Uninstall-OfficeWeb.ps1) | supprime tout |
+| [`OfficeWeb-PlatformScript.ps1`](OfficeWeb-PlatformScript.ps1) | tout en un seul fichier, à coller dans CIPP (généré par [`New-OfficeWebPlatformScript.ps1`](New-OfficeWebPlatformScript.ps1)) |
 
 Types de fichiers : `.docx`, `.docm`, `.doc`, `.dotx`, `.xlsx`, `.xlsm`, `.xlsb`, `.xls`,
 `.pptx`, `.pptm`, `.ppt`, `.ppsx`. Office pour le web ouvre les anciens formats en lecture seule
@@ -70,6 +71,26 @@ n'existe pas et Windows les ignore.
 
 Si vous modifiez un script, augmentez `$Version` dans `Install-OfficeWeb.ps1` et dans
 `Detect-OfficeWeb.ps1`. Sinon Intune considère l'ancienne version comme installée.
+
+## Via CIPP, sans application Win32
+
+[`OfficeWeb-PlatformScript.ps1`](OfficeWeb-PlatformScript.ps1) est `Install-OfficeWeb.ps1` avec
+`Open-OfficeWeb.ps1` intégré, en un seul fichier de 14 Ko. Collez son contenu comme script
+PowerShell dans CIPP (scripts Intune) ou dans Intune → Appareils → Scripts et corrections →
+Scripts de plateforme :
+
+| Champ | Valeur |
+|---|---|
+| Exécuter ce script avec les informations d'identification de l'utilisateur connecté | Non |
+| Appliquer la vérification de la signature du script | Non |
+| Exécuter le script dans l'hôte PowerShell 64 bits | **Oui** (sinon les associations arrivent dans le registre 32 bits) |
+| Affectation | `SG-D-UEM-WIN-Shared` |
+
+Le script ne télécharge rien : tout ce que l'appareil exécute se trouve dans le fichier collé. Un
+script de plateforme s'exécute une fois par appareil. Après une modification : relancez
+`New-OfficeWebPlatformScript.ps1`, augmentez `$Version` et collez le nouveau contenu dans CIPP ;
+Intune réexécute un script modifié. Pour le retirer, `Uninstall-OfficeWeb.ps1`, aussi comme script
+de plateforme.
 
 ## Comment savoir si cela a fonctionné
 

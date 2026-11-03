@@ -1,4 +1,6 @@
-﻿<#
+<#
+    ASCII only, so that Intune runs it the same in every code page; accented letters are [char] codes.
+
     Opens an Office file from a OneDrive or SharePoint synced folder in Office for the web.
 
     Windows cannot associate a file type with a web app, so on a device without the Office
@@ -37,7 +39,7 @@ function Write-Log($Text) {
     } catch { }
 }
 
-# "&Online weergeven", "オンラインで表示(&V)" and "View online" all become the plain text.
+# "&Online weergeven", a Japanese "...(&V)" and "View online" all become the plain text.
 function ConvertTo-PlainName([string]$Name) {
     return (($Name -replace '\(&.\)', '') -replace '&', '').Trim()
 }
@@ -55,11 +57,12 @@ function Get-ViewOnlineNames {
     param([System.IO.DirectoryInfo]$ResourceDir)
 
     if (-not ('OfficeWebOpen.Native' -as [type])) {
-        Add-Type -Namespace OfficeWebOpen -Name Native -MemberDefinition @'
-[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)] public static extern IntPtr LoadLibraryEx(string file, IntPtr reserved, uint flags);
-[DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int LoadString(IntPtr module, uint id, System.Text.StringBuilder buffer, int size);
-[DllImport("kernel32.dll")] public static extern bool FreeLibrary(IntPtr module);
-'@
+        # No here-string: New-OfficeWebPlatformScript.ps1 puts this whole script in one.
+        Add-Type -Namespace OfficeWebOpen -Name Native -MemberDefinition (@(
+            '[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)] public static extern IntPtr LoadLibraryEx(string file, IntPtr reserved, uint flags);'
+            '[DllImport("user32.dll", CharSet = CharSet.Unicode)] public static extern int LoadString(IntPtr module, uint id, System.Text.StringBuilder buffer, int size);'
+            '[DllImport("kernel32.dll")] public static extern bool FreeLibrary(IntPtr module);'
+        ) -join [Environment]::NewLine)
     }
     # LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE: read resources, run nothing.
     $flags = 0x22
@@ -107,8 +110,8 @@ function Get-CachedNames {
 function Show-NotSynced([string]$FileName) {
     $text = switch ((Get-UICulture).TwoLetterISOLanguageName) {
         'nl' { "$FileName staat niet in een gesynchroniseerde OneDrive- of SharePoint-map.`n`nZet het bestand in je OneDrive-map en wacht tot het groene vinkje verschijnt. Daarna opent het in Office voor het web." }
-        'fr' { "$FileName ne se trouve pas dans un dossier OneDrive ou SharePoint synchronisé.`n`nPlacez le fichier dans votre dossier OneDrive et attendez la coche verte. Il s'ouvrira ensuite dans Office pour le web." }
-        'de' { "$FileName befindet sich nicht in einem synchronisierten OneDrive- oder SharePoint-Ordner.`n`nLegen Sie die Datei in Ihren OneDrive-Ordner und warten Sie auf das grüne Häkchen. Danach öffnet sie sich in Office für das Web." }
+        'fr' { "$FileName ne se trouve pas dans un dossier OneDrive ou SharePoint synchronis$([char]0x00E9).`n`nPlacez le fichier dans votre dossier OneDrive et attendez la coche verte. Il s'ouvrira ensuite dans Office pour le web." }
+        'de' { "$FileName befindet sich nicht in einem synchronisierten OneDrive- oder SharePoint-Ordner.`n`nLegen Sie die Datei in Ihren OneDrive-Ordner und warten Sie auf das gr$([char]0x00FC)ne H$([char]0x00E4)kchen. Danach $([char]0x00F6)ffnet sie sich in Office f$([char]0x00FC)r das Web." }
         default { "$FileName is not in a synced OneDrive or SharePoint folder.`n`nPut the file in your OneDrive folder and wait for the green check mark. It then opens in Office for the web." }
     }
     Add-Type -AssemblyName System.Windows.Forms

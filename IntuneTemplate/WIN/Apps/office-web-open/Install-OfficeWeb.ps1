@@ -51,7 +51,14 @@ function Set-Value($Key, $Name, $Value, $Type = 'String') {
 Write-Log "--- install $Version"
 
 New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Open-OfficeWeb.ps1') -Destination $Script -Force
+# As a Win32 app the script sits next to this one. As a platform script (CIPP or Intune
+# Scripts) there is only one file: New-OfficeWebPlatformScript.ps1 puts it in $OpenScript.
+# @@OPEN-SCRIPT@@
+if (Get-Variable -Name OpenScript -ErrorAction SilentlyContinue) {
+    Set-Content -LiteralPath $Script -Value $OpenScript -Encoding ASCII
+} else {
+    Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'Open-OfficeWeb.ps1') -Destination $Script -Force
+}
 Write-Log "script in $Script"
 
 $classes = 'HKLM:\SOFTWARE\Classes'
