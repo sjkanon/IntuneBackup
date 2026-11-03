@@ -9,6 +9,7 @@ tenant, sans que personne n'ait à téléverser un `.intunewin`.
 |---|---|---|
 | [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `[Baseline] - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
 | [`Winget-AutoUpdate-AllDevices.json`](Winget-AutoUpdate-AllDevices.json) | la même application, affectée à tous les appareils — pour la baseline [`Windows-Updates.json`](../BaselineTemplate/README.fr.md#windows-updatesjson--correctifs) | idem |
+| [`Shared-Devices-Apps.json`](Shared-Devices-Apps.json) | `[Baseline] - WIN - D - Windows App` (Store) et `[Baseline] - WIN - D - Office op het web`, affectées à `SG-D-UEM-WIN-Shared` — pour la baseline `0.5 - UEM - Shared Devices` de CIPP-Baselines | [`IntuneTemplate/WIN/Apps/office-web-open/`](../IntuneTemplate/WIN/Apps/office-web-open/README.fr.md) |
 
 ## Fonctionnement
 

@@ -34,6 +34,8 @@ const crypto = require("crypto");
 const REPO_ROOT = path.resolve(__dirname, "..");
 const OUT_DIR = path.join(REPO_ROOT, "AppTemplate");
 const WAU_DIR = path.join(REPO_ROOT, "IntuneTemplate", "WIN", "Apps", "winget-autoupdate");
+const OFFICE_WEB_DIR = path.join(REPO_ROOT, "IntuneTemplate", "WIN", "Apps", "office-web-open");
+const SHARED_GROUP = "SG-D-UEM-WIN-Shared";
 const { WAU_TEMPLATE_FILE, UPDATES_BASELINE } = require("./lib/windows-updates");
 const { PREFIX } = require("./lib/organisation");
 
@@ -124,6 +126,79 @@ function wauTemplate({ file, displayName, assignTo, description }) {
   };
 }
 
+/**
+ * The apps of the shared devices, for the baseline 0.5 - UEM - Shared Devices in CIPP-Baselines:
+ * Windows App from the Store, and Office op het web as a custom application. Its install script
+ * is OfficeWeb-PlatformScript.ps1, Install-OfficeWeb.ps1 with Open-OfficeWeb.ps1 inside: CIPP
+ * uploads only scripts, so there is no file next to the installer. Built here the same way as
+ * New-OfficeWebPlatformScript.ps1 does, and checked against that file, so the platform script
+ * and the template install the same thing.
+ */
+function sharedDevicesTemplate() {
+  const install = readScript(OFFICE_WEB_DIR, "Install-OfficeWeb.ps1");
+  const open = readScript(OFFICE_WEB_DIR, "Open-OfficeWeb.ps1");
+  const uninstall = readScript(OFFICE_WEB_DIR, "Uninstall-OfficeWeb.ps1");
+  const detect = readScript(OFFICE_WEB_DIR, "Detect-OfficeWeb.ps1");
+  const platform = readScript(OFFICE_WEB_DIR, "OfficeWeb-PlatformScript.ps1");
+
+  const marker = "# @@OPEN-SCRIPT@@";
+  if (!install.includes(marker)) throw new Error("Install-OfficeWeb.ps1: marker @@OPEN-SCRIPT@@ missing");
+  if (/^'@/m.test(open)) throw new Error("Open-OfficeWeb.ps1: a line starting with '@ would end the here-string");
+  // A function, not a string: the script contains "$'", which String.replace reads as a pattern.
+  const body = install.replace(marker, () => `$OpenScript = @'\n${open.trimEnd()}\n'@`);
+  if (!platform.trimEnd().endsWith(body.trimEnd())) {
+    throw new Error("OfficeWeb-PlatformScript.ps1 is out of date: run IntuneTemplate/WIN/Apps/office-web-open/New-OfficeWebPlatformScript.ps1");
+  }
+  for (const [file, text] of [["OfficeWeb-PlatformScript.ps1", platform], ["Uninstall-OfficeWeb.ps1", uninstall], ["Detect-OfficeWeb.ps1", detect]]) {
+    assertNoTokens(text, file);
+  }
+  const version = pinned(install, "Version", "Install-OfficeWeb.ps1");
+  if (version !== pinned(detect, "Version", "Detect-OfficeWeb.ps1")) throw new Error("$Version differs between Install-OfficeWeb.ps1 and Detect-OfficeWeb.ps1");
+
+  const windowsApp = PREFIX + "WIN - D - Windows App";
+  const officeWeb = PREFIX + "WIN - D - Office op het web";
+  const assign = { InstallationIntent: false, AssignTo: "customGroup", CustomGroup: SHARED_GROUP };
+  const apps = [
+    {
+      appType: "StoreApp",
+      appName: windowsApp,
+      config: JSON.stringify({
+        ApplicationName: windowsApp,
+        description: "Windows App (Microsoft Store 9N1F85V9T8BN): Windows 365, Azure Virtual Desktop and remote PCs. Pinned to the taskbar and Start by Shared Devices Start and Taskbar.",
+        PackageName: "9N1F85V9T8BN",
+        InstallAsSystem: true,
+        ...assign,
+      }),
+    },
+    {
+      appType: "win32ScriptApp",
+      appName: officeWeb,
+      config: JSON.stringify({
+        applicationName: officeWeb,
+        description: `Office op het web ${version}: a double-click on a Word, Excel or PowerPoint file in a synced OneDrive or SharePoint folder opens it in Office for the web. Source: IntuneBackup IntuneTemplate/WIN/Apps/office-web-open.`,
+        publisher: "ConXioN",
+        installScript: platform,
+        uninstallScript: uninstall,
+        detectionScript: detect,
+        InstallAsSystem: true,
+        DisableRestart: true,
+        runAs32Bit: false,
+        enforceSignatureCheck: false,
+        ...assign,
+      }),
+    },
+  ];
+  const displayName = PREFIX + "Shared Devices Apps";
+  const guid = stableGuid(displayName);
+  const json = {
+    Displayname: displayName,
+    Description: `Windows App and Office op het web ${version} for shared Windows devices without Office, assigned (required) to ${SHARED_GROUP}. Deployed by the baseline 0.5 - UEM - Shared Devices.`,
+    GUID: guid,
+    Apps: apps,
+  };
+  return { file: "Shared-Devices-Apps.json", row: { PartitionKey: "AppTemplate", RowKey: guid, GUID: guid, JSON: JSON.stringify(json) } };
+}
+
 function main() {
   const check = process.argv.includes("--check");
   let stale = 0;
@@ -140,6 +215,7 @@ function main() {
       assignTo: "AllDevices",
       description: `Assigned to all devices (required); deployed by the baseline ${UPDATES_BASELINE.templateName}.`,
     }),
+    sharedDevicesTemplate(),
   ];
   for (const { file, row } of templates) {
     const target = path.join(OUT_DIR, file);
