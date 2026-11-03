@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 153 policies
+# Windows — 154 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 131 |
+| `SettingsCatalog/` | 132 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -19,6 +19,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 
 | Dossier | Quoi |
 |---|---|
+| [`Apps/office-web-open/`](Apps/office-web-open/README.fr.md) | Office op het web |
 | [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.fr.md) | Supprimer McAfee préinstallé |
 | [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.fr.md) | Winget-AutoUpdate |
 | [`AssignmentFilters/`](AssignmentFilters/README.fr.md) | Filtres d'affectation pour Windows |
@@ -30,7 +31,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 119
+## Device-scoped (D) — 120
 
 Affecter à des groupes d'appareils.
 
@@ -115,6 +116,7 @@ Affecter à des groupes d'appareils.
 | [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.fr.md) | Permet aux utilisateurs de se connecter sur les appareils partagés avec une clé de sécurité FIDO2 ou un badge NFC, sans mot de passe et sans configurer Windows Hello for Business sur l'appareil. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.fr.md) | Avertit dans le journal Système dès que le journal Sécurité est plein à 90 % et journalise l'exécution du pipeline de tous les modules PowerShell, afin que lors d'un incident le journal n'ait pas été écrasé à l'insu de tous et que l'activité PowerShell soit entièrement traçable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.fr.md) | Détermine quels paramètres Windows sont synchronisés entre appareils. | Settings Catalog | 4 | All Devices |
+| [**Shared Devices Office Web File Associations**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.fr.md) | Fait de l'application Office op het web l'application par défaut pour les fichiers Word, Excel et PowerPoint sur les appareils partagés, afin qu'un double-clic sur un fichier dans OneDrive ou SharePoint l'ouvre dans Office pour le web, et ouvre les scripts comme .js, .vbs et .hta avec le Bloc-notes. | Settings Catalog | 1 | — |
 | [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.fr.md) | Connecte OneDrive en silence avec le compte professionnel sur les appareils partagés, place Bureau, Documents et Images dans OneDrive et garde les fichiers en ligne uniquement, y compris ceux des sites d'équipe synchronisés, afin que rien ne reste dans un profil que le PC partagé supprime et que le disque ne se remplisse pas d'une copie par utilisateur. | Settings Catalog | 12 | — |
 | [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.fr.md) | Masque le champ du mot de passe sur l'écran de connexion des appareils partagés et active la connexion web, afin que les utilisateurs se connectent avec une clé FIDO2, ou avec un Temporary Access Pass tant qu'ils n'en ont pas. | Settings Catalog | 2 | — |
 | [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.fr.md) | Synchronise automatiquement une bibliothèque SharePoint du client pour chaque utilisateur des appareils partagés, en fichiers en ligne uniquement, afin que chacun ait le dossier partagé dans l'Explorateur sans l'ajouter lui-même. | Settings Catalog | 3 | — |

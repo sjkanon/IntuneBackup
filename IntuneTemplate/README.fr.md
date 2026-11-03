@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# IntuneTemplate — 218 policies
+# IntuneTemplate — 219 policies
 
 La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui
 se trouve dans `export/` et `BaselineTemplate/` en est dérivé et généré.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.fr.md) | 131 | 1 | 10 | 11 | – | **153** |
+| [Windows](WIN/README.fr.md) | 132 | 1 | 10 | 11 | – | **154** |
 | [macOS](MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **172** | **1** | **17** | **26** | **2** | **218** |
+| **Total** | **173** | **1** | **17** | **26** | **2** | **219** |
 
 ## Organisation
 
@@ -92,7 +92,7 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 | `[Baseline] - Baseline-SG-D-UEM-Pilot` | Custom group: SG-D-UEM-Pilot | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` | Custom group: SG-D-UEM-WIN-CloudPC-Dynamic | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External` | Custom group: SG-D-UEM-WIN-CloudPC-External | 1 | 1 |
-| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 6 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 7 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
@@ -114,7 +114,7 @@ elles existent comme alternative à une policy qui, elle, est déployée.
 
 ## Par plateforme
 
-- [Windows](WIN/README.fr.md) — 153 policies
+- [Windows](WIN/README.fr.md) — 154 policies
 - [macOS](MAC/README.fr.md) — 37 policies
 - [iOS/iPadOS](IOS/README.fr.md) — 14 policies
 - [Android](AND/README.fr.md) — 14 policies

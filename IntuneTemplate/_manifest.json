@@ -5050,6 +5050,35 @@
       "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
+      "target": "Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations",
+      "displayName": "[Baseline] - WIN - D - Shared Devices Office Web File Associations",
+      "doelgroep": "fysiek",
+      "doel": "Maakt op gedeelde apparaten de app Office op het web standaard voor Word-, Excel- en PowerPoint-bestanden, zodat een dubbelklik op een bestand in OneDrive of SharePoint het opent in Office voor het web, en opent scripts zoals .js, .vbs en .hta met Kladblok.",
+      "controls": {
+        "iso": [
+          "A.8.9 Configuratiebeheer",
+          "A.8.19 Installatie van software op operationele systemen"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.1 Establish and Maintain a Secure Configuration Process"
+        ],
+        "nistcsf": [
+          "PR.PS-01"
+        ]
+      },
+      "bron": "Eigen baseline — Policy CSP ApplicationDefaults/DefaultAssociationsConfiguration met de ProgIds van de Win32-app IntuneTemplate/WIN/Apps/office-web-open, plus de koppelingen van [Baseline] - WIN - D - Script File Associations.",
+      "bewijs": "Zonder Office op het toestel vraagt Windows bij elke dubbelklik op een Word-bestand met welke app het moet openen. Windows kan een bestandstype niet aan een webapp koppelen; de app Office op het web vult dat gat, en deze policy maakt hem bij elke aanmelding standaard, ook voor een nieuw Shared PC-profiel.",
+      "universeel": "Nee. Alleen op gedeelde apparaten zonder Office; waar Office staat, blijft Word de standaard.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met de Win32-app Office op het web (IntuneTemplate/WIN/Apps/office-web-open) op dezelfde groep. Zonder die app wijst de koppeling naar een ProgId die niet bestaat en negeert Windows hem. Bevat ook de scriptkoppelingen van [Baseline] - WIN - D - Script File Associations: twee policies met Default Associations Configuration op één toestel zijn een Conflict. Die policy staat in fase 2 op de pilot, waar gedeelde apparaten niet in horen; sluit SG-D-UEM-WIN-Shared uit zodra hij naar fase 1 gaat, en neem een wijziging aan zijn lijst hier over. Windows past de koppelingen toe bij het aanmelden.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten zonder Office, samen met de app Office op het web.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
       "target": "Baseline_WIN_D_Passkey_Access",
       "displayName": "[Baseline] - WIN - D - Passkey Access",
       "doelgroep": "alle",

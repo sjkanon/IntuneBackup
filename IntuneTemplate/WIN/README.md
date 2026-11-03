@@ -2,13 +2,13 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 153 policies
+# Windows — 154 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 131 |
+| `SettingsCatalog/` | 132 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -19,6 +19,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 
 | Map | Wat |
 |---|---|
+| [`Apps/office-web-open/`](Apps/office-web-open/README.md) | Office op het web |
 | [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.md) | Verwijder voorgeïnstalleerde McAfee |
 | [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.md) | Winget-AutoUpdate |
 | [`AssignmentFilters/`](AssignmentFilters/README.md) | Toewijzingsfilters voor Windows |
@@ -30,7 +31,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 119
+## Device-scoped (D) — 120
 
 Toewijzen aan apparaatgroepen.
 
@@ -115,6 +116,7 @@ Toewijzen aan apparaatgroepen.
 | [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.md) | Laat gebruikers zich op gedeelde apparaten aanmelden met een FIDO2-beveiligingssleutel of NFC-badge, zonder wachtwoord en zonder Windows Hello for Business op het toestel in te richten. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.md) | Waarschuwt in het systeemlogboek zodra het beveiligingslogboek voor 90% vol is en logt de pijplijnuitvoering van alle PowerShell-modules, zodat het logboek bij een incident niet ongemerkt is overschreven en PowerShell-activiteit volledig herleidbaar is. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.md) | Bepaalt welke Windows-instellingen tussen apparaten gesynchroniseerd worden. | Settings Catalog | 4 | All Devices |
+| [**Shared Devices Office Web File Associations**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.md) | Maakt op gedeelde apparaten de app Office op het web standaard voor Word-, Excel- en PowerPoint-bestanden, zodat een dubbelklik op een bestand in OneDrive of SharePoint het opent in Office voor het web, en opent scripts zoals .js, .vbs en .hta met Kladblok. | Settings Catalog | 1 | — |
 | [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.md) | Meldt OneDrive op gedeelde apparaten stil aan met het werkaccount, zet Bureaublad, Documenten en Afbeeldingen in OneDrive en zet bestanden alleen online neer, ook die van gesynchroniseerde teamsites, zodat er niets in een profiel achterblijft dat Shared PC opruimt en de schijf niet volloopt met een kopie per gebruiker. | Settings Catalog | 12 | — |
 | [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.md) | Verbergt het wachtwoordveld op het aanmeldscherm van gedeelde apparaten en zet aanmelden via het web aan, zodat gebruikers zich aanmelden met een FIDO2-sleutel, of met een Temporary Access Pass zolang ze er nog geen hebben. | Settings Catalog | 2 | — |
 | [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.md) | Synchroniseert op gedeelde apparaten één SharePoint-bibliotheek van de klant automatisch voor elke gebruiker, als bestanden die alleen online staan, zodat iedereen de gedeelde map in Verkenner heeft zonder die zelf toe te voegen. | Settings Catalog | 3 | — |
