@@ -4939,6 +4939,90 @@
       "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
+      "target": "Baseline_WIN_D_Shared_Devices_OneDrive",
+      "displayName": "[Baseline] - WIN - D - Shared Devices OneDrive",
+      "doelgroep": "fysiek",
+      "doel": "Meldt OneDrive op gedeelde apparaten stil aan met het werkaccount, zet Bureaublad, Documenten en Afbeeldingen in OneDrive en zet bestanden alleen online neer, ook die van gesynchroniseerde teamsites, zodat er niets in een profiel achterblijft dat Shared PC opruimt en de schijf niet volloopt met een kopie per gebruiker.",
+      "controls": {
+        "iso": [
+          "A.8.13 Back-up van informatie",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "cis": [
+          "CIS Controls v8.1 11.2 Perform Automated Backups"
+        ],
+        "nistcsf": [
+          "PR.DS-11"
+        ]
+      },
+      "bron": "Eigen baseline — dezelfde waarden als [Baseline] - WIN - D - Microsoft OneDrive voor stil aanmelden, Files On-Demand, Known Folder Move en de toegestane tenant, plus Convert synced team site files to online-only files (DehydrateSyncedTeamSites, Microsoft Learn: Use OneDrive policies to control sync settings).",
+      "bewijs": "Shared PC verwijdert profielen na 30 dagen of bij weinig schijfruimte. Wat dan alleen lokaal stond, is weg; met Known Folder Move staat het in OneDrive. Op een gedeeld toestel synchroniseert elk profiel dezelfde teamsites opnieuw: met Files On-Demand en DehydrateSyncedTeamSites blijven dat verwijzingen in plaats van kopieën.",
+      "universeel": "Nee. Alleen op gedeelde apparaten; op een eigen laptop doet [Baseline] - WIN - D - Microsoft OneDrive hetzelfde zonder de teamsites terug te zetten naar alleen online.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, naast [Baseline] - WIN - D - Shared PC of Shared PC Domain and Guest. Een eigen template zodat de Shared Devices-baseline in CIPP-Baselines OneDrive kan uitrollen zonder [Baseline] - WIN - D - Microsoft OneDrive op een groep te zetten. De gedeelde instellingen hebben dezelfde waarden als die policy, dus samen op één toestel is geen Conflict. De Settings Catalog-ID van DehydrateSyncedTeamSites volgt het patroon van de andere OneDrive-instellingen en staat in geen bron letterlijk: weigert CIPP het template, zoek de instelling dan op in de Settings Catalog (Convert synced team site files to online-only files) en neem die ID over.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten, samen met de Shared PC-policies.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites",
+      "displayName": "[Baseline] - WIN - D - Shared Devices SharePoint Team Sites",
+      "doelgroep": "fysiek",
+      "doel": "Synchroniseert op gedeelde apparaten één SharePoint-bibliotheek van de klant automatisch voor elke gebruiker, als bestanden die alleen online staan, zodat iedereen de gedeelde map in Verkenner heeft zonder die zelf toe te voegen.",
+      "controls": {
+        "iso": [
+          "A.8.13 Back-up van informatie",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "cis": [
+          "CIS Controls v8.1 11.2 Perform Automated Backups"
+        ],
+        "nistcsf": [
+          "PR.DS-11"
+        ]
+      },
+      "bron": "Eigen baseline — Configure team site libraries to sync automatically (AutoMountTeamSites, Microsoft Learn: Use OneDrive policies to control sync settings). Naam en bibliotheek-ID uit de CIPP-variabelen %SharedTeamSiteName% en %SharedTeamSiteLibraryId%.",
+      "bewijs": "Op een gedeeld toestel meldt zich steeds een ander profiel aan. Zonder automatisch koppelen moet elke gebruiker de bibliotheek zelf synchroniseren of een snelkoppeling maken; met deze policy staat hij er bij elke aanmelding, als verwijzingen dankzij Files On-Demand.",
+      "universeel": "Nee. Per klant een andere bibliotheek, en alleen waar een gedeeld toestel met een vaste map werkt.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met [Baseline] - WIN - D - Shared Devices OneDrive (Files On-Demand is vereist). Leg in CIPP per tenant de variabelen %SharedTeamSiteName% (de naam in Verkenner) en %SharedTeamSiteLibraryId% vast. De bibliotheek-ID haal je in SharePoint: open de bibliotheek, Synchroniseren, annuleer de OneDrive-vraag en kies Bibliotheek-id kopiëren. Microsoft raadt het af voor bibliotheken met meer dan 5.000 bestanden of mappen en voor meer dan 1.000 toestellen per bibliotheek. OneDrive koppelt de bibliotheek binnen acht uur na de aanmelding; op een gedeeld toestel met steeds nieuwe profielen kan een gebruiker daar dus de eerste keer op moeten wachten. De Settings Catalog-ID's volgen het patroon van de andere OneDrive-instellingen en staan in geen bron letterlijk: weigert CIPP het template, neem dan de ID's over uit de Settings Catalog (Configure team site libraries to sync automatically).",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "Wacht op de bibliotheek-ID van de klant: zonder de CIPP-variabelen %SharedTeamSiteName% en %SharedTeamSiteLibraryId% komt de letterlijke tekst in de tenant."
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_Passwordless",
+      "displayName": "[Baseline] - WIN - D - Shared Devices Passwordless",
+      "doelgroep": "fysiek",
+      "doel": "Verbergt het wachtwoordveld op het aanmeldscherm van gedeelde apparaten en zet aanmelden via het web aan, zodat gebruikers zich aanmelden met een FIDO2-sleutel, of met een Temporary Access Pass zolang ze er nog geen hebben.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-03"
+        ]
+      },
+      "bron": "Eigen baseline — EnablePasswordlessExperience en EnableWebSignIn uit [Baseline] - WIN - D - Passwordless (OpenIntuneBaseline Windows v4.0), zonder de standaard-aanmeldtegel.",
+      "bewijs": "Op gedeelde apparaten staat Windows Hello for Business uit; de aanmelding is een FIDO2-sleutel ([Baseline] - WIN - D - Security Key Sign-in). Zonder wachtwoordveld kan een gedeeld toestel niet de plek worden waar iemand zijn wachtwoord intypt terwijl er meegekeken wordt.",
+      "universeel": "Nee. Op een eigen laptop doet [Baseline] - WIN - D - Passwordless dit, met Windows Hello als standaardtegel.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met [Baseline] - WIN - D - Windows Hello for Business Disabled en [Baseline] - WIN - D - Security Key Sign-in. [Baseline] - WIN - D - Passwordless zet daarnaast de standaardtegel op de pincode van Windows Hello; die hoort niet op een toestel zonder Windows Hello, daarom staat hij hier niet in. Deze twee instellingen hebben dezelfde waarde als in die policy, dus samen op één toestel is geen Conflict. Wie nog geen sleutel heeft, meldt zich aan via het web met een Temporary Access Pass van de servicedesk: zet de TAP-methode in Entra aan voordat deze policy landt.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten, samen met de policy die Windows Hello for Business uitzet.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
       "target": "Baseline_WIN_D_Passkey_Access",
       "displayName": "[Baseline] - WIN - D - Passkey Access",
       "doelgroep": "alle",

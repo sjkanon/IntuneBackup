@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 149 policies
+# Windows — 152 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 127 |
+| `SettingsCatalog/` | 130 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 115
+## Device-scoped (D) — 118
 
 Affecter à des groupes d'appareils.
 
@@ -115,6 +115,9 @@ Affecter à des groupes d'appareils.
 | [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.fr.md) | Permet aux utilisateurs de se connecter sur les appareils partagés avec une clé de sécurité FIDO2 ou un badge NFC, sans mot de passe et sans configurer Windows Hello for Business sur l'appareil. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.fr.md) | Avertit dans le journal Système dès que le journal Sécurité est plein à 90 % et journalise l'exécution du pipeline de tous les modules PowerShell, afin que lors d'un incident le journal n'ait pas été écrasé à l'insu de tous et que l'activité PowerShell soit entièrement traçable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.fr.md) | Détermine quels paramètres Windows sont synchronisés entre appareils. | Settings Catalog | 4 | All Devices |
+| [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.fr.md) | Connecte OneDrive en silence avec le compte professionnel sur les appareils partagés, place Bureau, Documents et Images dans OneDrive et garde les fichiers en ligne uniquement, y compris ceux des sites d'équipe synchronisés, afin que rien ne reste dans un profil que le PC partagé supprime et que le disque ne se remplisse pas d'une copie par utilisateur. | Settings Catalog | 12 | — |
+| [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.fr.md) | Masque le champ du mot de passe sur l'écran de connexion des appareils partagés et active la connexion web, afin que les utilisateurs se connectent avec une clé FIDO2, ou avec un Temporary Access Pass tant qu'ils n'en ont pas. | Settings Catalog | 2 | — |
+| [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.fr.md) | Synchronise automatiquement une bibliothèque SharePoint du client pour chaque utilisateur des appareils partagés, en fichiers en ligne uniquement, afin que chacun ait le dossier partagé dans l'Explorateur sans l'ajouter lui-même. | Settings Catalog | 3 | — |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.fr.md) | Mode PC partagé comme [Baseline] - WIN - D - Shared PC, mais avec en plus un compte invité : l'écran de connexion affiche un bouton Invité permettant à une personne sans compte de démarrer une session locale temporaire. | Device config | — | — |
 | [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.fr.md) | Place les PC Windows partagés en mode PC partagé avec uniquement des comptes Entra : les profils des utilisateurs qui ne se sont pas connectés depuis 30 jours, ou lorsque l'espace disque libre passe sous 25 %, sont supprimés, il n'y a pas de stockage local en dehors du profil et la maintenance s'exécute à 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.fr.md) | Nettoie automatiquement les fichiers temporaires, la Corbeille et les anciens téléchargements dès que le disque menace d'être plein, et repasse en ligne uniquement les fichiers OneDrive mis en cache localement. | Settings Catalog | 6 | All Devices |

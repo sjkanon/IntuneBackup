@@ -2,18 +2,18 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# IntuneTemplate — 214 policies
+# IntuneTemplate — 217 policies
 
 La source de ce dépôt : les policies Intune convenues, au format template CIPP. Tout ce qui
 se trouve dans `export/` et `BaselineTemplate/` en est dérivé et généré.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.fr.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](WIN/README.fr.md) | 130 | 1 | 10 | 11 | – | **152** |
 | [macOS](MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Total** | **168** | **1** | **17** | **26** | **2** | **214** |
+| **Total** | **171** | **1** | **17** | **26** | **2** | **217** |
 
 ## Organisation
 
@@ -83,7 +83,7 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 | `[Baseline] - Baseline-Pilot-Devices-Physical` | Custom group: SG-D-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 12 |
 | `[Baseline] - Baseline-Pilot-Users` | Custom group: SG-U-UEM-Pilot | 2 | 9 |
 | `[Baseline] - Baseline-Pilot-Users-Physical` | Custom group: SG-U-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 1 |
-| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
+| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 27 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (à lier à un jeton ADE dans Intune) | 1 | 2 |
 | `[Baseline] - Baseline-SG-D-UEM-AND-Dedicated-Dynamic` | Custom group: SG-D-UEM-AND-Dedicated-Dynamic | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-IOS-BYOD-Dynamic` | Custom group: SG-D-UEM-IOS-BYOD-Dynamic | 1 | 1 |
@@ -92,7 +92,7 @@ qui ne sont pas encore prêtes. La valeur découle de `fase` dans `_manifest.jso
 | `[Baseline] - Baseline-SG-D-UEM-Pilot` | Custom group: SG-D-UEM-Pilot | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` | Custom group: SG-D-UEM-WIN-CloudPC-Dynamic | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External` | Custom group: SG-D-UEM-WIN-CloudPC-External | 1 | 1 |
-| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 4 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 6 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
@@ -114,7 +114,7 @@ elles existent comme alternative à une policy qui, elle, est déployée.
 
 ## Par plateforme
 
-- [Windows](WIN/README.fr.md) — 149 policies
+- [Windows](WIN/README.fr.md) — 152 policies
 - [macOS](MAC/README.fr.md) — 37 policies
 - [iOS/iPadOS](IOS/README.fr.md) — 14 policies
 - [Android](AND/README.fr.md) — 14 policies

@@ -2,18 +2,18 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# IntuneTemplate — 214 policies
+# IntuneTemplate — 217 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `export/` en `BaselineTemplate/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](WIN/README.md) | 130 | 1 | 10 | 11 | – | **152** |
 | [macOS](MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Totaal** | **168** | **1** | **17** | **26** | **2** | **214** |
+| **Totaal** | **171** | **1** | **17** | **26** | **2** | **217** |
 
 ## Indeling
 
@@ -83,7 +83,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `[Baseline] - Baseline-Pilot-Devices-Physical` | Custom group: SG-D-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 12 |
 | `[Baseline] - Baseline-Pilot-Users` | Custom group: SG-U-UEM-Pilot | 2 | 9 |
 | `[Baseline] - Baseline-Pilot-Users-Physical` | Custom group: SG-U-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 1 |
-| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
+| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 27 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
 | `[Baseline] - Baseline-SG-D-UEM-AND-Dedicated-Dynamic` | Custom group: SG-D-UEM-AND-Dedicated-Dynamic | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-IOS-BYOD-Dynamic` | Custom group: SG-D-UEM-IOS-BYOD-Dynamic | 1 | 1 |
@@ -92,7 +92,7 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `[Baseline] - Baseline-SG-D-UEM-Pilot` | Custom group: SG-D-UEM-Pilot | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` | Custom group: SG-D-UEM-WIN-CloudPC-Dynamic | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External` | Custom group: SG-D-UEM-WIN-CloudPC-External | 1 | 1 |
-| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 4 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 6 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
@@ -114,7 +114,7 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 149 policies
+- [Windows](WIN/README.md) — 152 policies
 - [macOS](MAC/README.md) — 37 policies
 - [iOS/iPadOS](IOS/README.md) — 14 policies
 - [Android](AND/README.md) — 14 policies
