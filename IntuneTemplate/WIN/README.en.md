@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 148 policies
+# Windows — 149 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 126 |
+| `SettingsCatalog/` | 127 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 114
+## Device-scoped (D) — 115
 
 Assign to device groups.
 
@@ -96,6 +96,7 @@ Assign to device groups.
 | [**Microsoft Edge Security**](SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.en.md) | Edge's security settings: SmartScreen, download control, certificate behaviour and which sites may load insecure content. | Settings Catalog | 59 | All Devices |
 | [**Microsoft Edge Updates**](SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.en.md) | How and when Edge updates itself, and that a user cannot postpone it. | Settings Catalog | 24 | All Devices |
 | [**Microsoft Office Security**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.en.md) | Office macro security: blocks macros in files from the internet, restricts ActiveX and old file formats. The centrepiece of this baseline against phishing via attachments. | Settings Catalog | 209 | All Devices |
+| [**Microsoft Office Shared Computer Activation**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.en.md) | Lets Microsoft 365 Apps on shared devices activate per signed-in user instead of once per device, so that everyone uses Office with their own licence and the device does not count towards one user's installation limit. | Settings Catalog | 1 | — |
 | [**Microsoft Office Updates**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.en.md) | Which update channel Office is on and how quickly updates are installed. | Settings Catalog | 6 | All Devices |
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) | Automatically signs the OneDrive client in with the work account and moves Desktop, Documents and Pictures to OneDrive, so that nothing is stored only locally. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) | Restricts the Microsoft Store, so that users cannot install arbitrary apps. | Settings Catalog | 7 | All Devices |

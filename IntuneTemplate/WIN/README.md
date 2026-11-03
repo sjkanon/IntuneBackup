@@ -2,13 +2,13 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 148 policies
+# Windows — 149 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 126 |
+| `SettingsCatalog/` | 127 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 114
+## Device-scoped (D) — 115
 
 Toewijzen aan apparaatgroepen.
 
@@ -96,6 +96,7 @@ Toewijzen aan apparaatgroepen.
 | [**Microsoft Edge Security**](SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Security.md) | De beveiligingsinstellingen van Edge: SmartScreen, downloadcontrole, certificaatgedrag en welke sites onbeveiligde inhoud mogen laden. | Settings Catalog | 59 | All Devices |
 | [**Microsoft Edge Updates**](SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_Updates.md) | Hoe en wanneer Edge zichzelf bijwerkt, en dat een gebruiker dat niet kan uitstellen. | Settings Catalog | 24 | All Devices |
 | [**Microsoft Office Security**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Security.md) | De macrobeveiliging van Office: blokkeert macro's in bestanden uit internet, beperkt ActiveX en oude bestandsformaten. Het zwaartepunt van deze baseline voor phishing via bijlagen. | Settings Catalog | 209 | All Devices |
+| [**Microsoft Office Shared Computer Activation**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation.md) | Laat Microsoft 365 Apps op gedeelde apparaten per aangemelde gebruiker activeren in plaats van één keer per toestel, zodat iedereen Office met de eigen licentie gebruikt en het toestel niet meetelt voor de installatielimiet van één gebruiker. | Settings Catalog | 1 | — |
 | [**Microsoft Office Updates**](SettingsCatalog/Baseline_WIN_D_Microsoft_Office_Updates.md) | Op welk updatekanaal Office zit en hoe snel updates worden geïnstalleerd. | Settings Catalog | 6 | All Devices |
 | [**Microsoft OneDrive**](SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.md) | Meldt de OneDrive-client automatisch aan met het werkaccount en verplaatst Bureaublad, Documenten en Afbeeldingen naar OneDrive, zodat er niets alleen lokaal staat. | Settings Catalog | 19 | All Devices |
 | [**Microsoft Store**](SettingsCatalog/Baseline_WIN_D_Microsoft_Store.md) | Beperkt de Microsoft Store, zodat gebruikers geen willekeurige apps kunnen installeren. | Settings Catalog | 7 | All Devices |

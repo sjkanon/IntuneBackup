@@ -1,0 +1,32 @@
+{
+    "name": "[Baseline] - WIN - D - Microsoft Office Shared Computer Activation",
+    "description": "Lets Microsoft 365 Apps on shared devices activate per signed-in user instead of once per device, so that everyone uses Office with their own licence and the device does not count towards one user's installation limit. Baseline assignment: none by default — belongs on SEC-Shared-Devices. Source: Own baseline — Office ADMX, Microsoft Office 2016 (Machine) > Licensing Settings > Use shared computer activation (L_SharedComputerLicensing = 1). Microsoft requires this for Microsoft 365 Apps on devices that several people use..",
+    "platforms": "windows10",
+    "technologies": "mdm",
+    "templateReference": {
+        "templateId": "",
+        "templateFamily": "none",
+        "templateDisplayName": null,
+        "templateDisplayVersion": null
+    },
+    "roleScopeTagIds": [
+        "0"
+    ],
+    "settingCount": 1,
+    "settings": [
+        {
+            "id": "0",
+            "settingInstance": {
+                "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingInstance",
+                "settingDefinitionId": "device_vendor_msft_policy_config_office16v2~policy~l_microsoftofficemachine~l_licensingsettings_l_sharedcomputerlicensing",
+                "settingInstanceTemplateReference": null,
+                "choiceSettingValue": {
+                    "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+                    "settingValueTemplateReference": null,
+                    "value": "device_vendor_msft_policy_config_office16v2~policy~l_microsoftofficemachine~l_licensingsettings_l_sharedcomputerlicensing_1",
+                    "children": []
+                }
+            }
+        }
+    ]
+}
