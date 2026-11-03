@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · **English** · [Français](README.fr.md)
 
-# Windows — 149 policies
+# Windows — 154 policies
 
 All policies are named `[Baseline] - WIN - <D|U> - <Item>`; the tables below show the `<Item>` part.
 
 | Folder | Count |
 |---|---:|
-| `SettingsCatalog/` | 127 |
+| `SettingsCatalog/` | 132 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -19,6 +19,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 
 | Folder | What |
 |---|---|
+| [`Apps/office-web-open/`](Apps/office-web-open/README.en.md) | Office op het web |
 | [`Apps/remove-mcafee/`](Apps/remove-mcafee/README.en.md) | Remove preinstalled McAfee |
 | [`Apps/winget-autoupdate/`](Apps/winget-autoupdate/README.en.md) | Winget-AutoUpdate |
 | [`AssignmentFilters/`](AssignmentFilters/README.en.md) | Assignment filters for Windows |
@@ -30,7 +31,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.en.md) | Firefox policies |
 
-## Device-scoped (D) — 115
+## Device-scoped (D) — 120
 
 Assign to device groups.
 
@@ -115,6 +116,11 @@ Assign to device groups.
 | [**Security Key Sign in**](DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) | Lets users sign in on shared devices with a FIDO2 security key or NFC badge, without a password and without setting up Windows Hello for Business on the device. | Device config | — | — |
 | [**Security Log Monitoring**](SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) | Warns in the System log as soon as the Security log is 90% full and logs pipeline execution of all PowerShell modules, so that during an incident the log has not been overwritten unnoticed and PowerShell activity is fully traceable. | Settings Catalog | 4 | — |
 | [**Settings Sync**](SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) | Determines which Windows settings are synchronised between devices. | Settings Catalog | 4 | All Devices |
+| [**Shared Devices Office Web File Associations**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.en.md) | Makes the app Office op het web the default for Word, Excel and PowerPoint files on shared devices, so that a double-click on a file in OneDrive or SharePoint opens it in Office for the web, and opens scripts such as .js, .vbs and .hta with Notepad. | Settings Catalog | 1 | — |
+| [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.en.md) | Signs OneDrive on shared devices in silently with the work account, puts Desktop, Documents and Pictures in OneDrive and keeps files online-only, including those of synced team sites, so that nothing stays behind in a profile that Shared PC cleans up and the disk does not fill up with a copy per user. | Settings Catalog | 12 | — |
+| [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.en.md) | Hides the password field on the sign-in screen of shared devices and turns on web sign-in, so that users sign in with a FIDO2 key, or with a Temporary Access Pass as long as they do not have one yet. | Settings Catalog | 2 | — |
+| [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.en.md) | Syncs one SharePoint library of the customer automatically for every user on shared devices, as online-only files, so that everyone has the shared folder in Explorer without adding it themselves. | Settings Catalog | 3 | — |
+| [**Shared Devices Start and Taskbar**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.en.md) | Pins Microsoft Edge and Windows App to the taskbar and Start on shared devices, so that every user finds the browser and the remote workplace straight away at the first sign-in. | Settings Catalog | 2 | — |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) | Shared PC mode like [Baseline] - WIN - D - Shared PC, but with a guest account as well: the sign-in screen shows a Guest button with which someone without an account starts a temporary local session. | Device config | — | — |
 | [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) | Puts shared Windows PCs in Shared PC mode with Entra accounts only: profiles of users who have not signed in for 30 days, or when free disk space drops below 25%, are removed, there is no local storage outside the profile and maintenance runs at 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) | Automatically cleans up temporary files, the Recycle Bin and old downloads as soon as the disk threatens to fill up, and makes locally cached OneDrive files online-only again. | Settings Catalog | 6 | All Devices |

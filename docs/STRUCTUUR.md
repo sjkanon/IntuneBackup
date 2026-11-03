@@ -102,9 +102,9 @@ naar het CIPP-pakket; `check-scope.js` bewaakt dat fase, toewijzing en pakket kl
 | Fase | Betekenis | Policies | CIPP-pakket | CIPP-stage |
 |---:|---|---:|---|---:|
 | 1 | Nu uitrollen | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token`; per klasse ook `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
-| 2 | Eerst pilot | 42 | `[Baseline] - Baseline-Pilot` → groep `SEC-Baseline-Pilot`; `-Pilot-Physical` met filter | 2 |
+| 2 | Eerst pilot | 42 | `[Baseline] - Baseline-Pilot-Devices` → groep `SG-D-UEM-Pilot`, `-Pilot-Users` → `SG-U-UEM-Pilot`; `-Physical` met filter | 2 |
 | 3 | Wacht op voorwaarde (bijv. eerste inschrijving) | 26 | `[Baseline] - Baseline-Wacht`, niet toegewezen | 3 |
-| 4 | Eigen groep (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<groep>` | 1 |
+| 4 | Eigen groep (`faseGroep`) | 18 | `[Baseline] - Baseline-SG-<groep>` | 1 |
 | 5 | Niet uitrollen — alternatief voor een andere policy | 15 | geen | – |
 
 Doorschuiven naar stage 2 gebeurt als alles uit stage 1 compliant is **en** er twee weken voorbij

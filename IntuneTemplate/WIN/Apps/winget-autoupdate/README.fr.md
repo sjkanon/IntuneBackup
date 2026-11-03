@@ -86,7 +86,7 @@ désinstallation passe par [`Uninstall-WAU.ps1`](Uninstall-WAU.ps1), la détecti
 
 1. CIPP → **Tools → Community Repos** → ce dépôt → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
 2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy** :
-   choisissez les tenants et, comme affectation, le groupe `SEC-Baseline-Pilot` (le template
+   choisissez les tenants et, comme affectation, le groupe `SG-D-UEM-Pilot` (le template
    n'affecte rien lui-même). Ou ajoutez-le à une baseline avec le standard *Deploy Intune Application Template*.
 
 L'appareil doit pouvoir joindre `github.com` ; le journal MSI se trouve dans `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
@@ -114,7 +114,7 @@ de `Install-WAU.ps1` de `excluded_apps.txt` — les deux voies installent la mê
 | Comportement de redémarrage | Aucune action spécifique |
 | Système d'exploitation | 64 bits, Windows 10 22H2 ou ultérieur |
 | Règle de détection | Script personnalisé → [`Detect-WAU.ps1`](Detect-WAU.ps1) |
-| Affectation | *Required* sur le groupe pilote `SEC-Baseline-Pilot`, puis tous les appareils Windows |
+| Affectation | *Required* sur le groupe pilote `SG-D-UEM-Pilot`, puis tous les appareils Windows |
 
 La détection ignore volontairement la version : cela réinstallerait à chaque changement de
 version. Elle vérifie la clé de registre, `Winget-Upgrade.ps1` et la tâche planifiée

@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Cloud PC External Access",
-    "description": "On session hosts and Cloud PCs for personal devices and external users, shuts off the clipboard, printers and camera, disconnects a session after 15 minutes without activity and signs it out 15 minutes later: what is on the virtual desktop stays there. Baseline assignment: none by default — belongs on SEC-Cloud-PC-External. Source: IntuneAdmin — Baseline - Win365 - Do not allow Clipboard redirection, Do not allow client printer redirection and Do not allow video capture redirection; CIS Microsoft Intune for Windows 11 v4 L2 — Set time limit for active but idle Remote Desktop Services sessions (15 minutes) and Set time limit for disconnected sessions (15 minutes instead of 1).",
+    "description": "On session hosts and Cloud PCs for personal devices and external users, shuts off the clipboard, printers and camera, disconnects a session after 15 minutes without activity and signs it out 15 minutes later: what is on the virtual desktop stays there. Baseline assignment: none by default — belongs on SG-D-UEM-WIN-CloudPC-External. Source: IntuneAdmin — Baseline - Win365 - Do not allow Clipboard redirection, Do not allow client printer redirection and Do not allow video capture redirection; CIS Microsoft Intune for Windows 11 v4 L2 — Set time limit for active but idle Remote Desktop Services sessions (15 minutes) and Set time limit for disconnected sessions (15 minutes instead of 1).",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

@@ -69,7 +69,7 @@ Centre d'administration Intune → **Devices → Scripts and remediations → Cr
 | Exécuter avec les informations d'identification de l'utilisateur | Non (SYSTEM) |
 | PowerShell 64 bits | Oui |
 | Planification | Quotidienne |
-| Affectation | Groupe pilote `SEC-Baseline-Pilot`, puis tous les appareils Windows. Sur un appareil sans Firefox, il n'écrit que des valeurs de registre. |
+| Affectation | Groupe pilote `SG-D-UEM-Pilot`, puis tous les appareils Windows. Sur un appareil sans Firefox, il n'écrit que des valeurs de registre. |
 
 Un Firefox en cours d'exécution applique les stratégies après un redémarrage. Vérifiez avec `about:policies`.
 

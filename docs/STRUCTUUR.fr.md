@@ -102,9 +102,9 @@ la traduit en package CIPP ; `check-scope.js` vérifie que phase, affectation et
 | Phase | Signification | Stratégies | Package CIPP | Stage CIPP |
 |---:|---|---:|---|---:|
 | 1 | Déployer immédiatement | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token` ; par classe aussi `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
-| 2 | D'abord en pilote | 42 | `[Baseline] - Baseline-Pilot` → groupe `SEC-Baseline-Pilot` ; `-Pilot-Physical` avec filtre | 2 |
+| 2 | D'abord en pilote | 42 | `[Baseline] - Baseline-Pilot-Devices` → groupe `SG-D-UEM-Pilot`, `-Pilot-Users` → `SG-U-UEM-Pilot` ; `-Physical` avec filtre | 2 |
 | 3 | En attente d'un prérequis (p. ex. première inscription) | 26 | `[Baseline] - Baseline-Wacht`, non affecté | 3 |
-| 4 | Groupe dédié (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<groupe>` | 1 |
+| 4 | Groupe dédié (`faseGroep`) | 18 | `[Baseline] - Baseline-SG-<groupe>` | 1 |
 | 5 | Ne pas déployer — alternative à une autre stratégie | 15 | aucun | – |
 
 Le passage au stage 2 a lieu lorsque tout le stage 1 est conforme **et** que deux semaines se sont

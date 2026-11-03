@@ -15,7 +15,7 @@ Permet aux utilisateurs de se connecter sur les appareils partagés avec une cl�
 | Source | Baseline propre — OMA-URI ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin = 1, comme dans IntuneAdmin/IntuneBaselines (Baseline - Enables FIDO Security Keys to be used during Windows Sign In). |
 | Fichier | [`Baseline_WIN_D_Security_Key_Sign_in.json`](Baseline_WIN_D_Security_Key_Sign_in.json) |
 
-> Se place sur SEC-Shared-Devices. L'utilisateur a besoin d'une passkey sur une clé ou un badge FIDO2, enregistrée dans Entra ; activez pour cela la méthode d'authentification Passkey (FIDO2) dans la stratégie des méthodes d'authentification d'Entra. Un profil personnalisé (OMA-URI) plutôt que Settings Catalog, car l'ID Settings Catalog n'est vérifiable dans aucune source ; c'est le même paramètre que dans IntuneAdmin. Fonctionne sans Windows Hello for Business sur l'appareil : testez sur le premier appareil que l'option Clé de sécurité figure sur l'écran de connexion à côté de [Baseline] - WIN - D - Windows Hello for Business Disabled.
+> Se place sur SG-D-UEM-WIN-Shared. L'utilisateur a besoin d'une passkey sur une clé ou un badge FIDO2, enregistrée dans Entra ; activez pour cela la méthode d'authentification Passkey (FIDO2) dans la stratégie des méthodes d'authentification d'Entra. Un profil personnalisé (OMA-URI) plutôt que Settings Catalog, car l'ID Settings Catalog n'est vérifiable dans aucune source ; c'est le même paramètre que dans IntuneAdmin. Fonctionne sans Windows Hello for Business sur l'appareil : testez sur le premier appareil que l'option Clé de sécurité figure sur l'écran de connexion à côté de [Baseline] - WIN - D - Windows Hello for Business Disabled.
 
 ## Normes
 

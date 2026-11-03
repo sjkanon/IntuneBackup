@@ -52,7 +52,7 @@ FSLogix-policies is de CIPP-variabele `%FSLogixStorageAccount%`, die je per tena
   *Not applicable* en maken de host niet niet-compliant. En: **compliance gericht op gebruikers
   wordt op multi-session niet ondersteund.** De compliancepolicies in deze baseline (`WIN - U - Compliance …`)
   gaan naar alle gebruikers; voor de sessiehosts moeten ze óók aan de apparaatgroep
-  SEC-AVD-Session-Hosts worden toegewezen. Zonder dat is de host niet compliant en blokkeert
+  SG-D-UEM-WIN-AVD-SessionHosts worden toegewezen. Zonder dat is de host niet compliant en blokkeert
   CA 2060 de desktop-apps in de sessie zodra die op enforce staat.
 - **Update rings** werken niet. Updates komen met de maandelijkse image-rebuild.
 - **Apps** alleen in systeemcontext en als *Required*.
@@ -198,15 +198,15 @@ Fysiek en AVD, ongewijzigd en zonder filter.
 | [U - AI Usage Control Permitted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.md) | 5 |  |
 | [U - AI Usage Control Restricted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.md) | 2 |  |
 | [U - Attachment Scanning](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.md) | 1 |  |
-| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
-| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
 | [U - Compliance BitLocker](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.md) | 1 | Meldt op multi-session *Not applicable*; maakt de host niet niet-compliant. |
 | [U - Compliance Code Integrity](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.md) | 1 | Meldt op multi-session *Not applicable*; maakt de host niet niet-compliant. |
-| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) | 3 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
-| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
-| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
-| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
-| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.md) | 2 | Op multi-session alleen via een **apparaattoewijzing** (SEC-AVD-Session-Hosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.md) | 3 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.md) | 1 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
+| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.md) | 2 | Op multi-session alleen via een **apparaattoewijzing** (SG-D-UEM-WIN-AVD-SessionHosts): gebruikersgerichte compliance wordt daar niet ondersteund. |
 | [U - Compliance Secure Boot](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.md) | 1 | Meldt op multi-session *Not applicable*; maakt de host niet niet-compliant. |
 | [U - Compliance TPM](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.md) | 1 | Meldt op multi-session *Not applicable*; maakt de host niet niet-compliant. |
 | [U - Copilot](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.md) | 1 |  |
@@ -288,8 +288,8 @@ Doelgroep `fysiek`: in fase 1 en 2 het include-filter `[Baseline] - WIN - Physic
 | [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.md) | 1 | Nieuw. Doelgroep `avd`: pakket `Baseline-Devices-AVD`, include-filter `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Start and Search](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.md) | 1 | Nieuw. Doelgroep `avd`. Neemt `allowcloudsearch` over van Windows Feature Configuration (daar weggehaald); webresultaten staan al uit via die policy. `HideRecommendedSection` bestaat niet in de Settings Catalog. |
-| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | 4 | Bestaand, alleen op een hostpool voor externen (SEC-Cloud-PC-External). Botst daar met de sessielimieten van AVD Session Host — zie de open punten. |
-| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.md) | 4 | Bestaand, via de groep SEC-Cloud-PC (ook Windows 365). Zet ook de tijdzone-redirectie. |
+| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.md) | 4 | Bestaand, alleen op een hostpool voor externen (SG-D-UEM-WIN-CloudPC-External). Botst daar met de sessielimieten van AVD Session Host — zie de open punten. |
+| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.md) | 4 | Bestaand, via de groep SG-D-UEM-WIN-CloudPC-Dynamic (ook Windows 365). Zet ook de tijdzone-redirectie. |
 
 ## Bevindingen uit de testtenant (9 oktober 2026)
 
@@ -383,7 +383,7 @@ Het volledige draaiboek, ook voor de fysieke klasse en de migratie van een oude 
    het opslagaccount, zonder `.file.core.windows.net`. Zonder die variabele staat
    `%FSLogixStorageAccount%` letterlijk in het pad en kan met `PreventLoginWithFailure` niemand meer
    op de host aanmelden.
-3. **Groep SEC-AVD-Session-Hosts** als dynamische apparaatgroep, bijvoorbeeld
+3. **Groep SG-D-UEM-WIN-AVD-SessionHosts** als dynamische apparaatgroep, bijvoorbeeld
    `(device.displayName -startsWith "<hostpoolprefix>-sh")`. Niet voor de baseline-pakketten (die
    gebruiken het filter), wel voor de compliance-apparaattoewijzing (stap 5), de RDP-SSO-instelling
    *target device groups* op de hostpool en rapportage.
@@ -392,7 +392,7 @@ Het volledige draaiboek, ook voor de fysieke klasse en de migratie van een oude 
    gaan via de `-Physical`-pakketten en komen dus niet op de host.
 5. **Compliance op het apparaat.** Wijs de compliancepolicies die multi-session ondersteunt —
    Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection, Defender Security
-   Intelligence, Firewall en OS Version — óók toe aan SEC-AVD-Session-Hosts. Let op het open punt
+   Intelligence, Firewall en OS Version — óók toe aan SG-D-UEM-WIN-AVD-SessionHosts. Let op het open punt
    hieronder: CIPP's `verifyAssignments` ziet die extra toewijzing als afwijking.
 6. **Pilot-hostpool.** Eén hostpool met Entra join, Intune-inschrijving en Trusted Launch. Per host
    in Intune: elke policy *Succeeded* of *Not applicable*, geen *Conflict*. Aanmelden met een passkey
@@ -409,14 +409,14 @@ blijft alleen voor de applicatieservers).
 
 ## Open punten
 
-- **Hostpool voor externen.** Op een host in SEC-Cloud-PC-External landen `AVD Session Host`
+- **Hostpool voor externen.** Op een host in SG-D-UEM-WIN-CloudPC-External landen `AVD Session Host`
   (fase 1, `avd`) en `Cloud PC External Access` (fase 4) allebei, met andere sessielimieten: een
   Conflict, waarna geen van beide limieten geldt. In het pakketmodel is `AVD Session Host` niet los
   uit te sluiten — een exclude-groep op `Baseline-Devices-AVD` zou ook FSLogix van die hosts halen.
   Alleen relevant in een tenant met zo'n hostpool; een oplossing is de sessielimieten in een eigen
   policy onderbrengen.
 - **Compliance op het apparaat en `verifyAssignments`.** CIPP beheert de toewijzing van
-  `Baseline-Users` (alle gebruikers) en ziet een extra apparaattoewijzing aan SEC-AVD-Session-Hosts
+  `Baseline-Users` (alle gebruikers) en ziet een extra apparaattoewijzing aan SG-D-UEM-WIN-AVD-SessionHosts
   als afwijking die remediëring weer weghaalt (`Compare-CIPPIntuneAssignments`: extra
   include-groepen tellen mee zodra de standard de toewijzing beheert). Tot de pijplijn de
   compliancepolicies in een eigen pakket zet: controleer na elke CIPP-run dat de apparaattoewijzing

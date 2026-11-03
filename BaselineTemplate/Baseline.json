@@ -122,11 +122,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-android-dedicated",
+          "instance": "IntuneTemplatePackage#sg-d-uem-and-dedicated-dynamic",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Android-Dedicated",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-AND-Dedicated-Dynamic",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Android-Dedicated",
+            "customGroup": "SG-D-UEM-AND-Dedicated-Dynamic",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -139,11 +139,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-baseline-pilot",
+          "instance": "IntuneTemplatePackage#sg-d-uem-ios-byod-dynamic",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Baseline-Pilot",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-IOS-BYOD-Dynamic",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Baseline-Pilot",
+            "customGroup": "SG-D-UEM-IOS-BYOD-Dynamic",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -156,11 +156,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-cloud-pc",
+          "instance": "IntuneTemplatePackage#sg-d-uem-ios-corporate-dynamic",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Cloud-PC",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-IOS-Corporate-Dynamic",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Cloud-PC",
+            "customGroup": "SG-D-UEM-IOS-Corporate-Dynamic",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -173,11 +173,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-cloud-pc-external",
+          "instance": "IntuneTemplatePackage#sg-d-uem-mac-remotesupport",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Cloud-PC-External",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-MAC-RemoteSupport",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Cloud-PC-External",
+            "customGroup": "SG-D-UEM-MAC-RemoteSupport",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -190,11 +190,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-ios-byod",
+          "instance": "IntuneTemplatePackage#sg-d-uem-pilot",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-iOS-BYOD",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-Pilot",
             "assignTo": "customGroup",
-            "customGroup": "SEC-iOS-BYOD",
+            "customGroup": "SG-D-UEM-Pilot",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -207,11 +207,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-ios-corporate",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-cloudpc-dynamic",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-iOS-Corporate",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic",
             "assignTo": "customGroup",
-            "customGroup": "SEC-iOS-Corporate",
+            "customGroup": "SG-D-UEM-WIN-CloudPC-Dynamic",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -224,11 +224,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-remote-support-macos",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-cloudpc-external",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Remote-Support-macOS",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Remote-Support-macOS",
+            "customGroup": "SG-D-UEM-WIN-CloudPC-External",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -241,45 +241,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-shared-devices",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-shared",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Shared-Devices",
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-Shared",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Shared-Devices",
-            "excludeGroup": "",
-            "assignmentFilter": "",
-            "assignmentFilterType": "include",
-            "verifyAssignments": true,
-            "levenshteinDistance": 0
-          },
-          "remediateEnabled": true,
-          "alertEnabled": true,
-          "alertOnRemediate": false
-        },
-        {
-          "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-update-ring1",
-          "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Update-Ring1",
-            "assignTo": "customGroup",
-            "customGroup": "SEC-Update-Ring1",
-            "excludeGroup": "",
-            "assignmentFilter": "",
-            "assignmentFilterType": "include",
-            "verifyAssignments": true,
-            "levenshteinDistance": 0
-          },
-          "remediateEnabled": true,
-          "alertEnabled": true,
-          "alertOnRemediate": false
-        },
-        {
-          "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-update-ring2",
-          "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-SEC-Update-Ring2",
-            "assignTo": "customGroup",
-            "customGroup": "SEC-Update-Ring2",
+            "customGroup": "SG-D-UEM-WIN-Shared",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -323,6 +289,40 @@
           "remediateEnabled": true,
           "alertEnabled": true,
           "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-update-ring1",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1",
+            "assignTo": "customGroup",
+            "customGroup": "SG-D-UEM-WIN-Update-Ring1",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-update-ring2",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring2",
+            "assignTo": "customGroup",
+            "customGroup": "SG-D-UEM-WIN-Update-Ring2",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
         }
       ]
     },
@@ -342,11 +342,11 @@
       "standards": [
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#pilot",
+          "instance": "IntuneTemplatePackage#pilot-devices",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot",
+            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Devices",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Baseline-Pilot",
+            "customGroup": "SG-D-UEM-Pilot",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -359,11 +359,45 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#pilot-physical",
+          "instance": "IntuneTemplatePackage#pilot-devices-physical",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Physical",
+            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Devices-Physical",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Baseline-Pilot",
+            "customGroup": "SG-D-UEM-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "[Baseline] - WIN - Physical",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#pilot-users",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Users",
+            "assignTo": "customGroup",
+            "customGroup": "SG-U-UEM-Pilot",
+            "excludeGroup": "",
+            "assignmentFilter": "",
+            "assignmentFilterType": "include",
+            "verifyAssignments": true,
+            "levenshteinDistance": 0
+          },
+          "remediateEnabled": true,
+          "alertEnabled": true,
+          "alertOnRemediate": false
+        },
+        {
+          "standard": "IntuneTemplatePackage",
+          "instance": "IntuneTemplatePackage#pilot-users-physical",
+          "variables": {
+            "intuneTemplatePackage": "[Baseline] - Baseline-Pilot-Users-Physical",
+            "assignTo": "customGroup",
+            "customGroup": "SG-U-UEM-Pilot",
             "excludeGroup": "",
             "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",

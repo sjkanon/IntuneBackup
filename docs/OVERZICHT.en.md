@@ -4,34 +4,34 @@
 
 # Intune baseline — overview
 
-214 policies across 4 platforms, with
+219 policies across 4 platforms, with
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) as the source.
 This is the summary; the details are in the [main README](../README.en.md) and per folder.
 
 | | Count |
 |---|---:|
-| Policies | 214 |
-| Without assignment (deliberately) | 106 |
+| Policies | 219 |
+| Without assignment (deliberately) | 111 |
 | Deployed in the tenant | 0 |
 
 ## What is in it
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.en.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](../IntuneTemplate/WIN/README.en.md) | 132 | 1 | 10 | 11 | – | **154** |
 | [macOS](../IntuneTemplate/MAC/README.en.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.en.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Each platform has a table with **every policy, what it does and where it lands**:
-- [Windows](../IntuneTemplate/WIN/README.en.md) — 149 policies
+- [Windows](../IntuneTemplate/WIN/README.en.md) — 154 policies
 - [macOS](../IntuneTemplate/MAC/README.en.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.en.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.en.md) — 14 policies
 
 ## Compliance framework
 
-214 of the 214 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+219 of the 219 policies reference ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 and NIST CSF 2.0; together the policies in phase 1 touch 32 of the 93 Annex A controls.
 Per control and per NIS2 point what the baseline enforces, how it is verified and what the organisation
 has to arrange itself: [COMPLIANCE.en.md](COMPLIANCE.en.md).
@@ -122,13 +122,13 @@ step 4 before step 3 produces two policies that contradict each other.
 | 3 | Replace | Windows Firewall and Office Updates change policy type — manual work |
 | 4 | Retire | delete Network Security, Windows Search, System Services, OneDrive KFM |
 | 5 | Deploy | the new policies via CIPP or `Start-IntuneRestoreConfig` |
-| 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SEC-Baseline-Pilot'` |
+| 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SG-D-UEM-Pilot'` and `'SG-U-UEM-Pilot'` |
 | 7 | Inventory again | the list of orphaned policies must be empty |
 
 ## Pilot first
 
-Phase 2 in `_manifest.json`. These policies are deployed via the package `[Baseline] - Baseline-Pilot` to
-`SEC-Baseline-Pilot`, and only to everyone once they move to phase 1 — a PR, because that
+Phase 2 in `_manifest.json`. These policies are deployed via the packages `[Baseline] - Baseline-Pilot-Devices` and `-Pilot-Users` to
+`SG-D-UEM-Pilot` and `SG-U-UEM-Pilot`, and only to everyone once they move to phase 1 — a PR, because that
 changes who they are deployed to. The reason per policy is the `faseWaarom` from the manifest.
 
 | Policy | Why |
@@ -176,8 +176,8 @@ changes who they are deployed to. The reason per policy is the `faseWaarom` from
 | `AND - U - Corporate AI Restricted` | Users lose Circle to Search and Gemini's screen context on the work profile or the whole device. Whether that fits is an organisational decision about generative AI, as with Windows AI Restricted; pilot group first, and do not assign for an organisation that allows these assistants. |
 | `AND - U - Corporate Data Protection` | Users notice it immediately: no screenshots, no files via Bluetooth, and a fully managed device can no longer be reset by the user — IT has to wipe it. Pilot group first; without fully managed or corporate-owned work profile enrolment it does nothing. |
 
-106 are without assignment: the 42 above, 26 awaiting a prerequisite,
-22 for a dedicated group and 16 that are not deployed. The last two are an
+111 are without assignment: the 42 above, 27 awaiting a prerequisite,
+25 for a dedicated group and 17 that are not deployed. The last two are an
 *alternative* to a policy that is assigned, not an addition to it: update rings
 1 and 2 for Windows and Defender set the same settings as ring 3 with different values, the
 three CIPP standard templates for Defender do the same as their OIB counterpart, the

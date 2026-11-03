@@ -38,7 +38,7 @@ Leaves the preset security policies alone.
 ./Set-DefenderOfficeTenant.ps1 -WhatIf
 
 .EXAMPLE
-./Set-DefenderOfficeTenant.ps1 -VipGroupName 'SEC-Directie'
+./Set-DefenderOfficeTenant.ps1 -VipGroupName 'SG-U-MDE-VIP'
 #>
 [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
 param(

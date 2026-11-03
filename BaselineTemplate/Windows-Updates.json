@@ -1,7 +1,7 @@
 {
   "TemplateType": "BaselineTemplate",
   "templateName": "[Baseline] - Windows Updates",
-  "description": "Patching for Windows devices: Windows Update rings (Ring 3 on all devices except the ring groups SEC-Update-Ring1 and SEC-Update-Ring2), Microsoft Edge and Microsoft 365 Apps update policies, and Winget-AutoUpdate for every other app winget knows, two weeks after the rings are compliant. Package membership follows the repo. Assign the tenants before you run it.",
+  "description": "Patching for Windows devices: Windows Update rings (Ring 3 on all devices except the ring groups SG-D-UEM-WIN-Update-Ring1 and SG-D-UEM-WIN-Update-Ring2), Microsoft Edge and Microsoft 365 Apps update policies, and Winget-AutoUpdate for every other app winget knows, two weeks after the rings are compliant. Package membership follows the repo. Assign the tenants before you run it.",
   "assignedTenants": [
     {
       "label": "Exported Template",
@@ -25,7 +25,7 @@
             "intuneTemplatePackage": "[Baseline] - Updates-Ring3-Physical",
             "assignTo": "AllDevices",
             "customGroup": "",
-            "excludeGroup": "SEC-Update-Ring1,SEC-Update-Ring2",
+            "excludeGroup": "SG-D-UEM-WIN-Update-Ring1,SG-D-UEM-WIN-Update-Ring2",
             "assignmentFilter": "[Baseline] - WIN - Physical",
             "assignmentFilterType": "include",
             "verifyAssignments": true,
@@ -37,11 +37,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-update-ring1",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-update-ring1",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Updates-SEC-Update-Ring1",
+            "intuneTemplatePackage": "[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Update-Ring1",
+            "customGroup": "SG-D-UEM-WIN-Update-Ring1",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",
@@ -54,11 +54,11 @@
         },
         {
           "standard": "IntuneTemplatePackage",
-          "instance": "IntuneTemplatePackage#sec-update-ring2",
+          "instance": "IntuneTemplatePackage#sg-d-uem-win-update-ring2",
           "variables": {
-            "intuneTemplatePackage": "[Baseline] - Updates-SEC-Update-Ring2",
+            "intuneTemplatePackage": "[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2",
             "assignTo": "customGroup",
-            "customGroup": "SEC-Update-Ring2",
+            "customGroup": "SG-D-UEM-WIN-Update-Ring2",
             "excludeGroup": "",
             "assignmentFilter": "",
             "assignmentFilterType": "include",

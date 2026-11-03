@@ -88,7 +88,7 @@ une. Deux formes, toutes deux telles que le module les écrit lui-même :
 
 Seule la phase 1 a une affectation. Les 101 stratégies des phases 2 à 5 sont restaurées sans
 affectation, volontairement — voir `fase` dans [`_manifest.json`](../IntuneTemplate/_manifest.json).
-Affectez-les après la restauration selon leur phase : le pilote sur `SEC-Baseline-Pilot`, la
+Affectez-les après la restauration selon leur phase : le pilote sur `SG-D-UEM-Pilot` et `SG-U-UEM-Pilot`, la
 phase 4 sur le groupe de `faseGroep`, la phase 3 une fois la condition remplie, la phase 5 pas
 du tout. `node scripts/export-intunebackup.js` les liste toutes à chaque exécution.
 
@@ -112,7 +112,7 @@ Le script recherche le filtre par son nom et, avec `-CreateFilters`, le crée de
 `node scripts/export-intunebackup.js local/<tenant>/export --filter-ids local/<tenant>/filters.json`,
 avec `{ "WIN - Physical": "<id>", "WIN - AVD Multi-session": "<id>" }` — jamais dans `export/`, car
 les id appartiennent à ce tenant. Les stratégies de phase 2 dotées d'une classe reçoivent leur
-filtre de la même façon avec `-GroupName 'SEC-Baseline-Pilot'`.
+filtre de la même façon avec `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'`.
 
 Voir le [README principal](../README.fr.md#restaurer-dans-un-tenant) pour le contexte complet et
 [OVERZICHT.fr.md](../docs/OVERZICHT.fr.md#dabord-en-pilote) pour les stratégies qui vont d'abord

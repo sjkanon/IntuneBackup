@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Defender ASR Policy Audit Mode",
-    "description": "Sets the same Attack Surface Reduction rules as the blocking ASR policy to audit: Defender logs what it would stop, but stops nothing. Intended to measure the impact of a rule before you let it block. Baseline assignment: none by default — belongs on SEC-Baseline-Pilot. Source: CIPP standard template.",
+    "description": "Sets the same Attack Surface Reduction rules as the blocking ASR policy to audit: Defender logs what it would stop, but stops nothing. Intended to measure the impact of a rule before you let it block. Baseline assignment: none by default — belongs on SG-D-UEM-Pilot. Source: CIPP standard template.",
     "platforms": "windows10",
     "technologies": "mdm,microsoftSense",
     "templateReference": {

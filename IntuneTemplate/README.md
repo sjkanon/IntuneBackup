@@ -2,18 +2,18 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# IntuneTemplate — 214 policies
+# IntuneTemplate — 219 policies
 
 De bron van deze repo: de afgesproken Intune-policies in CIPP-templateformaat. Alles wat
 in `export/` en `BaselineTemplate/` staat is hieruit afgeleid en wordt gegenereerd.
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](WIN/README.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](WIN/README.md) | 132 | 1 | 10 | 11 | – | **154** |
 | [macOS](MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
-| **Totaal** | **168** | **1** | **17** | **26** | **2** | **214** |
+| **Totaal** | **173** | **1** | **17** | **26** | **2** | **219** |
 
 ## Indeling
 
@@ -48,7 +48,7 @@ platform-README somt ze op onder *Overige onderdelen*; de pijplijn leest ze niet
 |---|---|---|
 | [`_assignments.json`](_assignments.json) | het toewijzingsdoel per policy | `export-intunebackup.js`, `check-scope.js` |
 | [`_manifest.json`](_manifest.json) | welke OIB-policy waar landt, waarom er afgeweken wordt en in welke fase hij uitrolt | `import-oib.js`, `set-packages.js` |
-| [`_renames.json`](_renames.json) | hoe policies in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
+| [`_renames.json`](_renames.json) | hoe policies en groepen in de tenant heetten en wat er nu bij hoort | `Rename-BaselinePolicy.ps1`, `Rename-BaselineGroup.ps1`, `check-scope.js` |
 | [`_ca.json`](_ca.json) | per policy de Conditional Access-policies die erop leunen — een kopie uit `docs/policies.json` in de CA-Policies-repo | `generate-docs.js` (schrijft hem ook, met die repo ernaast) |
 | [`_controls.json`](_controls.json) | de normenvocabulaire: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |
 | [`_i18n/`](_i18n/) | de Engelse en Franse vertaling van de teksten uit de data, voor de gegenereerde documentatie | `generate-docs.js`, `generate-compliance.js` |
@@ -79,28 +79,30 @@ zijn ongetest uitrollen. De waarde volgt uit `fase` in `_manifest.json` en het d
 | `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter [Baseline] - WIN - AVD Multi-session (include) | 1 | 5 |
 | `[Baseline] - Baseline-Users` | Assign to all users | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | Assign to all users, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| `[Baseline] - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | Custom group: SEC-Baseline-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 13 |
-| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
+| `[Baseline] - Baseline-Pilot-Devices` | Custom group: SG-D-UEM-Pilot | 2 | 20 |
+| `[Baseline] - Baseline-Pilot-Devices-Physical` | Custom group: SG-D-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 12 |
+| `[Baseline] - Baseline-Pilot-Users` | Custom group: SG-U-UEM-Pilot | 2 | 9 |
+| `[Baseline] - Baseline-Pilot-Users-Physical` | Custom group: SG-U-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 1 |
+| `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 27 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (koppelen aan een ADE-token in Intune) | 1 | 2 |
-| `[Baseline] - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Cloud-PC` | Custom group: SEC-Cloud-PC | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Cloud-PC-External` | Custom group: SEC-Cloud-PC-External | 1 | 1 |
-| `[Baseline] - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
-| `[Baseline] - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
-| `[Baseline] - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
-| `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 4 |
-| `[Baseline] - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-AND-Dedicated-Dynamic` | Custom group: SG-D-UEM-AND-Dedicated-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-IOS-BYOD-Dynamic` | Custom group: SG-D-UEM-IOS-BYOD-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-IOS-Corporate-Dynamic` | Custom group: SG-D-UEM-IOS-Corporate-Dynamic | 1 | 3 |
+| `[Baseline] - Baseline-SG-D-UEM-MAC-RemoteSupport` | Custom group: SG-D-UEM-MAC-RemoteSupport | 1 | 2 |
+| `[Baseline] - Baseline-SG-D-UEM-Pilot` | Custom group: SG-D-UEM-Pilot | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` | Custom group: SG-D-UEM-WIN-CloudPC-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External` | Custom group: SG-D-UEM-WIN-CloudPC-External | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 7 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
-| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| `[Baseline] - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring2` | Custom group: SG-D-UEM-WIN-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SG-D-UEM-WIN-Update-Ring1, SG-D-UEM-WIN-Update-Ring2, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
+| `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2` | Custom group: SG-D-UEM-WIN-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Updates-Devices` | Assign to all devices | 1 | 1 |
 | `[Baseline] - Updates-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| *(leeg)* | wordt niet uitgerold | – | 16 |
+| *(leeg)* | wordt niet uitgerold | – | 17 |
 
 De stage-kolom is de stage in [`BaselineTemplate/Baseline.json`](../BaselineTemplate/Baseline.json),
 de CIPP-baseline die deze pakketten uitrolt. De `Updates-`pakketten rolt een eigen baseline uit,
@@ -112,7 +114,7 @@ bestaan als alternatief voor een policy die wél uitrolt.
 
 ## Per platform
 
-- [Windows](WIN/README.md) — 149 policies
+- [Windows](WIN/README.md) — 154 policies
 - [macOS](MAC/README.md) — 37 policies
 - [iOS/iPadOS](IOS/README.md) — 14 policies
 - [Android](AND/README.md) — 14 policies

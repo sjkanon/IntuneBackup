@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Apple Intelligence Restricted",
-    "description": "Turns off Apple Intelligence features that have text, email, notes, web pages or images processed by a language model or sent to an external AI service, and keeps dictation on the device. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.5.1.1–2.5.1.4 and 2.18.1 (mSCP branch tahoe); ids and values identical to OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions, except Safari summaries (OIB: on, here off).",
+    "description": "Turns off Apple Intelligence features that have text, email, notes, web pages or images processed by a language model or sent to an external AI service, and keeps dictation on the device. Baseline assignment: none by default — pilot group SG-D-UEM-Pilot first. Source: CIS Apple macOS 26.0 Tahoe Benchmark v1.1.0 L1 2.5.1.1–2.5.1.4 and 2.18.1 (mSCP branch tahoe); ids and values identical to OpenIntuneBaseline macOS v2.0 beta — SC - Device Security - D - Restrictions, except Safari summaries (OIB: on, here off).",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

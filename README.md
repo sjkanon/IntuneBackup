@@ -147,7 +147,7 @@ IntuneTemplate/        de bron: de policies in CIPP-templateformaat
   _assignments.json   toewijzingsdoel per fase-1-policy
   _controls.json      vocabulaire voor ISO 27001, NIS2, CIS en NIST CSF
   _licenties.json     welke controls met een licentie in te vullen zijn
-  _renames.json       vroegere namen in de tenant (bron voor Rename-BaselinePolicy.ps1)
+  _renames.json       vroegere namen in de tenant (bron voor Rename-BaselinePolicy.ps1 en Rename-BaselineGroup.ps1)
   _ca.json            welke CA-policies op een policy leunen (kopie uit de CA-Policies-repo)
   _i18n/              Engelse en Franse vertalingen van de teksten uit de data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
@@ -364,15 +364,15 @@ De stages die erin zitten:
 
 | Stage | Pakketten | Doorschuiven naar déze stage |
 |---:|---|---|
-| 1 · Nu | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` en de groepspakketten `[Baseline] - Baseline-SEC-*` (fase 4, één per groep) | — stage 1 geldt altijd |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | `success` (alles uit stage 1 is compliant) **en** `time` van twee weken |
+| 1 · Nu | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` en de groepspakketten `[Baseline] - Baseline-SG-*` (fase 4, één per groep) | — stage 1 geldt altijd |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot-Devices`, `[Baseline] - Baseline-Pilot-Physical` | `success` (alles uit stage 1 is compliant) **en** `time` van twee weken |
 | 3 · Wacht op voorwaarde | `[Baseline] - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Latere stages stapelen op stage 1, en de conditie hoort bij de stage die een tenant
 **binnengaat**, niet bij de stage die hij verlaat. CIPP kent er vijf: `time`, `variable`,
 `group`, `success` en `manual`. Zet een pakket in precies één stage: hetzelfde template twee
 keer met een ander toewijzingsdoel botst op CIPP's conflictdetectie. Laat de pilot daarom
-groeien via de **groep** `SEC-Baseline-Pilot` en niet via een extra stage.
+groeien via de **groep** `SG-D-UEM-Pilot` / `SG-U-UEM-Pilot` en niet via een extra stage.
 
 Let op waar de restore-export staat: `export/**NativeImport**/IntuneBackupAndRestore/`. Dat
 woord in het pad is geen beschrijving maar een uitsluiting. CIPP haalt de bestandslijst op met
@@ -446,21 +446,24 @@ vervangt alleen CIPP; bij een restore met IntuneBackupAndRestore vul je het met 
 .\scripts\Set-BaselineAssignment.ps1 -Scope D -AllDevices
 .\scripts\Set-BaselineAssignment.ps1 -Scope U -AllUsers
 .\scripts\Set-BaselineAssignment.ps1 -Platform MAC -Scope D -AllDevices
-.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SEC-Baseline-Pilot'
+.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SG-D-UEM-Pilot'
+.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SG-U-UEM-Pilot'
 .\scripts\Set-BaselineAssignment.ps1 -GroupId '<object-id>' -Exclude
 ```
 
 Zet in één keer een assignment op de baseline-policies die bij dat doel horen, over de vijf
 policytypes heen (elk met een eigen Graph-endpoint). Welke dat zijn volgt uit de fase, net als
 bij de CIPP-pakketten: `-AllDevices` en `-AllUsers` nemen fase 1 met dat doel uit
-`_assignments.json`, `-GroupName 'SEC-Baseline-Pilot'` neemt de pilot, en een groep uit
+`_assignments.json`, `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` neemt de pilot, en een groep uit
 `faseGroep` neemt de fase 4-policies van die groep. Fase 3 en 5 wijst het script nooit vanzelf
 toe — tot september 2026 deed `-AllDevices` dat wel, alternatieven en pilot incluis.
 `-IgnoreFase` neemt toch alles, voor een testtenant; `-Exclude` gaat altijd op alle policies.
 
-De `SEC-*`-groepen (`SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Shared-Devices`, …) zijn
+De groepen (`SG-D-UEM-Pilot`, `SG-U-UEM-Pilot`, `SG-D-UEM-WIN-Update-Ring1`, `SG-D-UEM-WIN-Shared`, …) zijn
 standaardnamen, geen vereiste. Heten ze in de tenant anders, zie dan
 [de BaselineTemplate-README](BaselineTemplate/README.md#wat-je-erna-zelf-doet) voor waar je ze hernoemt.
+Tot november 2026 heetten ze `SEC-…`; `.\scripts\Rename-BaselineGroup.ps1 -WhatIf` en daarna zonder
+`-WhatIf` zet een tenant om, vóórdat de nieuwe templates in CIPP staan.
 
 `-Scope D|U` filtert daarna op de scope in de naam, `-Platform` op het platform. Policies die
 de naamconventie niet volgen vallen buiten élk filter; het script waarschuwt daar expliciet
@@ -492,13 +495,13 @@ waarde zetten leveren in Intune een Conflict op, waarna de instelling door géé
 toegepast. `check-scope.js` bewaakt dat.
 
 ```powershell
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Disabled' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SG-D-UEM-WIN-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Disabled' -GroupName 'SG-D-UEM-WIN-Shared'
 ```
 
 Op gedeelde apparaten staat Windows Hello for Business uit (*Windows Hello for Business
 Disabled*) en meldt een gebruiker zich aan met een FIDO2-sleutel of badge (*Security Key
-Sign-in*), allebei op `SEC-Shared-Devices`. WHfB is een sleutel per gebruiker per toestel en
+Sign-in*), allebei op `SG-D-UEM-WIN-Shared`. WHfB is een sleutel per gebruiker per toestel en
 past daar niet. *Windows Hello for Business Multi User* is het alternatief (fase 5) voor wie
 het daar wel wil; naast *Disabled* is dat een Conflict.
 
@@ -506,7 +509,7 @@ Shared PC mode is er in twee varianten die je juist **nooit** naast elkaar toewi
 *Shared PC* (alleen Entra-accounts) op `SG-D-UEM-WIN-SharedPC` en *Shared PC Domain and Guest*
 (Entra-accounts én een knop Gast) op `SG-D-UEM-WIN-SharedPC-Guest`. Beide zetten dezelfde
 instellingen op een andere waarde, dus twee op één apparaat is een Conflict. Een gedeeld apparaat
-staat in `SEC-Shared-Devices` en in precies één van die twee groepen. OpenIntuneBaseline dekt
+staat in `SG-D-UEM-WIN-Shared` en in precies één van die twee groepen. OpenIntuneBaseline dekt
 gedeelde apparaten niet; deze twee zijn eigen policies.
 
 ### Wat je eerst in een pilot zet

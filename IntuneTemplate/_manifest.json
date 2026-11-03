@@ -637,7 +637,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Dedicated toestellen hebben geen gebruiker; een gebruikerstoewijzing bereikt ze niet. Hoort op een apparaatgroep met alleen dedicated toestellen.",
-      "faseGroep": "SEC-Android-Dedicated (dynamische apparaatgroep op het enrollmentProfileName van de dedicated inschrijfprofielen, of een toewijzing met filter — zie IntuneTemplate/AND/AssignmentFilters)",
+      "faseGroep": "SG-D-UEM-AND-Dedicated-Dynamic (dynamische apparaatgroep op het enrollmentProfileName van de dedicated inschrijfprofielen, of een toewijzing met filter — zie IntuneTemplate/AND/AssignmentFilters)",
       "controls": {
         "iso": [
           "A.8.1 Eindpuntapparatuur van gebruikers",
@@ -910,7 +910,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Vrijwel alle instellingen vragen een supervised toestel (ADE); op een persoonlijk toestel zijn ze ongepast of doen ze niets. Na toewijzing kan de gebruiker het toestel niet meer zelf wissen — terugzetten gaat via Intune.",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
+      "faseGroep": "SG-D-UEM-IOS-Corporate-Dynamic (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.9 Configuratiebeheer",
@@ -1037,7 +1037,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen voor bedrijfstoestellen, en de tekst moet per organisatie worden ingevuld vóór toewijzing (placeholder VERLOREN-TOESTEL-TEKST-INVULLEN).",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
+      "faseGroep": "SG-D-UEM-IOS-Corporate-Dynamic (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.7.9 Beveiliging van bedrijfsmiddelen buiten het terrein",
@@ -1093,7 +1093,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen supervised toestellen; niet-supervised toestellen krijgen de VPN-variant. Vraagt daarnaast een Defender for Endpoint-licentie, de connector en de Defender-app als vereiste (VPP-)app.",
-      "faseGroep": "SEC-iOS-Corporate (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
+      "faseGroep": "SG-D-UEM-IOS-Corporate-Dynamic (dynamische apparaatgroep: iPhone/iPad met deviceOwnership Company, via ADE ingeschreven en supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -1124,7 +1124,7 @@
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Alleen niet-supervised (persoonlijk ingeschreven) toestellen; supervised toestellen krijgen het content filter. Vraagt daarnaast een Defender for Endpoint-licentie, de connector en de Defender-app.",
-      "faseGroep": "SEC-iOS-BYOD (dynamische apparaatgroep: ingeschreven iPhone/iPad met deviceOwnership Personal, dus niet supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
+      "faseGroep": "SG-D-UEM-IOS-BYOD-Dynamic (dynamische apparaatgroep: ingeschreven iPhone/iPad met deviceOwnership Personal, dus niet supervised — regel in IntuneTemplate/IOS/Enrollment/README.md)",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -1575,7 +1575,7 @@
       "note": "Schermopname staat hier niet in maar in [Baseline] - MAC - D - Screen Recording: macOS staat een MDM niet toe die te verlenen, dus dat is een custom profile met AllowStandardUserToSetSystemService in plaats van een settings catalog-entry. Volledige schijftoegang voor OneDrive staat hier ook niet in: dat doet [Baseline] - MAC - D - Microsoft OneDrive al.",
       "herkomst": "eigen",
       "fase": 4,
-      "faseGroep": "SEC-Remote-Support-macOS (Macs waarop NinjaOne of TeamViewer draait)",
+      "faseGroep": "SG-D-UEM-MAC-RemoteSupport (Macs waarop NinjaOne of TeamViewer draait)",
       "faseWaarom": "Hoort bij twee specifieke remote-supporttools, NinjaOne en TeamViewer, en niet bij elke organisatie. Toewijzen op een Mac zonder die tools doet niets; toewijzen waar een andere TeamViewer-installatie staat geeft die wél rechten zonder dat iemand iets goedkeurt. Gebruikt de organisatie andere tools, vervang dan de bundle-id's en code requirements in plaats van deze policy toe te wijzen.",
       "controls": {
         "iso": [
@@ -1624,7 +1624,7 @@
       "note": "Apple laat schermopname niet met \"Allow\" verlenen — een MDM kan het alleen weigeren of, zoals hier, de gebruiker het zelf laten aanzetten zonder beheerderswachtwoord. De eerste klik blijft dus handmatig, net als de periodieke herbevestiging op recente macOS-versies. Custom profile en geen settings catalog, omdat de mobileconfig de letterlijke waarde uit Apple's schema draagt in plaats van een Intune-enum die per definitie-update kan verschuiven. Dezelfde vijf bundles en dezelfde code requirements als de Toegankelijkheid-entries in [Baseline] - MAC - D - Privacy Preferences; die twee profielen raken elkaar niet omdat ze verschillende TCC-services zetten.",
       "herkomst": "eigen",
       "fase": 4,
-      "faseGroep": "SEC-Remote-Support-macOS (Macs waarop NinjaOne of TeamViewer draait)",
+      "faseGroep": "SG-D-UEM-MAC-RemoteSupport (Macs waarop NinjaOne of TeamViewer draait)",
       "faseWaarom": "Hoort bij twee specifieke remote-supporttools, NinjaOne en TeamViewer, en niet bij elke organisatie. Toewijzen op een Mac zonder die tools doet niets; toewijzen waar een andere TeamViewer-installatie staat geeft die wél rechten zonder dat iemand iets goedkeurt. Gebruikt de organisatie andere tools, vervang dan de bundle-id's en code requirements in plaats van deze policy toe te wijzen.",
       "controls": {
         "iso": [
@@ -2640,7 +2640,7 @@
       "fase": 4,
       "doelgroep": "alle",
       "faseWaarom": "Pilotgroep, en dan zónder de blokkerende ASR-policy — dezelfde zestien regels op audit in plaats van block.",
-      "faseGroep": "SEC-Baseline-Pilot",
+      "faseGroep": "SG-D-UEM-Pilot",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -2810,7 +2810,7 @@
       "fase": 4,
       "doelgroep": "alle",
       "faseWaarom": "Pilotgroep voor Defender-updates.",
-      "faseGroep": "SEC-Update-Ring1",
+      "faseGroep": "SG-D-UEM-WIN-Update-Ring1",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -2839,7 +2839,7 @@
       "fase": 4,
       "doelgroep": "alle",
       "faseWaarom": "UAT-groep voor Defender-updates.",
-      "faseGroep": "SEC-Update-Ring2",
+      "faseGroep": "SG-D-UEM-WIN-Update-Ring2",
       "controls": {
         "iso": [
           "A.8.7 Bescherming tegen malware",
@@ -4639,7 +4639,7 @@
       "fase": 4,
       "doelgroep": "fysiek",
       "faseWaarom": "Pilotgroep voor Windows-updates.",
-      "faseGroep": "SEC-Update-Ring1",
+      "faseGroep": "SG-D-UEM-WIN-Update-Ring1",
       "controls": {
         "iso": [
           "A.8.8 Beheer van technische kwetsbaarheden",
@@ -4668,7 +4668,7 @@
       "fase": 4,
       "doelgroep": "fysiek",
       "faseWaarom": "UAT-groep voor Windows-updates.",
-      "faseGroep": "SEC-Update-Ring2",
+      "faseGroep": "SG-D-UEM-WIN-Update-Ring2",
       "controls": {
         "iso": [
           "A.8.8 Beheer van technische kwetsbaarheden",
@@ -4791,7 +4791,7 @@
       "fase": 4,
       "doelgroep": "fysiek",
       "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker maakt dit thuiswerken en hotels onmogelijk.",
-      "faseGroep": "SEC-Shared-Devices"
+      "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
       "target": "Baseline_WIN_D_Shared_PC",
@@ -4820,7 +4820,7 @@
       "bron": "Eigen baseline — Intune Shared multi-user device (sharedPCConfiguration, SharedPC CSP). OpenIntuneBaseline dekt gedeelde apparaten bewust niet (WINDOWS/README.md).",
       "bewijs": "Op een gedeeld apparaat blijft zonder opruimen elk profiel staan dat er ooit op is aangemaakt, met de gecachte bestanden, browsergegevens en tokens van iedereen die er ooit heeft gewerkt. Shared PC mode ruimt die profielen op en houdt alleen Entra-accounts toe, zodat elke aanmelding aan één persoon te koppelen is en onder Conditional Access valt. Geen lokale opslag buiten het profiel betekent dat een bestand niet op C:\\ achterblijft voor de volgende gebruiker; werkbestanden horen in OneDrive.",
       "universeel": "Nee. Alleen voor apparaten waar meerdere mensen op werken: balie, werkplaats, vergaderruimte, flexplek. Op een laptop van één gebruiker ruimt hij na 30 dagen afwezigheid diens profiel op. Wijs per apparaat óf deze policy óf [Baseline] - WIN - D - Shared PC Domain and Guest toe, nooit allebei.",
-      "note": "Eigen groep SG-D-UEM-WIN-SharedPC (vast), naast SEC-Shared-Devices: een gedeeld apparaat staat in SEC-Shared-Devices (WHfB Multi User, Wireless Shared Devices) én in precies één van SG-D-UEM-WIN-SharedPC of SG-D-UEM-WIN-SharedPC-Guest. Twee Shared PC-policies op één apparaat leveren in Intune een Conflict op, en dan doet geen van beide iets. Shared PC mode raakt alleen nieuwe aanmeldingen: profielen die er al stonden voordat de policy landde, ruimt het accountbeheer niet altijd op — begin bij voorkeur met een schoon apparaat (Autopilot reset). Het profiel van een gebruiker verdwijnt na 30 dagen inactiviteit of zodra de vrije ruimte onder 25% zakt; boven 50% vrije ruimte blijven profielen staan. Daarom hoort OneDrive met Known Folder Move op deze apparaten aan te staan, anders verdwijnen bestanden mee. Dat regelen [Baseline] - WIN - D - Microsoft OneDrive (stil aanmelden, Known Folder Move, Files On-Demand) en [Baseline] - WIN - D - Storage Sense (cloudbestanden na 30 dagen weer alleen online) al op elk apparaat. Synchroniseer geen SharePoint-bibliotheken op een gedeeld apparaat: elk nieuw profiel bouwt die synchronisatie opnieuw op. Werk in de browser, in Teams of via een snelkoppeling in OneDrive. Office activeert hier per gebruiker met [Baseline] - WIN - D - Microsoft Office Shared Computer Activation. `disableEduPolicies` staat op true: de onderwijsinstellingen van Shared PC (o.a. geen Store-apps, geen Cortana) horen hier niet thuis. Combineer met [Baseline] - WIN - D - Windows Hello for Business Disabled en [Baseline] - WIN - D - Security Key Sign-in: op een gedeeld apparaat geen WHfB per gebruiker, wel aanmelden met een sleutel.",
+      "note": "Eigen groep SG-D-UEM-WIN-SharedPC (vast), naast SG-D-UEM-WIN-Shared: een gedeeld apparaat staat in SG-D-UEM-WIN-Shared (WHfB Multi User, Wireless Shared Devices) én in precies één van SG-D-UEM-WIN-SharedPC of SG-D-UEM-WIN-SharedPC-Guest. Twee Shared PC-policies op één apparaat leveren in Intune een Conflict op, en dan doet geen van beide iets. Shared PC mode raakt alleen nieuwe aanmeldingen: profielen die er al stonden voordat de policy landde, ruimt het accountbeheer niet altijd op — begin bij voorkeur met een schoon apparaat (Autopilot reset). Het profiel van een gebruiker verdwijnt na 30 dagen inactiviteit of zodra de vrije ruimte onder 25% zakt; boven 50% vrije ruimte blijven profielen staan. Daarom hoort OneDrive met Known Folder Move op deze apparaten aan te staan, anders verdwijnen bestanden mee. Dat regelen [Baseline] - WIN - D - Microsoft OneDrive (stil aanmelden, Known Folder Move, Files On-Demand) en [Baseline] - WIN - D - Storage Sense (cloudbestanden na 30 dagen weer alleen online) al op elk apparaat. Synchroniseer geen SharePoint-bibliotheken op een gedeeld apparaat: elk nieuw profiel bouwt die synchronisatie opnieuw op. Werk in de browser, in Teams of via een snelkoppeling in OneDrive. Office staat niet op gedeelde apparaten: gebruikers werken in Edge, met Office op het web. Wie toch Microsoft 365 Apps installeert, wijst [Baseline] - WIN - D - Microsoft Office Shared Computer Activation (fase 5) aan dezelfde groep toe. `disableEduPolicies` staat op true: de onderwijsinstellingen van Shared PC (o.a. geen Store-apps, geen Cortana) horen hier niet thuis. Combineer met [Baseline] - WIN - D - Windows Hello for Business Disabled en [Baseline] - WIN - D - Security Key Sign-in: op een gedeeld apparaat geen WHfB per gebruiker, wel aanmelden met een sleutel.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker ruimt dit na 30 dagen afwezigheid het profiel op.",
@@ -4878,11 +4878,11 @@
       "bron": "Eigen baseline — PassportForWork CSP, UsePassportForWork = false. Microsoft raadt voor gedeelde apparaten FIDO2-beveiligingssleutels aan in plaats van Windows Hello for Business.",
       "bewijs": "Windows Hello for Business is een sleutel per gebruiker per toestel. Op een gedeeld apparaat betekent dat bij elke nieuwe gebruiker een inrichting, een sleutel in de TPM die blijft staan als de gebruiker allang weg is, en een PIN die alleen op dat ene toestel werkt. Een beveiligingssleutel of badge gaat met de gebruiker mee en is net zo phishing-resistent.",
       "universeel": "Nee. Alleen voor gedeelde apparaten. Op een laptop van één gebruiker is Windows Hello for Business juist de gewone manier om zonder wachtwoord aan te melden.",
-      "note": "Hoort op SEC-Shared-Devices, samen met [Baseline] - WIN - D - Security Key Sign-in: zonder die tweede policy hebben gebruikers op het toestel alleen nog web sign-in. Niet naast [Baseline] - WIN - D - Windows Hello for Business Multi User of [Baseline] - WIN - D - Windows Hello for Business op hetzelfde apparaat: dezelfde instelling met een andere waarde is een Conflict. Die laatste staat in fase 2 op de pilotgroep; zet geen gedeelde apparaten in SEC-Baseline-Pilot, en sluit SEC-Shared-Devices uit zodra hij naar fase 1 gaat. [Baseline] - WIN - U - Windows Hello for Business zet WHfB per gebruiker aan; welke van de twee wint als een gebruiker met die policy zich op een gedeeld apparaat aanmeldt, test je in de pilot. [Baseline] - WIN - D - Passwordless zet de PIN als standaard aanmeldoptie; zonder WHfB kiest de gebruiker de eerste keer zelf de sleutel of web sign-in onder Aanmeldopties.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met [Baseline] - WIN - D - Security Key Sign-in: zonder die tweede policy hebben gebruikers op het toestel alleen nog web sign-in. Niet naast [Baseline] - WIN - D - Windows Hello for Business Multi User of [Baseline] - WIN - D - Windows Hello for Business op hetzelfde apparaat: dezelfde instelling met een andere waarde is een Conflict. Die laatste staat in fase 2 op de pilotgroep; zet geen gedeelde apparaten in SG-D-UEM-Pilot, en sluit SG-D-UEM-WIN-Shared uit zodra hij naar fase 1 gaat. [Baseline] - WIN - U - Windows Hello for Business zet WHfB per gebruiker aan; welke van de twee wint als een gebruiker met die policy zich op een gedeeld apparaat aanmeldt, test je in de pilot. [Baseline] - WIN - D - Passwordless zet de PIN als standaard aanmeldoptie; zonder WHfB kiest de gebruiker de eerste keer zelf de sleutel of web sign-in onder Aanmeldopties.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten. Op een laptop van één gebruiker zet dit Windows Hello for Business uit.",
-      "faseGroep": "SEC-Shared-Devices"
+      "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
       "target": "Baseline_WIN_D_Security_Key_Sign_in",
@@ -4905,11 +4905,11 @@
       "bron": "Eigen baseline — OMA-URI ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin = 1, zoals in IntuneAdmin/IntuneBaselines (Baseline - Enables FIDO Security Keys to be used during Windows Sign In).",
       "bewijs": "Een FIDO2-sleutel is phishing-resistent en gaat met de gebruiker mee van toestel naar toestel. Daarmee voldoet een aanmelding op een gedeeld apparaat aan dezelfde eis als Windows Hello for Business op een eigen laptop, zonder dat er per toestel iets ingericht hoeft te worden.",
       "universeel": "Nee. Hij hoort bij gedeelde apparaten, samen met [Baseline] - WIN - D - Windows Hello for Business Disabled. Op een eigen laptop is hij niet nodig: daar is Windows Hello for Business de methode.",
-      "note": "Hoort op SEC-Shared-Devices. De gebruiker heeft een passkey nodig op een FIDO2-sleutel of badge, geregistreerd in Entra; zet de authenticatiemethode Passkey (FIDO2) daarvoor aan in de Entra-policy voor authenticatiemethoden. Een custom profiel (OMA-URI) in plaats van Settings Catalog, omdat de Settings Catalog-ID niet in een bron is na te gaan; het is dezelfde instelling als in IntuneAdmin. Werkt zonder Windows Hello for Business op het toestel: test op het eerste apparaat dat de optie Beveiligingssleutel op het aanmeldscherm staat naast [Baseline] - WIN - D - Windows Hello for Business Disabled.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared. De gebruiker heeft een passkey nodig op een FIDO2-sleutel of badge, geregistreerd in Entra; zet de authenticatiemethode Passkey (FIDO2) daarvoor aan in de Entra-policy voor authenticatiemethoden. Een custom profiel (OMA-URI) in plaats van Settings Catalog, omdat de Settings Catalog-ID niet in een bron is na te gaan; het is dezelfde instelling als in IntuneAdmin. Werkt zonder Windows Hello for Business op het toestel: test op het eerste apparaat dat de optie Beveiligingssleutel op het aanmeldscherm staat naast [Baseline] - WIN - D - Windows Hello for Business Disabled.",
       "herkomst": "eigen",
       "fase": 4,
       "faseWaarom": "Gedeelde apparaten, samen met de policy die Windows Hello for Business uitzet. Op een eigen laptop niet nodig.",
-      "faseGroep": "SEC-Shared-Devices"
+      "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
       "target": "Baseline_WIN_D_Microsoft_Office_Shared_Computer_Activation",
@@ -4932,11 +4932,151 @@
       "bron": "Eigen baseline — Office-ADMX, Microsoft Office 2016 (Machine) > Licensing Settings > Use shared computer activation (L_SharedComputerLicensing = 1). Microsoft schrijft dit voor bij Microsoft 365 Apps op toestellen die meerdere mensen gebruiken.",
       "bewijs": "Zonder Shared Computer Activation activeert Office op naam van wie zich als eerste aanmeldt: de volgende gebruikers krijgen activeringsmeldingen of werken onder andermans licentie, en elk gedeeld toestel telt mee voor de vijf installaties van die ene gebruiker. Met Shared Computer Activation haalt Office bij elke aanmelding een licentietoken voor de aangemelde gebruiker op.",
       "universeel": "Nee. Alleen op gedeelde apparaten; op een eigen laptop activeert Office per toestel en is dit niet nodig.",
-      "note": "Hoort op SEC-Shared-Devices, naast [Baseline] - WIN - D - Shared PC of [Baseline] - WIN - D - Shared PC Domain and Guest. Het licentietoken staat in het gebruikersprofiel en gaat mee weg als Shared PC het profiel opruimt; bij de volgende aanmelding haalt Office een nieuw token op, dus de eerste keer Office openen vraagt een internetverbinding. Elke gebruiker heeft een licentie nodig die Shared Computer Activation ondersteunt. Een Shared PC-gast heeft geen Entra-account en dus geen Office-licentie. Is Office op het toestel al per apparaat geactiveerd, dan blijft die activering staan: begin bij voorkeur met een schoon apparaat (Autopilot reset), net als bij Shared PC.",
+      "note": "Niet standaard: op gedeelde apparaten werken gebruikers in Edge. Installeert een klant daar toch Microsoft 365 Apps, dan hoort deze policy op SG-D-UEM-WIN-Shared, naast [Baseline] - WIN - D - Shared PC of [Baseline] - WIN - D - Shared PC Domain and Guest. Het licentietoken staat in het gebruikersprofiel en gaat mee weg als Shared PC het profiel opruimt; bij de volgende aanmelding haalt Office een nieuw token op, dus de eerste keer Office openen vraagt een internetverbinding. Elke gebruiker heeft een licentie nodig die Shared Computer Activation ondersteunt. Een Shared PC-gast heeft geen Entra-account en dus geen Office-licentie. Is Office op het toestel al per apparaat geactiveerd, dan blijft die activering staan: begin bij voorkeur met een schoon apparaat (Autopilot reset), net als bij Shared PC.",
+      "herkomst": "eigen",
+      "fase": 5,
+      "faseWaarom": "Op gedeelde apparaten staat standaard geen Office: gebruikers werken in Edge, met Office op het web. Alleen toewijzen aan SG-D-UEM-WIN-Shared bij een klant die daar toch Microsoft 365 Apps installeert."
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_OneDrive",
+      "displayName": "[Baseline] - WIN - D - Shared Devices OneDrive",
+      "doelgroep": "fysiek",
+      "doel": "Meldt OneDrive op gedeelde apparaten stil aan met het werkaccount, zet Bureaublad, Documenten en Afbeeldingen in OneDrive en zet bestanden alleen online neer, ook die van gesynchroniseerde teamsites, zodat er niets in een profiel achterblijft dat Shared PC opruimt en de schijf niet volloopt met een kopie per gebruiker.",
+      "controls": {
+        "iso": [
+          "A.8.13 Back-up van informatie",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "cis": [
+          "CIS Controls v8.1 11.2 Perform Automated Backups"
+        ],
+        "nistcsf": [
+          "PR.DS-11"
+        ]
+      },
+      "bron": "Eigen baseline — dezelfde waarden als [Baseline] - WIN - D - Microsoft OneDrive voor stil aanmelden, Files On-Demand, Known Folder Move en de toegestane tenant, plus Convert synced team site files to online-only files (DehydrateSyncedTeamSites, Microsoft Learn: Use OneDrive policies to control sync settings).",
+      "bewijs": "Shared PC verwijdert profielen na 30 dagen of bij weinig schijfruimte. Wat dan alleen lokaal stond, is weg; met Known Folder Move staat het in OneDrive. Op een gedeeld toestel synchroniseert elk profiel dezelfde teamsites opnieuw: met Files On-Demand en DehydrateSyncedTeamSites blijven dat verwijzingen in plaats van kopieën.",
+      "universeel": "Nee. Alleen op gedeelde apparaten; op een eigen laptop doet [Baseline] - WIN - D - Microsoft OneDrive hetzelfde zonder de teamsites terug te zetten naar alleen online.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, naast [Baseline] - WIN - D - Shared PC of Shared PC Domain and Guest. Een eigen template zodat de Shared Devices-baseline in CIPP-Baselines OneDrive kan uitrollen zonder [Baseline] - WIN - D - Microsoft OneDrive op een groep te zetten. De gedeelde instellingen hebben dezelfde waarden als die policy, dus samen op één toestel is geen Conflict. De Settings Catalog-ID van DehydrateSyncedTeamSites volgt het patroon van de andere OneDrive-instellingen en staat in geen bron letterlijk: weigert CIPP het template, zoek de instelling dan op in de Settings Catalog (Convert synced team site files to online-only files) en neem die ID over.",
       "herkomst": "eigen",
       "fase": 4,
-      "faseWaarom": "Gedeelde apparaten, samen met de Shared PC-policies. Op een eigen laptop niet nodig.",
-      "faseGroep": "SEC-Shared-Devices"
+      "faseWaarom": "Gedeelde apparaten, samen met de Shared PC-policies.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites",
+      "displayName": "[Baseline] - WIN - D - Shared Devices SharePoint Team Sites",
+      "doelgroep": "fysiek",
+      "doel": "Synchroniseert op gedeelde apparaten één SharePoint-bibliotheek van de klant automatisch voor elke gebruiker, als bestanden die alleen online staan, zodat iedereen de gedeelde map in Verkenner heeft zonder die zelf toe te voegen.",
+      "controls": {
+        "iso": [
+          "A.8.13 Back-up van informatie",
+          "A.8.12 Voorkomen van datalekken"
+        ],
+        "nis2": [
+          "art. 21(2)(c) bedrijfscontinuiteit en crisisbeheer"
+        ],
+        "cis": [
+          "CIS Controls v8.1 11.2 Perform Automated Backups"
+        ],
+        "nistcsf": [
+          "PR.DS-11"
+        ]
+      },
+      "bron": "Eigen baseline — Configure team site libraries to sync automatically (AutoMountTeamSites, Microsoft Learn: Use OneDrive policies to control sync settings). Naam en bibliotheek-ID uit de CIPP-variabelen %SharedTeamSiteName% en %SharedTeamSiteLibraryId%.",
+      "bewijs": "Op een gedeeld toestel meldt zich steeds een ander profiel aan. Zonder automatisch koppelen moet elke gebruiker de bibliotheek zelf synchroniseren of een snelkoppeling maken; met deze policy staat hij er bij elke aanmelding, als verwijzingen dankzij Files On-Demand.",
+      "universeel": "Nee. Per klant een andere bibliotheek, en alleen waar een gedeeld toestel met een vaste map werkt.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met [Baseline] - WIN - D - Shared Devices OneDrive (Files On-Demand is vereist). Leg in CIPP per tenant de variabelen %SharedTeamSiteName% (de naam in Verkenner) en %SharedTeamSiteLibraryId% vast. De bibliotheek-ID haal je in SharePoint: open de bibliotheek, Synchroniseren, annuleer de OneDrive-vraag en kies Bibliotheek-id kopiëren. Microsoft raadt het af voor bibliotheken met meer dan 5.000 bestanden of mappen en voor meer dan 1.000 toestellen per bibliotheek. OneDrive koppelt de bibliotheek binnen acht uur na de aanmelding; op een gedeeld toestel met steeds nieuwe profielen kan een gebruiker daar dus de eerste keer op moeten wachten. De Settings Catalog-ID's volgen het patroon van de andere OneDrive-instellingen en staan in geen bron letterlijk: weigert CIPP het template, neem dan de ID's over uit de Settings Catalog (Configure team site libraries to sync automatically).",
+      "herkomst": "eigen",
+      "fase": 3,
+      "faseWaarom": "Wacht op de bibliotheek-ID van de klant: zonder de CIPP-variabelen %SharedTeamSiteName% en %SharedTeamSiteLibraryId% komt de letterlijke tekst in de tenant."
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_Passwordless",
+      "displayName": "[Baseline] - WIN - D - Shared Devices Passwordless",
+      "doelgroep": "fysiek",
+      "doel": "Verbergt het wachtwoordveld op het aanmeldscherm van gedeelde apparaten en zet aanmelden via het web aan, zodat gebruikers zich aanmelden met een FIDO2-sleutel, of met een Temporary Access Pass zolang ze er nog geen hebben.",
+      "controls": {
+        "iso": [
+          "A.5.17 Authenticatie-informatie",
+          "A.8.5 Veilige authenticatie"
+        ],
+        "nis2": [
+          "art. 21(2)(j) multifactorauthenticatie en beveiligde communicatie"
+        ],
+        "cis": [],
+        "nistcsf": [
+          "PR.AA-03"
+        ]
+      },
+      "bron": "Eigen baseline — EnablePasswordlessExperience en EnableWebSignIn uit [Baseline] - WIN - D - Passwordless (OpenIntuneBaseline Windows v4.0), zonder de standaard-aanmeldtegel.",
+      "bewijs": "Op gedeelde apparaten staat Windows Hello for Business uit; de aanmelding is een FIDO2-sleutel ([Baseline] - WIN - D - Security Key Sign-in). Zonder wachtwoordveld kan een gedeeld toestel niet de plek worden waar iemand zijn wachtwoord intypt terwijl er meegekeken wordt.",
+      "universeel": "Nee. Op een eigen laptop doet [Baseline] - WIN - D - Passwordless dit, met Windows Hello als standaardtegel.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met [Baseline] - WIN - D - Windows Hello for Business Disabled en [Baseline] - WIN - D - Security Key Sign-in. [Baseline] - WIN - D - Passwordless zet daarnaast de standaardtegel op de pincode van Windows Hello; die hoort niet op een toestel zonder Windows Hello, daarom staat hij hier niet in. Deze twee instellingen hebben dezelfde waarde als in die policy, dus samen op één toestel is geen Conflict. Wie nog geen sleutel heeft, meldt zich aan via het web met een Temporary Access Pass van de servicedesk: zet de TAP-methode in Entra aan voordat deze policy landt.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten, samen met de policy die Windows Hello for Business uitzet.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_Start_and_Taskbar",
+      "displayName": "[Baseline] - WIN - D - Shared Devices Start and Taskbar",
+      "doelgroep": "fysiek",
+      "doel": "Zet op gedeelde apparaten Microsoft Edge en Windows App vast op de taakbalk en in Start, zodat elke gebruiker bij de eerste aanmelding meteen de browser en de externe werkplek vindt.",
+      "controls": {
+        "iso": [
+          "A.8.9 Configuratiebeheer"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.1 Establish and Maintain a Secure Configuration Process"
+        ],
+        "nistcsf": [
+          "PR.PS-01"
+        ]
+      },
+      "bron": "Eigen baseline — Policy CSP Start/ConfigureStartPins (Start-indeling van Windows 11) en Start/StartLayout met een CustomTaskbarLayoutCollection (taakbalk), Microsoft Learn: Customize the Start layout en Customize the Taskbar on Windows 11.",
+      "bewijs": "Op een gedeeld toestel krijgt elke gebruiker een nieuw profiel met de standaardindeling van Windows. Wie via Windows App op een Cloud PC of AVD werkt, zoekt dan eerst de app; met een vaste indeling staat hij er bij elke aanmelding.",
+      "universeel": "Nee. Op een eigen laptop richt de gebruiker Start en taakbalk zelf in.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared. De taakbalk krijgt Edge en Windows App achter de standaardpictogrammen van Windows; dat gebeurt bij de eerste aanmelding van een profiel, en dat is op een Shared PC elke nieuwe gebruiker. Start krijgt Edge, Windows App, Verkenner en Instellingen; dat vervangt de hele lijst met vastgemaakte apps en gebruikers kunnen hem niet aanpassen. Windows App moet op het toestel staan: rol hem uit als Store-app (9N1F85V9T8BN) via CIPP of Intune, anders blijft de plek leeg. Een snelkoppeling op het bureaublad kan niet met een policy: Edge zet er zelf een neer, voor Windows App is een script nodig. Alleen Windows 11. De app-ID van Windows App (MicrosoftCorporationII.Windows365_8wekyb3d8bbwe!Windows365) controleer je op een toestel met Get-StartApps.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten, samen met de Shared PC-policies.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
+    },
+    {
+      "target": "Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations",
+      "displayName": "[Baseline] - WIN - D - Shared Devices Office Web File Associations",
+      "doelgroep": "fysiek",
+      "doel": "Maakt op gedeelde apparaten de app Office op het web standaard voor Word-, Excel- en PowerPoint-bestanden, zodat een dubbelklik op een bestand in OneDrive of SharePoint het opent in Office voor het web, en opent scripts zoals .js, .vbs en .hta met Kladblok.",
+      "controls": {
+        "iso": [
+          "A.8.9 Configuratiebeheer",
+          "A.8.19 Installatie van software op operationele systemen"
+        ],
+        "nis2": [
+          "art. 21(2)(i) personeelsbeveiliging, toegangsbeleid en beheer van bedrijfsmiddelen"
+        ],
+        "cis": [
+          "CIS Controls v8.1 4.1 Establish and Maintain a Secure Configuration Process"
+        ],
+        "nistcsf": [
+          "PR.PS-01"
+        ]
+      },
+      "bron": "Eigen baseline — Policy CSP ApplicationDefaults/DefaultAssociationsConfiguration met de ProgIds van de Win32-app IntuneTemplate/WIN/Apps/office-web-open, plus de koppelingen van [Baseline] - WIN - D - Script File Associations.",
+      "bewijs": "Zonder Office op het toestel vraagt Windows bij elke dubbelklik op een Word-bestand met welke app het moet openen. Windows kan een bestandstype niet aan een webapp koppelen; de app Office op het web vult dat gat, en deze policy maakt hem bij elke aanmelding standaard, ook voor een nieuw Shared PC-profiel.",
+      "universeel": "Nee. Alleen op gedeelde apparaten zonder Office; waar Office staat, blijft Word de standaard.",
+      "note": "Hoort op SG-D-UEM-WIN-Shared, samen met de Win32-app Office op het web (IntuneTemplate/WIN/Apps/office-web-open) op dezelfde groep. Zonder die app wijst de koppeling naar een ProgId die niet bestaat en negeert Windows hem. Bevat ook de scriptkoppelingen van [Baseline] - WIN - D - Script File Associations: twee policies met Default Associations Configuration op één toestel zijn een Conflict. Die policy staat in fase 2 op de pilot, waar gedeelde apparaten niet in horen; sluit SG-D-UEM-WIN-Shared uit zodra hij naar fase 1 gaat, en neem een wijziging aan zijn lijst hier over. Windows past de koppelingen toe bij het aanmelden.",
+      "herkomst": "eigen",
+      "fase": 4,
+      "faseWaarom": "Gedeelde apparaten zonder Office, samen met de app Office op het web.",
+      "faseGroep": "SG-D-UEM-WIN-Shared"
     },
     {
       "target": "Baseline_WIN_D_Passkey_Access",
@@ -6205,7 +6345,7 @@
       "fase": 4,
       "doelgroep": "avd",
       "faseWaarom": "Alleen voor Cloud PC's en sessiehosts. Op een gewone laptop doen de instellingen niets: ze gelden voor binnenkomende Remote Desktop-sessies.",
-      "faseGroep": "SEC-Cloud-PC (dynamische apparaatgroep met de Windows 365 Cloud PC's en de Azure Virtual Desktop-sessiehosts: (device.deviceModel -startsWith \"Cloud PC\") -or (device.deviceModel -eq \"Virtual Machine\"); een AVD-hostpool met eigen namen kan ook op device.displayName -startsWith)",
+      "faseGroep": "SG-D-UEM-WIN-CloudPC-Dynamic (dynamische apparaatgroep met de Windows 365 Cloud PC's en de Azure Virtual Desktop-sessiehosts: (device.deviceModel -startsWith \"Cloud PC\") -or (device.deviceModel -eq \"Virtual Machine\"); een AVD-hostpool met eigen namen kan ook op device.displayName -startsWith)",
       "controls": {
         "iso": [
           "A.6.7 Werken op afstand",
@@ -6227,7 +6367,7 @@
       },
       "bewijs": "Een virtuele werkplek is pas een grens als er niets over die grens heen lekt. Microsoft raadt in de beveiligingsaanbevelingen voor Azure Virtual Desktop en de richtlijnen voor Windows 365 aan redirectie te beperken, het klembord in één richting te begrenzen en screen capture protection te combineren met een watermerk: de eerste houdt een schermafdruk vanaf het lokale toestel tegen, het tweede maakt een foto van het scherm herleidbaar naar de verbinding.",
       "universeel": "Alleen Cloud PC's en sessiehosts. Een gewoon Windows-toestel ontvangt geen Remote Desktop-sessies van gebruikers en heeft er niets aan.",
-      "note": "Vul aan wat [Baseline] - WIN - D - Remote Desktop and RPC al op elk toestel zet (wachtwoordprompt bij verbinden, secure RPC, encryptieniveau Hoog, geen schijfredirectie); die vier staan hier bewust niet nog eens in. Klembord van server naar client staat uit (OIB); van client naar server blijft toegestaan. Screen capture protection op 'client' en niet op 'client and server' zoals IntuneAdmin: data blijft daarmee al in de virtuele werkplek, en het knipprogramma in de sessie zelf blijft werken voor een melding aan de servicedesk. Gevolg: wie het bureaublad in een Teams-vergadering vanaf het lokale toestel deelt ziet zwart — deel vanuit Teams in de sessie zelf. Windows App op iOS en Android verbindt alleen nog als een app protection policy op Windows App schermopname blokkeert (zie IOS/AppConfiguration en AND/AppConfiguration). Het watermerk werkt op een volledig bureaublad, niet op RemoteApp. BitLocker hoort niet op een Cloud PC: sluit SEC-Cloud-PC uit bij [Baseline] - WIN - D - BitLocker en [Baseline] - WIN - U - Compliance BitLocker, of wijs die toe met een filter op deviceModel."
+      "note": "Vul aan wat [Baseline] - WIN - D - Remote Desktop and RPC al op elk toestel zet (wachtwoordprompt bij verbinden, secure RPC, encryptieniveau Hoog, geen schijfredirectie); die vier staan hier bewust niet nog eens in. Klembord van server naar client staat uit (OIB); van client naar server blijft toegestaan. Screen capture protection op 'client' en niet op 'client and server' zoals IntuneAdmin: data blijft daarmee al in de virtuele werkplek, en het knipprogramma in de sessie zelf blijft werken voor een melding aan de servicedesk. Gevolg: wie het bureaublad in een Teams-vergadering vanaf het lokale toestel deelt ziet zwart — deel vanuit Teams in de sessie zelf. Windows App op iOS en Android verbindt alleen nog als een app protection policy op Windows App schermopname blokkeert (zie IOS/AppConfiguration en AND/AppConfiguration). Het watermerk werkt op een volledig bureaublad, niet op RemoteApp. BitLocker hoort niet op een Cloud PC: sluit SG-D-UEM-WIN-CloudPC-Dynamic uit bij [Baseline] - WIN - D - BitLocker en [Baseline] - WIN - U - Compliance BitLocker, of wijs die toe met een filter op deviceModel."
     },
     {
       "target": "Baseline_WIN_D_Cloud_PC_External_Access",
@@ -6238,7 +6378,7 @@
       "fase": 4,
       "doelgroep": "avd",
       "faseWaarom": "Alleen voor de virtuele werkplek waarop onbeheerde toestellen en derden werken. Voor eigen medewerkers op een beheerd toestel is geen klembord en geen printer een onnodige beperking.",
-      "faseGroep": "SEC-Cloud-PC-External (apparaatgroep met alleen de sessiehosts of Cloud PC's waarop persoonlijke toestellen, aannemers of andere organisaties werken — in AVD een eigen hostpool, bij Windows 365 een eigen provisioningbeleid met een eigen naamvoorvoegsel)",
+      "faseGroep": "SG-D-UEM-WIN-CloudPC-External (apparaatgroep met alleen de sessiehosts of Cloud PC's waarop persoonlijke toestellen, aannemers of andere organisaties werken — in AVD een eigen hostpool, bij Windows 365 een eigen provisioningbeleid met een eigen naamvoorvoegsel)",
       "controls": {
         "iso": [
           "A.6.7 Werken op afstand",
@@ -6381,7 +6521,7 @@
       },
       "bewijs": "Op een pooled host houdt een verbroken sessie die nooit wordt afgemeld de FSLogix-container vergrendeld en geheugen bezet; verbindt de gebruiker opnieuw en komt hij op een andere host, dan is zijn container daar niet te koppelen. Twee uur geeft ruimte voor een weggevallen verbinding of een pauze en ruimt daarna op — en pas bij afmelden comprimeert FSLogix de container. Storage Sense ruimt binnen het gekoppelde profiel op: OneDrive-bestanden worden online-only (geen dataverlies, de grootste winst), tijdelijke bestanden en de prullenbak gaan weg. Wat vrijkomt, geeft de FSLogix-compactie bij afmelding terug aan het share (VHD Compact Disk in AVD FSLogix Profile Containers). Kleinere containers betekenen snellere aanmeldingen en minder kans op een volle container; bij Azure Files Premium rekent Microsoft op de provisioned grootte, dus de besparing zit in snelheid en ruimte, niet in de rekening.",
       "universeel": "Alleen AVD-sessiehosts met Windows 11 Enterprise multi-session. Op een fysiek toestel zet [Baseline] - WIN - D - Storage Sense dezelfde instellingen met andere waarden (cadence 0, 30 dagen); die heeft doelgroep fysiek en deze avd, dus ze komen nooit samen op één apparaat.",
-      "note": "**De cadence staat niet in deze policy.** configstoragesenseglobalcadence heeft in zijn Settings Catalog-definitie geen windowsMultiSession in applicability.windowsSkus, dus Intune levert hem niet aan een multi-session-host (de andere vijf Storage Sense-instellingen wel; op de host geverifieerd). Zonder cadence draait Storage Sense alleen bij weinig vrije ruimte op C:, en die loopt op een sessiehost nooit vol — Storage Sense zou dan nooit draaien. De AVD-image zet daarom ConfigStorageSenseGlobalCadence = 1 (dagelijks) onder HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense (run-vdot.ps1 in de AVD-repo). Downloads pas na dertig dagen, omdat dat echte verwijdering is; OneDrive-dehydratie na zeven dagen, omdat het bestand online blijft. Geen wekelijkse Invoke-FslShrinkDisk of FSLShrink meer nodig: de ingebouwde compactie bij afmelding (FSLogix 2210 en later) doet hetzelfde bij elke afmelding, zonder aparte VM met rechten op het share en zonder risico dat een script een gekoppelde container raakt; de sessielimieten hierboven zorgen dat er ook echt wordt afgemeld. FSLShrink alleen nog als noodmiddel voor containers die al groot zijn: eenmalig, buiten kantooruren, met de hosts in drain mode. Tijdzone-redirectie (ts_time_zone) staat hier bewust niet in: [Baseline] - WIN - D - Cloud PC Session Security zet hem al op de sessiehosts (groep SEC-Cloud-PC). **Overlap met [Baseline] - WIN - D - Cloud PC External Access:** die zet dezelfde twee sessielimieten op 15 minuten. Op een hostpool voor externen landen beide policies en botsen ze (Conflict: dan geldt geen van beide limieten); in het pakketmodel is deze policy daar niet los uit te sluiten — zie de open punten in docs/AVD.md. De waarden staan in milliseconden: 7200000 is twee uur."
+      "note": "**De cadence staat niet in deze policy.** configstoragesenseglobalcadence heeft in zijn Settings Catalog-definitie geen windowsMultiSession in applicability.windowsSkus, dus Intune levert hem niet aan een multi-session-host (de andere vijf Storage Sense-instellingen wel; op de host geverifieerd). Zonder cadence draait Storage Sense alleen bij weinig vrije ruimte op C:, en die loopt op een sessiehost nooit vol — Storage Sense zou dan nooit draaien. De AVD-image zet daarom ConfigStorageSenseGlobalCadence = 1 (dagelijks) onder HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\StorageSense (run-vdot.ps1 in de AVD-repo). Downloads pas na dertig dagen, omdat dat echte verwijdering is; OneDrive-dehydratie na zeven dagen, omdat het bestand online blijft. Geen wekelijkse Invoke-FslShrinkDisk of FSLShrink meer nodig: de ingebouwde compactie bij afmelding (FSLogix 2210 en later) doet hetzelfde bij elke afmelding, zonder aparte VM met rechten op het share en zonder risico dat een script een gekoppelde container raakt; de sessielimieten hierboven zorgen dat er ook echt wordt afgemeld. FSLShrink alleen nog als noodmiddel voor containers die al groot zijn: eenmalig, buiten kantooruren, met de hosts in drain mode. Tijdzone-redirectie (ts_time_zone) staat hier bewust niet in: [Baseline] - WIN - D - Cloud PC Session Security zet hem al op de sessiehosts (groep SG-D-UEM-WIN-CloudPC-Dynamic). **Overlap met [Baseline] - WIN - D - Cloud PC External Access:** die zet dezelfde twee sessielimieten op 15 minuten. Op een hostpool voor externen landen beide policies en botsen ze (Conflict: dan geldt geen van beide limieten); in het pakketmodel is deze policy daar niet los uit te sluiten — zie de open punten in docs/AVD.md. De waarden staan in milliseconden: 7200000 is twee uur."
     },
     {
       "target": "Baseline_WIN_D_AVD_Start_and_Search",

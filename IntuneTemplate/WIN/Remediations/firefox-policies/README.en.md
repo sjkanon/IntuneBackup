@@ -69,7 +69,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 | Run using logged-on credentials | No (SYSTEM) |
 | 64-bit PowerShell | Yes |
 | Schedule | Daily |
-| Assignment | Pilot group `SEC-Baseline-Pilot`, then all Windows devices. On a device without Firefox it only writes registry values. |
+| Assignment | Pilot group `SG-D-UEM-Pilot`, then all Windows devices. On a device without Firefox it only writes registry values. |
 
 A running Firefox picks up the policies after a restart. Check with `about:policies`.
 

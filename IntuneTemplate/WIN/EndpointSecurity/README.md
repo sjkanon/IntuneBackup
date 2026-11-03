@@ -73,7 +73,7 @@ alle Windows-apparaten.
 ### 1. Audit — fase 2, pilotgroep, daarna alle apparaten
 
 Maak `AppControl_BuiltIn_Audit.graph.json` aan (zie *Uitrol*) en wijs toe aan de pilotgroep
-(`SEC-Baseline-Pilot`), na een week aan alle Windows-apparaten. In auditmodus draait alles
+(`SG-D-UEM-Pilot`), na een week aan alle Windows-apparaten. In auditmodus draait alles
 door; Windows logt per bestand dat **zou** zijn geblokkeerd:
 
 | Gebeurtenis | Logboek | Advanced Hunting `ActionType` |
@@ -112,7 +112,7 @@ Deze uitzonderingen zijn organisatiespecifiek en horen in de eigen tenant, niet 
 ### 3. Afdwingen — fase 4
 
 Pas als query 2 over zeven dagen niets onbekends meer toont: wijs
-`AppControl_BuiltIn_Enforce.graph.json` toe aan een groep `SEC-AppControl-Enforced` en
+`AppControl_BuiltIn_Enforce.graph.json` toe aan een groep `SG-D-UEM-WIN-AppControl-Enforced` en
 **haal die groep uit de toewijzing van de audit-policy**. Beide policies hebben hetzelfde
 PolicyID; op één apparaat botsen ze. Uitbreiden per afdeling, niet in één keer.
 

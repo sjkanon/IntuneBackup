@@ -87,7 +87,7 @@ allebei zoals de module ze zelf wegschrijft:
 
 Alleen fase 1 heeft een assignment. De 101 policies in fase 2 tot en met 5 komen met opzet
 ongetoewezen terug — zie `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json). Wijs
-ze na de restore toe volgens hun fase: de pilot op `SEC-Baseline-Pilot`, fase 4 op de groep uit
+ze na de restore toe volgens hun fase: de pilot op `SG-D-UEM-Pilot` en `SG-U-UEM-Pilot`, fase 4 op de groep uit
 `faseGroep`, fase 3 zodra de voorwaarde er is, fase 5 niet. `node scripts/export-intunebackup.js`
 noemt bij elke run de volledige lijst.
 
@@ -110,7 +110,7 @@ Het script zoekt het filter op naam op en maakt het met `-CreateFilters` aan uit
 `node scripts/export-intunebackup.js local/<tenant>/export --filter-ids local/<tenant>/filters.json`,
 met `{ "WIN - Physical": "<id>", "WIN - AVD Multi-session": "<id>" }` — nooit in `export/`, want de
 id's zijn van die tenant. Fase-2-policies met een klasse krijgen hun filter bij
-`-GroupName 'SEC-Baseline-Pilot'` op dezelfde manier.
+`-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` op dezelfde manier.
 
 Zie de [hoofd-README](../README.md#terugzetten-in-een-tenant) voor de volledige context en
 [OVERZICHT.md](../docs/OVERZICHT.md#eerst-in-een-pilot) voor de policies die eerst in een pilot

@@ -86,7 +86,7 @@ ernaast en installeert met dezelfde MSI-properties als hieronder. Verwijderen do
 
 1. CIPP → **Tools → Community Repos** → deze repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
 2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy**:
-   kies de tenants en als toewijzing de groep `SEC-Baseline-Pilot` (het template wijst zelf
+   kies de tenants en als toewijzing de groep `SG-D-UEM-Pilot` (het template wijst zelf
    niets toe). Of zet het in een baseline met de standard *Deploy Intune Application Template*.
 
 Het apparaat moet `github.com` kunnen bereiken; de MSI-log staat in `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
@@ -114,7 +114,7 @@ lijst in `Install-WAU.ps1` van `excluded_apps.txt` — beide routes installeren 
 | Gedrag bij opnieuw opstarten | Geen specifieke actie |
 | Besturingssysteem | 64-bit, Windows 10 22H2 of nieuwer |
 | Detectieregel | Aangepast script → [`Detect-WAU.ps1`](Detect-WAU.ps1) |
-| Toewijzing | *Required* op de pilotgroep `SEC-Baseline-Pilot`, daarna alle Windows-apparaten |
+| Toewijzing | *Required* op de pilotgroep `SG-D-UEM-Pilot`, daarna alle Windows-apparaten |
 
 De detectie kijkt bewust niet naar de versie: die zou bij elke versiewissel opnieuw installeren.
 Ze kijkt of de registersleutel, `Winget-Upgrade.ps1` en de geplande taak `\WAU\Winget-AutoUpdate`

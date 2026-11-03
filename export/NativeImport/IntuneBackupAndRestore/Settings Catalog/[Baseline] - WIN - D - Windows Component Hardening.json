@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Component Hardening",
-    "description": "Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP server, no continuing on another device, no enumeration of local users, protected mode for the shell protocol, no WinRT access from hosted content and no upgrade offer via the Store. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) — instance structures adopted from IntuneAdmin, values verified against the settings catalog definitions; 'Enumerate local users' deliberately deviates from the IntuneAdmin value.",
+    "description": "Closes seven small CIS gaps in Windows components: no automatic sign-in, no NTP server, no continuing on another device, no enumeration of local users, protected mode for the shell protocol, no WinRT access from hosted content and no upgrade offer via the Store. Baseline assignment: none by default — pilot group SG-D-UEM-Pilot first. Source: CIS v4 Windows 11 L1 (IntuneAdmin CISv4 profiles) — instance structures adopted from IntuneAdmin, values verified against the settings catalog definitions; 'Enumerate local users' deliberately deviates from the IntuneAdmin value.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

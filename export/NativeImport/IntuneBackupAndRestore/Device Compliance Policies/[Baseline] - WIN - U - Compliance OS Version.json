@@ -50,5 +50,5 @@
         }
     ],
     "displayName": "[Baseline] - WIN - U - Compliance OS Version",
-    "description": "Checks whether the device runs a Windows version that can actually apply the baseline: at least Windows 11 22H2. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Own policy; the minimum follows from what the baseline itself already requires — Account Lockout needs 22H2 with KB5053657 or 24H2, Administrator Protection and Windows Protected Print need 24H2."
+    "description": "Checks whether the device runs a Windows version that can actually apply the baseline: at least Windows 11 22H2. Baseline assignment: none by default — pilot group SG-U-UEM-Pilot first. Source: Own policy; the minimum follows from what the baseline itself already requires — Account Lockout needs 22H2 with KB5053657 or 24H2, Administrator Protection and Windows Protected Print need 24H2."
 }

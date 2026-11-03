@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - MAC - D - Passcode and Screen Lock",
-    "description": "Sets on the Mac the password and screen lock that the compliance policy already requires: at least eight characters, no simple password, lock after fifteen minutes. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the macOS settings catalog — values taken one-to-one from [Baseline] - MAC - U - Compliance Password and verified against the settings catalog definitions (minLength max 16, maxInactivity max 15)..",
+    "description": "Sets on the Mac the password and screen lock that the compliance policy already requires: at least eight characters, no simple password, lock after fifteen minutes. Baseline assignment: none by default — pilot group SG-D-UEM-Pilot first. Source: Apple Passcode payload (com.apple.mobiledevice.passwordpolicy) in the macOS settings catalog — values taken one-to-one from [Baseline] - MAC - U - Compliance Password and verified against the settings catalog definitions (minLength max 16, maxInactivity max 15)..",
     "platforms": "macOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

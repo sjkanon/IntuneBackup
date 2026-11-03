@@ -4,34 +4,34 @@
 
 # Baseline Intune — vue d'ensemble
 
-214 policies sur 4 plateformes, avec
+219 policies sur 4 plateformes, avec
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) comme source.
 Ceci est le résumé ; les détails se trouvent dans le [README principal](../README.fr.md) et dans chaque dossier.
 
 | | Nombre |
 |---|---:|
-| Policies | 214 |
-| Sans affectation (volontairement) | 106 |
+| Policies | 219 |
+| Sans affectation (volontairement) | 111 |
 | Déployées dans le tenant | 0 |
 
 ## Contenu
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Total |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.fr.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](../IntuneTemplate/WIN/README.fr.md) | 132 | 1 | 10 | 11 | – | **154** |
 | [macOS](../IntuneTemplate/MAC/README.fr.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.fr.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Chaque plateforme dispose d'un tableau avec **chaque policy, ce qu'elle fait et où elle atterrit** :
-- [Windows](../IntuneTemplate/WIN/README.fr.md) — 149 policies
+- [Windows](../IntuneTemplate/WIN/README.fr.md) — 154 policies
 - [macOS](../IntuneTemplate/MAC/README.fr.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.fr.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.fr.md) — 14 policies
 
 ## Référentiel de conformité
 
-214 des 214 policies renvoient à l'ISO/IEC 27001:2022 Annexe A, à NIS2 art. 21(2),
+219 des 219 policies renvoient à l'ISO/IEC 27001:2022 Annexe A, à NIS2 art. 21(2),
 aux CIS Controls v8.1 et au NIST CSF 2.0 ; ensemble, les policies de la phase 1 couvrent 32 des 93 mesures de l'Annexe A.
 Par mesure et par point NIS2 : ce que la baseline impose, comment c'est vérifié et ce que l'organisation
 doit régler elle-même : [COMPLIANCE.fr.md](COMPLIANCE.fr.md).
@@ -122,13 +122,13 @@ l'étape 4 avant l'étape 3 produit deux policies qui se contredisent.
 | 3 | Remplacer | Windows Firewall et Office Updates changent de type de policy — travail manuel |
 | 4 | Supprimer | supprimer Network Security, Windows Search, System Services, OneDrive KFM |
 | 5 | Déployer | les nouvelles policies via CIPP ou `Start-IntuneRestoreConfig` |
-| 6 | Affecter | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` et `-Scope U -AllUsers` ne prennent que la phase 1 ; le pilote suit avec `-GroupName 'SEC-Baseline-Pilot'` |
+| 6 | Affecter | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` et `-Scope U -AllUsers` ne prennent que la phase 1 ; le pilote suit avec `-GroupName 'SG-D-UEM-Pilot'` et `'SG-U-UEM-Pilot'` |
 | 7 | Inventorier à nouveau | la liste des policies orphelines doit être vide |
 
 ## D'abord en pilote
 
-Phase 2 dans `_manifest.json`. Ces policies sont déployées via le package `[Baseline] - Baseline-Pilot` vers
-`SEC-Baseline-Pilot`, et à tout le monde seulement lorsqu'elles passent en phase 1 — une PR, car cela
+Phase 2 dans `_manifest.json`. Ces policies sont déployées via les packages `[Baseline] - Baseline-Pilot-Devices` et `-Pilot-Users` vers
+`SG-D-UEM-Pilot` et `SG-U-UEM-Pilot`, et à tout le monde seulement lorsqu'elles passent en phase 1 — une PR, car cela
 change à qui elles sont déployées. La raison pour chaque policy est le `faseWaarom` du manifeste.
 
 | Policy | Pourquoi |
@@ -176,8 +176,8 @@ change à qui elles sont déployées. La raison pour chaque policy est le `faseW
 | `AND - U - Corporate AI Restricted` | Les utilisateurs perdent Circle to Search et le contexte d'écran de Gemini sur le profil professionnel ou sur tout l'appareil. Que cela convienne relève du choix de l'organisation concernant l'IA générative, comme pour Windows AI Restricted ; d'abord sur un groupe pilote, et ne pas affecter dans une organisation qui autorise ces assistants. |
 | `AND - U - Corporate Data Protection` | Les utilisateurs le remarquent immédiatement : pas de captures d'écran, pas de fichiers via Bluetooth, et un appareil fully managed ne peut plus être réinitialisé par l'utilisateur — l'IT doit l'effacer. D'abord sur un groupe pilote ; sans inscription fully managed ou corporate-owned work profile, il ne fait rien. |
 
-106 sont sans affectation : les 42 ci-dessus, 26 en attente d'un prérequis,
-22 pour un groupe dédié et 16 qui ne sont pas déployées. Ces deux dernières catégories sont une
+111 sont sans affectation : les 42 ci-dessus, 27 en attente d'un prérequis,
+25 pour un groupe dédié et 17 qui ne sont pas déployées. Ces deux dernières catégories sont une
 *alternative* à une policy affectée, pas un complément : les anneaux de mise à jour
 1 et 2 pour Windows et Defender définissent les mêmes paramètres que l'anneau 3 avec d'autres valeurs, les
 trois templates standard CIPP pour Defender font la même chose que leur équivalent OIB, la

@@ -98,7 +98,7 @@ Order:
 9. **Take inventory again** — the list of orphaned policies must be empty.
 
 The pilot (rollout phase 2) is not included in item 7 above: `-AllDevices` and `-AllUsers` only
-take what is in rollout phase 1. It follows separately with `-GroupName 'SEC-Baseline-Pilot'` — the list is in
+take what is in rollout phase 1. It follows separately with `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` — the list is in
 [OVERZICHT.en.md](OVERZICHT.en.md#pilot-first).
 
 ### What if policies with the old name are still in the tenant

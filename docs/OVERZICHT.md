@@ -4,34 +4,34 @@
 
 # Intune-baseline — overzicht
 
-214 policies over 4 platformen, met
+219 policies over 4 platformen, met
 [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline) als bron.
 Dit is de samenvatting; de details staan in de [hoofd-README](../README.md) en per map.
 
 | | Aantal |
 |---|---:|
-| Policies | 214 |
-| Zonder toewijzing (bewust) | 106 |
+| Policies | 219 |
+| Zonder toewijzing (bewust) | 111 |
 | Uitgerold in de tenant | 0 |
 
 ## Wat er in zit
 
 | Platform | Settings Catalog | ADMX | Device config | Compliance | App Protection | Totaal |
 |---|---:|---:|---:|---:|---:|---:|
-| [Windows](../IntuneTemplate/WIN/README.md) | 127 | 1 | 10 | 11 | – | **149** |
+| [Windows](../IntuneTemplate/WIN/README.md) | 132 | 1 | 10 | 11 | – | **154** |
 | [macOS](../IntuneTemplate/MAC/README.md) | 30 | – | 3 | 4 | – | **37** |
 | [iOS/iPadOS](../IntuneTemplate/IOS/README.md) | 8 | – | 2 | 3 | 1 | **14** |
 | [Android](../IntuneTemplate/AND/README.md) | 3 | – | 2 | 8 | 1 | **14** |
 
 Per platform staat er een tabel met **elke policy, wat hij doet en waar hij landt**:
-- [Windows](../IntuneTemplate/WIN/README.md) — 149 policies
+- [Windows](../IntuneTemplate/WIN/README.md) — 154 policies
 - [macOS](../IntuneTemplate/MAC/README.md) — 37 policies
 - [iOS/iPadOS](../IntuneTemplate/IOS/README.md) — 14 policies
 - [Android](../IntuneTemplate/AND/README.md) — 14 policies
 
 ## Normenkader
 
-214 van de 214 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
+219 van de 219 policies verwijzen naar ISO/IEC 27001:2022 Annex A, NIS2 art. 21(2),
 CIS Controls v8.1 en NIST CSF 2.0; de policies in fase 1 raken samen 32 van de 93 Annex A-controls.
 Per control en per NIS2-punt wat de baseline afdwingt, hoe het getoetst wordt en wat de organisatie
 zelf moet regelen: [COMPLIANCE.md](COMPLIANCE.md).
@@ -122,13 +122,13 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | 3 | Vervangen | Windows Firewall en Office Updates wisselen van policytype — handwerk |
 | 4 | Opheffen | Network Security, Windows Search, System Services, OneDrive KFM verwijderen |
 | 5 | Uitrollen | de nieuwe policies via CIPP of `Start-IntuneRestoreConfig` |
-| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |
+| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SG-D-UEM-Pilot'` en `'SG-U-UEM-Pilot'` |
 | 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |
 
 ## Eerst in een pilot
 
-Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `[Baseline] - Baseline-Pilot` uit naar
-`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
+Fase 2 in `_manifest.json`. Deze policies rollen via de pakketten `[Baseline] - Baseline-Pilot-Devices` en `-Pilot-Users` uit naar
+`SG-D-UEM-Pilot` en `SG-U-UEM-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
 verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.
 
 | Policy | Waarom |
@@ -176,8 +176,8 @@ verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit he
 | `AND - U - Corporate AI Restricted` | Gebruikers verliezen Circle to Search en de schermcontext van Gemini op het werkprofiel of het hele toestel. Of dat past is een organisatiebesluit over generatieve AI, net als bij Windows AI Restricted; eerst op een pilotgroep, en niet toewijzen bij een organisatie die deze assistenten toestaat. |
 | `AND - U - Corporate Data Protection` | Gebruikers merken het meteen: geen schermafdrukken, geen bestanden via Bluetooth, en een fully managed toestel kan niet meer zelf gereset worden — IT moet wissen. Eerst op een pilotgroep; zonder fully managed- of corporate-owned work profile-inschrijving doet hij niets. |
 
-Zonder toewijzing staan er 106: de 42 hierboven, 26 die op een voorwaarde
-wachten, 22 voor een eigen groep en 16 die niet uitrollen. Die laatste twee zijn een
+Zonder toewijzing staan er 111: de 42 hierboven, 27 die op een voorwaarde
+wachten, 25 voor een eigen groep en 17 die niet uitrollen. Die laatste twee zijn een
 *alternatief* voor een policy die wél is toegewezen, niet een aanvulling erop: de update-ringen
 1 en 2 voor Windows en Defender zetten dezelfde instellingen als ring 3 met andere waarden, de
 drie CIPP-standaardtemplates voor Defender doen hetzelfde als hun OIB-tegenhanger, de

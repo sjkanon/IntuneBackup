@@ -40,5 +40,5 @@
         }
     ],
     "displayName": "[Baseline] - AND - D - Compliance Dedicated Device Health",
-    "description": "Marks a dedicated Android device (kiosk or shared) as non-compliant when it is rooted, Play Integrity does not pass with hardware backing, the Intune app has been tampered with, storage is not encrypted or the latest security patch is older than the minimum. Baseline assignment: none by default — belongs on SEC-Android-Dedicated. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Corp-Dedicated - Kiosk and Shared - v1.5; without password and OS version requirements, patch level added."
+    "description": "Marks a dedicated Android device (kiosk or shared) as non-compliant when it is rooted, Play Integrity does not pass with hardware backing, the Intune app has been tampered with, storage is not encrypted or the latest security patch is older than the minimum. Baseline assignment: none by default — belongs on SG-D-UEM-AND-Dedicated-Dynamic. Source: UniFy Android Enterprise Baseline v1.5.1 — AND - CP - DEV - Corp-Dedicated - Kiosk and Shared - v1.5; without password and OS version requirements, patch level added."
 }
