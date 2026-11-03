@@ -67,6 +67,10 @@ koppelingen naar een ProgId die niet bestaat en negeert Windows ze.
 Pas je een script aan, verhoog dan `$Version` in `Install-OfficeWeb.ps1` én in
 `Detect-OfficeWeb.ps1`. Anders ziet Intune de oude versie als geïnstalleerd.
 
+## Via de baseline
+
+De gewone weg. [`AppTemplate/Shared-Devices-Apps.json`](../../../../AppTemplate/Shared-Devices-Apps.json) is een CIPP-applicatietemplate met deze app als *custom application* (het installatiescript is `OfficeWeb-PlatformScript.ps1`) en Windows App uit de Store, allebei op `SG-D-UEM-WIN-Shared`. De baseline `0.5 - UEM - Shared Devices` rolt het uit met de standard *Deploy Intune Application Template*. `node scripts/generate-app-templates.js` bouwt het template en weigert als het platformscript achterloopt.
+
 ## Via CIPP, zonder Win32-app
 
 [`OfficeWeb-PlatformScript.ps1`](OfficeWeb-PlatformScript.ps1) is `Install-OfficeWeb.ps1` met

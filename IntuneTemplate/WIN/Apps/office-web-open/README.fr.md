@@ -72,6 +72,10 @@ n'existe pas et Windows les ignore.
 Si vous modifiez un script, augmentez `$Version` dans `Install-OfficeWeb.ps1` et dans
 `Detect-OfficeWeb.ps1`. Sinon Intune considère l'ancienne version comme installée.
 
+## Via la baseline
+
+La voie normale. [`AppTemplate/Shared-Devices-Apps.json`](../../../../AppTemplate/Shared-Devices-Apps.json) est un template d'application CIPP avec cette application comme *custom application* (le script d'installation est `OfficeWeb-PlatformScript.ps1`) et Windows App du Store, toutes deux sur `SG-D-UEM-WIN-Shared`. La baseline `0.5 - UEM - Shared Devices` le déploie avec le standard *Deploy Intune Application Template*. `node scripts/generate-app-templates.js` construit le template et refuse si le script de plateforme n'est pas à jour.
+
 ## Via CIPP, sans application Win32
 
 [`OfficeWeb-PlatformScript.ps1`](OfficeWeb-PlatformScript.ps1) est `Install-OfficeWeb.ps1` avec

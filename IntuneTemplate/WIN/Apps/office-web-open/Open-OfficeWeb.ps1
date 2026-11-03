@@ -20,7 +20,7 @@
     -BuildCache <folder> only writes the list (Install-OfficeWeb.ps1 does that for all users).
     -WhatIf shows which menu item would run, without running it.
 
-    Runs as the signed-in user. Logs to %LOCALAPPDATA%\OfficeWebOpen\open.log.
+    Runs as the signed-in user. Logs to OfficeWebOpen\open.log in the user's local app data.
 #>
 [CmdletBinding(SupportsShouldProcess)]
 param(

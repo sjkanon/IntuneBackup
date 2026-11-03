@@ -66,6 +66,10 @@ point to a ProgId that does not exist and Windows ignores them.
 If you change a script, raise `$Version` in `Install-OfficeWeb.ps1` and in `Detect-OfficeWeb.ps1`.
 Otherwise Intune sees the old version as installed.
 
+## Through the baseline
+
+The normal route. [`AppTemplate/Shared-Devices-Apps.json`](../../../../AppTemplate/Shared-Devices-Apps.json) is a CIPP application template with this app as a *custom application* (the install script is `OfficeWeb-PlatformScript.ps1`) and Windows App from the Store, both on `SG-D-UEM-WIN-Shared`. The baseline `0.5 - UEM - Shared Devices` deploys it with the standard *Deploy Intune Application Template*. `node scripts/generate-app-templates.js` builds the template and refuses when the platform script is out of date.
+
 ## Through CIPP, without a Win32 app
 
 [`OfficeWeb-PlatformScript.ps1`](OfficeWeb-PlatformScript.ps1) is `Install-OfficeWeb.ps1` with

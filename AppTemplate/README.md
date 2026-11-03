@@ -9,6 +9,7 @@ CIPP-**applicatietemplates**: Win32-apps die CIPP zelf in een tenant zet, zonder
 |---|---|---|
 | [`Winget-AutoUpdate.json`](Winget-AutoUpdate.json) | `[Baseline] - WIN - D - Winget-AutoUpdate` | [`IntuneTemplate/WIN/Apps/winget-autoupdate/`](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
 | [`Winget-AutoUpdate-AllDevices.json`](Winget-AutoUpdate-AllDevices.json) | dezelfde app, toegewezen aan alle apparaten — voor de baseline [`Windows-Updates.json`](../BaselineTemplate/README.md#windows-updatesjson--patchen) | idem |
+| [`Shared-Devices-Apps.json`](Shared-Devices-Apps.json) | `[Baseline] - WIN - D - Windows App` (Store) en `[Baseline] - WIN - D - Office op het web`, toegewezen aan `SG-D-UEM-WIN-Shared` — voor de baseline `0.5 - UEM - Shared Devices` in CIPP-Baselines | [`IntuneTemplate/WIN/Apps/office-web-open/`](../IntuneTemplate/WIN/Apps/office-web-open/README.md) |
 
 ## Hoe het werkt
 

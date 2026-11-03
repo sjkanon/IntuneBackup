@@ -6,7 +6,7 @@
     Install-OfficeWeb.ps1 when the script changes, so devices get the new script.
 #>
 
-$Version = '1.0.0'
+$Version = '1.0.1'
 $Script = Join-Path $env:ProgramFiles 'OfficeWebOpen\Open-OfficeWeb.ps1'
 $Installed = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\OfficeWebOpen' -Name Version -ErrorAction SilentlyContinue).Version
 $Command = (Get-ItemProperty -Path 'HKLM:\SOFTWARE\Classes\OfficeWeb.Word\shell\open\command' -ErrorAction SilentlyContinue).'(default)'
