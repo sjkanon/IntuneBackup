@@ -73,7 +73,7 @@ all Windows devices.
 ### 1. Audit — phase 2, pilot group, then all devices
 
 Create `AppControl_BuiltIn_Audit.graph.json` (see *Deployment*) and assign it to the pilot group
-(`SEC-Baseline-Pilot`), after a week to all Windows devices. In audit mode everything keeps
+(`SG-D-UEM-Pilot`), after a week to all Windows devices. In audit mode everything keeps
 running; Windows logs per file what **would** have been blocked:
 
 | Event | Log | Advanced Hunting `ActionType` |
@@ -112,7 +112,7 @@ These exceptions are organisation-specific and belong in your own tenant, not in
 ### 3. Enforce — phase 4
 
 Only when query 2 shows nothing unknown over seven days: assign
-`AppControl_BuiltIn_Enforce.graph.json` to a group `SEC-AppControl-Enforced` and
+`AppControl_BuiltIn_Enforce.graph.json` to a group `SG-D-UEM-WIN-AppControl-Enforced` and
 **remove that group from the assignment of the audit policy**. Both policies have the same
 PolicyID; on one device they conflict. Expand per department, not all at once.
 

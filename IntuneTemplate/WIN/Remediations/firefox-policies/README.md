@@ -69,7 +69,7 @@ Intune admin center → **Devices → Scripts and remediations → Create**:
 | Uitvoeren met aanmeldingsreferenties | Nee (SYSTEM) |
 | 64-bits PowerShell | Ja |
 | Schema | Dagelijks |
-| Toewijzing | Pilotgroep `SEC-Baseline-Pilot`, daarna alle Windows-apparaten. Op een apparaat zonder Firefox schrijft hij alleen registerwaarden. |
+| Toewijzing | Pilotgroep `SG-D-UEM-Pilot`, daarna alle Windows-apparaten. Op een apparaat zonder Firefox schrijft hij alleen registerwaarden. |
 
 Een draaiende Firefox neemt de policies over na een herstart. Controleer met `about:policies`.
 

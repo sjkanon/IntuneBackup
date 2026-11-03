@@ -48,7 +48,7 @@ platform README lists them under *Other components*; the pipeline does not read 
 |---|---|---|
 | [`_assignments.json`](_assignments.json) | the assignment target per policy | `export-intunebackup.js`, `check-scope.js` |
 | [`_manifest.json`](_manifest.json) | which OIB policy lands where, why it deviates and in which phase it is deployed | `import-oib.js`, `set-packages.js` |
-| [`_renames.json`](_renames.json) | what policies were called in the tenant and what they map to now | `Rename-BaselinePolicy.ps1`, `check-scope.js` |
+| [`_renames.json`](_renames.json) | what policies and groups were called in the tenant and what they map to now | `Rename-BaselinePolicy.ps1`, `Rename-BaselineGroup.ps1`, `check-scope.js` |
 | [`_ca.json`](_ca.json) | per policy the Conditional Access policies that rely on it — a copy from `docs/policies.json` in the CA-Policies repo | `generate-docs.js` (also writes it, with that repo next to this one) |
 | [`_controls.json`](_controls.json) | the standards vocabulary: ISO 27001 Annex A, NIS2 art. 21(2), CIS Controls v8.1, NIST CSF 2.0 | `check-scope.js`, `generate-compliance.js` |
 | [`_i18n/`](_i18n/) | the English and French translation of the texts from the data, for the generated documentation | `generate-docs.js`, `generate-compliance.js` |
@@ -79,25 +79,27 @@ ready yet untested. The value follows from `fase` in `_manifest.json` and the ta
 | `[Baseline] - Baseline-Devices-AVD` | Assign to all devices, filter [Baseline] - WIN - AVD Multi-session (include) | 1 | 5 |
 | `[Baseline] - Baseline-Users` | Assign to all users | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | Assign to all users, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| `[Baseline] - Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | Custom group: SEC-Baseline-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 13 |
+| `[Baseline] - Baseline-Pilot-Devices` | Custom group: SG-D-UEM-Pilot | 2 | 20 |
+| `[Baseline] - Baseline-Pilot-Devices-Physical` | Custom group: SG-D-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 12 |
+| `[Baseline] - Baseline-Pilot-Users` | Custom group: SG-U-UEM-Pilot | 2 | 9 |
+| `[Baseline] - Baseline-Pilot-Users-Physical` | Custom group: SG-U-UEM-Pilot, filter [Baseline] - WIN - Physical (include) | 2 | 1 |
 | `[Baseline] - Baseline-Wacht` | Do not assign | 3 | 26 |
 | `[Baseline] - Baseline-ADE-token` | Do not assign (link to an ADE token in Intune) | 1 | 2 |
-| `[Baseline] - Baseline-SEC-Android-Dedicated` | Custom group: SEC-Android-Dedicated | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Baseline-Pilot` | Custom group: SEC-Baseline-Pilot | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Cloud-PC` | Custom group: SEC-Cloud-PC | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Cloud-PC-External` | Custom group: SEC-Cloud-PC-External | 1 | 1 |
-| `[Baseline] - Baseline-SEC-iOS-BYOD` | Custom group: SEC-iOS-BYOD | 1 | 1 |
-| `[Baseline] - Baseline-SEC-iOS-Corporate` | Custom group: SEC-iOS-Corporate | 1 | 3 |
-| `[Baseline] - Baseline-SEC-Remote-Support-macOS` | Custom group: SEC-Remote-Support-macOS | 1 | 2 |
-| `[Baseline] - Baseline-SEC-Shared-Devices` | Custom group: SEC-Shared-Devices | 1 | 4 |
-| `[Baseline] - Baseline-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `[Baseline] - Baseline-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-AND-Dedicated-Dynamic` | Custom group: SG-D-UEM-AND-Dedicated-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-IOS-BYOD-Dynamic` | Custom group: SG-D-UEM-IOS-BYOD-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-IOS-Corporate-Dynamic` | Custom group: SG-D-UEM-IOS-Corporate-Dynamic | 1 | 3 |
+| `[Baseline] - Baseline-SG-D-UEM-MAC-RemoteSupport` | Custom group: SG-D-UEM-MAC-RemoteSupport | 1 | 2 |
+| `[Baseline] - Baseline-SG-D-UEM-Pilot` | Custom group: SG-D-UEM-Pilot | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` | Custom group: SG-D-UEM-WIN-CloudPC-Dynamic | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-External` | Custom group: SG-D-UEM-WIN-CloudPC-External | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Shared` | Custom group: SG-D-UEM-WIN-Shared | 1 | 4 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC` | Custom group: SG-D-UEM-WIN-SharedPC | 1 | 1 |
 | `[Baseline] - Baseline-SG-D-UEM-WIN-SharedPC-Guest` | Custom group: SG-D-UEM-WIN-SharedPC-Guest | 1 | 1 |
-| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SEC-Update-Ring1, SEC-Update-Ring2, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
-| `[Baseline] - Updates-SEC-Update-Ring1` | Custom group: SEC-Update-Ring1 | 1 | 1 |
-| `[Baseline] - Updates-SEC-Update-Ring2` | Custom group: SEC-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring2` | Custom group: SG-D-UEM-WIN-Update-Ring2 | 1 | 1 |
+| `[Baseline] - Updates-Ring3-Physical` | Assign to all devices, exclude SG-D-UEM-WIN-Update-Ring1, SG-D-UEM-WIN-Update-Ring2, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
+| `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1` | Custom group: SG-D-UEM-WIN-Update-Ring1 | 1 | 1 |
+| `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2` | Custom group: SG-D-UEM-WIN-Update-Ring2 | 1 | 1 |
 | `[Baseline] - Updates-Devices` | Assign to all devices | 1 | 1 |
 | `[Baseline] - Updates-Devices-Physical` | Assign to all devices, filter [Baseline] - WIN - Physical (include) | 1 | 1 |
 | *(empty)* | not deployed | – | 16 |

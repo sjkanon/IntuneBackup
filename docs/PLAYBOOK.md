@@ -28,7 +28,7 @@ matcht de vier fysieke en QEMU-pc's en niet de AVD-host, `[Baseline] - WIN - AVD
 
 **Windows 365 Cloud PC's en persoonlijke AVD-hosts** (single-session, model `Cloud PC …` of
 `Virtual Machine`) vallen onder **geen** van beide filters. Ze krijgen alleen klasse `alle`, plus de
-Cloud PC-set via de groepen `SEC-Cloud-PC` en `SEC-Cloud-PC-External` (fase 4). Geen BitLocker,
+Cloud PC-set via de groepen `SG-D-UEM-WIN-CloudPC-Dynamic` en `SG-D-UEM-WIN-CloudPC-External` (fase 4). Geen BitLocker,
 Windows Hello, Storage Sense of fysieke `Remote Desktop and RPC`, en ook geen FSLogix. Dat is een
 keuze, geen vergissing: controleer bij een klant met Windows 365 of de gezamenlijke set daar volstaat.
 
@@ -51,12 +51,14 @@ Stand bij het schrijven, nageteld uit het manifest; de actuele, gegenereerde tab
 | `[Baseline] - Baseline-Users` | alle gebruikers | — | 1 | 31 |
 | `[Baseline] - Baseline-Users-Physical` | alle gebruikers | `[Baseline] - WIN - Physical` | 1 | 1 |
 | `[Baseline] - Baseline-ADE-token` | niet toewijzen (ADE-token) | — | 1 | 2 |
-| `[Baseline] - Baseline-SEC-<groep>` (tien pakketten) | de groep uit `faseGroep` | — | 1 | 14 |
-| `[Baseline] - Baseline-Pilot` | groep `SEC-Baseline-Pilot` | — | 2 | 29 |
-| `[Baseline] - Baseline-Pilot-Physical` | groep `SEC-Baseline-Pilot` | `[Baseline] - WIN - Physical` | 2 | 13 |
+| `[Baseline] - Baseline-SG-<groep>` (twaalf pakketten) | de groep uit `faseGroep` | — | 1 | 18 |
+| `[Baseline] - Baseline-Pilot-Devices` | groep `SG-D-UEM-Pilot` | — | 2 | 20 |
+| `[Baseline] - Baseline-Pilot-Users` | groep `SG-U-UEM-Pilot` | — | 2 | 9 |
+| `[Baseline] - Baseline-Pilot-Devices-Physical` | groep `SG-D-UEM-Pilot` | `[Baseline] - WIN - Physical` | 2 | 12 |
+| `[Baseline] - Baseline-Pilot-Users-Physical` | groep `SG-U-UEM-Pilot` | `[Baseline] - WIN - Physical` | 2 | 1 |
 | `[Baseline] - Baseline-Wacht` | niet toewijzen | — | 3 | 26 |
-| `[Baseline] - Updates-Ring3-Physical` | alle apparaten behalve `SEC-Update-Ring1/2` | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
-| `[Baseline] - Updates-SEC-Update-Ring1`, `-Ring2` | de ringgroep | — | 1 (Windows-Updates) | 2 |
+| `[Baseline] - Updates-Ring3-Physical` | alle apparaten behalve `SG-D-UEM-WIN-Update-Ring1/2` | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
+| `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1`, `-Ring2` | de ringgroep | — | 1 (Windows-Updates) | 2 |
 | `[Baseline] - Updates-Devices` | alle apparaten | — | 1 (Windows-Updates) | 1 |
 | `[Baseline] - Updates-Devices-Physical` | alle apparaten | `[Baseline] - WIN - Physical` | 1 (Windows-Updates) | 1 |
 | *(geen pakket — fase 5)* | — | — | — | 15 |
@@ -85,18 +87,18 @@ als **naam** (`assignmentFilter`, `assignmentFilterType: include`); CIPP zoekt h
 
 **Groepen blijven nodig** waar het om een selectie gaat en niet om een soort apparaat:
 
-- **De pilot**: `SEC-Baseline-Pilot`. Wie in de pilot zit is een keuze, geen eigenschap van het apparaat.
-- **Fase 4**: `SEC-Cloud-PC`, `SEC-Cloud-PC-External`, `SEC-Shared-Devices`, de update-ringen
-  `SEC-Update-Ring1/2` en de andere `faseGroep`-groepen.
-- **De AVD-hostgroep `SEC-AVD-Session-Hosts`**, niet voor de baseline-pakketten maar voor de
+- **De pilot**: `SG-D-UEM-Pilot` voor apparaten en `SG-U-UEM-Pilot` voor gebruikers. Wie in de pilot zit is een keuze, geen eigenschap van het apparaat.
+- **Fase 4**: `SG-D-UEM-WIN-CloudPC-Dynamic`, `SG-D-UEM-WIN-CloudPC-External`, `SG-D-UEM-WIN-Shared`, de update-ringen
+  `SG-D-UEM-WIN-Update-Ring1/2` en de andere `faseGroep`-groepen.
+- **De AVD-hostgroep `SG-D-UEM-WIN-AVD-SessionHosts`**, niet voor de baseline-pakketten maar voor de
   hostpoolinstelling *RDP SSO → target device groups*, de compliance-apparaattoewijzing op
   multi-session en rapportage.
 - **Functies die een groep eisen**, zoals Windows Autopatch en andere update-diensten met hun eigen
   groepen.
 
-**Groep én filter** kan samen: `[Baseline] - Baseline-Pilot-Physical` gaat naar de groep
-`SEC-Baseline-Pilot` met include `[Baseline] - WIN - Physical`. Zit er een sessiehost in de pilotgroep, dan
-krijgt hij de gezamenlijke pilotpolicies (`Baseline-Pilot`) maar niet de fysieke.
+**Groep én filter** kan samen: `[Baseline] - Baseline-Pilot-Devices-Physical` gaat naar de groep
+`SG-D-UEM-Pilot` met include `[Baseline] - WIN - Physical`. Zit er een sessiehost in de pilotgroep, dan
+krijgt hij de gezamenlijke pilotpolicies (`Baseline-Pilot-Devices`) maar niet de fysieke.
 
 ## Naamgeving
 
@@ -114,11 +116,11 @@ Policy-, pakket-, filter- en groepsnamen zijn Engels; manifestvelden (`doel`, `f
 | CIPP-pakket | `<prefix>Baseline-<doel>[-<klasse>]` | `[Baseline] - Baseline-Devices-Physical` |
 | Updatepakket | `<prefix>Updates-<doel>[-<klasse>]` | `[Baseline] - Updates-Ring3-Physical` |
 | Klasse-achtervoegsel | `-Physical`, `-AVD` — altijd achteraan | `[Baseline] - Baseline-Pilot-Physical` |
-| Groepspakket | `<prefix>Baseline-<groepsnaam>` | `[Baseline] - Baseline-SEC-Cloud-PC` |
+| Groepspakket | `<prefix>Baseline-<groepsnaam>` | `[Baseline] - Baseline-SG-D-UEM-WIN-CloudPC-Dynamic` |
 | CIPP-baseline | `<prefix><Onderwerp>` | `[Baseline] - Windows Updates` |
 | Toewijzingsfilter | `<PLATFORM> - <Naam>`, **zonder** prefix | `[Baseline] - WIN - Physical`, `[Baseline] - AND - Corporate` |
 | Filterbestand | `<PLATFORM>-<Naam met ->.json` in `<PLATFORM>/AssignmentFilters/` | `WIN-Physical.json` |
-| Entra-groep | `SEC-<Doel-in-woorden>` met koppeltekens | `SEC-Baseline-Pilot`, `SEC-AVD-Session-Hosts` |
+| Entra-groep | `SG-<U\|D>-<domein>-[<platform>-]<onderwerp>[-Dynamic]`, zie de groepen-wegwijzer in het CIPP-Regelboek | `SG-D-UEM-Pilot`, `SG-D-UEM-WIN-AVD-SessionHosts` |
 | CIPP custom variable | PascalCase, tussen `%` in het template | `%SecurityAlertMail%`, `%FSLogixStorageAccount%` |
 | Placeholder in git | `<WAT>-INVULLEN`, in `local/` ingevuld | `DEDICATED-INSCHRIJFPROFIEL-INVULLEN` |
 
@@ -133,10 +135,8 @@ export zoeken ze letterlijk op naam — een filter hernoemen is dus in de tenant
   heten ook Nederlands (`Nu`, `Pilot`, `Wacht op voorwaarde`, en `Melden`/`Blokkeren` bij DLP).
 - Het filterbestand `WIN-AVD-Multi-Session.json` heeft een hoofdletter S, de filternaam
   `[Baseline] - WIN - AVD Multi-session` niet. Bij de Android-filters komen bestand en naam exact overeen.
-- `[Baseline] - Baseline-SEC-Baseline-Pilot` (fase 4, één policy) en `[Baseline] - Baseline-Pilot`
+- `[Baseline] - Baseline-SG-D-UEM-Pilot` (fase 4, één policy) en `[Baseline] - Baseline-Pilot-Devices`
   (fase 2) gaan naar dezelfde groep: twee pakketten voor één doel.
-- In groepsnamen staat het platform in merkspelling (`SEC-iOS-BYOD`, `SEC-Remote-Support-macOS`),
-  elders als code (`IOS`, `MAC`).
 - `[Baseline] Windows Hello For Business` uit de oude set staat niet in `_renames.json` (zie migratie).
 
 ## Stappen
@@ -152,7 +152,7 @@ export zoeken ze letterlijk op naam — een filter hernoemen is dus in de tenant
 - **CIPP**: de tenant is toegevoegd (GDAP) en de template-repository wijst naar deze repo.
 - **Tenantinstellingen** uit [STRUCTUUR.md](STRUCTUUR.md#tenantinstellingen-die-geen-policy-zijn):
   apparaten zonder compliancebeleid niet-compliant, Defender for Endpoint-connector aan.
-- **Groepen** die de tenant nodig heeft: `SEC-Baseline-Pilot` (met een handvol fysieke pilotpc's
+- **Groepen** die de tenant nodig heeft: `SG-D-UEM-Pilot` / `SG-U-UEM-Pilot` (met een handvol fysieke pilotpc's
   en -gebruikers) en de `faseGroep`-groepen die je gebruikt. Zie de
   [BaselineTemplate-README](../BaselineTemplate/README.md#wat-je-erna-zelf-doet).
 
@@ -217,7 +217,7 @@ de baseline, meestal een oude policy.
 ### 6. Stage 2: de pilot
 
 CIPP schuift door naar stage 2 als alles uit stage 1 compliant is **en** er twee weken voorbij
-zijn. `Baseline-Pilot` en `Baseline-Pilot-Physical` gaan dan naar `SEC-Baseline-Pilot`. Laat de
+zijn. `Baseline-Pilot-Devices`, `Baseline-Pilot-Users` en hun `-Physical` gaan dan naar `SG-D-UEM-Pilot` / `SG-U-UEM-Pilot`. Laat de
 pilot groeien via de groep, niet met een extra stage.
 
 ### 7. Stage 3 met de hand
@@ -296,7 +296,7 @@ Connect-MgGraph -Scopes 'DeviceManagementConfiguration.ReadWrite.All' -TenantId 
 Zie [AVD.md](AVD.md) voor de indeling per policy, de FSLogix-aanpak en het uitrolplan. In het kort:
 
 - **Compliance ook op het apparaat.** Gebruikersgerichte compliance werkt niet op multi-session;
-  wijs de compliancepolicies die multi-session ondersteunt óók toe aan `SEC-AVD-Session-Hosts`.
+  wijs de compliancepolicies die multi-session ondersteunt óók toe aan `SG-D-UEM-WIN-AVD-SessionHosts`.
   CIPP beheert de toewijzing van `Baseline-Users` en haalt zo'n extra toewijzing bij een run weer
   weg — controleer dat na elke run tot dit in de pijplijn zit (open punt in AVD.md).
 - **Sync forceren op een multi-session-host**: `deviceenroller.exe /o <enrollment-ID> /c /b`
@@ -324,7 +324,7 @@ Zie [AVD.md](AVD.md) voor de indeling per policy, de FSLogix-aanpak en het uitro
 
 - [ ] Filters `[Baseline] - WIN - Physical` en `[Baseline] - WIN - AVD Multi-session` bestaan, naam letterlijk, *Preview* klopt.
 - [ ] Bij AVD: custom variable `FSLogixStorageAccount` gezet voor deze tenant.
-- [ ] Groepen `SEC-Baseline-Pilot` en de gebruikte `faseGroep`-groepen bestaan; bij AVD ook `SEC-AVD-Session-Hosts`.
+- [ ] Groepen `SG-D-UEM-Pilot` / `SG-U-UEM-Pilot` en de gebruikte `faseGroep`-groepen bestaan; bij AVD ook `SG-D-UEM-WIN-AVD-SessionHosts`.
 - [ ] Tenantinstellingen: niet-compliant zonder beleid, Defender-connector aan.
 - [ ] `Baseline.json` en `Windows-Updates.json` geïmporteerd met de knop, tenant toegewezen.
 - [ ] Oude policies hernoemd (`Rename-BaselinePolicy.ps1`), `replace`/`retire` met de hand afgehandeld.

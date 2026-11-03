@@ -83,7 +83,7 @@ detection [`Detect-WAU.ps1`](Detect-WAU.ps1). No `.intunewin` to build.
 
 1. CIPP → **Tools → Community Repos** → this repo → `AppTemplate/Winget-AutoUpdate.json` → **Import**.
 2. **Applications → Application Templates** → `[Baseline] - Winget-AutoUpdate` → **Deploy**:
-   pick the tenants and, as assignment, the group `SEC-Baseline-Pilot` (the template itself
+   pick the tenants and, as assignment, the group `SG-D-UEM-Pilot` (the template itself
    assigns nothing). Or put it in a baseline with the standard *Deploy Intune Application Template*.
 
 The device must be able to reach `github.com`; the MSI log is in `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\WAU-install.log`.
@@ -111,7 +111,7 @@ when version, hash or product code in the scripts differ from `New-WAUPackage.ps
 | Device restart behaviour | No specific action |
 | Operating system | 64-bit, Windows 10 22H2 or later |
 | Detection rule | Custom script → [`Detect-WAU.ps1`](Detect-WAU.ps1) |
-| Assignment | *Required* on the pilot group `SEC-Baseline-Pilot`, then all Windows devices |
+| Assignment | *Required* on the pilot group `SG-D-UEM-Pilot`, then all Windows devices |
 
 The detection deliberately ignores the version: that would reinstall on every version change. It
 checks for the registry key, `Winget-Upgrade.ps1` and the scheduled task `\WAU\Winget-AutoUpdate`.

@@ -15,7 +15,7 @@ Lets users sign in on shared devices with a FIDO2 security key or NFC badge, wit
 | Source | Own baseline — OMA-URI ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin = 1, as in IntuneAdmin/IntuneBaselines (Baseline - Enables FIDO Security Keys to be used during Windows Sign In). |
 | File | [`Baseline_WIN_D_Security_Key_Sign_in.json`](Baseline_WIN_D_Security_Key_Sign_in.json) |
 
-> Belongs on SEC-Shared-Devices. The user needs a passkey on a FIDO2 key or badge, registered in Entra; turn on the Passkey (FIDO2) authentication method for that in the Entra authentication methods policy. A custom profile (OMA-URI) instead of Settings Catalog, because the Settings Catalog ID cannot be verified in any source; it is the same setting as in IntuneAdmin. Works without Windows Hello for Business on the device: test on the first device that the Security key option is on the sign-in screen next to [Baseline] - WIN - D - Windows Hello for Business Disabled.
+> Belongs on SG-D-UEM-WIN-Shared. The user needs a passkey on a FIDO2 key or badge, registered in Entra; turn on the Passkey (FIDO2) authentication method for that in the Entra authentication methods policy. A custom profile (OMA-URI) instead of Settings Catalog, because the Settings Catalog ID cannot be verified in any source; it is the same setting as in IntuneAdmin. Works without Windows Hello for Business on the device: test on the first device that the Security key option is on the sign-in screen next to [Baseline] - WIN - D - Windows Hello for Business Disabled.
 
 ## Standards
 

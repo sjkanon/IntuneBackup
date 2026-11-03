@@ -23,8 +23,8 @@ dépôt : le manifeste.
 
 | Étape | Paquets | Passage à cette étape |
 |---:|---|---|
-| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` et les paquets de groupe `[Baseline] - Baseline-SEC-*` | — l'étape 1 s'applique toujours |
-| 2 · Pilote | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
+| 1 · Immédiat | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` et les paquets de groupe `[Baseline] - Baseline-SG-*` | — l'étape 1 s'applique toujours |
+| 2 · Pilote | `[Baseline] - Baseline-Pilot-Devices`, `[Baseline] - Baseline-Pilot-Physical` | tout ce qui relève de l'étape 1 est conforme (`success`) **et** deux semaines se sont écoulées (`time`) |
 | 3 · En attente d'un prérequis | `[Baseline] - Baseline-Wacht` | `manual` — quelqu'un la fait avancer |
 
 Les stratégies contenues dans chaque paquet sont listées dans le
@@ -79,9 +79,9 @@ catalogue filtre également ce mot, et le fichier devient alors introuvable, mê
 - **Créer les filtres.** `[Baseline] - WIN - Physical` et `[Baseline] - WIN - AVD Multi-session` depuis
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.fr.md), avant
   la première exécution.
-- **Veiller à ce que les groupes existent.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`,
-  `SEC-Update-Ring2`, `SEC-Shared-Devices`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`,
-  `SEC-iOS-Corporate` et `SEC-Remote-Support-macOS` doivent exister dans le tenant ; CIPP les
+- **Veiller à ce que les groupes existent.** `SG-D-UEM-Pilot`, `SG-U-UEM-Pilot`, `SG-D-UEM-WIN-Update-Ring1`,
+  `SG-D-UEM-WIN-Update-Ring2`, `SG-D-UEM-WIN-Shared`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SG-D-UEM-AND-Dedicated-Dynamic`, `SG-D-UEM-IOS-BYOD-Dynamic`,
+  `SG-D-UEM-IOS-Corporate-Dynamic` et `SG-D-UEM-MAC-RemoteSupport` doivent exister dans le tenant ; CIPP les
   recherche par nom (les caractères génériques sont autorisés). Ce sont des noms par défaut. Si un
   groupe s'appelle autrement, modifiez `faseGroep` dans
   [`_manifest.json`](../IntuneTemplate/_manifest.json) — pour le groupe pilote aussi `PILOT_GROUP`
@@ -166,9 +166,9 @@ un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition 
 
 | Étape | Standard | Affectation | Ce qu'il fait |
 |---:|---|---|---|
-| 1 · Immédiat | `[Baseline] - Updates-Ring3-Physical` | tous les appareils, **sauf** `SEC-Update-Ring1` et `SEC-Update-Ring2`, filtre `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
-| 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
-| 1 · Immédiat | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
+| 1 · Immédiat | `[Baseline] - Updates-Ring3-Physical` | tous les appareils, **sauf** `SG-D-UEM-WIN-Update-Ring1` et `SG-D-UEM-WIN-Update-Ring2`, filtre `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production : installe à 13:00, échéance de deux jours |
+| 1 · Immédiat | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1` | `SG-D-UEM-WIN-Update-Ring1` | Ring 1 Pilot : mises à jour immédiates |
+| 1 · Immédiat | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2` | `SG-D-UEM-WIN-Update-Ring2` | Ring 2 UAT : mises à jour qualité après trois jours |
 | 1 · Immédiat | `[Baseline] - Updates-Devices` | tous les appareils | Edge Updates (redémarrage obligatoire, hors heures de travail) |
 | 1 · Immédiat | `[Baseline] - Updates-Devices-Physical` | tous les appareils, filtre `[Baseline] - WIN - Physical` | Microsoft Office Updates (mises à jour automatiques, impossibles à désactiver) — sur un hôte AVD, les mises à jour arrivent avec l'image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | tous les appareils (Required) | Winget-AutoUpdate : met à jour chaque jour toute application connue de winget, sauf la [liste d'exclusion](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.fr.md) |
@@ -176,14 +176,14 @@ un tenant qui ne reçoit pas (encore) toute la baseline Intune. La répartition 
 L'étape 2 commence lorsque tout ce qui relève de l'étape 1 est conforme **et** que deux semaines
 se sont écoulées — le même seuil que l'étape pilote de `Baseline.json`.
 
-**Ring 3 exclut les groupes d'anneau.** Sans cette exclusion, un appareil de `SEC-Update-Ring1`
+**Ring 3 exclut les groupes d'anneau.** Sans cette exclusion, un appareil de `SG-D-UEM-WIN-Update-Ring1`
 reçoit deux anneaux de mise à jour ; Intune signale alors un Conflict et n'applique les
 paramètres contestés (report, échéance) via aucun des deux. Un paquet partage son affectation avec
 tous ses membres : c'est pourquoi Ring 3 est un paquet à part et que l'exclusion ne touche pas Edge
 et Office.
 
 **Ces stratégies ont été retirées de `Baseline.json`.** Elles se trouvaient dans `Baseline-Devices`
-et `Baseline-SEC-Update-Ring1/2`. Un tenant sous `Baseline.json` a donc *aussi* besoin de cette
+et `Baseline-SG-D-UEM-WIN-Update-Ring1/2`. Un tenant sous `Baseline.json` a donc *aussi* besoin de cette
 baseline, sinon plus personne ne surveille les stratégies de mise à jour (elles restent en place :
 CIPP ne supprime rien). Les anneaux de mise à jour Defender, *Update Reports and Telemetry* et
 *Google Chrome Updates* restent dans `Baseline.json`.
@@ -201,7 +201,7 @@ Deux conséquences :
   les appareils.
 - Si quelqu'un retire l'affectation, CIPP ne le voit pas : l'application existe toujours.
 
-**Avant la première exécution :** les groupes `SEC-Update-Ring1` et `SEC-Update-Ring2` doivent
+**Avant la première exécution :** les groupes `SG-D-UEM-WIN-Update-Ring1` et `SG-D-UEM-WIN-Update-Ring2` doivent
 exister (vides, c'est permis), sinon CIPP ne peut ni les affecter ni les exclure. Licence : Intune
 uniquement.
 

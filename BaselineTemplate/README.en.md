@@ -22,8 +22,8 @@ picking the right assignment target thirteen times — one misclick puts up to 7
 
 | Stage | Packages | Moving on to this stage |
 |---:|---|---|
-| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SEC-*` | — stage 1 always applies |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
+| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SG-*` | — stage 1 always applies |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot-Devices`, `[Baseline] - Baseline-Pilot-Physical` | everything from stage 1 is compliant (`success`) **and** two weeks have passed (`time`) |
 | 3 · Awaiting prerequisite | `[Baseline] - Baseline-Wacht` | `manual` — someone moves it on |
 
 Which policies are in which package is listed in the
@@ -74,9 +74,9 @@ filters that word out too, and then the file can no longer be found with the but
 - **Create the filters.** `[Baseline] - WIN - Physical` and `[Baseline] - WIN - AVD Multi-session` from
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.en.md), before
   the first run.
-- **Make sure the groups exist.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
-  `SEC-Shared-Devices`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` and
-  `SEC-Remote-Support-macOS` must exist in the tenant; CIPP looks them up by name (wildcards allowed).
+- **Make sure the groups exist.** `SG-D-UEM-Pilot`, `SG-U-UEM-Pilot`, `SG-D-UEM-WIN-Update-Ring1`, `SG-D-UEM-WIN-Update-Ring2`,
+  `SG-D-UEM-WIN-Shared`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SG-D-UEM-AND-Dedicated-Dynamic`, `SG-D-UEM-IOS-BYOD-Dynamic`, `SG-D-UEM-IOS-Corporate-Dynamic` and
+  `SG-D-UEM-MAC-RemoteSupport` must exist in the tenant; CIPP looks them up by name (wildcards allowed).
   These are default names. If a group is called something else, change `faseGroep` in
   [`_manifest.json`](../IntuneTemplate/_manifest.json) — for the pilot group also `PILOT_GROUP`
   in `scripts/lib/templates.js` and `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — and
@@ -158,9 +158,9 @@ tenant that does not (yet) get the full Intune baseline. The layout lives in
 
 | Stage | Standard | Assignment | What it does |
 |---:|---|---|---|
-| 1 · Now | `[Baseline] - Updates-Ring3-Physical` | all devices, **except** `SEC-Update-Ring1` and `SEC-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
-| 1 · Now | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates right away |
-| 1 · Now | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: quality updates after three days |
+| 1 · Now | `[Baseline] - Updates-Ring3-Physical` | all devices, **except** `SG-D-UEM-WIN-Update-Ring1` and `SG-D-UEM-WIN-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installs at 13:00, two-day deadline |
+| 1 · Now | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1` | `SG-D-UEM-WIN-Update-Ring1` | Ring 1 Pilot: updates right away |
+| 1 · Now | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2` | `SG-D-UEM-WIN-Update-Ring2` | Ring 2 UAT: quality updates after three days |
 | 1 · Now | `[Baseline] - Updates-Devices` | all devices | Edge Updates (restart required, outside working hours) |
 | 1 · Now | `[Baseline] - Updates-Devices-Physical` | all devices, filter `[Baseline] - WIN - Physical` | Microsoft Office Updates (automatic updates, cannot be turned off) — on an AVD host updates come with the image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | all devices (Required) | Winget-AutoUpdate: updates every app winget knows daily, except the [exclusion list](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.en.md) |
@@ -168,13 +168,13 @@ tenant that does not (yet) get the full Intune baseline. The layout lives in
 Stage 2 starts once everything in stage 1 is compliant **and** two weeks have passed — the same
 threshold as the pilot stage of `Baseline.json`.
 
-**Ring 3 excludes the ring groups.** Without that exclusion a device in `SEC-Update-Ring1` gets
+**Ring 3 excludes the ring groups.** Without that exclusion a device in `SG-D-UEM-WIN-Update-Ring1` gets
 two update rings; Intune then reports a Conflict and applies the disputed settings (deferral,
 deadline) through neither. A package shares its assignment with all its members, which is why
 Ring 3 is a package of its own and the exclusion does not land on Edge and Office.
 
 **These policies were taken out of `Baseline.json`.** They were in `Baseline-Devices` and
-`Baseline-SEC-Update-Ring1/2`. A tenant on `Baseline.json` therefore needs this baseline *as
+`Baseline-SG-D-UEM-WIN-Update-Ring1/2`. A tenant on `Baseline.json` therefore needs this baseline *as
 well*, otherwise nobody guards the update policies any more (they do stay in place: CIPP deletes
 nothing). The Defender update rings, *Update Reports and Telemetry* and *Google Chrome Updates*
 stay in `Baseline.json`.
@@ -190,7 +190,7 @@ template from this repo before the baseline itself (`referencedTemplates`). Two 
   standard sees it as present and does not change the assignment. Widen it to all devices yourself.
 - If someone removes the assignment, CIPP does not notice: the app still exists.
 
-**Before the first run:** the groups `SEC-Update-Ring1` and `SEC-Update-Ring2` must exist (empty
+**Before the first run:** the groups `SG-D-UEM-WIN-Update-Ring1` and `SG-D-UEM-WIN-Update-Ring2` must exist (empty
 is fine), otherwise CIPP can neither assign nor exclude them. Licence: Intune only.
 
 Importing works as for `Baseline.json`: with the button. Updating: a different layout in

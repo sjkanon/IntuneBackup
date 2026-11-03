@@ -91,13 +91,13 @@ Twee fase 4-groepen in het manifest. Maak ze als dynamische apparaatgroep in Ent
 
 | Groep | Regel |
 |---|---|
-| `SEC-iOS-Corporate` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Company")` |
-| `SEC-iOS-BYOD` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Personal")` |
+| `SG-D-UEM-IOS-Corporate-Dynamic` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Company")` |
+| `SG-D-UEM-IOS-BYOD-Dynamic` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Personal")` |
 
 Een ADE-toestel wordt door Intune als *Company* gemarkeerd. Controleer vóór toewijzing of er
 geen handmatig als *Company* gemarkeerde, niet-supervised toestellen zijn: die zouden de
 supervised-only policies krijgen (die iOS dan negeert) en géén Defender-VPN. Wie strakker wil,
-gebruikt voor `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
+gebruikt voor `SG-D-UEM-IOS-Corporate-Dynamic` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
 
 ## Apple Business (voorheen Apple Business Manager)
 
@@ -128,7 +128,7 @@ Eenmalig per tenant, buiten Intune:
    die in 2025–2026 meermaals herschikt.
 5. **Company Portal en Microsoft Authenticator via VPP.** Koop beide (gratis) in Apple
    Business → Apps and Books met **apparaatlicenties**, synchroniseer het VPP-token, en wijs ze
-   in Intune als *required* toe aan `SEC-iOS-Corporate`. Apparaatlicenties installeren zonder
+   in Intune als *required* toe aan `SG-D-UEM-IOS-Corporate-Dynamic`. Apparaatlicenties installeren zonder
    Apple Account. Authenticator is voorwaarde voor `IOS - D - Enterprise SSO`; Company Portal
    wordt door het inschrijfprofiel zelf geïnstalleerd (`companyPortalVppTokenId`) — maak daar
    geen tweede toewijzing voor, dan krijgt de gebruiker een aanmeldprompt. Doe hetzelfde voor
@@ -138,7 +138,7 @@ Eenmalig per tenant, buiten Intune:
 
 - **Inschrijvingsrestrictie iOS/iPadOS** (Devices → Enrollment → Device platform restriction):
   persoonlijk ingeschreven toestellen toestaan of blokkeren is een organisatiebesluit. Wie BYOD alleen
-  via App Protection wil, blokkeert *Personally owned* — dan zijn `SEC-iOS-BYOD` en de VPN-variant
+  via App Protection wil, blokkeert *Personally owned* — dan zijn `SG-D-UEM-IOS-BYOD-Dynamic` en de VPN-variant
   van Defender overbodig.
 - **Defender for Endpoint-connector** (Endpoint security → Microsoft Defender for Endpoint):
   *Connect iOS/iPadOS devices* aan, en voor de MAM-route ook *Connect iOS/iPadOS devices to

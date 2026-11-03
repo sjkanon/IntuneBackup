@@ -122,13 +122,13 @@ stap 4 vóór stap 3 levert twee policies op die elkaar tegenspreken.
 | 3 | Vervangen | Windows Firewall en Office Updates wisselen van policytype — handwerk |
 | 4 | Opheffen | Network Security, Windows Search, System Services, OneDrive KFM verwijderen |
 | 5 | Uitrollen | de nieuwe policies via CIPP of `Start-IntuneRestoreConfig` |
-| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SEC-Baseline-Pilot'` |
+| 6 | Toewijzen | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` en `-Scope U -AllUsers` nemen alleen fase 1; de pilot volgt met `-GroupName 'SG-D-UEM-Pilot'` en `'SG-U-UEM-Pilot'` |
 | 7 | Opnieuw inventariseren | de lijst met wees-policies moet leeg zijn |
 
 ## Eerst in een pilot
 
-Fase 2 in `_manifest.json`. Deze policies rollen via het pakket `[Baseline] - Baseline-Pilot` uit naar
-`SEC-Baseline-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
+Fase 2 in `_manifest.json`. Deze policies rollen via de pakketten `[Baseline] - Baseline-Pilot-Devices` en `-Pilot-Users` uit naar
+`SG-D-UEM-Pilot` en `SG-U-UEM-Pilot`, en pas naar iedereen als ze naar fase 1 gaan — een PR, want dat
 verandert naar wie ze uitrollen. Het waarom per policy is de `faseWaarom` uit het manifest.
 
 | Policy | Waarom |

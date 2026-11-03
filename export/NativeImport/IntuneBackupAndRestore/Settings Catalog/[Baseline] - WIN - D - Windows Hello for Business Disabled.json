@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - D - Windows Hello for Business Disabled",
-    "description": "Turns Windows Hello for Business off on shared devices: no PIN or biometrics per user per device. Users sign in with a FIDO2 security key or through web sign-in. Baseline assignment: none by default — belongs on SEC-Shared-Devices. Source: Own baseline — PassportForWork CSP, UsePassportForWork = false. For shared devices Microsoft recommends FIDO2 security keys instead of Windows Hello for Business..",
+    "description": "Turns Windows Hello for Business off on shared devices: no PIN or biometrics per user per device. Users sign in with a FIDO2 security key or through web sign-in. Baseline assignment: none by default — belongs on SG-D-UEM-WIN-Shared. Source: Own baseline — PassportForWork CSP, UsePassportForWork = false. For shared devices Microsoft recommends FIDO2 security keys instead of Windows Hello for Business..",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

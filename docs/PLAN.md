@@ -98,7 +98,7 @@ Volgorde:
 9. **Opnieuw inventariseren** — de lijst met wees-policies moet leeg zijn.
 
 De pilot (uitrolfase 2) gaat niet mee in punt 7 hierboven: `-AllDevices` en `-AllUsers` nemen
-alleen wat in uitrolfase 1 staat. Die volgt apart met `-GroupName 'SEC-Baseline-Pilot'` — de lijst staat in
+alleen wat in uitrolfase 1 staat. Die volgt apart met `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` — de lijst staat in
 [OVERZICHT.md](OVERZICHT.md#eerst-in-een-pilot).
 
 ### Wat als er nog policies met de oude naam in de tenant staan

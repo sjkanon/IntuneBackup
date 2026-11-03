@@ -3,7 +3,7 @@
     "roleScopeTagIds": [
         "0"
     ],
-    "description": "Only for organisations that use NinjaOne or TeamViewer. Sets screen recording for NinjaOne Remote and TeamViewer to AllowStandardUserToSetSystemService: a user without administrator rights can tick the box themselves, without an administrator password. Enabling it remains a manual click — macOS does not allow an MDM to grant screen recording. Baseline assignment: none by default — belongs on SEC-Remote-Support-macOS. Source: own baseline — Apple does not allow screen recording in the settings catalog form of PPPC.",
+    "description": "Only for organisations that use NinjaOne or TeamViewer. Sets screen recording for NinjaOne Remote and TeamViewer to AllowStandardUserToSetSystemService: a user without administrator rights can tick the box themselves, without an administrator password. Enabling it remains a manual click — macOS does not allow an MDM to grant screen recording. Baseline assignment: none by default — belongs on SG-D-UEM-MAC-RemoteSupport. Source: own baseline — Apple does not allow screen recording in the settings catalog form of PPPC.",
     "displayName": "[Baseline] - MAC - D - Screen Recording",
     "deploymentChannel": "deviceChannel",
     "payloadName": "Screen Recording",

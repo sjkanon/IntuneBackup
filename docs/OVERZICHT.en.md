@@ -122,13 +122,13 @@ step 4 before step 3 produces two policies that contradict each other.
 | 3 | Replace | Windows Firewall and Office Updates change policy type — manual work |
 | 4 | Retire | delete Network Security, Windows Search, System Services, OneDrive KFM |
 | 5 | Deploy | the new policies via CIPP or `Start-IntuneRestoreConfig` |
-| 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SEC-Baseline-Pilot'` |
+| 6 | Assign | `Set-BaselineAssignment.ps1 -Scope D -AllDevices` and `-Scope U -AllUsers` only take phase 1; the pilot follows with `-GroupName 'SG-D-UEM-Pilot'` and `'SG-U-UEM-Pilot'` |
 | 7 | Inventory again | the list of orphaned policies must be empty |
 
 ## Pilot first
 
-Phase 2 in `_manifest.json`. These policies are deployed via the package `[Baseline] - Baseline-Pilot` to
-`SEC-Baseline-Pilot`, and only to everyone once they move to phase 1 — a PR, because that
+Phase 2 in `_manifest.json`. These policies are deployed via the packages `[Baseline] - Baseline-Pilot-Devices` and `-Pilot-Users` to
+`SG-D-UEM-Pilot` and `SG-U-UEM-Pilot`, and only to everyone once they move to phase 1 — a PR, because that
 changes who they are deployed to. The reason per policy is the `faseWaarom` from the manifest.
 
 | Policy | Why |

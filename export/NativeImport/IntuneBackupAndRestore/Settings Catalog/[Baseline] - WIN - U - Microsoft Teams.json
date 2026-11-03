@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - WIN - U - Microsoft Teams",
-    "description": "Limits sign-in in Teams to the organisation's own tenant and prevents Teams from starting itself immediately after installation. Baseline assignment: none by default — pilot group SEC-Baseline-Pilot first. Source: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams.",
+    "description": "Limits sign-in in Teams to the organisation's own tenant and prevents Teams from starting itself immediately after installation. Baseline assignment: none by default — pilot group SG-U-UEM-Pilot first. Source: IntuneAdmin/IntuneBaselines — Windows 11 Benchmarks/Microsoft Teams.",
     "platforms": "windows10",
     "technologies": "mdm",
     "templateReference": {

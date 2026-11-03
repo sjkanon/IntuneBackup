@@ -91,13 +91,13 @@ Deux groupes de phase 4 dans le manifeste. Créez-les comme groupes d'appareils 
 
 | Groupe | Règle |
 |---|---|
-| `SEC-iOS-Corporate` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Company")` |
-| `SEC-iOS-BYOD` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Personal")` |
+| `SG-D-UEM-IOS-Corporate-Dynamic` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Company")` |
+| `SG-D-UEM-IOS-BYOD-Dynamic` | `(device.deviceOSType -in ["iPhone","iPad"]) -and (device.deviceOwnership -eq "Personal")` |
 
 Intune marque un appareil ADE comme *Company*. Avant l'affectation, vérifiez qu'il n'existe
 aucun appareil non supervisé marqué manuellement comme *Company* : il recevrait les
 stratégies réservées aux appareils supervisés (qu'iOS ignore alors) et pas de VPN Defender. Pour être plus strict,
-utilisez pour `SEC-iOS-Corporate` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
+utilisez pour `SG-D-UEM-IOS-Corporate-Dynamic` `device.enrollmentProfileName -eq "[Baseline] - IOS - D - Corporate ADE Baseline"`.
 
 ## Apple Business (anciennement Apple Business Manager)
 
@@ -128,7 +128,7 @@ Une seule fois par tenant, en dehors d'Intune :
    réorganisée plusieurs fois en 2025–2026.
 5. **Company Portal et Microsoft Authenticator via VPP.** Achetez les deux (gratuits) dans Apple
    Business → Apps and Books avec des **licences par appareil**, synchronisez le jeton VPP et affectez-les
-   dans Intune en *required* à `SEC-iOS-Corporate`. Les licences par appareil s'installent sans
+   dans Intune en *required* à `SG-D-UEM-IOS-Corporate-Dynamic`. Les licences par appareil s'installent sans
    Apple Account. Authenticator est un prérequis pour `IOS - D - Enterprise SSO` ; Company Portal
    est installé par le profil d'inscription lui-même (`companyPortalVppTokenId`) — ne créez pas
    de seconde affectation pour lui, sinon l'utilisateur reçoit une invite de connexion. Faites de même pour
@@ -138,7 +138,7 @@ Une seule fois par tenant, en dehors d'Intune :
 
 - **Restriction d'inscription iOS/iPadOS** (Devices → Enrollment → Device platform restriction) :
   autoriser ou bloquer les appareils inscrits à titre personnel est une décision de l'organisation. Si vous voulez le BYOD uniquement
-  via App Protection, bloquez *Personally owned* — `SEC-iOS-BYOD` et la variante VPN
+  via App Protection, bloquez *Personally owned* — `SG-D-UEM-IOS-BYOD-Dynamic` et la variante VPN
   de Defender deviennent alors inutiles.
 - **Connecteur Defender for Endpoint** (Endpoint security → Microsoft Defender for Endpoint) :
   *Connect iOS/iPadOS devices* activé, et pour la route MAM également *Connect iOS/iPadOS devices to

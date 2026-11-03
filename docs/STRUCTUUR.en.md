@@ -103,9 +103,9 @@ agree.
 | Phase | Meaning | Policies | CIPP package | CIPP stage |
 |---:|---|---:|---|---:|
 | 1 | Deploy now | 106 | `[Baseline] - Baseline-Devices`, `[Baseline] - Baseline-Users`, `[Baseline] - Baseline-ADE-token`; per class also `-Devices-Physical`, `-Users-Physical`, `-Devices-AVD` | 1 |
-| 2 | Pilot first | 42 | `[Baseline] - Baseline-Pilot` → group `SEC-Baseline-Pilot`; `-Pilot-Physical` with filter | 2 |
+| 2 | Pilot first | 42 | `[Baseline] - Baseline-Pilot-Devices` → group `SG-D-UEM-Pilot`, `-Pilot-Users` → `SG-U-UEM-Pilot`; `-Physical` with filter | 2 |
 | 3 | Awaiting prerequisite (e.g. first enrollment) | 26 | `[Baseline] - Baseline-Wacht`, not assigned | 3 |
-| 4 | Dedicated group (`faseGroep`) | 18 | `[Baseline] - Baseline-SEC-<group>` | 1 |
+| 4 | Dedicated group (`faseGroep`) | 18 | `[Baseline] - Baseline-SG-<group>` | 1 |
 | 5 | Do not deploy — alternative to another policy | 15 | none | – |
 
 Moving on to stage 2 happens once everything from stage 1 is compliant **and** two weeks have

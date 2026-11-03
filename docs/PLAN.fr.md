@@ -100,7 +100,7 @@ Ordre :
 9. **Refaire l'inventaire** — la liste des stratégies orphelines doit être vide.
 
 Le pilote (phase de déploiement 2) n'est pas inclus dans le point 7 ci-dessus : `-AllDevices` et
-`-AllUsers` ne prennent que ce qui est en phase de déploiement 1. Il suit séparément avec `-GroupName 'SEC-Baseline-Pilot'` — la liste se
+`-AllUsers` ne prennent que ce qui est en phase de déploiement 1. Il suit séparément avec `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` — la liste se
 trouve dans [OVERZICHT.fr.md](OVERZICHT.fr.md#dabord-en-pilote).
 
 ### Et s'il reste des stratégies avec l'ancien nom dans le tenant

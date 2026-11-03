@@ -146,7 +146,7 @@ IntuneTemplate/        the source: the policies in CIPP template format
   _assignments.json   assignment target per phase 1 policy
   _controls.json      vocabulary for ISO 27001, NIS2, CIS and NIST CSF
   _licenties.json     which controls a licence can fulfil
-  _renames.json       former names in the tenant (source for Rename-BaselinePolicy.ps1)
+  _renames.json       former names in the tenant (source for Rename-BaselinePolicy.ps1 and Rename-BaselineGroup.ps1)
   _ca.json            which CA policies rely on a policy (copy from the CA-Policies repo)
   _i18n/              English and French translations of the texts in the data
   WIN/  SettingsCatalog/  AdministrativeTemplates/  DeviceConfigurations/  CompliancePolicies/
@@ -363,15 +363,15 @@ The stages it contains:
 
 | Stage | Packages | Moving on to *this* stage |
 |---:|---|---|
-| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SEC-*` (phase 4, one per group) | — stage 1 always applies |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
+| 1 · Now | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` and the group packages `[Baseline] - Baseline-SG-*` (phase 4, one per group) | — stage 1 always applies |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot-Devices`, `[Baseline] - Baseline-Pilot-Physical` | `success` (everything from stage 1 is compliant) **and** `time` of two weeks |
 | 3 · Awaiting prerequisite | `[Baseline] - Baseline-Wacht` | `manual` — someone moves it on |
 
 Later stages stack on stage 1, and the condition belongs to the stage a tenant
 **enters**, not the stage it leaves. CIPP has five: `time`, `variable`,
 `group`, `success` and `manual`. Put a package in exactly one stage: the same template twice
 with a different assignment target collides with CIPP's conflict detection. So let the pilot
-grow via the **group** `SEC-Baseline-Pilot` and not via an extra stage.
+grow via the **group** `SG-D-UEM-Pilot` / `SG-U-UEM-Pilot` and not via an extra stage.
 
 Note where the restore export lives: `export/**NativeImport**/IntuneBackupAndRestore/`. That
 word in the path is not a description but an exclusion. CIPP fetches the file list with
@@ -445,21 +445,24 @@ CIPP replaces that; on a restore with IntuneBackupAndRestore you fill it in by h
 .\scripts\Set-BaselineAssignment.ps1 -Scope D -AllDevices
 .\scripts\Set-BaselineAssignment.ps1 -Scope U -AllUsers
 .\scripts\Set-BaselineAssignment.ps1 -Platform MAC -Scope D -AllDevices
-.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SEC-Baseline-Pilot'
+.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SG-D-UEM-Pilot'
+.\scripts\Set-BaselineAssignment.ps1 -GroupName 'SG-U-UEM-Pilot'
 .\scripts\Set-BaselineAssignment.ps1 -GroupId '<object-id>' -Exclude
 ```
 
 Sets an assignment in one go on the baseline policies that belong to that target, across the five
 policy types (each with its own Graph endpoint). Which ones follows from the phase, just as
 with the CIPP packages: `-AllDevices` and `-AllUsers` take phase 1 with that target from
-`_assignments.json`, `-GroupName 'SEC-Baseline-Pilot'` takes the pilot, and a group from
+`_assignments.json`, `-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'` takes the pilot, and a group from
 `faseGroep` takes the phase 4 policies of that group. The script never assigns phases 3 and 5
 by itself — until September 2026 `-AllDevices` did, alternatives and pilot included.
 `-IgnoreFase` takes everything anyway, for a test tenant; `-Exclude` always applies to all policies.
 
-The `SEC-*` groups (`SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Shared-Devices`, …) are
+The groups (`SG-D-UEM-Pilot`, `SG-U-UEM-Pilot`, `SG-D-UEM-WIN-Update-Ring1`, `SG-D-UEM-WIN-Shared`, …) are
 default names, not a requirement. If they are named differently in the tenant, see
 [the BaselineTemplate README](BaselineTemplate/README.en.md#what-you-do-yourself-afterwards) for where to rename them.
+Until November 2026 they were called `SEC-…`; `.scriptsRename-BaselineGroup.ps1 -WhatIf` and then without
+`-WhatIf` converts a tenant, before the new templates are in CIPP.
 
 `-Scope D|U` then filters on the scope in the name, `-Platform` on the platform. Policies that
 do not follow the naming convention fall outside *every* filter; the script warns about this explicitly
@@ -491,13 +494,13 @@ value cause a Conflict in Intune, after which the setting is applied by neither.
 `check-scope.js` guards this.
 
 ```powershell
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SEC-Update-Ring1'
-.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Disabled' -GroupName 'SEC-Shared-Devices'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Update Ring 1 Pilot' -GroupName 'SG-D-UEM-WIN-Update-Ring1'
+.\scripts\Set-BaselineAssignment.ps1 -Name '[Baseline] - WIN - D - Windows Hello for Business Disabled' -GroupName 'SG-D-UEM-WIN-Shared'
 ```
 
 On shared devices Windows Hello for Business is off (*Windows Hello for Business Disabled*)
 and a user signs in with a FIDO2 key or badge (*Security Key Sign-in*), both on
-`SEC-Shared-Devices`. WHfB is a key per user per device and does not fit there. *Windows Hello
+`SG-D-UEM-WIN-Shared`. WHfB is a key per user per device and does not fit there. *Windows Hello
 for Business Multi User* is the alternative (phase 5) for those who do want it there; next to
 *Disabled* that is a Conflict.
 
@@ -505,7 +508,7 @@ Shared PC mode comes in two variants that you must **never** assign side by side
 *Shared PC* (Entra accounts only) on `SG-D-UEM-WIN-SharedPC` and *Shared PC Domain and Guest*
 (Entra accounts plus a Guest button) on `SG-D-UEM-WIN-SharedPC-Guest`. Both set the same
 settings to a different value, so two on one device is a Conflict. A shared device is in
-`SEC-Shared-Devices` and in exactly one of those two groups. OpenIntuneBaseline does not cover
+`SG-D-UEM-WIN-Shared` and in exactly one of those two groups. OpenIntuneBaseline does not cover
 shared devices; these two are own policies.
 
 ### What to put in a pilot first

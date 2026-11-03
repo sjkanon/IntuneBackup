@@ -22,8 +22,8 @@ dertien keer het juiste toewijzingsdoel kiezen — één misklik zet tot 70 poli
 
 | Stage | Pakketten | Doorschuiven naar deze stage |
 |---:|---|---|
-| 1 · Nu | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` en de groepspakketten `[Baseline] - Baseline-SEC-*` | — stage 1 geldt altijd |
-| 2 · Pilot | `[Baseline] - Baseline-Pilot`, `[Baseline] - Baseline-Pilot-Physical` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
+| 1 · Nu | `[Baseline] - Baseline-Devices`, `-Devices-Physical`, `-Devices-AVD`, `[Baseline] - Baseline-Users`, `-Users-Physical`, `[Baseline] - Baseline-ADE-token` en de groepspakketten `[Baseline] - Baseline-SG-*` | — stage 1 geldt altijd |
+| 2 · Pilot | `[Baseline] - Baseline-Pilot-Devices`, `[Baseline] - Baseline-Pilot-Physical` | alles uit stage 1 is compliant (`success`) **en** twee weken verstreken (`time`) |
 | 3 · Wacht op voorwaarde | `[Baseline] - Baseline-Wacht` | `manual` — iemand zet 'm door |
 
 Welke policies in welk pakket zitten staat in de
@@ -76,9 +76,9 @@ filtert dat woord óók weg, en dan is het bestand ook met de knop niet meer te 
 - **De filters aanmaken.** `[Baseline] - WIN - Physical` en `[Baseline] - WIN - AVD Multi-session` uit
   [`IntuneTemplate/WIN/AssignmentFilters/`](../IntuneTemplate/WIN/AssignmentFilters/README.md), vóór
   de eerste run.
-- **De groepen laten bestaan.** `SEC-Baseline-Pilot`, `SEC-Update-Ring1`, `SEC-Update-Ring2`,
-  `SEC-Shared-Devices`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SEC-Android-Dedicated`, `SEC-iOS-BYOD`, `SEC-iOS-Corporate` en
-  `SEC-Remote-Support-macOS` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
+- **De groepen laten bestaan.** `SG-D-UEM-Pilot`, `SG-U-UEM-Pilot`, `SG-D-UEM-WIN-Update-Ring1`, `SG-D-UEM-WIN-Update-Ring2`,
+  `SG-D-UEM-WIN-Shared`, `SG-D-UEM-WIN-SharedPC`, `SG-D-UEM-WIN-SharedPC-Guest`, `SG-D-UEM-AND-Dedicated-Dynamic`, `SG-D-UEM-IOS-BYOD-Dynamic`, `SG-D-UEM-IOS-Corporate-Dynamic` en
+  `SG-D-UEM-MAC-RemoteSupport` moeten in de tenant bestaan; CIPP zoekt ze op naam (wildcards mogen).
   Het zijn standaardnamen. Heet een groep anders, pas dan `faseGroep` in
   [`_manifest.json`](../IntuneTemplate/_manifest.json) aan — voor de pilotgroep ook `PILOT_GROUP`
   in `scripts/lib/templates.js` en `$PilotGroup` in `scripts/Set-BaselineAssignment.ps1` — en
@@ -159,9 +159,9 @@ Los van `Baseline.json`, omdat patchen iets is wat elke tenant nodig heeft — o
 
 | Stage | Standard | Toewijzing | Wat het doet |
 |---:|---|---|---|
-| 1 · Nu | `[Baseline] - Updates-Ring3-Physical` | alle apparaten, **behalve** `SEC-Update-Ring1` en `SEC-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
-| 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring1` | `SEC-Update-Ring1` | Ring 1 Pilot: updates meteen |
-| 1 · Nu | `[Baseline] - Updates-SEC-Update-Ring2` | `SEC-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
+| 1 · Nu | `[Baseline] - Updates-Ring3-Physical` | alle apparaten, **behalve** `SG-D-UEM-WIN-Update-Ring1` en `SG-D-UEM-WIN-Update-Ring2`, filter `[Baseline] - WIN - Physical` | Windows Update Ring 3 Production: installeert om 13:00, deadline twee dagen |
+| 1 · Nu | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring1` | `SG-D-UEM-WIN-Update-Ring1` | Ring 1 Pilot: updates meteen |
+| 1 · Nu | `[Baseline] - Updates-SG-D-UEM-WIN-Update-Ring2` | `SG-D-UEM-WIN-Update-Ring2` | Ring 2 UAT: kwaliteitsupdates na drie dagen |
 | 1 · Nu | `[Baseline] - Updates-Devices` | alle apparaten | Edge Updates (herstart verplicht, buiten werktijd) |
 | 1 · Nu | `[Baseline] - Updates-Devices-Physical` | alle apparaten, filter `[Baseline] - WIN - Physical` | Microsoft Office Updates (automatisch bijwerken, niet uit te zetten) — op een AVD-host komen updates met de image |
 | 2 · Winget-AutoUpdate | *Deploy Intune Application Template* | alle apparaten (Required) | Winget-AutoUpdate: werkt dagelijks elke app bij die winget kent, behalve de [uitsluitingslijst](../IntuneTemplate/WIN/Apps/winget-autoupdate/README.md) |
@@ -170,12 +170,12 @@ Stage 2 begint als alles uit stage 1 compliant is **en** er twee weken voorbij z
 drempel als de pilotstage van `Baseline.json`.
 
 **Ring 3 sluit de ringgroepen uit.** Zonder die uitsluiting krijgt een apparaat in
-`SEC-Update-Ring1` twee updaterings; Intune meldt dan een Conflict en past de omstreden
+`SG-D-UEM-WIN-Update-Ring1` twee updaterings; Intune meldt dan een Conflict en past de omstreden
 instellingen (uitstel, deadline) via geen van beide toe. Een pakket deelt zijn toewijzing met al
 zijn leden, daarom is Ring 3 een pakket apart en zit de uitsluiting niet op Edge en Office.
 
 **Deze policies zijn uit `Baseline.json` gehaald.** Ze zaten in `Baseline-Devices` en
-`Baseline-SEC-Update-Ring1/2`. Een tenant met `Baseline.json` heeft deze baseline dus óók nodig,
+`Baseline-SG-D-UEM-WIN-Update-Ring1/2`. Een tenant met `Baseline.json` heeft deze baseline dus óók nodig,
 anders bewaakt niemand de updatepolicies meer (ze blijven wel staan: CIPP verwijdert niets). De
 Defender-updaterings, *Update Reports and Telemetry* en *Google Chrome Updates* blijven in
 `Baseline.json`.
@@ -190,7 +190,7 @@ haalt dat template uit deze repo mee vóór de baseline zelf (`referencedTemplat
   hem als aanwezig en verandert hij de toewijzing niet. Breid die dan zelf uit naar alle apparaten.
 - Haalt iemand de toewijzing weg, dan ziet CIPP dat niet: de app bestaat nog.
 
-**Vóór de eerste run:** de groepen `SEC-Update-Ring1` en `SEC-Update-Ring2` moeten bestaan (leeg
+**Vóór de eerste run:** de groepen `SG-D-UEM-WIN-Update-Ring1` en `SG-D-UEM-WIN-Update-Ring2` moeten bestaan (leeg
 mag), anders kan CIPP ze niet toewijzen en ook niet uitsluiten. Licentie: alleen Intune.
 
 Importeren gaat net als bij `Baseline.json`: met de knop. Bijwerken: een andere indeling in

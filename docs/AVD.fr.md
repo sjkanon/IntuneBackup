@@ -54,7 +54,7 @@ stratégies FSLogix est la variable CIPP `%FSLogixStorageAccount%`, à définir 
   Integrity indiquent *Not applicable* et ne rendent pas l'hôte non conforme. Et : **la conformité
   ciblant les utilisateurs n'est pas prise en charge en multisession.** Les stratégies de conformité
   de cette baseline (`WIN - U - Compliance …`) vont à tous les utilisateurs ; pour les hôtes de session,
-  elles doivent *aussi* être affectées au groupe d'appareils SEC-AVD-Session-Hosts. Sans cela,
+  elles doivent *aussi* être affectées au groupe d'appareils SG-D-UEM-WIN-AVD-SessionHosts. Sans cela,
   l'hôte n'est pas conforme et la CA 2060 bloque les applications de bureau dans la session dès
   qu'elle est appliquée.
 - Les **anneaux de mise à jour** ne fonctionnent pas. Les mises à jour arrivent avec la reconstruction
@@ -202,15 +202,15 @@ Physique et AVD, inchangée et sans filtre.
 | [U - AI Usage Control Permitted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.fr.md) | 5 |  |
 | [U - AI Usage Control Restricted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.fr.md) | 2 |  |
 | [U - Attachment Scanning](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.fr.md) | 1 |  |
-| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
-| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
 | [U - Compliance BitLocker](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.fr.md) | 1 | Indique *Not applicable* en multisession ; ne rend pas l'hôte non conforme. |
 | [U - Compliance Code Integrity](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.fr.md) | 1 | Indique *Not applicable* en multisession ; ne rend pas l'hôte non conforme. |
-| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md) | 3 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
-| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
-| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
-| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
-| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.fr.md) | 2 | En multisession uniquement via une **affectation aux appareils** (SEC-AVD-Session-Hosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.fr.md) | 3 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.fr.md) | 1 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
+| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.fr.md) | 2 | En multisession uniquement via une **affectation aux appareils** (SG-D-UEM-WIN-AVD-SessionHosts) : la conformité ciblée sur l'utilisateur n'y est pas prise en charge. |
 | [U - Compliance Secure Boot](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.fr.md) | 1 | Indique *Not applicable* en multisession ; ne rend pas l'hôte non conforme. |
 | [U - Compliance TPM](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.fr.md) | 1 | Indique *Not applicable* en multisession ; ne rend pas l'hôte non conforme. |
 | [U - Copilot](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.fr.md) | 1 |  |
@@ -292,8 +292,8 @@ Classe `fysiek` : en phases 1 et 2 le filtre d'inclusion `[Baseline] - WIN - Phy
 | [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.fr.md) | 1 | Nouveau. Classe `avd` : paquet `Baseline-Devices-AVD`, filtre d'inclusion `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Start and Search](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.fr.md) | 1 | Nouveau. Classe `avd`. Reprend `allowcloudsearch` de Windows Feature Configuration (retiré là-bas) ; les résultats web y sont déjà désactivés. `HideRecommendedSection` n'existe pas dans le Settings Catalog. |
-| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | 4 | Existant, uniquement sur un pool d'hôtes pour externes (SEC-Cloud-PC-External). Y entre en conflit avec les limites de session d'AVD Session Host — voir les points ouverts. |
-| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | 4 | Existant, via le groupe SEC-Cloud-PC (aussi Windows 365). Active aussi la redirection du fuseau horaire. |
+| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.fr.md) | 4 | Existant, uniquement sur un pool d'hôtes pour externes (SG-D-UEM-WIN-CloudPC-External). Y entre en conflit avec les limites de session d'AVD Session Host — voir les points ouverts. |
+| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.fr.md) | 4 | Existant, via le groupe SG-D-UEM-WIN-CloudPC-Dynamic (aussi Windows 365). Active aussi la redirection du fuseau horaire. |
 
 ## Constats du tenant de test (9 octobre 2026)
 
@@ -388,7 +388,7 @@ dans [PLAYBOOK.fr.md](PLAYBOOK.fr.md). Pour AVD en bref :
    compte de stockage, sans `.file.core.windows.net`. Sans cette variable, `%FSLogixStorageAccount%`
    reste tel quel dans le chemin et, avec `PreventLoginWithFailure`, plus personne ne peut se
    connecter à l'hôte.
-3. **Groupe SEC-AVD-Session-Hosts** comme groupe d'appareils dynamique, par exemple
+3. **Groupe SG-D-UEM-WIN-AVD-SessionHosts** comme groupe d'appareils dynamique, par exemple
    `(device.displayName -startsWith "<hostpoolprefix>-sh")`. Pas pour les paquets de la baseline
    (ils utilisent le filtre), mais pour l'affectation de conformité aux appareils (étape 5), le
    paramètre RDP SSO *target device groups* du pool d'hôtes et les rapports.
@@ -397,7 +397,7 @@ dans [PLAYBOOK.fr.md](PLAYBOOK.fr.md). Pour AVD en bref :
    réservées au physique passent par les paquets `-Physical` et n'atteignent donc pas l'hôte.
 5. **Conformité sur l'appareil.** Affectez les stratégies de conformité prises en charge en
    multisession — Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection,
-   Defender Security Intelligence, Firewall et OS Version — *aussi* à SEC-AVD-Session-Hosts.
+   Defender Security Intelligence, Firewall et OS Version — *aussi* à SG-D-UEM-WIN-AVD-SessionHosts.
    Attention au point ouvert ci-dessous : le `verifyAssignments` de CIPP voit cette affectation
    supplémentaire comme un écart.
 6. **Pool d'hôtes pilote.** Un pool d'hôtes avec jonction Entra, inscription Intune et Trusted
@@ -417,7 +417,7 @@ Ensuite les autres pools d'hôtes ; les hôtes Entra DS passent en mode drain et
 
 ## Points ouverts
 
-- **Pool d'hôtes pour externes.** Sur un hôte de SEC-Cloud-PC-External arrivent à la fois
+- **Pool d'hôtes pour externes.** Sur un hôte de SG-D-UEM-WIN-CloudPC-External arrivent à la fois
   `AVD Session Host` (phase 1, `avd`) et `Cloud PC External Access` (phase 4), avec des limites de
   session différentes : un Conflict, après quoi aucune des deux limites ne s'applique. Dans le
   modèle par paquets, `AVD Session Host` ne peut pas être exclue seule — un groupe d'exclusion sur
@@ -425,7 +425,7 @@ Ensuite les autres pools d'hôtes ; les hôtes Entra DS passent en mode drain et
   tel pool ; une solution consiste à placer les limites de session dans une stratégie à part.
 - **Conformité sur l'appareil et `verifyAssignments`.** CIPP gère l'affectation de `Baseline-Users`
   (tous les utilisateurs) et voit une affectation supplémentaire aux appareils de
-  SEC-AVD-Session-Hosts comme un écart que la remédiation retire (`Compare-CIPPIntuneAssignments` :
+  SG-D-UEM-WIN-AVD-SessionHosts comme un écart que la remédiation retire (`Compare-CIPPIntuneAssignments` :
   les groupes d'inclusion supplémentaires comptent dès que le standard gère l'affectation). Tant que
   le pipeline ne place pas les stratégies de conformité dans un paquet à part : vérifiez après
   chaque exécution CIPP que l'affectation aux appareils est toujours là.

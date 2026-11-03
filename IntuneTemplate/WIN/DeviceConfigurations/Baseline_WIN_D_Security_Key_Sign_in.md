@@ -15,7 +15,7 @@ Laat gebruikers zich op gedeelde apparaten aanmelden met een FIDO2-beveiligingss
 | Bron | Eigen baseline — OMA-URI ./Device/Vendor/MSFT/PassportForWork/SecurityKey/UseSecurityKeyForSignin = 1, zoals in IntuneAdmin/IntuneBaselines (Baseline - Enables FIDO Security Keys to be used during Windows Sign In). |
 | Bestand | [`Baseline_WIN_D_Security_Key_Sign_in.json`](Baseline_WIN_D_Security_Key_Sign_in.json) |
 
-> Hoort op SEC-Shared-Devices. De gebruiker heeft een passkey nodig op een FIDO2-sleutel of badge, geregistreerd in Entra; zet de authenticatiemethode Passkey (FIDO2) daarvoor aan in de Entra-policy voor authenticatiemethoden. Een custom profiel (OMA-URI) in plaats van Settings Catalog, omdat de Settings Catalog-ID niet in een bron is na te gaan; het is dezelfde instelling als in IntuneAdmin. Werkt zonder Windows Hello for Business op het toestel: test op het eerste apparaat dat de optie Beveiligingssleutel op het aanmeldscherm staat naast [Baseline] - WIN - D - Windows Hello for Business Disabled.
+> Hoort op SG-D-UEM-WIN-Shared. De gebruiker heeft een passkey nodig op een FIDO2-sleutel of badge, geregistreerd in Entra; zet de authenticatiemethode Passkey (FIDO2) daarvoor aan in de Entra-policy voor authenticatiemethoden. Een custom profiel (OMA-URI) in plaats van Settings Catalog, omdat de Settings Catalog-ID niet in een bron is na te gaan; het is dezelfde instelling als in IntuneAdmin. Werkt zonder Windows Hello for Business op het toestel: test op het eerste apparaat dat de optie Beveiligingssleutel op het aanmeldscherm staat naast [Baseline] - WIN - D - Windows Hello for Business Disabled.
 
 ## Normen
 

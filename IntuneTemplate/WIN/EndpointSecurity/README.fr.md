@@ -73,7 +73,7 @@ tous les appareils Windows.
 ### 1. Audit — phase 2, groupe pilote, puis tous les appareils
 
 Créez `AppControl_BuiltIn_Audit.graph.json` (voir *Déploiement*) et affectez-la au groupe pilote
-(`SEC-Baseline-Pilot`), puis au bout d'une semaine à tous les appareils Windows. En mode audit, tout continue
+(`SG-D-UEM-Pilot`), puis au bout d'une semaine à tous les appareils Windows. En mode audit, tout continue
 de fonctionner ; Windows journalise pour chaque fichier ce qui **aurait** été bloqué :
 
 | Événement | Journal | Advanced Hunting `ActionType` |
@@ -112,7 +112,7 @@ Ces exceptions sont propres à chaque organisation et ont leur place dans votre 
 ### 3. Application — phase 4
 
 Seulement lorsque la requête 2 ne montre plus rien d'inconnu sur sept jours : affectez
-`AppControl_BuiltIn_Enforce.graph.json` à un groupe `SEC-AppControl-Enforced` et
+`AppControl_BuiltIn_Enforce.graph.json` à un groupe `SG-D-UEM-WIN-AppControl-Enforced` et
 **retirez ce groupe de l'affectation de la stratégie d'audit**. Les deux stratégies ont le même
 PolicyID ; sur un même appareil, elles entrent en conflit. Étendez par service, pas en une seule fois.
 

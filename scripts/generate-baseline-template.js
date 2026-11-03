@@ -62,7 +62,7 @@ const APP_TEMPLATE_DIR = path.join(REPO_ROOT, "AppTemplate");
 
 const TEMPLATE_NAME = PREFIX + "Baseline";
 
-/** `[Baseline] - Baseline-SEC-Update-Ring1` -> `sec-update-ring1`; de sleutel achter de `#` in een instance. */
+/** `[Baseline] - Baseline-SG-D-UEM-WIN-Update-Ring1` -> `sg-d-uem-win-update-ring1`; de sleutel achter de `#` in een instance. */
 function instanceSuffix(pkg) {
   const prefix = pkg.startsWith(UPDATES_PREFIX) ? UPDATES_PREFIX : PACKAGE_PREFIX;
   return pkg.slice(prefix.length).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");

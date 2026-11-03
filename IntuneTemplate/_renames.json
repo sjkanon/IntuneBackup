@@ -15,7 +15,14 @@
     "previousNames staat in volgorde: eerst de oorspronkelijke naam, daarna de tussenstap uit",
     "PLAN.md stap 2, dan de naam met platform, en daarna bij elke wissel van het voorvoegsel",
     "(scripts/set-organisation.js) de naam van daarvoor.",
-    "Een policy kan onder elk van die namen in een tenant staan."
+    "Een policy kan onder elk van die namen in een tenant staan.",
+    "",
+    "groups: hoe de Entra-groepen van de baseline heetten, voor scripts/Rename-BaselineGroup.ps1.",
+    "  rename  - PATCH op de bestaande groep: naam wijzigt, id, leden en toewijzingen blijven.",
+    "  split   - de oude groep had gebruikers én apparaten; de leden gaan naar twee nieuwe groepen",
+    "            (elke groep één soort). De oude blijft staan tot CIPP opnieuw heeft toegewezen.",
+    "  membership - assigned of dynamic, zoals de nieuwe naam het zegt (-Dynamic achteraan).",
+    "            Klopt dat in de tenant niet, dan hernoemt het script niet: de naam zou liegen."
   ],
   "policies": [
     {
@@ -1105,5 +1112,20 @@
       "target": "[Baseline] - WIN - U - Windows Spotlight",
       "action": "rename"
     }
+  ],
+  "groups": [
+    { "previousName": "SEC-Baseline-Pilot", "action": "split", "into": [{ "name": "SG-D-UEM-Pilot", "members": "device" }, { "name": "SG-U-UEM-Pilot", "members": "user" }] },
+    { "previousName": "SEC-Update-Ring1", "name": "SG-D-UEM-WIN-Update-Ring1", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-Update-Ring2", "name": "SG-D-UEM-WIN-Update-Ring2", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-Shared-Devices", "name": "SG-D-UEM-WIN-Shared", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-Cloud-PC", "name": "SG-D-UEM-WIN-CloudPC-Dynamic", "action": "rename", "membership": "dynamic" },
+    { "previousName": "SEC-Cloud-PC-External", "name": "SG-D-UEM-WIN-CloudPC-External", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-iOS-Corporate", "name": "SG-D-UEM-IOS-Corporate-Dynamic", "action": "rename", "membership": "dynamic" },
+    { "previousName": "SEC-iOS-BYOD", "name": "SG-D-UEM-IOS-BYOD-Dynamic", "action": "rename", "membership": "dynamic" },
+    { "previousName": "SEC-Android-Dedicated", "name": "SG-D-UEM-AND-Dedicated-Dynamic", "action": "rename", "membership": "dynamic" },
+    { "previousName": "SEC-Remote-Support-macOS", "name": "SG-D-UEM-MAC-RemoteSupport", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-AppControl-Enforced", "name": "SG-D-UEM-WIN-AppControl-Enforced", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-AVD-Session-Hosts", "name": "SG-D-UEM-WIN-AVD-SessionHosts", "action": "rename", "membership": "assigned" },
+    { "previousName": "SEC-Directie", "name": "SG-U-MDE-VIP", "action": "rename", "membership": "assigned" }
   ]
 }

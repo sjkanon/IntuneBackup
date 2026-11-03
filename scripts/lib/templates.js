@@ -177,10 +177,25 @@ const PACKAGE_BY_TARGET = {
 
 /** Fase -> package, voor de fases waar het doel niet uit _assignments.json volgt. */
 const PACKAGE_BY_FASE = {
-  2: PACKAGE_PREFIX + "Pilot",
   3: PACKAGE_PREFIX + "Wacht",
   5: "",
 };
+
+/**
+ * Fase 2 gaat naar de pilot, in twee groepen: een groep bevat óf gebruikers óf apparaten, nooit
+ * allebei (zie de groepen-wegwijzer in het CIPP-Regelboek). Welke volgt uit de D of U in de
+ * naam, zoals bij fase 1. Daarom ook twee pakketten: één pakket is één toewijzingsdoel.
+ */
+const PILOT_PACKAGES = {
+  D: { pkg: PACKAGE_PREFIX + "Pilot-Devices", group: "SG-D-UEM-Pilot" },
+  U: { pkg: PACKAGE_PREFIX + "Pilot-Users", group: "SG-U-UEM-Pilot" },
+};
+
+/** Pakket en groep van de pilot voor deze policy, of null als de naam geen D of U heeft. */
+function pilotFor(entry) {
+  const parsed = parseBaseName((entry && entry.target) || "");
+  return parsed ? PILOT_PACKAGES[parsed.scope] : null;
+}
 
 /**
  * Een macOS-inschrijfprofiel wordt aan een ADE-token gekoppeld en niet aan een Entra-groep.
@@ -189,7 +204,7 @@ const PACKAGE_BY_FASE = {
  */
 const PACKAGE_WITHOUT_GROUP = new Set([PACKAGE_PREFIX + "ADE-token"]);
 
-/** "SEC-Update-Ring1" uit een `faseGroep` die er nog een toelichting achter heeft staan. */
+/** "SG-D-UEM-WIN-Update-Ring1" uit een `faseGroep` die er nog een toelichting achter heeft staan. */
 function groupOfFaseGroep(faseGroep) {
   return String(faseGroep || "").split(" (")[0].trim();
 }
@@ -225,6 +240,7 @@ function basePackageFor(entry, assignment) {
     const group = groupOfFaseGroep(entry.faseGroep);
     return group ? PACKAGE_PREFIX + group : null;
   }
+  if (entry.fase === 2) return pilotFor(entry)?.pkg ?? null;
   return PACKAGE_BY_FASE[entry.fase] ?? null;
 }
 
@@ -233,10 +249,9 @@ function basePackageFor(entry, assignment) {
  * should this template be assigned to?", `customGroup` het veld eronder. `"On"` is CIPP's
  * waarde voor *Do not assign* — het template wordt dan wél aangemaakt, maar niet toegewezen.
  *
- * De pilotgroep staat hier als enige groepsnaam letterlijk: fase 2 kent geen `faseGroep`,
- * want dat is per definitie de pilot. De rest van de groepen komt uit het manifest.
+ * De pilotgroepen (PILOT_PACKAGES) zijn de enige groepsnamen die hier letterlijk staan: fase 2
+ * kent geen `faseGroep`, want dat is per definitie de pilot. De rest komt uit het manifest.
  */
-const PILOT_GROUP = "SEC-Baseline-Pilot";
 
 function deployOptionsForPackage(pkg) {
   if (!pkg) return null;
@@ -252,7 +267,8 @@ function baseDeployOptions(pkg) {
   if (pkg === PACKAGE_PREFIX + "Devices") return { assignTo: "AllDevices", customGroup: "" };
   if (pkg === PACKAGE_PREFIX + "Users") return { assignTo: "allLicensedUsers", customGroup: "" };
   if (pkg === PACKAGE_PREFIX + "Wacht") return { assignTo: "On", customGroup: "" };
-  if (pkg === PACKAGE_PREFIX + "Pilot") return { assignTo: "customGroup", customGroup: PILOT_GROUP };
+  const pilot = Object.values(PILOT_PACKAGES).find((p) => p.pkg === pkg);
+  if (pilot) return { assignTo: "customGroup", customGroup: pilot.group };
   if (PACKAGE_WITHOUT_GROUP.has(pkg)) return { assignTo: "On", customGroup: "" };
   return { assignTo: "customGroup", customGroup: pkg.slice(PACKAGE_PREFIX.length) };
 }
@@ -293,7 +309,7 @@ function assignmentText(assignment, entry) {
 function baseAssignmentText(assignment, entry) {
   const targets = assignmentTargets(assignment);
   if (targets.length === 0) {
-    if (entry.fase === 2) return `none by default — pilot group ${PILOT_GROUP} first`;
+    if (entry.fase === 2) return `none by default — pilot group ${pilotFor(entry)?.group} first`;
     if (entry.fase === 3) return "none yet — waits for a prerequisite, see the phase reason";
     if (entry.fase === 4 && groupOfFaseGroep(entry.faseGroep)) return `none by default — belongs on ${groupOfFaseGroep(entry.faseGroep)}`;
     if (entry.fase === 5) return "none — an alternative that is not deployed";
@@ -344,7 +360,7 @@ function stageForPackage(pkg) {
   pkg = splitClassSuffix(pkg).base;
   // Stage 1 van Windows-Updates.json; Winget-AutoUpdate in stage 2 is geen pakket.
   if (UPDATE_PACKAGES[pkg]) return 1;
-  if (pkg === PACKAGE_PREFIX + "Pilot") return 2;
+  if (Object.values(PILOT_PACKAGES).some((p) => p.pkg === pkg)) return 2;
   if (pkg === PACKAGE_PREFIX + "Wacht") return 3;
   return 1;
 }
@@ -368,7 +384,7 @@ function packagePlan(manifest, assignments) {
   };
   const rank = (full) => {
     const pkg = splitClassSuffix(full).base;
-    const order = [PACKAGE_PREFIX + "Devices", PACKAGE_PREFIX + "Users", PACKAGE_PREFIX + "Pilot", PACKAGE_PREFIX + "Wacht"];
+    const order = [PACKAGE_PREFIX + "Devices", PACKAGE_PREFIX + "Users", PILOT_PACKAGES.D.pkg, PILOT_PACKAGES.U.pkg, PACKAGE_PREFIX + "Wacht"];
     const i = order.indexOf(pkg);
     if (i >= 0) return i;
     // Na de Baseline-pakketten, in de volgorde van lib/windows-updates.js.
@@ -522,4 +538,4 @@ function versionFloors(raw) {
   return VERSION_FIELDS.filter((veld) => veld in (raw || {}) && isVersionSet(raw[veld])).map((veld) => ({ veld, waarde: String(raw[veld]) }));
 }
 
-module.exports = { DOELGROEPEN, FILTER_FASES, classFilterFor, splitClassSuffix, basePackageFor, PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };
+module.exports = { PILOT_PACKAGES, DOELGROEPEN, FILTER_FASES, classFilterFor, splitClassSuffix, basePackageFor, PLATFORMS, PACKAGE_PREFIX, BASELINE_STAGES, packageFor, composeDescription, assignmentForPackage, deployOptionsForPackage, stageForPackage, assignmentTargets, packagePlan, BASE_NAME_RE, TYPE_TO_CATEGORY, VERSION_FIELDS, PATCH_FIELDS, parseBaseName, relativePathFor, listTemplateFiles, readTemplate, readTemplates, collectSettingIds, flattenInstance, flattenSettings, stripDeprecatedTccAllowed, isVersionSet, versionFloors };

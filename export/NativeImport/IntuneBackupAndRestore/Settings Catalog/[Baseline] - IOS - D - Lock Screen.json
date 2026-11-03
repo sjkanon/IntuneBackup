@@ -1,6 +1,6 @@
 {
     "name": "[Baseline] - IOS - D - Lock Screen",
-    "description": "Shows a message for the finder on the lock screen of a corporate iPhone or iPad, so that a lost device can be returned to the organisation. Baseline assignment: none by default — belongs on SEC-iOS-Corporate. Source: Apple Shared Device Configuration payload (com.apple.shareddeviceconfiguration) in the iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate and IntuneAdmin — Lock Screen Message. The lock screen restrictions from the same UniFy policy are in [Baseline] - IOS - D - Restrictions Corporate.",
+    "description": "Shows a message for the finder on the lock screen of a corporate iPhone or iPad, so that a lost device can be returned to the organisation. Baseline assignment: none by default — belongs on SG-D-UEM-IOS-Corporate-Dynamic. Source: Apple Shared Device Configuration payload (com.apple.shareddeviceconfiguration) in the iOS settings catalog; UniFy iOS/iPadOS Baseline v1.2 — SC - Lock Screen - Corporate and IntuneAdmin — Lock Screen Message. The lock screen restrictions from the same UniFy policy are in [Baseline] - IOS - D - Restrictions Corporate.",
     "platforms": "iOS",
     "technologies": "mdm,appleRemoteManagement",
     "templateReference": {

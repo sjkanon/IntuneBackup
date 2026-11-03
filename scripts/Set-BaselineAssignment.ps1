@@ -14,8 +14,9 @@ skipped. With -Name you can supply your own list.
 
 Which policies belong to the target follows from the fase (phase) in _manifest.json, the same
 derivation as the CIPP packages: -AllDevices and -AllUsers take phase 1 with that target from
-_assignments.json, -GroupName 'SEC-Baseline-Pilot' takes phase 2, and -GroupName with a
-`faseGroep` takes that group's phase 4 policies. This script never assigns phase 3 and 5 on
+_assignments.json, -GroupName 'SG-D-UEM-Pilot' takes the device policies of phase 2 and
+-GroupName 'SG-U-UEM-Pilot' the user policies, and -GroupName with a `faseGroep` takes that
+group's phase 4 policies. This script never assigns phase 3 and 5 on
 its own. An exclusion (-Exclude) does go on all policies: it only takes something away.
 
 Device classes. Every Windows policy has a `doelgroep` in _manifest.json: alle (physical PCs
@@ -90,7 +91,8 @@ of the class filter from the manifest.
 Shows what would happen, without changing anything.
 
 .EXAMPLE
-.\Set-BaselineAssignment.ps1 -GroupName 'SEC-Baseline-Pilot'
+.\Set-BaselineAssignment.ps1 -GroupName 'SG-D-UEM-Pilot'
+.\Set-BaselineAssignment.ps1 -GroupName 'SG-U-UEM-Pilot'
 
 .EXAMPLE
 .\Set-BaselineAssignment.ps1 -AllDevices -Replace
@@ -296,8 +298,10 @@ $target['deviceAndAppManagementAssignmentFilterType'] = if ($FilterType) { $Filt
 # after which Intune applies the disputed setting through neither of them. The same derivation as
 # packageFor() in scripts/lib/templates.js, so CIPP and this script roll out the same thing to the
 # same target: phase 1 is listed with its target in _assignments.json, phase 2 belongs on the pilot
-# group, phase 4 on its `faseGroep`, and phase 3 and 5 are assigned by nothing.
-$PilotGroup = 'SEC-Baseline-Pilot'
+# groups, phase 4 on its `faseGroep`, and phase 3 and 5 are assigned by nothing.
+# Two pilot groups, because a group holds either users or devices: the D or U in the file name
+# decides, like PILOT_PACKAGES in scripts/lib/templates.js.
+$PilotGroups = @{ 'SG-D-UEM-Pilot' = 'D'; 'SG-U-UEM-Pilot' = 'U' }
 
 if ($Name) {
     $wanted = $Name
@@ -324,7 +328,7 @@ if ($Name) {
             'GroupName'  {
                 $manifest.policies |
                     Where-Object {
-                        ($_.fase -eq 2 -and $GroupName -eq $PilotGroup) -or
+                        ($_.fase -eq 2 -and $PilotGroups.ContainsKey($GroupName) -and $_.target -match "^Baseline_[A-Z]+_$($PilotGroups[$GroupName])_") -or
                         ($_.fase -eq 4 -and (($_.faseGroep -split ' \(')[0].Trim()) -eq $GroupName)
                     } |
                     ForEach-Object { $_.displayName }
@@ -335,7 +339,7 @@ if ($Name) {
         })
 
         if ($wanted.Count -eq 0) {
-            $known = @($PilotGroup) + @($manifest.policies | Where-Object { $_.fase -eq 4 } | ForEach-Object { ($_.faseGroep -split ' \(')[0].Trim() }) | Sort-Object -Unique
+            $known = @($PilotGroups.Keys) + @($manifest.policies | Where-Object { $_.fase -eq 4 } | ForEach-Object { ($_.faseGroep -split ' \(')[0].Trim() }) | Sort-Object -Unique
             throw "No policy belongs to this target according to the phase. Groups the phase knows: $($known -join ', '). For another group: -Name or -IgnoreFase."
         }
         Write-Host "Policy list according to the phase in _manifest.json ($($wanted.Count) policies)" -ForegroundColor Cyan

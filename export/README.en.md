@@ -87,7 +87,7 @@ both as the module itself writes them:
 
 Only phase 1 has an assignment. The 101 policies in phases 2 to 5 are deliberately restored
 unassigned — see `fase` in [`_manifest.json`](../IntuneTemplate/_manifest.json). Assign them
-after the restore according to their phase: the pilot to `SEC-Baseline-Pilot`, phase 4 to the
+after the restore according to their phase: the pilot to `SG-D-UEM-Pilot` and `SG-U-UEM-Pilot`, phase 4 to the
 group from `faseGroep`, phase 3 once the prerequisite is in place, phase 5 not at all.
 `node scripts/export-intunebackup.js` lists them all on every run.
 
@@ -110,7 +110,7 @@ The script looks the filter up by name and, with `-CreateFilters`, creates it fr
 `node scripts/export-intunebackup.js local/<tenant>/export --filter-ids local/<tenant>/filters.json`,
 with `{ "WIN - Physical": "<id>", "WIN - AVD Multi-session": "<id>" }` — never into `export/`, as the
 ids belong to that tenant. Phase 2 policies with a class get their filter the same way with
-`-GroupName 'SEC-Baseline-Pilot'`.
+`-GroupName 'SG-D-UEM-Pilot'` / `'SG-U-UEM-Pilot'`.
 
 See the [main README](../README.en.md#restoring-into-a-tenant) for the full context and
 [OVERZICHT.en.md](../docs/OVERZICHT.en.md#pilot-first) for the policies that belong in a pilot

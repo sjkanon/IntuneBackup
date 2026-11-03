@@ -53,7 +53,7 @@ policies is the CIPP variable `%FSLogixStorageAccount%`, which you set per tenan
   *Not applicable* and do not make the host non-compliant. And: **user-targeted compliance is not
   supported on multi-session.** The compliance policies in this baseline (`WIN - U - Compliance …`)
   go to all users; for the session hosts they must *also* be assigned to the device group
-  SEC-AVD-Session-Hosts. Without that the host is not compliant and CA 2060 blocks the desktop apps
+  SG-D-UEM-WIN-AVD-SessionHosts. Without that the host is not compliant and CA 2060 blocks the desktop apps
   in the session as soon as it is enforced.
 - **Update rings** do not work. Updates come with the monthly image rebuild.
 - **Apps** only in system context and as *Required*.
@@ -199,15 +199,15 @@ Physical and AVD, unchanged and without a filter.
 | [U - AI Usage Control Permitted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) | 5 |  |
 | [U - AI Usage Control Restricted](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) | 2 |  |
 | [U - Attachment Scanning](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Attachment_Scanning.en.md) | 1 |  |
-| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) | 1 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
-| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) | 1 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
+| [U - Compliance Antispyware](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antispyware.en.md) | 1 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
+| [U - Compliance Antivirus](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Antivirus.en.md) | 1 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
 | [U - Compliance BitLocker](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_BitLocker.en.md) | 1 | Reports *Not applicable* on multi-session; does not make the host non-compliant. |
 | [U - Compliance Code Integrity](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Code_Integrity.en.md) | 1 | Reports *Not applicable* on multi-session; does not make the host non-compliant. |
-| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) | 3 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
-| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) | 1 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
-| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) | 1 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
-| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) | 1 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
-| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) | 2 | On multi-session only through a **device assignment** (SEC-AVD-Session-Hosts): user-targeted compliance is not supported there. |
+| [U - Compliance Defender for Endpoint Risk](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) | 3 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
+| [U - Compliance Defender Real Time Protection](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Real_Time_Protection.en.md) | 1 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
+| [U - Compliance Defender Security Intelligence](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_Security_Intelligence.en.md) | 1 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
+| [U - Compliance Firewall](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) | 1 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
+| [U - Compliance OS Version](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_OS_Version.en.md) | 2 | On multi-session only through a **device assignment** (SG-D-UEM-WIN-AVD-SessionHosts): user-targeted compliance is not supported there. |
 | [U - Compliance Secure Boot](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) | 1 | Reports *Not applicable* on multi-session; does not make the host non-compliant. |
 | [U - Compliance TPM](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) | 1 | Reports *Not applicable* on multi-session; does not make the host non-compliant. |
 | [U - Copilot](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Copilot.en.md) | 1 |  |
@@ -289,8 +289,8 @@ Class `fysiek`: in phase 1 and 2 the include filter `[Baseline] - WIN - Physical
 | [D - AVD Remote Desktop and RPC](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Remote_Desktop_and_RPC.en.md) | 1 | New. Class `avd`: package `Baseline-Devices-AVD`, include filter `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Session Host](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) | 1 | New. Class `avd`: package `Baseline-Devices-AVD`, include filter `[Baseline] - WIN - AVD Multi-session`. |
 | [D - AVD Start and Search](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Start_and_Search.en.md) | 1 | New. Class `avd`. Takes over `allowcloudsearch` from Windows Feature Configuration (removed there); web results are already off through that policy. `HideRecommendedSection` does not exist in the Settings Catalog. |
-| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) | 4 | Existing, only on a host pool for external users (SEC-Cloud-PC-External). Clashes there with the session limits of AVD Session Host — see the open points. |
-| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) | 4 | Existing, through the group SEC-Cloud-PC (also Windows 365). Also sets time zone redirection. |
+| [D - Cloud PC External Access](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) | 4 | Existing, only on a host pool for external users (SG-D-UEM-WIN-CloudPC-External). Clashes there with the session limits of AVD Session Host — see the open points. |
+| [D - Cloud PC Session Security](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) | 4 | Existing, through the group SG-D-UEM-WIN-CloudPC-Dynamic (also Windows 365). Also sets time zone redirection. |
 
 ## Findings from the test tenant (9 October 2026)
 
@@ -383,7 +383,7 @@ The full runbook, including the physical class and migrating from an old set, is
    the storage account, without `.file.core.windows.net`. Without that variable
    `%FSLogixStorageAccount%` stays in the path literally and, with `PreventLoginWithFailure`, nobody
    can sign in to the host any more.
-3. **Group SEC-AVD-Session-Hosts** as a dynamic device group, for example
+3. **Group SG-D-UEM-WIN-AVD-SessionHosts** as a dynamic device group, for example
    `(device.displayName -startsWith "<hostpoolprefix>-sh")`. Not for the baseline packages (they use
    the filter), but for the compliance device assignment (step 5), the RDP SSO setting *target
    device groups* on the host pool, and reporting.
@@ -392,7 +392,7 @@ The full runbook, including the physical class and migrating from an old set, is
    through the `-Physical` packages and therefore do not reach the host.
 5. **Compliance on the device.** Assign the compliance policies multi-session supports —
    Antispyware, Antivirus, Defender for Endpoint Risk, Defender Real Time Protection, Defender Security
-   Intelligence, Firewall and OS Version — *also* to SEC-AVD-Session-Hosts. Mind the open point
+   Intelligence, Firewall and OS Version — *also* to SG-D-UEM-WIN-AVD-SessionHosts. Mind the open point
    below: CIPP's `verifyAssignments` sees that extra assignment as a deviation.
 6. **Pilot host pool.** One host pool with Entra join, Intune enrolment and Trusted Launch. Per host
    in Intune: every policy *Succeeded* or *Not applicable*, no *Conflict*. Sign in with a passkey
@@ -409,14 +409,14 @@ only for the application servers).
 
 ## Open points
 
-- **Host pool for external users.** On a host in SEC-Cloud-PC-External both `AVD Session Host`
+- **Host pool for external users.** On a host in SG-D-UEM-WIN-CloudPC-External both `AVD Session Host`
   (phase 1, `avd`) and `Cloud PC External Access` (phase 4) land, with different session limits: a
   Conflict, after which neither limit applies. In the package model `AVD Session Host` cannot be
   excluded on its own — an exclude group on `Baseline-Devices-AVD` would also take FSLogix off those
   hosts. Only relevant in a tenant with such a host pool; one solution is to move the session
   limits into a policy of their own.
 - **Compliance on the device and `verifyAssignments`.** CIPP manages the assignment of
-  `Baseline-Users` (all users) and sees an extra device assignment to SEC-AVD-Session-Hosts as a
+  `Baseline-Users` (all users) and sees an extra device assignment to SG-D-UEM-WIN-AVD-SessionHosts as a
   deviation that remediation removes again (`Compare-CIPPIntuneAssignments`: extra include groups
   count as soon as the standard manages the assignment). Until the pipeline puts the compliance
   policies in a package of their own: check after every CIPP run that the device assignment is
