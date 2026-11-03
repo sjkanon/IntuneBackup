@@ -2,13 +2,13 @@
 
 **Nederlands** · [English](README.en.md) · [Français](README.fr.md)
 
-# Windows — 152 policies
+# Windows — 153 policies
 
 Alle policies heten `[Baseline] - WIN - <D|U> - <Item>`; de tabellen hieronder laten het `<Item>`-deel zien.
 
 | Map | Aantal |
 |---|---:|
-| `SettingsCatalog/` | 130 |
+| `SettingsCatalog/` | 131 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.md) | Firefox-policies |
 
-## Device-scoped (D) — 118
+## Device-scoped (D) — 119
 
 Toewijzen aan apparaatgroepen.
 
@@ -118,6 +118,7 @@ Toewijzen aan apparaatgroepen.
 | [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.md) | Meldt OneDrive op gedeelde apparaten stil aan met het werkaccount, zet Bureaublad, Documenten en Afbeeldingen in OneDrive en zet bestanden alleen online neer, ook die van gesynchroniseerde teamsites, zodat er niets in een profiel achterblijft dat Shared PC opruimt en de schijf niet volloopt met een kopie per gebruiker. | Settings Catalog | 12 | — |
 | [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.md) | Verbergt het wachtwoordveld op het aanmeldscherm van gedeelde apparaten en zet aanmelden via het web aan, zodat gebruikers zich aanmelden met een FIDO2-sleutel, of met een Temporary Access Pass zolang ze er nog geen hebben. | Settings Catalog | 2 | — |
 | [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.md) | Synchroniseert op gedeelde apparaten één SharePoint-bibliotheek van de klant automatisch voor elke gebruiker, als bestanden die alleen online staan, zodat iedereen de gedeelde map in Verkenner heeft zonder die zelf toe te voegen. | Settings Catalog | 3 | — |
+| [**Shared Devices Start and Taskbar**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.md) | Zet op gedeelde apparaten Microsoft Edge en Windows App vast op de taakbalk en in Start, zodat elke gebruiker bij de eerste aanmelding meteen de browser en de externe werkplek vindt. | Settings Catalog | 2 | — |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.md) | Shared PC mode zoals [Baseline] - WIN - D - Shared PC, maar met daarnaast een gastaccount: op het aanmeldscherm staat een knop Gast waarmee iemand zonder account een tijdelijke lokale sessie start. | Device config | — | — |
 | [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.md) | Zet gedeelde Windows-pc's in Shared PC mode met alleen Entra-accounts: profielen van gebruikers die 30 dagen niet zijn aangemeld of bij minder dan 25% vrije schijfruimte worden opgeruimd, er is geen lokale opslag buiten het profiel en onderhoud draait om 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.md) | Ruimt automatisch tijdelijke bestanden, de prullenbak en oude downloads op zodra de schijf vol dreigt te raken, en maakt lokaal gecachte OneDrive-bestanden weer online-only. | Settings Catalog | 6 | All Devices |

@@ -2,13 +2,13 @@
 
 [Nederlands](README.md) · [English](README.en.md) · **Français**
 
-# Windows — 152 policies
+# Windows — 153 policies
 
 Toutes les policies s'appellent `[Baseline] - WIN - <D|U> - <Item>` ; les tableaux ci-dessous montrent la partie `<Item>`.
 
 | Dossier | Nombre |
 |---|---:|
-| `SettingsCatalog/` | 130 |
+| `SettingsCatalog/` | 131 |
 | `DeviceConfigurations/` | 10 |
 | `AdministrativeTemplates/` | 1 |
 | `CompliancePolicies/` | 11 |
@@ -30,7 +30,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
 | [`Remediations/firefox-policies/`](Remediations/firefox-policies/README.fr.md) | Stratégies Firefox |
 
-## Device-scoped (D) — 118
+## Device-scoped (D) — 119
 
 Affecter à des groupes d'appareils.
 
@@ -118,6 +118,7 @@ Affecter à des groupes d'appareils.
 | [**Shared Devices OneDrive**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.fr.md) | Connecte OneDrive en silence avec le compte professionnel sur les appareils partagés, place Bureau, Documents et Images dans OneDrive et garde les fichiers en ligne uniquement, y compris ceux des sites d'équipe synchronisés, afin que rien ne reste dans un profil que le PC partagé supprime et que le disque ne se remplisse pas d'une copie par utilisateur. | Settings Catalog | 12 | — |
 | [**Shared Devices Passwordless**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.fr.md) | Masque le champ du mot de passe sur l'écran de connexion des appareils partagés et active la connexion web, afin que les utilisateurs se connectent avec une clé FIDO2, ou avec un Temporary Access Pass tant qu'ils n'en ont pas. | Settings Catalog | 2 | — |
 | [**Shared Devices SharePoint Team Sites**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_SharePoint_Team_Sites.fr.md) | Synchronise automatiquement une bibliothèque SharePoint du client pour chaque utilisateur des appareils partagés, en fichiers en ligne uniquement, afin que chacun ait le dossier partagé dans l'Explorateur sans l'ajouter lui-même. | Settings Catalog | 3 | — |
+| [**Shared Devices Start and Taskbar**](SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.fr.md) | Épingle Microsoft Edge et Windows App dans la barre des tâches et dans Démarrer sur les appareils partagés, afin que chaque utilisateur trouve tout de suite le navigateur et le poste de travail distant à sa première connexion. | Settings Catalog | 2 | — |
 | [**Shared PC Domain Guest**](DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.fr.md) | Mode PC partagé comme [Baseline] - WIN - D - Shared PC, mais avec en plus un compte invité : l'écran de connexion affiche un bouton Invité permettant à une personne sans compte de démarrer une session locale temporaire. | Device config | — | — |
 | [**Shared PC**](DeviceConfigurations/Baseline_WIN_D_Shared_PC.fr.md) | Place les PC Windows partagés en mode PC partagé avec uniquement des comptes Entra : les profils des utilisateurs qui ne se sont pas connectés depuis 30 jours, ou lorsque l'espace disque libre passe sous 25 %, sont supprimés, il n'y a pas de stockage local en dehors du profil et la maintenance s'exécute à 02:00. | Device config | — | — |
 | [**Storage Sense**](SettingsCatalog/Baseline_WIN_D_Storage_Sense.fr.md) | Nettoie automatiquement les fichiers temporaires, la Corbeille et les anciens téléchargements dès que le disque menace d'être plein, et repasse en ligne uniquement les fichiers OneDrive mis en cache localement. | Settings Catalog | 6 | All Devices |
