@@ -531,3 +531,86 @@ In addition:
    on `3010` to 4 hours (CIS).
 6. **Not tested on real devices**: the new macOS, iOS and Android policies and the scripts in
    `IntuneTemplate/`. First one pilot device per platform.
+
+# Round OIB Windows v4.0.1 and BYOD v2.0 (20 November 2026)
+
+Checked what changed in the sources since 2 October. `.oib-source` is on commit `2089b94` of main
+(5 November 2026), which contains Windows v4.0.1 (tag `windows-v4.0.1`) and BYOD v2.0 (tag
+`byod-v2.0`). macOS (v1.0) did not change; iOS v1.0 and macOS v2.0 are still beta.
+
+Watch out on the next import: the local checkout pointed to a fork that lagged behind and silently
+delivered the old files. `upstreams.oib.checkout` in the manifest now clones from upstream.
+
+## What changed
+
+| Policy | What OIB did | Here |
+|---|---|---|
+| Administrator Protection | Type of Admin Approval Mode from 2 (Administrator protection) to 1 (Legacy). Since the October 2026 security update the feature is actually active, and it breaks LAPS (OIB #264; Microsoft lists it under Troubleshooting on Learn) | **adopted**. This baseline relies on LAPS (`wlapsadmin`). Back to 2 once Microsoft fixes it |
+| Script File Associations | only a warning in the description: the policy breaks PowerShell scripts that Intune runs in user context | **override**: `.ps1` and `.psm1` removed from the list. `Mount-AzureFilesDrive.ps1` runs as the user and would otherwise no longer map the drive. The rest (`.js`, `.vbs`, `.hta`, `.bat`, `.cmd` …) still opens in Notepad |
+| Config Refresh | only a warning: can briefly drop Wi-Fi profiles | nothing; not in phase 1 |
+| App Protection iOS and Android | rebuilt on Microsoft Level 2, partly Level 3 (BYOD v2.0) | adopted, with two deliberate deviations — see below |
+
+## App Protection: what we took and what we did not
+
+Adopted from BYOD v2.0:
+
+| Setting | Was | Now |
+|---|---|---|
+| Jailbroken/rooted device (`appActionIfDeviceComplianceRequired`) | block | **wipe work data** |
+| Selective wipe after offline | 90 days | **30 days** |
+| Biometrics, then the PIN after all | 12 hours | 24 hours |
+| Samsung Knox attestation (Android) | not configured | **block where supported** |
+| Class 3 biometrics (Android) | `null` | explicitly on |
+| Photo from the library into a work document | no | yes |
+| Open-In/Share filter (iOS) | via our override | now in the source |
+
+Deliberately **not** adopted (`veldOverrides`):
+
+| Setting | OIB v2.0 | Here | Why |
+|---|---|---|---|
+| Access check after offline | 7 days | 12 hours | otherwise a stolen device in airplane mode keeps a week of access to cached mail; a phone that comes online checks by itself |
+| Saving to the photo library | allowed | not | the library syncs to iCloud or Google Photos, outside selective wipe |
+| Screen capture (iOS) | notBlocked | blocked | unchanged, same as Android |
+| Widgets (iOS) | on | off | unchanged |
+| Previous PINs | 0 | 5 | unchanged |
+
+The iOS 26 fields for Writing Tools and Genmoji are `notBlocked` in the source, the default value.
+The App Protection policy therefore decides nothing about Apple Intelligence; that stays with the
+Restricted/Permitted pair for enrolled devices.
+
+## Importer bug fixed
+
+A full run of `import-oib.js` removed from twelve own templates (`herkomst: eigen`) every setting
+that occurs anywhere in OIB — among them `silentaccountconfig` and `filesondemandenabled` from
+Shared Devices OneDrive. The manifest says the importer never touches the settings of an own
+template, and the class templates (Shared Devices, AVD, Cloud PC) deliberately set an OIB setting
+differently for their own device class. Nobody noticed, because those templates were all created
+after the last full run. Now an own template without `carryFrom` is treated like `metadataOnly`:
+only name and description are refreshed. `Legacy Hardening` keeps its `carryFrom` and still drops
+what OIB takes over. After the fix a full run touches only the four intended templates, and a
+second run writes nothing.
+
+## New: no work accounts from other organisations
+
+[`IntuneTemplate/WIN/Remediations/block-workplace-join/`](../IntuneTemplate/WIN/Remediations/block-workplace-join/README.en.md)
+sets `BlockAADWorkplaceJoin = 1`. A user can then no longer add a work account from another tenant
+on an organisation device, and Office no longer registers the device in that other tenant unasked.
+Idea from IntuneAdmin/IntuneBaselines (October 2026); the scripts are our own. A remediation and
+not a template: the setting is not in the settings catalog. Phase 2, because anyone who works for a
+second organisation with an account from that tenant runs into it.
+
+## Looked at, not adopted
+
+- **IntuneAdmin Modern Work Edge baseline** (September 2026): OIB v4.0 already took over the Edge
+  v151 baseline.
+- **IntuneAdmin GSA Client Lockdown** (October 2026): only useful with Global Secure Access, which
+  is not in this baseline.
+- **OIB iOS v1.0 beta**: nine policies, all topics already covered. Compare per setting once the beta
+  is over.
+
+## Open points from this round
+
+7. **OIB iOS v1.0**: after release, compare per setting with `IntuneTemplate/IOS/`.
+8. **Administrator Protection back to 2** once OIB #264 or Microsoft resolves the LAPS problem.
+9. **Script File Associations** now has an override on the whole list: compare the decoded XML on
+   every OIB import, because a new extension does not get in by itself.
