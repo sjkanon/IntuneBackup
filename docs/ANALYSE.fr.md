@@ -532,3 +532,88 @@ En outre :
    sur `3010` à 4 heures (CIS).
 6. **Non testé sur de vrais appareils** : les nouvelles stratégies macOS, iOS et Android et les scripts dans
    `IntuneTemplate/`. D'abord un appareil pilote par plateforme.
+
+# Itération OIB Windows v4.0.1 et BYOD v2.0 (20 novembre 2026)
+
+Vérification de ce qui a changé dans les sources depuis le 2 octobre. `.oib-source` est sur le commit
+`2089b94` de main (5 novembre 2026), qui contient Windows v4.0.1 (tag `windows-v4.0.1`) et BYOD v2.0
+(tag `byod-v2.0`). macOS (v1.0) n'a pas changé ; iOS v1.0 et macOS v2.0 sont encore en bêta.
+
+Attention lors du prochain import : le checkout local pointait vers un fork en retard et livrait
+silencieusement les anciens fichiers. `upstreams.oib.checkout` dans le manifeste clone désormais depuis
+upstream.
+
+## Ce qui a changé
+
+| Stratégie | Ce qu'a fait OIB | Chez nous |
+|---|---|---|
+| Administrator Protection | Type of Admin Approval Mode de 2 (Administrator protection) à 1 (Legacy). Depuis la mise à jour de sécurité d'octobre 2026, la fonction est réellement active et casse LAPS (OIB #264 ; Microsoft le mentionne sous Troubleshooting sur Learn) | **repris**. Cette baseline repose sur LAPS (`wlapsadmin`). Retour à 2 dès que Microsoft corrige |
+| Script File Associations | uniquement un avertissement dans la description : la stratégie casse les scripts PowerShell qu'Intune exécute dans le contexte utilisateur | **override** : `.ps1` et `.psm1` retirés de la liste. `Mount-AzureFilesDrive.ps1` s'exécute en tant qu'utilisateur et ne mapperait sinon plus le lecteur. Le reste (`.js`, `.vbs`, `.hta`, `.bat`, `.cmd` …) s'ouvre toujours dans le Bloc-notes |
+| Config Refresh | uniquement un avertissement : peut interrompre brièvement les profils Wi-Fi | rien ; pas en phase 1 |
+| App Protection iOS et Android | reconstruites sur le niveau 2 de Microsoft, en partie niveau 3 (BYOD v2.0) | reprises, avec deux écarts volontaires — voir ci-dessous |
+
+## App Protection : ce qui est repris et ce qui ne l'est pas
+
+Repris de BYOD v2.0 :
+
+| Paramètre | Avant | Maintenant |
+|---|---|---|
+| Appareil jailbreaké/rooté (`appActionIfDeviceComplianceRequired`) | bloquer | **effacer les données professionnelles** |
+| Effacement sélectif après hors ligne | 90 jours | **30 jours** |
+| Biométrie, puis le code PIN malgré tout | 12 heures | 24 heures |
+| Attestation Samsung Knox (Android) | non configuré | **bloquer là où c'est pris en charge** |
+| Biométrie de classe 3 (Android) | `null` | explicitement activée |
+| Photo de la bibliothèque dans un document professionnel | non | oui |
+| Filtre Open-In/Share (iOS) | via notre override | désormais dans la source |
+
+Volontairement **non** repris (`veldOverrides`) :
+
+| Paramètre | OIB v2.0 | Chez nous | Pourquoi |
+|---|---|---|---|
+| Vérification d'accès après hors ligne | 7 jours | 12 heures | sinon un appareil volé en mode avion garde une semaine d'accès au courrier en cache ; un téléphone qui revient en ligne vérifie de lui-même |
+| Enregistrement dans la photothèque | autorisé | non | la photothèque se synchronise vers iCloud ou Google Photos, hors de l'effacement sélectif |
+| Capture d'écran (iOS) | notBlocked | blocked | inchangé, comme Android |
+| Widgets (iOS) | activés | désactivés | inchangé |
+| Codes PIN précédents | 0 | 5 | inchangé |
+
+Les champs iOS 26 pour Writing Tools et Genmoji sont sur `notBlocked` dans la source, la valeur par
+défaut. La stratégie App Protection ne décide donc rien sur Apple Intelligence ; cela reste du ressort
+de la paire Restricted/Permitted pour les appareils inscrits.
+
+## Bogue de l'importeur corrigé
+
+Une exécution complète de `import-oib.js` supprimait de douze modèles propres (`herkomst: eigen`) tout
+paramètre présent quelque part dans OIB — entre autres `silentaccountconfig` et `filesondemandenabled`
+de Shared Devices OneDrive. Le manifeste indique que l'importeur ne touche jamais aux paramètres d'un
+modèle propre, et les modèles de classe (Shared Devices, AVD, Cloud PC) définissent justement un
+paramètre OIB autrement pour leur propre classe d'appareils. Personne ne l'a remarqué, car ces modèles
+ont tous été créés après la dernière exécution complète. Désormais, un modèle propre sans `carryFrom`
+est traité comme `metadataOnly` : seuls le nom et la description sont mis à jour. `Legacy Hardening`
+garde son `carryFrom` et retire toujours ce qu'OIB reprend. Après la correction, une exécution
+complète ne touche que les quatre modèles prévus, et une deuxième exécution n'écrit rien.
+
+## Nouveau : pas de comptes professionnels d'autres organisations
+
+[`IntuneTemplate/WIN/Remediations/block-workplace-join/`](../IntuneTemplate/WIN/Remediations/block-workplace-join/README.fr.md)
+définit `BlockAADWorkplaceJoin = 1`. Un utilisateur ne peut alors plus ajouter un compte professionnel
+d'un autre tenant sur un appareil de l'organisation, et Office n'inscrit plus l'appareil dans cet autre
+tenant sans le demander. Idée tirée d'IntuneAdmin/IntuneBaselines (octobre 2026) ; les scripts sont
+les nôtres. Une correction (remediation) et non un modèle : le paramètre n'est pas dans le catalogue
+de paramètres. Phase 2, car quiconque travaille pour une seconde organisation avec un compte de ce
+tenant sera concerné.
+
+## Examiné, non repris
+
+- **Baseline Edge Modern Work d'IntuneAdmin** (septembre 2026) : OIB v4.0 a déjà repris la baseline
+  Edge v151.
+- **GSA Client Lockdown d'IntuneAdmin** (octobre 2026) : utile uniquement avec Global Secure Access,
+  qui ne fait pas partie de cette baseline.
+- **OIB iOS v1.0 bêta** : neuf stratégies, tous les sujets déjà couverts. Comparer paramètre par
+  paramètre une fois la bêta terminée.
+
+## Points ouverts de cette itération
+
+7. **OIB iOS v1.0** : après la publication, comparer paramètre par paramètre avec `IntuneTemplate/IOS/`.
+8. **Administrator Protection de retour à 2** dès qu'OIB #264 ou Microsoft résout le problème LAPS.
+9. **Script File Associations** a désormais un override sur toute la liste : comparer le XML décodé à
+   chaque import OIB, car une nouvelle extension n'y entre pas d'elle-même.

@@ -5,7 +5,7 @@
 `IntuneTemplate/` est la source : les stratégies Intune convenues au format de modèle CIPP (une ligne
 Table Storage avec une chaîne `JSON`/`RAWJson` imbriquée). Depuis août 2026, le contenu provient
 en grande partie d'[OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
-(Windows v4.0, macOS v1.0, BYOD), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
+(Windows v4.0.1, macOS v1.0, BYOD v2.0), complété par ce que cette baseline couvre en plus. Windows v4.0 a été
 repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.md#itération-oib-windows-v40-14-septembre-2026).
 
 213 stratégies sur quatre plateformes :
@@ -19,7 +19,7 @@ repris avant la publication officielle — voir [`ANALYSE.md`](docs/ANALYSE.fr.m
 
 ```mermaid
 flowchart LR
-  OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
+  OIB["OpenIntuneBaseline<br/>Win v4.0.1 · macOS v1.0 · BYOD v2.0"]
   T["<b>IntuneTemplate/</b><br/>213 stratégies<br/><i>la source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Tenant Intune")]

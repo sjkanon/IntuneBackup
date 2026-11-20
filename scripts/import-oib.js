@@ -494,7 +494,14 @@ function main() {
     let body;
     // Een eigen policy zonder bron die geen Settings Catalog is, kan niet uit overgenomen
     // settings worden opgebouwd: alleen naam en omschrijving bijwerken, net als metadataOnly.
-    if (entry.metadataOnly || (!source && !entry.carryFrom && existing && existing.type !== "Catalog")) {
+    // `herkomst: eigen` zonder carryFrom hoort hier ook: "geen enkel script raakt de settings"
+    // (zie het manifest). Zonder die regel viel zo'n Settings Catalog-template in de tak
+    // hieronder, die elke instelling weggooit die ergens in OIB voorkomt — terwijl de
+    // klasse-templates (Shared Devices, AVD, Cloud PC) juist bewust een OIB-instelling anders
+    // zetten voor hun eigen apparaatklasse. Gevonden in november 2026: Shared Devices OneDrive
+    // verloor silentaccountconfig en filesondemandenabled.
+    const ownTemplate = entry.herkomst === "eigen" && !entry.carryFrom && existing;
+    if (entry.metadataOnly || ownTemplate || (!source && !entry.carryFrom && existing && existing.type !== "Catalog")) {
       // Templates die niet uit OIB komen. Alleen naam en omschrijving worden ververst; de
       // instellingen blijven onaangeroerd. Zonder deze tak zouden ze buiten het manifest
       // vallen en dus ook geen doel-zin in de tenant krijgen.

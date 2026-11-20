@@ -36,6 +36,7 @@ Ces stratégies Conditional Access du dépôt CA-Policies s'appuient sur cette p
 |---|---|---|
 | 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Active le plug-in Microsoft Enterprise SSO, qui transmet l'identité de l'appareil lors d'une connexion Entra. Sans le plug-in, un appareil conforme ne peut pas être reconnu comme tel dans les apps qui n'utilisent pas MSAL. |
 | 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré. |
+| 2115 - GRANT - Token Protection Apple | report-only | La token protection sur Apple exige un enregistrement d'appareil lié au matériel, qui ne passe que par le plug-in Microsoft Enterprise SSO (iOS) ou Platform SSO (macOS). Sans cette stratégie Intune, le jeton n'est pas lié et cette stratégie CA bloque les applications Microsoft. |
 | 2130 - GRANT - Admins Compliant Device | enabled | Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré. |
 
 ## Paramètres — 21

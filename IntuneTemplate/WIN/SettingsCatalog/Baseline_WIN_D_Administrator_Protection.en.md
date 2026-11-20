@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Administrator Protection
 
-Makes administrators work without elevated rights by default and ask for consent per action. Windows 11 24H2 and later.
+Keeps UAC on the classic Admin Approval Mode so that Administrator Protection does not break the LAPS account, and sets how the prompt behaves once Administrator Protection may be enabled again. Windows 11 24H2 and later.
 
 | | |
 |---|---|
@@ -12,10 +12,10 @@ Makes administrators work without elevated rights by default and ask for consent
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection |
+| Source | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Administrator Protection |
 | File | [`Baseline_WIN_D_Administrator_Protection.json`](Baseline_WIN_D_Administrator_Protection.json) |
 
-> Windows 11 24H2 and later; on older builds the setting does nothing.
+> Since November 2026 (OIB v4.0.1, issue #264) Type of Admin Approval Mode is 1 (Legacy) instead of 2 (Administrator protection). Since the October 2026 security update Administrator Protection is actually active, and that causes problems with LAPS — Microsoft lists it under Troubleshooting on Learn. This baseline manages the local administrator account with LAPS (wlapsadmin), so LAPS wins. Back to 2 once Microsoft resolves the LAPS issue; follow OIB #264. Windows 11 24H2 and later; on older builds the setting does nothing.
 
 ## Standards
 
@@ -36,7 +36,7 @@ setting has the value shown.
 | Setting | Value |
 |---|---|
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministratorprotection` | 1 |
-| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 2 |
+| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 1 |
 
 ---
 

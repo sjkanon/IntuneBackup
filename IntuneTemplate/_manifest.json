@@ -90,12 +90,12 @@
   "upstreams": {
     "oib": {
       "repo": "https://github.com/SkipToTheEndpoint/OpenIntuneBaseline",
-      "windows": "v4.0",
+      "windows": "v4.0.1",
       "macos": "v1.0",
-      "byod": "ongenummerd",
-      "retrievedAt": "2026-10-02",
-      "checkout": "git -c core.longpaths=true clone --depth 1 --branch windows-v4.0 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source",
-      "let_op": "Windows v4.0 is uitgebracht op 30 september 2026 (tag windows-v4.0, commit 1cc71a9). De eerdere import kwam van commit f247604 op de toen nog niet uitgebrachte branch; het verschil is op 2 oktober 2026 nagelopen en overgenomen."
+      "byod": "v2.0",
+      "retrievedAt": "2026-11-20",
+      "checkout": "git -c core.longpaths=true clone --depth 1 https://github.com/SkipToTheEndpoint/OpenIntuneBaseline .oib-source && git -C .oib-source checkout 2089b94",
+      "let_op": "Commit 2089b94 op main (5 november 2026) bevat Windows v4.0.1 (tag windows-v4.0.1) én BYOD v2.0 (tag byod-v2.0); geen van beide tags heeft de ander, daarom main. Windows v4.0 kwam van tag windows-v4.0 (commit 1cc71a9, 30 september 2026). Clone van upstream, niet van een fork: een fork die achterloopt levert stil de oude bestanden."
     },
     "intuneadmin": {
       "repo": "https://github.com/IntuneAdmin/IntuneBaselines",
@@ -131,6 +131,14 @@
       "reason": "Geen policy maar OIB's lijst van tracking-ID's. Wat daarvan nodig is staat per policy als oibId in dit manifest; import-oib.js leest het ID uit de policy zelf."
     },
     {
+      "source": "BYOD/PolicyManifest.json",
+      "reason": "Hetzelfde als WINDOWS/PolicyManifest.json, maar voor de BYOD-policies (sinds BYOD v2.0)."
+    },
+    {
+      "source": "releases.json",
+      "reason": "Geen policy maar OIB's lijst van platforms en versies voor de documentatiesite. De versies die hier gelden staan in upstreams.oib."
+    },
+    {
       "source": "MACOS/IntuneManagement/SettingsCatalog/MacOS - OIB - Updates - D - Update Configuration - v1.0.json",
       "reason": "Vervangen door de declaratieve variant (DDM) in Baseline_MAC_D_Software_Updates, een eigen policy. Die vervangt de com.apple.SoftwareUpdate-instellingen uit deze policy, behalve twee sleutels zonder DDM-tegenhanger, die hij zelf meeneemt."
     },
@@ -145,7 +153,7 @@
   ],
   "policies": [
     {
-      "source": "BYOD/AppProtection/Android - Baseline - BYOD - App Protection.json",
+      "source": "BYOD/IntuneManagement/AppProtection/Android - OIB - App Protection - U - BYOD L2+ - v2.0.json",
       "target": "Baseline_AND_U_App_Protection",
       "displayName": "[Baseline] - AND - U - App Protection",
       "doel": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke Android-telefoon: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens.",
@@ -184,9 +192,22 @@
           "veld": "previousPinBlockCount",
           "waarde": 5,
           "reason": "De laatste vijf app-PIN's mogen niet opnieuw gebruikt worden. OpenIntuneBaseline laat dit op 0; zonder deze override zet een import het stilzwijgend terug."
+        },
+        {
+          "veld": "periodOfflineBeforeAccessCheck",
+          "waarde": "PT12H",
+          "reason": "Na 12 uur zonder verbinding met Intune moet de app eerst opnieuw controleren voor hij organisatiegegevens toont. OIB BYOD v2.0 versoepelt dit naar 7 dagen (Microsoft Level 2); wij houden de waarde van v1. De prijs is klein — een telefoon die online komt controleert vanzelf — en een gestolen toestel in vliegtuigstand houdt zo geen week toegang tot de gecachte mail."
+        },
+        {
+          "veld": "allowedDataStorageLocations",
+          "waarde": [
+            "oneDriveForBusiness",
+            "sharePoint"
+          ],
+          "reason": "OIB BYOD v2.0 staat opslaan in de fotobibliotheek toe. Op een persoonlijk toestel is de fotobibliotheek privé en wordt hij naar iCloud of Google Foto's gesynchroniseerd: een foto van een werkdocument of een bijlage staat dan buiten selectief wissen. Inkomend (een foto uit de bibliotheek in een werkdocument) laten we wel toe — zie allowedDataIngestionLocations, dat de bron levert."
         }
       ],
-      "note": "Sinds september 2026 waarschuwt deze policy bij Android onder 16.0 en bij een beveiligingspatch ouder dan 2026-03-01. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Beide waarden verouderen — draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Ze staan in `veldOverrides` omdat OIB ze leeg laat; zonder die regels draait de eerstvolgende `import-oib.js` ze stilzwijgend terug.",
+      "note": "Sinds september 2026 waarschuwt deze policy bij Android onder 16.0 en bij een beveiligingspatch ouder dan 2026-03-01. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Beide waarden verouderen — draai `node scripts/check-osversion.js` om te zien hoe ver ze achterlopen. Ze staan in `veldOverrides` omdat OIB ze leeg laat; zonder die regels draait de eerstvolgende `import-oib.js` ze stilzwijgend terug. Sinds november 2026 op OIB BYOD v2.0 (Microsoft Level 2, deels Level 3): Samsung Knox-attestatie vereist (blokkeert waar het toestel het ondersteunt), een geroot toestel wist de werkgegevens in plaats van alleen te blokkeren, selectief wissen na 30 dagen offline (was 90), biometrie na 24 uur weer door de PIN (was 12 uur), Class 3-biometrie expliciet aan, en een foto uit de bibliotheek mag een werkdocument in. Bewust níet overgenomen: 7 dagen offline voor de toegangscontrole en opslaan in de fotobibliotheek — zie veldOverrides.",
       "fase": 1,
       "controls": {
         "iso": [
@@ -212,7 +233,8 @@
         ]
       },
       "bewijs": "App Protection is de enige Android-maatregel die elke telefoon raakt, ingeschreven of niet. Hij scheidt bedrijfsdata binnen de Microsoft-apps van de rest van het toestel (uitgaande overdracht alleen naar beheerde apps, geen opslaan-als, geen back-up, geen schermafdruk), versleutelt die data, vraagt een eigen PIN en wist alleen de werkgegevens na 90 dagen zonder contact of op verzoek. Conditional Access 2070 maakt hem afdwingbaar: zonder beschermde app geen toegang. Het Microsoft App Protection Framework (niveau 2, enhanced) is de referentie.",
-      "universeel": "Elke gebruiker met een Android-telefoon, ingeschreven of niet (`targetedAppManagementLevels: unspecified`). Beschermt alleen apps die de Intune App SDK gebruiken — de Microsoft 365-apps; andere apps vallen erbuiten."
+      "universeel": "Elke gebruiker met een Android-telefoon, ingeschreven of niet (`targetedAppManagementLevels: unspecified`). Beschermt alleen apps die de Intune App SDK gebruiken — de Microsoft 365-apps; andere apps vallen erbuiten.",
+      "oibId": "62651D3B-5693-4ED2-96D0-5259BB33AB66"
     },
     {
       "target": "Baseline_AND_U_Compliance_Device_Health",
@@ -673,13 +695,13 @@
       "metadataOnly": true
     },
     {
-      "source": "BYOD/AppProtection/iOS - Baseline - BYOD - App Protection.json",
+      "source": "BYOD/IntuneManagement/AppProtection/iOS - OIB - App Protection - U - BYOD L2+ - v2.0.json",
       "target": "Baseline_IOS_U_App_Protection",
       "displayName": "[Baseline] - IOS - U - App Protection",
       "doel": "Beschermt bedrijfsdata binnen de Microsoft-apps op een persoonlijke iPhone of iPad: aparte PIN, versleuteling, geen kopiëren naar privé-apps, en op afstand wissen van alleen de werkgegevens — zonder dat het apparaat zelf beheerd wordt.",
       "bron": "OpenIntuneBaseline BYOD — iOS App Protection",
       "type": "AppProtection",
-      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. Bewust níet de iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState: Apple Intelligence toestaan of niet is een organisatiebesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.",
+      "note": "MAM voor persoonlijke iPhones/iPads: bedrijfsdata in de Microsoft-apps krijgt een PIN, versleuteling en kopieerbeperkingen, zonder dat het apparaat zelf beheerd wordt. Sinds september 2026 waarschuwt deze policy ook bij iOS onder 18.0. Bewust de **warning**-variant en niet `minimumRequired*`: die laatste blokkeert de app en dat hoort een aparte beslissing te zijn, genomen nadat je in de rapportage hebt gezien hoeveel toestellen het raakt. Die waarde veroudert — draai `node scripts/check-osversion.js` om te zien hoe ver hij achterloopt. Hij staat in `veldOverrides` omdat OIB hem leeg laat; zonder die regel draait de eerstvolgende `import-oib.js` hem stilzwijgend terug. Sinds september 2026 ook allowWidgetContentSync=false: widgets van beheerde apps tonen geen organisatiegegevens, in lijn met meldingen zonder organisatiegegevens. De iOS 26-velden writingToolsConfigurationState en genmojiConfigurationState staan sinds OIB BYOD v2.0 op notBlocked, en dat is de standaardwaarde: deze policy beslist dus niets over Apple Intelligence. Toestaan of niet blijft een organisatiebesluit (zie [Baseline] - IOS - D - Apple Intelligence Restricted/Permitted voor ingeschreven toestellen), en deze policy is er één voor iedereen. Sinds november 2026 op OIB BYOD v2.0 (Microsoft Level 2, deels Level 3): een gejailbreakt toestel wist de werkgegevens in plaats van alleen te blokkeren, selectief wissen na 30 dagen offline (was 90), biometrie na 24 uur weer door de PIN (was 12 uur), delen via Open-In/Share alleen naar beheerde apps, en een foto uit de bibliotheek mag een werkdocument in. Bewust níet overgenomen: 7 dagen offline voor de toegangscontrole en opslaan in de fotobibliotheek — zie veldOverrides. Ook niet blockDataIngestionIntoOrganizationDocuments=true (UniFy L2): met alleen OneDrive, SharePoint en camera als bron kan een gebruiker geen foto uit zijn bibliotheek meer in een werkdocument zetten — dezelfde afweging als bij allowedInboundDataTransferSources.",
       "herkomst": "oib",
       "ondergrens": [
         {
@@ -707,7 +729,7 @@
         {
           "veld": "screenCaptureConfigurationState",
           "waarde": "blocked",
-          "reason": "Geen schermafdrukken van organisatiegegevens in beheerde apps, gelijk aan de Android-policy. OpenIntuneBaseline laat dit ongeconfigureerd.",
+          "reason": "Geen schermafdrukken van organisatiegegevens in beheerde apps, gelijk aan de Android-policy. OpenIntuneBaseline BYOD v2.0 zet dit op notBlocked (het framework doet er geen uitspraak over).",
           "toevoegen": true
         },
         {
@@ -718,8 +740,21 @@
         {
           "veld": "allowWidgetContentSync",
           "waarde": false,
-          "reason": "Widgets van beheerde apps (Outlook, Teams) tonen geen organisatiegegevens op het beginscherm of in de Today-weergave — de consequentie van notificationRestriction blockOrganizationalData, dat meldingen al zonder inhoud toont. iOS-veld uit Graph beta iosManagedAppProtection; OpenIntuneBaseline laat het weg. LET OP: OIB f247604 kent dit veld niet, dus import-oib.js stopt op deze regel (net als nu al op screenCaptureConfigurationState) — zie RAPPORT WP2.",
+          "reason": "Widgets van beheerde apps (Outlook, Teams) tonen geen organisatiegegevens op het beginscherm of in de Today-weergave — de consequentie van notificationRestriction blockOrganizationalData, dat meldingen al zonder inhoud toont. iOS-veld uit Graph beta iosManagedAppProtection; OpenIntuneBaseline BYOD v2.0 zet het op true.",
           "toevoegen": true
+        },
+        {
+          "veld": "periodOfflineBeforeAccessCheck",
+          "waarde": "PT12H",
+          "reason": "Na 12 uur zonder verbinding met Intune moet de app eerst opnieuw controleren voor hij organisatiegegevens toont. OIB BYOD v2.0 versoepelt dit naar 7 dagen (Microsoft Level 2); wij houden de waarde van v1. De prijs is klein — een telefoon die online komt controleert vanzelf — en een gestolen toestel in vliegtuigstand houdt zo geen week toegang tot de gecachte mail."
+        },
+        {
+          "veld": "allowedDataStorageLocations",
+          "waarde": [
+            "oneDriveForBusiness",
+            "sharePoint"
+          ],
+          "reason": "OIB BYOD v2.0 staat opslaan in de fotobibliotheek toe. Op een persoonlijk toestel is de fotobibliotheek privé en wordt hij naar iCloud gesynchroniseerd: een foto van een werkdocument of een bijlage staat dan buiten selectief wissen. Inkomend (een foto uit de bibliotheek in een werkdocument) laten we wel toe — zie allowedDataIngestionLocations, dat de bron levert."
         }
       ],
       "fase": 1,
@@ -745,7 +780,8 @@
         ]
       },
       "bewijs": "Op een telefoon die niet van de organisatie is, is App Protection de enige laag tussen bedrijfsgegevens en privé-apps: versleuteling van de app-gegevens, een eigen PIN, geen kopiëren of 'Openen in' naar onbeheerde apps, geen back-up naar iCloud, en selectief wissen van alleen de werkgegevens. Conditional Access 2070 eist voor iOS een compliant app óf een compliant apparaat, dus zonder deze policy komt een persoonlijk toestel niet bij Outlook en Teams. De CIS Apple iOS/iPadOS 26 Benchmark-set van UniFy (MAM L2 BYOD) is op de meeste punten gelijk of ruimer.",
-      "universeel": "Elke gebruiker, elk iOS-toestel, ingeschreven of niet (targetedAppManagementLevels unspecified). De grens: het beschermt alleen apps met de Intune SDK (Microsoft 365-apps), niet de rest van het toestel."
+      "universeel": "Elke gebruiker, elk iOS-toestel, ingeschreven of niet (targetedAppManagementLevels unspecified). De grens: het beschermt alleen apps met de Intune SDK (Microsoft 365-apps), niet de rest van het toestel.",
+      "oibId": "79695F88-44D7-49CA-B06B-6385A3411523"
     },
     {
       "target": "Baseline_IOS_U_Compliance_Device_Health",
@@ -2242,13 +2278,13 @@
       "faseWaarom": "De machine-drempel zet een apparaat na tien mislukte pogingen in BitLocker-herstel. Dat is recoverable (de sleutel staat in Entra ID) maar levert een helpdeskvraag op; kijk in de pilot hoe vaak het gebeurt."
     },
     {
-      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Administrator Protection - v3.7.json",
-      "oibId": "E100EBFD-8D2E-40AC-A9A3-48DBF6764144",
+      "source": "WINDOWS/IntuneManagement/SettingsCatalog/Win - OIB - SC - Device Security - D - Administrator Protection - v4.0.1.json",
+      "oibId": "32BCF079-FF38-4672-8971-59D399FD34D3",
       "target": "Baseline_WIN_D_Administrator_Protection",
       "displayName": "[Baseline] - WIN - D - Administrator Protection",
-      "doel": "Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.",
-      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection",
-      "note": "Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.",
+      "doel": "Houdt UAC op de klassieke Admin Approval Mode, zodat Administrator Protection het LAPS-account niet breekt, en legt vast hoe de prompt zich gedraagt zodra Administrator Protection weer aan mag. Windows 11 24H2 en hoger.",
+      "bron": "OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Administrator Protection",
+      "note": "Sinds november 2026 (OIB v4.0.1, issue #264) staat Type of Admin Approval Mode op 1 (Legacy) in plaats van 2 (Administrator protection). Sinds de beveiligingsupdate van oktober 2026 is Administrator Protection echt actief, en dat geeft problemen met LAPS — Microsoft noemt het zelf onder Troubleshooting op Learn. Deze baseline beheert het lokale beheerdersaccount met LAPS (wlapsadmin), dus LAPS wint. Weer naar 2 zodra Microsoft het LAPS-probleem oplost; volg OIB #264. Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.",
       "herkomst": "oib",
       "fase": 2,
       "doelgroep": "alle",
@@ -3812,8 +3848,15 @@
       "target": "Baseline_WIN_D_Script_File_Associations",
       "displayName": "[Baseline] - WIN - D - Script File Associations",
       "doel": "Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de scripthost, zodat dubbelklikken op zo'n bijlage niets uitvoert.",
-      "bron": "OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations",
-      "note": "Opent .js/.vbs/.hta met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit.",
+      "bron": "OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Script File Associations",
+      "note": "Opent .js/.vbs/.hta (en .bat, .cmd en andere scripthost-extensies) met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit. Bewust zonder .ps1 en .psm1 (override): OIB v4.0.1 waarschuwt dat die twee PowerShell-scripts breken die Intune in gebruikerscontext draait, en deze baseline heeft er zelf een (Mount-AzureFilesDrive.ps1). PowerShell voert een .ps1 bij dubbelklikken standaard toch al niet uit, dus de winst van die twee was klein.",
+      "overrides": [
+        {
+          "settingDefinitionId": "device_vendor_msft_policy_config_applicationdefaults_defaultassociationsconfiguration",
+          "value": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxEZWZhdWx0QXNzb2NpYXRpb25zPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmFwcHgiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuYmF0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmNhYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5jb20iIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuY21kIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLmh0YSIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qcyIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5qc2UiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIuc2N0IiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLnNoYiIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii5zaHMiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIud3NmIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KICA8QXNzb2NpYXRpb24gSWRlbnRpZmllcj0iLndzaCIgUHJvZ0lkPSJBcHBsaWNhdGlvbnNcbm90ZXBhZC5leGUiIEFwcGxpY2F0aW9uTmFtZT0iTm90ZXBhZCIgLz4NCiAgPEFzc29jaWF0aW9uIElkZW50aWZpZXI9Ii52YmUiIFByb2dJZD0iQXBwbGljYXRpb25zXG5vdGVwYWQuZXhlIiBBcHBsaWNhdGlvbk5hbWU9Ik5vdGVwYWQiIC8+DQogIDxBc3NvY2lhdGlvbiBJZGVudGlmaWVyPSIudmJzIiBQcm9nSWQ9IkFwcGxpY2F0aW9uc1xub3RlcGFkLmV4ZSIgQXBwbGljYXRpb25OYW1lPSJOb3RlcGFkIiAvPg0KPC9EZWZhdWx0QXNzb2NpYXRpb25zPg==",
+          "reason": "Dezelfde lijst als OIB, zonder .ps1 en .psm1. OIB v4.0.1 zet in de omschrijving van deze policy dat hij PowerShell-scripts uit Intune in gebruikerscontext breekt; Mount-AzureFilesDrive.ps1 in IntuneTemplate/WIN/PlatformScripts draait als de gebruiker en zou de schijf dan niet meer koppelen. Komt er een extensie bij in de OIB-lijst, dan moet deze waarde met de hand mee — vergelijk de gedecodeerde XML bij elke OIB-import."
+        }
+      ],
       "herkomst": "oib",
       "fase": 2,
       "doelgroep": "alle",

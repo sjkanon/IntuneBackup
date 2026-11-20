@@ -26,6 +26,7 @@ Not a CIPP policy type, so not in the tables below and not in a CIPP package. Ho
 | [`EndpointSecurity/`](EndpointSecurity/README.en.md) | App Control for Business (WDAC) — generic starting point |
 | [`Enrollment/`](Enrollment/README.en.md) | Windows Autopilot: classic and device preparation |
 | [`PlatformScripts/`](PlatformScripts/README.en.md) | Windows platform scripts |
+| [`Remediations/block-workplace-join/`](Remediations/block-workplace-join/README.en.md) | No work accounts from other organisations on Windows |
 | [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.en.md) | DNS over HTTPS for Windows |
 | [`Remediations/escrow-check/`](Remediations/escrow-check/README.en.md) | Escrow check: BitLocker recovery key and LAPS password in Entra ID |
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.en.md) | Event log sizes for PowerShell, Defender and Code Integrity |
@@ -39,7 +40,7 @@ Assign to device groups.
 |---|---|---|---:|---|
 | [**Access Control**](SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) | Shows a warning before sign-in that the system is for authorised users only, and hides the last signed-in user name. | Settings Catalog | 6 | — |
 | [**Account Lockout**](SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) | Locks an account for 15 minutes after ten failed sign-in attempts, including that of the built-in administrator, and puts the device into BitLocker recovery after ten failed attempts. | Settings Catalog | 3 | — |
-| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) | Makes administrators work without elevated rights by default and ask for consent per action. Windows 11 24H2 and later. | Settings Catalog | 2 | — |
+| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) | Keeps UAC on the classic Admin Approval Mode so that Administrator Protection does not break the LAPS account, and sets how the prompt behaves once Administrator Protection may be enabled again. Windows 11 24H2 and later. | Settings Catalog | 2 | — |
 | [**AI Tooling**](SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) | Blocks GitHub Copilot on personal accounts in Visual Studio; the business licence keeps working. | Settings Catalog | 1 | All Devices |
 | [**Attack Surface Reduction**](SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.en.md) | Blocks the attack techniques from Defender's Attack Surface Reduction rules: macros that launch processes, executable content from email and USB, abuse of Office and script engines, and credential theft from LSASS. | Settings Catalog | 19 | All Devices |
 | [**Audit and Event Logging**](SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) | Defines which events Windows records and how large the logs are — the basis for after-the-fact investigation. | Settings Catalog | 40 | All Devices |

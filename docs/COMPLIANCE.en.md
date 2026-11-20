@@ -1841,11 +1841,11 @@ Risk detection on workload identities is a separate SKU. This is the pitfall wit
 |---|---|
 | Conditional Access (1) | `CA - 1140 - BLOCK - Managed Identities At Risk` |
 
-### Microsoft Entra Agent ID
+### Microsoft Agent 365 / Microsoft 365 E7
 
-*not yet available in every tenant*
+*Microsoft 365 E7, or Microsoft Agent 365 alongside Entra ID P1 (P2 for the risk policies 1150 and 1170)*
 
-The five agent templates require agent identities. This is not a purchasing decision but an availability issue; they are therefore set to report-only until the capability is available.
+According to Microsoft Learn, Conditional Access for agents requires Microsoft 365 E7, or Microsoft Agent 365 with Entra ID P1 (or M365 E3); for agent risk P2 (or M365 E5). Agent risk is still preview. Without that licence and without registered agent identities the five agent templates have nothing to work on; they are therefore report-only.
 
 | Side | Policies |
 |---|---|

@@ -26,6 +26,7 @@ Geen CIPP-policytype, dus niet in de tabellen hieronder en niet in een CIPP-pakk
 | [`EndpointSecurity/`](EndpointSecurity/README.md) | App Control for Business (WDAC) — generiek startpunt |
 | [`Enrollment/`](Enrollment/README.md) | Windows Autopilot: klassiek en device preparation |
 | [`PlatformScripts/`](PlatformScripts/README.md) | Windows-platformscripts |
+| [`Remediations/block-workplace-join/`](Remediations/block-workplace-join/README.md) | Geen werkaccounts van andere organisaties op Windows |
 | [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.md) | DNS over HTTPS voor Windows |
 | [`Remediations/escrow-check/`](Remediations/escrow-check/README.md) | Escrow-controle: BitLocker-herstelsleutel en LAPS-wachtwoord in Entra ID |
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.md) | Logboekgroottes voor PowerShell, Defender en Code Integrity |
@@ -39,7 +40,7 @@ Toewijzen aan apparaatgroepen.
 |---|---|---|---:|---|
 | [**Access Control**](SettingsCatalog/Baseline_WIN_D_Access_Control.md) | Toont vóór het aanmelden een waarschuwing dat het systeem alleen voor geautoriseerde gebruikers is, en verbergt de laatst aangemelde gebruikersnaam. | Settings Catalog | 6 | — |
 | [**Account Lockout**](SettingsCatalog/Baseline_WIN_D_Account_Lockout.md) | Sluit een account 15 minuten af na tien mislukte aanmeldpogingen, ook dat van de ingebouwde beheerder, en zet het apparaat na tien mislukte pogingen in BitLocker-herstel. | Settings Catalog | 3 | — |
-| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.md) | Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger. | Settings Catalog | 2 | — |
+| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.md) | Houdt UAC op de klassieke Admin Approval Mode, zodat Administrator Protection het LAPS-account niet breekt, en legt vast hoe de prompt zich gedraagt zodra Administrator Protection weer aan mag. Windows 11 24H2 en hoger. | Settings Catalog | 2 | — |
 | [**AI Tooling**](SettingsCatalog/Baseline_WIN_D_AI_Tooling.md) | Blokkeert GitHub Copilot op persoonlijke accounts in Visual Studio; de zakelijke licentie blijft werken. | Settings Catalog | 1 | All Devices |
 | [**Attack Surface Reduction**](SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.md) | Blokkeert de aanvalstechnieken uit Defender's Attack Surface Reduction-regels: macro's die processen starten, uitvoerbare inhoud uit e-mail en USB, misbruik van Office- en scriptmotoren, en het uitlezen van inloggegevens uit LSASS. | Settings Catalog | 19 | All Devices |
 | [**Audit and Event Logging**](SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.md) | Legt vast welke gebeurtenissen Windows registreert en hoe groot de logboeken zijn — de basis voor onderzoek achteraf. | Settings Catalog | 40 | All Devices |

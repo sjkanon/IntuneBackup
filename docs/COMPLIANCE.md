@@ -1841,11 +1841,11 @@ Risicodetectie op workload-identiteiten is een eigen SKU. Dit is de valkuil bij 
 |---|---|
 | Conditional Access (1) | `CA - 1140 - BLOCK - Managed Identities At Risk` |
 
-### Microsoft Entra Agent ID
+### Microsoft Agent 365 / Microsoft 365 E7
 
-*nog niet in elke tenant beschikbaar*
+*Microsoft 365 E7, of Microsoft Agent 365 naast Entra ID P1 (P2 voor de risicopolicies 1150 en 1170)*
 
-De vijf agent-templates vragen agent-identiteiten. Dit is geen aankoopbeslissing maar een beschikbaarheidskwestie; ze staan daarom op report-only tot de voorziening er is.
+Conditional Access voor agents vraagt volgens Microsoft Learn Microsoft 365 E7, of Microsoft Agent 365 met Entra ID P1 (of M365 E3); voor agentrisico P2 (of M365 E5). Agentrisico is nog preview. Zonder die licentie en zonder geregistreerde agent-identiteiten hebben de vijf agent-templates niets om op te werken; ze staan daarom op report-only.
 
 | Kant | Policies |
 |---|---|

@@ -26,6 +26,7 @@ Pas un type de stratégie CIPP, donc absent des tableaux ci-dessous et d'un pack
 | [`EndpointSecurity/`](EndpointSecurity/README.fr.md) | App Control for Business (WDAC) — point de départ générique |
 | [`Enrollment/`](Enrollment/README.fr.md) | Windows Autopilot : classique et device preparation |
 | [`PlatformScripts/`](PlatformScripts/README.fr.md) | Scripts de plateforme Windows |
+| [`Remediations/block-workplace-join/`](Remediations/block-workplace-join/README.fr.md) | Pas de comptes professionnels d'autres organisations sous Windows |
 | [`Remediations/dns-over-https/`](Remediations/dns-over-https/README.fr.md) | DNS over HTTPS pour Windows |
 | [`Remediations/escrow-check/`](Remediations/escrow-check/README.fr.md) | Contrôle de l'escrow : clé de récupération BitLocker et mot de passe LAPS dans Entra ID |
 | [`Remediations/event-log-sizes/`](Remediations/event-log-sizes/README.fr.md) | Tailles des journaux pour PowerShell, Defender et Code Integrity |
@@ -39,7 +40,7 @@ Affecter à des groupes d'appareils.
 |---|---|---|---:|---|
 | [**Access Control**](SettingsCatalog/Baseline_WIN_D_Access_Control.fr.md) | Affiche avant la connexion un avertissement indiquant que le système est réservé aux utilisateurs autorisés, et masque le nom du dernier utilisateur connecté. | Settings Catalog | 6 | — |
 | [**Account Lockout**](SettingsCatalog/Baseline_WIN_D_Account_Lockout.fr.md) | Verrouille un compte pendant 15 minutes après dix tentatives de connexion échouées, y compris celui de l'administrateur intégré, et place l'appareil en récupération BitLocker après dix tentatives échouées. | Settings Catalog | 3 | — |
-| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.fr.md) | Fait travailler les administrateurs sans droits élevés par défaut et leur fait demander l'autorisation pour chaque action. Windows 11 24H2 et versions ultérieures. | Settings Catalog | 2 | — |
+| [**Administrator Protection**](SettingsCatalog/Baseline_WIN_D_Administrator_Protection.fr.md) | Maintient l'UAC sur le mode d'approbation administrateur classique, afin qu'Administrator Protection ne casse pas le compte LAPS, et fixe le comportement de l'invite dès qu'Administrator Protection pourra être réactivé. Windows 11 24H2 et versions ultérieures. | Settings Catalog | 2 | — |
 | [**AI Tooling**](SettingsCatalog/Baseline_WIN_D_AI_Tooling.fr.md) | Bloque GitHub Copilot sur les comptes personnels dans Visual Studio ; la licence professionnelle continue de fonctionner. | Settings Catalog | 1 | All Devices |
 | [**Attack Surface Reduction**](SettingsCatalog/Baseline_WIN_D_Attack_Surface_Reduction.fr.md) | Bloque les techniques d'attaque visées par les règles Attack Surface Reduction de Defender : macros qui lancent des processus, contenu exécutable provenant des e-mails et de l'USB, abus des moteurs Office et de script, et vol d'identifiants depuis LSASS. | Settings Catalog | 19 | All Devices |
 | [**Audit and Event Logging**](SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.fr.md) | Définit quels événements Windows enregistre et quelle est la taille des journaux — la base de toute investigation a posteriori. | Settings Catalog | 40 | All Devices |
