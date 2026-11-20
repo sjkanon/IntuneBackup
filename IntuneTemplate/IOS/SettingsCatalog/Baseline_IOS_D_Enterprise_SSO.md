@@ -36,6 +36,7 @@ Deze Conditional Access-policies uit de CA-Policies-repo leunen op deze policy. 
 |---|---|---|
 | 2060 - GRANT - Mobile Apps and Desktop Clients | disabled | Zet de Microsoft Enterprise SSO-plug-in aan, die bij een Entra-aanmelding de apparaatidentiteit meegeeft. Zonder plug-in kan een compliant toestel in apps die geen MSAL gebruiken niet als compliant herkend worden. |
 | 2090 - GRANT - Browser Access On Unmanaged Devices | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
+| 2115 - GRANT - Token Protection Apple | report-only | Token protection op Apple vraagt hardwaregebonden apparaatregistratie, en die komt alleen via de Microsoft Enterprise SSO-plug-in (iOS) of Platform SSO (macOS). Zonder deze Intune-policy is het token niet gebonden en blokkeert deze CA-policy de Microsoft-apps. |
 | 2130 - GRANT - Admins Compliant Device | enabled | Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat. |
 
 ## Instellingen — 21

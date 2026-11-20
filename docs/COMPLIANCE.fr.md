@@ -1841,11 +1841,11 @@ La détection des risques sur les identités de charge de travail est un SKU dis
 |---|---|
 | Conditional Access (1) | `CA - 1140 - BLOCK - Managed Identities At Risk` |
 
-### Microsoft Entra Agent ID
+### Microsoft Agent 365 / Microsoft 365 E7
 
-*pas encore disponible dans tous les tenants*
+*Microsoft 365 E7, ou Microsoft Agent 365 avec Entra ID P1 (P2 pour les stratégies de risque 1150 et 1170)*
 
-Les cinq templates d'agent nécessitent des identités d'agent. Ce n'est pas une décision d'achat mais une question de disponibilité ; ils sont donc en report-only jusqu'à ce que la fonctionnalité soit disponible.
+Selon Microsoft Learn, l'accès conditionnel pour les agents exige Microsoft 365 E7, ou Microsoft Agent 365 avec Entra ID P1 (ou M365 E3) ; pour le risque d'agent, P2 (ou M365 E5). Le risque d'agent est encore en préversion. Sans cette licence et sans identités d'agent enregistrées, les cinq modèles d'agents n'ont rien sur quoi agir ; ils sont donc en report-only.
 
 | Côté | Policies |
 |---|---|

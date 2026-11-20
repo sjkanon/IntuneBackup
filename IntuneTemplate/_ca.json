@@ -546,6 +546,16 @@
         }
       },
       {
+        "ca": "CA__2115__GRANT__Token_Protection_Apple",
+        "displayName": "CA - 2115 - GRANT - Token Protection Apple",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Token protection op Apple vraagt hardwaregebonden apparaatregistratie, en die komt alleen via de Microsoft Enterprise SSO-plug-in (iOS) of Platform SSO (macOS). Zonder deze Intune-policy is het token niet gebonden en blokkeert deze CA-policy de Microsoft-apps.",
+          "en": "Token protection on Apple needs hardware-backed device registration, which only comes through the Microsoft Enterprise SSO plug-in (iOS) or Platform SSO (macOS). Without this Intune policy the token is not bound and this CA policy blocks the Microsoft apps.",
+          "fr": "La token protection sur Apple exige un enregistrement d'appareil lié au matériel, qui ne passe que par le plug-in Microsoft Enterprise SSO (iOS) ou Platform SSO (macOS). Sans cette stratégie Intune, le jeton n'est pas lié et cette stratégie CA bloque les applications Microsoft."
+        }
+      },
+      {
         "ca": "CA__2130__GRANT__Admins_Compliant_Device",
         "displayName": "CA - 2130 - GRANT - Admins Compliant Device",
         "state": "enabled",
@@ -807,6 +817,16 @@
           "nl": "Zorgt dat de browser de apparaatstatus meegeeft. Edge doet dat alleen met een werkprofiel; Safari op de Mac en iOS via de Microsoft Enterprise SSO-plug-in. Ontbreekt dat, dan faalt de compliant-eis ook op een beheerd apparaat.",
           "en": "Makes sure the browser passes the device state along. Edge only does so with a work profile; Safari on Mac and iOS through the Microsoft Enterprise SSO plug-in. Without it, the compliant-device requirement fails even on a managed device.",
           "fr": "Garantit que le navigateur transmet l'état de l'appareil. Edge ne le fait qu'avec un profil professionnel ; Safari sur Mac et iOS via le plug-in Microsoft Enterprise SSO. Sans cela, l'exigence d'appareil conforme échoue même sur un appareil géré."
+        }
+      },
+      {
+        "ca": "CA__2115__GRANT__Token_Protection_Apple",
+        "displayName": "CA - 2115 - GRANT - Token Protection Apple",
+        "state": "enabledForReportingButNotEnforced",
+        "waarom": {
+          "nl": "Token protection op Apple vraagt hardwaregebonden apparaatregistratie, en die komt alleen via de Microsoft Enterprise SSO-plug-in (iOS) of Platform SSO (macOS). Zonder deze Intune-policy is het token niet gebonden en blokkeert deze CA-policy de Microsoft-apps.",
+          "en": "Token protection on Apple needs hardware-backed device registration, which only comes through the Microsoft Enterprise SSO plug-in (iOS) or Platform SSO (macOS). Without this Intune policy the token is not bound and this CA policy blocks the Microsoft apps.",
+          "fr": "La token protection sur Apple exige un enregistrement d'appareil lié au matériel, qui ne passe que par le plug-in Microsoft Enterprise SSO (iOS) ou Platform SSO (macOS). Sans cette stratégie Intune, le jeton n'est pas lié et cette stratégie CA bloque les applications Microsoft."
         }
       },
       {
