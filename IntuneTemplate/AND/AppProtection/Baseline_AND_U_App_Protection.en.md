@@ -15,7 +15,7 @@ Protects corporate data within the Microsoft apps on a personal Android phone: s
 | Source | OpenIntuneBaseline BYOD — Android App Protection |
 | File | [`Baseline_AND_U_App_Protection.json`](Baseline_AND_U_App_Protection.json) |
 
-> Since September 2026 this policy warns for Android below 16.0 and for a security patch older than 2026-03-01. Deliberately the **warning** variant and not `minimumRequired*`: the latter blocks the app, and that should be a separate decision, taken after you have seen in the reporting how many devices it affects. Both values go stale — run `node scripts/check-osversion.js` to see how far behind they are. They are in `veldOverrides` because OIB leaves them empty; without those lines the next `import-oib.js` silently reverts them.
+> Since September 2026 this policy warns on Android below 16.0 and on a security patch older than 2026-03-01. Deliberately the **warning** variant and not `minimumRequired*`: the latter blocks the app, and that should be a separate decision, taken after you have seen in reporting how many devices it affects. Both values go stale — run `node scripts/check-osversion.js` to see how far behind they are. They are in `veldOverrides` because OIB leaves them empty; without those rules the next `import-oib.js` silently reverts them. Since November 2026 on OIB BYOD v2.0 (Microsoft Level 2, partly Level 3): Samsung Knox attestation required (blocks where the device supports it), a rooted device wipes the work data instead of only blocking, selective wipe after 30 days offline (was 90), biometrics fall back to the PIN after 24 hours (was 12 hours), Class 3 biometrics explicitly on, and a photo from the library may go into a work document. Deliberately not adopted: 7 days offline before the access check, and saving to the photo library — see veldOverrides.
 
 ## Standards
 
@@ -37,98 +37,105 @@ These Conditional Access policies from the CA-Policies repo rely on this policy.
 | 2070 - GRANT - Mobile Device Access Requirements | disabled | The app protection policy that `compliantApplication` asks for. Without an assigned policy no app qualifies and access on iOS and Android is closed. |
 | 2150 - GRANT - Cloud PC Mobile Access | enabled | One of the two ways to meet this policy: the app is covered by an app protection policy. Without an assigned policy only a compliant device is left. |
 
-## Properties — 86
+## Properties — 93
 
 An app protection policy has no settingDefinitionIds but fixed properties. `—` means not configured.
 
 | Property | Value |
 |---|---|
-| `periodOfflineBeforeAccessCheck` | PT12H |
-| `periodOnlineBeforeAccessCheck` | PT30M |
-| `allowedInboundDataTransferSources` | allApps |
-| `allowedOutboundDataTransferDestinations` | managedApps |
-| `organizationalCredentialsRequired` | false |
-| `allowedOutboundClipboardSharingLevel` | managedAppsWithPasteIn |
-| `dataBackupBlocked` | true |
-| `deviceComplianceRequired` | true |
-| `managedBrowserToOpenLinksRequired` | true |
-| `saveAsBlocked` | true |
-| `periodOfflineBeforeWipeIsEnforced` | P90D |
-| `pinRequired` | true |
-| `maximumPinRetries` | 5 |
-| `simplePinBlocked` | true |
-| `minimumPinLength` | 6 |
-| `pinCharacterSet` | numeric |
-| `periodBeforePinReset` | PT0S |
+| `allowedAndroidDeviceModels` | — |
+| `allowedDataIngestionLocations` | oneDriveForBusiness, sharePoint, camera, photoLibrary |
 | `allowedDataStorageLocations` | oneDriveForBusiness, sharePoint |
-| `contactSyncBlocked` | false |
-| `printBlocked` | true |
-| `fingerprintBlocked` | false |
-| `disableAppPinIfDevicePinIsSet` | false |
-| `maximumRequiredOsVersion` | — |
-| `maximumWarningOsVersion` | — |
-| `maximumWipeOsVersion` | — |
-| `minimumRequiredOsVersion` | — |
-| `minimumWarningOsVersion` | 16.0 |
-| `minimumRequiredAppVersion` | — |
-| `minimumWarningAppVersion` | — |
-| `minimumWipeOsVersion` | — |
-| `minimumWipeAppVersion` | — |
-| `appActionIfDeviceComplianceRequired` | block |
+| `allowedInboundDataTransferSources` | allApps |
+| `allowedOutboundClipboardSharingLevel` | managedAppsWithPasteIn |
+| `allowedOutboundDataTransferDestinations` | managedApps |
+| `appActionIfAndroidDeviceManufacturerNotAllowed` | block |
+| `appActionIfAndroidDeviceModelNotAllowed` | block |
+| `appActionIfAndroidSafetyNetAppsVerificationFailed` | block |
+| `appActionIfAndroidSafetyNetDeviceAttestationFailed` | block |
+| `appActionIfDeviceComplianceRequired` | wipe |
+| `appActionIfDeviceLockNotSet` | block |
+| `appActionIfDevicePasscodeComplexityLessThanMedium` | block |
 | `appActionIfMaximumPinRetriesExceeded` | block |
-| `pinRequiredInsteadOfBiometricTimeout` | PT12H |
-| `allowedOutboundClipboardSharingExceptionLength` | 0 |
-| `notificationRestriction` | blockOrganizationalData |
-| `previousPinBlockCount` | 5 |
+| `appActionIfSamsungKnoxAttestationRequired` | blockWhenSettingIsSupported |
+| `appActionIfUnableToAuthenticateUser` | block |
+| `appGroupType` | allMicrosoftApps |
+| `approvedKeyboards` | — |
+| `dialerRestrictionLevel` | allApps |
+| `exemptedAppPackages` | — |
 | `managedBrowser` | microsoftEdge |
 | `maximumAllowedDeviceThreatLevel` | notConfigured |
 | `mobileThreatDefenseRemediationAction` | block |
-| `mobileThreatDefensePartnerPriority` | — |
-| `blockDataIngestionIntoOrganizationDocuments` | false |
-| `allowedDataIngestionLocations` | oneDriveForBusiness, sharePoint, camera |
-| `appActionIfUnableToAuthenticateUser` | block |
-| `dialerRestrictionLevel` | allApps |
-| `gracePeriodToBlockAppsDuringOffClockHours` | — |
-| `targetedAppManagementLevels` | unspecified |
-| `appGroupType` | allMicrosoftApps |
-| `screenCaptureBlocked` | true |
-| `disableAppEncryptionIfDeviceEncryptionIsEnabled` | false |
-| `encryptAppData` | true |
-| `minimumRequiredPatchVersion` | 0000-00-00 |
-| `minimumWarningPatchVersion` | 2026-03-01 |
-| `minimumWipePatchVersion` | 0000-00-00 |
-| `allowedAndroidDeviceManufacturers` | — |
-| `appActionIfAndroidDeviceManufacturerNotAllowed` | block |
-| `requiredAndroidSafetyNetDeviceAttestationType` | basicIntegrityAndDeviceCertification |
-| `appActionIfAndroidSafetyNetDeviceAttestationFailed` | block |
+| `notificationRestriction` | blockOrganizationalData |
+| `periodBeforePinReset` | PT0S |
+| `periodOfflineBeforeAccessCheck` | PT12H |
+| `periodOfflineBeforeWipeIsEnforced` | P30D |
+| `periodOnlineBeforeAccessCheck` | PT30M |
+| `pinCharacterSet` | numeric |
+| `pinRequiredInsteadOfBiometricTimeout` | P1D |
+| `protectedMessagingRedirectAppType` | anyApp |
+| `purviewContentEvaluationRequired` | notRequired |
 | `requiredAndroidSafetyNetAppsVerificationType` | enabled |
-| `appActionIfAndroidSafetyNetAppsVerificationFailed` | block |
-| `customBrowserPackageId` |  |
-| `customBrowserDisplayName` |  |
-| `minimumRequiredCompanyPortalVersion` | — |
-| `minimumWarningCompanyPortalVersion` | — |
-| `minimumWipeCompanyPortalVersion` | — |
-| `keyboardsRestricted` | false |
-| `allowedAndroidDeviceModels` | — |
-| `appActionIfAndroidDeviceModelNotAllowed` | block |
-| `customDialerAppPackageId` |  |
-| `customDialerAppDisplayName` |  |
-| `biometricAuthenticationBlocked` | false |
+| `requiredAndroidSafetyNetDeviceAttestationType` | basicIntegrityAndDeviceCertification |
 | `requiredAndroidSafetyNetEvaluationType` | hardwareBacked |
-| `blockAfterCompanyPortalUpdateDeferralInDays` | 0 |
-| `warnAfterCompanyPortalUpdateDeferralInDays` | 0 |
-| `wipeAfterCompanyPortalUpdateDeferralInDays` | 0 |
-| `deviceLockRequired` | false |
-| `appActionIfDeviceLockNotSet` | block |
-| `connectToVpnOnLaunch` | false |
-| `appActionIfDevicePasscodeComplexityLessThanLow` | — |
-| `appActionIfDevicePasscodeComplexityLessThanMedium` | block |
+| `targetedAppManagementLevels` | unspecified |
+| `allowedAndroidDeviceManufacturers` | — |
+| `allowedOutboundClipboardSharingExceptionLength` | 0 |
+| `appActionIfAccountIsClockedOut` | — |
+| `appActionIfDeveloperOptionsEnabled` | — |
 | `appActionIfDevicePasscodeComplexityLessThanHigh` | — |
+| `appActionIfDevicePasscodeComplexityLessThanLow` | — |
+| `biometricAuthenticationBlocked` | false |
+| `blockAfterCompanyPortalUpdateDeferralInDays` | 0 |
+| `blockDataIngestionIntoOrganizationDocuments` | false |
+| `connectToVpnOnLaunch` | false |
+| `contactSyncBlocked` | false |
+| `customBrowserDisplayName` |  |
+| `customBrowserPackageId` |  |
+| `customDialerAppDisplayName` |  |
+| `customDialerAppPackageId` |  |
+| `dataBackupBlocked` | true |
+| `deviceComplianceRequired` | true |
+| `deviceLockRequired` | false |
+| `disableAppEncryptionIfDeviceEncryptionIsEnabled` | false |
+| `disableAppPinIfDevicePinIsSet` | false |
+| `encryptAppData` | true |
+| `fingerprintAndBiometricEnabled` | true |
+| `fingerprintBlocked` | false |
+| `gracePeriodToBlockAppsDuringOffClockHours` | — |
+| `keyboardsRestricted` | false |
+| `managedBrowserToOpenLinksRequired` | true |
+| `maximumPinRetries` | 5 |
+| `maximumRequiredOsVersion` | — |
+| `maximumWarningOsVersion` | — |
+| `maximumWipeOsVersion` | — |
+| `messagingRedirectAppDisplayName` |  |
+| `messagingRedirectAppPackageId` |  |
+| `minimumPinLength` | 6 |
+| `minimumRequiredAppVersion` | — |
+| `minimumRequiredCompanyPortalVersion` | — |
+| `minimumRequiredOsVersion` | — |
+| `minimumRequiredPatchVersion` | — |
+| `minimumWarningAppVersion` | — |
+| `minimumWarningCompanyPortalVersion` | — |
+| `minimumWarningOsVersion` | 16.0 |
+| `minimumWarningPatchVersion` | 2026-03-01 |
+| `minimumWipeAppVersion` | — |
+| `minimumWipeCompanyPortalVersion` | — |
+| `minimumWipeOsVersion` | — |
+| `minimumWipePatchVersion` | — |
+| `mobileThreatDefensePartnerPriority` | — |
+| `organizationalCredentialsRequired` | false |
+| `pinRequired` | true |
+| `previousPinBlockCount` | 5 |
+| `printBlocked` | true |
 | `requireClass3Biometrics` | true |
 | `requirePinAfterBiometricChange` | true |
-| `fingerprintAndBiometricEnabled` | — |
-| `exemptedAppPackages` | — |
-| `approvedKeyboards` | — |
+| `saveAsBlocked` | true |
+| `screenCaptureBlocked` | true |
+| `simplePinBlocked` | true |
+| `warnAfterCompanyPortalUpdateDeferralInDays` | 0 |
+| `wipeAfterCompanyPortalUpdateDeferralInDays` | 0 |
 
 ---
 

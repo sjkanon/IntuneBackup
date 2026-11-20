@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Administrator Protection
 
-Laat beheerders standaard zonder verhoogde rechten werken en per handeling om toestemming vragen. Windows 11 24H2 en hoger.
+Houdt UAC op de klassieke Admin Approval Mode, zodat Administrator Protection het LAPS-account niet breekt, en legt vast hoe de prompt zich gedraagt zodra Administrator Protection weer aan mag. Windows 11 24H2 en hoger.
 
 | | |
 |---|---|
@@ -12,10 +12,10 @@ Laat beheerders standaard zonder verhoogde rechten werken en per handeling om to
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection |
+| Bron | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Administrator Protection |
 | Bestand | [`Baseline_WIN_D_Administrator_Protection.json`](Baseline_WIN_D_Administrator_Protection.json) |
 
-> Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.
+> Sinds november 2026 (OIB v4.0.1, issue #264) staat Type of Admin Approval Mode op 1 (Legacy) in plaats van 2 (Administrator protection). Sinds de beveiligingsupdate van oktober 2026 is Administrator Protection echt actief, en dat geeft problemen met LAPS — Microsoft noemt het zelf onder Troubleshooting op Learn. Deze baseline beheert het lokale beheerdersaccount met LAPS (wlapsadmin), dus LAPS wint. Weer naar 2 zodra Microsoft het LAPS-probleem oplost; volg OIB #264. Windows 11 24H2 en hoger; op oudere builds doet de instelling niets.
 
 ## Normen
 
@@ -36,7 +36,7 @@ instelling op de getoonde waarde staat.
 | Instelling | Waarde |
 |---|---|
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministratorprotection` | 1 |
-| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 2 |
+| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 1 |
 
 ---
 

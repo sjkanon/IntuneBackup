@@ -5,7 +5,7 @@
 `IntuneTemplate/` is the source: the agreed Intune policies in CIPP template format (a Table
 Storage row with a nested `JSON`/`RAWJson` string). Since August 2026 the content comes
 largely from [OpenIntuneBaseline](https://github.com/SkipToTheEndpoint/OpenIntuneBaseline)
-(Windows v4.0, macOS v1.0, BYOD), supplemented with what this baseline covers on top of that. Windows v4.0 was
+(Windows v4.0.1, macOS v1.0, BYOD v2.0), supplemented with what this baseline covers on top of that. Windows v4.0 was
 adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#round-oib-windows-v40-14-september-2026).
 
 213 policies across four platforms:
@@ -19,7 +19,7 @@ adopted before the official release — see [`ANALYSE.md`](docs/ANALYSE.en.md#ro
 
 ```mermaid
 flowchart LR
-  OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"]
+  OIB["OpenIntuneBaseline<br/>Win v4.0.1 · macOS v1.0 · BYOD v2.0"]
   T["<b>IntuneTemplate/</b><br/>213 policies<br/><i>the source</i>"]
   EX["export/NativeImport/<br/>IntuneBackupAndRestore/"]
   TENANT[("Intune tenant")]

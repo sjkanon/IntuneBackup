@@ -12,10 +12,10 @@ Laat .js-, .vbs- en .hta-bestanden openen in Kladblok in plaats van in de script
 | Scope | Device (D) — toewijzen aan apparaatgroepen |
 | Type | Settings Catalog |
 | Toewijzing | — |
-| Bron | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
+| Bron | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Script File Associations |
 | Bestand | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 
-> Opent .js/.vbs/.hta met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit.
+> Opent .js/.vbs/.hta (en .bat, .cmd en andere scripthost-extensies) met Kladblok in plaats van de scripthost — dubbelklikken op een bijlage voert dan niets uit. Bewust zonder .ps1 en .psm1 (override): OIB v4.0.1 waarschuwt dat die twee PowerShell-scripts breken die Intune in gebruikerscontext draait, en deze baseline heeft er zelf een (Mount-AzureFilesDrive.ps1). PowerShell voert een .ps1 bij dubbelklikken standaard toch al niet uit, dus de winst van die twee was klein.
 
 ## Normen
 

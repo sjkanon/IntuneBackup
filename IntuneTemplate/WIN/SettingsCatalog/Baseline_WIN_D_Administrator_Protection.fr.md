@@ -4,7 +4,7 @@
 
 # [Baseline] - WIN - D - Administrator Protection
 
-Fait travailler les administrateurs sans droits élevés par défaut et leur fait demander l'autorisation pour chaque action. Windows 11 24H2 et versions ultérieures.
+Maintient l'UAC sur le mode d'approbation administrateur classique, afin qu'Administrator Protection ne casse pas le compte LAPS, et fixe le comportement de l'invite dès qu'Administrator Protection pourra être réactivé. Windows 11 24H2 et versions ultérieures.
 
 | | |
 |---|---|
@@ -12,10 +12,10 @@ Fait travailler les administrateurs sans droits élevés par défaut et leur fai
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Administrator Protection |
+| Source | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Administrator Protection |
 | Fichier | [`Baseline_WIN_D_Administrator_Protection.json`](Baseline_WIN_D_Administrator_Protection.json) |
 
-> Windows 11 24H2 et ultérieur ; sur les builds plus anciens, le paramètre n'a aucun effet.
+> Depuis novembre 2026 (OIB v4.0.1, issue #264), Type of Admin Approval Mode est sur 1 (Legacy) au lieu de 2 (Administrator protection). Depuis la mise à jour de sécurité d'octobre 2026, Administrator Protection est réellement actif, ce qui pose des problèmes avec LAPS — Microsoft le mentionne lui-même sous Troubleshooting sur Learn. Cette baseline gère le compte administrateur local avec LAPS (wlapsadmin), donc LAPS l'emporte. Revenir à 2 dès que Microsoft résout le problème LAPS ; suivre OIB #264. Windows 11 24H2 et versions ultérieures ; sur les builds plus anciens, le paramètre n'a aucun effet.
 
 ## Normes
 
@@ -36,7 +36,7 @@ paramètre parent a la valeur indiquée.
 | Paramètre | Valeur |
 |---|---|
 | `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_behavioroftheelevationpromptforadministratorprotection` | 1 |
-| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 2 |
+| `device_vendor_msft_policy_config_localpoliciessecurityoptions_useraccountcontrol_typeofadminapprovalmode` | 1 |
 
 ---
 

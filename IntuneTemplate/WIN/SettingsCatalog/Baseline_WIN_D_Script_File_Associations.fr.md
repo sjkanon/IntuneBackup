@@ -12,10 +12,10 @@ Fait ouvrir les fichiers .js, .vbs et .hta dans le Bloc-notes au lieu de l'hôte
 | Scope | Device (D) — affecter à des groupes d'appareils |
 | Type | Settings Catalog |
 | Affectation | — |
-| Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
+| Source | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Script File Associations |
 | Fichier | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 
-> Ouvre les fichiers .js/.vbs/.hta avec le Bloc-notes au lieu de l'hôte de script — double-cliquer sur une pièce jointe n'exécute alors rien.
+> Ouvre les fichiers .js/.vbs/.hta (ainsi que .bat, .cmd et d'autres extensions de l'hôte de script) dans le Bloc-notes au lieu de l'hôte de script — un double-clic sur une pièce jointe n'exécute alors rien. Volontairement sans .ps1 ni .psm1 (override) : OIB v4.0.1 avertit que ces deux extensions cassent les scripts PowerShell qu'Intune exécute dans le contexte utilisateur, et cette baseline en contient un (Mount-AzureFilesDrive.ps1). PowerShell n'exécute de toute façon pas un .ps1 par double-clic par défaut, donc le gain de ces deux extensions était faible.
 
 ## Normes
 

@@ -23,7 +23,7 @@ généré, quels systèmes le lisent et comment il arrive dans un tenant. Pour l
 
 ```mermaid
 flowchart LR
-  OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"] -->|import-oib.js| T
+  OIB["OpenIntuneBaseline<br/>Win v4.0.1 · macOS v1.0 · BYOD v2.0"] -->|import-oib.js| T
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Sauvegarde du tenant<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 

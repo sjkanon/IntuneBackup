@@ -23,7 +23,7 @@ from it, which systems read it and how it ends up in a tenant. For the *what* pe
 
 ```mermaid
 flowchart LR
-  OIB["OpenIntuneBaseline<br/>Win v4.0 · macOS v1.0 · BYOD"] -->|import-oib.js| T
+  OIB["OpenIntuneBaseline<br/>Win v4.0.1 · macOS v1.0 · BYOD v2.0"] -->|import-oib.js| T
   IA["IntuneAdmin<br/>IntuneBaselines"] -->|import-intuneadmin.js| T
   BK["Tenant backup<br/>IntuneBackupAndRestore"] -->|import-intunebackup.js| T
 

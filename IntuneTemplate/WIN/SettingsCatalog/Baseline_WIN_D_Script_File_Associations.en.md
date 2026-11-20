@@ -12,10 +12,10 @@ Makes .js, .vbs and .hta files open in Notepad instead of the script host, so th
 | Scope | Device (D) — assign to device groups |
 | Type | Settings Catalog |
 | Assignment | — |
-| Source | OpenIntuneBaseline Windows v4.0 — SC - Device Security - D - Script File Associations |
+| Source | OpenIntuneBaseline Windows v4.0.1 — SC - Device Security - D - Script File Associations |
 | File | [`Baseline_WIN_D_Script_File_Associations.json`](Baseline_WIN_D_Script_File_Associations.json) |
 
-> Opens .js/.vbs/.hta with Notepad instead of the script host — double-clicking an attachment then executes nothing.
+> Opens .js/.vbs/.hta (and .bat, .cmd and other script host extensions) in Notepad instead of the script host — double-clicking an attachment then runs nothing. Deliberately without .ps1 and .psm1 (override): OIB v4.0.1 warns that those two break PowerShell scripts that Intune runs in user context, and this baseline has one itself (Mount-AzureFilesDrive.ps1). PowerShell does not run a .ps1 on double-click by default anyway, so the gain from those two was small.
 
 ## Standards
 
