@@ -16,12 +16,12 @@ assignment and the per-device status of every policy named below.
 
 | Status | Meaning |
 |---|---|
-| ● Covered (phase 1) | at least one policy in phase 1 enforces or verifies the measure |
-| ◐ Pilot, waiting or dedicated group only | the policy exists, but is in phase 2, 3 or 4: not yet on all devices |
+| ● Covered (phase 1) | at least one policy in phase 1 or an active CA policy enforces or verifies the measure |
+| ◐ Pilot, waiting or dedicated group only | the policy exists, but is in phase 2, 3 or 4 (or in report-only): not yet on all devices |
 | ▢ Organisational | cannot be implemented with endpoint or identity policy: process, people, physical or another technical domain |
 | ○ No technical measure in the baseline | can be implemented technically, but this baseline does not (or only with an alternative in phase 5) |
 
-> **Conditional Access is deliberately not included** (`--no-ca`). MFA (NIS2 (j)) and access conditions rely largely on CA; the accountability for that is in the CA repo.
+Conditional Access is included from `../CA-Policies/controls/ca-controls.json` (46 policies).
 ## Contents
 
 1. [Summary](#summary)
@@ -36,7 +36,7 @@ assignment and the per-device status of every policy named below.
 
 ## Summary
 
-### Policies per phase — 219 Intune policies
+### Policies per phase — 220 Intune policies and 46 CA policies
 
 Only phase 1 is assigned to all devices or users and counts as enforced. The rest is
 deliberately not deployed yet; the reason per policy is in [Organisational decisions and residual risks](#organisational-decisions-and-residual-risks).
@@ -46,12 +46,13 @@ deliberately not deployed yet; the reason per policy is in [Organisational decis
 | 1 — Now | 87 | 19 | 1 | 1 | **108** |
 | 2 — Pilot | 31 | 9 | – | 2 | **42** |
 | 3 — Awaiting prerequisite | 6 | 3 | 8 | 10 | **27** |
-| 4 — Dedicated group | 16 | 4 | 4 | 1 | **25** |
+| 4 — Dedicated group | 17 | 4 | 4 | 1 | **26** |
 | 5 — Do not deploy | 14 | 2 | 1 | – | **17** |
-| **Total** | **154** | **37** | **14** | **14** | **219** |
+| **Total** | **155** | **37** | **14** | **14** | **220** |
 
 Assigned according to `_assignments.json`: 108 (should equal phase 1: 108).
 
+Conditional Access: 26 active, 9 report-only, 11 off or unknown.
 
 ### ISO/IEC 27001:2022 Annex A — 93 controls
 
@@ -59,10 +60,10 @@ Columns: whether, according to the vocabulary, the control can be implemented wi
 
 | Status | Technical (10) | Partial (37) | Organisational (46) | Total |
 |---|---:|---:|---:|---:|
-| ● Covered (phase 1) | 10 | 22 | 0 | **32** |
+| ● Covered (phase 1) | 10 | 26 | 0 | **36** |
 | ◐ Pilot, waiting or dedicated group only | 0 | 3 | 1 | **4** |
 | ▢ Organisational | 0 | 0 | 45 | **45** |
-| ○ No technical measure in the baseline | 0 | 12 | 0 | **12** |
+| ○ No technical measure in the baseline | 0 | 8 | 0 | **8** |
 
 ### NIS2 art. 21(2)
 
@@ -70,27 +71,27 @@ Number of policies that implement the point technically. No point is done with t
 
 | Point | Intune phase 1 | CA active | Pilot, waiting, dedicated group |
 |---|---:|---:|---:|
-| [(a)](#art-212a-policies-on-risk-analysis-and-information-system-security) policies on risk analysis and information system security | 0 | n/a | 0 |
-| [(b)](#art-212b-incident-handling) incident handling | 8 | n/a | 6 |
-| [(c)](#art-212c-business-continuity-and-crisis-management) business continuity and crisis management | 7 | n/a | 4 |
-| [(d)](#art-212d-supply-chain-security) supply chain security | 2 | n/a | 5 |
-| [(e)](#art-212e-security-in-network-and-information-systems-acquisition-development-and-maintenance-including-vulnerability-handling) security in network and information systems acquisition, development and maintenance, including vulnerability handling | 52 | n/a | 38 |
-| [(f)](#art-212f-assessing-the-effectiveness) assessing the effectiveness | 13 | n/a | 2 |
-| [(g)](#art-212g-basic-cyber-hygiene-practices-and-cybersecurity-training) basic cyber hygiene practices and cybersecurity training | 1 | n/a | 2 |
-| [(h)](#art-212h-cryptography-and-encryption) cryptography and encryption | 9 | n/a | 7 |
-| [(i)](#art-212i-human-resources-security-access-control-policies-and-asset-management) human resources security, access control policies and asset management | 23 | n/a | 44 |
-| [(j)](#art-212j-multi-factor-authentication-and-secured-communications) multi-factor authentication and secured communications | 5 | n/a | 8 |
+| [(a)](#art-212a-policies-on-risk-analysis-and-information-system-security) policies on risk analysis and information system security | 0 | 0 | 0 |
+| [(b)](#art-212b-incident-handling) incident handling | 8 | 7 | 7 |
+| [(c)](#art-212c-business-continuity-and-crisis-management) business continuity and crisis management | 7 | 0 | 4 |
+| [(d)](#art-212d-supply-chain-security) supply chain security | 2 | 1 | 5 |
+| [(e)](#art-212e-security-in-network-and-information-systems-acquisition-development-and-maintenance-including-vulnerability-handling) security in network and information systems acquisition, development and maintenance, including vulnerability handling | 52 | 0 | 38 |
+| [(f)](#art-212f-assessing-the-effectiveness) assessing the effectiveness | 13 | 0 | 2 |
+| [(g)](#art-212g-basic-cyber-hygiene-practices-and-cybersecurity-training) basic cyber hygiene practices and cybersecurity training | 1 | 2 | 3 |
+| [(h)](#art-212h-cryptography-and-encryption) cryptography and encryption | 9 | 1 | 7 |
+| [(i)](#art-212i-human-resources-security-access-control-policies-and-asset-management) human resources security, access control policies and asset management | 23 | 18 | 51 |
+| [(j)](#art-212j-multi-factor-authentication-and-secured-communications) multi-factor authentication and secured communications | 5 | 12 | 13 |
 
 ### CIS Controls v8.1 and NIST CSF 2.0
 
-CIS safeguards that can be implemented technically (process, documentation and training safeguards not counted): **IG1 16 of 36** covered, **IG1+IG2 37 of 94**, **IG1–IG3 38 of 111**.
+CIS safeguards that can be implemented technically (process, documentation and training safeguards not counted): **IG1 22 of 36** covered, **IG1+IG2 44 of 94**, **IG1–IG3 47 of 111**.
 
 | NIST CSF 2.0 function | Covered | Prepared only | Relevant subcategories |
 |---|---:|---:|---:|
 | GV Govern | 0 | 0 | 8 |
-| ID Identify | 0 | 2 | 7 |
-| PR Protect | 15 | 0 | 18 |
-| DE Detect | 2 | 1 | 6 |
+| ID Identify | 1 | 1 | 7 |
+| PR Protect | 16 | 0 | 18 |
+| DE Detect | 3 | 1 | 6 |
 | RS Respond | 1 | 0 | 7 |
 | RC Recover | 1 | 0 | 5 |
 
@@ -109,25 +110,25 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | **A.5.4** Management responsibilities | organisational | ▢ Organisational | – | – | Management demonstrably drives compliance (NIS2 art. 20: management bodies approve the measures and follow training). |
 | **A.5.5** Contact with authorities | organisational | ▢ Organisational | – | – | Document points of contact with the CSIRT/NCSC, the supervisory authority and the data protection authority (AP), including reporting deadlines. |
 | **A.5.6** Contact with special interest groups | organisational | ▢ Organisational | – | – | Organise participation in ISACs, sector consultations and supplier advisories. |
-| **A.5.7** Threat intelligence | partial | ○ No technical measure in the baseline | – | – | Have threat intelligence (Defender, Entra ID Protection, NCSC) assessed and translated into adjustments to the baseline. |
+| [**A.5.7** Threat intelligence](#a57-threat-intelligence) | partial | ● Covered (phase 1) | 1 | – | Have threat intelligence (Defender, Entra ID Protection, NCSC) assessed and translated into adjustments to the baseline. |
 | **A.5.8** Information security in project management | organisational | ▢ Organisational | – | – | Include security requirements in projects, for example when rolling out new devices or platforms. |
-| [**A.5.9** Inventory of information and other associated assets](#a59-inventory-of-information-and-other-associated-assets) | partial | ◐ Pilot, waiting or dedicated group only | – | 3 | Intune provides the device inventory; ownership, the information inventory and periodic checks for completeness are organisational. |
+| [**A.5.9** Inventory of information and other associated assets](#a59-inventory-of-information-and-other-associated-assets) | partial | ◐ Pilot, waiting or dedicated group only | – | 4 | Intune provides the device inventory; ownership, the information inventory and periodic checks for completeness are organisational. |
 | [**A.5.10** Acceptable use of information and other associated assets](#a510-acceptable-use-of-information-and-other-associated-assets) | partial | ● Covered (phase 1) | 3 | 11 | Define and communicate rules of use (including AI and private use); technology enforces only part of them. |
 | **A.5.11** Return of assets | partial | ○ No technical measure in the baseline | – | – | Offboarding process: returning devices, retire/wipe in Intune, blocking the account. |
 | **A.5.12** Classification of information | organisational | ▢ Organisational | – | – | Define a classification scheme; technical labels (Purview) are outside the scope of this baseline. |
 | **A.5.13** Labelling of information | organisational | ▢ Organisational | – | – | Labelling procedure and tools (Purview sensitivity labels) — outside the scope of this baseline. |
-| [**A.5.14** Information transfer](#a514-information-transfer) | partial | ● Covered (phase 1) | 1 | 1 | Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. |
-| [**A.5.15** Access control](#a515-access-control) | technical | ● Covered (phase 1) | 3 | 12 | Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. |
-| [**A.5.16** Identity management](#a516-identity-management) | partial | ● Covered (phase 1) | 2 | 1 | Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. |
-| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 13 | 22 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
-| **A.5.18** Access rights | partial | ○ No technical measure in the baseline | – | – | Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. |
+| [**A.5.14** Information transfer](#a514-information-transfer) | partial | ● Covered (phase 1) | 1 | 2 | Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. |
+| [**A.5.15** Access control](#a515-access-control) | technical | ● Covered (phase 1) | 15 | 25 | Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. |
+| [**A.5.16** Identity management](#a516-identity-management) | partial | ● Covered (phase 1) | 9 | 3 | Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. |
+| [**A.5.17** Authentication information](#a517-authentication-information) | technical | ● Covered (phase 1) | 22 | 26 | Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. |
+| [**A.5.18** Access rights](#a518-access-rights) | partial | ● Covered (phase 1) | 3 | 1 | Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. |
 | [**A.5.19** Information security in supplier relationships](#a519-information-security-in-supplier-relationships) | organisational | ◐ Pilot, waiting or dedicated group only | – | 2 | Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. |
 | **A.5.20** Addressing information security within supplier agreements | organisational | ▢ Organisational | – | – | Include security requirements, data processing agreements and audit rights in contracts. |
 | **A.5.21** Managing information security in the ICT supply chain | organisational | ▢ Organisational | – | – | Requirements for ICT products and services in the chain; assess the provenance of software and updates. |
 | **A.5.22** Monitoring, review and change management of supplier services | organisational | ▢ Organisational | – | – | Track changes at Microsoft/suppliers (Message Center, roadmaps) and review them periodically. |
-| **A.5.23** Information security for use of cloud services | partial | ○ No technical measure in the baseline | – | – | Process for acquiring, using and exiting cloud services; CA and tenant restrictions enforce part of it. |
+| [**A.5.23** Information security for use of cloud services](#a523-information-security-for-use-of-cloud-services) | partial | ● Covered (phase 1) | 2 | 1 | Process for acquiring, using and exiting cloud services; CA and tenant restrictions enforce part of it. |
 | **A.5.24** Information security incident management planning and preparation | organisational | ▢ Organisational | – | – | Incident response plan with roles, playbooks (e.g. isolate device, revoke account) and notification obligation (NIS2 art. 23). |
-| **A.5.25** Assessment and decision on information security events | partial | ○ No technical measure in the baseline | – | – | Triage process and criteria for 'incident'; Defender provides the signals. |
+| [**A.5.25** Assessment and decision on information security events](#a525-assessment-and-decision-on-information-security-events) | partial | ● Covered (phase 1) | 1 | 1 | Triage process and criteria for 'incident'; Defender provides the signals. |
 | **A.5.26** Response to information security incidents | partial | ○ No technical measure in the baseline | – | – | Executing the response plan; technical actions (isolate, wipe, revoke sessions) must be rehearsed. |
 | **A.5.27** Learning from information security incidents | organisational | ▢ Organisational | – | – | Post-incident reviews and their translation into baseline changes. |
 | **A.5.28** Collection of evidence | partial | ○ No technical measure in the baseline | – | – | Forensic procedure and retention periods; logging and EDR provide the material, safeguarding the chain of custody is organisational. |
@@ -151,7 +152,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | **A.6.4** Disciplinary process | organisational | ▢ Organisational | – | – | Formal procedure for policy violations. |
 | **A.6.5** Responsibilities after termination or change of employment | partial | ○ No technical measure in the baseline | – | – | Offboarding process: revoke access, return the device or wipe it selectively, confidentiality after departure. |
 | **A.6.6** Confidentiality or non-disclosure agreements | organisational | ▢ Organisational | – | – | Draw up non-disclosure agreements and have them signed. |
-| [**A.6.7** Remote working](#a67-remote-working) | partial | ● Covered (phase 1) | 1 | 2 | Remote working policy (location, screens, networks); technology protects the device and the access. |
+| [**A.6.7** Remote working](#a67-remote-working) | partial | ● Covered (phase 1) | 2 | 5 | Remote working policy (location, screens, networks); technology protects the device and the access. |
 | **A.6.8** Information security event reporting | organisational | ▢ Organisational | – | – | Set up a reporting channel for employees and make it known. |
 
 ### 7 Physical controls
@@ -164,7 +165,7 @@ control can be implemented with endpoint or identity policy; **Status** states w
 | **A.7.4** Physical security monitoring | organisational | ▢ Organisational | – | – | Outside the endpoint/identity domain: camera surveillance, alarm follow-up. |
 | **A.7.5** Protecting against physical and environmental threats | organisational | ▢ Organisational | – | – | Outside the endpoint/identity domain. |
 | **A.7.6** Working in secure areas | organisational | ▢ Organisational | – | – | Outside the endpoint/identity domain. |
-| [**A.7.7** Clear desk and clear screen](#a77-clear-desk-and-clear-screen) | technical | ● Covered (phase 1) | 5 | 5 | Define clear-desk rules for paper and media; clear screen is enforced technically. |
+| [**A.7.7** Clear desk and clear screen](#a77-clear-desk-and-clear-screen) | technical | ● Covered (phase 1) | 7 | 6 | Define clear-desk rules for paper and media; clear screen is enforced technically. |
 | **A.7.8** Equipment siting and protection | organisational | ▢ Organisational | – | – | Outside the endpoint/identity domain. |
 | [**A.7.9** Security of assets off-premises](#a79-security-of-assets-off-premises) | partial | ● Covered (phase 1) | 2 | 5 | Rules for taking equipment off-site, leaving it unattended and reporting loss; encryption and remote wipe are technical. |
 | [**A.7.10** Storage media](#a710-storage-media) | partial | ● Covered (phase 1) | 1 | 3 | Policy for removable media and secure destruction. |
@@ -177,30 +178,30 @@ control can be implemented with endpoint or identity policy; **Status** states w
 
 | Control | Implementable | Status | Phase 1 | Other | What remains needed organisationally |
 |---|---|---|---:|---:|---|
-| [**A.8.1** User endpoint devices](#a81-user-endpoint-devices) | technical | ● Covered (phase 1) | 20 | 37 | Policy for corporate and personal devices (BYOD), registration and rules of use. |
-| [**A.8.2** Privileged access rights](#a82-privileged-access-rights) | technical | ● Covered (phase 1) | 6 | 3 | Process for granting and periodically reviewing administrative rights (PIM, access reviews). |
-| [**A.8.3** Information access restriction](#a83-information-access-restriction) | partial | ● Covered (phase 1) | 1 | 1 | Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. |
+| [**A.8.1** User endpoint devices](#a81-user-endpoint-devices) | technical | ● Covered (phase 1) | 25 | 43 | Policy for corporate and personal devices (BYOD), registration and rules of use. |
+| [**A.8.2** Privileged access rights](#a82-privileged-access-rights) | technical | ● Covered (phase 1) | 11 | 6 | Process for granting and periodically reviewing administrative rights (PIM, access reviews). |
+| [**A.8.3** Information access restriction](#a83-information-access-restriction) | partial | ● Covered (phase 1) | 3 | 3 | Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. |
 | **A.8.4** Access to source code | organisational | ▢ Organisational | – | – | Only with in-house software development: manage access to repositories and development tools. |
-| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 13 | 26 | Establish an authentication policy (which methods, exceptions, break-glass). |
+| [**A.8.5** Secure authentication](#a85-secure-authentication) | technical | ● Covered (phase 1) | 23 | 31 | Establish an authentication policy (which methods, exceptions, break-glass). |
 | [**A.8.6** Capacity management](#a86-capacity-management) | partial | ● Covered (phase 1) | 4 | – | Capacity planning for network, licences and storage. |
 | [**A.8.7** Protection against malware](#a87-protection-against-malware) | technical | ● Covered (phase 1) | 27 | 19 | User awareness and follow-up of detections (the standard names both explicitly). |
 | [**A.8.8** Management of technical vulnerabilities](#a88-management-of-technical-vulnerabilities) | partial | ● Covered (phase 1) | 12 | 13 | Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. |
-| [**A.8.9** Configuration management](#a89-configuration-management) | partial | ● Covered (phase 1) | 21 | 12 | This repo is the recorded configuration; reviewing changes (PR) and following up drift in the tenant remains a process. |
+| [**A.8.9** Configuration management](#a89-configuration-management) | partial | ● Covered (phase 1) | 21 | 13 | This repo is the recorded configuration; reviewing changes (PR) and following up drift in the tenant remains a process. |
 | **A.8.10** Information deletion | partial | ○ No technical measure in the baseline | – | – | Retention and deletion policy; selective wipe and wipe are technical tools. |
 | [**A.8.11** Data masking](#a811-data-masking) | partial | ◐ Pilot, waiting or dedicated group only | – | 1 | Policy on when data is masked or pseudonymised — largely at application level. |
-| [**A.8.12** Data leakage prevention](#a812-data-leakage-prevention) | partial | ● Covered (phase 1) | 14 | 21 | DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. |
+| [**A.8.12** Data leakage prevention](#a812-data-leakage-prevention) | partial | ● Covered (phase 1) | 14 | 23 | DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. |
 | [**A.8.13** Information backup](#a813-information-backup) | partial | ● Covered (phase 1) | 3 | 2 | Backup policy for M365 data and periodic restore tests; OneDrive synchronisation is not a full backup. |
 | **A.8.14** Redundancy of information processing facilities | organisational | ▢ Organisational | – | – | Redundancy of services and infrastructure — outside the endpoint/identity domain. |
-| [**A.8.15** Logging](#a815-logging) | partial | ● Covered (phase 1) | 6 | 2 | Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. |
-| [**A.8.16** Monitoring activities](#a816-monitoring-activities) | partial | ● Covered (phase 1) | 4 | 8 | 24/7 or office-hours follow-up of alerts, with escalation criteria. |
+| [**A.8.15** Logging](#a815-logging) | partial | ● Covered (phase 1) | 7 | 2 | Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. |
+| [**A.8.16** Monitoring activities](#a816-monitoring-activities) | partial | ● Covered (phase 1) | 11 | 10 | 24/7 or office-hours follow-up of alerts, with escalation criteria. |
 | [**A.8.17** Clock synchronization](#a817-clock-synchronization) | technical | ● Covered (phase 1) | 2 | 1 | Define an approved time source. |
 | [**A.8.18** Use of privileged utility programs](#a818-use-of-privileged-utility-programs) | partial | ● Covered (phase 1) | 1 | 3 | Register of permitted administration and remote support tools and who may use them. |
 | [**A.8.19** Installation of software on operational systems](#a819-installation-of-software-on-operational-systems) | technical | ● Covered (phase 1) | 10 | 11 | Process for approving and offering software (Company Portal catalogue). |
-| [**A.8.20** Networks security](#a820-networks-security) | partial | ● Covered (phase 1) | 14 | 14 | Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. |
+| [**A.8.20** Networks security](#a820-networks-security) | partial | ● Covered (phase 1) | 15 | 16 | Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. |
 | [**A.8.21** Security of network services](#a821-security-of-network-services) | partial | ● Covered (phase 1) | 2 | 5 | Define and monitor requirements for network services and providers. |
 | **A.8.22** Segregation of networks | organisational | ▢ Organisational | – | – | Network segmentation is infrastructure and cannot be set up through endpoint/identity policy. |
 | [**A.8.23** Web filtering](#a823-web-filtering) | technical | ● Covered (phase 1) | 3 | 5 | Define categories and exceptions (Defender Web Content Filtering in the Defender portal). |
-| [**A.8.24** Use of cryptography](#a824-use-of-cryptography) | partial | ● Covered (phase 1) | 10 | 9 | Cryptography policy and key management (who has access to recovery keys, rotation). |
+| [**A.8.24** Use of cryptography](#a824-use-of-cryptography) | partial | ● Covered (phase 1) | 11 | 9 | Cryptography policy and key management (who has access to recovery keys, rotation). |
 | **A.8.25** Secure development life cycle | organisational | ▢ Organisational | – | – | Only with in-house development. |
 | **A.8.26** Application security requirements | organisational | ▢ Organisational | – | – | Security requirements when developing or acquiring applications. |
 | **A.8.27** Secure system architecture and engineering principles | organisational | ▢ Organisational | – | – | Define architecture principles (zero trust). |
@@ -216,11 +217,16 @@ control can be implemented with endpoint or identity policy; **Status** states w
 
 All policies per control, with their phase. Phase 5 is an alternative that is not deployed and does not count towards the status.
 
+#### A.5.7 Threat intelligence
+
+- `CA - 1050 - BLOCK - HighRisk Countries` (CA, enabled)
+
 #### A.5.9 Inventory of information and other associated assets
 
 - [`WIN - D - Enrollment Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
+- [`WIN - D - Shared Device Name`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_Device_Name.en.md) (phase 4)
 
 #### A.5.10 Acceptable use of information and other associated assets
 
@@ -243,12 +249,30 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 - [`MAC - D - Restrictions`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
 - [`WIN - U - Microsoft Teams`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Teams.en.md) (phase 2)
+- `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled)
 
 #### A.5.15 Access control
 
+- `CA - 1010 - BLOCK - Legacy Authentication` (CA, enabled)
+- `CA - 1050 - BLOCK - HighRisk Countries` (CA, enabled)
+- `CA - 1090 - BLOCK - HighRisk SignIns` (CA, enabled)
+- `CA - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled)
+- `CA - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled)
+- `CA - 2050 - GRANT - MFA for All Users` (CA, enabled)
+- `CA - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled)
+- `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled)
+- `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups` (CA, enabled)
+- `CA - 3010 - SESSION - Admin Persistence` (CA, enabled)
+- `CA - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled)
+- `CA - 3070 - SESSION - Session Limits All Users` (CA, enabled)
 - [`MAC - D - Accounts and Login`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1)
 - [`WIN - D - Microsoft Accounts`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
 - [`WIN - D - User Rights`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_User_Rights.en.md) (phase 1)
+- `CA - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced)
+- `CA - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced)
+- `CA - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced)
+- `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign` (CA, enabledForReportingButNotEnforced)
+- `CA - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Access Control`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
 - [`WIN - D - Account Lockout`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Account_Lockout.en.md) (phase 2)
 - [`WIN - D - Enrollment Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enrollment_Hardening.en.md) (phase 2)
@@ -261,15 +285,41 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) (phase 4)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) (phase 4)
+- `CA - 1020 - BLOCK - Device Code Auth Flow` (CA, disabled)
+- `CA - 1030 - BLOCK - Unsupported Device Platforms` (CA, disabled)
+- `CA - 1040 - BLOCK - Countries not Allowed` (CA, disabled)
+- `CA - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` (CA, disabled)
+- `CA - 1070 - BLOCK - Explicitly Blocked Cloud Apps` (CA, disabled)
+- `CA - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled)
+- `CA - 1100 - BLOCK - HighRisk Users` (CA, disabled)
+- `CA - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled)
 
 #### A.5.16 Identity management
 
+- `CA - 1110 - BLOCK - Unlicensed Users` (CA, enabled)
+- `CA - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled)
+- `CA - 1150 - BLOCK - Risky Agent Identities` (CA, enabled)
+- `CA - 2080 - GRANT - MFA For Device Registration` (CA, enabled)
+- `CA - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled)
+- `CA - 2185 - GRANT - Register Security Info Passkey Rollout` (CA, enabled)
+- `CA - 3030 - SESSION - Register Security Info Requirements` (CA, enabled)
 - [`MAC - D - Platform SSO`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
 - [`WIN - D - Microsoft Accounts`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Accounts.en.md) (phase 1)
+- `CA - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced)
+- `CA - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 
 #### A.5.17 Authentication information
 
+- `CA - 2010 - GRANT - MediumRisk Signins` (CA, enabled)
+- `CA - 2020 - GRANT - MediumRisk Users` (CA, enabled)
+- `CA - 2050 - GRANT - MFA for All Users` (CA, enabled)
+- `CA - 2100 - GRANT - MFA For Admin Portals` (CA, enabled)
+- `CA - 2110 - GRANT - Token Protection` (CA, enabled)
+- `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled)
+- `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups` (CA, enabled)
+- `CA - 2185 - GRANT - Register Security Info Passkey Rollout` (CA, enabled)
+- `CA - 3030 - SESSION - Register Security Info Requirements` (CA, enabled)
 - [`MAC - D - Microsoft Edge Password Management`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Password_Management.en.md) (phase 1)
 - [`MAC - D - Platform SSO`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Platform_SSO.en.md) (phase 1)
 - [`MAC - U - Compliance Password`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
@@ -283,6 +333,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Windows LAPS`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_LAPS.en.md) (phase 1)
 - [`WIN - U - Microsoft Edge Password Management`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Password_Management.en.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
+- `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign` (CA, enabledForReportingButNotEnforced)
+- `CA - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced)
+- `CA - 2190 - GRANT - Windows Hello Passkeys` (CA, enabledForReportingButNotEnforced)
 - [`MAC - D - Passcode and Screen Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
 - [`MAC - D - Recovery Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Recovery_Lock.en.md) (phase 2)
 - [`WIN - D - Access Control`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Access_Control.en.md) (phase 2)
@@ -301,15 +354,34 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
 - [`WIN - D - Shared Devices Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.en.md) (phase 4)
 - [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
+- `CA - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled)
 - [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 5)
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Numeric.en.md) (phase 5)
 
+#### A.5.18 Access rights
+
+- `CA - 1110 - BLOCK - Unlicensed Users` (CA, enabled)
+- `CA - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled)
+- `CA - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled)
+- `CA - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled)
+
 #### A.5.19 Information security in supplier relationships
 
 - [`WIN - U - AI Usage Control Restricted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
 - [`WIN - U - AI Usage Control Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Permitted.en.md) (phase 5)
+
+#### A.5.23 Information security for use of cloud services
+
+- `CA - 1150 - BLOCK - Risky Agent Identities` (CA, enabled)
+- `CA - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled)
+- `CA - 1070 - BLOCK - Explicitly Blocked Cloud Apps` (CA, disabled)
+
+#### A.5.25 Assessment and decision on information security events
+
+- `CA - 1090 - BLOCK - HighRisk SignIns` (CA, enabled)
+- `CA - 1100 - BLOCK - HighRisk Users` (CA, disabled)
 
 #### A.5.29 Information security during disruption
 
@@ -349,17 +421,24 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.6.7 Remote working
 
+- `CA - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled)
 - [`WIN - D - AVD Session Host`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AVD_Session_Host.en.md) (phase 1)
+- `CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA` (CA, enabledForReportingButNotEnforced)
+- `CA - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) (phase 4)
 - [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) (phase 4)
+- `CA - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled)
 
 #### A.7.7 Clear desk and clear screen
 
+- `CA - 3010 - SESSION - Admin Persistence` (CA, enabled)
+- `CA - 3070 - SESSION - Session Limits All Users` (CA, enabled)
 - [`MAC - U - Compliance Password`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Password.en.md) (phase 1)
 - [`WIN - D - Device Lock`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Device_Lock.en.md) (phase 1)
 - [`WIN - D - Login and Lock Screen`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Login_and_Lock_Screen.en.md) (phase 1)
 - [`WIN - D - Power Management`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Power_Management.en.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
+- `CA - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced)
 - [`MAC - D - Passcode and Screen Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
 - [`MAC - D - Screensaver`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
 - [`AND - U - Corporate Device Security`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Device_Security.en.md) (phase 3)
@@ -385,6 +464,11 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.1 User endpoint devices
 
+- `CA - 2080 - GRANT - MFA For Device Registration` (CA, enabled)
+- `CA - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled)
+- `CA - 2130 - GRANT - Admins Compliant Device` (CA, enabled)
+- `CA - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled)
+- `CA - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled)
 - [`AND - U - App Protection`](../IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
 - [`IOS - U - App Protection`](../IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
 - [`MAC - D - Restrictions`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions.en.md) (phase 1)
@@ -405,6 +489,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - U - Compliance Secure Boot`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
 - [`WIN - U - Compliance TPM`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
 - [`WIN - U - Personal Data Encryption`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1)
+- `CA - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced)
+- `CA - 2190 - GRANT - Windows Hello Passkeys` (CA, enabledForReportingButNotEnforced)
+- `CA - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced)
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
 - [`MAC - D - FileVault`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
 - [`MAC - D - Passcode and Screen Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
@@ -437,6 +524,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) (phase 4)
 - [`WIN - D - Wireless Shared Devices`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
+- `CA - 1030 - BLOCK - Unsupported Device Platforms` (CA, disabled)
+- `CA - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled)
+- `CA - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled)
 - [`MAC - D - Apple Intelligence Permitted`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Apple_Intelligence_Permitted.en.md) (phase 5)
 - [`WIN - D - Windows AI Features Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Features_Permitted.en.md) (phase 5)
 - [`WIN - D - Windows AI Permitted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Permitted.en.md) (phase 5)
@@ -445,6 +535,11 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.2 Privileged access rights
 
+- `CA - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled)
+- `CA - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled)
+- `CA - 2100 - GRANT - MFA For Admin Portals` (CA, enabled)
+- `CA - 2130 - GRANT - Admins Compliant Device` (CA, enabled)
+- `CA - 3010 - SESSION - Admin Persistence` (CA, enabled)
 - [`WIN - D - Local Administrators`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Administrators.en.md) (phase 1)
 - [`WIN - D - Local Security Policies`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Local_Security_Policies.en.md) (phase 1)
 - [`WIN - D - Microsoft Store`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Store.en.md) (phase 1)
@@ -454,14 +549,31 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Administrator Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Administrator_Protection.en.md) (phase 2)
 - [`MAC - D - Enrollment Profile Administrator User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Administrator_User_Affinity.en.md) (phase 4)
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
+- `CA - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` (CA, disabled)
+- `CA - 1080 - BLOCK - Guest Access to Sensitive Apps` (CA, disabled)
+- `CA - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled)
 
 #### A.8.3 Information access restriction
 
+- `CA - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled)
+- `CA - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled)
 - [`AND - U - App Protection`](../IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
+- `CA - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced)
 - [`WIN - U - File Sharing Restrictions`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_File_Sharing_Restrictions.en.md) (phase 2)
+- `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled)
 
 #### A.8.5 Secure authentication
 
+- `CA - 1010 - BLOCK - Legacy Authentication` (CA, enabled)
+- `CA - 2010 - GRANT - MediumRisk Signins` (CA, enabled)
+- `CA - 2020 - GRANT - MediumRisk Users` (CA, enabled)
+- `CA - 2050 - GRANT - MFA for All Users` (CA, enabled)
+- `CA - 2080 - GRANT - MFA For Device Registration` (CA, enabled)
+- `CA - 2100 - GRANT - MFA For Admin Portals` (CA, enabled)
+- `CA - 2110 - GRANT - Token Protection` (CA, enabled)
+- `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled)
+- `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups` (CA, enabled)
+- `CA - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled)
 - [`AND - U - App Protection`](../IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
 - [`IOS - U - App Protection`](../IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
 - [`MAC - D - Accounts and Login`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Accounts_and_Login.en.md) (phase 1)
@@ -475,6 +587,9 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
 - [`WIN - D - Remote Desktop and RPC`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Remote_Desktop_and_RPC.en.md) (phase 1)
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
+- `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign` (CA, enabledForReportingButNotEnforced)
+- `CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA` (CA, enabledForReportingButNotEnforced)
+- `CA - 2190 - GRANT - Windows Hello Passkeys` (CA, enabledForReportingButNotEnforced)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
 - [`MAC - D - Passcode and Screen Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
 - [`MAC - D - Screensaver`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Screensaver.en.md) (phase 2)
@@ -497,6 +612,8 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
 - [`WIN - D - Shared Devices Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.en.md) (phase 4)
 - [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
+- `CA - 1020 - BLOCK - Device Code Auth Flow` (CA, disabled)
+- `CA - 2055 - GRANT - Phishing Resistant MFA for Admins` (CA, disabled)
 - [`WIN - D - Windows Hello for Business Multi User`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Multi_User.en.md) (phase 5)
 - [`WIN - D - Windows Hello Passkey PIN Complexity Numeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Passkey_PIN_Complexity_Numeric.en.md) (phase 5)
 - [`WIN - D - Windows Hello PIN Complexity Alphanumeric`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_PIN_Complexity_Alphanumeric.en.md) (phase 5)
@@ -618,6 +735,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`IOS - D - Restrictions Corporate`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
 - [`WIN - D - Shared Devices Office Web File Associations`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.en.md) (phase 4)
 - [`WIN - D - Shared Devices Start and Taskbar`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.en.md) (phase 4)
+- `CA - 2060 - GRANT - Mobile Apps and Desktop Clients` (CA, disabled)
 - [`WIN - D - Microsoft Edge Search Engine`](../IntuneTemplate/WIN/AdministrativeTemplates/Baseline_WIN_D_Microsoft_Edge_Search_Engine.en.md) (phase 5)
 - [`WIN - U - Microsoft Outlook Cached Mode Default`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) (phase 5)
 - [`WIN - U - Microsoft Outlook Cached Mode Off`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) (phase 5)
@@ -661,6 +779,8 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Shared Devices OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.en.md) (phase 4)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) (phase 4)
+- `CA - 2070 - GRANT - Mobile Device Access Requirements` (CA, disabled)
+- `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices` (CA, disabled)
 - [`IOS - D - Apple Intelligence Permitted`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Permitted.en.md) (phase 5)
 - [`MAC - D - External Storage Read Only`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_External_Storage_Read_Only.en.md) (phase 5)
 
@@ -674,6 +794,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.15 Logging
 
+- `CA - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled)
 - [`MAC - D - Time Server`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Time_Server.en.md) (phase 1)
 - [`WIN - D - Audit and Event Logging`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_and_Event_Logging.en.md) (phase 1)
 - [`WIN - D - Audit Policy Enforcement`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1)
@@ -685,10 +806,18 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.16 Monitoring activities
 
+- `CA - 1090 - BLOCK - HighRisk SignIns` (CA, enabled)
+- `CA - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled)
+- `CA - 1150 - BLOCK - Risky Agent Identities` (CA, enabled)
+- `CA - 2010 - GRANT - MediumRisk Signins` (CA, enabled)
+- `CA - 2020 - GRANT - MediumRisk Users` (CA, enabled)
+- `CA - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled)
+- `CA - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled)
 - [`MAC - D - Defender for Endpoint`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Defender_for_Endpoint.en.md) (phase 1)
 - [`WIN - D - Audit Policy Enforcement`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Audit_Policy_Enforcement.en.md) (phase 1)
 - [`WIN - D - Defender EDR Policy`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_EDR_Policy.en.md) (phase 1)
 - [`WIN - D - Logging`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logging.en.md) (phase 1)
+- `CA - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Security Log Monitoring`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2)
 - [`AND - U - Compliance Corporate Defender for Endpoint`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
 - [`AND - U - Compliance Defender for Endpoint`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
@@ -696,6 +825,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Windows Event Forwarding`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3)
 - [`WIN - U - Compliance Defender for Endpoint Risk`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
 - [`WIN - D - Defender ASR Policy Audit Mode`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_ASR_Policy_Audit_Mode.en.md) (phase 4)
+- `CA - 1100 - BLOCK - HighRisk Users` (CA, disabled)
 - [`WIN - D - Defender for Endpoint EDR`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_for_Endpoint_EDR.en.md) (phase 5)
 
 #### A.8.17 Clock synchronization
@@ -737,6 +867,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.20 Networks security
 
+- `CA - 1050 - BLOCK - HighRisk Countries` (CA, enabled)
 - [`MAC - D - Firewall and Gatekeeper`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Firewall_and_Gatekeeper.en.md) (phase 1)
 - [`MAC - D - Microsoft Edge Security`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Microsoft_Edge_Security.en.md) (phase 1)
 - [`MAC - U - Compliance Device Security`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
@@ -751,6 +882,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Windows Firewall Rules`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Firewall_Rules.en.md) (phase 1)
 - [`WIN - D - Wireless and Peripherals`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_and_Peripherals.en.md) (phase 1)
 - [`WIN - U - Compliance Firewall`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Firewall.en.md) (phase 1)
+- `CA - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Bluetooth Allowed Services`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Bluetooth_Allowed_Services.en.md) (phase 2)
 - [`WIN - D - Logon Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Logon_Hardening.en.md) (phase 2)
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
@@ -764,6 +896,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 - [`WIN - D - Wifi Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Wifi_Guest.en.md) (phase 3)
 - [`IOS - D - Restrictions Corporate`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Restrictions_Corporate.en.md) (phase 4)
 - [`WIN - D - Wireless Shared Devices`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
+- `CA - 1040 - BLOCK - Countries not Allowed` (CA, disabled)
 - [`WIN - D - Microsoft Edge DNS over HTTPS Secure`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Secure.en.md) (phase 5)
 
 #### A.8.21 Security of network services
@@ -789,6 +922,7 @@ All policies per control, with their phase. Phase 5 is an alternative that is no
 
 #### A.8.24 Use of cryptography
 
+- `CA - 2110 - GRANT - Token Protection` (CA, enabled)
 - [`AND - U - App Protection`](../IntuneTemplate/AND/AppProtection/Baseline_AND_U_App_Protection.en.md) (phase 1)
 - [`IOS - U - App Protection`](../IntuneTemplate/IOS/AppProtection/Baseline_IOS_U_App_Protection.en.md) (phase 1)
 - [`MAC - U - Compliance Device Security`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_Device_Security.en.md) (phase 1)
@@ -835,6 +969,10 @@ of the technical part, not a replacement for that assessment.
 
 - none
 
+**Conditional Access, active (0)**
+
+- none
+
 **Evidence route.** No technical measure in phase 1, so no technical evidence route either.
 
 **Needed organisationally**
@@ -861,8 +999,19 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Security Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Hardening.en.md) (phase 1)
 - [`WIN - D - Timezone`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Timezone.en.md) (phase 1)
 
-**Prepared — pilot, waiting or dedicated group (6)**
+**Conditional Access, active (7)**
 
+- `CA - 1090 - BLOCK - HighRisk SignIns` (CA, enabled)
+- `CA - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled)
+- `CA - 1150 - BLOCK - Risky Agent Identities` (CA, enabled)
+- `CA - 2010 - GRANT - MediumRisk Signins` (CA, enabled)
+- `CA - 2020 - GRANT - MediumRisk Users` (CA, enabled)
+- `CA - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled)
+- `CA - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled)
+
+**Prepared — pilot, waiting or dedicated group (7)**
+
+- `CA - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Security Log Monitoring`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Security_Log_Monitoring.en.md) (phase 2)
 - [`AND - U - Compliance Corporate Defender for Endpoint`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Corporate_Defender_for_Endpoint.en.md) (phase 3)
 - [`AND - U - Compliance Defender for Endpoint`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_U_Compliance_Defender_for_Endpoint.en.md) (phase 3)
@@ -870,7 +1019,7 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Windows Event Forwarding`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Event_Forwarding.en.md) (phase 3)
 - [`WIN - U - Compliance Defender for Endpoint Risk`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Defender_for_Endpoint_Risk.en.md) (phase 3)
 
-**Alternative, not deployed (1)**: `WIN - D - Defender for Endpoint EDR`
+**Alternative, not deployed (2)**: `CA - 1100 - BLOCK - HighRisk Users`, `WIN - D - Defender for Endpoint EDR`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -897,6 +1046,10 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Microsoft OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_OneDrive.en.md) (phase 1)
 - [`WIN - D - Settings Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Settings_Sync.en.md) (phase 1)
 - [`WIN - D - Storage Sense`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Storage_Sense.en.md) (phase 1)
+
+**Conditional Access, active (0)**
+
+- none
 
 **Prepared — pilot, waiting or dedicated group (4)**
 
@@ -925,6 +1078,10 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - AI Tooling`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_AI_Tooling.en.md) (phase 1)
 - [`WIN - D - Windows AI Restricted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_AI_Restricted.en.md) (phase 1)
 
+**Conditional Access, active (1)**
+
+- `CA - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled)
+
 **Prepared — pilot, waiting or dedicated group (5)**
 
 - [`AND - U - Corporate AI Restricted`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_AI_Restricted.en.md) (phase 2)
@@ -933,7 +1090,7 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - AI Usage Control Restricted`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_AI_Usage_Control_Restricted.en.md) (phase 2)
 - [`IOS - D - Apple Intelligence Restricted`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Apple_Intelligence_Restricted.en.md) (phase 3)
 
-**Alternative, not deployed (5)**: `IOS - D - Apple Intelligence Permitted`, `MAC - D - Apple Intelligence Permitted`, `WIN - D - Windows AI Features Permitted`, `WIN - D - Windows AI Permitted`, `WIN - U - AI Usage Control Permitted`
+**Alternative, not deployed (6)**: `CA - 1080 - BLOCK - Guest Access to Sensitive Apps`, `IOS - D - Apple Intelligence Permitted`, `MAC - D - Apple Intelligence Permitted`, `WIN - D - Windows AI Features Permitted`, `WIN - D - Windows AI Permitted`, `WIN - U - AI Usage Control Permitted`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1005,6 +1162,10 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - Microsoft Office Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Office_Security.en.md) (phase 1)
 - [`WIN - U - Microsoft Store`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Store.en.md) (phase 1)
 
+**Conditional Access, active (0)**
+
+- none
+
 **Prepared — pilot, waiting or dedicated group (38)**
 
 - [`MAC - D - Restrictions Hardening`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
@@ -1046,7 +1207,7 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Windows Update Ring 2 UAT`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Windows_Update_Ring_2_UAT.en.md) (phase 4)
 - [`WIN - D - Wireless Shared Devices`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Wireless_Shared_Devices.en.md) (phase 4)
 
-**Alternative, not deployed (1)**: `WIN - D - Defender AV Policy`
+**Alternative, not deployed (2)**: `CA - 2060 - GRANT - Mobile Apps and Desktop Clients`, `WIN - D - Defender AV Policy`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1079,6 +1240,10 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - Compliance Secure Boot`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_Secure_Boot.en.md) (phase 1)
 - [`WIN - U - Compliance TPM`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
 
+**Conditional Access, active (0)**
+
+- none
+
 **Prepared — pilot, waiting or dedicated group (2)**
 
 - [`MAC - U - Compliance OS Version`](../IntuneTemplate/MAC/CompliancePolicies/Baseline_MAC_U_Compliance_OS_Version.en.md) (phase 2)
@@ -1103,10 +1268,18 @@ of the technical part, not a replacement for that assessment.
 
 - [`WIN - D - Enhanced Phishing Protection`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Enhanced_Phishing_Protection.en.md) (phase 1)
 
-**Prepared — pilot, waiting or dedicated group (2)**
+**Conditional Access, active (2)**
 
+- `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled)
+- `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups` (CA, enabled)
+
+**Prepared — pilot, waiting or dedicated group (3)**
+
+- `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign` (CA, enabledForReportingButNotEnforced)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
 - [`MAC - D - Restrictions Hardening`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Restrictions_Hardening.en.md) (phase 2)
+
+**Alternative, not deployed (1)**: `CA - 1020 - BLOCK - Device Code Auth Flow`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1135,6 +1308,10 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - Compliance TPM`](../IntuneTemplate/WIN/CompliancePolicies/Baseline_WIN_U_Compliance_TPM.en.md) (phase 1)
 - [`WIN - U - Personal Data Encryption`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Personal_Data_Encryption.en.md) (phase 1)
 
+**Conditional Access, active (1)**
+
+- `CA - 2110 - GRANT - Token Protection` (CA, enabled)
+
 **Prepared — pilot, waiting or dedicated group (7)**
 
 - [`MAC - D - FileVault`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_FileVault.en.md) (phase 2)
@@ -1145,7 +1322,7 @@ of the technical part, not a replacement for that assessment.
 - [`IOS - D - Data Protection`](../IntuneTemplate/IOS/SettingsCatalog/Baseline_IOS_D_Data_Protection.en.md) (phase 3)
 - [`AND - D - Compliance Dedicated Device Health`](../IntuneTemplate/AND/CompliancePolicies/Baseline_AND_D_Compliance_Dedicated_Device_Health.en.md) (phase 4)
 
-**Alternative, not deployed (1)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`
+**Alternative, not deployed (2)**: `CA - 2070 - GRANT - Mobile Device Access Requirements`, `WIN - D - Microsoft Edge DNS over HTTPS Secure`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1187,8 +1364,35 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - U - Microsoft Edge Profiles and Sync`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Edge_Profiles_and_Sync.en.md) (phase 1)
 - [`WIN - U - Windows User Experience`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Windows_User_Experience.en.md) (phase 1)
 
-**Prepared — pilot, waiting or dedicated group (44)**
+**Conditional Access, active (18)**
 
+- `CA - 1010 - BLOCK - Legacy Authentication` (CA, enabled)
+- `CA - 1050 - BLOCK - HighRisk Countries` (CA, enabled)
+- `CA - 1090 - BLOCK - HighRisk SignIns` (CA, enabled)
+- `CA - 1110 - BLOCK - Unlicensed Users` (CA, enabled)
+- `CA - 1120 - BLOCK - Guest Access Outside Approved Apps` (CA, enabled)
+- `CA - 1130 - BLOCK - Admins From Untrusted Locations` (CA, enabled)
+- `CA - 1140 - BLOCK - Managed Identities At Risk` (CA, enabled)
+- `CA - 1150 - BLOCK - Risky Agent Identities` (CA, enabled)
+- `CA - 2080 - GRANT - MFA For Device Registration` (CA, enabled)
+- `CA - 2090 - GRANT - Browser Access On Unmanaged Devices` (CA, enabled)
+- `CA - 2130 - GRANT - Admins Compliant Device` (CA, enabled)
+- `CA - 2150 - GRANT - Cloud PC Mobile Access` (CA, enabled)
+- `CA - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled)
+- `CA - 2185 - GRANT - Register Security Info Passkey Rollout` (CA, enabled)
+- `CA - 3010 - SESSION - Admin Persistence` (CA, enabled)
+- `CA - 3050 - SESSION - Continuous Access Evaluation` (CA, enabled)
+- `CA - 3060 - SESSION - Defender for Cloud Apps` (CA, enabled)
+- `CA - 3070 - SESSION - Session Limits All Users` (CA, enabled)
+
+**Prepared — pilot, waiting or dedicated group (51)**
+
+- `CA - 1160 - BLOCK - Agent Identities To Agent Resources` (CA, enabledForReportingButNotEnforced)
+- `CA - 1170 - BLOCK - Risky Agent Users` (CA, enabledForReportingButNotEnforced)
+- `CA - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced)
+- `CA - 2160 - GRANT - Agent Users Compliant Device` (CA, enabledForReportingButNotEnforced)
+- `CA - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced)
+- `CA - 3020 - SESSION - BYOD Persistence` (CA, enabledForReportingButNotEnforced)
 - [`AND - U - Corporate Data Protection`](../IntuneTemplate/AND/SettingsCatalog/Baseline_AND_U_Corporate_Data_Protection.en.md) (phase 2)
 - [`MAC - D - Login Window`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Login_Window.en.md) (phase 2)
 - [`MAC - D - Passcode and Screen Lock`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Passcode_and_Screen_Lock.en.md) (phase 2)
@@ -1228,13 +1432,14 @@ of the technical part, not a replacement for that assessment.
 - [`MAC - D - Enrollment Profile Standard User Affinity`](../IntuneTemplate/MAC/SettingsCatalog/Baseline_MAC_D_Enrollment_Profile_Standard_User_Affinity.en.md) (phase 4)
 - [`WIN - D - Cloud PC External Access`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_External_Access.en.md) (phase 4)
 - [`WIN - D - Cloud PC Session Security`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Cloud_PC_Session_Security.en.md) (phase 4)
+- [`WIN - D - Shared Device Name`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_Device_Name.en.md) (phase 4)
 - [`WIN - D - Shared Devices Office Web File Associations`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.en.md) (phase 4)
 - [`WIN - D - Shared Devices Start and Taskbar`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Start_and_Taskbar.en.md) (phase 4)
 - [`WIN - D - Shared PC`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC.en.md) (phase 4)
 - [`WIN - D - Shared PC Domain and Guest`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_PC_Domain_Guest.en.md) (phase 4)
 - [`WIN - D - Windows Hello for Business Disabled`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business_Disabled.en.md) (phase 4)
 
-**Alternative, not deployed (3)**: `MAC - D - External Storage Read Only`, `WIN - D - Microsoft Office Shared Computer Activation`, `WIN - D - Windows Hello for Business Multi User`
+**Alternative, not deployed (12)**: `CA - 1030 - BLOCK - Unsupported Device Platforms`, `CA - 1040 - BLOCK - Countries not Allowed`, `CA - 1060 - BLOCK - Service Accounts Trusted Locations Excluded`, `CA - 1070 - BLOCK - Explicitly Blocked Cloud Apps`, `CA - 1080 - BLOCK - Guest Access to Sensitive Apps`, `CA - 1100 - BLOCK - HighRisk Users`, `CA - 2060 - GRANT - Mobile Apps and Desktop Clients`, `CA - 2070 - GRANT - Mobile Device Access Requirements`, `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices`, `MAC - D - External Storage Read Only`, `WIN - D - Microsoft Office Shared Computer Activation`, `WIN - D - Windows Hello for Business Multi User`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1259,8 +1464,28 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Passwordless.en.md) (phase 1)
 - [`WIN - D - Windows Hello Cloud Kerberos Trust`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_Cloud_Kerberos_Trust.en.md) (phase 1)
 
-**Prepared — pilot, waiting or dedicated group (8)**
+**Conditional Access, active (12)**
 
+- `CA - 1010 - BLOCK - Legacy Authentication` (CA, enabled)
+- `CA - 2010 - GRANT - MediumRisk Signins` (CA, enabled)
+- `CA - 2020 - GRANT - MediumRisk Users` (CA, enabled)
+- `CA - 2050 - GRANT - MFA for All Users` (CA, enabled)
+- `CA - 2080 - GRANT - MFA For Device Registration` (CA, enabled)
+- `CA - 2100 - GRANT - MFA For Admin Portals` (CA, enabled)
+- `CA - 2110 - GRANT - Token Protection` (CA, enabled)
+- `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` (CA, enabled)
+- `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups` (CA, enabled)
+- `CA - 2170 - GRANT - MFA For Intune Enrollment` (CA, enabled)
+- `CA - 2185 - GRANT - Register Security Info Passkey Rollout` (CA, enabled)
+- `CA - 3030 - SESSION - Register Security Info Requirements` (CA, enabled)
+
+**Prepared — pilot, waiting or dedicated group (13)**
+
+- `CA - 1180 - BLOCK - Agent Users Outside Compliant Network` (CA, enabledForReportingButNotEnforced)
+- `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign` (CA, enabledForReportingButNotEnforced)
+- `CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA` (CA, enabledForReportingButNotEnforced)
+- `CA - 2180 - GRANT - Register Security Info TAP Only` (CA, enabledForReportingButNotEnforced)
+- `CA - 2190 - GRANT - Windows Hello Passkeys` (CA, enabledForReportingButNotEnforced)
 - [`WIN - D - Microsoft Edge DNS over HTTPS Automatic`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Microsoft_Edge_DNS_over_HTTPS_Automatic.en.md) (phase 2)
 - [`WIN - D - Network Authentication Hardening`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Network_Authentication_Hardening.en.md) (phase 2)
 - [`WIN - D - Windows Hello for Business`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Windows_Hello_for_Business.en.md) (phase 2)
@@ -1270,7 +1495,7 @@ of the technical part, not a replacement for that assessment.
 - [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) (phase 4)
 - [`WIN - D - Shared Devices Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.en.md) (phase 4)
 
-**Alternative, not deployed (5)**: `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello for Business Multi User`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
+**Alternative, not deployed (7)**: `CA - 1020 - BLOCK - Device Code Auth Flow`, `CA - 2055 - GRANT - Phishing Resistant MFA for Admins`, `WIN - D - Microsoft Edge DNS over HTTPS Secure`, `WIN - D - Windows Hello for Business Multi User`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric`, `WIN - D - Windows Hello PIN Complexity Alphanumeric`, `WIN - D - Windows Hello PIN Complexity Numeric`
 
 **Evidence route.** Intune reporting: the assignment and the per-device status of the policies above.
 
@@ -1289,8 +1514,8 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 
 | Safeguard | IG | Kind | Status | Policies |
 |---|---|---|---|---|
-| **1.1** Establish and Maintain Detailed Enterprise Asset Inventory | IG1 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **1.2** Address Unauthorized Assets | IG1 | technical | ○ No technical measure in the baseline | — |
+| **1.1** Establish and Maintain Detailed Enterprise Asset Inventory | IG1 | technical | ● Covered (phase 1) | `CA - 2080 - GRANT - MFA For Device Registration`, `CA - 2170 - GRANT - MFA For Intune Enrollment`, `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
+| **1.2** Address Unauthorized Assets | IG1 | technical | ○ No technical measure in the baseline | `CA - 1030 - BLOCK - Unsupported Device Platforms`, `CA - 2060 - GRANT - Mobile Apps and Desktop Clients` |
 | **1.3** Utilize an Active Discovery Tool | IG2 | technical | ○ No technical measure in the baseline | — |
 | **1.4** Use Dynamic Host Configuration Protocol (DHCP) Logging to Update Enterprise Asset Inventory | IG2 | technical | ○ No technical measure in the baseline | — |
 | **1.5** Use a Passive Asset Discovery Tool | IG3 | technical | ○ No technical measure in the baseline | — |
@@ -1301,7 +1526,7 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 |---|---|---|---|---|
 | **2.1** Establish and Maintain a Software Inventory | IG1 | technical | ○ No technical measure in the baseline | — |
 | **2.2** Ensure Authorized Software is Currently Supported | IG1 | technical | ◐ Pilot, waiting or dedicated group only | `MAC - U - Compliance OS Version`, `WIN - U - Compliance OS Version` |
-| **2.3** Address Unauthorized Software | IG1 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Printing Hardening`, `AND - U - Compliance Device Health` |
+| **2.3** Address Unauthorized Software | IG1 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Printing Hardening`, `AND - U - Compliance Device Health`, `CA - 1070 - BLOCK - Explicitly Blocked Cloud Apps` |
 | **2.4** Utilize Automated Software Inventory Tools | IG2 | technical | ○ No technical measure in the baseline | — |
 | **2.5** Allowlist Authorized Software | IG2 | technical | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - D - Restrictions Hardening`, `IOS - D - Restrictions Corporate` |
 | **2.6** Allowlist Authorized Libraries | IG2 | technical | ○ No technical measure in the baseline | — |
@@ -1313,7 +1538,7 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 |---|---|---|---|---|
 | **3.1** Establish and Maintain a Data Management Process | IG1 | technical | ○ No technical measure in the baseline | — |
 | **3.2** Establish and Maintain a Data Inventory | IG1 | technical | ○ No technical measure in the baseline | — |
-| **3.3** Configure Data Access Control Lists | IG1 | technical | ● Covered (phase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `WIN - D - Cloud PC Session Security`, `MAC - D - External Storage Read Only` |
+| **3.3** Configure Data Access Control Lists | IG1 | technical | ● Covered (phase 1) | `IOS - U - App Protection`, `WIN - U - File Sharing Restrictions`, `IOS - D - Data Protection`, `WIN - D - Cloud PC Session Security`, `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices`, `MAC - D - External Storage Read Only` |
 | **3.4** Enforce Data Retention | IG1 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Windows AI Recall Boundaries` |
 | **3.5** Securely Dispose of Data | IG1 | technical | ○ No technical measure in the baseline | — |
 | **3.6** Encrypt Data on End-User Devices | IG1 | technical | ● Covered (phase 1) | `AND - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - U - Compliance BitLocker`, `WIN - U - Personal Data Encryption`, `MAC - D - FileVault` and 3 more |
@@ -1323,7 +1548,7 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 | **3.10** Encrypt Sensitive Data in Transit | IG2 | technical | ● Covered (phase 1) | `MAC - D - Microsoft Edge Security`, `WIN - D - Cryptography`, `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **3.11** Encrypt Sensitive Data at Rest | IG2 | technical | ● Covered (phase 1) | `IOS - U - App Protection`, `WIN - D - BitLocker`, `WIN - U - Personal Data Encryption`, `MAC - D - FileVault`, `IOS - D - Data Protection` |
 | **3.12** Segment Data Processing and Storage Based on Sensitivity | IG2 | technical | ○ No technical measure in the baseline | — |
-| **3.13** Deploy a Data Loss Prevention Solution | IG3 | technical | ◐ Pilot, waiting or dedicated group only | `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection` |
+| **3.13** Deploy a Data Loss Prevention Solution | IG3 | technical | ◐ Pilot, waiting or dedicated group only | `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `CA - 3040 - SESSION - Block File Downloads On Unmanaged Devices` |
 | **3.14** Log Sensitive Data Access | IG3 | technical | ○ No technical measure in the baseline | — |
 
 ### 4 Secure Configuration of Enterprise Assets and Software
@@ -1332,40 +1557,40 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 |---|---|---|---|---|
 | **4.1** Establish and Maintain a Secure Configuration Process | IG1 | organisational | ● Covered (phase 1) | `WIN - D - AVD FSLogix Profile Containers`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Config Refresh`, `WIN - D - Internet Explorer Legacy`, `WIN - D - Legacy Hardening`, `WIN - D - Local Security Policies` and 29 more |
 | **4.2** Establish and Maintain a Secure Configuration Process for Network Infrastructure | IG1 | organisational | ▢ Organisational | — |
-| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technical | ● Covered (phase 1) | `MAC - U - Compliance Password`, `WIN - D - AVD Session Host`, `WIN - D - Device Lock`, `WIN - D - Power Management`, `MAC - D - Passcode and Screen Lock`, `MAC - D - Screensaver` and 7 more |
+| **4.3** Configure Automatic Session Locking on Enterprise Assets | IG1 | technical | ● Covered (phase 1) | `CA - 3010 - SESSION - Admin Persistence`, `CA - 3070 - SESSION - Session Limits All Users`, `MAC - U - Compliance Password`, `WIN - D - AVD Session Host`, `WIN - D - Device Lock`, `WIN - D - Power Management` and 10 more |
 | **4.4** Implement and Manage a Firewall on Servers | IG1 | technical | ○ No technical measure in the baseline | — |
 | **4.5** Implement and Manage a Firewall on End-User Devices | IG1 | technical | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Compliance Device Security`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - U - Compliance Firewall` |
 | **4.6** Securely Manage Enterprise Assets and Software | IG1 | technical | ○ No technical measure in the baseline | — |
 | **4.7** Manage Default Accounts on Enterprise Assets and Software | IG1 | technical | ● Covered (phase 1) | `MAC - D - Accounts and Login`, `WIN - D - Local Security Policies`, `WIN - D - Windows LAPS`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technical | ● Covered (phase 1) | `MAC - D - Restrictions`, `WIN - D - AVD Start and Search`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening`, `WIN - D - Windows Feature Configuration` and 14 more |
+| **4.8** Uninstall or Disable Unnecessary Services on Enterprise Assets and Software | IG2 | technical | ● Covered (phase 1) | `CA - 1010 - BLOCK - Legacy Authentication`, `MAC - D - Restrictions`, `WIN - D - AVD Start and Search`, `WIN - D - Legacy Hardening`, `WIN - D - Privacy and Telemetry`, `WIN - D - Security Hardening` and 15 more |
 | **4.9** Configure Trusted DNS Servers on Enterprise Assets | IG2 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Microsoft Edge DNS over HTTPS Automatic`, `WIN - D - Microsoft Edge DNS over HTTPS Secure` |
 | **4.10** Enforce Automatic Device Lockout on Portable End-User Devices | IG2 | technical | ◐ Pilot, waiting or dedicated group only | `WIN - D - Account Lockout`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `IOS - D - Passcode` |
 | **4.11** Enforce Remote Wipe Capability on Portable End-User Devices | IG2 | technical | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection` |
-| **4.12** Separate Enterprise Workspaces on Mobile End-User Devices | IG3 | technical | ● Covered (phase 1) | `AND - U - App Protection`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions` |
+| **4.12** Separate Enterprise Workspaces on Mobile End-User Devices | IG3 | technical | ● Covered (phase 1) | `CA - 2150 - GRANT - Cloud PC Mobile Access`, `AND - U - App Protection`, `AND - U - Corporate Device Security`, `AND - U - Work Profile Restrictions`, `CA - 2070 - GRANT - Mobile Device Access Requirements` |
 
 ### 5 Account Management
 
 | Safeguard | IG | Kind | Status | Policies |
 |---|---|---|---|---|
-| **5.1** Establish and Maintain an Inventory of Accounts | IG1 | technical | ○ No technical measure in the baseline | — |
+| **5.1** Establish and Maintain an Inventory of Accounts | IG1 | technical | ● Covered (phase 1) | `CA - 1110 - BLOCK - Unlicensed Users` |
 | **5.2** Use Unique Passwords | IG1 | technical | ● Covered (phase 1) | `MAC - D - Microsoft Edge Password Management`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management`, `MAC - D - Recovery Lock`, `WIN - D - Windows Hello Passkey PIN Complexity Alphanumeric`, `WIN - D - Windows Hello Passkey PIN Complexity Numeric` and 2 more |
-| **5.3** Disable Dormant Accounts | IG1 | technical | ○ No technical measure in the baseline | — |
-| **5.4** Restrict Administrator Privileges to Dedicated Administrator Accounts | IG1 | technical | ● Covered (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Administrator Protection`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **5.5** Establish and Maintain an Inventory of Service Accounts | IG2 | technical | ○ No technical measure in the baseline | — |
+| **5.3** Disable Dormant Accounts | IG1 | technical | ● Covered (phase 1) | `CA - 1110 - BLOCK - Unlicensed Users` |
+| **5.4** Restrict Administrator Privileges to Dedicated Administrator Accounts | IG1 | technical | ● Covered (phase 1) | `WIN - D - Local Administrators`, `WIN - D - Administrator Protection`, `MAC - D - Enrollment Profile Standard User Affinity`, `CA - 1080 - BLOCK - Guest Access to Sensitive Apps` |
+| **5.5** Establish and Maintain an Inventory of Service Accounts | IG2 | technical | ● Covered (phase 1) | `CA - 1140 - BLOCK - Managed Identities At Risk`, `CA - 1150 - BLOCK - Risky Agent Identities`, `CA - 1060 - BLOCK - Service Accounts Trusted Locations Excluded` |
 | **5.6** Centralize Account Management | IG2 | technical | ● Covered (phase 1) | `MAC - D - Platform SSO`, `WIN - D - Microsoft Accounts`, `WIN - D - Shared PC` |
 
 ### 6 Access Control Management
 
 | Safeguard | IG | Kind | Status | Policies |
 |---|---|---|---|---|
-| **6.1** Establish an Access Granting Process | IG1 | organisational | ▢ Organisational | — |
-| **6.2** Establish an Access Revoking Process | IG1 | organisational | ▢ Organisational | — |
-| **6.3** Require MFA for Externally-Exposed Applications | IG1 | technical | ○ No technical measure in the baseline | — |
-| **6.4** Require MFA for Remote Network Access | IG1 | technical | ○ No technical measure in the baseline | — |
-| **6.5** Require MFA for Administrative Access | IG1 | technical | ○ No technical measure in the baseline | — |
+| **6.1** Establish an Access Granting Process | IG1 | organisational | ● Covered (phase 1) | `CA - 2185 - GRANT - Register Security Info Passkey Rollout`, `CA - 3030 - SESSION - Register Security Info Requirements`, `CA - 2180 - GRANT - Register Security Info TAP Only` |
+| **6.2** Establish an Access Revoking Process | IG1 | organisational | ● Covered (phase 1) | `CA - 3050 - SESSION - Continuous Access Evaluation` |
+| **6.3** Require MFA for Externally-Exposed Applications | IG1 | technical | ● Covered (phase 1) | `CA - 1010 - BLOCK - Legacy Authentication`, `CA - 2010 - GRANT - MediumRisk Signins`, `CA - 2020 - GRANT - MediumRisk Users`, `CA - 2050 - GRANT - MFA for All Users`, `CA - 2080 - GRANT - MFA For Device Registration`, `CA - 2110 - GRANT - Token Protection` and 6 more |
+| **6.4** Require MFA for Remote Network Access | IG1 | technical | ● Covered (phase 1) | `CA - 2050 - GRANT - MFA for All Users`, `CA - 2120 - GRANT - Phishing Resistant MFA for All Users`, `CA - 2125 - GRANT - Phishing Resistant MFA for Rollout Groups`, `CA - 2126 - GRANT - Phishing Resistant MFA for Passkey Campaign`, `CA - 2155 - GRANT - Virtual Desktop Phishing Resistant MFA`, `CA - 2190 - GRANT - Windows Hello Passkeys` |
+| **6.5** Require MFA for Administrative Access | IG1 | technical | ● Covered (phase 1) | `CA - 2100 - GRANT - MFA For Admin Portals`, `CA - 2055 - GRANT - Phishing Resistant MFA for Admins` |
 | **6.6** Establish and Maintain an Inventory of Authentication and Authorization Systems | IG2 | technical | ○ No technical measure in the baseline | — |
-| **6.7** Centralize Access Control | IG2 | technical | ● Covered (phase 1) | `MAC - D - Platform SSO`, `IOS - D - Enterprise SSO`, `MAC - D - Azure Files Cloud Kerberos` |
-| **6.8** Define and Maintain Role-Based Access Control | IG3 | technical | ○ No technical measure in the baseline | — |
+| **6.7** Centralize Access Control | IG2 | technical | ● Covered (phase 1) | `MAC - D - Platform SSO`, `CA - 1160 - BLOCK - Agent Identities To Agent Resources`, `IOS - D - Enterprise SSO`, `MAC - D - Azure Files Cloud Kerberos` |
+| **6.8** Define and Maintain Role-Based Access Control | IG3 | technical | ● Covered (phase 1) | `CA - 1120 - BLOCK - Guest Access Outside Approved Apps`, `CA - 1080 - BLOCK - Guest Access to Sensitive Apps` |
 
 ### 7 Continuous Vulnerability Management
 
@@ -1384,7 +1609,7 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 | Safeguard | IG | Kind | Status | Policies |
 |---|---|---|---|---|
 | **8.1** Establish and Maintain an Audit Log Management Process | IG1 | organisational | ▢ Organisational | — |
-| **8.2** Collect Audit Logs | IG1 | technical | ● Covered (phase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Windows Firewall`, `WIN - D - Security Log Monitoring` |
+| **8.2** Collect Audit Logs | IG1 | technical | ● Covered (phase 1) | `CA - 3060 - SESSION - Defender for Cloud Apps`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Windows Firewall`, `WIN - D - Security Log Monitoring` |
 | **8.3** Ensure Adequate Audit Log Storage | IG1 | technical | ● Covered (phase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Security Log Monitoring` |
 | **8.4** Standardize Time Synchronization | IG2 | technical | ● Covered (phase 1) | `MAC - D - Time Server`, `WIN - D - Timezone` |
 | **8.5** Collect Detailed Audit Logs | IG2 | technical | ● Covered (phase 1) | `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging` |
@@ -1441,17 +1666,17 @@ Benchmark references (CIS Microsoft Windows 11, Apple macOS, iOS, Android) are i
 | **12.5** Centralize Network Authentication, Authorization, and Auditing (AAA) | IG2 | technical | ○ No technical measure in the baseline | — |
 | **12.6** Use of Secure Network Management and Communication Protocols | IG2 | technical | ● Covered (phase 1) | `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Remote Desktop and RPC` |
 | **12.7** Ensure Remote Devices Utilize a VPN and are Connecting to an Enterprise's AAA Infrastructure | IG2 | technical | ○ No technical measure in the baseline | — |
-| **12.8** Establish and Maintain Dedicated Computing Resources for All Administrative Work | IG3 | technical | ○ No technical measure in the baseline | — |
+| **12.8** Establish and Maintain Dedicated Computing Resources for All Administrative Work | IG3 | technical | ● Covered (phase 1) | `CA - 1130 - BLOCK - Admins From Untrusted Locations`, `CA - 2130 - GRANT - Admins Compliant Device` |
 
 ### 13 Network Monitoring and Defense
 
 | Safeguard | IG | Kind | Status | Policies |
 |---|---|---|---|---|
-| **13.1** Centralize Security Event Alerting | IG2 | technical | ● Covered (phase 1) | `WIN - D - Defender EDR Policy`, `WIN - U - Compliance Defender for Endpoint Risk`, `WIN - D - Defender for Endpoint EDR` |
+| **13.1** Centralize Security Event Alerting | IG2 | technical | ● Covered (phase 1) | `CA - 1090 - BLOCK - HighRisk SignIns`, `CA - 3060 - SESSION - Defender for Cloud Apps`, `WIN - D - Defender EDR Policy`, `CA - 1170 - BLOCK - Risky Agent Users`, `WIN - U - Compliance Defender for Endpoint Risk`, `CA - 1100 - BLOCK - HighRisk Users` and 1 more |
 | **13.2** Deploy a Host-Based Intrusion Detection Solution | IG2 | technical | ● Covered (phase 1) | `MAC - D - Defender for Endpoint`, `WIN - D - Defender EDR Policy`, `WIN - D - Defender for Endpoint EDR` |
 | **13.3** Deploy a Network Intrusion Detection Solution | IG2 | technical | ○ No technical measure in the baseline | — |
 | **13.4** Perform Traffic Filtering Between Network Segments | IG2 | technical | ○ No technical measure in the baseline | — |
-| **13.5** Manage Access Control for Remote Assets | IG2 | technical | ● Covered (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Cloud PC External Access`, `WIN - D - Cloud PC Session Security` |
+| **13.5** Manage Access Control for Remote Assets | IG2 | technical | ● Covered (phase 1) | `CA - 1050 - BLOCK - HighRisk Countries`, `CA - 1130 - BLOCK - Admins From Untrusted Locations`, `CA - 2090 - GRANT - Browser Access On Unmanaged Devices`, `CA - 2130 - GRANT - Admins Compliant Device`, `CA - 2150 - GRANT - Cloud PC Mobile Access`, `WIN - D - AVD Session Host` and 8 more |
 | **13.6** Collect Network Traffic Flow Logs | IG2 | technical | ○ No technical measure in the baseline | — |
 | **13.7** Deploy a Host-Based Intrusion Prevention Solution | IG3 | technical | ○ No technical measure in the baseline | — |
 | **13.8** Deploy a Network Intrusion Prevention Solution | IG3 | technical | ○ No technical measure in the baseline | — |
@@ -1528,8 +1753,8 @@ is organisational by definition: no policy implements it, this baseline is at mo
 
 | Subcategory | Description | Status | Policies |
 |---|---|---|---|
-| **ID.AM-01** | Inventories of hardware managed by the organization are maintained | ◐ Pilot, waiting or dedicated group only | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
-| **ID.AM-02** | Inventories of software, services, and systems managed by the organization are maintained | ○ No technical measure in the baseline | — |
+| **ID.AM-01** | Inventories of hardware managed by the organization are maintained | ● Covered (phase 1) | `CA - 2080 - GRANT - MFA For Device Registration`, `CA - 2170 - GRANT - MFA For Intune Enrollment`, `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity`, `WIN - D - Shared Device Name` and 1 more |
+| **ID.AM-02** | Inventories of software, services, and systems managed by the organization are maintained | ○ No technical measure in the baseline | `CA - 1070 - BLOCK - Explicitly Blocked Cloud Apps` |
 | **ID.AM-08** | Systems, hardware, software, services, and data are managed throughout their life cycles | ○ No technical measure in the baseline | — |
 | **ID.RA-01** | Vulnerabilities in assets are identified, validated, and recorded | ◐ Pilot, waiting or dedicated group only | `MAC - D - Software Updates`, `IOS - D - Software Updates` |
 | **ID.RA-02** | Cyber threat intelligence is received from information sharing forums and sources | ○ No technical measure in the baseline | — |
@@ -1540,22 +1765,22 @@ is organisational by definition: no policy implements it, this baseline is at mo
 
 | Subcategory | Description | Status | Policies |
 |---|---|---|---|
-| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Covered (phase 1) | `MAC - D - Microsoft Edge Password Management`, `MAC - D - Platform SSO`, `WIN - D - Enhanced Phishing Protection`, `WIN - D - Microsoft Accounts`, `WIN - D - Windows LAPS`, `WIN - U - Microsoft Edge Password Management` and 12 more |
-| **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ○ No technical measure in the baseline | — |
-| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - D - Accounts and Login`, `MAC - D - Platform SSO`, `MAC - U - Compliance Password`, `WIN - D - AVD FSLogix Profile Containers` and 30 more |
-| **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Covered (phase 1) | `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos` |
-| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Covered (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Local Administrators`, `WIN - D - Local Security Policies`, `WIN - D - User Rights`, `WIN - D - Windows LAPS`, `MAC - D - Recovery Lock` and 9 more |
+| **PR.AA-01** | Identities and credentials for authorized users, services, and hardware are managed | ● Covered (phase 1) | `CA - 1010 - BLOCK - Legacy Authentication`, `CA - 1110 - BLOCK - Unlicensed Users`, `CA - 1140 - BLOCK - Managed Identities At Risk`, `CA - 1150 - BLOCK - Risky Agent Identities`, `CA - 2050 - GRANT - MFA for All Users`, `CA - 2080 - GRANT - MFA For Device Registration` and 26 more |
+| **PR.AA-02** | Identities are proofed and bound to credentials based on the context of interactions | ● Covered (phase 1) | `CA - 2185 - GRANT - Register Security Info Passkey Rollout`, `CA - 3030 - SESSION - Register Security Info Requirements`, `CA - 2180 - GRANT - Register Security Info TAP Only` |
+| **PR.AA-03** | Users, services, and hardware are authenticated | ● Covered (phase 1) | `CA - 1010 - BLOCK - Legacy Authentication`, `CA - 2010 - GRANT - MediumRisk Signins`, `CA - 2020 - GRANT - MediumRisk Users`, `CA - 2050 - GRANT - MFA for All Users`, `CA - 2100 - GRANT - MFA For Admin Portals`, `CA - 2120 - GRANT - Phishing Resistant MFA for All Users` and 42 more |
+| **PR.AA-04** | Identity assertions are protected, conveyed, and verified | ● Covered (phase 1) | `CA - 2110 - GRANT - Token Protection`, `WIN - D - Windows Hello Cloud Kerberos Trust`, `WIN - D - Disable NTLM`, `MAC - D - Azure Files Cloud Kerberos`, `CA - 1020 - BLOCK - Device Code Auth Flow` |
+| **PR.AA-05** | Access permissions, entitlements, and authorizations are defined, managed, enforced, and reviewed (least privilege, separation of duties) | ● Covered (phase 1) | `CA - 1050 - BLOCK - HighRisk Countries`, `CA - 1110 - BLOCK - Unlicensed Users`, `CA - 1120 - BLOCK - Guest Access Outside Approved Apps`, `CA - 1130 - BLOCK - Admins From Untrusted Locations`, `CA - 2090 - GRANT - Browser Access On Unmanaged Devices`, `CA - 2100 - GRANT - MFA For Admin Portals` and 34 more |
 | **PR.AT-01** | Personnel are provided with awareness and training | ○ No technical measure in the baseline | — |
-| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` and 17 more |
-| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Covered (phase 1) | `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - AVD Start and Search`, `WIN - D - Data Minimisation` and 18 more |
+| **PR.DS-01** | The confidentiality, integrity, and availability of data-at-rest are protected | ● Covered (phase 1) | `AND - U - App Protection`, `IOS - U - App Protection`, `MAC - U - Compliance Device Security`, `WIN - D - BitLocker`, `WIN - D - Windows AI Restricted`, `WIN - U - Compliance BitLocker` and 19 more |
+| **PR.DS-02** | The confidentiality, integrity, and availability of data-in-transit are protected | ● Covered (phase 1) | `CA - 2110 - GRANT - Token Protection`, `MAC - D - Restrictions`, `MAC - U - Microsoft Edge Profiles and Sync`, `WIN - D - AI Tooling`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - AVD Start and Search` and 19 more |
 | **PR.DS-10** | The confidentiality, integrity, and availability of data-in-use are protected | ● Covered (phase 1) | `AND - U - App Protection`, `AND - U - Corporate AI Restricted`, `AND - U - Corporate Data Protection`, `AND - U - Work Profile Restrictions` |
 | **PR.DS-11** | Backups of data are created, protected, maintained, and tested | ● Covered (phase 1) | `MAC - U - Microsoft OneDrive KFM`, `WIN - D - Microsoft OneDrive`, `WIN - D - Settings Sync`, `WIN - D - Shared Devices SharePoint Team Sites`, `WIN - D - Shared Devices OneDrive` |
-| **PR.PS-01** | Configuration management practices are established and applied | ● Covered (phase 1) | `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions`, `WIN - D - AVD Defender FSLogix Exclusions` and 61 more |
+| **PR.PS-01** | Configuration management practices are established and applied | ● Covered (phase 1) | `CA - 2130 - GRANT - Admins Compliant Device`, `MAC - D - Accounts and Login`, `MAC - D - Microsoft Edge Security`, `MAC - D - Microsoft Office`, `MAC - D - Microsoft OneDrive`, `MAC - D - Restrictions` and 63 more |
 | **PR.PS-02** | Software is maintained, replaced, and removed commensurate with risk | ● Covered (phase 1) | `MAC - D - Microsoft AutoUpdate`, `MAC - U - Microsoft Edge Updates`, `WIN - D - Automatic Restart Sign-On`, `WIN - D - Defender Update Ring 3 Production`, `WIN - D - Google Chrome Updates`, `WIN - D - Microsoft Edge Updates` and 18 more |
 | **PR.PS-03** | Hardware is maintained, replaced, and removed commensurate with risk | ○ No technical measure in the baseline | — |
 | **PR.PS-04** | Log records are generated and made available for continuous monitoring | ● Covered (phase 1) | `MAC - D - Time Server`, `WIN - D - Audit and Event Logging`, `WIN - D - Audit Policy Enforcement`, `WIN - D - Logging`, `WIN - D - Security Hardening`, `WIN - D - Timezone` and 2 more |
 | **PR.PS-05** | Installation and execution of unauthorized software are prevented | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `MAC - U - Microsoft Edge Extensions`, `WIN - D - Attack Surface Reduction`, `WIN - D - Microsoft Edge Security`, `WIN - D - Microsoft Office Security`, `WIN - D - Microsoft Store` and 11 more |
-| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Covered (phase 1) | `MAC - D - Firewall and Gatekeeper`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Remote Desktop and RPC`, `WIN - D - Windows Firewall`, `WIN - D - Windows Firewall Rules`, `WIN - D - Wireless and Peripherals` and 6 more |
+| **PR.IR-01** | Networks and environments are protected from unauthorized logical access and usage | ● Covered (phase 1) | `CA - 1050 - BLOCK - HighRisk Countries`, `CA - 1130 - BLOCK - Admins From Untrusted Locations`, `CA - 2090 - GRANT - Browser Access On Unmanaged Devices`, `MAC - D - Firewall and Gatekeeper`, `WIN - D - AVD Remote Desktop and RPC`, `WIN - D - Remote Desktop and RPC` and 12 more |
 | **PR.IR-03** | Mechanisms are implemented to achieve resilience requirements in normal and adverse situations | ● Covered (phase 1) | `WIN - D - AVD FSLogix Profile Containers`, `WIN - D - Business Continuity`, `MAC - D - Wifi Guest`, `WIN - D - Wifi Guest` |
 | **PR.IR-04** | Adequate resource capacity to ensure availability is maintained | ● Covered (phase 1) | `WIN - D - AVD Session Host`, `WIN - D - Delivery Optimisation`, `WIN - D - Endpoint Analytics`, `WIN - D - Storage Sense` |
 
@@ -1564,8 +1789,8 @@ is organisational by definition: no policy implements it, this baseline is at mo
 | Subcategory | Description | Status | Policies |
 |---|---|---|---|
 | **DE.CM-01** | Networks and network services are monitored to find potentially adverse events | ◐ Pilot, waiting or dedicated group only | `IOS - D - Defender for Endpoint Onboarding Supervised`, `IOS - D - Defender for Endpoint Onboarding Unsupervised` |
-| **DE.CM-03** | Personnel activity and technology usage are monitored to find potentially adverse events | ○ No technical measure in the baseline | — |
-| **DE.CM-09** | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events | ● Covered (phase 1) | `MAC - D - Defender Antivirus`, `MAC - D - Defender for Endpoint`, `MAC - D - Microsoft Edge Security`, `MAC - U - Compliance Device Health`, `MAC - U - Compliance Device Security`, `MAC - U - Compliance Password` and 35 more |
+| **DE.CM-03** | Personnel activity and technology usage are monitored to find potentially adverse events | ● Covered (phase 1) | `CA - 1090 - BLOCK - HighRisk SignIns`, `CA - 2010 - GRANT - MediumRisk Signins`, `CA - 2020 - GRANT - MediumRisk Users`, `CA - 3060 - SESSION - Defender for Cloud Apps`, `CA - 1170 - BLOCK - Risky Agent Users`, `CA - 1100 - BLOCK - HighRisk Users` |
+| **DE.CM-09** | Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events | ● Covered (phase 1) | `CA - 3060 - SESSION - Defender for Cloud Apps`, `MAC - D - Defender Antivirus`, `MAC - D - Defender for Endpoint`, `MAC - D - Microsoft Edge Security`, `MAC - U - Compliance Device Health`, `MAC - U - Compliance Device Security` and 36 more |
 | **DE.AE-02** | Potentially adverse events are analyzed to better understand associated activities | ● Covered (phase 1) | `WIN - D - Defender EDR Policy`, `WIN - D - Defender for Endpoint EDR` |
 | **DE.AE-03** | Information is correlated from multiple sources | ○ No technical measure in the baseline | — |
 | **DE.AE-06** | Information on adverse events is provided to authorized staff and tools | ○ No technical measure in the baseline | — |
@@ -1579,7 +1804,7 @@ is organisational by definition: no policy implements it, this baseline is at mo
 | **RS.AN-03** | Analysis is performed to establish what has taken place during an incident and the root cause | ○ No technical measure in the baseline | — |
 | **RS.AN-07** | Incident data and metadata are collected, and their integrity and provenance are preserved | ○ No technical measure in the baseline | — |
 | **RS.CO-02** | Internal and external stakeholders are notified of incidents | ○ No technical measure in the baseline | — |
-| **RS.MI-01** | Incidents are contained | ● Covered (phase 1) | `WIN - D - Defender Antivirus`, `WIN - D - Defender Ransomware Protection`, `AND - U - Compliance Corporate Defender for Endpoint`, `AND - U - Compliance Defender for Endpoint`, `WIN - U - Compliance Defender for Endpoint Risk` |
+| **RS.MI-01** | Incidents are contained | ● Covered (phase 1) | `CA - 1090 - BLOCK - HighRisk SignIns`, `CA - 1140 - BLOCK - Managed Identities At Risk`, `CA - 1150 - BLOCK - Risky Agent Identities`, `CA - 3050 - SESSION - Continuous Access Evaluation`, `WIN - D - Defender Antivirus`, `WIN - D - Defender Ransomware Protection` and 5 more |
 | **RS.MI-02** | Incidents are eradicated | ○ No technical measure in the baseline | — |
 
 ### RC — Recover
@@ -1623,7 +1848,7 @@ variants at the same time produces a Conflict in Intune, after which neither is 
 | [`WIN - U - Microsoft Outlook Cached Mode Default`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Default.en.md) | Alternative to the Managed variant, for an organisation that does want shared mailboxes cached. Assign one, never two — they set the same setting and together produce a Conflict. | A.8.9 |
 | [`WIN - U - Microsoft Outlook Cached Mode Off`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_U_Microsoft_Outlook_Cached_Mode_Off.en.md) | Alternative to the Managed variant, for shared devices without a retained profile. Assign one, never two — they set the same setting to a different value and together produce a Conflict, after which neither is applied. | A.8.1, A.8.9 |
 
-### B. Dedicated group — phase 4 (25)
+### B. Dedicated group — phase 4 (26)
 
 Belongs on a specific group. Decision: does that group exist, who is in it, and who manages the membership.
 
@@ -1644,6 +1869,7 @@ Belongs on a specific group. Decision: does that group exist, who is in it, and 
 | [`WIN - D - Defender Update Ring 1 Pilot`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_1_Pilot.en.md) | **SG-D-UEM-WIN-Update-Ring1** — Pilot group for Defender updates. | A.8.7, A.8.8, A.8.32 |
 | [`WIN - D - Defender Update Ring 2 UAT`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Defender_Update_Ring_2_UAT.en.md) | **SG-D-UEM-WIN-Update-Ring2** — UAT group for Defender updates. | A.8.7, A.8.8, A.8.32 |
 | [`WIN - D - Security Key Sign-in`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Security_Key_Sign_in.en.md) | **SG-D-UEM-WIN-Shared** — Shared devices, together with the policy that turns Windows Hello for Business off. Not needed on a laptop of one's own. | A.5.17, A.8.5 |
+| [`WIN - D - Shared Device Name`](../IntuneTemplate/WIN/DeviceConfigurations/Baseline_WIN_D_Shared_Device_Name.en.md) | **SG-D-UEM-WIN-Shared** — Shared devices. | A.5.9 |
 | [`WIN - D - Shared Devices Office Web File Associations`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Office_Web_File_Associations.en.md) | **SG-D-UEM-WIN-Shared** — Shared devices without Office, together with the app Office op het web. | A.8.9, A.8.19 |
 | [`WIN - D - Shared Devices OneDrive`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_OneDrive.en.md) | **SG-D-UEM-WIN-Shared** — Shared devices, together with the Shared PC policies. | A.8.12, A.8.13 |
 | [`WIN - D - Shared Devices Passwordless`](../IntuneTemplate/WIN/SettingsCatalog/Baseline_WIN_D_Shared_Devices_Passwordless.en.md) | **SG-D-UEM-WIN-Shared** — Shared devices, together with the policy that turns Windows Hello for Business off. | A.5.17, A.8.5 |
@@ -1741,18 +1967,14 @@ Until that decision, the control the policy implements is not covered.
 
 ### Residual risks
 
-**ISO controls that can be implemented technically but are not covered by phase 1 today (15).**
+**ISO controls that can be implemented technically but are not covered by phase 1 today (11).**
 Accept the risk explicitly, implement it outside this baseline, or move the prepared policy to phase 1.
 
 | Control | Implementable | Prepared in the baseline |
 |---|---|---|
 | **A.5.3** Segregation of duties | partial | — |
-| **A.5.7** Threat intelligence | partial | — |
-| **A.5.9** Inventory of information and other associated assets | partial | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity` |
+| **A.5.9** Inventory of information and other associated assets | partial | `WIN - D - Enrollment Hardening`, `MAC - D - Enrollment Profile Administrator User Affinity`, `MAC - D - Enrollment Profile Standard User Affinity`, `WIN - D - Shared Device Name` |
 | **A.5.11** Return of assets | partial | — |
-| **A.5.18** Access rights | partial | — |
-| **A.5.23** Information security for use of cloud services | partial | — |
-| **A.5.25** Assessment and decision on information security events | partial | — |
 | **A.5.26** Response to information security incidents | partial | — |
 | **A.5.28** Collection of evidence | partial | — |
 | **A.5.33** Protection of records | partial | `WIN - D - Windows AI Recall Boundaries` |
@@ -1880,25 +2102,25 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.5.4** Management responsibilities | yes | baseline security; confirm with the risk analysis | Organisational: Management demonstrably drives compliance (NIS2 art. 20: management bodies approve the measures and follow training). | — |
 | **A.5.5** Contact with authorities | yes | baseline security; confirm with the risk analysis | Organisational: Document points of contact with the CSIRT/NCSC, the supervisory authority and the data protection authority (AP), including reporting deadlines. | — |
 | **A.5.6** Contact with special interest groups | yes | baseline security; confirm with the risk analysis | Organisational: Organise participation in ISACs, sector consultations and supplier advisories. | — |
-| **A.5.7** Threat intelligence | yes | baseline security; confirm with the risk analysis | Organisational: Have threat intelligence (Defender, Entra ID Protection, NCSC) assessed and translated into adjustments to the baseline. | — |
+| **A.5.7** Threat intelligence | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1. Organisational: Have threat intelligence (Defender, Entra ID Protection, NCSC) assessed and translated into adjustments to the baseline. | (i) |
 | **A.5.8** Information security in project management | yes | baseline security; confirm with the risk analysis | Organisational: Include security requirements in projects, for example when rolling out new devices or platforms. | — |
-| **A.5.9** Inventory of information and other associated assets | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technically prepared: 3 policies in pilot, waiting or dedicated group. Organisational: Intune provides the device inventory; ownership, the information inventory and periodic checks for completeness are organisational. | (i) |
+| **A.5.9** Inventory of information and other associated assets | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technically prepared: 4 policies in pilot, waiting or dedicated group. Organisational: Intune provides the device inventory; ownership, the information inventory and periodic checks for completeness are organisational. | (i) |
 | **A.5.10** Acceptable use of information and other associated assets | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 6 prepared. Organisational: Define and communicate rules of use (including AI and private use); technology enforces only part of them. | (d) (g) (i) |
 | **A.5.11** Return of assets | yes | baseline security; confirm with the risk analysis | Organisational: Offboarding process: returning devices, retire/wipe in Intune, blocking the account. | — |
 | **A.5.12** Classification of information | yes | baseline security; confirm with the risk analysis | Organisational: Define a classification scheme; technical labels (Purview) are outside the scope of this baseline. | — |
 | **A.5.13** Labelling of information | yes | baseline security; confirm with the risk analysis | Organisational: Labelling procedure and tools (Purview sensitivity labels) — outside the scope of this baseline. | — |
 | **A.5.14** Information transfer | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Rules for information transfer with external parties (mail, sharing links, guest accounts); technology restricts channels on the device. | (i) |
-| **A.5.15** Access control | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 12 prepared. Organisational: Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. | (b) (e) (i) |
-| **A.5.16** Identity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 1 prepared. Organisational: Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. | (i) |
-| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 18 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (c) (e) (f) (g) (h) (i) (j) |
-| **A.5.18** Access rights | yes | baseline security; confirm with the risk analysis | Organisational: Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. | — |
+| **A.5.15** Access control | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 15 policies in phase 1, 17 prepared. Organisational: Establish an access policy (who may access what, under which conditions); Conditional Access and device policies enforce it. | (b) (d) (e) (g) (i) (j) |
+| **A.5.16** Identity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 9 policies in phase 1, 3 prepared. Organisational: Link the identity lifecycle (joiners, movers, leavers) to HR; register shared and service accounts. | (b) (i) (j) |
+| **A.5.17** Authentication information | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 22 policies in phase 1, 21 prepared. Organisational: Instruct users on handling passwords, PINs and recovery codes; issuance process for temporary access passes. | (b) (c) (e) (f) (g) (h) (i) (j) |
+| **A.5.18** Access rights | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1. Organisational: Granting, periodically reviewing (access reviews) and revoking rights; CA enforces conditions but does not review rights. | (b) (d) (i) |
 | **A.5.19** Information security in supplier relationships | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technically prepared: 1 policy in pilot, waiting or dedicated group. Organisational: Supplier policy and risk assessment (incl. Microsoft, AI services, remote support tools); technology can only block unapproved services. | (d) |
 | **A.5.20** Addressing information security within supplier agreements | yes | baseline security; confirm with the risk analysis | Organisational: Include security requirements, data processing agreements and audit rights in contracts. | — |
 | **A.5.21** Managing information security in the ICT supply chain | yes | baseline security; confirm with the risk analysis | Organisational: Requirements for ICT products and services in the chain; assess the provenance of software and updates. | — |
 | **A.5.22** Monitoring, review and change management of supplier services | yes | baseline security; confirm with the risk analysis | Organisational: Track changes at Microsoft/suppliers (Message Center, roadmaps) and review them periodically. | — |
-| **A.5.23** Information security for use of cloud services | yes | baseline security; confirm with the risk analysis | Organisational: Process for acquiring, using and exiting cloud services; CA and tenant restrictions enforce part of it. | — |
+| **A.5.23** Information security for use of cloud services | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1. Organisational: Process for acquiring, using and exiting cloud services; CA and tenant restrictions enforce part of it. | (b) (i) |
 | **A.5.24** Information security incident management planning and preparation | yes | baseline security; confirm with the risk analysis | Organisational: Incident response plan with roles, playbooks (e.g. isolate device, revoke account) and notification obligation (NIS2 art. 23). | — |
-| **A.5.25** Assessment and decision on information security events | yes | baseline security; confirm with the risk analysis | Organisational: Triage process and criteria for 'incident'; Defender provides the signals. | — |
+| **A.5.25** Assessment and decision on information security events | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1. Organisational: Triage process and criteria for 'incident'; Defender provides the signals. | (b) (i) |
 | **A.5.26** Response to information security incidents | yes | baseline security; confirm with the risk analysis | Organisational: Executing the response plan; technical actions (isolate, wipe, revoke sessions) must be rehearsed. | — |
 | **A.5.27** Learning from information security incidents | yes | baseline security; confirm with the risk analysis | Organisational: Post-incident reviews and their translation into baseline changes. | — |
 | **A.5.28** Collection of evidence | yes | baseline security; confirm with the risk analysis | Organisational: Forensic procedure and retention periods; logging and EDR provide the material, safeguarding the chain of custody is organisational. | — |
@@ -1917,7 +2139,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.6.4** Disciplinary process | yes | baseline security; confirm with the risk analysis | Organisational: Formal procedure for policy violations. | — |
 | **A.6.5** Responsibilities after termination or change of employment | yes | baseline security; confirm with the risk analysis | Organisational: Offboarding process: revoke access, return the device or wipe it selectively, confidentiality after departure. | — |
 | **A.6.6** Confidentiality or non-disclosure agreements | yes | baseline security; confirm with the risk analysis | Organisational: Draw up non-disclosure agreements and have them signed. | — |
-| **A.6.7** Remote working | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 2 prepared. Organisational: Remote working policy (location, screens, networks); technology protects the device and the access. | (i) |
+| **A.6.7** Remote working | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 4 prepared. Organisational: Remote working policy (location, screens, networks); technology protects the device and the access. | (h) (i) (j) |
 | **A.6.8** Information security event reporting | yes | baseline security; confirm with the risk analysis | Organisational: Set up a reporting channel for employees and make it known. | — |
 | **A.7.1** Physical security perimeters | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain: define physical zones. | — |
 | **A.7.2** Physical entry | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain: access control to buildings and rooms. | — |
@@ -1925,7 +2147,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.7.4** Physical security monitoring | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain: camera surveillance, alarm follow-up. | — |
 | **A.7.5** Protecting against physical and environmental threats | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain. | — |
 | **A.7.6** Working in secure areas | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain. | — |
-| **A.7.7** Clear desk and clear screen | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 5 policies in phase 1, 5 prepared. Organisational: Define clear-desk rules for paper and media; clear screen is enforced technically. | (e) (f) (i) |
+| **A.7.7** Clear desk and clear screen | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 7 policies in phase 1, 6 prepared. Organisational: Define clear-desk rules for paper and media; clear screen is enforced technically. | (e) (f) (i) |
 | **A.7.8** Equipment siting and protection | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain. | — |
 | **A.7.9** Security of assets off-premises | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 5 prepared. Organisational: Rules for taking equipment off-site, leaving it unattended and reporting loss; encryption and remote wipe are technical. | (e) (h) (i) |
 | **A.7.10** Storage media | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 2 prepared. Organisational: Policy for removable media and secure destruction. | (e) (h) (i) |
@@ -1933,11 +2155,11 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.7.12** Cabling security | yes | baseline security; confirm with the risk analysis | Organisational: Outside the endpoint/identity domain. | — |
 | **A.7.13** Equipment maintenance | yes | baseline security; confirm with the risk analysis | Organisational: Maintenance and repair by authorised parties, with agreements on the data on the device. | — |
 | **A.7.14** Secure disposal or re-use of equipment | yes | baseline security; confirm with the risk analysis | Organisational: Procedure for disposal and re-use (wipe/Autopilot Reset, certificate of destruction). | — |
-| **A.8.1** User endpoint devices | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 20 policies in phase 1, 32 prepared. Organisational: Policy for corporate and personal devices (BYOD), registration and rules of use. | (d) (e) (f) (h) (i) |
-| **A.8.2** Privileged access rights | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 6 policies in phase 1, 3 prepared. Organisational: Process for granting and periodically reviewing administrative rights (PIM, access reviews). | (e) (i) |
-| **A.8.3** Information access restriction | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 1 prepared. Organisational: Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. | (h) (i) |
+| **A.8.1** User endpoint devices | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 25 policies in phase 1, 35 prepared. Organisational: Policy for corporate and personal devices (BYOD), registration and rules of use. | (d) (e) (f) (h) (i) (j) |
+| **A.8.2** Privileged access rights | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 11 policies in phase 1, 3 prepared. Organisational: Process for granting and periodically reviewing administrative rights (PIM, access reviews). | (b) (d) (e) (i) (j) |
+| **A.8.3** Information access restriction | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 2 prepared. Organisational: Authorisation matrix and data permissions (SharePoint/Teams) — largely outside this baseline. | (d) (h) (i) |
 | **A.8.4** Access to source code | depends | only applicable with in-house software or script development | Organisational: Only with in-house software development: manage access to repositories and development tools. | — |
-| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 13 policies in phase 1, 22 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (c) (e) (f) (g) (h) (i) (j) |
+| **A.8.5** Secure authentication | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 23 policies in phase 1, 25 prepared. Organisational: Establish an authentication policy (which methods, exceptions, break-glass). | (b) (c) (e) (f) (g) (h) (i) (j) |
 | **A.8.6** Capacity management | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 4 policies in phase 1. Organisational: Capacity planning for network, licences and storage. | (c) (i) |
 | **A.8.7** Protection against malware | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 27 policies in phase 1, 17 prepared. Organisational: User awareness and follow-up of detections (the standard names both explicitly). | (b) (c) (e) (f) (i) (j) |
 | **A.8.8** Management of technical vulnerabilities | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 12 policies in phase 1, 13 prepared. Organisational: Vulnerability process: follow sources, assess risk, remediation deadlines, register exceptions. | (e) (f) (h) (i) |
@@ -1947,16 +2169,16 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 | **A.8.12** Data leakage prevention | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 14 policies in phase 1, 19 prepared. Organisational: DLP policy and classification; Purview DLP is outside this baseline, device and app restrictions contribute. | (c) (d) (e) (h) (i) |
 | **A.8.13** Information backup | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 2 prepared. Organisational: Backup policy for M365 data and periodic restore tests; OneDrive synchronisation is not a full backup. | (c) |
 | **A.8.14** Redundancy of information processing facilities | yes | baseline security; confirm with the risk analysis | Organisational: Redundancy of services and infrastructure — outside the endpoint/identity domain. | — |
-| **A.8.15** Logging | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 6 policies in phase 1, 2 prepared. Organisational: Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. | (b) (e) |
-| **A.8.16** Monitoring activities | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 4 policies in phase 1, 7 prepared. Organisational: 24/7 or office-hours follow-up of alerts, with escalation criteria. | (b) (e) (i) |
+| **A.8.15** Logging | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 7 policies in phase 1, 2 prepared. Organisational: Centrally collect, protect, retain and analyse log files (SIEM/Defender XDR); the baseline only governs what the device logs. | (b) (e) (i) |
+| **A.8.16** Monitoring activities | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 11 policies in phase 1, 8 prepared. Organisational: 24/7 or office-hours follow-up of alerts, with escalation criteria. | (b) (e) (i) (j) |
 | **A.8.17** Clock synchronization | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 1 prepared. Organisational: Define an approved time source. | (b) (e) (i) |
 | **A.8.18** Use of privileged utility programs | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 1 policy in phase 1, 3 prepared. Organisational: Register of permitted administration and remote support tools and who may use them. | (i) |
 | **A.8.19** Installation of software on operational systems | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 10 policies in phase 1, 10 prepared. Organisational: Process for approving and offering software (Company Portal catalogue). | (e) (f) (g) (h) (i) |
-| **A.8.20** Networks security | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 14 policies in phase 1, 13 prepared. Organisational: Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. | (b) (c) (e) (f) (h) (i) (j) |
+| **A.8.20** Networks security | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 15 policies in phase 1, 14 prepared. Organisational: Network infrastructure (firewalls, Wi-Fi, VPN) is largely outside this baseline. | (b) (c) (e) (f) (h) (i) (j) |
 | **A.8.21** Security of network services | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 2 policies in phase 1, 5 prepared. Organisational: Define and monitor requirements for network services and providers. | (c) (e) (h) |
 | **A.8.22** Segregation of networks | yes | baseline security; confirm with the risk analysis | Organisational: Network segmentation is infrastructure and cannot be set up through endpoint/identity policy. | — |
 | **A.8.23** Web filtering | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 3 policies in phase 1, 4 prepared. Organisational: Define categories and exceptions (Defender Web Content Filtering in the Defender portal). | (d) (e) (g) (i) (j) |
-| **A.8.24** Use of cryptography | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 10 policies in phase 1, 8 prepared. Organisational: Cryptography policy and key management (who has access to recovery keys, rotation). | (e) (f) (h) (i) (j) |
+| **A.8.24** Use of cryptography | yes | baseline security and implementation of NIS2 art. 21(2); confirm with the risk analysis | Technical: 11 policies in phase 1, 8 prepared. Organisational: Cryptography policy and key management (who has access to recovery keys, rotation). | (e) (f) (h) (i) (j) |
 | **A.8.25** Secure development life cycle | depends | only applicable with in-house software development | Organisational: Only with in-house development. | — |
 | **A.8.26** Application security requirements | yes | baseline security; confirm with the risk analysis | Organisational: Security requirements when developing or acquiring applications. | — |
 | **A.8.27** Secure system architecture and engineering principles | depends | only applicable with in-house system development | Organisational: Define architecture principles (zero trust). | — |
@@ -1972,7 +2194,7 @@ outcome. The *NIS2* column lists the points that the policies for this control t
 
 | | Count |
 |---|---:|
-| Intune policies with controls | 219 of 219 |
+| Intune policies with controls | 220 of 220 |
 | Labels outside the vocabulary | 0 |
 | Labels with a deviating spelling (still counted) | 0 |
 
